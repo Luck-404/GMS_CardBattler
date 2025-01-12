@@ -2,6 +2,12 @@
 if (place_meeting(x, y, obj_player) && !_touched) {
     _touched = true;      // Mark grass as touched
     image_speed = 10;     // Start the shaking animation
+	if (global.can_encounter == true){
+		var rand = irandom_range(1,100);
+		if (rand <= 50){
+			scr_start_transition(rm_encounter);
+		}
+	}
 }
 
 // If grass has been touched, run the counter
