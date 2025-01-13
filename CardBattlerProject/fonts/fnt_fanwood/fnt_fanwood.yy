@@ -1,7 +1,7 @@
 {
   "resourceType": "GMFont",
   "resourceVersion": "1.0",
-  "name": "fnt_default",
+  "name": "fnt_fanwood",
   "AntiAlias": 1,
   "applyKerning": 0,
   "ascender": 25,

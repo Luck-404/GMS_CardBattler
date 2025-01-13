@@ -1,13 +1,45 @@
-// Check if player is touching the grass and it's not already triggered
-if (place_meeting(x, y, obj_player) && !_touched) {
-    _touched = true;      // Mark grass as touched
-	
-	//var randnum = irandom(4);
-	//for (i = 0; i < randnum; i++){
-	//	var randx = irandom_range(-5,5);
-	//	var randy = irandom_range(-5,5);
-	//	var leaf = instance_create_layer(x+randx,y+randy,"Terrain",obj_leaf);
-	//	leaf.hsp = randx;
-	//	leaf.vspd = randy;
-	//}
+////////////////
+// DEACTIVATE //
+////////////////
+// Deactivate grass instance if far from the player
+if (distance_to_object(obj_player) > _deactivation_range) {
+    instance_deactivate_object(self);
+    return; // Skip further processing
+} else {
+    instance_activate_object(self);
+}
+
+//////////////////
+// ACTIVE CHECK //
+//////////////////
+// Optimize by skipping checks if grass is not active
+if (!_active) {
+    // Handle dormant phase and reset
+    if (_reset_delay > 0) {
+        _reset_delay--; // Countdown the reset timer
+    } else {
+        _active = true; // Reactivate the grass
+    }
+    return; // Skip further checks
+}
+
+//////////////////////////////
+// SPAWN CONES WHEN TOUCHED //
+//////////////////////////////
+// Check if the player is touching the grass and it's not already triggered
+if (place_meeting(x, y, obj_player)) {
+    if (!_touched) {
+        _touched = true;   // Mark grass as touched
+        image_speed = 10;  // Start the shaking animation
+        spawn_cones();    // Call function to spawn leaves
+    }
+} else {
+    if (_touched) {
+        // Reset state when player leaves
+        _touched = false;     // Allow grass to trigger again next time
+        _active = false;      // Deactivate grass
+        _reset_delay = _reset_time; // Set reset delay timer
+        image_speed = 0;      // Stop animation
+        image_index = 0;      // Reset animation frame
+    }
 }

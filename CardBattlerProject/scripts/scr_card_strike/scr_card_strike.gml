@@ -7,7 +7,7 @@ function scr_card_strike(_target){
 		_target._creature_def = 0;
 	}
 	show_debug_message("\n\n\n\ CASTING STRIKE \n\n\n");
-	var eff = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
-	eff.sprite_index = spr_effect_strike;
+	var _ref_effect = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
+	_ref_effect.sprite_index = spr_effect_strike;
 	audio_play_sound(snd_effect_strike,0,false);		
 }

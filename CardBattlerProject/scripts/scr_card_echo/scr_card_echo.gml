@@ -4,8 +4,8 @@ function scr_card_echo(){
 	global.echo = true;
 	global.echo_count+=1;
 	show_debug_message("\n\n\n\ CASTING ECHO \n\n\n");		
-	var eff = instance_create_layer(room_width/2,room_height/2,"Effects",obj_card_effect);
-	eff.sprite_index = spr_effect_echo;
+	var _ref_effect = instance_create_layer(room_width/2,room_height/2,"Effects",obj_card_effect);
+	_ref_effect.sprite_index = spr_effect_echo;
 	audio_play_sound(snd_effect_echo,0,false);		
 	
 	// remove the echo card

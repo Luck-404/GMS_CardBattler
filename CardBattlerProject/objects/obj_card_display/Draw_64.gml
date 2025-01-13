@@ -1,20 +1,25 @@
+///////////////////////////////////////////////
+// DISPLAYS  CARDS TOP LEFT DURING OVERWORLD //
+///////////////////////////////////////////////
 if (room == rm_overworld){
 	
-	var margin = 10;
-	var card_width = 32;
-	var card_height = 32;
-	var spacing = 3;
+	var _margin = 10;
+	var _card_width = 32;
+	var _card_height = 32;
+	var _spacing = 3;
 
-	for (var i = 0; i < ds_list_size(global.card_inventory); i++) {
-	    var card = ds_list_find_value(global.card_inventory, i);
-	    var sprite = ds_map_find_value(card, "sprite");
+	 // Draw the card sprite
+	for (var _i = 0; _i < ds_list_size(global.card_inventory); _i++) {
+	    var _ref_card = ds_list_find_value(global.card_inventory, _i);
+	    var _sprite = ds_map_find_value(_ref_card, "sprite");
     
-	    // Draw the card sprite
-	    var x_pos = margin + (i * (card_width + spacing));
-	    var y_pos = margin;
-	    draw_sprite_ext(sprite, 0, x_pos, y_pos, 0.1, 0.1, 0, c_white, 1);
+	   
+	    var _x_pos = _margin + (_i * (_card_width + _spacing));
+	    var _y_pos = _margin;
+	    draw_sprite_ext(_sprite, 0, _x_pos, _y_pos, 0.1, 0.1, 0, c_white, 1);
 	}
 
+	// Draw the total card count
 	draw_text(1800,30,"Cards: " + string(ds_list_size(global.card_inventory)));
 
 }

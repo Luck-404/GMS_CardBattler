@@ -1,100 +1,198 @@
+///////////////////
+// DRAWING CARDS //
+///////////////////
 // Default card dimensions
-var card_width = 100;
-var card_height = 150;
-var spacing = 120;  // Adjust this to control the spacing between cards
+var _card_width = 80;
+var _card_height = 120;
+var _spacing = 150;  // Adjust this to control the spacing between cards
 
 // Calculate the dynamic x_offset based on the number of cards in hand
-var hand_size = ds_list_size(global.current_hand);
-var x_offset = room_width / 2 - (hand_size * spacing) / 2;  // Center the cards dynamically
+var _var_hand_size = ds_list_size(global.current_hand);
+var _x_offset = room_width / 2 - (_var_hand_size * _spacing) / 2;  // Center the cards dynamically
 
 // Draw each card in the hand
-for (var i = 0; i < hand_size; i++) {
-    var card = ds_list_find_value(global.current_hand, i);
-    var card_x_pos = x_offset + i * spacing;  // Space the cards evenly across the bottom
-    var card_y_pos = room_height - card_height - 10;
+for (var _i = 0; _i < _var_hand_size; _i++) {
+    var _ref_card = ds_list_find_value(global.current_hand, _i);
+    var _card_x_pos = _x_offset + _i * _spacing;  // Space the cards evenly across the bottom
+    var _card_y_pos = room_height - _card_height - _spacing;
 
+	/////////////
+	// SCALING //
+	/////////////
     // Default scaling to 25%
-    var scale = 0.25;
+    var _scale = 0.20;
 
+
+	//////////////////////////////////////////////
+	// CHECKS FOR PLAYABILITY - GREYS CARDS OUT //
+	//////////////////////////////////////////////
     // Check if the card can be played (check mana)
-    var can_play = global.current_mana >= card[? "cost"];
+    var _flag_can_play = global.current_mana >= _ref_card[? "cost"];
 
     // If not enough mana, grey out the card and make it unselectable
-    var card_color = can_play ? c_white : c_gray;  // Grey out the card if not enough mana
+    var _card_color = _flag_can_play ? c_white : c_gray;  // Grey out the card if not enough mana
 
+	//////////////////////
+	// MOUSE OVER CARDS //
+	//////////////////////
     // Check if the mouse is over the card and the card is selectable
-    if (point_in_rectangle(mouse_x, mouse_y, card_x_pos - card_width / 2, card_y_pos - card_height / 2, card_x_pos + card_width / 2, card_y_pos + card_height / 2) && can_play) {
+    if (point_in_rectangle(mouse_x, mouse_y, _card_x_pos - _card_width, _card_y_pos - _card_height, _card_x_pos + _card_width, _card_y_pos + _card_height) && _flag_can_play) {
         // Enlarge the card to 35% on hover
-        scale = 0.35;
+        _scale = 0.30;
 
+		/////////////////////
+		// SELECTION LOGIC //
+		/////////////////////
         // If left-clicked, select the card, or unselect if it's already selected
         if (mouse_check_button_pressed(mb_left)) {
             // If a different card is selected, select the new one
-            if (global.card_selected != card) {
-                global.card_selected = card;  // Select the new card
+            if (global.card_selected != _ref_card) {
+                global.card_selected = _ref_card;  // Select the new card
             } else {
                 global.card_selected = undefined;  // Unselect the card if it's already selected
             }
         }
     }
 
+	////////////////////////////
+	// KEEP SELECTED ENLARGED //
+	////////////////////////////
     // If the card is selected, keep it enlarged at 35%
-    if (global.card_selected == card) {
-        scale = 0.35;  // Full size for selected card
+    if (global.card_selected == _ref_card) {
+        _scale = 0.30;  // Full size for selected card
     }
 
-    // Draw the card with the scaled size and color adjustment
-    draw_sprite_ext(card[? "sprite"], 0, card_x_pos, card_y_pos, scale, scale, 0, card_color, 1);
+    // Draw the card with the _scaled size and color adjustment
+    draw_sprite_ext(_ref_card[? "sprite"], 0, _card_x_pos, _card_y_pos, _scale, _scale, 0, _card_color, 1);
     
-    // Draw the card name and description (optional)
-    draw_text(card_x_pos, card_y_pos + card_height / 2 - 45, card[? "name"]);
+			/////////////////////
+			//  DRAW CARD NAME //
+			/////////////////////	
+		    // Draw the card name and description (optional)
+		    draw_text(_card_x_pos, _card_y_pos - 30, _ref_card[? "name"]);
 }
 
+
+//////////////////////////////
+// DRAW A LINE TO THE MOUSE //
+//////////////////////////////
 // If a card is selected, draw a line to the mouse
 if (global.card_selected != undefined) {
-    var selected_card = global.card_selected;
-    var selected_card_index = -1;
+    var _ref_selected_card = global.card_selected;
+    var _ref_selected_card_index = -1;
 
     // Find the index of the selected card in the hand
-    for (var i = 0; i < hand_size; i++) {
-        if (ds_list_find_value(global.current_hand, i) == selected_card) {
-            selected_card_index = i;
+    for (var _i = 0; _i < _var_hand_size; _i++) {
+        if (ds_list_find_value(global.current_hand, _i) == _ref_selected_card) {
+            _ref_selected_card_index = _i;
             break;
         }
     }
 
     // If found, calculate the position and draw a line to the mouse
-    if (selected_card_index != -1) {
-        var selected_card_x_pos = x_offset + selected_card_index * spacing;
-        var selected_card_y_pos = room_height - card_height - 10;
+    if (_ref_selected_card_index != -1) {
+        var _selected__card_x_pos = _x_offset + _ref_selected_card_index * _spacing + _card_width/2;
+        var _selected__card_y_pos = room_height - _card_height/2 - 150;
 
-        draw_line_width(selected_card_x_pos, selected_card_y_pos, mouse_x, mouse_y, 2);
+        draw_line_width(_selected__card_x_pos, _selected__card_y_pos, mouse_x, mouse_y, 3);
     }
 
-    // Handle playing the card by clicking on a creature
-    if (mouse_check_button_pressed(mb_left) && position_meeting(mouse_x, mouse_y, obj_creature)) {
-        var _tar = instance_position(mouse_x, mouse_y, obj_creature);
-        scr_play_card(global.card_selected[? "script"], _tar, global.card_selected[? "cost"]);  // Call the attached card script
-    }
+
+			//////////////////////////
+			// CHECK CORRECT TARGET //
+			//////////////////////////
+
+
+	///////////////////////////////////////
+	// CLICK TO CONFIRM CAST W NO TARGET //
+	///////////////////////////////////////
+	if (global.card_selected != undefined) {
+	    // Check if this card is "no target" and casting is not already in progress
+	    if (_ref_selected_card[? "target"] == "None") {
+	        if (!global.casting_phase) {
+	            // On the first left click, enter the casting phase
+	            if (mouse_check_button_pressed(mb_left)) {
+	                global.casting_phase = true; // Enter casting phase
+	            }
+	        } else {
+	            // On the second left click, confirm and play the card
+	            if (mouse_check_button_pressed(mb_left)) {
+	                var _ref_tar = undefined; // No specific target
+	                scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"]);
+
+	                // Reset the casting phase and deselect the card
+	                global.casting_phase = false;
+	                global.card_selected = undefined;
+	            }
+	        }
+	    }	
+	}
+	
+
+	/////////////////////////////////////////////
+	// HANDLE SPELLS WITH TARGET REQUIREMENTS //
+	/////////////////////////////////////////////
+	if (global.card_selected != undefined) {
+	    // Check if the card requires a target
+	    if (_ref_selected_card[? "target"] != "None") {
+	        // If not already in the target selection phase
+	        if (!global.casting_phase) {
+	            // First click enters the casting phase
+	            if (mouse_check_button_pressed(mb_left)) {
+	                global.casting_phase = true; // Enter target selection phase
+	            }
+	        } else {
+	            // During target selection phase, wait for a valid target
+	            if (mouse_check_button_pressed(mb_left)) {
+	                var _ref_tar = instance_position(mouse_x, mouse_y, obj_creature);
+
+	                if (_ref_tar != noone) {
+	                    // Play the card with the selected target
+	                    scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"]);
+
+	                    // Reset the casting phase and deselect the card
+	                    global.casting_phase = false;
+	                    global.card_selected = undefined;
+	                } else {
+	                    // If the click does not hit a valid target, provide feedback
+	                    show_debug_message("No valid target selected!");
+	                }
+	            }
+	        }
+	    }
+	}
 }
 
-// Unselect the card only if you right-click, or click anywhere else that isn't a card or obj_creature
+////////////////////////////
+//  RIGHT CLICK UNSELECTS //
+////////////////////////////
 if (mouse_check_button_pressed(mb_right)) {
     global.card_selected = undefined;  // Unselect the card
+    global.casting_phase = false;      // Reset casting phase
 }
 
+
+//////////////////////////////
+// DEV TOOL - "D" TO REDRAW //
+//////////////////////////////
 // Handle drawing new cards when the D key is pressed
 if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
     scr_draw_cards();  // Draw 3 new cards
 }
 
-// Draw additional HUD elements
+
+///////////////////////
+// DRAW HUD ELEMENTS //
+///////////////////////
 draw_text(100, 100, "Mana: " + string(global.current_mana) + "/" + string(global.max_mana));
-draw_text(1620, 100, "Cards in hand: " + string(hand_size));
+draw_text(1620, 100, "Cards in hand: " + string(_var_hand_size));
 draw_text(1620, 150, "Cards in deck: " + string(ds_list_size(global.card_inventory)));
 draw_text(1620, 200, "Cards exhausted: " + string(ds_list_size(global.exhausted)));
 
-// Debugging helper print
 if (global.card_selected != undefined) {
     draw_text(room_width/2-100, 400, "Card selected: " + string(global.card_selected[? "name"]));
+}
+
+if (global.casting_phase) {
+    draw_text(room_width / 2, 300, "Click again to confirm casting!");
 }

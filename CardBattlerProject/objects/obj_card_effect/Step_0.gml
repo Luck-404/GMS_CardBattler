@@ -1,3 +1,6 @@
+////////////////////////
+// COUNTDOWN TO DEATH //
+////////////////////////
 if (_count_lifetime <= 0){
 	instance_destroy();
 } else {
