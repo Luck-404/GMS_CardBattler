@@ -27,10 +27,24 @@ if (ds_list_size(global.player_team_in_play) == 0 && ds_list_size(global.player_
 		_ref_confirm._confirm_type = "playon";
 	
 		//give 2 cards a a reward, display them
-			//create 2 temp card objects with sprites
-			//add 2 new cards to inventory (script
+			//add 2 new cards to inventory (script)
+			scr_generate_reward_card(2);
+			//display 2 the 2 new temp card objects with sprites
+			var _ref_card1 = instance_create_layer(850,400,"GUI", obj_card);
+			_ref_card1.depth = -100;
+			_ref_card1.sprite_index = ds_list_find_value(global.card_inventory,ds_list_size(global.card_inventory)-1)[?"sprite"];
+			_ref_card1.image_xscale = 0.20;
+			_ref_card1.image_yscale = 0.20;
+			
+			var _ref_card2 = instance_create_layer(1000,400,"GUI", obj_card);
+			_ref_card2.depth = -100;
+			_ref_card2.sprite_index = ds_list_find_value(global.card_inventory,ds_list_size(global.card_inventory)-2)[?"sprite"];	
+			_ref_card2.image_xscale = 0.20;
+			_ref_card2.image_yscale = 0.20;			
+			
 		//give gold, display it
-		global.gold = global.gold + irandom_range(40,50);
+		global.randgold = irandom_range(40,50);
+		global.gold = global.gold + global.randgold;
 		
 		//on confirm, call a transition object to overworld back in the place we left off ()
 	}

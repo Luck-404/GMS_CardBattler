@@ -16,6 +16,7 @@ global.current_mana = 3;
 global.player_xpos = 960;
 global.player_ypos = 540;
 global.gold = 0;
+global.randgold = 0;
 
 //////////////////
 // STARTER TEAM //

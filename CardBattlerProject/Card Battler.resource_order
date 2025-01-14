@@ -59,6 +59,7 @@
     {"name":"spr_card_uncolored","order":6,"path":"sprites/spr_card_uncolored/spr_card_uncolored.yy",},
     {"name":"snd_effect_power_strike","order":5,"path":"sounds/snd_effect_power_strike/snd_effect_power_strike.yy",},
     {"name":"snd_creature_wraith_death","order":1,"path":"sounds/snd_creature_wraith_death/snd_creature_wraith_death.yy",},
+    {"name":"scr_generate_reward_card","order":11,"path":"scripts/scr_generate_reward_card/scr_generate_reward_card.yy",},
     {"name":"snd_effect_strike","order":6,"path":"sounds/snd_effect_strike/snd_effect_strike.yy",},
     {"name":"snd_effect_echoing","order":3,"path":"sounds/snd_effect_echoing/snd_effect_echoing.yy",},
     {"name":"spr_player_circle","order":7,"path":"sprites/spr_player_circle/spr_player_circle.yy",},

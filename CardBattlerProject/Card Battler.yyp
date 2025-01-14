@@ -90,6 +90,7 @@
     {"id":{"name":"spr_card_uncolored","path":"sprites/spr_card_uncolored/spr_card_uncolored.yy",},},
     {"id":{"name":"snd_effect_power_strike","path":"sounds/snd_effect_power_strike/snd_effect_power_strike.yy",},},
     {"id":{"name":"snd_creature_wraith_death","path":"sounds/snd_creature_wraith_death/snd_creature_wraith_death.yy",},},
+    {"id":{"name":"scr_generate_reward_card","path":"scripts/scr_generate_reward_card/scr_generate_reward_card.yy",},},
     {"id":{"name":"spr_card_block","path":"sprites/spr_card_block/spr_card_block.yy",},},
     {"id":{"name":"snd_effect_strike","path":"sounds/snd_effect_strike/snd_effect_strike.yy",},},
     {"id":{"name":"snd_effect_echoing","path":"sounds/snd_effect_echoing/snd_effect_echoing.yy",},},
