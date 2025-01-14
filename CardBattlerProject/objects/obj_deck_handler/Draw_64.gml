@@ -1,3 +1,7 @@
+if (instance_exists(obj_end_box) == true){
+	
+} else {
+
 ///////////////////
 // DRAWING CARDS //
 ///////////////////
@@ -172,13 +176,13 @@ if (mouse_check_button_pressed(mb_right)) {
 }
 
 
-//////////////////////////////
-// DEV TOOL - "D" TO REDRAW //
-//////////////////////////////
-// Handle drawing new cards when the D key is pressed
-if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
-    scr_draw_cards();  // Draw 3 new cards
-}
+////////////////////////////////
+//// DEV TOOL - "D" TO REDRAW //
+////////////////////////////////
+//// Handle drawing new cards when the D key is pressed
+//if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
+//    scr_draw_cards();  // Draw 3 new cards
+//}
 
 
 ///////////////////////
@@ -195,4 +199,5 @@ if (global.card_selected != undefined) {
 
 if (global.casting_phase) {
     draw_text(room_width / 2, 300, "Click again to confirm casting!");
+}
 }

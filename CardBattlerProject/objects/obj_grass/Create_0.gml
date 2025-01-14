@@ -6,6 +6,7 @@ _active = true;     // Tracks if the grass is active
 _reset_delay = 0;   // Delay timer for resetting grass state
 _reset_time = 600;  // Time before grass becomes active again (e.g., 2 seconds)
 _deactivation_range = 1500; // Distance to deactivate grass instance
+_flag_transition_start = false;
 
 ///////////////////////////////
 // SPAWN LEAVES WHEN TOUCHED //

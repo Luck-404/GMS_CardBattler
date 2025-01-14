@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "GUI",
-    "path": "folders/Objects/GUI.yy",
+    "name": "Terrain",
+    "path": "folders/Objects/Terrain.yy",
   },
   "parentObjectId": null,
   "persistent": true,

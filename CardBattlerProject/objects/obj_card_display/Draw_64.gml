@@ -21,5 +21,7 @@ if (room == rm_overworld){
 
 	// Draw the total card count
 	draw_text(1800,30,"Cards: " + string(ds_list_size(global.card_inventory)));
+	// Draw the total card count
+	draw_text(1800,60,"Gold: " + string(global.gold));	
 
 }

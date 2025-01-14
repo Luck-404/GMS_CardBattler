@@ -8,6 +8,7 @@ if (room == rm_overworld){
 	if (global.can_encounter == false){
 		if (global.steps > 10){
 			global.can_encounter = true;
+			show_debug_message("\n\n===ENCOUNTER READY===\n\n");				
 		}
 	}
 

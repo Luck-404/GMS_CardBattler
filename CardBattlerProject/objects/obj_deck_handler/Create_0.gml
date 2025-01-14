@@ -13,6 +13,7 @@ global.casting_phase = false;
 // HELPER SCRIPT TO REDRAW ALL CARDS ON PRESSING "D" (DEVELOPER) & AT THE END OF THE ROUND //
 /////////////////////////////////////////////////////////////////////////////////////////////
 function scr_draw_cards() {
+	audio_play_sound(snd_shuffle,0,false);
     // First, remove any previous card instances and reshuffle them back into the deck
     if (global.current_hand != undefined) {
         // Destroy any existing cards in hand (obj_cards)

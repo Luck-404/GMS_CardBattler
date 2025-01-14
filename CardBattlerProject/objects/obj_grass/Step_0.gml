@@ -15,7 +15,11 @@ if (distance_to_object(obj_player) > _deactivation_range) {
 if (place_meeting(x, y, obj_player)) {
 	if (global.can_encounter == true){
 		var _rand = irandom_range(1,100);
-		if (_rand <= 50){
+		if (_rand <= 50 && _flag_transition_start == false){
+			_flag_transition_start = true;
+			show_debug_message("\n\n===STARTING TRANSITION TO ENCOUNTER===\n\n");	
+			global.player_xpos = obj_player.x;
+			global.player_ypos = obj_player.y;
 			scr_start_transition(rm_encounter);
 		}
 	}
