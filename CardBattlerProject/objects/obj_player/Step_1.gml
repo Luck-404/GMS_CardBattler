@@ -3,6 +3,7 @@
 //////////////////
 if (room == rm_overworld){
 	if (_flag_created_camera == false){
+		show_debug_message("|=== PLAYER: CREATING CAMERA... ===|");			
 		global._camera = camera_create(); // Create a camera
 		global._cam_width = 960; // Camera width (match your viewport)
 		global._cam_height = 540; // Camera height (match your viewport)
@@ -10,6 +11,7 @@ if (room == rm_overworld){
 		camera_set_view_pos(global._camera, x - global._cam_width / 2, y - global._cam_height / 2); // Center on character
 		view_set_camera(0, global._camera); // Attach camera to Viewport 0
 		_flag_created_camera = true;
+		show_debug_message("|=== PLAYER: CREATED CAMERA! ===|");				
 	}
 	
 	else if (_flag_created_camera == true){	

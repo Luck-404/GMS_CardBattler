@@ -2,6 +2,7 @@
 // "ESC" ENDS GAME //
 /////////////////////
 if (keyboard_check_pressed(vk_escape)){
+	show_debug_message("|=== PLAYER: ENDING GAME VIA 'ESC' ===|");		
 	game_end();	
 }
 
@@ -9,6 +10,7 @@ if (keyboard_check_pressed(vk_escape)){
 // KB "F" TOGGLES FULLSCREEN //
 ///////////////////////////////
 if (keyboard_check_pressed(ord("F"))){
+	show_debug_message("|=== PLAYER: TOGGLING FULLSCREEN ===|");		
 	_flag_fullscreen = !_flag_fullscreen;
 	window_set_fullscreen(_flag_fullscreen);
 }
@@ -23,6 +25,7 @@ if (room == rm_overworld){
 	// PICKING UP NEW CARDS //
 	//////////////////////////
 	if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_sparkly)){
+		show_debug_message("|=== PLAYER: PRESSED 'E' ON A SPARKLY! ===|");		
 		scr_generate_reward_card(1);
 	}
 
@@ -75,17 +78,16 @@ if (room == rm_overworld){
 ////////////////////
 if (room == rm_encounter){
 	if (_flag_deck_created == false){ //CREATE THE DECK
+		show_debug_message("|=== PLAYER: ENTERED ENCOUNTER, GENERATING DECK_HANDLER... ===|");			
 		instance_create_layer(x,y,"GUI",obj_deck_handler);
-		show_debug_message("\n\n===CREATED DECK HANDLER===\n\n");		
+		show_debug_message("|=== PLAYER: GENERATED DECK_HANDLER! ===|");				
 		_flag_deck_created = true;
 	}
 	
 	//spawn enemy units ONCE	
 	if (_flag_party_spawned == false){
-		show_debug_message("\n\n===STARTING CREATURE SPAWN===\n\n");				
-		for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
-			show_debug_message("\ALLY TEAM INDEX " + string(_i));	
-			show_debug_message("\nALLY TEAM SIZE " + string(ds_list_size(global.player_team)));						
+		show_debug_message("|=== PLAYER: SPAWNING PLAYER TEAM OF SIZE " + string(ds_list_size(global.player_team)) + "... ===|");				
+		for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
 			//spawn the creature
 			var _ref_creature = ds_list_find_value(global.player_team, _i);
 			var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
@@ -107,12 +109,15 @@ if (room == rm_encounter){
 			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 			_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
 			
-			show_debug_message("\nSPAWNED ALLY CREATURE " + string(_ref_creature[? "name"]));
+			show_debug_message("|=== PLAYER: SPAWNED ALLY CREATURE " + string(_ref_creature[? "name"])+ "! ===|");
 			ds_list_add(global.player_team_in_play, _ref_creature_instance);
 			_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
 		}
 		_flag_party_spawned = true;
-			show_debug_message("\n\n===SPAWNED ENEMY TEAM OBJECT===\n\n");		
+		show_debug_message("|=== PLAYER: SPAWNED WHOLE ALLY TEAM! ===|");	
+		
+		show_debug_message("|=== PLAYER: SPAWNING ENEMY TEAM... ===|");			
 		var _enemy_team = instance_create_layer(960, 540, "GUI", obj_enemy_team); //generate the enemy team		
+		show_debug_message("|=== PLAYER: SPAWNED ENEMY TEAM! ===|");				
 	}
 }

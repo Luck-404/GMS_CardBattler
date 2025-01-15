@@ -2,14 +2,17 @@ if (instance_exists(obj_end_box) == true){
 	
 } else {
 	//check if dead
-	if (_creature_hp_current <= 0){
+	if (_creature_hp_current <= 0 && _flag_has_died == false){
 		_creature_hp_current = 0;
+		_flag_has_died = true;
 		if (_creature_team == "Ally"){
 			ds_list_delete(global.player_team_in_play,_creature_position);
 			ds_list_add(global.player_team_dead,self);
+			show_debug_message("+--+ OBJ_CREATURE: ALLY " + _creature_name + " HAS DIED +--+");			
 		} else{
 			ds_list_delete(global.enemy_team_in_play,_creature_position);
-			ds_list_add(global.enemy_team_dead,self);		
+			ds_list_add(global.enemy_team_dead,self);
+			show_debug_message("+--+ OBJ_CREATURE: ENEMY " + _creature_name + " HAS DIED +--+");				
 		}
 	}
 

@@ -49,11 +49,14 @@ for (var _i = 0; _i < _var_hand_size; _i++) {
 		/////////////////////
         // If left-clicked, select the card, or unselect if it's already selected
         if (mouse_check_button_pressed(mb_left)) {
+			show_debug_message("[== DECK_HANDLER: LEFT CLICKED ON CARD " + _ref_card[?"name"] + " ==]");	
             // If a different card is selected, select the new one
             if (global.card_selected != _ref_card) {
                 global.card_selected = _ref_card;  // Select the new card
+				show_debug_message("[== DECK_HANDLER: SELECTED CARD " + _ref_card[?"name"] + " ==]");					
             } else {
                 global.card_selected = undefined;  // Unselect the card if it's already selected
+				show_debug_message("[== DECK_HANDLER: DESELECTED CARD " + _ref_card[?"name"] + " ==]");				
             }
         }
     }
@@ -116,6 +119,7 @@ if (global.card_selected != undefined) {
 	        if (!global.casting_phase) {
 	            // On the first left click, enter the casting phase
 	            if (mouse_check_button_pressed(mb_left)) {
+					show_debug_message("[== DECK_HANDLER: TARGETLESS CARD " + _ref_selected_card[? "name"] + "SELECTED ==]");						
 	                global.casting_phase = true; // Enter casting phase
 	            }
 	        } else {
@@ -123,6 +127,7 @@ if (global.card_selected != undefined) {
 	            if (mouse_check_button_pressed(mb_left)) {
 	                var _ref_tar = undefined; // No specific target
 	                scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"]);
+					show_debug_message("[== DECK_HANDLER: TARGETLESS CARD " + _ref_selected_card[? "name"] + "CAST ==]");						
 
 	                // Reset the casting phase and deselect the card
 	                global.casting_phase = false;
@@ -143,6 +148,7 @@ if (global.card_selected != undefined) {
 	        if (!global.casting_phase) {
 	            // First click enters the casting phase
 	            if (mouse_check_button_pressed(mb_left)) {
+					show_debug_message("[== DECK_HANDLER: TARGETED CARD " + _ref_selected_card[? "name"] + " SELECTED ==]");						
 	                global.casting_phase = true; // Enter target selection phase
 	            }
 	        } else {
@@ -153,13 +159,13 @@ if (global.card_selected != undefined) {
 	                if (_ref_tar != noone) {
 	                    // Play the card with the selected target
 	                    scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"]);
-
+						show_debug_message("[== DECK_HANDLER: TARGETLESS CARD " + _ref_selected_card[? "name"] + " CAST ON " + _ref_tar._creature_name + " ==]");	
 	                    // Reset the casting phase and deselect the card
 	                    global.casting_phase = false;
 	                    global.card_selected = undefined;
 	                } else {
 	                    // If the click does not hit a valid target, provide feedback
-	                    show_debug_message("No valid target selected!");
+					show_debug_message("[== DECK_HANDLER: TARGETED CARD CAST FAILED: NO VALID TARGET SELECTED ==]");	
 	                }
 	            }
 	        }
@@ -171,18 +177,21 @@ if (global.card_selected != undefined) {
 //  RIGHT CLICK UNSELECTS //
 ////////////////////////////
 if (mouse_check_button_pressed(mb_right)) {
+	show_debug_message("[== DECK_HANDLER: RIGHT CLICKED, DESELECTING CARDS ==]");		
     global.card_selected = undefined;  // Unselect the card
     global.casting_phase = false;      // Reset casting phase
 }
 
 
-////////////////////////////////
-//// DEV TOOL - "D" TO REDRAW //
-////////////////////////////////
-//// Handle drawing new cards when the D key is pressed
-//if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
-//    scr_draw_cards();  // Draw 3 new cards
-//}
+//////////////////////////////
+// DEV TOOL - "D" TO REDRAW //
+//////////////////////////////
+// Handle drawing new cards when the D key is pressed
+if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
+	show_debug_message("[== DECK_HANDLER: DEV TOOL 'D TO DRAW' INVOKED... ==]");		
+    scr_draw_cards(3);  // Draw 3 new cards
+	show_debug_message("[== DECK_HANDLER: DEV TOOL 'D TO DRAW' COMPLETE! ==]");		
+}
 
 
 ///////////////////////

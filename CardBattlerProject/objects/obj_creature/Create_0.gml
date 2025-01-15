@@ -20,5 +20,4 @@ _creature_deathsound = snd_creature_wraith_death;
 _creature_defaultsound = snd_creature_wraith_default;
 _creature_def = 0;
 _creature_position = 0;
-
-show_debug_message("\n\n>> ALIVE <<\n\n");	
+_flag_has_died = false;

@@ -4,9 +4,8 @@
 if (room == rm_encounter){
 	//spawn enemy units ONCE	
 	if (_flag_party_spawned == false){
-		for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){	
-			show_debug_message("\n ENEMY TEAM INDEX " + string(_i));	
-			show_debug_message("\nENEMY TEAM SIZE" + string(ds_list_size(global.enemy_team)));				
+		show_debug_message("~~~ OBJ_ENEMY_TEAM: SPAWNING TEAM... ~~~");		
+		for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){				
 			//spawn the creature
 			var _ref_creature = ds_list_find_value(global.enemy_team, _i);
 			var _ref_creature_instance = instance_create_layer(1190+(170*_i), 650, "Creatures", obj_creature); //generate the creature	
@@ -27,11 +26,11 @@ if (room == rm_encounter){
 			_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 			_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
-			show_debug_message("\nSPAWNED ENEMY CREATURE " + string(_ref_creature[? "name"]));	
+			show_debug_message("~~~ OBJ_ENEMY_TEAM: SPAWNED ENEMY CREATURE " + string(_ref_creature[? "name"])+" ~~~");			
 			ds_list_add(global.enemy_team_in_play, _ref_creature_instance);		
 			_ref_creature_instance._creature_position = ds_list_find_index(global.enemy_team_in_play,_ref_creature_instance);			
 		}
 		_flag_party_spawned = true;					
-		show_debug_message("\n\n===DONE WITH SPAWNING===\n\n");			
+		show_debug_message("~~~ OBJ_ENEMY_TEAM: ALL UNITS SPAWNED! ~~~");			
 	}
 }

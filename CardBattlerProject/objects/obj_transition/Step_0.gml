@@ -8,23 +8,29 @@ if (_is_fading) {
 
         // Check if fully opaque
         if (image_alpha >= 1) {
+		show_debug_message("[[]] OBJ_TRANSITION: FADE IN COMPLETE [[]]");			
             image_alpha = 1;
 
             // Start fading out after fade in is complete
             _is_fading_in = false;
 			if (_target_room == rm_encounter && _flag_encounter_in == false){
+				show_debug_message("[[]] OBJ_TRANSITION: TRIGGERED AN ENCOUNTER, UPDATING VARIABLES... [[]]");
 				_flag_overworld_in = false;
-				_flag_encounter_in = true;				
+				_flag_encounter_in = true;			
+				show_debug_message("[[]] OBJ_TRANSITION: PLAYER HIDDEN [[]]");				
 				obj_player.visible = false;
 				//destroy old camera on way into new room
 				//camera_destroy(global._camera);
+				show_debug_message("[[]] OBJ_TRANSITION: CAMERA DELETED [[]]");				
 				global._camera = undefined; 
 				global._cam_height = undefined;
 				global._cam_width = undefined;
-				room_goto(_target_room);				
+				show_debug_message("[[]] OBJ_TRANSITION: ENTERING ENCOUNTER! [[]]");				
+				room_goto(_target_room);
 			}
 
 			if (_target_room == rm_overworld && _flag_overworld_in == false){
+					show_debug_message("[[]] OBJ_TRANSITION: TRIGGERED OVERWORLD, UPDATING VARIABLES... [[]]");				
 					_flag_encounter_in = false;
 					_flag_overworld_in = true;
 					//set player back where they left off
@@ -32,22 +38,27 @@ if (_is_fading) {
 					obj_player.y = global.player_ypos;
 					obj_player._flag_created_camera = false;
 					obj_player._move_speed = 4;
-					global.current_mana = 3;			
-					show_debug_message("RESET PLAYER'S POSITION, MOVEMENT AND CAMERA");
+					global.current_mana = 3;
+					show_debug_message("[[]] OBJ_TRANSITION: PLAYER POSITION, MANA, MOVEMENT RESET [[]]");					
 			
 					//clear player's creature lists
 					ds_list_clear(global.player_team_dead);
 					ds_list_clear(global.player_team_in_play);
-					show_debug_message("RESET PLAYER'S PARTY");
+					show_debug_message("[[]] OBJ_TRANSITION: PLAYER SPAWNED TEAM DELETED [[]]");					
+			
 			
 					//reset party spawned and deck created
 					obj_player._flag_party_spawned = false;
 					obj_player._flag_deck_created = false;
-					show_debug_message("RESET PLAYER'S PARTY SPAWN AND DECK CREATED VALUES");
+					show_debug_message("[[]] OBJ_TRANSITION: PLAYER POSITION, MANA, MOVEMENT RESET [[]]");										
 				
 					//reset encounter trigger variables
 		            global.steps = 0;
 		            global.can_encounter = false;	
+					global.trigger_loss = false;
+					show_debug_message("[[]] OBJ_TRANSITION: ENCOUNTER TRIGGER VARIABLES RESET [[]]");					
+								
+					show_debug_message("[[]] OBJ_TRANSITION: ENTERING OVERWORLD! [[]]");					
 					room_goto(_target_room);
 				}
             _is_fading_out = true;

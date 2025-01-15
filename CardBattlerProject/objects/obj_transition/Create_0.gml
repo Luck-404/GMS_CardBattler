@@ -1,3 +1,5 @@
+show_debug_message("[[]] OBJ_TRANSITION: CREATED [[]]");	
+
 ///////////////
 // VARIABLES //
 ///////////////
