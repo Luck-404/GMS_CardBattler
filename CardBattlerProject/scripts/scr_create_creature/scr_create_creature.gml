@@ -10,6 +10,7 @@ function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team
     ds_map_add(_ref_new_creature, "team", _team); //ally or enemy
     ds_map_add(_ref_new_creature, "breed", _breed); //TO DO LATER
     ds_map_add(_ref_new_creature, "hp", _hp); //Total HP stat, based on a number of factors (see the spreadsheet)
+    ds_map_add(_ref_new_creature, "curhp", _hp); //current HP stat, based on a number of factors (see the spreadsheet)	
     ds_map_add(_ref_new_creature, "spec", _spec); //martial, technical, or magical - certain ones can only use certain cards
     ds_map_add(_ref_new_creature, "class", _class); //solider, sailor, adventurer, hunter, merchant, engineer, mage, necromancer, priest
     ds_map_add(_ref_new_creature, "gearlist", _gear); //dslist of gear

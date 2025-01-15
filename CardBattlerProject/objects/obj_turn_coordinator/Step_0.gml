@@ -19,12 +19,28 @@ if (ds_list_size(global.player_team_in_play) == 0 && ds_list_size(global.player_
 		//ally won
 		//cleanup/reset any variables from all
 		//cleanup lists on delete
-		//check for persistent objects, remove as needed
+		//check for persistent objects, remove as needed (when we press confirm)
+		
 		
 		//display rewards screen and confirm box
 		instance_create_layer(960,540,"GUI", obj_end_box);
 		var _ref_confirm = instance_create_layer(960,940,"GUI", obj_confirm);	
 		_ref_confirm._confirm_type = "playon";
+		
+		//update your team's health currents as we move out of the room
+		for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
+			var _ref_creature = ds_list_find_value(global.player_team_in_play,_i); //get the creature at that spot
+			var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
+			//update the current hp to the permanent list
+			var _ref_original_creature = ds_list_find_value(global.player_team,_i); //get the creature at that spot
+			_ref_original_creature[?"curhp"] = _ref_hp_cur;
+		}
+	
+		// Empty the exhausted pile into the card inventory
+		scr_empty_exhausted();
+
+		// Empty the current hand into the card inventory
+		scr_empty_hand();
 	
 		//give 2 cards a a reward, display them
 			//add 2 new cards to inventory (script)

@@ -6,4 +6,5 @@ if (mouse_check_button_pressed(mb_left) && position_meeting(mouse_x,mouse_y,obj_
 	//flip turn	
 	global.turn_tracker = obj_enemy_team;
 	visible = false;
+	scr_draw_cards();
 }

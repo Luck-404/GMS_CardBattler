@@ -98,7 +98,7 @@ if (room == rm_encounter){
 			_ref_creature_instance._creature_team = _ref_creature[? "team"];
 			_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
 			_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
-			_ref_creature_instance._creature_hp_current = _ref_creature[? "hp"];
+			_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
 			_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
 			_ref_creature_instance._creature_class = _ref_creature[? "class"];
 			_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];

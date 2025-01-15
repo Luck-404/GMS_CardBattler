@@ -1,6 +1,7 @@
 ///////////////
 // VARIABLES //
 ///////////////
+global.hand_size = 3; // Maximum of 3 cards in the hand
 show_debug_message("\n\n===PLAYER CREATED===\n\n");	
 randomize();
 _flag_fullscreen = true;
@@ -51,10 +52,4 @@ instance_create_layer(x,y,"GUI",obj_encounter_trigger);
 ////////////
 // CAMERA //
 ////////////
-global._camera = camera_create(); // Create a camera
-global._cam_width = 960; // Camera width (match your viewport)
-global._cam_height = 540; // Camera height (match your viewport)
-camera_set_view_size(global._camera, global._cam_width, global._cam_height); // Set camera size
-camera_set_view_pos(global._camera, x - global._cam_width / 2, y - global._cam_height / 2); // Center on character
-view_set_camera(0, global._camera); // Attach camera to Viewport 0
-
+_flag_created_camera = false;
