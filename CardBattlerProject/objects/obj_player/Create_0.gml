@@ -18,7 +18,7 @@ global.max_mana = 3;
 global.current_mana = 3;
 global.player_xpos = 960;
 global.player_ypos = 540;
-global.gold = 0;
+global.gold = 500;
 global.randgold = 0;
 global.trigger_loss = false;
 

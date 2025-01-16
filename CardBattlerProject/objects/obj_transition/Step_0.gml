@@ -58,6 +58,9 @@ if (_is_fading) {
 					global.trigger_loss = false;
 					show_debug_message("[[]] OBJ_TRANSITION: ENCOUNTER TRIGGER VARIABLES RESET [[]]");					
 								
+					scr_stock_card_shop(irandom_range(3,9));			
+					show_debug_message("[[]] OBJ_TRANSITION: RESTOCKING CARD SHOP [[]]");	
+					
 					show_debug_message("[[]] OBJ_TRANSITION: ENTERING OVERWORLD! [[]]");					
 					room_goto(_target_room);
 				}

@@ -32,6 +32,7 @@
     {"name":"inst_63006310","path":"rooms/rm_overworld/rm_overworld.yy",},
     {"name":"inst_7A6A1E4A","path":"rooms/rm_overworld/rm_overworld.yy",},
     {"name":"inst_CEB3D5B","path":"rooms/rm_overworld/rm_overworld.yy",},
+    {"name":"inst_49E8502F","path":"rooms/rm_overworld/rm_overworld.yy",},
   ],
   "isDnd": false,
   "layers": [
@@ -67,7 +68,9 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_7A6A1E4A","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_terrain_circle","path":"objects/obj_terrain_circle/obj_terrain_circle.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1601.0,"y":295.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_CEB3D5B","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_player_circle","path":"objects/obj_player_circle/obj_player_circle.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1071.0,"y":400.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
-    {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"NPCs","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
+    {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"NPCs","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_49E8502F","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_card_shop","path":"objects/obj_card_shop/obj_card_shop.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1472.0,"y":608.0,},
+      ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRTileLayer","resourceVersion":"1.1","name":"ts_overworld","depth":500,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"properties":[],"tiles":{"SerialiseHeight":34,"SerialiseWidth":60,"TileCompressedData":[
 -160,-2147483648,1,1,-3,10,1,3,-53,-2147483648,1,1,-8,10,1,3,-12,0,-37,-2147483648,1,1,-10,10,-5,0,1,-2147483648,-6,0,-37,-2147483648,-13,10,1,3,-9,0,-33,-2147483648,1,5,-3,6,-15,10,4,3,0,0,-2147483648,-4,0,-31,-2147483648,2,5,6,-6,14,
 -14,10,4,3,0,-2147483648,-2147483648,-3,0,-29,-2147483648,2,5,6,-10,14,-13,10,1,0,-32,-2147483648,2,5,6,-14,14,-2,10,-8,18,1,19,-33,-2147483648,-18,14,-2,-2147483648,2,0,-2147483648,-3,0,-2,-2147483648,-3,0,-29,-2147483648,1,5,-18,14,9,7,-2147483648,0,-2147483648,-2147483648,

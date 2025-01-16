@@ -11,6 +11,7 @@ function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_c
     ds_map_add(_ref_new_card, "color", _color);
     ds_map_add(_ref_new_card, "type", _type);
     ds_map_add(_ref_new_card, "spec", _spec);	
+    ds_map_add(_ref_new_card, "goldcost", irandom_range(40,80));
 	show_debug_message("!!=== SCR_CREATE_CARD: CREATED CARD " + string(_name) +" ===!!");	
     return _ref_new_card;
 }
