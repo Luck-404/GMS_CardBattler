@@ -1,30 +1,30 @@
 if (keyboard_check_pressed(ord("E")) && distance_to_object(obj_player) < 32) {
-	show_debug_message("+++ CARD_SHOP: ACTIVATED +++");		
-    global.card_shop_gui_open = !global.card_shop_gui_open;
-    obj_player._move_speed = global.card_shop_gui_open ? 0 : 4;
+	show_debug_message("--- MERC_SHOP: ACTIVATED ---");		
+    global.merc_shop_gui_open = !global.merc_shop_gui_open;
+    obj_player._move_speed = global.merc_shop_gui_open ? 0 : 4;
 }
 
-if (global.card_shop_gui_open) {
+if (global.merc_shop_gui_open) {
     if (keyboard_check_pressed(vk_escape)) {
-		show_debug_message("+++ CARD_SHOP: CLOSED +++");			
-        global.card_shop_gui_open = false;
+		show_debug_message("--- MERC_SHOP: CLOSED ---");			
+        global.merc_shop_gui_open = false;
         obj_player._move_speed = 4;
     }
 
     // Background
     draw_set_color(c_silver);
-    draw_rectangle_color(50, 50, 750, 550, c_silver, c_silver, c_silver, c_silver, false);
+    draw_rectangle_color(50, 50, 900, 900, c_silver, c_silver, c_silver, c_silver, false);
 
-    // Draw cards
+    // Draw MERCS
     var _margin = 100;
-    var _card_width = 80;
-    var _card_height = 120;
+    var _card_width = 128;
+    var _card_height = 128;
     var _spacing = 30;
 
-    for (var _i = 0; _i < ds_list_size(global.card_shop_stock); _i++) {
-        var _ref_card = ds_list_find_value(global.card_shop_stock, _i);
-        var _sprite = _ref_card[?"sprite"];
-        var _cost = _ref_card[?"goldcost"]; // GOLD COST
+    for (var _i = 0; _i < ds_list_size(global.mercenary_shop_stock); _i++) {
+        var _ref_merc = ds_list_find_value(global.mercenary_shop_stock, _i);
+        var _sprite = _ref_merc[?"sprite"];
+        var _cost = _ref_merc[?"goldcost"]; // GOLD COST
         var _x_pos = _margin + _i * (_card_width + _spacing);
         var _y_pos = 150;
 
@@ -41,12 +41,12 @@ if (global.card_shop_gui_open) {
             if (mouse_check_button_pressed(mb_left)) {
                 if (global.gold >= _cost) {
                     global.gold -= _cost;
-					show_debug_message("+++ CARD_SHOP: PURCHASED ITEM! +++");						
-                    ds_list_add(global.card_inventory, _ref_card);
-                    ds_list_delete(global.card_shop_stock, _i);
+					show_debug_message("--- MERC_SHOP: PURCHASED ITEM! ---");						
+                    ds_list_add(global.player_team, _ref_merc);
+                    ds_list_delete(global.mercenary_shop_stock, _i);
                     break; // Exit the loop to avoid issues with the ds_list size changing
                 } else {
-					show_debug_message("+++ CARD_SHOP: NOT ENOUGH GOLD!!! +++");	
+					show_debug_message("--- MERC_SHOP: NOT ENOUGH GOLD!!! ---");	
                 }
             }
         }

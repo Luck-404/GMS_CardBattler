@@ -33,8 +33,8 @@ if (room == rm_overworld){
 	//draw the current team's hp bottom right
 	for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
 		var _ref_creature = ds_list_find_value(global.player_team,_i);
-		draw_sprite_ext(_ref_creature[?"sprite"],0,1700,960,0.2,0.2,0,c_white,1);		
-		draw_text(1750,960,"HP: " + string(_ref_creature[?"curhp"]) + "/" + string(_ref_creature[?"hp"]));
+		draw_sprite_ext(_ref_creature[?"sprite"],0,1700,500+(_i*100),0.2,0.2,0,c_white,1);		
+		draw_text(1750,500+(_i*100),"HP: " + string(_ref_creature[?"curhp"]) + "/" + string(_ref_creature[?"hp"]));
 	}
 
 }
