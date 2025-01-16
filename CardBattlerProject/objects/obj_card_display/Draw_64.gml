@@ -30,11 +30,15 @@ if (room == rm_overworld){
 	// Draw the total card count
 	draw_text(1800,60,"Gold: " + string(global.gold));	
 	
+	
 	//draw the current team's hp bottom right
 	for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
 		var _ref_creature = ds_list_find_value(global.player_team,_i);
 		draw_sprite_ext(_ref_creature[?"sprite"],0,1700,500+(_i*100),0.2,0.2,0,c_white,1);		
 		draw_text(1750,500+(_i*100),"HP: " + string(_ref_creature[?"curhp"]) + "/" + string(_ref_creature[?"hp"]));
 	}
+	
+	// Draw player x and y
+	draw_text(960,10,string(obj_player.x) + "x " + string(obj_player.y) + "y");	
 
 }

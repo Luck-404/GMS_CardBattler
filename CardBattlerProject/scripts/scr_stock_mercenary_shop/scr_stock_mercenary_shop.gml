@@ -1,5 +1,5 @@
 function scr_stock_mercenary_shop(_merc_count) {
-    ds_list_clear(global.card_shop_stock);
+    ds_list_clear(global.mercenary_shop_stock);
 
     // Determine rarity logic based on the number of mercs
     for (var _i = 0; _i < _merc_count; _i++) {

@@ -1,9 +1,10 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_sparkly",
+  "name": "obj_treasure",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
@@ -28,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_sparkly",
-    "path": "sprites/spr_sparkly/spr_sparkly.yy",
+    "name": "spr_treasure",
+    "path": "sprites/spr_treasure/spr_treasure.yy",
   },
   "spriteMaskId": null,
   "visible": true,

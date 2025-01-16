@@ -1,4 +1,4 @@
-if (keyboard_check_pressed(ord("E")) && distance_to_object(obj_player) < 32) {
+if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
 	show_debug_message("+++ CARD_SHOP: ACTIVATED +++");		
     global.card_shop_gui_open = !global.card_shop_gui_open;
     obj_player._move_speed = global.card_shop_gui_open ? 0 : 4;

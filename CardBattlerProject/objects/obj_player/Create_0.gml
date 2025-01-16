@@ -33,11 +33,16 @@ ds_list_add(global.player_team, _creature_wraith);
 	//monkey for testing purposes
 	var _creature_monkey = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 	_creature_monkey[?"curhp"] = 10;
+	ds_list_add(global.player_team, _creature_monkey);
 	
-ds_list_add(global.player_team, _creature_monkey);
 global.player_team_in_play = ds_list_create(); 
 global.player_team_dead = ds_list_create();
 global.graveyard = ds_list_create(); 
+
+	//monkey for graveyard purposes
+	var _creature_grave_monkey = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+	ds_list_add(global.graveyard, _creature_grave_monkey);
+	
 show_debug_message("|=== PLAYER: TEAM CREATED! ===|");	
 
 //////////
