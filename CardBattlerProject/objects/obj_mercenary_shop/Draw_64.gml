@@ -46,7 +46,8 @@ if (global.merc_shop_gui_open) {
                     ds_list_delete(global.mercenary_shop_stock, _i);
                     break; // Exit the loop to avoid issues with the ds_list size changing
                 } else {
-					show_debug_message("--- MERC_SHOP: NOT ENOUGH GOLD!!! ---");	
+					show_debug_message("--- MERC_SHOP: NOT ENOUGH GOLD!!! ---");
+					audio_play_sound(snd_menu_error,0,false);
                 }
             }
         }

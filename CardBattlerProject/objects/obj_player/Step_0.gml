@@ -1,7 +1,7 @@
 /////////////////////
 // "ESC" ENDS GAME //
 /////////////////////
-if (global.merc_shop_gui_open == false && global.card_shop_gui_open == false && keyboard_check_pressed(vk_escape)){
+if (global.merc_shop_gui_open == false && global.card_shop_gui_open == false && global.healer_shop_gui_open == false && keyboard_check_pressed(vk_escape)){
 	show_debug_message("|=== PLAYER: ENDING GAME VIA 'ESC' ===|");		
 	game_end();	
 }
