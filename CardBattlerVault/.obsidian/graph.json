@@ -5,8 +5,58 @@
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [],
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "#User",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    },
+    {
+      "query": "#Central",
+      "color": {
+        "a": 1,
+        "rgb": 16777215
+      }
+    },
+    {
+      "query": "#Cards",
+      "color": {
+        "a": 1,
+        "rgb": 95247
+      }
+    },
+    {
+      "query": "#Creatures",
+      "color": {
+        "a": 1,
+        "rgb": 262399
+      }
+    },
+    {
+      "query": "#Map",
+      "color": {
+        "a": 1,
+        "rgb": 16739338
+      }
+    },
+    {
+      "query": "#Encounters",
+      "color": {
+        "a": 1,
+        "rgb": 8716431
+      }
+    },
+    {
+      "query": "#GUI",
+      "color": {
+        "a": 1,
+        "rgb": 15662848
+      }
+    }
+  ],
   "collapse-display": true,
   "showArrow": false,
   "textFadeMultiplier": 0,
@@ -17,6 +67,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 1.0137940085180939,
-  "close": true
+  "scale": 0.3678930407644622,
+  "close": false
 }

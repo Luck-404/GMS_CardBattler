@@ -1,4 +1,4 @@
-if (instance_exists(obj_end_box) == true){
+0if (instance_exists(obj_end_box) == true){
 	
 } else {
 	//check if dead
