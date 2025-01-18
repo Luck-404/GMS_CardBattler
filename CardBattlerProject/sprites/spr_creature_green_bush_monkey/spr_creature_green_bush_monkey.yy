@@ -14,6 +14,8 @@
   "For3D": false,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ba2f4bea-1b0f-4e5a-849d-9791228352ac",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"a8591a79-9dfb-4749-833a-6a8a73949eca",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"eab8bf0b-851f-4b0e-b672-75f36e0d6f4f",},
   ],
   "gridX": 0,
   "gridY": 0,
@@ -43,11 +45,11 @@
     "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 1.0,
+    "length": 3.0,
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
-    "playbackSpeed": 30.0,
+    "playbackSpeed": 0.0,
     "playbackSpeedType": 0,
     "showBackdrop": true,
     "showBackdropImage": false,
@@ -55,6 +57,8 @@
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ba2f4bea-1b0f-4e5a-849d-9791228352ac","path":"sprites/spr_creature_green_bush_monkey/spr_creature_green_bush_monkey.yy",},},},"Disabled":false,"id":"cdb8375f-38f3-436a-a8b8-3c4007efcb59","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a8591a79-9dfb-4749-833a-6a8a73949eca","path":"sprites/spr_creature_green_bush_monkey/spr_creature_green_bush_monkey.yy",},},},"Disabled":false,"id":"5579e480-288d-4eae-8516-b7c4720acf5c","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"eab8bf0b-851f-4b0e-b672-75f36e0d6f4f","path":"sprites/spr_creature_green_bush_monkey/spr_creature_green_bush_monkey.yy",},},},"Disabled":false,"id":"12264965-c038-46a6-a109-4e618c9f7107","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

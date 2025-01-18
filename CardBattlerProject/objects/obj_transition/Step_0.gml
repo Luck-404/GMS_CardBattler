@@ -39,6 +39,8 @@ if (_is_fading) {
 					obj_player._flag_created_camera = false;
 					obj_player._move_speed = 4;
 					global.current_mana = 3;
+					obj_player._flag_transition_start = false;
+					obj_player._flag_can_touch = true;
 					show_debug_message("[[]] OBJ_TRANSITION: PLAYER POSITION, MANA, MOVEMENT RESET [[]]");					
 			
 					//clear player's creature lists

@@ -24,6 +24,7 @@ if (room == rm_overworld){
 	if (_current_tile_x != _previous_tile_x || _current_tile_y != _previous_tile_y) {
 	    // The player has changed tiles
 		global.steps++;
+		obj_player._flag_can_touch = true;
 		audio_play_sound(snd_walking_grass,0,false);
 		
 		//reset the nearest's grass' _flag_transition_Start

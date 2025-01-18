@@ -21,6 +21,8 @@ global.player_ypos = 540;
 global.gold = 500;
 global.randgold = 0;
 global.trigger_loss = false;
+_flag_transition_start = false;
+_flag_can_touch = true;
 
 //////////////////
 // STARTER TEAM //

@@ -1,3 +1,23 @@
+//////////////////////////////////////
+// spawn leaves, trigger transition //
+//////////////////////////////////////
+if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
+	_flag_can_touch = false;
+	scr_spawn_leaves();
+	if (global.can_encounter == true){
+		var _rand = irandom_range(1,100);
+		if (_rand <= 50 && _flag_transition_start == false){
+			_flag_transition_start = true;		
+			global.player_xpos = obj_player.x;
+			global.player_ypos = obj_player.y;
+			obj_player._move_speed = 0;				
+			scr_start_transition(rm_encounter);
+		}
+	}
+}
+
+
+
 /////////////////////
 // "ESC" ENDS GAME //
 /////////////////////
