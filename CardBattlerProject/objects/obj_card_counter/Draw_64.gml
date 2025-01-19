@@ -8,5 +8,6 @@ if (_reference_script != undefined && _trigger_my_effect == true){
 	_trigger_my_effect = false;
 }
 
+draw_set_color(_draw_color);
+draw_text(x,y,string(_turn_lifespan));
 draw_set_color(c_white);
-draw_text(room_width/2,room_height/2+300,"Lifespan of spell: " + string(_turn_lifespan));

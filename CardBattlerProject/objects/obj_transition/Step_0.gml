@@ -38,6 +38,7 @@ if (_is_fading) {
 					obj_player.y = global.player_ypos;
 					obj_player._flag_created_camera = false;
 					obj_player._move_speed = 4;
+					global.max_mana = global.max_mana_saved;
 					global.current_mana = global.max_mana;
 					obj_player._flag_transition_start = false;
 					obj_player._flag_can_touch = true;

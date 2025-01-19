@@ -6,7 +6,7 @@ if (instance_exists(obj_end_box) == true){
 		_creature_hp_current = 0;
 		_flag_has_died = true;
 		if (_creature_team == "Ally"){
-			ds_list_delete(global.player_team_in_play,_creature_position);
+			ds_list_delete(global.player_team_in_play, _creature_position);
 			ds_list_add(global.player_team_dead,self);
 			show_debug_message("+--+ OBJ_CREATURE: ALLY " + _creature_name + " HAS DIED +--+");			
 		} else{
@@ -57,13 +57,19 @@ if (instance_exists(obj_end_box) == true){
 
 
 
-	/////////////////////
-	// DRAW BOOST ICON //
-	/////////////////////
-	if (_creature_attack_mod > 1){
+	//////////////////////
+	// DRAW BOOST ICONS //
+	//////////////////////
+	if (_creature_attack_linear != 0){
 		// Set the drawing color for the attack boost
 		draw_set_color(c_red);
-		draw_text(_defense_x - 30, _defense_y - 30, string(_creature_attack_mod));  // Display the defense value inside the circle
+		draw_text(_defense_x - 60, _defense_y - 30, "+" + string(_creature_attack_linear));  // Display the defense value inside the circle
+		draw_set_color(c_white);	
+	}
+	if (_creature_attack_scalar != 1){
+		// Set the drawing color for the attack boost
+		draw_set_color(c_red);
+		draw_text(_defense_x - 30, _defense_y - 30, "x" + string(_creature_attack_scalar));  // Display the defense value inside the circle
 		draw_set_color(c_white);	
 	}
 

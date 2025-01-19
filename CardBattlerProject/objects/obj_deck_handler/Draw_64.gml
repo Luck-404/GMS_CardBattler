@@ -159,7 +159,7 @@ if (global.card_selected != undefined) {
 	                if (_ref_tar != noone) {
 	                    // Play the card with the selected target
 	                    scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"], _ref_selected_card[? "exhausts"]);
-						show_debug_message("[== DECK_HANDLER: TARGETLESS CARD " + _ref_selected_card[? "name"] + " CAST ON " + _ref_tar._creature_name + " ==]");	
+						show_debug_message("[== DECK_HANDLER: TARGETED CARD " + _ref_selected_card[? "name"] + " CAST ON " + _ref_tar._creature_name + " ==]");	
 	                    // Reset the casting phase and deselect the card
 	                    global.casting_phase = false;
 	                    global.card_selected = undefined;

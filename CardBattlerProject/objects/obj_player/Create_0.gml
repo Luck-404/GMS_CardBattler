@@ -14,6 +14,7 @@ _target_x = x; // Current position
 _target_y = y;
 _flag_moving = false; // Movement status
 global.hand_size = 3; // Maximum of 3 cards in the hand
+global.max_mana_saved = 3;
 global.max_mana = 3;
 global.current_mana = 3;
 global.player_xpos = 960;
@@ -55,14 +56,20 @@ global.card_inventory = ds_list_create(); //create inventory
 instance_create_layer(x,y,"GUI",obj_card_display); //generate the card display for overworld
 
 //add a 'starter deck'
-	var _card_strike = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack",,"Any","Any",irandom_range(30,45),false);
-	var _card_potent_fruit = scr_create_card("Potent Fruit", "2x Damage for 3 Turns", 2, scr_card_potent_fruit, spr_card_potent_fruit,"Ally","Green","Buff","Martial","Any",irandom_range(60,75),true);
+	//var _card_strike = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack","Any","Any",irandom_range(30,45),false);
+	var _card_potent_fruit = scr_create_card("Potent Fruit", "2x Damage for 3 Turns", 3, scr_card_potent_fruit, spr_card_potent_fruit,"Ally","Green","Buff","Martial","Any",irandom_range(75,90),true);
+	var _card_grow_manavine = scr_create_card("Grow Manavine", "+3 max mana for 3 turns", 2, scr_card_grow_manavine, spr_card_grow_manavine,"None","Green","Utility","Technical","Any",irandom_range(60,75),true);	
+	var _card_natures_remedy = scr_create_card("Nature's Remedy", "Heal Ally 30% max HP", 2, scr_card_natures_remedy, spr_card_natures_remedy,"Ally","Green","Heal","Magical","Any",irandom_range(60,75),true);	
+	var _card_thorny_whip = scr_create_card("Thorny Whip", "Attack 8", 0, scr_card_thorny_whip, spr_card_thorny_whip,"Enemy","Green","Attack","Any","Any",irandom_range(30,45),false);
+			
 	//var _card_echo = scr_create_card("Echo", "Next spell cast twice, exhaust", 0, scr_card_echo, spr_card_echo,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
 	//var _card_inspiration = scr_create_card("Inspiration", "Gain 1 mana, exhaust", 0, scr_card_inspiration, spr_card_insirpation,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
 	//ds_list_add(global.card_inventory, _card_echo);
 	//ds_list_add(global.card_inventory, _card_inspiration);
-	ds_list_add(global.card_inventory, _card_strike);
+	ds_list_add(global.card_inventory, _card_thorny_whip);
 	ds_list_add(global.card_inventory, _card_potent_fruit);	
+	ds_list_add(global.card_inventory, _card_grow_manavine);	
+	ds_list_add(global.card_inventory, _card_natures_remedy);		
 show_debug_message("|=== PLAYER: CARD INVENTORY CREATED! ===|");	
 
 ///////////////////////

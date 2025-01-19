@@ -126,7 +126,7 @@ if (global.turn_tracker == obj_enemy_team && _enemy_played == false){
 		}
 		show_debug_message("((o)) OBJ_TURN_COORDINATOR: ENEMY EXECUTING CAST ((o))");	
 		var _ref_card_scr = _ref_card[?"script"];
-		scr_play_card(_ref_card_scr,_ref_tar,0,, _ref_card[? "exhausts"]);
+		scr_play_card(_ref_card_scr,_ref_tar,0, _ref_card[? "exhausts"]);
 	}
 	//spawn a 1 second timer, then kill it which will update the global turn tracker
 	if (_flag_spawned_timer == false){
