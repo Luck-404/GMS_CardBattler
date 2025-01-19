@@ -21,3 +21,4 @@ _creature_defaultsound = snd_creature_wraith_default;
 _creature_def = 0;
 _creature_position = 0;
 _flag_has_died = false;
+_creature_attack_mod = 1;

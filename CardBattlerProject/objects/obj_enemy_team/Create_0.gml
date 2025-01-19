@@ -22,9 +22,9 @@ global.enemy_card_inventory = ds_list_create(); //create enemy inventory
 
 //RANDOMIZE HERE IN THE FUTURE
 //add a 'starter deck'
-	var _card_strike = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack","Any");
-	var _card_echo = scr_create_card("Echo", "Next spell cast twice, exhaust", 0, scr_card_echo, spr_card_echo,"None","Uncolored","Utility","Any");
-	var _card_block = scr_create_card("Block", "Defend 5", 1, scr_card_block, spr_card_block,"Ally","Uncolored","Defend","Any");	
+	var _card_strike = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack","Any","Any",irandom_range(30,45),false);
+	var _card_echo = scr_create_card("Echo", "Next spell cast twice, exhaust", 0, scr_card_echo, spr_card_echo,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
+	var _card_block = scr_create_card("Block", "Defend 5", 1, scr_card_block, spr_card_block,"Ally","Uncolored","Defend","Any","Any",irandom_range(30,45),false);	
 	
 	ds_list_add(global.enemy_card_inventory, _card_echo);
 	ds_list_add(global.enemy_card_inventory, _card_echo);	

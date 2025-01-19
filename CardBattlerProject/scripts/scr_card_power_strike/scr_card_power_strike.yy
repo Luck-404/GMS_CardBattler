@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Card Casts",
-    "path": "folders/Scripts/Card Casts.yy",
+    "name": "Uncolored",
+    "path": "folders/Scripts/Card Casts/Uncolored.yy",
   },
 }

@@ -55,12 +55,14 @@ global.card_inventory = ds_list_create(); //create inventory
 instance_create_layer(x,y,"GUI",obj_card_display); //generate the card display for overworld
 
 //add a 'starter deck'
-	var _card_strike = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack","Any");
-	var _card_echo = scr_create_card("Echo", "Next spell cast twice, exhaust", 0, scr_card_echo, spr_card_echo,"None","Uncolored","Utility","Any");
-	var _card_inspiration = scr_create_card("Inspiration", "Gain 1 mana, exhaust", 0, scr_card_inspiration, spr_card_insirpation,"None","Uncolored","Utility","Any");
-	ds_list_add(global.card_inventory, _card_echo);
-	ds_list_add(global.card_inventory, _card_inspiration);
+	var _card_strike = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack",,"Any","Any",irandom_range(30,45),false);
+	var _card_potent_fruit = scr_create_card("Potent Fruit", "2x Damage for 3 Turns", 2, scr_card_potent_fruit, spr_card_potent_fruit,"Ally","Green","Buff","Martial","Any",irandom_range(60,75),true);
+	//var _card_echo = scr_create_card("Echo", "Next spell cast twice, exhaust", 0, scr_card_echo, spr_card_echo,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
+	//var _card_inspiration = scr_create_card("Inspiration", "Gain 1 mana, exhaust", 0, scr_card_inspiration, spr_card_insirpation,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
+	//ds_list_add(global.card_inventory, _card_echo);
+	//ds_list_add(global.card_inventory, _card_inspiration);
 	ds_list_add(global.card_inventory, _card_strike);
+	ds_list_add(global.card_inventory, _card_potent_fruit);	
 show_debug_message("|=== PLAYER: CARD INVENTORY CREATED! ===|");	
 
 ///////////////////////

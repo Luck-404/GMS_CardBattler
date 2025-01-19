@@ -25,8 +25,8 @@
   "nineSlice": null,
   "origin": 0,
   "parent": {
-    "name": "Cards",
-    "path": "folders/Sprites/Cards.yy",
+    "name": "Uncolored",
+    "path": "folders/Sprites/Cards/Uncolored.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

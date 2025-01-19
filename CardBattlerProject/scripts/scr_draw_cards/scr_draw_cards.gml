@@ -5,27 +5,27 @@ function scr_draw_cards() {
 	audio_play_sound(snd_shuffle,0,false);
     // First, remove any previous card instances and reshuffle them back into the deck
     if (global.current_hand != undefined) {
-		show_debug_message("!!=== SCR_GEN_CARDS: REMOVING OLD CARD OBJECTS... ===!!");				
+		show_debug_message("!!=== SCR_DRAW_CARDS: REMOVING OLD CARD OBJECTS... ===!!");				
         // Destroy any existing cards in hand (obj_cards)
         with (obj_card) {
             instance_destroy();
         }
-		show_debug_message("!!=== SCR_GEN_CARDS: REMOVED OLD CARD OBJECTS! ===!!");		
+		show_debug_message("!!=== SCR_DRAW_CARDS: REMOVED OLD CARD OBJECTS! ===!!");		
 
         // Reshuffle the current hand back into your overall deck
-		show_debug_message("!!=== SCR_GEN_CARDS: SHUFFLING HAND CARDS BACK INTO DECK... ===!!");				
+		show_debug_message("!!=== SCR_DRAW_CARDS: SHUFFLING HAND CARDS BACK INTO DECK... ===!!");				
         if (global.current_hand != -1 && ds_list_size(global.current_hand) > 0) {			
             for (var _i = 0; _i < ds_list_size(global.current_hand); _i++) {
                 var _ref_card = ds_list_find_value(global.current_hand, _i);
 				// Return the card to the deck
                 ds_list_add(global.card_inventory, _ref_card);  
-				show_debug_message("!!=== SCR_GEN_CARDS: ADDED " + _ref_card[?"name"] + " BACK TO DECK! ===!!");				
+				show_debug_message("!!=== SCR_DRAW_CARDS: ADDED " + _ref_card[?"name"] + " BACK TO DECK! ===!!");				
             }
 			// Clear the current hand
             ds_list_clear(global.current_hand);  
-			show_debug_message("!!=== SCR_GEN_CARDS: CLEARED CURRENT_HAND! ===!!");			
+			show_debug_message("!!=== SCR_DRAW_CARDS: CLEARED CURRENT_HAND! ===!!");			
         }
-		show_debug_message("!!=== SCR_GEN_CARDS: SHUFFLED ALL HAND CARDS BACK INTO DECK! ===!!");		
+		show_debug_message("!!=== SCR_DRAW_CARDS: SHUFFLED ALL HAND CARDS BACK INTO DECK! ===!!");		
 
 
 

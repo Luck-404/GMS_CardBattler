@@ -126,7 +126,7 @@ if (global.card_selected != undefined) {
 	            // On the second left click, confirm and play the card
 	            if (mouse_check_button_pressed(mb_left)) {
 	                var _ref_tar = undefined; // No specific target
-	                scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"]);
+	                scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"], _ref_selected_card[? "exhausts"]);
 					show_debug_message("[== DECK_HANDLER: TARGETLESS CARD " + _ref_selected_card[? "name"] + "CAST ==]");						
 
 	                // Reset the casting phase and deselect the card
@@ -158,7 +158,7 @@ if (global.card_selected != undefined) {
 
 	                if (_ref_tar != noone) {
 	                    // Play the card with the selected target
-	                    scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"]);
+	                    scr_play_card(_ref_selected_card[? "script"], _ref_tar, _ref_selected_card[? "cost"], _ref_selected_card[? "exhausts"]);
 						show_debug_message("[== DECK_HANDLER: TARGETLESS CARD " + _ref_selected_card[? "name"] + " CAST ON " + _ref_tar._creature_name + " ==]");	
 	                    // Reset the casting phase and deselect the card
 	                    global.casting_phase = false;
@@ -190,7 +190,12 @@ if (mouse_check_button_pressed(mb_right)) {
 if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
 	show_debug_message("[== DECK_HANDLER: DEV TOOL 'D TO DRAW' INVOKED... ==]");		
     scr_draw_cards(3);  // Draw 3 new cards
-	show_debug_message("[== DECK_HANDLER: DEV TOOL 'D TO DRAW' COMPLETE! ==]");		
+	show_debug_message("[== DECK_HANDLER: DEV TOOL 'D TO DRAW' COMPLETE! ==]");	
+	
+	//ALSO decrement spells
+	with (obj_card_counter){
+		obj_card_counter._turn_lifespan--;
+	}
 }
 
 

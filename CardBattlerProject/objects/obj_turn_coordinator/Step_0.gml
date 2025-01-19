@@ -126,12 +126,17 @@ if (global.turn_tracker == obj_enemy_team && _enemy_played == false){
 		}
 		show_debug_message("((o)) OBJ_TURN_COORDINATOR: ENEMY EXECUTING CAST ((o))");	
 		var _ref_card_scr = _ref_card[?"script"];
-		scr_play_card(_ref_card_scr,_ref_tar,0);
+		scr_play_card(_ref_card_scr,_ref_tar,0,, _ref_card[? "exhausts"]);
 	}
 	//spawn a 1 second timer, then kill it which will update the global turn tracker
 	if (_flag_spawned_timer == false){
 		show_debug_message("((o)) OBJ_TURN_COORDINATOR: SPAWNING TIMER BEFORE PASS... ((o))");			
 		instance_create_layer(10,10,"GUI",obj_timer);
 		_flag_spawned_timer = true;
+		//trigger the effects of the passive cards
+		with(obj_card_counter){
+			obj_card_counter._turn_lifespan--;
+			obj_card_counter._trigger_my_effect = true;
+		}
 	}
 }

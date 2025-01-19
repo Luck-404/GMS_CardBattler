@@ -57,6 +57,17 @@ if (instance_exists(obj_end_box) == true){
 
 
 
+	/////////////////////
+	// DRAW BOOST ICON //
+	/////////////////////
+	if (_creature_attack_mod > 1){
+		// Set the drawing color for the attack boost
+		draw_set_color(c_red);
+		draw_text(_defense_x - 30, _defense_y - 30, string(_creature_attack_mod));  // Display the defense value inside the circle
+		draw_set_color(c_white);	
+	}
+
+
 	//////////////////////////
 	// ENLARGE ON MOUSEOVER //
 	//////////////////////////
