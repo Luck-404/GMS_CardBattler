@@ -16,6 +16,10 @@ if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
 	}
 }
 
+if (place_meeting(x, y, obj_tree) && _flag_can_touch == true) {
+	_flag_can_touch = false;
+	scr_spawn_cone();
+}
 
 
 /////////////////////

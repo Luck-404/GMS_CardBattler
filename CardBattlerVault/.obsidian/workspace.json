@@ -11,28 +11,41 @@
             "id": "c2ad93d8c9a81dcf",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "5.1 obj_transition.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "5.1 obj_transition"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           },
           {
             "id": "d8bb3bb311843ec8",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "1. NPCs.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1. NPCs"
+            }
+          },
+          {
+            "id": "05d1cd00b1d9ebba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1.0 obj_player.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1.0 obj_player"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -169,37 +182,37 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d8bb3bb311843ec8",
+  "active": "c2ad93d8c9a81dcf",
   "lastOpenFiles": [
+    "1. NPCs.md",
+    "1.0 obj_player.md",
+    "2.3 obj_turn_coordinator.md",
     "5.1 obj_transition.md",
+    "2. Encounters.md",
+    "obj_timer.md",
+    "7. Tools.md",
+    "0. Central Node.md",
+    "6 World Map.md",
+    "1.5 obj_enemy_team.md",
+    "2.1 obj_encounter_trigger.md",
+    "2.2 rm_encounter.md",
+    "3.4 obj_treasure.md",
+    "6.2 Terrain Features.md",
     "5. GUI and Transitions.md",
+    "1.4 obj_graveyard.md",
+    "1.3 obj_mercenary_shop.md",
+    "1.2 obj_healer_shop.md",
+    "1.1 obj_card_shop.md",
     "3.5 obj_card_effect.md",
     "3. Cards.md",
     "3.0.1 Uncolored Card - Block.md",
-    "3.4 obj_treasure.md",
     "4.1 obj_creature.md",
     "4. Creatures.md",
     "3.2 obj_deck_handler.md",
     "3.1 obj_card_display.md",
-    "3.3 obj_card.md",
-    "1. Character obj_player.md",
-    "6.2 Terrain Features.md",
-    "6.1 rm_overworld.md",
-    "6.0 World Map.md",
-    "0. Central Node.md",
-    "2. Encounters.md",
-    "2.2 rm_encounter.md",
-    "2.1 obj_encounter_trigger.md",
-    "6.3 Green Zones.md",
     "Untitled.canvas",
-    "3.0.6 Uncolored Card - Strike.md",
-    "3.0.5 Uncolored Card - Power Strike.md",
-    "3.0.4 Uncolored Card - Inspiration.md",
-    "3.0.3 Uncolored Card - Echo.md",
-    "3.0.2 Uncolored Card - Bulwark.md",
     "Videos",
     "Photos",
-    "Uncolored Card - Block.md",
     "Photos/pic_charpng.png"
   ]
 }

@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_play_card",
+  "name": "scr_spawn_cone",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Card Tools",
-    "path": "folders/Scripts/Card Tools.yy",
+    "name": "Terrain and GUI",
+    "path": "folders/Scripts/Terrain and GUI.yy",
   },
 }

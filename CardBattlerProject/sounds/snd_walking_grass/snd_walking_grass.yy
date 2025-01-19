@@ -12,8 +12,8 @@
   "conversionMode": 0,
   "duration": 0.227256,
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "name": "Terrain and Overworld",
+    "path": "folders/Sounds/Terrain and Overworld.yy",
   },
   "preload": false,
   "sampleRate": 44100,

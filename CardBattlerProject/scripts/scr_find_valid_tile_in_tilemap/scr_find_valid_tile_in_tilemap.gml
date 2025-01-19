@@ -24,7 +24,7 @@ function scr_find_valid_tile_in_tilemap() {
 
     // Pick a random valid tile
     var _chosen_position = noone;
-    if (ds_list_size(valid_positions) > 0) {
+    if (ds_list_size(_valid_positions) > 0) {
         _chosen_position = ds_list_find_value(_valid_positions, irandom(ds_list_size(_valid_positions) - 1));
     }
     ds_list_destroy(_valid_positions); // Clean up the list
