@@ -1,6 +1,6 @@
 function scr_find_valid_tile_in_tilemap() {
 	show_debug_message("!!=== SCR_FIND_TILE: FINDING A TILE ===!!");		
-    var _tilemap_id = layer_tilemap_get_id("ts_overworld");
+    var _tilemap_id = layer_tilemap_get_id(global.saved_ts);
     var _tile_width = 32;  // Width in tiles
     var _tile_height = 32; // Height in tiles
     var _tile_size = 32;  // Size of individual tiles (assuming square tiles)

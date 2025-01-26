@@ -29,7 +29,7 @@ if (_is_fading) {
 				room_goto(_target_room);
 			}
 
-			if (_target_room == rm_overworld && _flag_overworld_in == false){
+			if (_target_room == global.saved_room && _flag_overworld_in == false){
 					show_debug_message("[[]] OBJ_TRANSITION: TRIGGERED OVERWORLD, UPDATING VARIABLES... [[]]");				
 					_flag_encounter_in = false;
 					_flag_overworld_in = true;

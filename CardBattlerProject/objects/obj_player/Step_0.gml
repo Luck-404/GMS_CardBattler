@@ -8,8 +8,14 @@ if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
 		var _rand = irandom_range(1,100);
 		if (_rand <= 50 && _flag_transition_start == false){
 			_flag_transition_start = true;		
+			
+			//save the current room, tileset, and position of player
+			_tileset = layer_tilemap_get_id(ts_overworld);
+			global.saved_ts = tilemap_get_tileset(_tileset);
+			global.saved_room = room;
 			global.player_xpos = obj_player.x;
 			global.player_ypos = obj_player.y;
+			
 			obj_player._move_speed = 0;				
 			scr_start_transition(rm_encounter);
 		}
@@ -42,7 +48,7 @@ if (keyboard_check_pressed(ord("F"))){
 /////////////////////
 // OVERWORLD LOGIC //
 /////////////////////
-if (room == rm_overworld){
+if (room != rm_encounter){
 	visible = true; //MAKE VISIBLE IN OVERWORLD
 	
 	//////////////////////////
@@ -59,29 +65,51 @@ if (room == rm_overworld){
 	// MOVEMENT LOGIC //
 	////////////////////
 	if (!_flag_moving) {
-	        // Get tile layer and current tile at the target position
-	        var _tile_layer = layer_tilemap_get_id("ts_overworld");
-	        var _next_x = x, _next_y = y;
+	    // Get tile layer and current tile at the target position
+	    var _tile_layer = layer_tilemap_get_id(global.saved_ts);
+	    var _next_x = x, _next_y = y;
 
-	        // Check input for movement using WASD keys
-	        if (keyboard_check(ord("A"))) { // Move left
-	            _next_x = x - 32;
-	            image_xscale = -1; // Flip sprite to face left
-	        } else if (keyboard_check(ord("D"))) { // Move right
-	            _next_x = x + 32;
-	            image_xscale = 1; // Face sprite to the right
-	        } else if (keyboard_check(ord("W"))) { // Move up
-	            _next_y = y - 32;
-	        } else if (keyboard_check(ord("S"))) { // Move down
-	            _next_y = y + 32;
-	        }
+	    // Check input for movement using WASD or arrow keys for 8 directions
+	    var _move_left  = keyboard_check(ord("A"));
+	    var _move_right = keyboard_check(ord("D"));
+	    var _move_up    = keyboard_check(ord("W"));
+	    var _move_down  = keyboard_check(ord("S"));
 
-	        // Check if a tile exists at the target position
-	        if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
-	            _target_x = _next_x;
-	           _target_y = _next_y;
-	            _flag_moving = true; // Start moving
-	        }
+	    // Determine movement direction
+	    if (_move_up && _move_left) { // Move up-left
+	        _next_x = x - 32;
+	        _next_y = y - 32;
+	        image_xscale = -1;
+	    } else if (_move_up && _move_right) { // Move up-right
+	        _next_x = x + 32;
+	        _next_y = y - 32;
+	        image_xscale = 1;
+	    } else if (_move_down && _move_left) { // Move down-left
+	        _next_x = x - 32;
+	        _next_y = y + 32;
+	        image_xscale = -1;
+	    } else if (_move_down && _move_right) { // Move down-right
+	        _next_x = x + 32;
+	        _next_y = y + 32;
+	        image_xscale = 1;
+	    } else if (_move_left) { // Move left
+	        _next_x = x - 32;
+	        image_xscale = -1;
+	    } else if (_move_right) { // Move right
+	        _next_x = x + 32;
+	        image_xscale = 1;
+	    } else if (_move_up) { // Move up
+	        _next_y = y - 32;
+	    } else if (_move_down) { // Move down
+	        _next_y = y + 32;
+	    }
+
+	    // Check if a tile exists at the target position
+	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
+	        _target_x = _next_x;
+	        _target_y = _next_y;
+	        _flag_moving = true; // Start moving
+	    }
 	}
 
 	// Smooth movement to the target position
@@ -93,7 +121,7 @@ if (room == rm_overworld){
 
 	    // Stop moving when the target position is reached
 	    if (x == _target_x && y == _target_y) {
-		    _flag_moving = false;
+	        _flag_moving = false;
 	    }
 	}
 }

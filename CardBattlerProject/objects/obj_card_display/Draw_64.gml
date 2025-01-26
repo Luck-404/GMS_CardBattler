@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////
 // DISPLAYS  CARDS TOP LEFT DURING OVERWORLD //
 ///////////////////////////////////////////////
-if (room == rm_overworld){
+if (room != rm_encounter){
 	// TODO
 	// // HELPER - LIST CARD NAMES AND POSITIONS
 	//for (var _i = 0; _i < ds_list_size(global.card_inventory); _i++) {

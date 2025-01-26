@@ -34,7 +34,7 @@ function scr_draw_cards() {
 			////////////////////////////////
 		        // Check if there are no cards left in the deck
 		        if (ds_list_size(global.card_inventory) == 0) {
-		            // If there are no cards left in the deck, and the hand is also empty, transition to rm_overworld
+		            // If there are no cards left in the deck, and the hand is also empty, transition to saved_room
 		            if (ds_list_size(global.current_hand) == 0) {
 						show_debug_message("!!=== SCR_GEN_CARDS: EXHAUSTED ALL CARDS! ENDING GAME... ===!!");						
 		                global.trigger_loss = true;

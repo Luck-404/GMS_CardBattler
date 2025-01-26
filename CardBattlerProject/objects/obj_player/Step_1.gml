@@ -1,7 +1,7 @@
 //////////////////
 // CAMERA LOGIC //
 //////////////////
-if (room == rm_overworld){
+if (room != rm_encounter){
 	if (_flag_created_camera == false){
 		show_debug_message("|=== PLAYER: CREATING CAMERA... ===|");			
 		global._camera = camera_create(); // Create a camera

@@ -1,7 +1,7 @@
 ///////////////////
 // DISPLAY STEPS //
 ///////////////////
-if (room == rm_overworld){
+if (room != rm_encounter){
 	
 	draw_set_color(c_white);
 	draw_set_font(fnt_fanwood);
