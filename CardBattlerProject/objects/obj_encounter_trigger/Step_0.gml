@@ -34,6 +34,6 @@ if (room != rm_encounter){
 	    // You can add custom logic here for tile change, like triggering events or effects
 	    // Update the previous tile position
 	    _previous_tile_x = _current_tile_x;
-	    _previous_tile_y = _current_tile_y;
+	    _previous_tile_y = _current_tile_y;		
 	}
 }

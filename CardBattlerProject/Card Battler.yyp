@@ -125,6 +125,7 @@
     {"id":{"name":"spr_cone","path":"sprites/spr_cone/spr_cone.yy",},},
     {"id":{"name":"scr_card_power_strike","path":"scripts/scr_card_power_strike/scr_card_power_strike.yy",},},
     {"id":{"name":"ts_overworld_green","path":"tilesets/ts_overworld_green/ts_overworld_green.yy",},},
+    {"id":{"name":"rm_route_green_1","path":"rooms/rm_route_green_1/rm_route_green_1.yy",},},
     {"id":{"name":"ts_oneway","path":"tilesets/ts_oneway/ts_oneway.yy",},},
     {"id":{"name":"spr_ts_temple","path":"sprites/spr_ts_temple/spr_ts_temple.yy",},},
     {"id":{"name":"obj_end_turn","path":"objects/obj_end_turn/obj_end_turn.yy",},},
@@ -195,6 +196,7 @@
     {"id":{"name":"obj_player_circle","path":"objects/obj_player_circle/obj_player_circle.yy",},},
     {"id":{"name":"scr_spawn_leaves","path":"scripts/scr_spawn_leaves/scr_spawn_leaves.yy",},},
     {"id":{"name":"spr_ts_walls","path":"sprites/spr_ts_walls/spr_ts_walls.yy",},},
+    {"id":{"name":"rm_route_green_3","path":"rooms/rm_route_green_3/rm_route_green_3.yy",},},
     {"id":{"name":"spr_card_echo","path":"sprites/spr_card_echo/spr_card_echo.yy",},},
     {"id":{"name":"spr_creature_yellow_green_shard_golem","path":"sprites/spr_creature_yellow_green_shard_golem/spr_creature_yellow_green_shard_golem.yy",},},
     {"id":{"name":"obj_card_display","path":"objects/obj_card_display/obj_card_display.yy",},},
@@ -211,6 +213,8 @@
   "RoomOrderNodes": [
     {"roomId":{"name":"rm_overworld_green","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},},
     {"roomId":{"name":"rm_encounter","path":"rooms/rm_encounter/rm_encounter.yy",},},
+    {"roomId":{"name":"rm_route_green_1","path":"rooms/rm_route_green_1/rm_route_green_1.yy",},},
+    {"roomId":{"name":"rm_route_green_3","path":"rooms/rm_route_green_3/rm_route_green_3.yy",},},
   ],
   "templateType": "game",
   "TextureGroups": [

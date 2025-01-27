@@ -25,7 +25,7 @@ global.trigger_loss = false;
 _flag_transition_start = false;
 _flag_can_touch = true;
 global.saved_room = room;
-_tileset = layer_tilemap_get_id(ts_overworld);
+_tileset = layer_tilemap_get_id("ts_overworld");
 global.saved_ts = tilemap_get_tileset(_tileset);
 
 //////////////////

@@ -10,7 +10,7 @@ if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
 			_flag_transition_start = true;		
 			
 			//save the current room, tileset, and position of player
-			_tileset = layer_tilemap_get_id(ts_overworld);
+			_tileset = layer_tilemap_get_id("ts_overworld");
 			global.saved_ts = tilemap_get_tileset(_tileset);
 			global.saved_room = room;
 			global.player_xpos = obj_player.x;
@@ -22,10 +22,13 @@ if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
 	}
 }
 
-if (place_meeting(x, y, obj_tree) && _flag_can_touch == true) {
-	_flag_can_touch = false;
-	scr_spawn_cone();
+if (place_meeting(x, y, obj_tree)) {
+	if (_flag_can_touch == true){
+		_flag_can_touch = false;
+		scr_spawn_cone();
+	}
 }
+
 
 
 /////////////////////
@@ -66,7 +69,7 @@ if (room != rm_encounter){
 	////////////////////
 	if (!_flag_moving) {
 	    // Get tile layer and current tile at the target position
-	    var _tile_layer = layer_tilemap_get_id(global.saved_ts);
+	    var _tile_layer = layer_tilemap_get_id("ts_overworld");
 	    var _next_x = x, _next_y = y;
 
 	    // Check input for movement using WASD or arrow keys for 8 directions
@@ -108,7 +111,7 @@ if (room != rm_encounter){
 	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
 	        _target_x = _next_x;
 	        _target_y = _next_y;
-	        _flag_moving = true; // Start moving
+	        _flag_moving = true; // Start moving			
 	    }
 	}
 
