@@ -24,10 +24,25 @@
     {"name":"inst_5F35C112","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},
     {"name":"inst_2E0DBE61","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},
     {"name":"inst_7640DCA9","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},
+    {"name":"trigger1","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},
+    {"name":"trigger3","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},
+    {"name":"trigger2","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},
   ],
   "isDnd": false,
   "layers": [
-    {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"GUI","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
+    {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"GUI","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"trigger1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2016.0,"y":2144.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"trigger3","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"properties":[
+            {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"propertyId":{"name":"_color","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"value":"c_red",},
+            {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"propertyId":{"name":"_req_dir","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"value":"\"Up\"",},
+            {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"propertyId":{"name":"_text","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"value":"\"The Bonezone\"",},
+          ],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2016.0,"y":2368.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"trigger2","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"properties":[
+            {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"propertyId":{"name":"_color","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"value":"c_purple",},
+            {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"propertyId":{"name":"_req_dir","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"value":"\"Right\"",},
+            {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"obj_banner_trigger","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"propertyId":{"name":"_text","path":"objects/obj_banner_trigger/obj_banner_trigger.yy",},"value":"\"PP\"",},
+          ],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2304.0,"y":2240.0,},
+      ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"Grasses","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_4371D961","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_grass","path":"objects/obj_grass/obj_grass.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1824.0,"y":2080.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
