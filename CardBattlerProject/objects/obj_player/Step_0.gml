@@ -70,6 +70,8 @@ if (room != rm_encounter){
 	if (!_flag_moving) {
 	    // Get tile layer and current tile at the target position
 	    var _tile_layer = layer_tilemap_get_id("ts_overworld");
+		var _wall_layer = layer_tilemap_get_id("ts_walls");
+		var _one_way_layer = layer_tilemap_get_id("ts_oneway");
 	    var _next_x = x, _next_y = y;
 
 	    // Check input for movement using WASD or arrow keys for 8 directions
@@ -109,9 +111,13 @@ if (room != rm_encounter){
 
 	    // Check if a tile exists at the target position
 	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
-	        _target_x = _next_x;
-	        _target_y = _next_y;
-	        _flag_moving = true; // Start moving			
+			if ((tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0)){
+				show_debug_message("Wall here");	
+			} else {
+		        _target_x = _next_x;
+		        _target_y = _next_y;
+		        _flag_moving = true; // Start moving
+			}
 	    }
 	}
 

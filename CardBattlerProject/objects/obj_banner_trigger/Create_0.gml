@@ -4,3 +4,5 @@ if (is_undefined(_color)) {
 if (is_undefined(_text)) {
     _text = "Default Banner Text";
 }
+
+_flag_triggered = false;

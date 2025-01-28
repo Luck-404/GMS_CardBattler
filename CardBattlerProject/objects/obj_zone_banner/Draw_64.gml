@@ -1,12 +1,13 @@
 // Decrement life
 if (_life > 0) {
     // Draw the banner sprite
+	image_speed = 1;
     draw_sprite_ext(spr_banner, image_index, display_get_width()/2, display_get_height()/8, 2, 2, 0, _ban_color, 1);
     // Decrease life
     _life--;
 
     // Draw text in the center of the screen
-    if (_life < 100) { // Show text for the last 100 frames
+    if (_life < 115) { // Show text for the last 100 frames
 		image_speed = 0;
 		image_index = 7;
         draw_set_color(c_white); // Set text color
