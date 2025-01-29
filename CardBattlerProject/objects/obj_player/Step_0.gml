@@ -29,6 +29,13 @@ if (place_meeting(x, y, obj_tree)) {
 	}
 }
 
+if (place_meeting(x, y, obj_bush)) {
+	if (_flag_can_touch == true){
+		_flag_can_touch = false;
+		scr_spawn_leaves();
+	}
+}
+
 
 
 /////////////////////

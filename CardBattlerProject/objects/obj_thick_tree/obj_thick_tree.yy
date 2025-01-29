@@ -28,8 +28,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_thick_tree",
-    "path": "sprites/spr_thick_tree/spr_thick_tree.yy",
+    "name": "spr_green_thick_tree",
+    "path": "sprites/spr_green_thick_tree/spr_green_thick_tree.yy",
   },
   "spriteMaskId": null,
   "visible": true,

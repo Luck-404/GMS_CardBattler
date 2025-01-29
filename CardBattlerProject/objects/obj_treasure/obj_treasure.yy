@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_treasure",
-    "path": "sprites/spr_treasure/spr_treasure.yy",
+    "name": "spr_treasure_sparkle",
+    "path": "sprites/spr_treasure_sparkle/spr_treasure_sparkle.yy",
   },
   "spriteMaskId": null,
   "visible": true,

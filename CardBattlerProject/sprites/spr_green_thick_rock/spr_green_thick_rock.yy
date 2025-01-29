@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "spr__thick_rock",
+  "name": "spr_green_thick_rock",
   "bbox_bottom": 63,
   "bbox_left": 0,
   "bbox_right": 63,
@@ -25,14 +25,14 @@
   "nineSlice": null,
   "origin": 7,
   "parent": {
-    "name": "Terrain",
-    "path": "folders/Sprites/Terrain.yy",
+    "name": "Green",
+    "path": "folders/Sprites/Terrain/Green.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "spr__thick_rock",
+    "name": "spr_green_thick_rock",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -54,7 +54,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"4dfb59f0-767f-4fa5-b089-41b4b10e199a","path":"sprites/spr__thick_rock/spr__thick_rock.yy",},},},"Disabled":false,"id":"7f50ca62-d818-4de0-aed8-d7fd84942d81","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"4dfb59f0-767f-4fa5-b089-41b4b10e199a","path":"sprites/spr_green_thick_rock/spr_green_thick_rock.yy",},},},"Disabled":false,"id":"7f50ca62-d818-4de0-aed8-d7fd84942d81","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

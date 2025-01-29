@@ -1,8 +1,9 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_thick_rock",
+  "name": "obj_bush",
   "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,},
   ],
   "managed": true,
@@ -28,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_green_thick_rock",
-    "path": "sprites/spr_green_thick_rock/spr_green_thick_rock.yy",
+    "name": "spr_forest_bush",
+    "path": "sprites/spr_forest_bush/spr_forest_bush.yy",
   },
   "spriteMaskId": null,
   "visible": true,
