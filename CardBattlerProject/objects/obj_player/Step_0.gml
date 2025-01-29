@@ -39,6 +39,15 @@ if (global.graveyard_gui_open == false && global.merc_shop_gui_open == false && 
 	game_end();	
 }
 
+/////////////////////
+// SHIFT TO SPRINT //
+/////////////////////
+if (_flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
+	_move_speed = 4;
+} else if (_flag_transition_start == false) {
+	_move_speed = 3;	
+}
+
 ///////////////////////////////
 // KB "F" TOGGLES FULLSCREEN //
 ///////////////////////////////
@@ -64,104 +73,94 @@ if (room != rm_encounter){
 	}
 
 
-	////////////////////
-	// MOVEMENT LOGIC //
-	////////////////////
+////////////////////
+// MOVEMENT LOGIC //
+////////////////////
 	if (!_flag_moving) {
-		image_speed = 0;
-		image_index = 0;		
-	    // Get tile layer and current tile at the target position
+	    image_speed = 0;
+	    image_index = 0;
+    
+	    // Get tile layers
 	    var _tile_layer = layer_tilemap_get_id("ts_overworld");
-		var _wall_layer = layer_tilemap_get_id("ts_walls");
-		var _one_way_layer = layer_tilemap_get_id("ts_oneway");
-	    var _next_x = x, _next_y = y;
-
-	    // Check input for movement using WASD or arrow keys for 8 directions
+	    var _wall_layer = layer_tilemap_get_id("ts_walls");
+	    var _one_way_layer = layer_tilemap_get_id("ts_oneway");
+    
+	    // Movement inputs
 	    var _move_left  = keyboard_check(ord("A"));
 	    var _move_right = keyboard_check(ord("D"));
 	    var _move_up    = keyboard_check(ord("W"));
 	    var _move_down  = keyboard_check(ord("S"));
 
 	    // Determine movement direction
-	    if (_move_up && _move_left) { // Move up-left
-	        _next_x = x - 32;
-	        _next_y = y - 32;
-			image_speed = 1;
-			image_index = 5;
-	        image_xscale = -1;
-			if (image_index < 5){
-				image_index = 5;
-			}			
-	    } else if (_move_up && _move_right) { // Move up-right
-	        _next_x = x + 32;
-	        _next_y = y - 32;
-			image_speed = 1;
-			image_index = 5;
-	        image_xscale = 1;
-			if (image_index < 5){
-				image_index = 5;
-			}						
-	    } else if (_move_down && _move_left) { // Move down-left
-	        _next_x = x - 32;
-	        _next_y = y + 32;
-			image_speed = 1;
-			image_index = 0;
-	        image_xscale = -1;
-			if (image_index < 3){
-				image_index = 0;
-			}			
-	    } else if (_move_down && _move_right) { // Move down-right
-	        _next_x = x + 32;
-	        _next_y = y + 32;
-			image_speed = 1;
-			image_index = 0;
-	        image_xscale = 1;
-			if (image_index < 3){
-				image_index = 0;
-			}			
-	    } else if (_move_left) { // Move left
-	        _next_x = x - 32;
-			image_speed = 1;
-			image_index = 0;
-	        image_xscale = -1;
-			if (image_index < 3){
-				image_index = 0;
-			}			
-	    } else if (_move_right) { // Move right
-	        _next_x = x + 32;
-			image_speed = 1;
-			image_index = 0;
-	        image_xscale = 1;
-			if (image_index < 3){
-				image_index = 0;
-			}			
-	    } else if (_move_up) { // Move up
-	        _next_y = y - 32;
-			image_speed = 1;
-			image_index = 5;
-	        image_xscale = 1;	
-			if (image_index < 5){
-				image_index = 5;
-			}			
-	    } else if (_move_down) { // Move down
-	        _next_y = y + 32;
-			image_speed = 1;
-			image_index = 0;
-	        image_xscale = 1;
-			if (image_index < 3){
-				image_index = 0;
-			}
+	    var _next_x = x;
+	    var _next_y = y;
+	    var _facing_front = true; // Tracks whether to use front-facing sprite
+	    var _flip = 1; // Tracks xscale
+
+	    // Direction tracking variables for the hop
+	    _hop_dx = 0;
+	    _hop_dy = 0;
+
+	    if (_move_up && _move_left) {
+	        _hop_dx = -32;
+	        _hop_dy = -32;
+	        _facing_front = false;
+	        _flip = -1;
+	    } else if (_move_up && _move_right) {
+	        _hop_dx = 32;
+	        _hop_dy = -32;
+	        _facing_front = false;
+	    } else if (_move_down && _move_left) {
+	        _hop_dx = -32;
+	        _hop_dy = 32;
+	        _flip = -1;
+	    } else if (_move_down && _move_right) {
+	        _hop_dx = 32;
+	        _hop_dy = 32;
+	    } else if (_move_left) {
+	        _hop_dx = -32;
+	        _flip = -1;
+	    } else if (_move_right) {
+	        _hop_dx = 32;
+	    } else if (_move_up) {
+	        _hop_dy = -32;
+	        _facing_front = false;
+	    } else if (_move_down) {
+	        _hop_dy = 32;
+	    }
+
+	    _next_x += _hop_dx;
+	    _next_y += _hop_dy;
+
+	    // Apply movement and sprite settings
+	    if (_hop_dx != 0 || _hop_dy != 0) {
+	        image_speed = 1;
+	        image_xscale = _flip;
+	        sprite_index = _facing_front ? spr_player_front : spr_player_back;
 	    }
 
 	    // Check if a tile exists at the target position
 	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
-			if ((tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0)){
-				show_debug_message("Wall here");	
+	        if (tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0) {
+	            show_debug_message("Wall here");    
+	        } else if ((tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y) != 0)) {
+			    var _tile_index = tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y);
+    
+			    if (scr_check_one_way_hop(_tile_index, _next_x, _next_y, x, y)) {
+			        _target_x = _next_x;
+			        _target_y = _next_y;
+			        _flag_moving = true; // Start moving
+			        _hop_start = true;
+					_hop_offset = 8;
+			    } else {
+			        show_debug_message("Blocked! Cannot enter from this direction.");
+			    }
 			} else {
-		        _target_x = _next_x;
-		        _target_y = _next_y;
-		        _flag_moving = true; // Start moving
-			}
+	            _target_x = _next_x;
+	            _target_y = _next_y;
+	            _flag_moving = true; // Start moving
+	            _hop_start = false;                
+	        }
 	    }
 	}
 
@@ -171,10 +170,19 @@ if (room != rm_encounter){
 	    if (x > _target_x) x = max(x - _move_speed, _target_x);
 	    if (y < _target_y) y = min(y + _move_speed, _target_y);
 	    if (y > _target_y) y = max(y - _move_speed, _target_y);
-
+		
 	    // Stop moving when the target position is reached
 	    if (x == _target_x && y == _target_y) {
-	        _flag_moving = false;
+	        _flag_moving = false;      
+			y-= _hop_offset;
+			_hop_offset = 0;
+	        if (_hop_start) {
+	            _hop_start = false;
+				y += _hop_offset;
+	            _target_x += _hop_dx; // Move one more step in the same direction
+	            _target_y += _hop_dy;
+	            _flag_moving = true; // Trigger hop movement
+	        }
 	    }
 	}
 }

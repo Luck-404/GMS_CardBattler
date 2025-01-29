@@ -15,6 +15,11 @@ if (room != rm_encounter){
 	}
 	
 	else if (_flag_created_camera == true){	
+		if (_hop_offset != 0) {
+			camera_set_view_target(global._camera,obj_player_circle);		
+		} else {
+			camera_set_view_target(global._camera,obj_player);		
+		}
 		// Clamp camera position to room boundaries
 		var _cam_x = clamp(x - global._cam_width / 2, 0, room_width - global._cam_width);
 		var _cam_y = clamp(y - global._cam_height / 2, 0, room_height - global._cam_height);

@@ -27,6 +27,10 @@ _flag_can_touch = true;
 global.saved_room = room;
 _tileset = layer_tilemap_get_id("ts_overworld");
 global.saved_ts = tilemap_get_tileset(_tileset);
+_hop_start = false;
+_hop_offset = 0;
+_hop_dx = 0;
+_hop_dy = 0;
 
 //////////////////
 // STARTER TEAM //
