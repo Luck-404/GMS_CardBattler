@@ -68,6 +68,8 @@ if (room != rm_encounter){
 	// MOVEMENT LOGIC //
 	////////////////////
 	if (!_flag_moving) {
+		image_speed = 0;
+		image_index = 0;		
 	    // Get tile layer and current tile at the target position
 	    var _tile_layer = layer_tilemap_get_id("ts_overworld");
 		var _wall_layer = layer_tilemap_get_id("ts_walls");
@@ -84,29 +86,71 @@ if (room != rm_encounter){
 	    if (_move_up && _move_left) { // Move up-left
 	        _next_x = x - 32;
 	        _next_y = y - 32;
+			image_speed = 1;
+			image_index = 5;
 	        image_xscale = -1;
+			if (image_index < 5){
+				image_index = 5;
+			}			
 	    } else if (_move_up && _move_right) { // Move up-right
 	        _next_x = x + 32;
 	        _next_y = y - 32;
+			image_speed = 1;
+			image_index = 5;
 	        image_xscale = 1;
+			if (image_index < 5){
+				image_index = 5;
+			}						
 	    } else if (_move_down && _move_left) { // Move down-left
 	        _next_x = x - 32;
 	        _next_y = y + 32;
+			image_speed = 1;
+			image_index = 0;
 	        image_xscale = -1;
+			if (image_index < 3){
+				image_index = 0;
+			}			
 	    } else if (_move_down && _move_right) { // Move down-right
 	        _next_x = x + 32;
 	        _next_y = y + 32;
+			image_speed = 1;
+			image_index = 0;
 	        image_xscale = 1;
+			if (image_index < 3){
+				image_index = 0;
+			}			
 	    } else if (_move_left) { // Move left
 	        _next_x = x - 32;
+			image_speed = 1;
+			image_index = 0;
 	        image_xscale = -1;
+			if (image_index < 3){
+				image_index = 0;
+			}			
 	    } else if (_move_right) { // Move right
 	        _next_x = x + 32;
+			image_speed = 1;
+			image_index = 0;
 	        image_xscale = 1;
+			if (image_index < 3){
+				image_index = 0;
+			}			
 	    } else if (_move_up) { // Move up
 	        _next_y = y - 32;
+			image_speed = 1;
+			image_index = 5;
+	        image_xscale = 1;	
+			if (image_index < 5){
+				image_index = 5;
+			}			
 	    } else if (_move_down) { // Move down
 	        _next_y = y + 32;
+			image_speed = 1;
+			image_index = 0;
+	        image_xscale = 1;
+			if (image_index < 3){
+				image_index = 0;
+			}
 	    }
 
 	    // Check if a tile exists at the target position

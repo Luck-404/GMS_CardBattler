@@ -3,7 +3,7 @@
   "resourceVersion": "1.0",
   "name": "spr_ts_walls",
   "bbox_bottom": 127,
-  "bbox_left": 0,
+  "bbox_left": 1,
   "bbox_right": 479,
   "bbox_top": 0,
   "bboxMode": 0,

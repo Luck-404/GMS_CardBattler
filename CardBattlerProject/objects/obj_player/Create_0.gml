@@ -9,7 +9,7 @@ _flag_fullscreen = true;
 window_set_fullscreen(_flag_fullscreen);
 _flag_deck_created = false;
 _flag_party_spawned = false;
-_move_speed = 4;
+_move_speed = 3;
 _target_x = x; // Current position
 _target_y = y;
 _flag_moving = false; // Movement status
