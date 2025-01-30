@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Terrain",
-    "path": "folders/Objects/Terrain.yy",
+    "name": "Plants",
+    "path": "folders/Objects/Terrain/Plants.yy",
   },
   "parentObjectId": null,
   "persistent": false,

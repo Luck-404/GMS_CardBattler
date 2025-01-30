@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Shops",
-    "path": "folders/Objects/Shops.yy",
+    "name": "NPCs and Shops",
+    "path": "folders/Objects/NPCs and Shops.yy",
   },
   "parentObjectId": null,
   "persistent": false,

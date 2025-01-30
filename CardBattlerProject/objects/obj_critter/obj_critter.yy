@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Terrain",
-    "path": "folders/Objects/Terrain.yy",
+    "name": "Extras",
+    "path": "folders/Objects/Terrain/Extras.yy",
   },
   "parentObjectId": null,
   "persistent": false,

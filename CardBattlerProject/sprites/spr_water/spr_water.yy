@@ -25,8 +25,8 @@
   "nineSlice": null,
   "origin": 0,
   "parent": {
-    "name": "Tilesets",
-    "path": "folders/Sprites/Tilesets.yy",
+    "name": "Backdrops",
+    "path": "folders/Sprites/Tilesets/Backdrops.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

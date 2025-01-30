@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Terrain",
-    "path": "folders/Objects/Terrain.yy",
+    "name": "Plants",
+    "path": "folders/Objects/Terrain/Plants.yy",
   },
   "parentObjectId": null,
   "persistent": false,
@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_forest_tree",
-    "path": "sprites/spr_forest_tree/spr_forest_tree.yy",
+    "name": "spr_green_forest_tree",
+    "path": "sprites/spr_green_forest_tree/spr_green_forest_tree.yy",
   },
   "spriteMaskId": null,
   "visible": true,
