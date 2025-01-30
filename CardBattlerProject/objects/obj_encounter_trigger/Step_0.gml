@@ -27,9 +27,12 @@ if (room != rm_encounter){
 		obj_player._flag_can_touch = true;
 		audio_play_sound(snd_walking_grass,0,false);
 		
-		////reset the nearest's grass' _flag_transition_Start
-		//var _ref_grass = instance_nearest(obj_player.x,obj_player.y,obj_grass);
-		//_ref_grass._flag_transition_start = false;
+		//trigger a critter every so often
+		var _rand = irandom(100);
+		if (_rand < 10){
+			scr_spawn_critter();
+		}
+			
 			
 	    // You can add custom logic here for tile change, like triggering events or effects
 	    // Update the previous tile position
