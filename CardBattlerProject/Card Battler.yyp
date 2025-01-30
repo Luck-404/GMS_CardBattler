@@ -104,6 +104,7 @@
     {"id":{"name":"spr_ts_green","path":"sprites/spr_ts_green/spr_ts_green.yy",},},
     {"id":{"name":"snd_shuffle","path":"sounds/snd_shuffle/snd_shuffle.yy",},},
     {"id":{"name":"obj_cone","path":"objects/obj_cone/obj_cone.yy",},},
+    {"id":{"name":"ts_trees","path":"sprites/ts_trees/ts_trees.yy",},},
     {"id":{"name":"scr_card_strike","path":"scripts/scr_card_strike/scr_card_strike.yy",},},
     {"id":{"name":"spr_card_potent_fruit","path":"sprites/spr_card_potent_fruit/spr_card_potent_fruit.yy",},},
     {"id":{"name":"scr_card_grow_manavine","path":"scripts/scr_card_grow_manavine/scr_card_grow_manavine.yy",},},

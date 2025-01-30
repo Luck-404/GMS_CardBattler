@@ -1,7 +1,10 @@
 //////////////////////////////////////
 // spawn leaves, trigger transition //
 //////////////////////////////////////
-if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
+var _grass_layer = layer_tilemap_get_id("tl_grass");
+var _tree_layer = layer_tilemap_get_id("tl_trees");
+var _foliage_layer = layer_tilemap_get_id("tl_foliage");
+if ((tilemap_get_at_pixel(_grass_layer, x, y) != 0) && _flag_can_touch == true) {
 	_flag_can_touch = false;
 	scr_spawn_leaves();
 	if (global.can_encounter == true){
@@ -10,7 +13,7 @@ if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
 			_flag_transition_start = true;		
 			
 			//save the current room, tileset, and position of player
-			_tileset = layer_tilemap_get_id("ts_overworld");
+			_tileset = layer_tilemap_get_id("tl_overworld");
 			global.saved_ts = tilemap_get_tileset(_tileset);
 			global.saved_room = room;
 			global.player_xpos = obj_player.x;
@@ -22,14 +25,14 @@ if (place_meeting(x, y, obj_grass) && _flag_can_touch == true) {
 	}
 }
 
-if (place_meeting(x, y, obj_tree)) {
+if (tilemap_get_at_pixel(_tree_layer, x, y) != 0) {
 	if (_flag_can_touch == true){
 		_flag_can_touch = false;
 		scr_spawn_cone();
 	}
 }
 
-if (place_meeting(x, y, obj_bush)) {
+if (tilemap_get_at_pixel(_foliage_layer, x, y) != 0) {
 	if (_flag_can_touch == true){
 		_flag_can_touch = false;
 		scr_spawn_leaves();
@@ -88,9 +91,9 @@ if (room != rm_encounter){
 	    image_index = 0;
     
 	    // Get tile layers
-	    var _tile_layer = layer_tilemap_get_id("ts_overworld");
-	    var _wall_layer = layer_tilemap_get_id("ts_walls");
-	    var _one_way_layer = layer_tilemap_get_id("ts_oneway");
+	    var _tile_layer = layer_tilemap_get_id("tl_overworld");
+	    var _wall_layer = layer_tilemap_get_id("tl_walls");
+	    var _one_way_layer = layer_tilemap_get_id("tl_oneway");
     
 	    // Movement inputs
 	    var _move_left  = keyboard_check(ord("A"));
