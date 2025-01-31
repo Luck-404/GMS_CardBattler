@@ -5,8 +5,8 @@ function scr_spawn_critter(){
 	//get a point that is min 320px x(10 tiles) by 320px y(10 tles) away to 480px (15 tiles away)
 	var _ysign = choose(-1,1)
 	var _xsign = choose(-1,1)
-	var _t_x = _p_x + (_xsign*irandom(320,480));
-	var _t_y = _p_y + (_ysign*irandom(320,480));	
+	var _t_x = _p_x + (_xsign*irandom_range(320,480));
+	var _t_y = _p_y + (_ysign*irandom_range(320,480));	
 	
 	instance_create_depth(_t_x,_t_y,200,obj_critter);	
 }

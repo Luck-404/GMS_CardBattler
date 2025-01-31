@@ -4,5 +4,5 @@ if (_flag_playing == false){
 	//switch (music)
 	//make the zone_trigger objects pass a variable to this
 	audio_stop_all();
-	audio_play_sound(snd_bgm_meadows,0,true);	
+	audio_play_sound(snd_bgm_meadows,0,true);
 }

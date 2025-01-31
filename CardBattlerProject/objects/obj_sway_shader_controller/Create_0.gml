@@ -6,3 +6,6 @@ if (self._u_time == -1) {
 }
 
 depth = 201;
+
+show_debug_message("PIPELINE: ... SUCCESS");
+global.overworld_pipeline_state = PIPELINE_STATE.CHECK_NPC;
