@@ -8,6 +8,7 @@ switch(global.overworld_pipeline_state){
 			//send to idle to wait for confirmation from the object.
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;			
 		}
+		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 	break;
 	#endregion
 	
@@ -29,12 +30,14 @@ switch(global.overworld_pipeline_state){
 			instance_create_layer(x,y,"GUI",obj_sway_shader_controller);
 			//send to idle to wait for confirmation from the object.
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
-		}		
+		}
+		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;			
 	break;	
 	#endregion	
 	
 	
-	#region NPCS	
+	
+	#region NPCS, QUESTS, SHOPS
 	case PIPELINE_STATE.CHECK_NPC:
 		//CHECK RELEVANT NPCS
 		show_debug_message("PIPELINE: CHECKING NPCS...");
@@ -45,27 +48,63 @@ switch(global.overworld_pipeline_state){
 		
 		//POPULATE CARD SHOP
 		show_debug_message("PIPELINE: POPULATING CARD SHOP");	
-		if (instance_exists(obj_card_shop) == true){	
-			
+		if ((instance_exists(obj_card_shop) == true) && global.counter_card_shop_reset == 0){	
+			scr_stock_card_shop(irandom(3,6)); //stock card shop with 3-6 cards
+			global.counter_card_shop_reset = 3;
+			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
 			show_debug_message("PIPELINE: COULD NOT FIND A CARD SHOP TO POPULATE.");			
 		}
 		
 		//POPULATE MERC SHOP
 		show_debug_message("PIPELINE: POPULATING MERC SHOP");	
-		if (instance_exists(obj_mercenary_shop) == true){	
-			
+		if ((instance_exists(obj_mercenary_shop) == true) && global.counter_merc_shop_reset == 0){	
+			scr_stock_mercenary_shop(irandom_range(3,6));
+			global.counter_merc_shop_reset = 3;
+			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
 			show_debug_message("PIPELINE: COULD NOT FIND A MERC SHOP TO POPULATE.");			
-		}		
+		}
+		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_TREASURE;	
 	break;	
 	#endregion	
 	
-	case PIPELINE_STATE.SPAWN_TREASURE:
-	break;	
 	
+	
+	#region TREASURES
+	case PIPELINE_STATE.SPAWN_TREASURE:
+		//check position of placed cards
+		show_debug_message("PIPELINE: CHECKING PLACED TREASURES...");
+		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");		
+		
+		//check position of randomized chests
+		show_debug_message("PIPELINE: CHECKING RANDOMIZED CHESTS...");
+		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");	
+		
+		//spawn 3 randomized sparkly spots at the beginning of the game.
+		show_debug_message("PIPELINE: SPAWNING LUCKY SPOTS...");
+		for (var _i = 0; _i < 3; _i++){
+		    var _new_position = scr_find_valid_tile_in_tilemap();
+		    if (_new_position != noone) {
+		        var _new_x = _new_position[0];
+		        var _new_y = _new_position[1];
+		        instance_create_layer(_new_x, _new_y, "Player", obj_treasure);
+		    }	
+		}
+		show_debug_message("PIPELINE: SUCCESS...");	
+		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_PLAYER;
+	break;
+	#endregion		
+	
+	
+	
+	#region PLAYER	
 	case PIPELINE_STATE.SPAWN_PLAYER:
+	
 	break;	
+	#endregion		
+	
+	
 	
 	case PIPELINE_STATE.SPAWN_STATS:
 	break;	
