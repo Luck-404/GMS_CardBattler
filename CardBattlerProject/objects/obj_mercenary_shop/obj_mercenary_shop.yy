@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "NPCs and Shops",
-    "path": "folders/Objects/NPCs and Shops.yy",
+    "path": "folders/Objects/Overworld/NPCs and Shops.yy",
   },
   "parentObjectId": null,
   "persistent": false,

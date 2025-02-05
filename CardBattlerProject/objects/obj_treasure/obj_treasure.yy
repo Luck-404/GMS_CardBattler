@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Treasures",
-    "path": "folders/Objects/Terrain/Treasures.yy",
+    "path": "folders/Objects/Overworld/Terrain/Treasures.yy",
   },
   "parentObjectId": null,
   "persistent": false,

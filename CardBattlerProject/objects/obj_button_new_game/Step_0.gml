@@ -1,10 +1,14 @@
-if (global.gui_open == false){
+//////////////////////////////////////////////////////////////////////
+//					OBJ_BUTTON_NEW_GAME STEP						//
+//																	//
+// > HOVERING OVER THE BUTTON WILL HIGHLIGHT IT						//
+//////////////////////////////////////////////////////////////////////
+//BUTTON DOES NOT FUNCTION IF THE GUI IS NOT OPEN
+if (global.flag_gui_open == false){
+	//CHECK MOUSE POSITION
 	if (position_meeting(mouse_x,mouse_y,obj_button_new_game)){
-		 _selected = true;
-		 if (mouse_check_button_pressed(mb_left)){
-			global.gui_open = true;
-		 }
+		 _flag_selected = true;
 	} else {
-		_selected = false;
+		_flag_selected = false;
 	}
 }

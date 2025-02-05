@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Effects",
-    "path": "folders/Objects/Effects.yy",
+    "name": "GUIs",
+    "path": "folders/Objects/GUIs.yy",
   },
   "parentObjectId": null,
   "persistent": true,

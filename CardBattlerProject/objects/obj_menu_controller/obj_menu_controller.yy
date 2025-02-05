@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Main Menu",
-    "path": "folders/Objects/Main Menu.yy",
+    "name": "GUIs",
+    "path": "folders/Objects/GUIs.yy",
   },
   "parentObjectId": null,
   "persistent": true,

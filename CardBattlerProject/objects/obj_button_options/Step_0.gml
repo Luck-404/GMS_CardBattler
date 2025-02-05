@@ -1,11 +1,14 @@
-if (global.gui_open == false){
+//////////////////////////////////////////////////////////////////////
+//					OBJ_BUTTON_OPTIONS STEP							//
+//																	//
+// > HOVERING OVER THE BUTTON WILL HIGHLIGHT IT						//
+//////////////////////////////////////////////////////////////////////
+//BUTTON DOES NOT FUNCTION IF THE GUI IS NOT OPEN
+if (global.flag_gui_open == false){
+	//CHECK MOUSE POSITION
 	if (position_meeting(mouse_x,mouse_y,obj_button_options)){
-		 _selected = true;
-		 if (mouse_check_button_pressed(mb_left)){
-			global.gui_open = true;
-			instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);
-		 }
+		 _flag_selected = true;
 	} else {
-		_selected = false;
+		_flag_selected = false;
 	}
 }

@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Tools",
-    "path": "folders/Objects/Tools.yy",
+    "name": "Encounter",
+    "path": "folders/Objects/Encounter.yy",
   },
   "parentObjectId": null,
   "persistent": false,

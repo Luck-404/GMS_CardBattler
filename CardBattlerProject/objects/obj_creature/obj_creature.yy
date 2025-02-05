@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Creatures",
-    "path": "folders/Objects/Creatures.yy",
+    "path": "folders/Objects/Encounter/Creatures.yy",
   },
   "parentObjectId": null,
   "persistent": false,

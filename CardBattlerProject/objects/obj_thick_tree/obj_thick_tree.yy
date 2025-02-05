@@ -9,7 +9,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Plants",
-    "path": "folders/Objects/Terrain/Plants.yy",
+    "path": "folders/Objects/Overworld/Terrain/Plants.yy",
   },
   "parentObjectId": null,
   "persistent": false,

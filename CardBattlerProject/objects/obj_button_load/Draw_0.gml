@@ -1,12 +1,12 @@
-//highlight if selected
-if (_selected){
+//////////////////////////////////////////////////////////////////////
+//					OBJ_BUTTON_LOAD DRAW							//
+//																	//
+// > HOVERING OVER THE BUTTON WILL HIGHLIGHT IT.					//
+//////////////////////////////////////////////////////////////////////
+if (_flag_selected){
 	image_index = 1;
 }
 else {
 	image_index = 0;
 }
 draw_self();
-
-if (global.gui_open && _selected == true){
-	draw_sprite(spr_mm_darken,0,0,0);
-}

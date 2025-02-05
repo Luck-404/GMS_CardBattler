@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "GUI",
-    "path": "folders/Objects/GUI.yy",
+    "name": "GUIs",
+    "path": "folders/Objects/GUIs.yy",
   },
   "parentObjectId": null,
   "persistent": false,
