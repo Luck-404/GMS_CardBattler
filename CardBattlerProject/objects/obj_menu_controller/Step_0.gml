@@ -74,7 +74,7 @@ if (room = rm_main_menu){
 	////////////////////////////////////////////
 	// ESCAPE WILL CLOSE A GUI IF ONE IS OPEN //
 	////////////////////////////////////////////
-	if (keyboard_check_pressed(vk_escape) && (global.flag_gui_open = true)){
+	if (keyboard_check_pressed(vk_escape) && (global.flag_gui_open == true)){
 		
 		//DESTROY THE OPTIONS PANE IF OPEN
 		if (instance_exists(obj_gui_options)){
@@ -105,7 +105,7 @@ if (room = rm_main_menu){
 	//////////////////////////////////////////////////
 	// ESCAPE WILL CLOSE THE GAME IF NO GUI IS OPEN //
 	//////////////////////////////////////////////////
-	else if (keyboard_check_pressed(vk_escape)){
+	else if (keyboard_check_pressed(vk_escape) && global.flag_gui_open == false){
 		game_end();
 	}
 }

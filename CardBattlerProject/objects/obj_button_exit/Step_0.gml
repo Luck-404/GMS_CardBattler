@@ -13,6 +13,8 @@ if (global.flag_gui_open == false){
 		 if (mouse_check_button_pressed(mb_left)){
 			game_end();
 		 }
-} else {
+	}
+}
+else {
 	_flag_selected = false;
 }

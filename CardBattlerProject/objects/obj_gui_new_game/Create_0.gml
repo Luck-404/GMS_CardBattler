@@ -17,26 +17,33 @@ _ref_passer = instance_create_layer(0,0,"GUI",obj_passer);
 _list_patrons = ds_list_create();
 scr_populate_patrons(_list_patrons);
 
-//CURRENTLY HOVERED PATRON/PATH
-_flag_hover_patron = false;
+//variables to track gui start x and y locations
+_patrons_start_x = 0; 
+_patrons_start_y = 0;
+_patrons_box_w = 64;
+_patrons_box_h = 64;	
+_patrons_x_pos = 0;
+_patrons_y_pos = 0;
 
 //CURRENTLY SELECTED PATRON/PATH
 _selected_patron = undefined;
 
 //LIST OF BLESSINGS (DSLIST - CALL SCRIPT TO POPULATE IN STEP WHEN A PATRON IS SELECTED)
-_list_blessings = ds_list_create();
+_array_blessings = [];
 
-//CURRENTLY HOVERED BLESSING
-_flag_hover_blessing = true;
+//variables to track gui start x and y locations
+_blessings_start_x = 0; 
+_blessings_start_y = 0;
+_blessings_box_w = 32;
+_blessings_box_h = 32;	
+_blessings_x_pos = 0;
+_blessings_y_pos = 0;
 
 //CURRENTLY SELECTED BLESSING
 _selected_blessing = undefined;
 
 //CONFIRM BUTTON IS ACTIVE IF THERE IS A BLESSING AND PATRON SELECTED
 _flag_confirm_active = false;
-
-//HOVERING OVER CONFIRM BUTTON
-_flag_hover_confirm = false;
 
 //AFTER CLICKING CONFIRM, WAITS FOR THE PASSER TO BE READY TO TRANSITION
 _flag_ready_to_transition = false;

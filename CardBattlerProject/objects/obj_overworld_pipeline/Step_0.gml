@@ -49,7 +49,7 @@ switch(global.overworld_pipeline_state){
 		//POPULATE CARD SHOP
 		show_debug_message("PIPELINE: POPULATING CARD SHOP");	
 		if ((instance_exists(obj_card_shop) == true) && global.counter_card_shop_reset == 0){	
-			scr_stock_card_shop(irandom(3,6)); //stock card shop with 3-6 cards
+			scr_stock_card_shop(irandom_range(3,6)); //stock card shop with 3-6 cards
 			global.counter_card_shop_reset = 3;
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
