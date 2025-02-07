@@ -1,14 +1,50 @@
-show_debug_message("[[]] OBJ_TRANSITION: CREATED [[]]");	
+///////////////////////////////////////////////////////////////////////
+//						OBJ_TRANSITION CREATE						//
+//																	//
+// > CDEFINE CREATE OBJECT VARIABLES								//
+//////////////////////////////////////////////////////////////////////
 
-///////////////
-// VARIABLES //
-///////////////
-image_alpha = 0;         // Start fully transparent
-_fade_speed = 0.06;      // Adjust fade speed
-_target_room = -1;       // Room to transition to
-_is_fading = false;      // Controls if fade is active
-_is_fading_in = true;    // Start with fade in
-_is_fading_out = false;  // Fade out state
-_flag_encounter_in = false;
-_flag_overworld_in = false;
+//ENUM for state machine
+enum TRANSITION_STATE {
+	FADE_OUT,
+	TRANSITION,
+	CREATE_PIPELINE,
+	LOADING,
+	FADE_IN,
+	DELETE
+}
+
+_transition_state_tracker = TRANSITION_STATE.FADE_OUT; //STATE TRACKER
+_target_room = undefined;	// TARGET ROOM
+//MM => OW
+//OW => MM
+
+//OW => OW
+
+//OW => Encounter
+//Encounter => OW
+_ref_pipeline = undefined; //pipeline created in the new room
+
+
+image_alpha = 0;	// START TRANSPARENT
+_fade_speed = 0.06; // FADE SPEED
 depth = -10000;
+
+//draw event definitions
+_rot = 0;
+enum LOADING_STATE {
+	CREATE_GUI,
+	CREATE_AMBIANCE,
+	DATA_RETRIEVAL,
+	SPAWN_TREASURES,
+	SPAWN_PLAYER,
+	SPAWN_LOGGER,
+	
+	SPAWN_ENEMY_TEAM,
+	SPAWN_ALLY_TEAM,
+	SPAWN_DECK,
+	INIT_LOGGER,
+	
+	SAVING
+}
+_loading_step = LOADING_STATE.CREATE_GUI;

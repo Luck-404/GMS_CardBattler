@@ -11,13 +11,17 @@ if (instance_exists(obj_passer)){
 		instance_destroy(obj_passer);	
 	}
 }
+
 _ref_passer = instance_create_layer(0,0,"GUI",obj_passer);
+
+//VARIABLES TO TRACK THE LOCATION OF THE 'CLOSE X' BUTTON
+//TODO
 
 //LIST OF AVAILABLE PATRONS AND THEIR DETAILS (DSLIST - CALL SCRIPT TO POPULATE)
 _list_patrons = ds_list_create();
 scr_populate_patrons(_list_patrons);
 
-//variables to track gui start x and y locations
+//VARIABLES TO TRACK THE START OF THE PATRONS GUI GRIDS
 _patrons_start_x = 0; 
 _patrons_start_y = 0;
 _patrons_box_w = 64;
@@ -25,13 +29,13 @@ _patrons_box_h = 64;
 _patrons_x_pos = 0;
 _patrons_y_pos = 0;
 
-//CURRENTLY SELECTED PATRON/PATH
+//REFERENCE SELECTED PATRON/PATH, USED TO ACTIVATE BLESSINGS AND TO BE PASSED ONTO THE PASSER
 _selected_patron = undefined;
 
-//LIST OF BLESSINGS (DSLIST - CALL SCRIPT TO POPULATE IN STEP WHEN A PATRON IS SELECTED)
+//ARRAY OF BLESSINGS, A PATRON HAS AN ARRAY OF 3 ATTACHED BLESSINGS (A DSMAP OBJECT IN EACH CELL).
 _array_blessings = [];
 
-//variables to track gui start x and y locations
+//VARIABLES TO TRACK THE START OF THE BLESSINGS GUI GRIDS
 _blessings_start_x = 0; 
 _blessings_start_y = 0;
 _blessings_box_w = 32;
@@ -39,11 +43,8 @@ _blessings_box_h = 32;
 _blessings_x_pos = 0;
 _blessings_y_pos = 0;
 
-//CURRENTLY SELECTED BLESSING
+//REFERENCE SELECTED PATRON/PATH, USED TO ACTIVATE THE CONFIRM BUTTON AND TO BE PASSED ONTO THE PASSER
 _selected_blessing = undefined;
 
-//CONFIRM BUTTON IS ACTIVE IF THERE IS A BLESSING AND PATRON SELECTED
-_flag_confirm_active = false;
-
-//AFTER CLICKING CONFIRM, WAITS FOR THE PASSER TO BE READY TO TRANSITION
-_flag_ready_to_transition = false;
+//THE VARIABLES HAVE BEEN PASSED
+_variables_passed = false;

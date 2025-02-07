@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////////////////////
+//					SCR_PASSER_CHECK								//
+//																	//
+// > CHECK THE INFORMATION OF THE PASSER OBJECT TO MAKE SURE IT		//
+//	 PROPERLY PASSED ALL THE VALUES									//
+//////////////////////////////////////////////////////////////////////
 function scr_passer_check(_type){
 	if (instance_exists(obj_passer)){
 
@@ -15,7 +21,7 @@ function scr_passer_check(_type){
 		return "STARTER NOT DEFINED";	
 		}
 
-		//check ARDS
+		//check CARDS
 		if(obj_passer._pass_cards != undefined){
 			show_debug_message("Checker found: " + string(obj_passer._pass_cards));	
 		} else {

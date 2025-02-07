@@ -14,7 +14,7 @@ if (global.flag_gui_open == false){
 			game_end();
 		 }
 	}
-}
-else {
-	_flag_selected = false;
+	else {
+		_flag_selected = false;
+	}
 }

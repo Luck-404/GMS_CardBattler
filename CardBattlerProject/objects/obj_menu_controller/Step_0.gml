@@ -37,12 +37,14 @@ if (room = rm_main_menu){
 	//////////////////////////////////////////////////////////
 	// CHECK FOR GUI BUTTONS (ALL BESIDES EXIT) - SPAWN GUI //
 	//////////////////////////////////////////////////////////
+	if (_clicked == false){
 		///////////////
 		// NEW GAME //
 		//////////////
 		if (position_meeting(mouse_x,mouse_y,obj_button_new_game)){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 _clicked = true;
 				global.flag_gui_open = true;
 				global.gui_active = "New Game";				
 				//DISPLAY THE GUI
@@ -53,6 +55,7 @@ if (room = rm_main_menu){
 		if (position_meeting(mouse_x,mouse_y,obj_gui_load_game)){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 _clicked = true;				 
 				global.flag_gui_open = true;
 				global.gui_active = "Load";
 				//DISPLAY THE GUI
@@ -64,13 +67,14 @@ if (room = rm_main_menu){
 		if (position_meeting(mouse_x,mouse_y,obj_gui_options)){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 _clicked = true;				 
 				global.flag_gui_open = true;
 				global.gui_active = "Options";				
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);
 			 }
 		}		
-		
+	}
 	////////////////////////////////////////////
 	// ESCAPE WILL CLOSE A GUI IF ONE IS OPEN //
 	////////////////////////////////////////////

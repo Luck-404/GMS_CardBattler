@@ -11,3 +11,4 @@ global.res_y=1080; //tracks the y size of the resolution
 global.scalar_snd = 1; //tracks the sound scalar
 global.scalar_bgm = 1; //tracks the bgm scalar
 global.flag_tutorials = true; //tracks the tutorials checkbox
+_clicked = false;
