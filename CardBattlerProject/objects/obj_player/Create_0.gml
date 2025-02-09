@@ -68,7 +68,11 @@ instance_create_layer(x,y,"GUI",obj_card_display); //generate the card display f
 	var _card_grow_manavine = scr_create_card("Grow Manavine", "+3 max mana for 3 turns", 2, scr_card_grow_manavine, spr_card_grow_manavine,"None","Green","Utility","Technical","Any",irandom_range(60,75),true);	
 	var _card_natures_remedy = scr_create_card("Nature's Remedy", "Heal Ally 30% max HP", 2, scr_card_natures_remedy, spr_card_natures_remedy,"Ally","Green","Heal","Magical","Any",irandom_range(60,75),true);	
 	var _card_thorny_whip = scr_create_card("Thorny Whip", "Attack 8", 0, scr_card_thorny_whip, spr_card_thorny_whip,"Enemy","Green","Attack","Any","Any",irandom_range(30,45),false);
-			
+	var _card_poison_ivy = scr_create_card("Poison Ivy", "Poison up to 3 targets for 2 turns", 1, scr_card_poison_ivy, spr_card_poison_ivy,"Enemy","Green","Attack","Any","Any",irandom_range(45,60),false);
+	var _card_fell = scr_create_card("Fell", "Deal 30% hp damage to one unit", 2, scr_card_fell, spr_card_fell,"Enemy","Green","Attack","Any","Any",irandom_range(60,75),false);
+	var _card_beastial_bash = scr_create_card("Beastial Bash", "Deal damage to 3 units, stun 1", 3, scr_card_beastial_bash, spr_card_beastial_bash,"Enemy","Green","Attack","Any","Any",irandom_range(75,90),true);
+	var _card_stampede = scr_create_card("Stampede", "Deal damage to all units", 3, scr_card_stampede, spr_card_stampede,"Enemy","Green","Attack","Any","Any",irandom_range(75,90),true);
+	
 	//var _card_echo = scr_create_card("Echo", "Next spell cast twice, exhaust", 0, scr_card_echo, spr_card_echo,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
 	//var _card_inspiration = scr_create_card("Inspiration", "Gain 1 mana, exhaust", 0, scr_card_inspiration, spr_card_insirpation,"None","Uncolored","Utility","Any","Any",irandom_range(60,75),true);
 	//ds_list_add(global.card_inventory, _card_echo);
@@ -76,7 +80,11 @@ instance_create_layer(x,y,"GUI",obj_card_display); //generate the card display f
 	ds_list_add(global.card_inventory, _card_thorny_whip);
 	ds_list_add(global.card_inventory, _card_potent_fruit);	
 	ds_list_add(global.card_inventory, _card_grow_manavine);	
-	ds_list_add(global.card_inventory, _card_natures_remedy);		
+	ds_list_add(global.card_inventory, _card_natures_remedy);	
+	ds_list_add(global.card_inventory, _card_poison_ivy);
+	ds_list_add(global.card_inventory, _card_fell);	
+	ds_list_add(global.card_inventory, _card_beastial_bash);	
+	ds_list_add(global.card_inventory, _card_stampede);		
 show_debug_message("|=== PLAYER: CARD INVENTORY CREATED! ===|");	
 
 ///////////////////////

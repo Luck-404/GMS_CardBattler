@@ -12,6 +12,10 @@ global.enemy_team_dead = ds_list_create();
 //RANDOMIZE HERE IN THE FUTURE
 var _creature_wraith = scr_create_creature("Wraith", false, "Uncolored", "None", "None","Enemy","Default",irandom_range(1,5),"All","All",undefined, undefined,spr_creature_uncolored_wraith,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 ds_list_add(global.enemy_team, _creature_wraith);
+ds_list_add(global.enemy_team, _creature_wraith);
+ds_list_add(global.enemy_team, _creature_wraith);
+ds_list_add(global.enemy_team, _creature_wraith);
+ds_list_add(global.enemy_team, _creature_wraith);
 show_debug_message("~~~ OBJ_ENEMY_TEAM: TEAM SET UP... ~~~");
 
 //////////

@@ -6,3 +6,7 @@ if (_count_lifetime <= 0){
 } else {
 	_count_lifetime--;	
 }
+
+if (_vspd > 0){
+	y+=_vspd;	
+}

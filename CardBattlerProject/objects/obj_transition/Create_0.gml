@@ -16,23 +16,19 @@ enum TRANSITION_STATE {
 
 _transition_state_tracker = TRANSITION_STATE.FADE_OUT; //STATE TRACKER
 _target_room = undefined;	// TARGET ROOM
-//MM => OW
-//OW => MM
+	//MM => OW
+	//OW => MM
 
-//OW => OW
+	//OW => OW
 
-//OW => Encounter
-//Encounter => OW
-_ref_pipeline = undefined; //pipeline created in the new room
-
+	//OW => Encounter
+	//Encounter => OW
 
 image_alpha = 0;	// START TRANSPARENT
 _fade_speed = 0.06; // FADE SPEED
-depth = -10000;
-
-//draw event definitions
-_rot = 0;
-enum LOADING_STATE {
+depth = -10000; //ALWAYS SHOW ON TOP
+_rot = 0; //FOR DRAW EVENT SPINNER
+enum LOADING_STATE { //DRAW EVENT STATE TRACKER
 	CREATE_GUI,
 	CREATE_AMBIANCE,
 	DATA_RETRIEVAL,
@@ -47,4 +43,17 @@ enum LOADING_STATE {
 	
 	SAVING
 }
-_loading_step = LOADING_STATE.CREATE_GUI;
+
+_ref_pipeline = undefined; //pipeline REFERENCE, TO START THE DRAW EVENT
+
+if (_target_room == rm_encounter){ // ENCOUNTER
+	_pipeline = "encounter";
+	_loading_step = LOADING_STATE.SPAWN_ENEMY_TEAM;
+} else if (_target_room == rm_main_menu){ //MAIN MENU
+	_pipeline = "main menu";	
+	_loading_step = LOADING_STATE.SAVING;
+} else { //OVERWORLD
+	_pipeline = "overworld";	 
+	_loading_step = LOADING_STATE.CREATE_GUI;
+}
+

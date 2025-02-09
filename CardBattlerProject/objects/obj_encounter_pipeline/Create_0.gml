@@ -1,6 +1,6 @@
 show_debug_message("\n\n\n");
 
-enum PIPELINE_STATE	{
+enum ENCOUNTER_PIPELINE_STATE	{
 	CREATE_GUI,
 	CREATE_AMBIANCE,
 	CHECK_NPC,
@@ -15,7 +15,7 @@ enum PIPELINE_STATE	{
 }
 
 //track the pipeline state globally
-global.overworld_pipeline_state = PIPELINE_STATE.CREATE_GUI;
+global.encounter_pipeline_state = ENCOUNTER_PIPELINE_STATE.CREATE_GUI;
 
 global.counter_card_shop_reset = 0; //tracks every 3 encounters, reset card shops.
 global.counter_merc_shop_reset = 0; //tracks every 3 encounters, reset merc shops.

@@ -1,27 +1,27 @@
 switch(global.overworld_pipeline_state){
 	#region GUI
-	case PIPELINE_STATE.CREATE_GUI: //CREATES GUI
+	case ENCOUNTER_PIPELINE_STATE.CREATE_GUI: //CREATES GUI
 		show_debug_message("PIPELINE: CREATING OBJ_CARD_DISPLAY");
 		//CREATE THE GUI CONTROLLER
 		if (instance_exists(obj_card_display) == false){
 			instance_create_layer(x,y,"GUI",obj_card_display);
 			//send to idle to wait for confirmation from the object.
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;			
+			global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;			
 		}
-		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+		global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;	
 	break;
 	#endregion
 	
 	
 	
 	#region AMBIANCE	
-	case PIPELINE_STATE.CREATE_AMBIANCE:
+	case ENCOUNTER_PIPELINE_STATE.CREATE_AMBIANCE:
 		show_debug_message("PIPELINE: CREATING OBJ_MUSIC_CONTROLLER");
 		//CREATE THE MUSIC CONTROLLER
 		if (instance_exists(obj_music_controller) == false){
 			instance_create_layer(x,y,"GUI",obj_music_controller);
 			//send to idle to wait for confirmation from the object.
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+			global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;	
 		}
 		
 		show_debug_message("PIPELINE: CREATING OBJ_SWAY_SHADER_CONTROLLER");
@@ -29,16 +29,16 @@ switch(global.overworld_pipeline_state){
 		if (instance_exists(obj_sway_shader_controller) == false){
 			instance_create_layer(x,y,"GUI",obj_sway_shader_controller);
 			//send to idle to wait for confirmation from the object.
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+			global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;	
 		}
-		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;			
+		global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;			
 	break;	
 	#endregion	
 	
 	
 	
 	#region NPCS, QUESTS, SHOPS
-	case PIPELINE_STATE.CHECK_NPC:
+	case ENCOUNTER_PIPELINE_STATE.CHECK_NPC:
 		//CHECK RELEVANT NPCS
 		show_debug_message("PIPELINE: CHECKING NPCS...");
 		show_debug_message("PIPELINE: NO NPCS TO CHECK AT THIS TIME.");		
@@ -51,7 +51,7 @@ switch(global.overworld_pipeline_state){
 		if ((instance_exists(obj_card_shop) == true) && global.counter_card_shop_reset == 0){	
 			scr_stock_card_shop(irandom_range(3,6)); //stock card shop with 3-6 cards
 			global.counter_card_shop_reset = 3;
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+			global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;	
 		} else {
 			show_debug_message("PIPELINE: COULD NOT FIND A CARD SHOP TO POPULATE.");			
 		}
@@ -61,18 +61,18 @@ switch(global.overworld_pipeline_state){
 		if ((instance_exists(obj_mercenary_shop) == true) && global.counter_merc_shop_reset == 0){	
 			scr_stock_mercenary_shop(irandom_range(3,6));
 			global.counter_merc_shop_reset = 3;
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+			global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.IDLE;	
 		} else {
 			show_debug_message("PIPELINE: COULD NOT FIND A MERC SHOP TO POPULATE.");			
 		}
-		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_TREASURE;	
+		global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.SPAWN_TREASURE;	
 	break;	
 	#endregion	
 	
 	
 	
 	#region TREASURES
-	case PIPELINE_STATE.SPAWN_TREASURE:
+	case ENCOUNTER_PIPELINE_STATE.SPAWN_TREASURE:
 		//check position of placed cards
 		show_debug_message("PIPELINE: CHECKING PLACED TREASURES...");
 		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");		
@@ -92,35 +92,35 @@ switch(global.overworld_pipeline_state){
 		    }	
 		}
 		show_debug_message("PIPELINE: SUCCESS...");	
-		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_PLAYER;
+		global.overworld_pipeline_state = ENCOUNTER_PIPELINE_STATE.SPAWN_PLAYER;
 	break;
 	#endregion		
 	
 	
 	
 	#region PLAYER	
-	case PIPELINE_STATE.SPAWN_PLAYER:
+	case ENCOUNTER_PIPELINE_STATE.SPAWN_PLAYER:
 	
 	break;	
 	#endregion		
 	
 	
 	
-	case PIPELINE_STATE.SPAWN_STATS:
+	case ENCOUNTER_PIPELINE_STATE.SPAWN_STATS:
 	break;	
 	
-	case PIPELINE_STATE.END_INIT_TRANSITION:
+	case ENCOUNTER_PIPELINE_STATE.END_INIT_TRANSITION:
 	break;	
 	
-	case PIPELINE_STATE.IDLE:
+	case ENCOUNTER_PIPELINE_STATE.IDLE:
 	break;
 	
-	case PIPELINE_STATE.TRANSITION_OUT:
+	case ENCOUNTER_PIPELINE_STATE.TRANSITION_OUT:
 	break;
 	
-	case PIPELINE_STATE.TRANSITION_IN:
+	case ENCOUNTER_PIPELINE_STATE.TRANSITION_IN:
 	break;
 	
-	case PIPELINE_STATE.RESET:
+	case ENCOUNTER_PIPELINE_STATE.RESET:
 	break;
 }

@@ -23,3 +23,4 @@ _creature_position = 0;
 _flag_has_died = false;
 _creature_attack_scalar = 1;
 _creature_attack_linear = 0;
+_turn_available = true;
