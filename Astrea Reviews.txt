@@ -1,0 +1,92 @@
+Astrea
+
+Cool main menu
+6 characters - different play/deckstyles
+Interesting story
+beautiful art
+music/sfx awesome!
+
+black hole blessings - choose a powerful artiface and drawback at spawn
+- spawn kits
+
+Types of die
+purify - heal/deal x
+corrupt - heal/deal x
+copycat - copy a die from your hand to roll
+owl-light - scale purify with amount of converted dice in the encounter
+   -   convert- change reds to blues
+Eureka - convert
+dissolve life - instadeath
+draw - draw a die
+change target effects - change from self/single target to aoe
+change dice into a certain dice (ingenious touch)
+draw 2, get 2 permanent trash cards to eat up your hand
+serenity- increases purification recieved
+inventive- sac dice and deal damage
+twilight sigil - creatures affected receive healing/damage per die converted
+dice that you can choose the face of die to roll (tutor effect)
+amplify - change x dice into a purift 10 for end of turn
+lunar alignment - decrease all die from our hand to 1, deal 9 damage to all enemies for each die you turn to 1
+nocturnal updraft - gain 1 doom, deal purification to an enemy for each doom
+expertise - convert all dice from your hand
+bright enhancement- enhance 2 dice permanently
+
+
+forced to play reds! balance/risk
+
+effects in game
+- thorns - take the damage dealt back (important to watch your HP!)
+- paralyze hex - draw 1 less
+- hex die - takes up a spot in your drawn hand
+- doom - increases die corruption value
+- stunned- cannot reroll dice
+- plague die- adds more trash die to your pool
+- wound - a die with corruption actins
+- dizzy - a die with negative actions
+- shadow mantle - block purify
+- hidden - cannot see waht enemy rolled
+- dazed - randomly reroll blues to red and reds to blues
+- disoriented -randomize actions on dice attached
+- research - increase enhance effectiveness
+- serenity -opp of doom
+roguelike
+- 3 lives limit
+- permalose lives (forge thing though)
+- receive purification when playing a risky die
+- new moon ray
+
+interesting system of built-in extra cards- take life to unlock them
+	- moonie: free convert, reroll, st damage/heal, draw
+
+choose chest after every battle
+
+enemy has attack shown above them during your turn.
+
+can corrupt self!
+
+critical - whenever you deal purification you have a change to multiply the purification
+sands of time - whenever you play a nonhex die you have a change of not discarding the die but instead rerolling it
+
+minions
+- shield - rolls a shield die per turn
+- beacon - rolls a purify die per turn
+- colossus - tanky that has the values targeted at it rerolled from 1-6 << cool idea, maybe have a debuff that rerolls all damage on it to 25% to 150%
+
+star blesings (items)
+- whenever you draw a hex, research - increases enhance effectiveness
+- every 6 starter die you play, deal damage to all targets
+- if 3 dice are converted in a single turn, refresh virtues (built in skills)
+- increase purification received, increase corruption received
+- draw 1 more per turn, increase enemy overcorruption (will attack more)
+- draw 1 more per turn, start silenced (cannot use virtues)
+
+- shrine before boss (item, heal, or gold)
+
+-unholy mist (at the end of the turn, gain 2 shield)
+- light shield
+-boost - draw one more
+-incorruptible - blocks all corruption
+-timeless - choose a non-mandatory action to not dicard << COOL IDEA, force cards to stay in hand!!
+
+chapter limited cards
+forge cards - change cards into others for rest of round/run
