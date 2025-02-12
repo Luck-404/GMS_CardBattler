@@ -1,16 +1,9 @@
-///////////////////////////////////////////////
-// DISPLAYS  CARDS TOP LEFT DURING OVERWORLD //
-///////////////////////////////////////////////
-if (room != rm_encounter){
-	// TODO
-	// // HELPER - LIST CARD NAMES AND POSITIONS
-	//for (var _i = 0; _i < ds_list_size(global.card_inventory); _i++) {
-	//    var _ref_card = ds_list_find_value(global.card_inventory, _i);
-	//    var _name = _ref_card[?"name"];
-	//	show_debug_message("Card " + string(_i) + " is " + _name);
-	//}
-	
-	
+//////////////////////////////////////////////////////////////////////
+//					OBJ_CARD_DISPLAY DRAW GUI						//
+//																	//
+// > DRAW GUI FEATURES WHILE IN OVERWORLD -DRAW CARD DECK 			//
+//////////////////////////////////////////////////////////////////////
+if (ds_list_size(global.card_inventory) != 0){
 	var _margin = 10;
 	var _card_width = 32;
 	var _card_height = 32;

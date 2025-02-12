@@ -236,7 +236,7 @@
     {"name":"rm_route_green_3","order":3,"path":"rooms/rm_route_green_3/rm_route_green_3.yy",},
     {"name":"spr_card_echo","order":2,"path":"sprites/spr_card_echo/spr_card_echo.yy",},
     {"name":"spr_creature_yellow_green_shard_golem","order":12,"path":"sprites/spr_creature_yellow_green_shard_golem/spr_creature_yellow_green_shard_golem.yy",},
-    {"name":"obj_card_display","order":1,"path":"objects/obj_card_display/obj_card_display.yy",},
+    {"name":"obj_card_display","order":9,"path":"objects/obj_card_display/obj_card_display.yy",},
     {"name":"spr_card_fell","order":5,"path":"sprites/spr_card_fell/spr_card_fell.yy",},
     {"name":"obj_card_effect","order":1,"path":"objects/obj_card_effect/obj_card_effect.yy",},
     {"name":"spr_creature_blue_green_swoop_owl","order":6,"path":"sprites/spr_creature_blue_green_swoop_owl/spr_creature_blue_green_swoop_owl.yy",},

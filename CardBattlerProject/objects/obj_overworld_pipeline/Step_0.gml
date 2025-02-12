@@ -1,7 +1,16 @@
+//////////////////////////////////////////////////////////////////////
+//					OBJ_OVERWORLD_PIPELINE STEP						//
+//																	//
+// >TRACK AND PERFORM OPERATIONS FOR THE OVERWORLD'S SETUP. ALSO	//
+//  HANDLE THE TRANSITION OUT OF THE ROOM TO ANOTHER.				//
+//////////////////////////////////////////////////////////////////////
 switch(global.overworld_pipeline_state){
 	#region GUI
+	/////////////////////////////////////////////////////
+	//	CREATE GUI: CREATE GUI OBJECTS FOR USER TO SEE //
+	/////////////////////////////////////////////////////
 	case PIPELINE_STATE.CREATE_GUI: //CREATES GUI
-		show_debug_message("PIPELINE: CREATING OBJ_CARD_DISPLAY");
+		show_debug_message("\nPIPELINE: CREATING OBJ_CARD_DISPLAY");
 		//CREATE THE GUI CONTROLLER
 		if (instance_exists(obj_card_display) == false){
 			instance_create_layer(x,y,"GUI",obj_card_display);

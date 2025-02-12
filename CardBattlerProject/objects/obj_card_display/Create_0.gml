@@ -1,2 +1,7 @@
-show_debug_message("CARD_DISPLAY: ... SUCCESS");
+//////////////////////////////////////////////////////////////////////
+//					OBJ_CARD_DISPLAY CREATE							//
+//																	//
+// > CREATE AND ESTABLISH VARIABLES FOR SELF, TELL PIPELINE TO		//
+//	 TO CONTINUE													//
+//////////////////////////////////////////////////////////////////////
 global.overworld_pipeline_state = PIPELINE_STATE.CREATE_AMBIANCE;
