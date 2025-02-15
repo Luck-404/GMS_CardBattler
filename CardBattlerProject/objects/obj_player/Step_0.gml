@@ -1,52 +1,52 @@
 //////////////////////////////////////
 // spawn leaves, trigger transition //
 //////////////////////////////////////
-var _grass_layer = layer_tilemap_get_id("tl_grass");
-var _tree_layer = layer_tilemap_get_id("tl_trees");
-var _foliage_layer = layer_tilemap_get_id("tl_foliage");
-if ((tilemap_get_at_pixel(_grass_layer, x, y) != 0) && _flag_can_touch == true) {
-	_flag_can_touch = false;
-	scr_spawn_leaves();
-	//if (global.can_encounter == true){
-	//	var _rand = irandom_range(1,100);
-	//	if (_rand <= 50 && _flag_transition_start == false){
-	//		_flag_transition_start = true;		
+//var _grass_layer = layer_tilemap_get_id("tl_grass");
+//var _tree_layer = layer_tilemap_get_id("tl_trees");
+//var _foliage_layer = layer_tilemap_get_id("tl_foliage");
+//if ((tilemap_get_at_pixel(_grass_layer, x, y) != 0) && _flag_can_touch == true) {
+//	_flag_can_touch = false;
+//	scr_spawn_leaves();
+//	//if (global.can_encounter == true){
+//	//	var _rand = irandom_range(1,100);
+//	//	if (_rand <= 50 && _flag_transition_start == false){
+//	//		_flag_transition_start = true;		
 			
-	//		//save the current room, tileset, and position of player
-	//		_tileset = layer_tilemap_get_id("tl_overworld");
-	//		global.saved_ts = tilemap_get_tileset(_tileset);
-	//		global.saved_room = room;
-	//		global.player_xpos = obj_player.x;
-	//		global.player_ypos = obj_player.y;
+//	//		//save the current room, tileset, and position of player
+//	//		_tileset = layer_tilemap_get_id("tl_overworld");
+//	//		global.saved_ts = tilemap_get_tileset(_tileset);
+//	//		global.saved_room = room;
+//	//		global.player_xpos = obj_player.x;
+//	//		global.player_ypos = obj_player.y;
 			
-	//		obj_player._move_speed = 0;				
-	//		//scr_start_transition(rm_encounter);
-	//		room_goto(rm_encounter);
-	//	}
-	//}
-}
+//	//		obj_player._move_speed = 0;				
+//	//		//scr_start_transition(rm_encounter);
+//	//		room_goto(rm_encounter);
+//	//	}
+//	//}
+//}
 
-if (tilemap_get_at_pixel(_tree_layer, x, y) != 0) {
-	if (_flag_can_touch == true){
-		_flag_can_touch = false;
-		scr_spawn_cone();
-	}
-}
+//if (tilemap_get_at_pixel(_tree_layer, x, y) != 0) {
+//	if (_flag_can_touch == true){
+//		_flag_can_touch = false;
+//		scr_spawn_cone();
+//	}
+//}
 
-if (tilemap_get_at_pixel(_foliage_layer, x, y) != 0) {
-	if (_flag_can_touch == true){
-		_flag_can_touch = false;
-		scr_spawn_leaves();
-	}
-}
+//if (tilemap_get_at_pixel(_foliage_layer, x, y) != 0) {
+//	if (_flag_can_touch == true){
+//		_flag_can_touch = false;
+//		scr_spawn_leaves();
+//	}
+//}
 
 
 
 /////////////////////
 // "ESC" ENDS GAME //
 /////////////////////
-if (global.graveyard_gui_open == false && global.merc_shop_gui_open == false && global.card_shop_gui_open == false && global.healer_shop_gui_open == false && keyboard_check_pressed(vk_escape)){
-	show_debug_message("|=== PLAYER: ENDING GAME VIA 'ESC' ===|");		
+if (global.graveyard_gui_open == false && global.merc_shop_gui_open == false && global.card_shop_gui_open == false && global.healer_shop_gui_open == false && keyboard_check_pressed(vk_f1)){
+	show_debug_message("|=== PLAYER: ENDING GAME VIA 'F1' ===|");		
 	game_end();	
 }
 

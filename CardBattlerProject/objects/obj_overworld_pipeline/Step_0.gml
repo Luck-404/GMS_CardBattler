@@ -14,10 +14,12 @@ switch(global.overworld_pipeline_state){
 		//CREATE THE GUI CONTROLLER
 		if (instance_exists(obj_card_display) == false){
 			instance_create_layer(x,y,"GUI",obj_card_display);
-			//send to idle to wait for confirmation from the object.
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;			
+			//TODO - chECKER?	
 		}
-		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+		if (instance_exists(obj_card_display)) {
+			show_debug_message("PIPELINE: SUCCESS...");				
+			global.overworld_pipeline_state = PIPELINE_STATE.CREATE_AMBIANCE;	
+		}
 	break;
 	#endregion
 	
@@ -29,18 +31,21 @@ switch(global.overworld_pipeline_state){
 		//CREATE THE MUSIC CONTROLLER
 		if (instance_exists(obj_music_controller) == false){
 			instance_create_layer(x,y,"GUI",obj_music_controller);
-			//send to idle to wait for confirmation from the object.
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+			//TODO - chECKER?	
 		}
-		
-		show_debug_message("PIPELINE: CREATING OBJ_SWAY_SHADER_CONTROLLER");
-		//CREATE THE SWAY SHADER CONTROLLER
-		if (instance_exists(obj_sway_shader_controller) == false){
-			instance_create_layer(x,y,"GUI",obj_sway_shader_controller);
-			//send to idle to wait for confirmation from the object.
-			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
+		if (instance_exists(obj_music_controller)){
+			show_debug_message("PIPELINE: SUCCESS...");					
+			show_debug_message("PIPELINE: CREATING OBJ_SWAY_SHADER_CONTROLLER");
+			//CREATE THE SWAY SHADER CONTROLLER
+			if (instance_exists(obj_sway_shader_controller) == false){
+				instance_create_layer(x,y,"GUI",obj_sway_shader_controller);
+				//TODO - chECKER?	
+			}
 		}
-		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;			
+		if (instance_exists(obj_sway_shader_controller)){
+			show_debug_message("PIPELINE: SUCCESS...");					
+			global.overworld_pipeline_state = PIPELINE_STATE.CHECK_NPC;	
+	}
 	break;	
 	#endregion	
 	
@@ -64,7 +69,7 @@ switch(global.overworld_pipeline_state){
 		} else {
 			show_debug_message("PIPELINE: COULD NOT FIND A CARD SHOP TO POPULATE.");			
 		}
-		
+		show_debug_message("PIPELINE: SUCCESS...");				
 		//POPULATE MERC SHOP
 		show_debug_message("PIPELINE: POPULATING MERC SHOP");	
 		if ((instance_exists(obj_mercenary_shop) == true) && global.counter_merc_shop_reset == 0){	
@@ -74,6 +79,7 @@ switch(global.overworld_pipeline_state){
 		} else {
 			show_debug_message("PIPELINE: COULD NOT FIND A MERC SHOP TO POPULATE.");			
 		}
+		show_debug_message("PIPELINE: SUCCESS...");				
 		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_TREASURE;	
 	break;	
 	#endregion	
@@ -109,27 +115,61 @@ switch(global.overworld_pipeline_state){
 	
 	#region PLAYER	
 	case PIPELINE_STATE.SPAWN_PLAYER:
-	
+		show_debug_message("PIPELINE: SPAWNING PLAYER...");	
+		var _ref_player = instance_create_layer(1968, 1982, "Player", obj_player);
+			//PASSER STUFF
+			//TODO
+		show_debug_message("PIPELINE: SUCCESS...");	
+		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_STATS;	
 	break;	
 	#endregion		
 	
 	
 	
+	#region STATS	
 	case PIPELINE_STATE.SPAWN_STATS:
+		//spawn stats tracker
+		show_debug_message("PIPELINE: SPAWNING STATS TRACKER...");
+		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");
+		global.overworld_pipeline_state = PIPELINE_STATE.END_INIT_TRANSITION;			
 	break;	
+	#endregion	
 	
+	
+	
+	#region END INIT	
 	case PIPELINE_STATE.END_INIT_TRANSITION:
+		obj_transition._transition_state_tracker = TRANSITION_STATE.FADE_IN;
+		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 	break;	
+	#endregion 
 	
+	
+	
+	#region IDLE		
 	case PIPELINE_STATE.IDLE:
-	break;
 	
+	break;
+	#endregion	
+	
+	
+	
+	#region TRANSITION OUT		
 	case PIPELINE_STATE.TRANSITION_OUT:
 	break;
+	#endregion
 	
+	
+	
+	#region TRANSITION IN			
 	case PIPELINE_STATE.TRANSITION_IN:
 	break;
+	#endregion
 	
+	
+	
+	#region RESET		
 	case PIPELINE_STATE.RESET:
 	break;
+	#endregion	
 }

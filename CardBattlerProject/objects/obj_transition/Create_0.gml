@@ -41,19 +41,11 @@ enum LOADING_STATE { //DRAW EVENT STATE TRACKER
 	SPAWN_DECK,
 	INIT_LOGGER,
 	
-	SAVING
+	SAVING,
+	
+	IDLE
 }
 
 _ref_pipeline = undefined; //pipeline REFERENCE, TO START THE DRAW EVENT
-
-if (_target_room == rm_encounter){ // ENCOUNTER
-	_pipeline = "encounter";
-	_loading_step = LOADING_STATE.SPAWN_ENEMY_TEAM;
-} else if (_target_room == rm_main_menu){ //MAIN MENU
-	_pipeline = "main menu";	
-	_loading_step = LOADING_STATE.SAVING;
-} else { //OVERWORLD
-	_pipeline = "overworld";	 
-	_loading_step = LOADING_STATE.CREATE_GUI;
-}
-
+_loading_step = LOADING_STATE.IDLE;
+_pipeline = undefined;

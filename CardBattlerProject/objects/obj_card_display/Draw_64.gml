@@ -3,7 +3,7 @@
 //																	//
 // > DRAW GUI FEATURES WHILE IN OVERWORLD -DRAW CARD DECK 			//
 //////////////////////////////////////////////////////////////////////
-if (ds_list_size(global.card_inventory) != 0){
+if (instance_exists(obj_player) && !instance_exists(obj_transition) && ds_list_size(global.card_inventory) != 0){
 	var _margin = 10;
 	var _card_width = 32;
 	var _card_height = 32;

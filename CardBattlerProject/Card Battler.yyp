@@ -312,8 +312,8 @@
     {"id":{"name":"rm_overworld_green","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},},
   ],
   "RoomOrderNodes": [
-    {"roomId":{"name":"rm_overworld_green","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},},
     {"roomId":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
+    {"roomId":{"name":"rm_overworld_green","path":"rooms/rm_overworld_green/rm_overworld_green.yy",},},
     {"roomId":{"name":"rm_encounter","path":"rooms/rm_encounter/rm_encounter.yy",},},
     {"roomId":{"name":"rm_route_green_1","path":"rooms/rm_route_green_1/rm_route_green_1.yy",},},
     {"roomId":{"name":"rm_route_green_3","path":"rooms/rm_route_green_3/rm_route_green_3.yy",},},

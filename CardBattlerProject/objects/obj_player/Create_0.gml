@@ -1,15 +1,12 @@
-show_debug_message("\n\n\n\n\n|=== PLAYER CREATED: GAME START ===|");	
 ///////////////
 // VARIABLES //
 ///////////////
-show_debug_message("|=== PLAYER: RANDOMIZING... ===|");	
 randomize();
-show_debug_message("|=== PLAYER: RANDOMIZED ===|");	
 _flag_fullscreen = true;
 window_set_fullscreen(_flag_fullscreen);
 _flag_deck_created = false;
 _flag_party_spawned = false;
-_move_speed = 3;
+_move_speed = 0;
 _target_x = x; // Current position
 _target_y = y;
 _flag_moving = false; // Movement status
@@ -25,8 +22,6 @@ global.trigger_loss = false;
 _flag_transition_start = false;
 _flag_can_touch = true;
 global.saved_room = room;
-_tileset = layer_tilemap_get_id("tl_overworld");
-global.saved_ts = tilemap_get_tileset(_tileset);
 _hop_start = false;
 _hop_offset = 0;
 _hop_dx = 0;

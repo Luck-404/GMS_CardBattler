@@ -126,6 +126,7 @@ if (room != rm_main_menu){
 	// ESCAPE OPENs/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
 	if (keyboard_check_pressed(vk_escape)){
+		show_debug_message("CLICKED ESC");
 		 if (global.flag_gui_open == false){
 			 //CREATE THE OPTIONS MENU		 
 			instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);

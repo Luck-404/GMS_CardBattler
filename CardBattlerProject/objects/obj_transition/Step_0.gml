@@ -13,20 +13,26 @@ switch(_transition_state_tracker){
 	
 	case TRANSITION_STATE.TRANSITION:
 		//move to new room
-		room_goto(room);
+		room_goto(_target_room);
 		_transition_state_tracker = TRANSITION_STATE.CREATE_PIPELINE;
 	break;
 	
 	case TRANSITION_STATE.CREATE_PIPELINE:
 		//BASED ON THE ROOM, CREATE THE PROPER PIPELINE
 		if (_target_room == rm_main_menu){
-			//CALL SAVE?
+			//TODO SAVE
+			_pipeline = "main menu";	
+			_loading_step = LOADING_STATE.SAVING;
 		} else if (_target_room == rm_encounter){
 			//spawn encounter pipeline
 			_ref_pipeline = instance_create_layer(x,y,"GUI",obj_encounter_pipeline)
+			_pipeline = "encounter";
+			_loading_step = LOADING_STATE.SPAWN_ENEMY_TEAM;
 		} else {
 			//spawn ow pipeline
 			_ref_pipeline = instance_create_layer(x,y,"GUI",obj_overworld_pipeline)			
+			_pipeline = "overworld";	 
+			_loading_step = LOADING_STATE.CREATE_GUI;
 		}
 		_transition_state_tracker = TRANSITION_STATE.LOADING;
 	break;	
@@ -43,6 +49,7 @@ switch(_transition_state_tracker){
 	break;
 	
 	case TRANSITION_STATE.DELETE:
+		obj_player._move_speed = 3;
 		instance_destroy();
 	break;	
 }
