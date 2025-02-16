@@ -11,7 +11,7 @@ function scr_transition(_destination,_type,_toid,_fromid){
 				case "start": //enter overworld from main menu
 					//create a transition object, pass it room to goto
 					global.start_x = 1968;
-					global.start_y = 1976;					
+					global.start_y = 1982;					
 					_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
 					_ref_transition._target_room = rm_overworld_green;
 				break;

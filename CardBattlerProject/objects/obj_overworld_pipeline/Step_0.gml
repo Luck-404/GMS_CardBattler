@@ -116,7 +116,7 @@ switch(global.overworld_pipeline_state){
 	#region PLAYER	
 	case PIPELINE_STATE.SPAWN_PLAYER:
 		show_debug_message("PIPELINE: SPAWNING PLAYER...");	
-		var _ref_player = instance_create_layer(1968, 1982, "Player", obj_player);
+		var _ref_player = instance_create_layer(global.start_x, global.start_y, "Player", obj_player);
 			//PASSER STUFF
 			//TODO
 		show_debug_message("PIPELINE: SUCCESS...");	
