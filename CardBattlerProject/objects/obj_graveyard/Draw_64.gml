@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//					OBJ_GRAVEYARD DRAW GUI							//
+//																	//
+// > WHEN A PLAYER PRESSES 'E', SHOW THE DISPLAY.					//
+//////////////////////////////////////////////////////////////////////
 if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
     show_debug_message("<<>> GRAVEYARD: ACTIVATED <<>>");
     global.graveyard_gui_open = !global.graveyard_gui_open;

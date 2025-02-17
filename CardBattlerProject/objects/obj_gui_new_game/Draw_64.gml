@@ -7,14 +7,13 @@
 	///////////////////////////////
 	// HANDLE 'X' CLICK TO CLOSE //
 	///////////////////////////////
-		if (mouse_x < 1135 && mouse_x > 1114 && mouse_y < 308 && mouse_y > 289) {
+		if (device_mouse_x_to_gui(0) < 1135 && device_mouse_x_to_gui(0) > 1114 && mouse_y < 308 && mouse_y > 289) {
 			image_index = 1;
 			if (mouse_check_button(mb_left)) {
 				image_index = 2;
 			}
 			if (mouse_check_button_released(mb_left)) {
 				global.flag_gui_open = false;
-				global.gui_active = undefined;
 				_selected_blessing = undefined;
 				_selected_patron = undefined;
 				instance_destroy();
@@ -55,7 +54,7 @@
 			}
 
 			// ON HOVER, HIGHLIGHT IT, SHOW A TOOLTIP
-			if (mouse_x > _patrons_x_pos && mouse_x < _patrons_x_pos + _patrons_box_w &&
+			if (device_mouse_x_to_gui(0) > _patrons_x_pos && device_mouse_x_to_gui(0) < _patrons_x_pos + _patrons_box_w &&
 				mouse_y > _patrons_y_pos && mouse_y < _patrons_y_pos + _patrons_box_h) {
 	
 				//HIGHLIGHT
@@ -64,14 +63,14 @@
 
 				// TOOLTIPS
 				draw_set_color(c_gray);
-				draw_rectangle(mouse_x, mouse_y - 30, mouse_x + string_width(_name) + 10, mouse_y, false);
+				draw_rectangle(device_mouse_x_to_gui(0), mouse_y - 30, device_mouse_x_to_gui(0) + string_width(_name) + 10, mouse_y, false);
 				draw_set_color(c_white);
-				draw_text(mouse_x + 5, mouse_y - 27, _name);
+				draw_text(device_mouse_x_to_gui(0) + 5, mouse_y - 27, _name);
 			}
 
 			// WATCH FOR LEFT CLICKS, SET THE APPROPRIATE PATRON
 			if (mouse_check_button_pressed(mb_left) &&
-				mouse_x > _patrons_x_pos && mouse_x < _patrons_x_pos + _patrons_box_w &&
+				device_mouse_x_to_gui(0) > _patrons_x_pos && device_mouse_x_to_gui(0) < _patrons_x_pos + _patrons_box_w &&
 				mouse_y > _patrons_y_pos && mouse_y < _patrons_y_pos + _patrons_box_h) {
 		
 				_selected_patron = ds_list_find_value(_list_patrons, _i);
@@ -133,7 +132,7 @@
 				draw_sprite(_blessing_sprite, 0, _blessings_x_pos + 16, _blessings_y_pos + 16);
 
 				// ON HOVER, HIGHLIGHT AND SHOW TOOLTIP
-				if (mouse_x > _blessings_x_pos && mouse_x < _blessings_x_pos + 32 &&
+				if (device_mouse_x_to_gui(0) > _blessings_x_pos && device_mouse_x_to_gui(0) < _blessings_x_pos + 32 &&
 					mouse_y > _blessings_y_pos && mouse_y < _blessings_y_pos + 32) {
 				
 					//HIGHLIGHT
@@ -142,18 +141,18 @@
 
 					//SHOW TOOLTIP
 					draw_set_color(c_gray);
-					draw_rectangle(mouse_x, mouse_y - 30, mouse_x + string_width(_blessing_name) + 10, mouse_y, true);
+					draw_rectangle(device_mouse_x_to_gui(0), mouse_y - 30, device_mouse_x_to_gui(0) + string_width(_blessing_name) + 10, mouse_y, true);
 					draw_set_color(c_white);
-					draw_text(mouse_x + 5, mouse_y - 27, _blessing_name);
+					draw_text(device_mouse_x_to_gui(0) + 5, mouse_y - 27, _blessing_name);
 				}
 
 				// SELECT BLESSINGS ON LEFT CLICK
 				if (mouse_check_button_pressed(mb_left) &&
-					mouse_x > _blessings_x_pos && mouse_x < _blessings_x_pos + 32 &&
+					device_mouse_x_to_gui(0) > _blessings_x_pos && device_mouse_x_to_gui(0) < _blessings_x_pos + 32 &&
 					mouse_y > _blessings_y_pos && mouse_y < _blessings_y_pos + 32) {
 					
 					//SET THE BLESSING TO THE CURRENT SELECTED BLESSING
-					_selected_blessing = _array_blessings[_j];;
+					_selected_blessing = _array_blessings[_j];
 				}
 
 				// Draw selection indicator
@@ -179,7 +178,7 @@
 		draw_sprite(spr_button_confirm, 0, room_width / 2, _blessings_start_y + 80);
 
 		// HIGHLIGHT THE CONFIRM BUTTON ON HOVER
-		if (mouse_x > room_width / 2 - 32 && mouse_x < room_width / 2 + 32 &&
+		if (device_mouse_x_to_gui(0) > room_width / 2 - 32 && device_mouse_x_to_gui(0) < room_width / 2 + 32 &&
 			mouse_y > _blessings_start_y + 80 - 16 && mouse_y < _blessings_start_y + 80 + 16) {
 		
 		
@@ -202,8 +201,7 @@
 				if (_check == true){ //ON OK, WE TRANSITION TO THE MAP
 					//START TRANSITION TO OVERWORLD
 					//close the gui
-					global.flag_gui_open = false;
-					global.gui_active = undefined;						
+					global.flag_gui_open = false;						
 					_selected_blessing = undefined;
 					_selected_patron = undefined;	
 					scr_transition("overworld","start",0,0);

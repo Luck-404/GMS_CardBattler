@@ -26,7 +26,7 @@
   "origin": 0,
   "parent": {
     "name": "Backdrops",
-    "path": "folders/Sprites/Tilesets/Backdrops.yy",
+    "path": "folders/Sprites/World/Tilesets/Backdrops.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

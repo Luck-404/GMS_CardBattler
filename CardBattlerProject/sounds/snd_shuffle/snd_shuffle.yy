@@ -12,8 +12,8 @@
   "conversionMode": 0,
   "duration": 1.170792,
   "parent": {
-    "name": "Cards",
-    "path": "folders/Sounds/Cards.yy",
+    "name": "Menus",
+    "path": "folders/Sounds/Menus.yy",
   },
   "preload": false,
   "sampleRate": 44100,

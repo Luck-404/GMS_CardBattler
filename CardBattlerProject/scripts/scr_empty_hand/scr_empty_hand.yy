@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Card Tools",
-    "path": "folders/Scripts/Card Tools.yy",
+    "path": "folders/Scripts/GUI and Tools/Encounter/Card Tools.yy",
   },
 }

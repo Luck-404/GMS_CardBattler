@@ -6,7 +6,7 @@
 //BUTTON DOES NOT FUNCTION IF THE GUI IS NOT OPEN
 if (global.flag_gui_open == false){
 	//CHECK MOUSE POSITION
-	if (position_meeting(mouse_x,mouse_y,obj_button_load)){
+	if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_load)){
 		 _flag_selected = true;
 	} else {
 		_flag_selected = false;

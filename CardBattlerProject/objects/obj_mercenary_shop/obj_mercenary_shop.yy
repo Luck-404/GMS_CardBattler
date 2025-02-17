@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "NPCs and Shops",
-    "path": "folders/Objects/Overworld/NPCs and Shops.yy",
+    "name": "NPCs",
+    "path": "folders/Objects/World/NPCs.yy",
   },
   "parentObjectId": null,
   "persistent": false,

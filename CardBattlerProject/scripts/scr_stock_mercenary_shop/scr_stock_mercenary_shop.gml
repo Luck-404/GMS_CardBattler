@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//					SCR_STOCK_MERC_SHOP								//
+//																	//
+// > STOCKS THE MERC SHOP WITH X MERCS.								//
+//////////////////////////////////////////////////////////////////////
 function scr_stock_mercenary_shop(_merc_count) {
     ds_list_clear(global.mercenary_shop_stock);
 
@@ -6,9 +11,4 @@ function scr_stock_mercenary_shop(_merc_count) {
         var _merc = scr_generate_creature();
         ds_list_add(global.mercenary_shop_stock, _merc);
     }
-	
-	//if (global.overworld_pipeline_state == PIPELINE_STATE.IDLE){
-	//	show_debug_message("SCR_STOCK_MERC_SHOP: SUCESS...");
-	//	global.overworld_pipeline_state = PIPELINE_STATE.CHECK_NPC;
-	//}	
 }

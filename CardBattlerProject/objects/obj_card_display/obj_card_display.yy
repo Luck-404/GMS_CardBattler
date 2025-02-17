@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "GUIs",
-    "path": "folders/Objects/GUIs.yy",
+    "name": "Overworld",
+    "path": "folders/Objects/GUI and Tools/Overworld.yy",
   },
   "parentObjectId": null,
   "persistent": false,

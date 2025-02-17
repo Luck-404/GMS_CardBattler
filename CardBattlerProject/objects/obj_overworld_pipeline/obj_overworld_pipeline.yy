@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Overworld",
-    "path": "folders/Objects/Overworld.yy",
+    "path": "folders/Objects/GUI and Tools/Overworld.yy",
   },
   "parentObjectId": null,
   "persistent": true,

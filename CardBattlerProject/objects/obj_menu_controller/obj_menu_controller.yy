@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "GUIs",
-    "path": "folders/Objects/GUIs.yy",
+    "name": "General",
+    "path": "folders/Objects/GUI and Tools/General.yy",
   },
   "parentObjectId": null,
   "persistent": true,

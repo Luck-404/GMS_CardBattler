@@ -78,7 +78,7 @@ if (instance_exists(obj_end_box) == true){
 	// ENLARGE ON MOUSEOVER //
 	//////////////////////////
 	// Check if mouse is over the creature (including its enlarged size when hovered)
-	if (position_meeting(mouse_x,mouse_y,self)) {
+	if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)) {
 	    // Enlarge the sprite when hovered
 	    draw_sprite_ext(sprite_index, image_index, x, y, 1.5, 1.5, image_angle, c_white, 1);  // Enlarged sprite on hover
 	} else {

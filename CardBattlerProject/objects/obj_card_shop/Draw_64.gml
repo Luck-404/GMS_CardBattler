@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////////////////////
+//					OBJ_CARD_SHOP DRAW GUI							//
+//																	//
+// > WHEN A PLAYER PRESSES 'E', SHOW THE DISPLAY. HANDLE LEFT CLICK //
+//   LOGIC WHEN INTERACTING WITH THE SHOP.							//
+//////////////////////////////////////////////////////////////////////
 if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
 	show_debug_message("+++ CARD_SHOP: ACTIVATED +++");		
     global.card_shop_gui_open = !global.card_shop_gui_open;

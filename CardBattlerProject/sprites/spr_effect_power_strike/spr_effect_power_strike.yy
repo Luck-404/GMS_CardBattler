@@ -28,7 +28,7 @@
   "origin": 0,
   "parent": {
     "name": "Card Effects",
-    "path": "folders/Sprites/Effects/Card Effects.yy",
+    "path": "folders/Sprites/Effects/Encounters/Card Effects.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Overworld",
-    "path": "folders/Objects/Overworld.yy",
+    "name": "Encounter",
+    "path": "folders/Objects/GUI and Tools/Encounter.yy",
   },
   "parentObjectId": null,
   "persistent": true,

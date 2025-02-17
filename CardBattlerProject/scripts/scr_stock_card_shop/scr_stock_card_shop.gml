@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//					SCR_STOCK_CARD_SHOP								//
+//																	//
+// > STOCKS THE CARD SHOP WITH x CARDS WITH VARYING RARITIES		//
+//////////////////////////////////////////////////////////////////////
 function scr_stock_card_shop(_card_count) {
     ds_list_clear(global.card_shop_stock);
 
@@ -18,9 +23,4 @@ function scr_stock_card_shop(_card_count) {
 
         ds_list_add(global.card_shop_stock, _card);
     }
-	
-	//if (global.overworld_pipeline_state == PIPELINE_STATE.IDLE){
-	//	show_debug_message("SCR_STOCK_CARD_SHOP: SUCESS...");
-	//	global.overworld_pipeline_state = PIPELINE_STATE.CHECK_NPC;
-	//}
 }

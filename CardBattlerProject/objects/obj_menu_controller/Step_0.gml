@@ -5,7 +5,9 @@
 //   ESC INPUT, END GAME ON NO GUI ESC.								//
 // > OTHER ROOM FUNCITONALITY: 'ESC' SUMMMONS THE OPTIONS MENU.		//
 //////////////////////////////////////////////////////////////////////
-
+if (global.flag_gui_open == false){
+	_clicked = false;
+}
 ///////////////
 ///////////////
 // MAIN MENU //
@@ -37,44 +39,47 @@ if (room = rm_main_menu){
 	//////////////////////////////////////////////////////////
 	// CHECK FOR GUI BUTTONS (ALL BESIDES EXIT) - SPAWN GUI //
 	//////////////////////////////////////////////////////////
-	if (_clicked == false){
+	if (_clicked == false && global.flag_gui_open == false){
 		///////////////
 		// NEW GAME //
 		//////////////
-		if (position_meeting(mouse_x,mouse_y,obj_button_new_game)){
+		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_new_game)){
+			
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 show_debug_message("CLICK NEW GAME");
 				 _clicked = true;
-				global.flag_gui_open = true;
-				global.gui_active = "New Game";				
+				global.flag_gui_open = true;			
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_new_game);
 			}
 		}
 		
-		if (position_meeting(mouse_x,mouse_y,obj_gui_load_game)){
+		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_load)){
+			
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 show_debug_message("CLICK LOAD");
 				 _clicked = true;				 
 				global.flag_gui_open = true;
-				global.gui_active = "Load";
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_load_game);
 			
 			 }
 		}
 		
-		if (position_meeting(mouse_x,mouse_y,obj_gui_options)){
+		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_options)){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 show_debug_message("CLICK OPTIONS");
 				 _clicked = true;				 
-				global.flag_gui_open = true;
-				global.gui_active = "Options";				
+				global.flag_gui_open = true;		
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);
 			 }
 		}		
 	}
+	
 	////////////////////////////////////////////
 	// ESCAPE WILL CLOSE A GUI IF ONE IS OPEN //
 	////////////////////////////////////////////
@@ -103,7 +108,6 @@ if (room = rm_main_menu){
 		
 		//UPDATE GLOBAL
 		global.flag_gui_open = false;
-		global.gui_active = undefined;
 	}
 	
 	//////////////////////////////////////////////////
@@ -128,12 +132,12 @@ if (room != rm_main_menu){
 	if (keyboard_check_pressed(vk_escape)){
 		show_debug_message("CLICKED ESC");
 		 if (global.flag_gui_open == false){
+			 obj_player._move_speed = 0;
 			 //CREATE THE OPTIONS MENU		 
 			instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);
 			
 			//UPDATE GLOBAL
 			global.flag_gui_open = true;
-			global.gui_active = "Options";
 		 }
 		 
 		 else {
@@ -141,10 +145,10 @@ if (room != rm_main_menu){
 			if (instance_exists(obj_gui_options)){
 				instance_destroy(obj_gui_options);
 			}
+			obj_player._move_speed = 3;
 			
 			//UPDATE GLOBAL
 			global.flag_gui_open = false;
-			global.gui_active = undefined;
 		 }
 	}
 	

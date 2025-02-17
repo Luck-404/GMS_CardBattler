@@ -32,8 +32,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "GUI",
-    "path": "folders/Sprites/GUI.yy",
+    "name": "Overworld",
+    "path": "folders/Sprites/GUI/Overworld.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

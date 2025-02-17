@@ -3,6 +3,8 @@
 //																	//
 // > ESTABLISH DEFINITIONS FOR THE OVERWOLRD PIPELINE				//
 //////////////////////////////////////////////////////////////////////
+randomize();
+
 enum PIPELINE_STATE	{
 	CREATE_GUI,
 	CREATE_AMBIANCE,
@@ -21,7 +23,3 @@ global.overworld_pipeline_state = PIPELINE_STATE.CREATE_GUI; //track the pipelin
 
 global.counter_card_shop_reset = 0; //tracks every 3 encounters, reset card shops.
 global.counter_merc_shop_reset = 0; //tracks every 3 encounters, reset merc shops.
-
-//the tileset to focus on in certian bits of code (placing treasures and such)
-_tileset = layer_tilemap_get_id("tl_overworld");
-global.saved_ts = tilemap_get_tileset(_tileset);

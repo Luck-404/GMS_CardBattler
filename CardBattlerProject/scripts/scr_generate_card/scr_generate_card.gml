@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////
+//					SCR_GENERATE_CARD								//
+//																	//
+// > USED WHEN STOCKING THE CARD SHOPS. STOCK THE SHOPS WITH A		//
+//   VARIETY OF CARDS. THE SHOP RESETS EVERY TIME 3 ENCOUNTERS HAVE //
+//   BEEN COMPLETED, HIGHER RARITY GENERATES A BETTER CARD.			//
+//////////////////////////////////////////////////////////////////////
 function scr_generate_card(_rarity) {
     var _card;
     switch (_rarity) {

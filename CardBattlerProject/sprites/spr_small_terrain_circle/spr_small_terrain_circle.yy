@@ -26,7 +26,7 @@
   "origin": 4,
   "parent": {
     "name": "Terrain",
-    "path": "folders/Sprites/Terrain.yy",
+    "path": "folders/Sprites/World/Terrain.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

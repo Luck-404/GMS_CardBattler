@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//						OBJ_TREASURE STEP							//
+//																	//
+// > UPON INTERACTION, MAKE A NEW TREASURE IN A RANDOM SPOT			//
+//////////////////////////////////////////////////////////////////////
 if (_flag_interacted) {
     var _new_position = scr_find_valid_tile_in_tilemap();
     if (_new_position != noone) {

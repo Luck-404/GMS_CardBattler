@@ -1,5 +1,8 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+//////////////////////////////////////////////////////////////////////
+//					SCR_CREATE_CARD									//
+//																	//
+// > CREATES A CARD WITH MAPPED VALUES								//
+//////////////////////////////////////////////////////////////////////
 function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_color,_type,_archespec,_classspec,_goldcost,_exhaust) {
     var _ref_new_card = ds_map_create();
     ds_map_add(_ref_new_card, "name", _name);

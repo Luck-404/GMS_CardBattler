@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Treasures",
-    "path": "folders/Objects/Overworld/Terrain/Treasures.yy",
+    "name": "Triggers",
+    "path": "folders/Objects/World/Triggers.yy",
   },
   "parentObjectId": null,
   "persistent": false,

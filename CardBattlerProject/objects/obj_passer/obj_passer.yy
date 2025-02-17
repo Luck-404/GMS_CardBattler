@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Tools",
-    "path": "folders/Objects/Tools.yy",
+    "name": "General",
+    "path": "folders/Objects/GUI and Tools/General.yy",
   },
   "parentObjectId": null,
   "persistent": false,

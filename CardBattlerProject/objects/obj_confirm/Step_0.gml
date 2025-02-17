@@ -1,4 +1,4 @@
-if (mouse_check_button_pressed(mb_left) && position_meeting(mouse_x,mouse_y,obj_confirm)){
+if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_confirm)){
 	show_debug_message("<<= OBJ_CONFIRM: CLICKED CONFIRM=>>");					
 			
 	if (_confirm_type == "endgame"){

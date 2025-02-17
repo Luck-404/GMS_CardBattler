@@ -40,7 +40,7 @@ for (var _i = 0; _i < _var_hand_size; _i++) {
 	// MOUSE OVER CARDS //
 	//////////////////////
     // Check if the mouse is over the card and the card is selectable
-    if (point_in_rectangle(mouse_x, mouse_y, _card_x_pos - _card_width, _card_y_pos - _card_height, _card_x_pos + _card_width, _card_y_pos + _card_height) && _flag_can_play) {
+    if (point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), _card_x_pos - _card_width, _card_y_pos - _card_height, _card_x_pos + _card_width, _card_y_pos + _card_height) && _flag_can_play) {
         // Enlarge the card to 35% on hover
         _scale = 0.30;
 
@@ -101,7 +101,7 @@ if (global.card_selected != undefined) {
         var _selected__card_x_pos = _x_offset + _ref_selected_card_index * _spacing + _card_width/2;
         var _selected__card_y_pos = room_height - _card_height/2 - 150;
 
-        draw_line_width(_selected__card_x_pos, _selected__card_y_pos, mouse_x, mouse_y, 3);
+        draw_line_width(_selected__card_x_pos, _selected__card_y_pos, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), 3);
     }
 
 
@@ -154,7 +154,7 @@ if (global.card_selected != undefined) {
 	        } else {
 	            // During target selection phase, wait for a valid target
 	            if (mouse_check_button_pressed(mb_left)) {
-	                var _ref_tar = instance_position(mouse_x, mouse_y, obj_creature);
+	                var _ref_tar = instance_position(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), obj_creature);
 
 	                if (_ref_tar != noone) {
 	                    // Play the card with the selected target

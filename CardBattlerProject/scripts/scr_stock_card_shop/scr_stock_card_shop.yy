@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Card Tools",
-    "path": "folders/Scripts/Card Tools.yy",
+    "name": "World",
+    "path": "folders/Scripts/World.yy",
   },
 }

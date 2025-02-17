@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//							OBJ_PLAYER STEP							//
+//																	//
+// > HANDLE VARIOUS LOGIC FOR THE PLAYER CHARACTER		//
+//////////////////////////////////////////////////////////////////////
 //////////////////////////////////////
 // spawn leaves, trigger transition //
 //////////////////////////////////////
@@ -77,7 +82,7 @@ if (room != rm_encounter){
 	//////////////////////////
 	// PICKING UP NEW CARDS //
 	//////////////////////////
-	if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_treasure)){
+	if (keyboard_check_pressed(ord("E")) && distance_to_object(obj_treasure) < 48){
 		obj_treasure._flag_interacted = true;
 		show_debug_message("|=== PLAYER: PRESSED 'E' ON A TREASURE! ===|");		
 		scr_generate_reward_card(1);

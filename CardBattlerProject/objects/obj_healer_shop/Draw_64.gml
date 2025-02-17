@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////////////////////
+//					OBJ_HEAL_SHOP DRAW GUI							//
+//																	//
+// > WHEN A PLAYER PRESSES 'E', SHOW THE DISPLAY. HANDLE LEFT CLICK //
+//   LOGIC WHEN INTERACTING WITH THE SHOP.							//
+//////////////////////////////////////////////////////////////////////
 if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
     show_debug_message("+=+=+ HEALER_SHOP: ACTIVATED +=+=+");
     global.healer_shop_gui_open = !global.healer_shop_gui_open;

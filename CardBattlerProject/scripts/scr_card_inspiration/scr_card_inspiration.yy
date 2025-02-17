@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Uncolored",
-    "path": "folders/Scripts/Card Casts/Uncolored.yy",
+    "path": "folders/Scripts/GUI and Tools/Encounter/Card Casts/Uncolored.yy",
   },
 }

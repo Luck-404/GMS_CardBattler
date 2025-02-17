@@ -26,7 +26,7 @@
   "origin": 7,
   "parent": {
     "name": "Main Menu",
-    "path": "folders/Sprites/Main Menu.yy",
+    "path": "folders/Sprites/GUI/Main Menu.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

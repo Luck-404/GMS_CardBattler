@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////
+//					SCR_GENERATE_CREATURE							//
+//																	//
+// > USED WHEN STOCKING THE MERC SHOPS. STOCK THE SHOPS WITH A		//
+//   VARIETY OF MERCS. THE SHOP RESETS EVERY TIME 3 ENCOUNTERS HAVE //
+//   BEEN COMPLETED.												//
+//////////////////////////////////////////////////////////////////////
 function scr_generate_creature() {
 var _rand = irandom_range(1,2);
 var _creature = undefined;

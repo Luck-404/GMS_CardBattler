@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//					SCR_GENERATE_REWARD_CARD						//
+//																	//
+// > CALLED WHEN A TREASURE IS PICKED UP, GENERATES A REWARD		//
+//////////////////////////////////////////////////////////////////////
 function scr_generate_reward_card(_amount){
 	for (var _i = 0; _i < _amount; _i++){
 	show_debug_message("!!=== SCR_GEN_CARDS: CREATING A CARD ===!!");		

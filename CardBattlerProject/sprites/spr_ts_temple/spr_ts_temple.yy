@@ -26,7 +26,7 @@
   "origin": 0,
   "parent": {
     "name": "Ground",
-    "path": "folders/Sprites/Tilesets/Ground.yy",
+    "path": "folders/Sprites/World/Tilesets/Ground.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

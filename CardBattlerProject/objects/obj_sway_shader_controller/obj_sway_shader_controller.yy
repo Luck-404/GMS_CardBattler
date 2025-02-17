@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Overworld",
-    "path": "folders/Objects/Overworld.yy",
+    "name": "Ambiance",
+    "path": "folders/Objects/Ambiance.yy",
   },
   "parentObjectId": null,
   "persistent": false,

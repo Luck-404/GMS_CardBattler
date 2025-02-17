@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Cards",
-    "path": "folders/Objects/Encounter/Cards.yy",
+    "name": "Encounter",
+    "path": "folders/Objects/GUI and Tools/Encounter.yy",
   },
   "parentObjectId": null,
   "persistent": false,

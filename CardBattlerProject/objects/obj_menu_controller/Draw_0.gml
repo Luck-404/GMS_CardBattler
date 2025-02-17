@@ -21,5 +21,5 @@ if (room = rm_main_menu){
 /////////
 if (global.flag_gui_open == true){
 	//draw darkening sprite
-	draw_sprite(spr_mm_darken,0,0,0);
+	draw_sprite_tiled(spr_mm_darken,0,0,0);
 }

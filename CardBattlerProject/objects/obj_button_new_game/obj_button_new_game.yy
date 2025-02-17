@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Buttons",
-    "path": "folders/Objects/Main Menu/Buttons.yy",
+    "name": "Main Menu",
+    "path": "folders/Objects/GUI and Tools/Main Menu.yy",
   },
   "parentObjectId": null,
   "persistent": false,

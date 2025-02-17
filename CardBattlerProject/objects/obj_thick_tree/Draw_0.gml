@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//							OBJ_THICK_TREE DRAW						//
+//																	//
+// > DRAW SELF SLIGHTLY TRANSPARENT WHEN A PLAYER IS BEHIND ME.		//
+//////////////////////////////////////////////////////////////////////
 if (place_meeting(x,y,obj_player) && obj_player.y-16 < self.y-50){
 	image_alpha = 0.7;
 } else {

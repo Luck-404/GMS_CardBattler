@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Creatures",
-    "path": "folders/Scripts/Creatures.yy",
+    "path": "folders/Scripts/GUI and Tools/Encounter/Creatures.yy",
   },
 }

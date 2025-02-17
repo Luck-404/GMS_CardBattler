@@ -26,6 +26,9 @@ switch(global.overworld_pipeline_state){
 	
 	
 	#region AMBIANCE	
+	//////////////////////////////////////////////////////
+	//	CREATE AMBIANCE: MISC WORLD AMBIANCE (SFX, VFX) //
+	//////////////////////////////////////////////////////
 	case PIPELINE_STATE.CREATE_AMBIANCE:
 		show_debug_message("PIPELINE: CREATING OBJ_MUSIC_CONTROLLER");
 		//CREATE THE MUSIC CONTROLLER
@@ -52,6 +55,9 @@ switch(global.overworld_pipeline_state){
 	
 	
 	#region NPCS, QUESTS, SHOPS
+	///////////////////////////////
+	//	CREATE NPCS/SHOPS/QUESTS //
+	///////////////////////////////
 	case PIPELINE_STATE.CHECK_NPC:
 		//CHECK RELEVANT NPCS
 		show_debug_message("PIPELINE: CHECKING NPCS...");
@@ -87,6 +93,9 @@ switch(global.overworld_pipeline_state){
 	
 	
 	#region TREASURES
+	///////////////////////
+	//	CREATE TREASURES //
+	///////////////////////
 	case PIPELINE_STATE.SPAWN_TREASURE:
 		//check position of placed cards
 		show_debug_message("PIPELINE: CHECKING PLACED TREASURES...");
@@ -114,6 +123,9 @@ switch(global.overworld_pipeline_state){
 	
 	
 	#region PLAYER	
+	///////////////////////////////////////////////////////////////////////////////////////
+	//	CREATE PLAYER: TAKE IN DATA FROM PASSER, ASSIGN POSITION BASED ON THE TRANSITION //
+	///////////////////////////////////////////////////////////////////////////////////////	
 	case PIPELINE_STATE.SPAWN_PLAYER:
 		show_debug_message("PIPELINE: SPAWNING PLAYER...");	
 		var _ref_player = instance_create_layer(global.start_x, global.start_y, "Player", obj_player);
@@ -127,6 +139,9 @@ switch(global.overworld_pipeline_state){
 	
 	
 	#region STATS	
+	///////////////////////////
+	//	CREATE STATS TRACKER //
+	///////////////////////////////////////////////////////////////////////////////////////		
 	case PIPELINE_STATE.SPAWN_STATS:
 		//spawn stats tracker
 		show_debug_message("PIPELINE: SPAWNING STATS TRACKER...");
