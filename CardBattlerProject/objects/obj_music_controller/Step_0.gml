@@ -8,7 +8,7 @@ if (_flag_playing == false && !instance_exists(obj_music_timer)){
 	_flag_playing = true;	
 	//switch (_current_zone) (town, forest, meadows, etc)
 		//1-n.. music per _current_zone switch (rand to pick)-- zone banner triggers set the type of this
-		audio_play_sound(snd_bgm_meadows,0,false);
+		audio_play_sound(snd_bgm_meadows,0,false,global.music_vol);
 		_music_ref_playing = "meadows1";
 	//set a timer for the length of the song + 5 seconds. (gives 5 seconds between songs)
 	var _music_timer = instance_create_layer(x,y,"GUI",obj_music_timer);
