@@ -6,24 +6,16 @@
 show_debug_message("Mouse Position: " + string(_mx) + ", " + string(_my));
 
 // Adjust mouse position based on the current window size
-_mx = window_mouse_get_x();
-_my = window_mouse_get_y();
+_mx = mouse_x;
+_my = mouse_y;
 
-//////////////////
-// CLOSE BUTTON //
-//////////////////
-if (_mx < 1135 && _mx > 1114 && _my < 308 && _my > 289){
-	image_index = 2;
-	global.flag_gui_open = false;
-	obj_menu_controller._clicked = false;
-	instance_destroy();
-}
+
 
 ///////////////////////
 //  LEFT CLICK LOGIC //
 ///////////////////////
 // Resolution Change
-if (point_in_rectangle(_mx, _my, _menu_x + 200, _menu_y + _spacing, _menu_x + 270, _menu_y + _spacing + 20)) {
+if (_hover_resolution) {
     global.res_index = (global.res_index + 1) mod array_length(_resolutions);
 	global.res_x = _resolutions[global.res_index][0];
 	global.res_y = _resolutions[global.res_index][1];
@@ -40,58 +32,57 @@ if (point_in_rectangle(_mx, _my, _menu_x + 100, _menu_y + _spacing + 60, _menu_x
 }
 
 // Checkbox Toggle
-if (point_in_rectangle(_mx, _my, _menu_x + 150, _menu_y + _spacing + 90, _menu_x + 170, _menu_y + _spacing + 110)) {
+if (_hover_checkbox) {
     global.flag_tutorials = !(global.flag_tutorials);
 }
 
 // Apply Button
 if (_hover_apply) {
-var _filepath = working_directory + "saved_options.txt";
-show_debug_message("delete filepath: "+ string(_filepath));		
-file_delete(_filepath); // Delete the old file
+    var _settings_path = "C:/CardBattler/Settings.ini";
 
-var _exitfile = file_text_open_write(_filepath); // Create a new file
-_filepath = working_directory + "saved_options.txt";
-show_debug_message("write filepath: "+ string(_filepath));	
-// Check if the file opened successfully
-if (_exitfile != -1) {
-    file_text_write_real(_exitfile, global.res_x);
-    file_text_writeln(_exitfile);
-    file_text_write_real(_exitfile, global.res_y);
-    file_text_writeln(_exitfile);
-    file_text_write_real(_exitfile, global.res_index);
-    file_text_writeln(_exitfile);
-    file_text_write_real(_exitfile, global.sound_vol);
-    file_text_writeln(_exitfile);
-    file_text_write_real(_exitfile, global.music_vol);
-    file_text_writeln(_exitfile);
-	//write either "true" or "false" to file based on global.flag_tutorials
-	// Write boolean value for global.flag_tutorials
-	//file_text_write_string(_exitfile, string(global.flag_tutorials));
-    //file_text_writeln(_exitfile);
-		
-    show_debug_message("New Res X: " + string(global.res_x));
-    show_debug_message("New Res Y: " + string(global.res_y));
-    show_debug_message("New Res Index: " + string(global.res_index));
-    show_debug_message("New Sound Vol: " + string(global.sound_vol));
-    show_debug_message("New Music Vol: " + string(global.music_vol));
-		
-	////print out the value (true or false) of global.flag_tutorials
-    //show_debug_message("New Tutorials: " + string(global.flag_tutorials));
-		
-    // Close the file after writing
-    file_text_close(_exitfile);
-} else {
-    show_message("Error: Could not create or write to saved_options.txt!");
+    ini_open(_settings_path);
+    ini_write_real("Settings", "res_x", global.res_x);
+    ini_write_real("Settings", "res_y", global.res_y);
+    ini_write_real("Settings", "res_index", global.res_index);
+    ini_write_real("Settings", "sound_volume", global.sound_vol);
+    ini_write_real("Settings", "music_volume", global.music_vol);
+    ini_write_string("Settings", "tutorials", scr_bool_to_string(global.flag_tutorials));
+    ini_close();
+	// Set the updated window size
+	window_set_size(global.res_x, global.res_y);
+	if (instance_exists(obj_music_timer)){
+		audio_stop_all();
+		instance_destroy(obj_music_timer);
+	}
+	audio_master_gain(global.sound_vol);
 }
 
-// Set the updated window size
-window_set_size(global.res_x, global.res_y);
-if (instance_exists(obj_music_timer)){
-	audio_stop_all();
-	instance_destroy(obj_music_timer);
-}
-audio_master_gain(global.sound_vol);
+if (_hover_reset){
+	//delete old file
+	var _settings_path = "C:/CardBattler/Settings.ini";
+	file_delete(_settings_path);
+	
+	// Define the original INI file path and the new file path
+	var _original_file_path = "C:/Games/CardBattler/Default_Settings.ini"; // Replace with your actual path
+	var _new_file_path = "C:/Games/CardBattler/Settings.ini"; // The new file name
+	ini_open(_new_file_path);
+	ini_close();
+	
+	// Check if the original file exists
+	if (file_exists(_original_file_path)) {
+		
+	    // Copy the original INI file to the new location
+	    var _result = file_copy(_original_file_path, _new_file_path);
+    
+	    // Check if the copy was successful
+	    if (_result) {
+	        show_debug_message("File copied successfully!");
+	    } else {
+	        show_debug_message("Failed to copy the file.");
+	    }
+	} else {
+	    show_debug_message("Original file does not exist.");
+	}
 }
 
 // Quit Button

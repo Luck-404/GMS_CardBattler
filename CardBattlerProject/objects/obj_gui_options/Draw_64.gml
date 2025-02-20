@@ -9,9 +9,30 @@ draw_self();
 draw_set_font(fnt_fanwood_sm);
 
 // Adjust mouse position based on the current window size
-_mx = window_mouse_get_x();
-_my = window_mouse_get_y();
+_mx = mouse_x;
+_my = mouse_y;
 
+
+//handle 'close' button
+//////////////////
+// CLOSE BUTTON //
+//////////////////
+if (position_meeting(x,y,obj_gui_option_close_button)){
+	if (mouse_check_button_pressed(mb_left){
+		image_index = 2;
+		global.flag_gui_open = false;
+		obj_menu_controller._clicked = false;
+		instance_destroy();
+	}
+}
+
+//update ui ever tick
+// UI Positions
+_menu_x = window_get_width() / 2 - (240*global.ui_scalar);
+_menu_y = window_get_height() / 2 - (150*global.ui_scalar);
+_menu_width = 300*global.ui_scalar;
+_menu_height = 250*global.ui_scalar;
+_spacing = 40*global.ui_scalar; // Spacing between elements
 
 // Draw Resolution Dropdown with hover effect
 _hover_resolution = point_in_rectangle(_mx, _my, _menu_x + 200, _menu_y + _spacing, _menu_x + 270, _menu_y + _spacing + 20);
@@ -53,6 +74,12 @@ draw_set_color(c_white);
 _hover_apply = point_in_rectangle(_mx, _my, _menu_x + 50, _menu_y + _spacing + 120, _menu_x + 120, _menu_y + _spacing + 140);
 draw_set_color(_hover_apply ? c_green : c_white);
 draw_text(_menu_x + 50, _menu_y + _spacing + 120, "Apply");
+draw_set_color(c_white);
+
+// Draw Reset to Defaults Button
+_hover_reset = point_in_rectangle(_mx, _my, _menu_x + 50, _menu_y + _spacing + 220, _menu_x + 120, _menu_y + _spacing + 240);
+draw_set_color(_hover_reset ? c_red : c_white);
+draw_text(_menu_x + 50, _menu_y + _spacing + 220, "Reset to Default");
 draw_set_color(c_white);
 
 // Draw Save/Exit to MM Button
