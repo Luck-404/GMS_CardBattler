@@ -29,9 +29,11 @@ function scr_transition(_destination,_type,_toid,_fromid){
 				break;
 				
 				case "return": //return to saved overworld from encounter
-				global.start_x = 0;
-				global.start_y = 0;					
-				//create a transition object, pass it the saved global room to goto and position to goto
+					global.start_x = global.player_xpos;
+					global.start_y = global.player_ypos;					
+					//create a transition object, pass it the saved global room to goto and position to goto
+					_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
+					_ref_transition._target_room = global.saved_room;
 				break;
 				
 				case "load": //enter the overworld, pull from the savefile and enter the world at the saved coordinates

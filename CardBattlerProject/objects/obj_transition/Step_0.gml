@@ -19,6 +19,8 @@ switch(_transition_state_tracker){
 	// CHANGE ROOMS //
 	//////////////////
 	case TRANSITION_STATE.TRANSITION:
+		//save
+		scr_save();
 		//move to new room
 		room_goto(_target_room);
 		_transition_state_tracker = TRANSITION_STATE.CREATE_PIPELINE;

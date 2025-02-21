@@ -6,93 +6,216 @@
 // Draw the background box
 draw_self();
 
+//FONT
 draw_set_font(fnt_fanwood_sm);
 
-// Adjust mouse position based on the current window size
-_mx = mouse_x;
-_my = mouse_y;
+////////////////////
+// MOUSE POSITION //
+////////////////////
+_mx = device_mouse_x_to_gui(0);
+_my = device_mouse_y_to_gui(0);
 
-
-//handle 'close' button
 //////////////////
 // CLOSE BUTTON //
 //////////////////
-if (position_meeting(x,y,obj_gui_option_close_button)){
-	if (mouse_check_button_pressed(mb_left){
-		image_index = 2;
+#region Close Button
+if (position_meeting(_mx,_my,obj_gui_options_close_button)){
+	obj_gui_options_close_button.image_index = 1;
+	if (mouse_check_button_pressed(mb_left)){
+		obj_gui_options_close_button.image_index = 2;
 		global.flag_gui_open = false;
 		obj_menu_controller._clicked = false;
 		instance_destroy();
 	}
+} else {
+	obj_gui_options_close_button.image_index = 0;
 }
+#endregion
 
-//update ui ever tick
-// UI Positions
-_menu_x = window_get_width() / 2 - (240*global.ui_scalar);
-_menu_y = window_get_height() / 2 - (150*global.ui_scalar);
-_menu_width = 300*global.ui_scalar;
-_menu_height = 250*global.ui_scalar;
-_spacing = 40*global.ui_scalar; // Spacing between elements
 
-// Draw Resolution Dropdown with hover effect
-_hover_resolution = point_in_rectangle(_mx, _my, _menu_x + 200, _menu_y + _spacing, _menu_x + 270, _menu_y + _spacing + 20);
-draw_text(_menu_x + 20, _menu_y + _spacing, "Resolution:");
-draw_set_color(_hover_resolution ? c_yellow : c_white);  // Change color on hover
-draw_text(_menu_x + 200, _menu_y + _spacing, string(global.res_x) + "x" + string(global.res_y));
-draw_set_color(c_white);
 
-// Draw Sound Slider
-draw_text(_menu_x + 20, _menu_y + _spacing + 30, "Sound:");
-draw_rectangle(_menu_x + 100, _menu_y + _spacing + 35, _menu_x + 200, _menu_y + _spacing + 45, false);
-draw_set_color(c_blue);
-draw_rectangle(_menu_x + 100 + global.sound_vol * 100 - 5, _menu_y + _spacing + 30, _menu_x + 100 + global.sound_vol * 100 + 5, _menu_y + _spacing + 50, false);
-draw_set_color(c_white);
-draw_text(_menu_x + 210, _menu_y + _spacing + 30, string(round(global.sound_vol * 100)) + "%");
-
-// Draw Music Slider
-draw_text(_menu_x + 20, _menu_y + _spacing + 60, "Music:");
-draw_rectangle(_menu_x + 100, _menu_y + _spacing + 65, _menu_x + 200, _menu_y + _spacing + 75, false);
-draw_set_color(c_red);
-draw_rectangle(_menu_x + 100 + global.music_vol * 100 - 5, _menu_y + _spacing + 60, _menu_x + 100 + global.music_vol * 100 + 5, _menu_y + _spacing + 80, false);
-draw_set_color(c_white);
-draw_text(_menu_x + 210, _menu_y + _spacing + 60, string(round(global.music_vol * 100)) + "%");
-
-// Draw Checkbox (Tutorial Toggle)
-_hover_checkbox = point_in_rectangle(_mx, _my, _menu_x + 150, _menu_y + _spacing + 90, _menu_x + 170, _menu_y + _spacing + 110);
-draw_text(_menu_x + 20, _menu_y + _spacing + 90, "Toggle Tutorials:");
-draw_set_color(_hover_checkbox ? c_orange : c_white);
-draw_rectangle(_menu_x + 150, _menu_y + _spacing + 90, _menu_x + 170, _menu_y + _spacing + 110, false);
-if (global.flag_tutorials) {
-    draw_set_color(c_black);
-    draw_line(_menu_x + 155, _menu_y + _spacing + 95, _menu_x + 165, _menu_y + _spacing + 105);
-    draw_line(_menu_x + 165, _menu_y + _spacing + 95, _menu_x + 155, _menu_y + _spacing + 105);
-	draw_set_color(c_white);
+////////////////
+// RESOLUTION //
+////////////////
+#region Resolution
+if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
+	obj_gui_options_resolution_button.image_index = 1;
+	if (mouse_check_button_pressed(mb_left)){
+		obj_gui_options_resolution_button.image_index = 2;
+		global.res_index = (global.res_index + 1) mod array_length(_resolutions);
+		global.res_x = _resolutions[global.res_index][0];
+		global.res_y = _resolutions[global.res_index][1];
+	}
+} else {
+	obj_gui_options_resolution_button.image_index = 0;
 }
-draw_set_color(c_white);
+#endregion
 
-// Draw Apply Button
-_hover_apply = point_in_rectangle(_mx, _my, _menu_x + 50, _menu_y + _spacing + 120, _menu_x + 120, _menu_y + _spacing + 140);
-draw_set_color(_hover_apply ? c_green : c_white);
-draw_text(_menu_x + 50, _menu_y + _spacing + 120, "Apply");
-draw_set_color(c_white);
 
-// Draw Reset to Defaults Button
-_hover_reset = point_in_rectangle(_mx, _my, _menu_x + 50, _menu_y + _spacing + 220, _menu_x + 120, _menu_y + _spacing + 240);
-draw_set_color(_hover_reset ? c_red : c_white);
-draw_text(_menu_x + 50, _menu_y + _spacing + 220, "Reset to Default");
-draw_set_color(c_white);
 
-// Draw Save/Exit to MM Button
-if (room != rm_main_menu && room != rm_encounter){
-	_hover_quit = point_in_rectangle(_mx, _my, _menu_x + 50, _menu_y + _spacing + 140, _menu_x + 120, _menu_y + _spacing + 160);
-	draw_set_color(_hover_quit ? c_red : c_white);
-	draw_text(_menu_x + 50, _menu_y + _spacing + 120, "Save & Exit");
-	draw_set_color(c_white);
-}
+////////////////////////
+// TUTORIALS CHECKBOX //
+////////////////////////
+#region Tutorials
+	if (position_meeting(_mx,_my, obj_gui_options_tutorials_checkbox)){
+		obj_gui_options_tutorials_checkbox.image_index = 1;
+		if (mouse_check_button_pressed(mb_left)){
+			obj_gui_options_tutorials_checkbox.image_index = 2;
+			global.flag_tutorials = !(global.flag_tutorials);
+		}
+	} else {
+		obj_gui_options_tutorials_checkbox.image_index = 0;
+	}
+#endregion
 
-if (room == rm_encounter){
-	_hover_forfeit = point_in_rectangle(_mx, _my, _menu_x + 50, _menu_y + _spacing + 140, _menu_x + 120, _menu_y + _spacing + 160);
-	draw_set_color(_hover_quit ? c_red : c_white);
-	draw_text(_menu_x + 50, _menu_y + _spacing + 120, "Forfeit");
-	draw_set_color(c_white);
-}
+
+
+/////////////////////////
+// FULLSCREEN CHECKBOX //
+/////////////////////////
+#region Fullscreen
+	if (position_meeting(_mx,_my, obj_gui_options_fullscreen_checkbox)){
+		obj_gui_options_fullscreen_checkbox.image_index = 1;
+		if (mouse_check_button_pressed(mb_left)){
+			obj_gui_options_fullscreen_checkbox.image_index = 2;
+			global.flag_fullscreen = !(global.flag_fullscreen);
+		}
+	} else {
+		obj_gui_options_fullscreen_checkbox.image_index = 0;
+	}
+#endregion
+
+
+
+///////////////////////////
+// APPLY UPDATED OPTIONS //
+///////////////////////////
+#region Apply
+// Apply Button
+	if (position_meeting(_mx,_my,obj_gui_options_apply_button)){
+		obj_gui_options_apply_button.image_index = 1;
+			if (mouse_check_button_pressed(mb_left)){
+				obj_gui_options_apply_button.image_index = 2;
+
+		    ini_open(global.settings_file);
+		    ini_write_real("Settings", "res_x", global.res_x);
+		    ini_write_real("Settings", "res_y", global.res_y);				
+		    ini_write_real("Settings", "res_index", global.res_index);				
+		    ini_write_real("Settings", "music_volume", global.music_vol);				
+		    ini_write_real("Settings", "sound_volume", global.sound_vol);				
+		    ini_write_string("Settings", "tutorials", scr_bool_to_string(global.flag_tutorials));				
+			ini_write_string("Settings", "fullscreen", scr_bool_to_string(global.flag_fullscreen));					
+		    ini_close();
+			
+			// Set the updated window size
+			window_set_size(global.res_x, global.res_y);
+
+			//DELETE OLD MUSIC
+			if (instance_exists(obj_music_timer)){
+				audio_stop_all();
+				instance_destroy(obj_music_timer);
+			}
+			
+			//SET NEW SOUND
+			audio_master_gain(global.sound_vol);
+			
+			//fullscreen
+			window_set_fullscreen(global.flag_fullscreen);
+		}
+	} else {
+		obj_gui_options_apply_button.image_index = 0;	
+	}
+#endregion
+
+
+
+//////////////////////////////////////
+// RESET SETTINGS TO DEFAULT BUTTON //
+//////////////////////////////////////
+#region DEFAULTS
+	if (position_meeting(_mx,_my,obj_gui_options_default_button)){
+		obj_gui_options_default_button.image_index = 1;
+		if (mouse_check_button_pressed(mb_left)){
+			obj_gui_options_default_button.image_index = 2;
+
+			file_delete(global.settings_file);
+			
+			//overwrite old file
+			var _result = file_copy(global.default_settings_file, global.settings_file);
+
+			global.res_x = 1920;
+			global.res_y = 1080;
+			global.res_index = 3;
+			global.sound_vol = 1.0;
+			global.music_vol = 1.0;
+			global.flag_tutorials = true; 
+			global.flag_fullscreen = false; 
+
+			// Set the updated window size
+			window_set_size(global.res_x, global.res_y);
+
+			//DELETE OLD MUSIC
+			if (instance_exists(obj_music_timer)){
+				audio_stop_all();
+				instance_destroy(obj_music_timer);
+			}
+			
+			//SET NEW SOUND
+			audio_master_gain(global.sound_vol);
+			
+			//fullscreen
+			window_set_fullscreen(global.flag_fullscreen);
+			} 
+		} else {
+		obj_gui_options_default_button.image_index = 0;
+	}
+#endregion
+
+
+
+////////////////////////////
+// EXIT TO MM (OVERWORLD) //
+////////////////////////////
+#region EXIT
+	if (room != rm_main_menu && room != rm_encounter){
+		if (position_meeting(_mx,_my,obj_gui_options_savexit_button)){
+			obj_gui_options_savexit_button.image_index = 1;
+			if (mouse_check_button_pressed(mb_left)){		
+				obj_gui_options_savexit_button.image_index = 2;
+			    //start transition to main menu
+				scr_transition("main menu","Any","Any","Any");
+				//delete self
+				instance_destroy();
+			}
+		} else {
+			obj_gui_options_savexit_button.image_index = 0;
+		}
+	}
+#endregion
+
+
+
+/////////////////////////
+// FORFEIT (ENCOUNTER) //
+/////////////////////////
+#region FORFEIT
+	if (room == rm_encounter){
+		if (position_meeting(_mx,_my,obj_gui_options_forfeit_button)){
+			obj_gui_options_forfeit_button.image_index = 1;
+			if (mouse_check_button_pressed(mb_left)){		
+				obj_gui_options_forfeit_button.image_index = 2;
+				//take 25% hp from all units
+				for (var _creatureindex = 0; _creatureindex < ds_list_size(global.player_team); _creatureindex++){
+					var _ref_unit = ds_list_find_value(global.player_team,_creatureindex);
+					_ref_unit[?"curhp"] = ceil((_ref_unit[?"curhp"])*0.75);
+				}
+				//start transition to overworld
+				scr_transition("overworld","return","Any","Any");
+				//delete self
+				instance_destroy();
+			}
+		} else {
+			obj_gui_options_forfeit_button.image_index = 0;
+		}
+	}
+#endregion

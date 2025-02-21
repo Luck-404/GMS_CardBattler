@@ -4,6 +4,7 @@
 // > ESTABLISH VARIABLES											//
 //////////////////////////////////////////////////////////////////////
 draw_set_font(fnt_fanwood_sm);
+depth = -100;
 
 // Resolution options
 _resolutions = [
@@ -13,27 +14,25 @@ _resolutions = [
     [1920, 1080]
 ];
 
-// UI Positions
-_menu_x = window_get_width() / 2 - (240*global.ui_scalar);
-_menu_y = window_get_height() / 2 - (150*global.ui_scalar);
-_menu_width = 300*global.ui_scalar;
-_menu_height = 250*global.ui_scalar;
-_spacing = 40*global.ui_scalar; // Spacing between elements
-
-// Button states
-_hover_apply = false;
-_hover_quit = false;
-_hover_resolution = false;
-_hover_forfeit = false;
-_hover_checkbox = false;
-_hover_reset = false;
-
-// Dragging states for sliders
-_dragging_sound = false;
-_dragging_music = false;
-
 image_index	= 0;
 image_speed = 0;
 
-_mx = mouse_x;
-_my = mouse_y;
+_mx = device_mouse_x_to_gui(0);
+_my = device_mouse_y_to_gui(0);
+
+//CREATE BUTTONS
+instance_create_layer(x+150,y-270,"GUI",obj_gui_options_close_button);//close
+
+instance_create_layer(x-80,y-225+40,"GUI",obj_gui_options_resolution_button);//resolution
+instance_create_layer(x-80,y-225+80,"GUI",obj_gui_options_sound_slider);//sound slider
+instance_create_layer(x-80,y-225+120,"GUI",obj_gui_options_music_slider);//music slider
+instance_create_layer(x-100,y-225+160,"GUI",obj_gui_options_tutorials_checkbox);//tutorials
+instance_create_layer(x,y-225+160,"GUI",obj_gui_options_fullscreen_checkbox);//fullscreen
+instance_create_layer(x-80,y-225+200,"GUI",obj_gui_options_apply_button);//apply 
+instance_create_layer(x-80,y-225+240,"GUI",obj_gui_options_default_button);//reset
+if (room != rm_main_menu && room != rm_encounter){
+instance_create_layer(x-80,y-225+280,"GUI",obj_gui_options_savexit_button);//save and exit
+}
+if (room == rm_encounter){
+instance_create_layer(x-80,y-225+280,"GUI",obj_gui_options_forfeit_button);//forfeit
+}

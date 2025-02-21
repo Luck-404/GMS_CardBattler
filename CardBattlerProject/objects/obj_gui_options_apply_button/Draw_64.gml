@@ -1,0 +1,12 @@
+image_speed = 0;
+depth = -101;
+
+draw_self();
+draw_set_color(c_white);
+draw_set_font(fnt_fanwood_sm);
+draw_text(x-35,y,"Apply");
+draw_set_color(c_black);
+
+if (!instance_exists(obj_gui_options)){
+	instance_destroy();	
+}

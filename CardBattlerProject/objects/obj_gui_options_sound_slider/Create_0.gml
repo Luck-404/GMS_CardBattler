@@ -1,0 +1,1 @@
+_dragging = false; // Whether the slider is being dragged

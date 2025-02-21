@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_get_ui_scalar",
+  "name": "scr_get_saves",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

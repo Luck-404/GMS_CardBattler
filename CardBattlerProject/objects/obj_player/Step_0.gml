@@ -55,6 +55,23 @@ if (global.graveyard_gui_open == false && global.merc_shop_gui_open == false && 
 	game_end();	
 }
 
+////////////////////
+// R to encounter //
+////////////////////
+if (_flag_transition_start == false && (keyboard_check(ord("R")) == true)){
+	global.saved_room = room;
+	global.player_xpos = x;
+	global.player_ypos = y;
+	room_goto(rm_encounter);
+}
+
+////////////////
+// F4 to SAVE //
+////////////////
+if (_flag_transition_start == false && (keyboard_check(vk_f4) == true)){
+	scr_save();
+}
+
 /////////////////////
 // SHIFT TO SPRINT //
 /////////////////////
@@ -64,14 +81,14 @@ if (_flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
 	_move_speed = 3;	
 }
 
-///////////////////////////////
-// KB "F" TOGGLES FULLSCREEN //
-///////////////////////////////
-if (keyboard_check_pressed(ord("F"))){
-	show_debug_message("|=== PLAYER: TOGGLING FULLSCREEN ===|");		
-	_flag_fullscreen = !_flag_fullscreen;
-	window_set_fullscreen(_flag_fullscreen);
-}
+/////////////////////////////////
+//// KB "F" TOGGLES FULLSCREEN //
+/////////////////////////////////
+//if (keyboard_check_pressed(ord("F"))){
+//	show_debug_message("|=== PLAYER: TOGGLING FULLSCREEN ===|");		
+//	_flag_fullscreen = !_flag_fullscreen;
+//	window_set_fullscreen(_flag_fullscreen);
+//}
 
 /////////////////////
 // OVERWORLD LOGIC //
