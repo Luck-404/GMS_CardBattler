@@ -11,7 +11,7 @@ function scr_save(){
 
 	// Create and write to the .ini file
 	ini_open(_save_path);
-	var _rmname = room_get_name(global.saved_room);
+	var _rmname = scr_save_room(global.saved_room);
 	ini_write_string("Player", "Map", _rmname);
 	ini_write_real("Player", "x_pos", global.player_xpos);
 	ini_write_real("Player", "y_pos", global.player_ypos);

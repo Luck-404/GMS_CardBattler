@@ -1,9 +1,7 @@
-show_debug_message("~~~ OBJ_ENEMY_TEAM: CREATED AND ALIVE ~~~");	
 
 //////////////////
 // STARTER TEAM //
 //////////////////
-show_debug_message("~~~ OBJ_ENEMY_TEAM: SETTING UP TEAM... ~~~");
 _flag_party_spawned = false;
 global.enemy_team = ds_list_create(); 
 global.enemy_team_in_play = ds_list_create();
@@ -16,12 +14,11 @@ ds_list_add(global.enemy_team, _creature_wraith);
 ds_list_add(global.enemy_team, _creature_wraith);
 ds_list_add(global.enemy_team, _creature_wraith);
 ds_list_add(global.enemy_team, _creature_wraith);
-show_debug_message("~~~ OBJ_ENEMY_TEAM: TEAM SET UP... ~~~");
 
 //////////
 // DECK //
 //////////
-show_debug_message("~~~ OBJ_ENEMY_TEAM: SETTING UP DECK... ~~~");
+
 global.enemy_card_inventory = ds_list_create(); //create enemy inventory
 
 //RANDOMIZE HERE IN THE FUTURE

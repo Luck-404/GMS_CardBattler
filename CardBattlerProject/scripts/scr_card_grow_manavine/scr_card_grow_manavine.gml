@@ -1,5 +1,4 @@
 function scr_card_grow_manavine(){
-	show_debug_message("!!=== SCR_GROW_MANAVINE: CASTING GROW MANAVINE ===!!");
 	var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_counter);
 	_ref_counter.x = 960;
 	_ref_counter.y = 50;

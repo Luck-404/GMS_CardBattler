@@ -47,7 +47,6 @@ if (room = rm_main_menu){
 			
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
-				 show_debug_message("CLICK NEW GAME");
 				 global._clicked = true;
 				global.flag_gui_open = true;			
 				//DISPLAY THE GUI
@@ -59,7 +58,6 @@ if (room = rm_main_menu){
 			
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
-				 show_debug_message("CLICK LOAD");
 				 global._clicked = true;				 
 				global.flag_gui_open = true;
 				//DISPLAY THE GUI
@@ -71,7 +69,6 @@ if (room = rm_main_menu){
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_options)){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
-				 show_debug_message("CLICK OPTIONS");
 				 global._clicked = true;				 
 				global.flag_gui_open = true;		
 				//DISPLAY THE GUI
@@ -130,7 +127,6 @@ if (room != rm_main_menu){
 	// ESCAPE OPENs/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
 	if (keyboard_check_pressed(vk_escape)){
-		show_debug_message("CLICKED ESC");
 		 if (global.flag_gui_open == false){
 			 obj_player._move_speed = 0;
 			 //CREATE THE OPTIONS MENU		 

@@ -5,14 +5,12 @@
 //   LOGIC WHEN INTERACTING WITH THE SHOP.							//
 //////////////////////////////////////////////////////////////////////
 if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
-	show_debug_message("--- MERC_SHOP: ACTIVATED ---");		
     global.merc_shop_gui_open = !global.merc_shop_gui_open;
     obj_player._move_speed = global.merc_shop_gui_open ? 0 : 4;
 }
 
 if (global.merc_shop_gui_open) {
-    if (keyboard_check_pressed(vk_escape)) {
-		show_debug_message("--- MERC_SHOP: CLOSED ---");			
+    if (keyboard_check_pressed(vk_escape)) {			
         global.merc_shop_gui_open = false;
         obj_player._move_speed = 4;
     }
@@ -47,12 +45,10 @@ if (global.merc_shop_gui_open) {
             if (mouse_check_button_pressed(mb_left)) {
                 if (global.gold >= _cost) {
                     global.gold -= _cost;
-					show_debug_message("--- MERC_SHOP: PURCHASED ITEM! ---");						
                     ds_list_add(global.player_team, _ref_merc);
                     ds_list_delete(global.mercenary_shop_stock, _i);
                     break; // Exit the loop to avoid issues with the ds_list size changing
                 } else {
-					show_debug_message("--- MERC_SHOP: NOT ENOUGH GOLD!!! ---");
 					audio_play_sound(snd_menu_error,0,false);
                 }
             }

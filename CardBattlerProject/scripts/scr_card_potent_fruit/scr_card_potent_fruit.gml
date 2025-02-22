@@ -1,5 +1,4 @@
 function scr_card_potent_fruit(_target){
-	show_debug_message("!!=== SCR_POTENT_FRUIT: CASTING POTENT FRUIT ===!!");
 	var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_counter);
 	_ref_counter.x = _target.x;
 	_ref_counter.y = _target.y - 100;

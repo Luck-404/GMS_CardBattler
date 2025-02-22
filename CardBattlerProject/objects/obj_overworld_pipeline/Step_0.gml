@@ -161,6 +161,7 @@ switch(global.overworld_pipeline_state){
 	
 	#region END INIT	
 	case PIPELINE_STATE.END_INIT_TRANSITION:
+			scr_save();
 		obj_transition._transition_state_tracker = TRANSITION_STATE.FADE_IN;
 		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 	break;	

@@ -1,5 +1,4 @@
 function scr_card_thorny_whip(_target){
-	show_debug_message("!!=== SCR_THORNY_WHIP: CASTING THORNY WHIP ===!!");	
 	_target._creature_hp_current -= abs(_target._creature_def-8);	
 	_target._creature_def -= 8;
 	if (_target._creature_def <= 0){

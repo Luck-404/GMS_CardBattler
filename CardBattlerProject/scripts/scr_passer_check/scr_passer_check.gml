@@ -9,14 +9,14 @@ function scr_passer_check(_type){
 
 		//check patron
 		if(obj_passer._pass_patron != undefined){
-			show_debug_message("Checker found: " + string(obj_passer._pass_patron));
+			//show_debug_message("Checker found: " + string(obj_passer._pass_patron));
 		} else {
 		return "PATRON NOT DEFINED";	
 		}
 
 		//check BLESSING
 		if(obj_passer._pass_blessing != undefined){
-			show_debug_message("Checker found: " + string(obj_passer._pass_blessing));	
+			//show_debug_message("Checker found: " + string(obj_passer._pass_blessing));	
 		} else {
 		return "BLESSING NOT DEFINED";	
 		}

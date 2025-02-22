@@ -20,6 +20,5 @@ function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team
 	ds_map_add(_ref_new_creature, "deathsound", _deathsound); //reference to the new creature's death sound
 	ds_map_add(_ref_new_creature, "defaultsound", _defaultsound); //reference to the new creature's default sound	
 	ds_map_add(_ref_new_creature, "goldcost", irandom_range(30,80)); //reference to the new creature's default sound		
-	show_debug_message("!!=== SCR_CREATE_CREATURE: CREATED CREATURE " + string(_name) +" ===!!");		
-    return _ref_new_creature;
+   return _ref_new_creature;
 }

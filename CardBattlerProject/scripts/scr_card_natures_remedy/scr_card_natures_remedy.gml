@@ -1,5 +1,4 @@
 function scr_card_natures_remedy(_target){
-	show_debug_message("!!=== SCR_NATURES_REMEDY: CASTING NATURE'S REMEDY ===!!");		
 	
 	//get 30% of max hp
 	var _30p = ceil((_target._creature_hp_max)*0.30);

@@ -1,4 +1,4 @@
-show_debug_message("|\/| OBJ_ENCOUNTER: CREATED AND ALIVE |\/|");
+
 ///////////////
 // VARIABLES //
 ///////////////

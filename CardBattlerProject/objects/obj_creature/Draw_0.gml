@@ -7,12 +7,10 @@ if (instance_exists(obj_end_box) == true){
 		_flag_has_died = true;
 		if (_creature_team == "Ally"){
 			ds_list_delete(global.player_team_in_play, _creature_position);
-			ds_list_add(global.player_team_dead,self);
-			show_debug_message("+--+ OBJ_CREATURE: ALLY " + _creature_name + " HAS DIED +--+");			
+			ds_list_add(global.player_team_dead,self);	
 		} else{
 			ds_list_delete(global.enemy_team_in_play,_creature_position);
-			ds_list_add(global.enemy_team_dead,self);
-			show_debug_message("+--+ OBJ_CREATURE: ENEMY " + _creature_name + " HAS DIED +--+");				
+			ds_list_add(global.enemy_team_dead,self);			
 		}
 	}
 

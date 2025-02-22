@@ -17,6 +17,5 @@ function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_c
     ds_map_add(_ref_new_card, "classspec", _classspec);	
     ds_map_add(_ref_new_card, "goldcost", _goldcost);
     ds_map_add(_ref_new_card, "exhausts", _exhaust);	
-	show_debug_message("!!=== SCR_CREATE_CARD: CREATED CARD " + string(_name) +" ===!!");	
     return _ref_new_card;
 }

@@ -4,6 +4,7 @@
 // > UPON INTERACTION, MAKE A NEW TREASURE IN A RANDOM SPOT			//
 //////////////////////////////////////////////////////////////////////
 if (_flag_interacted) {
+	show_debug_message("TREASURE FOUND");
     var _new_position = scr_find_valid_tile_in_tilemap();
     if (_new_position != noone) {
         var _new_x = _new_position[0];

@@ -3,8 +3,7 @@
 //																	//
 // > USED BY OVERWORLD PIPELINE TO PLACE 3 RANDOM TREASURES			//
 //////////////////////////////////////////////////////////////////////
-function scr_find_valid_tile_in_tilemap() {
-	show_debug_message("!!=== SCR_FIND_TILE: FINDING A TILE ===!!");		
+function scr_find_valid_tile_in_tilemap() {	
     var _tilemap_id = layer_tilemap_get_id("tl_overworld");
 	var _walls_id = layer_tilemap_get_id("tl_walls");
     var _tile_width = 32;  // Width in tiles

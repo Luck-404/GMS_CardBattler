@@ -4,14 +4,12 @@
 // > WHEN A PLAYER PRESSES 'E', SHOW THE DISPLAY.					//
 //////////////////////////////////////////////////////////////////////
 if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
-    show_debug_message("<<>> GRAVEYARD: ACTIVATED <<>>");
     global.graveyard_gui_open = !global.graveyard_gui_open;
     obj_player._move_speed = global.graveyard_gui_open ? 0 : 4;
 }
 
 if (global.graveyard_gui_open) {
     if (keyboard_check_pressed(vk_escape)) {
-        show_debug_message("+=+=+ GRAVEYARD: CLOSED +=+=+");
         global.graveyard_gui_open = false;
         obj_player._move_speed = 4;
     }

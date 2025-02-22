@@ -4,8 +4,7 @@
 // > CALLED WHEN A TREASURE IS PICKED UP, GENERATES A REWARD		//
 //////////////////////////////////////////////////////////////////////
 function scr_generate_reward_card(_amount){
-	for (var _i = 0; _i < _amount; _i++){
-	show_debug_message("!!=== SCR_GEN_CARDS: CREATING A CARD ===!!");		
+	for (var _i = 0; _i < _amount; _i++){	
 	//pick a random card from the entire pool, add it to the inventory
 		var _rand = choose("echo","inspire","block","strike","bulwark","power");
 		switch(_rand){

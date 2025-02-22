@@ -5,14 +5,12 @@
 //   LOGIC WHEN INTERACTING WITH THE SHOP.							//
 //////////////////////////////////////////////////////////////////////
 if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
-    show_debug_message("+=+=+ HEALER_SHOP: ACTIVATED +=+=+");
     global.healer_shop_gui_open = !global.healer_shop_gui_open;
     obj_player._move_speed = global.healer_shop_gui_open ? 0 : 4;
 }
 
 if (global.healer_shop_gui_open) {
     if (keyboard_check_pressed(vk_escape)) {
-        show_debug_message("+=+=+ HEALER_SHOP: CLOSED +=+=+");
         global.healer_shop_gui_open = false;
         obj_player._move_speed = 4;
     }
@@ -107,10 +105,8 @@ if (global.healer_shop_gui_open) {
         if (!_is_full_hp && _hover_10_hp && mouse_check_button_pressed(mb_left)) {
             if (global.gold >= 10) {
                 global.gold -= 10;
-                show_debug_message("+=+=+ HEALER_SHOP: PURCHASED 10HP HEAL! +=+=+");
                 _ref_unit[?"curhp"] = min(_ref_unit[?"curhp"] + 10, _ref_unit[?"hp"]);
             } else {
-                show_debug_message("+=+=+ HEALER_SHOP: NOT ENOUGH GOLD!!! +=+=+");
 				audio_play_sound(snd_menu_error,0,false);
             }
         }
@@ -118,10 +114,8 @@ if (global.healer_shop_gui_open) {
         if (!_is_full_hp && _hover_max_hp && mouse_check_button_pressed(mb_left)) {
             if (global.gold >= _maxcost) {
                 global.gold -= _maxcost;
-                show_debug_message("+=+=+ HEALER_SHOP: PURCHASED MAX HEAL! +=+=+");
                 _ref_unit[?"curhp"] = _ref_unit[?"hp"];
             } else {
-                show_debug_message("+=+=+ HEALER_SHOP: NOT ENOUGH GOLD!!! +=+=+");
 				audio_play_sound(snd_menu_error,0,false);
             }
         }

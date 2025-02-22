@@ -20,7 +20,6 @@ switch(_transition_state_tracker){
 	//////////////////
 	case TRANSITION_STATE.TRANSITION:
 		//move to new room
-		show_debug_message("Going to room: " + string(_target_room));
 		room_goto(_target_room);
 		_transition_state_tracker = TRANSITION_STATE.CREATE_PIPELINE;
 	break;
@@ -73,10 +72,6 @@ switch(_transition_state_tracker){
 	/////////////////
 	case TRANSITION_STATE.DELETE:
 		obj_player._move_speed = 3;
-		//save
-		if ((room != rm_main_menu) && (room != rm_encounter)){
-			scr_save();		
-		}
 		if (room == rm_main_menu){
 			instance_destroy(obj_player);
 		}

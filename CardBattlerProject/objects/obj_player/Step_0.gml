@@ -168,7 +168,7 @@ if (room != rm_encounter){
 	    // Check if a tile exists at the target position
 	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
 	        if (tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0) {
-	            show_debug_message("Wall here");    
+	            //wall
 	        } else if ((tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y) != 0)) {
 			    var _tile_index = tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y);
     
@@ -179,7 +179,7 @@ if (room != rm_encounter){
 			        _hop_start = true;
 					_hop_offset = 8;
 			    } else {
-			        show_debug_message("Blocked! Cannot enter from this direction.");
+			        //blocked
 			    }
 			} else {
 	            _target_x = _next_x;
@@ -218,15 +218,14 @@ if (room != rm_encounter){
 ////////////////////
 if (room == rm_encounter){
 	if (_flag_deck_created == false){ //CREATE THE DECK
-		show_debug_message("|=== PLAYER: ENTERED ENCOUNTER, GENERATING DECK_HANDLER... ===|");			
+	
 		instance_create_layer(x,y,"GUI",obj_deck_handler);
-		show_debug_message("|=== PLAYER: GENERATED DECK_HANDLER! ===|");				
+		
 		_flag_deck_created = true;
 	}
 	
 	//spawn enemy units ONCE	
 	if (_flag_party_spawned == false){
-		show_debug_message("|=== PLAYER: SPAWNING PLAYER TEAM OF SIZE " + string(ds_list_size(global.player_team)) + "... ===|");				
 		for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
 			//spawn the creature
 			var _ref_creature = ds_list_find_value(global.player_team, _i);
@@ -249,15 +248,12 @@ if (room == rm_encounter){
 			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 			_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
 			
-			show_debug_message("|=== PLAYER: SPAWNED ALLY CREATURE " + string(_ref_creature[? "name"])+ "! ===|");
 			ds_list_add(global.player_team_in_play, _ref_creature_instance);
 			_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
 		}
 		_flag_party_spawned = true;
-		show_debug_message("|=== PLAYER: SPAWNED WHOLE ALLY TEAM! ===|");	
-		
-		show_debug_message("|=== PLAYER: SPAWNING ENEMY TEAM... ===|");			
-		var _enemy_team = instance_create_layer(960, 540, "GUI", obj_enemy_team); //generate the enemy team		
-		show_debug_message("|=== PLAYER: SPAWNED ENEMY TEAM! ===|");				
+
+			
+		var _enemy_team = instance_create_layer(960, 540, "GUI", obj_enemy_team); //generate the enemy team						
 	}
 }
