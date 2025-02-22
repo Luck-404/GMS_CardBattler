@@ -40,7 +40,7 @@ switch(_transition_state_tracker){
 			//spawn encounter pipeline
 			_ref_pipeline = instance_create_layer(x,y,"GUI",obj_encounter_pipeline)
 			_pipeline = "encounter";
-			_loading_step = LOADING_STATE.ENC_CREATE_GUI;
+			_loading_step = LOADING_STATE.ENC_INIT;
 		} else {
 			//spawn ow pipeline
 			_ref_pipeline = instance_create_layer(x,y,"GUI",obj_overworld_pipeline)			
@@ -74,10 +74,15 @@ switch(_transition_state_tracker){
 	// DELETE SELF //
 	/////////////////
 	case TRANSITION_STATE.DELETE:
-		obj_player._move_speed = 3;
 		if (room == rm_main_menu){
 			instance_destroy(obj_player);
 		}
+		
+		if(room != rm_encounter && room != rm_main_menu){
+			obj_player._flag_transition_start = false;
+			obj_player._move_speed = 3;
+		}
+		show_debug_message("TRANSITION: DELETING SELF");
 		instance_destroy();
 	break;	
 }

@@ -16,6 +16,8 @@ if (mouse_check_button_released(mb_left)){
 #region Main Menu
 if (room = rm_main_menu){
 	
+	audio_stop_sound(snd_bgm_meadows);
+	
 	////////////////////////////////////
 	// SPAWN MAIN MENU BUTTON OBJECTS //
 	////////////////////////////////////

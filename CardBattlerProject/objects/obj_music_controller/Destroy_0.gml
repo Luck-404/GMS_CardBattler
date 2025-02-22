@@ -1,0 +1,2 @@
+audio_stop_sound(snd_bgm_meadows);
+instance_destroy(obj_music_timer);

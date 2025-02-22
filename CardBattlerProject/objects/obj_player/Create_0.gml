@@ -46,7 +46,7 @@ global.trigger_loss = false;
 
 _flag_created_camera = false; // CAMERA 
 
-instance_create_layer(x,y,"GUI",obj_encounter_trigger); // ENCOUNTER TRIGGER
+//instance_create_layer(x,y,"GUI",obj_encounter_trigger); // ENCOUNTER TRIGGER
 
 _flag_can_touch = true;
 

@@ -57,6 +57,10 @@ function scr_load_card(_cardname){
 		case "Block":
 			_loadedcard = scr_create_card("Block", "Defend 5", 1, scr_card_block, spr_card_block,"Ally","Uncolored","Defend","Any","Any",irandom_range(30,45),false);
 		break;		
+		
+		case "Default":
+			_loadedcard = scr_create_card("Strike", "Attack 6", 1, scr_card_strike, spr_card_strike,"Enemy","Uncolored","Attack","Any","Any",irandom_range(30,45),false);
+		break;
 	}
 	return _loadedcard;
 }

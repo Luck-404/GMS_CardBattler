@@ -2,7 +2,7 @@ draw_self();
 if (_tar_sprite != undefined){
 	draw_sprite(_tar_sprite,0,x,y);	
 }
-if (!position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_new_game_patron_button)){
+if (!position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 	 image_index = 0;
 	 _hover = false;
 }

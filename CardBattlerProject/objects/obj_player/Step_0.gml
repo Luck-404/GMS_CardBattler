@@ -51,33 +51,31 @@
 // "ESC" ENDS GAME //
 /////////////////////
 if (keyboard_check_pressed(vk_f1)){
-	show_debug_message("|=== PLAYER: ENDING GAME VIA 'F1' ===|");		
+	show_debug_message("PLAYER: ENDING GAME VIA 'F1'");		
 	game_end();	
 }
 
 ////////////////////
 // R to encounter //
 ////////////////////
-if (_flag_transition_start == false && (keyboard_check(ord("R")) == true)){
-	global.saved_room = room;
-	global.player_xpos = x;
-	global.player_ypos = y;
-	room_goto(rm_encounter);
+if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(ord("R")) == true)){
+	_flag_transition_start = true;
+	scr_transition("encounter","Any","Any","Any");
 }
 
 ////////////////
 // F4 to SAVE //
 ////////////////
-if (_flag_transition_start == false && (keyboard_check(vk_f4) == true)){
+if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_f4) == true)){
 	scr_save();
 }
 
 /////////////////////
 // SHIFT TO SPRINT //
 /////////////////////
-if (_flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
+if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
 	_move_speed = 4;
-} else if (_flag_transition_start == false) {
+} else if (room != rm_encounter && _flag_transition_start == false) {
 	_move_speed = 3;	
 }
 
@@ -94,7 +92,7 @@ if (room != rm_encounter){
 	//////////////////////////
 	if (keyboard_check_pressed(ord("E")) && distance_to_object(obj_treasure) < 48){
 		obj_treasure._flag_interacted = true;
-		show_debug_message("|=== PLAYER: PRESSED 'E' ON A TREASURE! ===|");		
+		show_debug_message("PLAYER: PRESSED 'E' ON A TREASURE!");		
 		scr_generate_reward_card(1);
 	}
 
@@ -217,43 +215,43 @@ if (room != rm_encounter){
 // ENCOUNTER ROOM //
 ////////////////////
 if (room == rm_encounter){
-	if (_flag_deck_created == false){ //CREATE THE DECK
+	//if (_flag_deck_created == false){ //CREATE THE DECK
 	
-		instance_create_layer(x,y,"GUI",obj_deck_handler);
+	//	instance_create_layer(x,y,"GUI",obj_deck_handler);
 		
-		_flag_deck_created = true;
-	}
+	//	_flag_deck_created = true;
+	//}
 	
-	//spawn enemy units ONCE	
-	if (_flag_party_spawned == false){
-		for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
-			//spawn the creature
-			var _ref_creature = ds_list_find_value(global.player_team, _i);
-			var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
-			//pass the creature the proper stats it needs
-			_ref_creature_instance._creature_name = _ref_creature[? "name"];
-			_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
-			_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
-			_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
-			_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
-			_ref_creature_instance._creature_team = _ref_creature[? "team"];
-			_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
-			_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
-			_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
-			_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
-			_ref_creature_instance._creature_class = _ref_creature[? "class"];
-			_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
-			_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
-			_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
-			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
-			_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
+	////spawn enemy units ONCE	
+	//if (_flag_party_spawned == false){
+	//	for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
+	//		//spawn the creature
+	//		var _ref_creature = ds_list_find_value(global.player_team, _i);
+	//		var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
+	//		//pass the creature the proper stats it needs
+	//		_ref_creature_instance._creature_name = _ref_creature[? "name"];
+	//		_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
+	//		_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
+	//		_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
+	//		_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
+	//		_ref_creature_instance._creature_team = _ref_creature[? "team"];
+	//		_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
+	//		_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
+	//		_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
+	//		_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
+	//		_ref_creature_instance._creature_class = _ref_creature[? "class"];
+	//		_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
+	//		_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
+	//		_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
+	//		_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
+	//		_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
 			
-			ds_list_add(global.player_team_in_play, _ref_creature_instance);
-			_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
-		}
-		_flag_party_spawned = true;
+	//		ds_list_add(global.player_team_in_play, _ref_creature_instance);
+	//		_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
+	//	}
+	//	_flag_party_spawned = true;
 
 			
-		var _enemy_team = instance_create_layer(960, 540, "GUI", obj_enemy_team); //generate the enemy team						
-	}
+	//	var _enemy_team = instance_create_layer(960, 540, "GUI", obj_enemy_team); //generate the enemy team						
+	//}
 }

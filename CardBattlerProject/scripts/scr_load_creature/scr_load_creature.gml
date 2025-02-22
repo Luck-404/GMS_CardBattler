@@ -8,6 +8,14 @@ function scr_load_creature(_creaturename){
 		case "Bush Monkey":
 			_loadedcreature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 		break;	
+		
+		case "Corpseflower":
+			_loadedcreature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"All","All",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+		break;	
+		
+		case "Furn":
+			_loadedcreature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"All","All",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+		break;			
 	}
 	return _loadedcreature;
 }

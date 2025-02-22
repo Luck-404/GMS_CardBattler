@@ -6,8 +6,8 @@
 function scr_find_valid_tile_in_tilemap() {	
     var _tilemap_id = layer_tilemap_get_id("tl_overworld");
 	var _walls_id = layer_tilemap_get_id("tl_walls");
-    var _tile_width = 32;  // Width in tiles
-    var _tile_height = 32; // Height in tiles
+    var _tile_width = 180;  // Width in tiles
+    var _tile_height = 180; // Height in tiles
     var _tile_size = 32;  // Size of individual tiles (assuming square tiles)
 
     var _valid_positions = ds_list_create(); // List to store valid tiles

@@ -13,10 +13,7 @@ enum PIPELINE_STATE	{
 	SPAWN_PLAYER,
 	SPAWN_STATS,
 	END_INIT_TRANSITION,
-	IDLE,
-	TRANSITION_OUT,
-	TRANSITION_IN,
-	RESET
+	IDLE
 }
 
 global.overworld_pipeline_state = PIPELINE_STATE.CREATE_GUI; //track the pipeline state globally

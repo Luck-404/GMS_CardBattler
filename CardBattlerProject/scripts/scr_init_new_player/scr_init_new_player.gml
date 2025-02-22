@@ -17,6 +17,42 @@ function scr_init_new_player(_player,_patron,_blessing){
 			}
 			//gear (WIP)
 		break;
+		
+		case "Merlin":
+			//gold based on patron
+			global.gold = irandom_range(10,20);
+			//player's team setup
+			_new_creature = scr_load_creature("Corpseflower");
+			ds_list_add(global.player_team, _new_creature);
+			////blessing setup
+			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
+			//ds_list_add(global.blessings_list, _new_bless);
+			//player's deck setup
+			_arr = ["Fell","Thorny Whip","Fell","Thorny Whip","Fell"];
+			for (var _i = 0; _i < array_length(_arr); _i++){
+				var _new_card = scr_load_card(_arr[_i]);		
+				ds_list_add(global.card_inventory, _new_card);
+			}
+			//gear (WIP)
+		break;
+		
+		case "Wolfman":
+			//gold based on patron
+			global.gold = irandom_range(10,20);
+			//player's team setup
+			_new_creature = scr_load_creature("Furn");
+			ds_list_add(global.player_team, _new_creature);
+			////blessing setup
+			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
+			//ds_list_add(global.blessings_list, _new_bless);
+			//player's deck setup
+			_arr = ["Bulwark","Thorny Whip","Bulwark","Thorny Whip","Bulwark"];
+			for (var _i = 0; _i < array_length(_arr); _i++){
+				var _new_card = scr_load_card(_arr[_i]);		
+				ds_list_add(global.card_inventory, _new_card);
+			}
+			//gear (WIP)
+		break;		
 	}
 
 }

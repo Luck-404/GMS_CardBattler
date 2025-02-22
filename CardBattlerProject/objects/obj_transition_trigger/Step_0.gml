@@ -4,7 +4,7 @@
 // > SPAWN A BANNER WHEN A PLAYER ENTERS, THEN SET TO TRIGGERED		//
 //////////////////////////////////////////////////////////////////////
 if (instance_place(x,y,obj_player) && _flag_triggered == false){
-	show_debug_message("PLAYER HAS ENTERED TRANSITION TRIGGER");	
+	//show_debug_message("PLAYER HAS ENTERED TRANSITION TRIGGER");	
 	//trigger this one
 	_flag_triggered = true;
 	obj_player._move_speed = 0;

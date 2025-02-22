@@ -89,9 +89,7 @@ function scr_transition(_destination,_type,_toid,_fromid){
 					}
 				break;
 				
-				case "return": //return to saved overworld from encounter
-					global.start_x = global.player_xpos;
-					global.start_y = global.player_ypos;					
+				case "return": //return to saved overworld from encounter				
 					//create a transition object, pass it the saved global room to goto and position to goto
 					_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
 					_ref_transition._target_room = global.saved_room;
@@ -108,12 +106,14 @@ function scr_transition(_destination,_type,_toid,_fromid){
 		case "main menu":
 			//save location and room
 			global.saved_room = room;
-			global.start_x = obj_player.x;
-			global.start_y = obj_player.y;	
+			global.player_xpos = obj_player.x;
+			global.player_ypos = obj_player.y;	
 			
 			//autosave the stuff
 			scr_save();
-
+			
+			instance_destroy(obj_player);
+			
 			//go to main menu
 			_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
 			_ref_transition._target_room = rm_main_menu;
@@ -122,8 +122,8 @@ function scr_transition(_destination,_type,_toid,_fromid){
 		case "encounter":
 			//save location and room
 			global.saved_room = room;
-			global.start_x = obj_player.x;
-			global.start_y = obj_player.y;	
+			global.player_xpos = obj_player.x;
+			global.player_ypos = obj_player.y;	
 			
 			scr_save();
 			//create a transition object and pass it the encounter room (type of encounter

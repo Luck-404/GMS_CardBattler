@@ -10,14 +10,14 @@ switch(global.overworld_pipeline_state){
 	//	CREATE GUI: CREATE GUI OBJECTS FOR USER TO SEE //
 	/////////////////////////////////////////////////////
 	case PIPELINE_STATE.CREATE_GUI: //CREATES GUI
-		show_debug_message("\nPIPELINE: CREATING OBJ_CARD_DISPLAY");
+		show_debug_message("\n==========================================================================\nOVERWORLD PIPELINE: CREATING OBJ_CARD_DISPLAY");
 		//CREATE THE GUI CONTROLLER
 		if (instance_exists(obj_card_display) == false){
 			instance_create_layer(x,y,"GUI",obj_card_display);
 			//TODO - chECKER?	
 		}
 		if (instance_exists(obj_card_display)) {
-			show_debug_message("PIPELINE: SUCCESS...");				
+			show_debug_message("OVERWORLD PIPELINE: SUCCESS...");				
 			global.overworld_pipeline_state = PIPELINE_STATE.CREATE_AMBIANCE;	
 		}
 	break;
@@ -30,15 +30,15 @@ switch(global.overworld_pipeline_state){
 	//	CREATE AMBIANCE: MISC WORLD AMBIANCE (SFX, VFX) //
 	//////////////////////////////////////////////////////
 	case PIPELINE_STATE.CREATE_AMBIANCE:
-		show_debug_message("PIPELINE: CREATING OBJ_MUSIC_CONTROLLER");
+		show_debug_message("OVERWORLD PIPELINE: CREATING OBJ_MUSIC_CONTROLLER");
 		//CREATE THE MUSIC CONTROLLER
 		if (instance_exists(obj_music_controller) == false){
 			instance_create_layer(x,y,"GUI",obj_music_controller);
 			//TODO - chECKER?	
 		}
 		if (instance_exists(obj_music_controller)){
-			show_debug_message("PIPELINE: SUCCESS...");					
-			show_debug_message("PIPELINE: CREATING OBJ_SWAY_SHADER_CONTROLLER");
+			show_debug_message("OVERWORLD PIPELINE:SUCCESS...");					
+			show_debug_message("OVERWORLD PIPELINE: CREATING OBJ_SWAY_SHADER_CONTROLLER");
 			//CREATE THE SWAY SHADER CONTROLLER
 			if (instance_exists(obj_sway_shader_controller) == false){
 				instance_create_layer(x,y,"GUI",obj_sway_shader_controller);
@@ -46,7 +46,7 @@ switch(global.overworld_pipeline_state){
 			}
 		}
 		if (instance_exists(obj_sway_shader_controller)){
-			show_debug_message("PIPELINE: SUCCESS...");					
+			show_debug_message("OVERWORLD PIPELINE: SUCCESS...");					
 			global.overworld_pipeline_state = PIPELINE_STATE.CHECK_NPC;	
 	}
 	break;	
@@ -60,32 +60,32 @@ switch(global.overworld_pipeline_state){
 	///////////////////////////////
 	case PIPELINE_STATE.CHECK_NPC:
 		//CHECK RELEVANT NPCS
-		show_debug_message("PIPELINE: CHECKING NPCS...");
-		show_debug_message("PIPELINE: NO NPCS TO CHECK AT THIS TIME.");		
+		show_debug_message("OVERWORLD PIPELINE: CHECKING NPCS...");
+		show_debug_message("OVERWORLD PIPELINE: NO NPCS TO CHECK AT THIS TIME.");		
 		//CHECK QUEST SPOTS
-		show_debug_message("PIPELINE: CHECKING QUESTS...");
-		show_debug_message("PIPELINE: NO QUESTS TO CHECK AT THIS TIME.");		
+		show_debug_message("OVERWORLD PIPELINE: CHECKING QUESTS...");
+		show_debug_message("OVERWORLD PIPELINE: NO QUESTS TO CHECK AT THIS TIME.");		
 		
 		//POPULATE CARD SHOP
-		show_debug_message("PIPELINE: POPULATING CARD SHOP");	
+		show_debug_message("OVERWORLD PIPELINE: POPULATING CARD SHOP");	
 		if ((instance_exists(obj_card_shop) == true) && global.counter_card_shop_reset == 0){	
 			scr_stock_card_shop(irandom_range(3,6)); //stock card shop with 3-6 cards
 			global.counter_card_shop_reset = 3;
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
-			show_debug_message("PIPELINE: COULD NOT FIND A CARD SHOP TO POPULATE.");			
+			show_debug_message("OVERWORLD PIPELINE: COULD NOT FIND A CARD SHOP TO POPULATE.");			
 		}
-		show_debug_message("PIPELINE: SUCCESS...");				
+		show_debug_message("OVERWORLD PIPELINE: SUCCESS...");				
 		//POPULATE MERC SHOP
-		show_debug_message("PIPELINE: POPULATING MERC SHOP");	
+		show_debug_message("OVERWORLD PIPELINE: POPULATING MERC SHOP");	
 		if ((instance_exists(obj_mercenary_shop) == true) && global.counter_merc_shop_reset == 0){	
 			scr_stock_mercenary_shop(irandom_range(3,6));
 			global.counter_merc_shop_reset = 3;
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
-			show_debug_message("PIPELINE: COULD NOT FIND A MERC SHOP TO POPULATE.");			
+			show_debug_message("OVERWORLD PIPELINE: COULD NOT FIND A MERC SHOP TO POPULATE.");			
 		}
-		show_debug_message("PIPELINE: SUCCESS...");				
+		show_debug_message("OVERWORLD PIPELINE: SUCCESS...");				
 		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_TREASURE;	
 	break;	
 	#endregion	
@@ -98,15 +98,15 @@ switch(global.overworld_pipeline_state){
 	///////////////////////
 	case PIPELINE_STATE.SPAWN_TREASURE:
 		//check position of placed cards
-		show_debug_message("PIPELINE: CHECKING PLACED TREASURES...");
-		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");		
+		show_debug_message("OVERWORLD PIPELINE: CHECKING PLACED TREASURES...");
+		show_debug_message("OVERWORLD PIPELINE: FEATURE NOT IMPLEMENTED");		
 		
 		//check position of randomized chests
-		show_debug_message("PIPELINE: CHECKING RANDOMIZED CHESTS...");
-		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");	
+		show_debug_message("OVERWORLD PIPELINE: CHECKING RANDOMIZED CHESTS...");
+		show_debug_message("OVERWORLD PIPELINE: FEATURE NOT IMPLEMENTED");	
 		
 		//spawn 3 randomized sparkly spots at the beginning of the game.
-		show_debug_message("PIPELINE: SPAWNING LUCKY SPOTS...");
+		show_debug_message("OVERWORLD PIPELINE: SPAWNING LUCKY SPOTS...");
 		for (var _i = 0; _i < 3; _i++){
 		    var _new_position = scr_find_valid_tile_in_tilemap();
 		    if (_new_position != noone) {
@@ -115,7 +115,7 @@ switch(global.overworld_pipeline_state){
 		        instance_create_layer(_new_x, _new_y, "Player", obj_treasure);
 		    }	
 		}
-		show_debug_message("PIPELINE: SUCCESS...");	
+		show_debug_message("OVERWORLD PIPELINE: SUCCESS...");	
 		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_PLAYER;
 	break;
 	#endregion		
@@ -128,7 +128,7 @@ switch(global.overworld_pipeline_state){
 	///////////////////////////////////////////////////////////////////////////////////////	
 	case PIPELINE_STATE.SPAWN_PLAYER:
 	if (!instance_exists(obj_player)){
-		show_debug_message("PIPELINE: SPAWNING PLAYER...");	
+		show_debug_message("OVERWORLD PIPELINE: SPAWNING PLAYER...");	
 		var _ref_player = instance_create_layer(global.start_x, global.start_y, "Player", obj_player);
 			//PASSER STUFF (Either from load or from new game)
 			if (obj_passer._pass_savefile != undefined){ //LOAD THE PLAYER STUFF from a file
@@ -137,7 +137,7 @@ switch(global.overworld_pipeline_state){
 			else{ //set up a new player based on the chosen patron
 				scr_init_new_player(_ref_player,obj_passer._pass_patron,obj_passer._pass_blessing);
 			}
-			show_debug_message("PIPELINE: SUCCESS...");	
+			show_debug_message("OVERWORLD PIPELINE: SUCCESS...");	
 	}
 		//delete passer
 		instance_destroy(obj_passer);
@@ -153,8 +153,8 @@ switch(global.overworld_pipeline_state){
 	///////////////////////////////////////////////////////////////////////////////////////		
 	case PIPELINE_STATE.SPAWN_STATS:
 		//spawn stats tracker
-		show_debug_message("PIPELINE: SPAWNING STATS TRACKER...");
-		show_debug_message("PIPELINE: FEATURE NOT IMPLEMENTED");
+		show_debug_message("OVERWORLD PIPELINE: SPAWNING STATS TRACKER...");
+		show_debug_message("OVERWORLD PIPELINE: FEATURE NOT IMPLEMENTED\n==========================================================================\n");
 		global.overworld_pipeline_state = PIPELINE_STATE.END_INIT_TRANSITION;			
 	break;	
 	#endregion	
@@ -163,7 +163,10 @@ switch(global.overworld_pipeline_state){
 	
 	#region END INIT	
 	case PIPELINE_STATE.END_INIT_TRANSITION:
-			scr_save();
+		global.player_xpos = obj_player.x;
+		global.player_ypos = obj_player.y;
+		global.saved_room = room;
+		scr_save();
 		obj_transition._transition_state_tracker = TRANSITION_STATE.FADE_IN;
 		global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 	break;	
@@ -173,28 +176,6 @@ switch(global.overworld_pipeline_state){
 	
 	#region IDLE		
 	case PIPELINE_STATE.IDLE:
-	
-	break;
-	#endregion	
-	
-	
-	
-	#region TRANSITION OUT		
-	case PIPELINE_STATE.TRANSITION_OUT:
-	break;
-	#endregion
-	
-	
-	
-	#region TRANSITION IN			
-	case PIPELINE_STATE.TRANSITION_IN:
-	break;
-	#endregion
-	
-	
-	
-	#region RESET		
-	case PIPELINE_STATE.RESET:
 	break;
 	#endregion	
 }

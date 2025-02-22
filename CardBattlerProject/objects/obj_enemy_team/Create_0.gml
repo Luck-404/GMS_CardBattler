@@ -33,4 +33,3 @@ global.enemy_card_inventory = ds_list_create(); //create enemy inventory
 	ds_list_add(global.enemy_card_inventory, _card_strike);	
 	ds_list_add(global.enemy_card_inventory, _card_block);
 	ds_list_add(global.enemy_card_inventory, _card_block);
-	show_debug_message("~~~ OBJ_ENEMY_TEAM: DECK SET UP ~~~");

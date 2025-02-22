@@ -3,6 +3,6 @@
 //																	//
 // > A RANDOMLY PLACED TREASURE.									//
 //////////////////////////////////////////////////////////////////////
-show_debug_message("OBJ_TREASURE: SPAWNED AT + " + string(x) + "x " + string(y) + "y");	
+show_debug_message("          OBJ_TREASURE: SPAWNED AT + " + string(x) + "x " + string(y) + "y");	
 _flag_interacted = false;
 depth = 401;

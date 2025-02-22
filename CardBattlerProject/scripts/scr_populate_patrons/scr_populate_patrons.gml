@@ -13,14 +13,12 @@ function scr_populate_patrons(_output_list){
 				//add patron to the list
 				ds_list_add(_output_list,_new_patron);				
 			//Merlin (TESTER)
-	////			//create a patron (script)		
-	//			_new_patron = scr_create_patron("Merlin","God of Druids",spr_sigil_merlin,"Corpseflower", ["Strike","Block","Life Spirit","Thorny Whip","Poison Ivy","Poison Ivy"],["Yew Tree Sprig"],"10-20 Starting Gold",[scr_create_blessing("Druid's Kiss","Casting a green spell has a chance to heal",spr_blessing_druids_kiss),scr_create_blessing("Sprouts", "Minions may gain bonus health at spawn",spr_blessing_sprouts),scr_create_blessing("Mulch","Every unit killed gives your units a permanent health buff",spr_blessing_mulch)]);
-	//			//add patron to the list
-	//			ds_list_add(_output_list,_new_patron);			
-	//		//Wolfman (TESTER)
-	//			//create a patron (script)
-	//			_new_patron = scr_create_patron("Wolfman","God of the Wilds",spr_sigil_wolfman,"Furn", ["Strike","Block","Beastial Bash","Thorny Whip","Health Berry","Poison Ivy"],["Wolf Fang"],"10-20 Starting Gold",[scr_create_blessing("Howl","Sometimes stun all enemies at the beginning of the round",spr_blessing_howl),scr_create_blessing("Woodsman", "Gain bonus to green damage",spr_blessing_woodsman),scr_create_blessing("Carnivore","Heal on kills",spr_blessing_carnivore)]);
-	//			//add patron to the list
-	//			ds_list_add(_output_list,_new_patron);			
+				_new_patron = scr_create_patron("Merlin","God of Druids",spr_sigil_merlin,"Corpseflower", ["Fell","Thorny Whip","Fell","Thorny Whip","Fell"],["Yew Tree Sprig"],"10-20 Starting Gold",[scr_create_blessing("Druid's Kiss","Casting a green spell has a chance to heal",spr_blessing_druids_kiss),scr_create_blessing("Sprouts", "Minions may gain bonus health at spawn",spr_blessing_sprouts),scr_create_blessing("Mulch","Every unit killed gives your units a permanent health buff",spr_blessing_mulch)]);
+				//add patron to the list
+				ds_list_add(_output_list,_new_patron);			
+			//Wolfman (TESTER)
+				_new_patron = scr_create_patron("Wolfman","God of the Wilds",spr_sigil_wolfman,"Furn", ["Bulwark","Thorny Whip","Bulwark","Thorny Whip","Bulwark"],["Wolf Fang"],"10-20 Starting Gold",[scr_create_blessing("Howl","Sometimes stun all enemies at the beginning of the round",spr_blessing_howl),scr_create_blessing("Woodsman", "Gain bonus to green damage",spr_blessing_woodsman),scr_create_blessing("Carnivore","Heal on kills",spr_blessing_carnivore)]);
+				//add patron to the list
+				ds_list_add(_output_list,_new_patron);			
 	return _output_list;
 }

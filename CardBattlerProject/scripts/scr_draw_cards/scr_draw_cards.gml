@@ -63,7 +63,7 @@ function scr_draw_cards() {
 				_ref_card_instance._card_spec = _ref_card[? "spec"]
 			
             } else {
-				show_debug_message("!!=== SCR_GEN_CARDS: ITERATION " + string(_i) + " DID NOT FIND A CARD TO DRAW FROM THE DECK! ===!!");						
+				//show_debug_message("!!=== SCR_GEN_CARDS: ITERATION " + string(_i) + " DID NOT FIND A CARD TO DRAW FROM THE DECK! ===!!");						
 			}
         }	
     }

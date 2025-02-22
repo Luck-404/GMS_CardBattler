@@ -181,6 +181,11 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 			obj_gui_options_savexit_button.image_index = 1;
 			if (mouse_check_button_pressed(mb_left) && global._clicked == false){		
 				obj_gui_options_savexit_button.image_index = 2;
+				
+				global.player_xpos = obj_player.x;
+				global.player_ypos = obj_player.y;
+				global.saved_room = room;
+				
 			    //start transition to main menu
 				scr_transition("main menu","Any","Any","Any");
 				//delete self
