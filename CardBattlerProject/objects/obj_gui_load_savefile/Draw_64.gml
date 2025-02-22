@@ -13,18 +13,22 @@ if (!instance_exists(obj_gui_load_game)){
 
 if (position_meeting(_mx,_my,self)){
 	image_index = 1;
-	if (mouse_check_button_pressed(mb_left)){
+	if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 		obj_passer._pass_savefile = _savename;
 		
 		//get the destination room
-		ini_open(_savename);
-		global.saved_room = ini_read_string("Player","Map",string(rm_overworld_green));
+		ini_open(global.save_folder + _savename);
+			global.start_x = ini_read_string("Player","x_pos","NONEFOUND");	
+			global.start_y = ini_read_string("Player","y_pos","NONEFOUND");	
+			var _roomin = ini_read_string("Player","Map","NONEFOUND");				
+			var _room = scr_load_room(_roomin);			
+			global.saved_room = _room;			
 		ini_close();
 		
 		//close the gui
 		global.flag_gui_open = false;						
 		scr_transition("overworld","load",0,0);
-		instance_destroy();
+		instance_destroy(obj_gui_load_game);
 	}
 } else {
 	image_index = 0;	

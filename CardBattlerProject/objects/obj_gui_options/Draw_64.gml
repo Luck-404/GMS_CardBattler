@@ -21,10 +21,9 @@ _my = device_mouse_y_to_gui(0);
 #region Close Button
 if (position_meeting(_mx,_my,obj_gui_options_close_button)){
 	obj_gui_options_close_button.image_index = 1;
-	if (mouse_check_button_pressed(mb_left)){
+	if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 		obj_gui_options_close_button.image_index = 2;
 		global.flag_gui_open = false;
-		obj_menu_controller._clicked = false;
 		instance_destroy();
 	}
 } else {
@@ -40,7 +39,7 @@ if (position_meeting(_mx,_my,obj_gui_options_close_button)){
 #region Resolution
 if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 	obj_gui_options_resolution_button.image_index = 1;
-	if (mouse_check_button_pressed(mb_left)){
+	if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 		obj_gui_options_resolution_button.image_index = 2;
 		global.res_index = (global.res_index + 1) mod array_length(_resolutions);
 		global.res_x = _resolutions[global.res_index][0];
@@ -59,7 +58,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 #region Tutorials
 	if (position_meeting(_mx,_my, obj_gui_options_tutorials_checkbox)){
 		obj_gui_options_tutorials_checkbox.image_index = 1;
-		if (mouse_check_button_pressed(mb_left)){
+		if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 			obj_gui_options_tutorials_checkbox.image_index = 2;
 			global.flag_tutorials = !(global.flag_tutorials);
 		}
@@ -76,7 +75,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 #region Fullscreen
 	if (position_meeting(_mx,_my, obj_gui_options_fullscreen_checkbox)){
 		obj_gui_options_fullscreen_checkbox.image_index = 1;
-		if (mouse_check_button_pressed(mb_left)){
+		if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 			obj_gui_options_fullscreen_checkbox.image_index = 2;
 			global.flag_fullscreen = !(global.flag_fullscreen);
 		}
@@ -94,7 +93,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 // Apply Button
 	if (position_meeting(_mx,_my,obj_gui_options_apply_button)){
 		obj_gui_options_apply_button.image_index = 1;
-			if (mouse_check_button_pressed(mb_left)){
+			if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 				obj_gui_options_apply_button.image_index = 2;
 
 		    ini_open(global.settings_file);
@@ -135,7 +134,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 #region DEFAULTS
 	if (position_meeting(_mx,_my,obj_gui_options_default_button)){
 		obj_gui_options_default_button.image_index = 1;
-		if (mouse_check_button_pressed(mb_left)){
+		if (mouse_check_button_pressed(mb_left) && global._clicked == false){
 			obj_gui_options_default_button.image_index = 2;
 
 			file_delete(global.settings_file);
@@ -180,7 +179,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 	if (room != rm_main_menu && room != rm_encounter){
 		if (position_meeting(_mx,_my,obj_gui_options_savexit_button)){
 			obj_gui_options_savexit_button.image_index = 1;
-			if (mouse_check_button_pressed(mb_left)){		
+			if (mouse_check_button_pressed(mb_left) && global._clicked == false){		
 				obj_gui_options_savexit_button.image_index = 2;
 			    //start transition to main menu
 				scr_transition("main menu","Any","Any","Any");
@@ -203,7 +202,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 	if (room == rm_encounter){
 		if (position_meeting(_mx,_my,obj_gui_options_forfeit_button)){
 			obj_gui_options_forfeit_button.image_index = 1;
-			if (mouse_check_button_pressed(mb_left)){		
+			if (mouse_check_button_pressed(mb_left) && global._clicked == false){		
 				obj_gui_options_forfeit_button.image_index = 2;
 				//take 25% hp from all units
 				for (var _creatureindex = 0; _creatureindex < ds_list_size(global.player_team); _creatureindex++){

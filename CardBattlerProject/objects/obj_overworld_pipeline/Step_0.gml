@@ -130,13 +130,15 @@ switch(global.overworld_pipeline_state){
 		show_debug_message("PIPELINE: SPAWNING PLAYER...");	
 		var _ref_player = instance_create_layer(global.start_x, global.start_y, "Player", obj_player);
 			//PASSER STUFF (Either from load or from new game)
-			if (obj_passer._pass_savefile != undefined){ //LOAD THE PLAYER STUFF
-				
+			if (obj_passer._pass_savefile != undefined){ //LOAD THE PLAYER STUFF from a file
+				scr_init_loaded_player(_ref_player,obj_passer._pass_savefile);
 			}
-			else{ //set up a new player
-				
+			else{ //set up a new player based on the chosen patron
+				scr_init_new_player(_ref_player,obj_passer._pass_patron,obj_passer._pass_blessing);
 			}
 		show_debug_message("PIPELINE: SUCCESS...");	
+		//delete passer
+		instance_destroy(obj_passer);
 		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_STATS;	
 	break;	
 	#endregion		

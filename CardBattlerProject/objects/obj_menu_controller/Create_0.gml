@@ -68,4 +68,4 @@ audio_master_gain(global.sound_vol);
 window_set_fullscreen(global.flag_fullscreen);
 
 global.flag_gui_open = false; //tracks if there is a menu gui open
-_clicked = false;
+global._clicked = false;

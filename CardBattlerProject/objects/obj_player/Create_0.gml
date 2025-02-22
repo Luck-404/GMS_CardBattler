@@ -5,85 +5,49 @@
 //	 THROUGH THIS OBJECT											//
 //////////////////////////////////////////////////////////////////////
 randomize();
-_flag_deck_created = false;
-_flag_party_spawned = false;
+
+//location and movement
+global.player_xpos = 0;
+global.player_ypos = 0;
+global.saved_room = room;
 _move_speed = 0;
 _target_x = x; // Current position
 _target_y = y;
 _flag_moving = false; // Movement status
-global.hand_size = 3; // Maximum of 3 cards in the hand
-global.max_mana_saved = 3;
-global.max_mana = 3;
-global.current_mana = 3;
-global.player_xpos = 960;
-global.player_ypos = 540;
-global.gold = 500;
-global.randgold = 0;
-global.trigger_loss = false;
-global.blessings_list = ds_list_create();
-_flag_transition_start = false;
-_flag_can_touch = true;
-global.saved_room = room;
 _hop_start = false;
 _hop_offset = 0;
 _hop_dx = 0;
 _hop_dy = 0;
 
+//deck stuff
+_flag_deck_created = false;
+global.card_inventory = ds_list_create(); //create inventory
+
+//creature stuff
+_flag_party_spawned = false;
 global.player_team = ds_list_create(); 
 global.player_team_in_play = ds_list_create(); 
 global.player_team_dead = ds_list_create();
 global.graveyard = ds_list_create(); 
 
+//gear and blessings
+global.blessings_list = ds_list_create();
 
-//////////////////
-// STARTER TEAM //
-//////////////////
-var _creature_wraith = scr_create_creature("Wraith", false, "Uncolored", "None", "None","Ally","Default",irandom_range(30,40),"All","All",undefined, undefined,spr_creature_uncolored_wraith,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
-ds_list_add(global.player_team, _creature_wraith);
+//general stats
+global.hand_size = 3; // Maximum of 3 cards in the hand
+global.max_mana_saved = 3;
+global.max_mana = 3;
+global.current_mana = 3;
+global.gold = 0;
+global.randgold = 0;
 
-var _creature_monkey = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
-_creature_monkey[?"curhp"] = 10;
-ds_list_add(global.player_team, _creature_monkey);
-	
+//other
+global.trigger_loss = false;
 
-	
-show_debug_message("|=== PLAYER: TEAM CREATED! ===|");	
+_flag_created_camera = false; // CAMERA 
 
-//////////
-// DECK //
-//////////
-show_debug_message("|=== PLAYER: CREATING CARD INVENTORY... ===|");	
-global.card_inventory = ds_list_create(); //create inventory
-instance_create_layer(x,y,"GUI",obj_card_display); //generate the card display for overworld
+instance_create_layer(x,y,"GUI",obj_encounter_trigger); // ENCOUNTER TRIGGER
 
-//add a 'starter deck'
-	var _card_potent_fruit = scr_create_card("Potent Fruit", "2x Damage for 3 Turns", 3, scr_card_potent_fruit, spr_card_potent_fruit,"Ally","Green","Buff","Martial","Any",irandom_range(75,90),true);
-	var _card_grow_manavine = scr_create_card("Grow Manavine", "+3 max mana for 3 turns", 2, scr_card_grow_manavine, spr_card_grow_manavine,"None","Green","Utility","Technical","Any",irandom_range(60,75),true);	
-	var _card_natures_remedy = scr_create_card("Nature's Remedy", "Heal Ally 30% max HP", 2, scr_card_natures_remedy, spr_card_natures_remedy,"Ally","Green","Heal","Magical","Any",irandom_range(60,75),true);	
-	var _card_thorny_whip = scr_create_card("Thorny Whip", "Attack 8", 0, scr_card_thorny_whip, spr_card_thorny_whip,"Enemy","Green","Attack","Any","Any",irandom_range(30,45),false);
-	var _card_poison_ivy = scr_create_card("Poison Ivy", "Poison up to 3 targets for 2 turns", 1, scr_card_poison_ivy, spr_card_poison_ivy,"Enemy","Green","Attack","Any","Any",irandom_range(45,60),false);
-	var _card_fell = scr_create_card("Fell", "Deal 30% hp damage to one unit", 2, scr_card_fell, spr_card_fell,"Enemy","Green","Attack","Any","Any",irandom_range(60,75),false);
-	var _card_beastial_bash = scr_create_card("Beastial Bash", "Deal damage to 3 units, stun 1", 3, scr_card_beastial_bash, spr_card_beastial_bash,"Enemy","Green","Attack","Any","Any",irandom_range(75,90),true);
-	var _card_stampede = scr_create_card("Stampede", "Deal damage to all units", 3, scr_card_stampede, spr_card_stampede,"Enemy","Green","Attack","Any","Any",irandom_range(75,90),true);
-	
-	ds_list_add(global.card_inventory, _card_thorny_whip);
-	ds_list_add(global.card_inventory, _card_potent_fruit);	
-	ds_list_add(global.card_inventory, _card_grow_manavine);	
-	ds_list_add(global.card_inventory, _card_natures_remedy);	
-	ds_list_add(global.card_inventory, _card_poison_ivy);
-	ds_list_add(global.card_inventory, _card_fell);	
-	ds_list_add(global.card_inventory, _card_beastial_bash);	
-	ds_list_add(global.card_inventory, _card_stampede);		
-show_debug_message("|=== PLAYER: CARD INVENTORY CREATED! ===|");	
+_flag_can_touch = true;
 
-///////////////////////
-// ENCOUNTER TRIGGER //
-///////////////////////
-show_debug_message("|=== PLAYER: CREATING ENCOUNTER TRIGGER... ===|");	
-instance_create_layer(x,y,"GUI",obj_encounter_trigger);
-show_debug_message("|=== PLAYER: CREATED ENCOUNTER TRIGGER! ===|");	
-
-////////////
-// CAMERA //
-////////////
-_flag_created_camera = false;
+_flag_transition_start = false;

@@ -5,8 +5,8 @@
 //   ESC INPUT, END GAME ON NO GUI ESC.								//
 // > OTHER ROOM FUNCITONALITY: 'ESC' SUMMMONS THE OPTIONS MENU.		//
 //////////////////////////////////////////////////////////////////////
-if (global.flag_gui_open == false){
-	_clicked = false;
+if (mouse_check_button_released(mb_left)){
+	global._clicked = false;
 }
 ///////////////
 ///////////////
@@ -39,7 +39,7 @@ if (room = rm_main_menu){
 	//////////////////////////////////////////////////////////
 	// CHECK FOR GUI BUTTONS (ALL BESIDES EXIT) - SPAWN GUI //
 	//////////////////////////////////////////////////////////
-	if (_clicked == false && global.flag_gui_open == false){
+	if (global._clicked == false && global.flag_gui_open == false){
 		///////////////
 		// NEW GAME //
 		//////////////
@@ -48,7 +48,7 @@ if (room = rm_main_menu){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
 				 show_debug_message("CLICK NEW GAME");
-				 _clicked = true;
+				 global._clicked = true;
 				global.flag_gui_open = true;			
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_new_game);
@@ -60,7 +60,7 @@ if (room = rm_main_menu){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
 				 show_debug_message("CLICK LOAD");
-				 _clicked = true;				 
+				 global._clicked = true;				 
 				global.flag_gui_open = true;
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_load_game);
@@ -72,7 +72,7 @@ if (room = rm_main_menu){
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
 				 show_debug_message("CLICK OPTIONS");
-				 _clicked = true;				 
+				 global._clicked = true;				 
 				global.flag_gui_open = true;		
 				//DISPLAY THE GUI
 				instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);

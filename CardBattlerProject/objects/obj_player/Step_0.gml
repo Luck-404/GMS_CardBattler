@@ -50,7 +50,7 @@
 /////////////////////
 // "ESC" ENDS GAME //
 /////////////////////
-if (global.graveyard_gui_open == false && global.merc_shop_gui_open == false && global.card_shop_gui_open == false && global.healer_shop_gui_open == false && keyboard_check_pressed(vk_f1)){
+if (keyboard_check_pressed(vk_f1)){
 	show_debug_message("|=== PLAYER: ENDING GAME VIA 'F1' ===|");		
 	game_end();	
 }

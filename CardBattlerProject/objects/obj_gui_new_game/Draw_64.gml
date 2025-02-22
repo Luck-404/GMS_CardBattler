@@ -9,7 +9,7 @@
 	///////////////////////////////
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_new_game_close_button)) {
 			obj_gui_new_game_close_button.image_index = 1;
-			if (mouse_check_button(mb_left)) {
+			if (mouse_check_button_pressed(mb_left) && global._clicked == false) {
 				obj_gui_new_game_close_button.image_index = 2;
 				global.flag_gui_open = false;
 				_selected_blessing = undefined;
@@ -68,7 +68,7 @@
 			}
 
 			// WATCH FOR LEFT CLICKS, SET THE APPROPRIATE PATRON
-			if (mouse_check_button_pressed(mb_left) &&
+			if ((mouse_check_button_pressed(mb_left) && global._clicked == false) &&
 				device_mouse_x_to_gui(0) > _patrons_x_pos && device_mouse_x_to_gui(0) < _patrons_x_pos + _patrons_box_w &&
 				mouse_y > _patrons_y_pos && mouse_y < _patrons_y_pos + _patrons_box_h) {
 		
@@ -146,7 +146,7 @@
 				}
 
 				// SELECT BLESSINGS ON LEFT CLICK
-				if (mouse_check_button_pressed(mb_left) &&
+				if ((mouse_check_button_pressed(mb_left) && global._clicked == false) &&
 					device_mouse_x_to_gui(0) > _blessings_x_pos && device_mouse_x_to_gui(0) < _blessings_x_pos + 32 &&
 					mouse_y > _blessings_y_pos && mouse_y < _blessings_y_pos + 32) {
 					
@@ -184,15 +184,10 @@
 			draw_set_color(c_white);
 			draw_rectangle(room_width / 2 - 32, _blessings_start_y + 80 - 16, room_width / 2 + 32, _blessings_start_y + 80 + 16, true);
 			// HANDLE CLICKS
-			if (mouse_check_button_pressed(mb_left) && (_variables_passed == false)){
+			if ((mouse_check_button_pressed(mb_left) && global._clicked == false) && (_variables_passed == false)){
 				_variables_passed = true;			
 				//PASS THE VALUES TO THE PASSER
 				_ref_passer._pass_patron = ds_map_find_value(_selected_patron, "Name");
-				_ref_passer._pass_starter = ds_map_find_value(_selected_patron, "Starter");
-				_ref_passer._pass_cards = ds_map_find_value(_selected_patron, "Cards");
-				_ref_passer._pass_gear = ds_map_find_value(_selected_patron, "Gear");
-				_ref_passer._pass_gold = ds_map_find_value(_selected_patron, "Bonus Gold");
-		
 				_ref_passer._pass_blessing = _selected_blessing[?"Name"];
 		
 				var _check = scr_passer_check("New Game");

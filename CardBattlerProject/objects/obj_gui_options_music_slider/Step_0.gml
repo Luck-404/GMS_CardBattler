@@ -1,7 +1,7 @@
 // Check if the mouse is over the slider bar
 if (device_mouse_x_to_gui(0) >= x-5 && device_mouse_x_to_gui(0) <= x + 105 && device_mouse_y_to_gui(0) >= y - 5 && device_mouse_y_to_gui(0) <= y + 5) {
 	image_index = 1;
-    if (mouse_check_button_pressed(mb_left)) {
+    if ((mouse_check_button_pressed(mb_left) && global._clicked == false)) {
         _dragging = true; // Start dragging when clicked
 		image_index = 2;	
     }

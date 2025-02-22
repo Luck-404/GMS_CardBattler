@@ -9,18 +9,6 @@
 //patron (string)
 _pass_patron = undefined;
 
-//starter creature (string)
-_pass_starter = undefined;
-
-//starting cards (array of strings)
-_pass_cards = undefined;
-
-//starting gear (array of strings)
-_pass_gear = undefined;
-
-//starting gold (integer)
-_pass_gold = 0;
-
 //starting blessing (string)
 _pass_blessing = undefined;
 
