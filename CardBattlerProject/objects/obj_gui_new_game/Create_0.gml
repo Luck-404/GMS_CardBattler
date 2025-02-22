@@ -14,8 +14,7 @@ if (instance_exists(obj_passer)){
 
 _ref_passer = instance_create_layer(0,0,"GUI",obj_passer);
 
-//VARIABLES TO TRACK THE LOCATION OF THE 'CLOSE X' BUTTON
-//TODO
+instance_create_layer(x+150,y-270,"GUI",obj_gui_new_game_close_button);//close
 
 //LIST OF AVAILABLE PATRONS AND THEIR DETAILS (DSLIST - CALL SCRIPT TO POPULATE)
 _list_patrons = ds_list_create();

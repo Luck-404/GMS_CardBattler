@@ -185,6 +185,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 			    //start transition to main menu
 				scr_transition("main menu","Any","Any","Any");
 				//delete self
+				global.flag_gui_open = false;
 				instance_destroy();
 			}
 		} else {
@@ -212,6 +213,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 				//start transition to overworld
 				scr_transition("overworld","return","Any","Any");
 				//delete self
+				global.flag_gui_open = false;
 				instance_destroy();
 			}
 		} else {

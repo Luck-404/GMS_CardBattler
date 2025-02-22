@@ -11,6 +11,7 @@ global.game_folder = "C:/CardBattler/";
 global.default_settings_file = "C:/CardBattler/Default_Settings.ini";
 global.settings_file = "C:/CardBattler/Settings.ini"
 global.save_folder = "C:/CardBattler/Saves/"
+global.saved_room = undefined;
 
 if (!directory_exists(global.game_folder)) {
 	directory_create(global.game_folder);

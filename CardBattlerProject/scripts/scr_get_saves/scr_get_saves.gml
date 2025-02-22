@@ -1,21 +1,17 @@
 function scr_get_saves(){
-	global.saves_list = []; // Clear previous saves
-
+	while (instance_exists(obj_gui_load_savefile) == true){ // Delete all previous saves
+		instance_destroy(obj_gui_load_savefile);
+	}
+	
 	var _file = file_find_first(global.save_folder + "Save_*.ini", fa_none);
 	var _index = 0;
-	var _y_offset = obj_gui_load_game.y; // Starting Y position for drawing
-
+	var _y_offset = obj_gui_load_game.y-200; // Starting Y position for drawing
+	var _x_offset = obj_gui_load_game.x;
+	
 	while (_file != "") {
-	    global.saves_list[_index] = {
-	        _name: _file,
-	        _x1: obj_gui_load_game.x-100,   // X start
-	        _y1: _y_offset-15,
-	        _x2: obj_gui_load_game.x+100,  // X end (button width)
-	        _y2: _y_offset + 15
-	    };
-	    _index++;
-	    _y_offset += 40; // Move down for next file
-
+		_ref_button = instance_create_layer(_x_offset,_y_offset+_index,"GUI",obj_gui_load_savefile);
+		_ref_button._savename = _file;
+		_index= _index+40;
 	    _file = file_find_next();
 	}
 	file_find_close();

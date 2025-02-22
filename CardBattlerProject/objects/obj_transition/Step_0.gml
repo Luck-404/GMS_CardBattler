@@ -19,8 +19,6 @@ switch(_transition_state_tracker){
 	// CHANGE ROOMS //
 	//////////////////
 	case TRANSITION_STATE.TRANSITION:
-		//save
-		scr_save();
 		//move to new room
 		room_goto(_target_room);
 		_transition_state_tracker = TRANSITION_STATE.CREATE_PIPELINE;
@@ -54,6 +52,9 @@ switch(_transition_state_tracker){
 	/////////////////////////////
 	case TRANSITION_STATE.LOADING:
 		//wait here, displaying a loading bar/sprite (in the draw) until the room's pipeline sends us we're good
+		if (room == rm_main_menu){
+			_transition_state_tracker = TRANSITION_STATE.FADE_IN;
+		}
 	break;
 	
 	/////////////
@@ -71,6 +72,13 @@ switch(_transition_state_tracker){
 	/////////////////
 	case TRANSITION_STATE.DELETE:
 		obj_player._move_speed = 3;
+		//save
+		if ((room != rm_main_menu) && (room != rm_encounter)){
+			scr_save();		
+		}
+		if (room == rm_main_menu){
+			instance_destroy(obj_player);
+		}
 		instance_destroy();
 	break;	
 }

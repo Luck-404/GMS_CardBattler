@@ -129,8 +129,13 @@ switch(global.overworld_pipeline_state){
 	case PIPELINE_STATE.SPAWN_PLAYER:
 		show_debug_message("PIPELINE: SPAWNING PLAYER...");	
 		var _ref_player = instance_create_layer(global.start_x, global.start_y, "Player", obj_player);
-			//PASSER STUFF
-			//TODO
+			//PASSER STUFF (Either from load or from new game)
+			if (obj_passer._pass_savefile != undefined){ //LOAD THE PLAYER STUFF
+				
+			}
+			else{ //set up a new player
+				
+			}
 		show_debug_message("PIPELINE: SUCCESS...");	
 		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_STATS;	
 	break;	

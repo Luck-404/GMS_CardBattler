@@ -81,14 +81,7 @@ if (_flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
 	_move_speed = 3;	
 }
 
-/////////////////////////////////
-//// KB "F" TOGGLES FULLSCREEN //
-/////////////////////////////////
-//if (keyboard_check_pressed(ord("F"))){
-//	show_debug_message("|=== PLAYER: TOGGLING FULLSCREEN ===|");		
-//	_flag_fullscreen = !_flag_fullscreen;
-//	window_set_fullscreen(_flag_fullscreen);
-//}
+
 
 /////////////////////
 // OVERWORLD LOGIC //

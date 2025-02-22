@@ -158,3 +158,11 @@ if (room != rm_main_menu){
 	//FUTURE
 }
 #endregion
+
+///////////////////////////////
+// KB "F" TOGGLES FULLSCREEN //
+///////////////////////////////
+if (keyboard_check_pressed(ord("F"))){	
+	global.flag_fullscreen = !global.flag_fullscreen;
+	window_set_fullscreen(global.flag_fullscreen);
+}

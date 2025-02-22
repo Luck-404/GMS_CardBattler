@@ -7,19 +7,18 @@
 	///////////////////////////////
 	// HANDLE 'X' CLICK TO CLOSE //
 	///////////////////////////////
-		if (device_mouse_x_to_gui(0) < 1135 && device_mouse_x_to_gui(0) > 1114 && mouse_y < 308 && mouse_y > 289) {
-			image_index = 1;
+		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_new_game_close_button)) {
+			obj_gui_new_game_close_button.image_index = 1;
 			if (mouse_check_button(mb_left)) {
-				image_index = 2;
-			}
-			if (mouse_check_button_released(mb_left)) {
+				obj_gui_new_game_close_button.image_index = 2;
 				global.flag_gui_open = false;
 				_selected_blessing = undefined;
 				_selected_patron = undefined;
+				instance_destroy(_ref_passer);
 				instance_destroy();
 			}
 		} else {
-			image_index = 0;
+			obj_gui_new_game_close_button.image_index = 0;
 		}
 
 	/////////////
