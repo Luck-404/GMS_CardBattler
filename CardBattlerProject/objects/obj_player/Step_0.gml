@@ -25,7 +25,7 @@
 //	//		global.player_ypos = obj_player.y;
 			
 //	//		obj_player._move_speed = 0;				
-//	//		//scr_start_transition(rm_encounter);
+//	//		//scr_transition(rm_encounter);
 //	//		room_goto(rm_encounter);
 //	//	}
 //	//}

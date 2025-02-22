@@ -27,8 +27,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Options",
-    "path": "folders/Sprites/GUI/General/Options.yy",
+    "name": "Load",
+    "path": "folders/Sprites/GUI/General/Load.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

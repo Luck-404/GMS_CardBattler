@@ -10,6 +10,7 @@ _my = device_mouse_y_to_gui(0);
 
 //CREATE BUTTONS
 instance_create_layer(x+150,y-270,"GUI",obj_gui_load_close_button);//close
+scr_trim_saves();
 scr_get_saves();
 
 if (instance_exists(obj_passer)){

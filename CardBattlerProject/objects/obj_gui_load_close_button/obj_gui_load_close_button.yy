@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "GUI and Tools",
-    "path": "folders/Objects/GUI and Tools.yy",
+    "name": "Load Menu",
+    "path": "folders/Objects/GUI and Tools/Load Menu.yy",
   },
   "parentObjectId": null,
   "persistent": false,

@@ -11,6 +11,12 @@ if (!instance_exists(obj_gui_load_game)){
 	instance_destroy();	
 }
 
+if (_init == false){
+	_ref_deleter._ref_file = _savename;
+	_ref_deleter._ref_save_button = self;
+	_init = true;
+}
+
 if (position_meeting(_mx,_my,self)){
 	image_index = 1;
 	if (mouse_check_button_pressed(mb_left) && global._clicked == false){

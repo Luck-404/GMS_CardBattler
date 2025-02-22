@@ -11,10 +11,10 @@ function scr_load_room(_rminput){
 			_out = rm_overworld_green;
 		break;
 		case "green_1":
-			_out = rm_route_green_1;
+			_out = rm_route_green_3;
 		break;
 		case "green_3":
-			_out = rm_route_green_3;
+			_out = rm_route_green_1;
 		break;
 	}
 	return _out;

@@ -10,20 +10,81 @@ function scr_transition(_destination,_type,_toid,_fromid){
 			switch(_type){
 				case "start": //enter overworld from main menu
 					//create a transition object, pass it room to goto
-					global.start_x = 1968;
-					global.start_y = 1982;					
+					global.start_x = 4130;
+					global.start_y = 5391;					
 					_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
 					_ref_transition._target_room = rm_overworld_green;
 				break;
 				
 				case "new room": //enter an overworld from another overworld
+				var _ref_passer = instance_create_layer(x,y,"GUI",obj_passer);
 					switch(_toid){
-						case "green_dungeon":
-						//save fromid info
+						case rm_overworld_green:
+							switch(_fromid){
+								case rm_route_green_1:
+									//create a transition object, pass it room to goto and the initial position to send the player
+									global.start_x = 1966;
+									global.start_y = 116;	
+									obj_player.x = 1966;
+									obj_player.y = 116;
+									obj_player._flag_moving = false;											
+									obj_player._target_x = 1966;
+									obj_player._target_y = 116;
+									_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
+									_ref_transition._target_room = rm_overworld_green;
+									global.saved_room = rm_overworld_green;
+								break;
+								
+								case rm_route_green_3:
+									//create a transition object, pass it room to goto and the initial position to send the player
+									global.start_x = 4078;
+									global.start_y = 5684;	
+									obj_player.x = 4078;
+									obj_player.y = 5684;		
+									obj_player._flag_moving = false;									
+									obj_player._target_x = 4078;
+									obj_player._target_y = 5684;									
+									_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
+									_ref_transition._target_room = rm_overworld_green;
+									global.saved_room = rm_overworld_green;
+								break;
+							}
+						break;
 						
-						//create a transition object, pass it room to goto and the initial position to send the player
-						global.start_x = 0;
-						global.start_y = 0;	
+						case rm_route_green_1:
+							switch(_fromid){
+									case rm_overworld_green:
+										//create a transition object, pass it room to goto and the initial position to send the player
+										global.start_x = 2990;
+										global.start_y = 5720;	
+										obj_player.x = 2990;
+										obj_player.y = 5720;
+										obj_player._flag_moving = false;
+										obj_player._target_x = 2990;
+										obj_player._target_y = 5720;										
+										_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
+										_ref_transition._target_room = rm_route_green_1;
+										global.saved_room = rm_route_green_1;
+									break;
+							}
+						break;
+						
+						case rm_route_green_3:
+							switch(_fromid){
+									case rm_overworld_green:
+										//create a transition object, pass it room to goto and the initial position to send the player
+										global.start_x = 3888;
+										global.start_y = 150;	
+										obj_player.x = 3888;
+										obj_player.y = 150;
+										obj_player._flag_moving = false;											
+										obj_player._target_x = 3888;
+										obj_player._target_y = 150;										
+										_ref_transition = instance_create_layer(x,y,"GUI",obj_transition);
+										_ref_transition._target_room = rm_route_green_3;
+										global.saved_room = rm_route_green_3;
+									break;
+							}
 						break;
 					}
 				break;

@@ -6,6 +6,9 @@
 
 if (room != rm_encounter){
 	if (_flag_created_camera == false){
+		if (global._camera != undefined){
+			camera_destroy(global._camera);
+		}
 		global._camera = camera_create(); // Create a camera
 		global._cam_width = 960; // Camera width (match your viewport)
 		global._cam_height = 540; // Camera height (match your viewport)

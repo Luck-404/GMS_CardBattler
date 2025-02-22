@@ -27,14 +27,13 @@
   "physicsShapePoints": [],
   "physicsStartAwake": true,
   "properties": [
-    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"_req_dir","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"\"Any\"","varType":2,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"_color","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"c_green","varType":7,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"_text","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"\"The Meadows\"","varType":2,},
   ],
   "solid": false,
   "spriteId": {
-    "name": "spr_zone_trigger",
-    "path": "sprites/spr_zone_trigger/spr_zone_trigger.yy",
+    "name": "spr_banner_trigger",
+    "path": "sprites/spr_banner_trigger/spr_banner_trigger.yy",
   },
   "spriteMaskId": null,
   "visible": true,

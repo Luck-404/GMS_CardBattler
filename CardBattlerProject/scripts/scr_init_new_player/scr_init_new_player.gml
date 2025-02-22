@@ -12,8 +12,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//player's deck setup
 			var _arr = ["Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy"];
 			for (var _i = 0; _i < array_length(_arr); _i++){
-				var _new_card = scr_load_card(_arr[_i]);
-				show_debug_message(_new_card[?"name"]);				
+				var _new_card = scr_load_card(_arr[_i]);		
 				ds_list_add(global.card_inventory, _new_card);
 			}
 			//gear (WIP)

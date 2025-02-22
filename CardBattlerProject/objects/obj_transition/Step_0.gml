@@ -22,6 +22,9 @@ switch(_transition_state_tracker){
 		//move to new room
 		room_goto(_target_room);
 		_transition_state_tracker = TRANSITION_STATE.CREATE_PIPELINE;
+		if (instance_exists(obj_player)){
+			obj_player._flag_created_camera = false;
+		}
 	break;
 	
 	/////////////////////

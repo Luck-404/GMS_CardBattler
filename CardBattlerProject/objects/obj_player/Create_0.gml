@@ -51,3 +51,4 @@ instance_create_layer(x,y,"GUI",obj_encounter_trigger); // ENCOUNTER TRIGGER
 _flag_can_touch = true;
 
 _flag_transition_start = false;
+global._camera = undefined;

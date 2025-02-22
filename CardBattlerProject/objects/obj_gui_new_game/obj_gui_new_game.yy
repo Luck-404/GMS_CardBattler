@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Main Menu",
-    "path": "folders/Objects/GUI and Tools/Main Menu.yy",
+    "name": "New Game Menu",
+    "path": "folders/Objects/GUI and Tools/New Game Menu.yy",
   },
   "parentObjectId": null,
   "persistent": false,

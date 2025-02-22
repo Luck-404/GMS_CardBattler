@@ -10,10 +10,10 @@ function scr_save_room(_rminput){
 		case rm_overworld_green:
 			_out =  "ow_green";
 		break;
-		case rm_route_green_1:
+		case rm_route_green_3:
 			_out =  "green_1";
 		break;
-		case rm_route_green_3:
+		case rm_route_green_1:
 			_out =  "green_3";
 		break;
 	}
