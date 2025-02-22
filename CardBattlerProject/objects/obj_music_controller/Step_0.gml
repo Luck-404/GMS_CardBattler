@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-//					OBJ_MUSIC_CONTROLLER							//
+//					OBJ_MUSIC_CONTROLLER STEP						//
 //																	//
 // > PLAY MUSIC BASED ON THE AREA. MUSIC WILL SWITCH BETWEEN AREAS  //
 //////////////////////////////////////////////////////////////////////
@@ -16,6 +16,7 @@ if (_flag_playing == false && !instance_exists(obj_music_timer)){
 	_flag_playing = false;
 }
 
+//TODO
 //if a new zone has been entered (_current_zone != _music_ref_playing)
 	//destroy the old timer/stop the old music (fade out somehow
 	//top loop should take over... new ref will set up properly and this wont play again!

@@ -77,7 +77,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Load","folderPath":"folders/Sprites/GUI/General/Load.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"New Game","folderPath":"folders/Sprites/GUI/General/New Game.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Options","folderPath":"folders/Sprites/GUI/General/Options.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Main Menu","folderPath":"folders/Sprites/GUI/Main Menu.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Main Menu","folderPath":"folders/Sprites/GUI/General/Main Menu.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Overworld","folderPath":"folders/Sprites/GUI/Overworld.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sigils","folderPath":"folders/Sprites/GUI/Sigils.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Player","folderPath":"folders/Sprites/Player.yy",},
@@ -96,6 +96,8 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Foliage","folderPath":"folders/Tile Sets/Foliage.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Ground","folderPath":"folders/Tile Sets/Ground.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Walls","folderPath":"folders/Tile Sets/Walls.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Load","folderPath":"folders/Scripts/GUI and Tools/Load.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Save","folderPath":"folders/Scripts/GUI and Tools/Save.yy",},
   ],
   "IncludedFiles": [
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"saved_options.txt","CopyToMask":-1,"filePath":"datafiles",},
