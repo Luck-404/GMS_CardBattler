@@ -4,15 +4,16 @@
 // > ESTABLISH VARIABLE DEFINITIONS FOR MENUS THROUGHOUT THE GAME.	//
 //   USED IN OPTIONS MENU AND SUCH.									//
 //////////////////////////////////////////////////////////////////////
-
 depth = -99;
 
+//set up saving locations and informations
 global.game_folder = "C:/CardBattler/";
 global.default_settings_file = "C:/CardBattler/Default_Settings.ini";
 global.settings_file = "C:/CardBattler/Settings.ini"
 global.save_folder = "C:/CardBattler/Saves/"
 global.saved_room = undefined;
 
+//create the folders if needed
 if (!directory_exists(global.game_folder)) {
 	directory_create(global.game_folder);
 }
@@ -60,12 +61,9 @@ if (file_exists(global.settings_file)) {
 }
 
 // Apply the settings
-
 window_set_size(global.res_x, global.res_y);
 audio_master_gain(global.sound_vol);
-
-//window fulscreen
 window_set_fullscreen(global.flag_fullscreen);
 
-global.flag_gui_open = false; //tracks if there is a menu gui open
-global._clicked = false;
+global.flag_gui_open = false; //track if a gui has been opened
+global._clicked = false; //track if a button has been clicked

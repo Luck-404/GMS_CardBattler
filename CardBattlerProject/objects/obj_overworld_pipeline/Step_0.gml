@@ -14,7 +14,6 @@ switch(global.overworld_pipeline_state){
 		//CREATE THE GUI CONTROLLER
 		if (instance_exists(obj_card_display) == false){
 			instance_create_layer(x,y,"GUI",obj_card_display);
-			//TODO - chECKER?	
 		}
 		if (instance_exists(obj_card_display)) {
 			show_debug_message("OVERWORLD PIPELINE: SUCCESS...");				
@@ -34,7 +33,6 @@ switch(global.overworld_pipeline_state){
 		//CREATE THE MUSIC CONTROLLER
 		if (instance_exists(obj_music_controller) == false){
 			instance_create_layer(x,y,"GUI",obj_music_controller);
-			//TODO - chECKER?	
 		}
 		if (instance_exists(obj_music_controller)){
 			show_debug_message("OVERWORLD PIPELINE:SUCCESS...");					
@@ -42,7 +40,6 @@ switch(global.overworld_pipeline_state){
 			//CREATE THE SWAY SHADER CONTROLLER
 			if (instance_exists(obj_sway_shader_controller) == false){
 				instance_create_layer(x,y,"GUI",obj_sway_shader_controller);
-				//TODO - chECKER?	
 			}
 		}
 		if (instance_exists(obj_sway_shader_controller)){

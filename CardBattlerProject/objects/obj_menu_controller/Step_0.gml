@@ -8,6 +8,7 @@
 if (mouse_check_button_released(mb_left)){
 	global._clicked = false;
 }
+
 ///////////////
 ///////////////
 // MAIN MENU //
@@ -153,7 +154,7 @@ if (room != rm_main_menu){
 	//////////////////
 	// DEV MENU GUI //
 	//////////////////
-	//FUTURE
+	//TODO
 }
 #endregion
 

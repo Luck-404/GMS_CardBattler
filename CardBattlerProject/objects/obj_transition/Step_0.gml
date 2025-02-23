@@ -33,7 +33,6 @@ switch(_transition_state_tracker){
 	case TRANSITION_STATE.CREATE_PIPELINE:
 		//BASED ON THE ROOM, CREATE THE PROPER PIPELINE
 		if (_target_room == rm_main_menu){
-			//TODO SAVE
 			_pipeline = "main menu";	
 			_loading_step = LOADING_STATE.SAVING;
 		} else if (_target_room == rm_encounter){
