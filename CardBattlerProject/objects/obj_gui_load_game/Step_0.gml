@@ -1,7 +1,12 @@
-/// Left Pressed Event (inside obj_save_menu)
+//////////////////////////////////////////////////////////////////////
+//						OBJ_GUI_LOAD_GAME STEP						//
+//																	//
+// > HANDLE CLOSE BUTTON LOGIC										//
+//////////////////////////////////////////////////////////////////////
 var _mx = device_mouse_x_to_gui(0);
 var _my = device_mouse_y_to_gui(0);
 
+//CLOSE BUTTON
 if (position_meeting(_mx,_my,obj_gui_load_close_button)){
 	obj_gui_load_close_button.image_index = 1;
 	if (mouse_check_button_pressed(mb_left) && global._clicked == false){

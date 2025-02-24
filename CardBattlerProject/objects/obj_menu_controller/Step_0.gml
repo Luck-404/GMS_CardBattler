@@ -127,7 +127,7 @@ if (room = rm_main_menu){
 #region Other Rooms
 if (room != rm_main_menu){
 	/////////////////////////////////////////
-	// ESCAPE OPENs/CLOSES THE OPTIONS GUI //
+	// ESCAPE OPENS/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
 	if (keyboard_check_pressed(vk_escape)){
 		 if (global.flag_gui_open == false){

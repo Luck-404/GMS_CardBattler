@@ -1,5 +1,12 @@
+//////////////////////////////////////////////////////////////////////
+//							SCR_GET_SAVED							//
+//																	//
+// > GET A LIST OF SAVES FROM THE LOCAL SAVES FOLDER, CREATE BUTTON //
+//	 OBJECTS FOR EACH ONE											//
+//////////////////////////////////////////////////////////////////////
 function scr_get_saves(){
-	while (instance_exists(obj_gui_load_savefile) == true){ // Delete all previous saves
+	// Delete all previous saves
+	while (instance_exists(obj_gui_load_savefile) == true){ 
 		instance_destroy(obj_gui_load_savefile);
 	}
 	
