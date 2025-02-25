@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//						SCR_INIT_NEW_PLAYER							//
+//																	//
+// > CREATE A NEW PLAYER BASED ON THE SELECTED PATRON				//
+//////////////////////////////////////////////////////////////////////
 function scr_init_new_player(_player,_patron,_blessing){
 	switch(_patron){
 		case "Lucky":
@@ -6,7 +11,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//player's team setup
 			var _new_creature = scr_load_creature("Bush Monkey");
 			ds_list_add(global.player_team, _new_creature);
-			////blessing setup
+			////blessing setup TODO
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.blessings_list, _new_bless);
 			//player's deck setup
@@ -15,7 +20,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 				var _new_card = scr_load_card(_arr[_i]);		
 				ds_list_add(global.card_inventory, _new_card);
 			}
-			//gear (WIP)
+			//gear (TODO)
 		break;
 		
 		case "Merlin":
@@ -24,7 +29,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//player's team setup
 			_new_creature = scr_load_creature("Corpseflower");
 			ds_list_add(global.player_team, _new_creature);
-			////blessing setup
+			////blessing setup (TODO)
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.blessings_list, _new_bless);
 			//player's deck setup
@@ -33,7 +38,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 				var _new_card = scr_load_card(_arr[_i]);		
 				ds_list_add(global.card_inventory, _new_card);
 			}
-			//gear (WIP)
+			//gear (TODO)
 		break;
 		
 		case "Wolfman":
@@ -42,7 +47,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//player's team setup
 			_new_creature = scr_load_creature("Furn");
 			ds_list_add(global.player_team, _new_creature);
-			////blessing setup
+			////blessing setup (TODO)
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.blessings_list, _new_bless);
 			//player's deck setup
@@ -51,7 +56,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 				var _new_card = scr_load_card(_arr[_i]);		
 				ds_list_add(global.card_inventory, _new_card);
 			}
-			//gear (WIP)
+			//gear (TODO)
 		break;		
 	}
 

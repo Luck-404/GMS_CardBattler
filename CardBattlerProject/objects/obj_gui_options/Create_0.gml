@@ -1,10 +1,14 @@
 //////////////////////////////////////////////////////////////////////
 //						OBJ_GUI_OPTIONS CREATE						//
 //																	//
-// > ESTABLISH VARIABLES											//
+// > ESTABLISH VARIABLES, CREATE BUTTONS							//
 //////////////////////////////////////////////////////////////////////
-draw_set_font(fnt_fanwood_sm);
 depth = -100;
+image_index	= 0;
+image_speed = 0;
+
+_mx = device_mouse_x_to_gui(0);
+_my = device_mouse_y_to_gui(0);
 
 // Resolution options
 _resolutions = [
@@ -14,15 +18,10 @@ _resolutions = [
     [1920, 1080]
 ];
 
-image_index	= 0;
-image_speed = 0;
 
-_mx = device_mouse_x_to_gui(0);
-_my = device_mouse_y_to_gui(0);
 
-//CREATE BUTTONS
+//create buttons
 instance_create_layer(x+150,y-270,"GUI",obj_gui_options_close_button);//close
-
 instance_create_layer(x-80,y-225+40,"GUI",obj_gui_options_resolution_button);//resolution
 instance_create_layer(x-80,y-225+80,"GUI",obj_gui_options_sound_slider);//sound slider
 instance_create_layer(x-80,y-225+120,"GUI",obj_gui_options_music_slider);//music slider

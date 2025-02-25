@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_healer_shop",
+  "name": "obj_NPC_graveyard",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,},
@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_healer_shop",
-    "path": "sprites/spr_healer_shop/spr_healer_shop.yy",
+    "name": "spr_graveyard",
+    "path": "sprites/spr_graveyard/spr_graveyard.yy",
   },
   "spriteMaskId": null,
   "visible": true,

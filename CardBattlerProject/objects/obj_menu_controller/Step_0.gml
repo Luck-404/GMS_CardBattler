@@ -165,3 +165,18 @@ if (keyboard_check_pressed(ord("F"))){
 	global.flag_fullscreen = !global.flag_fullscreen;
 	window_set_fullscreen(global.flag_fullscreen);
 }
+
+//////////////////
+// F1 ENDS GAME //
+//////////////////
+if (keyboard_check_pressed(vk_f1)){
+	show_debug_message("PLAYER: ENDING GAME VIA 'F1'");		
+	game_end();	
+}
+
+////////////////
+// F4 to SAVE //
+////////////////
+if (room != rm_encounter && room != rm_main_menu && (keyboard_check(vk_f4) == true)){
+	scr_save();
+}

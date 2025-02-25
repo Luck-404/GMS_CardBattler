@@ -3,21 +3,25 @@
 //																	//
 // > DRAW A LOADING BAR BASED ON THE LOADING STAGE OF THE PIPELINE	//
 //////////////////////////////////////////////////////////////////////
-//draw self
-draw_sprite(spr_fx_black,0,(display_get_gui_width()/2),(display_get_gui_height()/2));
+#region Loading Visuals
+	//draw self
+	draw_sprite(spr_fx_black,0,(display_get_gui_width()/2),(display_get_gui_height()/2));
 
-//draw spinner
-	draw_sprite_ext(spr_spinner,0,display_get_gui_width()/2,(display_get_gui_height()/2)-200,1,1,_rot,c_white,1);
-	_rot++;
-	if (_rot > 360){
-	_rot = 0;	
-	}
-//draw bar outline
-draw_set_color(c_white);
-draw_rectangle((display_get_gui_width()/2)-200,(display_get_gui_height()/2)-15,(display_get_gui_width()/2)+200,(display_get_gui_height()/2)+15,true);
+	//draw spinner
+		draw_sprite_ext(spr_spinner,0,display_get_gui_width()/2,(display_get_gui_height()/2)-200,1,1,_rot,c_white,1);
+		_rot++;
+		if (_rot > 360){
+		_rot = 0;	
+		}
 
-var _x_center = display_get_gui_width()/2; // Target x position
-var _y_center = (display_get_gui_height()/2)-45; // Target y position
+	//draw bar outline
+	draw_set_color(c_white);
+	draw_rectangle((display_get_gui_width()/2)-200,(display_get_gui_height()/2)-15,(display_get_gui_width()/2)+200,(display_get_gui_height()/2)+15,true);
+
+	var _x_center = display_get_gui_width()/2; // Target x position
+	var _y_center = (display_get_gui_height()/2)-45; // Target y position
+#endregion
+
 //draw text and fill in bar as we move farther
 switch(_loading_step){
 	/////////////////////////////////////////

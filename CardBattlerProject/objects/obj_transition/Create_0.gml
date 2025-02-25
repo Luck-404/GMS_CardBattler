@@ -3,6 +3,10 @@
 //																	//
 // > CDEFINE CREATE OBJECT VARIABLES								//
 //////////////////////////////////////////////////////////////////////
+image_alpha = 0;	// START TRANSPARENT
+_fade_speed = 0.06; // FADE SPEED
+depth = -10000; //ALWAYS SHOW ON TOP
+_rot = 0; //FOR DRAW EVENT SPINNER
 
 //ENUM for state machine
 enum TRANSITION_STATE {
@@ -13,21 +17,10 @@ enum TRANSITION_STATE {
 	FADE_IN,
 	DELETE
 }
-
 _transition_state_tracker = TRANSITION_STATE.FADE_OUT; //STATE TRACKER
+
 _target_room = undefined;	// TARGET ROOM
-	//MM => OW
-	//OW => MM
 
-	//OW => OW
-
-	//OW => Encounter
-	//Encounter => OW
-
-image_alpha = 0;	// START TRANSPARENT
-_fade_speed = 0.06; // FADE SPEED
-depth = -10000; //ALWAYS SHOW ON TOP
-_rot = 0; //FOR DRAW EVENT SPINNER
 enum LOADING_STATE { //DRAW EVENT STATE TRACKER
 	OW_CREATE_GUI,
 	OW_CREATE_AMBIANCE,

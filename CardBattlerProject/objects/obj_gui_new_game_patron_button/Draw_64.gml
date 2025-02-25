@@ -1,11 +1,31 @@
-draw_self();
-if (_tar_sprite != undefined){
+//////////////////////////////////////////////////////////////////////
+//				OBJ_GUI_MNEW_GAME_PATRON_BUTTON DRAW GUI			//
+//																	//
+// > HANDLE VISUAL UPDATES, HANDLE CLICKNIG AND SPAWNING BLESSINGS	//
+//////////////////////////////////////////////////////////////////////
+draw_self(); //BUTTON BG
+if (_tar_sprite != undefined){ //SIGIL OF PATRON
 	draw_sprite(_tar_sprite,0,x,y);	
 }
+
+
+
+//HOVER HIGHLIGHT
 if (!position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 	 image_index = 0;
 	 _hover = false;
 }
+// TOOLTIPS
+if (_hover == true){
+	draw_set_color(c_gray);
+	draw_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0) - 30, device_mouse_x_to_gui(0) + string_width(_selection_patron) + 10, device_mouse_y_to_gui(0), false);
+	draw_set_color(c_white);
+	draw_text(device_mouse_x_to_gui(0) + 5, device_mouse_y_to_gui(0) - 27, _selection_patron);	
+}
+
+
+
+//IF SELECTED, DISPLAY INFO AND SPAWN BLESSINGS
 if (_flag_selected == true){	
 	draw_sprite(spr_selected_arrow, 0, x, y);
 		
@@ -29,6 +49,7 @@ if (_flag_selected == true){
 	}
 	draw_set_color(c_black);		
 	
+	//SPAWN THE BLESSINGS
 	if (_spawned_blessings == false && array_length(_ref_to_patron[?"Blessings"]) != 0){
 		_spawned_blessings = true;
 		//spawn the blessing buttons
@@ -44,14 +65,9 @@ if (_flag_selected == true){
 	}
 }
 
+
+
+//DESTROY ON GUI CLOSE
 if (!instance_exists(obj_gui_new_game)){
 	instance_destroy();	
-}
-
-if (_hover == true){
-// TOOLTIPS
-	draw_set_color(c_gray);
-	draw_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0) - 30, device_mouse_x_to_gui(0) + string_width(_selection_patron) + 10, device_mouse_y_to_gui(0), false);
-	draw_set_color(c_white);
-	draw_text(device_mouse_x_to_gui(0) + 5, device_mouse_y_to_gui(0) - 27, _selection_patron);	
 }

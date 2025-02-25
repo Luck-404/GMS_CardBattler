@@ -1,168 +1,113 @@
 //////////////////////////////////////////////////////////////////////
 //							OBJ_PLAYER STEP							//
 //																	//
-// > HANDLE VARIOUS LOGIC FOR THE PLAYER CHARACTER		//
+// > HANDLE VARIOUS LOGIC FOR THE PLAYER CHARACTER					//
 //////////////////////////////////////////////////////////////////////
-//////////////////////////////////////
-// spawn leaves, trigger transition //
-//////////////////////////////////////
-//var _grass_layer = layer_tilemap_get_id("tl_grass");
-//var _tree_layer = layer_tilemap_get_id("tl_trees");
-//var _foliage_layer = layer_tilemap_get_id("tl_foliage");
-//if ((tilemap_get_at_pixel(_grass_layer, x, y) != 0) && _flag_can_touch == true) {
-//	_flag_can_touch = false;
-//	scr_spawn_leaves();
-//	//if (global.can_encounter == true){
-//	//	var _rand = irandom_range(1,100);
-//	//	if (_rand <= 50 && _flag_transition_start == false){
-//	//		_flag_transition_start = true;		
-			
-//	//		//save the current room, tileset, and position of player
-//	//		_tileset = layer_tilemap_get_id("tl_overworld");
-//	//		global.saved_ts = tilemap_get_tileset(_tileset);
-//	//		global.saved_room = room;
-//	//		global.player_xpos = obj_player.x;
-//	//		global.player_ypos = obj_player.y;
-			
-//	//		obj_player._move_speed = 0;				
-//	//		//scr_transition(rm_encounter);
-//	//		room_goto(rm_encounter);
-//	//	}
-//	//}
-//}
-
-//if (tilemap_get_at_pixel(_tree_layer, x, y) != 0) {
-//	if (_flag_can_touch == true){
-//		_flag_can_touch = false;
-//		scr_spawn_cone();
-//	}
-//}
-
-//if (tilemap_get_at_pixel(_foliage_layer, x, y) != 0) {
-//	if (_flag_can_touch == true){
-//		_flag_can_touch = false;
-//		scr_spawn_leaves();
-//	}
-//}
-
-
-
-/////////////////////
-// "ESC" ENDS GAME //
-/////////////////////
-if (keyboard_check_pressed(vk_f1)){
-	show_debug_message("PLAYER: ENDING GAME VIA 'F1'");		
-	game_end();	
-}
-
-////////////////////
-// R to encounter //
-////////////////////
-if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(ord("R")) == true)){
-	_flag_transition_start = true;
-	scr_transition("encounter","Any","Any","Any");
-}
-
-////////////////
-// F4 to SAVE //
-////////////////
-if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_f4) == true)){
-	scr_save();
-}
-
-/////////////////////
-// SHIFT TO SPRINT //
-/////////////////////
-if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
-	_move_speed = 4;
-} else if (room != rm_encounter && _flag_transition_start == false) {
-	_move_speed = 3;	
-}
-
-
-
-/////////////////////
-// OVERWORLD LOGIC //
-/////////////////////
 if (room != rm_encounter){
-	visible = true; //MAKE VISIBLE IN OVERWORLD
-	
-	//////////////////////////
-	// PICKING UP NEW CARDS //
-	//////////////////////////
-	if (keyboard_check_pressed(ord("E")) && distance_to_object(obj_treasure) < 48){
-		obj_treasure._flag_interacted = true;
-		show_debug_message("PLAYER: PRESSED 'E' ON A TREASURE!");		
-		scr_generate_reward_card(1);
+// Get tile layers
+var _grass_layer = layer_tilemap_get_id("tl_grass");
+var _foliage_layer = layer_tilemap_get_id("tl_foliage");
+var _tile_layer = layer_tilemap_get_id("tl_overworld");
+var _wall_layer = layer_tilemap_get_id("tl_walls");
+var _one_way_layer = layer_tilemap_get_id("tl_oneway");
+
+//////////////////////////
+// PLAYER STATE MACHINE //
+//////////////////////////
+switch (global.player_ow_state){
+#region IDLE
+case PLAYER_OW_STATE.IDLE: //wait for player input (movement, interactions with NPCs/Treasures)
+	image_speed = 0;
+	image_index = 0;
+	////////////////////
+	// R to encounter //
+	////////////////////
+	if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(ord("R")) == true)){
+		_flag_transition_start = true;
+		global.step_count = 0;
+		scr_transition("encounter","Any","Any","Any");
 	}
 
+	/////////////////////
+	// SHIFT TO SPRINT //
+	/////////////////////
+	if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
+		_move_speed = 8;
+	} else if (room != rm_encounter && _flag_transition_start == false) {
+		_move_speed = 4;	
+	}
+	
+	//NPC gui- hosted in-object
+	//Treasures- hosted in-object
+	
+	////////////////////
+	// MOVEMENT INPUT //
+	////////////////////
+	// Movement inputs
+	_move_left  = keyboard_check(ord("A"));
+	_move_right = keyboard_check(ord("D"));
+	_move_up    = keyboard_check(ord("W"));
+	_move_down  = keyboard_check(ord("S"));	
+	
+	if (_move_left != 0 || _move_right != 0 || _move_up != 0 || _move_down != 0){
+		global.player_ow_state = PLAYER_OW_STATE.MOVE_CHECK;
+	}
+break;
+#endregion
 
-////////////////////
-// MOVEMENT LOGIC //
-////////////////////
-	if (!_flag_moving) {
-	    image_speed = 0;
-	    image_index = 0;
-    
-	    // Get tile layers
-	    var _tile_layer = layer_tilemap_get_id("tl_overworld");
-	    var _wall_layer = layer_tilemap_get_id("tl_walls");
-	    var _one_way_layer = layer_tilemap_get_id("tl_oneway");
-    
-	    // Movement inputs
-	    var _move_left  = keyboard_check(ord("A"));
-	    var _move_right = keyboard_check(ord("D"));
-	    var _move_up    = keyboard_check(ord("W"));
-	    var _move_down  = keyboard_check(ord("S"));
-
+#region MOVE CHECK
+case PLAYER_OW_STATE.MOVE_CHECK: //check if player can move (collision detect)
+		_move_left  = keyboard_check(ord("A"));
+		_move_right = keyboard_check(ord("D"));
+		_move_up    = keyboard_check(ord("W"));
+		_move_down  = keyboard_check(ord("S"));	
+		
 	    // Determine movement direction
 	    var _next_x = x;
 	    var _next_y = y;
 	    var _facing_front = true; // Tracks whether to use front-facing sprite
 	    var _flip = 1; // Tracks xscale
-
+		
 	    // Direction tracking variables for the hop
 	    _hop_dx = 0;
-	    _hop_dy = 0;
+	    _hop_dy = 0;		
+	if (_move_up && _move_left) {
+	    _hop_dx = -32;
+	    _hop_dy = -32;
+	    _facing_front = false;
+	    _flip = -1;
+	} else if (_move_up && _move_right) {
+	    _hop_dx = 32;
+	    _hop_dy = -32;
+	    _facing_front = false;
+	} else if (_move_down && _move_left) {
+	    _hop_dx = -32;
+	    _hop_dy = 32;
+	    _flip = -1;
+	} else if (_move_down && _move_right) {
+	    _hop_dx = 32;
+	    _hop_dy = 32;
+	} else if (_move_left) {
+	    _hop_dx = -32;
+	    _flip = -1;
+	} else if (_move_right) {
+	    _hop_dx = 32;
+	} else if (_move_up) {
+	    _hop_dy = -32;
+	    _facing_front = false;
+	} else if (_move_down) {
+	    _hop_dy = 32;
+	}
+	_next_x += _hop_dx;
+	_next_y += _hop_dy;
 
-	    if (_move_up && _move_left) {
-	        _hop_dx = -32;
-	        _hop_dy = -32;
-	        _facing_front = false;
-	        _flip = -1;
-	    } else if (_move_up && _move_right) {
-	        _hop_dx = 32;
-	        _hop_dy = -32;
-	        _facing_front = false;
-	    } else if (_move_down && _move_left) {
-	        _hop_dx = -32;
-	        _hop_dy = 32;
-	        _flip = -1;
-	    } else if (_move_down && _move_right) {
-	        _hop_dx = 32;
-	        _hop_dy = 32;
-	    } else if (_move_left) {
-	        _hop_dx = -32;
-	        _flip = -1;
-	    } else if (_move_right) {
-	        _hop_dx = 32;
-	    } else if (_move_up) {
-	        _hop_dy = -32;
-	        _facing_front = false;
-	    } else if (_move_down) {
-	        _hop_dy = 32;
-	    }
-
-	    _next_x += _hop_dx;
-	    _next_y += _hop_dy;
-
-	    // Apply movement and sprite settings
-	    if (_hop_dx != 0 || _hop_dy != 0) {
-	        image_speed = 1;
-	        image_xscale = _flip;
-	        sprite_index = _facing_front ? spr_player_front : spr_player_back;
-	    }
-
+	// Apply movement and sprite settings
+	if (_hop_dx != 0 || _hop_dy != 0) {
+	    image_speed = 1;
+	    image_xscale = _flip;
+	    sprite_index = _facing_front ? spr_player_front : spr_player_back;
+	}	
+	
 	    // Check if a tile exists at the target position
 	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
 	        if (tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0) {
@@ -173,48 +118,140 @@ if (room != rm_encounter){
 			    if (scr_check_one_way_hop(_tile_index, _next_x, _next_y, x, y)) {
 			        _target_x = _next_x;
 			        _target_y = _next_y;
-			        _flag_moving = true; // Start moving
 			        _hop_start = true;
 					_hop_offset = 8;
+					global.player_ow_state = PLAYER_OW_STATE.MOVE;
 			    } else {
-			        //blocked
+			        global.player_ow_state = PLAYER_OW_STATE.IDLE;
 			    }
 			} else {
 	            _target_x = _next_x;
-	            _target_y = _next_y;
-	            _flag_moving = true; // Start moving
-	            _hop_start = false;                
+	            _target_y = _next_y
+	            _hop_start = false; 
+				global.player_ow_state = PLAYER_OW_STATE.MOVE;
 	        }
 	    }
-	}
+break;
+#endregion
 
-	// Smooth movement to the target position
-	if (_flag_moving) {
-	    if (x < _target_x) x = min(x + _move_speed, _target_x);
-	    if (x > _target_x) x = max(x - _move_speed, _target_x);
-	    if (y < _target_y) y = min(y + _move_speed, _target_y);
-	    if (y > _target_y) y = max(y - _move_speed, _target_y);
-		
-	    // Stop moving when the target position is reached
-	    if (x == _target_x && y == _target_y) {
-	        _flag_moving = false;      
-			y-= _hop_offset;
-			_hop_offset = 0;
-	        if (_hop_start) {
-	            _hop_start = false;
-				y += _hop_offset;
-	            _target_x += _hop_dx; // Move one more step in the same direction
-	            _target_y += _hop_dy;
-	            _flag_moving = true; // Trigger hop movement
-	        }
-	    }
+#region Move
+case PLAYER_OW_STATE.MOVE: //perform the movement
+    var _dx = _target_x - x;
+    var _dy = _target_y - y;
+    
+    // Smooth movement
+    if (abs(_dx) > 0 || abs(_dy) > 0) {
+        x += sign(_dx) * min(_move_speed, abs(_dx));
+        y += sign(_dy) * min(_move_speed, abs(_dy));
+    }
+
+    // Stop moving when the target position is reached
+    if (x == _target_x && y == _target_y) { 
+        y -= _hop_offset;
+        _hop_offset = 0;
+
+        if (_hop_start) {
+            _hop_start = false;
+            y += _hop_offset;
+            _target_x += _hop_dx;
+            _target_y += _hop_dy;
+            global.player_ow_state = PLAYER_OW_STATE.MOVE;
+        } else {
+            global.player_ow_state = PLAYER_OW_STATE.MOVE_TICK;
+        }
+    }
+break;
+#endregion
+
+#region Move Tick
+case PLAYER_OW_STATE.MOVE_TICK: //step increment, spawn extras (leaves, cones, critters), trigger encounter if appropriate!
+	global.step_count++;
+	
+	//attempt to spawn critter (10% chance)
+	var _randroll = irandom(100);
+	if (_randroll < 11){
+		scr_spawn_critter();	
 	}
+	
+	//if I can spawn a particle (5 step reset)
+	if (_counter_particles > 4){
+		//if now in a bush or grass, spawn a leaf
+		if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
+			scr_spawn_leaves();
+			_counter_particles = 0;
+		} 
+		// else if now in a tree, spawn a cone
+		else if (place_meeting(x,y,obj_tree)) {
+				scr_spawn_cone();
+				_counter_particles = 0;
+		}
+	}
+	//increment particle counter
+	_counter_particles++;	
+	
+	//trigger a transition with a 50% chance if in a grass/bush
+	if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
+			//spawn a transition if able to transition (20 steps)
+		if (global.step_count >= 20 && _flag_transition_start == false){
+			var _rand = irandom(100);
+			if (_rand > 50){
+				//trigger encounter (50% chance)
+				global.step_count = 0;
+				_flag_transition_start = true;
+				_target_x = x;
+				_target_y = y;
+				_move_speed = 0;
+				global.player_ow_state = PLAYER_OW_STATE.IDLE;
+				scr_transition("encounter","Any","Any","Any");
+			}
+		}			
+	} 
+	
+	global.player_ow_state = PLAYER_OW_STATE.IDLE;
+break;
+#endregion
+
+#region Pause
+case PLAYER_OW_STATE.PAUSE: //lock all input (conversations, cutscenes, in encounter, calculating)
+
+break;
+#endregion
 }
+}
+
 
 ////////////////////
 // ENCOUNTER ROOM //
 ////////////////////
 if (room == rm_encounter){
+	switch(global.player_enc_state){
+		case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
+		break;
+		case PLAYER_ENCOUNTER_STATE.BEGIN_TURN: //TURN BEGINS, PLAY TURN BEGIN EFFECTS
+		break;		
+		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
+		break;	
+		case PLAYER_ENCOUNTER_STATE.SHUFFLING: //SHUFFLE YOUR DECK, SHUFFLE ENEMY DECKS
+		break;
+		case PLAYER_ENCOUNTER_STATE.DRAW: //DRAW YOUR CARDS, DRAW ENEMY CARDS
+		break;		
+		case PLAYER_ENCOUNTER_STATE.PICK_CARD: //STAY HERE WAITNIG FOR INPUT (CARD CLICKED ON), ALSO COUNTS AS IDLE (CAN DO OPTIONS MENU STUFF)
+		break;		
+		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
+		break;
+		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
+		break;
+		case PLAYER_ENCOUNTER_STATE.CASTING: //SPELL EXECUTES, EFFECTS TRIGGER
+		break;
+		case PLAYER_ENCOUNTER_STATE.END_TURN: //END TURN EFFECTS TRIGGER AND PASES THE TURN TO THE ENEMY
+		break;		
+		case PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE: //IDLE HERE WHILE ENEMY GOES
+		break;		
+		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter
+		break;				
+		case PLAYER_ENCOUNTER_STATE.PAUSE: //be in this state when obj_player goes back to OW
+		break;
+	}
 	//if (_flag_deck_created == false){ //CREATE THE DECK
 	
 	//	instance_create_layer(x,y,"GUI",obj_deck_handler);

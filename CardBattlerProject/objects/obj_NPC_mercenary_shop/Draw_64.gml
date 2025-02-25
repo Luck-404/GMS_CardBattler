@@ -4,7 +4,7 @@
 // > WHEN A PLAYER PRESSES 'E', SHOW THE DISPLAY. HANDLE LEFT CLICK //
 //   LOGIC WHEN INTERACTING WITH THE SHOP.							//
 //////////////////////////////////////////////////////////////////////
-if (keyboard_check_pressed(ord("E")) && place_meeting(x,y,obj_player)) {
+if (instance_exists(obj_player) && global.player_ow_state == PLAYER_OW_STATE.IDLE && distance_to_object(obj_player) < 64 && keyboard_check_pressed(ord("E"))) {
     global.merc_shop_gui_open = !global.merc_shop_gui_open;
     obj_player._move_speed = global.merc_shop_gui_open ? 0 : 4;
 }

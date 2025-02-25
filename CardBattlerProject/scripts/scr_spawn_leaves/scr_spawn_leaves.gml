@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//							SCR_SPAWN_LEAVES						//
+//																	//
+// > SPAWN A LEAF WHEN A PLAYER TOUCHES A GRASS/BUSH				//
+//////////////////////////////////////////////////////////////////////
 function scr_spawn_leaves() {
     var _leaf_count = irandom_range(3, 6); // Random number of leaves
     for (var _i = 0; _i < _leaf_count; _i++) {

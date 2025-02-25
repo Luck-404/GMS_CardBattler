@@ -1,6 +1,8 @@
-///////////////
-// VARIABLES //
-///////////////
+//////////////////////////////////////////////////////////////////////
+//							OBJ_LEAD CREATE							//
+//																	//
+// > SPAWN A LEAD WHEN A PLAYER TOUCHES BUSH/GRASS					//
+//////////////////////////////////////////////////////////////////////
 vspd = random_range(1, 2); // Random vertical speed for falling
 hsp = random_range(-1, 1); // Small horizontal drift
 _life = 20 + irandom(30);  // Randomized lifespan for more variation

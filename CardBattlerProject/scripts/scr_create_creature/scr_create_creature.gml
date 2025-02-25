@@ -1,5 +1,8 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+//////////////////////////////////////////////////////////////////////
+//					SCR_CREATE_CREATURE								//
+//																	//
+// > CREATES A CREATURE WITH MAPPED VALUES							//
+//////////////////////////////////////////////////////////////////////
 function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team, _breed, _hp, _spec, _class, _gear, _markings, _sprite, _hurtsound, _deathsound, _defaultsound) {
     var _ref_new_creature = ds_map_create();
     ds_map_add(_ref_new_creature, "name", _name); //name of creature

@@ -1,6 +1,14 @@
+//slowly move around its home coordinates
+if (!_triggered){
+	x += choose(-1, 1) * random(2); // Random horizontal movement
+	y += choose(-1, 1) * random(2); // Random vertical movement
+}
+
+//destroy if player is too far away
 if (distance_to_object(obj_player) > 800){
 	instance_destroy();	
 }
+
 //if player is within 100px, run in a random direction x (xscale -1 or 1) and disappear after 2 seconds
 if (distance_to_object(obj_player) < 100){
 	_triggered = true;
@@ -37,8 +45,8 @@ if (_triggered){
 		case 3: // Bugs
 		    // Play buzzing sound here
 			//TODO
-		    x += choose(-1, 1) * random(2); // Random horizontal movement
-		    y += choose(-1, 1) * random(2); // Random vertical movement
+		    x += choose(-2, 2) * random(2); // Random horizontal movement
+		    y += choose(-2, 2) * random(2); // Random vertical movement
 	    break;		
 	}
 

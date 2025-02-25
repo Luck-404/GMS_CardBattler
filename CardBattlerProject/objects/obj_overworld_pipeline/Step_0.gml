@@ -65,9 +65,8 @@ switch(global.overworld_pipeline_state){
 		
 		//POPULATE CARD SHOP
 		show_debug_message("OVERWORLD PIPELINE: POPULATING CARD SHOP");	
-		if ((instance_exists(obj_card_shop) == true) && global.counter_card_shop_reset == 0){	
+		if ((instance_exists(obj_NPC_card_shop) == true)){	
 			scr_stock_card_shop(irandom_range(3,6)); //stock card shop with 3-6 cards
-			global.counter_card_shop_reset = 3;
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
 			show_debug_message("OVERWORLD PIPELINE: COULD NOT FIND A CARD SHOP TO POPULATE.");			
@@ -75,9 +74,8 @@ switch(global.overworld_pipeline_state){
 		show_debug_message("OVERWORLD PIPELINE: SUCCESS...");				
 		//POPULATE MERC SHOP
 		show_debug_message("OVERWORLD PIPELINE: POPULATING MERC SHOP");	
-		if ((instance_exists(obj_mercenary_shop) == true) && global.counter_merc_shop_reset == 0){	
+		if ((instance_exists(obj_NPC_mercenary_shop) == true)){	
 			scr_stock_mercenary_shop(irandom_range(3,6));
-			global.counter_merc_shop_reset = 3;
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
 			show_debug_message("OVERWORLD PIPELINE: COULD NOT FIND A MERC SHOP TO POPULATE.");			
@@ -109,7 +107,7 @@ switch(global.overworld_pipeline_state){
 		    if (_new_position != noone) {
 		        var _new_x = _new_position[0];
 		        var _new_y = _new_position[1];
-		        instance_create_layer(_new_x, _new_y, "Player", obj_treasure);
+		        instance_create_layer(_new_x, _new_y, "Player", obj_lucky_spot);
 		    }	
 		}
 		show_debug_message("OVERWORLD PIPELINE: SUCCESS...");	

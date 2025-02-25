@@ -1,7 +1,13 @@
+//////////////////////////////////////////////////////////////////////
+//						SCR_INIT_LOADED_PLAYER						//
+//																	//
+// > READ THE SAVEFILE AND GENERATE THE PLAYER BASED ON SAVE DATA   //
+//////////////////////////////////////////////////////////////////////
 function scr_init_loaded_player(_player,_file_path){
+	//IF THE SAVEFILE EXISTS
 	if (file_exists(global.save_folder + _file_path)) {
 	    ini_open(global.save_folder + _file_path);
-		    //LOAD MAP
+		    //LOAD ROOM
 			global.saved_room = ini_read_string("Player", "Map","NONEFOUND");
 			
 			//LOAD PLAYER X
@@ -13,7 +19,7 @@ function scr_init_loaded_player(_player,_file_path){
 			//load gold
 			global.gold = ini_read_real("Gold", "gold_count", 0);
 			
-			//read all card values in
+			//read all CARDS
 			for (var _cardindex = 0; _cardindex < 40; _cardindex++){
 				var _ref_card_name = ini_read_string("Card_" + string(_cardindex), "card_name","Default");
 				if (_ref_card_name == "Default"){
@@ -25,7 +31,7 @@ function scr_init_loaded_player(_player,_file_path){
 				}
 			}
 			
-			//read all blessing values in
+			//read all BLESSINGS
 			for (var _blessindex = 0; _blessindex < 100; _blessindex++){
 				var _ref_bless_name = ini_read_string("Blessing_" + string(_blessindex), "bless_name","Default");
 				if (_ref_bless_name == "Default"){
@@ -38,7 +44,7 @@ function scr_init_loaded_player(_player,_file_path){
 			}
 			
 			
-			//read all creatures in for team
+			//read all CREATURES
 			for (var _creatureindex = 0; _creatureindex < 5; _creatureindex++){
 				var _ref_creature_name = ini_read_string("Creature_" + string(_creatureindex), "creature_name","Default");
 				if (_ref_creature_name == "Default"){
@@ -51,7 +57,7 @@ function scr_init_loaded_player(_player,_file_path){
 				}
 			}			
 			
-			//read all graveyard creatures
+			//read ALL GRAVEYARD
 			for (var _deadindex = 0; _deadindex < 100; _deadindex++){
 				var _ref_dead_name = ini_read_string("Graveyard_" + string(_deadindex), "creature_name","Default");
 				if (_ref_dead_name == "Default"){

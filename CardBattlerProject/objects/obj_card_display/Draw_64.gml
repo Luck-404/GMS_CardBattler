@@ -4,6 +4,12 @@
 // > DRAW GUI FEATURES WHILE IN OVERWORLD -DRAW CARD DECK 			//
 //////////////////////////////////////////////////////////////////////
 if (instance_exists(obj_player) && !instance_exists(obj_transition) && ds_list_size(global.card_inventory) != 0){
+	
+	//TEMP draw steps
+	draw_text(1800, 200, "Steps: " + string(global.step_count));
+	//TEMP draw particle trigger
+	draw_text(1800, 100, "Particles?: " + string(obj_player._counter_particles));
+	
 	var _margin = 10;
 	var _card_width = 32;
 	var _card_height = 32;

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
-//							OBJ_THICK_TREE CREATE					//
+//							OBJ_ROCK CREATE							//
 //																	//
 // > RANDOMIZE														//
 //////////////////////////////////////////////////////////////////////
-image_index = choose(0,1,2); //randomize index
-image_xscale = choose(1,-1); //randomize orientation
+image_index = choose(0,1,2); //randomize the rock
+image_xscale = choose(1,-1); //randomize facing direction
 image_speed = 0;
