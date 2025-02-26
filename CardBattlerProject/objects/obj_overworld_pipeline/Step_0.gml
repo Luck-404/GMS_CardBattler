@@ -135,6 +135,7 @@ switch(global.overworld_pipeline_state){
 			show_debug_message("OVERWORLD PIPELINE: SUCCESS...");	
 	}
 		//delete passer
+		global.player_ow_state = PLAYER_OW_STATE.GENERAL;
 		instance_destroy(obj_passer);
 		global.overworld_pipeline_state = PIPELINE_STATE.SPAWN_STATS;	
 	break;	

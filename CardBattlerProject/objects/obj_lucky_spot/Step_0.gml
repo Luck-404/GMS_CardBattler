@@ -3,7 +3,7 @@
 //																	//
 // > UPON INTERACTION, MAKE A NEW TREASURE IN A RANDOM SPOT			//
 //////////////////////////////////////////////////////////////////////
-if (instance_exists(obj_player) && global.player_ow_state == PLAYER_OW_STATE.IDLE && distance_to_object(obj_player) < 64 && keyboard_check_pressed(ord("E"))){
+if (instance_exists(obj_player) && global.player_ow_state == PLAYER_OW_STATE.GENERAL && distance_to_object(obj_player) < 64 && keyboard_check_pressed(ord("E"))){
 	//roll a card
 	var _rarity_roll = irandom_range(1, 100); // Determine rarity
     var _card = undefined;

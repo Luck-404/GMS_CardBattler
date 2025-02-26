@@ -4,16 +4,16 @@
 // > THE MAIN PLAYER UNIT, MOST USER-GAME INTERACTIONS ARE RAN		//
 //	 THROUGH THIS OBJECT											//
 //////////////////////////////////////////////////////////////////////
-
+image_speed = 0;
+image_index = 0;
+	
 //overworld state enumerator
 enum PLAYER_OW_STATE {
-	IDLE,
-	MOVE_CHECK,
-	MOVE,
-	MOVE_TICK,
-	PAUSE
+	GENERAL,
+	INTERACT,
+	PAUSED
 }
-global.player_ow_state = PLAYER_OW_STATE.IDLE;
+global.player_ow_state = PLAYER_OW_STATE.GENERAL;
 
 //location and movement
 global.player_xpos = 0;
@@ -27,6 +27,9 @@ _hop_offset = 0;
 _hop_dx = 0;
 _hop_dy = 0;
 global.step_count = 0;
+global.steps_rand = irandom_range(10,15);
+_moving = false;
+_finish_move = false;
 _move_left = 0;
 _move_right = 0;
 _move_up = 0;

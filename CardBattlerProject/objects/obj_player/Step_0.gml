@@ -15,16 +15,15 @@ var _one_way_layer = layer_tilemap_get_id("tl_oneway");
 // PLAYER STATE MACHINE //
 //////////////////////////
 switch (global.player_ow_state){
-#region IDLE
-case PLAYER_OW_STATE.IDLE: //wait for player input (movement, interactions with NPCs/Treasures)
-	image_speed = 0;
-	image_index = 0;
+#region GENERAL
+case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions with NPCs/Treasures)
 	////////////////////
 	// R to encounter //
 	////////////////////
 	if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(ord("R")) == true)){
 		_flag_transition_start = true;
 		global.step_count = 0;
+		global.player_ow_state = PLAYER_OW_STATE.PAUSED;		
 		scr_transition("encounter","Any","Any","Any");
 	}
 
@@ -32,193 +31,209 @@ case PLAYER_OW_STATE.IDLE: //wait for player input (movement, interactions with 
 	// SHIFT TO SPRINT //
 	/////////////////////
 	if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
-		_move_speed = 8;
+		_move_speed = 4;
 	} else if (room != rm_encounter && _flag_transition_start == false) {
-		_move_speed = 4;	
+		_move_speed = 3;	
 	}
 	
-	//NPC gui- hosted in-object
-	//Treasures- hosted in-object
+	//NPC gui- hosted in-object (send to interact (TODO))
+	//Treasures- hosted in-object (send to interact (TODO))
 	
-	////////////////////
-	// MOVEMENT INPUT //
-	////////////////////
-	// Movement inputs
+	////////////////
+	// CHECK MOVE //
+	////////////////
+	#region Check Move
 	_move_left  = keyboard_check(ord("A"));
 	_move_right = keyboard_check(ord("D"));
 	_move_up    = keyboard_check(ord("W"));
-	_move_down  = keyboard_check(ord("S"));	
-	
-	if (_move_left != 0 || _move_right != 0 || _move_up != 0 || _move_down != 0){
-		global.player_ow_state = PLAYER_OW_STATE.MOVE_CHECK;
-	}
-break;
-#endregion
+	_move_down  = keyboard_check(ord("S"));		
+		//get move input
+		if (_moving == false) {
 
-#region MOVE CHECK
-case PLAYER_OW_STATE.MOVE_CHECK: //check if player can move (collision detect)
-		_move_left  = keyboard_check(ord("A"));
-		_move_right = keyboard_check(ord("D"));
-		_move_up    = keyboard_check(ord("W"));
-		_move_down  = keyboard_check(ord("S"));	
-		
-	    // Determine movement direction
-	    var _next_x = x;
-	    var _next_y = y;
-	    var _facing_front = true; // Tracks whether to use front-facing sprite
-	    var _flip = 1; // Tracks xscale
-		
-	    // Direction tracking variables for the hop
-	    _hop_dx = 0;
-	    _hop_dy = 0;		
-	if (_move_up && _move_left) {
-	    _hop_dx = -32;
-	    _hop_dy = -32;
-	    _facing_front = false;
-	    _flip = -1;
-	} else if (_move_up && _move_right) {
-	    _hop_dx = 32;
-	    _hop_dy = -32;
-	    _facing_front = false;
-	} else if (_move_down && _move_left) {
-	    _hop_dx = -32;
-	    _hop_dy = 32;
-	    _flip = -1;
-	} else if (_move_down && _move_right) {
-	    _hop_dx = 32;
-	    _hop_dy = 32;
-	} else if (_move_left) {
-	    _hop_dx = -32;
-	    _flip = -1;
-	} else if (_move_right) {
-	    _hop_dx = 32;
-	} else if (_move_up) {
-	    _hop_dy = -32;
-	    _facing_front = false;
-	} else if (_move_down) {
-	    _hop_dy = 32;
-	}
-	_next_x += _hop_dx;
-	_next_y += _hop_dy;
+			    // Determine movement direction
+			    var _next_x = x;
+			    var _next_y = y;
+			    var _facing_front = true; // Tracks whether to use front-facing sprite
+			    var _flip = 1; // Tracks xscale-- currently faced right
+			
+				//8 directional variables
+					//UL
+					if (_move_up && _move_left) {
+					    _next_x = x-32;
+					    _next_y = y-32;
+					    _facing_front = false;
+					    _flip = -1;
+					} 
+				
+					//UP
+					else if (_move_up) {
+					    _next_y = y-32;
+					    _facing_front = false;
+					} 
 
-	// Apply movement and sprite settings
-	if (_hop_dx != 0 || _hop_dy != 0) {
-	    image_speed = 1;
-	    image_xscale = _flip;
-	    sprite_index = _facing_front ? spr_player_front : spr_player_back;
-	}	
+					//UR
+					else if (_move_up && _move_right) { 
+					    _next_x = x+32;
+					    _next_y = y-32;
+					    _facing_front = false;
+					} 
+				
+					//L
+					else if (_move_left) {
+					    _next_x = x-32;
+					    _flip = -1;
+					} 
+				
+					////M (CANCELING)
+					//else if ((_move_left && _move_right) || (_move_up && _move_down) || (_move_left && _move_up && _move_down && _move_right)) {
+
+					//} 		
+				
+					//R
+					else if (_move_right) {
+					    _next_x = x+32;
+					} 
+				
+					//BL
+					else if (_move_down && _move_left) {
+					    _next_x = x-32;
+					    _next_y = y+32;
+					    _flip = -1;
+					} 
+				
+					//B
+					else if (_move_down)  {
+					    _next_y = y+32;
+					}
+				
+					//BR
+					else if (_move_down && _move_right) {
+					    _next_x = x+32;
+					    _next_y = y+32;
+					} 
+				
+					show_debug_message("xtar: " + string(_next_x), + " ytar: " + string(_next_y));
+				
+				// Apply movement and sprite settings
+				if (_next_x != x || _next_y != y) {
+				    image_speed = 1;
+				    image_xscale = _flip;
+				    sprite_index = _facing_front ? spr_player_front : spr_player_back;
+				}	
 	
-	    // Check if a tile exists at the target position
-	    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) {
-	        if (tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0) {
-	            //wall
-	        } else if ((tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y) != 0)) {
-			    var _tile_index = tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y);
-    
-			    if (scr_check_one_way_hop(_tile_index, _next_x, _next_y, x, y)) {
-			        _target_x = _next_x;
-			        _target_y = _next_y;
-			        _hop_start = true;
-					_hop_offset = 8;
-					global.player_ow_state = PLAYER_OW_STATE.MOVE;
-			    } else {
-			        global.player_ow_state = PLAYER_OW_STATE.IDLE;
+			
+			    // Check if a tile exists at the target position
+			    if (tilemap_get_at_pixel(_tile_layer, _next_x, _next_y) != 0) { //if there is a tile
+			        if (tilemap_get_at_pixel(_wall_layer, _next_x, _next_y) != 0) { //if there is no wall
+						//there is a wall, do nothing
+			        } 
+					else if ((tilemap_get_at_pixel(_one_way_layer, _next_x, _next_y) != 0)) { //if there is no one-way
+						//there is a oneway, do nothing
+					} 
+					else {
+						//otherwise there is no wall or oneway, move!
+			            _target_x = _next_x;
+			            _target_y = _next_y
+			            _hop_start = false; 
+						_moving = true;
+			        }
 			    }
-			} else {
-	            _target_x = _next_x;
-	            _target_y = _next_y
-	            _hop_start = false; 
-				global.player_ow_state = PLAYER_OW_STATE.MOVE;
-	        }
-	    }
-break;
-#endregion
-
-#region Move
-case PLAYER_OW_STATE.MOVE: //perform the movement
-    var _dx = _target_x - x;
-    var _dy = _target_y - y;
-    
-    // Smooth movement
-    if (abs(_dx) > 0 || abs(_dy) > 0) {
-        x += sign(_dx) * min(_move_speed, abs(_dx));
-        y += sign(_dy) * min(_move_speed, abs(_dy));
-    }
-
-    // Stop moving when the target position is reached
-    if (x == _target_x && y == _target_y) { 
-        y -= _hop_offset;
-        _hop_offset = 0;
-
-        if (_hop_start) {
-            _hop_start = false;
-            y += _hop_offset;
-            _target_x += _hop_dx;
-            _target_y += _hop_dy;
-            global.player_ow_state = PLAYER_OW_STATE.MOVE;
-        } else {
-            global.player_ow_state = PLAYER_OW_STATE.MOVE_TICK;
-        }
-    }
-break;
-#endregion
-
-#region Move Tick
-case PLAYER_OW_STATE.MOVE_TICK: //step increment, spawn extras (leaves, cones, critters), trigger encounter if appropriate!
-	global.step_count++;
-	
-	//attempt to spawn critter (10% chance)
-	var _randroll = irandom(100);
-	if (_randroll < 11){
-		scr_spawn_critter();	
-	}
-	
-	//if I can spawn a particle (5 step reset)
-	if (_counter_particles > 4){
-		//if now in a bush or grass, spawn a leaf
-		if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
-			scr_spawn_leaves();
-			_counter_particles = 0;
-		} 
-		// else if now in a tree, spawn a cone
-		else if (place_meeting(x,y,obj_tree)) {
-				scr_spawn_cone();
-				_counter_particles = 0;
-		}
-	}
-	//increment particle counter
-	_counter_particles++;	
-	
-	//trigger a transition with a 50% chance if in a grass/bush
-	if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
-			//spawn a transition if able to transition (20 steps)
-		if (global.step_count >= 20 && _flag_transition_start == false){
-			var _rand = irandom(100);
-			if (_rand > 50){
-				//trigger encounter (50% chance)
-				global.step_count = 0;
-				_flag_transition_start = true;
-				_target_x = x;
-				_target_y = y;
-				_move_speed = 0;
-				global.player_ow_state = PLAYER_OW_STATE.IDLE;
-				scr_transition("encounter","Any","Any","Any");
 			}
-		}			
-	} 
+		#endregion
+		
+	//////////////////
+	// EXECUTE MOVE //
+	//////////////////
+	#region Execute Move
+	if (_moving == true) {
+		var _dx = _target_x - x;
+		var _dy = _target_y - y;
+    
+		// Smooth movement toward target
+		if (abs(_dx) > 0 || abs(_dy) > 0) {
+		    x += sign(_dx) * min(_move_speed, abs(_dx));
+		    y += sign(_dy) * min(_move_speed, abs(_dy));
+		}
+
+		// Stop moving when the target position is reached
+		if (x == _target_x && y == _target_y) { 
+		        _finish_move = true;
+		    }
+		}
+	#endregion
+		
+	////////////////////
+	// MOVE END TICKS //
+	////////////////////
+	#region Move End
+	if (_finish_move == true){
+		image_speed = 0;
+		global.step_count++;
 	
-	global.player_ow_state = PLAYER_OW_STATE.IDLE;
+		//attempt to spawn critter (10% chance)
+		var _randroll = irandom(100);
+		if (_randroll < 11){
+			scr_spawn_critter();	
+		}
+	
+		//if I can spawn a particle (5 step reset)
+		if (_counter_particles > 4){
+			//if now in a bush or grass, spawn a leaf
+			if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
+				scr_spawn_leaves();
+				_counter_particles = 0;
+			} 
+			// else if now in a tree, spawn a cone
+			else if (place_meeting(x,y,obj_tree)) {
+					scr_spawn_cone();
+					_counter_particles = 0;
+			}
+		}
+		//increment particle counter
+		_counter_particles++;	
+	
+		//trigger a transition with a 50% chance if in a grass/bush
+		if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
+				//spawn a transition if able to transition (20 steps)
+			if (global.step_count >= global.steps_rand && _flag_transition_start == false){
+				var _rand = irandom(100);
+				if (_rand > 50){
+					//trigger encounter (50% chance)
+					global.step_count = 0;
+					_flag_transition_start = true;
+					global.player_ow_state = PLAYER_OW_STATE.PAUSED;
+					_finish_move = false;
+					_moving = false;
+					scr_transition("encounter","Any","Any","Any");
+					_target_x = x;
+					_target_y = y;
+					 _next_x = x;
+					_next_y = y;
+					_move_speed = 0;
+				}
+			}			
+		}
+		_finish_move = false;
+		_moving = false;
+	}
+	#endregion
+
+break;
+#endregion
+
+#region Interaction
+case PLAYER_OW_STATE.INTERACT: //lock all input (conversations, cutscenes, in encounter, calculating)
+
 break;
 #endregion
 
 #region Pause
-case PLAYER_OW_STATE.PAUSE: //lock all input (conversations, cutscenes, in encounter, calculating)
+case PLAYER_OW_STATE.PAUSED: //lock all input (conversations, cutscenes, in encounter, calculating)
 
 break;
 #endregion
+	}
 }
-}
-
 
 ////////////////////
 // ENCOUNTER ROOM //
