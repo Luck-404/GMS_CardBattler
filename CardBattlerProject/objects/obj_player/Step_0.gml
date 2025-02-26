@@ -17,16 +17,11 @@ var _one_way_layer = layer_tilemap_get_id("tl_oneway");
 switch (global.player_ow_state){
 #region GENERAL
 case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions with NPCs/Treasures)
-	////////////////////
-	// R to encounter //
-	////////////////////
-	if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(ord("R")) == true)){
-		_flag_transition_start = true;
-		global.step_count = 0;
-		global.player_ow_state = PLAYER_OW_STATE.PAUSED;		
-		scr_transition("encounter","Any","Any","Any");
-	}
 
+	//NPC gui- hosted in-object (send to interact (TODO))
+	//Treasures- hosted in-object (send to interact (TODO))
+	//Shop gui - hosted in-object (send to interact (TODO))
+	
 	/////////////////////
 	// SHIFT TO SPRINT //
 	/////////////////////
@@ -35,9 +30,6 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 	} else if (room != rm_encounter && _flag_transition_start == false) {
 		_move_speed = 3;	
 	}
-	
-	//NPC gui- hosted in-object (send to interact (TODO))
-	//Treasures- hosted in-object (send to interact (TODO))
 	
 	////////////////
 	// CHECK MOVE //
@@ -55,62 +47,55 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 			    var _next_y = y;
 			    var _facing_front = true; // Tracks whether to use front-facing sprite
 			    var _flip = 1; // Tracks xscale-- currently faced right
-			
+				
+				//M (CANCELING)
+				if ((_move_left && _move_right) || (_move_up && _move_down) || (_move_left && _move_up && _move_down && _move_right)) {
+
+				} 	
+
 				//8 directional variables
-					//UL
-					if (_move_up && _move_left) {
-					    _next_x = x-32;
-					    _next_y = y-32;
-					    _facing_front = false;
-					    _flip = -1;
-					} 
-				
-					//UP
-					else if (_move_up) {
-					    _next_y = y-32;
-					    _facing_front = false;
-					} 
-
-					//UR
-					else if (_move_up && _move_right) { 
-					    _next_x = x+32;
-					    _next_y = y-32;
-					    _facing_front = false;
-					} 
-				
-					//L
-					else if (_move_left) {
-					    _next_x = x-32;
-					    _flip = -1;
-					} 
-				
-					////M (CANCELING)
-					//else if ((_move_left && _move_right) || (_move_up && _move_down) || (_move_left && _move_up && _move_down && _move_right)) {
-
-					//} 		
-				
-					//R
-					else if (_move_right) {
-					    _next_x = x+32;
-					} 
-				
-					//BL
-					else if (_move_down && _move_left) {
-					    _next_x = x-32;
-					    _next_y = y+32;
-					    _flip = -1;
-					} 
-				
-					//B
-					else if (_move_down)  {
-					    _next_y = y+32;
-					}
-				
-					//BR
-					else if (_move_down && _move_right) {
-					    _next_x = x+32;
-					    _next_y = y+32;
-					} 
+					// Up-Left
+				if (_move_up && _move_left) {
+				    _next_x = x-32;
+				    _next_y = y-32;
+				    _facing_front = false;
+				    _flip = -1;
+				} 
+				// Up-Right
+				else if (_move_up && _move_right) { 
+				    _next_x = x+32;
+				    _next_y = y-32;
+				    _facing_front = false;
+				} 
+				// Down-Left
+				else if (_move_down && _move_left) {
+				    _next_x = x-32;
+				    _next_y = y+32;
+				    _flip = -1;
+				} 
+				// Down-Right
+				else if (_move_down && _move_right) {
+				    _next_x = x+32;
+				    _next_y = y+32;
+				} 
+				// Up
+				else if (_move_up) {
+				    _next_y = y-32;
+				    _facing_front = false;
+				} 
+				// Left
+				else if (_move_left) {
+				    _next_x = x-32;
+				    _flip = -1;
+				} 
+				// Right
+				else if (_move_right) {
+				    _next_x = x+32;
+				} 
+				// Down
+				else if (_move_down)  {
+				    _next_y = y+32;
+				}
 				
 					show_debug_message("xtar: " + string(_next_x), + " ytar: " + string(_next_y));
 				
@@ -133,7 +118,7 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 					else {
 						//otherwise there is no wall or oneway, move!
 			            _target_x = _next_x;
-			            _target_y = _next_y
+			            _target_y = _next_y;
 			            _hop_start = false; 
 						_moving = true;
 			        }
@@ -172,7 +157,7 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 	
 		//attempt to spawn critter (10% chance)
 		var _randroll = irandom(100);
-		if (_randroll < 11){
+		if (_randroll < 10){
 			scr_spawn_critter();	
 		}
 	
@@ -196,20 +181,13 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 		if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
 				//spawn a transition if able to transition (20 steps)
 			if (global.step_count >= global.steps_rand && _flag_transition_start == false){
+				_flag_transition_start = true;
 				var _rand = irandom(100);
 				if (_rand > 50){
-					//trigger encounter (50% chance)
-					global.step_count = 0;
-					_flag_transition_start = true;
+					//trigger encounter (50% chance)	
+					global.steps_rand = irandom_range(10,15);
 					global.player_ow_state = PLAYER_OW_STATE.PAUSED;
-					_finish_move = false;
-					_moving = false;
 					scr_transition("encounter","Any","Any","Any");
-					_target_x = x;
-					_target_y = y;
-					 _next_x = x;
-					_next_y = y;
-					_move_speed = 0;
 				}
 			}			
 		}
@@ -229,7 +207,15 @@ break;
 
 #region Pause
 case PLAYER_OW_STATE.PAUSED: //lock all input (conversations, cutscenes, in encounter, calculating)
-
+	_flag_transition_start = false;
+	global.step_count = 0;
+	_finish_move = false;
+	_moving = false;					
+	_target_x = x;
+	_target_y = y;
+		_next_x = x;
+	_next_y = y;
+	_move_speed = 0;	
 break;
 #endregion
 	}
