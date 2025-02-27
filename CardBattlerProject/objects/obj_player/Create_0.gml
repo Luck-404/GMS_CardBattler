@@ -28,6 +28,7 @@ _hop_dx = 0;
 _hop_dy = 0;
 global.step_count = 0;
 global.steps_rand = irandom_range(10,15);
+_counter_particles = 0;
 _moving = false;
 _finish_move = false;
 _move_left = 0;
@@ -62,14 +63,13 @@ _flag_created_camera = false;
 global._camera = undefined;
 
 _flag_transition_start = false; //HAVE I STARTED A TRANSITION
-_counter_particles = 0;
+
 
 //encounter state enumerator
 enum PLAYER_ENCOUNTER_STATE {
 	INIT,
 	BEGIN_TURN,
 	MINIONS_CAST,
-	SHUFFLING,
 	DRAW,
 	PICK_CARD,
 	PICK_CHANNEL,

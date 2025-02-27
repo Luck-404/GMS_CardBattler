@@ -19,28 +19,35 @@ switch (global.player_ow_state){
 case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions with NPCs/Treasures)
 
 	//NPC gui- hosted in-object (send to interact (TODO))
-	//Treasures- hosted in-object (send to interact (TODO))
-	//Shop gui - hosted in-object (send to interact (TODO))
+	//Treasures- hosted in-object (send to interact-- need a timer for the 'zelda hold up' effect) (TODO)
+	//Shop gui - hosted in-object (send to interact)
 	
-	/////////////////////
-	// SHIFT TO SPRINT //
-	/////////////////////
-	if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
-		_move_speed = 4;
-	} else if (room != rm_encounter && _flag_transition_start == false) {
-		_move_speed = 3;	
+	if (global.flag_gui_open == true){
+		_move_speed = 0;
+	}
+	else {
+		/////////////////////
+		// SHIFT TO SPRINT //
+		/////////////////////
+		if (room != rm_encounter && _flag_transition_start == false && (keyboard_check(vk_lshift) == true)){
+			_move_speed = 4;
+		} else if (room != rm_encounter && _flag_transition_start == false) {
+			_move_speed = 3;	
+		}
 	}
 	
+
 	////////////////
 	// CHECK MOVE //
 	////////////////
 	#region Check Move
+	if (_move_speed != 0){
 	_move_left  = keyboard_check(ord("A"));
 	_move_right = keyboard_check(ord("D"));
 	_move_up    = keyboard_check(ord("W"));
 	_move_down  = keyboard_check(ord("S"));		
 		//get move input
-		if (_moving == false) {
+		if (_moving == false && (_move_left != 0 || _move_right != 0 || _move_up != 0 || _move_down != 0)){
 
 			    // Determine movement direction
 			    var _next_x = x;
@@ -97,8 +104,6 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 				    _next_y = y+32;
 				}
 				
-					show_debug_message("xtar: " + string(_next_x), + " ytar: " + string(_next_y));
-				
 				// Apply movement and sprite settings
 				if (_next_x != x || _next_y != y) {
 				    image_speed = 1;
@@ -152,6 +157,7 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 	////////////////////
 	#region Move End
 	if (_finish_move == true){
+		_finish_move = false;	
 		image_speed = 0;
 		global.step_count++;
 	
@@ -181,27 +187,32 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 		if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
 				//spawn a transition if able to transition (20 steps)
 			if (global.step_count >= global.steps_rand && _flag_transition_start == false){
-				_flag_transition_start = true;
 				var _rand = irandom(100);
-				if (_rand > 50){
-					//trigger encounter (50% chance)	
+				show_debug_message("TRYING ENCOUNTER" + string(_rand));				
+				if (_rand > 50){ //trigger encounter (50% chance)	
+					_flag_transition_start = true;
 					global.steps_rand = irandom_range(10,15);
 					global.player_ow_state = PLAYER_OW_STATE.PAUSED;
 					scr_transition("encounter","Any","Any","Any");
 				}
 			}			
 		}
-		_finish_move = false;
 		_moving = false;
 	}
 	#endregion
-
+	}
 break;
 #endregion
 
 #region Interaction
 case PLAYER_OW_STATE.INTERACT: //lock all input (conversations, cutscenes, in encounter, calculating)
-
+	_finish_move = false;
+	_moving = false;					
+	_target_x = x;
+	_target_y = y;
+	_next_x = x;
+	_next_y = y;
+	_move_speed = 0;
 break;
 #endregion
 
@@ -213,7 +224,7 @@ case PLAYER_OW_STATE.PAUSED: //lock all input (conversations, cutscenes, in enco
 	_moving = false;					
 	_target_x = x;
 	_target_y = y;
-		_next_x = x;
+	_next_x = x;
 	_next_y = y;
 	_move_speed = 0;	
 break;
@@ -226,70 +237,286 @@ break;
 ////////////////////
 if (room == rm_encounter){
 	switch(global.player_enc_state){
-		case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
-		break;
-		case PLAYER_ENCOUNTER_STATE.BEGIN_TURN: //TURN BEGINS, PLAY TURN BEGIN EFFECTS
-		break;		
-		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
-		break;	
-		case PLAYER_ENCOUNTER_STATE.SHUFFLING: //SHUFFLE YOUR DECK, SHUFFLE ENEMY DECKS
-		break;
-		case PLAYER_ENCOUNTER_STATE.DRAW: //DRAW YOUR CARDS, DRAW ENEMY CARDS
-		break;		
-		case PLAYER_ENCOUNTER_STATE.PICK_CARD: //STAY HERE WAITNIG FOR INPUT (CARD CLICKED ON), ALSO COUNTS AS IDLE (CAN DO OPTIONS MENU STUFF)
-		break;		
-		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
-		break;
-		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
-		break;
-		case PLAYER_ENCOUNTER_STATE.CASTING: //SPELL EXECUTES, EFFECTS TRIGGER
-		break;
-		case PLAYER_ENCOUNTER_STATE.END_TURN: //END TURN EFFECTS TRIGGER AND PASES THE TURN TO THE ENEMY
-		break;		
-		case PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE: //IDLE HERE WHILE ENEMY GOES
-		break;		
-		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter
-		break;				
-		case PLAYER_ENCOUNTER_STATE.PAUSE: //be in this state when obj_player goes back to OW
-		break;
-	}
-	//if (_flag_deck_created == false){ //CREATE THE DECK
-	
-	//	instance_create_layer(x,y,"GUI",obj_deck_handler);
+		#region INIT
+			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
 		
-	//	_flag_deck_created = true;
-	//}
-	
-	////spawn enemy units ONCE	
-	//if (_flag_party_spawned == false){
-	//	for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
-	//		//spawn the creature
-	//		var _ref_creature = ds_list_find_value(global.player_team, _i);
-	//		var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
-	//		//pass the creature the proper stats it needs
-	//		_ref_creature_instance._creature_name = _ref_creature[? "name"];
-	//		_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
-	//		_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
-	//		_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
-	//		_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
-	//		_ref_creature_instance._creature_team = _ref_creature[? "team"];
-	//		_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
-	//		_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
-	//		_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
-	//		_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
-	//		_ref_creature_instance._creature_class = _ref_creature[? "class"];
-	//		_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
-	//		_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
-	//		_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
-	//		_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
-	//		_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
+			////////////////
+			// SPAWN TEAM //
+			////////////////
+				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
+					//spawn the creature
+					var _ref_creature = ds_list_find_value(global.player_team, _i);
+					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
+					//pass the creature the proper stats it needs
+					_ref_creature_instance._creature_name = _ref_creature[? "name"];
+					_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
+					_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
+					_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
+					_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
+					_ref_creature_instance._creature_team = _ref_creature[? "team"];
+					_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
+					_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
+					_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
+					_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
+					_ref_creature_instance._creature_class = _ref_creature[? "class"];
+					_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
+					_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
+					_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
+					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
+					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
 			
-	//		ds_list_add(global.player_team_in_play, _ref_creature_instance);
-	//		_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
-	//	}
-	//	_flag_party_spawned = true;
+					ds_list_add(global.player_team_in_play, _ref_creature_instance);
+					_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
+				}
 
+			////////////////////////////
+			// ON-ENCOUNTER BLESSINGS //
+			////////////////////////////
+		
+			//PASS
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;
+		break;
+		#endregion
+		
+		
+		
+		#region BEGIN TURN
+		case PLAYER_ENCOUNTER_STATE.BEGIN_TURN: //TURN BEGINS, PLAY TURN BEGIN EFFECTS
+			//////////////////////////////////////
+			// DECREMENT SHIELDS FROM LAST TURN //
+			//////////////////////////////////////
+				//only if not turn 1
+				
+			////////////////////////////////
+			// TRIGGER BEGIN TURN EFFECTS //
+			////////////////////////////////
+				//Util
+				
+				//Buffs
+				
+				//Debuffs
+				
+				//CC
+				
+				//DoTs
+				
+			//PASS
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.MINIONS_CAST;				
+		break;		
+		#endregion
+		
+		
+		
+		#region Minions Cast
+		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
+			//tell each minion to execute their casting script
+				//for each ally creature
+					//for each ally minion
+					
+			//PASS
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.DRAW;							
+		break;	
+		#endregion
+		
+		
+		
+		#region DRAW
+		case PLAYER_ENCOUNTER_STATE.DRAW: //DRAW YOUR CARDS, DRAW ENEMY CARDS
+		/////////////////////
+		// DRAW USER CARDS //
+		/////////////////////
+			//see how many cards are in my hand
+			//see how many cards I can draw
+				//draw as many as I can
+				//take all cards from my discard and place them into my hand
+				//shuffle the list
+				//draw the remaining cards
+				
+		//////////////////////
+		// DRAW ENEMY CARDS //
+		//////////////////////				
+			//draw enemy's cards
+				//for each enemy in enemy_list
+				//grab a card from their hand pool, have it as a variable
+				//spawn a enemy_card_object, draws itself, can show info on hover in pick_card
 			
-	//	var _enemy_team = instance_create_layer(960, 540, "GUI", obj_enemy_team); //generate the enemy team						
-	//}
+			//PASS
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;							
+		break;		
+		#endregion
+		
+		
+		
+		#region PICK CARD	
+		case PLAYER_ENCOUNTER_STATE.PICK_CARD: //STAY HERE WAITNIG FOR INPUT (CARD CLICKED ON), ALSO COUNTS AS IDLE (CAN DO OPTIONS MENU STUFF)
+		///////////////////
+		// HOVER EFFECTS //
+		///////////////////	
+			//Cards (user hand and enemy prepped)
+				//user cards- make slightly larger
+				//enemy- name, dmg, type, etc
+			//Allies
+			//Enemies
+			//minions (ally and enemy)
+
+
+		//////////////
+		// END TURN //
+		//////////////
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
+			
+		/////////////////
+		// SELECT CARD //
+		/////////////////
+			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
+			//if usable
+				//click on a card object
+				//once a card is selected PASS
+					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;		
+			//if not usable- grey out- play err and shake slightly if they try to click it
+		break;		
+		#endregion		
+		
+		
+		
+		#region PICK CHANNEL
+		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
+		////////////////
+		// TARGETLESS //
+		////////////////		
+		//if card is targetless, send to pick target to cast
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
+				
+		///////////////////
+		// HOVER EFFECTS //
+		///////////////////	
+			//Cards (user hand and enemy prepped)
+				//user cards- make slightly larger
+				//enemy- name, dmg, type, etc
+			//Allies
+			//Enemies
+			//minions (ally and enemy)		
+			
+		/////////////////////
+		// HIGHLIGHT UNITS //
+		/////////////////////	
+			//based on the card, highlight ally units that fit the criteria
+
+					
+		//////////////
+		// END TURN //
+		//////////////
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
+			
+		////////////////////////
+		// ESC OR RIGHT CLICK //
+		////////////////////////			
+			//esc/right click sends back to "pick card"
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+				
+		////////////////////
+		// SELECT CHANNEL //
+		////////////////////			
+		//select unit to cast through - err noise on improper units
+			//once a card is selected PASS
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;	
+		break;
+		#endregion
+		
+		
+		
+		#region PICK TARGET
+		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
+			//////////////
+			// END TURN //
+			//////////////
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;			
+			
+			////////////////
+			// TARGETLESS //
+			////////////////
+			//if targetless, prompt to click anywhere
+				//if targetless esc is pressed, send back to pick card 
+					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+				//if clicked- cast te spell, send back to pick card
+					//script_execute()
+					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+					
+			////////////////////////
+			// ESC OR RIGHT CLICK //
+			////////////////////////			
+				//esc/right click sends back to "pick channel"
+					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;		
+					
+			///////////////////
+			// SELECT TARGET //
+			////////////////////
+			//pick any target creature (ally or enemy, unless specific) to cast on.
+				//if melee, limit to the front unit
+
+				//Ally
+				
+				//Enemy
+					
+				//Any
+			
+			
+					//when a target is clicked, send to next phase (CASTING-effects, mana decrement, etc-HANDLED IN SCRIPTS THEMSEVLES
+						//script_execute()
+						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+		break;
+		#endregion
+		
+		
+		
+		#region END TURN
+		case PLAYER_ENCOUNTER_STATE.END_TURN: //END TURN EFFECTS TRIGGER AND PASES THE TURN TO THE ENEMY
+			//////////////////////////////
+			// TRIGGER END TURN EFFECTS //
+			//////////////////////////////
+				//
+				//
+				//
+				
+			//PASS
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE;	
+		break;		
+		#endregion
+		
+		
+		
+		#region ENEMY TURN IDLE
+		case PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE: //IDLE HERE WHILE ENEMY GOES
+		
+		break;		
+		#endregion
+		
+		
+		
+		#region EXIT ENC
+		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter
+			
+			//Cleanup field- delete enemies
+			//Put cards back into deck (from exhaust and discard)
+			//Put any dead allies into graveyard
+			//Update any allies health, markings gain
+			
+			//confirm object
+			//Give out rewards:
+				//Markings gained
+				//Gold
+				//Cards
+				
+			// hosts the player encounter state/ow state flipping (enc goes paused, ow goes active)
+		break;				
+		#endregion
+		
+		
+		
+		#region PAUSE
+		case PLAYER_ENCOUNTER_STATE.PAUSE: //be in this state when obj_player goes back to OW
+		
+		break;
+		#endregion
+	}
 }

@@ -131,6 +131,7 @@ if (room != rm_main_menu){
 	/////////////////////////////////////////
 	if (keyboard_check_pressed(vk_escape)){
 		 if (global.flag_gui_open == false){
+			 global.player_ow_state == PLAYER_OW_STATE.INTERACT;
 			 obj_player._move_speed = 0;
 			 //CREATE THE OPTIONS MENU		 
 			instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);
@@ -145,7 +146,7 @@ if (room != rm_main_menu){
 				instance_destroy(obj_gui_options);
 			}
 			obj_player._move_speed = 3;
-			
+			global.player_ow_state = PLAYER_OW_STATE.GENERAL;
 			//UPDATE GLOBAL
 			global.flag_gui_open = false;
 		 }

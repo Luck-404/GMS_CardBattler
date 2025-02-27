@@ -4,14 +4,18 @@
 // > WHEN A PLAYER PRESSES 'E', SHOW THE DISPLAY.					//
 //////////////////////////////////////////////////////////////////////
 if (instance_exists(obj_player) && global.player_ow_state == PLAYER_OW_STATE.GENERAL && distance_to_object(obj_player) < 64 && keyboard_check_pressed(ord("E"))) {
-    global.graveyard_gui_open = !global.graveyard_gui_open;
-    obj_player._move_speed = global.graveyard_gui_open ? 0 : 4;
+    global.flag_gui_open = !global.flag_gui_open;
+	global.player_ow_state == PLAYER_OW_STATE.INTERACT;
+	_interacted = true;
+    obj_player._move_speed = global.flag_gui_open ? 0 : 3;
 }
 
-if (global.graveyard_gui_open) {
-    if (keyboard_check_pressed(vk_escape)) {
-        global.graveyard_gui_open = false;
-        obj_player._move_speed = 4;
+if (global.flag_gui_open && _interacted == true) {
+    if (keyboard_check_pressed(vk_escape)) {	
+		_interacted = false;
+		global.player_ow_state = PLAYER_OW_STATE.GENERAL;
+        global.flag_gui_open = false;
+        obj_player._move_speed = 3;
     }
 
     // Background
