@@ -206,6 +206,10 @@ break;
 
 #region Interaction
 case PLAYER_OW_STATE.INTERACT: //lock all input (conversations, cutscenes, in encounter, calculating)
+	//sent here from NPCS (TODO)
+	//sent here from Treasures (TODO)
+	//sent here from shops
+	//sent here from options menu
 	_finish_move = false;
 	_moving = false;					
 	_target_x = x;
@@ -248,6 +252,7 @@ if (room == rm_encounter){
 					var _ref_creature = ds_list_find_value(global.player_team, _i);
 					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
 					//pass the creature the proper stats it needs
+					_ref_creature_instance._position_in_team = _i;
 					_ref_creature_instance._creature_name = _ref_creature[? "name"];
 					_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
 					_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
@@ -264,15 +269,30 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
-			
 					ds_list_add(global.player_team_in_play, _ref_creature_instance);
 					_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
 				}
+				
+				//apply unit 'lefts' and 'rights'
+				//TODO
+					if (_i = 0){
+						_ref_creature_instance._left_unit = undefined;
+					}
+					else {
+						_ref_creature_instance._left_unit = ds_list_find_index(global.player_team);
+					}
+					if (_i = 4){					
+						_ref_creature_instance._right_unit = undefined;		
+					}
+					else {
+						_ref_creature_instance._right_unit = ds_list_find_index(global.player_team);;	
+					}
 
 			////////////////////////////
 			// ON-ENCOUNTER BLESSINGS //
 			////////////////////////////
-		
+				//TODO
+				
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;
 		break;
@@ -286,20 +306,33 @@ if (room == rm_encounter){
 			// DECREMENT SHIELDS FROM LAST TURN //
 			//////////////////////////////////////
 				//only if not turn 1
+				if (global.turn_count != 1){
+					//for each unit in player's party
+					for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
+						var _unit = ds_list_find_value(global.player_team, _i);
+						//if the unit has a shield, halve it- diff amounts for different classes
+						scr_decrement_shield(_unit); //TODO
+					}
+				}
 				
 			////////////////////////////////
 			// TRIGGER BEGIN TURN EFFECTS //
 			////////////////////////////////
-				//Util
+				//for each unit in player's party
+				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
+					var _unit = ds_list_find_value(global.player_team, _i);
+					scr_trigger_turn_effects(_unit);
+					//Util
 				
-				//Buffs
+					//Buffs
 				
-				//Debuffs
+					//Debuffs
 				
-				//CC
+					//CC
 				
-				//DoTs
-				
+					//DoTs
+				}			
+
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.MINIONS_CAST;				
 		break;		
@@ -310,9 +343,13 @@ if (room == rm_encounter){
 		#region Minions Cast
 		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
 			//tell each minion to execute their casting script
-				//for each ally creature
-					//for each ally minion
-					
+				//for each unit in player's party
+				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
+					var _unit = ds_list_find_value(global.player_team, _i);
+					//triggers each ally minion in order (1-5), if they have at least one
+					scr_trigger_minions(_unit);
+				}
+
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.DRAW;							
 		break;	
@@ -326,20 +363,58 @@ if (room == rm_encounter){
 		// DRAW USER CARDS //
 		/////////////////////
 			//see how many cards are in my hand
+			var _cards_in_deck = ds_list_size(global.card_inventory);
 			//see how many cards I can draw
-				//draw as many as I can
-				//take all cards from my discard and place them into my hand
-				//shuffle the list
-				//draw the remaining cards
+			var _amount_to_draw = global.hand_size;
+			var _extra = _cards_in_deck - _amount_to_draw;
+			
+			if (_extra > 0){
+				//draw the cards normally
+				scr_draw_cards(global.hand_size); //also adds cards to current hand
+			}
+			else if (_extra == 0){
+				//draw cards normally
+				scr_draw_cards(global.hand_size); //also adds cards to current hand
+				//shuffle discard into deck
+				scr_shuffle();
+			}
+			else {
+				var _diff = abs(_extra);
+				var _first_draw = _amount_to_draw - _diff;
+				//draw the first amount of cards (_first_draw)
+				scr_draw_cards(_first_draw); //also adds cards to current hand
+				//shuffle discard into the deck
+				scr_shuffle();
+				//draw second amount of cards (_diff)
+				scr_draw_cards(_diff); //also adds cards to current hand
+			}
 				
 		//////////////////////
 		// DRAW ENEMY CARDS //
 		//////////////////////				
 			//draw enemy's cards
-				//for each enemy in enemy_list
-				//grab a card from their hand pool, have it as a variable
-				//spawn a enemy_card_object, draws itself, can show info on hover in pick_card
-			
+			//for each enemy in enemy_list
+			for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){
+					var _unit = ds_list_find_value(global.enemy_team, _i);
+					var _unit_deck = _unit._deck;
+					var _unit_discard = _unit._discard;
+					
+					//grab a card from their hand pool, have it as a variable
+					if (ds_list_size(_unit_deck) > 1){
+						var _card = ds_list_find_value(_unit_deck,0);
+						scr_init_enemy_card(_card); //spawn a enemy_card_object, draws itself, can show info on hover in pick_card
+					}
+					
+					else if (ds_list_size(_unit_deck) == 1){
+						//draw a card normally
+						var _card = ds_list_find_value(_unit_deck,0);
+						scr_init_enemy_card(_card); //spawn a enemy_card_object, draws itself, can show info on hover in pick_card
+						
+						//reshuffle their discard pile into their hand for next turn to use
+						scr_shuffle_enemy_deck(_unit_deck,_unit_discard);
+					}
+				}
+				
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;							
 		break;		
@@ -352,28 +427,56 @@ if (room == rm_encounter){
 		///////////////////
 		// HOVER EFFECTS //
 		///////////////////	
-			//Cards (user hand and enemy prepped)
+			//TODO
+			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
 				//user cards- make slightly larger
 				//enemy- name, dmg, type, etc
-			//Allies
-			//Enemies
-			//minions (ally and enemy)
+			//Allies //handled by obj_creature
+			//Enemies //handled by obj_creature
+			//minions (ally and enemy) //handled by obj_minion
 
 
 		//////////////
 		// END TURN //
 		//////////////
+		if (position_meeting(mouse_x, mouse_y, obj_end_turn) && mouse_check_button_pressed(mb_left)){
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
+		}
 			
 		/////////////////
 		// SELECT CARD //
 		/////////////////
 			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
-			//if usable
+				for (var _i = 0; _i < ds_list_size(global.current_hand); _i++){
+					var _card = ds_list_find_value(global.current_hand, _i);
+					var _flag_usability == scr_check_usability(_card);
+					//if usable
+					_card_active = _flag_usability;
+						//cards draw greyed or not depending on usability
+				}
 				//click on a card object
-				//once a card is selected PASS
-					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;		
-			//if not usable- grey out- play err and shake slightly if they try to click it
+				if (position_meeting(mouse_x, mouse_y, obj_card) && mouse_check_button_pressed(mb_left)){
+					var _card = instance_nearest(mouse_x, mouse_y, obj_card);
+					if (_card_active != false){
+						//unselect all cards
+						with(obj_card){
+							_card._selected = false;
+						}
+						//reset user card selection
+						_card_selected = undefined;
+					
+						//select new card
+						_card._selected = true;
+						_card_selected = _card;
+					
+						//once a card is selected PASS
+						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;
+					}
+					else {
+						//if not usable- grey out- play err and shake slightly if they try to click it
+					}
+				}
+
 		break;		
 		#endregion		
 		
@@ -385,21 +488,24 @@ if (room == rm_encounter){
 		// TARGETLESS //
 		////////////////		
 		//if card is targetless, send to pick target to cast
+		if (_card_selected[?"Target"] = "Targetless"){
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
+		}
 				
 		///////////////////
 		// HOVER EFFECTS //
 		///////////////////	
-			//Cards (user hand and enemy prepped)
+			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
 				//user cards- make slightly larger
 				//enemy- name, dmg, type, etc
-			//Allies
-			//Enemies
-			//minions (ally and enemy)		
+			//Allies //handled by obj_creature
+			//Enemies //handled by obj_creature
+			//minions (ally and enemy) //handled by obj_minion
 			
 		/////////////////////
 		// HIGHLIGHT UNITS //
 		/////////////////////	
+		for (_
 			//based on the card, highlight ally units that fit the criteria
 
 					
@@ -430,7 +536,17 @@ if (room == rm_encounter){
 			//////////////
 			// END TURN //
 			//////////////
-				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;			
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
+				
+			///////////////////
+			// HOVER EFFECTS //
+			///////////////////					
+			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
+				//user cards- make slightly larger
+				//enemy- name, dmg, type, etc
+			//Allies //handled by obj_creature
+			//Enemies //handled by obj_creature
+			//minions (ally and enemy) //handled by obj_minion	
 			
 			////////////////
 			// TARGETLESS //
@@ -440,6 +556,7 @@ if (room == rm_encounter){
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 				//if clicked- cast te spell, send back to pick card
 					//script_execute()
+					//put card into discard pile
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 					
 			////////////////////////
@@ -463,6 +580,7 @@ if (room == rm_encounter){
 			
 					//when a target is clicked, send to next phase (CASTING-effects, mana decrement, etc-HANDLED IN SCRIPTS THEMSEVLES
 						//script_execute()
+						//put card into discard pile
 						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 		break;
 		#endregion
@@ -478,6 +596,8 @@ if (room == rm_encounter){
 				//
 				//
 				
+			//empty hand into discard pile
+			
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE;	
 		break;		
