@@ -252,7 +252,6 @@ if (room == rm_encounter){
 					var _ref_creature = ds_list_find_value(global.player_team, _i);
 					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
 					//pass the creature the proper stats it needs
-					_ref_creature_instance._position_in_team = _i;
 					_ref_creature_instance._creature_name = _ref_creature[? "name"];
 					_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
 					_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
@@ -270,22 +269,15 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
 					ds_list_add(global.player_team_in_play, _ref_creature_instance);
-					_ref_creature_instance._creature_position = ds_list_find_index(global.player_team_in_play,_ref_creature_instance);
+					_ref_creature_instance._creature_position = _i;
 				}
 				
 				//apply unit 'lefts' and 'rights'
 				//TODO
-					if (_i = 0){
-						_ref_creature_instance._left_unit = undefined;
-					}
-					else {
-						_ref_creature_instance._left_unit = ds_list_find_index(global.player_team);
-					}
-					if (_i = 4){					
-						_ref_creature_instance._right_unit = undefined;		
-					}
-					else {
-						_ref_creature_instance._right_unit = ds_list_find_index(global.player_team);;	
+				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){		
+					var _ref_creature = ds_list_find_value(global.player_team, _i);
+						_ref_creature._left_unit = undefined;
+						_ref_creature._right_unit = undefined;	
 					}
 
 			////////////////////////////
