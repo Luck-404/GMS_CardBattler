@@ -438,15 +438,12 @@ if (room == rm_encounter){
 		
 		#region PICK CARD	
 		case PLAYER_ENCOUNTER_STATE.PICK_CARD: //STAY HERE WAITNIG FOR INPUT (CARD CLICKED ON), ALSO COUNTS AS IDLE (CAN DO OPTIONS MENU STUFF)
+		if (global.flag_gui_open == false){
 		///////////////////
 		// HOVER EFFECTS //
 		///////////////////	
-			//TODO
 			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
-				//user cards- make slightly larger
-				//enemy- name, dmg, type, etc
-			//Allies //handled by obj_creature
-			//Enemies //handled by obj_creature
+			//Allies & Enemies //handled by obj_creature
 			//minions (ally and enemy) //handled by obj_minion
 
 
@@ -490,7 +487,7 @@ if (room == rm_encounter){
 						//if not usable- grey out- play err and shake slightly if they try to click it
 					}
 				}
-
+		}
 		break;		
 		#endregion		
 		
@@ -498,6 +495,7 @@ if (room == rm_encounter){
 		
 		#region PICK CHANNEL
 		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
+		if (global.flag_gui_open == false){
 		////////////////
 		// TARGETLESS //
 		////////////////		
@@ -510,10 +508,7 @@ if (room == rm_encounter){
 		// HOVER EFFECTS //
 		///////////////////	
 			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
-				//user cards- make slightly larger
-				//enemy- name, dmg, type, etc
-			//Allies //handled by obj_creature
-			//Enemies //handled by obj_creature
+			//Allies & Enemies //handled by obj_creature
 			//minions (ally and enemy) //handled by obj_minion
 			
 		/////////////////////
@@ -540,6 +535,7 @@ if (room == rm_encounter){
 		//select unit to cast through - err noise on improper units
 			//once a card is selected PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;	
+		}
 		break;
 		#endregion
 		
@@ -547,6 +543,7 @@ if (room == rm_encounter){
 		
 		#region PICK TARGET
 		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
+			if (global.flag_gui_open == false){
 			//////////////
 			// END TURN //
 			//////////////
@@ -556,11 +553,8 @@ if (room == rm_encounter){
 			// HOVER EFFECTS //
 			///////////////////					
 			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
-				//user cards- make slightly larger
-				//enemy- name, dmg, type, etc
-			//Allies //handled by obj_creature
-			//Enemies //handled by obj_creature
-			//minions (ally and enemy) //handled by obj_minion	
+			//Allies & Enemies //handled by obj_creature
+			//minions (ally and enemy) //handled by obj_minion
 			
 			////////////////
 			// TARGETLESS //
@@ -596,6 +590,7 @@ if (room == rm_encounter){
 						//script_execute()
 						//put card into discard pile
 						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+			}
 		break;
 		#endregion
 		
