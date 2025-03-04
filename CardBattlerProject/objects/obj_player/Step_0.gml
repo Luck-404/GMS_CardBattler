@@ -461,14 +461,17 @@ if (room == rm_encounter){
 				for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
 					var _card = ds_list_find_value(global.player_hand, _i);
 					var _flag_usability = scr_check_usability(_card);
-					//if usable
-					_card_active = _flag_usability;
-						//cards draw greyed or not depending on usability
+					if (_flag_usability == true){
+						_card._active = true;
+					} else {
+						_card._active = false;
+					}
+					//cards draw greyed or not depending on usability
 				}
 				//click on a card object
 				if (position_meeting(mouse_x, mouse_y, obj_card) && mouse_check_button_pressed(mb_left)){
 					var _card = instance_nearest(mouse_x, mouse_y, obj_card);
-					if (_card_active != false){
+					if (_card._active != false){
 						//unselect all cards
 						with(obj_card){
 							_card._selected = false;
@@ -485,6 +488,9 @@ if (room == rm_encounter){
 					}
 					else {
 						//if not usable- grey out- play err and shake slightly if they try to click it
+						//TODO
+						//SHAKE
+						//ERR NOISE
 					}
 				}
 		}
@@ -500,7 +506,7 @@ if (room == rm_encounter){
 		// TARGETLESS //
 		////////////////		
 		//if card is targetless, send to pick target to cast
-		if (_card_selected[?"Target"] = "Targetless"){
+		if (_card_selected[?"target"] = "Targetless"){
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
 		}
 				
@@ -514,15 +520,25 @@ if (room == rm_encounter){
 		/////////////////////
 		// HIGHLIGHT UNITS //
 		/////////////////////	
-		for (_
+		for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+			var _unit = ds_list_find_value(global.player_party_in_play, _i);
 			//based on the card, highlight ally units that fit the criteria
-
+			var _check_channel = scr_check_chanellability(_unit);
+			
+			if(_check_channel == true){
+			_unit._active = true;
+			} else {
+			_unit._active = false;	
+			}
+		}
 					
 		//////////////
 		// END TURN //
 		//////////////
+		if (position_meeting(mouse_x, mouse_y, obj_end_turn) && mouse_check_button_pressed(mb_left)){
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
-			
+		}
+		
 		////////////////////////
 		// ESC OR RIGHT CLICK //
 		////////////////////////			
@@ -543,54 +559,55 @@ if (room == rm_encounter){
 		
 		#region PICK TARGET
 		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
-			if (global.flag_gui_open == false){
-			//////////////
-			// END TURN //
-			//////////////
-				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
-				
-			///////////////////
-			// HOVER EFFECTS //
-			///////////////////					
-			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
-			//Allies & Enemies //handled by obj_creature
-			//minions (ally and enemy) //handled by obj_minion
+		if (global.flag_gui_open == false){
+		//////////////
+		// END TURN //
+		//////////////
+		if (position_meeting(mouse_x, mouse_y, obj_end_turn) && mouse_check_button_pressed(mb_left)){
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
+		}
+		///////////////////
+		// HOVER EFFECTS //
+		///////////////////					
+		//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
+		//Allies & Enemies //handled by obj_creature
+		//minions (ally and enemy) //handled by obj_minion
 			
-			////////////////
-			// TARGETLESS //
-			////////////////
-			//if targetless, prompt to click anywhere
-				//if targetless esc is pressed, send back to pick card 
-					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
-				//if clicked- cast te spell, send back to pick card
+		////////////////
+		// TARGETLESS //
+		////////////////
+		//if targetless, prompt to click anywhere
+			//if targetless esc is pressed, send back to pick card 
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+			//if clicked- cast te spell, send back to pick card
+				//script_execute()
+				//put card into discard pile
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+					
+		////////////////////////
+		// ESC OR RIGHT CLICK //
+		////////////////////////			
+			//esc/right click sends back to "pick channel"
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;		
+					
+		///////////////////
+		// SELECT TARGET //
+		////////////////////
+		//pick any target creature (ally or enemy, unless specific) to cast on.
+			//if melee, limit to the front unit
+
+			//Ally
+				
+			//Enemy
+					
+			//Any
+			
+			
+				//when a target is clicked, send to next phase (CASTING-effects, mana decrement, etc-HANDLED IN SCRIPTS THEMSEVLES
 					//script_execute()
 					//put card into discard pile
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
-					
-			////////////////////////
-			// ESC OR RIGHT CLICK //
-			////////////////////////			
-				//esc/right click sends back to "pick channel"
-					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;		
-					
-			///////////////////
-			// SELECT TARGET //
-			////////////////////
-			//pick any target creature (ally or enemy, unless specific) to cast on.
-				//if melee, limit to the front unit
-
-				//Ally
-				
-				//Enemy
-					
-				//Any
-			
-			
-					//when a target is clicked, send to next phase (CASTING-effects, mana decrement, etc-HANDLED IN SCRIPTS THEMSEVLES
-						//script_execute()
-						//put card into discard pile
-						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
-			}
+		}
 		break;
 		#endregion
 		

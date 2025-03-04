@@ -31,7 +31,7 @@ for (var _i = 0; _i < _var_hand_size; _i++) {
 	// CHECKS FOR PLAYABILITY - GREYS CARDS OUT //
 	//////////////////////////////////////////////
     // Check if the card can be played (check mana)
-    var _flag_can_play = global.cur_max_mana  >= _ref_card[? "cost"];
+    var _flag_can_play = global.cur_mana  >= _ref_card[? "cost"];
 
     // If not enough mana, grey out the card and make it unselectable
     var _card_color = _flag_can_play ? c_white : c_gray;  // Grey out the card if not enough mana
@@ -199,7 +199,7 @@ if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
 ///////////////////////
 // DRAW HUD ELEMENTS //
 ///////////////////////
-draw_text(100, 100, "Mana: " + string(global.cur_max_mana ) + "/" + string(global.max_mana));
+draw_text(100, 100, "Mana: " + string(global.cur_mana ) + "/" + string(global.max_mana));
 draw_text(1620, 100, "Cards in hand: " + string(_var_hand_size));
 draw_text(1620, 150, "Cards in deck: " + string(ds_list_size(global.player_deck)));
 draw_text(1620, 200, "Cards exhausted: " + string(ds_list_size(global.player_exhaust_pile)));

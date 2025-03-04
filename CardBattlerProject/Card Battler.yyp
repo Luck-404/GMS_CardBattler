@@ -131,6 +131,7 @@
     {"id":{"name":"obj_gui_options","path":"objects/obj_gui_options/obj_gui_options.yy",},},
     {"id":{"name":"spr_mercenary_shop","path":"sprites/spr_mercenary_shop/spr_mercenary_shop.yy",},},
     {"id":{"name":"spr_ts_grass","path":"sprites/spr_ts_grass/spr_ts_grass.yy",},},
+    {"id":{"name":"scr_check_chanellability","path":"scripts/scr_check_chanellability/scr_check_chanellability.yy",},},
     {"id":{"name":"scr_load_blessing","path":"scripts/scr_load_blessing/scr_load_blessing.yy",},},
     {"id":{"name":"spr_effect_grow_manavine_repeat","path":"sprites/spr_effect_grow_manavine_repeat/spr_effect_grow_manavine_repeat.yy",},},
     {"id":{"name":"scr_init_loaded_player","path":"scripts/scr_init_loaded_player/scr_init_loaded_player.yy",},},

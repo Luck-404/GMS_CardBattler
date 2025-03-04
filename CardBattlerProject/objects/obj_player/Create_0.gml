@@ -42,6 +42,7 @@ global.player_deck = ds_list_create(); //create inventory
 global.player_hand = ds_list_create(); //create hand to hold in an encounter turn
 global.player_discard_pile = ds_list_create(); //create discard pile
 global.player_exhaust_pile = ds_list_create(); //create exhaust pile
+_card_selected = undefined;
 
 //creature stuff
 _flag_party_spawned = false;
@@ -49,6 +50,7 @@ global.player_party = ds_list_create();
 global.player_party_in_play = ds_list_create(); 
 global.player_party_dead = ds_list_create();
 global.graveyard = ds_list_create(); 
+_target_selected = undefined;
 
 //blessings
 global.player_blessings_list = ds_list_create();
@@ -60,7 +62,7 @@ global.cur_hand_size = global.max_hand_size;
 
 global.max_mana_saved = 3;
 global.max_mana = 3;
-global.cur_max_mana = 3;
+global.cur_mana = 3;
 
 global.gold = 0;
 global.gold_randomizer = 0;

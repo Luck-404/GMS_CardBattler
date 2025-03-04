@@ -25,7 +25,7 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 			global.echo_count = 0;
 			global.echo = false;
 			//subract cost once
-			global.cur_max_mana  = global.cur_max_mana  - _card_cost;
+			global.cur_mana  = global.cur_mana  - _card_cost;
 		}
 				
 	}
@@ -38,7 +38,7 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 		// Execute the attached script of the card
 		_card_script(_target_creature);
 		//subract cost once
-		global.cur_max_mana  = global.cur_max_mana  - _card_cost;
+		global.cur_mana  = global.cur_mana  - _card_cost;
 	}
 	
 ///////////////

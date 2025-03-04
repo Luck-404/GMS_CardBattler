@@ -13,7 +13,8 @@ function scr_init_enemy_card(_ref_card,_ref_unit){
 		_ref_card_instance._card_target = _ref_card[? "target"];
 		_ref_card_instance._card_color = _ref_card[? "color"];
 		_ref_card_instance._card_type = _ref_card[? "type"];
-		_ref_card_instance._card_spec = _ref_card[? "spec"]
+		_ref_card_instance._card_spec_req = _ref_card[? "spec"]
+		_ref_card_instance._card_class_req = _ref_card[? "class"]
 		_ref_unit._card_selected = _ref_card_instance;
 		_ref_card_instance._unit = _ref_unit;
 }

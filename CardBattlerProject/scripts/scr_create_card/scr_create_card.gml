@@ -13,8 +13,8 @@ function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_c
     ds_map_add(_ref_new_card, "target", _target);
     ds_map_add(_ref_new_card, "color", _color);
     ds_map_add(_ref_new_card, "type", _type);
-    ds_map_add(_ref_new_card, "archespec", _archespec);
-    ds_map_add(_ref_new_card, "classspec", _classspec);	
+    ds_map_add(_ref_new_card, "spec", _archespec);
+    ds_map_add(_ref_new_card, "class", _classspec);	
     ds_map_add(_ref_new_card, "goldcost", _goldcost);
     ds_map_add(_ref_new_card, "exhausts", _exhaust);	
     return _ref_new_card;

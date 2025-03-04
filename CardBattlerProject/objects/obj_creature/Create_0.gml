@@ -25,6 +25,8 @@ _creature_attack_scalar = 1;
 _creature_attack_linear = 0;
 _turn_available = true;
 _creature_position = 0;
+_active = false;
+_selected = false;
 
 
 _deck = ds_list_create();
