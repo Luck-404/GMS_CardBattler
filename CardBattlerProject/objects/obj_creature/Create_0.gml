@@ -25,3 +25,8 @@ _creature_attack_scalar = 1;
 _creature_attack_linear = 0;
 _turn_available = true;
 _creature_position = 0;
+
+
+_deck = ds_list_create();
+_discard = ds_list_create();
+_card_selected = undefined;

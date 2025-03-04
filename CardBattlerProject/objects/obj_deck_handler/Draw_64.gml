@@ -11,12 +11,12 @@ var _card_height = 120;
 var _spacing = 150;  // Adjust this to control the spacing between cards
 
 // Calculate the dynamic x_offset based on the number of cards in hand
-var _var_hand_size = ds_list_size(global.current_hand);
+var _var_hand_size = ds_list_size(global.player_hand);
 var _x_offset = room_width / 2 - (_var_hand_size * _spacing) / 2;  // Center the cards dynamically
 
 // Draw each card in the hand
 for (var _i = 0; _i < _var_hand_size; _i++) {
-    var _ref_card = ds_list_find_value(global.current_hand, _i);
+    var _ref_card = ds_list_find_value(global.player_hand, _i);
     var _card_x_pos = _x_offset + _i * _spacing;  // Space the cards evenly across the bottom
     var _card_y_pos = room_height - _card_height - _spacing;
 
@@ -31,7 +31,7 @@ for (var _i = 0; _i < _var_hand_size; _i++) {
 	// CHECKS FOR PLAYABILITY - GREYS CARDS OUT //
 	//////////////////////////////////////////////
     // Check if the card can be played (check mana)
-    var _flag_can_play = global.current_mana >= _ref_card[? "cost"];
+    var _flag_can_play = global.cur_max_mana  >= _ref_card[? "cost"];
 
     // If not enough mana, grey out the card and make it unselectable
     var _card_color = _flag_can_play ? c_white : c_gray;  // Grey out the card if not enough mana
@@ -90,7 +90,7 @@ if (global.card_selected != undefined) {
 
     // Find the index of the selected card in the hand
     for (var _i = 0; _i < _var_hand_size; _i++) {
-        if (ds_list_find_value(global.current_hand, _i) == _ref_selected_card) {
+        if (ds_list_find_value(global.player_hand, _i) == _ref_selected_card) {
             _ref_selected_card_index = _i;
             break;
         }
@@ -199,10 +199,10 @@ if (keyboard_check_pressed(ord("D")) && global.card_selected == undefined) {
 ///////////////////////
 // DRAW HUD ELEMENTS //
 ///////////////////////
-draw_text(100, 100, "Mana: " + string(global.current_mana) + "/" + string(global.max_mana));
+draw_text(100, 100, "Mana: " + string(global.cur_max_mana ) + "/" + string(global.max_mana));
 draw_text(1620, 100, "Cards in hand: " + string(_var_hand_size));
-draw_text(1620, 150, "Cards in deck: " + string(ds_list_size(global.card_inventory)));
-draw_text(1620, 200, "Cards exhausted: " + string(ds_list_size(global.exhausted)));
+draw_text(1620, 150, "Cards in deck: " + string(ds_list_size(global.player_deck)));
+draw_text(1620, 200, "Cards exhausted: " + string(ds_list_size(global.player_exhaust_pile)));
 
 if (global.card_selected != undefined) {
     draw_text(room_width/2-100, 400, "Card selected: " + string(global.card_selected[? "name"]));

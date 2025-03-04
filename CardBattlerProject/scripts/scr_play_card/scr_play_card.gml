@@ -9,9 +9,9 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 		if (_card_script == scr_card_echo){	
 			global.echo_count +=1;
 			//show_debug_message("!!=== SCR_PLAY_CARD: ECHO COUNTER INCREASED BY 1, NOW..." + string(global.echo_count) +" ===!!");		
-			ds_list_delete(global.current_hand, ds_list_find_index(global.current_hand,global.card_selected));
-			//ds_list_delete(global.card_inventory, ds_list_find_index(global.card_inventory,global.card_selected));
-			ds_list_add(global.exhausted,global.card_selected);
+			ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
+			//ds_list_delete(global.player_deck, ds_list_find_index(global.player_deck,global.card_selected));
+			ds_list_add(global.player_exhaust_pile,global.card_selected);
 			// Reset the selected card
 			global.card_selected = undefined;
 			//show_debug_message("!!=== SCR_PLAY_CARD: ECHO CARD EXHAUSTED! ===!!");					
@@ -25,7 +25,7 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 			global.echo_count = 0;
 			global.echo = false;
 			//subract cost once
-			global.current_mana = global.current_mana - _card_cost;
+			global.cur_max_mana  = global.cur_max_mana  - _card_cost;
 		}
 				
 	}
@@ -38,7 +38,7 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 		// Execute the attached script of the card
 		_card_script(_target_creature);
 		//subract cost once
-		global.current_mana = global.current_mana - _card_cost;
+		global.cur_max_mana  = global.cur_max_mana  - _card_cost;
 	}
 	
 ///////////////
@@ -50,9 +50,9 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 	//////////////////////////////////////////////////
 	if (_card_exhausts == true){
 		//show_debug_message("!!=== SCR_PLAY_CARD: EXHAUSTING CARD! ===!!");			
-		ds_list_delete(global.current_hand, ds_list_find_index(global.current_hand,global.card_selected));
-		//ds_list_delete(global.card_inventory, ds_list_find_index(global.card_inventory,global.card_selected));
-		ds_list_add(global.exhausted,global.card_selected);
+		ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
+		//ds_list_delete(global.player_deck, ds_list_find_index(global.player_deck,global.card_selected));
+		ds_list_add(global.player_exhaust_pile,global.card_selected);
 		// Reset the selected card
 		global.card_selected = undefined;
 	} 
@@ -63,8 +63,8 @@ function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhaust
 	else {		
 		//show_debug_message("!!=== SCR_PLAY_CARD: PLACING CARD " + string(_card_script) + " BACK INTO DECK! ===!!");		
 		// Put the card back into the deck
-		ds_list_add(global.card_inventory, global.card_selected);
-		ds_list_delete(global.current_hand, ds_list_find_index(global.current_hand,global.card_selected));
+		ds_list_add(global.player_deck, global.card_selected);
+		ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
 
 		// Reset the selected card
 		global.card_selected = undefined;

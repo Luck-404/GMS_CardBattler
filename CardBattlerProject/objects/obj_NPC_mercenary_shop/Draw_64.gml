@@ -49,7 +49,7 @@ if (global.flag_gui_open && _interacted == true) {
             if (mouse_check_button_pressed(mb_left)) {
                 if (global.gold >= _cost) {
                     global.gold -= _cost;
-                    ds_list_add(global.player_team, _ref_merc);
+                    ds_list_add(global.player_party, _ref_merc);
                     ds_list_delete(global.mercenary_shop_stock, _i);
                     break; // Exit the loop to avoid issues with the ds_list size changing
                 } else {

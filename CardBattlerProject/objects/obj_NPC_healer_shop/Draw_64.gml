@@ -31,8 +31,8 @@ if (global.flag_gui_open && _interacted == true) {
     var _button_spacing = 60; // Increased vertical spacing between buttons
     var _button_x_offset = -50; // Move buttons slightly to the left
 
-    for (var _i = 0; _i < ds_list_size(global.player_team); _i++) {
-        var _ref_unit = ds_list_find_value(global.player_team, _i);
+    for (var _i = 0; _i < ds_list_size(global.player_party); _i++) {
+        var _ref_unit = ds_list_find_value(global.player_party, _i);
         var _sprite = _ref_unit[?"sprite"];
         var _curhp = _ref_unit[?"curhp"];
         var _maxhp = _ref_unit[?"hp"];

@@ -50,7 +50,7 @@ if (global.flag_gui_open && _interacted == true) {
                 if (global.gold >= _cost) {
                     global.gold -= _cost;
 					
-                    ds_list_add(global.card_inventory, _ref_card);
+                    ds_list_add(global.player_deck, _ref_card);
                     ds_list_delete(global.card_shop_stock, _i);
                     break; // Exit the loop to avoid issues with the ds_list size changing
                 } else {

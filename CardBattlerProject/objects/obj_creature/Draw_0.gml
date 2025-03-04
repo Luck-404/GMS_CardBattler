@@ -6,8 +6,8 @@ if (instance_exists(obj_end_box) == true){
 		_creature_hp_current = 0;
 		_flag_has_died = true;
 		if (_creature_team == "Ally"){
-			ds_list_delete(global.player_team_in_play, _creature_position);
-			ds_list_add(global.player_team_dead,self);	
+			ds_list_delete(global.player_party_in_play, _creature_position);
+			ds_list_add(global.player_party_dead,self);	
 		} else{
 			ds_list_delete(global.enemy_team_in_play,_creature_position);
 			ds_list_add(global.enemy_team_dead,self);			

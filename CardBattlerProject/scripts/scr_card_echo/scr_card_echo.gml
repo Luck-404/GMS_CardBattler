@@ -9,11 +9,11 @@ function scr_card_echo(){
 	audio_play_sound(snd_effect_echo,0,false);		
 	
 	// remove the echo card
-	//ds_list_add(global.card_inventory, global.card_selected);
+	//ds_list_add(global.player_deck, global.card_selected);
 	//show_debug_message("!!=== SCR_ECHO: EXHAUSTING ECHO ===!!");	
-	ds_list_delete(global.current_hand, ds_list_find_index(global.current_hand,global.card_selected));
-	//ds_list_delete(global.card_inventory, ds_list_find_index(global.card_inventory,global.card_selected));
-	ds_list_add(global.exhausted,global.card_selected);
+	ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
+	//ds_list_delete(global.player_deck, ds_list_find_index(global.player_deck,global.card_selected));
+	ds_list_add(global.player_exhaust_pile,global.card_selected);
 	// Reset the selected card
 	global.card_selected = undefined;
 }

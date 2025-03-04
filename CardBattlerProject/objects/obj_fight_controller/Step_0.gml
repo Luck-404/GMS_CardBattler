@@ -1,5 +1,5 @@
 //check for game end
-if (global.trigger_loss == true || (ds_list_size(global.player_team_in_play) == 0 && ds_list_size(global.player_team_dead) != 0)){
+if (global.trigger_loss == true || (ds_list_size(global.player_party_in_play) == 0 && ds_list_size(global.player_party_dead) != 0)){
 	if (_flag_executed_encounter_end == false){
 		_flag_executed_encounter_end = true;
 		//enemy won
@@ -26,15 +26,15 @@ if (global.trigger_loss == true || (ds_list_size(global.player_team_in_play) == 
 		instance_create_layer(960,540,"GUI", obj_end_box);
 		
 		//update your team's health currents as we move out of the room
-		for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
-			var _ref_creature = ds_list_find_value(global.player_team_in_play,_i); //get the creature at that spot
+		for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+			var _ref_creature = ds_list_find_value(global.player_party_in_play,_i); //get the creature at that spot
 			var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
 			//update the current hp to the permanent list
-			var _ref_original_creature = ds_list_find_value(global.player_team,_i); //get the creature at that spot
+			var _ref_original_creature = ds_list_find_value(global.player_party,_i); //get the creature at that spot
 			_ref_original_creature[?"curhp"] = _ref_hp_cur;
 			//if that hp turns out to be 0- the creature has died and is sent to the graveyard
 			if (_ref_hp_cur == 0){
-				ds_list_delete(global.player_team,ds_list_find_index(global.player_team,_ref_original_creature));
+				ds_list_delete(global.player_party,ds_list_find_index(global.player_party,_ref_original_creature));
 				ds_list_add(global.graveyard,_ref_original_creature);
 			}
 		}
@@ -51,19 +51,19 @@ if (global.trigger_loss == true || (ds_list_size(global.player_team_in_play) == 
 		//display 2 the 2 new temp card objects with sprites
 		var _ref_card1 = instance_create_layer(850,400,"GUI", obj_card);
 		_ref_card1.depth = -100;
-		_ref_card1.sprite_index = ds_list_find_value(global.card_inventory,ds_list_size(global.card_inventory)-1)[?"sprite"];
+		_ref_card1.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-1)[?"sprite"];
 		_ref_card1.image_xscale = 0.20;
 		_ref_card1.image_yscale = 0.20;
 			
 		var _ref_card2 = instance_create_layer(1000,400,"GUI", obj_card);
 		_ref_card2.depth = -100;
-		_ref_card2.sprite_index = ds_list_find_value(global.card_inventory,ds_list_size(global.card_inventory)-2)[?"sprite"];	
+		_ref_card2.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
 		_ref_card2.image_xscale = 0.20;
 		_ref_card2.image_yscale = 0.20;			
 				
 		//give gold, display it
-		global.randgold = irandom_range(40,50);
-		global.gold = global.gold + global.randgold;
+		global.gold_randomizer = irandom_range(40,50);
+		global.gold = global.gold + global.gold_randomizer;
 		
 		//on confirm, call a transition object to overworld back in the place we left off ()
 		var _ref_confirm = instance_create_layer(960,940,"GUI", obj_confirm);	
@@ -97,9 +97,9 @@ if (global.turn_tracker == obj_enemy_team && _enemy_played == false){
 			break;
 			
 			case "Strike":
-				_ref_tar_num = irandom_range(1,ds_list_size(global.player_team_in_play));
+				_ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
 
-				_ref_tar = ds_list_find_value(global.player_team_in_play,_ref_tar_num-1);
+				_ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
 			break;
 			
 			case "Block":

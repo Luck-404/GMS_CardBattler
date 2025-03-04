@@ -244,12 +244,17 @@ if (room == rm_encounter){
 		#region INIT
 			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
 		
+			////////////////////
+			// RANDOMIZE DECK //
+			////////////////////
+			scr_randomize_deck();
+			
 			////////////////
 			// SPAWN TEAM //
 			////////////////
-				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){					
+				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){					
 					//spawn the creature
-					var _ref_creature = ds_list_find_value(global.player_team, _i);
+					var _ref_creature = ds_list_find_value(global.player_party, _i);
 					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
 					//pass the creature the proper stats it needs
 					_ref_creature_instance._creature_name = _ref_creature[? "name"];
@@ -268,16 +273,30 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
-					ds_list_add(global.player_team_in_play, _ref_creature_instance);
+					ds_list_add(global.player_party_in_play, _ref_creature_instance);
 					_ref_creature_instance._creature_position = _i;
 				}
 				
 				//apply unit 'lefts' and 'rights'
-				//TODO
-				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){		
-					var _ref_creature = ds_list_find_value(global.player_team, _i);
-						_ref_creature._left_unit = undefined;
-						_ref_creature._right_unit = undefined;	
+				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){		
+					var _ref_creature = ds_list_find_value(global.player_party, _i);
+						switch(_i){
+							case 0:
+								_ref_creature._left_unit = undefined;
+								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i+1);	
+							break;
+							
+							case 4:
+								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i-1);	
+								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i+1);	
+							break;
+							
+							default:
+								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i-1);	
+								_ref_creature._right_unit = undefined;				
+							break;
+						}
+
 					}
 
 			////////////////////////////
@@ -300,10 +319,10 @@ if (room == rm_encounter){
 				//only if not turn 1
 				if (global.turn_count != 1){
 					//for each unit in player's party
-					for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
-						var _unit = ds_list_find_value(global.player_team, _i);
+					for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+						var _unit = ds_list_find_value(global.player_party, _i);
 						//if the unit has a shield, halve it- diff amounts for different classes
-						scr_decrement_shield(_unit); //TODO
+						scr_decrement_shields(_unit);
 					}
 				}
 				
@@ -311,9 +330,9 @@ if (room == rm_encounter){
 			// TRIGGER BEGIN TURN EFFECTS //
 			////////////////////////////////
 				//for each unit in player's party
-				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
-					var _unit = ds_list_find_value(global.player_team, _i);
-					scr_trigger_turn_effects(_unit);
+				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+					var _unit = ds_list_find_value(global.player_party, _i);
+					//scr_trigger_turn_effects(_unit);
 					//Util
 				
 					//Buffs
@@ -336,10 +355,11 @@ if (room == rm_encounter){
 		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
 			//tell each minion to execute their casting script
 				//for each unit in player's party
-				for (var _i = 0; _i < ds_list_size(global.player_team); _i++){
-					var _unit = ds_list_find_value(global.player_team, _i);
+				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+					var _unit = ds_list_find_value(global.player_party, _i);
 					//triggers each ally minion in order (1-5), if they have at least one
-					scr_trigger_minions(_unit);
+					//TODO
+					//scr_trigger_minions(_unit);
 				}
 
 			//PASS
@@ -351,62 +371,64 @@ if (room == rm_encounter){
 		
 		#region DRAW
 		case PLAYER_ENCOUNTER_STATE.DRAW: //DRAW YOUR CARDS, DRAW ENEMY CARDS
-		/////////////////////
-		// DRAW USER CARDS //
-		/////////////////////
-			//see how many cards are in my hand
-			var _cards_in_deck = ds_list_size(global.card_inventory);
-			//see how many cards I can draw
-			var _amount_to_draw = global.hand_size;
-			var _extra = _cards_in_deck - _amount_to_draw;
+			#region USER CARDS
+			/////////////////////
+			// DRAW USER CARDS //
+			/////////////////////
+				//see how many cards are in my hand
+				var _cards_in_deck = ds_list_size(global.player_deck);
+				//see how many cards I can draw
+				var _amount_to_draw = global.max_hand_size;
+				var _extra = _cards_in_deck - _amount_to_draw;
 			
-			if (_extra > 0){
-				//draw the cards normally
-				scr_draw_cards(global.hand_size); //also adds cards to current hand
-			}
-			else if (_extra == 0){
-				//draw cards normally
-				scr_draw_cards(global.hand_size); //also adds cards to current hand
-				//shuffle discard into deck
-				scr_shuffle();
-			}
-			else {
-				var _diff = abs(_extra);
-				var _first_draw = _amount_to_draw - _diff;
-				//draw the first amount of cards (_first_draw)
-				scr_draw_cards(_first_draw); //also adds cards to current hand
-				//shuffle discard into the deck
-				scr_shuffle();
-				//draw second amount of cards (_diff)
-				scr_draw_cards(_diff); //also adds cards to current hand
-			}
-				
-		//////////////////////
-		// DRAW ENEMY CARDS //
-		//////////////////////				
-			//draw enemy's cards
-			//for each enemy in enemy_list
-			for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){
+				if (_extra > 0){
+					//draw the cards normally
+					scr_draw_cards(global.max_hand_size); //also adds cards to current hand
+				}
+				else if (_extra == 0){
+					//draw cards normally
+					scr_draw_cards(global.max_hand_size); //also adds cards to current hand
+					//shuffle discard into deck
+					scr_shuffle(); //takes all cards from discard and shuffles them back into your deck
+				}
+				else {
+					var _diff = abs(_extra);
+					var _first_draw = _amount_to_draw - _diff;
+					//draw the first amount of cards (_first_draw)
+					scr_draw_cards(_first_draw); //draw first part of the cards
+					//shuffle discard into the deck
+					scr_shuffle(); //takes all cards from discard and shuffles them back into your deck
+					//draw second amount of cards (_diff)
+					scr_draw_cards(_diff); //draw last part of the cards
+				}
+			#endregion
+		
+			#region ENEMY CARDS		
+			//////////////////////
+			// DRAW ENEMY CARDS //
+			//////////////////////				
+				//draw enemy's cards
+				//for each enemy in enemy_list
+				for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){
 					var _unit = ds_list_find_value(global.enemy_team, _i);
 					var _unit_deck = _unit._deck;
-					var _unit_discard = _unit._discard;
 					
 					//grab a card from their hand pool, have it as a variable
 					if (ds_list_size(_unit_deck) > 1){
 						var _card = ds_list_find_value(_unit_deck,0);
-						scr_init_enemy_card(_card); //spawn a enemy_card_object, draws itself, can show info on hover in pick_card
+						scr_init_enemy_card(_card,_unit); //spawn a enemy_card_object, draws itself, can show info on hover in 
 					}
 					
 					else if (ds_list_size(_unit_deck) == 1){
 						//draw a card normally
 						var _card = ds_list_find_value(_unit_deck,0);
-						scr_init_enemy_card(_card); //spawn a enemy_card_object, draws itself, can show info on hover in pick_card
+						scr_init_enemy_card(_card,_unit); //spawn a enemy_card_object, draws itself, can show info on hover in pick_card
 						
 						//reshuffle their discard pile into their hand for next turn to use
-						scr_shuffle_enemy_deck(_unit_deck,_unit_discard);
+						scr_shuffle_enemy_deck(_unit);
 					}
 				}
-				
+			#endregion
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;							
 		break;		
@@ -439,9 +461,9 @@ if (room == rm_encounter){
 		// SELECT CARD //
 		/////////////////
 			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
-				for (var _i = 0; _i < ds_list_size(global.current_hand); _i++){
-					var _card = ds_list_find_value(global.current_hand, _i);
-					var _flag_usability == scr_check_usability(_card);
+				for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
+					var _card = ds_list_find_value(global.player_hand, _i);
+					var _flag_usability = scr_check_usability(_card);
 					//if usable
 					_card_active = _flag_usability;
 						//cards draw greyed or not depending on usability

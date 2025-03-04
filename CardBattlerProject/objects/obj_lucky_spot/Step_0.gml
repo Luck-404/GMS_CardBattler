@@ -20,7 +20,7 @@ if (instance_exists(obj_player) && global.player_ow_state == PLAYER_OW_STATE.GEN
 		_card = scr_roll_card("legendary");
 	}
 			
-    ds_list_add(global.card_inventory, _card);
+    ds_list_add(global.player_deck, _card);
 	
 	_flag_interacted = true;
 }

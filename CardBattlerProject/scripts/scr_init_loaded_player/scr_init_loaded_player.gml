@@ -27,7 +27,7 @@ function scr_init_loaded_player(_player,_file_path){
 				} else {
 					//basd on card name, spawn that card for the player
 						var _new_card = scr_load_card(_ref_card_name);
-						ds_list_add(global.card_inventory, _new_card);
+						ds_list_add(global.player_deck, _new_card);
 				}
 			}
 			
@@ -39,7 +39,7 @@ function scr_init_loaded_player(_player,_file_path){
 				} else {
 					//basd on card name, spawn that card for the player
 						var _new_bless = scr_load_blessing(_ref_bless_name);
-						ds_list_add(global.blessings_list, _new_bless);
+						ds_list_add(global.player_blessings_list, _new_bless);
 				}
 			}
 			
@@ -53,7 +53,7 @@ function scr_init_loaded_player(_player,_file_path){
 						var _new_creature = scr_load_creature(_ref_creature_name);
 						_new_creature[?"hp"] = ini_read_real("Creature_" + string(_creatureindex), "creature_max_hp",1);
 						_new_creature[?"curhp"] = ini_read_real("Creature_" + string(_creatureindex), "creature_cur_hp",1);
-						ds_list_add(global.player_team, _new_creature);
+						ds_list_add(global.player_party, _new_creature);
 				}
 			}			
 			

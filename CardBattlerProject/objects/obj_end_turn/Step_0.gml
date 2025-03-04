@@ -1,9 +1,12 @@
-if (instance_exists(obj_end_box) == true){
-	visible = false;
+//////////////////////////////////////////////////////////////////////
+//						OBJ_END_TURN STEP							//
+//																	//
+// > HANDLE UPDATING VISUALS BASED ON TURNSTATE						//
+//////////////////////////////////////////////////////////////////////
+if (global.player_enc_state != PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE && global.player_enc_state != PLAYER_ENCOUNTER_STATE.EXIT_ENC){
+	visible = true;
 }
-if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_end_turn)){
-	//flip turn	
-	global.turn_tracker = obj_enemy_team;
+
+else {
 	visible = false;
-	scr_draw_cards();
 }

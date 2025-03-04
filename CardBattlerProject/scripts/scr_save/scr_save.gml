@@ -19,20 +19,20 @@ function scr_save(){
 	ini_write_real("Gold", "gold_count", global.gold);
 	
 	//for every card...
-	for (var _cardindex = 0; _cardindex < ds_list_size(global.card_inventory); _cardindex++){
-		var _ref_card = ds_list_find_value(global.card_inventory,_cardindex);
+	for (var _cardindex = 0; _cardindex < ds_list_size(global.player_deck); _cardindex++){
+		var _ref_card = ds_list_find_value(global.player_deck,_cardindex);
 		ini_write_string("Card_" + string(_cardindex), "card_name", _ref_card[?"name"]);
 	}
 	
 	//for every blessing...
-	for (var _blessindex = 0; _blessindex < ds_list_size(global.blessings_list); _blessindex++){
-		var _ref_bless = ds_list_find_value(global.blessings_list,_blessindex);
+	for (var _blessindex = 0; _blessindex < ds_list_size(global.player_blessings_list); _blessindex++){
+		var _ref_bless = ds_list_find_value(global.player_blessings_list,_blessindex);
 		ini_write_string("Blessing_" + string(_blessindex), "bless_name", _ref_bless[?"Name"]);
 	}
 	
 	//for every creature in the party..
-	for (var _partyindex = 0; _partyindex < ds_list_size(global.player_team); _partyindex++){
-		var _ref_unit = ds_list_find_value(global.player_team,_partyindex);
+	for (var _partyindex = 0; _partyindex < ds_list_size(global.player_party); _partyindex++){
+		var _ref_unit = ds_list_find_value(global.player_party,_partyindex);
 		ini_write_string("Creature_" + string(_partyindex), "creature_name", _ref_unit[?"name"]);
 		//ini_write_string("Creature " + _ref_unit[?"name"] + " " + _partyindex, "creature_subtype", _ref_unit[?"subtype"]);
 		//ini_write_string("Creature " + _ref_unit[?"name"] + " " + _partyindex, "creature_breed", _ref_unit[?"breed"]);
@@ -42,7 +42,7 @@ function scr_save(){
 		
 		//var _ref_markings_list = _ref_unit[?"markingslist"];
 		//for (var _markindex = 0; _markindex < ds_list_size(_ref_markings_list); _markindex++){
-		//	var _ref_marking = ds_list_find_value(global.player_team,_partyindex);
+		//	var _ref_marking = ds_list_find_value(global.player_party,_partyindex);
 		//	ini_write_string("Creature " + _ref_unit[?"name"] + " " + _partyindex, "creature_markings", _ref_unit[?"markingslist"]);
 		//}
 	}
