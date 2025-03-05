@@ -11,5 +11,7 @@ _card_color = undefined; //color of card
 _card_type = undefined; //Utility, Powerup, Debuff, Attack, Defend
 _card_spec_req = undefined; //Martial, Technical, or Magical locked? or locked behind a certain subspec?
 _card_class_req = undefined;
+_flag_targetless = false;
+_card_ref = undefined;
 _active = true;
 _selected = false;

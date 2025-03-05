@@ -31,9 +31,12 @@ function scr_draw_cards(_amount) {
 			_ref_card_instance._card_target = _ref_card[? "target"];
 			_ref_card_instance._card_color = _ref_card[? "color"];
 			_ref_card_instance._card_type = _ref_card[? "type"];
-			_ref_card_instance._card_spec_req = _ref_card[? "spec"]
-			_ref_card_instance._card_class_req = _ref_card[? "class"]			
-			
+			_ref_card_instance._card_spec_req = _ref_card[? "spec"];
+			_ref_card_instance._card_class_req = _ref_card[? "class"];
+			_ref_card_instance._card_ref = _ref_card;
+			if(_ref_card[?"target"] == "None"){
+			_ref_card_instance._flag_targetless = true;			
+			}
         }
     }	
 }

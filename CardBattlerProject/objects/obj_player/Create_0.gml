@@ -43,6 +43,7 @@ global.player_hand = ds_list_create(); //create hand to hold in an encounter tur
 global.player_discard_pile = ds_list_create(); //create discard pile
 global.player_exhaust_pile = ds_list_create(); //create exhaust pile
 _card_selected = undefined;
+_channel_selected = undefined;
 
 //creature stuff
 _flag_party_spawned = false;

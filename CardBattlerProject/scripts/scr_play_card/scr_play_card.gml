@@ -1,5 +1,20 @@
-// When a card is played, call scr_play_card
-function scr_play_card(_card_script, _target_creature, _card_cost, _card_exhausts) {
+//////////////////////////////////////////////////////////////////////
+//							SCR_PLAY_CARD							//
+//																	//
+// > PPLAYS AN INPUT CARD											//
+//////////////////////////////////////////////////////////////////////
+function scr_play_card(_card_ref, _channel_creature, _target_creature) {
+	
+			//scr_damage_calc
+			//effects and sounds
+			//deduct mana
+			//put card into discard pile
+	
+	//targetless
+	if (_target_creature == "Targetless"){
+		
+	}
+	
 	//////////
 	// ECHO //
 	//////////

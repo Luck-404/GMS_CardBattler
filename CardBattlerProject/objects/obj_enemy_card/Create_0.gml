@@ -8,4 +8,5 @@ _card_sprite = undefined; //sprite for the card
 _card_target = undefined; //who can it target (none, ally, enemy, all)
 _card_color = undefined; //color of card
 _card_type = undefined; //Utility, Powerup, Debuff, Attack, Defend
+_card_ref = undefined;
 _unit = undefined;
