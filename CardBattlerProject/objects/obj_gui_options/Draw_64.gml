@@ -209,14 +209,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 			obj_gui_options_forfeit_button.image_index = 1;
 			if (mouse_check_button_pressed(mb_left) && global._clicked == false){		
 				obj_gui_options_forfeit_button.image_index = 2;
-				//take 25% hp from all units
-				for (var _creatureindex = 0; _creatureindex < ds_list_size(global.player_party); _creatureindex++){
-					var _ref_unit = ds_list_find_value(global.player_party,_creatureindex);
-					_ref_unit[?"curhp"] = ceil((_ref_unit[?"curhp"])*0.75);
-				}
-				//start transition to overworld
-				scr_transition("overworld","return","Any","Any");
-				//delete self
+				obj_fight_controller._flag_forfeit = true;
 				global.flag_gui_open = false;
 				instance_destroy();
 			}

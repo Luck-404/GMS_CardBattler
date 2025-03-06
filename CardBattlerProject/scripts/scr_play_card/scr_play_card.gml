@@ -4,84 +4,65 @@
 // > PPLAYS AN INPUT CARD											//
 //////////////////////////////////////////////////////////////////////
 function scr_play_card(_card_ref, _channel_creature, _target_creature) {
+	var _card_script = _card_ref[?"script"];
 	
-			//scr_damage_calc
-			//effects and sounds
-			//deduct mana
-			//put card into discard pile
-	
-	//targetless
+	////////////////
+	// TARGETLESS //
+	////////////////
 	if (_target_creature == "Targetless"){
-		
-	}
-	
-	//////////
-	// ECHO //
-	//////////
-	if (global.echo == true){		
-	//show_debug_message("!!=== SCR_PLAY_CARD: CARD " + string(_card_script) + " ECHOING... ===!!");		
-	//	//if this new card is an echo, add to the echo counter
-		if (_card_script == scr_card_echo){	
-			global.echo_count +=1;
-			//show_debug_message("!!=== SCR_PLAY_CARD: ECHO COUNTER INCREASED BY 1, NOW..." + string(global.echo_count) +" ===!!");		
-			ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
-			//ds_list_delete(global.player_deck, ds_list_find_index(global.player_deck,global.card_selected));
-			ds_list_add(global.player_exhaust_pile,global.card_selected);
-			// Reset the selected card
-			global.card_selected = undefined;
-			//show_debug_message("!!=== SCR_PLAY_CARD: ECHO CARD EXHAUSTED! ===!!");					
-		} 
-		//otherwise play the card out for as many echoes as possible
-		else {			
-			for (var _j = -1; _j < global.echo_count; _j++){	
-				audio_play_sound(snd_effect_echoing,0,false);	
-				_card_script(_target_creature);
-			}
-			global.echo_count = 0;
-			global.echo = false;
-			//subract cost once
-			global.cur_mana  = global.cur_mana  - _card_cost;
+		switch(_card_script){
+			case scr_card_echo:
+				if (global.echo_count != 0){
+					global.echo_count += 1;
+				} else {
+					for (var _j = -1; _j < global.echo_count; _j++){	
+						audio_play_sound(snd_effect_echoing,0,false);	
+						_card_script(_target_creature,1);
+					}
+					global.echo_count = 0;
+					//subract cost once
+					global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
+				}
+				scr_exhaust(_card_ref);
+			break;
+			
+			default:
+				_card_script(_target_creature,1);
+				//subract cost once
+				global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
+				if (_card_ref[?"exhausts"] == true){
+					scr_exhaust(_card_ref);
+				}
+				else {
+					scr_discard(_card_ref);
+				}
+			break;
 		}
-				
 	}
 		
-	////////////
-	// NORMAL //
-	////////////
-	else {
-		//show_debug_message("!!=== SCR_PLAY_CARD: CARD " + string(_card_script) + " EXECUTING NORMALLY... ===!!");		
-		// Execute the attached script of the card
-		_card_script(_target_creature);
-		//subract cost once
-		global.cur_mana  = global.cur_mana  - _card_cost;
-	}
+	///////////////////////
+	// CALC DAMAGE BONUS //
+	///////////////////////
+	var _base_dmg = _card_ref[?"damage"];
+	var _dmg_mult = scr_calculate_damage(_channel_creature,_base_dmg,_target_creature);
 	
-///////////////
-// POST PLAY //
-///////////////
-	
-	//////////////////////////////////////////////////
-	// IF THE CARD EXHAUSTS, PUT IT IN EXHAUST DECK //
-	//////////////////////////////////////////////////
-	if (_card_exhausts == true){
-		//show_debug_message("!!=== SCR_PLAY_CARD: EXHAUSTING CARD! ===!!");			
-		ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
-		//ds_list_delete(global.player_deck, ds_list_find_index(global.player_deck,global.card_selected));
-		ds_list_add(global.player_exhaust_pile,global.card_selected);
-		// Reset the selected card
-		global.card_selected = undefined;
-	} 
-		
-	/////////////////////////////////
-	// OTHERWISE RETURN IT TO DECK //
-	/////////////////////////////////
-	else {		
-		//show_debug_message("!!=== SCR_PLAY_CARD: PLACING CARD " + string(_card_script) + " BACK INTO DECK! ===!!");		
-		// Put the card back into the deck
-		ds_list_add(global.player_deck, global.card_selected);
-		ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,global.card_selected));
+	//////////////////////
+	// HANDLE MANA COST //
+	//////////////////////	
+	global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
 
-		// Reset the selected card
-		global.card_selected = undefined;
+	//////////
+	// CAST //
+	//////////
+	_card_script(_card_ref,_dmg_mult,_base_dmg,_channel_creature,_target_creature);
+
+	//////////////////////////////////
+	// HANDLE DISCARDING/EXHAUSTING //
+	//////////////////////////////////
+	if (_card_ref[?"exhausts"] == true){
+		scr_exhaust(_card_ref);
+	}
+	else {
+		scr_discard(_card_ref);
 	}
 }

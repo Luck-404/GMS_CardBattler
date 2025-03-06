@@ -129,9 +129,9 @@ if (room != rm_main_menu){
 	/////////////////////////////////////////
 	// ESCAPE OPENS/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
-	if (keyboard_check_pressed(vk_escape)){
+	if (keyboard_check_pressed(vk_escape) && !instance_exists(obj_enc_rewards)){
 		 if (global.flag_gui_open == false){
-			 global.player_ow_state == PLAYER_OW_STATE.INTERACT;
+			 global.player_ow_state = PLAYER_OW_STATE.INTERACT;
 			 obj_player._move_speed = 0;
 			 //CREATE THE OPTIONS MENU		 
 			instance_create_layer(display_get_gui_width()/2,display_get_gui_height()/2,"GUI",obj_gui_options);

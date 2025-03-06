@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_empty_exhausted",
+  "name": "scr_exhaust",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

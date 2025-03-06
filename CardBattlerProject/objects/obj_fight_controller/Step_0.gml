@@ -1,124 +1,263 @@
-//check for game end
-if (global.trigger_loss == true || (ds_list_size(global.player_party_in_play) == 0 && ds_list_size(global.player_party_dead) != 0)){
-	if (_flag_executed_encounter_end == false){
-		_flag_executed_encounter_end = true;
-		//enemy won
-		//cleanup/reset any variables from all
-		//cleanup lists on delete
-		//check for persistent objects, remove as needed
-	
-		//display score/game over screen and confirm box
-		instance_create_layer(960,540,"GUI", obj_end_box);
-
-		//on confirm, call a transition object to main menu
-		var _ref_confirm = instance_create_layer(960,940,"GUI", obj_confirm);	
-		_ref_confirm._confirm_type = "endgame";			
-	}
-} else if (instance_exists(obj_enemy_team) && ds_list_size(global.enemy_team_in_play) == 0 && ds_list_size(global.enemy_team_dead) != 0){
-	if (_flag_executed_encounter_end == false){	
-		_flag_executed_encounter_end = true;
-		//ally won
-		//cleanup/reset any variables from all
-		//cleanup lists on delete
-		//check for persistent objects, remove as needed (when we press confirm)
-		
-		//display rewards screen and confirm box
-		instance_create_layer(960,540,"GUI", obj_end_box);
-		
-		//update your team's health currents as we move out of the room
-		for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-			var _ref_creature = ds_list_find_value(global.player_party_in_play,_i); //get the creature at that spot
-			var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
-			//update the current hp to the permanent list
-			var _ref_original_creature = ds_list_find_value(global.player_party,_i); //get the creature at that spot
-			_ref_original_creature[?"curhp"] = _ref_hp_cur;
-			//if that hp turns out to be 0- the creature has died and is sent to the graveyard
-			if (_ref_hp_cur == 0){
-				ds_list_delete(global.player_party,ds_list_find_index(global.player_party,_ref_original_creature));
-				ds_list_add(global.graveyard,_ref_original_creature);
-			}
+switch(global.fight_controller_state){
+	#region SPAWN ENEMIES
+	case FIGHT_CONTROLLER_STATE.SPAWN_ENEMIES:
+	show_debug_message("fight controller: spawning enemies");
+	//roll a random enemy team based on the room type, give them each a deck (inside script)
+		scr_roll_enemies(scr_save_room(global.saved_room), irandom_range(1,5));
+	//spawn enemy team creature objects
+		for (var _i = 0; _i < ds_list_size(global.enemy_party); _i++){				
+			//spawn the creature
+			var _ref_creature = ds_list_find_value(global.enemy_party, _i);
+			var _ref_creature_instance = instance_create_layer(1190+(170*_i), 650, "Creatures", obj_creature); //generate the creature	
+			//pass the creature the proper stats it needs
+			_ref_creature_instance._creature_name = _ref_creature[? "name"];
+			_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
+			_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
+			_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
+			_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
+			_ref_creature_instance._creature_team = _ref_creature[? "team"];
+			_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
+			_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
+			_ref_creature_instance._creature_hp_current = _ref_creature[? "hp"];
+			_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
+			_ref_creature_instance._creature_class = _ref_creature[? "class"];
+			_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
+			_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
+			_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
+			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
+			_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
+			//init their deck
+			scr_init_enemy_deck(_ref_creature_instance, _ref_creature[? "name"]);
+			ds_list_add(global.enemy_party_in_play, _ref_creature_instance);		
+			_ref_creature_instance._creature_position = ds_list_find_index(global.enemy_party_in_play,_ref_creature_instance);			
 		}
+		show_debug_message("fight controller: enemies spawned");		
+		global.fight_controller_state = FIGHT_CONTROLLER_STATE.PLAYER_TURN;
+	break;
+	#endregion
 	
-		// Empty the exhausted pile into the card inventory		
-		scr_empty_exhausted();
-
-		// Empty the current hand into the card inventory		
-		scr_empty_hand();
+	#region PLAYER TURN
+	case FIGHT_CONTROLLER_STATE.PLAYER_TURN:
+	//idle here while player goes (player sends to enemy turn)
+	break;
+	#endregion
 	
-		//give 2 cards a a reward, display them
-		//add 2 new cards to inventory (script)			
-		scr_generate_reward_card(2);
-		//display 2 the 2 new temp card objects with sprites
-		var _ref_card1 = instance_create_layer(850,400,"GUI", obj_card);
-		_ref_card1.depth = -100;
-		_ref_card1.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-1)[?"sprite"];
-		_ref_card1.image_xscale = 0.20;
-		_ref_card1.image_yscale = 0.20;
-			
-		var _ref_card2 = instance_create_layer(1000,400,"GUI", obj_card);
-		_ref_card2.depth = -100;
-		_ref_card2.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
-		_ref_card2.image_xscale = 0.20;
-		_ref_card2.image_yscale = 0.20;			
-				
-		//give gold, display it
-		global.gold_randomizer = irandom_range(40,50);
-		global.gold = global.gold + global.gold_randomizer;
-		
-		//on confirm, call a transition object to overworld back in the place we left off ()
-		var _ref_confirm = instance_create_layer(960,940,"GUI", obj_confirm);	
-		_ref_confirm._confirm_type = "playon";		
-	}
-}
-
-if (global.turn_tracker == obj_player){
-	//display the 'end turn' button
-	_ref_end_turn.visible = true;
-	//WAITS FOR CLICK ON END TURN BUTTON
-	_flag_spawned_timer = false;
-	_enemy_played = false;
-}
-
-if (global.turn_tracker == obj_enemy_team && _enemy_played == false){		
-	_enemy_played = true;
-	//have the enemy team play cards at random targets (one card per member of the team)
-	for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){
-
-		//pick the spell
-		var _ref_card_num = irandom_range(1,ds_list_size(global.enemy_card_inventory));
-		var _ref_card = ds_list_find_value(global.enemy_card_inventory,_ref_card_num-1);		
-
-		var _ref_tar = undefined;
-		var _ref_tar_num = 0;
-		//decide targets based on spell
-		switch(_ref_card[?"name"]){
-			case "Echo":
-				_i-=1;
-			break;
-			
-			case "Strike":
-				_ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
-
-				_ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
-			break;
-			
-			case "Block":
-				_ref_tar_num = irandom_range(1,ds_list_size(global.enemy_team_in_play));
-		
-				_ref_tar = ds_list_find_value(global.enemy_team_in_play,_ref_tar_num-1);
-			break;
-		}
-		var _ref_card_scr = _ref_card[?"script"];
-		scr_play_card(_ref_card_scr,_ref_tar,0, _ref_card[? "exhausts"]);
-	}
-	//spawn a 1 second timer, then kill it which will update the global turn tracker
-	if (_flag_spawned_timer == false){	
+	#region ENEMY TURN
+	case FIGHT_CONTROLLER_STATE.ENEMY_TURN:
+	show_debug_message("fight controller: enemies going");
+	//brief 0.5s wait - spawn a timer and check if its alive
+	if (_flag_init_timer == false){
+		_flag_init_timer = true;
 		instance_create_layer(10,10,"GUI",obj_timer);
-		_flag_spawned_timer = true;
-		//trigger the effects of the passive cards
-		with(obj_card_counter){
-			obj_card_counter._turn_lifespan--;
-			obj_card_counter._trigger_my_effect = true;
+	}
+	if (instance_exists(obj_timer)){
+		break;
+	}
+	
+	///////////////////////
+	// DECREMENT SHIELDS //
+	///////////////////////
+		//for each unit in player's party
+		for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
+			var _unit = ds_list_find_value(global.enemy_party_in_play, _i);
+			//if the unit has a shield, halve it- diff amounts for different classes
+			scr_decrement_shields(_unit);
+		}
+	
+	#region ENEMY BEGIN TURN
+	////////////////////////
+	// BEGIN TURN EFFECTS //
+	////////////////////////
+	////TODO
+	////wait
+	//if (_flag_begin_timer == false){
+	//	_flag_begin_timer = true;
+	//	instance_create_layer(10,10,"GUI",obj_timer);
+	//}
+	//if (instance_exists(obj_timer)){
+	//	break;
+	//}
+	#endregion
+	
+	#region ENEMY MINIONS
+	///////////////////
+	// ENEMY MINIONS //
+	///////////////////
+	////TODO
+	////wait
+	//if (_flag_minions_timer == false){
+	//	_flag_minions_timer = true;
+	//	instance_create_layer(10,10,"GUI",obj_timer);
+	//}
+	//if (instance_exists(obj_timer)){
+	//	break;
+	//}
+	#endregion
+	
+	#region ENEMY ATTACKS
+	//////////////////////////////
+	// EACH UNIT ATTACKS, WAITS //
+	//////////////////////////////
+	//unit 1
+	if (ds_list_find_value(global.enemy_party_in_play,0) != undefined){
+		//wait
+		if (_flag_init_timer == false){
+			_flag_init_timer = true;
+			instance_create_layer(10,10,"GUI",obj_timer);
+		}
+		if (instance_exists(obj_timer)){
+			break;
+		}
+		if (_flag_unit_1_went == false){
+			_flag_unit_1_went = true;
+			//cast spell
+			scr_play_enemy_card(ds_list_find_value(global.enemy_party_in_play,0));
 		}
 	}
+	//unit 2
+	if (ds_list_find_value(global.enemy_party_in_play,1) != undefined){
+		//wait
+		if (_flag_init_timer == false){
+			_flag_init_timer = true;
+			instance_create_layer(10,10,"GUI",obj_timer);
+		}
+		if (instance_exists(obj_timer)){
+			break;
+		}		
+		if (_flag_unit_2_went == false){
+			_flag_unit_2_went = true;
+			//cast spell
+			scr_play_enemy_card(ds_list_find_value(global.enemy_party_in_play,0));
+		}		
+	}	
+
+	//unit 3
+	if (ds_list_find_value(global.enemy_party_in_play,2) != undefined){
+		//wait
+		if (_flag_init_timer == false){
+			_flag_init_timer = true;
+			instance_create_layer(10,10,"GUI",obj_timer);
+		}
+		if (instance_exists(obj_timer)){
+			break;
+		}	
+		if (_flag_unit_3_went == false){
+			_flag_unit_3_went = true;
+			//cast spell
+			scr_play_enemy_card(ds_list_find_value(global.enemy_party_in_play,0));
+		}		
+	}
+
+	//unit 4
+	if (ds_list_find_value(global.enemy_party_in_play,3) != undefined){
+		//wait
+		if (_flag_init_timer == false){
+			_flag_init_timer = true;
+			instance_create_layer(10,10,"GUI",obj_timer);
+		}
+		if (instance_exists(obj_timer)){
+			break;
+		}		
+		if (_flag_unit_4_went == false){
+			_flag_unit_4_went = true;
+			//cast spell
+			scr_play_enemy_card(ds_list_find_value(global.enemy_party_in_play,0));
+		}		
+	}		
+		
+	//unit 5
+	if (ds_list_find_value(global.enemy_party_in_play,4) != undefined){
+		//wait
+		if (_flag_init_timer == false){
+			_flag_init_timer = true;
+			instance_create_layer(10,10,"GUI",obj_timer);
+		}
+		if (instance_exists(obj_timer)){
+			break;
+		}	
+		if (_flag_unit_5_went == false){
+			_flag_unit_5_went = true;
+			//cast spell
+			scr_play_enemy_card(ds_list_find_value(global.enemy_party_in_play,0));
+		}		
+	}	
+	#endregion
+	
+	#region END TURN
+	///////////////////
+	// END TURN WAIT //
+	///////////////////
+	if (_flag_end_timer == false){
+		_flag_end_timer = true;
+		instance_create_layer(10,10,"GUI",obj_timer);
+	}	
+	if (instance_exists(obj_timer)){
+		break;
+	}	
+	#endregion
+
+	show_debug_message("fight controller: enemies turn over");
+	//after all have gone once, send player to new turn
+	global.turn_counter++;
+	global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;	
+	global.fight_controller_state = FIGHT_CONTROLLER_STATE.PLAYER_TURN;
+	break;
+	#endregion
+	
+	#region END IDLE
+	case FIGHT_CONTROLLER_STATE.END_IDLE:
+	//idle here while the confirm dialogue is up, reset timers
+	_flag_init_timer = false;
+	_flag_begin_timer = false;
+	_flag_minions_timer = false;
+	_flag_timer_1 = false;
+	_flag_unit_1_went = false;
+	_flag_timer_2 = false;
+	_flag_unit_2_went = false;
+	_flag_timer_3 = false;
+	_flag_unit_3_went = false;
+	_flag_timer_4 = false;
+	_flag_unit_4_went = false;
+	_flag_timer_5 = false;
+	_flag_unit_5_went = false;
+	_flag_end_timer = false;
+	break;	
+	#endregion
 }
+
+////////////////////////////////////////////////
+// CHECK IF A WIN/LOSS CONDITION HAS BEEN MET //
+////////////////////////////////////////////////
+// All enemies dead
+	if (_flag_exit_spawned == false && ds_list_size(global.enemy_party_in_play) == 0 && ds_list_size(global.enemy_party_dead) != 0){
+		_flag_exit_spawned = true;
+		//if all enemies are dead, spawn a obj_enc_rewards with a "win" variable
+		var _ref_rewards = instance_create_layer(room_width/2, room_height/2, "GUI",obj_enc_rewards);
+		_ref_rewards._type = "win";
+		global.flag_gui_open = true;
+		global.fight_controller_state = FIGHT_CONTROLLER_STATE.END_IDLE;
+		global.player_enc_state = PLAYER_ENCOUNTER_STATE.EXIT_ENC;	
+	}
+
+// All allies dead
+	if (_flag_exit_spawned == false && ds_list_size(global.player_party_in_play) == 0 && ds_list_size(global.player_party_dead) != 0){
+		_flag_exit_spawned = true;
+		//if all allies are dead, spawn a obj_enc_rewards with a "loss" variable	
+		var _ref_rewards = instance_create_layer(room_width/2, room_height/2, "GUI",obj_enc_rewards);
+		_ref_rewards._type = "loss";
+		global.flag_gui_open = true;
+		global.fight_controller_state = FIGHT_CONTROLLER_STATE.END_IDLE;
+		global.player_enc_state = PLAYER_ENCOUNTER_STATE.EXIT_ENC;
+	}
+
+
+// forfeit
+	if (_flag_exit_spawned == false && _flag_forfeit == true){
+		_flag_exit_spawned = true;
+		//if forfeit was pressed, spawn a obj_enc_rewards with a "forfeit" variable
+		var _ref_rewards = instance_create_layer(room_width/2, room_height/2, "GUI",obj_enc_rewards);
+		_ref_rewards._type = "forfeit";
+		global.flag_gui_open = true;
+		global.fight_controller_state = FIGHT_CONTROLLER_STATE.END_IDLE;
+		global.player_enc_state = PLAYER_ENCOUNTER_STATE.EXIT_ENC;
+	}

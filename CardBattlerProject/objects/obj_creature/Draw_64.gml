@@ -14,8 +14,8 @@ if (_creature_hp_current <= 0 && _flag_has_died == false){
 		ds_list_delete(global.player_party_in_play, _creature_position);
 		ds_list_add(global.player_party_dead,self);	
 	} else{ //IF ENEMY
-		ds_list_delete(global.enemy_team_in_play,_creature_position);
-		ds_list_add(global.enemy_team_dead,self);			
+		ds_list_delete(global.enemy_party_in_play,_creature_position);
+		ds_list_add(global.enemy_party_dead,self);			
 	}
 }
 

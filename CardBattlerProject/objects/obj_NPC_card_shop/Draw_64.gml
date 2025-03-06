@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////////////
 if (instance_exists(obj_player) && global.player_ow_state == PLAYER_OW_STATE.GENERAL && distance_to_object(obj_player) < 64 && keyboard_check_pressed(ord("E"))) {
     global.flag_gui_open = !global.flag_gui_open;
-	global.player_ow_state == PLAYER_OW_STATE.INTERACT;
+	global.player_ow_state = PLAYER_OW_STATE.INTERACT;
 	_interacted = true;
     obj_player._move_speed = global.flag_gui_open ? 0 : 3;
 }

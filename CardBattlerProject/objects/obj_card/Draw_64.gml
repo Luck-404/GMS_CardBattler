@@ -1,10 +1,10 @@
 if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) && (global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CHANNEL || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_TARGET || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CARD)){
 	//enlarges card
 	if (_active){
-	draw_sprite_ext(sprite_index,0,x,y,1.5,1.5,0,c_white,1);
+	draw_sprite_ext(_card_sprite,0,x,y,1.5,1.5,0,c_white,1);
 	}
 	else {
-	draw_sprite_ext(sprite_index,0,x,y,1.5,1.5,0,c_grey,1);
+	draw_sprite_ext(_card_sprite,0,x,y,1.5,1.5,0,c_grey,1);
 	}
 	//draws info box
 	draw_set_color(c_grey);
@@ -21,9 +21,9 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 	
 } else {
 	if(_active){
-		draw_self();
+		draw_sprite_ext(_card_sprite,0,x,y,1,1,0,c_white,1);
 	}
 	else { //draw greyed if
-		draw_sprite_ext(sprite_index,0,x,y,1.0,1.0,0,c_grey,1);
+		draw_sprite_ext(_card_sprite,0,x,y,1.0,1.0,0,c_grey,1);
 	}
 }

@@ -1,17 +1,17 @@
 function scr_card_poison_ivy(_target){
 	//3-man swipe
 	// middle unit is _target
-	var _mid_id = ds_list_find_index(global.enemy_team,_target);
+	var _mid_id = ds_list_find_index(global.enemy_party,_target);
 	var _left_target = undefined;
 	var _right_target = undefined;
-	if (ds_list_size(global.enemy_team) > 1){
-		if ((_mid_id-1 != -1) && (ds_list_find_value(global.enemy_team,_mid_id-1) != undefined)){
+	if (ds_list_size(global.enemy_party) > 1){
+		if ((_mid_id-1 != -1) && (ds_list_find_value(global.enemy_party,_mid_id-1) != undefined)){
 			//left unit
-			_left_target = ds_list_find_value(global.enemy_team,_mid_id-1)
+			_left_target = ds_list_find_value(global.enemy_party,_mid_id-1)
 		}
-		if ((_mid_id+1 != 6) && (ds_list_find_value(global.enemy_team,_mid_id+1) != undefined)){
+		if ((_mid_id+1 != 6) && (ds_list_find_value(global.enemy_party,_mid_id+1) != undefined)){
 			//right unit	
-			_right_target = ds_list_find_value(global.enemy_team,_mid_id-1)
+			_right_target = ds_list_find_value(global.enemy_party,_mid_id-1)
 		}
 	}
 	

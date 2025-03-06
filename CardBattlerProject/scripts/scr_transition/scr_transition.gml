@@ -157,7 +157,9 @@ function scr_transition(_destination,_type,_toid,_fromid){
 			global.player_ypos = obj_player.y;	
 			
 			//autosave the stuff
-			scr_save();
+			if (_type != "loss"){
+				scr_save();
+			}
 			
 			instance_destroy(obj_player);
 			

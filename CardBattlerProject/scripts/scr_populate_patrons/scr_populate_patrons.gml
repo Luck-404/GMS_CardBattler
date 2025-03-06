@@ -10,7 +10,7 @@ function scr_populate_patrons(_output_list){
 			//Lucky
 				//create a patron (script)
 				var _new_patron = scr_create_patron("Lucky","God of Adventures",spr_sigil_luck,"Bush Monkey", ["Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy"],["Lucky Clover"],"30-50 Starting Gold",[scr_create_blessing("Lucky","Find items more often",spr_blessing_lucky),scr_create_blessing("Adventurer's Mark", "Encounters are skewed in your favor",spr_blessing_adventurers_mark),scr_create_blessing("Golden Idol","10% more gold from all sources",spr_blessing_golden_idol)]);
-				//add patron to the list
+			//add patron to the list
 				ds_list_add(_output_list,_new_patron);				
 			//Merlin (TESTER)
 				_new_patron = scr_create_patron("Merlin","God of Druids",spr_sigil_merlin,"Corpseflower", ["Fell","Thorny Whip","Fell","Thorny Whip","Fell"],["Yew Tree Sprig"],"10-20 Starting Gold",[scr_create_blessing("Druid's Kiss","Casting a green spell has a chance to heal",spr_blessing_druids_kiss),scr_create_blessing("Sprouts", "Minions may gain bonus health at spawn",spr_blessing_sprouts),scr_create_blessing("Mulch","Every unit killed gives your units a permanent health buff",spr_blessing_mulch)]);

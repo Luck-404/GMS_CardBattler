@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_empty_hand",
+  "name": "scr_play_enemy_card",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

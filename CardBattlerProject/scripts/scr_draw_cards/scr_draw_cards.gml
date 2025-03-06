@@ -15,6 +15,7 @@ function scr_draw_cards(_amount) {
             var _ref_card = ds_list_find_value(global.player_deck, _index);
 				// Add card to the hand
             ds_list_add(global.player_hand, _ref_card);
+			show_debug_message("added card " + _ref_card[?"name"] + " to the hand!");
 			    // Remove card from the deck
             ds_list_delete(global.player_deck, _index);
 

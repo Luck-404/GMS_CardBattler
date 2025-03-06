@@ -35,6 +35,7 @@ _move_left = 0;
 _move_right = 0;
 _move_up = 0;
 _move_down = 0;
+
 	
 //deck stuff
 _flag_deck_created = false;
@@ -44,6 +45,7 @@ global.player_discard_pile = ds_list_create(); //create discard pile
 global.player_exhaust_pile = ds_list_create(); //create exhaust pile
 _card_selected = undefined;
 _channel_selected = undefined;
+global.echo_count = 0;
 
 //creature stuff
 _flag_party_spawned = false;
@@ -78,13 +80,13 @@ _flag_transition_start = false; //HAVE I STARTED A TRANSITION
 //encounter state enumerator
 enum PLAYER_ENCOUNTER_STATE {
 	INIT,
+	CHECK_FIGHT_SETUP,
 	BEGIN_TURN,
 	MINIONS_CAST,
 	DRAW,
 	PICK_CARD,
 	PICK_CHANNEL,
 	PICK_TARGET,
-	CASTING,
 	END_TURN,
 	ENEMY_TURN_IDLE,
 	EXIT_ENC,

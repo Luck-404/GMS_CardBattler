@@ -17,7 +17,6 @@ var _one_way_layer = layer_tilemap_get_id("tl_oneway");
 switch (global.player_ow_state){
 #region GENERAL
 case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions with NPCs/Treasures)
-
 	//NPC gui- hosted in-object (send to interact (TODO))
 	//Treasures- hosted in-object (send to interact-- need a timer for the 'zelda hold up' effect) (TODO)
 	//Shop gui - hosted in-object (send to interact)
@@ -243,6 +242,7 @@ if (room == rm_encounter){
 	switch(global.player_enc_state){
 		#region INIT
 			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
+			show_debug_message("obj player: init");
 		
 			////////////////////
 			// RANDOMIZE DECK //
@@ -252,9 +252,9 @@ if (room == rm_encounter){
 			////////////////
 			// SPAWN TEAM //
 			////////////////
-				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){					
+				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){					
 					//spawn the creature
-					var _ref_creature = ds_list_find_value(global.player_party, _i);
+					var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
 					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
 					//pass the creature the proper stats it needs
 					_ref_creature_instance._creature_name = _ref_creature[? "name"];
@@ -278,21 +278,21 @@ if (room == rm_encounter){
 				}
 				
 				//apply unit 'lefts' and 'rights'
-				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){		
-					var _ref_creature = ds_list_find_value(global.player_party, _i);
+				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){		
+					var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
 						switch(_i){
 							case 0:
 								_ref_creature._left_unit = undefined;
-								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i+1);	
+								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);	
 							break;
 							
 							case 4:
-								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i-1);	
-								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i+1);	
+								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
+								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);	
 							break;
 							
 							default:
-								_ref_creature._right_unit = ds_list_find_value(global.player_party, _i-1);	
+								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
 								_ref_creature._right_unit = undefined;				
 							break;
 						}
@@ -309,18 +309,17 @@ if (room == rm_encounter){
 		break;
 		#endregion
 		
-		
-		
 		#region BEGIN TURN
 		case PLAYER_ENCOUNTER_STATE.BEGIN_TURN: //TURN BEGINS, PLAY TURN BEGIN EFFECTS
+			show_debug_message("obj player: begin turn");				
 			//////////////////////////////////////
 			// DECREMENT SHIELDS FROM LAST TURN //
 			//////////////////////////////////////
 				//only if not turn 1
-				if (global.turn_count != 1){
+				if (global.turn_counter != 1){
 					//for each unit in player's party
-					for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-						var _unit = ds_list_find_value(global.player_party, _i);
+					for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+						var _unit = ds_list_find_value(global.player_party_in_play, _i);
 						//if the unit has a shield, halve it- diff amounts for different classes
 						scr_decrement_shields(_unit);
 					}
@@ -330,8 +329,8 @@ if (room == rm_encounter){
 			// TRIGGER BEGIN TURN EFFECTS //
 			////////////////////////////////
 				//for each unit in player's party
-				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-					var _unit = ds_list_find_value(global.player_party, _i);
+				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+					var _unit = ds_list_find_value(global.player_party_in_play, _i);
 					//scr_trigger_turn_effects(_unit);
 					//Util
 				
@@ -355,8 +354,8 @@ if (room == rm_encounter){
 		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
 			//tell each minion to execute their casting script
 				//for each unit in player's party
-				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-					var _unit = ds_list_find_value(global.player_party, _i);
+				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+					var _unit = ds_list_find_value(global.player_party_in_play, _i);
 					//triggers each ally minion in order (1-5), if they have at least one
 					//TODO
 					//scr_trigger_minions(_unit);
@@ -371,6 +370,8 @@ if (room == rm_encounter){
 		
 		#region DRAW
 		case PLAYER_ENCOUNTER_STATE.DRAW: //DRAW YOUR CARDS, DRAW ENEMY CARDS
+			show_debug_message("obj player: drawing cards");
+				
 			#region USER CARDS
 			/////////////////////
 			// DRAW USER CARDS //
@@ -409,8 +410,8 @@ if (room == rm_encounter){
 			//////////////////////				
 				//draw enemy's cards
 				//for each enemy in enemy_list
-				for (var _i = 0; _i < ds_list_size(global.enemy_team); _i++){
-					var _unit = ds_list_find_value(global.enemy_team, _i);
+				for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
+					var _unit = ds_list_find_value(global.enemy_party_in_play, _i);
 					var _unit_deck = _unit._deck;
 					
 					//grab a card from their hand pool, have it as a variable
@@ -430,7 +431,8 @@ if (room == rm_encounter){
 				}
 			#endregion
 			//PASS
-			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;							
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;				
+			show_debug_message("obj player: done drawing cards");			
 		break;		
 		#endregion
 		
@@ -460,6 +462,7 @@ if (room == rm_encounter){
 			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
 				for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
 					var _card = ds_list_find_value(global.player_hand, _i);
+					show_debug_message("found card: " + _card._card_name);					
 					var _flag_usability = scr_check_usability(_card);
 					if (_flag_usability == true){
 						_card._active = true;
@@ -698,7 +701,10 @@ if (room == rm_encounter){
 			_card_selected._selected = false
 			_card_selected = undefined;		
 			
-			//PASS
+			//pass turn to enemy
+			global.fight_controller_state = FIGHT_CONTROLLER_STATE.ENEMY_TURN;
+				
+			//transition to idle
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.ENEMY_TURN_IDLE;	
 		break;		
 		#endregion
@@ -714,21 +720,25 @@ if (room == rm_encounter){
 		
 		
 		#region EXIT ENC
-		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter
-			
-			//Cleanup field- delete enemies
-			//Put cards back into deck (from exhaust and discard)
-			//Put any dead allies into graveyard
-			//Update any allies health, markings gain
+		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter			
+			//Update any allies health and Put any dead allies into graveyard
+			for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+				var _ref_creature = ds_list_find_value(global.player_party_in_play,_i); //get the creature at that spot
+				var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
+				//update the current hp to the permanent list
+				var _ref_original_creature = ds_list_find_value(global.player_party,_i); //get the creature at that spot
+				_ref_original_creature[?"curhp"] = _ref_hp_cur;
+				//if that hp turns out to be 0- the creature has died and is sent to the graveyard
+				if (_ref_hp_cur == 0){
+					ds_list_delete(global.player_party,ds_list_find_index(global.player_party,_ref_original_creature));
+					ds_list_add(global.graveyard,_ref_original_creature);
+				}
+			}	
+				
+			//Put cards back into deck (from exhaust and discard)			
 			scr_cards_cleanup();
 			
-			//confirm object
-			//Give out rewards:
-				//Markings gained
-				//Gold
-				//Cards
-				
-			// hosts the player encounter state/ow state flipping (enc goes paused, ow goes active)
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PAUSE;		
 		break;				
 		#endregion
 		

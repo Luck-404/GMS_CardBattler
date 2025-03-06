@@ -1,6 +1,6 @@
 function scr_card_stampede(){
-	for (var _i = 0; _i < ds_list_size(global.enemy_team); i++){
-		var _target = ds_list_find_value(global.enemy_team,_i);
+	for (var _i = 0; _i < ds_list_size(global.enemy_party); i++){
+		var _target = ds_list_find_value(global.enemy_party,_i);
 		//get 10% of max hp
 		var _10p = ceil((_target._creature_hp_max)*0.30);
 		_target._creature_hp_current -= abs(_target._creature_def-_10p);	

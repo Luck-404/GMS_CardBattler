@@ -3,7 +3,7 @@
 //																	//
 // > CREATES A CARD WITH MAPPED VALUES								//
 //////////////////////////////////////////////////////////////////////
-function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_color,_type,_archespec,_classspec,_goldcost,_exhaust) {
+function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_color,_type,_damage,_archespec,_classspec,_goldcost,_exhaust) {
     var _ref_new_card = ds_map_create();
     ds_map_add(_ref_new_card, "name", _name);
     ds_map_add(_ref_new_card, "description", _description);
@@ -13,6 +13,7 @@ function scr_create_card(_name, _description, _cost, _script, _sprite,_target,_c
     ds_map_add(_ref_new_card, "target", _target);
     ds_map_add(_ref_new_card, "color", _color);
     ds_map_add(_ref_new_card, "type", _type);
+    ds_map_add(_ref_new_card, "damage", _damage);	
     ds_map_add(_ref_new_card, "spec", _archespec);
     ds_map_add(_ref_new_card, "class", _classspec);	
     ds_map_add(_ref_new_card, "goldcost", _goldcost);
