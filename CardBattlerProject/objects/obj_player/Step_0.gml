@@ -186,8 +186,7 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 		if (((tilemap_get_at_pixel(_grass_layer, x, y) > 0) || (tilemap_get_at_pixel(_foliage_layer, x, y) > 0))) {
 				//spawn a transition if able to transition (20 steps)
 			if (global.step_count >= global.steps_rand && _flag_transition_start == false){
-				var _rand = irandom(100);
-				show_debug_message("TRYING ENCOUNTER" + string(_rand));				
+				var _rand = irandom(100);		
 				if (_rand > 50){ //trigger encounter (50% chance)	
 					_flag_transition_start = true;
 					global.steps_rand = irandom_range(10,15);
@@ -242,8 +241,9 @@ if (room == rm_encounter){
 	switch(global.player_enc_state){
 		#region INIT
 			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
-			show_debug_message("obj player: init");
 		
+			global.cur_mana = global.max_mana;
+			
 			////////////////////
 			// RANDOMIZE DECK //
 			////////////////////
@@ -252,9 +252,9 @@ if (room == rm_encounter){
 			////////////////
 			// SPAWN TEAM //
 			////////////////
-				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){					
+				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){					
 					//spawn the creature
-					var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
+					var _ref_creature = ds_list_find_value(global.player_party, _i);
 					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
 					//pass the creature the proper stats it needs
 					_ref_creature_instance._creature_name = _ref_creature[? "name"];
@@ -262,7 +262,7 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
 					_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
 					_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
-					_ref_creature_instance._creature_team = _ref_creature[? "team"];
+					_ref_creature_instance._creature_team = "Player";
 					_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
 					_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
 					_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
@@ -273,31 +273,24 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
-					ds_list_add(global.player_party_in_play, _ref_creature_instance);
 					_ref_creature_instance._creature_position = _i;
+					ds_list_add(global.player_party_in_play, _ref_creature_instance);
 				}
 				
 				//apply unit 'lefts' and 'rights'
 				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){		
 					var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
-						switch(_i){
-							case 0:
-								_ref_creature._left_unit = undefined;
-								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);	
-							break;
-							
-							case 4:
-								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
-								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);	
-							break;
-							
-							default:
-								_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
-								_ref_creature._right_unit = undefined;				
-							break;
-						}
-
+					if (_i == 0){
+						_ref_creature._left_unit = undefined;
+						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);	
+					} else if (_i == 4){
+						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
+						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);		
+					} else {
+						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
+						_ref_creature._right_unit = undefined;			
 					}
+				}
 
 			////////////////////////////
 			// ON-ENCOUNTER BLESSINGS //
@@ -309,9 +302,10 @@ if (room == rm_encounter){
 		break;
 		#endregion
 		
+		
+		
 		#region BEGIN TURN
-		case PLAYER_ENCOUNTER_STATE.BEGIN_TURN: //TURN BEGINS, PLAY TURN BEGIN EFFECTS
-			show_debug_message("obj player: begin turn");				
+		case PLAYER_ENCOUNTER_STATE.BEGIN_TURN: //TURN BEGINS, PLAY TURN BEGIN EFFECTS			
 			//////////////////////////////////////
 			// DECREMENT SHIELDS FROM LAST TURN //
 			//////////////////////////////////////
@@ -370,14 +364,13 @@ if (room == rm_encounter){
 		
 		#region DRAW
 		case PLAYER_ENCOUNTER_STATE.DRAW: //DRAW YOUR CARDS, DRAW ENEMY CARDS
-			show_debug_message("obj player: drawing cards");
 				
 			#region USER CARDS
 			/////////////////////
 			// DRAW USER CARDS //
 			/////////////////////
 				//see how many cards are in my hand
-				var _cards_in_deck = ds_list_size(global.player_deck);
+				var _cards_in_deck = ds_list_size(global.player_encounter_deck);
 				//see how many cards I can draw
 				var _amount_to_draw = global.max_hand_size;
 				var _extra = _cards_in_deck - _amount_to_draw;
@@ -413,26 +406,12 @@ if (room == rm_encounter){
 				for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
 					var _unit = ds_list_find_value(global.enemy_party_in_play, _i);
 					var _unit_deck = _unit._deck;
-					
-					//grab a card from their hand pool, have it as a variable
-					if (ds_list_size(_unit_deck) > 1){
-						var _card = ds_list_find_value(_unit_deck,0);
-						scr_init_enemy_card(_card,_unit); //spawn a enemy_card_object, draws itself, can show info on hover in 
-					}
-					
-					else if (ds_list_size(_unit_deck) == 1){
-						//draw a card normally
-						var _card = ds_list_find_value(_unit_deck,0);
-						scr_init_enemy_card(_card,_unit); //spawn a enemy_card_object, draws itself, can show info on hover in pick_card
-						
-						//reshuffle their discard pile into their hand for next turn to use
-						scr_shuffle_enemy_deck(_unit);
-					}
+					var _card = ds_list_find_value(_unit_deck,0);
+					scr_init_enemy_card(_card,_unit); //spawn a enemy_card_object, draws itself, can show info on hover in 
 				}
 			#endregion
 			//PASS
-			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;				
-			show_debug_message("obj player: done drawing cards");			
+			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;						
 		break;		
 		#endregion
 		
@@ -461,8 +440,7 @@ if (room == rm_encounter){
 		/////////////////
 			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
 				for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
-					var _card = ds_list_find_value(global.player_hand, _i);
-					show_debug_message("found card: " + _card._card_name);					
+					var _card = ds_list_find_value(global.player_hand, _i);			
 					var _flag_usability = scr_check_usability(_card);
 					if (_flag_usability == true){
 						_card._active = true;
@@ -472,7 +450,7 @@ if (room == rm_encounter){
 					//cards draw greyed or not depending on usability
 				}
 				//click on a card object
-				if (position_meeting(mouse_x, mouse_y, obj_card) && mouse_check_button_pressed(mb_left)){
+				if (position_meeting(mouse_x, mouse_y, obj_card) && instance_nearest(mouse_x, mouse_y, obj_card)._list == "hand" && mouse_check_button_pressed(mb_left)){
 					var _card = instance_nearest(mouse_x, mouse_y, obj_card);
 					if (_card._active != false){
 						//unselect all cards
@@ -484,7 +462,7 @@ if (room == rm_encounter){
 					
 						//select new card
 						_card._selected = true;
-						_card_selected = _card;
+						_card_selected = _card;				
 					
 						//once a card is selected PASS
 						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;
@@ -517,74 +495,75 @@ if (room == rm_encounter){
 		#region PICK CHANNEL
 		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
 		if (global.flag_gui_open == false){
-		////////////////
-		// TARGETLESS //
-		////////////////		
-		//if card is targetless, send to pick target to cast
-		if (_card_selected._flag_targetless == true){
-				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
-		}
-				
-		///////////////////
-		// HOVER EFFECTS //
-		///////////////////	
-			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
-			//Allies & Enemies //handled by obj_creature
-			//minions (ally and enemy) //handled by obj_minion
-			
-		/////////////////////
-		// HIGHLIGHT UNITS //
-		/////////////////////	
-		for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
-			var _unit = ds_list_find_value(global.player_party_in_play, _i);
-			//based on the card, highlight ally units that fit the criteria
-			var _check_channel = scr_check_chanellability(_unit,_card_selected);
-			
-			if(_check_channel == true){
-			_unit._active = true;
-			} else {
-			_unit._active = false;	
+			////////////////
+			// TARGETLESS //
+			////////////////		
+			//if card is targetless, send to pick target to cast
+			if (_card_selected._flag_targetless == true){
+					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
 			}
-		}
-					
-		//////////////
-		// END TURN //
-		//////////////
-		if (position_meeting(mouse_x, mouse_y, obj_end_turn) && mouse_check_button_pressed(mb_left)){
-			global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
-		}
-		
-		///////////////////////
-		// RIGHT CLICK / ESC //
-		///////////////////////	
-		if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
-			//unselect all cards
-			_card_selected._selected = false;
-			//reset user card selection
-			_card_selected = undefined;
-			//unselect channels
-			_channel_selected = undefined;
-			//send back one state
-			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
-		}			
 				
-		////////////////////
-		// SELECT CHANNEL //
-		////////////////////			
-		//select unit to cast through - err noise on improper units
+			///////////////////
+			// HOVER EFFECTS //
+			///////////////////	
+				//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
+				//Allies & Enemies //handled by obj_creature
+				//minions (ally and enemy) //handled by obj_minion
+			
+			/////////////////////
+			// HIGHLIGHT UNITS //
+			/////////////////////	
+			for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+				var _unit = ds_list_find_value(global.player_party_in_play, _i);
+				//based on the card, highlight ally units that fit the criteria
+				var _check_channel = scr_check_channelability(_unit,_card_selected);
+			
+				if(_check_channel == true){
+					_unit._active = true;
+				} else {
+					_unit._active = false;	
+				}
+			}
+					
+			//////////////
+			// END TURN //
+			//////////////
+			if (position_meeting(mouse_x, mouse_y, obj_end_turn) && mouse_check_button_pressed(mb_left)){
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
+			}
+		
+			///////////////////////
+			// RIGHT CLICK / ESC //
+			///////////////////////	
+			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
+				//unselect all cards
+				_card_selected._selected = false;
+				//reset user card selection
+				_card_selected = undefined;
+				//unselect channels
+				_channel_selected._selected_channel = false;
+				_channel_selected = undefined;
+				//send back one state
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+			}			
+				
+			////////////////////
+			// SELECT CHANNEL //
+			////////////////////			
+			//select unit to cast through - err noise on improper units
 			if (position_meeting(mouse_x, mouse_y, obj_creature) && mouse_check_button_pressed(mb_left)){
 				var _unit = instance_nearest(mouse_x, mouse_y, obj_creature);
 				if (_unit._active != false){
-					//unselect all cards
+					//unselect all creatures
 					with(obj_creature){
-						obj_creature._selected = false;
+						obj_creature._selected_channel = false;
 					}
 					//reset user card selection
 					_channel_selected = undefined;
 					
 					//select new card
-					_unit._selected = true;
-					_channel_selected = _card;
+					_unit._selected_channel = true;
+					_channel_selected = _unit;		
 					
 					//once a card is selected PASS
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
@@ -624,10 +603,13 @@ if (room == rm_encounter){
 			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
 				//unselect all cards
 				_card_selected._selected = false;
-				//reset user card selection
 				_card_selected = undefined;
 				//unselect channel unit
+				_channel_selected._selected_channel = false;
 				_channel_selected = undefined;
+				//unselect target unit
+				_target_selected._selected_target = false;
+				_target_selected = undefined;				
 				//if card is targetless, send to pick target
 				if (_card_selected._flag_targetless == true){
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;
@@ -656,17 +638,17 @@ if (room == rm_encounter){
 					var _unit = instance_nearest(mouse_x, mouse_y, obj_creature);
 					//unselect all cards
 					with(obj_creature){
-						obj_creature._selected = false;
+						obj_creature._selected_target = false;
 					}
 					//reset user card selection
 					_target_selected = undefined;
 					
 					//select new card
-					_unit._selected = true;
-					_target_selected = _card;
+					_unit._selected_target = true;
+					_target_selected = _unit;
 					
 					//if clicked- cast te spell, send back to pick card
-					scr_play_card(_card_selected._card_ref,_channel_selected,_target_selected);
+					scr_play_card(_card_selected,_channel_selected,_target_selected);
 			
 					//send back to pick card for another cast
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
@@ -684,22 +666,31 @@ if (room == rm_encounter){
 			// TRIGGER END TURN EFFECTS //
 			//////////////////////////////
 				//TODO
-
+			
+			with(obj_card_counter){
+				obj_card_counter._turn_lifespan--;
+			}
+			
 			//empty hand into discard pile
 			scr_discard_hand();
 			
 			//regen mana
 			global.cur_mana = global.max_mana;
 			
-			//set all variables to false/undefined
-			_target_selected._selected = false
-			_target_selected = undefined;
+			//reset player's selected and such
+			obj_player._card_selected = undefined;	
+			obj_player._channel_selected = undefined;
+			obj_player._target_selected = undefined;
 			
-			_channel_selected._selected = false
-			_channel_selected = undefined;	
+			with(obj_card){
+				obj_card._active = false;
+				obj_card._selected = false;
+			}
 			
-			_card_selected._selected = false
-			_card_selected = undefined;		
+			with(obj_creature){
+				obj_creature._selected_channel = false;
+				obj_creature._selected_target = false;
+			}			
 			
 			//pass turn to enemy
 			global.fight_controller_state = FIGHT_CONTROLLER_STATE.ENEMY_TURN;
@@ -720,20 +711,41 @@ if (room == rm_encounter){
 		
 		
 		#region EXIT ENC
-		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter			
+		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter	
+			with(obj_card){
+				obj_card._active = false;
+				obj_card._selected = false;
+			}
+			
+			//reset player's selected and such
+			obj_player._card_selected = undefined;	
+			obj_player._channel_selected = undefined;
+			obj_player._target_selected = undefined;
+			
+
+			
+			with(obj_creature){
+				obj_creature._selected_channel = false;
+				obj_creature._selected_target = false;
+			}			
+			
 			//Update any allies health and Put any dead allies into graveyard
-			for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-				var _ref_creature = ds_list_find_value(global.player_party_in_play,_i); //get the creature at that spot
-				var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
-				//update the current hp to the permanent list
-				var _ref_original_creature = ds_list_find_value(global.player_party,_i); //get the creature at that spot
-				_ref_original_creature[?"curhp"] = _ref_hp_cur;
-				//if that hp turns out to be 0- the creature has died and is sent to the graveyard
-				if (_ref_hp_cur == 0){
-					ds_list_delete(global.player_party,ds_list_find_index(global.player_party,_ref_original_creature));
-					ds_list_add(global.graveyard,_ref_original_creature);
-				}
-			}	
+			if (ds_list_size(global.player_party_in_play) != 0){
+				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+					var _ref_creature = ds_list_find_value(global.player_party_in_play,_i); //get the creature at that spot
+					var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
+					//update the current hp to the permanent list
+					var _ref_original_creature = ds_list_find_value(global.player_party,_i); //get the creature at that spot
+					_ref_original_creature[?"curhp"] = _ref_hp_cur;
+					//if that hp turns out to be 0- the creature has died and is sent to the graveyard
+					if (_ref_hp_cur == 0){
+						ds_list_delete(global.player_party,_i);
+						ds_list_add(global.graveyard,_ref_original_creature);
+					}
+				}	
+			} else {
+				
+			}
 				
 			//Put cards back into deck (from exhaust and discard)			
 			scr_cards_cleanup();

@@ -9,13 +9,16 @@
 if (_creature_hp_current <= 0 && _flag_has_died == false){
 	_creature_hp_current = 0;
 	_flag_has_died = true;
-	image_index = 3; //DEATH SPRITE STATE
-	if (_creature_team == "Ally"){ //IF ALLY
+	image_index = 1; //DEATH SPRITE STATE
+	if (_creature_team == "Player"){ //IF ALLY
 		ds_list_delete(global.player_party_in_play, _creature_position);
 		ds_list_add(global.player_party_dead,self);	
 	} else{ //IF ENEMY
+		if (_card_to_play != undefined){
+			instance_destroy(_card_to_play);	
+		}
 		ds_list_delete(global.enemy_party_in_play,_creature_position);
-		ds_list_add(global.enemy_party_dead,self);			
+		ds_list_add(global.enemy_party_dead,self);		
 	}
 }
 
@@ -23,14 +26,6 @@ if (_creature_hp_current <= 0 && _flag_has_died == false){
 // HOVER INTERACTIONS //
 ////////////////////////
 if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) && (global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CHANNEL || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_TARGET || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CARD)){
-	//enlarges self
-	if (_active){
-		draw_sprite_ext(sprite_index,0,x,y,1.5,1.5,0,c_white,1);
-	}
-	else {
-		draw_sprite_ext(sprite_index,0,x,y,1.5,1.5,0,c_grey,1);
-	}
-	
 	//draws info box
 	draw_set_color(c_grey);
 	draw_rectangle(mouse_x+10,mouse_y,mouse_x+155, mouse_y+75,false);
@@ -48,21 +43,12 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 	//TODO draw list of buffs/auras/HoTs
 	
 } 
-else {
-	if(_active){
-		draw_self();
-	}
-	else { //draw greyed if
-		draw_sprite_ext(sprite_index,0,x,y,1.0,1.0,0,c_grey,1);
-	}
-}
-
 /////////////////////
 // DRAW HEALTH BAR //
 /////////////////////
 // Set the drawing color for the health bar (green)
 draw_set_color(c_green);
-
+draw_set_font(fnt_fanwood);
 // Calculate the width of the health bar based on current health
 var _health_bar_width = 100 * (_creature_hp_current / _creature_hp_max);
 
@@ -92,4 +78,13 @@ draw_circle(_defense_x, _defense_y, _defense_circle_radius, false);  // Draw the
 
 // Draw the defense number inside the circle
 draw_set_color(c_white);
-draw_text(_defense_x - 4, _defense_y - 5, string(_creature_def));  // Display the defense value inside the circle
+draw_text(_defense_x-8, _defense_y - 17, string(_creature_def));  // Display the defense value inside the circle
+
+///////////////////
+// DRAW COUNTERS //
+///////////////////
+
+//stun
+if(_stunned){
+	//TODO show stun icon
+}

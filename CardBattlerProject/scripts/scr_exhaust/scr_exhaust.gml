@@ -5,14 +5,30 @@ function scr_exhaust(_card){
 	ds_list_delete(global.player_hand, ds_list_find_index(global.player_hand,_card));
 	//add to discard pile
 	ds_list_add(global.player_exhaust_pile,_card);
+	_card._list = "exhaust";
+	_card.x = 1600;
+	_card.y = 1000;
+	
+	with(obj_card){
+		obj_card._active = false;
+		obj_card._selected = false;
+	}
 
+	with(obj_creature){
+		obj_creature._selected_target = false;
+		obj_card._selected_channel = false;
+	}
 	//reset player's selected and such
-	obj_player._channel_selected._selected = false;
+	if(obj_player._card_selected != undefined){
+		obj_player._card_selected._selected = false;
+	}
+	obj_player._card_selected = undefined;	
+	if(obj_player._channel_selected != undefined){	
+		obj_player._channel_selected._selected_channel = false;
+	}
 	obj_player._channel_selected = undefined;
-	obj_player._target_selected._selected = false;
+	if(obj_player._target_selected != undefined){		
+		obj_player._target_selected._selected_target = false;
+	}
 	obj_player._target_selected = undefined;
-
-	//destroy the card object
-	instance_destroy(obj_player._card_selected);
-	obj_player._card_selected = undefined;
 }

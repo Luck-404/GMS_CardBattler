@@ -39,12 +39,12 @@ _move_down = 0;
 	
 //deck stuff
 _flag_deck_created = false;
-global.player_deck = ds_list_create(); //create inventory
-global.player_hand = ds_list_create(); //create hand to hold in an encounter turn
-global.player_discard_pile = ds_list_create(); //create discard pile
-global.player_exhaust_pile = ds_list_create(); //create exhaust pile
+global.player_deck = ds_list_create(); //create inventory (list of dsmaps)
+global.player_encounter_deck = ds_list_create(); //create encounter inventory (card objects)
+global.player_hand = ds_list_create(); //create hand to hold in an encounter turn (card objects)
+global.player_discard_pile = ds_list_create(); //create discard pile (card objects)
+global.player_exhaust_pile = ds_list_create(); //create exhaust pile (card objects)
 _card_selected = undefined;
-_channel_selected = undefined;
 global.echo_count = 0;
 
 //creature stuff
@@ -53,13 +53,14 @@ global.player_party = ds_list_create();
 global.player_party_in_play = ds_list_create(); 
 global.player_party_dead = ds_list_create();
 global.graveyard = ds_list_create(); 
+_channel_selected = undefined;
 _target_selected = undefined;
 
 //blessings
 global.player_blessings_list = ds_list_create();
 
 //general stats
-global.max_hand_size = 3; // Maximum of 3 cards in the hand
+global.max_hand_size = 4; // Maximum of 3 cards in the hand
 global.max_hand_size_saved = global.max_hand_size;
 global.cur_hand_size = global.max_hand_size;
 

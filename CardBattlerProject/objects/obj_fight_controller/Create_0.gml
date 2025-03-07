@@ -37,6 +37,8 @@ _flag_timer_5 = false;
 _flag_unit_5_went = false;
 _flag_end_timer = false;
 
+_flag_enc_reward_timer = false;
+
 //state enumerator
 enum FIGHT_CONTROLLER_STATE {
 	SPAWN_ENEMIES,

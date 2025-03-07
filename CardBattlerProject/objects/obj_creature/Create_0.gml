@@ -6,7 +6,7 @@ _creature_champion = false;
 _creature_color1 = "Uncolored";
 _creature_color2 = "None";
 _creature_subtype = "None";
-_creature_team = "Ally";
+_creature_team = "Player";
 _creature_breed = "Default";
 _creature_hp_max = 50;
 _creature_hp_current = 50;
@@ -26,8 +26,14 @@ _creature_attack_linear = 0;
 _turn_available = true;
 _creature_position = 0;
 _active = false;
-_selected = false;
+_selected_channel = false;
+_selected_target = false;
+_card_to_play = undefined;
+_left_unit = undefined;
+_right_unit = undefined;
 
+_stunned = false;
+_poison_count = 0;
 
 _deck = ds_list_create();
 _discard = ds_list_create();

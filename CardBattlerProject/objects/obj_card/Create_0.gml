@@ -15,3 +15,5 @@ _flag_targetless = false;
 _card_ref = undefined;
 _active = true;
 _selected = false;
+_list = undefined;
+_reward = false;

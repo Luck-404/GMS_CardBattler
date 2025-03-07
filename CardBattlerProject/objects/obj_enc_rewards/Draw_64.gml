@@ -30,6 +30,9 @@ var _rand_rewards = irandom_range(1,3);
 //display 2 the 2 new temp card objects with sprites
 var _ref_card1 = instance_create_layer(room_width/2,room_height/2+100,"GUI", obj_card);
 _ref_card1.depth = -101;
+_ref_card1._reward = true;
+_ref_card1.image_index = 0;
+_ref_card1.image_speed = 0;
 _ref_card1.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-1)[?"sprite"];
 _ref_card1.image_xscale = 0.20;
 _ref_card1.image_yscale = 0.20;
@@ -37,6 +40,9 @@ _ref_card1.image_yscale = 0.20;
 if (_rand_rewards > 1){
 var _ref_card2 = instance_create_layer(room_width/2-100,room_height/2+100,"GUI", obj_card);
 _ref_card2.depth = -101;
+_ref_card2._reward = true;
+_ref_card2.image_index = 0;
+_ref_card2.image_speed = 0;
 _ref_card2.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
 _ref_card2.image_xscale = 0.20;
 _ref_card2.image_yscale = 0.20;		
@@ -44,6 +50,9 @@ _ref_card2.image_yscale = 0.20;
 if (_rand_rewards >2 ){
 var _ref_card3 = instance_create_layer(room_width/2+100,room_height/2+100,"GUI", obj_card);
 _ref_card3.depth = -101;
+_ref_card3._reward = true;
+_ref_card3.image_index = 0;
+_ref_card3.image_speed = 0;
 _ref_card3.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
 _ref_card3.image_xscale = 0.20;
 _ref_card3.image_yscale = 0.20;	
@@ -58,7 +67,7 @@ if (_type == "win"){
 	draw_set_color(c_white);
 	draw_set_font(fnt_fanwood);
 	draw_text(room_width/2-100,room_height/2-100,"You've won!");
-	draw_text(room_width/2-100,room_height/2-80,"Gained " + strig(global.gold_randomizer) + " gold!");
+	draw_text(room_width/2-100,room_height/2-80,"Gained " + string(global.gold_randomizer) + " gold!");
 	draw_text(room_width/2-100,room_height/2-60,"Gained cards:");
 }
 
@@ -90,6 +99,7 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 		_clicked = true;
 		global.flag_gui_open = false;
 		scr_transition("overworld","return","Any","Any");
+		instance_destroy();
 	}
 	else if(_type == "loss"){
 		_clicked = true;
@@ -97,17 +107,21 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 		//start transition to title
 		global.flag_gui_open = false;		
 		scr_transition("main menu","loss","Any","Any");	
+		instance_destroy();
 	}
 	else if(_type == "forfeit"){
 		_clicked = true;
 		global.flag_gui_open = false;		
 		//on forfeit confirm
 		//take 25% max hp from all units
-		for (var _creatureindex = 0; _creatureindex < ds_list_size(global.player_party); _creatureindex++){
-			var _ref_unit = ds_list_find_value(global.player_party,_creatureindex);
-			_ref_unit[?"curhp"] = _ref_unit[?"curhp"]- floor((_ref_unit[?"maxhp"])*0.75);
+		for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
+			var _ref_unit = ds_list_find_value(global.player_party, _i);
+			var _cur_hp = _ref_unit[?"curhp"];
+			_cur_hp = floor(_cur_hp * 0.75);
+			_ref_unit[?"curhp"] = _cur_hp;
 		}
 		//start transition to overworld
 		scr_transition("overworld","return","Any","Any");
+		instance_destroy();
 	}
 }

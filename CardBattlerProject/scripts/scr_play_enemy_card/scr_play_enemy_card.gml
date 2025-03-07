@@ -3,21 +3,21 @@
 //																	//
 // > PLAYS THE ENEMY CARD BASED ON WHAT TYPE OF CARD IT IS.		    //
 //////////////////////////////////////////////////////////////////////
-function scr_play_enemy_card(_ref_unit){
-	var _card = _ref_unit._ref_card;
-	var _ref_card_scr = _card[?"script"];
+function scr_play_enemy_card(_ref_unit,_playing_card){
+	var _card_ref = _playing_card._card_ref;
+	var _ref_card_scr = _card_ref[?"script"];
 		
-	switch (_card[?"type"]){
+	switch (_card_ref[?"type"]){
 		case "Attack":
 			//pick a random enemy target
 			var _ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
 			var _ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
-			_ref_card_scr(_ref_tar);
+			_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
 		break;
 		
 		case "Defend":
 			//pick self
-			_ref_card_scr(_ref_unit);
+			_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
 		break;
 		
 		case "Heal":
@@ -29,7 +29,13 @@ function scr_play_enemy_card(_ref_unit){
 					_ref_tar = _cursor;
 				}
 			 }
-			_ref_card_scr(_ref_tar);
+			_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
 		break;		
 	}
+	
+	//put the card at the back of the unit's deck
+	ds_list_add(_ref_unit._deck,_card_ref);
+	ds_list_delete(_ref_unit._deck,0);
+	instance_destroy(_playing_card);
+	_ref_unit._card_to_play = undefined;	
 }
