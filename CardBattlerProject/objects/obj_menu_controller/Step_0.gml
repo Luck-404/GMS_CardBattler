@@ -129,7 +129,7 @@ if (room != rm_main_menu){
 	/////////////////////////////////////////
 	// ESCAPE OPENS/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
-	if (keyboard_check_pressed(vk_escape) && !instance_exists(obj_enc_rewards)){
+	if (keyboard_check_pressed(vk_escape) && !instance_exists(obj_enc_rewards) && instance_exists(obj_fight_controller) && (global.fight_controller_state != FIGHT_CONTROLLER_STATE.ENEMY_TURN)){
 		 if (global.flag_gui_open == false){
 			 global.player_ow_state = PLAYER_OW_STATE.INTERACT;
 			 obj_player._move_speed = 0;

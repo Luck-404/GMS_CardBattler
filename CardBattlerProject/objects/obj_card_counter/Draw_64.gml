@@ -1,4 +1,4 @@
-if (_turn_lifespan == 0){
+if (_turn_lifespan <= 0){
 	_reference_script(_target,false);
 	instance_destroy();
 }

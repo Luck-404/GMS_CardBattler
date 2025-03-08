@@ -1,4 +1,4 @@
-function scr_calculate_color_damage_bonus(_channeller, _base_damage, _target) {
+function scr_calculate_color_damage_bonus(_channeller, _target) {
     var _channeller_color = _channeller._creature_color1;  // Assuming unit has a "color" variable
     var _target_color = _target._creature_color1;  // Assuming unit has a "color" variable
     var _multiplier = 1;  // Default multiplier (neutral interaction)
@@ -22,10 +22,5 @@ function scr_calculate_color_damage_bonus(_channeller, _base_damage, _target) {
         
         // Add more cases if you have additional colors/elements
     }
-
-	if (_base_damage < 1.01){ //% scalar
-		return (100*_base_damage)* _multiplier;
-	} else {
-		return _base_damage * _multiplier; 
-	}
+		return _multiplier; 
 }

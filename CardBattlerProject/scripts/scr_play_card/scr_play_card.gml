@@ -11,56 +11,57 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 	// TARGETLESS //
 	////////////////
 	if (_target_creature == "Targetless"){
-		switch(_card_script){
-			case scr_card_echo:
-				if (global.echo_count != 0){
-					global.echo_count += 1;
-				} else {
-					for (var _j = -1; _j < global.echo_count; _j++){	
-						audio_play_sound(snd_effect_echoing,0,false);	
-						_card_script(_card_ref,_channel_creature,_target_creature);
-					}
-					global.echo_count = 0;
-					//subract cost once
-					global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
-				}
-				scr_exhaust(_card);
-			break;
-			
-			default:
+		if (global.echo_count != 0){
+			var _tmp = global.echo_count;
+			for (var _j = -1; _j < _tmp; _j++){	
+				audio_play_sound(snd_effect_echoing,0,false);	
 				_card_script(_card_ref,_channel_creature,_target_creature);
-				//subract cost once
-				global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
-				if (_card_ref[?"exhausts"] == true){
-					scr_exhaust(_card);
-				}
-				else {
-					scr_discard(_card);
-				}
-			break;
+			}
+			global.echo_count = 0;
+		} else {
+			_card_script(_card_ref,_channel_creature,_target_creature);
+		}
+		//subract cost once
+		global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
+		if (_card_ref[?"exhausts"] == true){
+			scr_exhaust(_card);
+		}
+		else {
+			scr_discard(_card);
+		}
+	} 
+	else {
+	
+		//////////////////////
+		// HANDLE MANA COST //
+		//////////////////////	
+		global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
+
+		//////////
+		// CAST //
+		//////////
+		if (global.echo_count != 0){
+			var _tmp = global.echo_count;
+			for (var _j = -1; _j < _tmp; _j++){	
+				audio_play_sound(snd_effect_echoing,0,false);	
+				_card_script(_card_ref,_channel_creature,_target_creature);
+			}
+			global.echo_count = 0;
+		} else {
+			_card_script(_card_ref,_channel_creature,_target_creature);
+		}
+		
+		//////////////////////////////////
+		// HANDLE DISCARDING/EXHAUSTING //
+		//////////////////////////////////
+		if (_card_ref[?"exhausts"] == true){
+			scr_exhaust(_card);
+		}
+		else {
+			scr_discard(_card);
 		}
 	}
-	
-	//////////////////////
-	// HANDLE MANA COST //
-	//////////////////////	
-	global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
-
-	//////////
-	// CAST //
-	//////////
-	_card_script(_card_ref,_channel_creature,_target_creature);
-
-	//////////////////////////////////
-	// HANDLE DISCARDING/EXHAUSTING //
-	//////////////////////////////////
-	if (_card_ref[?"exhausts"] == true){
-		scr_exhaust(_card);
-	}
-	else {
-		scr_discard(_card);
-	}
-	
+		
 	/////////////////////////////////////////
 	// RESET PLAYER VARIABLES FOR NEW CAST //
 	/////////////////////////////////////////
@@ -75,8 +76,12 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 	}
 			
 	with(obj_creature){
+		obj_creature._active = false;
 		obj_creature._selected_channel = false;
 		obj_creature._selected_target = false;
 	}			
+	
+	obj_player._flag_check_card = false;
+	obj_player._flag_check_channel = false;
 			
 }

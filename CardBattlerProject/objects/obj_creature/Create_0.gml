@@ -10,8 +10,8 @@ _creature_team = "Player";
 _creature_breed = "Default";
 _creature_hp_max = 50;
 _creature_hp_current = 50;
-_creature_spec = "All";
-_creature_class = "All";
+_creature_spec = "Any";
+_creature_class = "Any";
 _creature_gear = ds_list_create(); //can start with these if wanted
 _creature_markings = ds_list_create(); //can start with these if wanted
 _creature_sprite = spr_creature_uncolored_wraith;
@@ -32,8 +32,26 @@ _card_to_play = undefined;
 _left_unit = undefined;
 _right_unit = undefined;
 
+
+//CC counters
 _stunned = false;
+_stun_counter_ref = undefined;
+
+//DOT Counters
 _poison_count = 0;
+_poison_counter_ref = undefined;
+
+//Buff counters
+_buffs = ds_list_create();
+
+//other counters
+//_poison_count = 0;
+//_poison_counter_ref = undefined;
+//_poison_count = 0;
+//_poison_counter_ref = undefined;
+//_poison_count = 0;
+//_poison_counter_ref = undefined;
+//_poison_count = 0;
 
 _deck = ds_list_create();
 _discard = ds_list_create();

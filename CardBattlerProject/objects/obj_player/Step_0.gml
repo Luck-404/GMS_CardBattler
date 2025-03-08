@@ -241,8 +241,6 @@ if (room == rm_encounter){
 	switch(global.player_enc_state){
 		#region INIT
 			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
-		
-			global.cur_mana = global.max_mana;
 			
 			////////////////////
 			// RANDOMIZE DECK //
@@ -274,23 +272,27 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
 					_ref_creature_instance._creature_position = _i;
+					
+					//_ref_creature_instance._creature_attack_linear = 1;
+					//_ref_creature_instance._creature_attack_scalar = 2;
 					ds_list_add(global.player_party_in_play, _ref_creature_instance);
 				}
 				
-				//apply unit 'lefts' and 'rights'
-				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){		
-					var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
-					if (_i == 0){
-						_ref_creature._left_unit = undefined;
-						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);	
-					} else if (_i == 4){
-						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
-						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i+1);		
-					} else {
-						_ref_creature._right_unit = ds_list_find_value(global.player_party_in_play, _i-1);	
-						_ref_creature._right_unit = undefined;			
-					}
-				}
+		for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++) {		
+			var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
+			var _ref_left_creature = undefined;
+			var _ref_right_creature = undefined;
+			
+			if (ds_list_find_value(global.player_party_in_play, _i-1) != undefined){
+				_ref_left_creature = ds_list_find_value(global.player_party_in_play, _i-1);
+			}
+			if (ds_list_find_value(global.player_party_in_play, _i+1) != undefined){
+				_ref_right_creature = ds_list_find_value(global.player_party_in_play, _i+1);
+			}
+			
+			_ref_creature._left_unit = _ref_left_creature;
+			_ref_creature._right_unit = _ref_right_creature;
+		}		
 
 			////////////////////////////
 			// ON-ENCOUNTER BLESSINGS //
@@ -439,19 +441,27 @@ if (room == rm_encounter){
 		// SELECT CARD //
 		/////////////////
 			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
-				for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
-					var _card = ds_list_find_value(global.player_hand, _i);			
-					var _flag_usability = scr_check_usability(_card);
-					if (_flag_usability == true){
-						_card._active = true;
-					} else {
-						_card._active = false;
+				if (_flag_check_card == false){
+
+					_flag_check_card = true;
+					for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
+						var _card = ds_list_find_value(global.player_hand, _i);		
+						if (_card._active == false){
+							var _flag_usability = scr_check_usability(_card);
+							if (_flag_usability == true){
+								_card._active = true;
+							} else {
+								_card._active = false;
+							}
+						}
+						//cards draw greyed or not depending on usability
 					}
-					//cards draw greyed or not depending on usability
 				}
+				
 				//click on a card object
 				if (position_meeting(mouse_x, mouse_y, obj_card) && instance_nearest(mouse_x, mouse_y, obj_card)._list == "hand" && mouse_check_button_pressed(mb_left)){
 					var _card = instance_nearest(mouse_x, mouse_y, obj_card);
+
 					if (_card._active != false){
 						//unselect all cards
 						with(obj_card){
@@ -495,13 +505,6 @@ if (room == rm_encounter){
 		#region PICK CHANNEL
 		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
 		if (global.flag_gui_open == false){
-			////////////////
-			// TARGETLESS //
-			////////////////		
-			//if card is targetless, send to pick target to cast
-			if (_card_selected._flag_targetless == true){
-					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
-			}
 				
 			///////////////////
 			// HOVER EFFECTS //
@@ -513,15 +516,21 @@ if (room == rm_encounter){
 			/////////////////////
 			// HIGHLIGHT UNITS //
 			/////////////////////	
-			for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
-				var _unit = ds_list_find_value(global.player_party_in_play, _i);
-				//based on the card, highlight ally units that fit the criteria
-				var _check_channel = scr_check_channelability(_unit,_card_selected);
+			if (_flag_check_channel == false){
+
+				_flag_check_channel = true;			
+				for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+					var _unit = ds_list_find_value(global.player_party_in_play, _i);
+					if (_unit._active == false){					
+						//based on the card, highlight ally units that fit the criteria
+						var _check_channel = scr_check_channelability(_unit,_card_selected);
 			
-				if(_check_channel == true){
-					_unit._active = true;
-				} else {
-					_unit._active = false;	
+						if(_check_channel == true){
+							_unit._active = true;
+						} else {
+							_unit._active = false;	
+						}
+					}
 				}
 			}
 					
@@ -541,8 +550,19 @@ if (room == rm_encounter){
 				//reset user card selection
 				_card_selected = undefined;
 				//unselect channels
-				_channel_selected._selected_channel = false;
-				_channel_selected = undefined;
+				if (_channel_selected != undefined){
+					_channel_selected._selected_channel = false;
+					_channel_selected = undefined;
+				}
+				
+				_flag_check_card = false;
+				_flag_check_channel = false;
+					
+				with (obj_creature){
+					obj_creature._active = false;
+					obj_creature._selected_channel = false;
+					obj_creature._selected_target = false;
+				}
 				//send back one state
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 			}			
@@ -601,22 +621,36 @@ if (room == rm_encounter){
 			// RIGHT CLICK / ESC //
 			///////////////////////
 			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
-				//unselect all cards
-				_card_selected._selected = false;
-				_card_selected = undefined;
-				//unselect channel unit
-				_channel_selected._selected_channel = false;
-				_channel_selected = undefined;
-				//unselect target unit
-				_target_selected._selected_target = false;
-				_target_selected = undefined;				
-				//if card is targetless, send to pick target
+				var _dest = undefined;
 				if (_card_selected._flag_targetless == true){
-					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;
+					//unselect all cards
+					_card_selected._selected = false;
+					_card_selected = undefined;					
+					_dest = PLAYER_ENCOUNTER_STATE.PICK_CARD;
 				} else {
-					//send back one state
-					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;	
+					_dest = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;	
+				}		
+
+				//unselect channel unit
+				if (_channel_selected != undefined){
+					_channel_selected._selected_channel = false;
+					_channel_selected = undefined;
 				}
+				//unselect target unit
+				if (_target_selected != undefined){				
+					_target_selected._selected_target = false;
+					_target_selected = undefined;		
+				}
+				with (obj_creature){
+					obj_creature._active = false;
+					obj_creature._selected_channel = false;
+					obj_creature._selected_target = false;
+				}				
+				
+				_flag_check_card = false;
+				_flag_check_channel = false;
+				
+				global.player_enc_state = _dest;
 			}						
 			
 			////////////////
@@ -625,7 +659,7 @@ if (room == rm_encounter){
 			//if targetless, prompt to click anywhere
 			if (_card_selected._flag_targetless == true){
 			//if clicked- cast te spell, send back to pick card
-				scr_play_card(_card_selected._card_ref,_channel_selected,"Targetless");
+				scr_play_card(_card_selected,_channel_selected,"Targetless");
 				//send back to pick card for another cast
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 			} 
@@ -666,16 +700,23 @@ if (room == rm_encounter){
 			// TRIGGER END TURN EFFECTS //
 			//////////////////////////////
 				//TODO
-			
-			with(obj_card_counter){
-				obj_card_counter._turn_lifespan--;
+
+			with (obj_card_counter) {
+			if (_counter_team == "Player" && _target == "Targetless"){
+		        _turn_lifespan--;
+				_trigger_my_effect = true;
+			}			
+			else if (_target != "Targetless" && _target._creature_team == "Player") {
+			    _turn_lifespan--;
+				_trigger_my_effect = true;
+			}				
 			}
 			
 			//empty hand into discard pile
 			scr_discard_hand();
 			
 			//regen mana
-			global.cur_mana = global.max_mana;
+			global.cur_mana = global.max_mana+global.bonus_mana;
 			
 			//reset player's selected and such
 			obj_player._card_selected = undefined;	
@@ -688,9 +729,13 @@ if (room == rm_encounter){
 			}
 			
 			with(obj_creature){
+				obj_creature._active = false;
 				obj_creature._selected_channel = false;
 				obj_creature._selected_target = false;
 			}			
+			
+			obj_player._flag_check_card = false;
+			obj_player._flag_check_channel = false;
 			
 			//pass turn to enemy
 			global.fight_controller_state = FIGHT_CONTROLLER_STATE.ENEMY_TURN;
@@ -728,6 +773,13 @@ if (room == rm_encounter){
 				obj_creature._selected_channel = false;
 				obj_creature._selected_target = false;
 			}			
+			
+			while(ds_list_size(global.encounter_utility_active) != 0){
+				var _counter = ds_list_find_value(global.encounter_utility_active, _i);	
+				ds_list_delete(global.encounter_utility_active,_i);
+				instance_destroy(_counter);
+			}
+			ds_list_clear(global.encounter_utility_active);
 			
 			//Update any allies health and Put any dead allies into graveyard
 			if (ds_list_size(global.player_party_in_play) != 0){

@@ -46,6 +46,7 @@ global.player_discard_pile = ds_list_create(); //create discard pile (card objec
 global.player_exhaust_pile = ds_list_create(); //create exhaust pile (card objects)
 _card_selected = undefined;
 global.echo_count = 0;
+_flag_check_card = false;
 
 //creature stuff
 _flag_party_spawned = false;
@@ -55,21 +56,25 @@ global.player_party_dead = ds_list_create();
 global.graveyard = ds_list_create(); 
 _channel_selected = undefined;
 _target_selected = undefined;
+_flag_check_channel = false;
 
 //blessings
 global.player_blessings_list = ds_list_create();
 
 //general stats
-global.max_hand_size = 4; // Maximum of 3 cards in the hand
+global.max_hand_size = 3; // Maximum of 3 cards in the hand
 global.max_hand_size_saved = global.max_hand_size;
 global.cur_hand_size = global.max_hand_size;
 
 global.max_mana_saved = 3;
 global.max_mana = 3;
 global.cur_mana = 3;
+global.bonus_mana = 0;
 
 global.gold = 0;
 global.gold_randomizer = 0;
+
+global.encounter_utility_active = ds_list_create();
 
 // CAMERA 
 _flag_created_camera = false; 

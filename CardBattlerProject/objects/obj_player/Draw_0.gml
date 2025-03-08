@@ -14,6 +14,9 @@ if (room == rm_encounter){
 	draw_text(1400,850,"discard: " + string(ds_list_size(global.player_discard_pile)));
 	draw_text(1600,850,"exhaust: " + string(ds_list_size(global.player_exhaust_pile)));	
 	draw_text(100,100,"mana: " + string(global.cur_mana) + "/" + string(global.max_mana));
+	if (global.echo_count != 0){
+		draw_text(100,130,"echo count: " + string(global.echo_count));	
+	}
 }
 
 if (_card_selected != undefined && _channel_selected == undefined){

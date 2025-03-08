@@ -21,9 +21,12 @@ _list_patrons = ds_list_create();
 scr_populate_patrons(_list_patrons);
 
 //make an object for each patron
+var _spacing = 40;
+var _total_width = (ds_list_size(_list_patrons) - 1) * _spacing;
+var _start_x = (room_width / 2) - (_total_width / 2);
 for (var _i = 0; _i < ds_list_size(_list_patrons); _i++){
 	//_xloc = spread out along the x coordinate
-	var _new_button = instance_create_layer(x+(50*_i),y-200,"GUI",obj_gui_new_game_patron_button);//close
+	var _new_button = instance_create_layer(_start_x+(_i*_spacing),y-200,"GUI",obj_gui_new_game_patron_button);//close
 	var _patron = ds_list_find_value(_list_patrons, _i);
 	var _sigil = ds_map_find_value(_patron, "Sigil");
 	var _name = ds_map_find_value(_patron, "Name");

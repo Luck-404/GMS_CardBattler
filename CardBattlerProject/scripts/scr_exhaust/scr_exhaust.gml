@@ -15,6 +15,7 @@ function scr_exhaust(_card){
 	}
 
 	with(obj_creature){
+		obj_creature._active = false;
 		obj_creature._selected_target = false;
 		obj_card._selected_channel = false;
 	}

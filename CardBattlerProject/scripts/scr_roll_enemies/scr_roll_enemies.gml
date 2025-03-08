@@ -14,21 +14,26 @@ function scr_roll_enemies(_room_type, _num_enemies) {
 				switch(_unit_picked){
 					case 1:
 						//create a bush monkey
-						_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
+						//_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"Martial","Adventurer",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
+						_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",100,"Martial","Adventurer",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);
 					break;
 					
 					case 2:
 						//create a corpseflower
-						_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"All","All",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						//_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"Magical","Summoner",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",30,"Magical","Summoner",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);						
 					break;
 					
 					case 3:
 						//create a furn
-						_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"All","All",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						//_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"Technical","Hunter",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",50,"Technical","Hunter",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);						
 					break;
@@ -41,23 +46,23 @@ function scr_roll_enemies(_room_type, _num_enemies) {
 				//randomly select a unit from the 3 possible
 				_unit_picked = irandom_range(1,3);
 				switch(_unit_picked){
-					case 1:
+						case 1:
 						//create a bush monkey
-						_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
+						_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"Martial","Adventurer",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);
 					break;
 					
 					case 2:
 						//create a corpseflower
-						_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"All","All",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"Magical","Summoner",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);						
 					break;
 					
 					case 3:
 						//create a furn
-						_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"All","All",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"Technical","Hunter",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);						
 					break;
@@ -72,21 +77,21 @@ function scr_roll_enemies(_room_type, _num_enemies) {
 				switch(_unit_picked){
 					case 1:
 						//create a bush monkey
-						_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
+						_new_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"Martial","Adventurer",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);				
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);
 					break;
 					
 					case 2:
 						//create a corpseflower
-						_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"All","All",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						_new_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"Magical","Summoner",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);						
 					break;
 					
 					case 3:
 						//create a furn
-						_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"All","All",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+						_new_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"Technical","Hunter",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 						//add them to enemy team
 						ds_list_add(global.enemy_party, _new_creature);						
 					break;

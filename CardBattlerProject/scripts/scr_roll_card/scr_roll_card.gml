@@ -46,7 +46,7 @@ function scr_roll_card(_rarity) {
             break;
 			
         case "rare":
-			_rand = choose("echo","inspire","bash","remedy");
+			_rand = choose("echo","inspire","bash","remedy","manavine");
 			switch(_rand){
 				case "echo":			
 					 _card = scr_create_card("Echo", "Repeat next spell for free, exhaust", 0, scr_card_echo, spr_card_echo, "None", "Uncolored", "Utility", 0, "Any", "Any", irandom_range(40,60), true);
@@ -59,6 +59,9 @@ function scr_roll_card(_rarity) {
 				break;	
 				case "remedy":			
 					 _card = scr_create_card("Nature's Remedy", "Heal a unit for 30% HP", 2, scr_card_natures_remedy, spr_card_natures_remedy, "Any", "Green", "Heal", 0, "Magical", "Any", irandom_range(40,60), true);	
+				break;	
+				case "manavine":			
+					 _card = scr_create_card("Grow Manavine", "Add 2 extra mana to the pool for 3 turns, exhaust", 3, scr_card_grow_manavine, spr_card_grow_manavine, "None", "Green", "Utility", 0, "Technical", "Any", 20, true);	
 				break;					
 			}
 		break;

@@ -20,12 +20,24 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 			_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
 		break;
 		
+		case "Buff":
+			//pick self
+			_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+		break;
+		
+		case "DoT":
+			//pick a random enemy target
+			_ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
+			_ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
+			_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+		break;		
+		
 		case "Heal":
 			//pick lowest hp ally
 			_ref_tar = _ref_unit;
 			 for(var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
 				_cursor = ds_list_find_value(global.enemy_party_in_play, _i);
-				if (_cursor._creature_hp_current < _ref_tar._creature_hp_current){
+				if ((_cursor._creature_hp_current/_cursor._creature_hp_max) < (_ref_tar._creature_hp_current/_ref_tar._creature_hp_max)){
 					_ref_tar = _cursor;
 				}
 			 }

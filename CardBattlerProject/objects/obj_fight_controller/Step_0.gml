@@ -31,6 +31,22 @@ switch(global.fight_controller_state){
 			ds_list_add(global.enemy_party_in_play, _ref_creature_instance);		
 			_ref_creature_instance._creature_position = ds_list_find_index(global.enemy_party_in_play,_ref_creature_instance);			
 		}	
+		
+		//apply unit 'lefts' and 'rights'
+		for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){		
+			var _ref_creature = ds_list_find_value(global.enemy_party_in_play, _i);
+			var _ref_left_creature = undefined;
+			var _ref_right_creature = undefined;
+			if (ds_list_find_value(global.enemy_party_in_play, _i-1) != undefined){
+				_ref_left_creature = ds_list_find_value(global.enemy_party_in_play, _i-1);
+			}
+			if (ds_list_find_value(global.enemy_party_in_play, _i+1) != undefined){
+				_ref_right_creature = ds_list_find_value(global.enemy_party_in_play, _i+1);
+			}
+			
+			_ref_creature._left_unit = _ref_left_creature;
+			_ref_creature._right_unit = _ref_right_creature;
+		}		
 		global.fight_controller_state = FIGHT_CONTROLLER_STATE.PLAYER_TURN;
 	break;
 	#endregion
@@ -43,6 +59,19 @@ switch(global.fight_controller_state){
 	
 	#region ENEMY TURN
 	case FIGHT_CONTROLLER_STATE.ENEMY_TURN:
+	///////////////////////
+	// DECREMENT SHIELDS //
+	///////////////////////
+	if (_flag_shields_handled == false){
+		_flag_shields_handled = true;
+		//for each unit in player's party
+		for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
+			var _unit = ds_list_find_value(global.enemy_party_in_play, _i);
+			//if the unit has a shield, halve it- diff amounts for different classes
+			scr_decrement_shields(_unit);
+		}
+	}
+		
 	//brief 0.5s wait - spawn a timer and check if its alive
 	if (_flag_init_timer == false){
 		_flag_init_timer = true;
@@ -52,15 +81,7 @@ switch(global.fight_controller_state){
 		break;
 	}
 	
-	///////////////////////
-	// DECREMENT SHIELDS //
-	///////////////////////
-		//for each unit in player's party
-		for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
-			var _unit = ds_list_find_value(global.enemy_party_in_play, _i);
-			//if the unit has a shield, halve it- diff amounts for different classes
-			scr_decrement_shields(_unit);
-		}
+
 	
 	#region ENEMY BEGIN TURN
 	////////////////////////
@@ -107,10 +128,15 @@ switch(global.fight_controller_state){
 			break;
 		}
 		if (_flag_unit_1_went == false){
-			_flag_unit_1_went = true;
+			_flag_unit_1_went = true
 			//cast spell
 			var _unit = ds_list_find_value(global.enemy_party_in_play,0);
-			scr_play_enemy_card(_unit,_unit._card_to_play);
+			if (_unit._stunned != true){
+				scr_play_enemy_card(_unit,_unit._card_to_play);
+			} else {
+				instance_destroy(_unit._card_to_play);
+				_unit._card_to_play = undefined;
+			}
 		}
 	}
 	//unit 2
@@ -127,7 +153,12 @@ switch(global.fight_controller_state){
 			_flag_unit_2_went = true;
 			//cast spell
 			var _unit = ds_list_find_value(global.enemy_party_in_play,1);
-			scr_play_enemy_card(_unit,_unit._card_to_play);
+			if (_unit._stunned != true){
+				scr_play_enemy_card(_unit,_unit._card_to_play);
+			} else {
+				instance_destroy(_unit._card_to_play);
+				_unit._card_to_play = undefined;
+			}
 		}		
 	}	
 
@@ -144,7 +175,12 @@ switch(global.fight_controller_state){
 		if (_flag_unit_3_went == false){
 			_flag_unit_3_went = true;
 			var _unit = ds_list_find_value(global.enemy_party_in_play,2);
-			scr_play_enemy_card(_unit,_unit._card_to_play);
+			if (_unit._stunned != true){
+				scr_play_enemy_card(_unit,_unit._card_to_play);
+			} else {
+				instance_destroy(_unit._card_to_play);
+				_unit._card_to_play = undefined;
+			}
 		}		
 	}
 
@@ -161,7 +197,12 @@ switch(global.fight_controller_state){
 		if (_flag_unit_4_went == false){
 			_flag_unit_4_went = true;
 			var _unit = ds_list_find_value(global.enemy_party_in_play,3);
-			scr_play_enemy_card(_unit,_unit._card_to_play);
+			if (_unit._stunned != true){
+				scr_play_enemy_card(_unit,_unit._card_to_play);
+			} else {
+				instance_destroy(_unit._card_to_play);
+				_unit._card_to_play = undefined;
+			}
 		}		
 	}		
 		
@@ -179,7 +220,12 @@ switch(global.fight_controller_state){
 			_flag_unit_5_went = true;
 			
 			var _unit = ds_list_find_value(global.enemy_party_in_play,4);
-			scr_play_enemy_card(_unit,_unit._card_to_play);
+			if (_unit._stunned != true){
+				scr_play_enemy_card(_unit,_unit._card_to_play);
+			} else {
+				instance_destroy(_unit._card_to_play);
+				_unit._card_to_play = undefined;
+			}
 		}		
 	}	
 	#endregion
@@ -196,6 +242,19 @@ switch(global.fight_controller_state){
 		break;
 	}	
 	#endregion
+	
+	with (obj_card_counter) {
+		if (_counter_team == "Enemy" && _target == "Targetless"){
+	        _turn_lifespan--;
+			_trigger_my_effect = true;
+		}		
+	   else if (_target != "Targetless" && _target._creature_team == "Enemy") {
+	        _turn_lifespan--;
+			_trigger_my_effect = true;
+	    }
+
+	}
+			
 
 	_flag_init_timer = false;
 	_flag_begin_timer = false;
@@ -211,6 +270,8 @@ switch(global.fight_controller_state){
 	_flag_timer_5 = false;
 	_flag_unit_5_went = false;
 	_flag_end_timer = false;
+	
+	_flag_shields_handled = false;
 	
 	//after all have gone once, send player to new turn
 	global.turn_counter++;

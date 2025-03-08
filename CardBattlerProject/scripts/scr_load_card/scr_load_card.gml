@@ -24,7 +24,7 @@ function scr_load_card(_cardname){
 		break;
 		
 		case "Fell":
-			_loadedcard = scr_create_card("Fell", "Deals 30% hp to the front unit", 2, scr_card_fell, spr_card_fell, "Any", "Green", "Attack", 0.30, "Any", "Any", 20, false);
+			_loadedcard = scr_create_card("Fell", "Deals 10% max hp to the front unit", 2, scr_card_fell, spr_card_fell, "Any", "Green", "Attack", 10, "Any", "Any", 20, false);
 		break;	
 		
 		case "Beastial Bash":
@@ -32,7 +32,7 @@ function scr_load_card(_cardname){
 		break;		
 		
 		case "Stampede":
-			_loadedcard = scr_create_card("Stampede", "Deal 20% hp to all units, exhaust", 3, scr_card_stampede, spr_card_stampede, "Any", "Green", "Attack", .20, "Any", "Any", 20, true);
+			_loadedcard = scr_create_card("Stampede", "Deal 30% max hp to all units, exhaust", 3, scr_card_stampede, spr_card_stampede, "Any", "Green", "Attack", 30, "Any", "Any", 20, true);
 		break;		
 		/////////////
 		// DEFENSE //
@@ -61,7 +61,7 @@ function scr_load_card(_cardname){
 		
 		//GREEN
 		case "Grow Manavine":
-			_loadedcard = scr_create_card("Grow Manavine", "+3 max mana for 3 turns", 2, scr_card_grow_manavine, spr_card_grow_manavine, "None", "Green", "Utility", 0, "Technical", "Any", 20, true);	
+			_loadedcard = scr_create_card("Grow Manavine", "Add 2 extra mana to the pool for 3 turns, exhaust", 3, scr_card_grow_manavine, spr_card_grow_manavine, "None", "Green", "Utility", 0, "Technical", "Any", 20, true);	
 		break;
 	
 		///////////
@@ -90,7 +90,7 @@ function scr_load_card(_cardname){
 
 		//GREEN
 		case "Nature's Remedy":
-			_loadedcard = scr_create_card("Nature's Remedy", "Heal a unit for 30% HP", 2, scr_card_natures_remedy, spr_card_natures_remedy, "Any", "Green", "Heal", 0, "Magical", "Any", 20, true);	
+			_loadedcard = scr_create_card("Nature's Remedy", "Heal a unit for 30% HP", 2, scr_card_natures_remedy, spr_card_natures_remedy, "Any", "Green", "Heal", 0, "Magical", "Any", 20, false);	
 		break;
 		
 		////////
