@@ -1,5 +1,5 @@
 function scr_save(){
-	show_debug_message("\n\n\n SAVING \n\n\n");
+	show_debug_message("================= SAVING =================");
 	// Generate timestamped filename
 	var _date = date_current_datetime();
 	var _save_name = string_format(date_get_day(_date), 2, 0) + "_" +

@@ -44,6 +44,7 @@ if (position_meeting(_mx,_my,self)){
 		
 		//CLOSE THE GUI
 		global.flag_gui_open = false;						
+		show_debug_message("			TRANSITION TO OVERWORLD FROM LOAD GAME");				
 		scr_transition("overworld","load",0,0);
 		instance_destroy(obj_gui_load_game);
 	}

@@ -115,6 +115,7 @@ var _my = device_mouse_y_to_gui(0);
 				global.flag_gui_open = false;						
 				_selected_blessing = undefined;
 				_selected_patron = undefined;	
+				show_debug_message("			TRANSITION TO OVERWORLD FROM NEW GAME MENU ");					
 				scr_transition("overworld","start",0,0);
 				instance_destroy();
 			}	

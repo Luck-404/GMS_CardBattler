@@ -191,6 +191,7 @@ case PLAYER_OW_STATE.GENERAL: //wait for player input (movement, interactions wi
 					_flag_transition_start = true;
 					global.steps_rand = irandom_range(10,15);
 					global.player_ow_state = PLAYER_OW_STATE.PAUSED;
+					show_debug_message("			TRANSITION TO ENCOUNTER FROM OVERWORLD");						
 					scr_transition("encounter","Any","Any","Any");
 				}
 			}			
@@ -241,7 +242,7 @@ if (room == rm_encounter){
 	switch(global.player_enc_state){
 		#region INIT
 			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
-			
+			show_debug_message("PLAYER ENCOUNTER STATE: STARTING INIT...");	
 			////////////////////
 			// RANDOMIZE DECK //
 			////////////////////
@@ -300,6 +301,7 @@ if (room == rm_encounter){
 				//TODO
 				
 			//PASS
+			show_debug_message("PLAYER ENCOUNTER STATE: SUCCESS...");	
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;
 		break;
 		#endregion

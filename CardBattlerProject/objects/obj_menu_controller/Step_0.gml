@@ -47,7 +47,7 @@ if (room = rm_main_menu){
 		// NEW GAME //
 		//////////////
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_new_game)){
-			
+			show_debug_message("MAIN MENU: OPENING NEW GAME GUI");
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
 				 global._clicked = true;
@@ -58,7 +58,7 @@ if (room = rm_main_menu){
 		}
 		
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_load)){
-			
+			show_debug_message("MAIN MENU: OPENING LOAD GAME GUI");
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
 				 global._clicked = true;				 
@@ -70,6 +70,7 @@ if (room = rm_main_menu){
 		}
 		
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_options)){
+			show_debug_message("MAIN MENU: OPENING OPTIONS GUI");
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
 				 global._clicked = true;				 
@@ -84,7 +85,7 @@ if (room = rm_main_menu){
 	// ESCAPE WILL CLOSE A GUI IF ONE IS OPEN //
 	////////////////////////////////////////////
 	if (keyboard_check_pressed(vk_escape) && (global.flag_gui_open == true)){
-		
+		show_debug_message("MAIN MENU: CLOSING GUI");
 		//DESTROY THE OPTIONS PANE IF OPEN
 		if (instance_exists(obj_gui_options)){
 			with(obj_gui_options){
@@ -114,6 +115,7 @@ if (room = rm_main_menu){
 	// ESCAPE WILL CLOSE THE GAME IF NO GUI IS OPEN //
 	//////////////////////////////////////////////////
 	else if (keyboard_check_pressed(vk_escape) && global.flag_gui_open == false){
+		show_debug_message("MAIN MENU: ENDING GAME VIA ESC");
 		game_end();
 	}
 }
@@ -129,8 +131,12 @@ if (room != rm_main_menu){
 	/////////////////////////////////////////
 	// ESCAPE OPENS/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
-	if (keyboard_check_pressed(vk_escape) && !instance_exists(obj_enc_rewards) && instance_exists(obj_fight_controller) && (global.fight_controller_state != FIGHT_CONTROLLER_STATE.ENEMY_TURN)){
+	if (keyboard_check_pressed(vk_escape) && !instance_exists(obj_enc_rewards)){
+		if (instance_exists(obj_fight_controller) && (global.fight_controller_state != FIGHT_CONTROLLER_STATE.ENEMY_TURN)){
+			
+		} else {
 		 if (global.flag_gui_open == false){
+			show_debug_message("IN GAME MENU: OPENING OPTIONS");
 			 global.player_ow_state = PLAYER_OW_STATE.INTERACT;
 			 obj_player._move_speed = 0;
 			 //CREATE THE OPTIONS MENU		 
@@ -141,6 +147,7 @@ if (room != rm_main_menu){
 		 }
 		 
 		 else {
+			show_debug_message("IN GAME MENU: CLOSING OPTIONS");			 
 			 //DESTROY THE OPTIONS BUTTON IF OPEN
 			if (instance_exists(obj_gui_options)){
 				instance_destroy(obj_gui_options);
@@ -150,6 +157,7 @@ if (room != rm_main_menu){
 			//UPDATE GLOBAL
 			global.flag_gui_open = false;
 		 }
+		}
 	}
 	
 	//////////////////

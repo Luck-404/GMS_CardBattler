@@ -187,6 +187,7 @@ if (position_meeting(_mx,_my,obj_gui_options_resolution_button)){
 				global.saved_room = room;
 				
 			    //start transition to main menu
+				show_debug_message("			TRANSITION TO MAIN MENU FROM OVERWORLD");				
 				scr_transition("main menu","Any","Any","Any");
 				//delete self
 				global.flag_gui_open = false;

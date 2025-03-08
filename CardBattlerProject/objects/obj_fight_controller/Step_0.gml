@@ -1,6 +1,7 @@
 switch(global.fight_controller_state){
 	#region SPAWN ENEMIES
 	case FIGHT_CONTROLLER_STATE.SPAWN_ENEMIES:
+	show_debug_message("FIGHT CONTROLLER: SPAWNING ENEMIES...");
 	//roll a random enemy team based on the room type, give them each a deck (inside script)
 		//scr_roll_enemies(scr_save_room(global.saved_room), irandom_range(1,5));
 		scr_roll_enemies(scr_save_room(global.saved_room), 1);	
@@ -47,6 +48,7 @@ switch(global.fight_controller_state){
 			_ref_creature._left_unit = _ref_left_creature;
 			_ref_creature._right_unit = _ref_right_creature;
 		}		
+		show_debug_message("FIGHT CONTROLLER: SUCCESS...");
 		global.fight_controller_state = FIGHT_CONTROLLER_STATE.PLAYER_TURN;
 	break;
 	#endregion
@@ -272,9 +274,10 @@ switch(global.fight_controller_state){
 	_flag_end_timer = false;
 	
 	_flag_shields_handled = false;
-	
+	show_debug_message("FIGHT CONTROLLER: TURN " + string(global.turn_counter) + " COMPLETED");
 	//after all have gone once, send player to new turn
 	global.turn_counter++;
+	show_debug_message("FIGHT CONTROLLER: TURN " + string(global.turn_counter) + " STARTED");
 	global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;	
 	global.fight_controller_state = FIGHT_CONTROLLER_STATE.PLAYER_TURN;
 	break;
@@ -300,6 +303,7 @@ switch(global.fight_controller_state){
 	if (instance_exists(obj_timer)){
 		
 	} else {
+		show_debug_message("FIGHT CONTROLLER: ENCOUNTER ENDED WITH A WIN");		
 			_flag_exit_spawned = true;
 			//if all enemies are dead, spawn a obj_enc_rewards with a "win" variable
 			var _ref_rewards = instance_create_layer(room_width/2, room_height/2, "GUI",obj_enc_rewards);
@@ -321,6 +325,7 @@ switch(global.fight_controller_state){
 		
 	} else {				
 		_flag_exit_spawned = true;
+		show_debug_message("FIGHT CONTROLLER: ENCOUNTER ENDED WITH A LOSS");	
 		//if all allies are dead, spawn a obj_enc_rewards with a "loss" variable	
 		var _ref_rewards = instance_create_layer(room_width/2, room_height/2, "GUI",obj_enc_rewards);
 		_ref_rewards._type = "loss";
@@ -342,6 +347,7 @@ switch(global.fight_controller_state){
 		
 	} else {				
 		_flag_exit_spawned = true;
+		show_debug_message("FIGHT CONTROLLER: ENCOUNTER ENDED WITH A FORFEIT");	
 		//if forfeit was pressed, spawn a obj_enc_rewards with a "forfeit" variable
 		var _ref_rewards = instance_create_layer(room_width/2, room_height/2, "GUI",obj_enc_rewards);
 		_ref_rewards._type = "forfeit";

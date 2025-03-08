@@ -98,6 +98,7 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 	if (_type == "win"){
 		_clicked = true;
 		global.flag_gui_open = false;
+		show_debug_message("			TRANSITION TO OVERWORLD FROM ENCOUNTER (WIN)");			
 		scr_transition("overworld","return","Any","Any");
 		instance_destroy();
 	}
@@ -106,6 +107,7 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 		//on game loss confirm- send to title screen
 		//start transition to title
 		global.flag_gui_open = false;		
+		show_debug_message("			TRANSITION TO MAIN MENU FROM ENCOUNTER (LOSS)");			
 		scr_transition("main menu","loss","Any","Any");	
 		instance_destroy();
 	}
@@ -121,6 +123,7 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 			_ref_unit[?"curhp"] = _cur_hp;
 		}
 		//start transition to overworld
+		show_debug_message("			TRANSITION TO OVERWORLD FROM ENCOUNTER (FORFEIT)");		
 		scr_transition("overworld","return","Any","Any");
 		instance_destroy();
 	}
