@@ -7,10 +7,13 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 	var _card_ref = _card._card_ref;
 	var _card_script = _card_ref[?"script"];
 	
+
+	
 	////////////////
 	// TARGETLESS //
 	////////////////
 	if (_target_creature == "Targetless"){
+		show_debug_message("COMBAT: " + _channel_creature._creature_team + " unit " + _channel_creature._creature_name + " plays card " + _card._card_name);		
 		if (global.echo_count != 0){
 			var _tmp = global.echo_count;
 			for (var _j = -1; _j < _tmp; _j++){	
@@ -31,7 +34,7 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 		}
 	} 
 	else {
-	
+		show_debug_message("COMBAT: " + _channel_creature._creature_team + " unit " + _channel_creature._creature_name + " plays card " + _card._card_name + " targeting " + _target_creature._creature_name);
 		//////////////////////
 		// HANDLE MANA COST //
 		//////////////////////	
