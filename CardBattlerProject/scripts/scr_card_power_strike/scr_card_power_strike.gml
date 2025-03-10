@@ -18,7 +18,8 @@ function scr_card_power_strike(_card,_channel,_target){
 	// DAMAGE //
 	////////////
 	scr_damage_creature(_target, _final_dmg);
-	show_debug_message(_channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
+	scr_trigger_minion_reactions(_card,_target,_channel,_final_dmg);
 	
 	////////////
 	// EFFECT //
@@ -37,4 +38,5 @@ function scr_card_power_strike(_card,_channel,_target){
 	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
 	_ref_banner._ban_color = c_black;
 	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name + " for " + string(_final_dmg);
+
 }

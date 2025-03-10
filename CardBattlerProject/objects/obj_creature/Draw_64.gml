@@ -159,12 +159,17 @@ if (_flag_has_died == false){
 		//////////////
 		if(_creature_attack_scalar != 1){
 			draw_sprite(spr_dmg_buff,0,x+30,y-125);	
+
 			draw_text(x+30,y-125,"x"+string(_creature_attack_scalar));
 		}
 	
 		if(_creature_attack_linear != 0){
 			draw_sprite(spr_dmg_buff,0,x+10,y-125);	
-			draw_text(x+10,y-125,"+"+string(_creature_attack_linear));
+			if (_creature_attack_linear < 0){
+				draw_text(x+10,y-125,string(_creature_attack_linear));
+			} else {
+				draw_text(x+10,y-125,"+"+string(_creature_attack_linear));
+			}
 		}
 	
 		//////////////
@@ -174,4 +179,12 @@ if (_flag_has_died == false){
 			draw_sprite(spr_poison,0,x-30,y-125);	
 			draw_text(x-30,y-125,string(_poison_count));
 		}
+		
+		///////////
+		// VENOM //
+		///////////
+		if(_venom_count != 0){
+			draw_sprite(spr_venom,0,x-50,y-125);	
+			draw_text(x-50,y-125,string(_venom_count));
+		}		
 }

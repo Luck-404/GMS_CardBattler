@@ -4,12 +4,15 @@
 // > CAST EACH MINION'S SPELL IN ORDER							    //
 //////////////////////////////////////////////////////////////////////
 if (_execute == true && instance_exists(obj_timer) == false){
+	if (ds_list_size(global.enemy_party_in_play) == 0){
+		instance_destroy();
+	}
 	if (ds_list_size(_playlist) > 0){
 		//find minion
 		var _minion = ds_list_find_value(_playlist,0);
 		_cursor_x = _minion.x;
 		_cursor_y = _minion.y+128;
-		show_debug_message("cursor x: " + string(_cursor_x) + " cursor y: " + string(_cursor_y));
+		//show_debug_message("cursor x: " + string(_cursor_x) + " cursor y: " + string(_cursor_y));
 		
 		//execute minion's script
 		_minion._trigger_my_effect = true;

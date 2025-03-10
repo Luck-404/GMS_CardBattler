@@ -21,7 +21,8 @@ function scr_card_fell(_card,_channel,_target){
 	// DAMAGE //
 	////////////
 	scr_damage_creature(_target, _final_dmg);
-		show_debug_message(_channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
+	scr_trigger_minion_reactions(_card,_target,_channel,_final_dmg);
 	
 	////////////
 	// EFFECT //

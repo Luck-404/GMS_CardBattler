@@ -33,6 +33,10 @@ draw_set_font(fnt_fanwood_sm);
 if (_target == "Targetless"){
 	draw_text(x,y,string(_turn_lifespan));
 } else{
-	draw_text(_target.x,_target.y-145,string(_turn_lifespan));
+	if (_turn_lifespan > 10){
+		
+	} else {
+		draw_text(_target.x,_target.y-145,string(_turn_lifespan));
+	}	
 }
 draw_set_color(c_white);

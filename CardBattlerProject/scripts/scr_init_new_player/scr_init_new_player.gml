@@ -22,9 +22,9 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.player_blessings_list, _new_bless);
 			//player's deck setup
-			//var _arr = ["Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy"];
-			var _arr = ["Thorny Whip","Thorny Whip","Thorny Whip","Thorny Whip","Thorny Whip"];
-			for (var _i = 0; _i < array_length(_arr); _i++){
+			//var _arr = ["Serpent Summon","Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy","Bramblet","Bloodbeak"];
+			var _arr = ["Serpent Summon","Strike","Bramblet"];
+		for (var _i = 0; _i < array_length(_arr); _i++){
 				var _new_card = scr_load_card(_arr[_i]);		
 				ds_list_add(global.player_deck, _new_card);
 			}

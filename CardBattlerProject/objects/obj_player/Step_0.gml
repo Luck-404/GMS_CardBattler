@@ -336,8 +336,19 @@ if (room == rm_encounter){
 				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
 					var _unit = ds_list_find_value(global.player_party_in_play, _i);
 					//scr_trigger_turn_effects(_unit);
-					//TODO
-				}			
+					//TODO					
+				}		
+				
+				with (obj_card_effect_counter) {
+					if (_counter_team == "Player" && _target == "Targetless" && _trigger_time == "Begin"){
+				        _turn_lifespan--;
+						_trigger_my_effect = true;
+					}			
+					else if (_target != "Targetless" && _target._creature_team == "Player" && _trigger_time == "Begin") {
+					    _turn_lifespan--;
+						_trigger_my_effect = true;
+					}				
+				}				
 
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.MINIONS_CAST;				
@@ -717,11 +728,11 @@ if (room == rm_encounter){
 			//////////////////////////////
 				//TODO
 				with (obj_card_effect_counter) {
-					if (_counter_team == "Player" && _target == "Targetless"){
+					if (_counter_team == "Player" && _target == "Targetless" && _trigger_time == "End"){
 				        _turn_lifespan--;
 						_trigger_my_effect = true;
 					}			
-					else if (_target != "Targetless" && _target._creature_team == "Player") {
+					else if (_target != "Targetless" && _target._creature_team == "Player" && _trigger_time == "End") {
 					    _turn_lifespan--;
 						_trigger_my_effect = true;
 					}				
@@ -760,12 +771,11 @@ if (room == rm_encounter){
 			scr_reset_playstate();
 			
 			while(ds_list_size(global.encounter_utility_active) != 0){
-				var _counter = ds_list_find_value(global.encounter_utility_active, _i);	
-				ds_list_delete(global.encounter_utility_active,_i);
+				var _counter = ds_list_find_value(global.encounter_utility_active, 0);	
 				instance_destroy(_counter);
+				ds_list_delete(global.encounter_utility_active,0);				
 			}
-			ds_list_clear(global.encounter_utility_active);
-			
+
 			//Update any allies health and Put any dead allies into graveyard
 			if (ds_list_size(global.player_party_in_play) != 0){
 				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){

@@ -10,3 +10,4 @@ _trigger_my_effect = false; //trigger effect once when spawned
 _draw_color = undefined; //COLOR TO DRAW COUNTER LIFETIME AS
 _counter_name = undefined; //NAME OF THE COUNTER (USED TO TRACK UTILITIES)
 _counter_team = undefined; //WHO OWNS THE COUNTER?
+_trigger_time = "End"; //"Begin" or "End"

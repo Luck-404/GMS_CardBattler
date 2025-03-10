@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_card_potent_fruit_repeat",
+  "name": "scr_minion_serpent_tick",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

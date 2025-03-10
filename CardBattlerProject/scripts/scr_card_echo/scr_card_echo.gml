@@ -3,6 +3,8 @@
 //																	//
 // > INCREASE ECHO COUNT BY 1										//
 //////////////////////////////////////////////////////////////////////
-function scr_card_echo(){
-	global.echo_count += 1;
+function scr_card_echo(_card,_channel,_target){
+	global.echo_count += 1;	
+	
+	scr_trigger_minion_reactions(_card,_target,_channel,0);	
 }

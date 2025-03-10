@@ -9,7 +9,8 @@ switch(global.fight_controller_state){
 	case FIGHT_CONTROLLER_STATE.SPAWN_ENEMIES:
 		show_debug_message("FIGHT CONTROLLER: SPAWNING ENEMIES...");
 		//roll a random enemy team based on the room type, give them each a deck (inside script)
-			scr_roll_enemies(scr_save_room(global.saved_room), irandom_range(1,5));
+			//scr_roll_enemies(scr_save_room(global.saved_room), 1);
+			scr_roll_enemies(scr_save_room(global.saved_room), irandom_range(1,5));			
 			
 		//spawn enemy team creature objects
 		for (var _i = 0; _i < ds_list_size(global.enemy_party); _i++){				
@@ -105,15 +106,28 @@ switch(global.fight_controller_state){
 		// BEGIN TURN EFFECTS //
 		////////////////////////
 		////TODO
-		////wait
-		//if (_flag_begin_timer == false){
-		//	_flag_begin_timer = true;
-			//var _ref_timer = instance_create_layer(10,10,"GUI",obj_timer);
-			//_ref_timer._life = 60; //0.5s
-		//}
-		//if (instance_exists(obj_timer)){
-		//	break;
-		//}
+		if (_flag_begin_turn_triggered == false){
+			_flag_begin_turn_triggered = true;
+			with (obj_card_effect_counter) {
+				if (_counter_team == "Enemy" && _target == "Targetless" && _trigger_time == "Begin"){
+					_turn_lifespan--;
+					_trigger_my_effect = true;
+				}			
+				else if (_target != "Targetless" && _target._creature_team == "Enemy" && _trigger_time == "Begin") {
+					_turn_lifespan--;
+					_trigger_my_effect = true;
+				}				
+			}	
+		}
+		//wait
+		if (_flag_begin_timer == false){
+			_flag_begin_timer = true;
+			var _ref_timer = instance_create_layer(10,10,"GUI",obj_timer);
+			_ref_timer._life = 60; //0.5s
+		}
+		if (instance_exists(obj_timer)){
+			break;
+		}
 		#endregion
 	
 		#region ENEMY MINIONS
@@ -325,22 +339,22 @@ switch(global.fight_controller_state){
 			// END TURN EFFECTS //
 			//////////////////////
 			with (obj_card_effect_counter) {
-				if (_counter_team == "Enemy" && _target == "Targetless"){
-			        _turn_lifespan--;
+				if (_counter_team == "Enemy" && _target == "Targetless" && _trigger_time == "End"){
+					_turn_lifespan--;
 					_trigger_my_effect = true;
-				}		
-			   else if (_target != "Targetless" && _target._creature_team == "Enemy") {
-			        _turn_lifespan--;
+				}			
+				else if (_target != "Targetless" && _target._creature_team == "Enemy" && _trigger_time == "End") {
+					_turn_lifespan--;
 					_trigger_my_effect = true;
-			    }
-
-			}
+				}				
+			}	
 			
 
 			/////////////////////
 			// RESET VARIABLES //
 			/////////////////////
 			_flag_init_timer = false;
+			_flag_begin_turn_triggered = false;
 			_flag_begin_timer = false;
 			_flag_minions_cast = false;
 			_flag_minions_timer = false;
@@ -362,6 +376,7 @@ switch(global.fight_controller_state){
 			//////////////
 			show_debug_message("FIGHT CONTROLLER: TURN " + string(global.turn_counter) + " COMPLETED");
 			global.turn_counter++;
+
 			show_debug_message("FIGHT CONTROLLER: TURN " + string(global.turn_counter) + " STARTED");
 			
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;	

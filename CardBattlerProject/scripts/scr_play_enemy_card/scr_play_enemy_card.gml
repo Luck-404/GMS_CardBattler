@@ -101,6 +101,17 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 			 }
 			_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
 		break;		
+		
+		///////////////
+		// ARCHETYPE //
+		///////////////
+		case "Archetype":
+			if (_card_ran == "Targetless"){ //
+				_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+			} else { //play on self
+				_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+			}
+		break;		
 	}
 	
 	

@@ -5,18 +5,11 @@
 //	 THE TARGET. THE CARD SCRIPTS THEMSELVES HANDLE A LOT OF THE	//
 //   LOGIC.															//
 //////////////////////////////////////////////////////////////////////
-function scr_play_card(_card, _channel_creature, _target_creature) {
-	global.latest_card = _card;
-	global.latest_channel = _channel_creature;
-	global.latest_target = _target_creature;	
-		
-	
+function scr_play_card(_card, _channel_creature, _target_creature) {	
 	var _card_ref = _card._card_ref;
 	var _card_script = _card_ref[?"script"];
 	
-	if (_card_ref[?"type"] != "Attack"){
-		global.latest_damage_done = 0;
-	}
+
 
 	////////////////
 	// TARGETLESS //
@@ -104,9 +97,8 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 		}
 	}
 		
-		
-/////////////////////////////////////////
-// RESET PLAYER VARIABLES FOR NEW CAST //
-/////////////////////////////////////////
-scr_reset_playstate();
+	/////////////////////////////////////////
+	// RESET PLAYER VARIABLES FOR NEW CAST //
+	/////////////////////////////////////////
+	scr_reset_playstate();
 }

@@ -64,7 +64,7 @@ _flag_minions_triggered = false;
 global.player_blessings_list = ds_list_create();
 
 //general stats
-global.max_hand_size = 6; // Maximum of 3 cards in the hand
+global.max_hand_size = 3; // Maximum of 3 cards in the hand
 global.max_hand_size_saved = global.max_hand_size;
 global.cur_hand_size = global.max_hand_size;
 

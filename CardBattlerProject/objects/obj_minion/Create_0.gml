@@ -3,7 +3,6 @@
 //																	//
 // > CREATE A MINION FROM A SCRIPT									//
 //////////////////////////////////////////////////////////////////////
-show_debug_message("MINION ALIVE");
 depth = -200;
 _minion_hp_cur = 0;
 _minion_hp_max = 0;
@@ -23,4 +22,11 @@ _trigger_my_effect = false;
 _minion_effect_script = undefined;
 image_index = 1;
 _host_damage_taken_trigger = "";
-_keystr = "";
+_host_damage_dealt_trigger = "";
+_taken_keystr = "";
+_dealt_keystr = "";
+_stacks = 0;
+_latest_damage_done = undefined;
+_latest_channel = undefined;
+_latest_target = undefined;
+_latest_card = undefined;

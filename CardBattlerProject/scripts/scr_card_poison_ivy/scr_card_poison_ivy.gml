@@ -31,7 +31,9 @@ function scr_card_poison_ivy(_card,_channel,_target){
 			_left_target._poison_counter_ref._turn_lifespan = 3;
 			_left_target._poison_count++;
 		}
+	scr_trigger_minion_reactions(_card,_left_target,_channel,0);		
 	}
+	
 	
 	// right target
 	if (_target._right_unit != undefined){
@@ -57,6 +59,7 @@ function scr_card_poison_ivy(_card,_channel,_target){
 			_right_target._poison_counter_ref._turn_lifespan = 3;
 			_right_target._poison_count++;
 		}
+	scr_trigger_minion_reactions(_card,_right_target,_channel,0);		
 	}
 	
 	// middle target
@@ -80,6 +83,7 @@ function scr_card_poison_ivy(_card,_channel,_target){
 		_target._poison_counter_ref._turn_lifespan = 3;
 		_target._poison_count++;
 	}
+	scr_trigger_minion_reactions(_card,_target,_channel,0);	
 	
 	///////////
 	// SOUND //

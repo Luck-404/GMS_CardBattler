@@ -57,7 +57,12 @@ _stun_counter_ref = undefined;
 //DOT Counters
 _poison_count = 0;
 _poison_counter_ref = undefined;
+_venom_count = 0;
+_venom_counter_ref = undefined;
 
 //Buff counters
 _buffs = ds_list_create();
+
+//Buff counters
+_debuffs = ds_list_create();
 

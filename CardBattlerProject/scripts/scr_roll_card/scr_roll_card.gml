@@ -49,7 +49,7 @@ function scr_roll_card(_rarity) {
             break;
 			
         case "rare":
-			_rand = choose("echo","inspire","bash","remedy","manavine","bramblet");
+			_rand = choose("echo","inspire","bash","remedy","manavine","bramblet","bloodbeak");
 			switch(_rand){
 				case "echo":			
 					 _card = scr_create_card("Echo", "Repeat next spell for free, exhaust", 0, scr_card_echo, spr_card_echo, "None", "Uncolored", "Utility", 0, "Any", "Any", irandom_range(40,60), true);
@@ -69,6 +69,9 @@ function scr_roll_card(_rarity) {
 				case "bramblet":
 					_card = scr_create_card("Bramblet", "Summon bramble minion on self, passively generates 5 armor for host, when host is attacked 10% damage is dealt back to caster", 2, scr_card_bramblet, spr_card_bramblet, "Green", "Utility", 0, "Magical", "Summoner", irandom_range(40,60), true, "Self");
 				break;
+				case "bloodbeak":
+					_card = scr_create_card("Bloodbeak", "Summon a bloodbeak minion, when the host deals damage the bloodbeak heals the host for 20% of their damage done, and also deals 5 damage to the same target", 2, scr_card_bloodbeak, spr_card_bloodbeak, "Green", "Utility", 0, "Any", "Any", irandom_range(40,60), false, "Ranged");
+				break;				
 			}
 		break;
 		

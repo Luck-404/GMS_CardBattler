@@ -14,7 +14,6 @@ draw_text(x,y+50, string(_minion_position));
 // DEATH CHECK //
 /////////////////
 if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_current <= 0) || (_minion_hp_cur <= 0 && _flag_has_died == false)){
-	show_debug_message("Minion has died!");
 	_flag_has_died = true;
 	//remove minion from attached unit
 	_minion_unit_attached._creature_minion_count--;
@@ -32,45 +31,141 @@ if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_cu
 /////////////////////////////
 // HANDLE SCRIPT EXECUTION //
 /////////////////////////////
-if (_minion_effect_script != undefined && _trigger_my_effect == true){
-	_minion_effect_script(_minion_unit_attached,self);
-	_trigger_my_effect = false;
-}
-
-
-////////////////////////////////
-// HOST DAMAGE TAKEN REACTION //
-////////////////////////////////
-if (_minion_cast_types[1] == "Host Damage Taken"){
-	if((global.latest_target == _minion_unit_attached) && global.latest_damage_done != 0){
-		//show_debug_message("My host " + _minion_unit_attached._creature_name + " has taken " + string(global.latest_damage_done) + " damage");
-		_keystr = string(global.turn_counter) + "-" + string(global.latest_damage_done) + "-" + string(global.latest_channel) + "-" + string(global.latest_target) + "-" + string(irandom(1000000));
-		//show_debug_message("Key: " + string(_keystr));
-		//1-10-monke-furn-6
-		if (_host_damage_taken_trigger != _keystr){ // "" vs 1-10-monke-furn-6
-			_host_damage_taken_trigger = _keystr; //1-10-monke-furn-6 = 1-10-monke-furn-6
-		
-			if (_minion_name == "Bramblet"){
-				//show_debug_message("Dealing 10% damage back to attacker");
-				//deal 10% damage back to channeler
-				var _10p = ceil(global.latest_damage_done*0.10);
-		
-				//store (key purposes)
-				var _tmp_dmg = global.latest_damage_done;
-				var _tmp_channel = global.latest_channel;
-		
-				//deal dmg
-				scr_damage_creature(global.latest_channel,_10p);
-		
-				//restore keys
-				global.latest_damage_done = _tmp_dmg;
-				global.latest_channel = _tmp_channel;
-			}
-		}
+if (_minion_cast_types[0] == "Minion Step"){
+	if (_minion_effect_script != undefined && _trigger_my_effect == true && _minion_unit_attached._creature_hp_current > 0){
+		_minion_effect_script(_minion_unit_attached,self);
+		_trigger_my_effect = false;
 	}
 }
 
 
+if (_latest_target != undefined && _latest_channel != undefined){
+	////////////////////////////////
+	// HOST DAMAGE TAKEN REACTION //
+	////////////////////////////////
+	if (_minion_cast_types[1] == "Host Damage Taken"){
+		//show_debug_message("MINION: " + _latest_target._creature_name + " has taken " + string(_latest_damage_done));
+		if(_latest_target == _minion_unit_attached && _latest_damage_done != 0){
+			if (_minion_name == "Bramblet"){
+				//show_debug_message("BRAMBLET: TRIGGERED");
+				//deal 10% damage back to channeler
+				var _10p = ceil(_latest_damage_done*0.10);
+				//show_debug_message("BRAMBLET: dealing " + string(_10p) + " to " + _latest_channel._creature_name);
+				//deal dmg
+				scr_damage_creature(_latest_channel,_10p);
+	
+				////////////
+				// EFFECT //
+				////////////
+				var _ref_effect = instance_create_layer(_minion_unit_attached.x,_minion_unit_attached.y,"Effects",obj_card_effect);
+				_ref_effect.sprite_index = spr_effect_red_strike;
+	
+				///////////
+				// SOUND //
+				///////////
+				audio_play_sound(snd_effect_strike,0,false);
+			}
+			
+			if (_minion_name == "Serpent"){
+				//show_debug_message("SERPENT: VENOM TRIGGERED");
+
+				//show_debug_message("SERPENT: applying venom to " + _latest_channel._creature_name);
+		
+				//CHECK FOR POISON
+				if (_latest_channel._venom_count == 0){	//IF NO VENOM
+					//set up a poison counter
+					var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
+					_ref_counter.x = _latest_channel.x+10;
+					_ref_counter.y = _latest_channel.y - 100;
+					_ref_counter._draw_color = c_purple;	
+					_ref_counter._turn_lifespan = 3;
+					_ref_counter._trigger_time = "End";
+					_latest_channel._venom_counter_ref = _ref_counter;
+					_ref_counter._trigger_my_effect = false;
+					_ref_counter._reference_script = scr_venom_tick;
+					_ref_counter._target = _latest_channel;
+			
+					//EFFECT
+					var _ref_effect1 = instance_create_layer(_latest_channel.x,_latest_channel.y,"Effects",obj_card_effect);
+					_ref_effect1.sprite_index = spr_effect_venom;
+			
+					//apply venom stacks
+					_latest_channel._venom_count++;
+					//apply debuff stacks from venom
+					_latest_channel._creature_attack_linear--;
+				} 
+				//IF VENOM, RENEW AND SCALE VENOM
+				else {
+					_latest_channel._venom_counter_ref._turn_lifespan = 3;
+					_latest_channel._venom_count++;
+					_latest_channel._creature_attack_linear--;
+				}
+		
+	
+				///////////
+				// SOUND //
+				///////////
+				audio_play_sound(snd_effect_poison_ivy,0,false);
+			}
+		}
+	}
+
+	////////////////////////////////
+	// HOST DAMAGE DEALT REACTION //
+	////////////////////////////////
+	if (_minion_cast_types[2] == "Host Damage Dealt"){
+		if((_latest_channel == _minion_unit_attached) && _latest_damage_done != 0){
+				if (_minion_name == "Bloodbeak"){
+					//show_debug_message("BLOODBEAK: TRIGGERED");
+					var _20p = ceil(_latest_damage_done*0.20); //get 20% of max hp
+
+					_minion_unit_attached._creature_hp_current += _20p; //add the hp
+					//show_debug_message("BLOODBEAK: healing " + string(_20p) + " on host " + _minion_unit_attached._creature_name);
+					if (_minion_unit_attached._creature_hp_current > _minion_unit_attached._creature_hp_max){ //check for overflow
+						_minion_unit_attached._creature_hp_current = _minion_unit_attached._creature_hp_max;
+					}
+				
+					////////////
+					// EFFECT //
+					////////////
+					var _ref_effect = instance_create_layer(_minion_unit_attached.x,_minion_unit_attached.y,"Effects",obj_card_effect);
+					_ref_effect.sprite_index = spr_effect_grow_natures_remedy;
+		
+					//deal dmg
+					//show_debug_message("BLOODBEAK: dealing 5 to unit " + _latest_target._creature_name);
+					scr_damage_creature(_latest_target,5);
+		
+					////////////
+					// EFFECT //
+					////////////
+					_ref_effect = instance_create_layer(_latest_target.x,_latest_target.y,"Effects",obj_card_effect);
+					_ref_effect.sprite_index = spr_effect_red_strike;
+			}
+			if (_minion_name == "Serpent"){
+				//show_debug_message("SERPENT: HEALING TRIGGERED");
+				var _20p = ceil(_latest_damage_done*0.20); //get 20% of max hp
+
+				_minion_unit_attached._creature_hp_current += _20p; //add the hp
+				//show_debug_message("SERPENT: healing " + string(_20p) + " on host " + _minion_unit_attached._creature_name);
+				if (_minion_unit_attached._creature_hp_current > _minion_unit_attached._creature_hp_max){ //check for overflow
+					_minion_unit_attached._creature_hp_current = _minion_unit_attached._creature_hp_max;
+				}
+				
+				////////////
+				// EFFECT //
+				////////////
+				var _ref_effect = instance_create_layer(_minion_unit_attached.x,_minion_unit_attached.y,"Effects",obj_card_effect);
+				_ref_effect.sprite_index = spr_effect_grow_natures_remedy;
+		}			
+		}
+	}
+
+	//restore keys
+	_latest_damage_done = undefined;
+	_latest_channel = undefined;
+	_latest_target = undefined;
+	_latest_card = undefined;
+}
 ////////////////////////
 // HOVER INTERACTIONS //
 ////////////////////////
@@ -96,7 +191,7 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 // Draw the current health number on the left side of the health bar
 draw_set_font(fnt_fanwood_sm);
 draw_set_color(c_white);
-draw_text(x-10, y + 20, string(_minion_hp_cur) + "/" + string(_minion_hp_max));
+draw_text(x-16, y + 20, string(_minion_hp_cur) + "/" + string(_minion_hp_max));
 
 ///////////////////////
 // DRAW DEFENSE ICON //
@@ -107,12 +202,12 @@ if (_minion_def != 0){
 
 	// Draw the blue circle for the defense stat to the right of the health bar
 	var _defense_circle_radius = 6; // Radius of the circle
-	var _defense_x = x + 25; // Position the circle 15 pixels to the right of the health bar
-	var _defense_y = y + 20; // Vertically align it with the health bar
+	var _defense_x = x; // Position the circle 15 pixels to the right of the health bar
+	var _defense_y = y + 40; // Vertically align it with the health bar
 
 	draw_circle(_defense_x, _defense_y, _defense_circle_radius, false);  // Draw the circle
 
 	// Draw the defense number inside the circle
 	draw_set_color(c_white);
-	draw_text(_defense_x - 3, _defense_y - 3, string(_minion_def));  // Display the defense value inside the circle
+	draw_text(_defense_x-2, _defense_y - 3, string(_minion_def));  // Display the defense value inside the circle
 }

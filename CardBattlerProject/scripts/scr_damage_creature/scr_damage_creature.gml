@@ -4,10 +4,8 @@
 // > CLEANUP OF THE DAMAGING SCRIPTS								//
 //////////////////////////////////////////////////////////////////////
 function scr_damage_creature(_target,_damage_input){
-	global.latest_target = _target;	
-	global.latest_damage_done = _damage_input;	
-	
-//////////////////////////
+	if (_damage_input > 0){ //if the damage reduction debuff was so effective the damage is negative
+	//////////////////////////
 	// DAMAGE MINIONS FIRST //
 	//////////////////////////
 	if (_target._creature_minion_count != 0){ //if there is a minion
@@ -44,5 +42,5 @@ function scr_damage_creature(_target,_damage_input){
 	// DAMAGE HEALTH //
 	///////////////////
 	_target._creature_hp_current = _target._creature_hp_current - _damage_input;	
-
+	}
 }

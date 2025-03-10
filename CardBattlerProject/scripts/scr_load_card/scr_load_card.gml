@@ -69,8 +69,12 @@ function scr_load_card(_cardname){
 		break;	
 
 		case "Bramblet":
-			_loadedcard = scr_create_card("Bramblet", "Summon bramble minion on self, passively generates 5 armor for host, when host is attacked 10% damage is dealt back to caster", 2, scr_card_bramblet, spr_card_bramblet, "Green", "Utility", 0, "Magical", "Summoner", 20, true, "Self");	
+			_loadedcard = scr_create_card("Bramblet", "Summon bramble minion on self, passively generates 5 armor for host, when host is attacked 10% damage is dealt back to caster", 2, scr_card_bramblet, spr_card_bramblet, "Green", "Utility", 0, "Magical", "Summoner", 20, true, "Self");			
 		break;	
+		
+		case "Bloodbeak":
+			_loadedcard = scr_create_card("Bloodbeak", "Summon a bloodbeak minion, when the host deals damage the bloodbeak heals the host for 20% of their damage done, and also deals 5 damage to the same target", 2, scr_card_bloodbeak, spr_card_bloodbeak, "Green", "Utility", 0, "Any", "Any", 20, false, "Ranged");
+		break;			
 	
 		///////////
 		// BUFFS //
@@ -131,6 +135,13 @@ function scr_load_card(_cardname){
 		//UNCOLORED
 		
 		//GREEN
+		case "Serpent Summon":
+			_loadedcard = scr_create_card("Serpent Summon", "Spawn three 6/6 coiled serpents, these serpents react to damage on the host and apply a stack of venom, while a serpent is alive hunter gets 10% leech and 10 bonus damage, exhaust.", 2, scr_card_serpent_summon, spr_card_serpent_summon, "Green", "Archetype", 0, "Technical", "Hunter", 20, true, "Self");
+		break;	
+		
+		case "Sprigs of Ygg":
+			_loadedcard = scr_create_card("Sprigs of Ygg", "For 5 rounds spawn a Spriggan at the beginning of each player round in all empty minion slots. This minion will deal damage and heal host for 2*stacks. If there is a Spriggan already in a spot, instead increase its stacks by 1 each, exhaust.", 3, scr_card_sprigs_of_ygg, spr_card_sprigs_of_ygg, "Green", "Archetype", 0, "Any", "Any", 20, true, "Targetless");
+		break;		
 	}
 	return _loadedcard;
 }

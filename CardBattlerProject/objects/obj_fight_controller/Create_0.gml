@@ -24,6 +24,7 @@ global.enemy_party = ds_list_create();
 global.enemy_party_in_play = ds_list_create();
 global.enemy_party_dead = ds_list_create();
 
+_flag_begin_turn_triggered = false;
 //timers for enemy turn
 
 _flag_timer_1 = false;
@@ -58,12 +59,4 @@ enum FIGHT_CONTROLLER_STATE {
 	END_IDLE
 }
 global.fight_controller_state = FIGHT_CONTROLLER_STATE.SPAWN_ENEMIES;
-
-///////////////////////////////
-// GLOBALS FOR CAST CHECKING //
-///////////////////////////////
-global.latest_card = undefined;
-global.latest_channel = undefined;
-global.latest_target = undefined;
-global.latest_damage_done = 0;
 
