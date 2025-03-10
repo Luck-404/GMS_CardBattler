@@ -1,23 +1,25 @@
+//////////////////////////////////////////////////////////////////////
+//						SCR_CARD_THORNY_WHIP						//
+//																	//
+// > DEAL DAMAGE TO ANY UNIT										//
+//////////////////////////////////////////////////////////////////////
 function scr_card_thorny_whip(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
 	var _base_dmg = _card[?"damage"];
-	var _color_mult = scr_calculate_color_damage_bonus(_channel,_target);
+	var _color_mult = scr_calculate_color_damage_bonus(_card[?"color"],_target);
 	var _scalar = _channel._creature_attack_scalar;
 	var _linear = _channel._creature_attack_linear;
 	var _scaled_dmg = _base_dmg*_scalar*_color_mult;
 	var _final_dmg = _scaled_dmg+_linear;
-	
+
 	////////////
 	// DAMAGE //
 	////////////
-	_target._creature_hp_current -= abs(_target._creature_def-_final_dmg);	
-	_target._creature_def -= _final_dmg;
-	if (_target._creature_def <= 0){
-		_target._creature_def = 0;
-	}
-	
+	scr_damage_creature(_target, _final_dmg);
+	show_debug_message(_channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
+
 	////////////
 	// EFFECT //
 	////////////

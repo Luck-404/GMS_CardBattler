@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//						SCR_CARD_GROW_MANAVINE						//
+//																	//
+// > ADD 2 BONUS MANA FOR 3 TURNS									//	
+//////////////////////////////////////////////////////////////////////
 function scr_card_grow_manavine(_card,_channel,_target){
 	//check for existing util
 	var _existing_manavine = undefined;
@@ -11,12 +16,12 @@ function scr_card_grow_manavine(_card,_channel,_target){
 		
 	//if no buff is found, apply the spell as usual
 	if (_existing_manavine == undefined){	
-		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_counter);
+		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
 		_ref_counter.x = 100;
 		_ref_counter.y = 170;
 		_ref_counter._draw_color = c_aqua;	
 		_ref_counter._turn_lifespan = 3;
-		_ref_counter._reference_script = scr_card_grow_manavine_repeat;
+		_ref_counter._reference_script = scr_card_grow_manavine_tick;
 		_ref_counter._target = _target;
 		_ref_counter._counter_name = "Manavine";
 		_ref_counter._counter_team = "Player";
@@ -33,7 +38,22 @@ function scr_card_grow_manavine(_card,_channel,_target){
 		//renew
 		_existing_manavine._turn_lifespan = 3;
 	}
+	
+	////////////
+	// EFFECT //
+	////////////
 	var _ref_effect = instance_create_layer(room_width/2,room_height/2,"Effects",obj_card_effect);
 	_ref_effect.sprite_index = spr_effect_grow_manavine;
+	
+	///////////
+	// SOUND //
+	///////////
 	audio_play_sound(snd_effect_grow_manavine,0,false);
+	
+	////////////
+	// BANNER //
+	////////////
+	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
+	_ref_banner._ban_color = c_black;
+	_ref_banner._ban_text = "" + _channel._creature_name + " casts grow manavine";	
 }

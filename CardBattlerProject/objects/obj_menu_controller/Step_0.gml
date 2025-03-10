@@ -47,9 +47,10 @@ if (room = rm_main_menu){
 		// NEW GAME //
 		//////////////
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_new_game)){
-			show_debug_message("MAIN MENU: OPENING NEW GAME GUI");
+			
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 show_debug_message("MAIN MENU: OPENING NEW GAME GUI");
 				 global._clicked = true;
 				global.flag_gui_open = true;			
 				//DISPLAY THE GUI
@@ -58,9 +59,10 @@ if (room = rm_main_menu){
 		}
 		
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_load)){
-			show_debug_message("MAIN MENU: OPENING LOAD GAME GUI");
+
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				show_debug_message("MAIN MENU: OPENING LOAD GAME GUI");
 				 global._clicked = true;				 
 				global.flag_gui_open = true;
 				//DISPLAY THE GUI
@@ -70,9 +72,10 @@ if (room = rm_main_menu){
 		}
 		
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_button_options)){
-			show_debug_message("MAIN MENU: OPENING OPTIONS GUI");
+			
 			 ///OPEN GUI ON LEFT CLICK
 			 if (mouse_check_button_pressed(mb_left)){
+				 show_debug_message("MAIN MENU: OPENING OPTIONS GUI");
 				 global._clicked = true;				 
 				global.flag_gui_open = true;		
 				//DISPLAY THE GUI
@@ -132,7 +135,7 @@ if (room != rm_main_menu){
 	// ESCAPE OPENS/CLOSES THE OPTIONS GUI //
 	/////////////////////////////////////////
 	if (keyboard_check_pressed(vk_escape) && !instance_exists(obj_enc_rewards)){
-		if (instance_exists(obj_fight_controller) && (global.fight_controller_state != FIGHT_CONTROLLER_STATE.ENEMY_TURN)){
+		if (instance_exists(obj_fight_controller) && (global.fight_controller_state == FIGHT_CONTROLLER_STATE.ENEMY_TURN)){
 			
 		} else {
 		 if (global.flag_gui_open == false){

@@ -10,7 +10,7 @@ function scr_roll_card(_rarity) {
     switch (_rarity) {
         case "common":
 			//var _rand = choose("block","strike","clear","thorny");		
-			var _rand = choose("block","strike","thorny");					
+			var _rand = choose("block","strike","thorny","life spirit");					
 			switch(_rand){
 				case "block":			
 				_card = scr_create_card("Block", "Adds 5 defense to self", 1, scr_card_block, spr_card_block, "Any", "Uncolored", "Defend", 0, "Any", "Any", irandom_range(10,20), false);
@@ -24,6 +24,9 @@ function scr_roll_card(_rarity) {
 				case "thorny":
 				_card = scr_create_card("Thorny Whip", "Deals 8 damage to any target", 0, scr_card_thorny_whip, spr_card_thorny_whip, "Any", "Green", "Attack", 8, "Any", "Any", irandom_range(10,20), false);
 				break;
+				case "life spirit":
+				_card = scr_create_card("Life Spirit", "Summon a healer minion with 5hp, heals host unit 5% hp per turn", 0, scr_card_life_spirit, spr_card_life_spirit, "Green", "Utility", 0, "Any", "Any", irandom_range(10,20), false, "Ranged");	
+				break;			
 			}
             break;
 			
@@ -46,7 +49,7 @@ function scr_roll_card(_rarity) {
             break;
 			
         case "rare":
-			_rand = choose("echo","inspire","bash","remedy","manavine");
+			_rand = choose("echo","inspire","bash","remedy","manavine","bramblet");
 			switch(_rand){
 				case "echo":			
 					 _card = scr_create_card("Echo", "Repeat next spell for free, exhaust", 0, scr_card_echo, spr_card_echo, "None", "Uncolored", "Utility", 0, "Any", "Any", irandom_range(40,60), true);
@@ -61,8 +64,11 @@ function scr_roll_card(_rarity) {
 					 _card = scr_create_card("Nature's Remedy", "Heal a unit for 30% HP", 2, scr_card_natures_remedy, spr_card_natures_remedy, "Any", "Green", "Heal", 0, "Magical", "Any", irandom_range(40,60), true);	
 				break;	
 				case "manavine":			
-					 _card = scr_create_card("Grow Manavine", "Add 2 extra mana to the pool for 3 turns, exhaust", 3, scr_card_grow_manavine, spr_card_grow_manavine, "None", "Green", "Utility", 0, "Technical", "Any", 20, true);	
-				break;					
+					 _card = scr_create_card("Grow Manavine", "Add 2 extra mana to the pool for 3 turns, exhaust", 3, scr_card_grow_manavine, spr_card_grow_manavine, "None", "Green", "Utility", 0, "Technical", "Any", irandom_range(40,60), true);	
+				break;			
+				case "bramblet":
+					_card = scr_create_card("Bramblet", "Summon bramble minion on self, passively generates 5 armor for host, when host is attacked 10% damage is dealt back to caster", 2, scr_card_bramblet, spr_card_bramblet, "Green", "Utility", 0, "Magical", "Summoner", irandom_range(40,60), true, "Self");
+				break;
 			}
 		break;
 		

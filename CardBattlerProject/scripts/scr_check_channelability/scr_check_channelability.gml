@@ -6,6 +6,9 @@
 //////////////////////////////////////////////////////////////////////
 function scr_check_channelability(_unit,_card){
 
+	//////////////////////////////////
+	// CHECK CREATURE COLOR VS CARD //
+	//////////////////////////////////
 	//check unit color against selected car
 	if (_unit._creature_color1 == "Uncolored"){
 
@@ -20,6 +23,9 @@ function scr_check_channelability(_unit,_card){
 		}
 	}
 	
+	/////////////////////////////////////
+	// CHECK CREATURE SPEC VS CARD REQ //
+	/////////////////////////////////////
 	//check unit spec
 	if (_card._card_spec_req == "Any"){
 
@@ -29,7 +35,10 @@ function scr_check_channelability(_unit,_card){
 			return false;
 		}
 	}
-	
+
+	//////////////////////////////////////
+	// CHECK CREATURE CLASS VS CARD REQ //
+	//////////////////////////////////////
 	//check unit class
 	if (_card._card_class_req == "Any"){
 
@@ -39,8 +48,11 @@ function scr_check_channelability(_unit,_card){
 			return false;
 		}	
 	}
+	
+	///////////////////////////////
+	// CHECK IF CREATURE IS CC'd //
+	///////////////////////////////
 	//check if unit is stunned/cc'd	
-		//TODO
 		if (_unit._stunned = true){
 
 			return false;	

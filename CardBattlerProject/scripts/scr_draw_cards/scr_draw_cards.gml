@@ -14,8 +14,7 @@ function scr_draw_cards(_amount) {
             var _index = irandom(ds_list_size(global.player_encounter_deck) - 1);
             var _ref_card = ds_list_find_value(global.player_encounter_deck, _index);
 			//move card to bottom of screen
-			_ref_card.x = 500+(200*_i);
-			_ref_card.y = 1000;
+			_ref_card.x = 500+(150*_i);
 			_ref_card._list = "hand";
 				// Add card to the hand
             ds_list_add(global.player_hand, _ref_card);

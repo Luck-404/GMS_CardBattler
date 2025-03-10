@@ -267,6 +267,9 @@ if (room == rm_encounter){
 					_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
 					_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
 					_ref_creature_instance._creature_class = _ref_creature[? "class"];
+					if (_ref_creature_instance._creature_class == "Summoner") {
+						_ref_creature_instance._creature_minion_limit = 5;
+					}
 					_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
 					_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
 					_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
@@ -279,21 +282,24 @@ if (room == rm_encounter){
 					ds_list_add(global.player_party_in_play, _ref_creature_instance);
 				}
 				
-		for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++) {		
-			var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
-			var _ref_left_creature = undefined;
-			var _ref_right_creature = undefined;
+			/////////////////////////////////
+			// APPLY TEAM LEFTS AND RIGHTS //
+			/////////////////////////////////
+			for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++) {		
+				var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
+				var _ref_left_creature = undefined;
+				var _ref_right_creature = undefined;
 			
-			if (ds_list_find_value(global.player_party_in_play, _i-1) != undefined){
-				_ref_left_creature = ds_list_find_value(global.player_party_in_play, _i-1);
-			}
-			if (ds_list_find_value(global.player_party_in_play, _i+1) != undefined){
-				_ref_right_creature = ds_list_find_value(global.player_party_in_play, _i+1);
-			}
+				if (ds_list_find_value(global.player_party_in_play, _i-1) != undefined){
+					_ref_left_creature = ds_list_find_value(global.player_party_in_play, _i-1);
+				}
+				if (ds_list_find_value(global.player_party_in_play, _i+1) != undefined){
+					_ref_right_creature = ds_list_find_value(global.player_party_in_play, _i+1);
+				}
 			
-			_ref_creature._left_unit = _ref_left_creature;
-			_ref_creature._right_unit = _ref_right_creature;
-		}		
+				_ref_creature._left_unit = _ref_left_creature;
+				_ref_creature._right_unit = _ref_right_creature;
+			}		
 
 			////////////////////////////
 			// ON-ENCOUNTER BLESSINGS //
@@ -330,15 +336,7 @@ if (room == rm_encounter){
 				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
 					var _unit = ds_list_find_value(global.player_party_in_play, _i);
 					//scr_trigger_turn_effects(_unit);
-					//Util
-				
-					//Buffs
-				
-					//Debuffs
-				
-					//CC
-				
-					//DoTs
+					//TODO
 				}			
 
 			//PASS
@@ -351,16 +349,24 @@ if (room == rm_encounter){
 		#region Minions Cast
 		case PLAYER_ENCOUNTER_STATE.MINIONS_CAST: //MINIONS CAST RANDOM SPELLS IF POSSIBLE
 			//tell each minion to execute their casting script
-				//for each unit in player's party
+			if (_flag_minions_triggered == false){
+				_flag_minions_triggered = true;
+				var _ref_player = instance_create_layer(10,10,"GUI",obj_minion_player);
+				//add all minions to the list
 				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
-					var _unit = ds_list_find_value(global.player_party_in_play, _i);
-					//triggers each ally minion in order (1-5), if they have at least one
-					//TODO
-					//scr_trigger_minions(_unit);
+					var _unit = ds_list_find_value(global.player_party_in_play,_i);
+					for (var _j = 0; _j < ds_list_size(_unit._creature_minion_references); _j++){
+						var _minion = ds_list_find_value(_unit._creature_minion_references,_j);
+						ds_list_add(_ref_player._playlist, _minion);
+					}
 				}
-
-			//PASS
-			global.player_enc_state = PLAYER_ENCOUNTER_STATE.DRAW;							
+				//execute
+				_ref_player._execute = true;
+			}
+			if (!instance_exists(obj_minion_player)){
+				//PASS
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.DRAW;	
+			}					
 		break;	
 		#endregion
 		
@@ -424,6 +430,7 @@ if (room == rm_encounter){
 		#region PICK CARD	
 		case PLAYER_ENCOUNTER_STATE.PICK_CARD: //STAY HERE WAITNIG FOR INPUT (CARD CLICKED ON), ALSO COUNTS AS IDLE (CAN DO OPTIONS MENU STUFF)
 		if (global.flag_gui_open == false){
+		
 		///////////////////
 		// HOVER EFFECTS //
 		///////////////////	
@@ -442,24 +449,28 @@ if (room == rm_encounter){
 		/////////////////
 		// SELECT CARD //
 		/////////////////
+			///////////////////////////
+			// CHECK CARD USEABILITY //
+			///////////////////////////
 			//check if card objects are usable (not enough mana, no unit on team that can cast it/units that can cast it are stunned)
 				if (_flag_check_card == false){
-
 					_flag_check_card = true;
 					for (var _i = 0; _i < ds_list_size(global.player_hand); _i++){
 						var _card = ds_list_find_value(global.player_hand, _i);		
-						if (_card._active == false){
-							var _flag_usability = scr_check_usability(_card);
-							if (_flag_usability == true){
-								_card._active = true;
-							} else {
-								_card._active = false;
-							}
+						
+						var _flag_usability = scr_check_usability(_card);
+						if (_flag_usability == true){
+							_card._active = true;
+						} else {
+							_card._active = false;
 						}
 						//cards draw greyed or not depending on usability
 					}
 				}
 				
+			////////////////////
+			// CARD SELECTION //
+			////////////////////
 				//click on a card object
 				if (position_meeting(mouse_x, mouse_y, obj_card) && instance_nearest(mouse_x, mouse_y, obj_card)._list == "hand" && mouse_check_button_pressed(mb_left)){
 					var _card = instance_nearest(mouse_x, mouse_y, obj_card);
@@ -487,17 +498,14 @@ if (room == rm_encounter){
 					}
 				}
 				
-		///////////////////////
-		// RIGHT CLICK / ESC //
-		///////////////////////	
-		if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
-				//unselect all cards
-				with(obj_card){
-					obj_card._selected = false;
-				}
-				//reset user card selection
-				_card_selected = undefined;
-			}	
+			////////////////////////////////////////////////////////////////////
+			// RIGHT CLICK / ESC CLEARS SELECTIONS AND SENDS BACK TO SQUARE 1 //
+			////////////////////////////////////////////////////////////////////
+			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){	
+				scr_reset_playstate();
+				//send back to pick cards
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+			}
 		}
 		break;		
 		#endregion		
@@ -507,7 +515,7 @@ if (room == rm_encounter){
 		#region PICK CHANNEL
 		case PLAYER_ENCOUNTER_STATE.PICK_CHANNEL: //WHEN A CARD IS SELECTED, CHECK FOR CLICK ON ANYTHING (FOR TARGETLESS) OR ON ALLY CREATURE TO CHANNEL FOR TARGETED
 		if (global.flag_gui_open == false){
-				
+			
 			///////////////////
 			// HOVER EFFECTS //
 			///////////////////	
@@ -515,23 +523,20 @@ if (room == rm_encounter){
 				//Allies & Enemies //handled by obj_creature
 				//minions (ally and enemy) //handled by obj_minion
 			
-			/////////////////////
-			// HIGHLIGHT UNITS //
-			/////////////////////	
+			///////////////////////////////
+			// CHECK UNIT CHANNELABILITY //
+			///////////////////////////////
 			if (_flag_check_channel == false){
-
 				_flag_check_channel = true;			
 				for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
-					var _unit = ds_list_find_value(global.player_party_in_play, _i);
-					if (_unit._active == false){					
-						//based on the card, highlight ally units that fit the criteria
-						var _check_channel = scr_check_channelability(_unit,_card_selected);
+					var _unit = ds_list_find_value(global.player_party_in_play, _i);					
+					//based on the card, highlight ally units that fit the criteria
+					var _check_channel = scr_check_channelability(_unit,_card_selected);
 			
-						if(_check_channel == true){
-							_unit._active = true;
-						} else {
-							_unit._active = false;	
-						}
+					if(_check_channel == true){
+						_unit._active = true;
+					} else {
+						_unit._active = false;	
 					}
 				}
 			}
@@ -543,29 +548,12 @@ if (room == rm_encounter){
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
 			}
 		
-			///////////////////////
-			// RIGHT CLICK / ESC //
-			///////////////////////	
-			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
-				//unselect all cards
-				_card_selected._selected = false;
-				//reset user card selection
-				_card_selected = undefined;
-				//unselect channels
-				if (_channel_selected != undefined){
-					_channel_selected._selected_channel = false;
-					_channel_selected = undefined;
-				}
-				
-				_flag_check_card = false;
-				_flag_check_channel = false;
-					
-				with (obj_creature){
-					obj_creature._active = false;
-					obj_creature._selected_channel = false;
-					obj_creature._selected_target = false;
-				}
-				//send back one state
+			////////////////////////////////////////////////////////////////////
+			// RIGHT CLICK / ESC CLEARS SELECTIONS AND SENDS BACK TO SQUARE 1 //
+			////////////////////////////////////////////////////////////////////
+			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){	
+				scr_reset_playstate();
+				//send back to pick cards
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 			}			
 				
@@ -606,90 +594,116 @@ if (room == rm_encounter){
 		#region PICK TARGET
 		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
 		if (global.flag_gui_open == false){
+			
 			//////////////
 			// END TURN //
 			//////////////
 			if (position_meeting(mouse_x, mouse_y, obj_end_turn) && mouse_check_button_pressed(mb_left)){
 				global.player_enc_state = PLAYER_ENCOUNTER_STATE.END_TURN;	
 			}
+			
 			///////////////////
 			// HOVER EFFECTS //
 			///////////////////					
 			//Cards (user hand and enemy prepped) - handled by obj_card/obj_enemy_card
 			//Allies & Enemies //handled by obj_creature
 			//minions (ally and enemy) //handled by obj_minion
-		
-			///////////////////////
-			// RIGHT CLICK / ESC //
-			///////////////////////
-			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){		
-				var _dest = undefined;
-				if (_card_selected._flag_targetless == true){
-					//unselect all cards
-					_card_selected._selected = false;
-					_card_selected = undefined;					
-					_dest = PLAYER_ENCOUNTER_STATE.PICK_CARD;
-				} else {
-					_dest = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;	
-				}		
-
-				//unselect channel unit
-				if (_channel_selected != undefined){
-					_channel_selected._selected_channel = false;
-					_channel_selected = undefined;
-				}
-				//unselect target unit
-				if (_target_selected != undefined){				
-					_target_selected._selected_target = false;
-					_target_selected = undefined;		
-				}
-				with (obj_creature){
-					obj_creature._active = false;
-					obj_creature._selected_channel = false;
-					obj_creature._selected_target = false;
-				}				
-				
-				_flag_check_card = false;
-				_flag_check_channel = false;
-				
-				global.player_enc_state = _dest;
+			
+			////////////////////////////////////////////////////////////////////
+			// RIGHT CLICK / ESC CLEARS SELECTIONS AND SENDS BACK TO SQUARE 1 //
+			////////////////////////////////////////////////////////////////////
+			if (mouse_check_button_pressed(mb_right) || (keyboard_check_pressed(vk_escape))){	
+				scr_reset_playstate();
+				//send back to pick cards
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 			}						
+			
+			/////////////////////
+			// TARGET CHECKING //
+			/////////////////////	
+			if (_flag_check_target == false && _channel_selected != undefined){
+				_flag_check_target = true;			
+				//scan player team for targets based on the card
+				for(var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+					var _unit = ds_list_find_value(global.player_party_in_play, _i);				
+					//based on the card, highlight ally units that fit the criteria
+					var _check_tar = scr_check_targetability(_channel_selected,_unit,_card_selected);
+			
+					if(_check_tar == true){
+						_unit._active = true;
+					} else {
+						_unit._active = false;	
+					}
+				}
+				//scan enemy team for targets based on the card
+				for(var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
+					var _unit = ds_list_find_value(global.enemy_party_in_play, _i);	
+					//based on the card, highlight ally units that fit the criteria
+					var _check_tar = scr_check_targetability(_channel_selected,_unit,_card_selected);
+			
+					if(_check_tar == true){
+						_unit._active = true;
+					} else {
+						_unit._active = false;	
+					}
+				}				
+			}
 			
 			////////////////
 			// TARGETLESS //
 			////////////////
 			//if targetless, prompt to click anywhere
-			if (_card_selected._flag_targetless == true){
-			//if clicked- cast te spell, send back to pick card
-				scr_play_card(_card_selected,_channel_selected,"Targetless");
-				//send back to pick card for another cast
-				global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
-			} 
-		
-			///////////////////
-			// SELECT TARGET //
-			///////////////////		
-			else {
-				if (position_meeting(mouse_x, mouse_y, obj_creature) && mouse_check_button_pressed(mb_left)){
-					var _unit = instance_nearest(mouse_x, mouse_y, obj_creature);
-					//unselect all cards
-					with(obj_creature){
-						obj_creature._selected_target = false;
-					}
-					//reset user card selection
-					_target_selected = undefined;
+			if (_card_selected != undefined){
+			if (_card_selected._flag_targetless == true){						
+				if (mouse_check_button_pressed(mb_left)){//if clicked- cast the spell, send back to pick card
+					scr_play_card(_card_selected,_channel_selected,"Targetless");
+						
 					
-					//select new card
-					_unit._selected_target = true;
-					_target_selected = _unit;
-					
-					//if clicked- cast te spell, send back to pick card
-					scr_play_card(_card_selected,_channel_selected,_target_selected);
-			
 					//send back to pick card for another cast
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 				}
+			} 
+			
+			////////////////////
+			// NOT TARGETLESS //
+			////////////////////
+			else {
+				///////////////////
+				// SELECT TARGET //
+				///////////////////		
+				if (position_meeting(mouse_x, mouse_y, obj_creature) && mouse_check_button_pressed(mb_left)){
+					var _unit = instance_nearest(mouse_x, mouse_y, obj_creature);
+					if (_unit._active != false){
+							//unselect all cards
+							with(obj_creature){
+								obj_creature._selected_target = false;
+							}
+							//reset user selection
+							_target_selected = undefined;
+					
+							//select new
+							_unit._selected_target = true;
+							_target_selected = _unit;
+					
+							///////////////
+							// PLAY CARD //
+							///////////////
+							//if clicked- cast te spell, send back to pick card
+							scr_play_card(_card_selected,_channel_selected,_target_selected);
+							
+							
+							//send back to pick card for another cast
+							global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
+					}
+					else {
+						//if not usable- grey out- play err and shake slightly if they try to click it
+						//TODO
+						//SHAKE
+						//ERR NOISE
+					}					
+				}
 			}
+		}
 		}
 		break;
 		#endregion
@@ -702,42 +716,26 @@ if (room == rm_encounter){
 			// TRIGGER END TURN EFFECTS //
 			//////////////////////////////
 				//TODO
-
-			with (obj_card_counter) {
-			if (_counter_team == "Player" && _target == "Targetless"){
-		        _turn_lifespan--;
-				_trigger_my_effect = true;
-			}			
-			else if (_target != "Targetless" && _target._creature_team == "Player") {
-			    _turn_lifespan--;
-				_trigger_my_effect = true;
-			}				
-			}
+				with (obj_card_effect_counter) {
+					if (_counter_team == "Player" && _target == "Targetless"){
+				        _turn_lifespan--;
+						_trigger_my_effect = true;
+					}			
+					else if (_target != "Targetless" && _target._creature_team == "Player") {
+					    _turn_lifespan--;
+						_trigger_my_effect = true;
+					}				
+				}
 			
 			//empty hand into discard pile
 			scr_discard_hand();
 			
+			_flag_minions_triggered = false;
+			
 			//regen mana
 			global.cur_mana = global.max_mana+global.bonus_mana;
 			
-			//reset player's selected and such
-			obj_player._card_selected = undefined;	
-			obj_player._channel_selected = undefined;
-			obj_player._target_selected = undefined;
-			
-			with(obj_card){
-				obj_card._active = false;
-				obj_card._selected = false;
-			}
-			
-			with(obj_creature){
-				obj_creature._active = false;
-				obj_creature._selected_channel = false;
-				obj_creature._selected_target = false;
-			}			
-			
-			obj_player._flag_check_card = false;
-			obj_player._flag_check_channel = false;
+			scr_reset_playstate();
 			
 			//pass turn to enemy
 			global.fight_controller_state = FIGHT_CONTROLLER_STATE.ENEMY_TURN;
@@ -759,22 +757,7 @@ if (room == rm_encounter){
 		
 		#region EXIT ENC
 		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter	
-			with(obj_card){
-				obj_card._active = false;
-				obj_card._selected = false;
-			}
-			
-			//reset player's selected and such
-			obj_player._card_selected = undefined;	
-			obj_player._channel_selected = undefined;
-			obj_player._target_selected = undefined;
-			
-
-			
-			with(obj_creature){
-				obj_creature._selected_channel = false;
-				obj_creature._selected_target = false;
-			}			
+			scr_reset_playstate();
 			
 			while(ds_list_size(global.encounter_utility_active) != 0){
 				var _counter = ds_list_find_value(global.encounter_utility_active, _i);	
@@ -797,8 +780,6 @@ if (room == rm_encounter){
 						ds_list_add(global.graveyard,_ref_original_creature);
 					}
 				}	
-			} else {
-				
 			}
 				
 			//Put cards back into deck (from exhaust and discard)			

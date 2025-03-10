@@ -57,12 +57,14 @@ global.graveyard = ds_list_create();
 _channel_selected = undefined;
 _target_selected = undefined;
 _flag_check_channel = false;
+_flag_check_target = false;
+_flag_minions_triggered = false;
 
 //blessings
 global.player_blessings_list = ds_list_create();
 
 //general stats
-global.max_hand_size = 3; // Maximum of 3 cards in the hand
+global.max_hand_size = 6; // Maximum of 3 cards in the hand
 global.max_hand_size_saved = global.max_hand_size;
 global.cur_hand_size = global.max_hand_size;
 

@@ -1,31 +1,62 @@
 //////////////////////////////////////////////////////////////////////
 //							SCR_PLAY_CARD							//
 //																	//
-// > PPLAYS AN INPUT CARD											//
+// > PLAYS AN INPUT CARD THROUGH THE CHANNEL CREATURE CENTERED ON	//
+//	 THE TARGET. THE CARD SCRIPTS THEMSELVES HANDLE A LOT OF THE	//
+//   LOGIC.															//
 //////////////////////////////////////////////////////////////////////
 function scr_play_card(_card, _channel_creature, _target_creature) {
+	global.latest_card = _card;
+	global.latest_channel = _channel_creature;
+	global.latest_target = _target_creature;	
+		
+	
 	var _card_ref = _card._card_ref;
 	var _card_script = _card_ref[?"script"];
 	
+	if (_card_ref[?"type"] != "Attack"){
+		global.latest_damage_done = 0;
+	}
 
-	
 	////////////////
 	// TARGETLESS //
 	////////////////
 	if (_target_creature == "Targetless"){
 		show_debug_message("COMBAT: " + _channel_creature._creature_team + " unit " + _channel_creature._creature_name + " plays card " + _card._card_name);		
+		
+		/////////////
+		// ECHOING //
+		/////////////
 		if (global.echo_count != 0){
-			var _tmp = global.echo_count;
-			for (var _j = -1; _j < _tmp; _j++){	
-				audio_play_sound(snd_effect_echoing,0,false);	
-				_card_script(_card_ref,_channel_creature,_target_creature);
+			//add to echo counter
+			if (_card_script == scr_card_echo){
+				global.echo_count++;
+			} 
+			//echo out the card
+			else {
+				var _tmp = global.echo_count;
+				for (var _j = -1; _j < _tmp; _j++){	
+					audio_play_sound(snd_effect_echoing,0,false);	
+					_card_script(_card_ref,_channel_creature,_target_creature);
+				}
+				global.echo_count = 0;
 			}
-			global.echo_count = 0;
-		} else {
+		} 
+		/////////////////
+		// NOT ECHOING //
+		/////////////////
+		else {
 			_card_script(_card_ref,_channel_creature,_target_creature);
 		}
-		//subract cost once
+		
+		///////////////////
+		// SUBTRACT MANA //
+		///////////////////
 		global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
+		
+		//////////////////
+		// CLEANUP CARD //
+		//////////////////
 		if (_card_ref[?"exhausts"] == true){
 			scr_exhaust(_card);
 		}
@@ -33,15 +64,19 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 			scr_discard(_card);
 		}
 	} 
+	
+	//////////////////
+	// NORMAL CARDS //
+	//////////////////
 	else {
 		show_debug_message("COMBAT: " + _channel_creature._creature_team + " unit " + _channel_creature._creature_name + " plays card " + _card._card_name + " targeting " + _target_creature._creature_name);
-		//////////////////////
-		// HANDLE MANA COST //
-		//////////////////////	
+		///////////////////
+		// SUBTRACT MANA //
+		///////////////////
 		global.cur_mana  = global.cur_mana  - _card_ref[?"cost"];
 
 		//////////
-		// CAST //
+		// ECHO //
 		//////////
 		if (global.echo_count != 0){
 			var _tmp = global.echo_count;
@@ -50,13 +85,17 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 				_card_script(_card_ref,_channel_creature,_target_creature);
 			}
 			global.echo_count = 0;
-		} else {
+		} 
+		/////////////////
+		// PLAY NORMAL //
+		/////////////////
+		else {
 			_card_script(_card_ref,_channel_creature,_target_creature);
 		}
 		
-		//////////////////////////////////
-		// HANDLE DISCARDING/EXHAUSTING //
-		//////////////////////////////////
+		//////////////////
+		// CLEANUP CARD //
+		//////////////////
 		if (_card_ref[?"exhausts"] == true){
 			scr_exhaust(_card);
 		}
@@ -65,26 +104,9 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 		}
 	}
 		
-	/////////////////////////////////////////
-	// RESET PLAYER VARIABLES FOR NEW CAST //
-	/////////////////////////////////////////
-	//reset player's selected and such
-	obj_player._card_selected = undefined;	
-	obj_player._channel_selected = undefined;
-	obj_player._target_selected = undefined;
-			
-	with(obj_card){
-		obj_card._active = false;
-		obj_card._selected = false;
-	}
-			
-	with(obj_creature){
-		obj_creature._active = false;
-		obj_creature._selected_channel = false;
-		obj_creature._selected_target = false;
-	}			
-	
-	obj_player._flag_check_card = false;
-	obj_player._flag_check_channel = false;
-			
+		
+/////////////////////////////////////////
+// RESET PLAYER VARIABLES FOR NEW CAST //
+/////////////////////////////////////////
+scr_reset_playstate();
 }

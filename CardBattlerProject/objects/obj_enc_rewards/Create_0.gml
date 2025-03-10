@@ -1,5 +1,12 @@
-_type = undefined;
+//////////////////////////////////////////////////////////////////////
+//							OBJ_ENC_REWARDS							//
+//																	//
+// > END OF ENCOUNTER REWARDS GUI.								    //
+//////////////////////////////////////////////////////////////////////
+_type = undefined; //STATE (WIN, LOSS, FORFEIT
+_flag_init = false; //SETUP COMPLETE FLAG
+_clicked = false; //CLICKED FLAG
+
+//CONFIRM BUTTON
 _ref_confirm = instance_create_layer(x,y+300,"GUI",obj_confirm);
 _ref_confirm.depth = -1000;
-_flag_init = false;
-_clicked = false;

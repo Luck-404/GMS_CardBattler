@@ -5,10 +5,17 @@
 //	 of limiting factors											//
 //////////////////////////////////////////////////////////////////////
 function scr_check_usability(_ref_card){
+	///////////////
+	// MANA COST //
+	///////////////
 	//check if you have enough mana
 	if(global.cur_mana < _ref_card._card_cost){
 		return false
 	}
+	
+	////////////////
+	// UNIT COLOR //
+	////////////////
 	//check if you have a unit that matches the color of the card
 		//for each unit
 		if(_ref_card._card_color == "Uncolored"){
@@ -26,6 +33,9 @@ function scr_check_usability(_ref_card){
 		}
 		
 		
+	///////////////
+	// UNIT SPEC //
+	///////////////
 	//check if you have a unit of the right major class (mar, tech, mag)
 		//for each unit
 		var _found_a_spec_unit = false;
@@ -43,7 +53,9 @@ function scr_check_usability(_ref_card){
 			}
 		}
 		
-		
+	////////////////
+	// UNIT CLASS //
+	////////////////
 	//check if you have a unit of the right class
 		//for each unit
 		if(_ref_card._card_class_req == "Any"){
@@ -62,5 +74,9 @@ function scr_check_usability(_ref_card){
 				return false;
 			}
 		}
+		
+	/////////////////////////////
+	// RETURN TRUE IF ALL PASS //
+	/////////////////////////////
 	return true;
 }

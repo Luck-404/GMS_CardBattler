@@ -1,17 +1,29 @@
-//draw big grey box
+//////////////////////////////////////////////////////////////////////
+//					OBJ_ENC_REWARDS	DRAW GUI						//
+//																	//
+// > DRAW GUI													    //
+//////////////////////////////////////////////////////////////////////
+
+/////////////////
+// DRAW BG BOX //
+/////////////////
 draw_set_color(c_grey);
 draw_rectangle(room_width/2 - 150,room_height/2 - 200,room_width/2 + 150,room_height/2 + 200,false);
 draw_set_color(c_white);
+
 /////////
 // WIN //
 /////////
-if (_type == "win" && _flag_init == false){
-_flag_init = true;	
-var _rand_rewards = irandom_range(1,3);
-    // Roll a rarity for each card
-    for (var _i = 0; _i < _rand_rewards; _i++) {
-        var _rarity_roll = irandom_range(1, 100); // Determine rarity
-        var _card = undefined;
+if (_type == "win" && _flag_init == false){ //INIT ONCE
+	_flag_init = true;	
+	////////////////////
+	// ROLL 1-3 CARDS //
+	////////////////////
+	var _rand_rewards = irandom_range(1,3);
+	// Roll a rarity for each card
+	for (var _i = 0; _i < _rand_rewards; _i++) {
+		var _rarity_roll = irandom_range(1, 100); // Determine rarity
+		var _card = undefined;
 		
 		if (50 < _rarity_roll < 100){ //50% common
 			_card = scr_roll_card("common");
@@ -25,37 +37,45 @@ var _rand_rewards = irandom_range(1,3);
 			_card = scr_roll_card("legendary");
 		}
 			
-        ds_list_add(global.player_deck, _card);
-    }
-//display 2 the 2 new temp card objects with sprites
-var _ref_card1 = instance_create_layer(room_width/2,room_height/2+100,"GUI", obj_card);
-_ref_card1.depth = -101;
-_ref_card1._reward = true;
-_ref_card1.image_index = 0;
-_ref_card1.image_speed = 0;
-_ref_card1.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-1)[?"sprite"];
-_ref_card1.image_xscale = 0.20;
-_ref_card1.image_yscale = 0.20;
-			
-if (_rand_rewards > 1){
-var _ref_card2 = instance_create_layer(room_width/2-100,room_height/2+100,"GUI", obj_card);
-_ref_card2.depth = -101;
-_ref_card2._reward = true;
-_ref_card2.image_index = 0;
-_ref_card2.image_speed = 0;
-_ref_card2.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
-_ref_card2.image_xscale = 0.20;
-_ref_card2.image_yscale = 0.20;		
-}
-if (_rand_rewards >2 ){
-var _ref_card3 = instance_create_layer(room_width/2+100,room_height/2+100,"GUI", obj_card);
-_ref_card3.depth = -101;
-_ref_card3._reward = true;
-_ref_card3.image_index = 0;
-_ref_card3.image_speed = 0;
-_ref_card3.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
-_ref_card3.image_xscale = 0.20;
-_ref_card3.image_yscale = 0.20;	
+		ds_list_add(global.player_deck, _card);
+	}
+		
+	//////////////////
+	// CREATE CARDS //
+	//////////////////
+	#region Card 1
+	var _ref_card1 = instance_create_layer(room_width/2,room_height/2+100,"GUI", obj_card);
+	_ref_card1.depth = -101;
+	_ref_card1._reward = true;
+	_ref_card1.image_index = 0;
+	_ref_card1.image_speed = 0;
+	_ref_card1.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-1)[?"sprite"];
+	_ref_card1.image_xscale = 0.20;
+	_ref_card1.image_yscale = 0.20;
+	#endregion
+	#region Card 2
+	if (_rand_rewards > 1){
+	var _ref_card2 = instance_create_layer(room_width/2-100,room_height/2+100,"GUI", obj_card);
+	_ref_card2.depth = -101;
+	_ref_card2._reward = true;
+	_ref_card2.image_index = 0;
+	_ref_card2.image_speed = 0;
+	_ref_card2.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
+	_ref_card2.image_xscale = 0.20;
+	_ref_card2.image_yscale = 0.20;		
+	}
+	#endregion	
+	#region Card 3	
+	if (_rand_rewards >2 ){
+	var _ref_card3 = instance_create_layer(room_width/2+100,room_height/2+100,"GUI", obj_card);
+	_ref_card3.depth = -101;
+	_ref_card3._reward = true;
+	_ref_card3.image_index = 0;
+	_ref_card3.image_speed = 0;
+	_ref_card3.sprite_index = ds_list_find_value(global.player_deck,ds_list_size(global.player_deck)-2)[?"sprite"];	
+	_ref_card3.image_xscale = 0.20;
+	_ref_card3.image_yscale = 0.20;	
+	#endregion
 }
 				
 //give gold, display it
@@ -63,7 +83,7 @@ global.gold_randomizer = irandom_range(40,50);
 global.gold = global.gold + global.gold_randomizer;
 				
 }
-if (_type == "win"){
+if (_type == "win"){ //ALWAYS
 	draw_set_color(c_white);
 	draw_set_font(fnt_fanwood);
 	draw_text(room_width/2-100,room_height/2-100,"You've won!");
@@ -102,6 +122,7 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 		scr_transition("overworld","return","Any","Any");
 		instance_destroy();
 	}
+	
 	else if(_type == "loss"){
 		_clicked = true;
 		//on game loss confirm- send to title screen
@@ -111,6 +132,7 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 		scr_transition("main menu","loss","Any","Any");	
 		instance_destroy();
 	}
+	
 	else if(_type == "forfeit"){
 		_clicked = true;
 		global.flag_gui_open = false;		

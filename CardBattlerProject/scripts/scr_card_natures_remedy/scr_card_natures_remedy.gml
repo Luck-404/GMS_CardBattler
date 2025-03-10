@@ -1,15 +1,17 @@
+//////////////////////////////////////////////////////////////////////
+//						SCR_CARD_NATURES_REMEDY						//
+//																	//
+// > HEAL A UNIT FOR 20% MAX HP										//	
+//////////////////////////////////////////////////////////////////////
 function scr_card_natures_remedy(_card,_channel,_target){
 	///////////////
 	// MAGNITUDE //
 	///////////////
-	//get 30% of max hp
-	var _30p = ceil((_target._creature_hp_max)*0.30);
+	var _20p = ceil((_target._creature_hp_max)*0.20); //get 20% of max hp
+
+	_target._creature_hp_current += _20p; //add the hp
 	
-	//add the hp
-	_target._creature_hp_current += _30p;
-	
-	//check for overflow
-	if (_target._creature_hp_current > _target._creature_hp_max){
+	if (_target._creature_hp_current > _target._creature_hp_max){ //check for overflow
 		_target._creature_hp_current = _target._creature_hp_max;
 	}
 	

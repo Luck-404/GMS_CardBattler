@@ -7,6 +7,7 @@ function scr_load_creature(_creaturename){
 		
 		case "Bush Monkey":
 			_loadedcreature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(40,60),"Martial","Adventurer",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+			//_loadedcreature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",5,"Martial","Adventurer",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
 		break;	
 		
 		case "Corpseflower":

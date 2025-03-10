@@ -1,6 +1,11 @@
-///////////////
-// VARIABLES //
-///////////////
+//////////////////////////////////////////////////////////////////////
+//						OBJ_CREATURE CREATE							//
+//																	//
+// > CREATE A CREATURE BASED ON A REFERENCE. THIS CREATURE ONLY		//
+//   EXISTS IN THE ENCOUNTER										//
+//////////////////////////////////////////////////////////////////////
+
+//DEFINITIONS
 _creature_name = "Wraith";
 _creature_champion = false;
 _creature_color1 = "Uncolored";
@@ -12,6 +17,9 @@ _creature_hp_max = 50;
 _creature_hp_current = 50;
 _creature_spec = "Any";
 _creature_class = "Any";
+_creature_minion_count = 0;
+_creature_minion_limit = 3;
+_creature_minion_references = ds_list_create();
 _creature_gear = ds_list_create(); //can start with these if wanted
 _creature_markings = ds_list_create(); //can start with these if wanted
 _creature_sprite = spr_creature_uncolored_wraith;
@@ -20,19 +28,28 @@ _creature_deathsound = snd_creature_wraith_death;
 _creature_defaultsound = snd_creature_wraith_default;
 _creature_def = 0;
 _creature_position = 0;
-_flag_has_died = false;
-_creature_attack_scalar = 1;
-_creature_attack_linear = 0;
-_turn_available = true;
-_creature_position = 0;
-_active = false;
-_selected_channel = false;
-_selected_target = false;
-_card_to_play = undefined;
 _left_unit = undefined;
 _right_unit = undefined;
 
+//STATS
+_creature_attack_scalar = 1;
+_creature_attack_linear = 0;
 
+//FLAGS
+_active = false;
+_selected_channel = false;
+_selected_target = false;
+_flag_has_died = false;
+_card_to_play = undefined; //ENEMIES ONLY
+
+//ENEMY DECK INFO
+_deck = ds_list_create();
+_discard = ds_list_create();
+_card_selected = undefined;
+
+/////////////
+// EFFECTS //
+/////////////
 //CC counters
 _stunned = false;
 _stun_counter_ref = undefined;
@@ -44,15 +61,3 @@ _poison_counter_ref = undefined;
 //Buff counters
 _buffs = ds_list_create();
 
-//other counters
-//_poison_count = 0;
-//_poison_counter_ref = undefined;
-//_poison_count = 0;
-//_poison_counter_ref = undefined;
-//_poison_count = 0;
-//_poison_counter_ref = undefined;
-//_poison_count = 0;
-
-_deck = ds_list_create();
-_discard = ds_list_create();
-_card_selected = undefined;

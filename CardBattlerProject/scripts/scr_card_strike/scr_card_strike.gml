@@ -1,9 +1,14 @@
+//////////////////////////////////////////////////////////////////////
+//							SCR_CARD_STRIKE							//
+//																	//
+// > DEAL DAMAGE TO A SINGLE UNIT AT MELEE RANGE					//
+//////////////////////////////////////////////////////////////////////
 function scr_card_strike(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
 	var _base_dmg = _card[?"damage"];
-	var _color_mult = scr_calculate_color_damage_bonus(_channel,_target);
+	var _color_mult = scr_calculate_color_damage_bonus(_card[?"color"],_target);
 	var _scalar = _channel._creature_attack_scalar;
 	var _linear = _channel._creature_attack_linear;
 	var _scaled_dmg = _base_dmg*_scalar*_color_mult;
@@ -12,11 +17,8 @@ function scr_card_strike(_card,_channel,_target){
 	////////////
 	// DAMAGE //
 	////////////
-	_target._creature_hp_current -= abs(_target._creature_def-_final_dmg);	
-	_target._creature_def -= _final_dmg;
-	if (_target._creature_def <= 0){
-		_target._creature_def = 0;
-	}
+	scr_damage_creature(_target, _final_dmg);
+	show_debug_message(_channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
 	
 	////////////
 	// EFFECT //
