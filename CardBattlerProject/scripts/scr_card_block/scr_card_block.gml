@@ -9,6 +9,11 @@ function scr_card_block(_card,_channel,_target){
 	///////////////
 	_target._creature_def += 5;
 	
+	
+	var _popup = instance_create_layer(_target.x, _target.y, "GUI", obj_combat_values_popup);
+	_popup._text = string(5);
+	_popup._type = "Shields";
+		
 	////////////
 	// EFFECT //
 	////////////

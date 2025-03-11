@@ -21,6 +21,14 @@ function scr_card_natures_remedy(_card,_channel,_target){
 	var _ref_effect = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
 	_ref_effect.sprite_index = spr_effect_grow_natures_remedy;
 	
+	///////////////////
+	// SCROLLING DMG //
+	///////////////////
+	//popup the reason
+	var _popup = instance_create_layer(_target.x, _target.y, "GUI", obj_combat_values_popup);
+	_popup._text = string(_20p);
+	_popup._type = "Healing";	
+	
 	///////////
 	// SOUND //
 	///////////

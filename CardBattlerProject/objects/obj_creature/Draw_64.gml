@@ -16,11 +16,14 @@ draw_text(x,y-400, string(_creature_position));
 if (_creature_hp_current <= 0 && _flag_has_died == false){
 	_creature_hp_current = 0;
 	_flag_has_died = true;
+	var _popup = instance_create_layer(x, y, "GUI", obj_combat_values_popup);
+	_popup._type = "Death";
 	image_index = 1; //DEATH SPRITE STATE
 	//////////
 	// ALLY //
 	//////////
 	if (_creature_team == "Player"){ 
+		
 		//update left and right references
 		//left's right (was self) becomes self's right
 		if (_left_unit != undefined){
@@ -48,6 +51,7 @@ if (_creature_hp_current <= 0 && _flag_has_died == false){
 	// ENEMY //
 	///////////
 	else{ 
+		image_xscale = -1;
 		//update left and right references
 		if (_left_unit != undefined){
 			_left_unit._right_unit = _right_unit;
@@ -143,10 +147,10 @@ if (_flag_has_died == false){
 			draw_set_color(c_white);
 			draw_text(_defense_x-4, _defense_y-8, string(_creature_def));  // Display the defense value inside the circle
 	}
+	
 	///////////////////////////////
 	// DRAW CC / DOT / HOT ICONS //
 	///////////////////////////////
-
 		//////////
 		// STUN //
 		//////////

@@ -9,7 +9,7 @@ function scr_check_targetability(_caster_unit,_tar_unit,_card){
 	// TARGETLESS //
 	////////////////
 	if (_card._flag_targetless == true){
-		return false;	
+		return [false,"CARD IS TARGETLESS"];
 	}
 	
 	_card_range = _card._card_range; //Self, Ranged, Melee, Targetless
@@ -18,10 +18,10 @@ function scr_check_targetability(_caster_unit,_tar_unit,_card){
 	//////////
 	if (_card_range == "Self"){ //only return true if its casting on itself
 		if (string(_caster_unit) == string(_tar_unit)){
-			return true;
+			return [true,"GOOD TO GO - SELF"];
 		} 
 		else{
-			return false;
+			return [false,"THIS CARD MUST BE CAST ON SELF"];
 		}
 	}
 	
@@ -29,7 +29,7 @@ function scr_check_targetability(_caster_unit,_tar_unit,_card){
 	// RANGED //
 	////////////
 	else if (_card_range == "Ranged"){ //always return true (any target)
-		return true;
+		return [true,"GOOD TO GO - RANGED"];
 	}
 	
 	///////////
@@ -40,7 +40,7 @@ function scr_check_targetability(_caster_unit,_tar_unit,_card){
 		// PLAYER //
 		////////////
 		if (_tar_unit._creature_team == "Player"){
-			return true;
+			return [true,"GOOD TO GO - PLAYER MELEE"];
 		} 
 		
 		///////////
@@ -48,9 +48,9 @@ function scr_check_targetability(_caster_unit,_tar_unit,_card){
 		///////////	
 		else {
 			if (_tar_unit._creature_position == 0){ //only activate the enemy unit in 1st spot
-				return true;	
+				return [true,"GOOD TO GO - ENEMY MELEE SPOT 0"];
 			}
 		}
-		return false;
+		return [false,"MELEE ATTACKS CAN ONLY ATTACK THE FRONT ENEMY UNIT"];
 	} 
 }

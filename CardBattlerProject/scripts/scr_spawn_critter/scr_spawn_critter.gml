@@ -13,5 +13,5 @@ function scr_spawn_critter(){
 	var _t_x = _p_x + (_xsign*irandom_range(320,480));
 	var _t_y = _p_y + (_ysign*irandom_range(320,480));	
 	
-	instance_create_depth(_t_x,_t_y,200,obj_critter);	
+	instance_create_layer(_t_x,_t_y,"Player",obj_critter);	
 }

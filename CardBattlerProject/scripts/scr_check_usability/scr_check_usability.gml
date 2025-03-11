@@ -10,7 +10,7 @@ function scr_check_usability(_ref_card){
 	///////////////
 	//check if you have enough mana
 	if(global.cur_mana < _ref_card._card_cost){
-		return false
+		return [false,"NOT ENOUGH MANA"];
 	}
 	
 	////////////////
@@ -28,7 +28,7 @@ function scr_check_usability(_ref_card){
 				}
 			}
 			if (_found_a_colored_unit == false){
-				return false;
+				return [false,"NO UNITS WITH REQUIRED COLOR"];
 			}
 		}
 		
@@ -49,7 +49,7 @@ function scr_check_usability(_ref_card){
 			}
 			if (_found_a_spec_unit == false){
 
-				return false;
+				return [false,"NO UNITS WITH REQUIRED SPEC"];
 			}
 		}
 		
@@ -71,12 +71,12 @@ function scr_check_usability(_ref_card){
 			}
 			if (_found_a_class_unit == false){
 
-				return false;
+				return [false,"NO UNITS WITH REQUIRED CLASS"];
 			}
 		}
 		
 	/////////////////////////////
 	// RETURN TRUE IF ALL PASS //
 	/////////////////////////////
-	return true;
+	return [true,"GOOD TO GO"];
 }

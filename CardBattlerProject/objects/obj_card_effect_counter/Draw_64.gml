@@ -17,6 +17,10 @@ if (_target != "Targetless"){
 	}
 }
 
+if (_checker_script != undefined){
+	_checker_script(_target,self);
+}
+
 /////////////////////////
 // TRIGGER EFFECT ONCE //
 /////////////////////////

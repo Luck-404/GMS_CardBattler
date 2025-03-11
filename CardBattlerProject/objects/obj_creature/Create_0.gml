@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////////////
 
 //DEFINITIONS
+_party_position = 0;
 _creature_name = "Wraith";
 _creature_champion = false;
 _creature_color1 = "Uncolored";

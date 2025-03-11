@@ -4,6 +4,7 @@
 // > APPLIES X DAMAGE TO A MINION FROM THE UNIT'S LIST			   //
 //////////////////////////////////////////////////////////////////////
 function scr_damage_minions(_unit, _dmg, _minion){
+	var _orig_dmg = _dmg;
 	////////////////////
 	// DAMAGE SHIELDS //
 	////////////////////
@@ -34,5 +35,13 @@ function scr_damage_minions(_unit, _dmg, _minion){
 		}
 	}
 	
+	///////////////////
+	// SCROLLING DMG //
+	///////////////////
+	//popup the reason
+	var _popup = instance_create_layer(_minion.x, _minion.y, "GUI", obj_combat_values_popup);
+	_popup._text = string(_orig_dmg);
+	_popup._type = "Damage";
+		
 	return _dmg;
 }

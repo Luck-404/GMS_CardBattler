@@ -62,6 +62,9 @@ function scr_card_inspiration(_card,_channel,_target){
 	///////////
 	audio_play_sound(snd_effect_inspiration,0,false);	
 	
+	var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
+	_popup._type = "Mana";
+			
 	////////////
 	// BANNER //
 	////////////

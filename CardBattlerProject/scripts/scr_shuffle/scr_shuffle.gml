@@ -14,10 +14,10 @@ function scr_shuffle(){
 			//move card to deck spot
 			_ref_card.x = 200;
 			_ref_card._list = "deck";
-			scr_reset_playstate();
 			// add the card to the deck
             ds_list_add(global.player_encounter_deck, _ref_card);	
 			ds_list_delete(global.player_discard_pile, _index);
         } 		
     }	
+	scr_reset_playstate();	
 }

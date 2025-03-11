@@ -5,6 +5,19 @@
 //   card.															//
 //////////////////////////////////////////////////////////////////////
 function scr_check_channelability(_unit,_card){
+	////////////////
+	// CHECK TEAM //
+	////////////////
+	if (_unit._creature_team == "Enemy"){
+		return [false,"CREATURE MUST BE IN PLAYER PARTY"];
+	} 
+	
+	////////////////
+	// CHECK DEAD //
+	////////////////
+	if (_unit._creature_hp_current <= 0){
+		return [false,"CREATURE MUST BE ALIVE"];
+	} 	
 
 	//////////////////////////////////
 	// CHECK CREATURE COLOR VS CARD //
@@ -19,7 +32,7 @@ function scr_check_channelability(_unit,_card){
 	else {
 		if ((_unit._creature_color1 != _card._card_color) && (_unit._creature_color2 != _card._card_color)){
 	
-			return false;
+			return [false,"CREATURE DOES NOT MATCH CARD COLOR REQUIREMENTS"];
 		}
 	}
 	
@@ -32,7 +45,7 @@ function scr_check_channelability(_unit,_card){
 	} else {	
 		if (_unit._creature_spec != _card._card_spec_req){
 
-			return false;
+			return [false,"CREATURE DOES NOT MATCH CARD SPEC REQUIREMENTS"];
 		}
 	}
 
@@ -45,7 +58,7 @@ function scr_check_channelability(_unit,_card){
 	} else {		
 		if (_unit._creature_class != _card._card_class_req){
 
-			return false;
+			return [false,"CREATURE DOES NOT MATCH CARD CLASS REQUIREMENTS"];
 		}	
 	}
 	
@@ -55,7 +68,7 @@ function scr_check_channelability(_unit,_card){
 	//check if unit is stunned/cc'd	
 		if (_unit._stunned = true){
 
-			return false;	
+			return [false,"CREATURE IS STUNNED"];
 		}
-	return true;
+	return [true,"GOOD TO GO"];
 }

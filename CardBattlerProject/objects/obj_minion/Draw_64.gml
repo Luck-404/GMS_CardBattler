@@ -15,6 +15,10 @@ draw_text(x,y+50, string(_minion_position));
 /////////////////
 if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_current <= 0) || (_minion_hp_cur <= 0 && _flag_has_died == false)){
 	_flag_has_died = true;
+	
+	var _popup = instance_create_layer(x, y, "GUI", obj_combat_values_popup);
+	_popup._type = "Death";
+	
 	//remove minion from attached unit
 	_minion_unit_attached._creature_minion_count--;
 	ds_list_delete(_minion_unit_attached._creature_minion_references, _minion_position);
@@ -54,6 +58,10 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				//deal dmg
 				scr_damage_creature(_latest_channel,_10p);
 	
+				var _popup2 = instance_create_layer(_latest_channel.x, _latest_channel.y, "GUI", obj_combat_values_popup);
+				_popup2._text = string(_10p);
+				_popup2._type = "Damage";	
+		
 				////////////
 				// EFFECT //
 				////////////
@@ -82,7 +90,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 					_ref_counter._trigger_time = "End";
 					_latest_channel._venom_counter_ref = _ref_counter;
 					_ref_counter._trigger_my_effect = false;
-					_ref_counter._reference_script = scr_venom_tick;
+					_ref_counter._reference_script = scr_card_venom_tick;
 					_ref_counter._target = _latest_channel;
 			
 					//EFFECT
@@ -124,6 +132,10 @@ if (_latest_target != undefined && _latest_channel != undefined){
 					if (_minion_unit_attached._creature_hp_current > _minion_unit_attached._creature_hp_max){ //check for overflow
 						_minion_unit_attached._creature_hp_current = _minion_unit_attached._creature_hp_max;
 					}
+					
+					var _popup2 = instance_create_layer(_minion_unit_attached.x, _minion_unit_attached.y, "GUI", obj_combat_values_popup);
+					_popup2._text = string(_20p);
+					_popup2._type = "Healing";	
 				
 					////////////
 					// EFFECT //
@@ -151,6 +163,10 @@ if (_latest_target != undefined && _latest_channel != undefined){
 					_minion_unit_attached._creature_hp_current = _minion_unit_attached._creature_hp_max;
 				}
 				
+				var _popup2 = instance_create_layer(_minion_unit_attached.x, _minion_unit_attached.y, "GUI", obj_combat_values_popup);
+				_popup2._text = string(_20p);
+				_popup2._type = "Healing";	
+					
 				////////////
 				// EFFECT //
 				////////////

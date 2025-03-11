@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_venom_tick",
+  "name": "scr_card_serpent_summon_disable",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

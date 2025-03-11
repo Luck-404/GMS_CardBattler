@@ -81,6 +81,7 @@ function scr_card_serpent_summon(_card,_channel,_target){
 			_ref_counter._reference_script = scr_card_serpent_summon_tick;
 			_ref_counter._target = _target;
 			_ref_counter._counter_name = "Serpent Summon DMG Bonus";
+			_ref_counter._checker_script = scr_card_serpent_summon_disable;
 			//add this type of buff to the buffs list
 			ds_list_add(_target._buffs,_ref_counter);
 			_ref_counter._trigger_my_effect = true;

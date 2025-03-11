@@ -70,8 +70,10 @@ if (_flag_has_died == false){
 ////////////////////////////////
 else {
 	draw_self();
+	image_index = 1;
 	if (_creature_team == "Enemy"){
 		image_xscale = -1;
+	} else {
+		image_xscale = 1;
 	}
-	draw_sprite_ext(sprite_index,1,x,y,1,1,0,c_white,1);
 }

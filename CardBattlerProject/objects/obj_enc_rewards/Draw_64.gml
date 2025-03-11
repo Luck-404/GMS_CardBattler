@@ -136,6 +136,9 @@ if (_clicked == false && position_meeting(mouse_x,mouse_y,obj_confirm) && mouse_
 	else if(_type == "forfeit"){
 		_clicked = true;
 		global.flag_gui_open = false;		
+			
+		global.cur_mana = global.max_mana;
+		
 		//on forfeit confirm
 		//take 25% max hp from all units
 		for (var _i = 0; _i < ds_list_size(global.player_party); _i++){

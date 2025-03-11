@@ -17,8 +17,14 @@ function scr_card_inspiration_tick(_target,_repeat){
 			}
 		}	
 
+	var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
+	_popup._text = "Inspiration wore off";
+
 	} else {
 		var _ref_effect = instance_create_layer(room_width/2,room_height/2,"Effects",obj_card_effect);
 		_ref_effect.sprite_index = spr_effect_grow_manavine_repeat;
+		
+			var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
+			_popup._type = "Mana";
 	}
 }

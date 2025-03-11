@@ -16,10 +16,20 @@ function scr_card_grow_manavine_tick(_target,_repeat){
 				ds_list_delete(global.encounter_utility_active,_i);
 			}
 		}	
+		
+	var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
+	_popup._text = "Manavine wore off";			
 
 	} 
 	else {
 		var _ref_effect = instance_create_layer(room_width/2,room_height/2,"Effects",obj_card_effect);
 		_ref_effect.sprite_index = spr_effect_grow_manavine_repeat;
+		
+		///////////////////
+		// SCROLLING DMG //
+		///////////////////
+		//popup the reason
+		var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
+		_popup._type = "Mana";		
 	}
 }

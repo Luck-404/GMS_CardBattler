@@ -13,6 +13,10 @@ function scr_minion_life_spirit_tick(_host,_self){
 		_host._creature_hp_current = _host._creature_hp_max;
 	}
 	
+	var _popup = instance_create_layer(_host.x, _host.y, "GUI", obj_combat_values_popup);
+	_popup._text = string(_5p);
+	_popup._type = "Healing";		
+	
 	////////////
 	// EFFECT //
 	////////////

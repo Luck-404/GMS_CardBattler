@@ -256,6 +256,7 @@ if (room == rm_encounter){
 					var _ref_creature = ds_list_find_value(global.player_party, _i);
 					var _ref_creature_instance = instance_create_layer(750-(170*_i), 650, "Creatures", obj_creature); //generate the creature	
 					//pass the creature the proper stats it needs
+					_ref_creature_instance._party_position = _i;
 					_ref_creature_instance._creature_name = _ref_creature[? "name"];
 					_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
 					_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
@@ -291,10 +292,10 @@ if (room == rm_encounter){
 				var _ref_right_creature = undefined;
 			
 				if (ds_list_find_value(global.player_party_in_play, _i-1) != undefined){
-					_ref_left_creature = ds_list_find_value(global.player_party_in_play, _i-1);
+					_ref_right_creature = ds_list_find_value(global.player_party_in_play, _i-1);
 				}
 				if (ds_list_find_value(global.player_party_in_play, _i+1) != undefined){
-					_ref_right_creature = ds_list_find_value(global.player_party_in_play, _i+1);
+					_ref_left_creature = ds_list_find_value(global.player_party_in_play, _i+1);
 				}
 			
 				_ref_creature._left_unit = _ref_left_creature;
@@ -470,7 +471,7 @@ if (room == rm_encounter){
 						var _card = ds_list_find_value(global.player_hand, _i);		
 						
 						var _flag_usability = scr_check_usability(_card);
-						if (_flag_usability == true){
+						if (_flag_usability[0] == true){
 							_card._active = true;
 						} else {
 							_card._active = false;
@@ -502,10 +503,19 @@ if (room == rm_encounter){
 						global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CHANNEL;
 					}
 					else {
-						//if not usable- grey out- play err and shake slightly if they try to click it
-						//TODO
 						//SHAKE
+						var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+						_shaker._target = _card; // Assign target
+						_shaker._origin_x = _card.x; // Store original position
+						_shaker._shaking = true;
+						
 						//ERR NOISE
+						audio_play_sound(snd_menu_error,1,false);
+						
+						//popup the reason
+						var _result = scr_check_usability(_card);
+						var _popup = instance_create_layer(x, y, "GUI", obj_error_popup);
+						_popup._text = _result[1];
 					}
 				}
 				
@@ -544,7 +554,7 @@ if (room == rm_encounter){
 					//based on the card, highlight ally units that fit the criteria
 					var _check_channel = scr_check_channelability(_unit,_card_selected);
 			
-					if(_check_channel == true){
+					if(_check_channel[0] == true){
 						_unit._active = true;
 					} else {
 						_unit._active = false;	
@@ -590,10 +600,19 @@ if (room == rm_encounter){
 					global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_TARGET;
 				}
 				else {
-					//if not usable- grey out- play err and shake slightly if they try to click it
-					//TODO
 					//SHAKE
+					var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+					_shaker._target = _unit; // Assign target
+					_shaker._origin_x = _unit.x; // Store original position
+					_shaker._shaking = true;
+						
 					//ERR NOISE
+					audio_play_sound(snd_menu_error,1,false);
+						
+					//popup the reason
+					var _result = scr_check_channelability(_unit,_card_selected);
+					var _popup = instance_create_layer(x, y, "GUI", obj_error_popup);
+					_popup._text = _result[1];
 				}
 			}		
 		}
@@ -640,7 +659,7 @@ if (room == rm_encounter){
 					//based on the card, highlight ally units that fit the criteria
 					var _check_tar = scr_check_targetability(_channel_selected,_unit,_card_selected);
 			
-					if(_check_tar == true){
+					if(_check_tar[0] == true){
 						_unit._active = true;
 					} else {
 						_unit._active = false;	
@@ -652,7 +671,7 @@ if (room == rm_encounter){
 					//based on the card, highlight ally units that fit the criteria
 					var _check_tar = scr_check_targetability(_channel_selected,_unit,_card_selected);
 			
-					if(_check_tar == true){
+					if(_check_tar[0] == true){
 						_unit._active = true;
 					} else {
 						_unit._active = false;	
@@ -707,10 +726,19 @@ if (room == rm_encounter){
 							global.player_enc_state = PLAYER_ENCOUNTER_STATE.PICK_CARD;	
 					}
 					else {
-						//if not usable- grey out- play err and shake slightly if they try to click it
-						//TODO
 						//SHAKE
+						var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+						_shaker._target = _unit; // Assign target
+						_shaker._origin_x = _unit.x; // Store original position
+						_shaker._shaking = true;
+						
 						//ERR NOISE
+						audio_play_sound(snd_menu_error,1,false);
+						
+						//popup the reason
+						var _result = scr_check_targetability(_channel_selected,_unit,_card_selected);
+						var _popup = instance_create_layer(x, y, "GUI", obj_error_popup);
+						_popup._text = _result[1];
 					}					
 				}
 			}
@@ -777,22 +805,27 @@ if (room == rm_encounter){
 			}
 
 			//Update any allies health and Put any dead allies into graveyard
+			//party health updates
 			if (ds_list_size(global.player_party_in_play) != 0){
-				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-					var _ref_creature = ds_list_find_value(global.player_party_in_play,_i); //get the creature at that spot
-					var _ref_hp_cur = _ref_creature._creature_hp_current; //get the value of the creature's currenthp
-					//update the current hp to the permanent list
-					var _ref_original_creature = ds_list_find_value(global.player_party,_i); //get the creature at that spot
-					_ref_original_creature[?"curhp"] = _ref_hp_cur;
-					//if that hp turns out to be 0- the creature has died and is sent to the graveyard
-					if (_ref_hp_cur == 0){
-						ds_list_delete(global.player_party,_i);
-						ds_list_add(global.graveyard,_ref_original_creature);
-					}
+				while (ds_list_size(global.player_party_in_play) > 0){
+					var _ref_creature_obj = ds_list_find_value(global.player_party_in_play,0); //get the creature at that spot
+					var _ref_creature_dsmap = ds_list_find_value(global.player_party,_ref_creature_obj._party_position);
+					_ref_creature_dsmap[?"curhp"] = _ref_creature_obj._creature_hp_current;
+					ds_list_delete(global.player_party_in_play,0);
+				}
+			}
+			//graveyard
+			if (ds_list_size(global.player_party_dead) != 0){
+				while (ds_list_size(global.player_party_dead) > 0){
+					var _ref_creature_obj = ds_list_find_value(global.player_party_dead,0); //get the creature at that spot
+					var _ref_creature_dsmap = ds_list_find_value(global.player_party,_ref_creature_obj._party_position);
+					ds_list_delete(global.player_party,_ref_creature_obj._party_position);
+					ds_list_add(global.graveyard,_ref_creature_dsmap);
+					ds_list_delete(global.player_party_dead,0);
 				}	
 			}
 				
-			//Put cards back into deck (from exhaust and discard)			
+			//Put cards back into deck (from exhaust and discard)		
 			scr_cards_cleanup();
 			
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.PAUSE;		

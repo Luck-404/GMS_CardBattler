@@ -57,5 +57,12 @@ function scr_card_grow_manavine(_card,_channel,_target){
 	_ref_banner._ban_color = c_black;
 	_ref_banner._ban_text = "" + _channel._creature_name + " casts grow manavine";	
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	///////////////////
+	// SCROLLING DMG //
+	///////////////////
+	//popup the reason
+	var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
+	_popup._type = "Mana";	
+	
+	scr_trigger_minion_reactions(_card,_target,_channel,0);		
 }
