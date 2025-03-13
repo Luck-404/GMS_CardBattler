@@ -20,7 +20,6 @@ function scr_card_bloodbeak(_card,_channel,_target){
 	_ref_minion._minion_deathsound = snd_creature_wraith_death;
 	_ref_minion._minion_defaultsound = snd_creature_wraith_default;
 	_ref_minion._minion_unit_attached = _target;
-	_ref_minion._minion_effect_script = scr_minion_bloodbeak_tick;
 	
 	///////////////////
 	// ADD TO TARGET //
@@ -59,7 +58,7 @@ function scr_card_bloodbeak(_card,_channel,_target){
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
+	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_banner);
 	_ref_banner._ban_color = c_black;
 	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name;
 	

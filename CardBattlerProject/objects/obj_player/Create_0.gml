@@ -76,8 +76,6 @@ global.bonus_mana = 0;
 global.gold = 0;
 global.gold_randomizer = 0;
 
-global.encounter_utility_active = ds_list_create();
-
 // CAMERA 
 _flag_created_camera = false; 
 global.camera = undefined;

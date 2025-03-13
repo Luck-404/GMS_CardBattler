@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Uncolored",
-    "path": "folders/Scripts/GUI and Tools/Encounter/Card Casts/Uncolored.yy",
+    "name": "Card Tick",
+    "path": "folders/Scripts/Tools and Game Systems/Encounter/Card Casts/Uncolored/Card Tick.yy",
   },
 }

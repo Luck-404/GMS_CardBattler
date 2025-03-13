@@ -30,7 +30,7 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 				var _tmp = global.echo_count;
 				for (var _j = -1; _j < _tmp; _j++){	
 					audio_play_sound(snd_effect_echoing,0,false);	
-					_card_script(_card_ref,_channel_creature,_target_creature);
+					_card_script(_card,_channel_creature,_target_creature);
 				}
 				global.echo_count = 0;
 			}
@@ -39,7 +39,7 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 		// NOT ECHOING //
 		/////////////////
 		else {
-			_card_script(_card_ref,_channel_creature,_target_creature);
+			_card_script(_card,_channel_creature,_target_creature);
 		}
 		
 		///////////////////
@@ -75,7 +75,7 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 			var _tmp = global.echo_count;
 			for (var _j = -1; _j < _tmp; _j++){	
 				audio_play_sound(snd_effect_echoing,0,false);	
-				_card_script(_card_ref,_channel_creature,_target_creature);
+				_card_script(_card,_channel_creature,_target_creature);
 			}
 			global.echo_count = 0;
 		} 
@@ -83,7 +83,7 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 		// PLAY NORMAL //
 		/////////////////
 		else {
-			_card_script(_card_ref,_channel_creature,_target_creature);
+			_card_script(_card,_channel_creature,_target_creature);
 		}
 		
 		//////////////////

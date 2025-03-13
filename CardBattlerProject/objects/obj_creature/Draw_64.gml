@@ -16,8 +16,7 @@ draw_text(x,y-400, string(_creature_position));
 if (_creature_hp_current <= 0 && _flag_has_died == false){
 	_creature_hp_current = 0;
 	_flag_has_died = true;
-	var _popup = instance_create_layer(x, y, "GUI", obj_combat_values_popup);
-	_popup._type = "Death";
+	scr_create_combat_popup(undefined,"","Death",x,y);
 	image_index = 1; //DEATH SPRITE STATE
 	//////////
 	// ALLY //
@@ -148,47 +147,31 @@ if (_flag_has_died == false){
 			draw_text(_defense_x-4, _defense_y-8, string(_creature_def));  // Display the defense value inside the circle
 	}
 	
-	///////////////////////////////
-	// DRAW CC / DOT / HOT ICONS //
-	///////////////////////////////
-		//////////
-		// STUN //
-		//////////
-		if(_stunned){
-			draw_sprite(spr_stun,-10,x,y-125);
-		}
+	///////////////////
+	// MOVE STATUSES //
+	///////////////////
+	for (var _i = 0; _i < ds_list_size(_creature_statuses); _i++){
+		var _counter = ds_list_find_value(_creature_statuses,_i);
+		_counter._counter_index = _i;
+		_counter.x = (x-50)+(32*_i);
+		_counter.y = (y-121);
+	}
 	
-		//////////////
-		// DMG BUFF //
-		//////////////
-		if(_creature_attack_scalar != 1){
-			draw_sprite(spr_dmg_buff,0,x+30,y-125);	
-
-			draw_text(x+30,y-125,"x"+string(_creature_attack_scalar));
-		}
-	
-		if(_creature_attack_linear != 0){
-			draw_sprite(spr_dmg_buff,0,x+10,y-125);	
-			if (_creature_attack_linear < 0){
-				draw_text(x+10,y-125,string(_creature_attack_linear));
-			} else {
-				draw_text(x+10,y-125,"+"+string(_creature_attack_linear));
-			}
-		}
-	
-		//////////////
-		// POISONED //
-		//////////////
-		if(_poison_count != 0){
-			draw_sprite(spr_poison,0,x-30,y-125);	
-			draw_text(x-30,y-125,string(_poison_count));
-		}
-		
-		///////////
-		// VENOM //
-		///////////
-		if(_venom_count != 0){
-			draw_sprite(spr_venom,0,x-50,y-125);	
-			draw_text(x-50,y-125,string(_venom_count));
-		}		
+	///////////////////////////////////////////
+	// ATTACK BONUSES AND VULNERABILITY SUMS //
+	///////////////////////////////////////////
+	draw_set_color(c_white);
+	draw_set_font(fnt_fanwood_mini);
+	//BONUS ATTACK
+	if (_creature_attack_scalar != 1 || _creature_attack_linear != 0){
+		draw_sprite(spr_dmg_buff,0,x-40,y-60); // Display the dmg boost arrow
+		draw_text(x-30, y-60, "x"+string(_creature_attack_scalar)); //dmg bonus scalar
+		draw_text(x-10, y-60, "+"+string(_creature_attack_linear)); //dmg bonus linear
+	}
+	//BONUS DAMAGE TAKEN
+	if (_creature_vulnerability_scalar != 1 || _creature_vulnerability_linear != 0){	
+		draw_sprite(spr_dmg_vulnerable,0,x+10,y-60); // Display the dmg taken arrow
+		draw_text(x+20, y-60, "x"+string(_creature_vulnerability_scalar)); //dmg taken scalar
+		draw_text(x+40, y-60, "+"+string(_creature_vulnerability_linear)); //dmg taken linear	
+	}
 }

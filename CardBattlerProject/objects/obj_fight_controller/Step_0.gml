@@ -108,16 +108,7 @@ switch(global.fight_controller_state){
 		////TODO
 		if (_flag_begin_turn_triggered == false){
 			_flag_begin_turn_triggered = true;
-			with (obj_card_effect_counter) {
-				if (_counter_team == "Enemy" && _target == "Targetless" && _trigger_time == "Begin"){
-					_turn_lifespan--;
-					_trigger_my_effect = true;
-				}			
-				else if (_target != "Targetless" && _target._creature_team == "Enemy" && _trigger_time == "Begin") {
-					_turn_lifespan--;
-					_trigger_my_effect = true;
-				}				
-			}	
+			scr_trigger_status_effects("Begin","Enemy");
 		}
 		//wait
 		if (_flag_begin_timer == false){
@@ -177,7 +168,7 @@ switch(global.fight_controller_state){
 				_flag_unit_1_went = true
 				//cast spell
 				var _unit = ds_list_find_value(global.enemy_party_in_play,0);
-				if (_unit._stunned != true){
+				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
 					instance_destroy(_unit._card_to_play);
@@ -208,7 +199,7 @@ switch(global.fight_controller_state){
 				_flag_unit_2_went = true
 				//cast spell
 				var _unit = ds_list_find_value(global.enemy_party_in_play,1);
-				if (_unit._stunned != true){
+				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
 					instance_destroy(_unit._card_to_play);
@@ -239,7 +230,7 @@ switch(global.fight_controller_state){
 				_flag_unit_3_went = true
 				//cast spell
 				var _unit = ds_list_find_value(global.enemy_party_in_play,2);
-				if (_unit._stunned != true){
+				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
 					instance_destroy(_unit._card_to_play);
@@ -270,7 +261,7 @@ switch(global.fight_controller_state){
 				_flag_unit_4_went = true
 				//cast spell
 				var _unit = ds_list_find_value(global.enemy_party_in_play,3);
-				if (_unit._stunned != true){
+				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
 					instance_destroy(_unit._card_to_play);
@@ -301,7 +292,7 @@ switch(global.fight_controller_state){
 				_flag_unit_5_went = true
 				//cast spell
 				var _unit = ds_list_find_value(global.enemy_party_in_play,4);
-				if (_unit._stunned != true){
+				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
 					instance_destroy(_unit._card_to_play);
@@ -338,16 +329,7 @@ switch(global.fight_controller_state){
 			//////////////////////
 			// END TURN EFFECTS //
 			//////////////////////
-			with (obj_card_effect_counter) {
-				if (_counter_team == "Enemy" && _target == "Targetless" && _trigger_time == "End"){
-					_turn_lifespan--;
-					_trigger_my_effect = true;
-				}			
-				else if (_target != "Targetless" && _target._creature_team == "Enemy" && _trigger_time == "End") {
-					_turn_lifespan--;
-					_trigger_my_effect = true;
-				}				
-			}	
+			scr_trigger_status_effects("End","Enemy");
 			
 
 			/////////////////////

@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Encounter",
-    "path": "folders/Objects/GUI and Tools/Encounter.yy",
+    "name": "Player and Units",
+    "path": "folders/Objects/Player and Units.yy",
   },
   "parentObjectId": null,
   "persistent": false,

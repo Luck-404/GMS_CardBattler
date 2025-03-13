@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Setup",
-    "path": "folders/Scripts/Player/Setup.yy",
+    "path": "folders/Scripts/Player and Units/Player/Setup.yy",
   },
 }

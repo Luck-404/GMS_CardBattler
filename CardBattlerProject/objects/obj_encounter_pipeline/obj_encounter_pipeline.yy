@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Encounter",
-    "path": "folders/Objects/GUI and Tools/Encounter.yy",
+    "name": "Controllers",
+    "path": "folders/Objects/Tools and Game Systems/Controllers.yy",
   },
   "parentObjectId": null,
   "persistent": true,

@@ -5,7 +5,7 @@
 //////////////////////////////////////////////////////////////////////
 function scr_init_enemy_deck(_creature,_ref_creature_name){
 //var _card_1 = scr_load_card("Bloodbeak");
-//var _card_12 = scr_load_card("Strike");
+//var _card_1 = scr_load_card("Strike");
 //ds_list_add(_creature._deck, _card_1);
 //ds_list_add(_creature._deck, _card_12);
 

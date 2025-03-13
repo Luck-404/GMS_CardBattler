@@ -21,9 +21,10 @@ function scr_init_new_player(_player,_patron,_blessing){
 			////blessing setup TODO
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.player_blessings_list, _new_bless);
+			
 			//player's deck setup
-			var _arr = ["Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy","Bramblet","Bloodbeak","Serpent Summon","Life Spirit","Bulwark"];
-			//var _arr = ["Bramblet","Bramblet","Strike"];
+			//var _arr = ["Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy","Bramblet","Bloodbeak","Serpent Summon","Life Spirit","Bulwark"];
+			var _arr = ["Beastial Bash","Poison Ivy","Poison Ivy"];
 				
 		for (var _i = 0; _i < array_length(_arr); _i++){
 				var _new_card = scr_load_card(_arr[_i]);		

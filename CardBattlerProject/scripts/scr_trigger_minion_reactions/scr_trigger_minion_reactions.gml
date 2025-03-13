@@ -1,8 +1,14 @@
+//////////////////////////////////////////////////////////////////////
+//			SCR_TRIGGER_MINION_REACTIONS							//
+//																	//
+// > MINIONS WITH THE 'HOST DMG TAKEN' AND 'HOST ATTACKED' RESET    //
+//   ALLOWING THEM TO TRIGGER										//
+//////////////////////////////////////////////////////////////////////
 function scr_trigger_minion_reactions(_card,_target,_channel,_damage){
 	with(obj_minion){
-	_latest_card = _card;
-	_latest_target = _target;
-	_latest_channel = _channel;
-	_latest_damage_done = _damage;
+		_latest_card = _card;
+		_latest_target = _target;
+		_latest_channel = _channel;
+		_latest_damage_done = _damage;
 	}
 }

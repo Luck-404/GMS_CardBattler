@@ -4,96 +4,112 @@
 // > POSION UP TO THREE TARGETS FOR 3 TURNS							//	
 //////////////////////////////////////////////////////////////////////
 function scr_card_poison_ivy(_card,_channel,_target){
-	// left target
+	/////////////////
+	// LEFT TARGET //
+	/////////////////
 	if (_target._left_unit != undefined){	
 		var _left_target = _target._left_unit;
-		//CHECK FOR POISON
-		if (_left_target._poison_count == 0){	//IF NO POISON
-			//set up a poison counter
-			var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
-			_ref_counter.x = _left_target.x+10;
-			_ref_counter.y = _left_target.y - 100;
-			_ref_counter._draw_color = c_green;	
-			_ref_counter._turn_lifespan = 3;
-			_left_target._poison_counter_ref = _ref_counter;
-			_ref_counter._trigger_my_effect = false;
-			_ref_counter._reference_script = scr_card_poison_ivy_tick;
-			_ref_counter._target = _left_target;
-			
-			//EFFECT
-			var _ref_effect1 = instance_create_layer(_left_target.x,_left_target.y,"Effects",obj_card_effect);
-			_ref_effect1.sprite_index = spr_effect_poison_ivy;
-			
-			_left_target._poison_count++;
+
+		////////////
+		// POISON //
+		////////////
+		var _counter = scr_get_status_counter(_left_target,"General",undefined,"Poison");		
+		if (_counter == undefined){		
+			scr_create_status_counter(_left_target,"Poison","Target is poisoned for 3 turns",_card,"End",scr_status_poison_tick, false, undefined, 3, 1, "3 + (stacks)", 0, "General", _left_target._creature_statuses, spr_status_poison);
+			_left_target._status_poisoned = true;		
 		} 
-		//IF POISON, RENEW AND SCALE POISON
 		else {
-			_left_target._poison_counter_ref._turn_lifespan = 3;
-			_left_target._poison_count++;
+			_counter._counter_life = 3;
+			_counter._counter_stacks+= 1;
 		}
-	scr_trigger_minion_reactions(_card,_left_target,_channel,0);		
-	}
-	
-	
-	// right target
-	if (_target._right_unit != undefined){
-		var _right_target = _target._right_unit;		
-		if (_right_target._poison_count == 0){		
-			//set up a poison counter
-			var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
-			_ref_counter.x = _right_target.x+10;
-			_ref_counter.y = _right_target.y - 100;
-			_ref_counter._draw_color = c_green;	
-			_ref_counter._turn_lifespan = 3;
-			_right_target._poison_counter_ref = _ref_counter;	
-			_ref_counter._trigger_my_effect = false;
-			_ref_counter._reference_script = scr_card_poison_ivy_tick;
-			_ref_counter._target = _right_target;
-			
-			//EFFECT
-			var _ref_effect2 = instance_create_layer(_right_target.x,_right_target.y,"Effects",obj_card_effect);
-			_ref_effect2.sprite_index = spr_effect_poison_ivy;
-			
-			_right_target._poison_count++;	
-		} else {
-			_right_target._poison_counter_ref._turn_lifespan = 3;
-			_right_target._poison_count++;
-		}
-	scr_trigger_minion_reactions(_card,_right_target,_channel,0);		
-	}
-	
-	// middle target
-	if (_target._poison_count == 0){				
-		//set up a poison counter
-		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
-		_ref_counter.x = _target.x+10;
-		_ref_counter.y = _target.y - 100;
-		_ref_counter._draw_color = c_green;	
-		_ref_counter._turn_lifespan = 3;
-		_target._poison_counter_ref = _ref_counter;				
-		_ref_counter._trigger_my_effect = false;
-		_ref_counter._reference_script = scr_card_poison_ivy_tick;
-		_ref_counter._target = _target;
+
+		scr_trigger_minion_reactions(_card,_left_target,_channel,0);	
 		
-		var _ref_effect3 = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
-		_ref_effect3.sprite_index = spr_effect_poison_ivy;
-		_target._poison_count++;		
+		////////////
+		// EFFECT //
+		////////////		
+		scr_create_combat_popup(_left_target,"Poisoned","Poison",0,0);
+		scr_create_combat_effect(_left_target,spr_effect_poison_ivy,0,0);
+		
+		///////////
+		// DEBUG //
+		///////////
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " on " + _left_target._creature_name);			
+
 	}
-	else {
-		_target._poison_counter_ref._turn_lifespan = 3;
-		_target._poison_count++;
-	}
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
 	
-	///////////
-	// SOUND //
-	///////////
-	audio_play_sound(snd_effect_poison_ivy,0,false);	
+	//////////////////
+	// RIGHT TARGET //
+	//////////////////
+	if (_target._right_unit != undefined){
+		var _right_target = _target._right_unit;
+
+		////////////
+		// POISON //
+		////////////
+		var _counter = scr_get_status_counter(_right_target,"General",undefined,"Poison");		
+		if (_counter == undefined){		
+			scr_create_status_counter(_right_target,"Poison","Target is poisoned for 3 turns",_card,"End",scr_status_poison_tick, false, undefined, 3, 1, "3 + (stacks)", 0, "General", _right_target._creature_statuses, spr_status_poison);
+			_right_target._status_poisoned = true;	
+		} 
+		else {
+			_counter._counter_life = 3;
+			_counter._counter_stacks+= 1;
+		}
+
+		scr_trigger_minion_reactions(_card,_right_target,_channel,0);	
+		
+		////////////
+		// EFFECT //
+		////////////		
+		scr_create_combat_popup(_right_target,"Poisoned","Poison",0,0);
+		scr_create_combat_effect(_right_target,spr_effect_poison_ivy,0,0);
+		
+		///////////
+		// DEBUG //
+		///////////
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " on " + _right_target._creature_name);			
+	
+	}
+	
+	///////////////////
+	// MIDDLE TARGET //
+	///////////////////
+	#region MIDDLE TARGET
+		////////////
+		// POISON //
+		////////////
+		var _counter = scr_get_status_counter(_target,"General",undefined,"Poison");		
+		if (_counter == undefined){		
+			scr_create_status_counter(_target,"Poison","Target is poisoned for 3 turns",_card,"End",scr_status_poison_tick, false, undefined, 3, 1, "3 + (stacks)", 0, "General", _target._creature_statuses, spr_status_poison);
+			_target._status_poisoned = true;
+		} 
+		else {
+			_counter._counter_life = 3;
+			_counter._counter_stacks+= 1;
+		}
+
+		scr_trigger_minion_reactions(_card,_target,_channel,0);	
+		
+		////////////
+		// EFFECT //
+		////////////		
+		scr_create_combat_popup(_target,"Poisoned","Poison",0,0);
+		scr_create_combat_effect(_target,spr_effect_poison_ivy,0,0);
+		
+		///////////
+		// DEBUG //
+		///////////
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " on " + _target._creature_name);		
+	#endregion
 	
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"];
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_name + " on up to 3 targets");
+
+	///////////
+	// SOUND //
+	///////////
+	audio_play_sound(snd_effect_poison_ivy,0,false);	
 }

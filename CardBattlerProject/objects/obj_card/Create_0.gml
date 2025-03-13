@@ -16,7 +16,7 @@ _card_spec_req = undefined; //Martial, Technical, or Magical locked? or locked b
 _card_class_req = undefined; //ALL CLASSES
 _card_range = undefined; //range of the card
 _card_ref = undefined; //REFERENCE TO THE ACTUAL CARD DEFINITION
-
+_card_target_count = 0;
 //FLAGS
 _flag_targetless = false; //IF THE CARD IS TARGETLESS OR NOT
 _reward = false; //USED BY OBJ_ENC_REWARDS TO DISPLAY THE CARDS

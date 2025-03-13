@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Green",
-    "path": "folders/Scripts/GUI and Tools/Encounter/Card Casts/Green.yy",
+    "path": "folders/Scripts/Player and Units/Minions/Green.yy",
   },
 }

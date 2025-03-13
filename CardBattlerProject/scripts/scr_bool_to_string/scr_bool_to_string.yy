@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "General",
-    "path": "folders/Scripts/GUI and Tools/General.yy",
+    "name": "Saving and Loading",
+    "path": "folders/Scripts/Tools and Game Systems/Saving and Loading.yy",
   },
 }

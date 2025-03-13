@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-//					SCR_CREATE_PATRONS								//
+//						SCR_CREATE_PATRON							//
 //																	//
 // > CREATE A MAPPED VALUE FOR EACH PATRON TO GO INTO THE PATRONS	//
 //	 LIST															//

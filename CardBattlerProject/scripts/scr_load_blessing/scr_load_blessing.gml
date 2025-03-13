@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//						SCR_LOAD_BLESSING							//
+//																	//
+// > LOADS BLESSING BASED ON NAME OF BLESSING- LOAD AND SAVE		//
+//////////////////////////////////////////////////////////////////////
 function scr_load_blessing(_blessingname){
 	_loadedblessing = undefined;
 	switch(_blessingname){

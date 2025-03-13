@@ -9,7 +9,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "General",
-    "path": "folders/Objects/GUI and Tools/General.yy",
+    "path": "folders/Objects/Tools and Game Systems/General.yy",
   },
   "parentObjectId": null,
   "persistent": true,

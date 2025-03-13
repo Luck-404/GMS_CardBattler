@@ -20,17 +20,17 @@ function scr_card_potent_fruit(_card,_channel,_target){
 	// IF NOT EXISTS, CAST SPELL //
 	///////////////////////////////
 	if (_existing_potent == undefined){			
-		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
+		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_status_counter);
 		_ref_counter.x = _target.x;
 		_ref_counter.y = _target.y - 100;
 		_ref_counter._draw_color = c_red;	
-		_ref_counter._turn_lifespan = 3;
+		_ref_counter._counter_life = 3;
 		_ref_counter._reference_script = scr_card_potent_fruit_tick;
 		_ref_counter._target = _target;
 		_ref_counter._counter_name = "Potent Fruit";
 		//add this type of buff to the buffs list
 		ds_list_add(_target._buffs,_ref_counter);
-		_ref_counter._trigger_my_effect = true;
+		_ref_counter._counter_trigger_effect = true;
 		_target._creature_attack_scalar = _target._creature_attack_scalar+1;
 	} 
 	
@@ -38,7 +38,7 @@ function scr_card_potent_fruit(_card,_channel,_target){
 	// IF EXISTS, RENEW //
 	//////////////////////	
 	else {
-		_existing_potent._turn_lifespan = 3;
+		_existing_potent._counter_life = 3;
 	}
 
 	////////////
@@ -55,7 +55,7 @@ function scr_card_potent_fruit(_card,_channel,_target){
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
+	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_banner);
 	_ref_banner._ban_color = c_black;
 	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name;
 	

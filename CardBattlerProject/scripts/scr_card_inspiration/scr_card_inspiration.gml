@@ -21,14 +21,14 @@ function scr_card_inspiration(_card,_channel,_target){
 	///////////////////////////////////////////////
 	if (_existing_insire == undefined){	
 		//create a new counter
-		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
+		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_status_counter);
 		//set location
 		_ref_counter.x = 100;
 		_ref_counter.y = 150;
 		//set color of timer writing
 		_ref_counter._draw_color = c_blue;	
 		//set lifespan
-		_ref_counter._turn_lifespan = 2;
+		_ref_counter._counter_life = 2;
 		//set tick script
 		_ref_counter._reference_script = scr_card_inspiration_tick;
 		//set target 
@@ -37,7 +37,7 @@ function scr_card_inspiration(_card,_channel,_target){
 		_ref_counter._counter_team = "Player";
 		//add this type of buff to the global util list
 		ds_list_add(global.encounter_utility_active,_ref_counter);
-		_ref_counter._trigger_my_effect = true;
+		_ref_counter._counter_trigger_effect = true;
 		//perform the effect
 		global.bonus_mana++;
 		global.cur_mana++;
@@ -48,7 +48,7 @@ function scr_card_inspiration(_card,_channel,_target){
 	//////////////////////////////////////////////
 	else {
 		//renew
-		_existing_insire._turn_lifespan = 2;
+		_existing_insire._counter_life = 2;
 	}
 	
 	////////////
@@ -68,7 +68,7 @@ function scr_card_inspiration(_card,_channel,_target){
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
+	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_banner);
 	_ref_banner._ban_color = c_black;
 	_ref_banner._ban_text = "" + _channel._creature_name + " casts inspiration";
 	

@@ -16,8 +16,7 @@ draw_text(x,y+50, string(_minion_position));
 if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_current <= 0) || (_minion_hp_cur <= 0 && _flag_has_died == false)){
 	_flag_has_died = true;
 	
-	var _popup = instance_create_layer(x, y, "GUI", obj_combat_values_popup);
-	_popup._type = "Death";
+	scr_create_combat_popup(undefined,"","Death",x,y);
 	
 	//remove minion from attached unit
 	_minion_unit_attached._creature_minion_count--;
@@ -36,9 +35,9 @@ if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_cu
 // HANDLE SCRIPT EXECUTION //
 /////////////////////////////
 if (_minion_cast_types[0] == "Minion Step"){
-	if (_minion_effect_script != undefined && _trigger_my_effect == true && _minion_unit_attached._creature_hp_current > 0){
+	if (_minion_effect_script != undefined && _counter_trigger_effect == true && _minion_unit_attached._creature_hp_current > 0){
 		_minion_effect_script(_minion_unit_attached,self);
-		_trigger_my_effect = false;
+		_counter_trigger_effect = false;
 	}
 }
 
@@ -82,15 +81,15 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				//CHECK FOR POISON
 				if (_latest_channel._venom_count == 0){	//IF NO VENOM
 					//set up a poison counter
-					var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
+					var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_status_counter);
 					_ref_counter.x = _latest_channel.x+10;
 					_ref_counter.y = _latest_channel.y - 100;
 					_ref_counter._draw_color = c_purple;	
-					_ref_counter._turn_lifespan = 3;
-					_ref_counter._trigger_time = "End";
+					_ref_counter._counter_life = 3;
+					_ref_counter._counter_trigger_period = "End";
 					_latest_channel._venom_counter_ref = _ref_counter;
-					_ref_counter._trigger_my_effect = false;
-					_ref_counter._reference_script = scr_card_venom_tick;
+					_ref_counter._counter_trigger_effect = false;
+					_ref_counter._reference_script = scr_status_venom_tick;
 					_ref_counter._target = _latest_channel;
 			
 					//EFFECT
@@ -104,7 +103,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				} 
 				//IF VENOM, RENEW AND SCALE VENOM
 				else {
-					_latest_channel._venom_counter_ref._turn_lifespan = 3;
+					_latest_channel._venom_counter_ref._counter_life = 3;
 					_latest_channel._venom_count++;
 					_latest_channel._creature_attack_linear--;
 				}
@@ -213,17 +212,9 @@ draw_text(x-16, y + 20, string(_minion_hp_cur) + "/" + string(_minion_hp_max));
 // DRAW DEFENSE ICON //
 ///////////////////////
 if (_minion_def != 0){
-	// Set the drawing color for the defense (blue circle)
-	draw_set_color(c_blue);
-
-	// Draw the blue circle for the defense stat to the right of the health bar
-	var _defense_circle_radius = 6; // Radius of the circle
-	var _defense_x = x; // Position the circle 15 pixels to the right of the health bar
-	var _defense_y = y + 40; // Vertically align it with the health bar
-
-	draw_circle(_defense_x, _defense_y, _defense_circle_radius, false);  // Draw the circle
-
+	draw_sprite(spr_minion_def,0,x-16, y + 40);
 	// Draw the defense number inside the circle
 	draw_set_color(c_white);
-	draw_text(_defense_x-2, _defense_y - 3, string(_minion_def));  // Display the defense value inside the circle
+	draw_set_font(fnt_fanwood_sm);
+	draw_text(x-14, y + 35, string(_minion_def));  // Display the defense value inside the circle
 }

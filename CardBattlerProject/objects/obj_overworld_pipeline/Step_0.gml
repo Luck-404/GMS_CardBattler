@@ -65,7 +65,7 @@ switch(global.overworld_pipeline_state){
 		
 		//POPULATE CARD SHOP
 		show_debug_message("OVERWORLD PIPELINE: POPULATING CARD SHOP");	
-		if ((instance_exists(obj_NPC_card_shop) == true)){	
+		if ((instance_exists(obj_npc_card_shop) == true)){	
 			scr_stock_card_shop(irandom_range(3,6)); //stock card shop with 3-6 cards
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {
@@ -74,7 +74,7 @@ switch(global.overworld_pipeline_state){
 		show_debug_message("OVERWORLD PIPELINE: SUCCESS...");				
 		//POPULATE MERC SHOP
 		show_debug_message("OVERWORLD PIPELINE: POPULATING MERC SHOP");	
-		if ((instance_exists(obj_NPC_mercenary_shop) == true)){	
+		if ((instance_exists(obj_npc_mercenary_shop) == true)){	
 			scr_stock_mercenary_shop(irandom_range(3,6));
 			global.overworld_pipeline_state = PIPELINE_STATE.IDLE;	
 		} else {

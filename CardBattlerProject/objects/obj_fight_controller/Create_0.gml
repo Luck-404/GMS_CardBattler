@@ -60,3 +60,8 @@ enum FIGHT_CONTROLLER_STATE {
 }
 global.fight_controller_state = FIGHT_CONTROLLER_STATE.SPAWN_ENEMIES;
 
+
+////////////////////////
+// ENCOUTNER STATUSES //
+////////////////////////
+global.encounter_statuses = ds_list_create();

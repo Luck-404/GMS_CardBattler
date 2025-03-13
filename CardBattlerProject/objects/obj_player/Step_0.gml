@@ -333,23 +333,8 @@ if (room == rm_encounter){
 			////////////////////////////////
 			// TRIGGER BEGIN TURN EFFECTS //
 			////////////////////////////////
-				//for each unit in player's party
-				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
-					var _unit = ds_list_find_value(global.player_party_in_play, _i);
-					//scr_trigger_turn_effects(_unit);
-					//TODO					
-				}		
 				
-				with (obj_card_effect_counter) {
-					if (_counter_team == "Player" && _target == "Targetless" && _trigger_time == "Begin"){
-				        _turn_lifespan--;
-						_trigger_my_effect = true;
-					}			
-					else if (_target != "Targetless" && _target._creature_team == "Player" && _trigger_time == "Begin") {
-					    _turn_lifespan--;
-						_trigger_my_effect = true;
-					}				
-				}				
+				scr_trigger_status_effects("Begin","Player");		
 
 			//PASS
 			global.player_enc_state = PLAYER_ENCOUNTER_STATE.MINIONS_CAST;				
@@ -624,6 +609,14 @@ if (room == rm_encounter){
 		#region PICK TARGET
 		case PLAYER_ENCOUNTER_STATE.PICK_TARGET: //WHEN A CHANNEL IS PICKED, WAIT FOR A TARGET TO CAST SPELL ON
 		if (global.flag_gui_open == false){
+			///////////////////
+			// SWORD CURSORS //
+			///////////////////
+			if (!instance_exists(obj_cursor)){
+				var _ref_cursor = instance_create_layer(0,0,"GUI",obj_cursor);
+				_ref_cursor._target_count = _card_selected._card_target_count;
+				show_debug_message(string(_card_selected._card_target_count));
+			}
 			
 			//////////////
 			// END TURN //
@@ -754,17 +747,7 @@ if (room == rm_encounter){
 			//////////////////////////////
 			// TRIGGER END TURN EFFECTS //
 			//////////////////////////////
-				//TODO
-				with (obj_card_effect_counter) {
-					if (_counter_team == "Player" && _target == "Targetless" && _trigger_time == "End"){
-				        _turn_lifespan--;
-						_trigger_my_effect = true;
-					}			
-					else if (_target != "Targetless" && _target._creature_team == "Player" && _trigger_time == "End") {
-					    _turn_lifespan--;
-						_trigger_my_effect = true;
-					}				
-				}
+				scr_trigger_status_effects("End","Player");		
 			
 			//empty hand into discard pile
 			scr_discard_hand();

@@ -37,6 +37,7 @@ var _tmp_deck = ds_list_create();
 			_new_card_object._card_class_req = _ref_card[? "class"];
 			_new_card_object._card_range = _ref_card[? "range"];
 			_new_card_object._card_ref = _ref_card;
+			_new_card_object._card_target_count = _ref_card[? "targets"];
 			
 			
 			if(_ref_card[?"range"] == "Targetless"){

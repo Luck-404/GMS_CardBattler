@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Card Tools",
-    "path": "folders/Scripts/GUI and Tools/Encounter/Card Tools.yy",
+    "name": "Card Setup",
+    "path": "folders/Scripts/Tools and Game Systems/Encounter/Card Setup.yy",
   },
 }

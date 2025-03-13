@@ -121,6 +121,6 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 	
 	//leech icon
 	if(_minion_name == "Bloodbeak" || _minion_name == "Serpent"){
-		draw_sprite(spr_leech,0,_minion_unit_attached.x-60, _minion_unit_attached.y - 98);
+		draw_sprite(spr_minion_leech,0,x+16, y + 40);
 	}
 }

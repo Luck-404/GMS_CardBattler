@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Overworld",
-    "path": "folders/Objects/GUI and Tools/Overworld.yy",
+    "name": "Controllers",
+    "path": "folders/Objects/Tools and Game Systems/Controllers.yy",
   },
   "parentObjectId": null,
   "persistent": false,
