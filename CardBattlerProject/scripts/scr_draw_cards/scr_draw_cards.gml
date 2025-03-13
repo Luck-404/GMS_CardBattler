@@ -8,7 +8,7 @@ function scr_draw_cards(_amount) {
     
     // Base position and spacing for cards
     var _base_x = 500;
-    var _card_spacing = 150;
+    var _card_spacing = 200;
     
     // Get the number of cards already in hand
     var _current_hand_size = ds_list_size(global.player_hand);

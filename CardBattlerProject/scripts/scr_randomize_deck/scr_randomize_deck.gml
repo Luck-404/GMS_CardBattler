@@ -20,7 +20,7 @@ var _tmp_deck = ds_list_create();
 		var _ref_card = ds_list_find_value(_tmp_deck, _index);
 	
 		//new card object
-		var _new_card_object = instance_create_layer(200,1000,"GUI",obj_card);
+		var _new_card_object = instance_create_layer(200,950,"GUI",obj_card);
 		_new_card_object._list = "deck";
 		//implement all data needed
             _new_card_object._card_name = _ref_card[? "name"];
