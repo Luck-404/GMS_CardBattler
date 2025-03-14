@@ -12,7 +12,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_left_target);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
 	
 		////////////
 		// DAMAGE //
@@ -23,12 +23,12 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_left_target,spr_effect_strike,0,0)
+		scr_create_combat_effect(_left_target,spr_effect_strike,0,0);
 
 		///////////
 		// DEBUG //
 		///////////
-		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " damage dealt = " + string(_calculated_dmg) + " to " + _left_target._creature_name);		
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"] + " on " + _target._creature_name + " for " + string(_calculated_dmg));
 	}
 		
 	//////////////////
@@ -39,7 +39,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_right_target);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
 	
 		////////////
 		// DAMAGE //
@@ -50,12 +50,12 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_right_target,spr_effect_strike,0,0)
+		scr_create_combat_effect(_right_target,spr_effect_strike,0,0);
 
 		///////////
 		// DEBUG //
 		///////////
-		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " damage dealt = " + string(_calculated_dmg) + " to " + _right_target._creature_name);		
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"] + " on " + _target._creature_name + " for " + string(_calculated_dmg));
 	}
 	
 	///////////////////
@@ -65,7 +65,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
 	
 		////////////
 		// DAMAGE //
@@ -89,22 +89,24 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_target,spr_effect_beastial_bash,0,0)
-
-		////////////
-		// BANNER //
-		////////////
-		scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_name + " on up to three enemies for " + string(_calculated_dmg))
+		scr_create_combat_effect(_target,spr_effect_beastial_bash,0,0);
 
 		///////////
-		// DEBUG //
+		// SOUND //
 		///////////
-		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " damage dealt = " + string(_calculated_dmg) + " to " + _target._creature_name);		
-	
+		audio_play_sound(snd_effect_beastial_bash,0,false);	
 	#endregion
 	
+
+	
+	////////////
+	// BANNER //
+	////////////
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
 	///////////
-	// SOUND //
+	// DEBUG //
 	///////////
-	audio_play_sound(snd_effect_beastial_bash,0,false);	
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
 }

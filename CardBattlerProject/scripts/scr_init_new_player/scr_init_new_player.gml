@@ -24,8 +24,8 @@ function scr_init_new_player(_player,_patron,_blessing){
 			
 			//player's deck setup
 			//var _arr = ["Strike","Block","Inspiration","Thorny Whip","Thorny Whip","Poison Ivy","Bramblet","Bloodbeak","Serpent Summon","Life Spirit","Bulwark"];
-			var _arr = ["Strike","Power Strike","Block","Bulwark","Echo","Inspiration","Thorny Whip","Fell","Beastial Bash","Stampede","Grow Manavine","Life Spirit","Bramblet","Potent Fruit","Nature's Remedy","Bloodbeak","Poison Ivy","Serpent Summon","Sprigs of Ygg"];
-				
+			var _arr = ["Bulwark","Echo","Inspiration"];
+
 		for (var _i = 0; _i < array_length(_arr); _i++){
 				var _new_card = scr_load_card(_arr[_i]);		
 				ds_list_add(global.player_deck, _new_card);

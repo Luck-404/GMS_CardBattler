@@ -16,7 +16,7 @@ switch(global.fight_controller_state){
 		for (var _i = 0; _i < ds_list_size(global.enemy_party); _i++){				
 			//spawn the creature
 			var _ref_creature = ds_list_find_value(global.enemy_party, _i);
-			var _ref_creature_instance = instance_create_layer(1190+(170*_i), 650, "Creatures", obj_creature); //generate the creature	
+			var _ref_creature_instance = instance_create_layer(1124+(_i*158), 536, "Creatures", obj_creature); //generate the creature	
 			//pass the creature the proper stats it needs
 			_ref_creature_instance._creature_name = _ref_creature[? "name"];
 			_ref_creature_instance._creature_champion = _ref_creature[? "champion"];

@@ -15,7 +15,7 @@
 		instance_destroy(); //DESTROY SELF
 	}
 	//host dies
-	if (_counter_target != "Targetless"){
+	if (_counter_target != "Global Utility"){
 		if(_counter_target._creature_hp_current <= 0){
 			ds_list_delete(_counter_list,_counter_index);
 			instance_destroy(); //DESTROY SELF
@@ -51,7 +51,9 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 	
 	draw_text(mouse_x+15, mouse_y+5, _counter_name); //name
 	draw_text(mouse_x+15, mouse_y+20, _counter_desc); //desc
+	if (_counter_target != "Global Utility"){
 	draw_text(mouse_x+15, mouse_y+35, "Type: " + _counter_card._card_type); //spell type
+	}
 	
 	//source card - for general it will be 'general', for standalone its the card name
 	if (_counter_type == "General"){
@@ -77,8 +79,9 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 	} else {
 		draw_text(mouse_x+15, mouse_y+125, "Charges: ∞");	
 	}
-	
+	if (_counter_target != "Global Utility"){
 	draw_text(mouse_x+15, mouse_y+140, "Host: " + _counter_target._creature_name);	
+	}
 } 
 
 //////////////////////////////////

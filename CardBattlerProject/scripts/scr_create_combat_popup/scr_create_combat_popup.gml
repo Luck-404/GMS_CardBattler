@@ -7,7 +7,7 @@ function scr_create_combat_popup(_target_obj,_text,_type,_tar_x,_tar_y){
 	///////////////////////////
 	// MAKE A RANDOM X VALUE //
 	///////////////////////////
-	var _rand_x = irandom_range(-25,25);
+	var _rand_x = irandom_range(-35,35);
 	
 	////////////////////
 	// DRAW ON TARGET //

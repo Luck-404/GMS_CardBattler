@@ -5,7 +5,7 @@
 //	 THE INFO IT NEEDS.												//
 //////////////////////////////////////////////////////////////////////
 function scr_init_enemy_card(_ref_card,_ref_unit){
-	var _ref_card_instance = instance_create_layer(_ref_unit.x, _ref_unit.y-200, "GUI", obj_enemy_card);
+	var _ref_card_instance = instance_create_layer(_ref_unit.x, 292, "GUI", obj_enemy_card);
         _ref_card_instance._card_name = _ref_card[? "name"];
         _ref_card_instance._card_desc = _ref_card[? "description"];
         _ref_card_instance._card_script = _ref_card[? "script"];

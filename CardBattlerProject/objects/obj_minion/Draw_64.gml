@@ -35,84 +35,84 @@ if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_cu
 // HANDLE SCRIPT EXECUTION //
 /////////////////////////////
 if (_minion_cast_types[0] == "Minion Step"){
-	if (_minion_effect_script != undefined && _counter_trigger_effect == true && _minion_unit_attached._creature_hp_current > 0){
+	if (_minion_effect_script != undefined && _minion_trigger_effect == true && _minion_unit_attached._creature_hp_current > 0){
 		_minion_effect_script(_minion_unit_attached,self);
-		_counter_trigger_effect = false;
+		_minion_trigger_effect = false;
 	}
 }
 
 
+
+///////////////
+// REACTIONS //
+///////////////
 if (_latest_target != undefined && _latest_channel != undefined){
 	////////////////////////////////
 	// HOST DAMAGE TAKEN REACTION //
 	////////////////////////////////
 	if (_minion_cast_types[1] == "Host Damage Taken"){
 		//show_debug_message("MINION: " + _latest_target._creature_name + " has taken " + string(_latest_damage_done));
+		
 		if(_latest_target == _minion_unit_attached && _latest_damage_done != 0){
+		///////////////
+		//  BRAMBLET //
+		///////////////			
 			if (_minion_name == "Bramblet"){
 				//show_debug_message("BRAMBLET: TRIGGERED");
-				//deal 10% damage back to channeler
-				var _10p = ceil(_latest_damage_done*0.10);
-				//show_debug_message("BRAMBLET: dealing " + string(_10p) + " to " + _latest_channel._creature_name);
-				//deal dmg
-				scr_damage_creature(_latest_channel,_10p);
-	
-				var _popup2 = instance_create_layer(_latest_channel.x, _latest_channel.y, "GUI", obj_combat_values_popup);
-				_popup2._text = string(_10p);
-				_popup2._type = "Damage";	
+				
+				/////////////////////////////
+				// DEAL 25% OF DAMAGE BACK //
+				/////////////////////////////
+					//deal 25% damage back to channeler
+					var _25p = ceil(_latest_damage_done*0.25);
+					scr_damage_creature(_latest_channel,_25p);
+					//show_debug_message("BRAMBLET: dealing " + string(_25p) + " to " + _latest_channel._creature_name);
 		
 				////////////
 				// EFFECT //
 				////////////
-				var _ref_effect = instance_create_layer(_minion_unit_attached.x,_minion_unit_attached.y,"Effects",obj_card_effect);
-				_ref_effect.sprite_index = spr_effect_red_strike;
+					//TODO
 	
 				///////////
 				// SOUND //
 				///////////
-				audio_play_sound(snd_effect_strike,0,false);
+					//TODO
 			}
 			
+		//////////////
+		//  SERPENT //
+		//////////////
 			if (_minion_name == "Serpent"){
 				//show_debug_message("SERPENT: VENOM TRIGGERED");
 
 				//show_debug_message("SERPENT: applying venom to " + _latest_channel._creature_name);
 		
-				//CHECK FOR POISON
-				if (_latest_channel._venom_count == 0){	//IF NO VENOM
-					//set up a poison counter
-					var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_status_counter);
-					_ref_counter.x = _latest_channel.x+10;
-					_ref_counter.y = _latest_channel.y - 100;
-					_ref_counter._draw_color = c_purple;	
-					_ref_counter._counter_life = 3;
-					_ref_counter._counter_trigger_period = "End";
-					_latest_channel._venom_counter_ref = _ref_counter;
-					_ref_counter._counter_trigger_effect = false;
-					_ref_counter._reference_script = scr_status_venom_tick;
-					_ref_counter._target = _latest_channel;
-			
-					//EFFECT
-					var _ref_effect1 = instance_create_layer(_latest_channel.x,_latest_channel.y,"Effects",obj_card_effect);
-					_ref_effect1.sprite_index = spr_effect_venom;
-			
-					//apply venom stacks
-					_latest_channel._venom_count++;
+				///////////
+				// VENOM //
+				///////////
+				var _counter = scr_get_status_counter(_latest_channel,"General",undefined,"Venom");		
+				if (_counter == undefined){		
+					scr_create_status_counter(_latest_channel,"Venom","Target is envenomed for 3 turns, each venom stack deals damage and reduces damage done",undefined,"End",scr_status_venom_tick, false, undefined, 3, 1, "3 * (stacks)", 0, "General", _latest_channel._creature_statuses, spr_status_venom);
+
+					_latest_channel._status_venom = true;
 					//apply debuff stacks from venom
-					_latest_channel._creature_attack_linear--;
+					_latest_channel._creature_attack_linear--;					
 				} 
-				//IF VENOM, RENEW AND SCALE VENOM
 				else {
-					_latest_channel._venom_counter_ref._counter_life = 3;
-					_latest_channel._venom_count++;
+					_counter._counter_life = 3;
+					_counter._counter_stacks +=1;
 					_latest_channel._creature_attack_linear--;
 				}
 		
+				////////////
+				// EFFECT //
+				////////////
+					scr_create_combat_effect(_latest_channel,spr_effect_venom,0,0);
 	
 				///////////
 				// SOUND //
 				///////////
-				audio_play_sound(snd_effect_poison_ivy,0,false);
+					//TODO
 			}
 		}
 	}
@@ -122,56 +122,56 @@ if (_latest_target != undefined && _latest_channel != undefined){
 	////////////////////////////////
 	if (_minion_cast_types[2] == "Host Damage Dealt"){
 		if((_latest_channel == _minion_unit_attached) && _latest_damage_done != 0){
+		////////////////
+		//  BLOODBEAK //
+		////////////////
 				if (_minion_name == "Bloodbeak"){
 					//show_debug_message("BLOODBEAK: TRIGGERED");
-					var _20p = ceil(_latest_damage_done*0.20); //get 20% of max hp
-
-					_minion_unit_attached._creature_hp_current += _20p; //add the hp
-					//show_debug_message("BLOODBEAK: healing " + string(_20p) + " on host " + _minion_unit_attached._creature_name);
-					if (_minion_unit_attached._creature_hp_current > _minion_unit_attached._creature_hp_max){ //check for overflow
-						_minion_unit_attached._creature_hp_current = _minion_unit_attached._creature_hp_max;
-					}
 					
-					var _popup2 = instance_create_layer(_minion_unit_attached.x, _minion_unit_attached.y, "GUI", obj_combat_values_popup);
-					_popup2._text = string(_20p);
-					_popup2._type = "Healing";	
+					///////////////
+					// 20% Leech //
+					///////////////
+					var _20p = ceil(_latest_damage_done*0.20); //get 20% of max hp
+					scr_heal_creature(_minion_unit_attached,_20p,0);
+					//show_debug_message("BLOODBEAK: healing " + string(_20p) + " on host " + _minion_unit_attached._creature_name);
 				
-					////////////
-					// EFFECT //
-					////////////
-					var _ref_effect = instance_create_layer(_minion_unit_attached.x,_minion_unit_attached.y,"Effects",obj_card_effect);
-					_ref_effect.sprite_index = spr_effect_grow_natures_remedy;
-		
-					//deal dmg
-					//show_debug_message("BLOODBEAK: dealing 5 to unit " + _latest_target._creature_name);
+					///////////
+					// 5 DMG //
+					///////////
 					scr_damage_creature(_latest_target,5);
-		
+					//show_debug_message("BLOODBEAK: dealing 5 to unit " + _latest_target._creature_name);
+					
 					////////////
 					// EFFECT //
 					////////////
-					_ref_effect = instance_create_layer(_latest_target.x,_latest_target.y,"Effects",obj_card_effect);
-					_ref_effect.sprite_index = spr_effect_red_strike;
-			}
-			if (_minion_name == "Serpent"){
-				//show_debug_message("SERPENT: HEALING TRIGGERED");
-				var _20p = ceil(_latest_damage_done*0.20); //get 20% of max hp
-
-				_minion_unit_attached._creature_hp_current += _20p; //add the hp
-				//show_debug_message("SERPENT: healing " + string(_20p) + " on host " + _minion_unit_attached._creature_name);
-				if (_minion_unit_attached._creature_hp_current > _minion_unit_attached._creature_hp_max){ //check for overflow
-					_minion_unit_attached._creature_hp_current = _minion_unit_attached._creature_hp_max;
+						//TODO
+	
+					///////////
+					// SOUND //
+					///////////
+						//TODO					
 				}
 				
-				var _popup2 = instance_create_layer(_minion_unit_attached.x, _minion_unit_attached.y, "GUI", obj_combat_values_popup);
-				_popup2._text = string(_20p);
-				_popup2._type = "Healing";	
+		//////////////
+		//  SERPENT //
+		//////////////
+			if (_minion_name == "Serpent"){
+					///////////////
+					// 20% Leech //
+					///////////////
+					var _20p = ceil(_latest_damage_done*0.20); //get 20% of max hp
+					scr_heal_creature(_minion_unit_attached,_20p,0);
 					
-				////////////
-				// EFFECT //
-				////////////
-				var _ref_effect = instance_create_layer(_minion_unit_attached.x,_minion_unit_attached.y,"Effects",obj_card_effect);
-				_ref_effect.sprite_index = spr_effect_grow_natures_remedy;
-		}			
+					////////////
+					// EFFECT //
+					////////////
+						//TODO
+	
+					///////////
+					// SOUND //
+					///////////
+						//TODO		
+			}			
 		}
 	}
 
@@ -181,6 +181,9 @@ if (_latest_target != undefined && _latest_channel != undefined){
 	_latest_target = undefined;
 	_latest_card = undefined;
 }
+
+
+
 ////////////////////////
 // HOVER INTERACTIONS //
 ////////////////////////

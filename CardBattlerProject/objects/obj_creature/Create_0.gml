@@ -35,8 +35,8 @@ _right_unit = undefined;
 //STATS
 _creature_attack_scalar = 1;
 _creature_attack_linear = 0;
-_creature_vulnerability_scalar = 1;
-_creature_vulnerability_linear = 0;
+_creature_vulnerability_scalar_stacks = 0;
+_creature_vulnerability_linear_stacks = 0;
 
 //FLAGS
 _active = false;

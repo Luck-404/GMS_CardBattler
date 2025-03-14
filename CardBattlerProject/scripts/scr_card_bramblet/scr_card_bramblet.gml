@@ -7,61 +7,28 @@ function scr_card_bramblet(_card,_channel,_target){
 	//////////////////
 	// SPAWN MINION //
 	//////////////////
-	var _ref_minion = instance_create_layer(_target.x,_target.y,"Creatures",obj_minion);
-	_ref_minion._minion_hp_cur = 10;
-	_ref_minion._minion_hp_max = 10;
-	_ref_minion._minion_def = 2;
-	_ref_minion._minion_name = "Bramblet";
-	_ref_minion._minion_team = _target._creature_team;
-	_ref_minion._minion_cast_types = ["Minion Step","Host Damage Taken","None"];
-	_ref_minion._minion_sprite = spr_minion_bramblet;
-	_ref_minion.sprite_index = _ref_minion._minion_sprite;
-	_ref_minion._minion_hurtsound = snd_creature_wraith_hurt;
-	_ref_minion._minion_deathsound = snd_creature_wraith_death;
-	_ref_minion._minion_defaultsound = snd_creature_wraith_default;
-	_ref_minion._minion_unit_attached = _target;
-	_ref_minion._minion_effect_script = scr_minion_bramblet_tick;
-	
-	///////////////////
-	// ADD TO TARGET //
-	///////////////////
-	//check target's list
-	if (_target._creature_minion_count < _target._creature_minion_limit){ //if open spot
-		//if open spot- play normally
-		ds_list_add(_target._creature_minion_references,_ref_minion);
-		_ref_minion._minion_position = _target._creature_minion_count;
-		_target._creature_minion_count++;
-	
-		
-	}
-	else { //overwrite old
-		//else overwrite oldest unit (delete oldest unit)
-		var _removal_unit = ds_list_find_value(_target._creature_minion_references,0);
-		ds_list_delete(_target._creature_minion_references,0);
-		instance_destroy(_removal_unit);
+	scr_create_combat_minion(_card,_channel,_target,"Bramblet");
+	scr_trigger_minion_reactions(_card,_target,_channel,0);
 
-		//add new to back of the list
-		ds_list_add(_target._creature_minion_references,_ref_minion);
-		_ref_minion._minion_position = _target._creature_minion_limit-1;
-	}
-	
-	//update positions of creatures
-	for (var _i = 0; _i < ds_list_size(_target._creature_minion_references); _i++){
-		var _minion = ds_list_find_value(_target._creature_minion_references,_i);
-		_minion._minion_position = _i;
-	}			
+	////////////
+	// EFFECT //
+	////////////
+		//TODO COOL EFFECT - sparkle into exsitence
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_grow_manavine,0,false);	
-	
+		//TODO
+		
+		
+		
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name;
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);				
 }

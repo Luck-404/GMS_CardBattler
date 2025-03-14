@@ -7,20 +7,20 @@
 function scr_decrement_shields(_unit){
 	var _type = _unit._creature_spec;
 	switch (_type){
-		case "Martial": //take half of the shields, rounded down
-			_unit._creature_def = floor((_unit._creature_def)*0.5);
+		case "Martial": //take 20% of the shields, rounded down
+			_unit._creature_def = floor((_unit._creature_def)*0.8);
 		break;
 		
-		case "Technical": //take 75% of the shields, rounded down
-			_unit._creature_def = floor((_unit._creature_def)*0.25);
+		case "Technical": //take 40% of the shields, rounded down
+			_unit._creature_def = floor((_unit._creature_def)*0.6);
 		break;
 				
-		case "Magical": //take 90% of the shields, rounded down
-			_unit._creature_def = floor((_unit._creature_def)*0.1);
+		case "Magical": //take 60% of the shields, rounded down
+			_unit._creature_def = floor((_unit._creature_def)*0.4);
 		break;
 				
-		case "Any": //take 80% of the shields, rounded down
-			_unit._creature_def = floor((_unit._creature_def)*0.2);
+		case "Any": //take 60% of the shields, rounded down
+			_unit._creature_def = floor((_unit._creature_def)*0.4);
 		break;
 	}
 }

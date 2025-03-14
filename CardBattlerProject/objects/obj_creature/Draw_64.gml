@@ -169,9 +169,9 @@ if (_flag_has_died == false){
 		draw_text(x-10, y-60, "+"+string(_creature_attack_linear)); //dmg bonus linear
 	}
 	//BONUS DAMAGE TAKEN
-	if (_creature_vulnerability_scalar != 1 || _creature_vulnerability_linear != 0){	
+	if (_creature_vulnerability_scalar_stacks != 0 || _creature_vulnerability_linear_stacks != 0){	
 		draw_sprite(spr_dmg_vulnerable,0,x+10,y-60); // Display the dmg taken arrow
-		draw_text(x+20, y-60, "x"+string(_creature_vulnerability_scalar)); //dmg taken scalar
-		draw_text(x+40, y-60, "+"+string(_creature_vulnerability_linear)); //dmg taken linear	
+		draw_text(x+20, y-60, "+"+string(50*_creature_vulnerability_scalar_stacks)+"%"); //dmg taken scalar
+		draw_text(x+40, y-60, "+"+string(_creature_vulnerability_linear_stacks)); //dmg taken linear	
 	}
 }

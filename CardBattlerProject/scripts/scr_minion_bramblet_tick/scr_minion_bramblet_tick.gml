@@ -19,10 +19,17 @@ function scr_minion_bramblet_tick(_host,_self){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_host,spr_card_block,0,0);
+		//TODO
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_block,0,false);	
+		//TODO
+		
+		
+		
+	///////////
+	// DEBUG //
+	///////////		
+	show_debug_message("COMBAT: BRAMBLET ADDED ARMOR TO HOST");		
 }

@@ -103,13 +103,15 @@ function scr_card_poison_ivy(_card,_channel,_target){
 		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_name + " on " + _target._creature_name);		
 	#endregion
 	
-	////////////
-	// BANNER //
-	////////////
-	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_name + " on up to 3 targets");
-
 	///////////
 	// SOUND //
 	///////////
 	audio_play_sound(snd_effect_poison_ivy,0,false);	
+	
+	
+	
+	////////////
+	// BANNER //
+	////////////
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
 }

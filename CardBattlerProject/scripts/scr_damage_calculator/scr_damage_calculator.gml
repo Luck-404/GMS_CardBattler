@@ -3,8 +3,13 @@
 //																	//
 // > CALCULATE DAMAGE FROM PLAYING A CARD							//	
 //////////////////////////////////////////////////////////////////////
-function scr_damage_calculator(_card,_channel,_target){
-	var _base_dmg = _card._card_ref[?"damage"]; //base damage from card
+function scr_damage_calculator(_card,_channel,_target,_percent){
+	var _base_dmg = 0;
+	if (_percent != 0){
+		_base_dmg = ceil((_percent/100)*_target._creature_hp_max);
+	} else {
+		_base_dmg = _card._card_ref[?"damage"]; //base damage from card
+	}
 	
 	/////////////////
 	// COLOR BONUS //
@@ -18,10 +23,15 @@ function scr_damage_calculator(_card,_channel,_target){
 	var _scalar = _channel._creature_attack_scalar; //get creature attack scalar
 	var _scaled_dmg = _post_color_dmg*_scalar;
 	
+	///////////////////
+	// VULNERABILITY //
+	///////////////////
+	var _vuln_dmg = _scaled_dmg*(1+(0.5*_target._creature_vulnerability_scalar_stacks));
+	
 	///////////////
 	// FINAL DMG //
 	///////////////	
-	var _final_dmg = _scaled_dmg+_channel._creature_attack_linear;
+	var _final_dmg = _vuln_dmg + _channel._creature_attack_linear;
 	
 	return _final_dmg;
 }

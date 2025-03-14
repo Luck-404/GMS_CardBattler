@@ -11,39 +11,44 @@ function scr_load_card(_cardname){
 		/////////////
 		//UNCOLORED
 		case "Strike":
-			_loadedcard = scr_create_card("Strike", "Deals 6 damage to the target in the front row", 1, scr_card_strike, spr_card_strike, "Uncolored", "Attack", 6, "Any", "Any", "Common", false, "Melee",1);
+			_loadedcard = scr_create_card("Strike", "Deals 6 damage", 1, scr_card_strike, spr_card_strike, "Uncolored", "Attack", 6, "Any", "Any", "Common", false, "Melee",1);
 		break;		
 		
 		case "Power Strike":
-			_loadedcard = scr_create_card("Power Strike", "Deals 12 damage on the target in the front row", 2, scr_card_power_strike, spr_card_power_strike, "Uncolored", "Attack", "Uncommon", "Any", "Any", 20, false, "Melee",1);
+			_loadedcard = scr_create_card("Power Strike", "Deals 15 damage", 2, scr_card_power_strike, spr_card_power_strike, "Uncolored", "Attack", 15, "Any", "Any", "Uncommon", false, "Melee",1);
 		break;
 		
 		//GREEN
 		case "Thorny Whip":
-			_loadedcard = scr_create_card("Thorny Whip", "Deals 8 damage to any target", 0, scr_card_thorny_whip, spr_card_thorny_whip, "Green", "Attack", 8, "Any", "Any", "Common", false, "Ranged",1);
+			_loadedcard = scr_create_card("Thorny Whip", "Deal 8 damage", 0, scr_card_thorny_whip, spr_card_thorny_whip, "Green", "Attack", 8, "Any", "Any", "Common", false, "Ranged",1);
 		break;
 		
 		case "Fell":
-			_loadedcard = scr_create_card("Fell", "Deals 10% max hp to the front unit", 2, scr_card_fell, spr_card_fell, "Green", "Attack", 10, "Any", "Any", "Uncommon", false, "Melee",1);
+			_loadedcard = scr_create_card("Fell", "Deal 15% of the target's max hp as melee damage.", 2, scr_card_fell, spr_card_fell, "Green", "Attack", 15, "Any", "Any", "Uncommon", false, "Melee",1);
 		break;	
 		
 		case "Beastial Bash":
-			_loadedcard = scr_create_card("Beastial Bash", "Deal 10 damage to 3 targets, stun the center unit for 1 turn", 3, scr_card_beastial_bash, spr_card_beastial_bash, "Green", "Attack", 10, "Any", "Any", "Rare", false, "Ranged", 3);
+			_loadedcard = scr_create_card("Beastial Bash", "Deal 12 damage to each target, also stun the middle target for 1 turn. Exhausts.", 2, scr_card_beastial_bash, spr_card_beastial_bash, "Green", "Attack", 12, "Any", "Any", "Rare", true, "Ranged", 3);
 		break;		
 		
 		case "Stampede":
-			_loadedcard = scr_create_card("Stampede", "Deal 30% max hp to all units, exhaust", 3, scr_card_stampede, spr_card_stampede, "Green", "Attack", 30, "Any", "Any", "Epic", true, "Ranged",5);
+			_loadedcard = scr_create_card("Stampede", "Deal 40% of each target's max hp as damage. Exhausts.", 3, scr_card_stampede, spr_card_stampede, "Green", "Attack", 40, "Any", "Any", "Epic", true, "Ranged",5);
 		break;		
+		
+		case "Snarling Bite":
+			_loadedcard = scr_create_card("Snarling Bite", "Deal 4 Melee damage and apply vulnerable if health is hit.", 2, scr_card_snarling_bite, spr_card_snarling_bite, "Green", "Attack", 4, "Technical", "Hunter", "Uncommon", false, "Melee", 1);
+		break;		
+		
 		/////////////
 		// DEFENSE //
 		/////////////
 		//UNCOLORED
 		case "Block":
-			_loadedcard = scr_create_card("Block", "Adds 5 defense to self", 1, scr_card_block, spr_card_block, "Uncolored", "Defend", 0, "Any", "Any", "Common", false, "Self",1);
+			_loadedcard = scr_create_card("Block", "Add 8 defense to self", 1, scr_card_block, spr_card_block, "Uncolored", "Defense", 0, "Any", "Any", "Common", false, "Self",1);
 		break;			
 		
 		case "Bulwark":
-			_loadedcard = scr_create_card("Bulwark", "Adds 10 defense to self", 2, scr_card_bulwark, spr_card_bulwark, "Uncolored", "Defend", 0, "Any", "Any", "Uncommon", false, "Self",1);
+			_loadedcard = scr_create_card("Bulwark", "Add 20 defense to self", 2, scr_card_bulwark, spr_card_bulwark, "Uncolored", "Defense", 0, "Any", "Any", "Uncommon", false, "Self",1);
 		break;
 		//GREEN
 		
@@ -52,28 +57,28 @@ function scr_load_card(_cardname){
 		/////////////
 		//UNCOLORED
 		case "Echo":
-			_loadedcard = scr_create_card("Echo", "Repeat next spell for free, exhaust", 0, scr_card_echo, spr_card_echo, "Uncolored", "Utility", 0, "Any", "Any", "Rare", true, "Targetless",0);
+			_loadedcard = scr_create_card("Echo", "Increase echo count by 1, echo causes the next spell to cast x more times. Exhausts.", 0, scr_card_echo, spr_card_echo, "Uncolored", "Utility", 0, "Any", "Any", "Rare", true, "Targetless",0);
 		break;		
 		
 		case "Inspiration":
-			_loadedcard = scr_create_card("Inspiration", "1 extra mana for a turn, exhaust", 0, scr_card_inspiration, spr_card_insirpation, "Uncolored", "Utility", 0, "Any", "Any", "Rare", true, "Targetless",0);
+			_loadedcard = scr_create_card("Inspiration", "Generates 1 bonus mana per turn, effect lasts 3 turns. Exhausts.", 0, scr_card_inspiration, spr_card_insirpation, "Uncolored", "Utility", 0, "Any", "Any", "Rare", true, "Targetless",0);
 		break;
 		
 		//GREEN
 		case "Grow Manavine":
-			_loadedcard = scr_create_card("Grow Manavine", "Add 2 extra mana to the pool for 3 turns, exhaust", 3, scr_card_grow_manavine, spr_card_grow_manavine, "Green", "Utility", 0, "Technical", "Any", "Rare", true, "Targetless",0);	
+			_loadedcard = scr_create_card("Grow Manavine", "Generates 2 bonus mana per turn, effect lasts 3 turns. Exhausts.", 3, scr_card_grow_manavine, spr_card_grow_manavine, "Green", "Utility", 0, "Technical", "Any", "Rare", true, "Targetless",0);	
 		break;
 		
 		case "Life Spirit":
-			_loadedcard = scr_create_card("Life Spirit", "Summon a healer minion with 5hp, heals host unit 5% hp per turn", 0, scr_card_life_spirit, spr_card_life_spirit, "Green", "Utility", 0, "Any", "Any", "Common", false, "Ranged",1);	
+			_loadedcard = scr_create_card("Life Spirit", "Summon a 7hp life spirit, minion heals host 8% hp per turn.", 0, scr_card_life_spirit, spr_card_life_spirit, "Green", "Utility", 0, "Any", "Any", "Uncommon", false, "Ranged",1);	
 		break;	
 
 		case "Bramblet":
-			_loadedcard = scr_create_card("Bramblet", "Summon bramble minion on self, passively generates 5 armor for host, when host is attacked 10% damage is dealt back to caster", 2, scr_card_bramblet, spr_card_bramblet, "Green", "Utility", 0, "Magical", "Summoner", "Rare", true, "Self",1);			
+			_loadedcard = scr_create_card("Bramblet", "Summon a 12hp bramblet, minion generates 2 armor for self and 5 armor for host per turn, when host takes damage, deal 25% damage back to attacker. Exhausts.", 2, scr_card_bramblet, spr_card_bramblet, "Green", "Utility", 0, "Magical", "Summoner", "Rare", true, "Self",1);			
 		break;	
 		
 		case "Bloodbeak":
-			_loadedcard = scr_create_card("Bloodbeak", "Summon a bloodbeak minion, when the host deals damage the bloodbeak heals the host for 20% of their damage done, and also deals 5 damage to the same target", 2, scr_card_bloodbeak, spr_card_bloodbeak, "Green", "Utility", 0, "Any", "Any", "Rare", false, "Ranged",1);
+			_loadedcard = scr_create_card("Bloodbeak", "Summon a 7hp bloodbeak, when host attacks it deals 5 damage to the same target, host gains 20% leech.", 2, scr_card_bloodbeak, spr_card_bloodbeak, "Green", "Utility", 0, "Any", "Any", "Rare", false, "Ranged", 1);
 		break;			
 	
 		///////////
@@ -83,8 +88,9 @@ function scr_load_card(_cardname){
 		
 		//GREEN
 		case "Potent Fruit":
-			_loadedcard = scr_create_card("Potent Fruit", "Increase damage by 2x for 3 turns, exhaust", 3, scr_card_potent_fruit, spr_card_potent_fruit, "Green", "Buff", 0, "Martial", "Any", "Epic", true, "Self",1);
+			_loadedcard = scr_create_card("Potent Fruit", "Increase damage dealt by this unit by 2x, lasts 3 turns. Exhausts.", 2, scr_card_potent_fruit, spr_card_potent_fruit, "Green", "Buff", 0, "Martial", "Any", "Epic", true, "Self",1);
 		break;
+		
 		/////////////
 		// DEBUFFS //
 		/////////////
@@ -96,13 +102,13 @@ function scr_load_card(_cardname){
 		// HEALS //
 		///////////
 		//UNCOLORED
-		case "Clear Battlefield":
-			//_loadedcard = scr_create_card("Clear Battlefield", "Clear damage zones", 0, scr_card_clear_battlefield, spr_card_clear_battlefield, "Uncolored", "Utility", 0, "Any", "Any", "Common", false, "Targetless",0);
-		break;						
+		//case "Clear Battlefield":
+		//	//_loadedcard = scr_create_card("Clear Battlefield", "TODO", 0, scr_card_clear_battlefield, spr_card_clear_battlefield, "Uncolored", "Utility", 0, "Any", "Any", "Common", false, "Targetless",0);
+		//break;						
 
 		//GREEN
 		case "Nature's Remedy":
-			_loadedcard = scr_create_card("Nature's Remedy", "Heal a unit for 20% HP", 2, scr_card_natures_remedy, spr_card_natures_remedy, "Green", "Heal", 0, "Magical", "Any", "Rare", false, "Ranged",1);	
+			_loadedcard = scr_create_card("Nature's Remedy", "Heal target for 33% of their max hp.", 2, scr_card_natures_remedy, spr_card_natures_remedy, "Green", "Heal", 0, "Magical", "Any", "Rare", false, "Ranged",1);	
 		break;
 		
 		////////
@@ -119,7 +125,7 @@ function scr_load_card(_cardname){
 		
 		//GREEN
 		case "Poison Ivy":
-			_loadedcard = scr_create_card("Poison Ivy", "Apply poison to 3 units for 1 turn", 1, scr_card_poison_ivy, spr_card_poison_ivy, "Green", "DoT", 0, "Any", "Any", "Uncommon", false, "Ranged",3);
+			_loadedcard = scr_create_card("Poison Ivy", "Apply a poison stack to 3 targets, lasts 3 turns (stackable).", 1, scr_card_poison_ivy, spr_card_poison_ivy, "Green", "DoT", 0, "Any", "Any", "Uncommon", false, "Ranged",3);
 		break;
 		
 		///////////
@@ -136,11 +142,11 @@ function scr_load_card(_cardname){
 		
 		//GREEN
 		case "Serpent Summon":
-			_loadedcard = scr_create_card("Serpent Summon", "Spawn three 6/6 coiled serpents, these serpents react to damage on the host and apply a stack of venom, while a serpent is alive hunter gets 10% leech and 10 bonus damage, exhaust.", 2, scr_card_serpent_summon, spr_card_serpent_summon, "Green", "Archetype", 0, "Technical", "Hunter", "Legendary", true, "Self",1);
+			_loadedcard = scr_create_card("Serpent Summon", "Summon 3 7hp serpents, while a serpent is alive host hunter gets +10dmg and 20% leech. When host takes damage each serpent applies 1 stack of venom. Exhausts.", 2, scr_card_serpent_summon, spr_card_serpent_summon, "Green", "Archetype", 0, "Technical", "Hunter", "Legendary", true, "Self",1);
 		break;	
 		
 		case "Sprigs of Ygg":
-			_loadedcard = scr_create_card("Sprigs of Ygg", "For 5 rounds spawn a Spriggan at the beginning of each player round in all empty minion slots. This minion will deal damage and heal host for 2*stacks. If there is a Spriggan already in a spot, instead increase its stacks by 1 each, exhaust.", 3, scr_card_sprigs_of_ygg, spr_card_sprigs_of_ygg, "Green", "Archetype", 0, "Any", "Any", "Legendary", true, "Targetless",5);
+			_loadedcard = scr_create_card("Sprigs of Ygg", "Summon 1hp spriggans in every open minion slot on target team, effect triggers once every turn for 5 turns giving spriggans stacks. Every turn each spriggan attacks enemies for x damage and heals each host for x hp, x being its stacks. Exhausts.", 3, scr_card_sprigs_of_ygg, spr_card_sprigs_of_ygg, "Green", "Archetype", 0, "Any", "Any", "Legendary", true, "Targetless",5);
 		break;		
 	}
 	return _loadedcard;

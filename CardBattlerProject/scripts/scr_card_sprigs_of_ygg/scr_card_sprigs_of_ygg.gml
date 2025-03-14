@@ -4,54 +4,38 @@
 // > SUMMON A SPRIGGAN IN EACH OPEN SPOT, SET UP COUNTER			//
 //////////////////////////////////////////////////////////////////////
 function scr_card_sprigs_of_ygg(_card,_channel,_target){
-		
-	//spawn counter- so the spriggans at the BEGINNING of every turn
-	//check for existing util
-	var _existing_sprig = undefined;
-	//see if the target already has a potent fruit buff on
-	for (var _i = 0; _i < ds_list_size(global.encounter_utility_active); _i++){
-		var _util = ds_list_find_value(global.encounter_utility_active,_i);
-		if (_util._counter_name == "Sprigs of Ygg" && _util._counter_team == _channel._creature_team){
-			_existing_sprig = _util;
-		}
-	}	
-		
-	//if no buff is found, apply the spell as usual
-	if (_existing_sprig == undefined){	
-		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_status_counter);
-		_ref_counter.x = 100;
-		_ref_counter.y = 250;
-		_ref_counter._draw_color = c_lime;	
-		_ref_counter._counter_life = 5;
-		_ref_counter._reference_script = scr_card_sprigs_of_ygg_tick;
-		_ref_counter._target = _channel;
-		_ref_counter._counter_trigger_period = "Begin";
-		_ref_counter._counter_name = "Sprigs of Ygg";
-		_ref_counter._counter_team = _channel._creature_team;
-		//add this type of buff to the global util list
-		ds_list_add(global.encounter_utility_active,_ref_counter);
-		_ref_counter._counter_trigger_effect = true;	
-		
-		//spawning handled in tick
+	/////////////
+	// COUNTER //
+	/////////////
+	var _counter = scr_get_status_counter("Global Utility", "Standalone", _card._card_name, undefined);		
+	if (_counter == undefined){		
+		scr_create_status_counter("Global Utility","Sprigs of Ygg","Spawn spriggans in every open slot, increase stacks on existing spriggans",_card,"Begin",scr_card_sprigs_of_ygg_tick, true, undefined, 5, 0, "1 trigger per turn", 0, "Standalone", global.encounter_statuses, spr_status_general_icon);
+	} 
+	else {
+		_counter._counter_life = 5;
 	}
 	
-	//if a buff is found, just renew its timer without adding anything to it!
-	else {
-		//renew
-		_existing_sprig._counter_life = 5;
-	}
+	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	
+	////////////
+	// EFFECT //
+	////////////
+		//TODO COOL EFFECT - sparkle into exsitence
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_grow_manavine,0,false);	
+		//TODO
+	
+	
 	
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"];
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);		
 }

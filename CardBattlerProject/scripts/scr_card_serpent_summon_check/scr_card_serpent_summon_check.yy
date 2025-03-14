@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_card_serpent_summon_disable",
+  "name": "scr_card_serpent_summon_check",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
