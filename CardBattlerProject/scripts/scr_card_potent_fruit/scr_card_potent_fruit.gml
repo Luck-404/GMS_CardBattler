@@ -27,7 +27,7 @@ function scr_card_potent_fruit(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_potent_fruit,0,false);		
+	audio_play_sound(snd_effect_powerup,0,false);		
 	
 	
 	

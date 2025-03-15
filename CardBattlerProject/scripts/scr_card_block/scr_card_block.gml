@@ -8,7 +8,7 @@ function scr_card_block(_card,_channel,_target){
 	// DEFENSE //
 	/////////////
 	_target._creature_def += 8;
-	scr_create_combat_popup(_target,"8","Shields",0,0);
+	scr_create_combat_popup(_target,"+8","Shields",0,0);
 	scr_trigger_minion_reactions(_card,_target,_channel,0);	
 	
 	////////////
@@ -19,7 +19,7 @@ function scr_card_block(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_block,0,false);
+	audio_play_sound(snd_effect_shield,0,false);
 	
 	
 	

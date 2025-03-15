@@ -7,7 +7,7 @@ function scr_card_power_strike(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
-	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
+	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 	////////////
 	// DAMAGE //
@@ -18,12 +18,12 @@ function scr_card_power_strike(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_power_strike,0,0);
+	scr_create_combat_effect(_target,spr_effect_big_hit,0,0);
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_power_strike,0,false);	
+	audio_play_sound(snd_effect_big_hit,0,false);	
 	
 	
 	////////////

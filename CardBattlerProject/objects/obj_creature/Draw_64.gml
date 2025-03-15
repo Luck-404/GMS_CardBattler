@@ -85,22 +85,23 @@ if (_flag_has_died == false){
 		///////////////////
 		// HOVER TOOLTIP //
 		///////////////////
-		draw_set_color(c_grey);
-		draw_rectangle(mouse_x+10,mouse_y,mouse_x+155, mouse_y+100,false);
-	
 		//draw info
 		draw_set_font(fnt_fanwood_sm);
-		draw_set_color(c_white);
+		draw_set_color(c_black);
+		var _tooltip_x = 1420;
+		var _tooltip_y = 838;
+		var _output_str = "";
 	
-		draw_text(mouse_x+15, mouse_y+5, _creature_name + " " + string(_creature_hp_current) + "/" + string(_creature_hp_max));
-		draw_text(mouse_x+15, mouse_y+20, "Defense: " + string(_creature_def));	
-		draw_text(mouse_x+15, mouse_y+35, _creature_color1 + " " + _creature_color2);	
-		draw_text(mouse_x+15, mouse_y+50, _creature_subtype);	
-		draw_text(mouse_x+15, mouse_y+60, _creature_spec);	
-		draw_text(mouse_x+15, mouse_y+70, _creature_class);	
+		_output_str += _creature_name + "\n";
+		_output_str += string(_creature_hp_current) + "/" + string(_creature_hp_max) + "\n";
+		_output_str += "Defense: " + string(_creature_def) + "\n";
+		_output_str += _creature_color1 + " " + _creature_color2 + "\n";
+		_output_str += "Subtype: " + _creature_subtype + "\n";
+		_output_str += "Spec: " + _creature_spec + "\n";
+		_output_str += "Class: " + _creature_class + "\n";
 	
-		//TODO draw list of stuns/debuffs/DoTs
-		//TODO draw list of buffs/auras/HoTs
+		//draw final tooltip;
+		draw_text_ext(_tooltip_x,_tooltip_y,_output_str,15,150);
 	
 	} 
 	
@@ -113,7 +114,7 @@ if (_flag_has_died == false){
 
 		// Center the health bar above the creature
 		var _bar_x = x - _health_bar_full_width / 2;  // Use full width for centering
-		var _bar_y = y - 100;  // Position the bar slightly above the creature
+		var _bar_y = y - 80;  // Position the bar slightly above the creature
 
 		// Draw the red background (lost health part)
 		draw_set_color(c_red);
@@ -132,19 +133,11 @@ if (_flag_has_died == false){
 	// DRAW DEFENSE ICON //
 	///////////////////////
 	if (_creature_def != 0){	
-			// Set the drawing color for the defense (blue circle)
-			draw_set_color(c_blue);
 
-			// Draw the blue circle for the defense stat to the right of the health bar
-			var _defense_circle_radius = 12; // Radius of the circle
-			var _defense_x = _bar_x + _health_bar_width + 24; // Position the circle 15 pixels to the right of the health bar
-			var _defense_y = _bar_y + 5; // Vertically align it with the health bar
-
-			draw_circle(_defense_x, _defense_y, _defense_circle_radius, false);  // Draw the circle
-
-			// Draw the defense number inside the circle
-			draw_set_color(c_white);
-			draw_text(_defense_x-4, _defense_y-8, string(_creature_def));  // Display the defense value inside the circle
+		draw_sprite(spr_def,0, x+52, y-90);
+		// Draw the defense number inside the circle
+		draw_set_color(c_white);
+		draw_text(x+64, y-80, string(_creature_def));  // Display the defense value inside the circle
 	}
 	
 	///////////////////
@@ -153,8 +146,8 @@ if (_flag_has_died == false){
 	for (var _i = 0; _i < ds_list_size(_creature_statuses); _i++){
 		var _counter = ds_list_find_value(_creature_statuses,_i);
 		_counter._counter_index = _i;
-		_counter.x = (x-50)+(32*_i);
-		_counter.y = (y-121);
+		_counter.x = (x-40)+(32*_i);
+		_counter.y = (y-101);
 	}
 	
 	///////////////////////////////////////////
@@ -164,14 +157,14 @@ if (_flag_has_died == false){
 	draw_set_font(fnt_fanwood_mini);
 	//BONUS ATTACK
 	if (_creature_attack_scalar != 1 || _creature_attack_linear != 0){
-		draw_sprite(spr_dmg_buff,0,x-40,y-60); // Display the dmg boost arrow
-		draw_text(x-30, y-60, "x"+string(_creature_attack_scalar)); //dmg bonus scalar
-		draw_text(x-10, y-60, "+"+string(_creature_attack_linear)); //dmg bonus linear
+		draw_sprite(spr_dmg_buff,0,x-40,y-40); // Display the dmg boost arrow
+		draw_text(x-30, y-40, "x"+string(_creature_attack_scalar)); //dmg bonus scalar
+		draw_text(x-10, y-40, "+"+string(_creature_attack_linear)); //dmg bonus linear
 	}
 	//BONUS DAMAGE TAKEN
 	if (_creature_vulnerability_scalar_stacks != 0 || _creature_vulnerability_linear_stacks != 0){	
-		draw_sprite(spr_dmg_vulnerable,0,x+10,y-60); // Display the dmg taken arrow
-		draw_text(x+20, y-60, "+"+string(50*_creature_vulnerability_scalar_stacks)+"%"); //dmg taken scalar
-		draw_text(x+40, y-60, "+"+string(_creature_vulnerability_linear_stacks)); //dmg taken linear	
+		draw_sprite(spr_dmg_vulnerable,0,x+10,y-40); // Display the dmg taken arrow
+		draw_text(x+20, y-40, "+"+string(50*_creature_vulnerability_scalar_stacks)+"%"); //dmg taken scalar
+		draw_text(x+40, y-40, "+"+string(_creature_vulnerability_linear_stacks)); //dmg taken linear	
 	}
 }

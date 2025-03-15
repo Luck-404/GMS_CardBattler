@@ -7,9 +7,9 @@ function scr_card_sprigs_of_ygg(_card,_channel,_target){
 	/////////////
 	// COUNTER //
 	/////////////
-	var _counter = scr_get_status_counter("Global Utility", "Standalone", _card._card_name, undefined);		
+	var _counter = scr_get_status_counter("Targetless", "Standalone", _card._card_name, undefined);		
 	if (_counter == undefined){		
-		scr_create_status_counter("Global Utility","Sprigs of Ygg","Spawn spriggans in every open slot, increase stacks on existing spriggans",_card,"Begin",scr_card_sprigs_of_ygg_tick, true, undefined, 5, 0, "1 trigger per turn", 0, "Standalone", global.encounter_statuses, spr_status_general_icon);
+		scr_create_status_counter("Targetless","Sprigs of Ygg","Spawn spriggans in every open slot, increase stacks on existing spriggans",_card,"Begin",scr_card_sprigs_of_ygg_tick, true, undefined, 5, 0, "1 trigger per turn", 0, "Standalone", global.encounter_statuses, spr_status_general_icon);
 	} 
 	else {
 		_counter._counter_life = 5;
@@ -25,7 +25,7 @@ function scr_card_sprigs_of_ygg(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-		//TODO
+		audio_play_sound(snd_effect_grow_plant,0,false);	
 	
 	
 	

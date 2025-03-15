@@ -19,3 +19,5 @@ _counter_charges = 1; //how many times can this counter trigger before blowing u
 _counter_list = undefined; //am I a reg counter or part of the global utilities list?
 _counter_sprite = undefined;
 _counter_index = 0;
+
+_counter_delete_flag = false;

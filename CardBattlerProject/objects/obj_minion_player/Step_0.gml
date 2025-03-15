@@ -15,7 +15,7 @@ if (_execute == true && instance_exists(obj_timer) == false){
 		//show_debug_message("cursor x: " + string(_cursor_x) + " cursor y: " + string(_cursor_y));
 		
 		//execute minion's script
-		_minion._counter_trigger_effect = true;
+		_minion._minion_trigger_effect = true;
 		
 
 

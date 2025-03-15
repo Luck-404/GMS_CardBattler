@@ -4,7 +4,7 @@
 // > DRAWS X CARDS FROM THE PLAYER DECK TO THE PLAYER'S HAND		//
 //////////////////////////////////////////////////////////////////////
 function scr_draw_cards(_amount) {
-    audio_play_sound(snd_shuffle, 0, false);
+    audio_play_sound(snd_card_shuffle, 0, false);
     
     // Base position and spacing for cards
     var _base_x = 790;

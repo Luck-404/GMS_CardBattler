@@ -21,7 +21,7 @@ function scr_heal_creature(_target,_heal_linear,_heal_percent){
 	// HEAL PERCENT //
 	//////////////////
 	else {
-		_p = ceil((_host._creature_hp_max)*_heal_percent); //get 5% of max hp
+		_p = ceil((_target._creature_hp_max)*_heal_percent); //get 5% of max hp
 
 		_target._creature_hp_current += _p; //add the hp
 	

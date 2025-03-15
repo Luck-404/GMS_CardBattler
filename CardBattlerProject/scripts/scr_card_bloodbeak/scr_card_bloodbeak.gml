@@ -18,7 +18,7 @@ function scr_card_bloodbeak(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-		//TODO
+		audio_play_sound(snd_effect_cast_bloodbeak,0,false);
 	
 	
 	

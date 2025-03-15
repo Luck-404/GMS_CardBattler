@@ -7,9 +7,9 @@ function scr_card_grow_manavine(_card,_channel,_target){
 	////////////////
 	// BONUS MANA //
 	////////////////
-	var _counter = scr_get_status_counter("Global Utility", "Standalone", _card._card_name, undefined);		
+	var _counter = scr_get_status_counter("Targetless", "Standalone", _card._card_name, undefined);		
 	if (_counter == undefined){		
-		scr_create_status_counter("Global Utility","Manavine","Gain 2 bonus mana per turn, lasts 3 turns",_card,"End",scr_card_grow_manavine_tick, true, undefined, 3, 0, "2 bonus mana", 0, "Standalone", global.encounter_statuses, spr_status_mana_bonus);
+		scr_create_status_counter("Targetless","Manavine","Gain 2 bonus mana per turn, lasts 3 turns",_card,"End",scr_card_grow_manavine_tick, true, undefined, 3, 0, "2 bonus mana", 0, "Standalone", global.encounter_statuses, spr_status_mana_bonus);
 		scr_create_combat_popup(undefined,"+2 Bonus Mana","Default",room_width/2,room_height/2);
 		scr_create_combat_popup(undefined,"","Mana",room_width/2,room_height/2);			
 		//decrement bonus mana
@@ -30,7 +30,7 @@ function scr_card_grow_manavine(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_grow_manavine,0,false);		
+	audio_play_sound(snd_effect_manvine,0,false);		
 	
 	
 	

@@ -10,10 +10,10 @@
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.83576,
+  "duration": 1.15907,
   "parent": {
-    "name": "Card Effects",
-    "path": "folders/Sounds/Card Effects.yy",
+    "name": "Parts",
+    "path": "folders/Sounds/Card Effects/Parts.yy",
   },
   "preload": false,
   "sampleRate": 44100,

@@ -7,7 +7,7 @@ function scr_card_fell(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
-	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,_card._card_ref[?"damage"]);
+	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,_card._card_ref[?"damage"],0);
 
 	////////////
 	// DAMAGE //

@@ -20,6 +20,12 @@ function scr_create_status_counter(_target, _name, _desc, _card, _trigger_period
 	_ref_counter._counter_magnitude = _magnitude; //explaination of dmg
 	_ref_counter._counter_charges = _charges; //how many times can this counter trigger before blowing up?
 	_ref_counter._counter_list = _list; //am I a reg counter or part of the global utilities list?
+	if (_target != "Targetless"){
+		_ref_counter._counter_team = _target._creature_team; //am I a reg counter or part of the global utilities list?
+	}else {
+		_ref_counter._counter_team = "Player"; //am I a reg counter or part of the global utilities list?
+	}
+		
 
 	_ref_counter._counter_sprite = _sprite;
 	_ref_counter.sprite_index = _sprite; //sprite to draw as

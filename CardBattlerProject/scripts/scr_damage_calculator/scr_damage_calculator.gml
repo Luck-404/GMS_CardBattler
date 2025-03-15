@@ -3,12 +3,17 @@
 //																	//
 // > CALCULATE DAMAGE FROM PLAYING A CARD							//	
 //////////////////////////////////////////////////////////////////////
-function scr_damage_calculator(_card,_channel,_target,_percent){
+function scr_damage_calculator(_card,_channel,_target,_percent,_damage){
 	var _base_dmg = 0;
 	if (_percent != 0){
 		_base_dmg = ceil((_percent/100)*_target._creature_hp_max);
 	} else {
-		_base_dmg = _card._card_ref[?"damage"]; //base damage from card
+		if (_damage == 0){
+			_base_dmg = _card._card_ref[?"damage"]; //base damage from card
+		}
+		else{
+			_base_dmg = _damage;	
+		}
 	}
 	
 	/////////////////

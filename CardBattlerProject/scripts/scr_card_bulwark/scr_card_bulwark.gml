@@ -8,7 +8,7 @@ function scr_card_bulwark(_card,_channel,_target){
 	// DEFENSE //
 	/////////////
 	_target._creature_def += 20;
-	scr_create_combat_popup(_target,"20","Shields",0,0);
+	scr_create_combat_popup(_target,"+20","Shields",0,0);
 	scr_trigger_minion_reactions(_card,_target,_channel,0);	
 	
 	////////////
@@ -19,7 +19,7 @@ function scr_card_bulwark(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_bulwark,0,false);
+	audio_play_sound(snd_effect_big_shield,0,false);
 	
 	
 	

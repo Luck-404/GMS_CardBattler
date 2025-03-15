@@ -19,5 +19,5 @@
   "sampleRate": 44100,
   "soundFile": "snd_creature_wraith_default.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 0.2,
 }

@@ -30,8 +30,8 @@ function scr_damage_minions(_minion, _dmg){
 	if (_dmg != 0){ //if there is dmg left
 		var _damage_done = _minion._minion_hp_cur - _dmg;	 //calc the damage done
 		if (_damage_done <= 0){ //if below or equal to 0, get the damage diff and have that be the damage left
-			scr_create_combat_popup(_minion,string(_dmg),"Damage",0,0);			
 			_dmg = abs(_minion._minion_hp_cur - _dmg);
+			scr_create_combat_popup(_minion,string(_dmg),"Damage",0,0);		
 			_minion._minion_hp_cur = 0;
 		}
 		else if (_damage_done > 0){ //if theres hp left, update shield and no damage left to do

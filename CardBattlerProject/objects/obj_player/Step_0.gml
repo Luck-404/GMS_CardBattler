@@ -781,10 +781,10 @@ if (room == rm_encounter){
 		case PLAYER_ENCOUNTER_STATE.EXIT_ENC: //cleanup on exit from encounter	
 			scr_reset_playstate();
 			
-			while(ds_list_size(global.encounter_utility_active) != 0){
-				var _counter = ds_list_find_value(global.encounter_utility_active, 0);	
+			while(ds_list_size(global.encounter_statuses) != 0){
+				var _counter = ds_list_find_value(global.encounter_statuses, 0);	
 				instance_destroy(_counter);
-				ds_list_delete(global.encounter_utility_active,0);				
+				ds_list_delete(global.encounter_statuses,0);				
 			}
 
 			//Update any allies health and Put any dead allies into graveyard

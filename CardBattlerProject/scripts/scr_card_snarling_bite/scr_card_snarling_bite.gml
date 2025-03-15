@@ -13,7 +13,7 @@ function scr_card_snarling_bite(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
-	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
+	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 	////////////
 	// DAMAGE //
@@ -25,14 +25,15 @@ function scr_card_snarling_bite(_card,_channel,_target){
 	// VULNERABLE //
 	////////////////
 	if(_tar_hp != _target._creature_hp_current){
+		audio_play_sound(snd_effect_debuff,0,false);	
 		var _counter = scr_get_status_counter(_target, "General", undefined, "Vulnerablility Scalar");		
 		if (_counter == undefined){		
 			scr_create_status_counter(_target,"Vulnerablility Scalar","Increase damage taken by this unit by 50% per stack.",_card,"End",scr_status_vulnerable_scalar_tick, true, undefined, 1, 1, "+50% damage taken per stack", 0, "General", _target._creature_statuses, spr_status_vulnerability_up_scalar);
-			scr_create_combat_popup(_target,"x2 Damage Scalar","Default",0,0);	
 			_target._creature_vulnerability_scalar_stacks+=1;
 			scr_create_combat_popup(_target,"Vulnerable applied","Default",0,0);			
 		} 
 		else {
+			scr_create_combat_popup(_target,"+50% vulnerable","Default",0,0);			
 			_counter._counter_life = 1;
 			_counter._counter_stacks +=1;
 			_target._creature_vulnerability_scalar_stacks+=1;
@@ -43,12 +44,12 @@ function scr_card_snarling_bite(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_strike,0,0);
+	scr_create_combat_effect(_target,spr_effect_hit,0,0);
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_strike,0,false);	
+	audio_play_sound(snd_effect_snarling_bite,0,false);	
 	
 	
 	

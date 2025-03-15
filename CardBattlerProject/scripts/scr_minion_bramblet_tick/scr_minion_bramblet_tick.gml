@@ -13,8 +13,8 @@ function scr_minion_bramblet_tick(_host,_self){
 	//////////////////
 	// COMBAT POPUP //
 	//////////////////
-	scr_create_combat_popup(_host,"5","Shields",0,0);
-	scr_create_combat_popup(_self,"2","Shields",0,0);	
+	scr_create_combat_popup(_host,"+5","Shields",0,0);
+	scr_create_combat_popup(_self,"+2","Shields",0,0);	
 
 	////////////
 	// EFFECT //
@@ -24,7 +24,7 @@ function scr_minion_bramblet_tick(_host,_self){
 	///////////
 	// SOUND //
 	///////////
-		//TODO
+		audio_play_sound(snd_effect_shield,0,false);
 		
 		
 		

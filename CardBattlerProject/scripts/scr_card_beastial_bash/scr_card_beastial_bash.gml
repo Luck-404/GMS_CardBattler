@@ -12,7 +12,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 		////////////
 		// DAMAGE //
@@ -23,7 +23,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_left_target,spr_effect_strike,0,0);
+		scr_create_combat_effect(_left_target,spr_effect_hit,0,0);
 
 		///////////
 		// DEBUG //
@@ -39,7 +39,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 		////////////
 		// DAMAGE //
@@ -50,7 +50,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_right_target,spr_effect_strike,0,0);
+		scr_create_combat_effect(_right_target,spr_effect_hit,0,0);
 
 		///////////
 		// DEBUG //
@@ -65,7 +65,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 		////////////
 		// DAMAGE //
@@ -78,6 +78,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		//////////
 		var _counter = scr_get_status_counter(_target,"General",undefined,"Stun");		
 		if (_counter == undefined){		
+			audio_play_sound(snd_effect_stun,0,false);
 			scr_create_status_counter(_target,"Stun","Target is stunned for 1 turn",_card,"End",scr_status_stun_tick, true, undefined, 1, 0, "Stun for 1 turn", 0, "General", _target._creature_statuses, spr_status_stun);
 			scr_create_combat_popup(_target,"Stunned","Default",0,0);
 			_target._status_stunned = true;			
@@ -89,7 +90,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_target,spr_effect_beastial_bash,0,0);
+		scr_create_combat_effect(_target,spr_effect_beastial_bash,0,0,0);
 
 		///////////
 		// SOUND //

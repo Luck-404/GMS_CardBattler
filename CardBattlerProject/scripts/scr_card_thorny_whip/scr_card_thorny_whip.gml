@@ -7,7 +7,7 @@ function scr_card_thorny_whip(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
-	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0);
+	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 	////////////
 	// DAMAGE //

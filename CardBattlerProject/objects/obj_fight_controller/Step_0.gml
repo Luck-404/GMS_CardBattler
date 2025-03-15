@@ -171,6 +171,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
 				}
@@ -202,6 +203,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
 				}
@@ -233,6 +235,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
 				}
@@ -264,6 +267,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
 				}
@@ -295,6 +299,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
 				}

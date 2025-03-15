@@ -23,7 +23,7 @@ function scr_card_stampede(_card,_channel,_target){
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _calculated_dmg = scr_damage_calculator(_card,_channel,_unit,_card._card_ref[?"damage"]);
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_unit,_card._card_ref[?"damage"],0);
 
 		////////////
 		// DAMAGE //
@@ -34,8 +34,13 @@ function scr_card_stampede(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_unit,spr_effect_strike,0,0);
+		scr_create_combat_effect(_unit,spr_effect_hit,0,0);
 	}
+		
+	////////////
+	// EFFECT //
+	////////////
+		scr_create_combat_effect(undefined,spr_effect_stampede,(room_width/2)+250,room_height/2);		
 		
 	///////////
 	// SOUND //

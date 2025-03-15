@@ -21,5 +21,6 @@ function scr_card_inspiration_tick(_counter,_target,_repeat){		//STACKLESS		//DE
 		global.bonus_mana--;
 		global.cur_mana--;
 		scr_create_combat_popup(undefined,"Inspiration wore off","Default",room_width/2,room_height/2);
+		_counter._counter_delete_flag = true;		
 	}	
 }

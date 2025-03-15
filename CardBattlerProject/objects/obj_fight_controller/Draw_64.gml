@@ -22,6 +22,6 @@ if (global.fight_controller_state == FIGHT_CONTROLLER_STATE.PLAYER_TURN){
 for (var _i = 0; _i < ds_list_size(global.encounter_statuses); _i++){
 	var _counter = ds_list_find_value(global.encounter_statuses,_i);
 	_counter._counter_index = _i;	
-	_counter.x = (16*_i)+5;
-	_counter.y = 21;
+	_counter.x = (32*_i)+16;
+	_counter.y = 66;
 }

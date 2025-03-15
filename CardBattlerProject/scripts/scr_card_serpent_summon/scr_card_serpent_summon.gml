@@ -35,7 +35,7 @@ function scr_card_serpent_summon(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_potent_fruit,0,false);	
+	audio_play_sound(snd_effect_cast_serpent,0,false);	
 	
 	////////////
 	// EFFECT //

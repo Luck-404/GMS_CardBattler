@@ -8,6 +8,7 @@ function scr_minion_spriggan_tick(_host,_self){
 	// HEAL HOST //
 	///////////////
 	scr_heal_creature(_host,2*_self._minion_stacks,0);
+	audio_play_sound(snd_effect_heal,0,false);	
 
 	//////////////////////////////////
 	// DEAL DAMAGE TO A RANDOM UNIT //
@@ -26,7 +27,10 @@ function scr_minion_spriggan_tick(_host,_self){
 		////////////
 		// DAMAGE //
 		////////////
-		scr_damage_creature(_ref_tar,(2*_self._minion_stacks));
+		if(_ref_tar != undefined){
+			scr_damage_creature(_ref_tar,(2*_self._minion_stacks));
+			audio_play_sound(snd_effect_hit,0,false);	
+		}
 	#endregion
 
 	////////////

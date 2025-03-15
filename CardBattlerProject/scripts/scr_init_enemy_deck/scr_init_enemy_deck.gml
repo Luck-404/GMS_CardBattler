@@ -4,7 +4,7 @@
 // > GIVE UP TO 5 CARDS TO EACH CREATURE							//
 //////////////////////////////////////////////////////////////////////
 function scr_init_enemy_deck(_creature,_ref_creature_name){
-var _card_2 = scr_load_card("Block");
+var _card_2 = scr_load_card("Strike");
 ds_list_add(_creature._deck, _card_2);
 
 //switch(_ref_creature_name){

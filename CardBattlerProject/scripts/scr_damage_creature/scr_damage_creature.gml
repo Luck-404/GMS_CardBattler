@@ -53,16 +53,7 @@ function scr_damage_creature(_target,_damage_input){
         ////////////////////
 		#region DAMAGE SHIELDS
         if (_target._creature_def > 0) { // If there is a shield
-            var _new_shield = _target._creature_def - _damage_input;
-            if (_new_shield <= 0) { // Shield breaks
-				scr_create_combat_popup(_target,string(_target._creature_def),"Shields",0,0);
-                _damage_input = abs(_new_shield); // Carry over remaining damage
-                _target._creature_def = 0;
-            } else { // Shield absorbs all damage
-                _target._creature_def = _new_shield;
-				scr_create_combat_popup(_target,string(_damage_input),"Shields",0,0);
-                _damage_input = 0;
-            }
+			_damage_input = scr_damage_shields(_target,_damage_input);
         }
 		#endregion
 

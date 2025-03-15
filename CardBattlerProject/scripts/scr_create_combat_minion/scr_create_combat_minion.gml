@@ -26,7 +26,7 @@ function scr_create_combat_minion(_card,_channel,_target,_minion_type){
 		break;		
 		
 		case "Spriggan":
-			_new_minion = scr_create_minion(1,0,"Green","Spriggan",_target._creature_team,["Minion Step","None","None"],spr_minion_spriggan,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default,_target,scr_minion_spriggan_tick,0,"Support");
+			_new_minion = scr_create_minion(1,0,"Green","Spriggan",_target._creature_team,["Minion Step","None","None"],spr_minion_spriggan,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default,_target,scr_minion_spriggan_tick,1,"Support");
 		break;				
 	}
 

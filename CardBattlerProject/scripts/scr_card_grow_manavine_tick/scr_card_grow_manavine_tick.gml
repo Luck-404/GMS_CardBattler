@@ -21,5 +21,6 @@ function scr_card_grow_manavine_tick(_counter,_target,_repeat){
 		global.bonus_mana-=2;
 		global.cur_mana-=2;
 		scr_create_combat_popup(undefined,"Manavine wore off","Default",room_width/2,room_height/2);
+		_counter._counter_delete_flag = true;		
 	}	
 }

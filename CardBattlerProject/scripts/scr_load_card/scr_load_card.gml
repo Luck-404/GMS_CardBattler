@@ -37,7 +37,20 @@ function scr_load_card(_cardname){
 		
 		case "Snarling Bite":
 			_loadedcard = scr_create_card("Snarling Bite", "Deal 4 Melee damage and apply vulnerable if health is hit.", 2, scr_card_snarling_bite, spr_card_snarling_bite, "Green", "Attack", 4, "Technical", "Hunter", "Uncommon", false, "Melee", 1);
-		break;		
+		break;	
+		
+		case "Ursine Wrath":
+			_loadedcard = scr_create_card("Ursine Wrath", "Deal 5 melee damage to a target 3 times. Attack gains +1 dmg per hit per 5 shield channeler has.", 1, scr_card_ursine_wrath, spr_card_ursine_wrath, "Green", "Attack", 15, "Martial", "Adventurer", "Uncommon", false, "Melee", 1);
+		break;	
+		
+			case "Ursine Wrath Hit":
+				_loadedcard = scr_create_card("Ursine Wrath Hit", "Deal 5 melee damage to a target 3 times. Attack gains +1 dmg per hit per 5 shield channeler has.", 0, scr_card_ursine_wrath_hit, spr_card_invis, "Green", "Attack", 5, "Martial", "Adventurer", "Uncommon", false, "Melee", 1);
+			break;			
+		
+		//case "Ursine Wrath":
+		//	_loadedcard = scr_create_card("Ursine Wrath", "Deal 5 melee damage to a target 3 times. Attack gains +1 dmg per hit per 5 shield channeler has.", 1, scr_card_ursine_wrath, spr_card_ursine_wrath, "Green", "Attack", 15, "Martial", "Adventurer", "Uncommon", false, "Melee", 1);
+		//break;		
+		
 		
 		/////////////
 		// DEFENSE //

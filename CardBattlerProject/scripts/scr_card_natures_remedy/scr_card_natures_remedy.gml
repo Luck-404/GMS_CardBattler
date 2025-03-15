@@ -18,7 +18,7 @@ function scr_card_natures_remedy(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_natures_remedy,0,false);	
+	audio_play_sound(snd_effect_big_heal,0,false);	
 	
 	
 	

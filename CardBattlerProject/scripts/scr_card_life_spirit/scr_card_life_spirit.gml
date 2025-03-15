@@ -18,7 +18,7 @@ function scr_card_life_spirit(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-		//TODO
+		audio_play_sound(snd_effect_cast_life_spirit,0,false);
 	
 	
 	

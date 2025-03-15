@@ -86,7 +86,7 @@ function scr_card_poison_ivy(_card,_channel,_target){
 		} 
 		else {
 			_counter._counter_life = 3;
-			_counter._counter_stacks+= 1;
+			_counter._counter_stacks += 1;
 		}
 
 		scr_trigger_minion_reactions(_card,_target,_channel,0);	

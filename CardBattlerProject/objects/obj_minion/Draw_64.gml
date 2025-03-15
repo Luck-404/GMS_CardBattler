@@ -35,7 +35,7 @@ if ((_minion_unit_attached != undefined && _minion_unit_attached._creature_hp_cu
 // HANDLE SCRIPT EXECUTION //
 /////////////////////////////
 if (_minion_cast_types[0] == "Minion Step"){
-	if (_minion_effect_script != undefined && _minion_trigger_effect == true && _minion_unit_attached._creature_hp_current > 0){
+	if (_minion_effect_script != undefined && _minion_trigger_effect == true){
 		_minion_effect_script(_minion_unit_attached,self);
 		_minion_trigger_effect = false;
 	}
@@ -76,7 +76,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				///////////
 				// SOUND //
 				///////////
-					//TODO
+					audio_play_sound(snd_effect_hit,0,false);
 			}
 			
 		//////////////
@@ -92,13 +92,14 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				///////////
 				var _counter = scr_get_status_counter(_latest_channel,"General",undefined,"Venom");		
 				if (_counter == undefined){		
-					scr_create_status_counter(_latest_channel,"Venom","Target is envenomed for 3 turns, each venom stack deals damage and reduces damage done",undefined,"End",scr_status_venom_tick, false, undefined, 3, 1, "3 * (stacks)", 0, "General", _latest_channel._creature_statuses, spr_status_venom);
+					scr_create_status_counter(_latest_channel,"Venom","Target is envenomed for 3 turns, each venom stack deals damage and reduces damage done","Reaction","End",scr_status_venom_tick, false, undefined, 3, 1, "3 * (stacks)", 0, "General", _latest_channel._creature_statuses, spr_status_venom);
 
 					_latest_channel._status_venom = true;
 					//apply debuff stacks from venom
 					_latest_channel._creature_attack_linear--;					
 				} 
 				else {
+					show_debug_message("ADDING A STACK OF VENOM");
 					_counter._counter_life = 3;
 					_counter._counter_stacks +=1;
 					_latest_channel._creature_attack_linear--;
@@ -112,7 +113,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				///////////
 				// SOUND //
 				///////////
-					//TODO
+					audio_play_sound(snd_effect_reaction_serpent,0,false);	
 			}
 		}
 	}
@@ -149,7 +150,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 					///////////
 					// SOUND //
 					///////////
-						//TODO					
+						audio_play_sound(snd_effect_trigger_bloodbeak,0,false);				
 				}
 				
 		//////////////
@@ -170,7 +171,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 					///////////
 					// SOUND //
 					///////////
-						//TODO		
+						audio_play_sound(snd_effect_leech,0,false);	
 			}			
 		}
 	}
@@ -188,19 +189,25 @@ if (_latest_target != undefined && _latest_channel != undefined){
 // HOVER INTERACTIONS //
 ////////////////////////
 if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) && (global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CHANNEL || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_TARGET || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CARD)){
-	//draws info box
-	draw_set_color(c_grey);
-	draw_rectangle(mouse_x+10,mouse_y,mouse_x+155, mouse_y+75,false);
-	
+	///////////////////
+	// HOVER TOOLTIP //
+	///////////////////
 	//draw info
 	draw_set_font(fnt_fanwood_sm);
-	draw_set_color(c_white);
+	draw_set_color(c_black);
+	var _tooltip_x = 1420;
+	var _tooltip_y = 838;
+	var _output_str = "";
 	
-	draw_text(mouse_x+15, mouse_y+5, _minion_name + " " + string(_minion_hp_cur) + "/" + string(_minion_hp_max));
-	draw_text(mouse_x+15, mouse_y+20, "Defense: " + string(_minion_def));	
-	draw_text(mouse_x+15, mouse_y+35, "Attached Unit: " + _minion_unit_attached._creature_name);	
-	draw_text(mouse_x+15, mouse_y+50, "Team: " + _minion_team);		
+	_output_str += _minion_name + "\n";
+	_output_str += string(_minion_hp_cur) + "/" + string(_minion_hp_max) + "\n";
+	_output_str += "Defense: " + string(_minion_def) + "\n";
+	_output_str += "Attached Unit: " + _minion_unit_attached._creature_name;	
+	_output_str += "Color: " + _minion_color + "\n";
+	_output_str += "Class: " + _minion_class + "\n";
 	
+	//draw final tooltip;
+	draw_text_ext(_tooltip_x,_tooltip_y,_output_str,15,150);	
 } 
 
 /////////////////////

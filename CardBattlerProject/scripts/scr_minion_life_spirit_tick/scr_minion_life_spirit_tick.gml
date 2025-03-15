@@ -18,8 +18,7 @@ function scr_minion_life_spirit_tick(_host,_self){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_natures_remedy,0,false);	
-	//TODO
+	audio_play_sound(snd_effect_heal,0,false);
 		
 		
 		

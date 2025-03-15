@@ -9,7 +9,7 @@ function scr_get_status_counter(_target, _type, _card_name, _status_name){
 	// LIST TO LOOK THROUGH //
 	//////////////////////////
 	var _list = undefined;
-	if (_target == "Global Utility"){
+	if (_target == "Targetless"){
 		_list = global.encounter_statuses;
 	} else {
 		_list = _target._creature_statuses;

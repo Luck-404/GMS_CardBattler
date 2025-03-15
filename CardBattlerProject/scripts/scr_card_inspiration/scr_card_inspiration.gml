@@ -7,9 +7,9 @@ function scr_card_inspiration(_card,_channel,_target){
 	////////////////
 	// BONUS MANA //
 	////////////////
-	var _counter = scr_get_status_counter("Global Utility", "Standalone", _card._card_name, undefined);		
+	var _counter = scr_get_status_counter("Targetless", "Standalone", _card._card_name, undefined);		
 	if (_counter == undefined){		
-		scr_create_status_counter("Global Utility","Inspiration","Gain a bonus mana per turn, lasts 3 turns",_card,"End",scr_card_inspiration_tick, true, undefined, 3, 0, "1 bonus mana", 0, "Standalone", global.encounter_statuses, spr_status_mana_bonus);
+		scr_create_status_counter("Targetless","Inspiration","Gain a bonus mana per turn, lasts 3 turns",_card,"End",scr_card_inspiration_tick, true, undefined, 3, 0, "1 bonus mana", 0, "Standalone", global.encounter_statuses, spr_status_mana_bonus);
 		scr_create_combat_popup(undefined,"+1 Bonus Mana","Default",room_width/2,room_height/2);
 		scr_create_combat_popup(undefined,"","Mana",room_width/2,room_height/2);			
 		//decrement bonus mana
@@ -30,7 +30,7 @@ function scr_card_inspiration(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_inspiration,0,false);		
+	audio_play_sound(snd_effect_bonus_mana,0,false);		
 	
 	
 	

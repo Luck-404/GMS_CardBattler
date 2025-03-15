@@ -18,7 +18,7 @@ function scr_card_bramblet(_card,_channel,_target){
 	///////////
 	// SOUND //
 	///////////
-		//TODO
+		audio_play_sound(snd_effect_cast_bramblet,0,false);
 		
 		
 		
