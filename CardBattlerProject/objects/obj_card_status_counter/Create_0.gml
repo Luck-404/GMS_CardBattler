@@ -21,3 +21,8 @@ _counter_sprite = undefined;
 _counter_index = 0;
 
 _counter_delete_flag = false;
+
+_latest_channel = undefined;
+_latest_card = undefined;
+_latest_target = undefined;
+_latest_damage = 0;

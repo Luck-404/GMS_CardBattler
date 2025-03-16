@@ -17,12 +17,12 @@ function scr_card_potent_fruit(_card,_channel,_target){
 		_counter._counter_life = 3;
 	}	
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
 	
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_potent_fruit,0,0);
+	scr_create_combat_effect(_target,spr_effect_powerup,0,0,_card._card_animation_time,c_maroon,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

@@ -18,12 +18,12 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		// DAMAGE //
 		////////////
 		scr_damage_creature(_left_target, _calculated_dmg);
-		scr_trigger_minion_reactions(_card,_left_target,_channel,_calculated_dmg);
+		scr_trigger_global_reactions(_card,_left_target,_channel,_calculated_dmg);
 		
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_left_target,spr_effect_hit,0,0);
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 
 		///////////
 		// DEBUG //
@@ -45,12 +45,12 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		// DAMAGE //
 		////////////
 		scr_damage_creature(_right_target, _calculated_dmg);
-		scr_trigger_minion_reactions(_card,_right_target,_channel,_calculated_dmg);
+		scr_trigger_global_reactions(_card,_right_target,_channel,_calculated_dmg);
 		
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_right_target,spr_effect_hit,0,0);
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 
 		///////////
 		// DEBUG //
@@ -71,7 +71,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		// DAMAGE //
 		////////////
 		scr_damage_creature(_target, _calculated_dmg);
-		scr_trigger_minion_reactions(_card,_target,_channel,_calculated_dmg);
+		scr_trigger_global_reactions(_card,_target,_channel,_calculated_dmg);
 		
 		//////////
 		// STUN //
@@ -90,7 +90,8 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_target,spr_effect_beastial_bash,0,0,0);
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_target,spr_effect_powerdown,0,0,11,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 
 		///////////
 		// SOUND //

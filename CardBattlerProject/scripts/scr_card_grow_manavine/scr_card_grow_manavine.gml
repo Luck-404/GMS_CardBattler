@@ -20,17 +20,19 @@ function scr_card_grow_manavine(_card,_channel,_target){
 		_counter._counter_life = 3;
 	}
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
 	
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(undefined,spr_effect_grow_manavine,room_width/2,room_height/2);
+	scr_create_combat_effect(undefined,spr_effect_bonus_mana_shimmer,0,779,13,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(undefined,spr_effect_manavine,room_width/2,room_height/2,48,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_manvine,0,false);		
+	audio_play_sound(snd_effect_grow_plant,0,false);		
+	audio_play_sound(snd_effect_bonus_mana,0,false);		
 	
 	
 	

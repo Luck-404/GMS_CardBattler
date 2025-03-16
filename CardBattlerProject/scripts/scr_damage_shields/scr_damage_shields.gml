@@ -15,6 +15,7 @@ function scr_damage_shields(_target, _dmg){
             _dmg = abs(_new_shield); // Carry over remaining damage
             _target._creature_def = 0;
 			audio_play_sound(snd_effect_break_shield,0,false);			
+			scr_create_combat_effect(undefined,spr_def_break,_target.x+52,_target.y-90,7,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
         } else { // Shield absorbs all damage
             _target._creature_def = _new_shield;
 			scr_create_combat_popup(_target,"-"+string(_dmg),"Shields",0,0);

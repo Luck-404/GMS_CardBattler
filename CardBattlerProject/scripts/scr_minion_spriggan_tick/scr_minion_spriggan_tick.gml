@@ -8,12 +8,14 @@ function scr_minion_spriggan_tick(_host,_self){
 	// HEAL HOST //
 	///////////////
 	scr_heal_creature(_host,2*_self._minion_stacks,0);
+	scr_create_combat_effect(_host,spr_effect_heal,0,0,44,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 	audio_play_sound(snd_effect_heal,0,false);	
 
 	//////////////////////////////////
 	// DEAL DAMAGE TO A RANDOM UNIT //
 	//////////////////////////////////
 	#region DAMAGE
+
 		///////////////////
 		// SELECT TARGET //
 		///////////////////
@@ -22,6 +24,7 @@ function scr_minion_spriggan_tick(_host,_self){
 		if (ds_list_size(global.enemy_party_in_play) >0){
 			_ref_tar_num = irandom_range(1,ds_list_size(global.enemy_party_in_play));
 			_ref_tar = ds_list_find_value(global.enemy_party_in_play,_ref_tar_num-1);
+			scr_create_combat_effect(_ref_tar,spr_effect_hit,0,0,9,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 		}
 		
 		////////////

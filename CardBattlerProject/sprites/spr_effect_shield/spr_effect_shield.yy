@@ -34,13 +34,13 @@
   "height": 512,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"d270759f-85ec-41dd-9cbf-d56ced08bc5c","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"d270759f-85ec-41dd-9cbf-d56ced08bc5c","blendMode":0,"displayName":"default","isLocked":false,"opacity":30.0,"visible":true,},
   ],
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Card Effects",
-    "path": "folders/Sprites/Effects/Encounters/Card Effects.yy",
+    "path": "folders/Sprites/Effects/Card Effects.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
@@ -61,8 +61,8 @@
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
-    "playbackSpeed": 40.0,
-    "playbackSpeedType": 0,
+    "playbackSpeed": 1.0,
+    "playbackSpeedType": 1,
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,

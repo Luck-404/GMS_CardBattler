@@ -5,6 +5,7 @@
 //   RANDOMIZE THE DECK												//
 //////////////////////////////////////////////////////////////////////
 function scr_shuffle(){
+	audio_play_sound(snd_card_shuffle,0,false);
     // Reshuffle the discard back into your overall deck			
     if (global.player_discard_pile != undefined && ds_list_size(global.player_discard_pile) > 0) {	
 		while(ds_list_size(global.player_discard_pile) > 0){

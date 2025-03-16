@@ -5,9 +5,13 @@
 //////////////////////////////////////////////////////////////////////
 function scr_card_echo(_card,_channel,_target){
 	global.echo_count += 1;	
-	scr_create_combat_popup(undefined,"Echo count increased","Default",room_width/2,room_height/2);
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
 	
+	////////////
+	// EFFECT //
+	////////////
+	scr_create_combat_popup(undefined,"Echo count increased","Default",room_width/2,room_height/2);	
+	scr_create_combat_effect(undefined,spr_effect_echo,room_width/2,room_height/2,_card._card_animation_time,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

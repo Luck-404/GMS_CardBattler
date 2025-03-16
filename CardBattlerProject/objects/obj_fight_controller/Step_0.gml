@@ -171,6 +171,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					scr_create_combat_effect(_unit,spr_effect_stun_spinner,0,0,14,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
@@ -203,6 +204,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					scr_create_combat_effect(_unit,spr_effect_stun_spinner,0,0,14,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
@@ -235,6 +237,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					scr_create_combat_effect(_unit,spr_effect_stun_spinner,0,0,14,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
@@ -267,6 +270,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					scr_create_combat_effect(_unit,spr_effect_stun_spinner,0,0,14,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;
@@ -299,6 +303,7 @@ switch(global.fight_controller_state){
 				if (_unit._status_stunned != true){
 					scr_play_enemy_card(_unit,_unit._card_to_play);
 				} else {
+					scr_create_combat_effect(_unit,spr_effect_stun_spinner,0,0,14,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 					audio_play_sound(snd_effect_stun,0,false);
 					instance_destroy(_unit._card_to_play);
 					_unit._card_to_play = undefined;

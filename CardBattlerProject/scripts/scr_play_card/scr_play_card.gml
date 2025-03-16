@@ -6,10 +6,29 @@
 //   LOGIC.															//
 //////////////////////////////////////////////////////////////////////
 function scr_play_card(_card, _channel_creature, _target_creature) {	
+	audio_play_sound(snd_card_play,0,false);
 	var _card_ref = _card._card_ref;
 	var _card_script = _card_ref[?"script"];
 	
+	/////////////////////
+	// SHAKE CHANNELER //
+	/////////////////////
+	var _hopper = instance_create_layer(x, y, "GUI", obj_attack_hopper);
+	_hopper._target = _channel_creature;
+	_hopper._origin_y = _channel_creature.y; // Store original position
+	_hopper._shaking = true;
 
+		
+	/////////////////////////
+	// SHAKE TARGET ON ATK //
+	/////////////////////////
+	if (_card._card_type == "Attack" && _channel_creature != _target_creature){
+		var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+		_shaker._target = _target_creature; // Assign target
+		_shaker._origin_x = _target_creature.x; // Store original position
+		_shaker._shake_amount = 8; // Store original position
+		_shaker._shaking = true;
+	}
 
 	////////////////
 	// TARGETLESS //
@@ -97,6 +116,7 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 			scr_discard(_card);
 		}
 	}
+				
 		
 	/////////////////////////////////////////
 	// RESET PLAYER VARIABLES FOR NEW CAST //

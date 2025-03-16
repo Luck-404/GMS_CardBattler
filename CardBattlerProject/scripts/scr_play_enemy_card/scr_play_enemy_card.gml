@@ -10,7 +10,13 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 	var _card_ran = _playing_card._card_range;
 	var _ref_card_scr = _playing_card._card_ref[?"script"];
 	
-	
+	/////////////////////
+	// SHAKE CHANNELER //
+	/////////////////////
+	var _hopper = instance_create_layer(x, y, "GUI", obj_attack_hopper);
+	_hopper._target = _ref_unit;
+	_hopper._origin_y = _ref_unit.y; // Store original position
+	_hopper._shaking = true;
 	
 	switch (_playing_card._card_ref[?"type"]){
 		/////////////
@@ -20,6 +26,12 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 			if(_card_ran == "Melee"){ //pick front target
 				var _ref_tar = ds_list_find_value(global.player_party_in_play,0);
 				_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
+				
+				var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+				_shaker._target = _ref_tar; // Assign target
+				_shaker._origin_x = _ref_tar.x; // Store original position
+				_shaker._shake_amount = 8; // Store original position
+				_shaker._shaking = true;				
 			}
 			
 			else {
@@ -27,6 +39,12 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 			var _ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
 			var _ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
 			_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
+			
+				var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+				_shaker._target = _ref_tar; // Assign target
+				_shaker._origin_y = _ref_tar.x; // Store original position
+				_shaker._shake_amount = 8; // Store original position
+				_shaker._shaking = true;			
 			}
 		break;
 		

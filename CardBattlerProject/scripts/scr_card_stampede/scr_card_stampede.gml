@@ -29,18 +29,14 @@ function scr_card_stampede(_card,_channel,_target){
 		// DAMAGE //
 		////////////
 		scr_damage_creature(_unit, _calculated_dmg);
-		scr_trigger_minion_reactions(_card,_unit,_channel,_calculated_dmg);
-	
-		////////////
-		// EFFECT //
-		////////////
-		scr_create_combat_effect(_unit,spr_effect_hit,0,0);
+		scr_trigger_global_reactions(_card,_unit,_channel,_calculated_dmg);
 	}
 		
 	////////////
 	// EFFECT //
 	////////////
-		scr_create_combat_effect(undefined,spr_effect_stampede,(room_width/2)+250,room_height/2);		
+		scr_create_combat_effect(undefined,spr_effect_stampede,room_width/2,room_height/2,_card._card_animation_time,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(undefined,spr_effect_stampede_dust,room_width/2,room_height/2,_card._card_animation_time,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 		
 	///////////
 	// SOUND //

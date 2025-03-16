@@ -7,14 +7,17 @@ function scr_card_block(_card,_channel,_target){
 	/////////////
 	// DEFENSE //
 	/////////////
-	_target._creature_def += 8;
-	scr_create_combat_popup(_target,"+8","Shields",0,0);
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	var _ab_check = scr_check_armorbreak(_target);
+	if (_ab_check == false){	
+		_target._creature_def += 8;
+		scr_create_combat_popup(_target,"+8","Shields",0,0);
+	}
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
 	
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_block,0,0)	
+	scr_create_combat_effect(_target,spr_effect_shield,0,0,_card._card_animation_time,c_aqua,0.3,0.3,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 
 	///////////
 	// SOUND //

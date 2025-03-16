@@ -15,13 +15,8 @@ function scr_card_sprigs_of_ygg(_card,_channel,_target){
 		_counter._counter_life = 5;
 	}
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
-	
-	////////////
-	// EFFECT //
-	////////////
-		//TODO COOL EFFECT - sparkle into exsitence
-	
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
+
 	///////////
 	// SOUND //
 	///////////

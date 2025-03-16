@@ -13,20 +13,21 @@ function scr_card_thorny_whip(_card,_channel,_target){
 	// DAMAGE //
 	////////////
 	scr_damage_creature(_target, _calculated_dmg);
-	scr_trigger_minion_reactions(_card,_target,_channel,_calculated_dmg);
+	scr_trigger_global_reactions(_card,_target,_channel,_calculated_dmg);
 		
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_thorny_whip,0,0);
+	scr_create_combat_effect(_channel,spr_effect_thorny_whip,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_hit,0,0,9,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 
 	///////////
 	// SOUND //
 	///////////
 	audio_play_sound(snd_effect_thorny_whip,0,false);	
 	
-
-
+	
+	
 	////////////
 	// BANNER //
 	////////////

@@ -8,7 +8,7 @@ function scr_status_stun_tick(_counter,_target,_repeat){		//STACKLESS		//DEFAULT
 	// TRIGGER EFFECT //
 	////////////////////
 	if (_repeat == true){
-
+		
 	} 
 	
 	/////////////////

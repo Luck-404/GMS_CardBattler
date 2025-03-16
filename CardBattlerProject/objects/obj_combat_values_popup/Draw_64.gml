@@ -40,7 +40,7 @@ if (_life > 0){
 	}
 
 	draw_set_font(fnt_standout);
-	draw_text(x,y,_text);
+	draw_text(x - string_width(_text)/2,y,_text);
 }
 }
 else {		

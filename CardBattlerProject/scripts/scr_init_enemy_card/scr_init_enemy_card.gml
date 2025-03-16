@@ -16,7 +16,7 @@ function scr_init_enemy_card(_ref_card,_ref_unit){
 		_ref_card_instance._card_color = _ref_card[? "color"];
 		_ref_card_instance._card_type = _ref_card[? "type"];
 		_ref_card_instance._card_range = _ref_card[? "range"];
-		
+		_ref_card_instance._card_animation_time = _ref_card[? "time"];
 		_ref_card_instance._card_ref = _ref_card;		
 		_ref_card_instance._unit = _ref_unit;
 		

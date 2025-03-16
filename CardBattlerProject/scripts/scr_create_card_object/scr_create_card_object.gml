@@ -25,6 +25,7 @@ function scr_create_card_object(_list,_card_ref){
 	_new_card_object._card_range = _card_ref[? "range"];
 	_new_card_object._card_ref = _card_ref;
 	_new_card_object._card_target_count = _card_ref[? "targets"];
+	_new_card_object._card_animation_time = _card_ref[? "time"];
 			
 			
 	if(_card_ref[? "range"] == "Targetless"){

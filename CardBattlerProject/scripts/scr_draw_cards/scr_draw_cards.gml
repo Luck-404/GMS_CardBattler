@@ -4,7 +4,7 @@
 // > DRAWS X CARDS FROM THE PLAYER DECK TO THE PLAYER'S HAND		//
 //////////////////////////////////////////////////////////////////////
 function scr_draw_cards(_amount) {
-    audio_play_sound(snd_card_shuffle, 0, false);
+    
     
     // Base position and spacing for cards
     var _base_x = 790;
@@ -16,6 +16,7 @@ function scr_draw_cards(_amount) {
     
     // Draw new cards
     for (var _i = 0; _i < _amount; _i++) {
+		audio_play_sound(snd_card_draw, 0, false);
         // Check if there are cards left in the deck
         if (ds_list_size(global.player_encounter_deck) > 0) {
             // Randomly select a card from the deck

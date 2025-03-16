@@ -44,7 +44,7 @@
   "origin": 4,
   "parent": {
     "name": "Card Effects",
-    "path": "folders/Sprites/Effects/Encounters/Card Effects.yy",
+    "path": "folders/Sprites/Effects/Card Effects.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
@@ -65,8 +65,8 @@
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
-    "playbackSpeed": 30.0,
-    "playbackSpeedType": 0,
+    "playbackSpeed": 1.0,
+    "playbackSpeedType": 1,
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,

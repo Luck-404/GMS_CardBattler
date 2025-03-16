@@ -9,7 +9,7 @@ function scr_card_potent_fruit_tick(_counter,_target,_repeat){		//STACKLESS		//D
 	// TRIGGER EFFECT //
 	////////////////////
 	if (_repeat == true){
-		scr_create_combat_effect(_target,spr_effect_potent_fruit_repeat,0,0);
+		
 	}
 	
 	/////////////////

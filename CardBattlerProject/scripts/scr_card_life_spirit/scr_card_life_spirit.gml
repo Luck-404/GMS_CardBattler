@@ -7,18 +7,18 @@ function scr_card_life_spirit(_card,_channel,_target){
 	//////////////////
 	// SPAWN MINION //
 	//////////////////
-	scr_create_combat_minion(_card,_channel,_target,"Life Spirit");
-	scr_trigger_minion_reactions(_card,_target,_channel,0);
+	var _new_minion = scr_create_combat_minion(_card,_channel,_target,"Life Spirit");
+	scr_trigger_global_reactions(_card,_target,_channel,0);
 
 	////////////
 	// EFFECT //
 	////////////
-		//TODO COOL EFFECT - sparkle into exsitence
+	scr_create_combat_effect(undefined,spr_effect_minion_poof,_target.x,_target.y+110,18,c_white,0.8,0.8,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //
 	///////////
-		audio_play_sound(snd_effect_cast_life_spirit,0,false);
+	audio_play_sound(snd_effect_cast_life_spirit,0,false);
 	
 	
 	

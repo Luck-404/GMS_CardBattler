@@ -20,6 +20,9 @@ function scr_damage_creature(_target,_damage_input){
 	// HANDLE DAMAGE IN ORDER: MINIONS > SHIELDS > TARGET HP //
 	///////////////////////////////////////////////////////////
 	else {
+		//stop any sleeps
+		_target._status_sleeping = false;
+		
         //////////////////////////
         // DAMAGE MINIONS FIRST //
         //////////////////////////
@@ -61,7 +64,7 @@ function scr_damage_creature(_target,_damage_input){
         // DAMAGE HEALTH //
         ///////////////////
         _target._creature_hp_current -= _damage_input;
-		
+					
 		//////////////////
 		// COMBAT POPUP //
 		//////////////////

@@ -19,5 +19,5 @@
   "sampleRate": 44100,
   "soundFile": "snd_effect_snarling_bite.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 0.1,
 }

@@ -23,13 +23,13 @@ function scr_card_poison_ivy(_card,_channel,_target){
 			_counter._counter_stacks+= 1;
 		}
 
-		scr_trigger_minion_reactions(_card,_left_target,_channel,0);	
+		scr_trigger_global_reactions(_card,_left_target,_channel,0);	
 		
 		////////////
 		// EFFECT //
 		////////////		
 		scr_create_combat_popup(_left_target,"Poisoned","Poison",0,0);
-		scr_create_combat_effect(_left_target,spr_effect_poison_ivy,0,0);
+		scr_create_combat_effect(_left_target,spr_effect_dripping,0,0,_card._card_animation_time,c_lime,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 		
 		///////////
 		// DEBUG //
@@ -57,13 +57,13 @@ function scr_card_poison_ivy(_card,_channel,_target){
 			_counter._counter_stacks+= 1;
 		}
 
-		scr_trigger_minion_reactions(_card,_right_target,_channel,0);	
+		scr_trigger_global_reactions(_card,_right_target,_channel,0);	
 		
 		////////////
 		// EFFECT //
 		////////////		
 		scr_create_combat_popup(_right_target,"Poisoned","Poison",0,0);
-		scr_create_combat_effect(_right_target,spr_effect_poison_ivy,0,0);
+		scr_create_combat_effect(_right_target,spr_effect_dripping,0,0,_card._card_animation_time,c_lime,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 		
 		///////////
 		// DEBUG //
@@ -89,13 +89,13 @@ function scr_card_poison_ivy(_card,_channel,_target){
 			_counter._counter_stacks += 1;
 		}
 
-		scr_trigger_minion_reactions(_card,_target,_channel,0);	
+		scr_trigger_global_reactions(_card,_target,_channel,0);	
 		
 		////////////
 		// EFFECT //
 		////////////		
 		scr_create_combat_popup(_target,"Poisoned","Poison",0,0);
-		scr_create_combat_effect(_target,spr_effect_poison_ivy,0,0);
+		scr_create_combat_effect(_target,spr_effect_dripping,0,0,_card._card_animation_time,c_lime,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
 		
 		///////////
 		// DEBUG //
