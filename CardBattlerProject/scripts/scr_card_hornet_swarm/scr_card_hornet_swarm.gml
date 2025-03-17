@@ -22,7 +22,7 @@ function scr_card_hornet_swarm(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_powerdown,0,0,36,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_powerdown,0,0,36,c_orange,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
 	///////////
 	// SOUND //

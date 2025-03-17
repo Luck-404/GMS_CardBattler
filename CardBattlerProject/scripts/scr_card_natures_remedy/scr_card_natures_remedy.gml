@@ -13,7 +13,7 @@ function scr_card_natures_remedy(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_big_heal,0,0,_card._card_animation_time,c_white,0.3,0.3,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_big_heal,0,0,11,c_white,0.3,0.3,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

@@ -25,8 +25,8 @@ function scr_card_grow_manavine(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(undefined,spr_effect_bonus_mana_shimmer,0,779,13,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
-	scr_create_combat_effect(undefined,spr_effect_manavine,room_width/2,room_height/2,48,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(undefined,spr_effect_bonus_mana_shimmer,0,779,13,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(undefined,spr_effect_manavine,room_width/2,room_height/2,48,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

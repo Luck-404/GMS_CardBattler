@@ -22,8 +22,8 @@ function scr_card_rake(_card,_channel,_target){
 	// EFFECT //
 	////////////		
 	scr_create_combat_popup(_target,"Bleeding","Damage",0,0);
-	scr_create_combat_effect(_target,spr_effect_slice,0,0,5,c_red,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
-	scr_create_combat_effect(_target,spr_effect_dripping,0,0,_card._card_animation_time,c_red,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_slice,0,0,5,c_red,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_dripping,0,0,17,c_red,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 		
 	///////////
 	// SOUND //

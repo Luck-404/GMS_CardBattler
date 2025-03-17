@@ -18,8 +18,8 @@ function scr_card_thorny_whip(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_channel,spr_effect_thorny_whip,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
-	scr_create_combat_effect(_target,spr_effect_hit,0,0,9,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_channel,spr_effect_thorny_whip,0,0,18,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_hit,0,0,9,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
 	///////////
 	// SOUND //

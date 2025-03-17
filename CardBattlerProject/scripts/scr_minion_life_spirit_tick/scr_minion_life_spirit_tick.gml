@@ -12,7 +12,7 @@ function scr_minion_life_spirit_tick(_host,_self){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_host,spr_effect_heal,0,0,44,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_host,spr_effect_heal,0,0,44,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

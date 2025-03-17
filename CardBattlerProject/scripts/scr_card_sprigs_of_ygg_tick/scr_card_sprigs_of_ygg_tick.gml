@@ -8,8 +8,8 @@ function scr_card_sprigs_of_ygg_tick(_counter,_target,_repeat){
 	// TRIGGER EFFECT //
 	////////////////////
 	if (_repeat == true){
-		scr_create_combat_effect(undefined,spr_effect_ygg,room_width/2,room_height/2,120,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"BG_Effects");
-		scr_create_combat_effect(undefined,spr_effect_minion_poof,room_width/2,room_height/2,27,c_white,0.5,0.5,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(undefined,spr_effect_ygg,room_width/2,room_height/2,120,c_white,1,1,0,0,0,"Stationary",undefined,"BG_Effects");
+		scr_create_combat_effect(undefined,spr_effect_minion_poof,room_width/2,room_height/2,27,c_white,0.5,0.5,0,0,0,"Stationary",undefined,"Effects");
 	
 		//////////////////////////////
 		// SPAWN AND BUFF SPRIGGANS //
@@ -24,9 +24,7 @@ function scr_card_sprigs_of_ygg_tick(_counter,_target,_repeat){
 					//////////////////
 					// SPAWN MINION //
 					//////////////////
-					scr_create_combat_minion(undefined,undefined,_unit,"Spriggan");
-					scr_create_combat_effect(undefined,spr_effect_minion_poof,room_width/2,room_height/2,54,c_white,0.3,0.3,room_width/2,room_height/2,_unit.x,_unit.y+50,40,"Line",undefined,"Effects");		
-					scr_create_combat_effect(undefined,spr_effect_minion_poof,_unit.x,_unit.y+110,27,c_white,0.5,0.5,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");					
+					scr_create_combat_minion(undefined,undefined,_unit,"Spriggan",[""]);
 				}
 				else if (_spot._minion_name == "Spriggan") { //buff current spriggans
 					/////////////////

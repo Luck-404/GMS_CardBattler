@@ -20,7 +20,7 @@ function scr_card_viral_shot(_card,_channel,_target){
 	// EFFECT //
 	////////////		
 	scr_create_combat_popup(_target,"DoTs Doubled","Default",0,0);
-	scr_create_combat_effect(_target,spr_effect_powerdown,0,0,36,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_powerdown,0,0,36,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 		
 	///////////
 	// DEBUG //

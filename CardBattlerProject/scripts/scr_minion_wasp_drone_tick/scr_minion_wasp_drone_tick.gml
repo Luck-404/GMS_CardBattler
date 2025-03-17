@@ -29,7 +29,7 @@ function scr_minion_wasp_drone_tick(_host,_self){
 		////////////
 		// EFFECT //
 		////////////		
-		scr_create_combat_effect(_ref_tar,spr_effect_dripping,0,0,36,c_lime,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_ref_tar,spr_effect_dripping,0,0,36,c_lime,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
 	}
 	

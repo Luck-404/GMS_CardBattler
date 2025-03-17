@@ -23,7 +23,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
 		///////////
 		// DEBUG //
@@ -50,7 +50,7 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
 		///////////
 		// DEBUG //
@@ -90,8 +90,8 @@ function scr_card_beastial_bash(_card,_channel,_target){
 		////////////
 		// EFFECT //
 		////////////
-		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,_card._card_animation_time,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
-		scr_create_combat_effect(_target,spr_effect_powerdown,0,0,11,c_orange,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_target,spr_effect_powerdown,0,0,11,c_orange,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
 		///////////
 		// SOUND //

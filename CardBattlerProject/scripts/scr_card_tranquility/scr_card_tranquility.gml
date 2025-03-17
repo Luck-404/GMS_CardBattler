@@ -12,7 +12,7 @@ function scr_card_tranquility(_card,_channel,_target){
 	////////////
 	scr_create_combat_popup(undefined,"Echo count increased","Default",room_width/2,room_height/2);	
 	var _c_ltgrn = make_color_rgb(154,171,137);
-	scr_create_combat_effect(undefined,spr_effect_echo,room_width/2,room_height/2,_card._card_animation_time,_c_ltgrn,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(undefined,spr_effect_echo,room_width/2,room_height/2,15,_c_ltgrn,1,1,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

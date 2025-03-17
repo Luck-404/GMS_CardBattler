@@ -24,7 +24,7 @@ _minion_trigger_effect = false;
 _minion_effect_script = undefined;
 _minion_stacks = 0;
 _minion_class = "Vanguard"; //Support, Guardian, Vanguard
-
+_minion_notes = [""];
 _flag_has_died = false;
 
 _latest_damage_done = undefined;

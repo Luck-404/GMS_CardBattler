@@ -26,8 +26,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Implemented",
-    "path": "folders/Sprites/Creatures/Implemented.yy",
+    "name": "Green",
+    "path": "folders/Sprites/Creatures/Green.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

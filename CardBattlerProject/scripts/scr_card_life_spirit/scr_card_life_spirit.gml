@@ -7,13 +7,13 @@ function scr_card_life_spirit(_card,_channel,_target){
 	//////////////////
 	// SPAWN MINION //
 	//////////////////
-	var _new_minion = scr_create_combat_minion(_card,_channel,_target,"Life Spirit");
+	var _new_minion = scr_create_combat_minion(_card,_channel,_target,"Life Spirit",[""]);
 	scr_trigger_global_reactions(_card,_target,_channel,0);
 
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(undefined,spr_effect_minion_poof,_target.x,_target.y+110,18,c_white,0.8,0.8,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(undefined,spr_effect_minion_poof,_target.x,_target.y+110,18,c_white,0.8,0.8,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

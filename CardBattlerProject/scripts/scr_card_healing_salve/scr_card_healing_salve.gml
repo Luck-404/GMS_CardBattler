@@ -13,7 +13,7 @@ function scr_card_healing_salve(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_heal,0,0,11,c_white,0.5,0.5,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_heal,0,0,11,c_white,0.5,0.5,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

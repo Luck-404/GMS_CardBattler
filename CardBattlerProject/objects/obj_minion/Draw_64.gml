@@ -70,7 +70,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				////////////
 				// EFFECT //
 				////////////
-					scr_create_combat_effect(_latest_channel,spr_effect_hit,0,0,9,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+					scr_create_combat_effect(_latest_channel,spr_effect_hit,0,0,9,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 	
 				///////////
 				// SOUND //
@@ -93,7 +93,7 @@ if (_latest_target != undefined && _latest_channel != undefined){
 				if (_counter == undefined){		
 					scr_create_status_counter(_latest_channel,"Venom","Target is envenomed for 3 turns, each venom stack deals damage and reduces damage done","Reaction","End",scr_status_venom_tick, false, undefined, 3, 1, "3 * (stacks)", 0, "General", _latest_channel._creature_statuses, spr_status_venom);
 					scr_create_combat_popup(_latest_channel,"Envenomed","Venom",0,0);
-					scr_create_combat_effect(_latest_channel,spr_effect_dripping,0,0,36,c_purple,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+					scr_create_combat_effect(_latest_channel,spr_effect_dripping,0,0,36,c_purple,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 					_latest_channel._status_venom = true;
 					//apply debuff stacks from venom
 					_latest_channel._creature_attack_linear--;					
@@ -125,12 +125,12 @@ if (_latest_target != undefined && _latest_channel != undefined){
 					////////////
 					// EFFECT //
 					////////////
-						scr_create_combat_effect(_latest_target,spr_effect_slice,0,0,5,c_white,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+						scr_create_combat_effect(_latest_target,spr_effect_slice,0,0,5,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 						var _loc = 0;
 						if(_minion_unit_attached.x<960){
 							_loc = 1920;
 						}
-						scr_create_combat_effect(undefined,spr_effect_leech,_latest_target.x,_latest_target.y,54,c_white,0.25,0.25,_latest_target.x,_latest_target.y,_minion_unit_attached.x,_minion_unit_attached.y,40,"Line",undefined,"Effects");
+						scr_create_combat_effect(undefined,spr_effect_leech,_latest_target.x,_latest_target.y,54,c_white,0.25,0.25,_minion_unit_attached.x,_minion_unit_attached.y,40,"Projectile",undefined,"Effects");
 	
 					///////////////
 					// 20% Leech //
@@ -204,6 +204,10 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 	_output_str += "Attached Unit: " + _minion_unit_attached._creature_name+ "\n";	
 	_output_str += "Color: " + _minion_color + "\n";
 	_output_str += "Class: " + _minion_class + "\n";
+	if (_minion_notes[0] != [""]){
+		_output_str +=  "Deadseed type: " + string(_minion_notes[0]) + "\n";
+	}
+	
 	
 	//draw final tooltip;
 	draw_text_ext(_tooltip_x,_tooltip_y,_output_str,15,150);	

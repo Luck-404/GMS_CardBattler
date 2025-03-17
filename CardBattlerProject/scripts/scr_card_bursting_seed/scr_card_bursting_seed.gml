@@ -10,7 +10,7 @@ function scr_card_bursting_seed(_card,_channel,_target){
 	if (_target._creature_def != 0){
 		_target._creature_def = 0;
 		audio_play_sound(snd_effect_break_shield,0,false);			
-		scr_create_combat_effect(undefined,spr_def_break,_target.x+52,_target.y-90,7,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(undefined,spr_def_break,_target.x+52,_target.y-90,7,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
 	}
 	
 	////////////////////////
@@ -34,7 +34,7 @@ function scr_card_bursting_seed(_card,_channel,_target){
 		scr_create_status_counter(_target,"Vulnerablility Scalar","Increase damage taken by this unit by 50% per stack.",_card,"End",scr_status_vulnerable_scalar_tick, true, undefined, 1, 1, "+50% damage taken per stack", 0, "General", _target._creature_statuses, spr_status_vulnerability_up_scalar);
 		_target._creature_vulnerability_scalar_stacks+=1;
 		scr_create_combat_popup(_target,"Vulnerable applied","Default",0,0);		
-		scr_create_combat_effect(_target,spr_effect_powerdown,0,0,36,c_purple,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");		
+		scr_create_combat_effect(_target,spr_effect_powerdown,0,0,36,c_purple,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");		
 		audio_play_sound(snd_effect_debuff,0,false);	
 	} 
 	else {
@@ -49,7 +49,7 @@ function scr_card_bursting_seed(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_powerup,0,0,_card._card_animation_time,c_green,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_powerup,0,0,36,c_green,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //

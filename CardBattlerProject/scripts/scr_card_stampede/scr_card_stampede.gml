@@ -35,8 +35,8 @@ function scr_card_stampede(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-		scr_create_combat_effect(undefined,spr_effect_stampede,room_width/2,room_height/2,_card._card_animation_time,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
-		scr_create_combat_effect(undefined,spr_effect_stampede_dust,room_width/2,room_height/2,_card._card_animation_time,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(undefined,spr_effect_stampede,room_width/2,room_height/2,45,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(undefined,spr_effect_stampede_dust,room_width/2,room_height/2,45,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
 		
 	///////////
 	// SOUND //

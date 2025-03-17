@@ -40,11 +40,6 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 			var _ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
 			_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
 			
-				var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
-				_shaker._target = _ref_tar; // Assign target
-				_shaker._origin_y = _ref_tar.x; // Store original position
-				_shaker._shake_amount = 8; // Store original position
-				_shaker._shaking = true;			
 			}
 		break;
 		

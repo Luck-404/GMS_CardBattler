@@ -15,7 +15,7 @@ function scr_damage_minions(_minion, _dmg){
 			scr_create_combat_popup(_minion,string(_minion._minion_def),"Shields",0,0);
 			_dmg = abs(_minion._minion_def - _dmg);
 			_minion._minion_def = 0;
-			scr_create_combat_effect(undefined,spr_minion_def_break,_minion.x-16,_minion.y + 40,7,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+			scr_create_combat_effect(undefined,spr_minion_def_break,_minion.x-16,_minion.y + 40,7,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
 		}
 		else if (_new_shield > 0){ //if theres hp left, update shield and no damage left to do
 			_minion._minion_def = _minion._minion_def - _dmg;

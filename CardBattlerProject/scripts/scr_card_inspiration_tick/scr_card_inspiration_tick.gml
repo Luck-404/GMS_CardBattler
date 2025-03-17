@@ -9,7 +9,7 @@ function scr_card_inspiration_tick(_counter,_target,_repeat){		//STACKLESS		//DE
 	////////////////////
 	if (_repeat == true){
 		scr_create_combat_popup(undefined,"","Mana",room_width/2,room_height/2);	
-		scr_create_combat_effect(undefined,spr_effect_bonus_mana_shimmer,0,779,13,c_white,1,1,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(undefined,spr_effect_bonus_mana_shimmer,0,779,13,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
 	} 
 	
 	/////////////////

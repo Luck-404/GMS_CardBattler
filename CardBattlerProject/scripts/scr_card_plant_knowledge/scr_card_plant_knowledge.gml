@@ -27,8 +27,8 @@ function scr_card_plant_knowledge(_card,_channel,_target){
 	////////////
 	// EFFECT //
 	////////////
-	scr_create_combat_effect(_target,spr_effect_heal,0,0,11,c_white,0.5,0.5,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
-	scr_create_combat_effect(_target,spr_effect_powerup,0,0,36,c_green,0.25,0.25,undefined,undefined,undefined,undefined,undefined,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_heal,0,0,11,c_white,0.5,0.5,0,0,0,"Stationary",undefined,"Effects");
+	scr_create_combat_effect(_target,spr_effect_powerup,0,0,36,c_green,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //
