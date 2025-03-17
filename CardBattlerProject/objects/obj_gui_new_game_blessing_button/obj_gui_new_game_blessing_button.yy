@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "New Game Menu",
-    "path": "folders/Objects/GUI and Tools/New Game Menu.yy",
+    "path": "folders/Objects/GUI/New Game Menu.yy",
   },
   "parentObjectId": null,
   "persistent": false,

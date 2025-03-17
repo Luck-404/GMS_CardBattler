@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Green",
-    "path": "folders/Scripts/GUI and Tools/Encounter/Card Casts/Green.yy",
+    "name": "Standalone Status Tick",
+    "path": "folders/Scripts/Tools and Game Systems/Encounter/Card Casts/Green/Standalone Status Tick.yy",
   },
 }

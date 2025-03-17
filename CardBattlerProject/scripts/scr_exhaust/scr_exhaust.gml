@@ -9,7 +9,6 @@ function scr_exhaust(_card){
 	//add to discard pile
 	ds_list_add(global.player_exhaust_pile,_card);
 	_card._list = "exhaust";
-	_card.x = 1800;
-	_card.y = 1000;
+	_card.x = 1832;
 	scr_reset_playstate();
 }

@@ -4,23 +4,36 @@
 // > DAMAGE THE CREATURE THROUGH MINION > SHIELD > HP				//
 //////////////////////////////////////////////////////////////////////
 function scr_damage_creature(_target,_damage_input){
-	var _orig_dmg = _damage_input;
-    //show_debug_message("DAMAGE = " + string(_damage_input));
-
-    if (_damage_input > 0) { // Prevent negative damage
-
+	//////////////////////////////////////////////////////////////////////////
+	// CHECK IF INPUT WAS NEGATIVE (DUE TO A LARGE DECREASE IN ATTACK POWER //
+	//////////////////////////////////////////////////////////////////////////
+    if (_damage_input == 0) { // Prevent negative damage
+		//////////////////
+		// COMBAT POPUP //
+		//////////////////
+		scr_create_combat_popup(_target,"0","Damage",0,0);
+	}
+	
+	
+	
+	///////////////////////////////////////////////////////////
+	// HANDLE DAMAGE IN ORDER: MINIONS > SHIELDS > TARGET HP //
+	///////////////////////////////////////////////////////////
+	else {
+		//stop any sleeps
+		_target._status_sleeping = false;
+		
         //////////////////////////
         // DAMAGE MINIONS FIRST //
         //////////////////////////
-        if (_target._creature_minion_count > 0) {
+		#region DAMAGE MINIONS
+        if (_target._creature_minion_count > 0) { //if there is at least 1 minion
             var _list = _target._creature_minion_references;
             var _list_size = ds_list_size(_list);
             var _damage_divided = _damage_input div _list_size; // Base damage per minion
             var _damage_remainder = _damage_input mod _list_size; // Extra damage to distribute
-
-            //show_debug_message("DAMAGE PER MINION = " + string(_damage_divided));
-            //show_debug_message("DAMAGE REMAINDER = " + string(_damage_remainder));
-
+			
+			//for every minion, apply the damage
             for (var _i = 0; _i < _list_size; _i++) {
                 var _minion = ds_list_find_value(_list, _i);
                 var _damage_to_minion = _damage_divided;
@@ -30,42 +43,32 @@ function scr_damage_creature(_target,_damage_input){
                     _damage_to_minion += 1;
                 }
 
-                var _dmg_after_hit = scr_damage_minions(_target, _damage_to_minion, _minion);
-                //show_debug_message("MINION " + string(_i) + " TOOK DAMAGE: " + string(_damage_to_minion));
-                //show_debug_message("DAMAGE AFTER HIT = " + string(_dmg_after_hit));
-
+                var _dmg_after_hit = scr_damage_minions(_minion, _damage_to_minion);
+				
                 // Reduce damage input by the actual damage dealt
                 _damage_input -= (_damage_to_minion - _dmg_after_hit);
-                //show_debug_message("NEW DAMAGE = " + string(_damage_input));
             }
         }
+		#endregion
 
         ////////////////////
         // DAMAGE SHIELDS //
         ////////////////////
+		#region DAMAGE SHIELDS
         if (_target._creature_def > 0) { // If there is a shield
-            var _new_shield = _target._creature_def - _damage_input;
-            if (_new_shield <= 0) { // Shield breaks
-                _damage_input = abs(_new_shield); // Carry over remaining damage
-                _target._creature_def = 0;
-            } else { // Shield absorbs all damage
-                _target._creature_def = _new_shield;
-                _damage_input = 0;
-            }
+			_damage_input = scr_damage_shields(_target,_damage_input);
         }
+		#endregion
 
         ///////////////////
         // DAMAGE HEALTH //
         ///////////////////
         _target._creature_hp_current -= _damage_input;
-		
-		///////////////////
-		// SCROLLING DMG //
-		///////////////////
-		//popup the reason
-		var _popup = instance_create_layer(_target.x, _target.y, "GUI", obj_combat_values_popup);
-		_popup._text = string(_orig_dmg);
-		_popup._type = "Damage";
+					
+		//////////////////
+		// COMBAT POPUP //
+		//////////////////
+		scr_create_combat_popup(_target,string(_damage_input),"Damage",0,0);
 		
     }
 }

@@ -10,14 +10,14 @@
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.533175,
+  "duration": 1.019683,
   "parent": {
-    "name": "Card Effects",
-    "path": "folders/Sounds/Card Effects.yy",
+    "name": "Green",
+    "path": "folders/Sounds/Card Effects/Green.yy",
   },
   "preload": false,
   "sampleRate": 44100,
   "soundFile": "snd_effect_poison_ivy.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 0.1,
 }

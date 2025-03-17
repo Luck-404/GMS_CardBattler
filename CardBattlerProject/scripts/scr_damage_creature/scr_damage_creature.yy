@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Green",
-    "path": "folders/Scripts/GUI and Tools/Encounter/Card Casts/Green.yy",
+    "name": "Card Calculations",
+    "path": "folders/Scripts/Tools and Game Systems/Encounter/Card Calculations.yy",
   },
 }

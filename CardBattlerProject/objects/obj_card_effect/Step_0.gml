@@ -1,14 +1,5 @@
-//////////////////////////////////////////////////////////////////////
-//					OBJ_CARD_EFFECT STEP							//
-//																	//
-// > DECREMENT LIFE EVERY STEP										//
-//////////////////////////////////////////////////////////////////////
-if (_count_lifetime <= 0){
+if (_life <= 0){
 	instance_destroy();
 } else {
-	_count_lifetime--;	
-}
-
-if (_vspd > 0){
-	y+=_vspd;	
-}
+	_life--;
+};

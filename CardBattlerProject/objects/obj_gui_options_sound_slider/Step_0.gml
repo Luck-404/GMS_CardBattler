@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//					OBJ_GUI_OPTIONS_SOUND_SLIDER					//
+//																	//
+// > SLIDING													    //
+//////////////////////////////////////////////////////////////////////
 // Check if the mouse is over the slider bar
 if (device_mouse_x_to_gui(0) >= x-5 && device_mouse_x_to_gui(0) <= x + 105 && device_mouse_y_to_gui(0) >= y - 5 && device_mouse_y_to_gui(0) <= y + 5) {
 	image_index = 1;

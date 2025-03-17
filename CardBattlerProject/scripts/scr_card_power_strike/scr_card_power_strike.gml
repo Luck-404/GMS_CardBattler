@@ -7,36 +7,32 @@ function scr_card_power_strike(_card,_channel,_target){
 	///////////////////////
 	// CALC DAMAGE BONUS //
 	///////////////////////
-	var _base_dmg = _card[?"damage"];
-	var _color_mult = scr_calculate_color_damage_bonus(_card[?"color"],_target);
-	var _scalar = _channel._creature_attack_scalar;
-	var _linear = _channel._creature_attack_linear;
-	var _scaled_dmg = _base_dmg*_scalar*_color_mult;
-	var _final_dmg = _scaled_dmg+_linear;
+	var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 	////////////
 	// DAMAGE //
 	////////////
-	scr_damage_creature(_target, _final_dmg);
-	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
-	scr_trigger_minion_reactions(_card,_target,_channel,_final_dmg);
-	
+	scr_damage_creature(_target, _calculated_dmg);
+	scr_trigger_global_reactions(_card,_target,_channel,_calculated_dmg);
+		
 	////////////
 	// EFFECT //
 	////////////
-	var _ref_effect = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
-	_ref_effect.sprite_index = spr_effect_strike;
+	scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_power_strike,0,false);	
+	audio_play_sound(snd_effect_big_hit,0,false);	
+	
 	
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name + " for " + string(_final_dmg);
-
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"] + " on " + _target._creature_name + " for " + string(_calculated_dmg));
+	
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"] + " on " + _target._creature_name + " for " + string(_calculated_dmg));		
 }

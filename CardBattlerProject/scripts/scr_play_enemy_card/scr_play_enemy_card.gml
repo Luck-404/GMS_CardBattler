@@ -6,28 +6,40 @@
 function scr_play_enemy_card(_ref_unit,_playing_card){
 	//////////////////
 	// GET CARD REF //
-	//////////////////
-	var _card_ref = _playing_card._card_ref;
+	//////////////////+
 	var _card_ran = _playing_card._card_range;
-	var _ref_card_scr = _card_ref[?"script"];
+	var _ref_card_scr = _playing_card._card_ref[?"script"];
 	
+	/////////////////////
+	// SHAKE CHANNELER //
+	/////////////////////
+	var _hopper = instance_create_layer(x, y, "GUI", obj_attack_hopper);
+	_hopper._target = _ref_unit;
+	_hopper._origin_y = _ref_unit.y; // Store original position
+	_hopper._shaking = true;
 	
-	
-	switch (_card_ref[?"type"]){
+	switch (_playing_card._card_ref[?"type"]){
 		/////////////
 		// ATTACKS //
 		/////////////
 		case "Attack":
 			if(_card_ran == "Melee"){ //pick front target
 				var _ref_tar = ds_list_find_value(global.player_party_in_play,0);
-				_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
+				
+				var _shaker = instance_create_layer(x, y, "GUI", obj_error_shaker);
+				_shaker._target = _ref_tar; // Assign target
+				_shaker._origin_x = _ref_tar.x; // Store original position
+				_shaker._shake_amount = 8; // Store original position
+				_shaker._shaking = true;				
 			}
 			
 			else {
 			//pick a random enemy target
 			var _ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
 			var _ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
-			_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+			_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
+			
 			}
 		break;
 		
@@ -36,9 +48,9 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 		/////////////
 		// DEFENSE //
 		/////////////		
-		case "Defend":
+		case "Defense":
 			//pick self
-			_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+			_ref_card_scr(_playing_card,_ref_unit,_ref_unit);
 		break;
 		
 		
@@ -47,14 +59,14 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 		/////////////		
 		case "Utility":
 			if (_card_ran == "Self"){ //play on self
-				_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_unit);
 			}
 			
 			else {
 			//pick a random ally target
 				var _ref_tar_num = irandom_range(1,ds_list_size(global.enemy_party_in_play));
 				var _ref_tar = ds_list_find_value(global.enemy_party_in_play,_ref_tar_num-1);
-				_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
 			}
 		break;
 		
@@ -64,7 +76,7 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 		///////////		
 		case "Buff":
 			//pick self
-			_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+			_ref_card_scr(_playing_card,_ref_unit,_ref_unit);
 		break;
 		
 		
@@ -75,13 +87,13 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 		case "DoT":
 			if(_card_ran == "Melee"){ //pick front target
 				var _ref_tar = ds_list_find_value(global.player_party_in_play,0);
-				_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
 			}
 			else {
 				//pick a random enemy target
 				var _ref_tar_num = irandom_range(1,ds_list_size(global.player_party_in_play));
 				var _ref_tar = ds_list_find_value(global.player_party_in_play,_ref_tar_num-1);
-				_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
 			}
 		break;		
 		
@@ -99,7 +111,7 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 					_ref_tar = _cursor;
 				}
 			 }
-			_ref_card_scr(_card_ref,_ref_unit,_ref_tar);
+			_ref_card_scr(_playing_card,_ref_unit,_ref_tar);
 		break;		
 		
 		///////////////
@@ -107,9 +119,9 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 		///////////////
 		case "Archetype":
 			if (_card_ran == "Targetless"){ //
-				_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_unit);
 			} else { //play on self
-				_ref_card_scr(_card_ref,_ref_unit,_ref_unit);
+				_ref_card_scr(_playing_card,_ref_unit,_ref_unit);
 			}
 		break;		
 	}
@@ -119,7 +131,7 @@ function scr_play_enemy_card(_ref_unit,_playing_card){
 	///////////////////////////////////////
 	// PUT CARD INTO BACK OF UNIT'S DECK //
 	///////////////////////////////////////
-	ds_list_add(_ref_unit._deck,_card_ref);
+	ds_list_add(_ref_unit._deck,_playing_card._card_ref);
 	ds_list_delete(_ref_unit._deck,0);
 	instance_destroy(_playing_card);
 	_ref_unit._card_to_play = undefined;	

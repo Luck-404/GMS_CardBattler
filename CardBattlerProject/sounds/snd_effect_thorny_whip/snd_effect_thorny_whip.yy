@@ -10,10 +10,10 @@
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.203401,
+  "duration": 0.440975,
   "parent": {
-    "name": "Card Effects",
-    "path": "folders/Sounds/Card Effects.yy",
+    "name": "Green",
+    "path": "folders/Sounds/Card Effects/Green.yy",
   },
   "preload": false,
   "sampleRate": 44100,

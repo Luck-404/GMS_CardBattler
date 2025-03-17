@@ -12,7 +12,7 @@ image_index = 0;
 // GUI INFORMATION //
 /////////////////////
 global.turn_counter = 1;
-_ref_end_turn = instance_create_layer(1770,150,"GUI",obj_end_turn);
+_ref_end_turn = instance_create_layer(1750,729,"GUI",obj_end_turn);
 _ref_end_turn.visible = false;
 _flag_forfeit = false;
 _flag_exit_spawned = false;
@@ -60,3 +60,8 @@ enum FIGHT_CONTROLLER_STATE {
 }
 global.fight_controller_state = FIGHT_CONTROLLER_STATE.SPAWN_ENEMIES;
 
+
+////////////////////////
+// ENCOUTNER STATUSES //
+////////////////////////
+global.encounter_statuses = ds_list_create();

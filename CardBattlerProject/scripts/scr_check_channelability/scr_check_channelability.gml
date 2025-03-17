@@ -66,7 +66,7 @@ function scr_check_channelability(_unit,_card){
 	// CHECK IF CREATURE IS CC'd //
 	///////////////////////////////
 	//check if unit is stunned/cc'd	
-		if (_unit._stunned = true){
+		if (_unit._status_stunned = true){
 
 			return [false,"CREATURE IS STUNNED"];
 		}

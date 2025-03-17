@@ -9,7 +9,7 @@ function scr_discard(_card){
 	//add to discard pile
 	ds_list_add(global.player_discard_pile,_card);
 	_card._list = "discard";
-	_card.x = 1600;
+	_card.x = 1663;
 	
 	scr_reset_playstate();
 }

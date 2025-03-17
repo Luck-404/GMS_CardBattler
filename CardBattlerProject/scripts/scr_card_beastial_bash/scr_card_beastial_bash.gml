@@ -4,128 +4,111 @@
 // > DEAL DAMAGE THREE UNITS, CENTER UNIT IS ALSO STUNS FOR 1 TURN  //	
 //////////////////////////////////////////////////////////////////////
 function scr_card_beastial_bash(_card,_channel,_target){
-	// left target
+	/////////////////
+	// LEFT TARGET //
+	/////////////////
 	if (_target._left_unit != undefined){
-	var _left_target = _target._left_unit;
+		var _left_target = _target._left_unit;
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _base_dmg = _card[?"damage"];
-		var _color_mult = scr_calculate_color_damage_bonus(_card[?"color"],_target);
-		var _scalar = _channel._creature_attack_scalar;
-		var _linear = _channel._creature_attack_linear;
-		var _scaled_dmg = _base_dmg*_scalar*_color_mult;
-		var _final_dmg = _scaled_dmg+_linear;
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 		////////////
 		// DAMAGE //
 		////////////
-		scr_damage_creature(_left_target, _final_dmg);
-		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
-		scr_trigger_minion_reactions(_card,_left_target,_channel,_final_dmg);
+		scr_damage_creature(_left_target, _calculated_dmg);
+		scr_trigger_global_reactions(_card,_left_target,_channel,_calculated_dmg);
 		
 		////////////
 		// EFFECT //
 		////////////
-		var _ref_effect = instance_create_layer(_left_target.x,_left_target.y,"Effects",obj_card_effect);
-		_ref_effect.sprite_index = spr_effect_strike;
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 
-		////////////
-		// BANNER //
-		////////////
-		var _ref_banner_left = instance_create_layer(room_width/2,room_height/2-500,"GUI",obj_zone_banner);
-		_ref_banner_left._ban_color = c_black;
-		_ref_banner_left._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _left_target._creature_name + " for " + string(_final_dmg);	
+		///////////
+		// DEBUG //
+		///////////
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"] + " on " + _target._creature_name + " for " + string(_calculated_dmg));
 	}
 		
-	// right target
+	//////////////////
+	// RIGHT TARGET //
+	//////////////////
 	if (_target._right_unit != undefined){
-	var _right_target = _target._right_unit;
+		var _right_target = _target._right_unit;
 		///////////////////////
 		// CALC DAMAGE BONUS //
 		///////////////////////
-		var _base_dmg = _card[?"damage"];
-		var _color_mult = scr_calculate_color_damage_bonus(_channel,_right_target);
-		var _scalar = _channel._creature_attack_scalar;
-		var _linear = _channel._creature_attack_linear;
-		var _scaled_dmg = _base_dmg*_scalar*_color_mult;
-		var _final_dmg = _scaled_dmg+_linear;
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
 		////////////
 		// DAMAGE //
 		////////////
-		scr_damage_creature(_right_target, _final_dmg);
-		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
-		scr_trigger_minion_reactions(_card,_right_target,_channel,_final_dmg);
-	
+		scr_damage_creature(_right_target, _calculated_dmg);
+		scr_trigger_global_reactions(_card,_right_target,_channel,_calculated_dmg);
+		
 		////////////
 		// EFFECT //
 		////////////
-		var _ref_effect = instance_create_layer(_right_target.x,_right_target.y,"Effects",obj_card_effect);
-		_ref_effect.sprite_index = spr_effect_strike;
-		
-		////////////
-		// BANNER //
-		////////////
-		var _ref_banner_right = instance_create_layer(room_width/2,room_height/2-200,"GUI",obj_zone_banner);
-		_ref_banner_right._ban_color = c_black;
-		_ref_banner_right._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _right_target._creature_name + " for " + string(_final_dmg);	
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
+
+		///////////
+		// DEBUG //
+		///////////
+		show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"] + " on " + _target._creature_name + " for " + string(_calculated_dmg));
 	}
 	
-	// middle target
-	#region middle target
-	///////////////////////
-	// CALC DAMAGE BONUS //
-	///////////////////////
-	var _base_dmg = _card[?"damage"];
-	var _color_mult = scr_calculate_color_damage_bonus(_channel,_target);
-	var _scalar = _channel._creature_attack_scalar;
-	var _linear = _channel._creature_attack_linear;
-	var _scaled_dmg = _base_dmg*_scalar*_color_mult;
-	var _final_dmg = _scaled_dmg+_linear;
+	///////////////////
+	// MIDDLE TARGET //
+	///////////////////
+	#region MIDDLE TARGET
+		///////////////////////
+		// CALC DAMAGE BONUS //
+		///////////////////////
+		var _calculated_dmg = scr_damage_calculator(_card,_channel,_target,0,0);
 	
-	////////////
-	// DAMAGE //
-	////////////
-	scr_damage_creature(_target, _final_dmg);
-	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card[?"name"] + " damage dealt = " + string(_final_dmg) + " to " + _target._creature_name);
-	scr_trigger_minion_reactions(_card,_target,_channel,_final_dmg);
+		////////////
+		// DAMAGE //
+		////////////
+		scr_damage_creature(_target, _calculated_dmg);
+		scr_trigger_global_reactions(_card,_target,_channel,_calculated_dmg);
 		
-	////////////
-	// EFFECT //
-	////////////
-	var _ref_effect = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
-	_ref_effect.sprite_index = spr_effect_strike;
+		//////////
+		// STUN //
+		//////////
+		var _counter = scr_get_status_counter(_target,"General",undefined,"Stun");		
+		if (_counter == undefined){		
+			audio_play_sound(snd_effect_stun,0,false);
+			scr_create_status_counter(_target,"Stun","Target is stunned for 1 turn",_card,"End",scr_status_stun_tick, true, undefined, 1, 0, "Stun for 1 turn", 0, "General", _target._creature_statuses, spr_status_stun);
+			scr_create_combat_popup(_target,"Stunned","Default",0,0);
+			_target._status_stunned = true;			
+		} 
+		else {
+			_counter._counter_life = 1;
+		}
 		
-	////////////////////////////////////////////
-	// IF NOT STUNNED: STUN, OTHERWISE: RENEW //
-	////////////////////////////////////////////
-	if (_target._stunned == false){		
-		var _ref_counter = instance_create_layer(_target.x,_target.y-100,"GUI",obj_card_effect_counter);
-		_ref_counter.x = _target.x+20;
-		_ref_counter.y = _target.y - 100;
-		_ref_counter._draw_color = c_orange;	
-		_ref_counter._turn_lifespan = 1;
-		_ref_counter._trigger_my_effect = true;
-		_target._stun_counter_ref = _ref_counter;
-		_ref_counter._reference_script = scr_card_beastial_bash_tick;
-		_ref_counter._target = _target;
-		_target._stunned = true;
-	} 
-	else {
-		_target._stun_counter_ref._turn_lifespan = 1;
-	}
+		////////////
+		// EFFECT //
+		////////////
+		scr_create_combat_effect(_target,spr_effect_big_hit,0,0,11,c_white,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
+		scr_create_combat_effect(_target,spr_effect_powerdown,0,0,11,c_orange,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
+
+		///////////
+		// SOUND //
+		///////////
+		audio_play_sound(snd_effect_beastial_bash,0,false);	
 	#endregion
 	
-	///////////
-	// SOUND //
-	///////////
-	audio_play_sound(snd_effect_beastial_bash,0,false);	
+
 	
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name + " for " + string(_final_dmg);
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
 }

@@ -11,7 +11,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Main Menu",
-    "path": "folders/Objects/GUI and Tools/Main Menu.yy",
+    "path": "folders/Objects/GUI/Main Menu.yy",
   },
   "parentObjectId": null,
   "persistent": false,

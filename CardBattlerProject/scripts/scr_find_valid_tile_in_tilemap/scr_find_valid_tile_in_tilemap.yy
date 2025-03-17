@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Overworld",
-    "path": "folders/Scripts/Effects/Overworld.yy",
+    "name": "General",
+    "path": "folders/Scripts/Effects/General.yy",
   },
 }

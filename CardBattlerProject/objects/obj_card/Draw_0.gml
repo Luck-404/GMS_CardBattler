@@ -6,6 +6,13 @@
 //////////////////////////////////////////////////////////////////////
 
 if (_reward == false){
+	if (_list == "destroy"){
+		draw_sprite_ext(sprite_index,2,x,y,0.01,0.01,0,c_white,0);
+		image_index = 2;
+		image_speed = 0;
+		_reward = false;
+	}
+	
 	////////////////
 	// DECK CARDS //
 	////////////////
@@ -45,42 +52,35 @@ if (_reward == false){
 		// HOVER TOOLTIPS AND ENLARGING //
 		//////////////////////////////////
 		if (global.flag_gui_open == false && position_meeting(mouse_x,mouse_y,self) && (global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CHANNEL || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_TARGET || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CARD)){
-			//enlarges card
-			if (_active){
-				draw_sprite_ext(sprite_index,0,x,y,0.4,0.4,0,c_white,1);
-				draw_sprite_ext(spr_card_active,0,x,y,1,1,0,c_white,1);
-			}
-			else {
-				draw_sprite_ext(sprite_index,0,x,y,0.4,0.4,0,c_white,1);
-			}
-			//draws info box
-			draw_set_color(c_grey);
-			draw_rectangle(mouse_x+10,mouse_y,mouse_x+155, mouse_y+100,false);
-	
 			//draw info
 			draw_set_font(fnt_fanwood_sm);
-			draw_set_color(c_white);
-	
-			draw_text(mouse_x+15, mouse_y+5, _card_name + " | Mana Cost: " + string(_card_cost));
-			draw_text(mouse_x+15, mouse_y+20, _card_desc);	
-			draw_text(mouse_x+15, mouse_y+35, _card_color);	
-			draw_text(mouse_x+15, mouse_y+50, _card_type);	
-			draw_text(mouse_x+15, mouse_y+60, _list);	
-			draw_text(mouse_x+15, mouse_y+70, "requires " + _card_spec_req);				
-			draw_text(mouse_x+15, mouse_y+80, "requires " + _card_class_req);	
+			draw_set_color(c_black);
+			var _tooltip_x = 1420;
+			var _tooltip_y = 838;
+			var _output_str = "";
+			
+			_output_str += _card_name + "\n";
+			_output_str += string(_card_desc) + "\n";
+			_output_str += "Mana Cost: " + string(_card_cost) + "\n";			
+			_output_str += _card_color + "\n";
+			_output_str += "Type: " + _card_type + "\n";
+			_output_str += "Spec Req: " + _card_spec_req + "\n";
+			_output_str += "Class Req: " + _card_class_req + "\n";
 
-	
+			//draw final tooltip;
+			draw_text_ext(_tooltip_x,_tooltip_y,_output_str,15,150);
 		} 
 		//////////////////
 		// NOT HOVERING //
 		//////////////////
 		else {
+			y = 952;
 			if(_active){
-				draw_sprite_ext(sprite_index,0,x,y,0.3,0.3,0,c_white,1);
-				draw_sprite_ext(spr_card_active,0,x,y,1,1,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,0.4,0.4,0,c_white,1);
+				draw_sprite_ext(spr_card_active,0,x,y,1.0,1.0,0,c_white,1);
 			}
 			else { //draw greyed if
-				draw_sprite_ext(sprite_index,0,x,y,0.3,0.3,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,0.4,0.4,0,c_white,1);
 			}
 		}
 	}

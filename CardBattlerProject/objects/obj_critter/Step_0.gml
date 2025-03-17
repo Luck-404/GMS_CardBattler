@@ -1,3 +1,8 @@
+//////////////////////////////////////////////////////////////////////
+//						OBJ_CRITTER STEP							//
+//																	//
+// > MOVE BASED ON TYPE ROLLED										//
+//////////////////////////////////////////////////////////////////////
 //slowly move around its home coordinates
 if (!_triggered){
 	x += choose(-1, 1) * random(2); // Random horizontal movement
@@ -18,7 +23,7 @@ if (_triggered){
 	switch (image_index){
 		case 0: // Bird
 		    // Play flapping sound here
-			audio_play_sound(snd_bird_startle,1,false);
+			audio_play_sound(snd_ambiance_bird_startle,1,false);
 		    x += sin(2 * _runy_direction * 1.0 + current_time / 300) * 1.5;
 		    y -= 1.5 + random(0.5); // Move upwards erratically
 		break;

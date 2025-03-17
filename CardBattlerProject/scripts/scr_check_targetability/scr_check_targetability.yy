@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "Encounter",
+    "path": "folders/Scripts/Tools and Game Systems/Encounter.yy",
   },
 }

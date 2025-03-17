@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Effects",
-    "path": "folders/Objects/Effects.yy",
+    "name": "General",
+    "path": "folders/Objects/Tools and Game Systems/General.yy",
   },
   "parentObjectId": null,
   "persistent": false,

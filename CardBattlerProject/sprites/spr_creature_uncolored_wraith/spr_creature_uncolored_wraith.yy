@@ -28,8 +28,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Creatures",
-    "path": "folders/Sprites/Creatures.yy",
+    "name": "Uncolored",
+    "path": "folders/Sprites/Creatures/Uncolored.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

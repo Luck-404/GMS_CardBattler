@@ -6,6 +6,9 @@
 //////////////////////////////////////////////////////////////////////
 function scr_populate_patrons(_output_list){
 	//for each patron I want...
+		//Uncolored
+			//Spiritus
+				//just a wraith- kind of the hardcore mode start
 		//Green
 			//Lucky
 				//create a patron (script)
@@ -19,6 +22,6 @@ function scr_populate_patrons(_output_list){
 			//Wolfman (TESTER)
 				_new_patron = scr_create_patron("Wolfman","God of the Wilds",spr_sigil_wolfman,"Furn", ["Bulwark","Thorny Whip","Bulwark","Thorny Whip","Bulwark"],["Wolf Fang"],"10-20 Starting Gold",[scr_create_blessing("Howl","Sometimes stun all enemies at the beginning of the round",spr_blessing_howl),scr_create_blessing("Woodsman", "Gain bonus to green damage",spr_blessing_woodsman),scr_create_blessing("Carnivore","Heal on kills",spr_blessing_carnivore)]);
 				//add patron to the list
-				ds_list_add(_output_list,_new_patron);			
+				ds_list_add(_output_list,_new_patron);
 	return _output_list;
 }

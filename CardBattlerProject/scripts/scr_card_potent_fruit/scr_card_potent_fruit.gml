@@ -4,60 +4,40 @@
 // > BUFF SELF TO DEAL 2X DAMAGE FOR 3 TURNS						//	
 //////////////////////////////////////////////////////////////////////
 function scr_card_potent_fruit(_card,_channel,_target){
-	/////////////////////////
-	// CHECK EFFECT EXISTS //
-	/////////////////////////
-	var _existing_potent = undefined;
-		//see if the target already has a potent fruit buff on
-		for (var _i = 0; _i < ds_list_size(_target._buffs); _i++){
-			var _buff = ds_list_find_value(_target._buffs,_i);
-			if (_buff._counter_name == "Potent Fruit"){
-				_existing_potent = _buff
-			}
-		}
-		
-	///////////////////////////////
-	// IF NOT EXISTS, CAST SPELL //
-	///////////////////////////////
-	if (_existing_potent == undefined){			
-		var _ref_counter = instance_create_layer(0,0,"GUI",obj_card_effect_counter);
-		_ref_counter.x = _target.x;
-		_ref_counter.y = _target.y - 100;
-		_ref_counter._draw_color = c_red;	
-		_ref_counter._turn_lifespan = 3;
-		_ref_counter._reference_script = scr_card_potent_fruit_tick;
-		_ref_counter._target = _target;
-		_ref_counter._counter_name = "Potent Fruit";
-		//add this type of buff to the buffs list
-		ds_list_add(_target._buffs,_ref_counter);
-		_ref_counter._trigger_my_effect = true;
+	//////////////////
+	// BONUS DAMAGE //
+	//////////////////
+	var _counter = scr_get_status_counter(_target, "Standalone", _card._card_name, undefined);		
+	if (_counter == undefined){		
+		scr_create_status_counter(_target,"Potent Fruit","Increase damage dealt by this unit by 2x, lasts 3 turns.",_card,"End",scr_card_potent_fruit_tick, true, undefined, 3, 0, "x2 damage", 0, "Standalone", _target._creature_statuses, spr_status_damage_up_scalar);
+		scr_create_combat_popup(_target,"x2 Damage Scalar","Default",0,0);	
 		_target._creature_attack_scalar = _target._creature_attack_scalar+1;
 	} 
-	
-	//////////////////////
-	// IF EXISTS, RENEW //
-	//////////////////////	
 	else {
-		_existing_potent._turn_lifespan = 3;
-	}
-
+		_counter._counter_life = 3;
+	}	
+	
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
+	
 	////////////
 	// EFFECT //
 	////////////
-	var _ref_effect = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
-	_ref_effect.sprite_index = spr_effect_potent_fruit;
+	scr_create_combat_effect(_target,spr_effect_powerup,0,0,36,c_maroon,0.25,0.25,0,0,0,"Stationary",undefined,"Effects");
 	
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_potent_fruit,0,false);	
+	audio_play_sound(snd_effect_powerup,0,false);		
+	
+	
 	
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"] + " on " + _target._creature_name;
-	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
 }

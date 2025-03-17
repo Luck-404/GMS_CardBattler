@@ -4,10 +4,12 @@
 // > CREATE A MINION FROM A SCRIPT									//
 //////////////////////////////////////////////////////////////////////
 depth = -200;
+image_index = 1;
+
+
 _minion_hp_cur = 0;
 _minion_hp_max = 0;
 _minion_def = 0;
-_flag_has_died = false;
 _minion_color = "Uncolored";
 _minion_name = "Any";
 _minion_team = "Player";
@@ -18,14 +20,13 @@ _minion_deathsound = snd_creature_wraith_death;
 _minion_defaultsound = snd_creature_wraith_default;
 _minion_position = 0;
 _minion_unit_attached = undefined;
-_trigger_my_effect = false;
+_minion_trigger_effect = false;
 _minion_effect_script = undefined;
-image_index = 1;
-_host_damage_taken_trigger = "";
-_host_damage_dealt_trigger = "";
-_taken_keystr = "";
-_dealt_keystr = "";
-_stacks = 0;
+_minion_stacks = 0;
+_minion_class = "Vanguard"; //Support, Guardian, Vanguard
+_minion_notes = [""];
+_flag_has_died = false;
+
 _latest_damage_done = undefined;
 _latest_channel = undefined;
 _latest_target = undefined;

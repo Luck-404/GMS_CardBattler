@@ -4,33 +4,36 @@
 // > CAST A SHIELD ON SELF											//
 //////////////////////////////////////////////////////////////////////
 function scr_card_bulwark(_card,_channel,_target){
-	///////////////
-	// MAGNITUDE //
-	///////////////
-	_target._creature_def += 10;
-	
-	
-	var _popup = instance_create_layer(_target.x, _target.y, "GUI", obj_combat_values_popup);
-	_popup._text = string(10);
-	_popup._type = "Shields";
+	/////////////
+	// DEFENSE //
+	/////////////
+	var _ab_check = scr_check_armorbreak(_target);
+	if (_ab_check == false){
+		_target._creature_def += 20;
+		scr_create_combat_popup(_target,"+20","Shields",0,0);
+	}
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
 	
 	////////////
 	// EFFECT //
 	////////////
-	var _ref_effect = instance_create_layer(_target.x,_target.y,"Effects",obj_card_effect);
-	_ref_effect.sprite_index = spr_effect_bulwark;
-	
+	scr_create_combat_effect(_target,spr_effect_shield,0,0,15,c_blue,0.3,0.3,0,0,0,"Stationary",undefined,"Effects");
+
+
 	///////////
 	// SOUND //
 	///////////
-	audio_play_sound(snd_effect_bulwark,0,false);	
+	audio_play_sound(snd_effect_big_shield,0,false);
+	
+	
 	
 	////////////
 	// BANNER //
 	////////////
-	var _ref_banner = instance_create_layer(room_width/2,room_height/2-400,"GUI",obj_zone_banner);
-	_ref_banner._ban_color = c_black;
-	_ref_banner._ban_text = "" + _channel._creature_name + " casts " + _card[?"name"];
-	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);	
 }

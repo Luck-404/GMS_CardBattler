@@ -12,12 +12,12 @@
   "conversionMode": 0,
   "duration": 76.8,
   "parent": {
-    "name": "BGMs",
-    "path": "folders/Sounds/BGMs.yy",
+    "name": "Green",
+    "path": "folders/Sounds/BGMs/Green.yy",
   },
   "preload": false,
   "sampleRate": 44100,
   "soundFile": "snd_bgm_meadows.wav",
   "type": 0,
-  "volume": 0.3,
+  "volume": 0.1,
 }

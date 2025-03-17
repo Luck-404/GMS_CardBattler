@@ -5,9 +5,26 @@
 //////////////////////////////////////////////////////////////////////
 function scr_card_echo(_card,_channel,_target){
 	global.echo_count += 1;	
+	scr_trigger_global_reactions(_card,_target,_channel,0);	
 	
-	var _popup = instance_create_layer(room_width/2, room_height/2, "GUI", obj_combat_values_popup);
-	_popup._text = "Echo count increased";
+	////////////
+	// EFFECT //
+	////////////
+	scr_create_combat_popup(undefined,"Echo count increased","Default",room_width/2,room_height/2);	
+	scr_create_combat_effect(undefined,spr_effect_echo,room_width/2,room_height/2,15,c_white,1,1,0,0,0,"Stationary",undefined,"Effects");
 	
-	scr_trigger_minion_reactions(_card,_target,_channel,0);	
+	///////////
+	// SOUND //
+	///////////
+	audio_play_sound(snd_effect_echo,0,false);
+	
+	////////////
+	// BANNER //
+	////////////
+	scr_create_combat_banner(c_black,"" + _channel._creature_name + " casts " + _card._card_ref[?"name"]);
+
+	///////////
+	// DEBUG //
+	///////////
+	show_debug_message("COMBAT: " + _channel._creature_name + " casts " + _card._card_ref[?"name"]);	
 }
