@@ -64,7 +64,9 @@ function scr_damage_creature(_target,_damage_input){
         // DAMAGE HEALTH //
         ///////////////////
         _target._creature_hp_current -= _damage_input;
-					
+		_target._creature_animation_state = CREATURE_ANIMAITON_STATE.HURT;
+		_target.image_index = 6;
+		
 		//////////////////
 		// COMBAT POPUP //
 		//////////////////

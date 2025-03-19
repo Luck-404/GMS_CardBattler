@@ -27,7 +27,7 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//ds_list_add(global.player_blessings_list, _new_bless);
 			
 			//player's deck setup
-			var _arr = ["Poison Ivy", "Nature's Remedy", "Verdant Bolt","Serpent Summon"];
+			var _arr = ["Thorny Whip"];
 			
 
 		for (var _i = 0; _i < array_length(_arr); _i++){

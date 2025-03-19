@@ -17,7 +17,8 @@ if (_creature_hp_current <= 0 && _flag_has_died == false){
 	_creature_hp_current = 0;
 	_flag_has_died = true;
 	scr_create_combat_popup(undefined,"","Death",x,y);
-	image_index = 1; //DEATH SPRITE STATE
+	_creature_animation_state = CREATURE_ANIMAITON_STATE.DYING;
+	image_index = 9;
 	//////////
 	// ALLY //
 	//////////

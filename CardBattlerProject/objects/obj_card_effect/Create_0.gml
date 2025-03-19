@@ -15,10 +15,10 @@ _motion_type = "Stationary";
 _secondary_script = undefined;
 _move = false;
 
-_psys = part_system_create(ps_verdant_projectile);
-_psys2 = part_system_create(ps_deadseed_beam);
+//_psys = part_system_create(ps_verdant_projectile);
+//_psys2 = part_system_create(ps_deadseed_beam);
 
-if (x > 960){
- part_system_angle(_psys,0);
- part_system_angle(_psys2,0); 
-}
+//if (x > 960){
+// part_system_angle(_psys,0);
+// part_system_angle(_psys2,0); 
+//}

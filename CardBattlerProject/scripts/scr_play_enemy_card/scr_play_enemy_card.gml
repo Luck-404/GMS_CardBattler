@@ -4,6 +4,8 @@
 // > PLAYS THE ENEMY CARD BASED ON WHAT TYPE OF CARD IT IS.		    //
 //////////////////////////////////////////////////////////////////////
 function scr_play_enemy_card(_ref_unit,_playing_card){
+	_ref_unit._creature_animation_state = CREATURE_ANIMAITON_STATE.ATTACK;
+	_ref_unit.image_index = 3;
 	//////////////////
 	// GET CARD REF //
 	//////////////////+

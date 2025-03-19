@@ -93,3 +93,13 @@ _status_venom = false; //scr_status_venom_tick - lifetime 3 //stackable
 //////////////
 _creature_passives = ds_list_create();
 
+
+enum CREATURE_ANIMAITON_STATE {
+	IDLE,
+	ATTACK,
+	HURT,
+	DYING,
+	DEAD
+}
+
+_creature_animation_state = CREATURE_ANIMAITON_STATE.IDLE;

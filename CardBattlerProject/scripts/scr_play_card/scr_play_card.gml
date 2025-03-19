@@ -17,7 +17,9 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 	_hopper._target = _channel_creature;
 	_hopper._origin_y = _channel_creature.y; // Store original position
 	_hopper._shaking = true;
-
+	
+	_channel_creature._creature_animation_state = CREATURE_ANIMAITON_STATE.ATTACK;
+	_channel_creature.image_index = 3;
 		
 	/////////////////////////
 	// SHAKE TARGET ON ATK //
