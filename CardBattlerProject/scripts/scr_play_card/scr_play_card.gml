@@ -116,8 +116,15 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 			scr_discard(_card);
 		}
 	}
-				
-		
+	
+	////////////////////////////////////////////////
+	// FOR EACH PASSIVE IN THE CREATURE'S LIST... //
+	////////////////////////////////////////////////
+	
+	for (var _i = 0; _i < ds_list_size(_channel_creature._creature_passives); _i++){
+		var _passive = ds_list_find_value(_channel_creature._creature_passives, _i);
+		scr_check_on_play_passive(_passive._passive_name, _channel_creature, _card);
+	}
 	/////////////////////////////////////////
 	// RESET PLAYER VARIABLES FOR NEW CAST //
 	/////////////////////////////////////////

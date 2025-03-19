@@ -27,19 +27,19 @@ if (_flag_has_died == false){
 		//enlarges self
 		if (_active){
 			if (_creature_team == "Enemy"){
-				draw_sprite_ext(sprite_index,0,x,y,-1.5,1.5,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,-0.5,0.5,0,c_white,1);
 				draw_sprite_ext(spr_unit_active,0,x,y,1,1,0,c_white,1);
 			}
 			else{
-				draw_sprite_ext(sprite_index,0,x,y,1.5,1.5,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,0.5,0.5,0,c_white,1);
 				draw_sprite_ext(spr_unit_active,0,x,y,1,1,0,c_white,1);
 			}
 		}
 		else {
 			if (_creature_team == "Enemy"){
-				draw_sprite_ext(sprite_index,0,x,y,-1.5,1.5,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,-0.5,0.5,0,c_white,1);
 			} else {
-				draw_sprite_ext(sprite_index,0,x,y,1.5,1.5,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,0.5,0.5,0,c_white,1);
 			}
 		
 		}
@@ -49,18 +49,22 @@ if (_flag_has_died == false){
 		// DEFAULT STATE- NORMAL SIZE //
 		////////////////////////////////
 		if(_active){
-			draw_self();
 			if (_creature_team == "Enemy"){
+				draw_sprite_ext(sprite_index,0,x,y,-0.25,0.25,0,c_white,1);
+				draw_sprite_ext(spr_unit_active,0,x,y,-0.25,0.25,0,c_white,1);
 				image_xscale = -1;
 			}
-			draw_sprite_ext(spr_unit_active,0,x,y,1,1,0,c_white,1);
+			else {
+				draw_sprite_ext(sprite_index,0,x,y,0.25,0.25,0,c_white,1);
+				draw_sprite_ext(spr_unit_active,0,x,y,0.25,0.25,0,c_white,1);
+			}
 		}
 		else { //draw greyed if
 			if (_creature_team == "Enemy"){
-				draw_sprite_ext(sprite_index,0,x,y,-1.0,1.0,0,c_white,1);
+				draw_sprite_ext(sprite_index,0,x,y,-0.25,0.25,0,c_white,1);
 			}		
 			else {
-				draw_sprite_ext(sprite_index,0,x,y,1.0,1.0,0,c_white,1);	
+				draw_sprite_ext(sprite_index,0,x,y,0.25,0.25,0,c_white,1);	
 			}
 		}
 	}

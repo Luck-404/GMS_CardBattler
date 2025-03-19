@@ -52,7 +52,7 @@ function scr_load_card(_cardname){
 		//break;	
 		
 		case "Verdant Bolt":
-			_loadedcard = scr_create_card("Verdant Bolt", "Deal 8 damage to 1 target, target gains one of the following: 1 bleed stack, 1 venom stack, 1 poison stack", 1, scr_card_verdant_bolt, spr_card_verdant_bolt, "Green", "Attack", 8, "Magical", "Mage", "Rare", false, "Ranged", 1);
+			_loadedcard = scr_create_card("Verdant Bolt", "Deal 8 damage to 1 target, target gains one of the following: 1 bleed stack, 1 venom stack, 1 poison stack", 1, scr_card_verdant_bolt, spr_card_verdant_bolt, "Green", "Attack", 8, "Magical", "Any", "Rare", false, "Ranged", 1);
 		break;			
 		
 		

@@ -33,7 +33,7 @@ function scr_create_combat_minion(_card,_channel,_target,_minion_type,_notes){
 		break;		
 		
 		case "Wasp Drone":
-			_new_minion = scr_create_minion(4,0,"Green","Spriggan",_target._creature_team,["Minion Step","None","None"],spr_minion_wasp_drone,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default,_target,scr_minion_wasp_drone_tick,0,"Vanguard",_notes);
+			_new_minion = scr_create_minion(4,0,"Green","Wasp Drone",_target._creature_team,["Minion Step","None","None"],spr_minion_wasp_drone,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default,_target,scr_minion_wasp_drone_tick,0,"Vanguard",_notes);
 		break;		
 		
 		case "Deadseed":

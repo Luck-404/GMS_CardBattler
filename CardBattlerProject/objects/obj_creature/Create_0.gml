@@ -26,7 +26,6 @@ _creature_markings = ds_list_create(); //can start with these if wanted
 _creature_sprite = spr_creature_uncolored_wraith;
 _creature_hurtsound = snd_creature_wraith_hurt;
 _creature_deathsound = snd_creature_wraith_death;
-_creature_defaultsound = snd_creature_wraith_default;
 _creature_def = 0;
 _creature_position = 0;
 _left_unit = undefined;
@@ -89,4 +88,8 @@ _status_venom = false; //scr_status_venom_tick - lifetime 3 //stackable
 //_status_voidtouched = false; //scr_status_voidtouched_tick - lifetime 3 //stackable
 //_status_wildcharged = false; //scr_status_wildcharged_tick - lifetime 3 //stackable
 
+//////////////
+// PASSIVES //
+//////////////
+_creature_passives = ds_list_create();
 

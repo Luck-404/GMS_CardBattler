@@ -17,13 +17,17 @@ function scr_init_new_player(_player,_patron,_blessing){
 			
 			_new_creature = scr_load_creature("Corpseflower");
 			ds_list_add(global.player_party, _new_creature);
+			//ds_list_add(global.player_party, _new_creature);
+			//ds_list_add(global.player_party, _new_creature);
+			//ds_list_add(global.player_party, _new_creature);
+			//ds_list_add(global.player_party, _new_creature);
 
 			////blessing setup TODO
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.player_blessings_list, _new_bless);
 			
 			//player's deck setup
-			var _arr = ["Strike","Strike","Strike","Deadseed"];
+			var _arr = ["Poison Ivy", "Nature's Remedy", "Verdant Bolt","Serpent Summon"];
 			
 
 		for (var _i = 0; _i < array_length(_arr); _i++){

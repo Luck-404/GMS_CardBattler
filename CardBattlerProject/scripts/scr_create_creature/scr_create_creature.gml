@@ -3,7 +3,7 @@
 //																	//
 // > CREATES A CREATURE WITH MAPPED VALUES							//
 //////////////////////////////////////////////////////////////////////
-function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team, _breed, _hp, _spec, _class, _gear, _markings, _sprite, _hurtsound, _deathsound, _defaultsound) {
+function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team, _breed, _hp, _spec, _class, _gear, _markings, _sprite, _hurtsound, _deathsound, _passives) {
     var _ref_new_creature = ds_map_create();
     ds_map_add(_ref_new_creature, "name", _name); //name of creature
     ds_map_add(_ref_new_creature, "champion", _champion); //is a champion or not
@@ -21,7 +21,7 @@ function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team
 	ds_map_add(_ref_new_creature, "sprite", _sprite); //reference to the new creature's sprite
 	ds_map_add(_ref_new_creature, "hurtsound", _hurtsound); //reference to the new creature's hurt sound
 	ds_map_add(_ref_new_creature, "deathsound", _deathsound); //reference to the new creature's death sound
-	ds_map_add(_ref_new_creature, "defaultsound", _defaultsound); //reference to the new creature's default sound	
 	ds_map_add(_ref_new_creature, "goldcost", irandom_range(30,80)); //reference to the new creature's default sound	
+	ds_map_add(_ref_new_creature, "passives", _passives); //reference to the new creature's default sound	
    return _ref_new_creature;
 }

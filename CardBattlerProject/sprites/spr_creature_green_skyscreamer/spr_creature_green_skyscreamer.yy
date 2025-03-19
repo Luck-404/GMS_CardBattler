@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "spr_creature_green_wyrmling",
+  "name": "spr_creature_green_skyscreamer",
   "bbox_bottom": 320,
   "bbox_left": 192,
   "bbox_right": 320,
@@ -20,11 +20,10 @@
   "height": 512,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"2045336e-5549-409f-8234-090c542558f2","blendMode":0,"displayName":"Layer 1","isLocked":false,"opacity":27.0,"visible":true,},
     {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"b64c286f-e643-48f1-b3a8-01078639e2b4","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
   "nineSlice": null,
-  "origin": 4,
+  "origin": 0,
   "parent": {
     "name": "Green",
     "path": "folders/Sprites/Creatures/Green.yy",
@@ -33,7 +32,7 @@
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "spr_creature_green_wyrmling",
+    "name": "spr_creature_green_skyscreamer",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -55,13 +54,13 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"58f6e386-f30b-4ea3-9062-478a46fb3c4f","path":"sprites/spr_creature_green_wyrmling/spr_creature_green_wyrmling.yy",},},},"Disabled":false,"id":"28407767-2e1d-4bcc-a3eb-bbace3e42064","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"58f6e386-f30b-4ea3-9062-478a46fb3c4f","path":"sprites/spr_creature_green_skyscreamer/spr_creature_green_skyscreamer.yy",},},},"Disabled":false,"id":"f9fd51d8-d760-41b0-9d57-1d1e4bb27abf","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,
     "volume": 1.0,
-    "xorigin": 256,
-    "yorigin": 256,
+    "xorigin": 0,
+    "yorigin": 0,
   },
   "swatchColours": null,
   "swfPrecision": 2.525,

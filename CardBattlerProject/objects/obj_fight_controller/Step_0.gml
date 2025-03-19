@@ -12,11 +12,23 @@ switch(global.fight_controller_state){
 			//scr_roll_enemies(scr_save_room(global.saved_room), 1);
 			scr_roll_enemies(scr_save_room(global.saved_room), irandom_range(1,5));			
 			
-		//spawn enemy team creature objects
-		for (var _i = 0; _i < ds_list_size(global.enemy_party); _i++){				
-			//spawn the creature
+		///////////////
+		// SPAWN TEAM //
+		////////////////
+		var _total_units = ds_list_size(global.enemy_party);
+		var _x_min = 1124;
+		var _x_max = 1850;
+		var _x_center = (_x_min + _x_max) / 2;
+		var _spacing = 160; // Fixed spacing between units
+
+		for (var _i = 0; _i < _total_units; _i++) {  
+			// Calculate x position based on center alignment
+			var _offset = (_i - ((_total_units - 1) / 2)) * _spacing;
+			var _x_position = _x_center + _offset;
+
+			// Spawn the creature
 			var _ref_creature = ds_list_find_value(global.enemy_party, _i);
-			var _ref_creature_instance = instance_create_layer(1124+(_i*158), 536, "Creatures", obj_creature); //generate the creature	
+			var _ref_creature_instance = instance_create_layer(_x_position, 536, "Creatures", obj_creature);	
 			//pass the creature the proper stats it needs
 			_ref_creature_instance._creature_name = _ref_creature[? "name"];
 			_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
@@ -36,7 +48,19 @@ switch(global.fight_controller_state){
 			_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
 			_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
-			_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
+
+			/////////////////////
+			// SET UP PASSIVES //
+			/////////////////////
+				var _arr = _ref_creature[? "passives"];
+				for (var _j = 0; _j < 1; _j++){
+					show_debug_message("found enemy passive " +_arr[_j]);
+					var _passive_name = _arr[_j];
+					var _passive = scr_load_passive(_passive_name,_ref_creature_instance);
+					ds_list_add(_ref_creature_instance._creature_passives, _passive);
+					show_debug_message("adding passive to creature list");
+				}
+					
 			//init their deck
 			scr_init_enemy_deck(_ref_creature_instance, _ref_creature[? "name"]);
 			ds_list_add(global.enemy_party_in_play, _ref_creature_instance);		

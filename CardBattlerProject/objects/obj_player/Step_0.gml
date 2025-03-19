@@ -242,74 +242,103 @@ if (room == rm_encounter){
 	switch(global.player_enc_state){
 		#region INIT
 			case PLAYER_ENCOUNTER_STATE.INIT: //SPAWN CREATURES ON INIT ENTRY INTO THE ROOM
-			show_debug_message("PLAYER ENCOUNTER STATE: STARTING INIT...");	
-			////////////////////
-			// RANDOMIZE DECK //
-			////////////////////
-			scr_randomize_deck();
-			
-			////////////////
-			// SPAWN TEAM //
-			////////////////
-				for (var _i = 0; _i < ds_list_size(global.player_party); _i++){					
-					//spawn the creature
-					var _ref_creature = ds_list_find_value(global.player_party, _i);
-					var _ref_creature_instance = instance_create_layer(796-(_i*158), 536, "Creatures", obj_creature); //generate the creature	
-					//pass the creature the proper stats it needs
-					_ref_creature_instance._party_position = _i;
-					_ref_creature_instance._creature_name = _ref_creature[? "name"];
-					_ref_creature_instance._creature_champion = _ref_creature[? "champion"];
-					_ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
-					_ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
-					_ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
-					_ref_creature_instance._creature_team = "Player";
-					_ref_creature_instance._creature_breed = _ref_creature[? "breed"];
-					_ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
-					_ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
-					_ref_creature_instance._creature_spec = _ref_creature[? "spec"];
-					_ref_creature_instance._creature_class = _ref_creature[? "class"];
-					if (_ref_creature_instance._creature_class == "Summoner") {
-						_ref_creature_instance._creature_minion_limit = 5;
-					}
-					_ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
-					_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
-					_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
-					_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
-					_ref_creature_instance._creature_defaultsound = _ref_creature[? "defaultsound"];
-					_ref_creature_instance._creature_position = _i;
-					
-					//_ref_creature_instance._creature_attack_linear = 1;
-					//_ref_creature_instance._creature_attack_scalar = 2;
-					ds_list_add(global.player_party_in_play, _ref_creature_instance);
-				}
-				
-			/////////////////////////////////
-			// APPLY TEAM LEFTS AND RIGHTS //
-			/////////////////////////////////
-			for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++) {		
-				var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
-				var _ref_left_creature = undefined;
-				var _ref_right_creature = undefined;
-			
-				if (ds_list_find_value(global.player_party_in_play, _i-1) != undefined){
-					_ref_right_creature = ds_list_find_value(global.player_party_in_play, _i-1);
-				}
-				if (ds_list_find_value(global.player_party_in_play, _i+1) != undefined){
-					_ref_left_creature = ds_list_find_value(global.player_party_in_play, _i+1);
-				}
-			
-				_ref_creature._left_unit = _ref_left_creature;
-				_ref_creature._right_unit = _ref_right_creature;
-			}		
+				show_debug_message("PLAYER ENCOUNTER STATE: STARTING INIT...");	
+				////////////////////
+				// RANDOMIZE DECK //
+				////////////////////
+				scr_randomize_deck();
 
-			////////////////////////////
-			// ON-ENCOUNTER BLESSINGS //
-			////////////////////////////
+				////////////////
+				// SPAWN TEAM //
+				////////////////
+				var _total_units = ds_list_size(global.player_party);
+				var _x_min = 70;
+				var _x_max = 796;
+				var _x_center = (_x_min + _x_max) / 2;
+				var _spacing = 160; // Fixed spacing between units
+
+				for (var _i = 0; _i < _total_units; _i++) {  
+				    // Calculate x position based on center alignment
+				    var _offset = (_i - ((_total_units - 1) / 2)) * _spacing;
+				    var _x_position = _x_center + _offset;
+
+				    // Spawn the creature
+				    var _ref_creature = ds_list_find_value(global.player_party, _i);
+				    var _ref_creature_instance = instance_create_layer(_x_position, 536, "Creatures", obj_creature);
+
+				    // Assign stats and properties
+				    _ref_creature_instance._party_position = _i;
+				    _ref_creature_instance._creature_name = _ref_creature[? "name"];
+				    _ref_creature_instance._creature_champion = _ref_creature[? "champion"];
+				    _ref_creature_instance._creature_color1 = _ref_creature[? "color1"];
+				    _ref_creature_instance._creature_color2 = _ref_creature[? "color2"];
+				    _ref_creature_instance._creature_subtype = _ref_creature[? "subtype"];
+				    _ref_creature_instance._creature_team = "Player";
+				    _ref_creature_instance._creature_breed = _ref_creature[? "breed"];
+				    _ref_creature_instance._creature_hp_max = _ref_creature[? "hp"];
+				    _ref_creature_instance._creature_hp_current = _ref_creature[? "curhp"];
+				    _ref_creature_instance._creature_spec = _ref_creature[? "spec"];
+				    _ref_creature_instance._creature_class = _ref_creature[? "class"];
+    
+				    if (_ref_creature_instance._creature_class == "Summoner") {
+				        _ref_creature_instance._creature_minion_limit = 5;
+				    }
+
+				    _ref_creature_instance.sprite_index = _ref_creature[? "sprite"];
+				    _ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
+				    _ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
+				    _ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
+				    _ref_creature_instance._creature_position = _i;
+
+				    /////////////////////
+				    // SET UP PASSIVES //
+				    /////////////////////
+				    var _arr = _ref_creature[? "passives"];
+				    for (var _j = 0; _j < 1; _j++){
+				        show_debug_message("found ally passive " + _arr[_j]);
+				        var _passive_name = _arr[_j];
+				        var _passive = scr_load_passive(_passive_name, _ref_creature_instance);
+				        ds_list_add(_ref_creature_instance._creature_passives, _passive);
+				        show_debug_message("adding passive to creature list... " + ds_list_find_value(_ref_creature_instance._creature_passives, 0)._passive_name);
+				    }
+
+				    ds_list_add(global.player_party_in_play, _ref_creature_instance);
+					
+					//TEMP - add 5 minions
+					//scr_create_combat_minion(undefined,_ref_creature_instance,_ref_creature_instance,"Wasp Drone",[""]);
+					//scr_create_combat_minion(undefined,_ref_creature_instance,_ref_creature_instance,"Wasp Drone",[""]);
+					//scr_create_combat_minion(undefined,_ref_creature_instance,_ref_creature_instance,"Wasp Drone",[""]);
+					//scr_create_combat_minion(undefined,_ref_creature_instance,_ref_creature_instance,"Wasp Drone",[""]);
+					//scr_create_combat_minion(undefined,_ref_creature_instance,_ref_creature_instance,"Wasp Drone",[""]);
+				}
+
+				/////////////////////////////////
+				// APPLY TEAM LEFTS AND RIGHTS //
+				/////////////////////////////////
+				for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++) {		
+				    var _ref_creature = ds_list_find_value(global.player_party_in_play, _i);
+				    var _ref_left_creature = undefined;
+				    var _ref_right_creature = undefined;
+
+				    if (ds_list_find_value(global.player_party_in_play, _i-1) != undefined){
+				        _ref_right_creature = ds_list_find_value(global.player_party_in_play, _i-1);
+				    }
+				    if (ds_list_find_value(global.player_party_in_play, _i+1) != undefined){
+				        _ref_left_creature = ds_list_find_value(global.player_party_in_play, _i+1);
+				    }
+
+				    _ref_creature._left_unit = _ref_left_creature;
+				    _ref_creature._right_unit = _ref_right_creature;
+				}		
+
+				////////////////////////////
+				// ON-ENCOUNTER BLESSINGS //
+				////////////////////////////
 				//TODO
-				
-			//PASS
-			show_debug_message("PLAYER ENCOUNTER STATE: SUCCESS...");	
-			global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;
+
+				//PASS
+				show_debug_message("PLAYER ENCOUNTER STATE: SUCCESS...");	
+				global.player_enc_state = PLAYER_ENCOUNTER_STATE.BEGIN_TURN;
 		break;
 		#endregion
 		

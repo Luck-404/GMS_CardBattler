@@ -18,4 +18,11 @@ function scr_trigger_global_reactions(_card,_target,_channel,_damage){
 		_latest_channel = _channel;
 		_latest_damage_done = _damage;
 	}
+	
+	with(obj_passive){
+		_latest_card = _card;
+		_latest_target = _target;
+		_latest_channel = _channel;
+		_latest_damage_done = _damage;
+	}
 }

@@ -52,12 +52,12 @@ if (_minion_unit_attached != undefined){
 		if (_minion_team = "Enemy"){		
 			switch(_minion_position){
 					case 0:
-						x = _x_pos - 64;
+						x = _x_pos - 76;
 						y = _y_pos + 100;							
 					break;
 			
 					case 1:
-						x = _x_pos-32;
+						x = _x_pos-40;
 						y = _y_pos+130;								
 					break;
 			
@@ -67,12 +67,12 @@ if (_minion_unit_attached != undefined){
 					break;
 			
 					case 3:
-						x = _x_pos+32;
+						x = _x_pos+40;
 						y = _y_pos+130;							
 					break;
 
 					case 4:
-						x = _x_pos+64;
+						x = _x_pos+76;
 						y = _y_pos+100;							
 					break;
 				}
