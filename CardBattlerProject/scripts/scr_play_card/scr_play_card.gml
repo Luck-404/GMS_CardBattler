@@ -130,5 +130,8 @@ function scr_play_card(_card, _channel_creature, _target_creature) {
 	/////////////////////////////////////////
 	// RESET PLAYER VARIABLES FOR NEW CAST //
 	/////////////////////////////////////////
+	show_debug_message("SPAWNING TIMER");
+	instance_create_layer(x,y,"GUI",obj_rearrange_timer);	
 	scr_reset_playstate();
+
 }

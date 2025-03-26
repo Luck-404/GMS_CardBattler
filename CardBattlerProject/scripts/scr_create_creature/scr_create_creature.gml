@@ -3,7 +3,7 @@
 //																	//
 // > CREATES A CREATURE WITH MAPPED VALUES							//
 //////////////////////////////////////////////////////////////////////
-function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team, _breed, _hp, _spec, _class, _gear, _markings, _sprite, _hurtsound, _deathsound, _passives) {
+function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team, _breed, _hp, _spec, _class, _sprite, _hurtsound, _deathsound, _passives) {
     var _ref_new_creature = ds_map_create();
     ds_map_add(_ref_new_creature, "name", _name); //name of creature
     ds_map_add(_ref_new_creature, "champion", _champion); //is a champion or not
@@ -16,8 +16,6 @@ function scr_create_creature(_name, _champion, _color1, _color2, _subtype, _team
     ds_map_add(_ref_new_creature, "curhp", _hp); //current HP stat, based on a number of factors (see the spreadsheet)	
     ds_map_add(_ref_new_creature, "spec", _spec); //martial, technical, or magical - certain ones can only use certain cards
     ds_map_add(_ref_new_creature, "class", _class); //solider, sailor, adventurer, hunter, merchant, engineer, mage, necromancer, priest
-    ds_map_add(_ref_new_creature, "gearlist", _gear); //dslist of gear
-    ds_map_add(_ref_new_creature, "markingslist", _markings); //dslist of markings
 	ds_map_add(_ref_new_creature, "sprite", _sprite); //reference to the new creature's sprite
 	ds_map_add(_ref_new_creature, "hurtsound", _hurtsound); //reference to the new creature's hurt sound
 	ds_map_add(_ref_new_creature, "deathsound", _deathsound); //reference to the new creature's death sound

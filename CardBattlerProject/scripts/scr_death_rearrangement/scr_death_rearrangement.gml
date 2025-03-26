@@ -1,41 +1,95 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_death_rearrangement(_creature){
-	while (_creature._left_unit != undefined){
-		//start unit
-		var _start_pos = _creature._creature_position;
-		var _start_x = _creature.x;
-		var _start_left = _creature._left_unit;
-		var _start_right = _creature._right_unit;
-		
-		// swap unit
-		var _swap_unit = _creature._left_unit;
-		var _swap_pos = _swap_unit._creature_position;
-		var _swap_x = _swap_unit.x;
-		var _swap_left = _swap_unit._left_unit;
-		var _swap_right = _swap_unit._right_unit;
-		
-		//swap x values
-		_swap_unit.x = _start_x;
-		_creature.x = _swap_x;
-		
-		//swap positions
-		_swap_unit._creature_position = _start_pos;
-		_creature._creature_position = _swap_pos;
-		
-		//update left/right connections
-		_swap_unit._left_unit = _creature; //swapped
-		_swap_unit._right_unit = _start_right; //takes place of original
-		if (_start_right != undefined){
-			_start_right._left_unit = _swap_unit; //right unit references swapped now
+function scr_death_rearrangement(_creature,_team) {
+    show_debug_message("Starting rearrangement");
+    global.rearranging = true;
+
+
+switch(_team){
+	#region PLAYER
+	case "Player":
+		//update left and right references
+		//left's right (was self) becomes self's right
+		if (_left_unit != undefined){
+			_left_unit._right_unit = _right_unit;
+		} else {
+			_left_unit._right_unit = undefined;
 		}
-		_creature._left_unit = _swap_left; //original moves left
-		if (_swap_left != undefined){
-			_swap_left._right_unit = _creature; //swap left's new right is the original
+		
+		if (_right_unit != undefined){
+			_right_unit._left_unit = _left_unit;
+		} else {
+			_right_unit._left_unit = undefined;
 		}
-		_creature._right_unit = _swap_unit; //
-	}
-	
-	//remove unit from living list
-	
+		
+		//update lists
+		ds_list_delete(global.player_party_in_play, _creature_position);
+		ds_list_add(global.player_party_dead,self);	
+		
+		//update lists
+		//update alive positions of creatures
+		for (var _i = 0; _i < ds_list_size(global.player_party_in_play); _i++){
+			var _unit = ds_list_find_value(global.player_party_in_play,_i);
+			_unit._creature_position = _i;
+			//update visual positions
+			var _found_x = scr_find_new_creature_x("Player",_i);
+			_unit.x = _found_x;
+		}		
+		//update dead positions of creatures
+		for (var _i = 0; _i < ds_list_size(global.player_party_dead); _i++){
+			var _unit = ds_list_find_value(global.player_party_dead,_i);
+			_unit._creature_position = _i;
+			//update visual positions
+			var _found_x = scr_find_new_creature_x("Player", ds_list_size(global.enemy_party_in_play)+_i);
+			_unit.x = _found_x;
+		}	
+	break;
+	#endregion
+
+
+	#region Enemy
+	case "Enemy":
+		
+		//update left and right references
+		if (_left_unit != undefined){
+			_left_unit._right_unit = _right_unit;
+		} else {
+			_left_unit._right_unit = undefined;
+		}
+		
+		if (_right_unit != undefined){
+			_right_unit._left_unit = _left_unit;
+		} else {
+			_right_unit._left_unit = undefined;
+		}
+		
+		if (_card_to_play != undefined){
+			instance_destroy(_card_to_play);	
+		}
+		
+		ds_list_delete(global.enemy_party_in_play,_creature_position);
+		ds_list_add(global.enemy_party_dead,self);		
+		
+		//update lists
+		//update alive positions of creatures
+		for (var _i = 0; _i < ds_list_size(global.enemy_party_in_play); _i++){
+			var _unit = ds_list_find_value(global.enemy_party_in_play,_i);
+			_unit._creature_position = _i;
+			//update visual positions
+			var _found_x = scr_find_new_creature_x("Enemy",_i);
+			_unit.x = _found_x;
+		}		
+		//update dead positions of creatures
+		for (var _i = 0; _i < ds_list_size(global.enemy_party_dead); _i++){
+			var _unit = ds_list_find_value(global.enemy_party_dead,_i);
+			_unit._creature_position = _i;
+			//update visual positions
+			var _found_x = scr_find_new_creature_x("Enemy", ds_list_size(global.enemy_party_in_play)+_i);
+			_unit.x = _found_x;
+		}	
+	break;
+	#endregion
+}
+
+
+    global.rearranging = false;
+    show_debug_message("Ending rearrangement");
 }

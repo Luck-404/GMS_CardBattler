@@ -5,107 +5,8 @@
 //////////////////////////////////////////////////////////////////////
 draw_self();
 if (_minion_unit_attached != undefined){
-	var _x_pos = _minion_unit_attached.x;
-	var _y_pos = _minion_unit_attached.y;
-
-
-	if(_minion_unit_attached._creature_minion_limit == 3){
-		if (_minion_team = "Enemy"){
-			switch(_minion_position){
-				case 0:
-					x = _x_pos - 64;
-					y = _y_pos + 100;		
-				break;
-			
-				case 1:
-					x = _x_pos;
-					y = _y_pos + 100;			
-				break;
-			
-				case 2:
-					x = _x_pos + 64;
-					y = _y_pos + 100;							
-				break;
-			}
-		} else {
-			switch(_minion_position){
-				case 0:
-	
-					x = _x_pos + 64;
-					y = _y_pos + 100;						
-				break;
-			
-				case 1:
-					x = _x_pos;
-					y = _y_pos + 100;			
-				break;
-			
-				case 2:
-					x = _x_pos - 64;
-					y = _y_pos + 100;				
-				break;	
-			}
-		}
-	}
-	
-	else if(_minion_unit_attached._creature_minion_limit == 5){
-		if (_minion_team = "Enemy"){		
-			switch(_minion_position){
-					case 0:
-						x = _x_pos - 76;
-						y = _y_pos + 100;							
-					break;
-			
-					case 1:
-						x = _x_pos-40;
-						y = _y_pos+130;								
-					break;
-			
-					case 2:
-						x = _x_pos;
-						y = _y_pos+100;						
-					break;
-			
-					case 3:
-						x = _x_pos+40;
-						y = _y_pos+130;							
-					break;
-
-					case 4:
-						x = _x_pos+76;
-						y = _y_pos+100;							
-					break;
-				}
-		} 
-		else {
-			switch(_minion_position){
-					case 0:
-						x = _x_pos+64;
-						y = _y_pos+100;		
-					break;
-			
-					case 1:
-						x = _x_pos+32;
-						y = _y_pos+130;								
-					break;
-			
-					case 2:
-						x = _x_pos;
-						y = _y_pos+100;						
-					break;
-			
-					case 3:
-						x = _x_pos-32;
-						y = _y_pos+130;					
-					break;
-
-					case 4:
-						x = _x_pos - 64;
-						y = _y_pos + 100;				
-					break;
-				}
-			}
-	}	
+	scr_rearrange_minion(self,_minion_unit_attached._creature_minion_limit);
+}	
 	
 draw_sprite(spr_minion_circle,0,x,y+16);	
 
@@ -119,8 +20,7 @@ if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) &&
 }
 	
 	
-	//leech icon
-	if(_minion_name == "Bloodbeak" || _minion_name == "Serpent"){
-		draw_sprite(spr_minion_leech,0,x+16, y + 40);
-	}
+//leech icon
+if(_minion_name == "Bloodbeak" || _minion_name == "Serpent"){
+	draw_sprite(spr_minion_leech,0,x+16, y + 40);
 }

@@ -3,6 +3,8 @@
 //																	//
 // > DRAW HOVER INFORMATION											//
 //////////////////////////////////////////////////////////////////////
+x = _unit.x;
+
 if (global.player_enc_state!=PLAYER_ENCOUNTER_STATE.EXIT_ENC){
 	if ((global.flag_gui_open == false) && position_meeting(mouse_x,mouse_y,self) && (global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CHANNEL || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_TARGET || global.player_enc_state=PLAYER_ENCOUNTER_STATE.PICK_CARD)){
 		//enlarges card

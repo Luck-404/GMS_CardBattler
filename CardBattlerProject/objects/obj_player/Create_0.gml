@@ -100,3 +100,5 @@ enum PLAYER_ENCOUNTER_STATE {
 	PAUSE
 }
 global.player_enc_state = PLAYER_ENCOUNTER_STATE.PAUSE;
+
+global.rearranging = false;

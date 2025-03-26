@@ -20,7 +20,7 @@ function scr_load_card(_cardname){
 		
 		//GREEN
 		case "Thorny Whip":
-			_loadedcard = scr_create_card("Thorny Whip", "Deal 8 damage", 0, scr_card_thorny_whip, spr_card_thorny_whip, "Green", "Attack", 8, "Any", "Any", "Common", false, "Ranged",1);
+			_loadedcard = scr_create_card("Thorny Whip", "Deal 8 damage", 0, scr_card_thorny_whip, spr_card_thorny_whip, "Green", "Attack", 100, "Any", "Any", "Common", false, "Ranged",1);
 		break;
 		
 		//case "Fell":

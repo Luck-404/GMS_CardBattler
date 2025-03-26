@@ -10,19 +10,19 @@ var _rand = irandom_range(1,3);
 var _creature = undefined;
 switch (_rand){
 	case 0: //wraith
-		_creature = scr_create_creature("Wraith", false, "Uncolored", "None", "None","Ally","Default",irandom_range(30,40),"All","All",undefined, undefined,spr_creature_uncolored_wraith,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);	
+		_creature = scr_load_creature("Wraith");
 	break;
 	
 	case 1: //monke
-		_creature = scr_create_creature("Bush Monkey", false, "Green", "None", "None","Ally","Default",irandom_range(60,80),"All","All",undefined, undefined,spr_creature_green_bush_monkey,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);		
+		_creature = scr_load_creature("Bush Monkey");
 	break;
 	
 	case 2: //corpseflower
-		_creature = scr_create_creature("Corpseflower", false, "Green", "None", "None","Ally","Default",irandom_range(25,30),"All","All",undefined, undefined,spr_creature_green_corpseflower,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+		_creature = scr_load_creature("Corpseflower");
 	break;	
 		
 	case 3: //furn
-		_creature = scr_create_creature("Furn", false, "Green", "None", "None","Ally","Default",irandom_range(40,50),"All","All",undefined, undefined,spr_creature_green_furn,snd_creature_wraith_hurt,snd_creature_wraith_death,snd_creature_wraith_default);
+		_creature = scr_load_creature("Furn");
 	break;	
 }
 

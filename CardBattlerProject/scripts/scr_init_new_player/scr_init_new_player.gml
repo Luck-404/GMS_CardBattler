@@ -9,25 +9,18 @@ function scr_init_new_player(_player,_patron,_blessing){
 			//gold based on patron
 			global.gold = irandom_range(30,50);
 			//player's team setup
-			var _new_creature = scr_load_creature("Bush Monkey");
-			ds_list_add(global.player_party, _new_creature);		
-			
-			_new_creature = scr_load_creature("Furn");
-			ds_list_add(global.player_party, _new_creature);
-			
-			_new_creature = scr_load_creature("Corpseflower");
-			ds_list_add(global.player_party, _new_creature);
-			//ds_list_add(global.player_party, _new_creature);
-			//ds_list_add(global.player_party, _new_creature);
-			//ds_list_add(global.player_party, _new_creature);
-			//ds_list_add(global.player_party, _new_creature);
+			for (var _i = 0; _i < 5; _i++){
+				var _choice = choose("Bush Monkey","Furn","Corpseflower","Sirensting","Skyscreamer","Big Bear");
+				var _new_creature = scr_load_creature(_choice);
+				ds_list_add(global.player_party, _new_creature);
+			}
 
 			////blessing setup TODO
 			//var _new_bless = scr_load_blessing(_blessing[?"Name"]);
 			//ds_list_add(global.player_blessings_list, _new_bless);
 			
 			//player's deck setup
-			var _arr = ["Thorny Whip"];
+			var _arr = ["Thorny Whip","Thorny Whip","Thorny Whip"];
 			
 
 		for (var _i = 0; _i < array_length(_arr); _i++){

@@ -455,7 +455,7 @@ if (room == rm_encounter){
 		
 		#region PICK CARD	
 		case PLAYER_ENCOUNTER_STATE.PICK_CARD: //STAY HERE WAITNIG FOR INPUT (CARD CLICKED ON), ALSO COUNTS AS IDLE (CAN DO OPTIONS MENU STUFF)
-		if (global.flag_gui_open == false){
+		if (global.flag_gui_open == false && instance_exists(obj_rearrange_timer) == false && global.rearranging == false){
 		
 		///////////////////
 		// HOVER EFFECTS //
