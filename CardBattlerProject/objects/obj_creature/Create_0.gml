@@ -30,6 +30,7 @@ _creature_def = 0;
 _creature_position = 0;
 _left_unit = undefined;
 _right_unit = undefined;
+_creature_list = global.player_party_in_play;
 
 //STATS
 _creature_attack_scalar = 1;

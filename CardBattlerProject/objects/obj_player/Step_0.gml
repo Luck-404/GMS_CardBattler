@@ -289,6 +289,7 @@ if (room == rm_encounter){
 				    _ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 				    _ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
 				    _ref_creature_instance._creature_position = _i;
+					_ref_creature_instance._creature_list = global.player_party_in_play;
 
 				    /////////////////////
 				    // SET UP PASSIVES //

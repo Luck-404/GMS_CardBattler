@@ -9,6 +9,7 @@
 draw_set_color(c_olive);
 draw_set_font(fnt_fanwood);
 draw_text(x,y-400, string(_creature_position));
+//show_debug_message(_creature_team + " Creature " + string(_creature_position) + " at x"+ string(x));
 
 /////////////////
 // DEATH CHECK //

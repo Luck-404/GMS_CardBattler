@@ -48,7 +48,7 @@ switch(global.fight_controller_state){
 			_ref_creature_instance._creature_sprite = _ref_creature[? "sprite"];
 			_ref_creature_instance._creature_hurtsound = _ref_creature[? "hurtsound"];
 			_ref_creature_instance._creature_deathsound = _ref_creature[? "deathsound"];
-
+					_ref_creature_instance._creature_list = global.enemy_party_in_play;
 			/////////////////////
 			// SET UP PASSIVES //
 			/////////////////////
