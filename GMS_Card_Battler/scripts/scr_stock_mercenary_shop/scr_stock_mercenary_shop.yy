@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_stock_mercenary_shop",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_stock_mercenary_shop",
+  "parent":{
+    "name":"Shops",
+    "path":"folders/Scripts/World/Shops.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

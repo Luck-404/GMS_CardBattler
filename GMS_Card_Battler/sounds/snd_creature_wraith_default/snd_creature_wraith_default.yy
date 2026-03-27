@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_creature_wraith_default",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.471497,
+  "exportDir":"",
+  "name":"snd_creature_wraith_default",
+  "parent":{
+    "name":"Creatures",
+    "path":"folders/Sounds/Creatures.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_creature_wraith_default.wav",
+  "volume":0.2,
+}

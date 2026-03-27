@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_sway",
+  "name":"sh_sway",
+  "parent":{
+    "name":"Ambiance",
+    "path":"folders/Sprites/Ambiance.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

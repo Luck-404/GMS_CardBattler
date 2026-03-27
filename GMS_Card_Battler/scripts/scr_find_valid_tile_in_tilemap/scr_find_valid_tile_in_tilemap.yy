@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_find_valid_tile_in_tilemap",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_find_valid_tile_in_tilemap",
+  "parent":{
+    "name":"General",
+    "path":"folders/Scripts/Effects/General.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

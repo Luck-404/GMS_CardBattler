@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_passive_verdant",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_passive_verdant",
+  "parent":{
+    "name":"Passives",
+    "path":"folders/Scripts/Passives.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

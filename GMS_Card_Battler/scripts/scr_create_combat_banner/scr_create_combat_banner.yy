@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_create_combat_banner",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_create_combat_banner",
+  "parent":{
+    "name":"Encounter",
+    "path":"folders/Scripts/Effects/Encounter.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
