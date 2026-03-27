@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"Options",
-    "path":"folders/Sprites/GUI/General/Options.yy",
+    "path":"folders/OLD/Sprites/GUI/General/Options.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

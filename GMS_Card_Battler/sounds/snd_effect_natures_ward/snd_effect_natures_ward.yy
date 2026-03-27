@@ -15,7 +15,7 @@
   "name":"snd_effect_natures_ward",
   "parent":{
     "name":"Green",
-    "path":"folders/Sounds/Card Effects/Green.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Green.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Tools and Game Systems",
-    "path":"folders/Objects/Tools and Game Systems.yy",
+    "path":"folders/OLD/Objects/Tools and Game Systems.yy",
   },
   "parentObjectId":null,
   "persistent":false,

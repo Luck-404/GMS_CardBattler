@@ -13,7 +13,7 @@
   "out_tilevborder":2,
   "parent":{
     "name":"Walls",
-    "path":"folders/Tile Sets/Walls.yy",
+    "path":"folders/OLD/Tile Sets/Walls.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

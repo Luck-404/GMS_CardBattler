@@ -6,7 +6,7 @@
   "name":"scr_card_serpent_summon_check",
   "parent":{
     "name":"Card Disables",
-    "path":"folders/Scripts/Tools and Game Systems/Encounter/Card Casts/Green/Card Disables.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Encounter/Card Casts/Green/Card Disables.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

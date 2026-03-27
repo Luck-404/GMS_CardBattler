@@ -15,7 +15,7 @@
   "name":"snd_menu_error",
   "parent":{
     "name":"Menus",
-    "path":"folders/Sounds/Menus.yy",
+    "path":"folders/OLD/Sounds/Menus.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

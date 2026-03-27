@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Sigils",
-    "path":"folders/Sprites/GUI/Sigils.yy",
+    "path":"folders/OLD/Sprites/GUI/Sigils.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

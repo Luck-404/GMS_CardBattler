@@ -15,7 +15,7 @@
   "name":"snd_effect_grow_plant",
   "parent":{
     "name":"Green",
-    "path":"folders/Sounds/Card Effects/Green.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Green.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

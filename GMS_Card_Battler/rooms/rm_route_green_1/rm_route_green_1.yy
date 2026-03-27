@@ -70,7 +70,7 @@
   "name":"rm_route_green_1",
   "parent":{
     "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "path":"folders/OLD/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

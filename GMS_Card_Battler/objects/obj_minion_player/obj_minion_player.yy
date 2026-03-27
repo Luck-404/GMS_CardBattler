@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Minions",
-    "path":"folders/Objects/Tools and Game Systems/Minions.yy",
+    "path":"folders/OLD/Objects/Tools and Game Systems/Minions.yy",
   },
   "parentObjectId":null,
   "persistent":false,

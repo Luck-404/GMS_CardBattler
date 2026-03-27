@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Random",
-    "path":"folders/Sprites/Creatures/Random.yy",
+    "path":"folders/OLD/Sprites/Creatures/Random.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

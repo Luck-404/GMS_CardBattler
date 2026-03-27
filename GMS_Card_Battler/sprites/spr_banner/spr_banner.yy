@@ -36,7 +36,7 @@
   "origin":4,
   "parent":{
     "name":"Overworld",
-    "path":"folders/Sprites/GUI/Overworld.yy",
+    "path":"folders/OLD/Sprites/GUI/Overworld.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

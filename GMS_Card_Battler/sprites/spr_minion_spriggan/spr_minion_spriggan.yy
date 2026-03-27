@@ -48,7 +48,7 @@
   "origin":4,
   "parent":{
     "name":"Green",
-    "path":"folders/Sprites/Minions/Green.yy",
+    "path":"folders/OLD/Sprites/Minions/Green.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

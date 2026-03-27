@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Backdrops",
-    "path":"folders/Sprites/World/Tilesets/Backdrops.yy",
+    "path":"folders/OLD/Sprites/World/Tilesets/Backdrops.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

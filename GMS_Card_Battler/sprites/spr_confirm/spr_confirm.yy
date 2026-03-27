@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Encounter",
-    "path":"folders/Sprites/GUI/Encounter.yy",
+    "path":"folders/OLD/Sprites/GUI/Encounter.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

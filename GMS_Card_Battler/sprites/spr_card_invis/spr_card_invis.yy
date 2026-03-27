@@ -28,7 +28,7 @@
   "origin":0,
   "parent":{
     "name":"Cards",
-    "path":"folders/Sprites/Cards.yy",
+    "path":"folders/OLD/Sprites/Cards.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

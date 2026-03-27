@@ -6,7 +6,7 @@
   "name":"scr_transition",
   "parent":{
     "name":"General",
-    "path":"folders/Scripts/Effects/General.yy",
+    "path":"folders/OLD/Scripts/Effects/General.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

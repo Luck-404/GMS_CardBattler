@@ -6,7 +6,7 @@
   "name":"scr_stock_card_shop",
   "parent":{
     "name":"Shops",
-    "path":"folders/Scripts/World/Shops.yy",
+    "path":"folders/OLD/Scripts/World/Shops.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

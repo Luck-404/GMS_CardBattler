@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Particle Systems",
-    "path":"folders/Particle Systems.yy",
+    "path":"folders/OLD/Particle Systems.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

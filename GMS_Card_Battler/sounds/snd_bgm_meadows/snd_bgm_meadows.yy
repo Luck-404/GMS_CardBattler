@@ -15,7 +15,7 @@
   "name":"snd_bgm_meadows",
   "parent":{
     "name":"Green",
-    "path":"folders/Sounds/BGMs/Green.yy",
+    "path":"folders/OLD/Sounds/BGMs/Green.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

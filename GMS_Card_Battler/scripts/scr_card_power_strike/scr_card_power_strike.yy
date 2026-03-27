@@ -6,7 +6,7 @@
   "name":"scr_card_power_strike",
   "parent":{
     "name":"Card",
-    "path":"folders/Scripts/Tools and Game Systems/Encounter/Card Casts/Uncolored/Card.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Encounter/Card Casts/Uncolored/Card.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"Uncolored",
-    "path":"folders/Sprites/Cards/Uncolored.yy",
+    "path":"folders/OLD/Sprites/Cards/Uncolored.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

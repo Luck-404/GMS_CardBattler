@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Ambiance",
-    "path":"folders/Objects/Ambiance.yy",
+    "path":"folders/OLD/Objects/Ambiance.yy",
   },
   "parentObjectId":null,
   "persistent":false,

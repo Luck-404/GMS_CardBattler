@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Load",
-    "path":"folders/Sprites/GUI/General/Load.yy",
+    "path":"folders/OLD/Sprites/GUI/General/Load.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

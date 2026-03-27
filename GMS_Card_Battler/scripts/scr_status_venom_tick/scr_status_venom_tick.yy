@@ -6,7 +6,7 @@
   "name":"scr_status_venom_tick",
   "parent":{
     "name":"General Status Ticks",
-    "path":"folders/Scripts/Tools and Game Systems/Encounter/Card Casts/General Status Ticks.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Encounter/Card Casts/General Status Ticks.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

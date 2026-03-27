@@ -6,7 +6,7 @@
   "name":"scr_save_room",
   "parent":{
     "name":"Saving and Loading",
-    "path":"folders/Scripts/Tools and Game Systems/Saving and Loading.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Saving and Loading.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

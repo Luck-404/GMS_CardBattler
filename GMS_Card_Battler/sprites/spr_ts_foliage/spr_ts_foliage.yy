@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Foliage",
-    "path":"folders/Sprites/World/Tilesets/Foliage.yy",
+    "path":"folders/OLD/Sprites/World/Tilesets/Foliage.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

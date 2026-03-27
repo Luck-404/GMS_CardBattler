@@ -7,7 +7,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Encounter",
-    "path":"folders/Objects/GUI/Encounter.yy",
+    "path":"folders/OLD/Objects/GUI/Encounter.yy",
   },
   "parentObjectId":null,
   "persistent":false,

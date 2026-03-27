@@ -13,7 +13,7 @@
   "out_tilevborder":2,
   "parent":{
     "name":"Ground",
-    "path":"folders/Tile Sets/Ground.yy",
+    "path":"folders/OLD/Tile Sets/Ground.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

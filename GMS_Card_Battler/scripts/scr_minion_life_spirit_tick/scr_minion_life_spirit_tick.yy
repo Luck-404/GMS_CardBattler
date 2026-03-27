@@ -6,7 +6,7 @@
   "name":"scr_minion_life_spirit_tick",
   "parent":{
     "name":"Green",
-    "path":"folders/Scripts/Player and Units/Minions/Green.yy",
+    "path":"folders/OLD/Scripts/Player and Units/Minions/Green.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

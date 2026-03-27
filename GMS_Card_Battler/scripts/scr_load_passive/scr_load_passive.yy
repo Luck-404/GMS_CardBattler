@@ -6,7 +6,7 @@
   "name":"scr_load_passive",
   "parent":{
     "name":"Creatures",
-    "path":"folders/Scripts/Player and Units/Creatures.yy",
+    "path":"folders/OLD/Scripts/Player and Units/Creatures.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

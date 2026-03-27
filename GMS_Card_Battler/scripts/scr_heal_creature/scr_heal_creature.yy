@@ -6,7 +6,7 @@
   "name":"scr_heal_creature",
   "parent":{
     "name":"Card Calculations",
-    "path":"folders/Scripts/Tools and Game Systems/Encounter/Card Calculations.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Encounter/Card Calculations.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

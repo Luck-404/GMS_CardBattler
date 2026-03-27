@@ -15,7 +15,7 @@
   "name":"snd_effect_cast_life_spirit",
   "parent":{
     "name":"Minions",
-    "path":"folders/Sounds/Card Effects/Minions.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Minions.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -6,7 +6,7 @@
   "name":"scr_create_combat_banner",
   "parent":{
     "name":"Encounter",
-    "path":"folders/Scripts/Effects/Encounter.yy",
+    "path":"folders/OLD/Scripts/Effects/Encounter.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

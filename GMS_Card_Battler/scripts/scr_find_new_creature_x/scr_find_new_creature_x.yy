@@ -6,7 +6,7 @@
   "name":"scr_find_new_creature_x",
   "parent":{
     "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "path":"folders/OLD/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

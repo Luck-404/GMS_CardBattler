@@ -15,7 +15,7 @@
   "name":"snd_effect_hit",
   "parent":{
     "name":"Parts",
-    "path":"folders/Sounds/Card Effects/Parts.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Parts.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

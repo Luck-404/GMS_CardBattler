@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"New Game",
-    "path":"folders/Sprites/GUI/General/New Game.yy",
+    "path":"folders/OLD/Sprites/GUI/General/New Game.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

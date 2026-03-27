@@ -15,7 +15,7 @@
   "name":"snd_card_draw",
   "parent":{
     "name":"Card Movement",
-    "path":"folders/Sounds/Card Effects/Card Movement.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Card Movement.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

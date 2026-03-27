@@ -6,7 +6,7 @@
   "name":"scr_card_clear_battlefield",
   "parent":{
     "name":"Card",
-    "path":"folders/Scripts/Tools and Game Systems/Encounter/Card Casts/Uncolored/Card.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Encounter/Card Casts/Uncolored/Card.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

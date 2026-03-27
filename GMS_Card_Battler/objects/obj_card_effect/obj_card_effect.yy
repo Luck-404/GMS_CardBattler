@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Encounter",
-    "path":"folders/Objects/Effects/Encounter.yy",
+    "path":"folders/OLD/Objects/Effects/Encounter.yy",
   },
   "parentObjectId":null,
   "persistent":false,

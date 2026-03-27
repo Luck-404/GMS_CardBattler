@@ -1,4 +1,19 @@
 {
-  "FolderOrderSettings":[],
-  "ResourceOrderSettings":[],
+  "FolderOrderSettings":[
+    {"name":"NEW","order":1,"path":"folders/NEW.yy",},
+    {"name":"PRISMALS","order":1,"path":"folders/NEW/PRISMALS.yy",},
+    {"name":"GREEN","order":1,"path":"folders/NEW/PRISMALS/GREEN.yy",},
+    {"name":"OLD","order":2,"path":"folders/OLD.yy",},
+    {"name":"Objects","order":1,"path":"folders/OLD/Objects.yy",},
+    {"name":"Particle Systems","order":2,"path":"folders/OLD/Particle Systems.yy",},
+    {"name":"Rooms","order":3,"path":"folders/OLD/Rooms.yy",},
+    {"name":"Scripts","order":4,"path":"folders/OLD/Scripts.yy",},
+    {"name":"Sounds","order":5,"path":"folders/OLD/Sounds.yy",},
+    {"name":"Sprites","order":6,"path":"folders/OLD/Sprites.yy",},
+    {"name":"Tile Sets","order":7,"path":"folders/OLD/Tile Sets.yy",},
+  ],
+  "ResourceOrderSettings":[
+    {"name":"spr_unit_green_beavine","order":2,"path":"sprites/spr_unit_green_beavine/spr_unit_green_beavine.yy",},
+    {"name":"spr_unit_green_crusaber","order":1,"path":"sprites/spr_unit_green_crusaber/spr_unit_green_crusaber.yy",},
+  ],
 }

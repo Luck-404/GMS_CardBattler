@@ -6,7 +6,7 @@
   "name":"scr_rearrange_minion",
   "parent":{
     "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "path":"folders/OLD/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

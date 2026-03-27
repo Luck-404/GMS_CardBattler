@@ -6,7 +6,7 @@
   "name":"scr_create_combat_popup",
   "parent":{
     "name":"Encounter",
-    "path":"folders/Scripts/Tools and Game Systems/Encounter.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Encounter.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

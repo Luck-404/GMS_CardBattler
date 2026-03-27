@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Shops",
-    "path":"folders/Sprites/World/Shops.yy",
+    "path":"folders/OLD/Sprites/World/Shops.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

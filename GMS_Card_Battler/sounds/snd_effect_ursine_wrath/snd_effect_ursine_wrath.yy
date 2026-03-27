@@ -15,7 +15,7 @@
   "name":"snd_effect_ursine_wrath",
   "parent":{
     "name":"Minions",
-    "path":"folders/Sounds/Card Effects/Minions.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Minions.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

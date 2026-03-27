@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Player and Units",
-    "path":"folders/Objects/Player and Units.yy",
+    "path":"folders/OLD/Objects/Player and Units.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -29,7 +29,7 @@
   "origin":0,
   "parent":{
     "name":"Green",
-    "path":"folders/Sprites/World/Terrain/Green.yy",
+    "path":"folders/OLD/Sprites/World/Terrain/Green.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

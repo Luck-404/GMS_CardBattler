@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"NPCs",
-    "path":"folders/Objects/World/NPCs.yy",
+    "path":"folders/OLD/Objects/World/NPCs.yy",
   },
   "parentObjectId":null,
   "persistent":false,

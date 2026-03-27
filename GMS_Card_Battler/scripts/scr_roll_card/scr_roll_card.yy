@@ -6,7 +6,7 @@
   "name":"scr_roll_card",
   "parent":{
     "name":"Rewards",
-    "path":"folders/Scripts/Tools and Game Systems/Rewards.yy",
+    "path":"folders/OLD/Scripts/Tools and Game Systems/Rewards.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"scr_check_on_play_passive",
   "parent":{
     "name":"Passives",
-    "path":"folders/Scripts/Passives.yy",
+    "path":"folders/OLD/Scripts/Passives.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

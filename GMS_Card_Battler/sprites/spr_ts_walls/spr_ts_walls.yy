@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Walls",
-    "path":"folders/Sprites/World/Tilesets/Walls.yy",
+    "path":"folders/OLD/Sprites/World/Tilesets/Walls.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

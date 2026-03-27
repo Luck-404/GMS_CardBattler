@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Champions",
-    "path":"folders/Sprites/Champions.yy",
+    "path":"folders/OLD/Sprites/Champions.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

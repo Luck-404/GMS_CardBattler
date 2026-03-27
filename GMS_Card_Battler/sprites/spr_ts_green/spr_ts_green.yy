@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Ground",
-    "path":"folders/Sprites/World/Tilesets/Ground.yy",
+    "path":"folders/OLD/Sprites/World/Tilesets/Ground.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -4,7 +4,7 @@
   "name":"sh_sway",
   "parent":{
     "name":"Ambiance",
-    "path":"folders/Sprites/Ambiance.yy",
+    "path":"folders/OLD/Sprites/Ambiance.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",

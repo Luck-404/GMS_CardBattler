@@ -15,7 +15,7 @@
   "name":"snd_effect_beastial_bash",
   "parent":{
     "name":"Green",
-    "path":"folders/Sounds/Card Effects/Green.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Green.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

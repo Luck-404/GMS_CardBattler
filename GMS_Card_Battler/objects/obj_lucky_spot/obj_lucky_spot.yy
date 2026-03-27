@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Triggers",
-    "path":"folders/Objects/World/Triggers.yy",
+    "path":"folders/OLD/Objects/World/Triggers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

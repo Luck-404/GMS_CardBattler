@@ -58,7 +58,7 @@
   "origin":4,
   "parent":{
     "name":"Green",
-    "path":"folders/Sprites/Creatures/Green.yy",
+    "path":"folders/OLD/Sprites/Creatures/Green.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -15,7 +15,7 @@
   "name":"snd_ambiance_walking_grass",
   "parent":{
     "name":"Terrain and Overworld",
-    "path":"folders/Sounds/Terrain and Overworld.yy",
+    "path":"folders/OLD/Sounds/Terrain and Overworld.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

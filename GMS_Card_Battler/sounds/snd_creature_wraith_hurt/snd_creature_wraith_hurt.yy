@@ -15,7 +15,7 @@
   "name":"snd_creature_wraith_hurt",
   "parent":{
     "name":"Creatures",
-    "path":"folders/Sounds/Creatures.yy",
+    "path":"folders/OLD/Sounds/Creatures.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

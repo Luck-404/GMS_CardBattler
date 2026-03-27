@@ -15,7 +15,7 @@
   "name":"snd_effect_trigger_bloodbeak",
   "parent":{
     "name":"Minions",
-    "path":"folders/Sounds/Card Effects/Minions.yy",
+    "path":"folders/OLD/Sounds/Card Effects/Minions.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

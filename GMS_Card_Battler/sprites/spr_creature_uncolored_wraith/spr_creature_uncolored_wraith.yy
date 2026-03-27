@@ -29,7 +29,7 @@
   "origin":4,
   "parent":{
     "name":"Uncolored",
-    "path":"folders/Sprites/Creatures/Uncolored.yy",
+    "path":"folders/OLD/Sprites/Creatures/Uncolored.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

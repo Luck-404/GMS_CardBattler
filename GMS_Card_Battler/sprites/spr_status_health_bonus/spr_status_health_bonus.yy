@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Status Icons",
-    "path":"folders/Sprites/Status Icons.yy",
+    "path":"folders/OLD/Sprites/Status Icons.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

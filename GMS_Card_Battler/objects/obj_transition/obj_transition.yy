@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"General",
-    "path":"folders/Objects/Effects/General.yy",
+    "path":"folders/OLD/Objects/Effects/General.yy",
   },
   "parentObjectId":null,
   "persistent":true,

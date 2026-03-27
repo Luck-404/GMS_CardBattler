@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Blessings",
-    "path":"folders/Sprites/GUI/Blessings.yy",
+    "path":"folders/OLD/Sprites/GUI/Blessings.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

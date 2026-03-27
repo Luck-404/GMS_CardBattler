@@ -42,7 +42,7 @@
   "origin":4,
   "parent":{
     "name":"Card Effects",
-    "path":"folders/Sprites/Effects/Card Effects.yy",
+    "path":"folders/OLD/Sprites/Effects/Card Effects.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
