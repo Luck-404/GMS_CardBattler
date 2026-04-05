@@ -142,7 +142,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.4.221",
+    "IDEVersion":"2024.14.4.222",
   },
   "name":"Card Battler_old",
   "resources":[
@@ -626,6 +626,7 @@
     {"id":{"name":"spr_unit_green_arbrawn","path":"sprites/spr_unit_green_arbrawn/spr_unit_green_arbrawn.yy",},},
     {"id":{"name":"spr_unit_green_beavine","path":"sprites/spr_unit_green_beavine/spr_unit_green_beavine.yy",},},
     {"id":{"name":"spr_unit_green_crusaber","path":"sprites/spr_unit_green_crusaber/spr_unit_green_crusaber.yy",},},
+    {"id":{"name":"spr_unit_green_fightree","path":"sprites/spr_unit_green_fightree/spr_unit_green_fightree.yy",},},
     {"id":{"name":"spr_water","path":"sprites/spr_water/spr_water.yy",},},
     {"id":{"name":"ts_foliage","path":"tilesets/ts_foliage/ts_foliage.yy",},},
     {"id":{"name":"ts_grass","path":"tilesets/ts_grass/ts_grass.yy",},},

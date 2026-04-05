@@ -15,5 +15,6 @@
   "ResourceOrderSettings":[
     {"name":"spr_unit_green_beavine","order":2,"path":"sprites/spr_unit_green_beavine/spr_unit_green_beavine.yy",},
     {"name":"spr_unit_green_crusaber","order":1,"path":"sprites/spr_unit_green_crusaber/spr_unit_green_crusaber.yy",},
+    {"name":"spr_unit_green_fightree","order":3,"path":"sprites/spr_unit_green_fightree/spr_unit_green_fightree.yy",},
   ],
 }
