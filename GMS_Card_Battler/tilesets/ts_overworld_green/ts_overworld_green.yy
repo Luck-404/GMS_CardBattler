@@ -12,8 +12,8 @@
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
-    "name":"Ground",
-    "path":"folders/OLD/Tile Sets/Ground.yy",
+    "name":"TILESETS",
+    "path":"folders/NEW/TILESETS.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

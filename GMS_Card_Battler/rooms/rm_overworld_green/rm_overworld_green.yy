@@ -448,7 +448,7 @@
           -24,90,-16,33,-43,27,-36,84,1,85,-3,0,-60,33,-21,90,-15,33,-44,27,-36,84,1,85,-3,0,-67,33,-14,90,-14,
           33,-45,27,-36,84,1,85,-3,0,-73,33,-4,90,-17,33,-46,27,-36,84,1,85,-3,-2147483648,-93,33,-47,27,-36,84,
           1,85,-3,-2147483648,-90,33,-50,27,-36,84,1,85,-3,-2147483648,-89,33,-51,27,-36,84,1,85,-3,-2147483648,
-        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_overworld_green","path":"tilesets/ts_overworld_green/ts_overworld_green.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+        ],"TileDataFormat":1,},"tilesetId":null,"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":1002,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":1.0,"htiled":true,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_water","path":"sprites/spr_water/spr_water.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":1.0,"vtiled":true,"x":0,"y":0,},
   ],
   "name":"rm_overworld_green",

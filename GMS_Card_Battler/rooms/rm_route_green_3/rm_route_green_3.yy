@@ -59,7 +59,7 @@
           -18,84,-162,0,-18,84,-162,0,-18,84,-162,0,-18,84,-162,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,
           84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,
           -163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-163,0,-17,84,-37,0,
-        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_overworld_green","path":"tilesets/ts_overworld_green/ts_overworld_green.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+        ],"TileDataFormat":1,},"tilesetId":null,"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":1002,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":1.0,"htiled":true,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_water","path":"sprites/spr_water/spr_water.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":1.0,"vtiled":true,"x":0,"y":0,},
   ],
   "name":"rm_route_green_3",
