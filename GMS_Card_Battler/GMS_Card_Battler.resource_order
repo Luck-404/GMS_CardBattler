@@ -26,7 +26,7 @@
     {"name":"rm_hub_research","order":7,"path":"rooms/rm_hub_research/rm_hub_research.yy",},
     {"name":"rm_hub_SE","order":8,"path":"rooms/rm_hub_SE/rm_hub_SE.yy",},
     {"name":"rm_hub_SW","order":6,"path":"rooms/rm_hub_SW/rm_hub_SW.yy",},
-    {"name":"spr_ts_paths","order":7,"path":"sprites/spr_ts_paths/spr_ts_paths.yy",},
+    {"name":"spr_ts_paths","order":9,"path":"sprites/spr_ts_paths/spr_ts_paths.yy",},
     {"name":"spr_ts_temp","order":8,"path":"sprites/spr_ts_temp/spr_ts_temp.yy",},
     {"name":"spr_unit_blizzdrift","order":7,"path":"sprites/spr_unit_blizzdrift/spr_unit_blizzdrift.yy",},
     {"name":"spr_unit_blue_ammomarsh","order":11,"path":"sprites/spr_unit_blue_ammomarsh/spr_unit_blue_ammomarsh.yy",},

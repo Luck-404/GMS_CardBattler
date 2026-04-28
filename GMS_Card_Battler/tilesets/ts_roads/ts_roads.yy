@@ -8,7 +8,7 @@
     "TileSerialiseData":[],
   },
   "name":"ts_roads",
-  "out_columns":8,
+  "out_columns":15,
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
@@ -18,8 +18,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"spr_ts_roads",
-    "path":"sprites/spr_ts_roads/spr_ts_roads.yy",
+    "name":"spr_ts_paths",
+    "path":"sprites/spr_ts_paths/spr_ts_paths.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{
@@ -34,5 +34,5 @@
   "tileWidth":32,
   "tilexoff":0,
   "tileyoff":0,
-  "tile_count":60,
+  "tile_count":240,
 }
