@@ -213,7 +213,7 @@
           -2147483648,1,1,-3,-2147483648,1,1,-170,-2147483648,-2,1,-3,-2147483648,-2,1,2,-2147483648,1,-171,-2147483648,
           -2,1,-4,-2147483648,3,1,-2147483648,1,-171,-2147483648,-2,1,-5,-2147483648,1,30,-172,-2147483648,1,1,
           -180,-2147483648,1,1,-231,-2147483648,
-        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_roads","path":"tilesets/ts_roads/ts_roads.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_paths","path":"tilesets/ts_paths/ts_paths.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRTileLayer":"","%Name":"tl_walls","depth":702,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"tl_walls","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":180,"SerialiseWidth":180,"TileCompressedData":[
           -59,48,-5,0,-25,48,-91,-2147483648,1,48,-179,-2147483648,1,48,-179,-2147483648,1,48,-179,-2147483648,
           1,48,-179,-2147483648,1,48,-179,-2147483648,1,48,-179,-2147483648,1,48,-179,-2147483648,1,48,-179,-2147483648,

@@ -1,13 +1,13 @@
 {
   "$GMTileSet":"v1",
-  "%Name":"ts_roads",
+  "%Name":"ts_paths",
   "autoTileSets":[],
   "macroPageTiles":{
     "SerialiseHeight":0,
     "SerialiseWidth":0,
     "TileSerialiseData":[],
   },
-  "name":"ts_roads",
+  "name":"ts_paths",
   "out_columns":15,
   "out_tilehborder":2,
   "out_tilevborder":2,

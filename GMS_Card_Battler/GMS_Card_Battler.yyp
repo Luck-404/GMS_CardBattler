@@ -691,7 +691,7 @@
     {"id":{"name":"ts_grass","path":"tilesets/ts_grass/ts_grass.yy",},},
     {"id":{"name":"ts_oneway","path":"tilesets/ts_oneway/ts_oneway.yy",},},
     {"id":{"name":"ts_overworld_green","path":"tilesets/ts_overworld_green/ts_overworld_green.yy",},},
-    {"id":{"name":"ts_roads","path":"tilesets/ts_roads/ts_roads.yy",},},
+    {"id":{"name":"ts_paths","path":"tilesets/ts_paths/ts_paths.yy",},},
     {"id":{"name":"ts_rocks","path":"tilesets/ts_rocks/ts_rocks.yy",},},
     {"id":{"name":"ts_walls","path":"tilesets/ts_walls/ts_walls.yy",},},
   ],

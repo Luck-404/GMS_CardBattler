@@ -77,7 +77,7 @@
     {"name":"ts_foliage","order":4,"path":"tilesets/ts_foliage/ts_foliage.yy",},
     {"name":"ts_grass","order":5,"path":"tilesets/ts_grass/ts_grass.yy",},
     {"name":"ts_oneway","order":1,"path":"tilesets/ts_oneway/ts_oneway.yy",},
-    {"name":"ts_roads","order":3,"path":"tilesets/ts_roads/ts_roads.yy",},
+    {"name":"ts_paths","order":3,"path":"tilesets/ts_paths/ts_paths.yy",},
     {"name":"ts_rocks","order":6,"path":"tilesets/ts_rocks/ts_rocks.yy",},
     {"name":"ts_walls","order":2,"path":"tilesets/ts_walls/ts_walls.yy",},
   ],
