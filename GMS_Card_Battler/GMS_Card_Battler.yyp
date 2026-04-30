@@ -11,6 +11,7 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"NEW","folderPath":"folders/NEW.yy","name":"NEW","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"PLAYER","folderPath":"folders/NEW/PLAYER.yy","name":"PLAYER","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"PRISMALS","folderPath":"folders/NEW/PRISMALS.yy","name":"PRISMALS","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"BLUE","folderPath":"folders/NEW/PRISMALS/BLUE.yy","name":"BLUE","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"GREEN","folderPath":"folders/NEW/PRISMALS/GREEN.yy","name":"GREEN","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -207,6 +208,7 @@
     {"id":{"name":"obj_overworld_pipeline","path":"objects/obj_overworld_pipeline/obj_overworld_pipeline.yy",},},
     {"id":{"name":"obj_passer","path":"objects/obj_passer/obj_passer.yy",},},
     {"id":{"name":"obj_passive","path":"objects/obj_passive/obj_passive.yy",},},
+    {"id":{"name":"obj_play","path":"objects/obj_play/obj_play.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_rearrange_timer","path":"objects/obj_rearrange_timer/obj_rearrange_timer.yy",},},
     {"id":{"name":"obj_rock","path":"objects/obj_rock/obj_rock.yy",},},
@@ -217,6 +219,7 @@
     {"id":{"name":"obj_transition_trigger","path":"objects/obj_transition_trigger/obj_transition_trigger.yy",},},
     {"id":{"name":"obj_transition","path":"objects/obj_transition/obj_transition.yy",},},
     {"id":{"name":"obj_tree","path":"objects/obj_tree/obj_tree.yy",},},
+    {"id":{"name":"obj_wal","path":"objects/obj_wal/obj_wal.yy",},},
     {"id":{"name":"ps_deadseed_beam","path":"particles/ps_deadseed_beam/ps_deadseed_beam.yy",},},
     {"id":{"name":"ps_leech_beam","path":"particles/ps_leech_beam/ps_leech_beam.yy",},},
     {"id":{"name":"ps_spirit_projectile","path":"particles/ps_spirit_projectile/ps_spirit_projectile.yy",},},

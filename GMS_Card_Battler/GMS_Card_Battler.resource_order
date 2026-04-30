@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings":[
     {"name":"NEW","order":1,"path":"folders/NEW.yy",},
+    {"name":"PLAYER","order":4,"path":"folders/NEW/PLAYER.yy",},
     {"name":"PRISMALS","order":1,"path":"folders/NEW/PRISMALS.yy",},
     {"name":"BLUE","order":2,"path":"folders/NEW/PRISMALS/BLUE.yy",},
     {"name":"GREEN","order":1,"path":"folders/NEW/PRISMALS/GREEN.yy",},
@@ -18,6 +19,7 @@
     {"name":"Sprites","order":6,"path":"folders/OLD/Sprites.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"obj_wal","order":1,"path":"objects/obj_wal/obj_wal.yy",},
     {"name":"rm_hub_arena","order":1,"path":"rooms/rm_hub_arena/rm_hub_arena.yy",},
     {"name":"rm_hub_center","order":4,"path":"rooms/rm_hub_center/rm_hub_center.yy",},
     {"name":"rm_hub_east","order":5,"path":"rooms/rm_hub_east/rm_hub_east.yy",},
