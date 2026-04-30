@@ -27,7 +27,9 @@
     {"name":"rm_hub_SE","order":8,"path":"rooms/rm_hub_SE/rm_hub_SE.yy",},
     {"name":"rm_hub_SW","order":6,"path":"rooms/rm_hub_SW/rm_hub_SW.yy",},
     {"name":"spr_ts_paths","order":9,"path":"sprites/spr_ts_paths/spr_ts_paths.yy",},
-    {"name":"spr_ts_temp","order":8,"path":"sprites/spr_ts_temp/spr_ts_temp.yy",},
+    {"name":"spr_ts_tmp","order":13,"path":"sprites/spr_ts_tmp/spr_ts_tmp.yy",},
+    {"name":"spr_ts_wall","order":12,"path":"sprites/spr_ts_wall/spr_ts_wall.yy",},
+    {"name":"spr_ts_water","order":10,"path":"sprites/spr_ts_water/spr_ts_water.yy",},
     {"name":"spr_unit_blizzdrift","order":7,"path":"sprites/spr_unit_blizzdrift/spr_unit_blizzdrift.yy",},
     {"name":"spr_unit_blue_ammomarsh","order":11,"path":"sprites/spr_unit_blue_ammomarsh/spr_unit_blue_ammomarsh.yy",},
     {"name":"spr_unit_blue_caudaqua","order":4,"path":"sprites/spr_unit_blue_caudaqua/spr_unit_blue_caudaqua.yy",},
@@ -80,5 +82,6 @@
     {"name":"ts_paths","order":3,"path":"tilesets/ts_paths/ts_paths.yy",},
     {"name":"ts_rocks","order":6,"path":"tilesets/ts_rocks/ts_rocks.yy",},
     {"name":"ts_walls","order":2,"path":"tilesets/ts_walls/ts_walls.yy",},
+    {"name":"ts_water","order":11,"path":"tilesets/ts_water/ts_water.yy",},
   ],
 }
