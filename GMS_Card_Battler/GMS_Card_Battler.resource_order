@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings":[
     {"name":"NEW","order":1,"path":"folders/NEW.yy",},
+    {"name":"DECOR","order":5,"path":"folders/NEW/DECOR.yy",},
     {"name":"PLAYER","order":4,"path":"folders/NEW/PLAYER.yy",},
     {"name":"PRISMALS","order":1,"path":"folders/NEW/PRISMALS.yy",},
     {"name":"BLUE","order":2,"path":"folders/NEW/PRISMALS/BLUE.yy",},
@@ -28,6 +29,8 @@
     {"name":"rm_hub_research","order":7,"path":"rooms/rm_hub_research/rm_hub_research.yy",},
     {"name":"rm_hub_SE","order":8,"path":"rooms/rm_hub_SE/rm_hub_SE.yy",},
     {"name":"rm_hub_SW","order":6,"path":"rooms/rm_hub_SW/rm_hub_SW.yy",},
+    {"name":"spr_decor_large_tree_1","order":2,"path":"sprites/spr_decor_large_tree_1/spr_decor_large_tree_1.yy",},
+    {"name":"spr_decor_med_tree_2","order":1,"path":"sprites/spr_decor_med_tree_2/spr_decor_med_tree_2.yy",},
     {"name":"spr_ts_paths","order":9,"path":"sprites/spr_ts_paths/spr_ts_paths.yy",},
     {"name":"spr_ts_tmp","order":13,"path":"sprites/spr_ts_tmp/spr_ts_tmp.yy",},
     {"name":"spr_ts_wall","order":12,"path":"sprites/spr_ts_wall/spr_ts_wall.yy",},
@@ -78,6 +81,7 @@
     {"name":"spr_unit_red_wyrmelta","order":5,"path":"sprites/spr_unit_red_wyrmelta/spr_unit_red_wyrmelta.yy",},
     {"name":"spr_unit_saltwag","order":14,"path":"sprites/spr_unit_saltwag/spr_unit_saltwag.yy",},
     {"name":"spr_unit_spheniskip","order":15,"path":"sprites/spr_unit_spheniskip/spr_unit_spheniskip.yy",},
+    {"name":"Sprite265","order":6,"path":"sprites/Sprite265/Sprite265.yy",},
     {"name":"ts_foliage","order":4,"path":"tilesets/ts_foliage/ts_foliage.yy",},
     {"name":"ts_grass","order":5,"path":"tilesets/ts_grass/ts_grass.yy",},
     {"name":"ts_oneway","order":1,"path":"tilesets/ts_oneway/ts_oneway.yy",},
