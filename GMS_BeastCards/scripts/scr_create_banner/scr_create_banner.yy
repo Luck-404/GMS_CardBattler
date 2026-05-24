@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_create_banner",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_create_banner",
+  "parent":{
+    "name":"POPUPS",
+    "path":"folders/POPUPS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

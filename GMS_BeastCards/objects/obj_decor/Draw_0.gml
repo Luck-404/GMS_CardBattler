@@ -16,4 +16,4 @@ else{
 }
 
 //DRAW SHADOW
-draw_sprite_ext(spr_decor_shadow,0,x,y,0.75,0.75,0,c_white,1);
+draw_sprite_ext(spr_decor_shadow,0,x,y,0.5,0.5,0,c_white,1);
