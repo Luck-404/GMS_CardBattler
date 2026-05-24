@@ -3,6 +3,8 @@
 // DRAW: OBJ_DECOR
 //
 //
+//DRAW SHADOW
+draw_sprite_ext(spr_decor_shadow,image_index,x,y,0.5,0.5,0,c_white,1);
 
 //MAKE DULL WHEN TOUCHING PLAYER
 if (instance_place(x,y-(sprite_height/2)+16,obj_player)){
@@ -15,5 +17,3 @@ else{
 	draw_self();	
 }
 
-//DRAW SHADOW
-draw_sprite_ext(spr_decor_shadow,0,x,y,0.5,0.5,0,c_white,1);

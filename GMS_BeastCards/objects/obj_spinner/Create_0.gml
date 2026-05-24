@@ -5,4 +5,4 @@
 //
 depth = -1000;
 _rot = 0;
-_spin_speed = 5;
+_spin_speed = 10;

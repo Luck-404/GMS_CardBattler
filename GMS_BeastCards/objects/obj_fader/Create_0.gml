@@ -19,4 +19,4 @@ _flag_fade_in = false;
 _mode = "DEFAULT";
 _progress_tier = 0;
 
-_fade_speed = 0.03;
+_fade_speed = 0.07;
