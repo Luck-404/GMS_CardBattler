@@ -33,6 +33,6 @@ if (_life != 0){
 	}
 }
 
-if (distance_to_object(obj_player) > 96){
+if (distance_to_object(obj_player) > 256){
 	instance_destroy();	
 }

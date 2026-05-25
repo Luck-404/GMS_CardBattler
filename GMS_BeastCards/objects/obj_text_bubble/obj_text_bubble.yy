@@ -9,8 +9,8 @@
   "name":"obj_text_bubble",
   "overriddenProperties":[],
   "parent":{
-    "name":"POPUPS",
-    "path":"folders/POPUPS.yy",
+    "name":"Popups",
+    "path":"folders/Popups.yy",
   },
   "parentObjectId":null,
   "persistent":true,

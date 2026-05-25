@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_create_banner",
   "parent":{
-    "name":"POPUPS",
-    "path":"folders/POPUPS.yy",
+    "name":"Popups",
+    "path":"folders/Popups.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

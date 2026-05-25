@@ -5,6 +5,6 @@
 //
 
 _flag_triggered = false;
-_cooldown = 0;
+_cooldown = 60;
 
 sprite_index = _sign_sprite;

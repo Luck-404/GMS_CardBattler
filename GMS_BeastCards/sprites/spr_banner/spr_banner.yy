@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"POPUPS",
-    "path":"folders/POPUPS.yy",
+    "name":"Popups",
+    "path":"folders/Popups.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

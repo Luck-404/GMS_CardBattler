@@ -8,8 +8,8 @@
   "name":"obj_decor",
   "overriddenProperties":[],
   "parent":{
-    "name":"Decor Sprites",
-    "path":"folders/Decor Sprites.yy",
+    "name":"Decor",
+    "path":"folders/Decor.yy",
   },
   "parentObjectId":null,
   "persistent":false,

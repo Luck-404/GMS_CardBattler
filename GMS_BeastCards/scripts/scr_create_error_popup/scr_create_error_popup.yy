@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_create_error_popup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_create_error_popup",
+  "parent":{
+    "name":"Popups",
+    "path":"folders/Popups.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

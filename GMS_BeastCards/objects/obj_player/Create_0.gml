@@ -11,6 +11,8 @@ _player_speed = 3;
 _player_bounce_counter = 0;
 _player_bounce_frame = 0;
 
+_step_particle_timer = 0;
+
 //INIT
 window_set_fullscreen(true);
 

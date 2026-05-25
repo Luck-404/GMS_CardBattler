@@ -114,3 +114,18 @@ if (place_meeting(x, y + _vsp, obj_wall))
 }
 
 y += _vsp;
+
+//STEP PARTICLE
+	//TRIGGER A LEAF EVERY SO OFTEN
+	if (_step_particle_timer <= 0 && obj_player._flag_moving == true){
+		_step_particle_timer = 15;	
+		//TRIGGER A FEW PARTICLES
+		randomize();
+		var _random_particles = irandom_range(1,3);
+		//SPAWN THE PARTICLES
+		for (var _i = 0; _i < _random_particles; _i++){
+			var _particle = instance_create_layer(obj_player.x,obj_player.y,"ily_fx",obj_step_particle);	
+		}
+	} else {
+		_step_particle_timer--;
+	}

@@ -9,8 +9,8 @@
   "name":"obj_sign",
   "overriddenProperties":[],
   "parent":{
-    "name":"Decor Sprites",
-    "path":"folders/Decor Sprites.yy",
+    "name":"Decor",
+    "path":"folders/Decor.yy",
   },
   "parentObjectId":{
     "name":"obj_decor",
