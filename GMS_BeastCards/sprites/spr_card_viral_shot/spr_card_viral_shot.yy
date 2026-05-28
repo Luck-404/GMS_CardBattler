@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"GREEN",
-    "path":"folders/CARDS/SPRITES/GREEN.yy",
+    "path":"folders/CARDS/CARDS LIST/GREEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

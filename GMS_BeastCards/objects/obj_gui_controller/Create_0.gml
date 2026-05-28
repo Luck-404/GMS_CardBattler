@@ -9,6 +9,7 @@ global.pause = false;
 global.active_gui = undefined;
 
 //INIT
+gpu_set_texfilter(true);
 window_set_fullscreen(true);
 
 //METHODS

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"SPRITES",
-    "path":"folders/CARDS/SPRITES.yy",
+    "name":"GENERAL SPRITES",
+    "path":"folders/CARDS/GENERAL SPRITES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

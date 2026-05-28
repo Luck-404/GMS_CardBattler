@@ -3,7 +3,7 @@
   "%Name":"obj_ranch_gui_pane",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_ranch_gui_pane",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_ranch_gui_square",
-    "path":"sprites/spr_ranch_gui_square/spr_ranch_gui_square.yy",
+    "name":"spr_ranch_gui_pane",
+    "path":"sprites/spr_ranch_gui_pane/spr_ranch_gui_pane.yy",
   },
   "spriteMaskId":null,
   "visible":true,

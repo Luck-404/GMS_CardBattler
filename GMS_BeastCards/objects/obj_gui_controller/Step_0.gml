@@ -77,6 +77,28 @@ if (global.active_gui != undefined && global.active_gui.sprite_index == spr_gui_
 }
 #endregion
 
+#region ACTIVATE DECK PANE
+if (keyboard_check_pressed(ord("K"))){
+	show_debug_message("\n\n\n\n\n\nPLAYER PRESSED K TOGGLE DECK PANE")
+	//IF DECK PANE IS ALREADY ACTIVE
+	if (global.active_gui != undefined && global.active_gui.sprite_index == spr_gui_deck_pane){
+		//DESTROY CURRENT GUI
+		scr_destroy_gui_open();	
+		//TOGGLE PAUSE
+		scr_toggle_gui_pause();
+	}
+	else {
+		//ELSE OPEN DECK PANE INSTEAD
+		//DESTROY CURRENT GUI
+		scr_destroy_gui_open();
+		//TOGGLE PAUSE
+		scr_toggle_gui_pause();
+		//OPEN NEW PARTY GUI
+		global.active_gui = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_gui_deck_pane);
+	}
+}
+#endregion
+
 //IN RANCH, CLICK TO SHAKE UNIT
 if (room == rm_ow_ranch){
 	#region CLICK TO SHAKE UNIT

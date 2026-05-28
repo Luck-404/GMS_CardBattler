@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_get_beast_info",
   "parent":{
-    "name":"BEAST INFO",
-    "path":"folders/BEASTS/BEAST INFO.yy",
+    "name":"BEAST GET",
+    "path":"folders/BEASTS/BEAST GET.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

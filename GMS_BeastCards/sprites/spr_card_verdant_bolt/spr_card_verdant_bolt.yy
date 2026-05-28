@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"UNCOLORED",
-    "path":"folders/CARDS/SPRITES/UNCOLORED.yy",
+    "name":"GREEN",
+    "path":"folders/CARDS/CARDS LIST/GREEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
