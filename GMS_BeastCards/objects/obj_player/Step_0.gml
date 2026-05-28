@@ -4,20 +4,8 @@
 //
 //
 
-//FULLSCREEN TOGGLE
-if (keyboard_check_pressed(ord("F"))){
-	window_set_fullscreen(!window_get_fullscreen());	
-}
-
-
-//ESC EXIT
-if (keyboard_check_pressed(vk_escape)){
-	show_debug_message("\n\n\n\n\n\nPLAYER PRESSED ESCAPE TO END GAME")
-	game_end();	
-}
-
-
 // INPUT
+if (!global.pause){
 var _move_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 var _move_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 
@@ -41,7 +29,7 @@ else
 		if (_move_x < 0)
 		{
 			image_xscale = -1;
-		}
+		} 
 		else
 		{
 			image_xscale = 1;
@@ -114,6 +102,7 @@ if (place_meeting(x, y + _vsp, obj_wall))
 }
 
 y += _vsp;
+} 
 
 //STEP PARTICLE
 	//TRIGGER A LEAF EVERY SO OFTEN
@@ -124,8 +113,9 @@ y += _vsp;
 		var _random_particles = irandom_range(1,3);
 		//SPAWN THE PARTICLES
 		for (var _i = 0; _i < _random_particles; _i++){
-			var _particle = instance_create_layer(obj_player.x,obj_player.y,"ily_fx",obj_step_particle);	
+			var _particle = instance_create_layer(obj_player.x,obj_player.y,"ily_fx",obj_scene_fx_step_particle);	
 		}
 	} else {
 		_step_particle_timer--;
 	}
+	

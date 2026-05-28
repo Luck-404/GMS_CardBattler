@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Walls",
-    "path":"folders/Walls.yy",
+    "name":"WALLS",
+    "path":"folders/ROOM COMPONENTS/WALLS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

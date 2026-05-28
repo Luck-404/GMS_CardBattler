@@ -1,0 +1,16 @@
+//
+//
+// CREATE: OBJ_POPUP_TEXT_BUBBLE
+//
+//
+
+//VARIABLES
+_text = "DEFAULT";
+_life = 60;
+_pad = 15; //PADDING FOR THE TEXT BUBBLE
+
+//INIT
+
+//METHODS
+
+

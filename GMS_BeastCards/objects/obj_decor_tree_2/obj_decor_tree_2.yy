@@ -6,12 +6,12 @@
   "name":"obj_decor_tree_2",
   "overriddenProperties":[],
   "parent":{
-    "name":"Decor",
-    "path":"folders/Decor.yy",
+    "name":"NATURE",
+    "path":"folders/ROOM COMPONENTS/DECOR/OBJECTS/NATURE.yy",
   },
   "parentObjectId":{
-    "name":"obj_decor",
-    "path":"objects/obj_decor/obj_decor.yy",
+    "name":"obj_decor_parent",
+    "path":"objects/obj_decor_parent/obj_decor_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Decor",
-    "path":"folders/Decor.yy",
+    "name":"SPRITES",
+    "path":"folders/ROOM COMPONENTS/DECOR/SPRITES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
