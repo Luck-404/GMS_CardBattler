@@ -13,6 +13,7 @@ if (instance_place(x,y,obj_player) && _flag_triggered == false){
 	_flag_triggered = true; //TRIGGER ONCE
 	
 	obj_player._player_speed = 0; //SET PLAYER SPEED TO 0, EFFECTIVELY FREEZING THEM
+	obj_player._flag_moving = false;
 	
 	//FADE TO BLACK
 	_ref_fader = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition_fader);
@@ -38,6 +39,7 @@ if (_flag_continue_transition == true){
 	
 	//SPAWN ANNOUNCEMENT BANNER
 	scr_spawn_popup_banner(_room[1]);
+	global.last_player_banner = _room[1];
 	
 	//GO TO THE DESTINATION ROOM
 	room_goto(_room[0]);

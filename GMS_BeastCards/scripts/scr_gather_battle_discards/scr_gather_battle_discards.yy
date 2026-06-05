@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gather_battle_discards",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gather_battle_discards",
+  "parent":{
+    "name":"CARDS",
+    "path":"folders/BATTLE/CARDS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

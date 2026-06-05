@@ -50,7 +50,40 @@ for (var _i = 0; _i < _unit_count; _i++)
 				_unit_selected = ds_list_find_value(global.player_party,_pos);
 			}
 		}
+	//
+	// REORDER
+	//		
+	for (var _k = 1; _k <= 5; _k++)
+	{
+	    if (keyboard_check_pressed(ord(string(_k))))
+	    {
+	        var _target = _k - 1; // key 1 = slot 0
+
+	        // valid target + don't swap with self
+	        if (_target < _unit_count && _target != _i)
+	        {
+	            var _hover_unit  = ds_list_find_value(global.player_party, _i);
+	            var _target_unit = ds_list_find_value(global.player_party, _target);
+
+	            ds_list_replace(global.player_party, _i, _target_unit);
+	            ds_list_replace(global.player_party, _target, _hover_unit);
+
+	            // refresh selected ref if it exists
+	            if (_unit_selected != undefined)
+	            {
+	                _unit_selected = ds_list_find_value(global.player_party, _pos);
+	            }
+
+	            _flag_clicked = true;
+	            _cooldown = 10;
+	        }
+
+	        break;
+	    }
+	}	
 	}
+
+	
 }
 #endregion
 
@@ -79,6 +112,8 @@ if (_unit_selected != undefined)
 
     draw_set_colour(c_black);
 	draw_set_font(fnt_gui_small);
+	draw_set_valign(fa_top);
+	draw_set_halign(fa_left);	
 
     // ==========================
     // HEADER

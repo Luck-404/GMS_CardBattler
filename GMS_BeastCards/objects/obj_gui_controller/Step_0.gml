@@ -26,7 +26,7 @@ else {
 	}
 }
 
-
+if (room != rm_battle){
 #region PAUSE HANDLING
 if (keyboard_check_pressed(ord("T"))){
 	show_debug_message("\n\n\n\n\n\nPLAYER PRESSED T TOGGLE PAUSE GAME")
@@ -109,4 +109,5 @@ if (room == rm_ow_ranch){
 		_beast._beast_state = BEAST_STATE.SHAKE;
 	}
 	#endregion	
+}
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_degrade_shield",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_degrade_shield",
+  "parent":{
+    "name":"COMBAT",
+    "path":"folders/BATTLE/COMBAT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

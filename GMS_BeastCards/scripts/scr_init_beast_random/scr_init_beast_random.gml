@@ -32,7 +32,7 @@ function scr_init_beast_random(_beast_name){
 	#region HP VALUES
 	var _hp_stat = _new_beast[?"beast_hp_stat"];
 	var _hp_modifier = scr_get_beast_grade_modifier(_hp_stat);
-	var _hp_calculated = 5 + ((_hp_modifier*10)*1)/4
+	var _hp_calculated = 10 + ((_hp_modifier*10)*1)/4
 	ds_map_replace(_new_beast,"beast_hp_cur",_hp_calculated);
 	ds_map_replace(_new_beast,"beast_hp_max",_hp_calculated);
 	#endregion

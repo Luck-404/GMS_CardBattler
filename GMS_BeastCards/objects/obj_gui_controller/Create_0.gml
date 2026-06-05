@@ -19,6 +19,7 @@ function scr_destroy_gui_open(){
 		global.active_gui = undefined;
 	}	
 }
+
 function scr_toggle_gui_pause(){
 	global.pause = !global.pause;
 	
@@ -27,5 +28,17 @@ function scr_toggle_gui_pause(){
 		obj_player._player_speed = 3;
 	} else {
 		obj_player._player_speed = 0;
+		obj_player._flag_moving = false;		
 	}	
-}
+}	
+
+function scr_trigger_end_battle(_win_type){
+	show_debug_message("\n\n\n\n\n\nBATTLE HAS ENDED")
+	//DESTROY CURRENT GUI
+	scr_destroy_gui_open();
+	//TOGGLE PAUSE
+	scr_toggle_gui_pause();
+	//OPEN NEW END BATTLE GUI
+	global.active_gui = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_gui_end_battle_pane);
+	global.active_gui._condition = _win_type;
+	}

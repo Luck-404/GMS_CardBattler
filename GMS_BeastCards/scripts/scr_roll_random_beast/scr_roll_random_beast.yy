@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_roll_random_beast",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_roll_random_beast",
+  "parent":{
+    "name":"BEASTS",
+    "path":"folders/BATTLE/BEASTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

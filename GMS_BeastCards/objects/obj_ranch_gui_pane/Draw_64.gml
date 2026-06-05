@@ -97,6 +97,33 @@ for (var _i = 0; _i < 5; _i++)
 			_party_count = ds_list_size(global.player_party);
 			_ranch_count = ds_list_size(global.player_ranch);
 	    }
+			
+		//
+		// NUMBER KEY PARTY SLOT SWAP (1-5)
+		//
+		for (var _k = 1; _k <= 5; _k++)
+		{
+			if (keyboard_check_pressed(ord(string(_k))))
+			{
+			    var _target = _k - 1;
+
+			    if (_target < ds_list_size(global.player_party) && _target != _i)
+			    {
+			        var _hover_unit  = ds_list_find_value(global.player_party, _i);
+			        var _target_unit = ds_list_find_value(global.player_party, _target);
+
+			        ds_list_replace(global.player_party, _i, _target_unit);
+			        ds_list_replace(global.player_party, _target, _hover_unit);
+
+			        _party_count = ds_list_size(global.player_party);
+
+			        _flag_clicked = true;
+			        _cooldown = 10;
+			    }
+
+			    break;
+			}
+		}		
 	}
 	#endregion
 	}

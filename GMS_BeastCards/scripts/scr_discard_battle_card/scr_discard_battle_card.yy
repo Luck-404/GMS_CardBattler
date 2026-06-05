@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_discard_battle_card",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_discard_battle_card",
+  "parent":{
+    "name":"CARDS",
+    "path":"folders/BATTLE/CARDS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

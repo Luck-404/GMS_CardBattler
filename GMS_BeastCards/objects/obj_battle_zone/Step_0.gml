@@ -17,6 +17,23 @@ if (place_meeting(x,y,obj_player)){
 		if (_random_number < 10){
 			//TRIGGER A BATTLE	
 			scr_spawn_popup("TEXT","BATTLE TRIGGERED",undefined,c_black,obj_player.x,obj_player.y);
+			
+			//STORE PLAYER POSITION
+			global.last_player_x = obj_player.x;
+			global.last_player_y = obj_player.y;
+			global.last_player_rm = room;
+			global.last_enemy_pool = _encounter_list;
+			
+			//STOP PLAYER MOVEMENT
+			obj_player._player_speed = 0;
+			obj_player._flag_moving = false;			
+			
+			//HIDE PLAYER
+			obj_player.visible = false;			
+			
+			//SPAWN NEW TRANSITION
+			var _transition = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition);
+			_transition._destination = rm_battle;
 		}
 		_encounter_attempt_cooldown = 30;
 	} else {

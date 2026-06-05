@@ -16,7 +16,7 @@ if (_text != "DEFAULT")
 		case "TEXT":
 			//DRAW TEXT
 			draw_set_colour(_color);
-			draw_set_font(fnt_gui_small);
+			draw_set_font(fnt_gui_medium);
 			draw_text(x-(string_width(_text)/2),y,_text);
 		break;
 		#endregion
@@ -32,7 +32,7 @@ if (_text != "DEFAULT")
 		case "DUAL":
 			//DRAW TEXT
 			draw_set_colour(_color);
-			draw_set_font(fnt_gui_small);
+			draw_set_font(fnt_gui_medium);
 			draw_text(x-(string_width(_text)/2),y,_text);
 			//DRAW ICON (SLIGHTLY HIGHER)
 			draw_sprite(_sprite,0,x,y-15);

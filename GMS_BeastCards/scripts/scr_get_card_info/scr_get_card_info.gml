@@ -8,7 +8,7 @@ function scr_get_card_info(_card_name){
 	// NAME				- string
 	// SPRITE			- sprite index
 	// COLOR(S)			- ["COLOR1","COLOR2"] or ["COLOR1",undefined]
-	// RANGE			- SELF, MELEE, RANGED, BACK, GLOBAL
+	// RANGE			- SELF, MELEE, RANGED, BACK, GLOBAL, TEAN
 	// MAIN TYPE		- ATTACK, DEFENSE, SUPPORT, UTILITY, ARCHETYPE
 	// STAT TYPE		- NEU, MAG, PHY
 	// MAGNITUDE		- int
@@ -58,7 +58,7 @@ function scr_get_card_info(_card_name){
 			ds_map_add(_return_card,"card_mana_cost",1); //MANA COST
 			ds_map_add(_return_card,"card_exhausts",false); //EXHAUSTS
 			ds_map_add(_return_card,"card_script",scr_card_uncolored_strike); //SCRIPT
-			ds_map_add(_return_card,"card_description","Melee, ST, Deals [linear] melee damage."); //DESCRIPTION
+			ds_map_add(_return_card,"card_description","Melee, ST, Deals [linear] melee damage."); //DESCRIPTION	
 		break;
 		#endregion
 		
@@ -79,7 +79,7 @@ function scr_get_card_info(_card_name){
 			ds_map_add(_return_card,"card_mana_cost",1); //MANA COST
 			ds_map_add(_return_card,"card_exhausts",false); //EXHAUSTS
 			ds_map_add(_return_card,"card_script",scr_card_uncolored_power_strike); //SCRIPT
-			ds_map_add(_return_card,"card_description","Melee, ST, Deals [linear] melee damage."); //DESCRIPTION
+			ds_map_add(_return_card,"card_description","Melee, ST, Deals [linear] melee damage."); //DESCRIPTION			
 		break;	
 		#endregion
 		
@@ -194,7 +194,7 @@ function scr_get_card_info(_card_name){
 			ds_map_add(_return_card,"card_name","RESPOSITION"); //NAME
 			ds_map_add(_return_card,"card_sprite",spr_card_uncolored_reposition); //SPRITE		
 			ds_map_add(_return_card,"card_colors",["UNCOLORED",undefined]); //COLOR(s)
-			ds_map_add(_return_card,"card_range","SELF"); //RANGE 
+			ds_map_add(_return_card,"card_range","TEAM"); //RANGE 
 			ds_map_add(_return_card,"card_type","UTILITY"); //TYPE
 			ds_map_add(_return_card,"card_stat","NEU"); //STAT TYPE- WHAY KIND OF POW (MPOW OR PPOW) CAUSES THE MAGNITUDE TO GO UP
 			ds_map_add(_return_card,"card_magnitude",0); //MAGNITUDE
