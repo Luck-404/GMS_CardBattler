@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_damage_target",
   "parent":{
-    "name":"CARD LOGIC",
-    "path":"folders/BATTLE/CARDS/CARD LOGIC.yy",
+    "name":"CARD BATTLE LOGIC",
+    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

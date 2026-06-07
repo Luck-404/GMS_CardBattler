@@ -9,8 +9,15 @@ depth = 0;
 if (_flag_moving){
 	_player_bounce_counter++;
 	
-	//bounce
-	if (_player_bounce_counter >= 8){
+	//bounce normal
+	if (!_flag_sprinting && _player_bounce_counter >= 12){
+		_player_bounce_counter = 0;
+		_player_bounce_frame++;
+		//bounce a max of 4 px high
+		if (_player_bounce_frame > 4){
+			_player_bounce_frame = 0;
+		}
+	} else if (_player_bounce_counter >= 4){
 		_player_bounce_counter = 0;
 		_player_bounce_frame++;
 		//bounce a max of 4 px high

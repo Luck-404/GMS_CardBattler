@@ -16,19 +16,19 @@ _tile = tilemap_get_at_pixel(_pathmap, obj_player.x, obj_player.y);
 _tile_index = tile_get_index(_tile);
 
 if (_tile_index == 2) { // dirt
-    _color = make_colour_rgb(188,152,99);
+    _color = make_colour_rgb(102,82,53);
 }
 
 else if (_tile_index == 3) { // stone
-    _color = make_colour_rgb(147,147,147);
+    _color = make_colour_rgb(102,102,102);
 }
 
 else if (_tile_index == 7) { // wood
-    _color = make_colour_rgb(137,110,73);
+    _color = make_colour_rgb(204,163,108);
 }
 
 else { // grass
-    _color = make_colour_rgb(134,207,128);
+    _color = make_colour_rgb(82,127,78);
 }
 
 //METHODS

@@ -11,11 +11,12 @@ switch(_condition){
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_set_colour(c_red);
-		draw_text(room_width/2-(string_width("DEFEATED...")/2), 100,"DEFEATED...");
+		draw_text(room_width/2-(string_width("DEFEATED...")/2), room_height/2-75,"DEFEATED...");
 		
-		draw_text(room_width/2-(string_width("YOU LIMP BACK TO THE RANCH")/2), 150,"YOU LIMP BACK TO THE RANCH");
+		draw_text(room_width/2-(string_width("YOU LIMP BACK TO THE RANCH")/2), room_height/2,"YOU LIMP BACK TO THE RANCH");
 		draw_set_colour(c_black);
 		
+		#region ONCE
 		if (_flag_finished == false){
 			_flag_finished = true;
 			//UPDATE PLAYER'S UNIT HP- SET ALL TO 0
@@ -24,51 +25,123 @@ switch(_condition){
 				_party_unit[?"beast_hp_cur"] = 0;
 			}
 		}
+		#endregion
 		
 		//DISPLAY ALL PLAYER PARTY UNITS AND THEIR CUR/MAXHP
 		#region PARTY DRAW IN PANE
-		for (var _i = 0; _i < ds_list_size(global.player_party); _i++)
-		{
-		    var _box_x = _row_start_x + ((_slot_size + _spacing) * _i);
-		    var _box_y = _row_y;
+			var _display_index = 0;
 
-		    var _unit = ds_list_find_value(global.player_party, _i);
+			for (var _i = 0; _i < ds_list_size(global.player_party); _i++)
+			{
+			    var _unit = ds_list_find_value(global.player_party, _i);
 
-		    // Outline
-		    draw_set_colour(c_black);
-		    draw_rectangle(_box_x, _box_y,_box_x + _slot_size,_box_y + _slot_size,false);
+			    var _battle_unit = noone;
 
-		    // Fill
-		    draw_set_colour(c_gray);
-		    draw_rectangle(_box_x + 5,_box_y + 5,_box_x + 95,_box_y + 95,false);
+			    for (var _j = 0; _j < ds_list_size(obj_battle_player_controller._beasts_list); _j++)
+			    {
+			        var _b = ds_list_find_value(obj_battle_player_controller._beasts_list, _j);
 
-		    // Center
-		    var _unit_x = _box_x + (_slot_size * 0.5);
-		    var _unit_y = _box_y + (_slot_size * 0.5);
+			        if (_b._uid == _unit[?"beast_uid"])
+			        {
+			            _battle_unit = _b;
+			            break;
+			        }
+			    }
 
-		    // Shadow
-		    var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
-		    draw_sprite_ext(_shadow, 0, _unit_x, _unit_y + 25, 1, 1, 0, c_white, 1);
+			    var _is_present_in_battle = instance_exists(_battle_unit);
 
-		    // Unit
-		    draw_sprite_ext(_unit[?"beast_sprite"],0,_unit_x,_unit_y,0.125,0.125,0,c_white,1);
-			#endregion
-			
-		    // HP
-			draw_set_font(fnt_gui_large);
-			draw_set_halign(fa_left);
-			draw_set_valign(fa_top);
-			draw_set_colour(c_black);			
-			var _hp_string = "HP: " + string(_unit[?"beast_hp_cur"] + "/" + string(_unit[?"beast_hp_max"]));
-			var _text_x = _unit_x;
-			var _text_y = _box_y + (_slot_size) + 15;
-		    draw_text(_text_x-(string_width(_hp_string)/2),_text_y,_hp_string);
+			    if (!_is_present_in_battle) continue;
+
+			    //----------------------------------------------------
+			    // CRITICAL FIX: DEFINE DEAD STATE
+			    //----------------------------------------------------
+			    var _is_dead = (_battle_unit._cur_hp <= 0);
+
+			    var _box_x = _row_start_x + ((_slot_size + _spacing) * _display_index);
+			    var _box_y = _row_y;
+
+			    _display_index++;
+
+			    //----------------------------------------------------
+			    // OUTLINE
+			    //----------------------------------------------------
+			    draw_set_colour(c_black);
+			    draw_rectangle(_box_x, _box_y, _box_x + _slot_size, _box_y + _slot_size, false);
+
+			    //----------------------------------------------------
+			    // BACKGROUND
+			    //----------------------------------------------------
+			    draw_set_colour(_is_dead ? c_maroon : c_gray);
+
+			    draw_rectangle(
+			        _box_x + 5,
+			        _box_y + 5,
+			        _box_x + 95,
+			        _box_y + 95,
+			        false
+			    );
+
+			    //----------------------------------------------------
+			    // CENTER
+			    //----------------------------------------------------
+			    var _unit_x = _box_x + (_slot_size * 0.5);
+			    var _unit_y = _box_y + (_slot_size * 0.5);
+
+			    //----------------------------------------------------
+			    // SHADOW
+			    //----------------------------------------------------
+			    var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
+			    draw_sprite_ext(_shadow, 0, _unit_x, _unit_y + 25, 1, 1, 0, c_white, 1);
+
+			    //----------------------------------------------------
+			    // SPRITE
+			    //----------------------------------------------------
+			    var _col = _is_dead ? c_ltgray : c_white;
+
+			    draw_sprite_ext(
+			        _unit[?"beast_sprite"],
+			        0,
+			        _unit_x,
+			        _unit_y,
+			        0.125,
+			        0.125,
+			        0,
+			        _col,
+			        1
+			    );
+
+			    //----------------------------------------------------
+			    // HP TEXT
+			    //----------------------------------------------------
+			    draw_set_font(fnt_gui_small);
+			    draw_set_halign(fa_left);
+			    draw_set_valign(fa_top);
+			    draw_set_colour(c_black);
+
+			    var _hp_string;
+
+			    if (_is_dead)
+			    {
+			        _hp_string = "DEAD";
+			    }
+			    else
+			    {
+			        _hp_string = "HP: "
+			            + string(_battle_unit._cur_hp)
+			            + "/"
+			            + string(_battle_unit._max_hp);
+			    }
+
+			    var _text_x = _unit_x;
+			    var _text_y = _box_y + (_slot_size) + 15;
+
+			    draw_text(_text_x - (string_width(_hp_string) / 2), _text_y, _hp_string);
+			}
 			#endregion			
-		}
 		
 		
 		//WAIT FOR CLICK ON OBJ_END_CONFIRM
-		if (mouse_check_button_pressed(mb_left) && position_meeting(mouse_x,mouse_y,obj_battle_button_end_battle_confirm)){
+		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_battle_confirm)){
 			//TRANSITION BACK TO RANCH ROOM WITH A STORED POSITION:	
 			//SPAWN NEW TRANSITION
 			var _transition = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition);
@@ -88,96 +161,282 @@ switch(_condition){
 	break;
 	#endregion
 	
+	
+	
+	
+	
+	
 	#region WIN
 	case "WIN":
-		//DRAW 'DEFEATED'
+		//DRAW 'WIN'
 		draw_set_font(fnt_gui_large);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_set_colour(c_black);
-		draw_text(room_width/2-(string_width("YOU WON!")/2), 100,"YOU WON!");
+		draw_text(room_width/2-(string_width("YOU WON!")/2), 150,"YOU WON!");
 		
-		draw_text(room_width/2-(string_width("REWARDS:")/2), 150,"REWARDS:");
+		draw_text(room_width/2-(string_width("REWARDS:")/2), 200,"REWARDS:");
 		draw_set_colour(c_black);
 		
+		#region ONCE
 		if (_flag_finished == false){
 			_flag_finished = true;
 			//AWARD GP
-			global.player_gold += 25;
+			var _gold_reward = irandom_range(25,100);
+			global.player_gold += _gold_reward;
+			array_push(_rewards_list, ["GOLD", _gold_reward]);
 			
 			//AWARD 3 RANDOM CARDS
 			for (var _i = 0; _i < 3; _i++){
-				randomize();
 				var _pool = choose(global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_II_cards,global.rarity_II_cards,global.rarity_II_cards,global.rarity_III_cards);
 				var _card_roll = irandom_range(0,ds_list_size(_pool)-1);
 				var _card_name = ds_list_find_value(_pool,_card_roll);
 				var _new_card = scr_get_card_info(_card_name);
 				scr_add_card_to_deck(_new_card);
-			}
+				array_push(_rewards_list, ["CARD", _new_card]);				
+			}	
 			
 			//UPDATE PLAYER'S UNIT HP AND EXP
 			for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
 				var _party_unit = ds_list_find_value(global.player_party,_i);
-				var _battle_unit = ds_list_find_value(obj_battle_player_controller._beasts_list,_i);
+				var _battle_unit = noone;
+
+				for (var _j = 0; _j < ds_list_size(obj_battle_player_controller._beasts_list); _j++)
+				{
+				    var _b = ds_list_find_value(obj_battle_player_controller._beasts_list, _j);
+
+				    if (_b._uid == _party_unit[?"beast_uid"])
+				    {
+				        _battle_unit = _b;
+				        break;
+				    }
+				}
 				
-				_party_unit[?"beast_hp_cur"] = _battle_unit._cur_hp;
+				if (instance_exists(_battle_unit))
+				{
+				    _party_unit[?"beast_hp_cur"] = _battle_unit._cur_hp;
+				}
+
 				var _cur_exp = _party_unit[?"beast_exp"];
-				if (_cur_exp+2 >= 10){
-					_party_unit[?"beast_level"]++;
-					_party_unit[?"beast_exp"] += 2;
-					_party_unit[?"beast_exp"] -= 10;
-				} else {
-					_party_unit[?"beast_exp"] +=2;
+				if (_party_unit[?"beast_hp_cur"] > 0)
+				{
+				    _party_unit[?"beast_exp"] += 2;
+
+				    while (_party_unit[?"beast_exp"] >= 10)
+				    {
+				        _party_unit[?"beast_exp"] -= 10;
+				        scr_level_up_beast(_party_unit);
+				    }
 				}
 			}
+			array_push(_rewards_list, ["EXP", 2]);
 		}
-		
-		//DISPLAY ALL PLAYER PARTY UNITS AND THEIR CUR/MAXHP
-		#region PARTY DRAW IN PANE
-		for (var _i = 0; _i < ds_list_size(global.player_party); _i++)
+		#endregion
+		//
+		// DRAW REWARDS
+		//
+		#region REWARDS
+		draw_set_font(fnt_gui_small);
+		draw_set_colour(c_black);
+
+		var _reward_x = room_width * 0.5;
+		var _reward_y = room_width/2-150;
+
+		//
+		// CARDS FIRST
+		//
+		var _card_x = room_width * 0.5 - 150;
+		var _card_y = _reward_y;
+
+		for (var _i = 0; _i < array_length(_rewards_list); _i++)
 		{
-		    var _box_x = _row_start_x + ((_slot_size + _spacing) * _i);
-		    var _box_y = _row_y;
+			if (_rewards_list[_i][0] == "CARD")
+			{
+			    var _card = _rewards_list[_i][1];
 
-		    var _unit = ds_list_find_value(global.player_party, _i);
+			    draw_sprite_ext(
+			        _card[?"card_sprite"],
+			        0,
+			        _card_x,
+			        _card_y,
+			        0.2,
+			        0.2,
+			        0,
+			        c_white,
+			        1
+			    );
 
-		    // Outline
-		    draw_set_colour(c_black);
-		    draw_rectangle(_box_x, _box_y,_box_x + _slot_size,_box_y + _slot_size,false);
+			    draw_set_halign(fa_center);
 
-		    // Fill
-		    draw_set_colour(c_gray);
-		    draw_rectangle(_box_x + 5,_box_y + 5,_box_x + 95,_box_y + 95,false);
+			    draw_text(
+			        _card_x,
+			        _card_y + 60,
+			        string(_card[?"card_name"])
+			    );
 
-		    // Center
-		    var _unit_x = _box_x + (_slot_size * 0.5);
-		    var _unit_y = _box_y + (_slot_size * 0.5);
+			    draw_set_halign(fa_left);
 
-		    // Shadow
-		    var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
-		    draw_sprite_ext(_shadow, 0, _unit_x, _unit_y + 25, 1, 1, 0, c_white, 1);
-
-		    // Unit
-		    draw_sprite_ext(_unit[?"beast_sprite"],0,_unit_x,_unit_y,0.125,0.125,0,c_white,1);
-			#endregion
-			
-		    // HP
-			draw_set_font(fnt_gui_large);
-			draw_set_halign(fa_left);
-			draw_set_valign(fa_top);
-			draw_set_colour(c_black);			
-			var _hp_string = "HP: " + string(_unit[?"beast_hp_cur"] + "/" + string(_unit[?"beast_hp_max"]));
-			var _text_x = _unit_x;
-			var _text_y = _box_y + (_slot_size) + 15;
-		    draw_text(_text_x-(string_width(_hp_string)/2),_text_y,_hp_string);	
-			//level
-		    draw_text(_text_x-(string_width(string("Level: " + _unit[?"beast_level"]))/2),_text_y+30,"Level: " + _unit[?"beast_level"]);					
-			#endregion			
+			    _card_x += 150;
+			}
 		}
+
+		_reward_y += 90;
+
+		//
+		// GOLD SECOND
+		//
+		for (var _i = 0; _i < array_length(_rewards_list); _i++)
+		{
+		    if (_rewards_list[_i][0] == "GOLD")
+		    {
+		        draw_text(
+		            _reward_x - 100,
+		            _reward_y,
+		            "Gained " + string(_rewards_list[_i][1]) + " Gold"
+		        );
+
+		        _reward_y += 30;
+		    }
+		}
+
+		//
+		// EXP LAST
+		//
+		for (var _i = 0; _i < array_length(_rewards_list); _i++)
+		{
+		    if (_rewards_list[_i][0] == "EXP")
+		    {
+		        draw_text(
+		            _reward_x - 100,
+		            _reward_y,
+		            "Each Beast Gained " + string(_rewards_list[_i][1]) + " EXP"
+		        );
+
+		        _reward_y += 30;
+		    }
+		}
+		#endregion
 		
+		#region PARTY DRAW IN PANE
+			var _display_index = 0;
+
+			for (var _i = 0; _i < ds_list_size(global.player_party); _i++)
+			{
+			    var _unit = ds_list_find_value(global.player_party, _i);
+
+			    var _battle_unit = noone;
+
+			    for (var _j = 0; _j < ds_list_size(obj_battle_player_controller._beasts_list); _j++)
+			    {
+			        var _b = ds_list_find_value(obj_battle_player_controller._beasts_list, _j);
+
+			        if (_b._uid == _unit[?"beast_uid"])
+			        {
+			            _battle_unit = _b;
+			            break;
+			        }
+			    }
+
+			    var _is_present_in_battle = instance_exists(_battle_unit);
+
+			    if (!_is_present_in_battle) continue;
+
+			    //----------------------------------------------------
+			    // CRITICAL FIX: DEFINE DEAD STATE
+			    //----------------------------------------------------
+			    var _is_dead = (_battle_unit._cur_hp <= 0);
+
+			    var _box_x = _row_start_x + ((_slot_size + _spacing) * _display_index);
+			    var _box_y = _row_y;
+
+			    _display_index++;
+
+			    //----------------------------------------------------
+			    // OUTLINE
+			    //----------------------------------------------------
+			    draw_set_colour(c_black);
+			    draw_rectangle(_box_x, _box_y, _box_x + _slot_size, _box_y + _slot_size, false);
+
+			    //----------------------------------------------------
+			    // BACKGROUND
+			    //----------------------------------------------------
+			    draw_set_colour(_is_dead ? c_maroon : c_gray);
+
+			    draw_rectangle(
+			        _box_x + 5,
+			        _box_y + 5,
+			        _box_x + 95,
+			        _box_y + 95,
+			        false
+			    );
+
+			    //----------------------------------------------------
+			    // CENTER
+			    //----------------------------------------------------
+			    var _unit_x = _box_x + (_slot_size * 0.5);
+			    var _unit_y = _box_y + (_slot_size * 0.5);
+
+			    //----------------------------------------------------
+			    // SHADOW
+			    //----------------------------------------------------
+			    var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
+			    draw_sprite_ext(_shadow, 0, _unit_x, _unit_y + 25, 1, 1, 0, c_white, 1);
+
+			    //----------------------------------------------------
+			    // SPRITE
+			    //----------------------------------------------------
+			    var _col = _is_dead ? c_ltgray : c_white;
+
+			    draw_sprite_ext(
+			        _unit[?"beast_sprite"],
+			        0,
+			        _unit_x,
+			        _unit_y,
+			        0.125,
+			        0.125,
+			        0,
+			        _col,
+			        1
+			    );
+
+			    //----------------------------------------------------
+			    // HP TEXT
+			    //----------------------------------------------------
+			    draw_set_font(fnt_gui_small);
+			    draw_set_halign(fa_left);
+			    draw_set_valign(fa_top);
+			    draw_set_colour(c_black);
+
+			    var _hp_string;
+
+			    if (_is_dead)
+			    {
+			        _hp_string = "DEAD";
+			    }
+			    else
+			    {
+			        _hp_string = "HP: "
+			            + string(_battle_unit._cur_hp)
+			            + "/"
+			            + string(_battle_unit._max_hp);
+			    }
+
+			    var _text_x = _unit_x;
+			    var _text_y = _box_y + (_slot_size) + 15;
+
+			    draw_text(_text_x - (string_width(_hp_string) / 2), _text_y, _hp_string);
+
+			    draw_text(
+			        _text_x - (string_width("Level: " + string(_unit[?"beast_level"])) / 2),
+			        _text_y + 30,
+			        "Level: " + string(_unit[?"beast_level"])
+			    );
+
+		}
+		#endregion
 		
 		//WAIT FOR CLICK ON OBJ_END_CONFIRM
-		if (mouse_check_button_pressed(mb_left) && position_meeting(mouse_x,mouse_y,obj_battle_button_end_battle_confirm)){
+		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_battle_confirm)){
 			//TRANSITION BACK TO RANCH ROOM WITH A STORED POSITION:	
 			//SPAWN NEW TRANSITION
 			var _transition = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition);

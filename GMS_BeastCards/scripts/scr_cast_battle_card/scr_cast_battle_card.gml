@@ -14,7 +14,7 @@ var _scr = _card_ref[?"card_script"];
 var _cost = _card_ref[?"card_mana_cost"];
 
 //PLAY CARD EFFECT
-if (global.echo_counter != 0 && _card_ref[?"card_name"] != "ECHO"){
+if (global.caster_beast._team == "PLAYER" && global.echo_counter != 0 && _card_ref[?"card_name"] != "ECHO"){
 	for (var _i = 0; _i < global.echo_counter+1; _i++){
 		_scr(_card_ref,_caster,_tar);
 	}
@@ -24,16 +24,20 @@ if (global.echo_counter != 0 && _card_ref[?"card_name"] != "ECHO"){
 }
 
 //DEDUCT MANA FOR CARD CAST
+if (global.caster_beast._team == "PLAYER"){
 obj_battle_player_controller._cur_mana -= _cost;
+}
 
 //(FUTURE) TRIGGER EFFECTS
 
 //EXHAUST
-if (_card_ref[?"card_exhausts"] == true){
-	scr_exhaust_battle_card(_card);
-} else {
-//DISCARD 
-	scr_discard_battle_card(_card);
+if (global.caster_beast._team == "PLAYER"){
+	if (_card_ref[?"card_exhausts"] == true){
+		scr_exhaust_battle_card(_card);
+	} else {
+	//DISCARD 
+		scr_discard_battle_card(_card);
+	}
 }
 
 //RESET AT END

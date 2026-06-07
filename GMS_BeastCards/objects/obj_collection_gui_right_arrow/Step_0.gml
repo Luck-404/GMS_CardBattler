@@ -10,7 +10,7 @@ if (!instance_exists(obj_collection_gui_pane)){
 #endregion
 
 #region HOVER LOGIC AND CLICING
-if (position_meeting(mouse_x,mouse_y,self)){
+if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 	//HIGHLIGHT
 	image_index = 1;	
 	

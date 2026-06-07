@@ -1,9 +1,11 @@
 //
-//
 // CREATE: OBJ_LEAF
 //
-//
 
-direction = irandom_range(0,360);
-speed = irandom_range(1,4);
+_rot = irandom_range(0,359);
+_rot_spd = irandom_range(-45,45);
+
+_dir = random(360);
+_spd = random_range(2,8);
+
 _life = 5;

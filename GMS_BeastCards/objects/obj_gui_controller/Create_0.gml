@@ -21,14 +21,15 @@ function scr_destroy_gui_open(){
 }
 
 function scr_toggle_gui_pause(){
-	global.pause = !global.pause;
 	
 	//UPDATE PLAYER SPEED
 	if (obj_player._player_speed == 0){
 		obj_player._player_speed = 3;
+		
 	} else {
 		obj_player._player_speed = 0;
-		obj_player._flag_moving = false;		
+		obj_player._flag_moving = false;
+		obj_player._flag_sprinting = false;
 	}	
 }	
 

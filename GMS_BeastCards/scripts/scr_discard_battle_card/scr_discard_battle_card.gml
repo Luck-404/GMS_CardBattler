@@ -16,4 +16,5 @@ var _discard = obj_battle_player_controller._battle_discard;
 	_card.y = room_height-100;
 //Update its location to _location = “DISCARD”
 	_card._location = "DISCARD";
+	scr_reposition_cards();
 }

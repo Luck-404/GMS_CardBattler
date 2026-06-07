@@ -10,7 +10,7 @@ if (!instance_exists(obj_gui_party_pane)){
 #endregion
 
 #region HOVER LOGIC AND CLICING
-if (position_meeting(mouse_x,mouse_y,self)){
+if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 	image_index = 1;	
 	if (mouse_check_button_pressed(mb_left) && _flag_clicked == false){
 		_cooldown = 10;

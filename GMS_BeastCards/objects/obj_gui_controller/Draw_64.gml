@@ -32,20 +32,20 @@ if (global.active_gui == undefined)
     var _ui_x2 = _base_x + _slot_w;
     var _ui_y2 = room_height - 10;
 
-    var _hover_any = false;
+    //var _hover_any = false;
 
-    if (instance_exists(obj_player))
-    {
-        if (obj_player.x >= _ui_x1 && obj_player.x <= _ui_x2
-        && obj_player.y >= _ui_y1 && obj_player.y <= _ui_y2)
-        {
-            _hover_any = true;
-        }
-    }
+    //if (instance_exists(obj_player))
+    //{
+    //    if (obj_player.x >= _ui_x1 && obj_player.x <= _ui_x2
+    //    && obj_player.y >= _ui_y1 && obj_player.y <= _ui_y2)
+    //    {
+    //        _hover_any = true;
+    //    }
+    //}
 
-    var _alpha = _hover_any ? 0.25 : 1;
+    //var _alpha = _hover_any ? 0.25 : 1;
 
-    draw_set_alpha(_alpha);
+    //draw_set_alpha(_alpha);
 
     for (var _i = 0; _i < _count; _i++)
     {
@@ -55,11 +55,38 @@ if (global.active_gui == undefined)
         var _box_y = _base_y + (_i * (_slot_h + _spacing));
 
         // SLOT BACKGROUND
-        draw_set_colour(c_black);
-        draw_rectangle(_box_x, _box_y, _box_x + _slot_w, _box_y + _slot_h, false);
+		if (_unit[?"beast_hp_cur"] <= 0)
+		{
+		    draw_set_colour(c_black);
+			draw_rectangle(_box_x, _box_y, _box_x + _slot_w, _box_y + _slot_h, false);
 
-        draw_set_colour(c_gray);
-        draw_rectangle(_box_x + 3, _box_y + 3, _box_x + _slot_w - 3, _box_y + _slot_h - 3, false);
+			// inner fill (keep neutral regardless of state)
+			draw_set_colour(c_maroon);
+			draw_rectangle(
+			    _box_x + 3,
+			    _box_y + 3,
+			    _box_x + _slot_w - 3,
+			    _box_y + _slot_h - 3,
+			    false
+			);			
+		}
+		else
+		{
+		    draw_set_colour(c_black);
+			draw_rectangle(_box_x, _box_y, _box_x + _slot_w, _box_y + _slot_h, false);
+
+			// inner fill (keep neutral regardless of state)
+			draw_set_colour(c_gray);
+			draw_rectangle(
+			    _box_x + 3,
+			    _box_y + 3,
+			    _box_x + _slot_w - 3,
+			    _box_y + _slot_h - 3,
+			    false
+			);			
+		}
+
+
 
         // ICON
         var _cx = _box_x + (_slot_w * 0.5);
@@ -67,7 +94,7 @@ if (global.active_gui == undefined)
 
         var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
 
-        draw_sprite_ext(_shadow, 0, _cx, _cy + 10, 1, 1, 0, c_white, _alpha);
+        draw_sprite_ext(_shadow, 0, _cx, _cy + 10, 1, 1, 0, c_white, 1);
 
         draw_sprite_ext(
             _unit[?"beast_sprite"],
@@ -78,15 +105,15 @@ if (global.active_gui == undefined)
             0.10,
             0,
             c_white,
-            _alpha
+            1
         );
     }
 
     draw_set_alpha(1);
 
     // CLICK ANYWHERE ON PARTY STRIP -> OPEN PARTY PANE (unit 0 focus)
-    if (mouse_x >= _ui_x1 && mouse_x <= _ui_x2
-    && mouse_y >= _ui_y1 && mouse_y <= _ui_y2) && mouse_check_button_pressed(mb_left){
+    if (device_mouse_x_to_gui(0) >= _ui_x1 && device_mouse_x_to_gui(0) <= _ui_x2
+    && device_mouse_y_to_gui(0) >= _ui_y1 && device_mouse_y_to_gui(0) <= _ui_y2) && mouse_check_button_pressed(mb_left){
 		draw_set_colour(c_fuchsia);
 		draw_rectangle(_ui_x1+5,_ui_y1+5,_ui_x2-5,_ui_y2-5,true);
 		draw_set_colour(c_white);
@@ -134,19 +161,19 @@ if (global.active_gui == undefined)
     var _x2 = room_width - 10;
     var _y2 = 10 + _box_h;
 
-    // OPACITY WHEN PLAYER OVERLAPS
-    var _gold_alpha = 1;
+    //// OPACITY WHEN PLAYER OVERLAPS
+    //var _gold_alpha = 1;
 
-    if (instance_exists(obj_player))
-    {
-        if (obj_player.x >= _x1 && obj_player.x <= _x2
-        && obj_player.y >= _y1 && obj_player.y <= _y2)
-        {
-            _gold_alpha = 0.25;
-        }
-    }
+    //if (instance_exists(obj_player))
+    //{
+    //    if (obj_player.x >= _x1 && obj_player.x <= _x2
+    //    && obj_player.y >= _y1 && obj_player.y <= _y2)
+    //    {
+    //        _gold_alpha = 0.25;
+    //    }
+    //}
 
-    draw_set_alpha(_gold_alpha);
+    //draw_set_alpha(_gold_alpha);
 
     // BACKGROUND
     draw_set_colour(c_black);
@@ -178,25 +205,25 @@ if (global.active_gui == undefined)
 
     var _hover = false;
 
-    if (mouse_x >= 0 && mouse_x <= _icon_x2
-    && mouse_y >= 0 && mouse_y <= _icon_y2)
+    if (device_mouse_x_to_gui(0) >= 0 && device_mouse_x_to_gui(0) <= _icon_x2
+    && device_mouse_y_to_gui(0) >= 0 && device_mouse_y_to_gui(0) <= _icon_y2)
     {
         _hover = true;
     }
 
-    // OPACITY WHEN PLAYER OVERLAPS
-    var _deck_alpha = 1;
+    //// OPACITY WHEN PLAYER OVERLAPS
+    //var _deck_alpha = 1;
 
-    if (instance_exists(obj_player))
-    {
-        if (obj_player.x >= _icon_x1 && obj_player.x <= _icon_x2
-        && obj_player.y >= _icon_y1 && obj_player.y <= _icon_y2)
-        {
-            _deck_alpha = 0.25;
-        }
-    }
+    //if (instance_exists(obj_player))
+    //{
+    //    if (obj_player.x >= _icon_x1 && obj_player.x <= _icon_x2
+    //    && obj_player.y >= _icon_y1 && obj_player.y <= _icon_y2)
+    //    {
+    //        _deck_alpha = 0.25;
+    //    }
+    //}
 
-    draw_set_alpha(_deck_alpha);
+    //draw_set_alpha(_deck_alpha);
 
     // DRAW ICON
     draw_set_colour(c_white);

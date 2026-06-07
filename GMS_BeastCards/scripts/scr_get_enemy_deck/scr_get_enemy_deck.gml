@@ -19,14 +19,14 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 		#endregion
 
 		#region VIRIDIAN
-			#region ARBRAWN
+			#region ARBRAWN - MARTIAL-ADVENTURER
 			case "ARBRAWN":
 				switch(_beast_type){
 					case "BOTANICAL":
 						
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("EMERALD_SLAM"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("RAPID_STRIKES"));
 						return _return_deck;
@@ -35,7 +35,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "NATURAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("EMERALD_SLAM"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						return _return_deck;
@@ -44,7 +44,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "WILD":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("MIRACLE_MUSA"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("BULWARK"));
 						return _return_deck;
@@ -53,13 +53,13 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 			break;
 			#endregion
 			
-			#region ARGENTBUD
+			#region ARGENTBUD - TECHNICAL-MERCHANT
 			case "ARGENTBUD":
 				switch(_beast_type){
 					case "BOTANICAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("LIFE_SPIRIT"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("RAPID_STRIKES"));
 						return _return_deck;
@@ -68,7 +68,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "NATURAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("LIFE_SPIRIT"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						return _return_deck;
@@ -76,8 +76,8 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					
 					case "WILD":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("DISEASE"));
+						ds_list_add(_return_deck,scr_get_card_info("MIRACLE_MUSA"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("BULWARK"));
 						return _return_deck;
@@ -86,13 +86,13 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 			break;
 			#endregion
 			
-			#region BEAVINE
+			#region BEAVINE - MARTIAL-ADVENTURER
 			case "BEAVINE":
 				switch(_beast_type){
 					case "BOTANICAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("LIFE_SPIRIT"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("RAPID_STRIKES"));
 						return _return_deck;
@@ -101,7 +101,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "NATURAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("LIFE_SPIRIT"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						return _return_deck;
@@ -109,8 +109,8 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					
 					case "WILD":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("DISEASE"));
+						ds_list_add(_return_deck,scr_get_card_info("MIRACLE_MUSA"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("BULWARK"));
 						return _return_deck;
@@ -139,13 +139,13 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 			
 			#endregion
 			
-			#region FLITSAGE
+			#region FLITSAGE - MAGICAL-MAGE
 			case "FLITSAGE":
 				switch(_beast_type){
 					case "BOTANICAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("LIFE_SPIRIT"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("RAPID_STRIKES"));
 						return _return_deck;
@@ -154,7 +154,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "NATURAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("LIFE_SPIRIT"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						return _return_deck;
@@ -162,8 +162,8 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					
 					case "WILD":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("DISEASE"));
+						ds_list_add(_return_deck,scr_get_card_info("MIRACLE_MUSA"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						return _return_deck;
@@ -172,13 +172,13 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 			break;
 			#endregion
 			
-			#region FURN
+			#region FURN - TECHNICAL-HUNTER
 			case "FURN":
 				switch(_beast_type){
 					case "BOTANICAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("RAPID_STRIKES"));
 						return _return_deck;
@@ -187,7 +187,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "NATURAL":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						return _return_deck;
@@ -196,7 +196,7 @@ function scr_get_enemy_deck(_beast_name,_beast_type){
 					case "WILD":
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
 						ds_list_add(_return_deck,scr_get_card_info("STRIKE"));
-						ds_list_add(_return_deck,scr_get_card_info("POWER_STRIKE"));
+						ds_list_add(_return_deck,scr_get_card_info("MIRACLE_MUSA"));
 						ds_list_add(_return_deck,scr_get_card_info("BLOCK"));
 						ds_list_add(_return_deck,scr_get_card_info("DEFT_STRIKE"));
 						return _return_deck;

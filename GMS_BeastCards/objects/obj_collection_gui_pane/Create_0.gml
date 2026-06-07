@@ -15,7 +15,7 @@ _deck_count = ds_list_size(global.player_deck);
 _collection_count = ds_list_size(global.player_card_collection);
 
 _deck_max = 30;
-
+_type = "COLLECTION";
 // PANE AND SLOT SPACING AND LAYOUT
 _pane_w = 800;
 _pane_h = 800;

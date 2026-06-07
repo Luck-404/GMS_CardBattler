@@ -88,7 +88,7 @@ for (var _i = 0; _i < _deck_visible; _i++){
 		// HOVER LOGIC AND CLICKING
 		//
 		#region HOVER AND CLICK
-        if (mouse_x > _box_x && mouse_x < _box_x + _slot_w && mouse_y > _box_y && mouse_y < _box_y + _slot_h){
+        if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h){
 			//DRAW HIGHLIGHT
             draw_sprite(spr_collection_gui_highlight, 0, _box_x + 185, _box_y + 11);
 
@@ -177,7 +177,7 @@ for (var _i = 0; _i < _collection_per_page; _i++){
 		// HOVER AND CLICK
 		//
 		#region HOVER AND CLICK
-        if (mouse_x > _box_x && mouse_x < _box_x + _slot_w && mouse_y > _box_y && mouse_y < _box_y + _slot_h){
+        if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h){
             //HIGHLGIHT
 			draw_sprite(spr_collection_gui_highlight,0,_box_x + 185,_box_y + 11);
 

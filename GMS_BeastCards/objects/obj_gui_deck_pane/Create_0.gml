@@ -11,7 +11,7 @@ depth = -1;
 
 // DECK REFERENCE
 _card_count = ds_list_size(global.player_deck);
-
+_type = "DECK";
 // PANE SIZING
 _pane_w = 800;
 _pane_h = 800;

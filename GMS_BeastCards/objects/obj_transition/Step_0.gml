@@ -27,6 +27,12 @@ if (_flag_continue_transition == true){
 	//FADE IN
 	_ref_fader._flag_fade_in = true;
 
+	if (_destination != rm_battle){
+		//cant get into battle for 3s
+		var _waiter = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_waiter);
+		_waiter._life = 180;
+	}
+
 	//GO TO THE DESTINATION ROOM
 	room_goto(_destination);
 }

@@ -15,10 +15,15 @@ if (global.active_gui == undefined){
 #region DRAW SHADOW AND SPRITE
 draw_sprite_ext(_shadow,0,x,y+30,1,1,0,c_white,1);
 
-if (_beast_state == BEAST_STATE.SHAKE){
-	draw_sprite_ext(sprite_index,0,x,y+_draw_y_offset,image_xscale * 0.15,0.15,_draw_rot,c_white,1);
+if (_beast_state == BEAST_STATE.DEAD){
+	draw_sprite_ext(sprite_index,0,x,y+_bounce_frame,image_xscale * 0.15,0.15,_draw_rot,c_gray,1);	
+	draw_sprite_ext(spr_battle_enemy_dead,0,x,y,0.5,0.5,0,c_white,1);
 } else {
-	draw_sprite_ext(sprite_index,0,x,y+_bounce_frame,image_xscale * 0.15,0.15,_draw_rot,c_white,1);	
+	if (_beast_state == BEAST_STATE.SHAKE){
+		draw_sprite_ext(sprite_index,0,x,y+_draw_y_offset,image_xscale * 0.15,0.15,_draw_rot,c_white,1);
+	} else {
+		draw_sprite_ext(sprite_index,0,x,y+_bounce_frame,image_xscale * 0.15,0.15,_draw_rot,c_white,1);	
+	}
 }
 #endregion
 
@@ -185,6 +190,10 @@ if (global.pause == false){
 		    }
 		break;
 		#endregion
+		
+		case BEAST_STATE.DEAD:
+		
+		break;
 	}
 }
 #endregion

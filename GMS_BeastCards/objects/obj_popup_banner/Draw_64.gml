@@ -5,15 +5,15 @@
 //
 
 //DRAW SELF
-draw_self();
+draw_sprite(spr_popup_banner,_index,x,y);
 
 //
 // UNFURL BANNER | VISUALLY UNFURLS THE BANNER
 //
 #region UNFURL BANNER
 if (_flag_opened == false){
-	image_index++;
-	if (image_index == 3){
+	_index++;
+	if (_index == 3){
 		_flag_opened = true;
 	}
 }

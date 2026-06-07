@@ -4,6 +4,11 @@
 //
 //
 function scr_card_uncolored_power_strike(_card,_caster,_target){
-	//DEAL 4 damage
-	scr_damage_target(16,_target);
+	//DEAL damage
+	scr_damage_target(_card[?"card_magnitude"],_target);
+	
+	//PLAY ANIMATION
+	
+	//PLAY SOUND
+
 }

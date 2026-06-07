@@ -8,6 +8,13 @@
 if (!global.pause){
 var _move_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 var _move_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
+if (keyboard_check(vk_lshift) && _player_speed != 0){
+	_flag_sprinting = true;
+	_player_speed = 4;
+} else if (_player_speed != 0) {
+	_flag_sprinting = false;
+	_player_speed = 3;
+}
 
 // SPRITE DIRECTION / FACING
 
@@ -65,6 +72,7 @@ if (_move_x != 0 || _move_y != 0)
     _move_y /= _len;
 } else {
 	_flag_moving = false;	 
+	_flag_sprinting = false;
 	_player_bounce_counter = 0;
 	_player_bounce_frame = 0;
  }
@@ -111,6 +119,9 @@ y += _vsp;
 		//TRIGGER A FEW PARTICLES
 		randomize();
 		var _random_particles = irandom_range(1,3);
+		if (_flag_sprinting){
+			_random_particles = _random_particles*3;
+		}
 		//SPAWN THE PARTICLES
 		for (var _i = 0; _i < _random_particles; _i++){
 			var _particle = instance_create_layer(obj_player.x,obj_player.y,"ily_fx",obj_scene_fx_step_particle);	

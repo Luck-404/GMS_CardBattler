@@ -14,6 +14,7 @@ if (instance_place(x,y,obj_player) && _flag_triggered == false){
 	
 	obj_player._player_speed = 0; //SET PLAYER SPEED TO 0, EFFECTIVELY FREEZING THEM
 	obj_player._flag_moving = false;
+	obj_player._flag_sprinting = false;
 	
 	//FADE TO BLACK
 	_ref_fader = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition_fader);

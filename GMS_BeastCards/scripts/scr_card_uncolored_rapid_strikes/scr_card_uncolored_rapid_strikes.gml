@@ -4,12 +4,14 @@
 //
 //
 function scr_card_uncolored_rapid_strikes(_card,_caster,_target){
-	//DEAL 2 damage
-	scr_damage_target(2,_target);
+	for (var _i = 0; _i < 3; _i++){
+	//DEAL damage
+	scr_damage_target(_card[?"card_magnitude"],_target);
+
+	//PLAY ANIMATION
 	
-	//DEAL 2 damage
-	scr_damage_target(2,_target);
+	//PLAY SOUND
 	
-	//DEAL 2 damage
-	scr_damage_target(2,_target);	
+	//POPUP
+	}
 }

@@ -9,11 +9,14 @@
 //
 
 //BEASTS
-_beast_number = irandom_range(1,5);
-
+_beast_number = irandom_range(1,1);
+_statuses_init = false;
 _beasts_list = ds_list_create();
 _beasts_alive = ds_list_create();
 _beasts_graveyard = ds_list_create();
+_casting_units = ds_list_create();
+_cast_init = false;
+_minions_init = false;
 
 //ENEMY STATE
 enum ENEMY_STATE{

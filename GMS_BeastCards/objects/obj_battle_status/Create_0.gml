@@ -1,0 +1,10 @@
+_status_lifetime = 3;
+_status_command = "WAIT";
+_status_scr = undefined;
+_ref_host = "";
+_status_type = "DEFAULT";
+_status_name = "NONE";
+_status_desc = "NONE";
+_status_sprite = undefined;
+_status_stacks = 1;
+_trigger_region = "START"; //START OR END OR UNDEFINED

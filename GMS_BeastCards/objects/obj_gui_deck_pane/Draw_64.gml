@@ -7,7 +7,7 @@
 // 
 // SETUP
 //
-draw_self();
+draw_sprite(spr_gui_deck_pane,0,x,y);
 _card_count = ds_list_size(global.player_deck);
 var _preview_card = undefined;
 var _total_cost = 0;
@@ -45,7 +45,7 @@ for (var _i = 0; _i < 30; _i++){
 	        draw_sprite_ext(_card[?"card_sprite"],0,_center_x,_center_y,_card_scale,_card_scale,0,c_white,1);
 
 			//HOVER HIGHLIGHT AND PREIVEW SET
-	        if (mouse_x > _box_x && mouse_x < _box_x + _slot_w && mouse_y > _box_y && mouse_y < _box_y + _slot_h){
+	        if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h){
 	            draw_sprite(spr_gui_deck_highlight,0,_center_x,_center_y);
 
 	            if (keyboard_check(vk_lcontrol)){

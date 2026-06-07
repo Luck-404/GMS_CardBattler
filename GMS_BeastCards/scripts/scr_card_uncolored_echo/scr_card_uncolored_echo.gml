@@ -4,5 +4,12 @@
 //
 //
 function scr_card_uncolored_echo(_card,_caster,_target){
-	global.echo_counter++;
+	global.echo_counter+=_card[?"card_magnitude"];
+	
+	//PLAY ANIMATION
+	
+	//PLAY SOUND
+	
+	//POPUP
+	scr_spawn_scrolling_popup("TEXT","+1 ECHO",undefined,c_white,room_width/2-300,room_height/2);			
 }

@@ -9,7 +9,7 @@ depth = -1;
 _pos = 0;
 _unit_count = ds_list_size(global.player_party);
 _unit_selected = ds_list_find_value(global.player_party,_pos); //SELECT UNIT 0 BY DEFAULT
-
+_type = "PARTY";
 _pane_w = 800;
 _pane_h = 800;
 _pane_left = x - (_pane_w * 0.5);

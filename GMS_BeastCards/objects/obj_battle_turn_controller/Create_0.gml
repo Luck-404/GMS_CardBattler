@@ -29,7 +29,10 @@ _flag_battle_ended = false;
 function scr_pass_turn(){
 	if(_turn_tracker == 0){ //(player->enemy)
 		_turn_tracker++;
+		_enemy_controller._enemy_state = ENEMY_STATE.TURN_START;
+
 	}else { //(enemy->player)
 		_turn_tracker = 0;	
+		_player_controller._player_state = PLAYER_STATE.TURN_START;
 	}
 }

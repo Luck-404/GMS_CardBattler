@@ -12,7 +12,7 @@ depth = -1;
 //PARTY AND RANCH COUNTS
 _party_count = ds_list_size(global.player_party);
 _ranch_count = ds_list_size(global.player_ranch);
-
+_type = "RANCH";
 //SIZING OF PANE AND PIECES
 _pane_w = 800;
 _pane_h = 800;

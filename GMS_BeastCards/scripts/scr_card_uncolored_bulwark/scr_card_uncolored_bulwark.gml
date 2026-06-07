@@ -4,6 +4,10 @@
 //
 //
 function scr_card_uncolored_bulwark(_card,_caster,_target){
-	//ADD 20 DEF
-	scr_armor_target(20,_caster);
+	//ADD DEF
+	scr_armor_target(_card[?"card_magnitude"],_caster);
+	
+	//PLAY ANIMATION
+	
+	//PLAY SOUND
 }

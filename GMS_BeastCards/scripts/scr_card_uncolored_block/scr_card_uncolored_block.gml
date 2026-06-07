@@ -4,6 +4,11 @@
 //
 //
 function scr_card_uncolored_block(_card,_caster,_target){
-	//ADD 8 DEF
-	scr_armor_target(8,_caster);
+	//ADD DEF
+	scr_armor_target(_card[?"card_magnitude"],_caster);
+	
+	//PLAY ANIMATION
+	
+	//PLAY SOUND
+	
 }

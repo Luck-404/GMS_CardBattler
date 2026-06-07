@@ -4,5 +4,10 @@
 //
 //
 function scr_card_uncolored_inspiration(){
-
+	//APPLY EFFECT
+	scr_apply_buff_status("INSPIRATION");
+		
+	//PLAY ANIMATION
+	
+	//PLAY SOUND
 }

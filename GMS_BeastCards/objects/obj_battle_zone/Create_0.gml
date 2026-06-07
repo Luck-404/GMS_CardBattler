@@ -7,6 +7,7 @@
 //VARIABLES
 _encounter_attempt_cooldown = 0;
 _grass_timer = 0;
+_chance = 15;
 
 //INIT
 

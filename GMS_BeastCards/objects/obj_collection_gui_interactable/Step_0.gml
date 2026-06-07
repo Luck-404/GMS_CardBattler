@@ -19,7 +19,8 @@ if (distance_to_object(obj_player) < 48 && global.pause == false){
 
 			//SETTING UP NEW GUI
             obj_gui_controller.scr_destroy_gui_open();
-            obj_gui_controller.scr_toggle_gui_pause();
+			global.pause = true;
+			obj_gui_controller.scr_toggle_gui_pause();	
             global.active_gui = _collection_gui;
         }
     }

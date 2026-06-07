@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_minion_cast",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_minion_cast",
+  "parent":{
+    "name":"MINIONS",
+    "path":"folders/BATTLE/MINIONS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

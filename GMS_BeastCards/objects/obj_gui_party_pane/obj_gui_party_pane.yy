@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_gui_party_pane",
-    "path":"sprites/spr_gui_party_pane/spr_gui_party_pane.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

@@ -11,8 +11,10 @@ _cur_mana = 3;
 _max_mana = 3;
 _saved_max_mana = 3;
 _hand_size = 5;
-_draw_amount = 5;
+_draw_amount = 2;
 global.echo_counter = 0;
+_statuses_init = false;
+global.statuses = ds_list_create();
 
 //BEASTS
 _beasts_list = ds_list_create();
@@ -29,6 +31,7 @@ _battle_exhaust = ds_list_create();
 global.cast_card = undefined;
 global.caster_beast = undefined;
 global.target_beast = undefined;
+_minions_init = false;
 
 //PLAYER STATE
 enum PLAYER_STATE{
@@ -42,7 +45,8 @@ enum PLAYER_STATE{
 	SELECT_CASTER,
 	SELECT_TARGET,
 	CARD_EXECUTE,
-	TURN_END
+	TURN_END,
+	DISCARD_DOWN
 }
 
 _player_state = PLAYER_STATE.INIT_BEASTS;
@@ -78,32 +82,45 @@ function scr_check_battle_card_oom(_list){
 //
 //
 //
-function scr_check_battle_beast_color(_list){
-	for (var _b = 0; _b < ds_list_size(_list); _b++){
-		var _card_color_arr = global.cast_card._ref_card[?"card_colors"];
-		var _card_color_1 = _card_color_arr[0];
-		var _card_color_2 = _card_color_arr[1];	
-			
-		var _beast = ds_list_find_value(_list,_b);
-		var _beast_color_arr = _beast._ref_unit[?"beast_colors"];
-		var _beast_color_1 = _beast_color_arr[0];
-		var _beast_color_2 = _beast_color_arr[1];	
-			
-		if (_card_color_1 == "UNCOLORED"){
-			_beast._beast_color_check = true;
-		} else {
-			if (_card_color_1 == _beast_color_1 || _card_color_2 == _beast_color_1 || _card_color_1 == _beast_color_2 || _card_color_2 == _beast_color_2){
-				if (_card_color_2 == undefined && _beast_color_2 == undefined){
-					_beast._beast_color_check = false;	
-				} 
-				else {
-				_beast._beast_color_check = true;	
-				}
-			} else {
-				_beast._beast_color_check = false;	
-			}	
-		}
-	}
+function scr_check_battle_beast_color(_list)
+{
+    var _card_color_arr = global.cast_card._ref_card[?"card_colors"];
+    var _c1 = _card_color_arr[0];
+    var _c2 = _card_color_arr[1];
+
+    for (var _b = 0; _b < ds_list_size(_list); _b++)
+    {
+        var _beast = ds_list_find_value(_list, _b);
+        var _colors = _beast._ref_unit[?"beast_colors"];
+
+        var _b1 = _colors[0];
+        var _b2 = _colors[1];
+
+        // default assumption: fail
+        var _match = false;
+
+        // UNCOLORED = always valid
+        if (_c1 == "UNCOLORED" || _b1 == "UNCOLORED" || _b2 == "UNCOLORED")
+        {
+            _match = true;
+        }
+        else
+        {
+            // check c1
+            if (_c1 != undefined && (_c1 == _b1 || _c1 == _b2))
+            {
+                _match = true;
+            }
+
+            // check c2 only if needed
+            if (_c2 != undefined && (_c2 == _b1 || _c2 == _b2))
+            {
+                _match = true;
+            }
+        }
+
+        _beast._beast_color_check = _match;
+    }
 }
 
 //
@@ -111,11 +128,12 @@ function scr_check_battle_beast_color(_list){
 //
 function scr_check_battle_beast_archetype(_list){
 	for (var _b = 0; _b < ds_list_size(_list); _b++){
-		var _card_archetype = global.cast_card._ref_card[?"card_archetype"];
+		var _card_archetype = global.cast_card._ref_card[?"card_archetype_req"];
 			
 		var _beast = ds_list_find_value(_list,_b);
 		var _beast_archetype = _beast._ref_unit[?"beast_archetype"];
-
+		
+		_beast._beast_archetype_check = false;	
 			
 		if (_card_archetype == undefined || _card_archetype == _beast_archetype){
 				_beast._beast_archetype_check = true;	
@@ -130,7 +148,7 @@ function scr_check_battle_beast_archetype(_list){
 //
 function scr_check_battle_beast_class(_list){
 		for (var _b = 0; _b < ds_list_size(_list); _b++){
-			var _card_class = global.cast_card._ref_card[?"card_class"];
+			var _card_class = global.cast_card._ref_card[?"card_class_req"];
 			
 			var _beast = ds_list_find_value(_list,_b);
 			var _beast_class = _beast._ref_unit[?"beast_class"];
@@ -246,4 +264,22 @@ function scr_reroll_hand()
     scr_draw_battle_cards(_draw_amount);
 
     scr_check_battle_card_oom(_battle_hand);
+}
+
+//
+//
+//
+function scr_check_battle_beast_able(_list)
+{
+    for (var _b = 0; _b < ds_list_size(_list); _b++)
+    {
+        var _beast = ds_list_find_value(_list, _b);
+		
+		var _status = scr_check_unit_status("STUN",_beast);
+		if (_status != -1){
+			_beast._beast_able_check = false;
+		} else {
+			_beast._beast_able_check = true;
+		}
+    }
 }

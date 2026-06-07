@@ -49,7 +49,11 @@ for (var _i = 0; _i < 5; _i++)
 	// DRAW SPRITE BOX AS WELL AS UNIT
 	//
 	#region DRAW UNIT
-    draw_set_colour(c_aqua);
+	if (_unit[?"beast_hp_cur"] <= 0){
+		draw_set_colour(c_maroon);
+	} else {
+		draw_set_colour(c_aqua);
+	}
     draw_rectangle(_box_x + 10, _box_y + 10, _box_x + 110, _box_y + 110, false);
 
     var _unit_x = _box_x + 60;
@@ -75,7 +79,7 @@ for (var _i = 0; _i < 5; _i++)
 	// LEFT CLICKING UNITS FROM PARTY TO RANCH
 	//
 	#region LEFT CLICKING PARTY UNIT SENDS TO RANCH
-	if (mouse_x > _box_x && mouse_x < _box_x + _slot_w && mouse_y > _box_y && mouse_y < _box_y + _slot_h && ds_list_size(global.player_party) > 1){
+	if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h && ds_list_size(global.player_party) > 1){
 	    
 		//DRAW THE HIGHLIGHT WHEN HOVERING
 		draw_sprite(spr_ranch_gui_highlight, 0, _party_x + 185, _box_y + 65);
@@ -165,7 +169,11 @@ for (var _i = 0; _i < _ranch_per_page; _i++)
 		// DRAW UNIT
 		//
 		#region DRAW UNIT
-        draw_set_colour(c_green);
+		if (_unit[?"beast_hp_cur"] <= 0){
+			draw_set_colour(c_maroon);
+		} else {
+			draw_set_colour(c_aqua);
+		}
         draw_rectangle(_box_x + 10, _box_y + 10, _box_x + 110, _box_y + 110, false);
 
         var _unit_x = _box_x + 60;
@@ -206,7 +214,7 @@ for (var _i = 0; _i < _ranch_per_page; _i++)
 		// LEFT CLICK RANCH->PARTY
 		//
 		#region LEFT CLICKING
-        if (mouse_x > _box_x && mouse_x < _box_x + _slot_w && mouse_y > _box_y && mouse_y < _box_y + _slot_h && ds_list_size(global.player_party) < 5){
+        if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h && ds_list_size(global.player_party) < 5){
             
 			//DRAW HOVER HIGHLIGHT
 			draw_sprite(spr_ranch_gui_highlight, 0, _ranch_x + 185, _box_y + 65);

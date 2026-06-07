@@ -8,7 +8,7 @@
 // PARTY DRAW | DRAWS PLAYER'S PARTY IN GUI PANE
 //
 #region PARTY DRAW IN PANE
-draw_self();
+draw_sprite(spr_gui_party_pane,0,x,y);
 for (var _i = 0; _i < _unit_count; _i++)
 {
     var _box_x = _row_start_x + ((_slot_size + _spacing) * _i);
@@ -16,17 +16,67 @@ for (var _i = 0; _i < _unit_count; _i++)
 
     var _unit = ds_list_find_value(global.player_party, _i);
 
-    // Outline
-    draw_set_colour(c_black);
-    draw_rectangle(_box_x, _box_y,_box_x + _slot_size,_box_y + _slot_size,false);
+	// SLOT BACKGROUND (alive vs dead)
+	if (_unit[?"beast_hp_cur"] <= 0)
+	{
+		draw_set_colour(c_maroon);
+	}
+	else
+	{
+		draw_set_colour(c_gray);
+	}
 
-    // Fill
-    draw_set_colour(c_gray);
-    draw_rectangle(_box_x + 5,_box_y + 5,_box_x + 95,_box_y + 95,false);
+	draw_rectangle(
+		_box_x,
+		_box_y,
+		_box_x + _slot_size,
+		_box_y + _slot_size,
+		false
+	);
 
+	// outline border (kept consistent)
+	draw_set_colour(c_black);
+	draw_rectangle(
+		_box_x,
+		_box_y,
+		_box_x + _slot_size,
+		_box_y + _slot_size,
+		true
+	);
+	
     // Center
     var _unit_x = _box_x + (_slot_size * 0.5);
     var _unit_y = _box_y + (_slot_size * 0.5);
+
+	// Unit
+	if (_unit[?"beast_hp_cur"] <= 0)
+	{
+	    draw_sprite_ext(
+	        _unit[?"beast_sprite"],
+	        0,
+	        _unit_x,
+	        _unit_y,
+	        0.125,
+	        0.125,
+	        0,
+	        c_ltgray,
+	        1
+	    );
+	}
+	else
+	{
+	    draw_sprite_ext(
+	        _unit[?"beast_sprite"],
+	        0,
+	        _unit_x,
+	        _unit_y,
+	        0.125,
+	        0.125,
+	        0,
+	        c_white,
+	        1
+	    );
+	}
 
     // Shadow
     var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
@@ -40,7 +90,7 @@ for (var _i = 0; _i < _unit_count; _i++)
 		draw_sprite(spr_gui_party_selected,0,_unit_x,_unit_y);
 	}
 	//HIGHLIGHT HOVER AND LEFT CLICK SELECTS
-	if (mouse_x > _box_x && mouse_x < _box_x + _slot_size && mouse_y > _box_y && mouse_y < _box_y + _slot_size){
+	if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_size && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_size){
 		draw_sprite(spr_gui_party_highlight,0,_unit_x,_unit_y);
 		if (mouse_check_button_pressed(mb_left) && _flag_clicked == false){
 			_cooldown = 10;
@@ -129,7 +179,7 @@ if (_unit_selected != undefined)
         + string(_u[?"beast_level"])
         + " | "
         + string(_u[?"beast_exp"])
-        + "/100"
+        + "/10"
     );
     _y += _lh;
 

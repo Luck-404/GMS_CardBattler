@@ -5,16 +5,16 @@
 //
 
 //IF TOUCHING PLAYER...
-if (place_meeting(x,y,obj_player)){
+if (place_meeting(x,y,obj_player) && obj_player._flag_moving == true){
 //
 // BATTLE ATTEMPT AND TRIGGER | 10% CHANCE TO TRIGGER AN ENCOUNTER
 //
 #region BATTLE ATTEMPT AND TRIGGER
 	//IF COOLDOWN IS 0, TRIGGER AN ATTEMPT AT GOING TO BATTLE
-	if (_encounter_attempt_cooldown <= 0){
+	if (_encounter_attempt_cooldown <= 0 && !instance_exists(obj_waiter)){
 		randomize();
 		var _random_number = irandom_range(0,100);
-		if (_random_number < 10){
+		if (_random_number < _chance){
 			//TRIGGER A BATTLE	
 			scr_spawn_popup("TEXT","BATTLE TRIGGERED",undefined,c_black,obj_player.x,obj_player.y);
 			
@@ -26,7 +26,8 @@ if (place_meeting(x,y,obj_player)){
 			
 			//STOP PLAYER MOVEMENT
 			obj_player._player_speed = 0;
-			obj_player._flag_moving = false;			
+			obj_player._flag_moving = false;	
+			obj_player._flag_sprinting = false;
 			
 			//HIDE PLAYER
 			obj_player.visible = false;			

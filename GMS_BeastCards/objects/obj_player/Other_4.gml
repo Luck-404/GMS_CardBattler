@@ -1,0 +1,1 @@
+_flag_created_camera = false;

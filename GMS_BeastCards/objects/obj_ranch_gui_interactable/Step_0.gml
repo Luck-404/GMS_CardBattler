@@ -35,6 +35,7 @@ if (distance_to_object(obj_player) < 48 && global.pause == false){
 			//SET UP THE NEW GUI
 			var _ranch_gui = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_ranch_gui_pane);
 			obj_gui_controller.scr_destroy_gui_open();
+			global.pause = true;
 			obj_gui_controller.scr_toggle_gui_pause();
 			global.active_gui = _ranch_gui;
 			

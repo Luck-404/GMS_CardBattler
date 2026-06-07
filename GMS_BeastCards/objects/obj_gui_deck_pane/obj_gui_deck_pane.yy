@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_gui_deck_pane",
-    "path":"sprites/spr_gui_deck_pane/spr_gui_deck_pane.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
