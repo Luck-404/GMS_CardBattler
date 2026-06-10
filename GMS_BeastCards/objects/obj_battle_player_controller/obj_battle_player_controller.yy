@@ -10,8 +10,8 @@
   "name":"obj_battle_player_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"PLAYER",
-    "path":"folders/BATTLE/PLAYER.yy",
+    "name":"CONTROLLERS",
+    "path":"folders/BATTLE/CONTROLLERS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

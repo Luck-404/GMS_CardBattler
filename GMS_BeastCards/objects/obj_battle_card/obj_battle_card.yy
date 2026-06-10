@@ -10,8 +10,8 @@
   "name":"obj_battle_card",
   "overriddenProperties":[],
   "parent":{
-    "name":"CARDS",
-    "path":"folders/BATTLE/CARDS.yy",
+    "name":"BATTLE CARDS",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_battle_card",
-    "path":"sprites/spr_battle_card/spr_battle_card.yy",
+    "name":"spr_battle_card_hitbox",
+    "path":"sprites/spr_battle_card_hitbox/spr_battle_card_hitbox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

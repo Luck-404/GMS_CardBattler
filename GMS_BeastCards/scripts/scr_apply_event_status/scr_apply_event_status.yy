@@ -6,7 +6,7 @@
   "name":"scr_apply_event_status",
   "parent":{
     "name":"EVENTS",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/EVENTS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/EVENTS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

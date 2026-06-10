@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FADER",
-    "path":"folders/GENERAL GUI/TRANSITIONS/FADER.yy",
+    "path":"folders/GUI/TRANSITIONS/FADER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_clearcast",
   "parent":{
     "name":"CLEARCAST",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/CLEARCAST.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/CLEARCAST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

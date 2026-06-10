@@ -7,7 +7,7 @@ if (room != rm_battle){
 #region PAUSE NOTIFIER
 	if (global.pause){
 	draw_set_colour(c_white);
-	draw_set_font(fnt_gui_large);
+	draw_set_font(fnt_large_gui);
 	draw_text((room_width/2)-string_width("GAME PAUSED")/2,(room_height/8-100),"GAME PAUSED");
 	}
 #endregion
@@ -145,7 +145,7 @@ if (global.active_gui == undefined)
 {
     var _text = string(global.player_gold) + " gp";
 
-    draw_set_font(fnt_gui_medium);
+    draw_set_font(fnt_medium_gui);
 
     var _pad_x = 12;
     var _pad_y = 8;
@@ -227,7 +227,7 @@ if (global.active_gui == undefined)
 
     // DRAW ICON
     draw_set_colour(c_white);
-    draw_sprite(spr_deck_icon, _hover ? 1 : 0, _icon_x1, _icon_y1);
+    draw_sprite(spr_gui_deck_icon, _hover ? 1 : 0, _icon_x1, _icon_y1);
 
     draw_set_alpha(1);
 

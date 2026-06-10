@@ -10,8 +10,8 @@
   "name":"obj_scene_fx_step_particle",
   "overriddenProperties":[],
   "parent":{
-    "name":"SCENERY FX",
-    "path":"folders/ROOM COMPONENTS/SCENERY FX.yy",
+    "name":"SCENE FX",
+    "path":"folders/OVERWORLD/SCENE FX.yy",
   },
   "parentObjectId":null,
   "persistent":false,

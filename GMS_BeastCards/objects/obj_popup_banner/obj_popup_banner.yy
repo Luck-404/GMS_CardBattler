@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"BANNERS",
-    "path":"folders/GENERAL GUI/POPUPS/BANNERS.yy",
+    "path":"folders/GUI/POPUPS/BANNERS.yy",
   },
   "parentObjectId":null,
   "persistent":true,

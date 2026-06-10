@@ -6,7 +6,7 @@
   "name":"scr_get_beast_type_shadow",
   "parent":{
     "name":"BEAST GET",
-    "path":"folders/BEASTS/BEAST GET.yy",
+    "path":"folders/BEASTS/BEAST SETUP/BEAST GET.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

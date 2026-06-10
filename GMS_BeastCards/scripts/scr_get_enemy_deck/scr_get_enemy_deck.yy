@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_get_enemy_deck",
   "parent":{
-    "name":"ENEMY",
-    "path":"folders/BATTLE/ENEMY.yy",
+    "name":"BEAST GET",
+    "path":"folders/BEASTS/BEAST SETUP/BEAST GET.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

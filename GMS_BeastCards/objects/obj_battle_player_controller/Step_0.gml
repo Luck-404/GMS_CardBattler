@@ -80,7 +80,7 @@ switch (_player_state){
 		ds_list_shuffle(_battle_deck);	
 		
 		//DRAW 5 INITIAL (_hand_size)
-		scr_draw_battle_cards(_hand_size);
+		scr_draw_cards(_hand_size);
 
 		//NEXT STATE
 		_player_state = PLAYER_STATE.TRIGGER_ENTRY_EFFECTS;
@@ -124,7 +124,7 @@ switch (_player_state){
 	        scr_degrade_shield(_u);
 	    }
 
-	    scr_draw_battle_cards(_draw_amount);
+	    scr_draw_cards(_draw_amount);
 		
 	    _cur_mana = _max_mana;
 
@@ -153,7 +153,7 @@ switch (_player_state){
 		}
 	}
 
-	if (_statuses_init && !instance_exists(obj_waiter))
+	if (_statuses_init && !instance_exists(obj_wait))
 	{
 	    while (ds_list_size(_statuses_list) > 0)
 	    {
@@ -176,8 +176,7 @@ switch (_player_state){
 	    }
 	    else
 	    {
-	        var _waiter = instance_create_layer(room_width/2, room_height/2, "ily_fx", obj_waiter);
-	        _waiter._life = 10;
+	        scr_init_battle_wait(10);
 	    }
 	}
 
@@ -206,18 +205,17 @@ switch (_player_state){
 	        }
 	    }
 
-	    if (_minions_init && !instance_exists(obj_waiter))
+	    if (_minions_init && !instance_exists(obj_wait))
 	    {
 	        if (ds_list_size(_casting_minions) > 0)
 	        {
 	            var _minion = ds_list_find_value(_casting_minions, 0);
 
-	            scr_minion_cast(_minion);
+	            scr_cast_minion_effect(_minion);
 
 	            ds_list_delete(_casting_minions, 0);
 
-	            var _waiter = instance_create_layer(room_width/2, room_height/2, "ily_fx", obj_waiter);
-	            _waiter._life = 15;
+	            scr_init_battle_wait(15);
 	        }
 	        else
 	        {
@@ -242,7 +240,7 @@ switch (_player_state){
 	    _statuses_init = false;	
 		_minions_init = false;
 		#region END TURN
-		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_turn)){
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
 			_flag_clicked = true;			
 			_player_state = PLAYER_STATE.TURN_END;
 			break;			
@@ -286,7 +284,7 @@ switch (_player_state){
 	#region SELECT_CASTER
 	case PLAYER_STATE.SELECT_CASTER:
 		#region END TURN
-		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_turn)){
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
 			_flag_clicked = true;			
 			_player_state = PLAYER_STATE.TURN_END;
 			break;			
@@ -337,7 +335,7 @@ switch (_player_state){
 	#region SELECT_TARGET
 	case PLAYER_STATE.SELECT_TARGET:
 		#region END TURN
-		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_turn)){
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
 			_flag_clicked = true;			
 			_player_state = PLAYER_STATE.TURN_END;
 			break;			
@@ -405,7 +403,7 @@ switch (_player_state){
 	#region CARD_EXECUTE
 	case PLAYER_STATE.CARD_EXECUTE:
 		//_card,_caster,_target)
-		scr_cast_battle_card();
+		scr_cast_card();
 		
 		//MOVE STATE
 		_player_state = PLAYER_STATE.SELECT_CARD;
@@ -453,7 +451,7 @@ switch (_player_state){
 				ds_list_add(_statuses_list, _s);
 			}
 		}		
-		var _status = scr_check_unit_status("WEATHER: RAPID GROWTH",global.statuses);
+		var _status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
 		if (_status != -1){
 			_status._status_command = "REPEAT";
 		}	
@@ -462,7 +460,7 @@ switch (_player_state){
 	//----------------------------------------------------
 	// PROCESS STATUS QUEUE
 	//----------------------------------------------------
-	if (_statuses_init && !instance_exists(obj_waiter))
+	if (_statuses_init && !instance_exists(obj_wait))
 	{
 	    var _processed = false;
 
@@ -482,16 +480,13 @@ switch (_player_state){
 
 	    if (ds_list_size(_statuses_list) > 0)
 	    {
-	        var _waiter = instance_create_layer(room_width/2, room_height/2, "ily_fx", obj_waiter);
-	        _waiter._life = 10;
+	        scr_init_battle_wait(10);
 	    }
 	    else
 	    {
 	        ds_list_destroy(_statuses_list);
 	        _player_state = PLAYER_STATE.DISCARD_DOWN;
-			var _warning = instance_create_layer(room_width/2,room_height/2-150,"ily_fx",obj_popup_error);
-			_warning._life = 1000000;
-			_warning._text = "YOU MUST DISCARD DOWN TO 5 CARDS";
+			scr_spawn_popup_error("YOU MUST DISCARD DOWN TO 5 CARDS",1000000)
 	    }
 	}
 
@@ -539,7 +534,7 @@ switch (_player_state){
 
                 if (instance_exists(_card))
                 {
-                    scr_discard_battle_card(_card);
+                    scr_discard_card(_card);
                 }
             }
         }

@@ -8,7 +8,7 @@ function scr_status_event_rapid_growth(_tag,_ref){
 		case "APPLY":
 			_ref = global.statuses;
 			
-			var _status = scr_check_unit_status("WEATHER: RAPID GROWTH",global.statuses);
+			var _status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
 			if (_status != -1){
 				_status._status_lifetime = 15;			
 				return _status;
@@ -34,7 +34,7 @@ function scr_status_event_rapid_growth(_tag,_ref){
 				var _lid = layer_get_id("bly_event")
 				layer_background_change(_lid,spr_scene_fx_rapid_growth);
 	
-			scr_check_status_pos(global.statuses);
+			scr_reposition_statuses(global.statuses);
 		break;
 		
 		case "REPEAT":
@@ -98,7 +98,7 @@ function scr_status_event_rapid_growth(_tag,_ref){
 			} else {
 				_ref._status_command = "WAIT";	
 			}
-			scr_check_status_pos(global.statuses);				
+			scr_reposition_statuses(global.statuses);				
 		break;
 		
 		case "DEATH":

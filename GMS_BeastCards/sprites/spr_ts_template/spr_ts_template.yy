@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"SPRITES",
-    "path":"folders/TILESETS/SPRITES.yy",
+    "path":"folders/OVERWORLD/TILESETS/SPRITES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

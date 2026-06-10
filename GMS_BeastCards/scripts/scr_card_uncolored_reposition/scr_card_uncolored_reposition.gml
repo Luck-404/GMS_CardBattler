@@ -17,16 +17,16 @@ function scr_card_uncolored_reposition(_card,_caster,_target){
 	_target._pos = _stored_caster_pos;
 	_caster._pos = _stored_tar_pos;
 	
-	scr_check_unit_pos(_target);
-	scr_check_status_pos(_target);		
-	scr_check_unit_pos(_caster);	
-	scr_check_status_pos(_caster);		
+	scr_reposition_minions(_target);
+	scr_reposition_statuses(_target);		
+	scr_reposition_minions(_caster);	
+	scr_reposition_statuses(_caster);		
 	//PLAY ANIMATION
 	
 	//PLAY SOUND
 	
 	//POPUP
-	scr_spawn_scrolling_popup("TEXT","SWAPPED PLACES",undefined,c_black,_caster.x+irandom_range(-32,32),_caster.y-24+irandom_range(-32,32));		
-	scr_spawn_scrolling_popup("TEXT","SWAPPED PLACES",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));
+	scr_spawn_popup_scrolling("TEXT","SWAPPED PLACES",undefined,c_black,_caster.x+irandom_range(-32,32),_caster.y-24+irandom_range(-32,32));		
+	scr_spawn_popup_scrolling("TEXT","SWAPPED PLACES",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));
 
 }

@@ -8,7 +8,7 @@ function scr_status_dot_bleed(_tag,_ref){
 		case "APPLY":
 			_ref = global.target_beast;
 
-			var _status = scr_check_unit_status("BLEED",_ref);
+			var _status = scr_check_for_status("BLEED",_ref);
 			if (_status != -1){
 				_status._status_lifetime = 5;
 				_status._status_stacks += 1;
@@ -33,7 +33,7 @@ function scr_status_dot_bleed(_tag,_ref){
 	
 			//EFFECTS
 	
-			scr_check_status_pos(_ref);
+			scr_reposition_statuses(_ref);
 		break;
 		
 		case "REPEAT":
@@ -44,7 +44,7 @@ function scr_status_dot_bleed(_tag,_ref){
 		    if (_damage > 0 && _ref._ref_host._overhealth > 0)
 		    {
 		        var _blocked = min(_ref._ref_host._overhealth, _damage);
-				scr_spawn_scrolling_popup("TEXT","-" + string(_blocked),undefined,c_green,_ref._ref_host.x+irandom_range(-32,32),_ref._ref_host.y-24+irandom_range(-32,32));	
+				scr_spawn_popup_scrolling("TEXT","-" + string(_blocked),undefined,c_green,_ref._ref_host.x+irandom_range(-32,32),_ref._ref_host.y-24+irandom_range(-32,32));	
 		        _ref._ref_host._overhealth -= _blocked;
 		        _damage -= _blocked;
 		    }
@@ -54,7 +54,7 @@ function scr_status_dot_bleed(_tag,_ref){
 		    //----------------------------------------------------
 		    if (_damage > 0)
 		    {
-				scr_spawn_scrolling_popup("TEXT","-" + string(_damage),undefined,c_maroon,_ref._ref_host.x+irandom_range(-32,32),_ref._ref_host.y-24+irandom_range(-32,32));	
+				scr_spawn_popup_scrolling("TEXT","-" + string(_damage),undefined,c_maroon,_ref._ref_host.x+irandom_range(-32,32),_ref._ref_host.y-24+irandom_range(-32,32));	
 		        _ref._ref_host._cur_hp -= _damage;
 		    }		
 		
@@ -67,7 +67,7 @@ function scr_status_dot_bleed(_tag,_ref){
 			} else {
 				_ref._status_command = "WAIT";	
 			}
-			scr_check_status_pos(_ref._ref_host);			
+			scr_reposition_statuses(_ref._ref_host);			
 		break;
 		
 		case "DEATH":

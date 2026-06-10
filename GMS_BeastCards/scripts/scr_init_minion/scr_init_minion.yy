@@ -6,7 +6,7 @@
   "name":"scr_init_minion",
   "parent":{
     "name":"MINIONS",
-    "path":"folders/BATTLE/MINIONS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,6 +1,6 @@
 //
 //
-// SCRIPT: SCR_ADD_CARD_TO_DECK | ADDS CARD TO DECK IF THERE IS ROOM, OTHERWISE ADDS TO COLLECTION | RETURNS VOID
+// SCRIPT: SCR_ADD_CARD_TO_DECK | ADDS CARD TO DECK IF THERE IS ROOM, OTHERWISE ADDS TO library | RETURNS VOID
 //
 //
 function scr_add_card_to_deck(_new_card){
@@ -9,8 +9,8 @@ function scr_add_card_to_deck(_new_card){
 		ds_list_add(global.player_deck,_new_card);
 	}
 
-	//ADD TO COLLECTION
+	//ADD TO library
 	else {
-		ds_list_add(global.player_card_collection,_new_card);	
+		ds_list_add(global.player_library,_new_card);	
 	}
 }

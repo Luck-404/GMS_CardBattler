@@ -18,7 +18,7 @@ if (_flag_triggered == true){
 			_cooldown = 10;
 			
 			//ADD CHEST TO LIST
-			global.chests_opened[?_chest_id] = true;
+			global.player_chests_opened[?_chest_id] = true;
 		
 			//AWARD TREASURE
 			if (_loot_type == "RANDOM"){

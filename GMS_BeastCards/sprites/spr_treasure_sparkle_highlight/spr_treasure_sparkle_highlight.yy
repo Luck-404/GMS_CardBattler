@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SPARKLES",
-    "path":"folders/ROOM COMPONENTS/TREASURE/SPARKLES.yy",
+    "path":"folders/OVERWORLD/TREASURE/SPARKLES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":7,
   "parent":{
     "name":"NATURE",
-    "path":"folders/ROOM COMPONENTS/DECOR/SPRITES/NATURE.yy",
+    "path":"folders/OVERWORLD/DECOR/NATURE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

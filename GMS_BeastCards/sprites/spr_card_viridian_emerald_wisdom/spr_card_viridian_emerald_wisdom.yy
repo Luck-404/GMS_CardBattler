@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"EMERALD WISDOM",
-    "path":"folders/CARDS/CARDS LIST/GREEN/EMERALD WISDOM.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/EMERALD WISDOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

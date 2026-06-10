@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"SIGNS",
-    "path":"folders/ROOM COMPONENTS/DECOR/OBJECTS/SIGNS.yy",
+    "path":"folders/OVERWORLD/DECOR/SIGNS.yy",
   },
   "parentObjectId":{
     "name":"obj_decor_parent",

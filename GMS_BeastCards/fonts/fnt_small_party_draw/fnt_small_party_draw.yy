@@ -147,7 +147,7 @@
   "name":"fnt_small_party_draw",
   "parent":{
     "name":"FONTS",
-    "path":"folders/GENERAL GUI/FONTS.yy",
+    "path":"folders/GUI/FONTS.yy",
   },
   "pointRounding":0,
   "ranges":[

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BLEED",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/DOTs/BLEED.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/BLEED.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

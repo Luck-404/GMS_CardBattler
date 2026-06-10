@@ -10,7 +10,7 @@
 _player_controller = instance_create_layer(x,y,"ily_player",obj_battle_player_controller);
 _enemy_controller = instance_create_layer(x,y,"ily_enemy",obj_battle_enemy_controller);
 
-_end_turn_button = instance_create_layer(928,650,"ily_fx",obj_battle_button_end_turn);
+_end_turn_button = instance_create_layer(928,650,"ily_fx",obj_battle_end_turn_button);
 
 _turn_order = [_player_controller,_enemy_controller];
 _turn_tracker = 0;

@@ -4,13 +4,14 @@
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_ranch_beast_dummy",
   "overriddenProperties":[],
   "parent":{
-    "name":"RANCH",
-    "path":"folders/BEASTS/PARTY SYSTEM/RANCH.yy",
+    "name":"RANCH SYSTEM",
+    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_beast_viridian_arbrawn",
-    "path":"sprites/spr_beast_viridian_arbrawn/spr_beast_viridian_arbrawn.yy",
+    "name":"spr_beast_hitbox",
+    "path":"sprites/spr_beast_hitbox/spr_beast_hitbox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

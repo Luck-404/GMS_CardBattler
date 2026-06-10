@@ -10,8 +10,8 @@
   "name":"obj_battle_beast",
   "overriddenProperties":[],
   "parent":{
-    "name":"BEASTS",
-    "path":"folders/BATTLE/BEASTS.yy",
+    "name":"BATTLE BEAST",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE BEAST.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_beast_invis",
-    "path":"sprites/spr_beast_invis/spr_beast_invis.yy",
+    "name":"spr_beast_hitbox",
+    "path":"sprites/spr_beast_hitbox/spr_beast_hitbox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

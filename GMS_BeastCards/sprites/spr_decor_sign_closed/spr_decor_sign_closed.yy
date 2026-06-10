@@ -27,7 +27,7 @@
   "origin":7,
   "parent":{
     "name":"SIGNS",
-    "path":"folders/ROOM COMPONENTS/DECOR/SPRITES/SIGNS.yy",
+    "path":"folders/OVERWORLD/DECOR/SIGNS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

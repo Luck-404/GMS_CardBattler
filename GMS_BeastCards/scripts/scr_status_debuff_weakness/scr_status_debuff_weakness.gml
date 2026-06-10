@@ -3,7 +3,7 @@ function scr_status_debuff_weakness(_tag,_ref){
 		case "APPLY":
 			_ref = global.target_beast;
 			
-			var _status = scr_check_unit_status("WEAKNESS",_ref);
+			var _status = scr_check_for_status("WEAKNESS",_ref);
 			if (_status != -1){
 				_status._status_lifetime = 3;
 				_status._status_stacks += 1;
@@ -27,7 +27,7 @@ function scr_status_debuff_weakness(_tag,_ref){
 	
 			//EFFECTS
 	
-			scr_check_status_pos(_ref);
+			scr_reposition_statuses(_ref);
 		break;
 		
 		case "REPEAT":
@@ -40,7 +40,7 @@ function scr_status_debuff_weakness(_tag,_ref){
 			} else {
 				_ref._status_command = "WAIT";	
 			}
-			scr_check_status_pos(_ref._ref_host);				
+			scr_reposition_statuses(_ref._ref_host);				
 		break;
 		
 		case "DEATH":

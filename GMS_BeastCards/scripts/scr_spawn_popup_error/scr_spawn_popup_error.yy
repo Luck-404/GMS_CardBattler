@@ -6,7 +6,7 @@
   "name":"scr_spawn_popup_error",
   "parent":{
     "name":"ERRORS",
-    "path":"folders/GENERAL GUI/POPUPS/ERRORS.yy",
+    "path":"folders/GUI/POPUPS/ERRORS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

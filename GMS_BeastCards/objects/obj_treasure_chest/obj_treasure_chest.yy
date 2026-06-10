@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"CHESTS",
-    "path":"folders/ROOM COMPONENTS/TREASURE/CHESTS.yy",
+    "path":"folders/OVERWORLD/TREASURE/CHESTS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

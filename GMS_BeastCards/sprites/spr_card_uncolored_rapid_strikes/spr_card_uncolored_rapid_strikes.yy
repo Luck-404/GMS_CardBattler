@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RAPID STRIKES",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/RAPID STRIKES.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/RAPID STRIKES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

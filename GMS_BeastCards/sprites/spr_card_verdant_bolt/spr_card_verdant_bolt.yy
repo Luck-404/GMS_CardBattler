@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"GREEN",
-    "path":"folders/CARDS/CARDS LIST/GREEN.yy",
+    "name":"OLD",
+    "path":"folders/CARDS/CARD LIST/OLD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

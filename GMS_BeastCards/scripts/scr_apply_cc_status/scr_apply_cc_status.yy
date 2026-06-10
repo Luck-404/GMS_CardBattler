@@ -6,7 +6,7 @@
   "name":"scr_apply_cc_status",
   "parent":{
     "name":"CC",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/CC.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

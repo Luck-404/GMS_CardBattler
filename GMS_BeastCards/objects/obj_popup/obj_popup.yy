@@ -9,8 +9,8 @@
   "name":"obj_popup",
   "overriddenProperties":[],
   "parent":{
-    "name":"GENERAL POPUP",
-    "path":"folders/GENERAL GUI/POPUPS/GENERAL POPUP.yy",
+    "name":"GENERAL",
+    "path":"folders/GUI/POPUPS/GENERAL.yy",
   },
   "parentObjectId":null,
   "persistent":true,

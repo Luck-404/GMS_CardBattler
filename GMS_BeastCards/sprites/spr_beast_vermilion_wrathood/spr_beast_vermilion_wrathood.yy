@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VERMILION",
-    "path":"folders/BEASTS/SPRITES/VERMILION.yy",
+    "path":"folders/BEASTS/BEAST LIST/VERMILION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

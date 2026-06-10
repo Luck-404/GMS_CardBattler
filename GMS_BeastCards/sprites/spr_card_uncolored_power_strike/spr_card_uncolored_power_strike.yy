@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"POWER STRIKE",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/POWER STRIKE.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/POWER STRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

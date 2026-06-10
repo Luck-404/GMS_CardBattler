@@ -10,8 +10,8 @@
   "name":"obj_battle_turn_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"TURN CONTROLLER",
-    "path":"folders/BATTLE/TURN CONTROLLER.yy",
+    "name":"TURN",
+    "path":"folders/BATTLE/CONTROLLERS/TURN.yy",
   },
   "parentObjectId":null,
   "persistent":false,

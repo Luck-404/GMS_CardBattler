@@ -55,7 +55,6 @@ function scr_roll_treasure_sparkle_position(){
 // ROLLS TREASURE VISIBILITY
 //
 function scr_roll_treasure_sparkle_visibility(){
-	randomize();
 	_roll = irandom_range(0,100);
 	if (_roll < 50){
 		visible = true;	
@@ -69,7 +68,6 @@ function scr_roll_treasure_sparkle_visibility(){
 // AWARDS A TREASURE OF THE APPROPRAITE RARITY FROM THE GLOBAL POOLS
 //
 function scr_roll_treasure_sparkle_reward(){
-	randomize();
 	switch(_rarity){
 		#region I
 		case "I":

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STRIKE",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/STRIKE.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/STRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

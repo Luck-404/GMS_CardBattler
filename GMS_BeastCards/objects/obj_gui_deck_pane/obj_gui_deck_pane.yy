@@ -9,8 +9,8 @@
   "name":"obj_gui_deck_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"DECK",
-    "path":"folders/CARDS/CARD STORAGES/DECK.yy",
+    "name":"DECK SYSTEM",
+    "path":"folders/CARDS/CARD STORAGES/DECK SYSTEM.yy",
   },
   "parentObjectId":null,
   "persistent":false,

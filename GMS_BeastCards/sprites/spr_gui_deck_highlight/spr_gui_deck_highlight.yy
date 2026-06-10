@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"DECK",
-    "path":"folders/CARDS/CARD STORAGES/DECK.yy",
+    "name":"DECK SYSTEM",
+    "path":"folders/CARDS/CARD STORAGES/DECK SYSTEM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

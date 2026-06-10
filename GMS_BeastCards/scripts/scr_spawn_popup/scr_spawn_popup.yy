@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_spawn_popup",
   "parent":{
-    "name":"GENERAL POPUP",
-    "path":"folders/GENERAL GUI/POPUPS/GENERAL POPUP.yy",
+    "name":"GENERAL",
+    "path":"folders/GUI/POPUPS/GENERAL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

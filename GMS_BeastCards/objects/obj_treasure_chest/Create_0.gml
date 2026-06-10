@@ -18,7 +18,7 @@ _rand_y = irandom_range(-48,48);
 // INIT
 //
 // PERSIST OPENED STATE
-if (ds_map_exists(global.chests_opened, _chest_id))
+if (ds_map_exists(global.player_chests_opened, _chest_id))
 {
     _flag_triggered = true;
     image_index = 1;
@@ -57,7 +57,7 @@ function scr_roll_random_chest(){
 //
 function scr_award_treasure_chest_loot(){
 	//BASED ON CHEST ID, GET INFO FROM THE SPECIAL LOOT TABLE SCRIPT
-	var _rewards = scr_get_chest_loot(_chest_id);
+	var _rewards = scr_get_chest_custom_loot(_chest_id);
 	for (var _j = 0; _j < array_length(_rewards); _j++){
 		var _focus = _rewards[_j];
 		if (!is_string(_focus)){
@@ -84,7 +84,6 @@ function scr_award_treasure_chest_loot(){
 // AWARDS A TREASURE OF THE APPROPRAITE RARITY FROM THE GLOBAL POOLS IF RANDOM
 //
 function scr_roll_treasure_chest_reward(){
-	randomize();
 	switch(_rarity){
 		#region I
 		case "I":

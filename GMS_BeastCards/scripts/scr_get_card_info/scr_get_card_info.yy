@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_get_card_info",
   "parent":{
-    "name":"CARD SETUP",
-    "path":"folders/CARDS/CARD SETUP.yy",
+    "name":"CARD GET",
+    "path":"folders/CARDS/CARD SETUP/CARD GET.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

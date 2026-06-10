@@ -7,7 +7,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"NATURE",
-    "path":"folders/ROOM COMPONENTS/DECOR/OBJECTS/NATURE.yy",
+    "path":"folders/OVERWORLD/DECOR/NATURE.yy",
   },
   "parentObjectId":{
     "name":"obj_decor_parent",

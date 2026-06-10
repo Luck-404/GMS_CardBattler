@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_growth_sigil",
   "parent":{
     "name":"GROWTH SIGIL",
-    "path":"folders/CARDS/CARDS LIST/GREEN/GROWTH SIGIL.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GROWTH SIGIL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_disease",
   "parent":{
     "name":"DISEASE",
-    "path":"folders/CARDS/CARDS LIST/GREEN/DISEASE.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DISEASE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

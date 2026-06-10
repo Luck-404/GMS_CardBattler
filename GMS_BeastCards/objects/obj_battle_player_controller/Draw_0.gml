@@ -8,14 +8,14 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_colour(c_black);
-draw_set_font(fnt_gui_large);
+draw_set_font(fnt_large_gui);
 draw_text(50,50,"MANA: " + string(_cur_mana) +"/" + string(_max_mana));
 #endregion
 
 if (global.echo_counter != 0){
 draw_text(50,150,"ECHO: " + string(global.echo_counter));	
 }
-draw_set_font(fnt_gui_small);
+draw_set_font(fnt_small_gui);
 draw_text(50,800,"DCK: " + string(ds_list_size(_battle_deck)));	
 draw_text(200,800,"HND: " + string(ds_list_size(_battle_hand)));	
 draw_text(880,800,"DIS: " + string(ds_list_size(_battle_discard)));	
@@ -39,7 +39,7 @@ if (_player_state == PLAYER_STATE.SELECT_TARGET){
 	var _card_range = global.cast_card._ref_card[?"card_range"];
 	if (_card_range == "GLOBAL"){
 		draw_set_colour(c_black);
-		draw_set_font(fnt_gui_small);
+		draw_set_font(fnt_small_gui);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_text(device_mouse_x_to_gui(0)-string_width("CLICK TO CAST GLOBAL CARD")/2,device_mouse_y_to_gui(0)-15,"CLICK TO CAST GLOBAL CARD");
@@ -59,7 +59,7 @@ if (keyboard_check(vk_lcontrol) &&
     var _y1 = 750;
     var _y2 = 850;
 
-    draw_set_font(fnt_gui_small);
+    draw_set_font(fnt_small_gui);
 
     draw_set_colour(c_dkgray);
     draw_rectangle(_x1, _y1, _x2, _y2, false);

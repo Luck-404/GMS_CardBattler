@@ -4,20 +4,12 @@
 //
 //
 
-#region CHANGE DEPTH WITH Y VALUE
-if (global.active_gui == undefined){
- depth = -y;
-} else {
- depth = 0;	
-}
-#endregion
-
 #region DRAW SHADOW AND SPRITE
 draw_sprite_ext(_shadow,0,x,y+30,1,1,0,c_white,1);
 
 if (_beast_state == BEAST_STATE.DEAD){
 	draw_sprite_ext(sprite_index,0,x,y+_bounce_frame,image_xscale * 0.15,0.15,_draw_rot,c_gray,1);	
-	draw_sprite_ext(spr_battle_enemy_dead,0,x,y,0.5,0.5,0,c_white,1);
+	draw_sprite_ext(spr_battle_beast_dead,0,x,y,0.5,0.5,0,c_white,1);
 } else {
 	if (_beast_state == BEAST_STATE.SHAKE){
 		draw_sprite_ext(sprite_index,0,x,y+_draw_y_offset,image_xscale * 0.15,0.15,_draw_rot,c_white,1);
@@ -136,10 +128,9 @@ if (global.pause == false){
 			
 			#region STEP PARTICLES WHILE MOVING
 			//TRIGGER A STEP PARTICLE EVERY SO OFTEN
-			if (_step_particle_timer <= 0){
-				_step_particle_timer = 15;	
+			if (_player_step_particle_timer <= 0){
+				_player_step_particle_timer = 15;	
 				//TRIGGER A FEW PARTICLES
-				randomize();
 				var _random_particles = irandom_range(1,3);
 				//SPAWN THE PARTICLES
 				for (var _i = 0; _i < _random_particles; _i++){
@@ -147,7 +138,7 @@ if (global.pause == false){
 					_particle.depth = depth-1;
 				}
 			} else {
-				_step_particle_timer--;
+				_player_step_particle_timer--;
 			}
 			#endregion
 		break;

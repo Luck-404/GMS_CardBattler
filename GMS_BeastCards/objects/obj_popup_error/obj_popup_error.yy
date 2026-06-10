@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"ERRORS",
-    "path":"folders/GENERAL GUI/POPUPS/ERRORS.yy",
+    "path":"folders/GUI/POPUPS/ERRORS.yy",
   },
   "parentObjectId":null,
   "persistent":true,

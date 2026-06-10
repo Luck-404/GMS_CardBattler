@@ -4,7 +4,7 @@
 //
 //
 function scr_card_uncolored_clearcast(){
-	var _status = scr_check_unit_status("WEATHER: RAPID GROWTH",global.statuses);
+	var _status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
 	if (_status != -1){
 		//UNDO RAIN EFFECT
 		var _lid = layer_get_id("bly_event")
@@ -17,5 +17,5 @@ function scr_card_uncolored_clearcast(){
 	//PLAY SOUND
 	
 	//POPUP
-	scr_spawn_scrolling_popup("TEXT","WEATHER CLEARED",undefined,c_black,room_width/2-300,room_height/2);
+	scr_spawn_popup_scrolling("TEXT","WEATHER CLEARED",undefined,c_black,room_width/2-300,room_height/2);
 }

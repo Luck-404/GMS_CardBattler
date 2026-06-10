@@ -1,31 +1,32 @@
+//===============================================================================//
 //
+// DRAW: OBJ_PLAYER
+// FUNCTION:	Animates player bounce movement while walking or sprinting
+//				Draws the player's shadow beneath the character
+//				Draws the player sprite with movement-based visual offset
 //
-// DRAW - OBJ_PLAYER
-//
-//
-depth = 0;
-
-//WHILE MOVING, BOUNCE THE PLAYER EVERY 1/8s (8 frames)
-if (_flag_moving){
-	_player_bounce_counter++;
-	
-	//bounce normal
-	if (!_flag_sprinting && _player_bounce_counter >= 12){
-		_player_bounce_counter = 0;
-		_player_bounce_frame++;
-		//bounce a max of 4 px high
-		if (_player_bounce_frame > 4){
-			_player_bounce_frame = 0;
-		}
-	} else if (_player_bounce_counter >= 4){
-		_player_bounce_counter = 0;
-		_player_bounce_frame++;
-		//bounce a max of 4 px high
-		if (_player_bounce_frame > 4){
-			_player_bounce_frame = 0;
+//===============================================================================//
+#region CALCULATE BOUNCE WHILE MOVING
+	//—------------------------------------------------------------------------------//
+	// CALCULATE BOUNCE WHILE MOVING
+	//—------------------------------------------------------------------------------//
+	if (_flag_player_moving ){ //WHILE MOVING, BOUNCE THE PLAYER EVERY 1/8s (8 frames)
+		_player_bounce_counter++;
+		if (!_flag_player_sprinting && _player_bounce_counter >= 12){ //NOT SPRINTING
+			_player_bounce_counter = 0;
+			_player_bounce_frame++;
+			if (_player_bounce_frame > 4){
+				_player_bounce_frame = 0;
+			}
+		} else if (_player_bounce_counter >= 4){ //SPRINTING
+			_player_bounce_counter = 0;
+			_player_bounce_frame++;
+			if (_player_bounce_frame > 4){
+				_player_bounce_frame = 0;
+			}
 		}
 	}
-}
+#endregion
 
 //DRAW FOLLOWING SHADOW
 draw_sprite(spr_player_shadow,0,x,y);

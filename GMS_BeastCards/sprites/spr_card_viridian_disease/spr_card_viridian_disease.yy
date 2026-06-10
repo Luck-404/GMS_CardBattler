@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DISEASE",
-    "path":"folders/CARDS/CARDS LIST/GREEN/DISEASE.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DISEASE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

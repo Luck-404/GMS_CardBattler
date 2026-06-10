@@ -11,7 +11,7 @@ function scr_destroy_status(_status)
     //--------------------------------------------------
     if (_status._ref_host == undefined)
     {
-		var _s = scr_check_unit_status(_status._status_name,global.statuses);
+		var _s = scr_check_for_status(_status._status_name,global.statuses);
 		if (_s != -1){
 			var _i = ds_list_find_index(global.statuses, _s);	
 		    if (_i != -1)
@@ -21,7 +21,7 @@ function scr_destroy_status(_status)
 
 		    instance_destroy(_s);
 
-		    scr_check_status_pos(global.statuses);
+		    scr_reposition_statuses(global.statuses);
 		}
 		exit;		
     }
@@ -33,7 +33,7 @@ function scr_destroy_status(_status)
 
     if (instance_exists(_host))
     {
-		var _s = scr_check_unit_status(_status._status_name,_host);
+		var _s = scr_check_for_status(_status._status_name,_host);
 		if (_s != -1){		
 			var _i = ds_list_find_index(_host._statuses,_s);
 			
@@ -43,7 +43,7 @@ function scr_destroy_status(_status)
 	        }			
 	        instance_destroy(_s);
 
-	        scr_check_status_pos(_host);			
+	        scr_reposition_statuses(_host);			
 		}
     }
     else

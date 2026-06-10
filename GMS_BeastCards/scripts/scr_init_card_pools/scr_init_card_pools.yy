@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_init_card_pools",
   "parent":{
-    "name":"CARD SETUP",
-    "path":"folders/CARDS/CARD SETUP.yy",
+    "name":"CARD INIT",
+    "path":"folders/CARDS/CARD SETUP/CARD INIT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

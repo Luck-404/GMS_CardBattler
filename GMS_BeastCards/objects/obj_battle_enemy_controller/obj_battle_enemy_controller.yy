@@ -9,8 +9,8 @@
   "name":"obj_battle_enemy_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"ENEMY",
-    "path":"folders/BATTLE/ENEMY.yy",
+    "name":"CONTROLLERS",
+    "path":"folders/BATTLE/CONTROLLERS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

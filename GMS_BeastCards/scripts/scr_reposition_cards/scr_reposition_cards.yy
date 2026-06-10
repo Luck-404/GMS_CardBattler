@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_reposition_cards",
   "parent":{
-    "name":"CARD MOVEMENT LOGIC",
-    "path":"folders/BATTLE/CARDS/CARD MOVEMENT LOGIC.yy",
+    "name":"CARD FLOW",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD FLOW.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

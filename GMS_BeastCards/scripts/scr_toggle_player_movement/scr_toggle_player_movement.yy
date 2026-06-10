@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_toggle_player_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_toggle_player_movement",
+  "parent":{
+    "name":"PLAYER",
+    "path":"folders/PLAYER.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

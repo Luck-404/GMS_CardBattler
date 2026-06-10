@@ -9,8 +9,8 @@
   "name":"obj_battle_zone",
   "overriddenProperties":[],
   "parent":{
-    "name":"TRIGGER ZONE",
-    "path":"folders/BATTLE/TRIGGER ZONE.yy",
+    "name":"BATTLE TRIGGER",
+    "path":"folders/OVERWORLD/BATTLE TRIGGER.yy",
   },
   "parentObjectId":null,
   "persistent":false,

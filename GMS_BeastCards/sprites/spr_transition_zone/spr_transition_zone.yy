@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"TRANSITIONS",
-    "path":"folders/GENERAL GUI/TRANSITIONS.yy",
+    "name":"TRANSITION TRIGGER",
+    "path":"folders/GUI/TRANSITIONS/TRANSITION TRIGGER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

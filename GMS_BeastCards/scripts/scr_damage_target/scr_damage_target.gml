@@ -4,17 +4,16 @@
 //
 function scr_damage_target(_dmg, _tar)
 {
-    randomize();	
 	var _dmg_left = _dmg;
 	
 	//ADJUST DAMAGE BASED ON ATTACKER ATK STAT
 	if (global.cast_card._ref_card[?"card_stat"] == "PHY"){
-		var _pdmg_stat = global._target._ref_unit[?"beast_ppow_stat"];
+		var _pdmg_stat = global.caster_beast._ref_unit[?"beast_ppow_stat"];
 		var _pdmg_mod = scr_get_beast_grade_modifier(_pdmg_stat);
 		_dmg_left = ceil(_dmg_left*_pdmg_mod);
 	}
 	if (global.cast_card._ref_card[?"card_stat"] == "MAG"){
-		var _mdmg_stat = global._target._ref_unit[?"beast_mpow_stat"];
+		var _mdmg_stat = global.caster_beast._ref_unit[?"beast_mpow_stat"];
 		var _mdmg_mod = scr_get_beast_grade_modifier(_mdmg_stat);
 		_dmg_left = ceil(_dmg_left*_mdmg_mod);
 	}
@@ -23,7 +22,7 @@ function scr_damage_target(_dmg, _tar)
 	var _dod = global.target_beast._ref_unit[?"beast_dod_stat"];
 	var _roll2 = irandom_range(0,100);
 	if (_roll2 < _dod){
-		scr_spawn_scrolling_popup("TEXT","DODGED",undefined,c_white,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
+		scr_spawn_popup_scrolling("TEXT","DODGED",undefined,c_white,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
 		exit;
 	}	
 	
@@ -33,11 +32,11 @@ function scr_damage_target(_dmg, _tar)
 	var _roll = irandom_range(0,100);
 	if (_roll < _crit){
 		_dmg_left = _dmg_left * 2;		
-		scr_spawn_scrolling_popup("TEXT","CRIT",undefined,c_maroon,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
+		scr_spawn_popup_scrolling("TEXT","CRIT",undefined,c_maroon,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
 	}	
 	
 	//RAPID GROWTH BONUS DMG
-	var _status = scr_check_unit_status("WEATHER: RAPID GROWTH",global.statuses);
+	var _status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
 	if (_status != -1){
 		var _arr = global.cast_card._ref_card[?"card_colors"];
 		if (_arr[0] = "VIRIDIAN"){
@@ -46,25 +45,25 @@ function scr_damage_target(_dmg, _tar)
 	}	
 
 	//check for weakness
-	_status = scr_check_unit_status("WEAKNESS",global.caster_beast);
+	_status = scr_check_for_status("WEAKNESS",global.caster_beast);
 	var _weak_stacks = 0;
 	if (_status != -1){
 		_weak_stacks = _status._status_stacks;
 	}
 	_dmg_left = _dmg_left-(_weak_stacks*2);
 	if (_dmg_left <= 0){
-		scr_spawn_scrolling_popup("TEXT","TOO WEAK",undefined,c_white,global.caster_beast.x+irandom_range(-32,32),global.caster_beast.y-24+irandom_range(-32,32));	
+		scr_spawn_popup_scrolling("TEXT","TOO WEAK",undefined,c_white,global.caster_beast.x+irandom_range(-32,32),global.caster_beast.y-24+irandom_range(-32,32));	
 		exit;		
 	}
 	
 	//REDUCE DAMAGE BASED ON DEFENDER DEF STAT
 	if (global.cast_card._ref_card[?"card_stat"] == "PHY"){
-		var _pdef_stat = global._target._ref_unit[?"beast_pdef_stat"];
+		var _pdef_stat = global.target_beast._ref_unit[?"beast_pdef_stat"];
 		var _pdef_mod = scr_get_beast_grade_modifier(_pdef_stat);
 		_dmg_left = ceil(_dmg_left* (1 / _pdef_mod));
 	}
 	if (global.cast_card._ref_card[?"card_stat"] == "MAG"){
-		var _mdef_stat = global._target._ref_unit[?"beast_mdef_stat"];
+		var _mdef_stat = global.target_beast._ref_unit[?"beast_mdef_stat"];
 		var _mdef_mod = scr_get_beast_grade_modifier(_mdef_stat);
 		_dmg_left = ceil(_dmg_left* (1 / _mdef_mod));
 	}	
@@ -108,7 +107,7 @@ function scr_damage_target(_dmg, _tar)
 	        if (_m._cur_hp <= 0)
 	        {
 	            _m._cur_hp = 0;
-				scr_spawn_scrolling_popup("TEXT","-" + string(_actual),undefined,c_maroon,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
+				scr_spawn_popup_scrolling("TEXT","-" + string(_actual),undefined,c_maroon,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
 	            ds_list_delete(_minions, i);
 	            instance_destroy(_m);
 	        }
@@ -118,8 +117,8 @@ function scr_damage_target(_dmg, _tar)
 	    _dmg_left -= _total_applied;
 
 	    // re-sync minion positions once after cleanup
-	    scr_check_unit_pos(_tar);
-		scr_check_status_pos(_tar);
+	    scr_reposition_minions(_tar);
+		scr_reposition_statuses(_tar);
 	}
 
     //----------------------------------------------------
@@ -128,7 +127,7 @@ function scr_damage_target(_dmg, _tar)
     if (_dmg_left > 0 && _tar._armor > 0)
     {
         var _blocked = min(_tar._armor, _dmg_left);
-		scr_spawn_scrolling_popup("TEXT","-" + string(_blocked),undefined,c_blue,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));	
+		scr_spawn_popup_scrolling("TEXT","-" + string(_blocked),undefined,c_blue,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));	
         _tar._armor -= _blocked;
         _dmg_left -= _blocked;
     }
@@ -139,7 +138,7 @@ function scr_damage_target(_dmg, _tar)
     if (_dmg_left > 0 && _tar._overhealth > 0)
     {
         var _blocked = min(_tar._overhealth, _dmg_left);
-		scr_spawn_scrolling_popup("TEXT","-" + string(_blocked),undefined,c_green,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));	
+		scr_spawn_popup_scrolling("TEXT","-" + string(_blocked),undefined,c_green,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));	
         _tar._overhealth -= _blocked;
         _dmg_left -= _blocked;
     }
@@ -149,7 +148,7 @@ function scr_damage_target(_dmg, _tar)
     //----------------------------------------------------
     if (_dmg_left > 0)
     {
-		scr_spawn_scrolling_popup("TEXT","-" + string(_dmg_left),undefined,c_maroon,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));	
+		scr_spawn_popup_scrolling("TEXT","-" + string(_dmg_left),undefined,c_maroon,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));	
         _tar._cur_hp -= _dmg_left;
     }
 	

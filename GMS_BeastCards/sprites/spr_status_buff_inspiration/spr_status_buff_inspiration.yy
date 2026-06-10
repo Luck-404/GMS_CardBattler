@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"INSPIRATION",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/BUFFS/INSPIRATION.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/INSPIRATION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

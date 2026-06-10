@@ -17,7 +17,7 @@ function scr_init_minion(_id,_card,_caster,_target){
 				//PLAY SOUND
 	
 				//POPUP
-				scr_spawn_scrolling_popup("TEXT","+ MINION",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));		
+				scr_spawn_popup_scrolling("TEXT","+ MINION",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));		
 			} else {
 				//REPLACE OLDEST
 				var _old_min = ds_list_find_value(_target._minions,0);
@@ -29,11 +29,11 @@ function scr_init_minion(_id,_card,_caster,_target){
 				//PLAY SOUND
 	
 				//POPUP
-				scr_spawn_scrolling_popup("TEXT","+ MINION (REPLACED OLDEST)",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));		
+				scr_spawn_popup_scrolling("TEXT","+ MINION (REPLACED OLDEST)",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));		
 			}
 			
-		scr_check_unit_pos(_target);	
-		scr_check_status_pos(_target);				
+		scr_reposition_minions(_target);	
+		scr_reposition_statuses(_target);				
 		break;
 	}
 }

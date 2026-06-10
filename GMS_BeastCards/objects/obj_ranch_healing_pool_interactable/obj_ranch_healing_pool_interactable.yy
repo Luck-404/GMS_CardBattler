@@ -9,8 +9,8 @@
   "name":"obj_ranch_healing_pool_interactable",
   "overriddenProperties":[],
   "parent":{
-    "name":"RANCH",
-    "path":"folders/BEASTS/PARTY SYSTEM/RANCH.yy",
+    "name":"RANCH SYSTEM",
+    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
   },
   "parentObjectId":null,
   "persistent":false,

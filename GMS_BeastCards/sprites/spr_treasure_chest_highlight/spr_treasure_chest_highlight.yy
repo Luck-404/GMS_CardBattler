@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CHESTS",
-    "path":"folders/ROOM COMPONENTS/TREASURE/CHESTS.yy",
+    "path":"folders/OVERWORLD/TREASURE/CHESTS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

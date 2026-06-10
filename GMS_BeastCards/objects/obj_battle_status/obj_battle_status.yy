@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"STATUS",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

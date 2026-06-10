@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"HIDDEN CARD",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/HIDDEN CARD.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/HIDDEN CARD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

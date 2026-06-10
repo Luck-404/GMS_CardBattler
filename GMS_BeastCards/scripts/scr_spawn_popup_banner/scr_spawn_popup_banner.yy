@@ -6,7 +6,7 @@
   "name":"scr_spawn_popup_banner",
   "parent":{
     "name":"BANNERS",
-    "path":"folders/GENERAL GUI/POPUPS/BANNERS.yy",
+    "path":"folders/GUI/POPUPS/BANNERS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

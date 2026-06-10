@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_bulwark",
   "parent":{
     "name":"BULWARK",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/BULWARK.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/BULWARK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

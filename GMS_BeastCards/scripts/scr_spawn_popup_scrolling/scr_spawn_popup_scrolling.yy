@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_spawn_popup_scrolling",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_spawn_popup_scrolling",
+  "parent":{
+    "name":"SCROLLING",
+    "path":"folders/GUI/POPUPS/SCROLLING.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

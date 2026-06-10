@@ -1,16 +1,23 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_BATTLE_ZONE
+// FUNCTION:	Initializes wild encounter variables and timers
+//				Sets encounter cooldowns and encounter chance values
+//				Prepares the battle zone for random encounter checks
 //
-//
+//===============================================================================//
 
-//VARIABLES
+//---------//
+//VARIABLES//
+//—--------//
 _encounter_attempt_cooldown = 0;
-_grass_timer = 0;
-_chance = 15;
+_encouter_chance = 0;
+_scene_fx_litter_timer = 0;
 
-//INIT
+//----//
+//INIT//
+//----//
 
-//METHODS
-
-
+//-------//
+//METHODS//
+//-------//

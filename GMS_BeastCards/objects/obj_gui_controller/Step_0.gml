@@ -127,24 +127,24 @@ if (global.camera != undefined && room != rm_ow_ranch)
 
     if (mouse_wheel_up())
     {
-        global._cam_target_width =
-            max(global._cam_min_size,
-                global._cam_target_width - _zoom_step);
+        global.cam_target_width =
+            max(global.cam_min_size,
+                global.cam_target_width - _zoom_step);
 
-        global._cam_target_height =
-            max(global._cam_min_size,
-                global._cam_target_height - _zoom_step);
+        global.cam_target_height =
+            max(global.cam_min_size,
+                global.cam_target_height - _zoom_step);
     }
 
     if (mouse_wheel_down())
     {
-        global._cam_target_width =
-            min(global._cam_max_size,
-                global._cam_target_width + _zoom_step);
+        global.cam_target_width =
+            min(global.cam_max_size,
+                global.cam_target_width + _zoom_step);
 
-        global._cam_target_height =
-            min(global._cam_max_size,
-                global._cam_target_height + _zoom_step);
+        global.cam_target_height =
+            min(global.cam_max_size,
+                global.cam_target_height + _zoom_step);
     }
 }
 }

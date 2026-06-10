@@ -10,8 +10,8 @@
   "name":"obj_gui_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"GENERAL GUI",
-    "path":"folders/GENERAL GUI.yy",
+    "name":"GUI",
+    "path":"folders/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":true,

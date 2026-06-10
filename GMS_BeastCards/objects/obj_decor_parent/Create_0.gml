@@ -1,0 +1,1 @@
+_shadow_scalar = 0.5;

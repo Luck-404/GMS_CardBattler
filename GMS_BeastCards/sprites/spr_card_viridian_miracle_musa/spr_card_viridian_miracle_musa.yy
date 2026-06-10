@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"MIRACLE MUSA",
-    "path":"folders/CARDS/CARDS LIST/GREEN/MIRACLE MUSA.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/MIRACLE MUSA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

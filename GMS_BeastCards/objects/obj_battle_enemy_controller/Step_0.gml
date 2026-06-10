@@ -11,7 +11,7 @@ switch (_enemy_state){
 	case ENEMY_STATE.INIT_BEASTS:
 			for (var _i = 0; _i < _beast_number; _i++){
 			//GET UNIT
-			var _enemy_unit = scr_roll_random_beast(global.last_enemy_pool);
+			var _enemy_unit = scr_get_random_beast(global.last_enemy_pool);
 			
 			//MAKE NEW BEAST OBJ
 			var _obj_beast = instance_create_layer(room_width/2+80+(100*_i),room_height/2,"ily_player",obj_battle_beast);
@@ -65,7 +65,6 @@ switch (_enemy_state){
 		}
 		
 		//SHUFFLE DECK
-		randomize();
 		ds_list_shuffle(_enemy_unit._decklist);
 		
 		//SET CARD ACTIVEs
@@ -131,7 +130,7 @@ switch (_enemy_state){
 	        }
 	    }
 
-	    if (_statuses_init && !instance_exists(obj_waiter))
+	    if (_statuses_init && !instance_exists(obj_wait))
 	    {
 	        if (ds_list_size(_statuses_list) > 0)
 	        {
@@ -146,8 +145,7 @@ switch (_enemy_state){
 
 	                ds_list_delete(_statuses_list, 0);
 
-	                var _waiter = instance_create_layer(room_width/2, room_height/2, "ily_fx", obj_waiter);
-	                _waiter._life = 10;
+	                scr_init_battle_wait(10);
 	            }
 	            else
 	            {
@@ -189,18 +187,17 @@ switch (_enemy_state){
 	        }
 	    }
 
-	    if (_minions_init && !instance_exists(obj_waiter))
+	    if (_minions_init && !instance_exists(obj_wait))
 	    {
 	        if (ds_list_size(_casting_minions) > 0)
 	        {
 	            var _minion = ds_list_find_value(_casting_minions, 0);
 
-	            scr_minion_cast(_minion);
+	            scr_cast_minion_effect(_minion);
 
 	            ds_list_delete(_casting_minions, 0);
 
-	            var _waiter = instance_create_layer(room_width/2, room_height/2, "ily_fx", obj_waiter);
-	            _waiter._life = 15;
+	            scr_init_battle_wait(15);
 	        }
 	        else
 	        {
@@ -231,7 +228,7 @@ switch (_enemy_state){
 		    ds_list_add(_casting_units, ds_list_find_value(_beasts_alive, i));
 		}
 	}
-	if (_cast_init == true && !instance_exists(obj_waiter)){
+	if (_cast_init == true && !instance_exists(obj_wait)){
 		if(ds_list_size(_casting_units) > 0){
 			var _beast = ds_list_find_value(_casting_units,0);
 			obj_battle_player_controller.scr_check_battle_beast_able(_beasts_alive);
@@ -271,7 +268,7 @@ switch (_enemy_state){
 				            global.caster_beast = _beast;
 				            global.target_beast = _target;
 
-				            scr_cast_battle_card();
+				            scr_cast_card();
 				        }
 
 					break;
@@ -311,7 +308,7 @@ switch (_enemy_state){
 				        global.caster_beast = _beast;
 				        global.target_beast = _target;
 
-				        scr_cast_battle_card();
+				        scr_cast_card();
 					break;
 				
 					case "UTILITY":
@@ -349,7 +346,7 @@ switch (_enemy_state){
 				        global.caster_beast = _beast;
 				        global.target_beast = _target;
 
-				        scr_cast_battle_card();
+				        scr_cast_card();
 					break;				
 				
 					case "DEFENSE":
@@ -388,15 +385,14 @@ switch (_enemy_state){
 					    global.caster_beast = _beast;
 					    global.target_beast = _target;
 
-					    scr_cast_battle_card();
+					    scr_cast_card();
 
 					break;
 				}
 				ds_list_delete(_casting_units,0);
 				_card.visible = false;
 				//create waiter
-				var _waiter = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_waiter);
-				_waiter._life = 30;
+				scr_init_battle_wait(30);
 			} else {
 				_card.visible = false;	
 				ds_list_delete(_casting_units,0);	
@@ -465,13 +461,13 @@ switch (_enemy_state){
 	            }
 	        }
 			
-			var _status = scr_check_unit_status("WEATHER: RAPID GROWTH",global.statuses);
+			var _status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
 			if (_status != -1){
 				_status._status_command = "REPEAT";
 			}
 	    }
 
-	    if (_statuses_init && !instance_exists(obj_waiter))
+	    if (_statuses_init && !instance_exists(obj_wait))
 	    {
 	        if (ds_list_size(_statuses_list) > 0)
 	        {
@@ -486,8 +482,7 @@ switch (_enemy_state){
 
 	                ds_list_delete(_statuses_list, 0);
 
-	                var _waiter = instance_create_layer(room_width/2, room_height/2, "ily_fx", obj_waiter);
-	                _waiter._life = 10;
+	                scr_init_battle_wait(10);
 	            }
 	            else
 	            {

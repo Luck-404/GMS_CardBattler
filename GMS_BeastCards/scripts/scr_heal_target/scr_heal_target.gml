@@ -10,6 +10,6 @@ function scr_heal_target(_amt,_tar){
 			_tar._cur_hp = _tar._max_hp;
 		}
 		//POPUP
-		scr_spawn_scrolling_popup("TEXT","+" + string(_amt),undefined,c_green,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));					
+		scr_spawn_popup_scrolling("TEXT","+" + string(_amt),undefined,c_green,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));					
 	}
 }

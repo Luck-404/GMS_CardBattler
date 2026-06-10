@@ -6,7 +6,7 @@
   "name":"scr_status_dot_bleed",
   "parent":{
     "name":"BLEED",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/DOTs/BLEED.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/BLEED.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

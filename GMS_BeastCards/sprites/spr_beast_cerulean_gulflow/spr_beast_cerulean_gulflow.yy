@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CERULEAN",
-    "path":"folders/BEASTS/SPRITES/CERULEAN.yy",
+    "path":"folders/BEASTS/BEAST LIST/CERULEAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

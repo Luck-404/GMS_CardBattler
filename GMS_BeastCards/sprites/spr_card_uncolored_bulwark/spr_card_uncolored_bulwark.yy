@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BULWARK",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/BULWARK.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/BULWARK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

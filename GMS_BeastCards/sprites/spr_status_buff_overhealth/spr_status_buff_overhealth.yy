@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"OVERHEALTH",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/BUFFS/OVERHEALTH.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/OVERHEALTH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

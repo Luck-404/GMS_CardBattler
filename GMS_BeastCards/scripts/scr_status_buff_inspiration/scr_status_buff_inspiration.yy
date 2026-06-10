@@ -6,7 +6,7 @@
   "name":"scr_status_buff_inspiration",
   "parent":{
     "name":"INSPIRATION",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/BUFFS/INSPIRATION.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/INSPIRATION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

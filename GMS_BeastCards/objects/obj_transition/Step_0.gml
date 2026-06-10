@@ -29,8 +29,7 @@ if (_flag_continue_transition == true){
 
 	if (_destination != rm_battle){
 		//cant get into battle for 3s
-		var _waiter = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_waiter);
-		_waiter._life = 180;
+		scr_init_battle_wait(180);
 	}
 
 	//GO TO THE DESTINATION ROOM

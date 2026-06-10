@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"EMERALD SLAM",
-    "path":"folders/CARDS/CARDS LIST/GREEN/EMERALD SLAM.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/EMERALD SLAM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

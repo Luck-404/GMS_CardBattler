@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"FADER",
-    "path":"folders/GENERAL GUI/TRANSITIONS/FADER.yy",
+    "path":"folders/GUI/TRANSITIONS/FADER.yy",
   },
   "parentObjectId":null,
   "persistent":false,

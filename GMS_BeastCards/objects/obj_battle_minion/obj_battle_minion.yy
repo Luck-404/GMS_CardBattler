@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"MINIONS",
-    "path":"folders/BATTLE/MINIONS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_minion",
-    "path":"sprites/spr_minion/spr_minion.yy",
+    "name":"spr_minion_hitbox",
+    "path":"sprites/spr_minion_hitbox/spr_minion_hitbox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

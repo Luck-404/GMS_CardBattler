@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"TEXT BUBBLE",
-    "path":"folders/GENERAL GUI/POPUPS/TEXT BUBBLE.yy",
+    "path":"folders/GUI/POPUPS/TEXT BUBBLE.yy",
   },
   "parentObjectId":null,
   "persistent":true,

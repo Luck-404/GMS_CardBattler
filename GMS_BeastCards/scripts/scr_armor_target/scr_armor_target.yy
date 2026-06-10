@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_armor_target",
   "parent":{
-    "name":"CARD BATTLE LOGIC",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC.yy",
+    "name":"CARD CAST LOGIC",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

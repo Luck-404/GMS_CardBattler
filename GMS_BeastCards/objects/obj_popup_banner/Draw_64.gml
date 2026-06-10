@@ -25,7 +25,7 @@ if (_flag_opened == false){
 #region DRAW TEXT
 if (_text != "DEFAULT"){
 	draw_set_colour(c_black);
-	draw_set_font(fnt_gui_large);
+	draw_set_font(fnt_large_gui);
 	draw_text(x-(string_width(_text)/2),y,_text);
 }
 #endregion

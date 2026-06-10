@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"SPARKLES",
-    "path":"folders/ROOM COMPONENTS/TREASURE/SPARKLES.yy",
+    "path":"folders/OVERWORLD/TREASURE/SPARKLES.yy",
   },
   "parentObjectId":null,
   "persistent":false,

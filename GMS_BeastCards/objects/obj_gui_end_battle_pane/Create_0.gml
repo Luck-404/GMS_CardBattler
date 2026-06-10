@@ -7,7 +7,7 @@
 //
 //VARIABLES
 //
-_confirm_button = instance_create_layer(room_width/2,room_height/2+450,"ily_fx",obj_battle_button_end_battle_confirm);
+_confirm_button = instance_create_layer(room_width/2,room_height/2+450,"ily_fx",obj_gui_end_battle_confirm_button);
 _condition = "";
 _flag_finished = false;
 

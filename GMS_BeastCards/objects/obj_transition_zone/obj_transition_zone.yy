@@ -9,8 +9,8 @@
   "name":"obj_transition_zone",
   "overriddenProperties":[],
   "parent":{
-    "name":"TRANSITIONS",
-    "path":"folders/GENERAL GUI/TRANSITIONS.yy",
+    "name":"TRANSITION TRIGGER",
+    "path":"folders/GUI/TRANSITIONS/TRANSITION TRIGGER.yy",
   },
   "parentObjectId":null,
   "persistent":false,

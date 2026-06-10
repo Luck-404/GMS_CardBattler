@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"ROOM COMPONENTS",
-    "path":"folders/ROOM COMPONENTS.yy",
+    "name":"BATTLE ROOM",
+    "path":"folders/BATTLE/BATTLE ROOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

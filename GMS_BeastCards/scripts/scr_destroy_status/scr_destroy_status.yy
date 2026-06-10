@@ -6,7 +6,7 @@
   "name":"scr_destroy_status",
   "parent":{
     "name":"STATUS",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CLEARCAST",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/CLEARCAST.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/CLEARCAST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

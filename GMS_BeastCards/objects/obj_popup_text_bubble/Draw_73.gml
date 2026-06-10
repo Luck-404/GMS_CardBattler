@@ -11,7 +11,7 @@
 if (_text != "DEFAULT")
 {
     // text dimensions
-	draw_set_font(fnt_gui_small);	
+	draw_set_font(fnt_small_gui);	
     var tw = string_width(_text);
     var th = string_height(_text);
     

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"SCENERY FX",
-    "path":"folders/ROOM COMPONENTS/SCENERY FX.yy",
+    "name":"SCENE FX",
+    "path":"folders/OVERWORLD/SCENE FX.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

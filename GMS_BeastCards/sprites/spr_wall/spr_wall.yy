@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"WALLS",
-    "path":"folders/ROOM COMPONENTS/WALLS.yy",
+    "path":"folders/OVERWORLD/WALLS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

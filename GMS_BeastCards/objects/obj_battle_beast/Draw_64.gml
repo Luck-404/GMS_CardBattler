@@ -4,7 +4,7 @@
 //
 //
 if (!instance_exists(obj_gui_end_battle_pane)){
-draw_set_font(fnt_gui_small);
+draw_set_font(fnt_small_gui);
 if (_list == "DEAD"){
 	_cur_hp = 0;	
 	//draw_text(x-32,y+50,"DEAD: " + string(_pos));	
@@ -24,10 +24,10 @@ var _scale_y = 0.2;
 if position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), self)
 {
 	if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_CASTER && _team == "PLAYER"){
-		draw_sprite(spr_battle_caster_hover,0,x,y-50);
+		draw_sprite(spr_battle_caster_hover_icon,0,x,y-50);
 	}
 	if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_TARGET){
-		draw_sprite(spr_battle_target_hover,0,x,y-50);
+		draw_sprite(spr_battle_target_hover_icon,0,x,y-50);
 	}
 
     _scale_x *= 1.15;
@@ -53,7 +53,7 @@ draw_sprite_ext(_shadow, 0, x, y+16 + 18, 1, 1, 0, c_white, 1);
 
 if (_cur_hp <= 0){
 	draw_sprite_ext(_sprite, 0, x, y, _scale_x, _scale_y, 0, c_ltgray, 1);		
-	draw_sprite(spr_battle_enemy_dead,0,x,y);	
+	draw_sprite(spr_battle_beast_dead,0,x,y);	
 }
 //DRWA GREY IF IT DOES NOT MEET CASTING CHECKS
 else if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_CASTER && (_beast_able_check == false || _beast_color_check == false || _beast_archetype_check == false || _beast_class_check == false)){
@@ -151,7 +151,7 @@ draw_rectangle(_bar_x1,_bar_y1,_bar_x2,_bar_y2,true);
 //
 // hp text
 //
-draw_set_font(fnt_gui_small);
+draw_set_font(fnt_small_gui);
 draw_set_colour(c_black);
 
 var _hp_text = string(_cur_hp);
@@ -175,13 +175,13 @@ draw_text(
 if (_armor > 0)
 if (_armor > 0)
 {
-    draw_set_font(fnt_gui_small);
+    draw_set_font(fnt_small_gui);
     draw_set_colour(c_white);
 
     var _icon_x = _bar_x2 - 16;
     var _icon_y = _bar_y2 + 16;
 
-    draw_sprite(spr_battle_armor,0,_icon_x,_icon_y);
+    draw_sprite(spr_battle_armor_icon,0,_icon_x,_icon_y);
 
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
@@ -196,7 +196,7 @@ if (_armor > 0)
 
 if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_TARGET){
 	if (self == global.caster_beast){
-		draw_sprite(spr_battle_caster_hover,0,x,y-50);
+		draw_sprite(spr_battle_caster_hover_icon,0,x,y-50);
 	}
 }
 
@@ -271,8 +271,8 @@ if (_cur_hp <= 0 && _flag_death_handled == false)
         var _b = ds_list_find_value(_alive,_i);
         _b._pos = _i;
         _b.x = scr_get_battle_x(_b._team,_i);
-		scr_check_unit_pos(_b);
-		scr_check_status_pos(_b);
+		scr_reposition_minions(_b);
+		scr_reposition_statuses(_b);
     }
 
     //
@@ -288,7 +288,7 @@ if (_cur_hp <= 0 && _flag_death_handled == false)
 	    _b.x = scr_get_dead_x(_b._team, _alive_count, _i);
 	}
 
-    draw_sprite(spr_battle_enemy_dead,0,x,y);
+    draw_sprite(spr_battle_beast_dead,0,x,y);
     exit;
 }
 #endregion

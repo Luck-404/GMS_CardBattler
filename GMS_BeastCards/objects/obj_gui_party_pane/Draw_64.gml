@@ -161,7 +161,7 @@ if (_unit_selected != undefined)
     var _sg = 32;
 
     draw_set_colour(c_black);
-	draw_set_font(fnt_gui_small);
+	draw_set_font(fnt_small_gui);
 	draw_set_valign(fa_top);
 	draw_set_halign(fa_left);	
 

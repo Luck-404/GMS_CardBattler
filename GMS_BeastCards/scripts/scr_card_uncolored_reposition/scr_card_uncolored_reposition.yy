@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_reposition",
   "parent":{
     "name":"REPOSITION",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/REPOSITION.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/REPOSITION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

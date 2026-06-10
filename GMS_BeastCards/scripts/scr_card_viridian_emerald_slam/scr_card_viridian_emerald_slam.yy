@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_emerald_slam",
   "parent":{
     "name":"EMERALD SLAM",
-    "path":"folders/CARDS/CARDS LIST/GREEN/EMERALD SLAM.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/EMERALD SLAM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

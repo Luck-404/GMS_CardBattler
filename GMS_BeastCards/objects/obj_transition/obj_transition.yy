@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"TRANSITIONS",
-    "path":"folders/GENERAL GUI/TRANSITIONS.yy",
+    "path":"folders/GUI/TRANSITIONS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

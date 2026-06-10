@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ECHO",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/ECHO.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/ECHO.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

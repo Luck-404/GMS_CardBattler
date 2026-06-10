@@ -7,7 +7,7 @@ switch(_condition){
 	#region LOSS
 	case "LOSS":
 		//DRAW 'DEFEATED'
-		draw_set_font(fnt_gui_large);
+		draw_set_font(fnt_large_gui);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_set_colour(c_red);
@@ -113,7 +113,7 @@ switch(_condition){
 			    //----------------------------------------------------
 			    // HP TEXT
 			    //----------------------------------------------------
-			    draw_set_font(fnt_gui_small);
+			    draw_set_font(fnt_small_gui);
 			    draw_set_halign(fa_left);
 			    draw_set_valign(fa_top);
 			    draw_set_colour(c_black);
@@ -141,7 +141,7 @@ switch(_condition){
 		
 		
 		//WAIT FOR CLICK ON OBJ_END_CONFIRM
-		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_battle_confirm)){
+		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 			//TRANSITION BACK TO RANCH ROOM WITH A STORED POSITION:	
 			//SPAWN NEW TRANSITION
 			var _transition = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition);
@@ -155,7 +155,7 @@ switch(_condition){
 			obj_player.y = 980; //y
 			
 			//PLAYER IS ABLE AGAIN
-			obj_player._player_speed = 3;
+			scr_toggle_player_movement("START");
 			obj_player.visible = true;		
 		}
 	break;
@@ -169,7 +169,7 @@ switch(_condition){
 	#region WIN
 	case "WIN":
 		//DRAW 'WIN'
-		draw_set_font(fnt_gui_large);
+		draw_set_font(fnt_large_gui);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_set_colour(c_black);
@@ -236,7 +236,7 @@ switch(_condition){
 		// DRAW REWARDS
 		//
 		#region REWARDS
-		draw_set_font(fnt_gui_small);
+		draw_set_font(fnt_small_gui);
 		draw_set_colour(c_black);
 
 		var _reward_x = room_width * 0.5;
@@ -402,7 +402,7 @@ switch(_condition){
 			    //----------------------------------------------------
 			    // HP TEXT
 			    //----------------------------------------------------
-			    draw_set_font(fnt_gui_small);
+			    draw_set_font(fnt_small_gui);
 			    draw_set_halign(fa_left);
 			    draw_set_valign(fa_top);
 			    draw_set_colour(c_black);
@@ -436,7 +436,7 @@ switch(_condition){
 		#endregion
 		
 		//WAIT FOR CLICK ON OBJ_END_CONFIRM
-		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_button_end_battle_confirm)){
+		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 			//TRANSITION BACK TO RANCH ROOM WITH A STORED POSITION:	
 			//SPAWN NEW TRANSITION
 			var _transition = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition);
@@ -450,7 +450,7 @@ switch(_condition){
 			obj_player.y = global.last_player_y; //y
 			
 			//PLAYER IS ABLE AGAIN
-			obj_player._player_speed = 3;
+			scr_toggle_player_movement("START");
 			obj_player.visible = true;		
 		}
 	break;

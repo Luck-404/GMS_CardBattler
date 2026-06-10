@@ -29,7 +29,7 @@
   "origin":4,
   "parent":{
     "name":"BANNERS",
-    "path":"folders/GENERAL GUI/POPUPS/BANNERS.yy",
+    "path":"folders/GUI/POPUPS/BANNERS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

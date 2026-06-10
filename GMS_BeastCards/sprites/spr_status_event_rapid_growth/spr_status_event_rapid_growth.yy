@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"RAPID GROWTH",
-    "path":"folders/BATTLE/CARDS/CARD BATTLE LOGIC/STATUS/EVENTS/RAPID GROWTH.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/EVENTS/RAPID GROWTH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

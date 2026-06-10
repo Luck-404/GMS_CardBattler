@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_power_strike",
   "parent":{
     "name":"POWER STRIKE",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/POWER STRIKE.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/POWER STRIKE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

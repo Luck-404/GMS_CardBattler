@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VIRIDIAN",
-    "path":"folders/BEASTS/SPRITES/VIRIDIAN.yy",
+    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

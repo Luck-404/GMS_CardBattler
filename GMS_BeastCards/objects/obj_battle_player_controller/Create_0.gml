@@ -12,9 +12,23 @@ _max_mana = 3;
 _saved_max_mana = 3;
 _hand_size = 5;
 _draw_amount = 2;
-global.echo_counter = 0;
-_statuses_init = false;
-global.statuses = ds_list_create();
+
+
+#region BATTLE
+	//CARD CASTING
+	global.cast_card = undefined;
+	global.caster_beast = undefined;
+	global.target_beast = undefined;
+
+	global.echo_counter = 0;
+
+	//MINIONS
+	_minions_init = false;
+
+	//STATUSES
+	global.statuses = ds_list_create();
+	_statuses_init = false;
+#endregion
 
 //BEASTS
 _beasts_list = ds_list_create();
@@ -28,10 +42,8 @@ _battle_discard = ds_list_create();
 _battle_exhaust = ds_list_create();
 
 //SELECTIONS
-global.cast_card = undefined;
-global.caster_beast = undefined;
-global.target_beast = undefined;
-_minions_init = false;
+
+
 
 //PLAYER STATE
 enum PLAYER_STATE{
@@ -258,10 +270,10 @@ function scr_reroll_hand()
     while (ds_list_size(_battle_hand) > 0)
     {
         var _card = ds_list_find_value(_battle_hand, 0);
-        scr_discard_battle_card(_card);
+        scr_discard_card(_card);
     }
 
-    scr_draw_battle_cards(_draw_amount);
+    scr_draw_cards(_draw_amount);
 
     scr_check_battle_card_oom(_battle_hand);
 }
@@ -275,7 +287,7 @@ function scr_check_battle_beast_able(_list)
     {
         var _beast = ds_list_find_value(_list, _b);
 		
-		var _status = scr_check_unit_status("STUN",_beast);
+		var _status = scr_check_for_status("STUN",_beast);
 		if (_status != -1){
 			_beast._beast_able_check = false;
 		} else {

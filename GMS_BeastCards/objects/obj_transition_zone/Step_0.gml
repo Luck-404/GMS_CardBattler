@@ -12,9 +12,7 @@
 if (instance_place(x,y,obj_player) && _flag_triggered == false){
 	_flag_triggered = true; //TRIGGER ONCE
 	
-	obj_player._player_speed = 0; //SET PLAYER SPEED TO 0, EFFECTIVELY FREEZING THEM
-	obj_player._flag_moving = false;
-	obj_player._flag_sprinting = false;
+	scr_toggle_player_movement("STOP");
 	
 	//FADE TO BLACK
 	_ref_fader = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition_fader);
@@ -46,6 +44,6 @@ if (_flag_continue_transition == true){
 	room_goto(_room[0]);
 	
 	//RESET PLAYER SPEED, GIVES CONTROL BACK
-	obj_player._player_speed = 3;
+	scr_toggle_player_movement("START");
 }
 #endregion

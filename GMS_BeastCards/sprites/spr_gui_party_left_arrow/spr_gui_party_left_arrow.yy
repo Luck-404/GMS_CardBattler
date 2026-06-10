@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"PARTY GUI",
-    "path":"folders/BEASTS/PARTY SYSTEM/PARTY GUI.yy",
+    "name":"PARTY SYSTEM",
+    "path":"folders/BEASTS/BEAST STORAGES/PARTY SYSTEM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

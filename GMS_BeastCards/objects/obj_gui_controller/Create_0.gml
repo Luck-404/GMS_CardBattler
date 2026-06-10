@@ -5,8 +5,10 @@
 //
 
 //VARIABLES
-global.pause = false;
-global.active_gui = undefined;
+	#region GUI GLOBALS
+	global.pause = false;
+	global.active_gui = undefined;
+	#endregion
 
 //INIT
 gpu_set_texfilter(true);
@@ -24,12 +26,9 @@ function scr_toggle_gui_pause(){
 	
 	//UPDATE PLAYER SPEED
 	if (obj_player._player_speed == 0){
-		obj_player._player_speed = 3;
-		
+		scr_toggle_player_movement("START");
 	} else {
-		obj_player._player_speed = 0;
-		obj_player._flag_moving = false;
-		obj_player._flag_sprinting = false;
+		scr_toggle_player_movement("STOP");
 	}	
 }	
 

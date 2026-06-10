@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"RANCH",
-    "path":"folders/BEASTS/PARTY SYSTEM/RANCH.yy",
+    "name":"RANCH SYSTEM",
+    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

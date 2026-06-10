@@ -34,7 +34,7 @@ _tar_y = room_height/2+irandom_range(-250,250);
 _move_speed = random_range(0.5, 1.5);
 
 //STEP FX
-_step_particle_timer = 15;
+_player_step_particle_timer = 15;
 
 //SHAKING FX
 _bounce_counter = 0;

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_trigger_transition",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_trigger_transition",
+  "parent":{
+    "name":"TRANSITIONS",
+    "path":"folders/GUI/TRANSITIONS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

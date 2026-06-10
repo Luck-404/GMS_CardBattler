@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_miracle_musa",
   "parent":{
     "name":"MIRACLE MUSA",
-    "path":"folders/CARDS/CARDS LIST/GREEN/MIRACLE MUSA.yy",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/MIRACLE MUSA.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@ if (_preview_beast && _ref_unit != undefined)
 {
 	var _u = _ref_unit;
 
-	draw_set_font(fnt_gui_small);
+	draw_set_font(fnt_small_gui);
 	draw_set_colour(c_black);
 
 	var _panel_w = 360;

@@ -3,7 +3,7 @@ function scr_status_buff_inspiration(_tag,_ref){
 		case "APPLY":
 			_ref = global.statuses;
 			
-			var _status = scr_check_unit_status("INSPIRATION",global.statuses);
+			var _status = scr_check_for_status("INSPIRATION",global.statuses);
 			if (_status != -1){
 				_status._status_lifetime = 3;			
 				return _status;
@@ -29,7 +29,7 @@ function scr_status_buff_inspiration(_tag,_ref){
 	
 			//EFFECTS
 	
-			scr_check_status_pos(global.statuses);
+			scr_reposition_statuses(global.statuses);
 		break;
 		
 		case "REPEAT":
@@ -43,7 +43,7 @@ function scr_status_buff_inspiration(_tag,_ref){
 			} else {
 				_ref._status_command = "WAIT";	
 			}
-			scr_check_status_pos(global.statuses);				
+			scr_reposition_statuses(global.statuses);				
 		break;
 		
 		case "DEATH":

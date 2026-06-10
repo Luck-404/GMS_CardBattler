@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_chest_custom_loot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_chest_custom_loot",
+  "parent":{
+    "name":"CHESTS",
+    "path":"folders/OVERWORLD/TREASURE/CHESTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DEFT STRIKE",
-    "path":"folders/CARDS/CARDS LIST/UNCOLORED/DEFT STRIKE.yy",
+    "path":"folders/CARDS/CARD LIST/UNCOLORED/DEFT STRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

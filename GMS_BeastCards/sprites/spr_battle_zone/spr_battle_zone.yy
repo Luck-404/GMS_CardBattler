@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"TRIGGER ZONE",
-    "path":"folders/BATTLE/TRIGGER ZONE.yy",
+    "name":"BATTLE TRIGGER",
+    "path":"folders/OVERWORLD/BATTLE TRIGGER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
