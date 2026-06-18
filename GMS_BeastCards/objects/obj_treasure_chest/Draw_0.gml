@@ -3,6 +3,7 @@
 // DRAW: OBJ_TREASURE_CHEST | DRAWS HIGHLIGHT WHEN CLOSE, ALLOW PLAYER TO INTERACT TO GET NEW CARDS AND GP
 //
 //
+draw_sprite_ext(spr_decor_shadow,image_index,x,y,0.3,0.3,0,_color,1);
 draw_sprite_ext(spr_treasure_chest,image_index,x,y,1,1,0,_color,1);
 
 if (_flag_triggered == true){

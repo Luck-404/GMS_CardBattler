@@ -1,16 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_ranch_healing_pool_interactable",
+  "%Name":"obj_healing_pool_interactable",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_ranch_healing_pool_interactable",
+  "name":"obj_healing_pool_interactable",
   "overriddenProperties":[],
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"BEAST STORAGES",
+    "path":"folders/BEASTS/BEAST STORAGES.yy",
   },
   "parentObjectId":null,
   "persistent":false,

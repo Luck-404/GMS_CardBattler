@@ -32,7 +32,7 @@ function scr_spawn_ranch_unit(_unit){
 	_new_unit._shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
 	_new_unit._uid = _unit[?"beast_uid"];
 	if (_unit[?"beast_hp_cur"] <= 0){
-		_new_unit._beast_state = BEAST_STATE.DEAD;
+		_new_unit._beast_state = BEAST_STATE.REST;
 	}
 	
 	//ADD UNIT TO THE TRACKER LIST

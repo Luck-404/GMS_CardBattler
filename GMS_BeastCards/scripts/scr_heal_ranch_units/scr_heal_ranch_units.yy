@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_level_up_beast",
+  "%Name":"scr_heal_ranch_units",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_level_up_beast",
+  "name":"scr_heal_ranch_units",
   "parent":{
     "name":"RANCH SYSTEM",
     "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",

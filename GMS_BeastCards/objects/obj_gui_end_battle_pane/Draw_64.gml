@@ -181,6 +181,8 @@ switch(_condition){
 		#region ONCE
 		if (_flag_finished == false){
 			_flag_finished = true;
+			//HEAL RANCH UNITS BY 33%
+			scr_heal_ranch_units(0.33);
 			//AWARD GP
 			var _gold_reward = irandom_range(25,100);
 			global.player_gold += _gold_reward;

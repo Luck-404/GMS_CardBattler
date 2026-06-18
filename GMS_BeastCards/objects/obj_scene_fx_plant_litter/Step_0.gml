@@ -1,27 +1,38 @@
+//===============================================================================//
 //
-// STEP: OBJ_LEAF
+// STEP: OBJ_SCENE_FX_PLANT_LITTER
+// FUNCTION: Updates drifting litter movement.
+//           Applies wind flutter, gravity, rotation,
+//           velocity damping, and lifetime handling.
 //
+//===============================================================================//
 
-// rotation
+//—------------------------------------------------------------------------------//
+// ROTATION
+//—------------------------------------------------------------------------------//
 _rot += _rot_spd;
 
-// gentle side-to-side flutter
+//—------------------------------------------------------------------------------//
+// FLUTTER
+//—------------------------------------------------------------------------------//
 _hsp += random_range(-_wind_strength, _wind_strength);
 
-// fall downward
-_vsp += _gravity;
 
-// cap fall speed
-_vsp = clamp(_vsp, -10, 2);
+_vsp += _gravity; // fall downward
+
+ 
+_vsp = clamp(_vsp, -10, 2); // cap fall speed
 
 // movement
 x += _hsp;
 y += _vsp;
 
-// slowly damp horizontal motion
-_hsp *= 0.98;
 
-// life
+_hsp *= 0.98; // slowly damp horizontal motion
+
+//—------------------------------------------------------------------------------//
+// LIFE
+//—------------------------------------------------------------------------------//
 _life--;
 
 if (_life <= 0)
