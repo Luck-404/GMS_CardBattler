@@ -16,7 +16,7 @@ if (_text != "DEFAULT")
 		case "TEXT":
 			//DRAW TEXT
 			draw_set_colour(_color);
-			draw_set_font(fnt_medium_gui);
+			draw_set_font(fnt_small_gui);
 			draw_text(x-(string_width(_text)/2),y,_text);
 		break;
 		#endregion

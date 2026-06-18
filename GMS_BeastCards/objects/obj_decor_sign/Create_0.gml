@@ -1,23 +1,27 @@
+//===============================================================================//
 //
+// CREATE: OBJ_DECOR_SIGN
+// FUNCTION:	Initializes sign interaction variables
+//				Configures trigger and cooldown states
+//				Applies the assigned sign sprite instance
 //
-// CREATE: OBJ_SIGN
-//
-//
+//===============================================================================//
 
 event_inherited();
-
-//
-// VARIABLES
-// 
+//---------//
+//VARIABLES//
+//—--------//
 _flag_triggered = false;
 _cooldown = 60;
 
 sprite_index = _sign_sprite;
 
-//
-// INIT
-//
 
-//
-// METHODS
-//
+//----//
+//INIT//
+//----//
+
+
+//-------//
+//METHODS//
+//-------//

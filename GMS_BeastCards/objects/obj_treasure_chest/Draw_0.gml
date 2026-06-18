@@ -14,6 +14,7 @@ if (_flag_triggered == true){
 		draw_sprite(spr_treasure_chest_highlight,0,x,y);
 	
 		if (keyboard_check_pressed(ord("E")) && _flag_triggered == false){
+			show_debug_message("\n CHEST: PLAYER HAS PRESSED 'E' ON A CHEST");
 			_flag_triggered = true;
 			_cooldown = 10;
 			
@@ -22,9 +23,11 @@ if (_flag_triggered == true){
 		
 			//AWARD TREASURE
 			if (_loot_type == "RANDOM"){
+				show_debug_message("\n CHEST: ROLL RANDOM LOOT");
 				scr_roll_treasure_chest_reward();
 			}
 			else {
+				show_debug_message("\n CHEST: ROLL SPECIFIC LOOT");
 				scr_award_treasure_chest_loot();
 			}
 

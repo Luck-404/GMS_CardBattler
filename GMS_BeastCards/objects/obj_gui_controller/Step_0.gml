@@ -60,6 +60,30 @@ if (room != rm_battle){
 		}
 	}
 	#endregion
+	
+	#region ACTIVATE INVERNTORY PANE
+	if (keyboard_check_pressed(ord("I"))){
+		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED I TOGGLE INVENTORY PANE")
+		//IF PARTY PANE IS ALREADY ACTIVE
+		if (global.active_gui != undefined && global.active_gui._type == "INVENTORY"){
+			//DESTROY CURRENT GUI
+			scr_destroy_gui_open();
+			//TOGGLE PAUSE
+			global.pause = false;
+			scr_toggle_gui_pause();				
+		}
+		else {
+			//ELSE OPEN PARTY PANE INSTEAD
+			//DESTROY CURRENT GUI
+			scr_destroy_gui_open();
+			//TOGGLE PAUSE
+			global.pause = true;
+			scr_toggle_gui_pause();	
+			//OPEN NEW PARTY GUI
+			global.active_gui = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_gui_inventory_pane);
+		}
+	}
+	#endregion	
 
 	#region PARTY PANE ARROW KEYS
 	if (global.active_gui != undefined && global.active_gui.sprite_index == spr_gui_party_pane){

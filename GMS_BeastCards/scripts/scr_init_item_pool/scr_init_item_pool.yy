@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_init_item_pool",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_init_item_pool",
+  "parent":{
+    "name":"INVENTORY",
+    "path":"folders/GUI/INVENTORY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

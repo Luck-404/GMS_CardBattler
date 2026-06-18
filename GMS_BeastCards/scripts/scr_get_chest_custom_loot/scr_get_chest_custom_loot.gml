@@ -4,13 +4,16 @@
 //
 //
 function scr_get_chest_custom_loot(_chest_id){
-	var _return_arr = [];
-	
+	var _return_list = ds_list_create();
 	switch(_chest_id){
 		case "TESTER_CHEST":
-			_return_arr = ["STRIKE","STRIKE","ECHO",500];
+			ds_list_add(_return_list,["CARD","STRIKE",1]);
+			ds_list_add(_return_list,["CARD","ECHO",1]);
+			ds_list_add(_return_list,["ITEM","CONSUMABLE_HEALING_SALVE",3]);
+			ds_list_add(_return_list,["GOLD","GOLD",250]);
+			return _return_list;
 		break;
 	}
 	
-	return _return_arr;
+	return _return_list;
 }

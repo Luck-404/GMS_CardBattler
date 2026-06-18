@@ -42,8 +42,16 @@
 	global.viridian_minions = ds_list_create();
 	#endregion
 
+	#region ITEM GLOBALS
+	global.item_uid = 0;	
+	global.player_inventory = ds_list_create();	
+	global.item_pool = ds_list_create();
+	scr_init_item_pool();
+	#endregion
+	
 	#region PLAYER TRACKING
 	global.player_gold = 0;
+
 	global.player_chests_opened = ds_map_create();
 	#endregion
 
@@ -143,6 +151,15 @@
 	ds_list_add(global.player_library,scr_get_card_info("STRIKE"));
 	ds_list_add(global.player_library,scr_get_card_info("POWER_STRIKE"));
 	ds_list_add(global.player_library,scr_get_card_info("BLOCK"));
+	
+	//—------------------------------------------------------------------------------//
+	// ADD ITEMS TO INVENTORY
+	//—------------------------------------------------------------------------------//
+	//scr_add_item_to_inventory("QUEST_IMPORTANT_NOTEBOOK",1);
+	//scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",22);
+	//scr_add_item_to_inventory("PRISM_BASIC_PRISM",7);
+	//scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
+	//scr_add_item_to_inventory("EGG_ARBRAWN",45);	
 	#endregion
 #endregion
 

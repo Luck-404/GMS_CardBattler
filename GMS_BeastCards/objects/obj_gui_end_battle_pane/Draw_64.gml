@@ -186,15 +186,30 @@ switch(_condition){
 			global.player_gold += _gold_reward;
 			array_push(_rewards_list, ["GOLD", _gold_reward]);
 			
-			//AWARD 3 RANDOM CARDS
+			//AWARD 3 RANDOM CARDS OR ITEMS
 			for (var _i = 0; _i < 3; _i++){
-				var _pool = choose(global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_II_cards,global.rarity_II_cards,global.rarity_II_cards,global.rarity_III_cards);
-				var _card_roll = irandom_range(0,ds_list_size(_pool)-1);
-				var _card_name = ds_list_find_value(_pool,_card_roll);
-				var _new_card = scr_get_card_info(_card_name);
-				scr_add_card_to_deck(_new_card);
-				array_push(_rewards_list, ["CARD", _new_card]);				
+				var _rew = choose("ITEM","CARD");	
+				if (_rew == "CARD"){
+					var _pool = choose(global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_I_cards,global.rarity_II_cards,global.rarity_II_cards,global.rarity_II_cards,global.rarity_III_cards);
+					var _card_roll = irandom_range(0,ds_list_size(_pool)-1);
+					var _card_name = ds_list_find_value(_pool,_card_roll);
+					var _new_card = scr_get_card_info(_card_name)
+					scr_add_card_to_deck(_new_card);		
+					show_debug_message("RANDOM BATTLE REWARD + " + _card_name);
+					array_push(_rewards_list, ["CARD", _new_card]);	
+				}
+				else {
+					var _new_item = scr_get_random_item(global.item_pool);
+					show_debug_message("RANDOM BATTLE REWARD + " + _new_item);
+					var _fake_item = scr_get_item_info(_new_item);
+					scr_add_item_to_inventory(_new_item,1);
+					array_push(_rewards_list, ["ITEM", _fake_item]);	
+				}				
 			}	
+
+		
+			
+			
 			
 			//UPDATE PLAYER'S UNIT HP AND EXP
 			for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
@@ -278,6 +293,34 @@ switch(_condition){
 
 			    _card_x += 150;
 			}
+			else if (_rewards_list[_i][0] == "ITEM")
+			{
+			    var _item = _rewards_list[_i][1];
+
+			    draw_sprite_ext(
+			        _item[?"item_sprite"],
+			        0,
+			        _card_x,
+			        _card_y,
+			        2,
+			        2,
+			        0,
+			        c_white,
+			        1
+			    );
+
+			    draw_set_halign(fa_center);
+
+			    draw_text(
+			        _card_x,
+			        _card_y + 60,
+			        string(_item[?"item_name"])
+			    );
+
+			    draw_set_halign(fa_left);
+
+			    _card_x += 150;
+			}			
 		}
 
 		_reward_y += 90;
