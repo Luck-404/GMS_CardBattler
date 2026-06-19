@@ -183,7 +183,7 @@ if (global.pause == false){
 		break;
 		#endregion
 		
-		case BEAST_STATE.DEAD:
+		case BEAST_STATE.REST:
 		
 		break;
 	}

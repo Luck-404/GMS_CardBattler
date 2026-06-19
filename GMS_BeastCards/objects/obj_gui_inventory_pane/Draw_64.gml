@@ -224,6 +224,15 @@ for (var i = 0; i < _per_page; i++)
         {
             _preview_item = _item;
         }
+		//if (_flag_prompt_active == false && mouse_check_button_pressed(mb_left) && _flag_clicked == false){
+		//	_flag_prompt_active = true;
+		//	_flag_clicked = true;
+			
+		//	//GET SLOT ITEM
+			
+		//	scr_create_new_prompt(_slot_item_type);
+			
+		//}
     }
 }
 

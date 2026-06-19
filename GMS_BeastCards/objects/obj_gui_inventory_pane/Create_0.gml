@@ -61,6 +61,7 @@ _filter_mode = "ALL";  // ALL, QUEST, CONSUMABLE, PRISM, HELD, EGG
 //----------------//
 _flag_clicked = false;
 _cooldown = 10;
+_flag_prompt_active = false;
 
 //----------------//
 // ARROWS

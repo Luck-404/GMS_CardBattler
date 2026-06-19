@@ -11,7 +11,7 @@
 //VARIABLES//
 //—--------//
 _encounter_attempt_cooldown = 0;
-_encouter_chance = 100;
+_encouter_chance = 10;
 _scene_fx_litter_timer = 0;
 
 //----//

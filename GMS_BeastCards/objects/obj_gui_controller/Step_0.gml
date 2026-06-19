@@ -132,7 +132,7 @@ if (room == rm_ow_ranch){
 	#region CLICK TO SHAKE UNIT
 	if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy) && mouse_check_button_pressed(mb_left)){
 		var _beast = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy);
-		if (_beast._beast_state != BEAST_STATE.DEAD){
+		if (_beast._beast_state != BEAST_STATE.REST){
 			_beast._emoji = choose(spr_ranch_beast_happy,spr_ranch_beast_love,spr_ranch_beast_excited);
 			_beast._emoji_timer = irandom_range(60,120);		
 			_beast._beast_state = BEAST_STATE.SHAKE;

@@ -79,6 +79,7 @@
     {"$GMFolder":"","%Name":"GUI","folderPath":"folders/GUI.yy","name":"GUI","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"FONTS","folderPath":"folders/GUI/FONTS.yy","name":"FONTS","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"INVENTORY","folderPath":"folders/GUI/INVENTORY.yy","name":"INVENTORY","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"PROMPTS","folderPath":"folders/GUI/INVENTORY/PROMPTS.yy","name":"PROMPTS","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"ITEM GET","folderPath":"folders/GUI/INVENTORY/ITEM GET.yy","name":"ITEM GET","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"ITEM INIT","folderPath":"folders/GUI/INVENTORY/ITEM INIT.yy","name":"ITEM INIT","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"ITEM LIST","folderPath":"folders/GUI/INVENTORY/ITEM LIST.yy","name":"ITEM LIST","resourceType":"GMFolder","resourceVersion":"2.0",},

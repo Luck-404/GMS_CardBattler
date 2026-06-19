@@ -246,3 +246,6 @@ if (global.active_gui == undefined)
 }
 #endregion
 }
+
+//DRAW MACHINE FPS COUNTER
+draw_text(room_width-50,room_height-50,string(fps_real));
