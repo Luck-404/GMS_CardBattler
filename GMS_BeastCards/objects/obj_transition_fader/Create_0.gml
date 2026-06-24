@@ -6,7 +6,7 @@
 
 //VARIABLES
 _alpha = 0;
-_ref_transition = undefined;
+_ref_transition_obj = undefined;
 _flag_fade_out = false;
 _flag_fade_in = false;
 _fade_speed = 0.07;

@@ -17,7 +17,7 @@ if (_flag_fade_out == false){
 	_alpha+= _fade_speed;
 	if (_alpha >= 1.0){
 		_flag_fade_out = true;	
-		_ref_transition._flag_continue_transition = true;
+		_ref_transition_obj._flag_continue_transition = true;
 	}
 }
 #endregion

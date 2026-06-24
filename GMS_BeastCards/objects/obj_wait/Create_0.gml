@@ -1,18 +1,21 @@
+//===============================================================================//
 //
+// CREATE: OBJ_WAIT
+// FUNCTION: Initializes a temporary wait object.
+//           Counts down for a fixed lifespan.
+//           Destroys itself when the timer expires.
 //
-// CREATE: OBJ_WAITER
-//
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
-_life = 300;
+//---------//
+//VARIABLES//
+//---------//
+_ct_life = 300;
 
-//
-//INIT
-//
+//----//
+//INIT//
+//----//
 
-//
-//METHODS
-//
+//-------//
+//METHODS//
+//-------//

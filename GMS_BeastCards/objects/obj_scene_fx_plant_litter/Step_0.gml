@@ -10,32 +10,32 @@
 //—------------------------------------------------------------------------------//
 // ROTATION
 //—------------------------------------------------------------------------------//
-_rot += _rot_spd;
+_val_rot += _val_rot_spd;
 
 //—------------------------------------------------------------------------------//
 // FLUTTER
 //—------------------------------------------------------------------------------//
-_hsp += random_range(-_wind_strength, _wind_strength);
+_val_hsp += random_range(-_val_wind_strength, _val_wind_strength);
 
 
-_vsp += _gravity; // fall downward
+_val_vsp += _val_gravity; // fall downward
 
  
-_vsp = clamp(_vsp, -10, 2); // cap fall speed
+_val_vsp = clamp(_val_vsp, -10, 2); // cap fall speed
 
 // movement
-x += _hsp;
-y += _vsp;
+x += _val_hsp;
+y += _val_vsp;
 
 
-_hsp *= 0.98; // slowly damp horizontal motion
+_val_hsp *= 0.98; // slowly damp horizontal motion
 
 //—------------------------------------------------------------------------------//
 // LIFE
 //—------------------------------------------------------------------------------//
-_life--;
+_ct_life--;
 
-if (_life <= 0)
+if (_ct_life <= 0)
 {
     instance_destroy();
 }

@@ -14,14 +14,14 @@ if (!global.pause){
 	//—------------------------------------------------------------------------------//
 	// MOVEMENT INPUT
 	//—------------------------------------------------------------------------------//
-	var _move_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
-	var _move_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
-	if (keyboard_check(vk_lshift) && _player_speed != 0){
+	var _val_move_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
+	var _val_move_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
+	if (keyboard_check(vk_lshift) && _val_player_speed != 0){
 		_flag_player_sprinting = true;
-		_player_speed = 4;
-	} else if (_player_speed != 0){
+		_val_player_speed = 4;
+	} else if (_val_player_speed != 0){
 		_flag_player_sprinting = false;
-		_player_speed = 3;
+		_val_player_speed = 3;
 	}
 #endregion
 
@@ -29,17 +29,17 @@ if (!global.pause){
 	//—------------------------------------------------------------------------------//
 	// SPRITE DIRECTION / FACING
 	//—------------------------------------------------------------------------------//
-	if (_move_x == 0 && _move_y == 0){
+	if (_val_move_x == 0 && _val_move_y == 0){
 		// face player/front
 		image_index = 0;
 		image_xscale = 1;
 	} else {
 		// MOVING UP
-		if (_move_y < 0){
+		if (_val_move_y < 0){
 			image_index = 1;
 		
 			// LEFT / RIGHT FLIP
-			if (_move_x < 0){
+			if (_val_move_x < 0){
 				image_xscale = -1;
 			} else {
 				image_xscale = 1;
@@ -49,9 +49,9 @@ if (!global.pause){
 		// MOVING DOWN OR SIDEWAYS
 		else {
 			image_index = 0;
-			if (_move_x < 0){ // LEFT
+			if (_val_move_x < 0){ // LEFT
 				image_xscale = -1;
-			}  else if (_move_x > 0){ // RIGHT
+			}  else if (_val_move_x > 0){ // RIGHT
 				image_xscale = 1;
 			}
 		}
@@ -62,17 +62,17 @@ if (!global.pause){
 	//—------------------------------------------------------------------------------//
 	// NORMALIZE DIAGONAL MOVEMENT
 	//—------------------------------------------------------------------------------//
-	if (_move_x != 0 || _move_y != 0){
-		_flag_player_moving  = true;
-	    var _len = point_distance(0, 0, _move_x, _move_y);
+	if (_val_move_x != 0 || _val_move_y != 0){
+		_flag_player_moving = true;
+	    var _val_len = point_distance(0, 0, _val_move_x, _val_move_y);
 
-	    _move_x /= _len;
-	    _move_y /= _len;
+	    _val_move_x /= _val_len;
+	    _val_move_y /= _val_len;
 	} else {
-		_flag_player_moving  = false;	 
+		_flag_player_moving = false;	 
 		_flag_player_sprinting = false;
-		_player_bounce_counter = 0;
-		_player_bounce_frame = 0;
+		_ct_player_bounce = 0;
+		_val_player_bounce_frame = 0;
 	 }
 #endregion
 
@@ -80,47 +80,49 @@ if (!global.pause){
 	//—------------------------------------------------------------------------------//
 	// FINAL MOVEMENT
 	//—------------------------------------------------------------------------------//
-	var _hsp = _move_x * _player_speed;
-	var _vsp = _move_y * _player_speed;
+	var _val_hsp = _val_move_x * _val_player_speed;
+	var _val_vsp = _val_move_y * _val_player_speed;
 #endregion
 
 #region HORIZONTAL COLLISION
 	//—------------------------------------------------------------------------------//
 	// HORIZONTAL COLLISION
 	//—------------------------------------------------------------------------------//
-	if (place_meeting(x + _hsp, y, obj_wall)){
-	    while (!place_meeting(x + sign(_hsp), y, obj_wall)){
-	        x += sign(_hsp);
+	if (place_meeting(x + _val_hsp, y, obj_wall)){
+	    while (!place_meeting(x + sign(_val_hsp), y, obj_wall)){
+	        x += sign(_val_hsp);
 	    }
-	    _hsp = 0;
+	    _val_hsp = 0;
 	}
-	x += _hsp;
+	x += _val_hsp;
 #endregion
 
 #region VERTICAL COLLISION
 	//—------------------------------------------------------------------------------//
 	// VERTICAL COLLISION
 	//—------------------------------------------------------------------------------//
-	if (place_meeting(x, y + _vsp, obj_wall)){
-	    while (!place_meeting(x, y + sign(_vsp), obj_wall)){
-	        y += sign(_vsp);
+	if (place_meeting(x, y + _val_vsp, obj_wall)){
+	    while (!place_meeting(x, y + sign(_val_vsp), obj_wall)){
+	        y += sign(_val_vsp);
 	    }
-	    _vsp = 0;
+	    _val_vsp = 0;
 	}
-	y += _vsp;
+	y += _val_vsp;
 #endregion
 
 #region STEP PARTICLES
 	//—------------------------------------------------------------------------------//
 	// STEP PARTICLES
 	//—------------------------------------------------------------------------------//
-	//TRIGGER A LEAF EVERY SO OFTEN
-	if (_player_step_particle_timer <= 0 && obj_player._flag_player_moving  == true){
-		_player_step_particle_timer = 15;	
-		//TRIGGER A FEW PARTICLES
-		scr_helper_spawn_step_particles();
+	if (_flag_player_moving){
+		if (_ct_player_step_particle_timer <= 0){
+			_ct_player_step_particle_timer = 15;
+			hscr_spawn_step_particles();
+		} else {
+			_ct_player_step_particle_timer--;
+		}
 	} else {
-		_player_step_particle_timer--;
+		_ct_player_step_particle_timer = 0;
 	}
-#endregion	
+#endregion
 }

@@ -10,9 +10,9 @@
 //---------//
 //VARIABLES//
 //—--------//
-_encounter_attempt_cooldown = 0;
-_encouter_chance = 10;
-_scene_fx_litter_timer = 0;
+_ct_encounter_attempt_cooldown = 0;
+_val_encounter_chance = 10;
+_ct_scene_fx_litter_timer = 0;
 
 //----//
 //INIT//

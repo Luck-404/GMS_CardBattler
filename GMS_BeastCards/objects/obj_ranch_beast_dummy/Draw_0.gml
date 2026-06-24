@@ -128,8 +128,8 @@ if (global.pause == false){
 			
 			#region STEP PARTICLES WHILE MOVING
 			//TRIGGER A STEP PARTICLE EVERY SO OFTEN
-			if (_player_step_particle_timer <= 0){
-				_player_step_particle_timer = 15;	
+			if (_ct_player_step_particle_timer  <= 0){
+				_ct_player_step_particle_timer  = 15;	
 				//TRIGGER A FEW PARTICLES
 				var _random_particles = irandom_range(1,3);
 				//SPAWN THE PARTICLES
@@ -139,7 +139,7 @@ if (global.pause == false){
 					_particle.depth = depth-1;
 				}
 			} else {
-				_player_step_particle_timer--;
+				_ct_player_step_particle_timer --;
 			}
 			#endregion
 		break;

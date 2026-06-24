@@ -1,44 +1,68 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_UI_CONTROLLER
+// FUNCTION: Initializes global GUI state.
+//           Applies window and texture settings.
+//           Defines helper scripts for GUI cleanup, pause control, and battle end.
 //
-//
+//===============================================================================//
 
-//VARIABLES
-	#region GUI GLOBALS
-	global.pause = false;
-	global.active_gui = undefined;
-	#endregion
+//---------//
+//VARIABLES//
+//---------//
+global.pause = false;
+global.active_gui = undefined;
 
-//INIT
+//----//
+//INIT//
+//----//
 gpu_set_texfilter(true);
 window_set_fullscreen(true);
 
-//METHODS
-function scr_destroy_gui_open(){
+//-------//
+//METHODS//
+//-------//
+#region METHODS
+
+//—------------------------------------------------------------------------------//
+// hscr_destroy_gui_open
+// FUNCTION: Destroys the currently active GUI instance.
+//           Clears the active GUI reference after cleanup.
+//—------------------------------------------------------------------------------//
+function hscr_destroy_gui_open(){
 	if (global.active_gui != undefined){
 		instance_destroy(global.active_gui);
 		global.active_gui = undefined;
-	}	
+	}
 }
 
-function scr_toggle_gui_pause(){
-	
-	//UPDATE PLAYER SPEED
-	if (obj_player._player_speed == 0){
+//—------------------------------------------------------------------------------//
+// hscr_toggle_gui_pause
+// FUNCTION: Toggles player movement based on current movement state.
+//           Stops movement when opening GUI and restores movement when closing GUI.
+//—------------------------------------------------------------------------------//
+function hscr_toggle_gui_pause(_flag_pause){
+	global.pause = _flag_pause;
+	if (obj_player._val_player_speed == 0){
 		scr_toggle_player_movement("START");
 	} else {
 		scr_toggle_player_movement("STOP");
-	}	
-}	
-
-function scr_trigger_end_battle(_win_type){
-	show_debug_message("\n\n\n\n\n\nBATTLE HAS ENDED")
-	//DESTROY CURRENT GUI
-	scr_destroy_gui_open();
-	//TOGGLE PAUSE
-	scr_toggle_gui_pause();
-	//OPEN NEW END BATTLE GUI
-	global.active_gui = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_gui_end_battle_pane);
-	global.active_gui._condition = _win_type;
 	}
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_trigger_end_battle
+// FUNCTION: Ends battle flow and removes the current GUI.
+//           Toggles pause state, creates the end battle GUI, and assigns result.
+//—------------------------------------------------------------------------------//
+function hscr_trigger_end_battle(_str_win_type){
+	show_debug_message("\n\n\n\n\n\nBATTLE HAS ENDED");
+
+	hscr_destroy_gui_open();
+	hscr_toggle_gui_pause();
+
+	global.active_gui = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_gui_end_battle_pane);
+	global.active_gui._str_condition = _str_win_type;
+}
+
+#endregion

@@ -1,119 +1,155 @@
+//===============================================================================//
 //
+// CREATE: OBJ_TREASURE_SPARKLE
+// FUNCTION: Initializes a roaming treasure sparkle.
+//           Rolls rarity, visibility state, and starting position.
+//           Defines helper scripts for sparkle behavior and rewards.
 //
-// OBJ_TREASURE_SPARKLE
-//
-//
+//===============================================================================//
 
-//
-// VARIABLES
-//
-_rarity = "";
-_color = c_white;
-_visibility_timer = 300;
+//---------//
+//VARIABLES//
+//---------//
+_str_rarity = "";
+
+_c_sparkle = c_white;
+
+_val_visibility_timer = 300;
+
 _flag_triggered = false;
-_cooldown = 10;
 
-//
-// INIT
-//
-scr_roll_treasure_sparkle_rarity();
-scr_roll_treasure_sparkle_position()
-scr_roll_treasure_sparkle_visibility();
+_ct_cooldown = 10;
 
-//
-// METHODS
-//
+//----//
+//INIT//
+//----//
+hscr_roll_treasure_sparkle_rarity();
+hscr_roll_treasure_sparkle_position();
+hscr_roll_treasure_sparkle_visibility();
+
+//-------//
+//METHODS//
+//-------//
 #region METHODS
-//
-// ROLLS A RARITY FOR THE TREASURE
-//
-function scr_roll_treasure_sparkle_rarity(){
-	_rarity = choose("I","I","I","I","I","I","II","II","II","III");
+
+//—------------------------------------------------------------------------------//
+// hscr_roll_treasure_sparkle_rarity
+// FUNCTION: Rolls a rarity tier and assigns its display color.
+//—------------------------------------------------------------------------------//
+function hscr_roll_treasure_sparkle_rarity(){
+
+	_str_rarity = choose("I","I","I","I","I","I","II","II","II","III");
 	
-	switch(_rarity){
+	switch(_str_rarity){
 		case "I":
-		_color = c_white;
+			_c_sparkle = c_white;
 		break;
+
 		case "II":
-		_color = c_lime;
+			_c_sparkle = c_lime;
 		break;
+
 		case "III":
-		_color = c_aqua;
+			_c_sparkle = c_aqua;
 		break;
-	}	
-}
-
-//
-// PLACES TREASURE AT A NEW POSITION
-//
-function scr_roll_treasure_sparkle_position(){
-	x = irandom_range(32,room_width-32);
-	y = irandom_range(32,room_height-32);
-}
-
-//
-// ROLLS TREASURE VISIBILITY
-//
-function scr_roll_treasure_sparkle_visibility(){
-	_roll = irandom_range(0,100);
-	if (_roll < 50){
-		visible = true;	
-	} else {
-		visible = false;	
 	}
-	_visibility_timer = 300;
 }
 
-//
-// AWARDS A TREASURE OF THE APPROPRAITE RARITY FROM THE GLOBAL POOLS
-//
-function scr_roll_treasure_sparkle_reward(){
-	var _rew = choose("ITEM","CARD");
-	var _card_pool = global.rarity_I_cards;
-		
-	if (_rarity == "I"){
-		_card_pool = global.rarity_I_cards;	
-	} else if (_rarity == "II"){
-		_card_pool = global.rarity_II_cards;	
+//—------------------------------------------------------------------------------//
+// hscr_roll_treasure_sparkle_position
+// FUNCTION: Places the sparkle at a random room position.
+//—------------------------------------------------------------------------------//
+function hscr_roll_treasure_sparkle_position(){
+	x = irandom_range(32, room_width - 32);
+	y = irandom_range(32, room_height - 32);
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_roll_treasure_sparkle_visibility
+// FUNCTION: Randomly determines whether the sparkle is visible.
+//—------------------------------------------------------------------------------//
+function hscr_roll_treasure_sparkle_visibility(){
+	var _val_roll = irandom_range(0,100);
+
+	if (_val_roll < 50){
+		visible = true;
 	} else {
-		_card_pool = global.rarity_III_cards;	
+		visible = false;
+	}
+
+	_val_visibility_timer = 300;
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_roll_treasure_sparkle_reward
+// FUNCTION: Awards a random reward based on sparkle rarity.
+//           Grants either a card or item plus bonus gold.
+//           Creates popup notifications for all rewards.
+//—------------------------------------------------------------------------------//
+function hscr_roll_treasure_sparkle_reward(){
+	var _str_reward_type = choose("ITEM","CARD");
+	var _list_card_pool = global.rarity_I_cards;
+		
+	if (_str_rarity == "I"){
+		_list_card_pool = global.rarity_I_cards;
+	} else if (_str_rarity == "II"){
+		_list_card_pool = global.rarity_II_cards;
+	} else {
+		_list_card_pool = global.rarity_III_cards;
 	}
 		
-	if (_rew == "CARD"){
-		var _card_roll = irandom_range(0,ds_list_size(_card_pool)-1);
-		var _card_name = ds_list_find_value(_card_pool,_card_roll);
-		var _card = scr_get_card_info(_card_name)
-		scr_add_card_to_deck(_card);		
-		show_debug_message("\nTIER " + string(_rarity) + " RANDOM SPARKLE + " + _card_name);
+	//—------------------------------------------------------------------------------//
+	// CARD REWARD
+	//—------------------------------------------------------------------------------//
+	if (_str_reward_type == "CARD"){
+
+		var _val_card_roll = irandom_range(0, ds_list_size(_list_card_pool) - 1);
+		var _str_card_name = ds_list_find_value(_list_card_pool, _val_card_roll);
+		var _ref_card = scr_get_card_info(_str_card_name);
+
+		scr_add_card_to_deck(_ref_card);
+
+		show_debug_message("\nTIER " + _str_rarity + " RANDOM SPARKLE + " + _str_card_name);
 			
-		//POPUP NEW CARD GAINED
-		_rand_x = irandom_range(-48,48);
-		_rand_y = irandom_range(-48,48);
-		scr_spawn_popup("TEXT","+"+_card_name,undefined,c_white,obj_player.x+_rand_x,obj_player.y+_rand_y);
-	}
+		var _val_rand_x = irandom_range(-48,48);
+		var _val_rand_y = irandom_range(-48,48);
+
+		scr_spawn_popup("TEXT","+" + _str_card_name,undefined,c_white,obj_player.x + _val_rand_x,obj_player.y + _val_rand_y);
+
+	} 
+	//—------------------------------------------------------------------------------//
+	// ITEM REWARD
+	//—------------------------------------------------------------------------------//	
 	else {
-		_new_item = scr_get_random_item(global.item_pool);
-		show_debug_message("\nTIER " + string(_rarity) + " RANDOM SPARKLE + " + _new_item);
-		scr_add_item_to_inventory(_new_item,1);
-		//POPUP NEW CARD GAINED
-		_rand_x = irandom_range(-48,48);
-		_rand_y = irandom_range(-48,48);
-		scr_spawn_popup("TEXT","+"+string(_new_item),undefined,c_black,obj_player.x+_rand_x,obj_player.y+_rand_y);
-	}	
-		
-	//POPUP GOLD GAINED
-	var _new_gold = 10;
-	if (_rarity == "II"){
-	_new_gold = 25;	
-	}
-	if (_rarity == "III"){
-	_new_gold = 50;	
+
+		var _str_new_item = scr_get_random_item(global.item_pool);
+
+		show_debug_message("\nTIER " + _str_rarity + " RANDOM SPARKLE + " + _str_new_item);
+
+		scr_add_item_to_inventory(_str_new_item,1);
+
+		var _val_rand_x = irandom_range(-48,48);
+		var _val_rand_y = irandom_range(-48,48);
+
+		scr_spawn_popup("TEXT","+" + _str_new_item,undefined,c_black,obj_player.x + _val_rand_x,obj_player.y + _val_rand_y);
 	}
 		
-	global.player_gold += _new_gold;
+	var _val_new_gold = 10;
+
+	if (_str_rarity == "II"){
+		_val_new_gold = 25;
+	}
+
+	if (_str_rarity == "III"){
+		_val_new_gold = 50;
+	}
+		
+	global.player_gold += _val_new_gold;
 			
-	_rand_x = irandom_range(-48,48);
-	_rand_y = irandom_range(-48,48);			
-	scr_spawn_popup("TEXT","+" + string(_new_gold) + "gp",undefined,c_yellow,obj_player.x+_rand_x,obj_player.y+_rand_y);
-}		
+	var _val_rand_x = irandom_range(-48,48);
+	var _val_rand_y = irandom_range(-48,48);
+
+	scr_spawn_popup("TEXT","+" + string(_val_new_gold) + "gp",undefined,c_yellow,obj_player.x + _val_rand_x,obj_player.y + _val_rand_y);
+}
+
 #endregion

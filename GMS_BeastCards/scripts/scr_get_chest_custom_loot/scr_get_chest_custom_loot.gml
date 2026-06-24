@@ -1,19 +1,26 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_GET_CHEST_CUSTOM_LOOT
+// FUNCTION: Returns an array of reward structs for the specified chest.
+//           Each reward contains a type, reward id, and amount.
+//           Used by treasure chests with predefined loot tables.
 //
-// SCRIPT: SCR_GET_CHEST_LOOT | BASED ON THE PASSED CHEST NAME, RETRIEVE AN ARRAY WITH LOOT | RETURNS ARRAY OF LOOT
-//
-//
-function scr_get_chest_custom_loot(_chest_id){
-	var _return_list = ds_list_create();
-	switch(_chest_id){
+//===============================================================================//
+function scr_get_chest_custom_loot(_str_chest_id){
+
+	var _arr_return = [];
+
+	switch(_str_chest_id){
 		case "TESTER_CHEST":
-			ds_list_add(_return_list,["CARD","STRIKE",1]);
-			ds_list_add(_return_list,["CARD","ECHO",1]);
-			ds_list_add(_return_list,["ITEM","CONSUMABLE_HEALING_SALVE",3]);
-			ds_list_add(_return_list,["GOLD","GOLD",250]);
-			return _return_list;
+			//ARRAY OF STRUCTS
+			_arr_return = [
+				{_str_type:"CARD", _str_rew_id:"STRIKE", _val_amount:1},
+				{_str_type:"CARD", _str_rew_id:"ECHO", _val_amount:1},
+				{_str_type:"ITEM", _str_rew_id:"CONSUMABLE_HEALING_SALVE", _val_amount:3},
+				{_str_type:"GOLD", _str_rew_id:"GOLD", _val_amount:250}
+			];
 		break;
 	}
-	
-	return _return_list;
+
+	return _arr_return;
 }

@@ -7,7 +7,7 @@
 //
 //===============================================================================//
 
-if (place_meeting(x,y,obj_player) && obj_player._flag_player_moving  == true){ //IF TOUCHING PLAYER AND PLAYER IS MOVING
+if (place_meeting(x, y, obj_player) && obj_player._flag_player_moving){ //IF TOUCHING PLAYER AND PLAYER IS MOVING
 
 #region BATTLE ATTEMPT AND TRIGGER	
 	//—------------------------------------------------------------------------------//
@@ -15,11 +15,11 @@ if (place_meeting(x,y,obj_player) && obj_player._flag_player_moving  == true){ /
 	//								also prevents immediate re-battle after an 
 	//								encounter is over.. via obj_wait.
 	//—------------------------------------------------------------------------------//
-	if (_encounter_attempt_cooldown <= 0 && !instance_exists(obj_wait)){ 
+	if (_ct_encounter_attempt_cooldown <= 0 && !instance_exists(obj_wait)){
 		
 		//ROLL FOR ENCOUNTER
-		var _random_number = irandom_range(0,100);
-		if (_random_number < _encouter_chance){ //TRIGGER A BATTLE	
+		var _val_random_number = irandom_range(0,100);
+		if (_val_random_number < _val_encounter_chance){ //TRIGGER A BATTLE	
 			//POPUP
 			scr_spawn_popup("TEXT","BATTLE TRIGGERED",undefined,c_black,obj_player.x,obj_player.y);
 			
@@ -27,7 +27,7 @@ if (place_meeting(x,y,obj_player) && obj_player._flag_player_moving  == true){ /
 			global.last_player_x = obj_player.x;
 			global.last_player_y = obj_player.y;
 			global.last_player_rm = room;
-			global.last_enemy_pool = _encounter_list;
+			global.last_enemy_pool = _arr_encounter_beasts;
 			
 			//STOP PLAYER MOVEMENT
 			scr_toggle_player_movement("STOP");
@@ -40,9 +40,9 @@ if (place_meeting(x,y,obj_player) && obj_player._flag_player_moving  == true){ /
 		}
 		
 		//WAIT HALF A SECOND BEFORE TRYING AGAIN
-		_encounter_attempt_cooldown = 30;
+		_ct_encounter_attempt_cooldown = 30;
 	} else {
-		_encounter_attempt_cooldown--;
+		_ct_encounter_attempt_cooldown--;
 	}
 #endregion
 	
@@ -50,11 +50,11 @@ if (place_meeting(x,y,obj_player) && obj_player._flag_player_moving  == true){ /
 	//—------------------------------------------------------------------------------//
 	// PLANT LITTER SCENE FX | Spawn plant litter every so often walking in tall grass.
 	//—------------------------------------------------------------------------------//
-	if (_scene_fx_litter_timer <= 0){
-		_scene_fx_litter_timer = 20;	
+	if (_ct_scene_fx_litter_timer <= 0){
+		_ct_scene_fx_litter_timer = 20;	
 		scr_trigger_scene_fx_plant_litter();
 	} else {
-		_scene_fx_litter_timer--;
+		_ct_scene_fx_litter_timer--;
 	}
 #endregion
 

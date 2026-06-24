@@ -8,7 +8,7 @@ event_inherited();
 //---------//
 //VARIABLES//
 //—--------//
-_shadow_scalar = 0.25;
+_val_shadow_scalar = 0.25;
 
 //----//
 //INIT//

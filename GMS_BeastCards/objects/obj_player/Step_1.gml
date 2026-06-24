@@ -56,11 +56,11 @@
 	//—------------------------------------------------------------------------------//
 	// UPDATE CAMERA POSITIONING, CLAMP TO ROOM BOUNDS
 	//—------------------------------------------------------------------------------//
-	var _half_w = global.cam_width  * 0.5;
-	var _half_h = global.cam_height * 0.5;
+	var _val_half_w = global.cam_width  * 0.5;
+	var _val_half_h = global.cam_height * 0.5;
 
-	var _cam_x = clamp(x - _half_w,0,room_width - global.cam_width);
-	var _cam_y = clamp(y - _half_h,0,room_height - global.cam_height);
+	var _val_cam_x = clamp(x - _val_half_w,0,room_width - global.cam_width);
+	var _val_cam_y = clamp(y - _val_half_h,0,room_height - global.cam_height);
 
-	camera_set_view_pos(global.camera,_cam_x,_cam_y);
+	camera_set_view_pos(global.camera,_val_cam_x,_val_cam_y);
 #endregion

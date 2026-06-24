@@ -30,8 +30,8 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v2","%Name":"_sign_text","filters":[],"listItems":[],"multiselect":false,"name":"_sign_text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"DEFAULT\"","varType":2,},
-    {"$GMObjectProperty":"v2","%Name":"_sign_sprite","filters":[],"listItems":[],"multiselect":false,"name":"_sign_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"spr_decor_sign_up","path":"sprites/spr_decor_sign_up/spr_decor_sign_up.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_decor_sign_up","varType":5,},
+    {"$GMObjectProperty":"v2","%Name":"_str_sign_text","filters":[],"listItems":[],"multiselect":false,"name":"_str_sign_text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"DEFAULT\"","varType":2,},
+    {"$GMObjectProperty":"v2","%Name":"_spr_sign","filters":[],"listItems":[],"multiselect":false,"name":"_spr_sign","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"spr_decor_sign_up","path":"sprites/spr_decor_sign_up/spr_decor_sign_up.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_decor_sign_up","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

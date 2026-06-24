@@ -7,14 +7,14 @@
 //
 //===============================================================================//
 
-if (_life <= 0){
+if (_ct_life <= 0){
 	instance_destroy();	
 } else {
-	_life--;
+	_ct_life--;
 }
 
-if (_life <= 0){
+if (_ct_life <= 0){
 	instance_destroy();	
 } else {
-	_life--;
+	_ct_life--;
 }

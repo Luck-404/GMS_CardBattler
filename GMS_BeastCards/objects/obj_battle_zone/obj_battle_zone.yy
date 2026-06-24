@@ -27,7 +27,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v2","%Name":"_encounter_list","filters":[],"listItems":[
+    {"$GMObjectProperty":"v2","%Name":"_arr_encounter_beasts","filters":[],"listItems":[
         "\"ARBRAWN\"",
         "\"ARGENTBUD\"",
         "\"BEAVINE\"",
@@ -77,14 +77,14 @@
         "\"SOLEMOLD\"",
         "\"WRATHOOD\"",
         "\"WYRMELTA\"",
-      ],"multiselect":true,"name":"_encounter_list","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"Item 0\"","varType":6,},
-    {"$GMObjectProperty":"v2","%Name":"_loot_table_list","filters":[],"listItems":[
+      ],"multiselect":true,"name":"_arr_encounter_beasts","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"Item 0\"","varType":6,},
+    {"$GMObjectProperty":"v2","%Name":"_arr_loot_table","filters":[],"listItems":[
         "\"QUEST_IMPORTANT_NOTEBOOK\"",
         "\"CONSUMABLE_HEALING_SALVE\"",
         "\"PRISM_BASIC_PRISM\"",
         "\"HELD_POWERFUL_STONE\"",
         "\"EGG_ARBRAWN\"",
-      ],"multiselect":true,"name":"_loot_table_list","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":6,},
+      ],"multiselect":true,"name":"_arr_loot_table","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":6,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

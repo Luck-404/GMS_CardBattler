@@ -10,7 +10,7 @@
 //---------//
 //VARIABLES//
 //—--------//
-_shadow_scalar = 0.5;
+_val_shadow_scalar = 0.5;
 
 //----//
 //INIT//

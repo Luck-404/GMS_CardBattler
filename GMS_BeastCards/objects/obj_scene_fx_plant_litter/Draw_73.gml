@@ -9,12 +9,12 @@
 
 draw_sprite_ext(
     spr_scene_fx_plant_litter,
-    _random_index,
+    _val_sprite_index,
     x,
     y,
-    _random_size,
-    _random_size,
-    _rot,
+    _val_size,
+    _val_size,
+    _val_rot,
     c_white,
     1
 );

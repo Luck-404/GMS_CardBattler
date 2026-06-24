@@ -12,9 +12,9 @@ event_inherited();
 //VARIABLES//
 //—--------//
 _flag_triggered = false;
-_cooldown = 60;
+_ct_cooldown = 60;
 
-sprite_index = _sign_sprite;
+sprite_index = _spr_sign;
 
 
 //----//
