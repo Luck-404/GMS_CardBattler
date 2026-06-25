@@ -1,38 +1,33 @@
+//===============================================================================//
 //
+// STEP: OBJ_TRANSITION
+// FUNCTION: Starts an automatic room transition.
+//           Waits for fader signal before changing to destination room.
+//           Adds battle wait protection when returning from battle.
 //
-// STEP: OBJ_TRANSITION | WHEN SPAWNED, EXECUTES A TRANSITION
-//
-//
+//===============================================================================//
 
+//---------------//
+//INITIAL TRIGGER//
+//---------------//
+if (!_flag_triggered){
+	_flag_triggered = true;
 
-//
-// INITIAL TRIGGER | TRIGGER ON CONTACT WITH PLAYER
-//
-#region INITIAL TRIGGER
-if (_flag_triggered == false){
-	_flag_triggered = true; //TRIGGER ONCE
-	
-	//FADE TO BLACK
-	_ref_fader = instance_create_layer(room_width/2,room_height/2,"ily_fx",obj_transition_fader);
+	_ref_fader = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_transition_fader);
 	_ref_fader._ref_transition = self;
-
 }
-#endregion
 
-//
-// FINALIZE AND MOVE | WAIT FOR CONTINUE VARIABLE TO MVOE ON
-//
-#region FINALIZE AND MOVE
-if (_flag_continue_transition == true){
-	//FADE IN
+//-----------------//
+//FINALIZE AND MOVE//
+//-----------------//
+if (_flag_continue_transition){
+	_flag_continue_transition = false;
+
 	_ref_fader._flag_fade_in = true;
 
-	if (_destination != rm_battle){
-		//cant get into battle for 3s
+	if (_rm_destination != rm_battle){
 		scr_init_battle_wait(180);
 	}
 
-	//GO TO THE DESTINATION ROOM
-	room_goto(_destination);
+	room_goto(_rm_destination);
 }
-#endregion

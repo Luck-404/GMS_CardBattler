@@ -1,53 +1,47 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_POPUP_TEXT_BUBBLE
+// FUNCTION: Draws a padded text bubble.
+//           Counts down lifespan and destroys itself when expired.
+//           Destroys itself early if player moves too far away.
 //
-// DRAW GUI: OBJ_POPUP_TEXT_BUBBLE | DESCRIPTION
-//
-//
+//===============================================================================//
 
-//
-// DRAW TEXT BUBBLE AND TEXT | DRAWS TEXT BUBBLE WITH TEXT INSIDE OF IT
-//
-#region DRAW BUBBLE AND TEXT
-if (_text != "DEFAULT")
-{
-    // text dimensions
-	draw_set_font(fnt_small_gui);	
-    var tw = string_width(_text);
-    var th = string_height(_text);
-    
-    // bubble bounds
-    var left   = x - (tw / 2) - _pad;
-    var right  = x + (tw / 2) + _pad;
-    var top    = y - _pad;
-    var bottom = y + th + _pad;
+//----------------//
+//TEXT BUBBLE DRAW//
+//----------------//
+if (_str_text != "DEFAULT"){
+	draw_set_font(fnt_small_gui);
 
-    // background
-    draw_set_colour(c_white);
-    draw_rectangle(left, top, right, bottom, false);
+	var _val_text_w = string_width(_str_text);
+	var _val_text_h = string_height(_str_text);
 
-    // text
-    draw_set_colour(c_black);
-    draw_text(x - (tw / 2), y, _text);
+	var _val_left = x - (_val_text_w / 2) - _val_pad;
+	var _val_right = x + (_val_text_w / 2) + _val_pad;
+	var _val_top = y - _val_pad;
+	var _val_bottom = y + _val_text_h + _val_pad;
+
+	draw_set_colour(c_white);
+	draw_rectangle(_val_left,_val_top,_val_right,_val_bottom,false);
+
+	draw_set_colour(c_black);
+	draw_text(x - (_val_text_w / 2),y,_str_text);
 }
-#endregion
 
-//
-// DEATH COUNTDOWN | COUNTS DOWN AND KILLS AFTER 1S LIFESPAN
-//
-#region DEATH COUNTDOWN
-if (_life != 0){
-	_life--;
-	if (_life <= 0){
-		instance_destroy();	
+//---------//
+//LIFESPAN//
+//---------//
+if (_ct_life > 0){
+	_ct_life--;
+
+	if (_ct_life <= 0){
+		instance_destroy();
 	}
 }
-#endregion
 
-//
-// DEATH ON DISTANCE | KILLS OBJECT IF IT IS TOO FAR FROM THE PLAYER
-//
-#region DEATH IF TOO FAR FROM PLAYER
+//------------//
+//DISTANCE KILL//
+//------------//
 if (distance_to_object(obj_player) > 256){
-	instance_destroy();	
+	instance_destroy();
 }
-#endregion

@@ -1,31 +1,34 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_GET_TRANSITION_ROOM_INFO
+// FUNCTION: Returns destination room transition data.
+//           Resolves room id, banner text, and player spawn coordinates.
+//           Uses destination id and source id to place player correctly.
 //
-// SCRIPT: SCR_GET_TRANSITION_ROOM_INFO | BASED ON THE PASSED DESTINATION AND SOURCE, RETRIEVE THE DESIRED ROOM INFO (ID AND DESCRIPTION) AS WELL AS WHERE TO PLACE THE PLAYER (x,y) | RETURNS ARRAY WITH TRANSITION INFO
-//
-//
-function scr_get_transition_room_info(_to_id,_from_id){
+//===============================================================================//
+function scr_get_transition_room_info(_str_to_id,_str_from_id){
 	//INIT RETURN ARRAY
-	var _return_arr = ["DEFAULT_ROOM",0,0,"DEFAULT_BANNER_TEXT"];
+	var _arr_return = ["DEFAULT_ROOM",0,0,"DEFAULT_BANNER_TEXT"];
 	
-	switch(_to_id){
+	switch(_str_to_id){
 		#region NORTHWEST
 		case "NORTHWEST":
 			//ROOM ID
-			_return_arr[0] = rm_ow_northwest;
+			_arr_return[0] = rm_ow_northwest;
 			
 			//BANNER TEXT
-			_return_arr[1] = "NORTHWEST ROOM";
+			_arr_return[1] = "NORTHWEST ROOM";
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "WEST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y				
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y				
 				break;
 
 				case "NORTH":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 
@@ -35,31 +38,31 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region NORTH
 		case "NORTH":
 			//ROOM ID
-			_return_arr[0] = rm_ow_north;
+			_arr_return[0] = rm_ow_north;
 			
 			//BANNER TEXT
-			_return_arr[1] = "NORTH ROOM";	
+			_arr_return[1] = "NORTH ROOM";	
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "CENTER":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y				
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y				
 				break;
 				
 				case "NORTHWEST":
-					_return_arr[2] = 80; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 80; //x
+					_arr_return[3] = 530; //y					
 				break;
 				
 				case "RANCH":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y					
 				break;
 				
 				case "NORTHEAST":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 
@@ -69,21 +72,21 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region NORTHEAST
 		case "NORTHEAST":
 			//ROOM ID
-			_return_arr[0] = rm_ow_northeast;
+			_arr_return[0] = rm_ow_northeast;
 			
 			//BANNER TEXT
-			_return_arr[1] = "NORTHEAST ROOM";		
+			_arr_return[1] = "NORTHEAST ROOM";		
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "NORTH":
-					_return_arr[2] = 80; //x
-					_return_arr[3] = 530; //y				
+					_arr_return[2] = 80; //x
+					_arr_return[3] = 530; //y				
 				break;
 				
 				case "EAST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y					
 				break;
 			}
 
@@ -94,31 +97,31 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region WEST
 		case "WEST":
 			//ROOM ID
-			_return_arr[0] = rm_ow_west;
+			_arr_return[0] = rm_ow_west;
 			
 			//BANNER TEXT
-			_return_arr[1] = "WEST ROOM";	
+			_arr_return[1] = "WEST ROOM";	
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				//case "CLOSEDROAD":
-				//	_return_arr[2] = 80; //x
-				//	_return_arr[3] = 530; //y				
+				//	_arr_return[2] = 80; //x
+				//	_arr_return[3] = 530; //y				
 				//break;
 				
 				case "NORTHWEST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y					
 				break;
 				
 				case "SOUTHWEST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y					
 				break;
 				
 				case "CENTER":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 	
@@ -128,31 +131,31 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region CENTER
 		case "CENTER":
 			//ROOM ID
-			_return_arr[0] = rm_ow_center;
+			_arr_return[0] = rm_ow_center;
 			
 			//BANNER TEXT
-			_return_arr[1] = "CENTER ROOM";		
+			_arr_return[1] = "CENTER ROOM";		
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "SOUTH":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y				
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y				
 				break;
 				
 				case "WEST":
-					_return_arr[2] = 80; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 80; //x
+					_arr_return[3] = 530; //y					
 				break;
 				
 				case "NORTH":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y					
 				break;
 				
 				case "EAST":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 
@@ -162,31 +165,31 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region EAST
 		case "EAST":
 			//ROOM ID
-			_return_arr[0] = rm_ow_east;
+			_arr_return[0] = rm_ow_east;
 			
 			//BANNER TEXT
-			_return_arr[1] = "EAST ROOM";	
+			_arr_return[1] = "EAST ROOM";	
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "CENTER":
-					_return_arr[2] = 80; //x
-					_return_arr[3] = 530; //y				
+					_arr_return[2] = 80; //x
+					_arr_return[3] = 530; //y				
 				break;
 				
 				case "NORTHEAST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y					
 				break;
 				
 				case "SOUTHEAST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y					
 				break;
 				
 				case "LAKESIDE":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 	
@@ -196,21 +199,21 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region SOUTHWEST
 		case "SOUTHWEST":
 			//ROOM ID
-			_return_arr[0] = rm_ow_southwest;
+			_arr_return[0] = rm_ow_southwest;
 			
 			//BANNER TEXT
-			_return_arr[1] = "SOUTHWEST ROOM";	
+			_arr_return[1] = "SOUTHWEST ROOM";	
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "WEST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y				
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y				
 				break;
 				
 				case "SOUTH":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 	
@@ -220,26 +223,26 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region SOUTH
 		case "SOUTH":
 			//ROOM ID
-			_return_arr[0] = rm_ow_south;
+			_arr_return[0] = rm_ow_south;
 			
 			//BANNER TEXT
-			_return_arr[1] = "SOUTH ROOM";	
+			_arr_return[1] = "SOUTH ROOM";	
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "CENTER":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y				
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y				
 				break;
 				
 				case "SOUTHWEST":
-					_return_arr[2] = 80; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 80; //x
+					_arr_return[3] = 530; //y					
 				break;
 				
 				case "SOUTHEAST":
-					_return_arr[2] = 980; //x
-					_return_arr[3] = 530; //y					
+					_arr_return[2] = 980; //x
+					_arr_return[3] = 530; //y					
 				break;
 			}
 	
@@ -249,26 +252,26 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region SOUTHEAST
 		case "SOUTHEAST":
 			//ROOM ID
-			_return_arr[0] = rm_ow_southeast;
+			_arr_return[0] = rm_ow_southeast;
 			
 			//BANNER TEXT
-			_return_arr[1] = "SOUTHEAST ROOM";		
+			_arr_return[1] = "SOUTHEAST ROOM";		
 			
 			//PLAYER COORDS
-			switch(_from_id){
+			switch(_str_from_id){
 				case "SOUTH":
-					_return_arr[2] = 80; //x
-					_return_arr[3] = 530; //y				
+					_arr_return[2] = 80; //x
+					_arr_return[3] = 530; //y				
 				break;
 				
 				case "EAST":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 80; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 80; //y					
 				break;
 				
 				case "MARKET":
-					_return_arr[2] = 530; //x
-					_return_arr[3] = 980; //y					
+					_arr_return[2] = 530; //x
+					_arr_return[3] = 980; //y					
 				break;
 			}
 
@@ -278,14 +281,14 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region RANCH
 		case "RANCH":
 			//ROOM ID
-			_return_arr[0] = rm_ow_ranch;
+			_arr_return[0] = rm_ow_ranch;
 			
 			//BANNER TEXT
-			_return_arr[1] = "RANCH ROOM";		
+			_arr_return[1] = "RANCH ROOM";		
 			
 			//PLAYER COORDS
-			_return_arr[2] = 530; //x
-			_return_arr[3] = 980; //y
+			_arr_return[2] = 530; //x
+			_arr_return[3] = 980; //y
 
 		break;		
 		#endregion	
@@ -293,14 +296,14 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region MARKET
 		case "MARKET":
 			//ROOM ID
-			_return_arr[0] = rm_ow_market;
+			_arr_return[0] = rm_ow_market;
 			
 			//BANNER TEXT
-			_return_arr[1] = "MARKET ROOM";		
+			_arr_return[1] = "MARKET ROOM";		
 			
 			//PLAYER COORDS
-			_return_arr[2] = 530; //x
-			_return_arr[3] = 80; //y
+			_arr_return[2] = 530; //x
+			_arr_return[3] = 80; //y
 
 		break;		
 		#endregion	
@@ -308,19 +311,19 @@ function scr_get_transition_room_info(_to_id,_from_id){
 		#region LAKESIDE
 		case "LAKESIDE":
 			//ROOM ID
-			_return_arr[0] = rm_ow_lakeside;
+			_arr_return[0] = rm_ow_lakeside;
 			
 			//BANNER TEXT
-			_return_arr[1] = "LAKESIDE ROOM";		
+			_arr_return[1] = "LAKESIDE ROOM";		
 			
 			//PLAYER COORDS
-			_return_arr[2] = 80; //x
-			_return_arr[3] = 530; //y
+			_arr_return[2] = 80; //x
+			_arr_return[3] = 530; //y
 
 		break;		
 		#endregion			
 	}
 	
 	//RETURN ARRAY
-	return _return_arr;
+	return _arr_return;
 }

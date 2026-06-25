@@ -59,7 +59,7 @@ function hscr_trigger_end_battle(_str_win_type){
 	show_debug_message("\n\n\n\n\n\nBATTLE HAS ENDED");
 
 	hscr_destroy_gui_open();
-	hscr_toggle_gui_pause();
+	hscr_toggle_gui_pause(true);
 
 	global.active_gui = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_gui_end_battle_pane);
 	global.active_gui._str_condition = _str_win_type;

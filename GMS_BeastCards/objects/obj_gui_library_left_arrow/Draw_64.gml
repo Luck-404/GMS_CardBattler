@@ -1,6 +1,8 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_GUI_LIBRARY_LEFT_ARROW
+// FUNCTION: Draws the left page arrow.
 //
-// DRAW GUI: OBJ_library_GUI_LEFT_ARROW
-//
-//
+//===============================================================================//
+
 draw_self();

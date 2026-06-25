@@ -1,21 +1,26 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_TRANSITION
+// FUNCTION: Initializes automatic transition state.
+//           Stores destination room and fader reference.
+//           Begins transition flow on the next Step event.
 //
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
+//---------//
+//VARIABLES//
+//---------//
 _flag_triggered = false;
 _flag_continue_transition = false;
+
 _ref_fader = undefined;
-_destination = rm_ow_center;
 
-//
-//INIT
-//
+_rm_destination = rm_ow_center;
 
-//
-//METHODS
-//
+//----//
+//INIT//
+//----//
+
+//-------//
+//METHODS//
+//-------//

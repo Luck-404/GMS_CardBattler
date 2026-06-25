@@ -1,47 +1,47 @@
+//===============================================================================//
 //
-// STEP: OBJ_library_GUI_RIGHT_ARROW | HANDLE CLICKING AND DESTROY ON GUI EXIT
+// STEP: OBJ_GUI_INVENTORY_RIGHT_ARROW
+// FUNCTION: Handles right page navigation.
+//           Highlights while hovered.
+//           Destroys itself when the inventory pane closes.
 //
+//===============================================================================//
 
-#region DESTROY SELF ON GUI PANE DESTRUCTION
+//------------//
+//DESTROY SELF//
+//------------//
 if (!instance_exists(obj_gui_inventory_pane)){
 	instance_destroy();
 }
-#endregion
 
-#region HOVER LOGIC AND CLICKING
+//-----//
+//HOVER//
+//-----//
 if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
-	
-	//HIGHLIGHT
 	image_index = 1;
 
-	//LEFT CLICK
 	if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-		_cooldown = 10;
+		_ct_cooldown = 10;
 		_flag_clicked = true;
 
-		var _total_pages = max(
-		    1,
-		    ceil(ds_list_size(global.player_inventory) / _ref_gui_pane._inventory_per_page)
-		);
+		var _ct_total_pages = max(1,ceil(ds_list_size(global.player_inventory) / _ref_gui_pane._ct_inventory_per_page));
 
-		if (_ref_gui_pane._inventory_page < _total_pages - 1){
-			_ref_gui_pane._inventory_page++;
+		if (_ref_gui_pane._ct_inventory_page < _ct_total_pages - 1){
+			_ref_gui_pane._ct_inventory_page++;
 		}
 	}
-}
-else {
+} else {
 	image_index = 0;
 }
-#endregion
 
-#region CLICK COOLDOWN
+//--------//
+//COOLDOWN//
+//--------//
 if (_flag_clicked){
-	if (_cooldown > 0){
-		_cooldown--;
-	}
-	else{
-		_cooldown = 0;
+	if (_ct_cooldown > 0){
+		_ct_cooldown--;
+	} else {
+		_ct_cooldown = 0;
 		_flag_clicked = false;
 	}
 }
-#endregion

@@ -1,15 +1,28 @@
+//===============================================================================//
 //
+// CREATE: OBJ_POPUP
+// FUNCTION: Initializes standard popup state.
+//           Stores popup type, text, icon sprite, color, and lifespan.
+//           Displays temporary text, icon, or combined popup feedback.
 //
-// CREATE: OBJ_POPUP_BANNER
-//
-//
+//===============================================================================//
 
-//VARIABLES
-_type = "DEFAUKT";
-_text = "DEFAULT";
-_color = c_white;
-_life = 60;
+//---------//
+//VARIABLES//
+//---------//
+_str_type = "DEFAULT";
+_str_text = "DEFAULT";
 
-//INIT
+_spr_icon = undefined;
 
-//METHODS
+_c_popup = c_white;
+
+_ct_life = 60;
+
+//----//
+//INIT//
+//----//
+
+//-------//
+//METHODS//
+//-------//

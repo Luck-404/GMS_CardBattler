@@ -16,13 +16,15 @@ if (instance_place(x,y,obj_player) && !_flag_triggered){
 	scr_toggle_player_movement("STOP");
 
 	_ref_fader = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_transition_fader);
-	_ref_fader._ref_transition_obj = self;
+	_ref_fader._ref_transition = self;
 }
 
 //-----------------//
 //FINALIZE AND MOVE//
 //-----------------//
 if (_flag_continue_transition){
+	_flag_continue_transition = false;
+
 	var _arr_room = scr_get_transition_room_info(_str_to_id,_str_from_id);
 
 	obj_player.x = _arr_room[2];

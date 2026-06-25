@@ -1,15 +1,27 @@
+//===============================================================================//
 //
+// CREATE: OBJ_GUI_INVENTORY_RIGHT_ARROW
+// FUNCTION: Initializes the inventory page right arrow.
+//           Stores a reference to the inventory pane.
+//           Handles click cooldown state.
 //
-// CREATE: OBJ_library_GUI_RIGHT_ARROW
-//
-//
+//===============================================================================//
 
-//VARIABLES
+//---------//
+//VARIABLES//
+//---------//
 depth = -2;
-_cooldown = 0;
-_flag_clicked = false;
+
 _ref_gui_pane = obj_gui_inventory_pane;
 
-//INIT
+_ct_cooldown = 0;
 
-//METHODS
+_flag_clicked = false;
+
+//----//
+//INIT//
+//----//
+
+//-------//
+//METHODS//
+//-------//

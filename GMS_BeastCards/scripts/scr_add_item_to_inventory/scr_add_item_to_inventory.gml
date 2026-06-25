@@ -1,73 +1,63 @@
 //===============================================================================//
 //
-// SCR_ADD_ITEM_TO_INVENTORY
-// FUNCTION: Adds item maps into inventory with count support.
-//           Handles stacking + overflow into new stacks.
+// SCRIPT: SCR_ADD_ITEM_TO_INVENTORY
+// FUNCTION: Adds item structs to the player inventory.
+//           Handles stackable items by filling existing stacks first.
+//           Creates new item stacks when needed.
 //
 //===============================================================================//
 
-function scr_add_item_to_inventory(_new_item_name, _count)
-{
-    var _inv = global.player_inventory;
+function scr_add_item_to_inventory(_str_item_id,_ct_count){
+	var _list_inventory = global.player_inventory;
 
-    var _base_item = scr_get_item_info(_new_item_name);
+	var _stct_base_item = scr_get_item_info(_str_item_id);
 
-    var _stackable = _base_item[?"item_stackable"];
-    var _name = _base_item[?"item_name"];
-    //--------------------------------------------------
-    // NON-STACKABLE ITEMS
-    //--------------------------------------------------
-    if (!_stackable)
-    {
-        for (var _i = 0; _i < _count; _i++)
-        {
-            ds_list_add(_inv, _base_item);
-        }
-        return;
-    }
+	if (!_stct_base_item._flag_stackable){
+		for (var _it_item = 0; _it_item < _ct_count; _it_item++){
+			var _stct_new_item = scr_get_item_info(_str_item_id);
+			ds_list_add(_list_inventory,_stct_new_item);
+		}
 
-    //--------------------------------------------------
-    // STACKABLE ITEMS
-    //--------------------------------------------------
-    var _remaining = _count;
+		return;
+	}
 
-    // STEP 1: FILL EXISTING STACKS
-    for (var _i = 0; _i < ds_list_size(_inv); _i++)
-    {
-        if (_remaining <= 0) break;
+	var _ct_remaining = _ct_count;
 
-        var _item = ds_list_find_value(_inv, _i);
-        if (_item == undefined) continue;
+	for (var _it_item = 0; _it_item < ds_list_size(_list_inventory); _it_item++){
+		if (_ct_remaining <= 0){
+			break;
+		}
 
-        if (_item[?"item_name"] == _name)
-        {
-            var _cur = _item[?"item_amount"];
-            var _max = _item[?"item_max_amount"];
+		var _stct_item = ds_list_find_value(_list_inventory,_it_item);
 
-            if (_cur < _max)
-            {
-                var _space = _max - _cur;
-                var _add = min(_space, _remaining);
+		if (_stct_item == undefined){
+			continue;
+		}
 
-                _item[?"item_amount"] = _cur + _add;
-                _remaining -= _add;
+		if (_stct_item._str_item_id == _str_item_id){
+			var _ct_cur = _stct_item._ct_item_amount;
+			var _ct_max = _stct_item._ct_item_max_amount;
 
-                ds_list_replace(_inv, _i, _item);
-            }
-        }
-    }
+			if (_ct_cur < _ct_max){
+				var _ct_space = _ct_max - _ct_cur;
+				var _ct_add = min(_ct_space,_ct_remaining);
 
-    // STEP 2: CREATE NEW STACKS IF NEEDED
-    while (_remaining > 0)
-    {
-        var _new_stack = scr_get_item_info(_new_item_name);
-        var _max = _new_stack[?"item_max_amount"];
+				_stct_item._ct_item_amount = _ct_cur + _ct_add;
+				_ct_remaining -= _ct_add;
 
-        var _add = min(_max, _remaining);
+				ds_list_replace(_list_inventory,_it_item,_stct_item);
+			}
+		}
+	}
 
-        _new_stack[?"item_amount"] = _add;
-        _remaining -= _add;
+	while (_ct_remaining > 0){
+		var _stct_new_stack = scr_get_item_info(_str_item_id);
+		var _ct_max = _stct_new_stack._ct_item_max_amount;
+		var _ct_add = min(_ct_max,_ct_remaining);
 
-        ds_list_add(_inv, _new_stack);
-    }
+		_stct_new_stack._ct_item_amount = _ct_add;
+		_ct_remaining -= _ct_add;
+
+		ds_list_add(_list_inventory,_stct_new_stack);
+	}
 }

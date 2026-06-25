@@ -1,29 +1,28 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_POPUP_ERROR
+// FUNCTION: Draws a centered error message.
+//           Counts down its lifespan.
+//           Destroys itself when its timer expires.
 //
-// DRAW GUI: OBJ_POPUP_BANNER | DRAWS THE ERROR MESSAGE ACROSS THE SCREEN
-//
-//
+//===============================================================================//
 
-//
-// DRAW TEXT | DRAWS THE BANNER TEXT
-//
-#region DRAW TEXT
-if (_text != "DEFAULT")
-{
+//----//
+//TEXT//
+//----//
+if (_str_text != "DEFAULT"){
 	draw_set_colour(c_red);
 	draw_set_font(fnt_medium_gui);
-	draw_text(room_width/2-(string_width(_text)/2),room_height/2,_text);
+	draw_text(room_width / 2 - (string_width(_str_text) / 2),room_height / 2,_str_text);
 }
-#endregion
 
-//
-// DEATH COUNTDOWN | COUNTS DOWN AND KILLS AFTER 1S LIFESPAN
-//
-#region DEATH COUNTDOWN
-if (_life != 0){
-	_life--;
-	if (_life <= 0){
-		instance_destroy();	
+//---------//
+//LIFESPAN//
+//---------//
+if (_ct_life > 0){
+	_ct_life--;
+
+	if (_ct_life <= 0){
+		instance_destroy();
 	}
 }
-#endregion

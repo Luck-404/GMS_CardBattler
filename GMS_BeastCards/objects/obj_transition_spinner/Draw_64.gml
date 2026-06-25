@@ -1,13 +1,18 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_TRANSITION_SPINNER
+// FUNCTION: Updates spinner rotation.
+//           Draws spinner visual during transition processing.
+//           Provides visual feedback while rooms are changing.
 //
-// DRAW GUI: OBJ_TRANSITION_SPINNER | VISUALLY SPINS AT THE RATE GIVEN
-//
-//
+//===============================================================================//
 
-//SPIN
-_rot += _spin_speed;
+//----//
+//SPIN//
+//----//
+_val_rotation += _val_spin_speed;
 
-//DRAW
-draw_sprite_ext(spr_transition_spinner,0,x,y,0.75,0.75,_rot,c_white,1);
-
-//FUTURE: PROGRESS BAR BASED ON MILESTONES
+//----//
+//DRAW//
+//----//
+draw_sprite_ext(spr_transition_spinner,0,x,y,0.75,0.75,_val_rotation,c_white,1);

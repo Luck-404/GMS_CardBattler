@@ -1,8 +1,11 @@
+//===============================================================================//
 //
+// SCRIPT: scr_init_card_pools
+// FUNCTION: Initializes the global card rarity pools.
+// Adds each card ID to its appropriate rarity pool.
+// Used for random card generation and loot rewards.
 //
-// SCRIPT: SCR_INIT_CARD_POOLS | ADDS CARDS TO POOLS | RETURN VOID
-//
-//
+//===============================================================================//
 function scr_init_card_pools(){
 	#region I
 		ds_list_add(global.rarity_I_cards,"STRIKE");

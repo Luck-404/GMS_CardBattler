@@ -1,6 +1,8 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_GUI_INVENTORY_LEFT_ARROW
+// FUNCTION: Draws the inventory page left arrow.
 //
-// DRAW GUI: OBJ_library_GUI_LEFT_ARROW
-//
-//
+//===============================================================================//
+
 draw_self();

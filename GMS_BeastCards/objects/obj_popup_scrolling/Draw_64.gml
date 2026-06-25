@@ -1,57 +1,51 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_POPUP_SCROLLING
+// FUNCTION: Moves and draws a scrolling popup.
+//           Displays text, icon, or both depending on popup type.
+//           Counts down lifespan and destroys itself when expired.
 //
-// DRAW GUI: OBJ_POPUP | DISPLAYS A NEW TEXT OR ICON (OR BOTH) POPUP AT DESIGNATED LOCATION
-//
-//
+//===============================================================================//
 
-//
-// SWITCH BY TYPE | SWITCHES THE TYPE OF POPUP ACTION BASED ON PASSED TYPE
-//
-if (!(instance_exists(obj_gui_end_battle_pane))){
-	y-=_yspd;
-	#region POPUP ACTION
-	if (_text != "DEFAULT")
-	{
-		switch(_type){
-		
-			#region TEXT
+//--------------//
+//SCROLL MOVEMENT//
+//--------------//
+if (!instance_exists(obj_gui_end_battle_pane)){
+	y -= _val_y_speed;
+
+	//------------//
+	//POPUP ACTION//
+	//------------//
+	if (_str_text != "DEFAULT"){
+		switch(_str_type){
+
 			case "TEXT":
-				//DRAW TEXT
-				draw_set_colour(_color);
+				draw_set_colour(_c_popup);
 				draw_set_font(fnt_medium_gui);
-				draw_text(x-(string_width(_text)/2),y,_text);
+				draw_text(x - (string_width(_str_text) / 2),y,_str_text);
 			break;
-			#endregion
-		
-			#region ICON
+
 			case "ICON":
-				//DRAW ICON
-				draw_sprite(_sprite,0,x,y);
+				draw_sprite(_spr_icon,0,x,y);
 			break;
-			#endregion
-		
-			#region DUAL
+
 			case "DUAL":
-				//DRAW TEXT
-				draw_set_colour(_color);
+				draw_set_colour(_c_popup);
 				draw_set_font(fnt_medium_gui);
-				draw_text(x-(string_width(_text)/2),y,_text);
-				//DRAW ICON (SLIGHTLY HIGHER)
-				draw_sprite(_sprite,0,x,y-15);
+				draw_text(x - (string_width(_str_text) / 2),y,_str_text);
+				draw_sprite(_spr_icon,0,x,y - 15);
 			break;
-			#endregion
 		}
 	}
-	#endregion
 }
-	//
-	// DEATH COUNTDOWN | COUNTS DOWN AND KILLS AFTER 1S LIFESPAN
-	//
-	#region DEATH COUNTDOWN
-	if (_life != 0){
-		_life--;
-		if (_life <= 0){
-			instance_destroy();	
-		}
+
+//---------//
+//LIFESPAN//
+//---------//
+if (_ct_life > 0){
+	_ct_life--;
+
+	if (_ct_life <= 0){
+		instance_destroy();
 	}
-	#endregion
+}

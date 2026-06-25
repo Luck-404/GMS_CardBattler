@@ -134,7 +134,7 @@
 	//scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
 	//scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
 	//scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
-	repeat (10)
+	repeat (70)
 	{	
 		scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
 	}
@@ -142,18 +142,18 @@
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO LIBRARY
 	//—------------------------------------------------------------------------------//
-	ds_list_add(global.player_library,scr_get_card_info("STRIKE"));
-	ds_list_add(global.player_library,scr_get_card_info("POWER_STRIKE"));
-	ds_list_add(global.player_library,scr_get_card_info("BLOCK"));
+	//ds_list_add(global.player_library,scr_get_card_info("STRIKE"));
+	//ds_list_add(global.player_library,scr_get_card_info("POWER_STRIKE"));
+	//ds_list_add(global.player_library,scr_get_card_info("BLOCK"));
 	
 	//—------------------------------------------------------------------------------//
 	// ADD ITEMS TO INVENTORY
 	//—------------------------------------------------------------------------------//
 	scr_add_item_to_inventory("QUEST_IMPORTANT_NOTEBOOK",1);
-	scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",22);
-	scr_add_item_to_inventory("PRISM_BASIC_PRISM",7);
-	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
-	scr_add_item_to_inventory("EGG_ARBRAWN",45);	
+	//scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",22);
+	//scr_add_item_to_inventory("PRISM_BASIC_PRISM",7);
+	//scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
+	//scr_add_item_to_inventory("EGG_ARBRAWN",45);	
 	#endregion
 #endregion
 

@@ -1,14 +1,17 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_SPAWN_POPUP
+// FUNCTION: Creates a standard popup.
+//           Assigns popup type, text, icon, and color.
+//           Displays the popup at the specified position.
 //
-// SCRIPT: SCR_SPAWN_POPUP | HELPER METHOD TO CREATE A NEW POPUP OBJECT IN ONE LINE OF CODE | VOID
-//
-//
-function scr_spawn_popup(_type,_text,_sprite,_color,_x,_y){
-	//SPAWN POPUP AND PROVIDE IT THE PASSED TEXT DESCRIPTION
-	var _ref_popup = instance_create_layer(_x,_y,"ily_fx",obj_popup);
-	_ref_popup._type = _type;
-	_ref_popup._text = _text;
-	_ref_popup._sprite = _sprite;
-	_ref_popup._color = _color;
-	
+//===============================================================================//
+
+function scr_spawn_popup(_str_type,_str_text,_spr_icon,_c_popup,_val_x,_val_y){
+	var _ref_popup = instance_create_layer(_val_x,_val_y,"ily_fx",obj_popup);
+
+	_ref_popup._str_type = _str_type;
+	_ref_popup._str_text = _str_text;
+	_ref_popup._spr_icon = _spr_icon;
+	_ref_popup._c_popup = _c_popup;
 }

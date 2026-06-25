@@ -1,16 +1,25 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_POPUP_TEXT_BUBBLE
+// FUNCTION: Initializes text bubble popup state.
+//           Stores display text, lifespan, and bubble padding.
+//           Displays temporary world-space dialogue near an object.
 //
-//
+//===============================================================================//
 
-//VARIABLES
-_text = "DEFAULT";
-_life = 60;
-_pad = 15; //PADDING FOR THE TEXT BUBBLE
+//---------//
+//VARIABLES//
+//---------//
+_str_text = "DEFAULT";
 
-//INIT
+_ct_life = 60;
 
-//METHODS
+_val_pad = 15;
 
+//----//
+//INIT//
+//----//
 
+//-------//
+//METHODS//
+//-------//

@@ -1,13 +1,23 @@
+//===============================================================================//
 //
+// CREATE: OBJ_POPUP_ERROR
+// FUNCTION: Initializes popup error state.
+//           Stores error text and lifespan.
+//           Displays a temporary centered error message.
 //
-// CREATE: OBJ_POPUP_BANNER
-//
-//
+//===============================================================================//
 
-//VARIABLES
-_text = "DEFAULT";
-_life = 60;
+//---------//
+//VARIABLES//
+//---------//
+_str_text = "DEFAULT";
 
-//INIT
+_ct_life = 60;
 
-//METHODS
+//----//
+//INIT//
+//----//
+
+//-------//
+//METHODS//
+//-------//

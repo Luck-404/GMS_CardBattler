@@ -1,3 +1,11 @@
+//===============================================================================//
+//
+// SCRIPT: scr_init_item_pool
+// FUNCTION: Initializes the global item pool.
+// Adds every obtainable item ID to the master item pool.
+// Used for random item generation and loot selection.
+//
+//===============================================================================//
 function scr_init_item_pool(){
 	ds_list_add(global.item_pool,"QUEST_IMPORTANT_NOTEBOOK");
 	ds_list_add(global.item_pool,"HELD_POWERFUL_STONE");

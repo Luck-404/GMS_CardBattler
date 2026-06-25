@@ -1,54 +1,47 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_GET_RANDOM_ITEM
+// FUNCTION: Rolls a weighted random item id from the supplied item pool.
+//           Uses local item weights to bias common and rare item results.
+//           Returns the selected item id string.
 //
-// SCRIPT: ROLL_RANDOM_BEAST | GETS ALL THE BEASTS FROM THE GIVEN POOL AND ROLLS ONE | RETURNS A DSMAP OF A BEAST
-//
-//
-function scr_get_random_item(_pool){
-    var _weights = {
-        "QUEST_IMPORTANT_NOTEBOOK"		: 5,   // R3
-        "HELD_POWERFUL_STONE"			: 10,  // R2
-        "CONSUMABLE_HEALING_SALVE"		: 50,  // R1
-        "PRISM_BASIC_PRISM"				: 50,  // R1
-        "EGG_ARBRAWN"					: 20   // R2
-    };
+//===============================================================================//
 
-    var _total_weight = 0;
+function scr_get_random_item(_list_pool){
+	var _stct_weights = {
+		QUEST_IMPORTANT_NOTEBOOK : 5,
+		HELD_POWERFUL_STONE : 10,
+		CONSUMABLE_HEALING_SALVE : 50,
+		PRISM_BASIC_PRISM : 50,
+		EGG_ARBRAWN : 20
+	};
 
-    // Sum weights for beasts in pool
-    for (var _i = 0; _i < ds_list_size(_pool); _i++)
-    {
-        var _name = ds_list_find_value(_pool,_i);
+	var _val_total_weight = 0;
 
-        if (variable_struct_exists(_weights, _name))
-        {
-            _total_weight += variable_struct_get(_weights, _name);
-        }
-    }
+	for (var _it_item = 0; _it_item < ds_list_size(_list_pool); _it_item++){
+		var _str_item_id = ds_list_find_value(_list_pool,_it_item);
 
-    // Roll
-    var _roll = irandom_range(1, _total_weight);
+		if (variable_struct_exists(_stct_weights,_str_item_id)){
+			_val_total_weight += variable_struct_get(_stct_weights,_str_item_id);
+		}
+	}
 
-    // Resolve roll
-    var _running = 0;
-    var _item_name = "";
+	var _val_roll = irandom_range(1,_val_total_weight);
+	var _val_running_weight = 0;
+	var _str_return_item_id = "";
 
-    for (var _i = 0; _i < ds_list_size(_pool); _i++)
-    {
-        var _name = ds_list_find_value(_pool,_i);
+	for (var _it_item = 0; _it_item < ds_list_size(_list_pool); _it_item++){
+		var _str_item_id = ds_list_find_value(_list_pool,_it_item);
 
-        if (variable_struct_exists(_weights, _name))
-        {
-            _running += variable_struct_get(_weights, _name);
+		if (variable_struct_exists(_stct_weights,_str_item_id)){
+			_val_running_weight += variable_struct_get(_stct_weights,_str_item_id);
 
-            if (_roll <= _running)
-            {
-                _item_name = _name;
-                break;
-            }
-        }
-    }
+			if (_val_roll <= _val_running_weight){
+				_str_return_item_id = _str_item_id;
+				break;
+			}
+		}
+	}
 
-	//MAKE NEW UNIT OF THE ROLLED TYPE
-	return _item_name;
-	
+	return _str_return_item_id;
 }

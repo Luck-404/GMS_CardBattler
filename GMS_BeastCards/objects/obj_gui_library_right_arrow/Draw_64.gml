@@ -1,6 +1,8 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_GUI_LIBRARY_RIGHT_ARROW
+// FUNCTION: Draws the right page arrow.
 //
-// DRAW GUI: OBJ_library_GUI_RIGHT_ARROW
-//
-//
+//===============================================================================//
+
 draw_self();

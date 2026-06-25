@@ -1,42 +1,53 @@
+//===============================================================================//
 //
+// STEP: OBJ_GUI_LIBRARY_LEFT_ARROW
+// FUNCTION: Handles page navigation to the previous library page.
+// Destroys itself when the library pane closes.
+// Updates click cooldown and hover highlighting.
 //
-// STEP: OBJ_library_GUI_LEFT_ARROW | HANDLE CLICKING ADN DESTROY ON GUI EXIT
-//
-//
+//===============================================================================//
 
-#region DESTROY SELF ON GUI PANE DESTRUCTION
+//
+// DESTROY SELF
+//
+#region DESTROY SELF
 if (!instance_exists(obj_gui_library_pane)){
 	instance_destroy();
+	exit;
 }
 #endregion
 
-#region HOVER LOGIC AND CLICING
+//
+// HOVER AND CLICK
+//
+#region HOVER AND CLICK
 if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
-	//HIGHLIGHT
-	image_index = 1;	
-	
-	//LEFT CLICK
-	if (mouse_check_button_pressed(mb_left) && _flag_clicked == false){
-		_cooldown = 10;
+	image_index = 1;
+
+	if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
 		_flag_clicked = true;
-		
-		//ATTEMPT TO ITERATE TO PREVIOUS PAGE
-		if (_ref_gui_pane._library_page > 0)
-		{
-		    _ref_gui_pane._library_page--;
+		_val_cooldown = 10;
+
+		if (_ref_gui_pane._val_library_page > 0){
+			_ref_gui_pane._val_library_page--;
 		}
 	}
-} else {
-	image_index = 0;	
+}
+else{
+	image_index = 0;
 }
 #endregion
 
+//
+// CLICK COOLDOWN
+//
 #region CLICK COOLDOWN
-if (_flag_clicked == true){
-	if (_cooldown > 0){
-		_cooldown--;	
-	} else {
-		_cooldown = 0;
+if (_flag_clicked){
+	if (_val_cooldown > 0){
+		_val_cooldown--;
+	}
+	else{
+		_val_cooldown = 0;
 		_flag_clicked = false;
 	}
 }
