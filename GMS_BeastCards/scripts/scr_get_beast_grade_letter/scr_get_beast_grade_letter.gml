@@ -1,115 +1,104 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_GET_BEAST_GRADE_LETTER
+// FUNCTION: Returns the letter grade corresponding to a beast stat.
+// Accepts a raw stat value and returns a grade from F- through EX.
 //
-// SCRIPT: SCR_GET_BEAST_GRADE_LETTER | GETS THE GRADE (F- to EX) BASED ON INPUT STAT | RETURNS STRING OF GRADE STAT
-//
-//
-function scr_get_beast_grade_letter(_stat){
+//===============================================================================//
 
-	//F (0-30)
+function scr_get_beast_grade_letter(_val_stat){
+
+	// F
 	#region F
-	if (_stat <= 10){ //F-
+	if (_val_stat <= 10){
 		return "F-";
 	}
-	
-	else if (_stat <= 20){ //F
+	else if (_val_stat <= 20){
 		return "F";
 	}
-	
-	else if (_stat <= 30){ //F+
+	else if (_val_stat <= 30){
 		return "F+";
 	}
 	#endregion
-	
-	//E (30-60)
+
+	// E
 	#region E
-	else if (_stat <= 40){ //E-
+	else if (_val_stat <= 40){
 		return "E-";
 	}
-	
-	else if (_stat <= 50){ //E
+	else if (_val_stat <= 50){
 		return "E";
 	}
-	
-	else if (_stat <= 60){ //E+
+	else if (_val_stat <= 60){
 		return "E+";
 	}
 	#endregion
-	
-	//D (60-90)
+
+	// D
 	#region D
-	else if (_stat <= 70){ //D-
+	else if (_val_stat <= 70){
 		return "D-";
 	}
-	
-	else if (_stat <= 80){ //D
+	else if (_val_stat <= 80){
 		return "D";
 	}
-	
-	else if (_stat <= 90){ //D+
+	else if (_val_stat <= 90){
 		return "D+";
 	}
 	#endregion
-	
-	//C (90-120)
+
+	// C
 	#region C
-	else if (_stat <= 100){ //C-
+	else if (_val_stat <= 100){
 		return "C-";
 	}
-	
-	else if (_stat <= 110){ //C
+	else if (_val_stat <= 110){
 		return "C";
 	}
-	
-	else if (_stat <= 120){ //C+
+	else if (_val_stat <= 120){
 		return "C+";
 	}
 	#endregion
-	
-	//B (120-160)
+
+	// B
 	#region B
-	else if (_stat <= 130){ //B-
+	else if (_val_stat <= 130){
 		return "B-";
 	}
-	
-	else if (_stat <= 140){ //B
+	else if (_val_stat <= 140){
 		return "B";
 	}
-	
-	else if (_stat <= 150){ //B+
+	else if (_val_stat <= 150){
 		return "B+";
 	}
 	#endregion
-	
-	//A (150-180)
+
+	// A
 	#region A
-	else if (_stat <= 160){ //A-
+	else if (_val_stat <= 160){
 		return "A-";
 	}
-	
-	else if (_stat <= 170){ //A
+	else if (_val_stat <= 170){
 		return "A";
 	}
-	
-	else if (_stat <= 180){ //A+
+	else if (_val_stat <= 180){
 		return "A+";
 	}
 	#endregion
-	
-	//S (180-210)
+
+	// S
 	#region S
-	else if (_stat <= 190){ //S-
+	else if (_val_stat <= 190){
 		return "S-";
 	}
-	
-	else if (_stat <= 200){ //S
+	else if (_val_stat <= 200){
 		return "S";
 	}
-	
-	else if (_stat <= 210){ //S+
+	else if (_val_stat <= 210){
 		return "S+";
 	}
 	#endregion
-	
-	//EX (210+)
+
+	// EX
 	return "EX";
 }

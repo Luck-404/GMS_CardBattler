@@ -1,38 +1,46 @@
+//===============================================================================//
 //
+// CREATE: OBJ_BATTLE_TURN_CONTROLLER
+// FUNCTION: Initializes battle controllers and turn order.
+//           Creates player, enemy, and end-turn button controller objects.
+//           Defines helper script for passing turns.
 //
-// CREATE: OBJ_TURN_CONTROLLER
-//
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
-_player_controller = instance_create_layer(x,y,"ily_player",obj_battle_player_controller);
-_enemy_controller = instance_create_layer(x,y,"ily_enemy",obj_battle_enemy_controller);
+//---------//
+//VARIABLES//
+//---------//
+_ref_player_controller = instance_create_layer(x,y,"ily_player",obj_battle_player_controller);
+_ref_enemy_controller = instance_create_layer(x,y,"ily_enemy",obj_battle_enemy_controller);
 
-_end_turn_button = instance_create_layer(928,650,"ily_fx",obj_battle_end_turn_button);
+_ref_end_turn_button = instance_create_layer(928,650,"ily_fx",obj_battle_end_turn_button);
 
-_turn_order = [_player_controller,_enemy_controller];
-_turn_tracker = 0;
+_arr_turn_order = [_ref_player_controller,_ref_enemy_controller];
+_val_turn_tracker = 0;
 
 _flag_game_start = false;
 _flag_started_game = false;
 _flag_battle_ended = false;
 
-//
-//INIT
-//
+//----//
+//INIT//
+//----//
 
-//
-//METHODS
-//
-function scr_pass_turn(){
-	if(_turn_tracker == 0){ //(player->enemy)
-		_turn_tracker++;
-		_enemy_controller._enemy_state = ENEMY_STATE.TURN_START;
+//-------//
+//METHODS//
+//-------//
 
-	}else { //(enemy->player)
-		_turn_tracker = 0;	
-		_player_controller._player_state = PLAYER_STATE.TURN_START;
+//—------------------------------------------------------------------------------//
+// hscr_pass_turn
+// FUNCTION: Passes turn control between player and enemy controllers.
+//—------------------------------------------------------------------------------//
+function hscr_pass_turn(){
+	if (_val_turn_tracker == 0){
+		_val_turn_tracker++;
+		_ref_enemy_controller._enemy_state = ENEMY_STATE.TURN_START;
+	}
+	else{
+		_val_turn_tracker = 0;
+		_ref_player_controller._player_state = PLAYER_STATE.TURN_START;
 	}
 }

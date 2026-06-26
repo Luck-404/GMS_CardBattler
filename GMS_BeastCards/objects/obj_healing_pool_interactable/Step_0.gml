@@ -1,47 +1,56 @@
+//===============================================================================//
 //
+// STEP: OBJ_HEALING_POOL_INTERACTABLE
+// FUNCTION: Heals all party beasts when the player interacts.
 //
-// STEP:  | HANDLE PLAYER INTERACTION TO TRIGGER THE OPENING OF THE GUI
-//
-//
+//===============================================================================//
 
-
 //
-// HIGHLIGHT AND INTERACTION | IF PLAYER IS NEXT TO, HIGHLIGHT THE RANCH OBJ AND ALLOW INTERACTION
+// HIGHLIGHT AND INTERACTION
 //
 #region HIGHLIGHT AND INTERACTION
-if (distance_to_object(obj_player) < 48 && global.pause == false){
+if (distance_to_object(obj_player) < 48 && !global.pause){
+
 	image_index = 1;
-	
-	//ALLOW FOR TRIGGERING AN INTERACTION
-	#region E TO INTERACT
-	if (_flag_triggered == false && _cooldown == 0){
+
+	if (!_flag_triggered && _cooldown == 0){
+
 		if (keyboard_check(ord("E"))){
+
 			_flag_triggered = true;
 			_cooldown = 60;
-			
-			scr_spawn_popup_text_bubble(x,y-50,"HEALED PARTY");
-			for (var _i = 0; _i < ds_list_size(global.player_party); _i++){
-				var _b = ds_list_find_value(global.player_party,_i);
-				var _max = _b[?"beast_hp_max"];
-				ds_map_replace(_b,"beast_hp_cur",_max);
+
+			scr_spawn_popup_text_bubble(x,y - 50,"HEALED PARTY");
+
+			for (var _it_beast = 0; _it_beast < ds_list_size(global.player_party); _it_beast++){
+
+				var _stct_beast = ds_list_find_value(global.player_party,_it_beast);
+
+				if (_stct_beast == undefined){
+					continue;
+				}
+
+				_stct_beast.beast_hp_cur = _stct_beast.beast_hp_max;
 			}
 		}
 	}
-	#endregion
-} else {
+}
+else{
 	image_index = 0;
 }
 #endregion
 
 //
-// COOLDOWN | COOLDOWN SO YOU CANT SPAM THE GUI AND HAVE IT OPEN MANY TIMES
+// COOLDOWN
 //
 #region COOLDOWN
 if (_cooldown > 0){
-	_cooldown--;	
+
+	_cooldown--;
+
 	if (_cooldown <= 0){
 		_cooldown = 0;
-		_flag_triggered = false;	
+		_flag_triggered = false;
 	}
 }
 #endregion

@@ -1,98 +1,95 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_GET_RANDOM_BEAST
+// FUNCTION: Performs a weighted roll from a supplied beast pool.
+//           Returns a newly initialized randomized beast.
 //
-// SCRIPT: ROLL_RANDOM_BEAST | GETS ALL THE BEASTS FROM THE GIVEN POOL AND ROLLS ONE | RETURNS A DSMAP OF A BEAST
-//
-//
-function scr_get_random_beast(_pool){
-    var _weights = {
-        "ARBRAWN"   : 5,   // R3
-        "ARGENTBUD" : 20,  // R2
-        "BEAVINE"   : 50,  // R1
-		//BRYOBITE
-		//CHITROOPER
-		//CRUSABER
-		//DRYADAE
-		//FIGHTREE
-        "FLITSAGE"  : 50,  // R1
-        "FURN"      : 20   // R2
-		//LEPOROOT
-		//LUMBUCK
-		//MAMBARK
-		//MORELUSH
-		//SPOROSE
-		//STRIGIBLOOM
-		//TURFRANTULA
-		//AMMOMARSH
-		//BLIZZDRIFT
-		//CAUDAQUA
-		//CEPHARIME
-		//CHELONSEA
-		//CORALLIARC
-		//FROSTUSK
-		//GALENATRIUM
-		//GLACIMIGHT
-		//GULFllOW
-		//ISTIRAIN
-		//KELPLATANI
-		//LONTRIVER
-		//MARITIMICE
-		//SALTWAGG
-		//SPHENISKIP
-		//ASCHEMASS
-		//CANIGNIS
-		//DAIMONIS
-		//DRAKOAL
-		//EMBEROOST
-		//HELLSHROOM
-		//IMPARCH
-		//INFERNUS
-		//LAVAROWANA
-		//PYREKNIGHT
-		//PYROPLUME
-		//SANGUINAUT
-		//SLAGOLEM
-		//SOLEMOLD
-		//WRATHOOD
-		//WYRMELTA
-    };
+//===============================================================================//
 
-    var _total_weight = 0;
+function scr_get_random_beast(_arr_beast_pool){
 
-    // Sum weights for beasts in pool
-    for (var _i = 0; _i < array_length(_pool); _i++)
-    {
-        var _name = _pool[_i];
+	var _stct_weights = {
+		ARBRAWN   : 5,
+		ARGENTBUD : 20,
+		BEAVINE   : 50,
+		// BRYOBITE
+		// CHITROOPER
+		// CRUSABER
+		// DRYADAE
+		// FIGHTREE
+		FLITSAGE  : 50,
+		FURN      : 20
+		// LEPOROOT
+		// LUMBUCK
+		// MAMBARK
+		// MORELUSH
+		// SPOROSE
+		// STRIGIBLOOM
+		// TURFRANTULA
+		// AMMOMARSH
+		// BLIZZDRIFT
+		// CAUDAQUA
+		// CEPHARIME
+		// CHELONSEA
+		// CORALLIARC
+		// FROSTUSK
+		// GALENATRIUM
+		// GLACIMIGHT
+		// GULFFLOW
+		// ISTIRAIN
+		// KELPLATANI
+		// LONTRIVER
+		// MARITIMICE
+		// SALTWAGG
+		// SPHENISKIP
+		// ASCHEMASS
+		// CANIGNIS
+		// DAIMONIS
+		// DRAKOAL
+		// EMBEROOST
+		// HELLSHROOM
+		// IMPARCH
+		// INFERNUS
+		// LAVAROWANA
+		// PYREKNIGHT
+		// PYROPLUME
+		// SANGUINAUT
+		// SLAGOLEM
+		// SOLEMOLD
+		// WRATHOOD
+		// WYRMELTA
+	};
 
-        if (variable_struct_exists(_weights, _name))
-        {
-            _total_weight += variable_struct_get(_weights, _name);
-        }
-    }
+	var _val_total_weight = 0;
 
-    // Roll
-    var _roll = irandom_range(1, _total_weight);
+	// CALCULATE TOTAL WEIGHT
+	for (var _it_beast = 0; _it_beast < array_length(_arr_beast_pool); _it_beast++){
+		var _str_beast_name = _arr_beast_pool[_it_beast];
 
-    // Resolve roll
-    var _running = 0;
-    var _beast_name = "";
+		if (variable_struct_exists(_stct_weights,_str_beast_name)){
+			_val_total_weight += variable_struct_get(_stct_weights,_str_beast_name);
+		}
+	}
 
-    for (var _i = 0; _i < array_length(_pool); _i++)
-    {
-        var _name = _pool[_i];
+	// ROLL
+	var _val_roll = irandom_range(1,_val_total_weight);
 
-        if (variable_struct_exists(_weights, _name))
-        {
-            _running += variable_struct_get(_weights, _name);
+	// RESOLVE ROLL
+	var _val_running_weight = 0;
+	var _str_selected_beast = "";
 
-            if (_roll <= _running)
-            {
-                _beast_name = _name;
-                break;
-            }
-        }
-    }
+	for (var _it_beast = 0; _it_beast < array_length(_arr_beast_pool); _it_beast++){
+		var _str_beast_name = _arr_beast_pool[_it_beast];
 
-	//MAKE NEW UNIT OF THE ROLLED TYPE
-	return scr_init_beast_random(_beast_name);
-	
+		if (variable_struct_exists(_stct_weights,_str_beast_name)){
+			_val_running_weight += variable_struct_get(_stct_weights,_str_beast_name);
+
+			if (_val_roll <= _val_running_weight){
+				_str_selected_beast = _str_beast_name;
+				break;
+			}
+		}
+	}
+
+	return scr_init_beast_random(_str_selected_beast);
 }

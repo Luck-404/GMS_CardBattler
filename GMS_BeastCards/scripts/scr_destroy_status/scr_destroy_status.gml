@@ -1,53 +1,57 @@
+//===============================================================================//
 //
-// scr_destroy_status(_status)
-// Removes status from its owning list and destroys it
+// SCR_DESTROY_STATUS
+// FUNCTION: Removes a status from its owning list.
+//           Supports global statuses and host-bound statuses.
+//           Destroys the status instance and refreshes status icon positions.
 //
-function scr_destroy_status(_status)
-{
-    if (!instance_exists(_status)) exit;
+//===============================================================================//
+function scr_destroy_status(_ref_status){
 
-    //--------------------------------------------------
-    // GLOBAL STATUS
-    //--------------------------------------------------
-    if (_status._ref_host == undefined)
-    {
-		var _s = scr_check_for_status(_status._status_name,global.statuses);
-		if (_s != -1){
-			var _i = ds_list_find_index(global.statuses, _s);	
-		    if (_i != -1)
-		    {
-		        ds_list_delete(global.statuses, _i);
-		    }
+	if (!instance_exists(_ref_status)){
+		exit;
+	}
 
-		    instance_destroy(_s);
+	if (_ref_status._ref_host == undefined){
 
-		    scr_reposition_statuses(global.statuses);
+		var _ref_found_status = scr_check_for_status(_ref_status._str_status_name,global.statuses);
+
+		if (_ref_found_status != -1){
+
+			var _it_status = ds_list_find_index(global.statuses,_ref_found_status);
+
+			if (_it_status != -1){
+				ds_list_delete(global.statuses,_it_status);
+			}
+
+			instance_destroy(_ref_found_status);
+
+			scr_reposition_statuses(global.statuses);
 		}
-		exit;		
-    }
 
-    //--------------------------------------------------
-    // HOST STATUS
-    //--------------------------------------------------
-    var _host = _status._ref_host;
+		exit;
+	}
 
-    if (instance_exists(_host))
-    {
-		var _s = scr_check_for_status(_status._status_name,_host);
-		if (_s != -1){		
-			var _i = ds_list_find_index(_host._statuses,_s);
-			
-	        if (_i != -1)
-	        {
-	            ds_list_delete(_host._statuses, _i);
-	        }			
-	        instance_destroy(_s);
+	var _ref_host = _ref_status._ref_host;
 
-	        scr_reposition_statuses(_host);			
+	if (instance_exists(_ref_host)){
+
+		var _ref_found_status = scr_check_for_status(_ref_status._str_status_name,_ref_host);
+
+		if (_ref_found_status != -1){
+
+			var _it_status = ds_list_find_index(_ref_host._list_statuses,_ref_found_status);
+
+			if (_it_status != -1){
+				ds_list_delete(_ref_host._list_statuses,_it_status);
+			}
+
+			instance_destroy(_ref_found_status);
+
+			scr_reposition_statuses(_ref_host);
 		}
-    }
-    else
-    {
-        instance_destroy(_status);
-    }
+	}
+	else{
+		instance_destroy(_ref_status);
+	}
 }

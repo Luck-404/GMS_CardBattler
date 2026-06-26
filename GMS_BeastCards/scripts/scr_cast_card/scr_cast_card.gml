@@ -1,47 +1,63 @@
+//===============================================================================//
 //
+// SCR_CAST_CARD
+// FUNCTION: Resolves the currently selected card.
+//           Executes the card script, handles Echo, spends mana,
+//           moves the card to the correct pile, and clears selection.
 //
-//
-//
-//
+//===============================================================================//
 function scr_cast_card(){
 
-var _card = global.cast_card;
-var _card_ref = _card._ref_card;
-var _caster = global.caster_beast;
-var _tar = global.target_beast;
+	var _ref_card = global.cast_card;
+	var _stct_card = _ref_card._stct_card;
 
-var _scr = _card_ref[?"card_script"];
-var _cost = _card_ref[?"card_mana_cost"];
+	var _ref_caster = global.caster_beast;
+	var _ref_target = global.target_beast;
 
-//PLAY CARD EFFECT
-if (global.caster_beast._team == "PLAYER" && global.echo_counter != 0 && _card_ref[?"card_name"] != "ECHO"){
-	for (var _i = 0; _i < global.echo_counter+1; _i++){
-		_scr(_card_ref,_caster,_tar);
+	var _fn_script = _stct_card.card_script;
+	var _val_cost = _stct_card.card_mana_cost;
+
+	//
+	// CAST CARD
+	//
+	if (_ref_caster._str_team == "PLAYER" &&
+		global.echo_counter != 0 &&
+		_stct_card.card_name != "ECHO"){
+
+		for (var _it_echo = 0; _it_echo < global.echo_counter + 1; _it_echo++){
+			_fn_script(_stct_card,_ref_caster,_ref_target);
+		}
+
+		global.echo_counter = 0;
 	}
-	global.echo_counter = 0;
-} else {
-	_scr(_card_ref,_caster,_tar);
-}
-
-//DEDUCT MANA FOR CARD CAST
-if (global.caster_beast._team == "PLAYER"){
-obj_battle_player_controller._cur_mana -= _cost;
-}
-
-//(FUTURE) TRIGGER EFFECTS
-
-//EXHAUST
-if (global.caster_beast._team == "PLAYER"){
-	if (_card_ref[?"card_exhausts"] == true){
-		scr_exhaust_card(_card);
-	} else {
-	//DISCARD 
-		scr_discard_card(_card);
+	else{
+		_fn_script(_stct_card,_ref_caster,_ref_target);
 	}
-}
 
-//RESET AT END
-global.cast_card = undefined;
-global.caster_beast = undefined;
-global.target_beast = undefined;
+	//
+	// SPEND MANA
+	//
+	if (_ref_caster._str_team == "PLAYER"){
+		obj_battle_player_controller._val_cur_mana -= _val_cost;
+	}
+
+	//
+	// CARD DESTINATION
+	//
+	if (_ref_caster._str_team == "PLAYER"){
+
+		if (_stct_card.card_exhausts){
+			scr_exhaust_card(_ref_card);
+		}
+		else{
+			scr_discard_card(_ref_card);
+		}
+	}
+
+	//
+	// CLEAR SELECTION
+	//
+	global.cast_card = undefined;
+	global.caster_beast = undefined;
+	global.target_beast = undefined;
 }

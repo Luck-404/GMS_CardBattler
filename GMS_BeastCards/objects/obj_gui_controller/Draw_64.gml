@@ -49,7 +49,11 @@ if (room != rm_battle){
 		draw_set_alpha(_val_alpha);
 
 		for (var _it_party = 0; _it_party < _ct_party; _it_party++){
-			var _map_unit = ds_list_find_value(global.player_party,_it_party);
+			var _stct_unit = ds_list_find_value(global.player_party,_it_party);
+
+			if (_stct_unit == undefined){
+				continue;
+			}
 
 			var _val_box_x = _val_base_x;
 			var _val_box_y = _val_base_y + (_it_party * (_val_slot_h + _val_spacing));
@@ -57,9 +61,10 @@ if (room != rm_battle){
 			draw_set_colour(c_black);
 			draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
-			if (_map_unit[? "beast_hp_cur"] <= 0){
+			if (_stct_unit.beast_hp_cur <= 0){
 				draw_set_colour(c_maroon);
-			} else {
+			}
+			else{
 				draw_set_colour(c_gray);
 			}
 
@@ -68,10 +73,10 @@ if (room != rm_battle){
 			var _val_center_x = _val_box_x + (_val_slot_w * 0.5);
 			var _val_center_y = _val_box_y + (_val_slot_h * 0.5);
 
-			var _spr_shadow = scr_get_beast_type_shadow(_map_unit[? "beast_color_type"]);
+			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit.beast_color_type);
 
 			draw_sprite_ext(_spr_shadow,0,_val_center_x,_val_center_y + 10,1,1,0,c_white,1);
-			draw_sprite_ext(_map_unit[? "beast_sprite"],0,_val_center_x,_val_center_y,0.10,0.10,0,c_white,1);
+			draw_sprite_ext(_stct_unit.beast_sprite,0,_val_center_x,_val_center_y,0.10,0.10,0,c_white,1);
 		}
 
 		draw_set_alpha(1);
@@ -86,8 +91,8 @@ if (room != rm_battle){
 
 			global.active_gui = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_gui_party_pane);
 
-			global.active_gui._pos = 0;
-			global.active_gui._unit_selected = ds_list_find_value(global.player_party,0);
+			global.active_gui._val_pos = 0;
+			global.active_gui._stct_unit_selected = ds_list_find_value(global.player_party,0);
 		}
 	}
 

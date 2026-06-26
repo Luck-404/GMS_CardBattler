@@ -1,30 +1,42 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_BATTLE_CARD
+// FUNCTION: Initializes a battle card instance.
+//           Stores visual data, card reference, owning unit reference,
+//           location state, preview state, and mana validity flag.
 //
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
-_sprite = undefined;
-_uid = -1;
-_team = "PLAYER";
-_ref_card = undefined;
+//---------//
+//VARIABLES//
+//---------//
+
+// VISUAL / ID
+_spr_card = undefined;
+_uid_card = -1;
+
+// TEAM / REFERENCES
+_str_team = "PLAYER";
+_stct_card = undefined;
 _ref_unit = undefined;
-_location = "DECK"; //DECK, HAND, DISCARD, EXHAUST
-_preview_card = undefined;
-_scale_x = 0.3;
-_scale_y = 0.3;	
-_preview_scale = 1.0;
 
-_card_oom_check = false;
+// LOCATION
+_str_location = "DECK"; // DECK, HAND, DISCARD, EXHAUST
 
-//
-//INIT
-//
+// PREVIEW / SCALE
+_spr_preview_card = undefined;
 
+_val_scale_x = 0.3;
+_val_scale_y = 0.3;
+_val_preview_scale = 1.0;
 
-//
-//METHODS
-//
+// CHECKS
+_flag_card_oom_check = false;
+
+//----//
+//INIT//
+//----//
+
+//-------//
+//METHODS//
+//-------//

@@ -1,46 +1,52 @@
-function scr_level_up_beast(_beast)
-{
-    // dead beasts gain nothing
-    if (_beast[?"beast_hp_cur"] <= 0)
-        exit;
+//===============================================================================//
+//
+// SCRIPT: SCR_LEVEL_UP_BEAST
+// FUNCTION: Levels up a beast.
+//           Recalculates maximum HP while preserving the current HP percentage.
+//
+//===============================================================================//
 
-    //--------------------------------------------------
-    // LEVEL
-    //--------------------------------------------------
-    _beast[?"beast_level"] += 1;
+function scr_level_up_beast(_stct_beast){
 
-    //--------------------------------------------------
-    // SAVE OLD HP RATIO
-    //--------------------------------------------------
-    var _old_cur = _beast[?"beast_hp_cur"];
-    var _old_max = _beast[?"beast_hp_max"];
+	// DEAD BEASTS DO NOT GAIN LEVELS
+	if (_stct_beast.beast_hp_cur <= 0){
+		exit;
+	}
 
-    var _hp_ratio = 1;
+	//
+	// LEVEL
+	//
+	_stct_beast.beast_level++;
 
-    if (_old_max > 0)
-        _hp_ratio = _old_cur / _old_max;
+	//
+	// STORE CURRENT HP RATIO
+	//
+	var _val_old_cur_hp = _stct_beast.beast_hp_cur;
+	var _val_old_max_hp = _stct_beast.beast_hp_max;
 
-    //--------------------------------------------------
-    // RECALCULATE HP
-    //--------------------------------------------------
-    var _level = _beast[?"beast_level"];
+	var _val_hp_ratio = 1;
 
-    var _hp_stat = _beast[?"beast_hp_stat"];
-    var _hp_modifier = scr_get_beast_grade_modifier(_hp_stat);
+	if (_val_old_max_hp > 0){
+		_val_hp_ratio = _val_old_cur_hp / _val_old_max_hp;
+	}
 
-    // same formula, but scaled by level
-    var _hp_calculated = ceil(
-        10 + ((_hp_modifier * 10) * _level) / 4
-    );
+	//
+	// RECALCULATE MAX HP
+	//
+	var _val_hp_modifier = scr_get_beast_grade_modifier(_stct_beast.beast_hp_stat);
 
-    ds_map_replace(_beast, "beast_hp_max", _hp_calculated);
+	var _val_new_max_hp = ceil(
+		10 + ((_val_hp_modifier * 10) * _stct_beast.beast_level) / 4
+	);
 
-    //--------------------------------------------------
-    // KEEP SAME HP PERCENT
-    //--------------------------------------------------
-    var _new_cur = ceil(_hp_calculated * _hp_ratio);
+	_stct_beast.beast_hp_max = _val_new_max_hp;
 
-    _new_cur = clamp(_new_cur, 1, _hp_calculated);
+	//
+	// PRESERVE HP PERCENTAGE
+	//
+	var _val_new_cur_hp = ceil(_val_new_max_hp * _val_hp_ratio);
 
-    ds_map_replace(_beast, "beast_hp_cur", _new_cur);
+	_val_new_cur_hp = clamp(_val_new_cur_hp,1,_val_new_max_hp);
+
+	_stct_beast.beast_hp_cur = _val_new_cur_hp;
 }

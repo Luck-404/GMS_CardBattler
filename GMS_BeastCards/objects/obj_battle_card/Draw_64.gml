@@ -1,79 +1,129 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_BATTLE_CARD
+// FUNCTION: Draws player and enemy battle cards.
+//           Handles hand/deck/discard/exhaust visuals, hover scaling,
+//           mana-disabled tinting, enemy visibility, and card preview.
 //
-// DRAW_GUI: OBJ_BATTLE_CARD
-//
-//
-if (!instance_exists(obj_gui_end_battle_pane)){
-draw_self();
-if (_team == "PLAYER"){
-	_preview_card = undefined;
-	_scale_x = 0.3;
-	_scale_y = 0.3;	
-	_preview_scale = 1.0;	
-	if (_location != "HAND"){
-		if (_location == "DISCARD"){
-			draw_sprite_ext(spr_card_back,0,x,y,_scale_x,_scale_y,0,c_red,1);
-		} else if (_location == "EXHAUST"){
-			draw_sprite_ext(spr_card_back,0,x,y,_scale_x,_scale_y,0,c_gray,1);		
-		} else {
-			draw_sprite_ext(spr_card_back,0,x,y,_scale_x,_scale_y,0,c_white,1);
-		}
-	} else {
-		// hover enlarge
-		if position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), self)
-		{
-			_scale_x *= 1.15;
-			_scale_y *= 1.15;
-		    if (keyboard_check(vk_lcontrol)){
-		        _preview_card = _sprite;
-		    }
-		
-		}
-		//DRAW GREY IF OOM FOR THIS CARD
-		if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_CARD && _card_oom_check == true){
-			draw_sprite_ext(_sprite,0,x,y,_scale_x,_scale_y,0,c_ltgray,1);		
-		} else {
-			if (obj_battle_turn_controller._turn_tracker == 1){
-				draw_sprite_ext(_sprite,0,x,y,_scale_x,_scale_y,0,c_ltgray,1);	
-			} else {
-				draw_sprite_ext(_sprite,0,x,y,_scale_x,_scale_y,0,c_white,1);
-			}
-		}
-	} if (obj_battle_player_controller._player_state != PLAYER_STATE.SELECT_CARD){
-		_card_oom_check = false;
-	}
-} 
+//===============================================================================//
 
-else { //ENEMY 
-	x = _ref_unit.x;
-	if (_ref_unit._cur_hp <= 0){
-		visible = false;
-	} else {
-		_preview_card = undefined;
-		_scale_x = 0.15;
-		_scale_y = 0.15;	
-		_preview_scale = 1.0;	
-		if (_location == "DECK"){
-			visible=false;
-		} else {
-			if (obj_battle_enemy_controller._enemy_state == ENEMY_STATE.CAST_CARDS){
-				
-			} else {
-				visible=true;
+if (!instance_exists(obj_gui_end_battle_pane)){
+
+	draw_self();
+
+	//
+	// PLAYER CARD
+	//
+	#region PLAYER CARD
+	if (_str_team == "PLAYER"){
+
+		_spr_preview_card = undefined;
+
+		_val_scale_x = 0.3;
+		_val_scale_y = 0.3;
+		_val_preview_scale = 1.0;
+
+		if (_str_location != "HAND"){
+
+			switch(_str_location){
+
+				case "DISCARD":
+					draw_sprite_ext(spr_card_back,0,x,y,_val_scale_x,_val_scale_y,0,c_red,1);
+				break;
+
+				case "EXHAUST":
+					draw_sprite_ext(spr_card_back,0,x,y,_val_scale_x,_val_scale_y,0,c_gray,1);
+				break;
+
+				default:
+					draw_sprite_ext(spr_card_back,0,x,y,_val_scale_x,_val_scale_y,0,c_white,1);
+				break;
 			}
-			
-			// hover enlarge
-			if position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), self)
-			{
-				_scale_x *= 1.15;
-				_scale_y *= 1.15;
-			    if (keyboard_check(vk_lcontrol)){
-			        _preview_card = _sprite;
-			    }
-		
-			}		
-			draw_sprite_ext(_sprite,0,x,y,_scale_x,_scale_y,0,c_white,1);
+		}
+		else{
+
+			if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+
+				_val_scale_x *= 1.15;
+				_val_scale_y *= 1.15;
+
+				if (keyboard_check(vk_lcontrol)){
+					_spr_preview_card = _spr_card;
+				}
+			}
+
+			if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_CARD && _flag_card_oom_check){
+				draw_sprite_ext(_spr_card,0,x,y,_val_scale_x,_val_scale_y,0,c_ltgray,1);
+			}
+			else{
+				if (obj_battle_turn_controller._val_turn_tracker == 1){
+					draw_sprite_ext(_spr_card,0,x,y,_val_scale_x,_val_scale_y,0,c_ltgray,1);
+				}
+				else{
+					draw_sprite_ext(_spr_card,0,x,y,_val_scale_x,_val_scale_y,0,c_white,1);
+				}
+			}
+		}
+
+		if (obj_battle_player_controller._player_state != PLAYER_STATE.SELECT_CARD){
+			_flag_card_oom_check = false;
 		}
 	}
+	#endregion
+
+	//
+	// ENEMY CARD
+	//
+	#region ENEMY CARD
+	else{
+
+		x = _ref_unit.x;
+
+		if (_ref_unit._val_cur_hp <= 0){
+			visible = false;
+		}
+		else{
+
+			_spr_preview_card = undefined;
+
+			_val_scale_x = 0.15;
+			_val_scale_y = 0.15;
+			_val_preview_scale = 1.0;
+
+			if (_str_location == "DECK"){
+				visible = false;
+			}
+			else{
+
+				if (obj_battle_enemy_controller._enemy_state == ENEMY_STATE.CAST_CARDS){
+					visible = false;
+				}
+				else{
+					visible = true;
+				}
+
+				if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+
+					_val_scale_x *= 1.15;
+					_val_scale_y *= 1.15;
+
+					if (keyboard_check(vk_lcontrol)){
+						_spr_preview_card = _spr_card;
+					}
+				}
+
+				draw_sprite_ext(_spr_card,0,x,y,_val_scale_x,_val_scale_y,0,c_white,1);
+			}
+		}
+	}
+	#endregion
 }
+
+//
+// CARD PREVIEW
+//
+#region CARD PREVIEW
+if (_spr_preview_card != undefined){
+	draw_sprite_ext(_spr_card,0,room_width * 0.5,room_height * 0.5,_val_preview_scale,_val_preview_scale,0,c_white,1);
 }
+#endregion

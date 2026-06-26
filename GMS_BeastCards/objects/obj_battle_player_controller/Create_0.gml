@@ -1,51 +1,54 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_BATTLE_PLAYER_CONTROLLER
+// FUNCTION: Initializes player battle state.
+//           Stores mana, beast lists, battle card piles, and status trackers.
+//           Defines helper methods for card and beast validity checks.
 //
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
-_cur_mana = 3;
-_max_mana = 3;
-_saved_max_mana = 3;
-_hand_size = 5;
-_draw_amount = 2;
+//---------//
+//VARIABLES//
+//---------//
 
+// MANA
+_val_cur_mana = 3;
+_val_max_mana = 3;
+_val_saved_max_mana = 3;
 
-#region BATTLE
-	//CARD CASTING
-	global.cast_card = undefined;
-	global.caster_beast = undefined;
-	global.target_beast = undefined;
+// CARD FLOW
+_ct_hand_size = 5;
+_ct_draw_amount = 2;
 
-	global.echo_counter = 0;
+// BATTLE GLOBALS
+global.cast_card = undefined;
+global.caster_beast = undefined;
+global.target_beast = undefined;
 
-	//MINIONS
-	_minions_init = false;
+global.echo_counter = 0;
 
-	//STATUSES
-	global.statuses = ds_list_create();
-	_statuses_init = false;
-#endregion
+// MINIONS
+_flag_minions_init = false;
+_list_casting_minions = undefined;
 
-//BEASTS
-_beasts_list = ds_list_create();
-_beasts_alive = ds_list_create();
-_beasts_graveyard = ds_list_create();
+// STATUSES
+global.statuses = ds_list_create();
 
-//DECK
-_battle_deck = ds_list_create();
-_battle_hand = ds_list_create();
-_battle_discard = ds_list_create();
-_battle_exhaust = ds_list_create();
+_flag_statuses_init = false;
+_list_statuses = undefined;
 
-//SELECTIONS
+// BEASTS
+_list_beasts = ds_list_create();
+_list_beasts_alive = ds_list_create();
+_list_beasts_graveyard = ds_list_create();
 
+// DECK
+_list_battle_deck = ds_list_create();
+_list_battle_hand = ds_list_create();
+_list_battle_discard = ds_list_create();
+_list_battle_exhaust = ds_list_create();
 
-
-//PLAYER STATE
+// PLAYER STATE
 enum PLAYER_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
@@ -63,235 +66,227 @@ enum PLAYER_STATE{
 
 _player_state = PLAYER_STATE.INIT_BEASTS;
 
-//CLICK COOLDOWNS
+// CLICK COOLDOWN
 _flag_clicked = false;
-_cooldown = 10;
+_val_cooldown = 10;
 
-//
-//INIT
-//
+//----//
+//INIT//
+//----//
 
-//
-//METHODS
-//
+//-------//
+//METHODS//
+//-------//
 
-//
-//
-//
-function scr_check_battle_card_oom(_list){
-	for (var _i = 0; _i < ds_list_size(_list); _i++){
-		var _card = ds_list_find_value(_list,_i);
-		var _card_cost = _card._ref_card[?"card_mana_cost"];
-			
-		if (_card_cost <= _cur_mana){
-			_card._card_oom_check = false;	
-		} else {
-			_card._card_oom_check = true;	
+//—------------------------------------------------------------------------------//
+// hscr_check_battle_card_oom
+// FUNCTION: Flags cards as uncastable when their mana cost exceeds current mana.
+//—------------------------------------------------------------------------------//
+function hscr_check_battle_card_oom(_list_cards){
+
+	for (var _it_card = 0; _it_card < ds_list_size(_list_cards); _it_card++){
+
+		var _ref_card = ds_list_find_value(_list_cards,_it_card);
+		var _val_card_cost = _ref_card._ref_card.card_mana_cost;
+
+		if (_val_card_cost <= _val_cur_mana){
+			_ref_card._card_oom_check = false;
 		}
-	}	
-}
-
-//
-//
-//
-function scr_check_battle_beast_color(_list)
-{
-    var _card_color_arr = global.cast_card._ref_card[?"card_colors"];
-    var _c1 = _card_color_arr[0];
-    var _c2 = _card_color_arr[1];
-
-    for (var _b = 0; _b < ds_list_size(_list); _b++)
-    {
-        var _beast = ds_list_find_value(_list, _b);
-        var _colors = _beast._ref_unit[?"beast_colors"];
-
-        var _b1 = _colors[0];
-        var _b2 = _colors[1];
-
-        // default assumption: fail
-        var _match = false;
-
-        // UNCOLORED = always valid
-        if (_c1 == "UNCOLORED" || _b1 == "UNCOLORED" || _b2 == "UNCOLORED")
-        {
-            _match = true;
-        }
-        else
-        {
-            // check c1
-            if (_c1 != undefined && (_c1 == _b1 || _c1 == _b2))
-            {
-                _match = true;
-            }
-
-            // check c2 only if needed
-            if (_c2 != undefined && (_c2 == _b1 || _c2 == _b2))
-            {
-                _match = true;
-            }
-        }
-
-        _beast._beast_color_check = _match;
-    }
-}
-
-//
-//
-//
-function scr_check_battle_beast_archetype(_list){
-	for (var _b = 0; _b < ds_list_size(_list); _b++){
-		var _card_archetype = global.cast_card._ref_card[?"card_archetype_req"];
-			
-		var _beast = ds_list_find_value(_list,_b);
-		var _beast_archetype = _beast._ref_unit[?"beast_archetype"];
-		
-		_beast._beast_archetype_check = false;	
-			
-		if (_card_archetype == undefined || _card_archetype == _beast_archetype){
-				_beast._beast_archetype_check = true;	
-			} else {
-				_beast._beast_archetype_check = false;	
-		}	
+		else{
+			_ref_card._card_oom_check = true;
+		}
 	}
 }
 
-//
-//
-//
-function scr_check_battle_beast_class(_list){
-		for (var _b = 0; _b < ds_list_size(_list); _b++){
-			var _card_class = global.cast_card._ref_card[?"card_class_req"];
-			
-			var _beast = ds_list_find_value(_list,_b);
-			var _beast_class = _beast._ref_unit[?"beast_class"];
+//—------------------------------------------------------------------------------//
+// hscr_check_battle_beast_color
+// FUNCTION: Checks whether each beast can cast the selected card by color.
+//—------------------------------------------------------------------------------//
+function hscr_check_battle_beast_color(_list_beast_check){
 
-			
-			if (_card_class == undefined || _card_class == _beast_class){
-					_beast._beast_class_check = true;	
-				} else {
-					_beast._beast_class_check = false;	
-				}	
+	var _arr_card_colors = global.cast_card._ref_card.card_colors;
+
+	var _str_card_color_1 = _arr_card_colors[0];
+	var _str_card_color_2 = _arr_card_colors[1];
+
+	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+		var _arr_beast_colors = _ref_beast._ref_unit.beast_colors;
+
+		var _str_beast_color_1 = _arr_beast_colors[0];
+		var _str_beast_color_2 = _arr_beast_colors[1];
+
+		var _flag_match = false;
+
+		if (_str_card_color_1 == "UNCOLORED" || _str_beast_color_1 == "UNCOLORED" || _str_beast_color_2 == "UNCOLORED"){
+			_flag_match = true;
+		}
+		else{
+			if (_str_card_color_1 != undefined && (_str_card_color_1 == _str_beast_color_1 || _str_card_color_1 == _str_beast_color_2)){
+				_flag_match = true;
 			}
+
+			if (_str_card_color_2 != undefined && (_str_card_color_2 == _str_beast_color_1 || _str_card_color_2 == _str_beast_color_2)){
+				_flag_match = true;
+			}
+		}
+
+		_ref_beast._beast_color_check = _flag_match;
+	}
 }
 
-//
-//
-//
-function scr_check_battle_beast_range(_list,_range){
-// RANGE: SELF, MELEE, RANGED, BACK, GLOBAL
-			
-	//
+//—------------------------------------------------------------------------------//
+// hscr_check_battle_beast_archetype
+// FUNCTION: Checks whether each beast matches the selected card archetype requirement.
+//—------------------------------------------------------------------------------//
+function hscr_check_battle_beast_archetype(_list_beast_check){
+
+	var _str_card_archetype = global.cast_card._ref_card.card_archetype_req;
+
+	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+		var _str_beast_archetype = _ref_beast._ref_unit.beast_archetype;
+
+		if (_str_card_archetype == undefined || _str_card_archetype == _str_beast_archetype){
+			_ref_beast._beast_archetype_check = true;
+		}
+		else{
+			_ref_beast._beast_archetype_check = false;
+		}
+	}
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_check_battle_beast_class
+// FUNCTION: Checks whether each beast matches the selected card class requirement.
+//—------------------------------------------------------------------------------//
+function hscr_check_battle_beast_class(_list_beast_check){
+
+	var _str_card_class = global.cast_card._ref_card.card_class_req;
+
+	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+		var _str_beast_class = _ref_beast._ref_unit.beast_class;
+
+		if (_str_card_class == undefined || _str_card_class == _str_beast_class){
+			_ref_beast._beast_class_check = true;
+		}
+		else{
+			_ref_beast._beast_class_check = false;
+		}
+	}
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_check_battle_beast_range
+// FUNCTION: Checks valid targets based on selected card range.
+//           Updates player and enemy beast range flags.
+//—------------------------------------------------------------------------------//
+function hscr_check_battle_beast_range(_list_beast_check,_str_range){
+
 	// PLAYER TEAM
-	//
-	for (var _b = 0; _b < ds_list_size(_list); _b++){
-		var _beast_player = ds_list_find_value(_list,_b);
-		switch (_range){
+	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+		var _ref_beast_player = ds_list_find_value(_list_beast_check,_it_beast);
+
+		switch(_str_range){
+
 			case "SELF":
-				//CAN ONLY CAST ON SELF
-				if (_beast_player == global.caster_beast){
-					_beast_player._beast_range_check = true;	
-				} else {
-					_beast_player._beast_range_check = false;
-				}
+				_ref_beast_player._beast_range_check = (_ref_beast_player == global.caster_beast);
 			break;
-			
+
 			case "MELEE":
-				//CAN HIT ANY ALLY WITH A MELEE ATTACK (STAB IN BACK)
-				_beast_player._beast_range_check = true;
+				_ref_beast_player._beast_range_check = true;
 			break;
-					
+
 			case "TEAM":
-				//CAN SELECT ANY ALLY FOR TEAM CARD
-				if (_beast_player != self){
-					_beast_player._beast_range_check = true;
-				}
-			break;					
-			
-			case "RANGED":
-				//CAN HIT ANY ALLY WITH RANGED ATTACK (STAB IN BACK)
-				_beast_player._beast_range_check = true;
+				_ref_beast_player._beast_range_check = (_ref_beast_player != global.caster_beast);
 			break;
-			
+
+			case "RANGED":
+				_ref_beast_player._beast_range_check = true;
+			break;
+
 			case "BACK":
-				//CAN HIT ANY ALLY WITH BACK ATTACK (STAB IN BACK)
-				_beast_player._beast_range_check = true;
+				_ref_beast_player._beast_range_check = true;
+			break;
+
+			default:
+				_ref_beast_player._beast_range_check = false;
 			break;
 		}
 	}
-			
-	//
+
 	// ENEMY TEAM
-	//
-	for (var _b = 0; _b < ds_list_size(obj_battle_enemy_controller._beasts_alive); _b++){
-		var _beast_enemy = ds_list_find_value(obj_battle_enemy_controller._beasts_alive,_b);
-		switch (_range){
+	for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_alive); _it_beast++){
+
+		var _ref_beast_enemy = ds_list_find_value(obj_battle_enemy_controller._list_beasts_alive,_it_beast);
+
+		switch(_str_range){
+
 			case "SELF":
-				//CAN ONLY CAST ON SELF
-				_beast_enemy._beast_range_check = false;
+				_ref_beast_enemy._beast_range_check = false;
 			break;
-			
+
 			case "MELEE":
-				//CAN ONLY HIT THE FIRST UNIT
-				if (_b == 0){
-					_beast_enemy._beast_range_check = true;
-				}
-				else {
-					_beast_enemy._beast_range_check = false;	
-				}
+				_ref_beast_enemy._beast_range_check = (_it_beast == 0);
 			break;
-			
+
 			case "RANGED":
-				//CAN HIT ANY UNIT WITH A RANGED ATTACK
-				_beast_enemy._beast_range_check = true;
+				_ref_beast_enemy._beast_range_check = true;
 			break;
-					
+
 			case "TEAM":
-				//CAN SELECT NO ENEMY
-				_beast_enemy._beast_range_check = false;
-			break;						
-			
+				_ref_beast_enemy._beast_range_check = false;
+			break;
+
 			case "BACK":
-				//CAN ONLY HIT THE BACK UNIT
-				if (_b == ds_list_size(obj_battle_enemy_controller._beasts_alive)-1){
-					_beast_enemy._beast_range_check = true;
-				} else {
-					_beast_enemy._beast_range_check = false;	
-				}
+				_ref_beast_enemy._beast_range_check = (_it_beast == ds_list_size(obj_battle_enemy_controller._list_beasts_alive) - 1);
+			break;
+
+			default:
+				_ref_beast_enemy._beast_range_check = false;
 			break;
 		}
-	}			
+	}
 }
 
-//
-//
-//
-function scr_reroll_hand()
-{
-    while (ds_list_size(_battle_hand) > 0)
-    {
-        var _card = ds_list_find_value(_battle_hand, 0);
-        scr_discard_card(_card);
-    }
+//—------------------------------------------------------------------------------//
+// hscr_reroll_hand
+// FUNCTION: Discards current hand, draws new cards, and refreshes mana checks.
+//—------------------------------------------------------------------------------//
+function hscr_reroll_hand(){
 
-    scr_draw_cards(_draw_amount);
+	while (ds_list_size(_list_battle_hand) > 0){
 
-    scr_check_battle_card_oom(_battle_hand);
+		var _ref_card = ds_list_find_value(_list_battle_hand,0);
+		scr_discard_card(_ref_card);
+	}
+
+	scr_draw_cards(_ct_draw_amount);
+	hscr_check_battle_card_oom(_list_battle_hand);
 }
 
-//
-//
-//
-function scr_check_battle_beast_able(_list)
-{
-    for (var _b = 0; _b < ds_list_size(_list); _b++)
-    {
-        var _beast = ds_list_find_value(_list, _b);
-		
-		var _status = scr_check_for_status("STUN",_beast);
-		if (_status != -1){
-			_beast._beast_able_check = false;
-		} else {
-			_beast._beast_able_check = true;
+//—------------------------------------------------------------------------------//
+// hscr_check_battle_beast_able
+// FUNCTION: Flags beasts as unable to act when stunned.
+//—------------------------------------------------------------------------------//
+function hscr_check_battle_beast_able(_list_beast_check){
+
+	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+
+		var _ref_status = scr_check_for_status("STUN",_ref_beast);
+
+		if (_ref_status != -1){
+			_ref_beast._beast_able_check = false;
 		}
-    }
+		else{
+			_ref_beast._beast_able_check = true;
+		}
+	}
 }

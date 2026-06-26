@@ -1,8 +1,20 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_armor_target(_amt,_tar){
-	_tar._armor += _amt;
-	//POPUP
-	scr_spawn_popup_scrolling("TEXT","+" + string(_amt),undefined,c_blue,_tar.x+irandom_range(-32,32),_tar.y-24+irandom_range(-32,32));		
-	
+//===============================================================================//
+//
+// SCR_ARMOR_TARGET
+// FUNCTION: Adds armor to a target battle beast.
+//           Spawns armor gain popup text at the target.
+//
+//===============================================================================//
+function scr_armor_target(_val_amount,_ref_target){
+
+	_ref_target._val_armor += _val_amount;
+
+	scr_spawn_popup_scrolling(
+		"TEXT",
+		"+" + string(_val_amount),
+		undefined,
+		c_blue,
+		_ref_target.x + irandom_range(-32,32),
+		_ref_target.y - 24 + irandom_range(-32,32)
+	);
 }

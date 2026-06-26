@@ -1,30 +1,32 @@
+//===============================================================================//
 //
+// SCR_CAST_MINION_EFFECT
+// FUNCTION: Casts the effect of a battle minion.
+//           Determines friendly and enemy beast lists from the minion team.
+//           Executes behavior based on minion name.
 //
-//
-//
-//
-function scr_cast_minion_effect(_minion){
-	var _min_name = _minion._name;
-	var _min_team = _minion._team;
-	var _enemy_list;
-	var _friendly_list;
-	if (_min_team == "PLAYER"){
-		_friendly_list = obj_battle_player_controller._beasts_alive;
-		_enemy_list = obj_battle_enemy_controller._beasts_alive;
-	}else{
-		_enemy_list = obj_battle_player_controller._beasts_alive;
-		_friendly_list = obj_battle_enemy_controller._beasts_alive;
+//===============================================================================//
+function scr_cast_minion_effect(_ref_minion){
+
+	var _str_minion_name = _ref_minion._str_name;
+	var _str_minion_team = _ref_minion._str_team;
+
+	var _list_enemy;
+	var _list_friendly;
+
+	if (_str_minion_team == "PLAYER"){
+		_list_friendly = obj_battle_player_controller._list_beasts_alive;
+		_list_enemy = obj_battle_enemy_controller._list_beasts_alive;
 	}
-	
-	switch(_min_name){
+	else{
+		_list_enemy = obj_battle_player_controller._list_beasts_alive;
+		_list_friendly = obj_battle_enemy_controller._list_beasts_alive;
+	}
+
+	switch(_str_minion_name){
+
 		case "LIFE SPIRIT":
-			//HEAL HOST
-			scr_heal_target(2,_minion._host);
-			
-			//PLAY ANIMATION
-	
-			//PLAY SOUND
-	
+			scr_heal_target(2,_ref_minion._ref_host);
 		break;
 	}
 }

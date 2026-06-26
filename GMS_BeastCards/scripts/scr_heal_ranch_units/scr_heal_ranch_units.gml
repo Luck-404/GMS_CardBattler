@@ -1,37 +1,33 @@
 //===============================================================================//
 //
-// SCR_HEAL_RANCH_UNITS
-// FUNCTION: Triggered after battle completion.
-//           Heals all beasts currently stored in the ranch.
+// SCRIPT: SCR_HEAL_RANCH_UNITS
+// FUNCTION: Heals all beasts currently stored in the ranch.
 //           Restores a percentage of each beast's maximum HP.
 //           Will not heal beyond maximum HP.
 //
 //===============================================================================//
-function scr_heal_ranch_units(_amount)
-{
+function scr_heal_ranch_units(_val_amount){
     // _amount expected as decimal percent
     // Example:
     // 0.33 = 33%
     // 0.50 = 50%
     // 1.00 = full heal
 
-    var _ranch_count = ds_list_size(global.player_ranch);
+	for (var _it_beast = 0; _it_beast < ds_list_size(global.player_ranch); _it_beast++){
+		var _stct_beast = ds_list_find_value(global.player_ranch,_it_beast);
 
-    for (var _i = 0; _i < _ranch_count; _i++)
-    {
-        var _beast = ds_list_find_value(global.player_ranch, _i);
+		if (_stct_beast == undefined){
+			continue;
+		}
 
-        if (_beast == undefined)
-            continue;
+		var _val_max_hp = _stct_beast.beast_hp_max;
+		var _val_cur_hp = _stct_beast.beast_hp_cur;
 
-        var _max_hp = _beast[?"beast_hp_max"];
-        var _cur_hp = _beast[?"beast_hp_cur"];
+		var _val_heal_amount = ceil(_val_max_hp * _val_amount);
 
-        var _heal_amount = ceil(_max_hp * _amount);
+		_val_cur_hp += _val_heal_amount;
+		_val_cur_hp = min(_val_cur_hp,_val_max_hp);
 
-        _cur_hp += _heal_amount;
-        _cur_hp = min(_cur_hp, _max_hp);
-
-        _beast[?"beast_hp_cur"] = _cur_hp;
-    }
+		_stct_beast.beast_hp_cur = _val_cur_hp;
+	}
 }

@@ -1,78 +1,108 @@
+//===============================================================================//
 //
-// DRAW: OBJ_MINION
+// DRAW: OBJ_BATTLE_MINION
+// FUNCTION: Draws the battle minion.
+//           Displays sprite, HP, and an inspection tooltip while hovered.
 //
+//===============================================================================//
+
 if (!instance_exists(obj_gui_end_battle_pane)){
 
-if (_host == undefined) exit;
+	if (_ref_host == undefined){
+		exit;
+	}
 
+	//
+	// BASIC SETUP
+	//
+	#region BASIC SETUP
 
+	draw_set_font(fnt_small_party_draw);
 
-//----------------------------------------------------
-// BASIC SETUP
-//----------------------------------------------------
-draw_set_font(fnt_small_party_draw);
+	var _val_scale = 0.125;
+	var _val_flip = (_str_team == "ENEMY") ? -1 : 1;
 
-var _scale = 0.125;
+	#endregion
 
-// direction flip for enemy side
-var _flip = (_team == "ENEMY") ? -1 : 1;
+	//
+	// DRAW SPRITE
+	//
+	#region DRAW SPRITE
 
-//----------------------------------------------------
-// DRAW SPRITE (SCALED)
-//----------------------------------------------------
-draw_sprite_ext(
-    _minion_sprite,
-    0,
-    x,
-    y,
-    _scale * _flip,
-    _scale,
-    0,
-    c_white,
-    1
-);
+	draw_sprite_ext(
+		_spr_minion,
+		0,
+		x,
+		y,
+		_val_scale * _val_flip,
+		_val_scale,
+		0,
+		c_white,
+		1
+	);
 
-//----------------------------------------------------
-// HP TEXT
-//----------------------------------------------------
-draw_set_colour(c_white);
+	#endregion
 
-var _hp_text = string(_cur_hp) + "/" + string(_max_hp);
+	//
+	// DRAW HP
+	//
+	#region DRAW HP
 
-draw_text(
-    x - string_width(_hp_text) * 0.5,
-    y + 20,
-    _hp_text
-);
+	draw_set_colour(c_white);
 
-//----------------------------------------------------
-// TOOLTIP (CTRL HOVER) - CENTER TOP PANEL
-//----------------------------------------------------
-if (keyboard_check(vk_lcontrol) && position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), self))
-{
-    var _host_name = (_host != undefined) ? string(_host._ref_unit[?"beast_name"]) : "UNKNOWN";
+	var _str_hp = string(_val_cur_hp) + "/" + string(_val_max_hp);
 
-    var _title = string(_name) + "  |  " + _host_name;
+	draw_text(
+		x - string_width(_str_hp) * 0.5,
+		y + 20,
+		_str_hp
+	);
 
-    var _panel_w = string_width(_title) + 40;
-    var _panel_h = 40;
+	#endregion
 
-    var _px = room_width * 0.5 - _panel_w * 0.5;
-    var _py = 20;
+	//
+	// DRAW TOOLTIP
+	//
+	#region DRAW TOOLTIP
 
-    // background
-    draw_set_colour(c_dkgray);
-    draw_rectangle(_px, _py, _px + _panel_w, _py + _panel_h, false);
+	if (keyboard_check(vk_lcontrol) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 
-    draw_set_colour(c_black);
-    draw_rectangle(_px, _py, _px + _panel_w, _py + _panel_h, true);
+		var _str_host_name = (_ref_host != undefined) ? string(_ref_host._stct_unit.beast_name) : "UNKNOWN";
 
-    // text
-    draw_set_colour(c_white);
-    draw_text(
-        _px + _panel_w * 0.5 - string_width(_title) * 0.5,
-        _py + 12,
-        _title
-    );
-}
+		var _str_title = _str_name + " | " + _str_host_name;
+
+		var _val_panel_w = string_width(_str_title) + 40;
+		var _val_panel_h = 40;
+
+		var _val_panel_x = room_width * 0.5 - (_val_panel_w * 0.5);
+		var _val_panel_y = 20;
+
+		draw_set_colour(c_dkgray);
+		draw_rectangle(
+			_val_panel_x,
+			_val_panel_y,
+			_val_panel_x + _val_panel_w,
+			_val_panel_y + _val_panel_h,
+			false
+		);
+
+		draw_set_colour(c_black);
+		draw_rectangle(
+			_val_panel_x,
+			_val_panel_y,
+			_val_panel_x + _val_panel_w,
+			_val_panel_y + _val_panel_h,
+			true
+		);
+
+		draw_set_colour(c_white);
+
+		draw_text(
+			_val_panel_x + (_val_panel_w * 0.5) - (string_width(_str_title) * 0.5),
+			_val_panel_y + 12,
+			_str_title
+		);
+	}
+
+	#endregion
 }

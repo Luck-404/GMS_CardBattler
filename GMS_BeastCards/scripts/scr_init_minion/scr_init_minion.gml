@@ -1,39 +1,48 @@
-function scr_init_minion(_id,_card,_caster,_target){
-	switch(_id){
+//===============================================================================//
+//
+// SCR_INIT_MINION
+// FUNCTION: Creates a battle minion from a minion ID.
+//           Attaches it to the target beast.
+//           Replaces the oldest minion if the target is already at capacity.
+//
+//===============================================================================//
+function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
+
+	switch(_str_id){
+
 		case "LIFE_SPIRIT":
-			var _new_minion = instance_create_layer(_target.x,_target.y,"ily_minions",obj_battle_minion);
-			_new_minion._team = _target._team;
-			_new_minion._name = "LIFE SPIRIT";
-			_new_minion._cur_hp = 2;
-			_new_minion._max_hp = 2;
-			_new_minion._host = _target;
-			_new_minion._minion_sprite = spr_minion_life_spirit;
-	
-			if (ds_list_size(_target._minions) < _target._minions_max){
-		
-				ds_list_add(_target._minions,_new_minion);
-				//PLAY ANIMATION
-	
-				//PLAY SOUND
-	
-				//POPUP
-				scr_spawn_popup_scrolling("TEXT","+ MINION",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));		
-			} else {
-				//REPLACE OLDEST
-				var _old_min = ds_list_find_value(_target._minions,0);
-				ds_list_replace(_target._minions,0,_new_minion);
-				instance_destroy(_old_min);
-		
-				//PLAY ANIMATION
-	
-				//PLAY SOUND
-	
-				//POPUP
-				scr_spawn_popup_scrolling("TEXT","+ MINION (REPLACED OLDEST)",undefined,c_black,_target.x+irandom_range(-32,32),_target.y-24+irandom_range(-32,32));		
+
+			var _ref_new_minion = instance_create_layer(_ref_target.x,_ref_target.y,"ily_minions",obj_battle_minion);
+
+			_ref_new_minion._str_team = _ref_target._str_team;
+			_ref_new_minion._str_name = "LIFE SPIRIT";
+			_ref_new_minion._val_cur_hp = 2;
+			_ref_new_minion._val_max_hp = 2;
+			_ref_new_minion._ref_host = _ref_target;
+			_ref_new_minion._spr_minion = spr_minion_life_spirit;
+
+			if (ds_list_size(_ref_target._list_minions) < _ref_target._ct_minions_max){
+
+				ds_list_add(_ref_target._list_minions,_ref_new_minion);
+
+				scr_spawn_popup_scrolling("TEXT","+ MINION",undefined,c_black,_ref_target.x + irandom_range(-32,32),_ref_target.y - 24 + irandom_range(-32,32));
 			}
-			
-		scr_reposition_minions(_target);	
-		scr_reposition_statuses(_target);				
+			else{
+
+				var _ref_old_minion = ds_list_find_value(_ref_target._list_minions,0);
+
+				ds_list_replace(_ref_target._list_minions,0,_ref_new_minion);
+
+				if (instance_exists(_ref_old_minion)){
+					instance_destroy(_ref_old_minion);
+				}
+
+				scr_spawn_popup_scrolling("TEXT","+ MINION (REPLACED OLDEST)",undefined,c_black,_ref_target.x + irandom_range(-32,32),_ref_target.y - 24 + irandom_range(-32,32));
+			}
+
+			scr_reposition_minions(_ref_target);
+			scr_reposition_statuses(_ref_target);
+
 		break;
 	}
 }

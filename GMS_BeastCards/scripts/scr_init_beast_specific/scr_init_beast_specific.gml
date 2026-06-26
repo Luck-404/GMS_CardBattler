@@ -1,38 +1,56 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_INIT_BEAST_SPECIFIC
+// FUNCTION: Creates a beast struct from a base beast.
+//           Applies a specific color subtype, ability, and breed.
+//           Initializes HP values and assigns a unique UID.
 //
-// SCRIPT: SCR_INIT_BEAST_SPECIFIC | TAKE A BASE BEAST, SET ITS COLOR TYPE, ABILITY, BREED, AND UPDATE ITS HP VALUES AFTER | RETURNS MAP OF NEW BEAST
-//
-//
-function scr_init_beast_specific(_beast_name,_specific_data){
-	//GET A BASE BEAST
-	var _new_beast = scr_get_beast_info(_beast_name);
-	
-	//SET THE COLOR TYPE
+//===============================================================================//
+
+function scr_init_beast_specific(_str_beast_name,_arr_specific_data){
+
+	// GET BASE BEAST
+	var _stct_new_beast = scr_get_beast_info(_str_beast_name);
+
+	//
+	// COLOR TYPE
+	//
 	#region COLOR TYPE
-	ds_map_replace(_new_beast,"beast_color_type",_specific_data[0]);
+	_stct_new_beast.beast_color_type = _arr_specific_data[0];
 	#endregion
-	
-	//SET THE ABILITY
+
+	//
+	// ABILITY
+	//
 	#region ABILITY
-	ds_map_replace(_new_beast,"beast_ability",_specific_data[1]);
+	_stct_new_beast.beast_ability = _arr_specific_data[1];
 	#endregion
-	
-	//SET THE BREED
+
+	//
+	// BREED
+	//
 	#region BREED
-	ds_map_replace(_new_beast,"beast_breed",_specific_data[2]);
+	_stct_new_beast.beast_breed = _arr_specific_data[2];
 	#endregion
-	
-	//SET UP CUR AND MAX HP VALUES
-	#region HP VALUES
-	var _hp_stat = _new_beast[?"beast_hp_stat"];
-	var _hp_modifier = scr_get_beast_grade_modifier(_hp_stat);
-	var _hp_calculated = ceil(10 + ((_hp_modifier*10)*1)/4);
-	ds_map_replace(_new_beast,"beast_hp_cur",_hp_calculated);
-	ds_map_replace(_new_beast,"beast_hp_max",_hp_calculated);
+
+	//
+	// INITIALIZE HP
+	//
+	#region HP
+	var _val_hp_modifier = scr_get_beast_grade_modifier(_stct_new_beast.beast_hp_stat);
+	var _val_hp = ceil(10 + ((_val_hp_modifier * 10) * _stct_new_beast.beast_level) / 4);
+
+	_stct_new_beast.beast_hp_cur = _val_hp;
+	_stct_new_beast.beast_hp_max = _val_hp;
 	#endregion
-	
-	//UID
-	var _uid = global.beast_uid;
-	ds_map_add(_new_beast,"beast_uid",_uid);
-	global.beast_uid = global.beast_uid+1;	
+
+	//
+	// ASSIGN UID
+	//
+	#region UID
+	_stct_new_beast.beast_uid = global.beast_uid;
+	global.beast_uid++;
+	#endregion
+
+	return _stct_new_beast;
 }

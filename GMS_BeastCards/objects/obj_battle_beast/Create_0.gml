@@ -1,66 +1,87 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_BATTLE_BEAST
+// FUNCTION: Initializes a battle beast instance.
+//           Stores combat stats, status/minion/card lists, and unit reference.
+//           Defines helper scripts for alive/dead battlefield positioning.
 //
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
-_sprite = undefined;
-_uid = -1;
-_team = "PLAYER";
-_list = "ALIVE";
-_pos = -1;
-_cur_hp = 1;
-_max_hp = 1;
-_overhealth = 0;
-_armor = 0;
-_statuses = ds_list_create();
-_minions_max = 1;
-_minions = ds_list_create();
-_decklist = ds_list_create();
-_hand_pos = 0;
-_ref_unit = undefined; //stores an exact ref of the rolled or copied unit
+//---------//
+//VARIABLES//
+//---------//
+
+// VISUAL / ID
+_spr_beast = undefined;
+_uid_beast = -1;
+
+// TEAM / POSITION
+_str_team = "PLAYER";
+_str_list = "ALIVE";
+_val_pos = -1;
+
+// HP / DEFENSE
+_val_cur_hp = 1;
+_val_max_hp = 1;
+_val_overhealth = 0;
+_val_armor = 0;
+
+// STATUS / MINIONS
+_list_statuses = ds_list_create();
+
+_ct_minions_max = 1;
+_list_minions = ds_list_create();
+
+// CARDS
+_list_deck = ds_list_create();
+_val_hand_pos = 0;
+
+// UNIT REF
+_stct_unit = undefined;
+
+// STATE FLAGS
 _flag_death_handled = false;
-_preview_beast = false;
+_flag_preview_beast = false;
 
-//CHECKS
-_beast_color_check = true;
-_beast_archetype_check = true;
-_beast_class_check = true;
-_beast_range_check = true;
-_beast_able_check = true;
-//
-//INIT
-//
+// CASTING CHECKS
+_flag_beast_color_check = true;
+_flag_beast_archetype_check = true;
+_flag_beast_class_check = true;
+_flag_beast_range_check = true;
+_flag_beast_able_check = true;
 
+//----//
+//INIT//
+//----//
 
-//
-//METHODS
-//
-function scr_get_battle_x(_team, _pos)
-{
-    if (_team == "PLAYER")
-    {
-        return room_width/2 - 80 - (100 * _pos);
-    }
-    else
-    {
-        return room_width/2 + 80 + (100 * _pos);
-    }
+//-------//
+//METHODS//
+//-------//
+
+//—------------------------------------------------------------------------------//
+// hscr_get_battle_x
+// FUNCTION: Returns the active battle x-position for a beast by team and position.
+//—------------------------------------------------------------------------------//
+function hscr_get_battle_x(_str_team_check,_val_pos_check){
+
+	if (_str_team_check == "PLAYER"){
+		return room_width * 0.5 - 80 - (100 * _val_pos_check);
+	}
+	else{
+		return room_width * 0.5 + 80 + (100 * _val_pos_check);
+	}
 }
 
-function scr_get_dead_x(_team, _alive_count, _dead_pos)
-{
-    if (_team == "PLAYER")
-    {
-        return room_width/2 - 80
-             - (100 * (_alive_count + _dead_pos));
-    }
-    else
-    {
-        return room_width/2 + 80
-             + (100 * (_alive_count + _dead_pos));
-    }
+//—------------------------------------------------------------------------------//
+// hscr_get_dead_x
+// FUNCTION: Returns the graveyard x-position for a dead beast by team and position.
+//—------------------------------------------------------------------------------//
+function hscr_get_dead_x(_str_team_check,_ct_alive,_val_dead_pos){
+
+	if (_str_team_check == "PLAYER"){
+		return room_width * 0.5 - 80 - (100 * (_ct_alive + _val_dead_pos));
+	}
+	else{
+		return room_width * 0.5 + 80 + (100 * (_ct_alive + _val_dead_pos));
+	}
 }

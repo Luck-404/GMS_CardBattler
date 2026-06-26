@@ -1,13 +1,15 @@
+//===============================================================================//
 //
+// CREATE: OBJ_HEALING_POOL_INTERACTABLE
 //
-// CREATE: OBJ_GUI_PARTY_RANCH_INTERACTABLE
-//
-//
+//===============================================================================//
 
-//VARIABLES
+// VARIABLES
 depth = 1;
+
 _flag_triggered = false;
 _cooldown = 10;
-//INIT
 
-//METHODS
+// INIT
+
+// METHODS

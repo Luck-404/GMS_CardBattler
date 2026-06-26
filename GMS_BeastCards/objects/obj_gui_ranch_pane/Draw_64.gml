@@ -1,280 +1,209 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_GUI_RANCH_PANE
+// FUNCTION: Draws party and ranch beast slots.
+//           Handles moving beasts between party and ranch.
+//           Handles ranch deletion, pagination, and click cooldown.
 //
-// DRAW: OBJ_GUI_PARTY_PANE | DRAW PARTY UNITS, DRAW RANCH UNITS, ALLOW FOR MOVING BETWEEN THE TWO WITH A CLICK
-//
-//
+//===============================================================================//
+
+draw_self();
+
+_ct_party = ds_list_size(global.player_party);
+_ct_ranch = ds_list_size(global.player_ranch);
+
+var _val_mouse_x = device_mouse_x_to_gui(0);
+var _val_mouse_y = device_mouse_y_to_gui(0);
 
 //
-// PARTY DRAW | DRAWS PLAYER'S PARTY IN GUI PANE
+// SIGNS
 //
-#region PARTY DRAW IN PANE
-draw_self(); //DRAW PANE ITSELF
-
-//DRAW SIGNIFIERS ABOVE THE PANE TO SHOW WHICH SIDE IS WHICH
 #region SIGNS
 draw_set_font(fnt_medium_gui);
 draw_set_colour(c_white);
-draw_text(_pane_left+100,_pane_top-25,"PARTY");
-draw_text(_pane_left+615,_pane_top-25,"RANCH");
-#endregion
+
+draw_text(_val_pane_left + 100,_val_pane_top - 25,"PARTY");
+draw_text(_val_pane_left + 615,_val_pane_top - 25,"RANCH");
+
 draw_set_font(fnt_small_gui);
+#endregion
 
 //
-// PARTY SIDE (LEFT)
+// PARTY SIDE
 //
 #region PARTY DRAW AND MOVING TO RANCH
-for (var _i = 0; _i < 5; _i++)
-{
-    var _unit = ds_list_find_value(global.player_party, _i);
+for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 
-	//
-	// DRAW BACKGROUND AND BOXES
-	//
-	#region BG
-    var _box_x = _party_x;
-    var _box_y = _start_y + (_i * (_slot_h + _slot_margin));
+	var _stct_unit = ds_list_find_value(global.player_party,_it_unit);
 
-    // Background
-    draw_set_colour(c_black);
-    draw_rectangle(_box_x, _box_y, _box_x + _slot_w, _box_y + _slot_h, false);
+	var _val_box_x = _val_party_x;
+	var _val_box_y = _val_start_y + (_it_unit * (_val_slot_h + _val_slot_margin));
 
-    draw_set_colour(c_gray);
-    draw_rectangle(_box_x + 4, _box_y + 4, _box_x + _slot_w - 4, _box_y + _slot_h - 4, false);
-	#endregion
-	
-	//ALWAYS DRAW THE SLOTS EVEN IF NOT ENTIRELY FILLED.
-	if (_unit != undefined){
-		
-    //
-	// DRAW SPRITE BOX AS WELL AS UNIT
-	//
-	#region DRAW UNIT
-	if (_unit[?"beast_hp_cur"] <= 0){
-		draw_set_colour(c_maroon);
-	} else {
-		draw_set_colour(c_aqua);
-	}
-    draw_rectangle(_box_x + 10, _box_y + 10, _box_x + 110, _box_y + 110, false);
+	draw_set_colour(c_black);
+	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
-    var _unit_x = _box_x + 60;
-    var _unit_y = _box_y + 60;
-    var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
-    draw_sprite_ext(_shadow, 0, _unit_x, _unit_y + 20, 1, 1, 0, c_white, 1);
+	draw_set_colour(c_gray);
+	draw_rectangle(_val_box_x + 4,_val_box_y + 4,_val_box_x + _val_slot_w - 4,_val_box_y + _val_slot_h - 4,false);
 
-    draw_sprite_ext(_unit[?"beast_sprite"],0,_unit_x,_unit_y,0.125,0.125,0,c_white,1);
-	#endregion
+	if (_stct_unit != undefined){
 
-	// 
-    // DRAW UNIT INFO
-	//
-	#region DRAW UNIT INFO
-    draw_set_colour(c_black);
+		if (_stct_unit.beast_hp_cur <= 0){
+			draw_set_colour(c_maroon);
+		}
+		else{
+			draw_set_colour(c_aqua);
+		}
 
-    draw_text(_box_x + 125, _box_y + 20, _unit[?"beast_name"]);
-    draw_text(_box_x + 125, _box_y + 45, "LV " + string(_unit[?"beast_level"]));
-    draw_text(_box_x + 125, _box_y + 70, string(_unit[?"beast_hp_cur"]) + "/" + string(_unit[?"beast_hp_max"]));
-	#endregion
-	
-	//
-	// LEFT CLICKING UNITS FROM PARTY TO RANCH
-	//
-	#region LEFT CLICKING PARTY UNIT SENDS TO RANCH
-	if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h && ds_list_size(global.player_party) > 1){
-	    
-		//DRAW THE HIGHLIGHT WHEN HOVERING
-		draw_sprite(spr_gui_ranch_highlight, 0, _party_x + 185, _box_y + 65);
+		draw_rectangle(_val_box_x + 10,_val_box_y + 10,_val_box_x + 110,_val_box_y + 110,false);
 
-		//CHECK FOR CLICKS
-	    if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-			//ONLY ALLOW CLICK ONCE
-	        _flag_clicked = true;
-	        _cooldown = 10;
+		var _val_unit_x = _val_box_x + 60;
+		var _val_unit_y = _val_box_y + 60;
 
-			//ADD TO RANCH, REMOVE FROM PARTY
-	        ds_list_add(global.player_ranch, _unit);
-	        ds_list_delete(global.player_party, _i);
+		var _spr_shadow = scr_get_beast_type_shadow(_stct_unit.beast_color_type);
 
-			//SPAWN A NEW DUMMY UNIT
-	        obj_ranch_interactable.scr_spawn_ranch_unit(_unit);
-			
-			//UPDATE COUNTS
-			_party_count = ds_list_size(global.player_party);
-			_ranch_count = ds_list_size(global.player_ranch);
-	    }
-			
-		//
-		// NUMBER KEY PARTY SLOT SWAP (1-5)
-		//
-		for (var _k = 1; _k <= 5; _k++)
-		{
-			if (keyboard_check_pressed(ord(string(_k))))
-			{
-			    var _target = _k - 1;
+		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 20,1,1,0,c_white,1);
+		draw_sprite_ext(_stct_unit.beast_sprite,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 
-			    if (_target < ds_list_size(global.player_party) && _target != _i)
-			    {
-			        var _hover_unit  = ds_list_find_value(global.player_party, _i);
-			        var _target_unit = ds_list_find_value(global.player_party, _target);
+		draw_set_colour(c_black);
 
-			        ds_list_replace(global.player_party, _i, _target_unit);
-			        ds_list_replace(global.player_party, _target, _hover_unit);
+		draw_text(_val_box_x + 125,_val_box_y + 20,_stct_unit.beast_name);
+		draw_text(_val_box_x + 125,_val_box_y + 45,"LV " + string(_stct_unit.beast_level));
+		draw_text(_val_box_x + 125,_val_box_y + 70,string(_stct_unit.beast_hp_cur) + "/" + string(_stct_unit.beast_hp_max));
 
-			        _party_count = ds_list_size(global.player_party);
+		if (_val_mouse_x > _val_box_x && _val_mouse_x < _val_box_x + _val_slot_w && _val_mouse_y > _val_box_y && _val_mouse_y < _val_box_y + _val_slot_h && ds_list_size(global.player_party) > 1){
 
-			        _flag_clicked = true;
-			        _cooldown = 10;
-			    }
+			draw_sprite(spr_gui_ranch_highlight,0,_val_party_x + 185,_val_box_y + 65);
 
-			    break;
+			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+				_flag_clicked = true;
+				_val_cooldown = 10;
+
+				ds_list_add(global.player_ranch,_stct_unit);
+				ds_list_delete(global.player_party,_it_unit);
+
+				obj_ranch_interactable.hscr_spawn_ranch_unit(_stct_unit);
+
+				_ct_party = ds_list_size(global.player_party);
+				_ct_ranch = ds_list_size(global.player_ranch);
 			}
-		}		
-	}
-	#endregion
+
+			for (var _it_key = 1; _it_key <= 5; _it_key++){
+				if (keyboard_check_pressed(ord(string(_it_key)))){
+					var _val_target = _it_key - 1;
+
+					if (_val_target < ds_list_size(global.player_party) && _val_target != _it_unit){
+						var _stct_hover_unit = ds_list_find_value(global.player_party,_it_unit);
+						var _stct_target_unit = ds_list_find_value(global.player_party,_val_target);
+
+						ds_list_replace(global.player_party,_it_unit,_stct_target_unit);
+						ds_list_replace(global.player_party,_val_target,_stct_hover_unit);
+
+						_ct_party = ds_list_size(global.player_party);
+
+						_flag_clicked = true;
+						_val_cooldown = 10;
+					}
+
+					break;
+				}
+			}
+		}
 	}
 }
 #endregion
 
 //
-// RANCH SIDE (RIGHT)
+// RANCH SIDE
 //
 #region RANCH DRAW, MOVING TO PARTY, DELETING
-var _start_index = _ranch_page * _ranch_per_page;
+var _val_start_index = _val_ranch_page * _ct_ranch_per_page;
 
-for (var _i = 0; _i < _ranch_per_page; _i++)
-{
-	//
-	// DRAW SLOTS
-	//
-	#region DRAW SLOTS
-    var _ranch_index = _start_index + _i;
+for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 
-    var _box_x = _ranch_x;
-    var _box_y = _start_y + (_i * (_slot_h + _slot_margin));
+	var _val_ranch_index = _val_start_index + _it_unit;
 
-    draw_set_colour(c_black);
-    draw_rectangle(_box_x, _box_y, _box_x + _slot_w, _box_y + _slot_h, false);
+	var _val_box_x = _val_ranch_x;
+	var _val_box_y = _val_start_y + (_it_unit * (_val_slot_h + _val_slot_margin));
 
-    draw_set_colour(c_gray);
-    draw_rectangle(_box_x + 4, _box_y + 4, _box_x + _slot_w - 4, _box_y + _slot_h - 4, false);
-	#endregion
-	
-	//DRAW THE UNITS ON THE CURRENT PAGE
-    if (_ranch_index < ds_list_size(global.player_ranch))
-    {
-        var _unit = ds_list_find_value(global.player_ranch, _ranch_index);
+	draw_set_colour(c_black);
+	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
-		if (_unit == undefined) continue;
+	draw_set_colour(c_gray);
+	draw_rectangle(_val_box_x + 4,_val_box_y + 4,_val_box_x + _val_slot_w - 4,_val_box_y + _val_slot_h - 4,false);
 
-		//
-		// DRAW UNIT
-		//
-		#region DRAW UNIT
-		if (_unit[?"beast_hp_cur"] <= 0){
+	if (_val_ranch_index < ds_list_size(global.player_ranch)){
+
+		var _stct_unit = ds_list_find_value(global.player_ranch,_val_ranch_index);
+
+		if (_stct_unit == undefined){
+			continue;
+		}
+
+		if (_stct_unit.beast_hp_cur <= 0){
 			draw_set_colour(c_maroon);
-		} else {
+		}
+		else{
 			draw_set_colour(c_aqua);
 		}
-        draw_rectangle(_box_x + 10, _box_y + 10, _box_x + 110, _box_y + 110, false);
 
-        var _unit_x = _box_x + 60;
-        var _unit_y = _box_y + 60;
+		draw_rectangle(_val_box_x + 10,_val_box_y + 10,_val_box_x + 110,_val_box_y + 110,false);
 
-        var _shadow = scr_get_beast_type_shadow(_unit[?"beast_color_type"]);
+		var _val_unit_x = _val_box_x + 60;
+		var _val_unit_y = _val_box_y + 60;
 
-        draw_sprite_ext(_shadow, 0, _unit_x, _unit_y + 20, 1, 1, 0, c_white, 1);
+		var _spr_shadow = scr_get_beast_type_shadow(_stct_unit.beast_color_type);
 
-        draw_sprite_ext(
-            _unit[?"beast_sprite"],
-            0,
-            _unit_x,
-            _unit_y,
-            0.125,
-            0.125,
-            0,
-            c_white,
-            1
-        );
-		#endregion
-		
-		//
-		// DRAW UNIT INFO
-		//
-		#region DRAW UNIT INFO
-        draw_set_colour(c_black);
+		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 20,1,1,0,c_white,1);
+		draw_sprite_ext(_stct_unit.beast_sprite,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 
-        draw_text(_box_x + 125, _box_y + 20, _unit[?"beast_name"]);
-        draw_text(_box_x + 125, _box_y + 45, "LV " + string(_unit[?"beast_level"]));
-        draw_text(_box_x + 125, _box_y + 70,
-            string(_unit[?"beast_hp_cur"]) + "/" +
-            string(_unit[?"beast_hp_max"])
-        );
-		#endregion
+		draw_set_colour(c_black);
 
-        //
-		// LEFT CLICK RANCH->PARTY
-		//
-		#region LEFT CLICKING
-        if (device_mouse_x_to_gui(0) > _box_x && device_mouse_x_to_gui(0) < _box_x + _slot_w && device_mouse_y_to_gui(0) > _box_y && device_mouse_y_to_gui(0) < _box_y + _slot_h && ds_list_size(global.player_party) < 5){
-            
-			//DRAW HOVER HIGHLIGHT
-			draw_sprite(spr_gui_ranch_highlight, 0, _ranch_x + 185, _box_y + 65);
+		draw_text(_val_box_x + 125,_val_box_y + 20,_stct_unit.beast_name);
+		draw_text(_val_box_x + 125,_val_box_y + 45,"LV " + string(_stct_unit.beast_level));
+		draw_text(_val_box_x + 125,_val_box_y + 70,string(_stct_unit.beast_hp_cur) + "/" + string(_stct_unit.beast_hp_max));
 
-			//CLICK
-            if (mouse_check_button_pressed(mb_left) && !_flag_clicked)
-            {
-				//ONLY ALLOW CLICK ONCE
-                _flag_clicked = true;
-                _cooldown = 10;
-				
-				//ADD TO PARTY, REMOVE FROM RANCH
-                ds_list_add(global.player_party, _unit);
-                ds_list_delete(global.player_ranch, _ranch_index);
+		if (_val_mouse_x > _val_box_x && _val_mouse_x < _val_box_x + _val_slot_w && _val_mouse_y > _val_box_y && _val_mouse_y < _val_box_y + _val_slot_h && ds_list_size(global.player_party) < 5){
 
-				//DESTROY DUMMY
-                obj_ranch_interactable.scr_destroy_ranch_unit(_unit[?"beast_uid"]);
-				
-				//UPDATE COUNTS
-				_party_count = ds_list_size(global.player_party);
-				_ranch_count = ds_list_size(global.player_ranch);					
-            }
-        }
-		#endregion
-		
-		//
-		// DELETE REMOVES UNIT FROM RANCH
-		//
-		#region DELETING UNIT
-		if (keyboard_check_pressed(vk_delete) && _flag_clicked == false){
-			//ONLY CLICK ONCE
-            _flag_clicked = true;
-            _cooldown = 10;			
-			
-			//REMOVE UNIT FROM RANCH
-			ds_list_delete(global.player_ranch, _ranch_index);
-			
-			//REMOVE DUMMY FROM GAME
-            obj_ranch_interactable.scr_destroy_ranch_unit(_unit[?"beast_uid"]);
+			draw_sprite(spr_gui_ranch_highlight,0,_val_ranch_x + 185,_val_box_y + 65);
 
-			//UPDATE COUNTS
-			_party_count = ds_list_size(global.player_party);
-			_ranch_count = ds_list_size(global.player_ranch);			
+			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+				_flag_clicked = true;
+				_val_cooldown = 10;
+
+				ds_list_add(global.player_party,_stct_unit);
+				ds_list_delete(global.player_ranch,_val_ranch_index);
+
+				obj_ranch_interactable.hscr_destroy_ranch_unit(_stct_unit.beast_uid);
+
+				_ct_party = ds_list_size(global.player_party);
+				_ct_ranch = ds_list_size(global.player_ranch);
+			}
 		}
-		#endregion
-    }
+
+		if (keyboard_check_pressed(vk_delete) && !_flag_clicked){
+			_flag_clicked = true;
+			_val_cooldown = 10;
+
+			ds_list_delete(global.player_ranch,_val_ranch_index);
+			obj_ranch_interactable.hscr_destroy_ranch_unit(_stct_unit.beast_uid);
+
+			_ct_party = ds_list_size(global.player_party);
+			_ct_ranch = ds_list_size(global.player_ranch);
+		}
+	}
 }
+#endregion
 
 //
 // PAGE DISPLAY
 //
-#region PAGES
-//CALCULATE PAGES
-var _total_pages = max(1, ceil(_ranch_count / _ranch_per_page));
+#region PAGE DISPLAY
+var _ct_total_pages = max(1,ceil(_ct_ranch / _ct_ranch_per_page));
 
 draw_set_colour(c_black);
 draw_set_halign(fa_center);
 
-//DRAW
-draw_text(_page_center_x,_page_y - 8,"PAGE " + string(_ranch_page + 1) + "/" + string(_total_pages));
+draw_text(_val_page_center_x,_val_page_y - 8,"PAGE " + string(_val_ranch_page + 1) + "/" + string(_ct_total_pages));
 
 draw_set_halign(fa_left);
 #endregion
@@ -283,13 +212,13 @@ draw_set_halign(fa_left);
 // CLICK COOLDOWN
 //
 #region CLICK COOLDOWN
-if (_flag_clicked == true){
-	if (_cooldown > 0){
-		_cooldown--;	
-	} else {
-		_cooldown = 0;
+if (_flag_clicked){
+	if (_val_cooldown > 0){
+		_val_cooldown--;
+	}
+	else{
+		_val_cooldown = 0;
 		_flag_clicked = false;
 	}
 }
 #endregion
-

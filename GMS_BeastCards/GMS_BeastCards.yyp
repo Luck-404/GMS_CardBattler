@@ -250,7 +250,6 @@
     {"id":{"name":"scr_heal_ranch_units","path":"scripts/scr_heal_ranch_units/scr_heal_ranch_units.yy",},},
     {"id":{"name":"scr_heal_target","path":"scripts/scr_heal_target/scr_heal_target.yy",},},
     {"id":{"name":"scr_init_battle_wait","path":"scripts/scr_init_battle_wait/scr_init_battle_wait.yy",},},
-    {"id":{"name":"scr_init_beast_custom","path":"scripts/scr_init_beast_custom/scr_init_beast_custom.yy",},},
     {"id":{"name":"scr_init_beast_random","path":"scripts/scr_init_beast_random/scr_init_beast_random.yy",},},
     {"id":{"name":"scr_init_beast_specific","path":"scripts/scr_init_beast_specific/scr_init_beast_specific.yy",},},
     {"id":{"name":"scr_init_card_pools","path":"scripts/scr_init_card_pools/scr_init_card_pools.yy",},},

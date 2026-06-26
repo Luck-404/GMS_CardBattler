@@ -1,15 +1,24 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_GUI_PARTY_RIGHT_ARROW
+// FUNCTION: Initializes the right navigation arrow for the party GUI.
 //
-//
+//===============================================================================//
 
-//VARIABLES
+//---------//
+//VARIABLES//
+//---------//
 depth = -2;
-_cooldown = 0;
-_flag_clicked = false;
+
 _ref_gui_pane = obj_gui_party_pane;
 
-//INIT
+_flag_clicked = false;
+_val_cooldown = 0;
 
-//METHODS
+//----//
+//INIT//
+//----//
+
+//-------//
+//METHODS//
+//-------//

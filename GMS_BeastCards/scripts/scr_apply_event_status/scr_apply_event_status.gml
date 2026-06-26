@@ -1,14 +1,27 @@
+//===============================================================================//
 //
+// SCR_APPLY_EVENT_STATUS
+// FUNCTION: Applies a global event or weather status.
+//           Triggers any associated effects and notification popups.
 //
-//
-//
-//
-function scr_apply_event_status(_name){
-	switch(_name){
+//===============================================================================//
+function scr_apply_event_status(_str_event_name){
+
+	switch(_str_event_name){
+
 		case "RAPID GROWTH":
+
 			scr_status_event_rapid_growth("APPLY",undefined);
-			//POPUP
-			scr_spawn_popup_scrolling("TEXT","WEATHER: RAPID GROWTH",undefined,c_black,room_width/2,room_height/2);					
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"WEATHER: RAPID GROWTH",
+				undefined,
+				c_black,
+				room_width * 0.5,
+				room_height * 0.5
+			);
+
 		break;
 	}
 }

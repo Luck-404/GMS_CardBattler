@@ -1,10 +1,16 @@
+//===============================================================================//
 //
+// SCR_INIT_MINION_POOLS
+// FUNCTION: Populates all global minion pools.
+//           Called once during game initialization.
 //
-// SCRIPT: SCR_INIT_CARD_POOLS | ADDS CARDS TO POOLS | RETURN VOID
-//
-//
+//===============================================================================//
 function scr_init_minion_pools(){
+
+	//
+	// VIRIDIAN
+	//
 	#region VIRIDIAN
-		ds_list_add(global.viridian_minions,"LIFE_SPIRIT");		
+	ds_list_add(global.viridian_minions,"LIFE_SPIRIT");
 	#endregion
 }

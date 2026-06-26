@@ -1,99 +1,86 @@
+//===============================================================================//
 //
-// scr_check_status_pos(_host)
-// 16x16 status icons
-// 6 per row, centered
+// SCR_REPOSITION_STATUSES
+// FUNCTION: Repositions status icons.
+//           Supports global statuses at the top of the screen.
+//           Supports host-bound statuses above battle beasts.
 //
-function scr_reposition_statuses(_host)
-{
+//===============================================================================//
+function scr_reposition_statuses(_ref_host){
+
 	#region GLOBAL
-	if (_host == undefined || _host == global.statuses){
-		var _list = global.statuses;
-		var _count = ds_list_size(_list);
+	if (_ref_host == undefined || _ref_host == global.statuses){
 
-		if (_count <= 0) exit;
+		var _list_statuses = global.statuses;
+		var _ct_statuses = ds_list_size(_list_statuses);
 
-		var _cx = room_width * 0.5;
-		var _cy = 50;
+		if (_ct_statuses <= 0){
+			exit;
+		}
 
-		var _cols = 6;
-		var _x_spacing = 24;
-		var _y_spacing = 24;
+		var _val_center_x = room_width * 0.5;
+		var _val_center_y = 50;
 
-		for (var i = 0; i < _count; i++)
-		{
-		    var _row = i div _cols;
-		    var _col = i mod _cols;
+		var _ct_cols = 6;
+		var _val_x_spacing = 24;
+		var _val_y_spacing = 24;
 
-		    var _row_count = min(
-		        _cols,
-		        _count - (_row * _cols)
-		    );
+		for (var _it_status = 0; _it_status < _ct_statuses; _it_status++){
 
-		    var _start_x =
-		        _cx - ((_row_count - 1) * _x_spacing * 0.5);
+			var _val_row = _it_status div _ct_cols;
+			var _val_col = _it_status mod _ct_cols;
 
-		    var _s = ds_list_find_value(_list, i);
+			var _ct_row = min(_ct_cols,_ct_statuses - (_val_row * _ct_cols));
+			var _val_start_x = _val_center_x - ((_ct_row - 1) * _val_x_spacing * 0.5);
 
-		    if (instance_exists(_s))
-		    {
-		        _s.x = _start_x + (_col * _x_spacing);
-		        _s.y = _cy + (_row * _y_spacing);
-		    }
+			var _ref_status = ds_list_find_value(_list_statuses,_it_status);
+
+			if (instance_exists(_ref_status)){
+				_ref_status.x = _val_start_x + (_val_col * _val_x_spacing);
+				_ref_status.y = _val_center_y + (_val_row * _val_y_spacing);
+			}
 		}
 
 		exit;
-		}
+	}
 	#endregion
-    
+
 	#region REGULAR
-	var _list = _host._statuses;
+	var _list_statuses = _ref_host._list_statuses;
 
-	if (_host._cur_hp <= 0) exit;
+	if (_ref_host._val_cur_hp <= 0){
+		exit;
+	}
 
-	var _count = ds_list_size(_list);
+	var _ct_statuses = ds_list_size(_list_statuses);
 
-	if (_count <= 0) exit;
+	if (_ct_statuses <= 0){
+		exit;
+	}
 
-	var _cx = _host.x;
-	var _cy = _host.y - 100;
+	var _val_center_x = _ref_host.x;
+	var _val_center_y = _ref_host.y - 100;
 
-	var _cols = 4;
-	var _x_spacing = 24;
-	var _y_spacing = 24;
+	var _ct_cols = 4;
+	var _val_x_spacing = 24;
+	var _val_y_spacing = 24;
 
-	//------------------------------------------------------------
-	// Total rows
-	//------------------------------------------------------------
-	var _rows = ceil(_count / _cols);
+	var _ct_rows = ceil(_ct_statuses / _ct_cols);
 
-	//------------------------------------------------------------
-	// Position statuses
-	//------------------------------------------------------------
-	for (var i = 0; i < _count; i++)
-	{
-	    var _row = i div _cols;
-	    var _col = i mod _cols;
+	for (var _it_status = 0; _it_status < _ct_statuses; _it_status++){
 
-	    var _row_count = min(
-	        _cols,
-	        _count - (_row * _cols)
-	    );
+		var _val_row = _it_status div _ct_cols;
+		var _val_col = _it_status mod _ct_cols;
 
-	    // center this row independently
-	    var _start_x =
-	        _cx - ((_row_count - 1) * _x_spacing * 0.5);
+		var _ct_row = min(_ct_cols,_ct_statuses - (_val_row * _ct_cols));
+		var _val_start_x = _val_center_x - ((_ct_row - 1) * _val_x_spacing * 0.5);
 
-	    var _s = ds_list_find_value(_list, i);
+		var _ref_status = ds_list_find_value(_list_statuses,_it_status);
 
-	    if (instance_exists(_s))
-	    {
-	        _s.x = _start_x + (_col * _x_spacing);
-
-	        // grow upward from host
-	        _s.y =
-	            _cy
-	            - ((_rows - 1 - _row) * _y_spacing);
-	    }
+		if (instance_exists(_ref_status)){
+			_ref_status.x = _val_start_x + (_val_col * _val_x_spacing);
+			_ref_status.y = _val_center_y - ((_ct_rows - 1 - _val_row) * _val_y_spacing);
+		}
 	}
 	#endregion
 }

@@ -1,24 +1,31 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_BATTLE_ENEMY_CONTROLLER
+// FUNCTION: Initializes enemy battle state.
+//           Stores enemy beast lists, casting trackers, and state flags.
+//           Defines the enemy battle state machine enum.
 //
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
+//---------//
+//VARIABLES//
+//---------//
 
-//BEASTS
-_beast_number = irandom_range(1,1);
-_statuses_init = false;
-_beasts_list = ds_list_create();
-_beasts_alive = ds_list_create();
-_beasts_graveyard = ds_list_create();
-_casting_units = ds_list_create();
-_cast_init = false;
-_minions_init = false;
+// BEASTS
+_ct_beast = irandom_range(1,1);
 
-//ENEMY STATE
+_list_beasts = ds_list_create();
+_list_beasts_alive = ds_list_create();
+_list_beasts_graveyard = ds_list_create();
+
+_list_casting_units = ds_list_create();
+
+// STATE FLAGS
+_flag_statuses_init = false;
+_flag_cast_init = false;
+_flag_minions_init = false;
+
+// ENEMY STATE
 enum ENEMY_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
@@ -33,10 +40,10 @@ enum ENEMY_STATE{
 
 _enemy_state = ENEMY_STATE.INIT_BEASTS;
 
-//
-//INIT
-//
+//----//
+//INIT//
+//----//
 
-//
-//METHODS
-//
+//-------//
+//METHODS//
+//-------//

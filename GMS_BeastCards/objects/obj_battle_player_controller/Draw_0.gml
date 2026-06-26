@@ -1,101 +1,102 @@
+//===============================================================================//
 //
+// DRAW GUI: OBJ_BATTLE_PLAYER_CONTROLLER
+// FUNCTION: Draws player battle HUD information.
+//           Displays mana, echo count, card pile counts, selection lines,
+//           and ctrl inspection data.
 //
-// DRAW: OBJ_BATTLE_PLAYER_CONTROLLER | DRAW MANA COUNTER
-//
-//
+//===============================================================================//
+
 if (!instance_exists(obj_gui_end_battle_pane)){
-#region MANA COUNTER
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
-draw_set_colour(c_black);
-draw_set_font(fnt_large_gui);
-draw_text(50,50,"MANA: " + string(_cur_mana) +"/" + string(_max_mana));
-#endregion
 
-if (global.echo_counter != 0){
-draw_text(50,150,"ECHO: " + string(global.echo_counter));	
-}
-draw_set_font(fnt_small_gui);
-draw_text(50,800,"DCK: " + string(ds_list_size(_battle_deck)));	
-draw_text(200,800,"HND: " + string(ds_list_size(_battle_hand)));	
-draw_text(880,800,"DIS: " + string(ds_list_size(_battle_discard)));	
-draw_text(950,800,"EXH: " + string(ds_list_size(_battle_exhaust)));	
-//draw_text(room_width/2-16,25,"_s: " + string(ds_list_size(global.statuses)));
-
-
-#region CARD-> MOUSE
-if (_player_state == PLAYER_STATE.SELECT_CASTER){
+	#region MANA COUNTER
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
 	draw_set_colour(c_black);
-	draw_line(global.cast_card.x,global.cast_card.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));	
-}
-#endregion
+	draw_set_font(fnt_large_gui);
 
-#region CASTER-> MOUSE
-if (_player_state == PLAYER_STATE.SELECT_TARGET){
-	draw_set_colour(c_black);
-	draw_line(global.cast_card.x,global.cast_card.y,global.caster_beast.x,global.caster_beast.y);
-	draw_line(global.caster_beast.x,global.caster_beast.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));	
-	
-	var _card_range = global.cast_card._ref_card[?"card_range"];
-	if (_card_range == "GLOBAL"){
-		draw_set_colour(c_black);
-		draw_set_font(fnt_small_gui);
-		draw_set_halign(fa_left);
-		draw_set_valign(fa_top);
-		draw_text(device_mouse_x_to_gui(0)-string_width("CLICK TO CAST GLOBAL CARD")/2,device_mouse_y_to_gui(0)-15,"CLICK TO CAST GLOBAL CARD");
+	draw_text(50,50,"MANA: " + string(_val_cur_mana) + "/" + string(_val_max_mana));
+	#endregion
+
+	#region ECHO COUNTER
+	if (global.echo_counter != 0){
+		draw_text(50,150,"ECHO: " + string(global.echo_counter));
 	}
-	
-}
-#endregion
+	#endregion
 
-//------------------------------------------------------------
-// CTRL INSPECTION PANE
-//------------------------------------------------------------
-if (keyboard_check(vk_lcontrol) &&
-    (_player_state == PLAYER_STATE.SELECT_CASTER || _player_state == PLAYER_STATE.SELECT_TARGET) && !position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card))
-{
-    var _x1 = room_width/2 - 180;
-    var _x2 = room_width/2 + 180;
-    var _y1 = 750;
-    var _y2 = 850;
+	#region CARD PILE COUNTS
+	draw_set_font(fnt_small_gui);
 
-    draw_set_font(fnt_small_gui);
+	draw_text(50,800,"DCK: " + string(ds_list_size(_list_battle_deck)));
+	draw_text(200,800,"HND: " + string(ds_list_size(_list_battle_hand)));
+	draw_text(880,800,"DIS: " + string(ds_list_size(_list_battle_discard)));
+	draw_text(950,800,"EXH: " + string(ds_list_size(_list_battle_exhaust)));
+	#endregion
 
-    draw_set_colour(c_dkgray);
-    draw_rectangle(_x1, _y1, _x2, _y2, false);
+	#region CARD TO MOUSE
+	if (_player_state == PLAYER_STATE.SELECT_CASTER){
+		draw_set_colour(c_black);
+		draw_line(global.cast_card.x,global.cast_card.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
+	}
+	#endregion
 
-    draw_set_colour(c_black);
-    draw_rectangle(_x1, _y1, _x2, _y2, true);
+	#region CASTER TO MOUSE
+	if (_player_state == PLAYER_STATE.SELECT_TARGET){
+		draw_set_colour(c_black);
 
-    draw_set_colour(c_white);
+		draw_line(global.cast_card.x,global.cast_card.y,global.caster_beast.x,global.caster_beast.y);
+		draw_line(global.caster_beast.x,global.caster_beast.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
 
-    var _card = global.cast_card._ref_card;
+		var _str_card_range = global.cast_card._ref_card.card_range;
 
-    //--------------------------------------------------------
-    // CASTER MODE
-    //--------------------------------------------------------
-    if (_player_state == PLAYER_STATE.SELECT_CASTER)
-    {
-        var _colors = _card[?"card_colors"];
-        var _arch   = _card[?"card_archetype_req"];
-        var _class  = _card[?"card_class_req"];
+		if (_str_card_range == "GLOBAL"){
+			draw_set_colour(c_black);
+			draw_set_font(fnt_small_gui);
+			draw_set_halign(fa_left);
+			draw_set_valign(fa_top);
 
-        draw_text(_x1 + 10, _y1 + 10, "REQUIREMENTS TO CAST:");
-        draw_text(_x1 + 10, _y1 + 30, "COLOR(S): " + string(_colors));
-        draw_text(_x1 + 10, _y1 + 50, "ARCHETYPE: " + string(_arch));
-        draw_text(_x1 + 10, _y1 + 70, "CLASS: " + string(_class));
-    }
+			draw_text(device_mouse_x_to_gui(0) - string_width("CLICK TO CAST GLOBAL CARD") * 0.5,device_mouse_y_to_gui(0) - 15,"CLICK TO CAST GLOBAL CARD");
+		}
+	}
+	#endregion
 
-    //--------------------------------------------------------
-    // TARGET MODE
-    //--------------------------------------------------------
-    if (_player_state == PLAYER_STATE.SELECT_TARGET)
-    {
-        var _range = _card[?"card_range"];
+	#region CTRL INSPECTION PANE
+	if (keyboard_check(vk_lcontrol) && (_player_state == PLAYER_STATE.SELECT_CASTER || _player_state == PLAYER_STATE.SELECT_TARGET) && !position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card)){
 
-        draw_text(_x1 + 10, _y1 + 10, "REQUIREMENTS TO CAST:");
-        draw_text(_x1 + 10, _y1 + 30, "RANGE: " + string(_range));
-    }
-}
+		var _val_x1 = room_width * 0.5 - 180;
+		var _val_x2 = room_width * 0.5 + 180;
+		var _val_y1 = 750;
+		var _val_y2 = 850;
 
+		draw_set_font(fnt_small_gui);
+
+		draw_set_colour(c_dkgray);
+		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
+
+		draw_set_colour(c_black);
+		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,true);
+
+		draw_set_colour(c_white);
+
+		var _stct_card = global.cast_card._ref_card;
+
+		if (_player_state == PLAYER_STATE.SELECT_CASTER){
+			var _arr_colors = _stct_card.card_colors;
+			var _str_archetype = _stct_card.card_archetype_req;
+			var _str_class = _stct_card.card_class_req;
+
+			draw_text(_val_x1 + 10,_val_y1 + 10,"REQUIREMENTS TO CAST:");
+			draw_text(_val_x1 + 10,_val_y1 + 30,"COLOR(S): " + string(_arr_colors));
+			draw_text(_val_x1 + 10,_val_y1 + 50,"ARCHETYPE: " + string(_str_archetype));
+			draw_text(_val_x1 + 10,_val_y1 + 70,"CLASS: " + string(_str_class));
+		}
+
+		if (_player_state == PLAYER_STATE.SELECT_TARGET){
+			var _str_range = _stct_card.card_range;
+
+			draw_text(_val_x1 + 10,_val_y1 + 10,"REQUIREMENTS TO CAST:");
+			draw_text(_val_x1 + 10,_val_y1 + 30,"RANGE: " + string(_str_range));
+		}
+	}
+	#endregion
 }

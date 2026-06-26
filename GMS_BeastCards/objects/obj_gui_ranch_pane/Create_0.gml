@@ -1,52 +1,59 @@
+//===============================================================================//
 //
+// CREATE: OBJ_GUI_RANCH_PANE
+// FUNCTION: Initializes the party/ranch management GUI pane.
+//           Stores party and ranch layout, pagination, and click state.
+//           Creates navigation arrows for ranch page movement.
 //
-// CREATE: OBJ_GUI_PARTY_RANCH_PANE
-//
-//
+//===============================================================================//
 
-//
-//VARIABLES
-//
+//---------//
+//VARIABLES//
+//---------//
 depth = -1;
 
-//PARTY AND RANCH COUNTS
-_party_count = ds_list_size(global.player_party);
-_ranch_count = ds_list_size(global.player_ranch);
-_type = "RANCH";
-//SIZING OF PANE AND PIECES
-_pane_w = 800;
-_pane_h = 800;
-_pane_left = x - (_pane_w * 0.5);
-_pane_top  = y - (_pane_h * 0.5);
-_slot_h = 130;
-_slot_margin = 15;
-_slot_w = 370;
-_party_x = _pane_left + 15;
-_ranch_x = x + 15;
-_start_y = _pane_top + 15;
+// PARTY / RANCH COUNTS
+_ct_party = ds_list_size(global.player_party);
+_ct_ranch = ds_list_size(global.player_ranch);
 
-_ranch_page = 0;
-_ranch_per_page = 5;
+_str_type = "RANCH";
 
-_page_y = _pane_top + _pane_h - 50;
-_page_center_x = _ranch_x + (_slot_w * 0.5);
-_arrow_offset = 80;
+// PANE LAYOUT
+_val_pane_w = 800;
+_val_pane_h = 800;
+_val_pane_left = x - (_val_pane_w * 0.5);
+_val_pane_top = y - (_val_pane_h * 0.5);
 
-//COOLDOWN VARIABLES
+// SLOT LAYOUT
+_val_slot_h = 130;
+_val_slot_margin = 15;
+_val_slot_w = 370;
+
+_val_party_x = _val_pane_left + 15;
+_val_ranch_x = x + 15;
+_val_start_y = _val_pane_top + 15;
+
+// RANCH PAGE SETTINGS
+_val_ranch_page = 0;
+_ct_ranch_per_page = 5;
+
+_val_page_y = _val_pane_top + _val_pane_h - 50;
+_val_page_center_x = _val_ranch_x + (_val_slot_w * 0.5);
+_val_arrow_offset = 80;
+
+// CLICK COOLDOWN
 _flag_clicked = false;
-_cooldown = 10;
+_val_cooldown = 10;
 
-//
-//INIT
-//
+//----//
+//INIT//
+//----//
+_ref_left_arrow = instance_create_layer(_val_page_center_x - _val_arrow_offset,_val_page_y,"ily_fx",obj_gui_ranch_left_arrow);
+_ref_left_arrow._ref_gui_pane = self;
 
-//ARROWS FOR NAVIGATING PAGES OF RANCH UNITS
-_left_arrow = instance_create_layer(_page_center_x - _arrow_offset,_page_y,"ily_fx",obj_gui_ranch_left_arrow);
-_left_arrow._ref_gui_pane = self;
+_ref_right_arrow = instance_create_layer(_val_page_center_x + _val_arrow_offset,_val_page_y,"ily_fx",obj_gui_ranch_right_arrow);
+_ref_right_arrow._ref_gui_pane = self;
 
-_right_arrow = instance_create_layer(_page_center_x + _arrow_offset,_page_y,"ily_fx",obj_gui_ranch_right_arrow);
-_right_arrow._ref_gui_pane = self;
-
-//
-//METHODS
-//
+//-------//
+//METHODS//
+//-------//

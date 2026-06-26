@@ -112,10 +112,10 @@ if (room != rm_battle){
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy) && mouse_check_button_pressed(mb_left)){
 			var _ref_beast = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy);
 
-			if (_ref_beast._state_beast != BEAST_STATE.REST){
+			if (_ref_beast._beast_state != BEAST_STATE.REST){
 				_ref_beast._spr_emoji = choose(spr_ranch_beast_happy,spr_ranch_beast_love,spr_ranch_beast_excited);
-				_ref_beast._val_emoji_timer = irandom_range(60,120);
-				_ref_beast._state_beast = BEAST_STATE.SHAKE;
+				_ref_beast._ct_emoji_timer = irandom_range(60,120);
+				_ref_beast._beast_state = BEAST_STATE.SHAKE;
 			}
 		}
 	}

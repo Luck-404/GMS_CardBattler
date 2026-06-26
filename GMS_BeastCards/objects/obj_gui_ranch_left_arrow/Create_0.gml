@@ -1,18 +1,24 @@
-//
+//===============================================================================//
 //
 // CREATE: OBJ_GUI_RANCH_LEFT_ARROW
+// FUNCTION: Initializes the left page navigation arrow for the ranch GUI.
 //
-//
+//===============================================================================//
 
-//VARIABLES
+//---------//
+//VARIABLES//
+//---------//
 depth = -2;
 
 _ref_gui_pane = obj_gui_ranch_pane;
 
-_cooldown = 0;
 _flag_clicked = false;
+_val_cooldown = 0;
 
+//----//
+//INIT//
+//----//
 
-//INIT
-
-//METHODS
+//-------//
+//METHODS//
+//-------//
