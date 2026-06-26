@@ -1,14 +1,23 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_CARD_UNCOLORED_POWER_STRIKE
+// FUNCTION: Resolves the Power Strike card effect.
+//           Deals damage to the target.
+//           Plays the associated animation and sound effects.
 //
-// SCRIPT: SCR_CARD_UNCOLORED_STRIKE | Melee, ST, Deals [linear] melee damage | RETURNS VOID
-//
-//
-function scr_card_uncolored_power_strike(_card,_caster,_target){
-	//DEAL damage
-	scr_damage_target(_card[?"card_magnitude"],_target);
-	
-	//PLAY ANIMATION
-	
-	//PLAY SOUND
+//===============================================================================//
+function scr_card_uncolored_power_strike(_stct_card,_ref_caster,_ref_target){
 
+	//------------//
+	//DEAL DAMAGE//
+	//------------//
+	scr_damage_target(_stct_card._val_card_magnitude,_ref_target);
+
+	//----------------//
+	//PLAY ANIMATION//
+	//----------------//
+
+	//-----------//
+	//PLAY SOUND//
+	//-----------//
 }

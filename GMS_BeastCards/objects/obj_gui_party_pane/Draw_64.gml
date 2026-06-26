@@ -12,7 +12,7 @@
 //-----------//
 draw_sprite(spr_gui_party_pane,0,x,y);
 
-_ct_unit = ds_list_size(global.player_party);
+_ct_unit = ds_list_size(global.list_player_party);
 
 var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
@@ -23,14 +23,14 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 	var _val_box_x = _val_row_start_x + ((_val_slot_size + _val_spacing) * _it_unit);
 	var _val_box_y = _val_row_y;
 
-	var _stct_unit = ds_list_find_value(global.player_party,_it_unit);
+	var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
 
 	if (_stct_unit == undefined){
 		continue;
 	}
 
 	// SLOT BACKGROUND
-	if (_stct_unit.beast_hp_cur <= 0){
+	if (_stct_unit._val_beast_hp_cur <= 0){
 		draw_set_colour(c_maroon);
 	}
 	else{
@@ -46,15 +46,15 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 	var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
 	// SHADOW
-	var _spr_shadow = scr_get_beast_type_shadow(_stct_unit.beast_color_type);
+	var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 	draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 25,1,1,0,c_white,1);
 
 	// UNIT
-	if (_stct_unit.beast_hp_cur <= 0){
-		draw_sprite_ext(_stct_unit.beast_sprite,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_ltgray,1);
+	if (_stct_unit._val_beast_hp_cur <= 0){
+		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_ltgray,1);
 	}
 	else{
-		draw_sprite_ext(_stct_unit.beast_sprite,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
+		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 	}
 
 	// SELECTED
@@ -71,7 +71,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 			_flag_clicked = true;
 
 			_val_pos = _it_unit;
-			_stct_unit_selected = ds_list_find_value(global.player_party,_val_pos);
+			_stct_unit_selected = ds_list_find_value(global.list_player_party,_val_pos);
 		}
 
 		// NUMBER KEY REORDER
@@ -80,14 +80,14 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 				var _val_target = _it_key - 1;
 
 				if (_val_target < _ct_unit && _val_target != _it_unit){
-					var _stct_hover_unit = ds_list_find_value(global.player_party,_it_unit);
-					var _stct_target_unit = ds_list_find_value(global.player_party,_val_target);
+					var _stct_hover_unit = ds_list_find_value(global.list_player_party,_it_unit);
+					var _stct_target_unit = ds_list_find_value(global.list_player_party,_val_target);
 
-					ds_list_replace(global.player_party,_it_unit,_stct_target_unit);
-					ds_list_replace(global.player_party,_val_target,_stct_hover_unit);
+					ds_list_replace(global.list_player_party,_it_unit,_stct_target_unit);
+					ds_list_replace(global.list_player_party,_val_target,_stct_hover_unit);
 
 					if (_stct_unit_selected != undefined){
-						_stct_unit_selected = ds_list_find_value(global.player_party,_val_pos);
+						_stct_unit_selected = ds_list_find_value(global.list_player_party,_val_pos);
 					}
 
 					_flag_clicked = true;
@@ -136,14 +136,14 @@ if (_stct_unit_selected != undefined){
 	draw_set_halign(fa_left);
 
 	// HEADER
-	var _str_color_1 = _stct_unit.beast_colors[0];
-	var _str_color_2 = _stct_unit.beast_colors[1];
-	var _str_color_type = _stct_unit.beast_color_type;
+	var _str_color_1 = _stct_unit._arr_beast_colors[0];
+	var _str_color_2 = _stct_unit._arr_beast_colors[1];
+	var _str_color_type = _stct_unit._str_beast_color_type;
 
-	draw_text(_val_x,_val_y,_stct_unit.beast_name + " | LV " + string(_stct_unit.beast_level) + " | " + string(_stct_unit.beast_exp) + "/10");
+	draw_text(_val_x,_val_y,_stct_unit._str_beast_name + " | LV " + string(_stct_unit._val_beast_level) + " | " + string(_stct_unit._val_beast_exp) + "/10");
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,_stct_unit.beast_archetype + " | " + _stct_unit.beast_class);
+	draw_text(_val_x,_val_y,_stct_unit._str_beast_archetype + " | " + _stct_unit._str_beast_class);
 	_val_y += _val_lh;
 
 	var _str_color_text = "";
@@ -158,19 +158,19 @@ if (_stct_unit_selected != undefined){
 	draw_text(_val_x,_val_y,_str_color_text + " | " + string(_str_color_type));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"HP: " + string(_stct_unit.beast_hp_cur) + "/" + string(_stct_unit.beast_hp_max));
+	draw_text(_val_x,_val_y,"HP: " + string(_stct_unit._val_beast_hp_cur) + "/" + string(_stct_unit._val_beast_hp_max));
 	_val_y += _val_sg;
 
 	// CORE STATS
 	draw_text(_val_x,_val_y,"=== CORE STATS ===");
 	_val_y += _val_lh;
 
-	var _val_hp_stat = _stct_unit.beast_hp_stat;
-	var _val_con_stat = _stct_unit.beast_con_stat;
-	var _val_ppow_stat = _stct_unit.beast_ppow_stat;
-	var _val_mpow_stat = _stct_unit.beast_mpow_stat;
-	var _val_pdef_stat = _stct_unit.beast_pdef_stat;
-	var _val_mdef_stat = _stct_unit.beast_mdef_stat;
+	var _val_hp_stat = _stct_unit._val_beast_hp_stat;
+	var _val_con_stat = _stct_unit._val_beast_con_stat;
+	var _val_ppow_stat = _stct_unit._val_beast_ppow_stat;
+	var _val_mpow_stat = _stct_unit._val_beast_mpow_stat;
+	var _val_pdef_stat = _stct_unit._val_beast_pdef_stat;
+	var _val_mdef_stat = _stct_unit._val_beast_mdef_stat;
 
 	draw_text(_val_x,_val_y,"HP: " + string(_val_hp_stat) + " | " + scr_get_beast_grade_letter(_val_hp_stat) + " | " + string(scr_get_beast_grade_modifier(_val_hp_stat)));
 	_val_y += _val_lh;
@@ -194,30 +194,30 @@ if (_stct_unit_selected != undefined){
 	draw_text(_val_x,_val_y,"=== SECONDARY STATS ===");
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"CRIT: " + string(_stct_unit.beast_crit_stat));
+	draw_text(_val_x,_val_y,"CRIT: " + string(_stct_unit._val_beast_crit_stat));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"DODGE: " + string(_stct_unit.beast_dod_stat));
+	draw_text(_val_x,_val_y,"DODGE: " + string(_stct_unit._val_beast_dod_stat));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"MINION COUNT: " + string(_stct_unit.beast_min_stat));
+	draw_text(_val_x,_val_y,"MINION COUNT: " + string(_stct_unit._val_beast_min_stat));
 	_val_y += _val_sg;
 
 	// HELD ITEM
-	draw_text(_val_x,_val_y,"HELD ITEM: " + string(_stct_unit.beast_held_item));
+	draw_text(_val_x,_val_y,"HELD ITEM: " + string(_stct_unit._ref_beast_held_item));
 	_val_y += _val_sg;
 
 	// ABILITY
-	draw_text(_val_x,_val_y,"ABILITY: " + string(_stct_unit.beast_ability));
+	draw_text(_val_x,_val_y,"ABILITY: " + string(_stct_unit._str_beast_ability));
 	_val_y += _val_sg;
 
 	// LORE
 	draw_text(_val_x,_val_y,"=== LORE ===");
 	_val_y += _val_lh;
 
-	draw_text_ext(_val_x,_val_y,_stct_unit.beast_lore,-1,740);
+	draw_text_ext(_val_x,_val_y,_stct_unit._str_beast_lore,-1,740);
 	_val_y += _val_sg * 4.5;
 
-	draw_text_ext(_val_x,_val_y,_stct_unit.beast_role,-1,740);
+	draw_text_ext(_val_x,_val_y,_stct_unit._str_beast_role,-1,740);
 }
 #endregion

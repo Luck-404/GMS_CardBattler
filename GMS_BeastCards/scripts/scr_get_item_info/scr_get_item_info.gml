@@ -18,7 +18,7 @@ function scr_get_item_info(_str_item_id){
 		_flag_stackable : false,
 		_ct_item_amount : 1,
 		_ct_item_max_amount : 1,
-		_uid_item : global.item_uid
+		_uid_item : global.uid_next_item
 	};
 
 	switch(_str_item_id){
@@ -89,7 +89,7 @@ function scr_get_item_info(_str_item_id){
 		#endregion
 	}
 
-	global.item_uid++;
+	global.uid_next_item++;
 
 	return _stct_return_item;
 }

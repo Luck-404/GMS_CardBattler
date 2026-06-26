@@ -15,8 +15,8 @@ draw_self();
 #region SETUP
 _stct_preview_card = undefined;
 
-_ct_deck = ds_list_size(global.player_deck);
-_ct_library = ds_list_size(global.player_library);
+_ct_deck = ds_list_size(global.list_player_deck);
+_ct_library = ds_list_size(global.list_player_library);
 
 var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
@@ -40,7 +40,7 @@ draw_set_font(fnt_small_gui);
 //
 #region DRAW DECK
 for (var _it_card = 0; _it_card < _ct_deck_visible; _it_card++){
-	var _stct_card = ds_list_find_value(global.player_deck,_it_card);
+	var _stct_card = ds_list_find_value(global.list_player_deck,_it_card);
 
 	var _val_box_x = _val_deck_x;
 	var _val_box_y = _val_start_y + (_it_card * (_val_slot_h + _val_slot_margin));
@@ -57,8 +57,8 @@ for (var _it_card = 0; _it_card < _ct_deck_visible; _it_card++){
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
-				ds_list_add(global.player_library,_stct_card);
-				ds_list_delete(global.player_deck,_it_card);
+				ds_list_add(global.list_player_library,_stct_card);
+				ds_list_delete(global.list_player_deck,_it_card);
 			}
 		}
 	}
@@ -73,7 +73,7 @@ var _val_start_index = _val_library_page * _ct_library_per_page;
 
 for (var _it_card = 0; _it_card < _ct_library_per_page; _it_card++){
 	var _val_library_index = _val_start_index + _it_card;
-	var _stct_card = ds_list_find_value(global.player_library,_val_library_index);
+	var _stct_card = ds_list_find_value(global.list_player_library,_val_library_index);
 
 	var _val_box_x = _val_library_x;
 	var _val_box_y = _val_start_y + (_it_card * (_val_slot_h + _val_slot_margin));
@@ -90,15 +90,15 @@ for (var _it_card = 0; _it_card < _ct_library_per_page; _it_card++){
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
-				ds_list_add(global.player_deck,_stct_card);
-				ds_list_delete(global.player_library,_val_library_index);
+				ds_list_add(global.list_player_deck,_stct_card);
+				ds_list_delete(global.list_player_library,_val_library_index);
 			}
 
 			if (keyboard_check_pressed(vk_delete) && !_flag_clicked){
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
-				ds_list_delete(global.player_library,_val_library_index);
+				ds_list_delete(global.list_player_library,_val_library_index);
 			}
 		}
 	}
@@ -140,6 +140,6 @@ hscr_update_click_cooldown();
 //
 #region PREVIEW CARD
 if (_stct_preview_card != undefined){
-	draw_sprite_ext(_stct_preview_card.card_sprite,0,room_width * 0.5,room_height * 0.5,0.95,0.95,0,c_white,1);
+	draw_sprite_ext(_stct_preview_card._spr_card,0,room_width * 0.5,room_height * 0.5,0.95,0.95,0,c_white,1);
 }
 #endregion

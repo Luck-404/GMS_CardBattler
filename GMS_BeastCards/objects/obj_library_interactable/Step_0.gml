@@ -11,7 +11,7 @@
 // PROXIMITY INTERACTION
 //
 #region PROXIMITY INTERACTION
-if (distance_to_object(obj_player) < 48 && !global.pause){
+if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 	image_index = 1;
 
 	if (!_flag_triggered && _val_cooldown == 0){
@@ -24,7 +24,7 @@ if (distance_to_object(obj_player) < 48 && !global.pause){
 			obj_gui_controller.hscr_destroy_gui_open();
 			obj_gui_controller.hscr_toggle_gui_pause(true);
 
-			global.active_gui = _ref_library_gui;
+			global.ref_active_gui = _ref_library_gui;
 		}
 	}
 }

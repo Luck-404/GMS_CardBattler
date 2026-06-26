@@ -13,7 +13,7 @@
 #region SETUP
 draw_sprite(spr_gui_deck_pane,0,x,y);
 
-_ct_card = ds_list_size(global.player_deck);
+_ct_card = ds_list_size(global.list_player_deck);
 
 var _stct_preview_card = undefined;
 var _val_total_cost = 0;
@@ -46,12 +46,12 @@ for (var _it_card = 0; _it_card < 30; _it_card++){
 	
 	#region CARD
 	if (_it_card < _ct_card){
-		var _stct_card = ds_list_find_value(global.player_deck,_it_card);
+		var _stct_card = ds_list_find_value(global.list_player_deck,_it_card);
 		
 		if (_stct_card != undefined){
-			_val_total_cost += _stct_card.card_mana_cost;
+			_val_total_cost += _stct_card._val_card_mana_cost;
 			
-			draw_sprite_ext(_stct_card.card_sprite,0,_val_center_x,_val_center_y,_val_card_scale,_val_card_scale,0,c_white,1);
+			draw_sprite_ext(_stct_card._spr_card,0,_val_center_x,_val_center_y,_val_card_scale,_val_card_scale,0,c_white,1);
 
 			if (_val_mouse_x > _val_box_x && _val_mouse_x < _val_box_x + _val_slot_w && _val_mouse_y > _val_box_y && _val_mouse_y < _val_box_y + _val_slot_h){
 				draw_sprite(spr_gui_deck_highlight,0,_val_center_x,_val_center_y);
@@ -89,6 +89,6 @@ if (_ct_card > 0){
 //
 #region CARD PREVIEW
 if (_stct_preview_card != undefined){
-	draw_sprite_ext(_stct_preview_card.card_sprite,0,room_width * 0.5,room_height * 0.5,_val_preview_scale,_val_preview_scale,0,c_white,1);
+	draw_sprite_ext(_stct_preview_card._spr_card,0,room_width * 0.5,room_height * 0.5,_val_preview_scale,_val_preview_scale,0,c_white,1);
 }
 #endregion

@@ -8,27 +8,27 @@
 //===============================================================================//
 function scr_cast_card(){
 
-	var _ref_card = global.cast_card;
+	var _ref_card = global.ref_cast_card;
 	var _stct_card = _ref_card._stct_card;
 
-	var _ref_caster = global.caster_beast;
-	var _ref_target = global.target_beast;
+	var _ref_caster = global.ref_caster_beast;
+	var _ref_target = global.ref_target_beast;
 
-	var _fn_script = _stct_card.card_script;
-	var _val_cost = _stct_card.card_mana_cost;
+	var _fn_script = _stct_card._scr_card;
+	var _val_cost = _stct_card._val_card_mana_cost;
 
 	//
 	// CAST CARD
 	//
 	if (_ref_caster._str_team == "PLAYER" &&
-		global.echo_counter != 0 &&
-		_stct_card.card_name != "ECHO"){
+		global.ct_echo != 0 &&
+		_stct_card._str_card_name != "ECHO"){
 
-		for (var _it_echo = 0; _it_echo < global.echo_counter + 1; _it_echo++){
+		for (var _it_echo = 0; _it_echo < global.ct_echo + 1; _it_echo++){
 			_fn_script(_stct_card,_ref_caster,_ref_target);
 		}
 
-		global.echo_counter = 0;
+		global.ct_echo = 0;
 	}
 	else{
 		_fn_script(_stct_card,_ref_caster,_ref_target);
@@ -46,7 +46,7 @@ function scr_cast_card(){
 	//
 	if (_ref_caster._str_team == "PLAYER"){
 
-		if (_stct_card.card_exhausts){
+		if (_stct_card._flag_card_exhausts){
 			scr_exhaust_card(_ref_card);
 		}
 		else{
@@ -57,7 +57,7 @@ function scr_cast_card(){
 	//
 	// CLEAR SELECTION
 	//
-	global.cast_card = undefined;
-	global.caster_beast = undefined;
-	global.target_beast = undefined;
+	global.ref_cast_card = undefined;
+	global.ref_caster_beast = undefined;
+	global.ref_target_beast = undefined;
 }

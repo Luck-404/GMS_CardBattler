@@ -13,11 +13,11 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	// ATTACKER STAT SCALING
 	//
-	var _str_card_stat = global.cast_card._stct_card.card_stat;
+	var _str_card_stat = global.ref_cast_card._stct_card._str_card_stat;
 
 	if (_str_card_stat == "PHY"){
 
-		var _val_ppow_stat = global.caster_beast._stct_unit.beast_ppow_stat;
+		var _val_ppow_stat = global.ref_caster_beast._stct_unit._val_beast_ppow_stat;
 		var _val_ppow_mod = scr_get_beast_grade_modifier(_val_ppow_stat);
 
 		_val_damage_left = ceil(_val_damage_left * _val_ppow_mod);
@@ -25,7 +25,7 @@ function scr_damage_target(_val_damage,_ref_target){
 
 	if (_str_card_stat == "MAG"){
 
-		var _val_mpow_stat = global.caster_beast._stct_unit.beast_mpow_stat;
+		var _val_mpow_stat = global.ref_caster_beast._stct_unit._val_beast_mpow_stat;
 		var _val_mpow_mod = scr_get_beast_grade_modifier(_val_mpow_stat);
 
 		_val_damage_left = ceil(_val_damage_left * _val_mpow_mod);
@@ -34,7 +34,7 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	// TARGET DODGE
 	//
-	var _val_dodge = global.target_beast._stct_unit.beast_dod_stat;
+	var _val_dodge = global.ref_target_beast._stct_unit._val_beast_dod_stat;
 	var _val_dodge_roll = irandom_range(0,100);
 
 	if (_val_dodge_roll < _val_dodge){
@@ -47,7 +47,7 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	// CRIT
 	//
-	var _val_crit = global.caster_beast._stct_unit.beast_crit_stat;
+	var _val_crit = global.ref_caster_beast._stct_unit._val_beast_crit_stat;
 	var _val_crit_roll = irandom_range(0,100);
 
 	if (_val_crit_roll < _val_crit){
@@ -60,11 +60,11 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	// RAPID GROWTH BONUS
 	//
-	var _ref_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
+	var _ref_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.list_statuses);
 
 	if (_ref_status != -1){
 
-		var _arr_card_colors = global.cast_card._stct_card.card_colors;
+		var _arr_card_colors = global.ref_cast_card._stct_card._arr_card_colors;
 
 		if (_arr_card_colors[0] == "VIRIDIAN"){
 			_val_damage_left = ceil(_val_damage_left * 1.25);
@@ -74,7 +74,7 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	// WEAKNESS
 	//
-	_ref_status = scr_check_for_status("WEAKNESS",global.caster_beast);
+	_ref_status = scr_check_for_status("WEAKNESS",global.ref_caster_beast);
 
 	var _ct_weak_stacks = 0;
 
@@ -86,7 +86,7 @@ function scr_damage_target(_val_damage,_ref_target){
 
 	if (_val_damage_left <= 0){
 
-		scr_spawn_popup_scrolling("TEXT","TOO WEAK",undefined,c_white,global.caster_beast.x + irandom_range(-32,32),global.caster_beast.y - 24 + irandom_range(-32,32));
+		scr_spawn_popup_scrolling("TEXT","TOO WEAK",undefined,c_white,global.ref_caster_beast.x + irandom_range(-32,32),global.ref_caster_beast.y - 24 + irandom_range(-32,32));
 
 		exit;
 	}
@@ -96,7 +96,7 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	if (_str_card_stat == "PHY"){
 
-		var _val_pdef_stat = global.target_beast._stct_unit.beast_pdef_stat;
+		var _val_pdef_stat = global.ref_target_beast._stct_unit._val_beast_pdef_stat;
 		var _val_pdef_mod = scr_get_beast_grade_modifier(_val_pdef_stat);
 
 		_val_damage_left = ceil(_val_damage_left * (1 / _val_pdef_mod));
@@ -104,7 +104,7 @@ function scr_damage_target(_val_damage,_ref_target){
 
 	if (_str_card_stat == "MAG"){
 
-		var _val_mdef_stat = global.target_beast._stct_unit.beast_mdef_stat;
+		var _val_mdef_stat = global.ref_target_beast._stct_unit._val_beast_mdef_stat;
 		var _val_mdef_mod = scr_get_beast_grade_modifier(_val_mdef_stat);
 
 		_val_damage_left = ceil(_val_damage_left * (1 / _val_mdef_mod));

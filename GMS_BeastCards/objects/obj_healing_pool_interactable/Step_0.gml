@@ -9,7 +9,7 @@
 // HIGHLIGHT AND INTERACTION
 //
 #region HIGHLIGHT AND INTERACTION
-if (distance_to_object(obj_player) < 48 && !global.pause){
+if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 
 	image_index = 1;
 
@@ -22,15 +22,15 @@ if (distance_to_object(obj_player) < 48 && !global.pause){
 
 			scr_spawn_popup_text_bubble(x,y - 50,"HEALED PARTY");
 
-			for (var _it_beast = 0; _it_beast < ds_list_size(global.player_party); _it_beast++){
+			for (var _it_beast = 0; _it_beast < ds_list_size(global.list_player_party); _it_beast++){
 
-				var _stct_beast = ds_list_find_value(global.player_party,_it_beast);
+				var _stct_beast = ds_list_find_value(global.list_player_party,_it_beast);
 
 				if (_stct_beast == undefined){
 					continue;
 				}
 
-				_stct_beast.beast_hp_cur = _stct_beast.beast_hp_max;
+				_stct_beast._val_beast_hp_cur = _stct_beast._val_beast_hp_max;
 			}
 		}
 	}

@@ -27,10 +27,10 @@ if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 		_flag_clicked = true;
 		_val_cooldown = 10;
 
-		if (ds_list_find_value(global.player_party,_ref_gui_pane._val_pos - 1) != undefined){
+		if (ds_list_find_value(global.list_player_party,_ref_gui_pane._val_pos - 1) != undefined){
 
 			_ref_gui_pane._val_pos--;
-			_ref_gui_pane._stct_unit_selected = ds_list_find_value(global.player_party,_ref_gui_pane._val_pos);
+			_ref_gui_pane._stct_unit_selected = ds_list_find_value(global.list_player_party,_ref_gui_pane._val_pos);
 		}
 	}
 }

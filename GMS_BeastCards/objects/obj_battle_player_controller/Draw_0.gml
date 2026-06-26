@@ -19,8 +19,8 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	#endregion
 
 	#region ECHO COUNTER
-	if (global.echo_counter != 0){
-		draw_text(50,150,"ECHO: " + string(global.echo_counter));
+	if (global.ct_echo != 0){
+		draw_text(50,150,"ECHO: " + string(global.ct_echo));
 	}
 	#endregion
 
@@ -36,7 +36,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	#region CARD TO MOUSE
 	if (_player_state == PLAYER_STATE.SELECT_CASTER){
 		draw_set_colour(c_black);
-		draw_line(global.cast_card.x,global.cast_card.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
+		draw_line(global.ref_cast_card.x,global.ref_cast_card.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
 	}
 	#endregion
 
@@ -44,10 +44,10 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	if (_player_state == PLAYER_STATE.SELECT_TARGET){
 		draw_set_colour(c_black);
 
-		draw_line(global.cast_card.x,global.cast_card.y,global.caster_beast.x,global.caster_beast.y);
-		draw_line(global.caster_beast.x,global.caster_beast.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
+		draw_line(global.ref_cast_card.x,global.ref_cast_card.y,global.ref_caster_beast.x,global.ref_caster_beast.y);
+		draw_line(global.ref_caster_beast.x,global.ref_caster_beast.y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
 
-		var _str_card_range = global.cast_card._ref_card.card_range;
+		var _str_card_range = global.ref_cast_card._ref_card._str_card_range;
 
 		if (_str_card_range == "GLOBAL"){
 			draw_set_colour(c_black);
@@ -78,12 +78,12 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		draw_set_colour(c_white);
 
-		var _stct_card = global.cast_card._ref_card;
+		var _stct_card = global.ref_cast_card._ref_card;
 
 		if (_player_state == PLAYER_STATE.SELECT_CASTER){
-			var _arr_colors = _stct_card.card_colors;
-			var _str_archetype = _stct_card.card_archetype_req;
-			var _str_class = _stct_card.card_class_req;
+			var _arr_colors = _stct_card._arr_card_colors;
+			var _str_archetype = _stct_card._str_card_archetype_req;
+			var _str_class = _stct_card._str_card_class_req;
 
 			draw_text(_val_x1 + 10,_val_y1 + 10,"REQUIREMENTS TO CAST:");
 			draw_text(_val_x1 + 10,_val_y1 + 30,"COLOR(S): " + string(_arr_colors));
@@ -92,7 +92,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		}
 
 		if (_player_state == PLAYER_STATE.SELECT_TARGET){
-			var _str_range = _stct_card.card_range;
+			var _str_range = _stct_card._str_card_range;
 
 			draw_text(_val_x1 + 10,_val_y1 + 10,"REQUIREMENTS TO CAST:");
 			draw_text(_val_x1 + 10,_val_y1 + 30,"RANGE: " + string(_str_range));

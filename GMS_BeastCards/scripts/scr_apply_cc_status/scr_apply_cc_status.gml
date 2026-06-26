@@ -11,7 +11,7 @@ function scr_apply_cc_status(_str_status_name){
 	//
 	// RESIST CHECK
 	//
-	var _val_res_stat = global.target_beast._stct_unit.beast_con_stat;
+	var _val_res_stat = global.ref_target_beast._stct_unit._val_beast_con_stat;
 	var _val_res_mod = scr_get_beast_grade_modifier(_val_res_stat);
 	var _val_resist_chance = floor(5 * _val_res_mod);
 
@@ -24,8 +24,8 @@ function scr_apply_cc_status(_str_status_name){
 			"RESISTED",
 			undefined,
 			c_black,
-			global.target_beast.x + irandom_range(-32,32),
-			global.target_beast.y - 24 + irandom_range(-32,32)
+			global.ref_target_beast.x + irandom_range(-32,32),
+			global.ref_target_beast.y - 24 + irandom_range(-32,32)
 		);
 
 		exit;
@@ -45,8 +45,8 @@ function scr_apply_cc_status(_str_status_name){
 				"STUNNED",
 				undefined,
 				c_black,
-				global.target_beast.x + irandom_range(-32,32),
-				global.target_beast.y - 24 + irandom_range(-32,32)
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
 			);
 
 		break;

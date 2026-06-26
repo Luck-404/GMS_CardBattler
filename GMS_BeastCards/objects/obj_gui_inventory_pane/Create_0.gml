@@ -71,8 +71,8 @@ function hscr_build_filtered_inventory(){
 	var _list_filtered = ds_list_create();
 
 	if (_str_sort_mode == "RECENT"){
-		for (var _it_item = ds_list_size(global.player_inventory) - 1; _it_item >= 0; _it_item--){
-			var _stct_item = ds_list_find_value(global.player_inventory,_it_item);
+		for (var _it_item = ds_list_size(global.list_player_inventory) - 1; _it_item >= 0; _it_item--){
+			var _stct_item = ds_list_find_value(global.list_player_inventory,_it_item);
 
 			if (_stct_item == undefined){
 				continue;
@@ -85,8 +85,8 @@ function hscr_build_filtered_inventory(){
 			ds_list_add(_list_filtered,_stct_item);
 		}
 	} else {
-		for (var _it_item = 0; _it_item < ds_list_size(global.player_inventory); _it_item++){
-			var _stct_item = ds_list_find_value(global.player_inventory,_it_item);
+		for (var _it_item = 0; _it_item < ds_list_size(global.list_player_inventory); _it_item++){
+			var _stct_item = ds_list_find_value(global.list_player_inventory,_it_item);
 
 			if (_stct_item == undefined){
 				continue;

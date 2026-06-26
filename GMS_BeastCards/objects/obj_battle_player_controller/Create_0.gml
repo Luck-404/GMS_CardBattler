@@ -21,18 +21,18 @@ _ct_hand_size = 5;
 _ct_draw_amount = 2;
 
 // BATTLE GLOBALS
-global.cast_card = undefined;
-global.caster_beast = undefined;
-global.target_beast = undefined;
+global.ref_cast_card = undefined;
+global.ref_caster_beast = undefined;
+global.ref_target_beast = undefined;
 
-global.echo_counter = 0;
+global.ct_echo = 0;
 
 // MINIONS
 _flag_minions_init = false;
 _list_casting_minions = undefined;
 
 // STATUSES
-global.statuses = ds_list_create();
+global.list_statuses = ds_list_create();
 
 _flag_statuses_init = false;
 _list_statuses = undefined;
@@ -87,7 +87,7 @@ function hscr_check_battle_card_oom(_list_cards){
 	for (var _it_card = 0; _it_card < ds_list_size(_list_cards); _it_card++){
 
 		var _ref_card = ds_list_find_value(_list_cards,_it_card);
-		var _val_card_cost = _ref_card._ref_card.card_mana_cost;
+		var _val_card_cost = _ref_card._ref_card._val_card_mana_cost;
 
 		if (_val_card_cost <= _val_cur_mana){
 			_ref_card._card_oom_check = false;
@@ -104,7 +104,7 @@ function hscr_check_battle_card_oom(_list_cards){
 //—------------------------------------------------------------------------------//
 function hscr_check_battle_beast_color(_list_beast_check){
 
-	var _arr_card_colors = global.cast_card._ref_card.card_colors;
+	var _arr_card_colors = global.ref_cast_card._ref_card._arr_card_colors;
 
 	var _str_card_color_1 = _arr_card_colors[0];
 	var _str_card_color_2 = _arr_card_colors[1];
@@ -112,7 +112,7 @@ function hscr_check_battle_beast_color(_list_beast_check){
 	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
 
 		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
-		var _arr_beast_colors = _ref_beast._ref_unit.beast_colors;
+		var _arr_beast_colors = _ref_beast._ref_unit._arr_beast_colors;
 
 		var _str_beast_color_1 = _arr_beast_colors[0];
 		var _str_beast_color_2 = _arr_beast_colors[1];
@@ -142,12 +142,12 @@ function hscr_check_battle_beast_color(_list_beast_check){
 //—------------------------------------------------------------------------------//
 function hscr_check_battle_beast_archetype(_list_beast_check){
 
-	var _str_card_archetype = global.cast_card._ref_card.card_archetype_req;
+	var _str_card_archetype = global.ref_cast_card._ref_card._str_card_archetype_req;
 
 	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
 
 		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
-		var _str_beast_archetype = _ref_beast._ref_unit.beast_archetype;
+		var _str_beast_archetype = _ref_beast._ref_unit._str_beast_archetype;
 
 		if (_str_card_archetype == undefined || _str_card_archetype == _str_beast_archetype){
 			_ref_beast._beast_archetype_check = true;
@@ -164,12 +164,12 @@ function hscr_check_battle_beast_archetype(_list_beast_check){
 //—------------------------------------------------------------------------------//
 function hscr_check_battle_beast_class(_list_beast_check){
 
-	var _str_card_class = global.cast_card._ref_card.card_class_req;
+	var _str_card_class = global.ref_cast_card._ref_card._str_card_class_req;
 
 	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
 
 		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
-		var _str_beast_class = _ref_beast._ref_unit.beast_class;
+		var _str_beast_class = _ref_beast._ref_unit._str_beast_class;
 
 		if (_str_card_class == undefined || _str_card_class == _str_beast_class){
 			_ref_beast._beast_class_check = true;
@@ -195,7 +195,7 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 		switch(_str_range){
 
 			case "SELF":
-				_ref_beast_player._beast_range_check = (_ref_beast_player == global.caster_beast);
+				_ref_beast_player._beast_range_check = (_ref_beast_player == global.ref_caster_beast);
 			break;
 
 			case "MELEE":
@@ -203,7 +203,7 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 			break;
 
 			case "TEAM":
-				_ref_beast_player._beast_range_check = (_ref_beast_player != global.caster_beast);
+				_ref_beast_player._beast_range_check = (_ref_beast_player != global.ref_caster_beast);
 			break;
 
 			case "RANGED":

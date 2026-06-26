@@ -24,7 +24,7 @@ if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 		_ct_cooldown = 10;
 		_flag_clicked = true;
 
-		var _ct_total_pages = max(1,ceil(ds_list_size(global.player_inventory) / _ref_gui_pane._ct_inventory_per_page));
+		var _ct_total_pages = max(1,ceil(ds_list_size(global.list_player_inventory) / _ref_gui_pane._ct_inventory_per_page));
 
 		if (_ref_gui_pane._ct_inventory_page < _ct_total_pages - 1){
 			_ref_gui_pane._ct_inventory_page++;

@@ -1,15 +1,28 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_CARD_UNCOLORED_ECHO
+// FUNCTION: Resolves the Echo card effect.
+//           Increases the player's Echo counter by the card's magnitude.
+//           Plays the associated animation, sound, and popup effects.
 //
-// SCRIPT: SCR_CARD_UNCOLORED_STRIKE | Melee, ST, Deals [linear] melee damage | RETURNS VOID
-//
-//
-function scr_card_uncolored_echo(_card,_caster,_target){
-	global.echo_counter+=_card[?"card_magnitude"];
-	
-	//PLAY ANIMATION
-	
-	//PLAY SOUND
-	
-	//POPUP
-	scr_spawn_popup_scrolling("TEXT","+1 ECHO",undefined,c_white,room_width/2-300,room_height/2);			
+//===============================================================================//
+function scr_card_uncolored_echo(_stct_card,_ref_caster,_ref_target){
+
+	//----------------//
+	//GAIN ECHO STACKS//
+	//----------------//
+	global.ct_echo += _stct_card._val_card_magnitude;
+
+	//----------------//
+	//PLAY ANIMATION//
+	//----------------//
+
+	//-----------//
+	//PLAY SOUND//
+	//-----------//
+
+	//-------------//
+	//SPAWN POPUP//
+	//-------------//
+	scr_spawn_popup_scrolling("TEXT","+" + string(_stct_card._val_card_magnitude) + " ECHO",undefined,c_white,room_width / 2 - 300,room_height / 2);
 }

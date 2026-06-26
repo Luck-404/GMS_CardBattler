@@ -7,7 +7,7 @@
 //===============================================================================//
 function scr_degrade_shield(_ref_beast){
 
-	var _str_archetype = _ref_beast._stct_unit.beast_archetype;
+	var _str_archetype = _ref_beast._stct_unit._str_beast_archetype;
 
 	switch (_str_archetype){
 

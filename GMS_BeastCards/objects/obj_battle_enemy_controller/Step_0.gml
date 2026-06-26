@@ -16,7 +16,7 @@ switch(_enemy_state){
 		for (var _it_beast = 0; _it_beast < _ct_beast; _it_beast++){
 
 			// CREATE BEAST STRUCT
-			var _stct_unit = scr_get_random_beast(global.last_enemy_pool);
+			var _stct_unit = scr_get_random_beast(global.arr_last_enemy_pool);
 
 			// CREATE BATTLE BEAST
 			var _ref_beast = instance_create_layer(
@@ -26,13 +26,13 @@ switch(_enemy_state){
 				obj_battle_beast
 			);
 
-			_ref_beast._sprite = _stct_unit.beast_sprite;
+			_ref_beast._sprite = _stct_unit._spr_beast;
 			_ref_beast._ref_unit = _stct_unit;
 			_ref_beast._team = "ENEMY";
 			_ref_beast._uid = _stct_unit.beast_uid;
 			_ref_beast._pos = _it_beast;
-			_ref_beast._cur_hp = _stct_unit.beast_hp_cur;
-			_ref_beast._max_hp = _stct_unit.beast_hp_max;
+			_ref_beast._cur_hp = _stct_unit._val_beast_hp_cur;
+			_ref_beast._max_hp = _stct_unit._val_beast_hp_max;
 
 			// TRACK BEAST
 			ds_list_add(_list_beasts,_ref_beast);
@@ -58,8 +58,8 @@ switch(_enemy_state){
 
 			// BUILD DECK
 			var _list_deck = scr_get_enemy_deck(
-				_stct_unit.beast_name,
-				_stct_unit.beast_color_type
+				_stct_unit._str_beast_name,
+				_stct_unit._str_beast_color_type
 			);
 
 			// CREATE CARD INSTANCES
@@ -74,7 +74,7 @@ switch(_enemy_state){
 					obj_battle_card
 				);
 
-				_ref_card._sprite = _stct_card.card_sprite;
+				_ref_card._sprite = _stct_card._spr_card;
 				_ref_card._uid = _stct_card.card_uid;
 				_ref_card._team = "ENEMY";
 				_ref_card._ref_card = _stct_card;
@@ -276,7 +276,7 @@ switch(_enemy_state){
 
 				if (_ref_beast._beast_able_check){
 
-					var _str_card_type = _ref_card._ref_card.card_type;
+					var _str_card_type = _ref_card._ref_card._str_card_type;
 					var _ref_target = undefined;
 
 					switch(_str_card_type){
@@ -286,7 +286,7 @@ switch(_enemy_state){
 
 							if (ds_list_size(_list_enemy) > 0){
 
-								switch(_ref_card._ref_card.card_range){
+								switch(_ref_card._ref_card._str_card_range){
 
 									case "MELEE":
 										_ref_target = ds_list_find_value(_list_enemy,0);
@@ -301,9 +301,9 @@ switch(_enemy_state){
 									break;
 								}
 
-								global.cast_card = _ref_card;
-								global.caster_beast = _ref_beast;
-								global.target_beast = _ref_target;
+								global.ref_cast_card = _ref_card;
+								global.ref_caster_beast = _ref_beast;
+								global.ref_target_beast = _ref_target;
 
 								scr_cast_card();
 							}
@@ -314,7 +314,7 @@ switch(_enemy_state){
 						case "DEFENSE":
 							_ref_target = _ref_beast;
 
-							if (_ref_card._ref_card.card_range == "RANGED"){
+							if (_ref_card._ref_card._str_card_range == "RANGED"){
 
 								if (random(1) < 0.25){
 
@@ -335,9 +335,9 @@ switch(_enemy_state){
 								}
 							}
 
-							global.cast_card = _ref_card;
-							global.caster_beast = _ref_beast;
-							global.target_beast = _ref_target;
+							global.ref_cast_card = _ref_card;
+							global.ref_caster_beast = _ref_beast;
+							global.ref_target_beast = _ref_target;
 
 							scr_cast_card();
 						break;
@@ -432,7 +432,7 @@ switch(_enemy_state){
 				}
 			}
 
-			var _ref_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
+			var _ref_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.list_statuses);
 
 			if (_ref_status != -1){
 				_ref_status._status_command = "REPEAT";

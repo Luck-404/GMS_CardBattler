@@ -13,9 +13,9 @@
 #region SPAWN UNITS ONCE
 if (!_flag_spawned){
 
-	for (var _it_unit = 0; _it_unit < ds_list_size(global.player_ranch); _it_unit++){
+	for (var _it_unit = 0; _it_unit < ds_list_size(global.list_player_ranch); _it_unit++){
 
-		var _stct_unit = ds_list_find_value(global.player_ranch,_it_unit);
+		var _stct_unit = ds_list_find_value(global.list_player_ranch,_it_unit);
 
 		if (_stct_unit == undefined){
 			continue;
@@ -32,7 +32,7 @@ if (!_flag_spawned){
 // HIGHLIGHT AND INTERACTION
 //
 #region HIGHLIGHT AND INTERACTION
-if (distance_to_object(obj_player) < 48 && !global.pause){
+if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 
 	image_index = 1;
 
@@ -48,7 +48,7 @@ if (distance_to_object(obj_player) < 48 && !global.pause){
 			obj_gui_controller.hscr_destroy_gui_open();
 			obj_gui_controller.hscr_toggle_gui_pause(true);
 
-			global.active_gui = _ref_ranch_gui;
+			global.ref_active_gui = _ref_ranch_gui;
 		}
 	}
 }

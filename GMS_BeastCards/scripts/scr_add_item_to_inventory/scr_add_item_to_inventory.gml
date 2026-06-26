@@ -8,7 +8,7 @@
 //===============================================================================//
 
 function scr_add_item_to_inventory(_str_item_id,_ct_count){
-	var _list_inventory = global.player_inventory;
+	var _list_inventory = global.list_player_inventory;
 
 	var _stct_base_item = scr_get_item_info(_str_item_id);
 

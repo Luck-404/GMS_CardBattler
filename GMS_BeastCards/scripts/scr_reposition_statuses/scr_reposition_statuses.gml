@@ -9,9 +9,9 @@
 function scr_reposition_statuses(_ref_host){
 
 	#region GLOBAL
-	if (_ref_host == undefined || _ref_host == global.statuses){
+	if (_ref_host == undefined || _ref_host == global.list_statuses){
 
-		var _list_statuses = global.statuses;
+		var _list_statuses = global.list_statuses;
 		var _ct_statuses = ds_list_size(_list_statuses);
 
 		if (_ct_statuses <= 0){

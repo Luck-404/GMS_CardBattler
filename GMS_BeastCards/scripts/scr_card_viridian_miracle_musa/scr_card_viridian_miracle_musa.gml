@@ -1,10 +1,23 @@
-function scr_card_viridian_miracle_musa(_card,_caster,_target){
-	//APPLY EFFECT
+//===============================================================================//
+//
+// SCRIPT: SCR_CARD_VIRIDIAN_MIRACLE_MUSA
+// FUNCTION: Resolves the Miracle Musa card effect.
+//           Applies the Overhealth buff to the target.
+//           Plays the associated animation and sound effects.
+//
+//===============================================================================//
+function scr_card_viridian_miracle_musa(_stct_card,_ref_caster,_ref_target){
+
+	//------------------//
+	//APPLY BUFF STATUS//
+	//------------------//
 	scr_apply_buff_status("OVERHEALTH");
-		
-	//PLAY ANIMATION
-	
-	//PLAY SOUND
-	
-	//POPUP
+
+	//----------------//
+	//PLAY ANIMATION//
+	//----------------//
+
+	//-----------//
+	//PLAY SOUND//
+	//-----------//
 }

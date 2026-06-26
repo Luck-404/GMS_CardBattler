@@ -1,13 +1,23 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_CARD_VIRIDIAN_EMERALD_WISDOM
+// FUNCTION: Resolves the Emerald Wisdom card effect.
+//           Applies the Draw 2 buff.
+//           Plays the associated animation and sound effects.
 //
-// SCRIPT: SCR_CARD_UNCOLORED_STRIKE | Melee, ST, Deals [linear] melee damage | RETURNS VOID
-//
-//
-function scr_card_viridian_emerald_wisdom(){
-	//APPLY EFFECT
+//===============================================================================//
+function scr_card_viridian_emerald_wisdom(_stct_card,_ref_caster,_ref_target){
+
+	//------------------//
+	//APPLY BUFF STATUS//
+	//------------------//
 	scr_apply_buff_status("DRAW_2");
-		
-	//PLAY ANIMATION
-	
-	//PLAY SOUND
+
+	//----------------//
+	//PLAY ANIMATION//
+	//----------------//
+
+	//-----------//
+	//PLAY SOUND//
+	//-----------//
 }

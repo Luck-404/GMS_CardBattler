@@ -12,7 +12,7 @@ function scr_status_event_rapid_growth(_str_tag,_ref_status){
 
 		case "APPLY":
 
-			var _ref_existing_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
+			var _ref_existing_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.list_statuses);
 
 			if (_ref_existing_status != -1){
 				_ref_existing_status._val_status_lifetime = 15;
@@ -30,12 +30,12 @@ function scr_status_event_rapid_growth(_str_tag,_ref_status){
 			_ref_new_status._str_trigger_region = "END";
 			_ref_new_status._str_status_type = "GLOBAL";
 
-			ds_list_add(global.statuses,_ref_new_status);
+			ds_list_add(global.list_statuses,_ref_new_status);
 
 			var _ref_layer = layer_get_id("bly_event");
 			layer_background_change(_ref_layer,spr_scene_fx_rapid_growth);
 
-			scr_reposition_statuses(global.statuses);
+			scr_reposition_statuses(global.list_statuses);
 
 		break;
 
@@ -75,8 +75,8 @@ function scr_status_event_rapid_growth(_str_tag,_ref_status){
 
 				scr_heal_target(1,_ref_target);
 
-				var _it_minion = irandom(ds_list_size(global.viridian_minions) - 1);
-				var _str_minion = ds_list_find_value(global.viridian_minions,_it_minion);
+				var _it_minion = irandom(ds_list_size(global.list_pool_viridian_minions) - 1);
+				var _str_minion = ds_list_find_value(global.list_pool_viridian_minions,_it_minion);
 
 				scr_init_minion(_str_minion,undefined,undefined,_ref_target);
 			}
@@ -92,7 +92,7 @@ function scr_status_event_rapid_growth(_str_tag,_ref_status){
 				_ref_status._str_status_command = "WAIT";
 			}
 
-			scr_reposition_statuses(global.statuses);
+			scr_reposition_statuses(global.list_statuses);
 
 		break;
 

@@ -36,7 +36,7 @@ else
 			_flag_triggered = true;
 			image_index = 1;
 			
-			global.player_chests_opened[?_uid_chest] = true;
+			global.map_player_chests_opened[?_uid_chest] = true;
 		
 			if (_str_loot_type == "RANDOM")
 			{

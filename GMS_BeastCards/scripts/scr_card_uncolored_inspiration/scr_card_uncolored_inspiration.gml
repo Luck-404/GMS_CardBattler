@@ -1,13 +1,23 @@
+//===============================================================================//
 //
+// SCRIPT: SCR_CARD_UNCOLORED_INSPIRATION
+// FUNCTION: Resolves the Inspiration card effect.
+//           Applies the Inspiration buff.
+//           Plays the associated animation and sound effects.
 //
-// SCRIPT: SCR_CARD_UNCOLORED_STRIKE | Melee, ST, Deals [linear] melee damage | RETURNS VOID
-//
-//
-function scr_card_uncolored_inspiration(){
-	//APPLY EFFECT
+//===============================================================================//
+function scr_card_uncolored_inspiration(_stct_card,_ref_caster,_ref_target){
+
+	//------------------//
+	//APPLY BUFF STATUS//
+	//------------------//
 	scr_apply_buff_status("INSPIRATION");
-		
-	//PLAY ANIMATION
-	
-	//PLAY SOUND
+
+	//----------------//
+	//PLAY ANIMATION//
+	//----------------//
+
+	//-----------//
+	//PLAY SOUND//
+	//-----------//
 }

@@ -17,22 +17,22 @@ switch(_player_state){
 
 		var _val_spawn_index = 0;
 
-		for (var _it_beast = 0; _it_beast < ds_list_size(global.player_party); _it_beast++){
+		for (var _it_beast = 0; _it_beast < ds_list_size(global.list_player_party); _it_beast++){
 
-			var _stct_unit = ds_list_find_value(global.player_party,_it_beast);
+			var _stct_unit = ds_list_find_value(global.list_player_party,_it_beast);
 
 			if (_stct_unit == undefined){
 				continue;
 			}
 
 			// SKIP DEAD UNITS
-			if (_stct_unit.beast_hp_cur <= 0){
+			if (_stct_unit._val_beast_hp_cur <= 0){
 				continue;
 			}
 
 			var _ref_beast = instance_create_layer(room_width * 0.5 - 80 - (100 * _val_spawn_index),room_height * 0.5,"ily_player",obj_battle_beast);
 
-			_ref_beast._sprite = _stct_unit.beast_sprite;
+			_ref_beast._sprite = _stct_unit._spr_beast;
 			_ref_beast._ref_unit = _stct_unit;
 			_ref_beast._team = "PLAYER";
 			_ref_beast._uid = _stct_unit.beast_uid;
@@ -40,9 +40,9 @@ switch(_player_state){
 			// COMPACT SLOT INDEX
 			_ref_beast._pos = _val_spawn_index;
 
-			_ref_beast._minions_max = _stct_unit.beast_min_stat;
-			_ref_beast._cur_hp = _stct_unit.beast_hp_cur;
-			_ref_beast._max_hp = _stct_unit.beast_hp_max;
+			_ref_beast._minions_max = _stct_unit._val_beast_min_stat;
+			_ref_beast._cur_hp = _stct_unit._val_beast_hp_cur;
+			_ref_beast._max_hp = _stct_unit._val_beast_hp_max;
 
 			ds_list_add(_list_beasts,_ref_beast);
 			ds_list_add(_list_beasts_alive,_ref_beast);
@@ -61,9 +61,9 @@ switch(_player_state){
 	#region INIT CARDS
 	case PLAYER_STATE.INIT_CARDS:
 
-		for (var _it_card = 0; _it_card < ds_list_size(global.player_deck); _it_card++){
+		for (var _it_card = 0; _it_card < ds_list_size(global.list_player_deck); _it_card++){
 
-			var _stct_card = ds_list_find_value(global.player_deck,_it_card);
+			var _stct_card = ds_list_find_value(global.list_player_deck,_it_card);
 
 			if (_stct_card == undefined){
 				continue;
@@ -71,7 +71,7 @@ switch(_player_state){
 
 			var _ref_card = instance_create_layer(70,room_height - 100,"ily_player",obj_battle_card);
 
-			_ref_card._sprite = _stct_card.card_sprite;
+			_ref_card._sprite = _stct_card._spr_card;
 			_ref_card._uid = _stct_card.card_uid;
 			_ref_card._team = "PLAYER";
 			_ref_card._ref_card = _stct_card;
@@ -268,7 +268,7 @@ switch(_player_state){
 
 			if (_ref_card != undefined && _ref_card._location == "HAND" && _ref_card._team == "PLAYER" && !_ref_card._card_oom_check){
 
-				global.cast_card = _ref_card;
+				global.ref_cast_card = _ref_card;
 
 				_player_state = PLAYER_STATE.SELECT_CASTER;
 
@@ -308,7 +308,7 @@ switch(_player_state){
 			_flag_clicked = true;
 
 			_player_state = PLAYER_STATE.SELECT_CARD;
-			global.cast_card = undefined;
+			global.ref_cast_card = undefined;
 
 			hscr_check_battle_card_oom(_list_battle_hand);
 
@@ -330,11 +330,11 @@ switch(_player_state){
 
 				if (_ref_beast_clicked._team == "PLAYER" && _ref_beast_clicked._beast_color_check && _ref_beast_clicked._beast_able_check && _ref_beast_clicked._beast_archetype_check && _ref_beast_clicked._beast_class_check){
 
-					global.caster_beast = _ref_beast_clicked;
+					global.ref_caster_beast = _ref_beast_clicked;
 
 					_player_state = PLAYER_STATE.SELECT_TARGET;
 
-					var _str_card_range = global.cast_card._ref_card.card_range;
+					var _str_card_range = global.ref_cast_card._ref_card._str_card_range;
 
 					if (_str_card_range != "GLOBAL"){
 						hscr_check_battle_beast_range(_list_beasts_alive,_str_card_range);
@@ -372,7 +372,7 @@ switch(_player_state){
 			_flag_clicked = true;
 
 			_player_state = PLAYER_STATE.SELECT_CASTER;
-			global.caster_beast = undefined;
+			global.ref_caster_beast = undefined;
 
 			hscr_check_battle_beast_able(_list_beasts_alive);
 			hscr_check_battle_beast_color(_list_beasts_alive);
@@ -383,7 +383,7 @@ switch(_player_state){
 		}
 		#endregion
 
-		var _str_card_range = global.cast_card._ref_card.card_range;
+		var _str_card_range = global.ref_cast_card._ref_card._str_card_range;
 
 		//
 		// GLOBAL CARD HANDLE
@@ -394,7 +394,7 @@ switch(_player_state){
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
 				_flag_clicked = true;
 
-				global.target_beast = "GLOBAL";
+				global.ref_target_beast = "GLOBAL";
 
 				_player_state = PLAYER_STATE.CARD_EXECUTE;
 			}
@@ -414,7 +414,7 @@ switch(_player_state){
 			if (_ref_beast_clicked != undefined && _ref_beast_clicked._cur_hp > 0){
 
 				if (_ref_beast_clicked._beast_range_check){
-					global.target_beast = _ref_beast_clicked;
+					global.ref_target_beast = _ref_beast_clicked;
 
 					_player_state = PLAYER_STATE.CARD_EXECUTE;
 				}
@@ -466,7 +466,7 @@ switch(_player_state){
 				}
 			}
 
-			var _ref_weather = scr_check_for_status("WEATHER: RAPID GROWTH",global.statuses);
+			var _ref_weather = scr_check_for_status("WEATHER: RAPID GROWTH",global.list_statuses);
 
 			if (_ref_weather != -1){
 				_ref_weather._status_command = "REPEAT";

@@ -8,10 +8,10 @@
 //===============================================================================//
 
 function scr_add_card_to_deck(_stct_new_card){
-	if (ds_list_size(global.player_deck) < 30){
-		ds_list_add(global.player_deck,_stct_new_card);
+	if (ds_list_size(global.list_player_deck) < 30){
+		ds_list_add(global.list_player_deck,_stct_new_card);
 	}
 	else{
-		ds_list_add(global.player_library,_stct_new_card);
+		ds_list_add(global.list_player_library,_stct_new_card);
 	}
 }

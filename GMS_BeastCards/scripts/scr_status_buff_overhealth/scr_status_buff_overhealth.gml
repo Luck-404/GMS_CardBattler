@@ -12,7 +12,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status){
 
 		case "APPLY":
 
-			var _ref_target = global.target_beast;
+			var _ref_target = global.ref_target_beast;
 
 			var _ref_existing_status = scr_check_for_status("OVERHEALTH",_ref_target);
 

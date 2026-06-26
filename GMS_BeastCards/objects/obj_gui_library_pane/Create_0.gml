@@ -14,8 +14,8 @@
 depth = -1;
 
 // COUNTS
-_ct_deck = ds_list_size(global.player_deck);
-_ct_library = ds_list_size(global.player_library);
+_ct_deck = ds_list_size(global.list_player_deck);
+_ct_library = ds_list_size(global.list_player_library);
 
 // DECK / LIBRARY SETTINGS
 _ct_deck_max = 30;
@@ -114,12 +114,12 @@ function hscr_draw_card_slot(_val_box_x,_val_box_y){
 //           Reads card data from a card struct.
 //—------------------------------------------------------------------------------//
 function hscr_draw_card_info(_stct_card,_val_box_x,_val_box_y){
-	draw_sprite_ext(_stct_card.card_sprite,0,_val_box_x + 10,_val_box_y + 11,_val_card_icon_scale,_val_card_icon_scale,0,c_white,1);
+	draw_sprite_ext(_stct_card._spr_card,0,_val_box_x + 10,_val_box_y + 11,_val_card_icon_scale,_val_card_icon_scale,0,c_white,1);
 
 	draw_set_colour(c_black);
 
-	var _str_color_text = hscr_get_card_color_text(_stct_card.card_colors);
-	var _str_display_text = _stct_card.card_name + " - " + _str_color_text + " - " + string(_stct_card.card_mana_cost);
+	var _str_color_text = hscr_get_card_color_text(_stct_card._arr_card_colors);
+	var _str_display_text = _stct_card._str_card_name + " - " + _str_color_text + " - " + string(_stct_card._val_card_mana_cost);
 
 	draw_text(_val_box_x + 24,_val_box_y + 3,_str_display_text);
 }
@@ -154,10 +154,10 @@ function hscr_get_average_deck_cost(){
 	var _val_total_cost = 0;
 
 	for (var _it_card = 0; _it_card < _ct_deck; _it_card++){
-		var _stct_card = ds_list_find_value(global.player_deck,_it_card);
+		var _stct_card = ds_list_find_value(global.list_player_deck,_it_card);
 
 		if (_stct_card != undefined){
-			_val_total_cost += _stct_card.card_mana_cost;
+			_val_total_cost += _stct_card._val_card_mana_cost;
 		}
 	}
 

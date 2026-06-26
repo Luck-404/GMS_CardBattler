@@ -30,15 +30,15 @@ switch(_str_condition){
 
 			_flag_finished = true;
 
-			for (var _it_unit = 0; _it_unit < ds_list_size(global.player_party); _it_unit++){
+			for (var _it_unit = 0; _it_unit < ds_list_size(global.list_player_party); _it_unit++){
 
-				var _stct_unit = ds_list_find_value(global.player_party,_it_unit);
+				var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
 
 				if (_stct_unit == undefined){
 					continue;
 				}
 
-				_stct_unit.beast_hp_cur = 0;
+				_stct_unit._val_beast_hp_cur = 0;
 			}
 		}
 		#endregion
@@ -46,9 +46,9 @@ switch(_str_condition){
 		#region PARTY DRAW
 		var _val_display_index = 0;
 
-		for (var _it_unit = 0; _it_unit < ds_list_size(global.player_party); _it_unit++){
+		for (var _it_unit = 0; _it_unit < ds_list_size(global.list_player_party); _it_unit++){
 
-			var _stct_unit = ds_list_find_value(global.player_party,_it_unit);
+			var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
 
 			if (_stct_unit == undefined){
 				continue;
@@ -86,11 +86,11 @@ switch(_str_condition){
 			var _val_unit_x = _val_box_x + (_val_slot_size * 0.5);
 			var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
-			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit.beast_color_type);
+			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 25,1,1,0,c_white,1);
 
 			var _c_unit = _flag_dead ? c_ltgray : c_white;
-			draw_sprite_ext(_stct_unit.beast_sprite,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
+			draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
 
 			draw_set_font(fnt_small_gui);
 			draw_set_halign(fa_left);
@@ -154,7 +154,7 @@ switch(_str_condition){
 			scr_heal_ranch_units(0.33);
 
 			var _val_gold_reward = irandom_range(25,100);
-			global.player_gold += _val_gold_reward;
+			global.val_player_gold += _val_gold_reward;
 
 			array_push(_arr_rewards,["GOLD",_val_gold_reward]);
 
@@ -165,16 +165,16 @@ switch(_str_condition){
 				if (_str_reward_type == "CARD"){
 
 					var _list_pool = choose(
-						global.rarity_I_cards,
-						global.rarity_I_cards,
-						global.rarity_I_cards,
-						global.rarity_I_cards,
-						global.rarity_I_cards,
-						global.rarity_I_cards,
-						global.rarity_II_cards,
-						global.rarity_II_cards,
-						global.rarity_II_cards,
-						global.rarity_III_cards
+						global.list_pool_cards_rarity_I,
+						global.list_pool_cards_rarity_I,
+						global.list_pool_cards_rarity_I,
+						global.list_pool_cards_rarity_I,
+						global.list_pool_cards_rarity_I,
+						global.list_pool_cards_rarity_I,
+						global.list_pool_cards_rarity_II,
+						global.list_pool_cards_rarity_II,
+						global.list_pool_cards_rarity_II,
+						global.list_pool_cards_rarity_III
 					);
 
 					var _val_card_roll = irandom_range(0,ds_list_size(_list_pool) - 1);
@@ -189,7 +189,7 @@ switch(_str_condition){
 				}
 				else{
 
-					var _str_new_item = scr_get_random_item(global.item_pool);
+					var _str_new_item = scr_get_random_item(global.list_pool_items);
 					var _stct_fake_item = scr_get_item_info(_str_new_item);
 
 					scr_add_item_to_inventory(_str_new_item,1);
@@ -200,9 +200,9 @@ switch(_str_condition){
 				}
 			}
 
-			for (var _it_unit = 0; _it_unit < ds_list_size(global.player_party); _it_unit++){
+			for (var _it_unit = 0; _it_unit < ds_list_size(global.list_player_party); _it_unit++){
 
-				var _stct_unit = ds_list_find_value(global.player_party,_it_unit);
+				var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
 
 				if (_stct_unit == undefined){
 					continue;
@@ -221,15 +221,15 @@ switch(_str_condition){
 				}
 
 				if (instance_exists(_ref_battle_unit)){
-					_stct_unit.beast_hp_cur = _ref_battle_unit._cur_hp;
+					_stct_unit._val_beast_hp_cur = _ref_battle_unit._cur_hp;
 				}
 
-				if (_stct_unit.beast_hp_cur > 0){
+				if (_stct_unit._val_beast_hp_cur > 0){
 
-					_stct_unit.beast_exp += 2;
+					_stct_unit._val_beast_exp += 2;
 
-					while (_stct_unit.beast_exp >= 10){
-						_stct_unit.beast_exp -= 10;
+					while (_stct_unit._val_beast_exp >= 10){
+						_stct_unit._val_beast_exp -= 10;
 						scr_level_up_beast(_stct_unit);
 					}
 				}
@@ -255,10 +255,10 @@ switch(_str_condition){
 
 				var _stct_card = _arr_rewards[_it_reward][1];
 
-				draw_sprite_ext(_stct_card.card_sprite,0,_val_card_x,_val_card_y,0.2,0.2,0,c_white,1);
+				draw_sprite_ext(_stct_card._spr_card,0,_val_card_x,_val_card_y,0.2,0.2,0,c_white,1);
 
 				draw_set_halign(fa_center);
-				draw_text(_val_card_x,_val_card_y + 60,string(_stct_card.card_name));
+				draw_text(_val_card_x,_val_card_y + 60,string(_stct_card._str_card_name));
 				draw_set_halign(fa_left);
 
 				_val_card_x += 150;
@@ -303,9 +303,9 @@ switch(_str_condition){
 		#region PARTY DRAW
 		var _val_display_index = 0;
 
-		for (var _it_unit = 0; _it_unit < ds_list_size(global.player_party); _it_unit++){
+		for (var _it_unit = 0; _it_unit < ds_list_size(global.list_player_party); _it_unit++){
 
-			var _stct_unit = ds_list_find_value(global.player_party,_it_unit);
+			var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
 
 			if (_stct_unit == undefined){
 				continue;
@@ -343,11 +343,11 @@ switch(_str_condition){
 			var _val_unit_x = _val_box_x + (_val_slot_size * 0.5);
 			var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
-			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit.beast_color_type);
+			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 25,1,1,0,c_white,1);
 
 			var _c_unit = _flag_dead ? c_ltgray : c_white;
-			draw_sprite_ext(_stct_unit.beast_sprite,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
+			draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
 
 			draw_set_font(fnt_small_gui);
 			draw_set_halign(fa_left);
@@ -368,7 +368,7 @@ switch(_str_condition){
 
 			draw_text(_val_text_x - (string_width(_str_hp) * 0.5),_val_text_y,_str_hp);
 
-			var _str_level = "Level: " + string(_stct_unit.beast_level);
+			var _str_level = "Level: " + string(_stct_unit._val_beast_level);
 			draw_text(_val_text_x - (string_width(_str_level) * 0.5),_val_text_y + 30,_str_level);
 		}
 		#endregion
@@ -377,12 +377,12 @@ switch(_str_condition){
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);
-			_ref_transition._destination = global.last_player_rm;
+			_ref_transition._destination = global.ref_last_player_room;
 
-			scr_spawn_popup_banner(global.last_player_banner);
+			scr_spawn_popup_banner(global.str_last_player_banner);
 
-			obj_player.x = global.last_player_x;
-			obj_player.y = global.last_player_y;
+			obj_player.x = global.val_last_player_x;
+			obj_player.y = global.val_last_player_y;
 
 			scr_toggle_player_movement("START");
 			obj_player.visible = true;

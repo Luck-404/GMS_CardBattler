@@ -23,7 +23,7 @@ _c_chest = c_white;
 //----//
 //INIT//
 //----//
-if (ds_map_exists(global.player_chests_opened, _uid_chest)){
+if (ds_map_exists(global.map_player_chests_opened, _uid_chest)){
     _flag_triggered = true;
     image_index = 1;
 }
@@ -88,7 +88,7 @@ else if (_str_chest_id == "RANDOM"){
 				break;
 
 				case "GOLD":
-					global.player_gold += _val_reward_count;
+					global.val_player_gold += _val_reward_count;
 				break;
 			}
 
@@ -105,14 +105,14 @@ else if (_str_chest_id == "RANDOM"){
 	function hscr_roll_treasure_chest_reward(){
 		for (var _it_loot = 0; _it_loot < _val_loot_amount; _it_loot++){
 			var _str_reward_type = choose("ITEM","CARD");
-			var _list_card_pool = global.rarity_I_cards;
+			var _list_card_pool = global.list_pool_cards_rarity_I;
 		
 			if (_str_rarity == "I"){
-				_list_card_pool = global.rarity_I_cards;	
+				_list_card_pool = global.list_pool_cards_rarity_I;	
 			} else if (_str_rarity == "II"){
-				_list_card_pool = global.rarity_II_cards;	
+				_list_card_pool = global.list_pool_cards_rarity_II;	
 			} else {
-				_list_card_pool = global.rarity_III_cards;	
+				_list_card_pool = global.list_pool_cards_rarity_III;	
 			}
 		
 			if (_str_reward_type == "CARD"){
@@ -127,7 +127,7 @@ else if (_str_chest_id == "RANDOM"){
 
 				scr_spawn_popup("TEXT","+" + _str_card_name,undefined,c_white,obj_player.x + _val_rand_x,obj_player.y + _val_rand_y);
 			} else {
-				var _str_new_item = scr_get_random_item(global.item_pool);
+				var _str_new_item = scr_get_random_item(global.list_pool_items);
 
 				scr_add_item_to_inventory(_str_new_item, 1);
 
@@ -147,7 +147,7 @@ else if (_str_chest_id == "RANDOM"){
 				_val_new_gold = 300;	
 			}
 		
-			global.player_gold += _val_new_gold;
+			global.val_player_gold += _val_new_gold;
 			
 			_val_rand_x = irandom_range(-48,48);
 			_val_rand_y = irandom_range(-48,48);

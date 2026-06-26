@@ -14,8 +14,8 @@ depth = -1;
 
 _val_pos = 0;
 
-_ct_unit = ds_list_size(global.player_party);
-_stct_unit_selected = ds_list_find_value(global.player_party,_val_pos);
+_ct_unit = ds_list_size(global.list_player_party);
+_stct_unit_selected = ds_list_find_value(global.list_player_party,_val_pos);
 
 _str_type = "PARTY";
 

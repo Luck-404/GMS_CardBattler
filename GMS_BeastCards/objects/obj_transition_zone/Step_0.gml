@@ -33,7 +33,7 @@ if (_flag_continue_transition){
 	_ref_fader._flag_fade_in = true;
 
 	scr_spawn_popup_banner(_arr_room[1]);
-	global.last_player_banner = _arr_room[1];
+	global.str_last_player_banner = _arr_room[1];
 
 	room_goto(_arr_room[0]);
 

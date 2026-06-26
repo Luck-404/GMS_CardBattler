@@ -8,7 +8,7 @@
 //===============================================================================//
 
 //ALLOW INPUT AND LOGIC IF THE GAME IS NOT PAUSED
-if (!global.pause){ 
+if (!global.flag_pause){ 
 
 #region MOVEMENT INPUT
 	//—------------------------------------------------------------------------------//

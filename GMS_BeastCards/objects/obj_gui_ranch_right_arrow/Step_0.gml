@@ -28,7 +28,7 @@ if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 		_flag_clicked = true;
 		_val_cooldown = 10;
 
-		var _ct_total_pages = ceil(ds_list_size(global.player_ranch) / _ref_gui_pane._ct_ranch_per_page);
+		var _ct_total_pages = ceil(ds_list_size(global.list_player_ranch) / _ref_gui_pane._ct_ranch_per_page);
 
 		if (_ref_gui_pane._val_ranch_page < _ct_total_pages - 1){
 			_ref_gui_pane._val_ranch_page++;

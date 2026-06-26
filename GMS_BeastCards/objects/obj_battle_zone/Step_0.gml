@@ -24,10 +24,10 @@ if (place_meeting(x, y, obj_player) && obj_player._flag_player_moving){ //IF TOU
 			scr_spawn_popup("TEXT","BATTLE TRIGGERED",undefined,c_black,obj_player.x,obj_player.y);
 			
 			//STORE PLAYER POSITION
-			global.last_player_x = obj_player.x;
-			global.last_player_y = obj_player.y;
-			global.last_player_rm = room;
-			global.last_enemy_pool = _arr_encounter_beasts;
+			global.val_last_player_x = obj_player.x;
+			global.val_last_player_y = obj_player.y;
+			global.ref_last_player_room = room;
+			global.arr_last_enemy_pool = _arr_encounter_beasts;
 			
 			//STOP PLAYER MOVEMENT
 			scr_toggle_player_movement("STOP");

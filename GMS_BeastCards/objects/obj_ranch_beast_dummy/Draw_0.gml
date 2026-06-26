@@ -98,7 +98,7 @@ if (_ct_emoji_timer > 0){
 // STATE MACHINE
 //
 #region STATE MACHINE
-if (!global.pause){
+if (!global.flag_pause){
 
 	switch(_beast_state){
 

@@ -22,58 +22,58 @@
 	#endregion
 
 	#region BEAST GLOBALS
-	global.beast_uid = 0;
-	global.player_party = ds_list_create();
-	global.player_ranch = ds_list_create();
+	global.uid_next_beast = 0;
+	global.list_player_party = ds_list_create();
+	global.list_player_ranch = ds_list_create();
 	#endregion
 
 	#region CARD GLOBALS
-	global.card_uid = 0;
-	global.player_deck = ds_list_create();
-	global.player_library = ds_list_create();
+	global.uid_next_card = 0;
+	global.list_player_deck = ds_list_create();
+	global.list_player_library = ds_list_create();
 
-	global.rarity_I_cards = ds_list_create();
-	global.rarity_II_cards = ds_list_create();
-	global.rarity_III_cards = ds_list_create();
-	global.rarity_IV_cards = ds_list_create();
+	global.list_pool_cards_rarity_I = ds_list_create();
+	global.list_pool_cards_rarity_II = ds_list_create();
+	global.list_pool_cards_rarity_III = ds_list_create();
+	global.list_pool_cards_rarity_IV = ds_list_create();
 	#endregion
 
 	#region MINIONS
-	global.viridian_minions = ds_list_create();
+	global.list_pool_viridian_minions = ds_list_create();
 	#endregion
 
 	#region ITEM GLOBALS
-	global.item_uid = 0;	
-	global.player_inventory = ds_list_create();	
-	global.item_pool = ds_list_create();
+	global.uid_next_item = 0;	
+	global.list_player_inventory = ds_list_create();	
+	global.list_pool_items = ds_list_create();
 	scr_init_item_pool();
 	#endregion
 	
 	#region PLAYER TRACKING
-	global.player_gold = 0;
+	global.val_player_gold = 0;
 
-	global.player_chests_opened = ds_map_create();
+	global.map_player_chests_opened = ds_map_create();
 	#endregion
 
 	#region TRANSITIONS
-	global.last_player_x = 0;
-	global.last_player_y = 0;
-	global.last_player_rm = rm_ow_center;
-	global.last_player_banner = "";
-	global.last_enemy_pool = "";
+	global.val_last_player_x = 0;
+	global.val_last_player_y = 0;
+	global.ref_last_player_room = rm_ow_center;
+	global.str_last_player_banner = "";
+	global.arr_last_enemy_pool = "";
 	#endregion
 
 	#region CAMERA
 	_flag_created_camera = false; 
-	global.cam_min_size = 500;
-	global.cam_max_size = 1056;
+	global.val_cam_min_size = 500;
+	global.val_cam_max_size = 1056;
 
-	global.cam_width = 500;
-	global.cam_height = 500;
+	global.val_cam_width = 500;
+	global.val_cam_height = 500;
 
-	global.cam_target_width = global.cam_width;
-	global.cam_target_height = global.cam_height;
-	global.camera = undefined;
+	global.val_cam_target_width = global.val_cam_width;
+	global.val_cam_target_height = global.val_cam_height;
+	global.ref_camera = undefined;
 	#endregion
 #endregion
 
@@ -109,9 +109,9 @@
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO RANCH
 	//—------------------------------------------------------------------------------//
-	ds_list_add(global.player_ranch,scr_init_beast_random("ARBRAWN"));
-	ds_list_add(global.player_ranch,scr_init_beast_random("ARGENTBUD"));
-	ds_list_add(global.player_ranch,scr_init_beast_random("BEAVINE"));
+	ds_list_add(global.list_player_ranch,scr_init_beast_random("ARBRAWN"));
+	ds_list_add(global.list_player_ranch,scr_init_beast_random("ARGENTBUD"));
+	ds_list_add(global.list_player_ranch,scr_init_beast_random("BEAVINE"));
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO DECK

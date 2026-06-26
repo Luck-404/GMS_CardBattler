@@ -10,8 +10,8 @@ function scr_check_for_status(_str_id,_ref_owner){
 
 	var _list_statuses;
 
-	if (_ref_owner == global.statuses){
-		_list_statuses = global.statuses;
+	if (_ref_owner == global.list_statuses){
+		_list_statuses = global.list_statuses;
 	}
 	else{
 		_list_statuses = _ref_owner._list_statuses;

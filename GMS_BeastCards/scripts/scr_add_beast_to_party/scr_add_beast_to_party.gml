@@ -9,10 +9,10 @@
 
 function scr_add_beast_to_party(_stct_new_beast){
 
-	if (ds_list_size(global.player_party) < 5){
-		ds_list_add(global.player_party,_stct_new_beast);
+	if (ds_list_size(global.list_player_party) < 5){
+		ds_list_add(global.list_player_party,_stct_new_beast);
 	}
 	else{
-		ds_list_add(global.player_ranch,_stct_new_beast);
+		ds_list_add(global.list_player_ranch,_stct_new_beast);
 	}
 }

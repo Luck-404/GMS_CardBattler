@@ -12,7 +12,7 @@ function scr_status_buff_draw_2(_str_tag,_ref_status){
 
 		case "APPLY":
 
-			var _ref_existing_status = scr_check_for_status("DRAW_2",global.statuses);
+			var _ref_existing_status = scr_check_for_status("DRAW_2",global.list_statuses);
 
 			if (_ref_existing_status != -1){
 				_ref_existing_status._val_status_lifetime = 3;
@@ -32,9 +32,9 @@ function scr_status_buff_draw_2(_str_tag,_ref_status){
 
 			obj_battle_player_controller._ct_draw_amount += 2;
 
-			ds_list_add(global.statuses,_ref_new_status);
+			ds_list_add(global.list_statuses,_ref_new_status);
 
-			scr_reposition_statuses(global.statuses);
+			scr_reposition_statuses(global.list_statuses);
 
 		break;
 
@@ -49,7 +49,7 @@ function scr_status_buff_draw_2(_str_tag,_ref_status){
 				_ref_status._str_status_command = "WAIT";
 			}
 
-			scr_reposition_statuses(global.statuses);
+			scr_reposition_statuses(global.list_statuses);
 
 		break;
 

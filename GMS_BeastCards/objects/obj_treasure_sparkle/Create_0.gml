@@ -88,14 +88,14 @@ function hscr_roll_treasure_sparkle_visibility(){
 //—------------------------------------------------------------------------------//
 function hscr_roll_treasure_sparkle_reward(){
 	var _str_reward_type = choose("ITEM","CARD");
-	var _list_card_pool = global.rarity_I_cards;
+	var _list_card_pool = global.list_pool_cards_rarity_I;
 		
 	if (_str_rarity == "I"){
-		_list_card_pool = global.rarity_I_cards;
+		_list_card_pool = global.list_pool_cards_rarity_I;
 	} else if (_str_rarity == "II"){
-		_list_card_pool = global.rarity_II_cards;
+		_list_card_pool = global.list_pool_cards_rarity_II;
 	} else {
-		_list_card_pool = global.rarity_III_cards;
+		_list_card_pool = global.list_pool_cards_rarity_III;
 	}
 		
 	//—------------------------------------------------------------------------------//
@@ -122,7 +122,7 @@ function hscr_roll_treasure_sparkle_reward(){
 	//—------------------------------------------------------------------------------//	
 	else {
 
-		var _str_new_item = scr_get_random_item(global.item_pool);
+		var _str_new_item = scr_get_random_item(global.list_pool_items);
 
 		show_debug_message("\nTIER " + _str_rarity + " RANDOM SPARKLE + " + _str_new_item);
 
@@ -144,7 +144,7 @@ function hscr_roll_treasure_sparkle_reward(){
 		_val_new_gold = 50;
 	}
 		
-	global.player_gold += _val_new_gold;
+	global.val_player_gold += _val_new_gold;
 			
 	var _val_rand_x = irandom_range(-48,48);
 	var _val_rand_y = irandom_range(-48,48);

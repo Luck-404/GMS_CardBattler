@@ -14,19 +14,19 @@ function scr_destroy_status(_ref_status){
 
 	if (_ref_status._ref_host == undefined){
 
-		var _ref_found_status = scr_check_for_status(_ref_status._str_status_name,global.statuses);
+		var _ref_found_status = scr_check_for_status(_ref_status._str_status_name,global.list_statuses);
 
 		if (_ref_found_status != -1){
 
-			var _it_status = ds_list_find_index(global.statuses,_ref_found_status);
+			var _it_status = ds_list_find_index(global.list_statuses,_ref_found_status);
 
 			if (_it_status != -1){
-				ds_list_delete(global.statuses,_it_status);
+				ds_list_delete(global.list_statuses,_it_status);
 			}
 
 			instance_destroy(_ref_found_status);
 
-			scr_reposition_statuses(global.statuses);
+			scr_reposition_statuses(global.list_statuses);
 		}
 
 		exit;

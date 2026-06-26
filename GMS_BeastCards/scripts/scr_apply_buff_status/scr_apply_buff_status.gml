@@ -19,8 +19,8 @@ function scr_apply_buff_status(_str_status_name){
 				"+2 MANA",
 				undefined,
 				c_black,
-				global.caster_beast.x + irandom_range(-32,32),
-				global.caster_beast.y - 24 + irandom_range(-32,32)
+				global.ref_caster_beast.x + irandom_range(-32,32),
+				global.ref_caster_beast.y - 24 + irandom_range(-32,32)
 			);
 
 		break;
@@ -34,8 +34,8 @@ function scr_apply_buff_status(_str_status_name){
 				"+5 OVERHEALTH",
 				undefined,
 				c_green,
-				global.target_beast.x + irandom_range(-32,32),
-				global.target_beast.y - 24 + irandom_range(-32,32)
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
 			);
 
 		break;
@@ -49,8 +49,8 @@ function scr_apply_buff_status(_str_status_name){
 				"+2 CARD DRAW",
 				undefined,
 				c_green,
-				global.caster_beast.x + irandom_range(-32,32),
-				global.caster_beast.y - 24 + irandom_range(-32,32)
+				global.ref_caster_beast.x + irandom_range(-32,32),
+				global.ref_caster_beast.y - 24 + irandom_range(-32,32)
 			);
 
 		break;

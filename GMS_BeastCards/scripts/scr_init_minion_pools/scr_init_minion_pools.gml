@@ -11,6 +11,6 @@ function scr_init_minion_pools(){
 	// VIRIDIAN
 	//
 	#region VIRIDIAN
-	ds_list_add(global.viridian_minions,"LIFE_SPIRIT");
+	ds_list_add(global.list_pool_viridian_minions,"LIFE_SPIRIT");
 	#endregion
 }

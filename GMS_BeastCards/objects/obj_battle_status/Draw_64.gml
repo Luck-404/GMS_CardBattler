@@ -1,104 +1,83 @@
+//===============================================================================//
+//
+// DRAW GUI: OBJ_BATTLE_STATUS
+// FUNCTION: Draws status icon, stack count, lifetime count, and tooltip.
+//           Executes queued status commands.
+//           Supports repeat and death command callbacks.
+//
+//===============================================================================//
+
 if (!instance_exists(obj_gui_end_battle_pane)){
-	if (_status_sprite != undefined){
-		draw_sprite(_status_sprite,0,x,y);
+
+	if (_spr_status != undefined){
+
+		//----------//
+		//DRAW ICON//
+		//----------//
+		draw_sprite(_spr_status,0,x,y);
+
 		draw_set_font(fnt_small_party_draw);
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_middle);
 		draw_set_colour(c_black);
-		draw_text(x+5,y+10,string(_status_stacks));	
-		draw_text(x-5,y+10,string(_status_lifetime));		
+
+		draw_text(x + 5,y + 10,string(_ct_status_stacks));
+		draw_text(x - 5,y + 10,string(_val_status_lifetime));
+
 		draw_set_halign(fa_left);
-		draw_set_valign(fa_top);	
-	
-		switch(_status_command){
+		draw_set_valign(fa_top);
+
+		//----------------//
+		//STATUS COMMANDS//
+		//----------------//
+		switch(_str_status_command){
+
 			case "WAIT":
-		
 			break;
-		
-			case "REPEAT": //TRIGGER EFFECT AGAIN
-				_status_scr("REPEAT",self);		
+
+			case "REPEAT":
+				_scr_status("REPEAT",self);
 			break;
-		
-			case "DEATH": //WHEN EFFECT'S LIFE ENDS, OR IS REMOVED
-				_status_scr("DEATH",self);
-				_status_command = "WAIT";
-			break;		
+
+			case "DEATH":
+				_scr_status("DEATH",self);
+				_str_status_command = "WAIT";
+			break;
 		}
-	
-		//----------------------------------------------------
-		// TOOLTIP (CTRL HOVER)
-		//----------------------------------------------------
-		if (keyboard_check(vk_lcontrol) &&
-		    position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), self))
-		{
-		    var _line1 = string(_status_name) + " | " + string(_status_desc);
 
-		    var _line2 =
-		        "LIFE: " + string(_status_lifetime)
-		        + " | STACKS: " + string(_status_stacks);
-			
-			var _line3;
-			if(_trigger_region== "undefined"){
-			    _line3 =
-			        "TRIGGERS AT: NEVER";
-			} else {
-			    _line3 =
-			        "TRIGGERS AT: " + string(_trigger_region);
+		//-------------//
+		//DRAW TOOLTIP//
+		//-------------//
+		if (keyboard_check(vk_lcontrol) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+
+			var _str_line_1 = string(_str_status_name) + " | " + string(_str_status_desc);
+			var _str_line_2 = "LIFE: " + string(_val_status_lifetime) + " | STACKS: " + string(_ct_status_stacks);
+
+			var _str_line_3 = "";
+
+			if (_str_trigger_region == undefined || _str_trigger_region == "undefined"){
+				_str_line_3 = "TRIGGERS AT: NEVER";
 			}
-		
-		    var _panel_w = max(
-		        string_width(_line1),
-		        max(
-		            string_width(_line2),
-		            string_width(_line3)
-		        )
-		    ) + 24;
+			else{
+				_str_line_3 = "TRIGGERS AT: " + string(_str_trigger_region);
+			}
 
-		    var _panel_h = 70;
+			var _val_panel_w = max(string_width(_str_line_1),max(string_width(_str_line_2),string_width(_str_line_3))) + 24;
+			var _val_panel_h = 70;
 
-		    var _px = room_width * 0.5 - (_panel_w * 0.5);
-		    var _py = 20;
+			var _val_panel_x = room_width * 0.5 - (_val_panel_w * 0.5);
+			var _val_panel_y = 20;
 
-		    // background
-		    draw_set_colour(c_dkgray);
-		    draw_rectangle(
-		        _px,
-		        _py,
-		        _px + _panel_w,
-		        _py + _panel_h,
-		        false
-		    );
+			draw_set_colour(c_dkgray);
+			draw_rectangle(_val_panel_x,_val_panel_y,_val_panel_x + _val_panel_w,_val_panel_y + _val_panel_h,false);
 
-		    // border
-		    draw_set_colour(c_black);
-		    draw_rectangle(
-		        _px,
-		        _py,
-		        _px + _panel_w,
-		        _py + _panel_h,
-		        true
-		    );
+			draw_set_colour(c_black);
+			draw_rectangle(_val_panel_x,_val_panel_y,_val_panel_x + _val_panel_w,_val_panel_y + _val_panel_h,true);
 
-		    // text
-		    draw_set_colour(c_white);
-
-		    draw_text(
-		        _px + (_panel_w - string_width(_line1)) * 0.5,
-		        _py + 8,
-		        _line1
-		    );
-
-		    draw_text(
-		        _px + (_panel_w - string_width(_line2)) * 0.5,
-		        _py + 26,
-		        _line2
-		    );
-
-		    draw_text(
-		        _px + (_panel_w - string_width(_line3)) * 0.5,
-		        _py + 44,
-		        _line3
-		    );
-		}	
+			draw_set_colour(c_white);
+			draw_text(_val_panel_x + (_val_panel_w - string_width(_str_line_1)) * 0.5,_val_panel_y + 8,_str_line_1);
+			draw_text(_val_panel_x + (_val_panel_w - string_width(_str_line_2)) * 0.5,_val_panel_y + 26,_str_line_2);
+			draw_text(_val_panel_x + (_val_panel_w - string_width(_str_line_3)) * 0.5,_val_panel_y + 44,_str_line_3);
+		}
 	}
 }

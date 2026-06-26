@@ -10,8 +10,8 @@
 //---------//
 //VARIABLES//
 //---------//
-global.pause = false;
-global.active_gui = undefined;
+global.flag_pause = false;
+global.ref_active_gui = undefined;
 
 //----//
 //INIT//
@@ -30,9 +30,9 @@ window_set_fullscreen(true);
 //           Clears the active GUI reference after cleanup.
 //—------------------------------------------------------------------------------//
 function hscr_destroy_gui_open(){
-	if (global.active_gui != undefined){
-		instance_destroy(global.active_gui);
-		global.active_gui = undefined;
+	if (global.ref_active_gui != undefined){
+		instance_destroy(global.ref_active_gui);
+		global.ref_active_gui = undefined;
 	}
 }
 
@@ -42,7 +42,7 @@ function hscr_destroy_gui_open(){
 //           Stops movement when opening GUI and restores movement when closing GUI.
 //—------------------------------------------------------------------------------//
 function hscr_toggle_gui_pause(_flag_pause){
-	global.pause = _flag_pause;
+	global.flag_pause = _flag_pause;
 	if (obj_player._val_player_speed == 0){
 		scr_toggle_player_movement("START");
 	} else {
@@ -61,8 +61,8 @@ function hscr_trigger_end_battle(_str_win_type){
 	hscr_destroy_gui_open();
 	hscr_toggle_gui_pause(true);
 
-	global.active_gui = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_gui_end_battle_pane);
-	global.active_gui._str_condition = _str_win_type;
+	global.ref_active_gui = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_gui_end_battle_pane);
+	global.ref_active_gui._str_condition = _str_win_type;
 }
 
 #endregion

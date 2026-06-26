@@ -13,8 +13,8 @@
 depth = -1;
 
 // PARTY / RANCH COUNTS
-_ct_party = ds_list_size(global.player_party);
-_ct_ranch = ds_list_size(global.player_ranch);
+_ct_party = ds_list_size(global.list_player_party);
+_ct_ranch = ds_list_size(global.list_player_ranch);
 
 _str_type = "RANCH";
 
