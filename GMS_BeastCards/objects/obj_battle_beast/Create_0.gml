@@ -37,7 +37,7 @@ _list_deck = ds_list_create();
 _val_hand_pos = 0;
 
 // UNIT REF
-_stct_unit = undefined;
+_ref_unit = undefined;
 
 // STATE FLAGS
 _flag_death_handled = false;

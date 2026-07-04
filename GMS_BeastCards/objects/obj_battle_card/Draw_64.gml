@@ -52,7 +52,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				}
 			}
 
-			if (obj_battle_player_controller._player_state == PLAYER_STATE.SELECT_CARD && _flag_card_oom_check){
+			if (obj_battle_player_controller._state_player == ENUM_PLAYER_STATE.SELECT_CARD && _flag_card_oom_check){
 				draw_sprite_ext(_spr_card,0,x,y,_val_scale_x,_val_scale_y,0,c_ltgray,1);
 			}
 			else{
@@ -65,7 +65,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			}
 		}
 
-		if (obj_battle_player_controller._player_state != PLAYER_STATE.SELECT_CARD){
+		if (obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.SELECT_CARD){
 			_flag_card_oom_check = false;
 		}
 	}
@@ -95,10 +95,10 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			}
 			else{
 
-				if (obj_battle_enemy_controller._enemy_state == ENEMY_STATE.CAST_CARDS){
+				if (obj_battle_enemy_controller._state_enemy == ENUM_ENEMY_STATE.CAST_CARDS){
 					visible = false;
 				}
-				else{
+				else {
 					visible = true;
 				}
 

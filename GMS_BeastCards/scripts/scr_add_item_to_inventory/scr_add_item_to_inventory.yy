@@ -6,7 +6,7 @@
   "name":"scr_add_item_to_inventory",
   "parent":{
     "name":"ITEM INIT",
-    "path":"folders/GUI/INVENTORY/ITEM INIT.yy",
+    "path":"folders/INVENTORY/ITEM INIT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

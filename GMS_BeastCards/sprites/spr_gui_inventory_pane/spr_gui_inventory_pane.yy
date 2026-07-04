@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"INVENTORY",
-    "path":"folders/GUI/INVENTORY.yy",
+    "path":"folders/INVENTORY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

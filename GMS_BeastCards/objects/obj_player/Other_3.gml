@@ -68,7 +68,26 @@
 	if (ds_exists(global.map_player_chests_opened, ds_type_map)){
 		ds_map_destroy(global.map_player_chests_opened);
 	}
+	
 	#endregion
+	
+	#region LOGBOOK GLOBALS
+	if (ds_exists(global.list_logbook_beasts, ds_type_list)){
+		ds_list_destroy(global.list_logbook_beasts);
+	}
+
+	if (ds_exists(global.map_logbook_beasts, ds_type_map)){
+		ds_map_destroy(global.map_logbook_beasts);
+	}
+
+	if (ds_exists(global.list_logbook_cards, ds_type_list)){
+		ds_list_destroy(global.list_logbook_cards);
+	}
+
+	if (ds_exists(global.map_logbook_cards, ds_type_map)){
+		ds_map_destroy(global.map_logbook_cards);
+	}
+	#endregion	
 
 	#region CAMERA
 	if (global.ref_camera != undefined){
@@ -77,4 +96,9 @@
 	}
 	#endregion
 
+	#region MARKET GLOBALS
+	if (ds_exists(global.map_market_stock,ds_type_map)){
+		ds_map_destroy(global.map_market_stock);
+	}
+	#endregion
 #endregion

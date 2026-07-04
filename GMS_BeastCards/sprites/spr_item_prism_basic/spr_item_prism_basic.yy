@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BASIC PRISM",
-    "path":"folders/GUI/INVENTORY/ITEM LIST/PRISM/BASIC PRISM.yy",
+    "path":"folders/INVENTORY/ITEM LIST/PRISM/BASIC PRISM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

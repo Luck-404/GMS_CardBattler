@@ -5,19 +5,37 @@
 //
 //===============================================================================//
 
-switch(_enemy_state){
+switch(_state_enemy){
 
 	//
 	// INIT BEASTS
 	//
 	#region INIT BEASTS
-	case ENEMY_STATE.INIT_BEASTS:
+	case ENUM_ENEMY_STATE.INIT_BEASTS:
 
 		for (var _it_beast = 0; _it_beast < _ct_beast; _it_beast++){
 
 			// CREATE BEAST STRUCT
 			var _stct_unit = scr_get_random_beast(global.arr_last_enemy_pool);
 
+			// UPDATE LOGBOOK
+			if (_stct_unit != undefined && variable_global_exists("map_logbook_beasts")){
+				scr_logbook_mark_beast_seen(_stct_unit._str_beast_name);
+			}
+			
+			
+			
+						var _stct_seen_test = global.map_logbook_beasts[? _stct_unit._str_beast_name];
+
+						show_debug_message(
+							"LOGBOOK SEEN: " 
+							+ string(_stct_unit._str_beast_name) 
+							+ " | COUNT: " 
+							+ string(_stct_seen_test._ct_seen)
+						);
+			
+			
+			
 			// CREATE BATTLE BEAST
 			var _ref_beast = instance_create_layer(
 				room_width * 0.5 + 80 + (100 * _it_beast),
@@ -26,20 +44,22 @@ switch(_enemy_state){
 				obj_battle_beast
 			);
 
-			_ref_beast._sprite = _stct_unit._spr_beast;
+			_ref_beast._spr_beast = _stct_unit._spr_beast;
 			_ref_beast._ref_unit = _stct_unit;
-			_ref_beast._team = "ENEMY";
-			_ref_beast._uid = _stct_unit.beast_uid;
-			_ref_beast._pos = _it_beast;
-			_ref_beast._cur_hp = _stct_unit._val_beast_hp_cur;
-			_ref_beast._max_hp = _stct_unit._val_beast_hp_max;
+			_ref_beast._str_team = "ENEMY";
+			_ref_beast._uid_beast = _stct_unit._uid_beast;
+			_ref_beast._val_pos = _it_beast;
+			_ref_beast._ct_minions_max = _stct_unit._val_beast_min_stat;
+			_ref_beast._val_cur_hp = _stct_unit._val_beast_hp_cur;
+			_ref_beast._val_max_hp = _stct_unit._val_beast_hp_max;
 
 			// TRACK BEAST
 			ds_list_add(_list_beasts,_ref_beast);
 			ds_list_add(_list_beasts_alive,_ref_beast);
 		}
 
-		_enemy_state = ENEMY_STATE.INIT_CARDS;
+		_state_enemy = ENUM_ENEMY_STATE.INIT_CARDS;
+		
 
 	break;
 	#endregion
@@ -48,7 +68,7 @@ switch(_enemy_state){
 	// INIT CARDS
 	//
 	#region INIT CARDS
-	case ENEMY_STATE.INIT_CARDS:
+	case ENUM_ENEMY_STATE.INIT_CARDS:
 
 		// CREATE A DECK FOR EACH LIVING ENEMY BEAST
 		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
@@ -74,32 +94,32 @@ switch(_enemy_state){
 					obj_battle_card
 				);
 
-				_ref_card._sprite = _stct_card._spr_card;
-				_ref_card._uid = _stct_card.card_uid;
-				_ref_card._team = "ENEMY";
+				_ref_card._spr_card = _stct_card._spr_card;
+				_ref_card._uid_card = _stct_card._uid_card;
+				_ref_card._str_team = "ENEMY";
 				_ref_card._ref_card = _stct_card;
 				_ref_card._ref_unit = _ref_beast;
-				_ref_card._location = "DECK";
-				_ref_card.visible = false;
+				_ref_card._str_location = "DECK";
+				_ref_card.visible = true;
 
-				ds_list_add(_ref_beast._decklist,_ref_card);
+				ds_list_add(_ref_beast._list_deck,_ref_card);
 			}
 
 			// SHUFFLE DECK
-			ds_list_shuffle(_ref_beast._decklist);
+			ds_list_shuffle(_ref_beast._list_deck);
 
 			// DRAW FIRST CARD
-			_ref_beast._hand_pos = 0;
+			_ref_beast._val_hand_pos = 0;
 
 			var _ref_card = ds_list_find_value(
-				_ref_beast._decklist,
-				_ref_beast._hand_pos
+				_ref_beast._list_deck,
+				_ref_beast._val_hand_pos
 			);
 
-			_ref_card._location = "HAND";
+			_ref_card._str_location = "HAND";
 		}
 
-		_enemy_state = ENEMY_STATE.TRIGGER_ENTRY_EFFECTS;
+		_state_enemy = ENUM_ENEMY_STATE.TRIGGER_ENTRY_EFFECTS;
 
 	break;
 	#endregion
@@ -108,9 +128,9 @@ switch(_enemy_state){
 	// TRIGGER ENTRY EFFECTS
 	//
 	#region TRIGGER ENTRY EFFECTS
-	case ENEMY_STATE.TRIGGER_ENTRY_EFFECTS:
+	case ENUM_ENEMY_STATE.TRIGGER_ENTRY_EFFECTS:
 
-		_enemy_state = ENEMY_STATE.WAIT;
+		_state_enemy = ENUM_ENEMY_STATE.WAIT;
 
 	break;
 	#endregion
@@ -119,7 +139,7 @@ switch(_enemy_state){
 	// WAIT
 	//
 	#region WAIT
-	case ENEMY_STATE.WAIT:
+	case ENUM_ENEMY_STATE.WAIT:
 		_flag_statuses_init = false;
 		_flag_cast_init = false;
 		_flag_minions_init = false;
@@ -130,7 +150,7 @@ switch(_enemy_state){
 	// TURN START
 	//
 	#region TURN START
-	case ENEMY_STATE.TURN_START:
+	case ENUM_ENEMY_STATE.TURN_START:
 
 		if (!_flag_statuses_init){
 
@@ -151,11 +171,11 @@ switch(_enemy_state){
 
 				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
 
-				for (var _it_status = 0; _it_status < ds_list_size(_ref_beast._statuses); _it_status++){
+				for (var _it_status = 0; _it_status < ds_list_size(_ref_beast._list_statuses); _it_status++){
 
 					ds_list_add(
 						_list_statuses,
-						ds_list_find_value(_ref_beast._statuses,_it_status)
+						ds_list_find_value(_ref_beast._list_statuses,_it_status)
 					);
 				}
 			}
@@ -169,8 +189,8 @@ switch(_enemy_state){
 
 				if (instance_exists(_ref_status)){
 
-					if (_ref_status._trigger_region == "START"){
-						_ref_status._status_command = "REPEAT";
+					if (_ref_status._str_trigger_region == "START"){
+						_ref_status._str_status_command = "REPEAT";
 					}
 
 					ds_list_delete(_list_statuses,0);
@@ -188,7 +208,7 @@ switch(_enemy_state){
 
 				_flag_statuses_init = false;
 
-				_enemy_state = ENEMY_STATE.TRIGGER_MINIONS;
+				_state_enemy = ENUM_ENEMY_STATE.TRIGGER_MINIONS;
 			}
 		}
 
@@ -199,7 +219,7 @@ switch(_enemy_state){
 	// TRIGGER MINIONS
 	//
 	#region TRIGGER MINIONS
-	case ENEMY_STATE.TRIGGER_MINIONS:
+	case ENUM_ENEMY_STATE.TRIGGER_MINIONS:
 
 		if (!_flag_minions_init){
 
@@ -212,11 +232,11 @@ switch(_enemy_state){
 
 				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
 
-				for (var _it_minion = 0; _it_minion < ds_list_size(_ref_beast._minions); _it_minion++){
+				for (var _it_minion = 0; _it_minion < ds_list_size(_ref_beast._list_minions); _it_minion++){
 
 					ds_list_add(
 						_list_casting_minions,
-						ds_list_find_value(_ref_beast._minions,_it_minion)
+						ds_list_find_value(_ref_beast._list_minions,_it_minion)
 					);
 				}
 			}
@@ -241,7 +261,7 @@ switch(_enemy_state){
 
 				_flag_minions_init = false;
 
-				_enemy_state = ENEMY_STATE.CAST_CARDS;
+				_state_enemy = ENUM_ENEMY_STATE.CAST_CARDS;
 			}
 		}
 
@@ -252,7 +272,7 @@ switch(_enemy_state){
 	// CAST CARDS
 	//
 	#region CAST CARDS
-	case ENEMY_STATE.CAST_CARDS:
+	case ENUM_ENEMY_STATE.CAST_CARDS:
 
 		if (!_flag_cast_init){
 
@@ -270,11 +290,11 @@ switch(_enemy_state){
 
 				var _ref_beast = ds_list_find_value(_list_casting_units,0);
 
-				obj_battle_player_controller.scr_check_battle_beast_able(_list_beasts_alive);
+				obj_battle_player_controller.hscr_check_battle_beast_able(_list_beasts_alive);
 
-				var _ref_card = ds_list_find_value(_ref_beast._decklist,_ref_beast._hand_pos);
+				var _ref_card = ds_list_find_value(_ref_beast._list_deck,_ref_beast._val_hand_pos);
 
-				if (_ref_beast._beast_able_check){
+				if (_ref_beast._flag_beast_able_check){
 
 					var _str_card_type = _ref_card._ref_card._str_card_type;
 					var _ref_target = undefined;
@@ -310,7 +330,65 @@ switch(_enemy_state){
 						break;
 
 						case "SUPPORT":
+							_ref_target = _ref_beast;
+
+							if (_ref_card._ref_card._str_card_range == "RANGED"){
+
+								if (random(1) < 0.25){
+
+									var _ct_ally = ds_list_size(_list_beasts_alive);
+
+									if (_ct_ally > 1){
+
+										repeat(10){
+
+											var _ref_candidate = ds_list_find_value(_list_beasts_alive,irandom(_ct_ally - 1));
+
+											if (_ref_candidate != _ref_beast){
+												_ref_target = _ref_candidate;
+												break;
+											}
+										}
+									}
+								}
+							}
+
+							global.ref_cast_card = _ref_card;
+							global.ref_caster_beast = _ref_beast;
+							global.ref_target_beast = _ref_target;
+
+							scr_cast_card();
+							
 						case "UTILITY":
+							_ref_target = _ref_beast;
+
+							if (_ref_card._ref_card._str_card_range == "RANGED"){
+
+								if (random(1) < 0.25){
+
+									var _ct_ally = ds_list_size(_list_beasts_alive);
+
+									if (_ct_ally > 1){
+
+										repeat(10){
+
+											var _ref_candidate = ds_list_find_value(_list_beasts_alive,irandom(_ct_ally - 1));
+
+											if (_ref_candidate != _ref_beast){
+												_ref_target = _ref_candidate;
+												break;
+											}
+										}
+									}
+								}
+							}
+
+							global.ref_cast_card = _ref_card;
+							global.ref_caster_beast = _ref_beast;
+							global.ref_target_beast = _ref_target;
+
+							scr_cast_card();
+							
 						case "DEFENSE":
 							_ref_target = _ref_beast;
 
@@ -358,7 +436,7 @@ switch(_enemy_state){
 				}
 			}
 			else{
-				_enemy_state = ENEMY_STATE.NEW_CARDS;
+				_state_enemy = ENUM_ENEMY_STATE.NEW_CARDS;
 				break;
 			}
 		}
@@ -370,7 +448,7 @@ switch(_enemy_state){
 	// NEW CARDS
 	//
 	#region NEW CARDS
-	case ENEMY_STATE.NEW_CARDS:
+	case ENUM_ENEMY_STATE.NEW_CARDS:
 
 		// ITERATE EACH LIVING ENEMY BEAST'S HAND POSITION
 		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
@@ -378,30 +456,30 @@ switch(_enemy_state){
 			var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
 
 			// HIDE OLD CARD
-			var _ref_old_card = ds_list_find_value(_ref_beast._decklist,_ref_beast._hand_pos);
+			var _ref_old_card = ds_list_find_value(_ref_beast._list_deck,_ref_beast._val_hand_pos);
 
 			_ref_old_card.visible = false;
-			_ref_old_card._location = "DECK";
+			_ref_old_card._str_location = "DECK";
 
 			// ADVANCE HAND POSITION
-			_ref_beast._hand_pos++;
+			_ref_beast._val_hand_pos++;
 
-			if (_ref_beast._hand_pos > ds_list_size(_ref_beast._decklist) - 1){
-				_ref_beast._hand_pos = 0;
+			if (_ref_beast._val_hand_pos > ds_list_size(_ref_beast._list_deck) - 1){
+				_ref_beast._val_hand_pos = 0;
 			}
 
 			// SHOW NEW CARD
-			var _ref_new_card = ds_list_find_value(_ref_beast._decklist,_ref_beast._hand_pos);
+			var _ref_new_card = ds_list_find_value(_ref_beast._list_deck,_ref_beast._val_hand_pos);
 
 			_ref_new_card.visible = true;
-			_ref_new_card._location = "HAND";
+			_ref_new_card._str_location = "HAND";
 		}
 
 		_flag_statuses_init = false;
 		_flag_cast_init = false;
 		_flag_minions_init = false;
 
-		_enemy_state = ENEMY_STATE.TURN_END;
+		_state_enemy = ENUM_ENEMY_STATE.TURN_END;
 
 	break;
 	#endregion
@@ -410,7 +488,7 @@ switch(_enemy_state){
 	// TURN END
 	//
 	#region TURN END
-	case ENEMY_STATE.TURN_END:
+	case ENUM_ENEMY_STATE.TURN_END:
 
 		if (!_flag_statuses_init){
 
@@ -423,19 +501,13 @@ switch(_enemy_state){
 
 				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
 
-				for (var _it_status = 0; _it_status < ds_list_size(_ref_beast._statuses); _it_status++){
+				for (var _it_status = 0; _it_status < ds_list_size(_ref_beast._list_statuses); _it_status++){
 
 					ds_list_add(
 						_list_statuses,
-						ds_list_find_value(_ref_beast._statuses,_it_status)
+						ds_list_find_value(_ref_beast._list_statuses,_it_status)
 					);
 				}
-			}
-
-			var _ref_status = scr_check_for_status("WEATHER: RAPID GROWTH",global.list_statuses);
-
-			if (_ref_status != -1){
-				_ref_status._status_command = "REPEAT";
 			}
 		}
 
@@ -447,8 +519,8 @@ switch(_enemy_state){
 
 				if (instance_exists(_ref_status)){
 
-					if (_ref_status._trigger_region == "END"){
-						_ref_status._status_command = "REPEAT";
+					if (_ref_status._str_trigger_region == "END"){
+						_ref_status._str_status_command = "REPEAT";
 					}
 
 					ds_list_delete(_list_statuses,0);
@@ -466,7 +538,7 @@ switch(_enemy_state){
 
 				_flag_statuses_init = false;
 
-				_enemy_state = ENEMY_STATE.WAIT;
+				_state_enemy = ENUM_ENEMY_STATE.WAIT;
 
 				obj_battle_turn_controller.hscr_pass_turn();
 			}

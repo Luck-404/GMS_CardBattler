@@ -40,11 +40,11 @@ function hscr_spawn_ranch_unit(_stct_unit){
 	var _ref_new_unit = instance_create_layer(room_width * 0.5 + _val_rand_x,room_height * 0.5 + _val_rand_y,"ily_player",obj_ranch_beast_dummy);
 
 	_ref_new_unit.sprite_index = _stct_unit._spr_beast;
-	_ref_new_unit._shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
-	_ref_new_unit._uid = _stct_unit.beast_uid;
+	_ref_new_unit._spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+	_ref_new_unit._uid_dummy = _stct_unit._uid_beast;
 
 	if (_stct_unit._val_beast_hp_cur <= 0){
-		_ref_new_unit._beast_state = BEAST_STATE.REST;
+		_ref_new_unit._state_dummy = ENUM_DUMMY_STATE.REST;
 	}
 
 	ds_list_add(_list_dummy,_ref_new_unit);
@@ -65,7 +65,7 @@ function hscr_destroy_ranch_unit(_uid_beast){
 			continue;
 		}
 
-		if (_ref_dummy._uid == _uid_beast){
+		if (_ref_dummy._uid_dummy == _uid_beast){
 			ds_list_delete(_list_dummy,_it_dummy);
 			instance_destroy(_ref_dummy);
 			break;

@@ -54,6 +54,32 @@ if (room != rm_battle){
 		}
 	}
 
+	//---------------------//
+	//ACTIVATE LOGBOOK PANE//
+	//---------------------//
+	if (keyboard_check_pressed(ord("B"))){
+
+		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED B TOGGLE LOGBOOK PANE");
+
+		if (global.ref_active_gui != undefined && global.ref_active_gui._str_type == "LOGBOOK"){
+
+			hscr_destroy_gui_open();
+			hscr_toggle_gui_pause(false);
+		}
+		else{
+
+			hscr_destroy_gui_open();
+			hscr_toggle_gui_pause(true);
+
+			global.ref_active_gui = instance_create_layer(
+				room_width / 2,
+				room_height / 2,
+				"ily_fx",
+				obj_gui_logbook_pane
+			);
+		}
+	}
+
 	//-----------------------//
 	//ACTIVATE INVENTORY PANE//
 	//-----------------------//
@@ -112,10 +138,10 @@ if (room != rm_battle){
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy) && mouse_check_button_pressed(mb_left)){
 			var _ref_beast = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy);
 
-			if (_ref_beast._beast_state != BEAST_STATE.REST){
+			if (_ref_beast._state_dummy != ENUM_DUMMY_STATE.REST){
 				_ref_beast._spr_emoji = choose(spr_ranch_beast_happy,spr_ranch_beast_love,spr_ranch_beast_excited);
 				_ref_beast._ct_emoji_timer = irandom_range(60,120);
-				_ref_beast._beast_state = BEAST_STATE.SHAKE;
+				_ref_beast._state_dummy = ENUM_DUMMY_STATE.SHAKE;
 			}
 		}
 	}

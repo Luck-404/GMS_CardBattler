@@ -11,9 +11,9 @@
 // DRAW SHADOW AND BEAST
 //
 #region DRAW SHADOW AND BEAST
-draw_sprite_ext(_shadow,0,x,y + 30,1,1,0,c_white,1);
+draw_sprite_ext(_spr_shadow,0,x,y + 30,1,1,0,c_white,1);
 
-if (_beast_state == BEAST_STATE.REST){
+if (_state_dummy == ENUM_DUMMY_STATE.REST){
 
 	draw_sprite_ext(
 		sprite_index,
@@ -41,7 +41,7 @@ if (_beast_state == BEAST_STATE.REST){
 }
 else{
 
-	if (_beast_state == BEAST_STATE.SHAKE){
+	if (_state_dummy == ENUM_DUMMY_STATE.SHAKE){
 
 		draw_sprite_ext(
 			sprite_index,
@@ -100,22 +100,22 @@ if (_ct_emoji_timer > 0){
 #region STATE MACHINE
 if (!global.flag_pause){
 
-	switch(_beast_state){
+	switch(_state_dummy){
 
 		//
 		// FIND LOCATION
 		//
 		#region FIND LOCATION
-		case BEAST_STATE.FIND_LOCATION:
+		case ENUM_DUMMY_STATE.FIND_LOCATION:
 
 			_val_target_x = room_width * 0.5 + irandom_range(-250,250);
 			_val_target_y = room_height * 0.5 + irandom_range(-250,250);
 
 			_val_move_speed = random_range(0.5,2.5);
 
-			_beast_state = choose(
-				BEAST_STATE.IDLE,
-				BEAST_STATE.MOVE
+			_state_dummy = choose(
+				ENUM_DUMMY_STATE.IDLE,
+				ENUM_DUMMY_STATE.MOVE
 			);
 
 		break;
@@ -125,7 +125,7 @@ if (!global.flag_pause){
 		// IDLE
 		//
 		#region IDLE
-		case BEAST_STATE.IDLE:
+		case ENUM_DUMMY_STATE.IDLE:
 
 			if (_ct_idle_time > 0){
 
@@ -146,9 +146,9 @@ if (!global.flag_pause){
 
 				_ct_idle_time = irandom_range(60,300);
 
-				_beast_state = choose(
-					BEAST_STATE.MOVE,
-					BEAST_STATE.SHAKE
+				_state_dummy = choose(
+					ENUM_DUMMY_STATE.MOVE,
+					ENUM_DUMMY_STATE.SHAKE
 				);
 			}
 
@@ -159,7 +159,7 @@ if (!global.flag_pause){
 		// MOVE
 		//
 		#region MOVE
-		case BEAST_STATE.MOVE:
+		case ENUM_DUMMY_STATE.MOVE:
 
 			// BOUNCE
 			_ct_bounce_counter++;
@@ -203,9 +203,9 @@ if (!global.flag_pause){
 				x = _val_target_x;
 				y = _val_target_y;
 
-				_beast_state = choose(
-					BEAST_STATE.FIND_LOCATION,
-					BEAST_STATE.SHAKE
+				_state_dummy = choose(
+					ENUM_DUMMY_STATE.FIND_LOCATION,
+					ENUM_DUMMY_STATE.SHAKE
 				);
 			}
 
@@ -240,7 +240,7 @@ if (!global.flag_pause){
 		// SHAKE
 		//
 		#region SHAKE
-		case BEAST_STATE.SHAKE:
+		case ENUM_DUMMY_STATE.SHAKE:
 
 			if (_ct_shake_timer <= 0){
 
@@ -265,9 +265,9 @@ if (!global.flag_pause){
 				_val_draw_rotation = 0;
 				_val_draw_y_offset = 0;
 
-				_beast_state = choose(
-					BEAST_STATE.IDLE,
-					BEAST_STATE.FIND_LOCATION
+				_state_dummy = choose(
+					ENUM_DUMMY_STATE.IDLE,
+					ENUM_DUMMY_STATE.FIND_LOCATION
 				);
 			}
 
@@ -278,7 +278,7 @@ if (!global.flag_pause){
 		// REST
 		//
 		#region REST
-		case BEAST_STATE.REST:
+		case ENUM_DUMMY_STATE.REST:
 		break;
 		#endregion
 	}

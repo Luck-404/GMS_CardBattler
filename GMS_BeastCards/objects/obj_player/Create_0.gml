@@ -43,22 +43,49 @@
 	#endregion
 
 	#region ITEM GLOBALS
+	
+	#region MARKET TRACKING
+	global.map_market_stock = ds_map_create();
+
+	global.ct_market_restock_battles = 0;
+	global.ct_market_restock_battles_max = 3;
+
+	global.arr_market_egg_beast_pool = [
+		"ARBRAWN",
+		"ARGENTBUD",
+		"BEAVINE",
+		"FLITSAGE",
+		"FURN"
+	];
+	#endregion	
+	
 	global.uid_next_item = 0;	
 	global.list_player_inventory = ds_list_create();	
 	global.list_pool_items = ds_list_create();
+	global.ct_inventory_revision = 0;
 	scr_init_item_pool();
 	#endregion
 	
 	#region PLAYER TRACKING
-	global.val_player_gold = 0;
+	global.val_player_gold = 500;
 
 	global.map_player_chests_opened = ds_map_create();
+	#endregion
+
+	#region LOGBOOK GLOBALS
+	global.list_logbook_beasts = ds_list_create();
+	global.map_logbook_beasts = ds_map_create();
+
+	global.list_logbook_cards = ds_list_create();
+	global.map_logbook_cards = ds_map_create();
+
+	global.ct_logbook_revision = 0;
 	#endregion
 
 	#region TRANSITIONS
 	global.val_last_player_x = 0;
 	global.val_last_player_y = 0;
-	global.ref_last_player_room = rm_ow_center;
+	global.rm_last_player = rm_ow_center;
 	global.str_last_player_banner = "";
 	global.arr_last_enemy_pool = "";
 	#endregion
@@ -94,6 +121,12 @@
 	scr_init_minion_pools();
 
 	//—------------------------------------------------------------------------------//
+	// SETUP LOGBOOK
+	//—------------------------------------------------------------------------------//
+	scr_init_logbook_beasts();
+	scr_init_logbook_cards();		
+
+	//—------------------------------------------------------------------------------//
 	// SETUP TEST BEASTS AND CARDS
 	//—------------------------------------------------------------------------------//
 	#region TESTING
@@ -101,23 +134,33 @@
 	// ADD TEST BEASTS TO PARTY
 	//—------------------------------------------------------------------------------//
 	scr_add_beast_to_party(scr_init_beast_random("ARBRAWN"));
-	scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
-	scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
-	scr_add_beast_to_party(scr_init_beast_random("ARGENTBUD"));
-	scr_add_beast_to_party(scr_init_beast_random("FURN"));
+	//scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
+	//scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
+	//scr_add_beast_to_party(scr_init_beast_random("ARGENTBUD"));
+	//scr_add_beast_to_party(scr_init_beast_random("FURN"));
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO RANCH
 	//—------------------------------------------------------------------------------//
-	ds_list_add(global.list_player_ranch,scr_init_beast_random("ARBRAWN"));
-	ds_list_add(global.list_player_ranch,scr_init_beast_random("ARGENTBUD"));
-	ds_list_add(global.list_player_ranch,scr_init_beast_random("BEAVINE"));
+	var _stct_test_ranch_arbrawn = scr_init_beast_random("ARBRAWN");
+	ds_list_add(global.list_player_ranch,_stct_test_ranch_arbrawn);
+	scr_logbook_mark_beast_captured(_stct_test_ranch_arbrawn._str_beast_name);
+
+	//var _stct_test_ranch_argentbud = scr_init_beast_random("ARGENTBUD");
+	//ds_list_add(global.list_player_ranch,_stct_test_ranch_argentbud);
+	//scr_logbook_mark_beast_captured(_stct_test_ranch_argentbud._str_beast_name);
+
+	//var _stct_test_ranch_beavine = scr_init_beast_random("BEAVINE");
+	//ds_list_add(global.list_player_ranch,_stct_test_ranch_beavine);
+	//scr_logbook_mark_beast_captured(_stct_test_ranch_beavine._str_beast_name);
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO DECK
 	//—------------------------------------------------------------------------------//
 	//scr_add_card_to_deck(scr_get_card_info("STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
+	repeat(10){
+		scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
+	}
 	//scr_add_card_to_deck(scr_get_card_info("BLOCK"));
 	//scr_add_card_to_deck(scr_get_card_info("BULWARK"));
 	//scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
@@ -134,10 +177,6 @@
 	//scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
 	//scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
 	//scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
-	repeat (70)
-	{	
-		scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
-	}
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO LIBRARY
@@ -145,15 +184,19 @@
 	//ds_list_add(global.player_library,scr_get_card_info("STRIKE"));
 	//ds_list_add(global.player_library,scr_get_card_info("POWER_STRIKE"));
 	//ds_list_add(global.player_library,scr_get_card_info("BLOCK"));
+
+	show_debug_message("ARBRAWN OWNED COUNT: " + string(scr_logbook_get_beast_owned_count("ARBRAWN")));
+	show_debug_message("POWER STRIKE OWNED COUNT: " + string(scr_logbook_get_card_owned_count("POWER_STRIKE")));	
 	
 	//—------------------------------------------------------------------------------//
 	// ADD ITEMS TO INVENTORY
 	//—------------------------------------------------------------------------------//
 	scr_add_item_to_inventory("QUEST_IMPORTANT_NOTEBOOK",1);
-	//scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",22);
-	//scr_add_item_to_inventory("PRISM_BASIC_PRISM",7);
-	//scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
-	//scr_add_item_to_inventory("EGG_ARBRAWN",45);	
+	scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",3);
+	scr_add_item_to_inventory("PRISM_BASIC_PRISM",7);
+	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
+	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);	
+	scr_add_item_to_inventory("EGG_ARBRAWN",2);	
 	#endregion
 #endregion
 

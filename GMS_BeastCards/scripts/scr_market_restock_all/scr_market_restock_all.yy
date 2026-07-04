@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_market_restock_all",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_market_restock_all",
+  "parent":{
+    "name":"MARKETS",
+    "path":"folders/GUI/MARKETS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

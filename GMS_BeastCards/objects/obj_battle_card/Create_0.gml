@@ -17,11 +17,11 @@ _uid_card = -1;
 
 // TEAM / REFERENCES
 _str_team = "PLAYER";
-_stct_card = undefined;
+_ref_card = undefined;
 _ref_unit = undefined;
 
 // LOCATION
-_str_location = "DECK"; // DECK, HAND, DISCARD, EXHAUST
+_str_location = "DECK"; // DECK, HAND, DISCARD, EXHAUST,
 
 // PREVIEW / SCALE
 _spr_preview_card = undefined;

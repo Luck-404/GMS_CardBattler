@@ -6,7 +6,7 @@
   "name":"scr_init_item_pool",
   "parent":{
     "name":"INVENTORY",
-    "path":"folders/GUI/INVENTORY.yy",
+    "path":"folders/INVENTORY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -16,7 +16,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		if (!_flag_started_game){
 			_flag_started_game = true;
-			_ref_player_controller._player_state = PLAYER_STATE.TURN_START;
+			_ref_player_controller._state_player = ENUM_PLAYER_STATE.TURN_START;
 		}
 
 		// PLAYER TEAM DEAD
@@ -26,8 +26,8 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			if (!_flag_battle_ended){
 				_flag_battle_ended = true;
 
-				_ref_player_controller._player_state = PLAYER_STATE.WAIT;
-				_ref_enemy_controller._enemy_state = ENEMY_STATE.WAIT;
+				_ref_player_controller._state_player = ENUM_PLAYER_STATE.WAIT;
+				_ref_enemy_controller._state_enemy = ENUM_ENEMY_STATE.WAIT;
 
 				var _ref_end_gui = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_gui_end_battle_pane);
 				_ref_end_gui._str_condition = "LOSS";
@@ -42,8 +42,8 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			if (!_flag_battle_ended){
 				_flag_battle_ended = true;
 
-				_ref_player_controller._player_state = PLAYER_STATE.WAIT;
-				_ref_enemy_controller._enemy_state = ENEMY_STATE.WAIT;
+				_ref_player_controller._state_player = ENUM_PLAYER_STATE.WAIT;
+				_ref_enemy_controller._state_enemy = ENUM_ENEMY_STATE.WAIT;
 
 				var _ref_end_gui = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_gui_end_battle_pane);
 				_ref_end_gui._str_condition = "WIN";

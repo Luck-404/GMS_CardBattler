@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_logbook_mark_card_seen",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_logbook_mark_card_seen",
+  "parent":{
+    "name":"LOGBOOK",
+    "path":"folders/GUI/LOGBOOK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

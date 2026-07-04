@@ -6,7 +6,7 @@
   "name":"scr_get_item_info",
   "parent":{
     "name":"ITEM GET",
-    "path":"folders/GUI/INVENTORY/ITEM GET.yy",
+    "path":"folders/INVENTORY/ITEM GET.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

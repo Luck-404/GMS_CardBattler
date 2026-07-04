@@ -2,8 +2,10 @@
 //
 // DRAW GUI: OBJ_GUI_INVENTORY_PANE
 // FUNCTION: Draws the inventory pane.
-//           Runs filter, sort, pagination, slot drawing, and preview display.
-//           Destroys temporary filtered inventory list after drawing.
+//           Refreshes cached inventory only after sort, filter, or item changes.
+//           Opens item-use prompts for valid item types.
+//           Prevents click-through after prompts, textboxes, and target panes close.
+//           Draws cached inventory slots, page text, controls, and item preview.
 //
 //===============================================================================//
 
@@ -18,23 +20,40 @@ draw_set_font(fnt_small_gui);
 //-----------//
 _stct_preview_item = undefined;
 
-//--------//
-//PIPELINE//
-//--------//
-var _list_filtered = hscr_build_filtered_inventory();
+//--------------//
+//INPUT LOCKOUT//
+//--------------//
+hscr_update_input_lockout();
 
-hscr_sort_inventory(_list_filtered);
-
-var _ct_filtered = ds_list_size(_list_filtered);
-var _ct_total_pages = max(1,ceil(_ct_filtered / _ct_inventory_per_page));
-
-_ct_inventory_page = clamp(_ct_inventory_page,0,_ct_total_pages - 1);
-
+//------//
+//LAYOUT//
+//------//
 hscr_update_layout();
 
-hscr_draw_inventory_slots(_list_filtered);
-hscr_draw_page_text(_ct_total_pages);
-hscr_draw_sort_filter_buttons();
-hscr_draw_preview_modal();
+//------------------//
+//SORT/FILTER INPUT//
+//------------------//
+if (hscr_can_accept_input()){
+	hscr_handle_sort_filter_input();
+}
 
-ds_list_destroy(_list_filtered);
+//-------------//
+//CACHE REFRESH//
+//-------------//
+hscr_refresh_inventory_cache();
+
+//----//
+//DRAW//
+//----//
+hscr_draw_inventory_slots(_list_filtered_inventory);
+hscr_draw_page_text(_ct_inventory_total_pages);
+hscr_draw_sort_filter_buttons();
+
+if (hscr_can_accept_input()){
+	hscr_draw_preview_modal();
+}
+
+//---------//
+//COOLDOWN//
+//---------//
+hscr_update_click_cooldown();

@@ -59,7 +59,7 @@ function scr_init_beast_random(_str_beast_name){
 	// ASSIGN UID
 	//
 	#region UID
-	_stct_new_beast.beast_uid = global.uid_next_beast;
+	_stct_new_beast._uid_beast = global.uid_next_beast;
 	global.uid_next_beast++;
 	#endregion
 

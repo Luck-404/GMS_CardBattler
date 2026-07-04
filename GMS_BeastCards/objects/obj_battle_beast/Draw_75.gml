@@ -7,13 +7,13 @@
 //
 //===============================================================================//
 #region BEAST PREVIEW
-if (_flag_preview_beast && _stct_unit != undefined){
+if (_flag_preview_beast && _ref_unit != undefined){
 
 	draw_set_font(fnt_small_gui);
 	draw_set_colour(c_black);
 
 	var _val_panel_w = 360;
-	var _val_panel_h = 380;
+	var _val_panel_h = 420;
 
 	var _val_panel_x = room_width * 0.5 - (_val_panel_w * 0.5);
 	var _val_panel_y = 40;
@@ -30,22 +30,22 @@ if (_flag_preview_beast && _stct_unit != undefined){
 
 	draw_set_colour(c_white);
 
-	draw_text(_val_text_x,_val_text_y,string(_stct_unit._str_beast_name));
+	draw_text(_val_text_x,_val_text_y,string(_ref_unit._str_beast_name));
 
 	_val_text_y += _val_lh * 2;
 
 	draw_text(_val_text_x,_val_text_y,"=== STATS ===");
 	_val_text_y += _val_lh;
 
-	var _val_hp = _stct_unit._val_beast_hp_stat;
-	var _val_con = _stct_unit._val_beast_con_stat;
-	var _val_ppow = _stct_unit._val_beast_ppow_stat;
-	var _val_mpow = _stct_unit._val_beast_mpow_stat;
-	var _val_pdef = _stct_unit._val_beast_pdef_stat;
-	var _val_mdef = _stct_unit._val_beast_mdef_stat;
-	var _val_crit = _stct_unit._val_beast_crit_stat;
-	var _val_dodge = _stct_unit._val_beast_dod_stat;
-	var _val_minions = _stct_unit._val_beast_min_stat;
+	var _val_hp = _ref_unit._val_beast_hp_stat;
+	var _val_con = _ref_unit._val_beast_con_stat;
+	var _val_ppow = _ref_unit._val_beast_ppow_stat;
+	var _val_mpow = _ref_unit._val_beast_mpow_stat;
+	var _val_pdef = _ref_unit._val_beast_pdef_stat;
+	var _val_mdef = _ref_unit._val_beast_mdef_stat;
+	var _val_crit = _ref_unit._val_beast_crit_stat;
+	var _val_dodge = _ref_unit._val_beast_dod_stat;
+	var _val_minions = _ref_unit._val_beast_min_stat;
 
 	draw_text(_val_text_x,_val_text_y,"HP: " + string(_val_hp) + " (" + scr_get_beast_grade_letter(_val_hp) + " x" + string(scr_get_beast_grade_modifier(_val_hp)) + ")");
 	_val_text_y += _val_lh;
@@ -77,14 +77,30 @@ if (_flag_preview_beast && _stct_unit != undefined){
 	draw_text(_val_text_x,_val_text_y,"=== ABILITY ===");
 	_val_text_y += _val_lh;
 
-	draw_text_ext(_val_text_x,_val_text_y,string(_stct_unit._str_beast_ability),-1,320);
+	draw_text_ext(_val_text_x,_val_text_y,string(_ref_unit._str_beast_ability),-1,320);
 
 	_val_text_y += 60;
+
+	// HELD ITEM
+	draw_text(_val_text_x,_val_text_y,"=== HELD ITEM ===");
+	_val_text_y += _val_lh;
+
+	var _str_held_item = "NONE";
+
+	if (_ref_unit._ref_beast_held_item != undefined && _ref_unit._ref_beast_held_item != "EMPTY"){
+
+		var _stct_held_item = _ref_unit._ref_beast_held_item;
+
+		_str_held_item = string(_stct_held_item._str_item_name);
+	}
+
+	draw_text(_val_text_x,_val_text_y,_str_held_item);
+	_val_text_y += _val_lh * 2;
 
 	draw_text(_val_text_x,_val_text_y,"=== TALENT TREES ===");
 	_val_text_y += _val_lh;
 
-	var _arr_trees = _stct_unit._arr_beast_talent_trees;
+	var _arr_trees = _ref_unit._arr_beast_talent_trees;
 	var _str_tree_text = "";
 
 	for (var _it_tree = 0; _it_tree < array_length(_arr_trees); _it_tree++){

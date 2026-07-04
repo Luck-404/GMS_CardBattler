@@ -39,6 +39,7 @@ function scr_get_card_info(_str_card_name){
 			case "LIFE_SPIRIT":
 				_stct_return_card = {
 					_str_card_name : "LIFE SPIRIT",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_life_spirit,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "RANGED",
@@ -61,6 +62,7 @@ function scr_get_card_info(_str_card_name){
 			case "MIRACLE_MUSA":
 				_stct_return_card = {
 					_str_card_name : "MIRACLE MUSA",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_miracle_musa,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "RANGED",
@@ -83,6 +85,7 @@ function scr_get_card_info(_str_card_name){
 			case "DISEASE":
 				_stct_return_card = {
 					_str_card_name : "DISEASE",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_disease,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "RANGED",
@@ -105,6 +108,7 @@ function scr_get_card_info(_str_card_name){
 			case "EMERALD_SLAM":
 				_stct_return_card = {
 					_str_card_name : "EMERALD SLAM",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_emerald_slam,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "MELEE",
@@ -127,6 +131,7 @@ function scr_get_card_info(_str_card_name){
 			case "GROWTH_SIGIL":
 				_stct_return_card = {
 					_str_card_name : "GROWTH SIGIL",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_growth_sigil,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "GLOBAL",
@@ -149,6 +154,7 @@ function scr_get_card_info(_str_card_name){
 			case "EMERALD_WISDOM":
 				_stct_return_card = {
 					_str_card_name : "EMERALD WISDOM",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_emerald_wisdom,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "GLOBAL",
@@ -173,6 +179,7 @@ function scr_get_card_info(_str_card_name){
 			case "HIDDEN_CARD":
 				_stct_return_card = {
 					_str_card_name : "HIDDEN CARD",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_hidden_card,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "GLOBAL",
@@ -195,6 +202,7 @@ function scr_get_card_info(_str_card_name){
 			case "STRIKE":
 				_stct_return_card = {
 					_str_card_name : "STRIKE",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_strike,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "MELEE",
@@ -217,6 +225,7 @@ function scr_get_card_info(_str_card_name){
 			case "POWER_STRIKE":
 				_stct_return_card = {
 					_str_card_name : "POWER STRIKE",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_power_strike,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "MELEE",
@@ -239,6 +248,7 @@ function scr_get_card_info(_str_card_name){
 			case "BLOCK":
 				_stct_return_card = {
 					_str_card_name : "BLOCK",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_block,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "SELF",
@@ -261,6 +271,7 @@ function scr_get_card_info(_str_card_name){
 			case "BULWARK":
 				_stct_return_card = {
 					_str_card_name : "BULWARK",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_bulwark,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "SELF",
@@ -283,6 +294,7 @@ function scr_get_card_info(_str_card_name){
 			case "INSPIRATION":
 				_stct_return_card = {
 					_str_card_name : "INSPIRATION",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_inspiration,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "GLOBAL",
@@ -305,6 +317,7 @@ function scr_get_card_info(_str_card_name){
 			case "ECHO":
 				_stct_return_card = {
 					_str_card_name : "ECHO",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_echo,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "GLOBAL",
@@ -327,6 +340,7 @@ function scr_get_card_info(_str_card_name){
 			case "DEFT_STRIKE":
 				_stct_return_card = {
 					_str_card_name : "DEFT STRIKE",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_deft_strike,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "BACK",
@@ -345,10 +359,11 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
-			#region RESPOSITION
-			case "RESPOSITION":
+			#region REPOSITION
+			case "REPOSITION":
 				_stct_return_card = {
-					_str_card_name : "RESPOSITION",
+					_str_card_name : "REPOSITION",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_reposition,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "TEAM",
@@ -371,6 +386,7 @@ function scr_get_card_info(_str_card_name){
 			case "CLEARCAST":
 				_stct_return_card = {
 					_str_card_name : "CLEARCAST",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_clearcast,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "GLOBAL",
@@ -393,6 +409,7 @@ function scr_get_card_info(_str_card_name){
 			case "RAPID_STRIKES":
 				_stct_return_card = {
 					_str_card_name : "RAPID STRIKES",
+					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_rapid_strikes,
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "RANGED",
@@ -417,7 +434,7 @@ function scr_get_card_info(_str_card_name){
 		return undefined;
 	}
 	
-	_stct_return_card.card_uid = global.uid_next_card;
+	_stct_return_card._uid_card = global.uid_next_card;
 	global.uid_next_card++;
 	
 	return _stct_return_card;

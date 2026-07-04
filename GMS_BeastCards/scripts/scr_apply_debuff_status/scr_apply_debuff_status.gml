@@ -11,7 +11,7 @@ function scr_apply_debuff_status(_str_status_name){
 	//
 	// RESIST CHECK
 	//
-	var _val_res_stat = global.ref_target_beast._stct_unit._val_beast_con_stat;
+	var _val_res_stat = global.ref_target_beast._ref_unit._val_beast_con_stat;
 	var _val_res_mod = scr_get_beast_grade_modifier(_val_res_stat);
 	var _val_resist_chance = floor(5 * _val_res_mod);
 

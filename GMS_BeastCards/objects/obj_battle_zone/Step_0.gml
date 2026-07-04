@@ -26,7 +26,7 @@ if (place_meeting(x, y, obj_player) && obj_player._flag_player_moving){ //IF TOU
 			//STORE PLAYER POSITION
 			global.val_last_player_x = obj_player.x;
 			global.val_last_player_y = obj_player.y;
-			global.ref_last_player_room = room;
+			global.rm_last_player = room;
 			global.arr_last_enemy_pool = _arr_encounter_beasts;
 			
 			//STOP PLAYER MOVEMENT

@@ -49,3 +49,137 @@ _ref_right_arrow._ref_gui_pane = self;
 //-------//
 //METHODS//
 //-------//
+#region METHODS
+
+//—------------------------------------------------------------------------------//
+// hscr_has_held_item
+// FUNCTION: Returns whether a beast currently has a held item struct.
+//—------------------------------------------------------------------------------//
+function hscr_has_held_item(_stct_unit){
+
+	if (_stct_unit == undefined){
+		return false;
+	}
+
+	if (_stct_unit._ref_beast_held_item == undefined){
+		return false;
+	}
+
+	if (_stct_unit._ref_beast_held_item == "EMPTY"){
+		return false;
+	}
+
+	return true;
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_draw_party_slot_held_item
+// FUNCTION: Draws a small held item badge in a party slot.
+//           Used for quick party overview.
+//
+//—------------------------------------------------------------------------------//
+function hscr_draw_party_slot_held_item(_stct_unit,_val_box_x,_val_box_y){
+
+	if (!hscr_has_held_item(_stct_unit)){
+		return;
+	}
+
+	var _stct_held_item = _stct_unit._ref_beast_held_item;
+
+	var _val_badge_x = _val_box_x + _val_slot_size - 18;
+	var _val_badge_y = _val_box_y + _val_slot_size - 18;
+
+	draw_set_colour(c_black);
+	draw_circle(_val_badge_x,_val_badge_y,15,false);
+
+	draw_set_colour(c_white);
+	draw_circle(_val_badge_x,_val_badge_y,12,false);
+
+	draw_sprite_ext(
+		_stct_held_item._spr_item,
+		0,
+		_val_badge_x,
+		_val_badge_y,
+		1,
+		1,
+		0,
+		c_white,
+		1
+	);
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_draw_selected_held_item
+// FUNCTION: Draws the selected beast's held item data.
+//           Right-clicking the held item box unequips the item.
+//
+//—------------------------------------------------------------------------------//
+function hscr_draw_selected_held_item(_stct_unit,_val_x,_val_y){
+
+	draw_text(_val_x,_val_y,"=== HELD ITEM ===");
+	_val_y += 22;
+
+	var _stct_held_item = _stct_unit._ref_beast_held_item;
+
+	if (!hscr_has_held_item(_stct_unit)){
+		draw_text(_val_x,_val_y,"EMPTY");
+		return _val_y + 32;
+	}
+
+	var _val_box_w = 430;
+	var _val_box_h = 74;
+
+	var _val_box_x1 = _val_x;
+	var _val_box_y1 = _val_y;
+	var _val_box_x2 = _val_box_x1 + _val_box_w;
+	var _val_box_y2 = _val_box_y1 + _val_box_h;
+
+	var _val_mouse_x = device_mouse_x_to_gui(0);
+	var _val_mouse_y = device_mouse_y_to_gui(0);
+
+	var _flag_hover = _val_mouse_x > _val_box_x1 && _val_mouse_x < _val_box_x2 && _val_mouse_y > _val_box_y1 && _val_mouse_y < _val_box_y2;
+
+	draw_set_colour(_flag_hover ? c_white : c_gray);
+	draw_rectangle(_val_box_x1,_val_box_y1,_val_box_x2,_val_box_y2,false);
+
+	draw_set_colour(c_black);
+	draw_rectangle(_val_box_x1 + 3,_val_box_y1 + 3,_val_box_x2 - 3,_val_box_y2 - 3,false);
+
+	draw_sprite_ext(
+		_stct_held_item._spr_item,
+		0,
+		_val_box_x1 + 34,
+		_val_box_y1 + 36,
+		1.5,
+		1.5,
+		0,
+		c_white,
+		1
+	);
+
+	draw_set_colour(c_white);
+	draw_text(_val_box_x1 + 70,_val_box_y1 + 10,_stct_held_item._str_item_name);
+
+	draw_set_font(fnt_small_gui);
+	draw_set_colour(c_ltgray);
+	draw_text(_val_box_x1 + 70,_val_box_y1 + 36,"RIGHT CLICK: UNEQUIP");
+
+	if (_flag_hover && mouse_check_button_pressed(mb_right) && !_flag_clicked){
+
+		_flag_clicked = true;
+		_val_cooldown = 10;
+
+		scr_unequip_held_item_to_inventory(
+			_stct_unit,
+			_val_box_x1 + (_val_box_w * 0.5),
+			_val_box_y1
+		);
+	}
+
+	draw_set_font(fnt_small_gui);
+	draw_set_colour(c_black);
+
+	return _val_y + _val_box_h + 24;
+}
+
+#endregion

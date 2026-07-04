@@ -17,7 +17,8 @@ function scr_add_item_to_inventory(_str_item_id,_ct_count){
 			var _stct_new_item = scr_get_item_info(_str_item_id);
 			ds_list_add(_list_inventory,_stct_new_item);
 		}
-
+		
+		global.ct_inventory_revision++;
 		return;
 	}
 
@@ -60,4 +61,5 @@ function scr_add_item_to_inventory(_str_item_id,_ct_count){
 
 		ds_list_add(_list_inventory,_stct_new_stack);
 	}
+	global.ct_inventory_revision++;
 }

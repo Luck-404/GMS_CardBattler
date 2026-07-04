@@ -56,7 +56,10 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 	else{
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 	}
-
+	
+	// HELD ITEM BADGE
+	hscr_draw_party_slot_held_item(_stct_unit,_val_box_x,_val_box_y);
+	
 	// SELECTED
 	if (_it_unit == _val_pos){
 		draw_sprite(spr_gui_party_selected,0,_val_unit_x,_val_unit_y);
@@ -204,8 +207,8 @@ if (_stct_unit_selected != undefined){
 	_val_y += _val_sg;
 
 	// HELD ITEM
-	draw_text(_val_x,_val_y,"HELD ITEM: " + string(_stct_unit._ref_beast_held_item));
-	_val_y += _val_sg;
+	_val_y = hscr_draw_selected_held_item(_stct_unit,_val_x,_val_y);
+	_val_y += 8;
 
 	// ABILITY
 	draw_text(_val_x,_val_y,"ABILITY: " + string(_stct_unit._str_beast_ability));

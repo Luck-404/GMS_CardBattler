@@ -57,3 +57,78 @@ _ref_right_arrow._ref_gui_pane = self;
 //-------//
 //METHODS//
 //-------//
+#region METHODS
+
+//—------------------------------------------------------------------------------//
+// hscr_has_held_item
+// FUNCTION: Returns whether a beast currently has a held item struct.
+//           Used only for ranch pane display.
+//
+//—------------------------------------------------------------------------------//
+function hscr_has_held_item(_stct_unit){
+
+	if (_stct_unit == undefined){
+		return false;
+	}
+
+	if (_stct_unit._ref_beast_held_item == undefined){
+		return false;
+	}
+
+	if (_stct_unit._ref_beast_held_item == "EMPTY"){
+		return false;
+	}
+
+	return true;
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_draw_held_item_badge
+// FUNCTION: Draws a held item badge inside a beast frame.
+//           Display-only; does not allow unequipping or item changes.
+//
+//—------------------------------------------------------------------------------//
+function hscr_draw_held_item_badge(_stct_unit,_val_box_x,_val_box_y){
+
+	if (!hscr_has_held_item(_stct_unit)){
+		return;
+	}
+
+	var _stct_held_item = _stct_unit._ref_beast_held_item;
+
+	var _val_badge_x = _val_box_x + 96;
+	var _val_badge_y = _val_box_y + 96;
+	var _val_badge_size = 26;
+
+	draw_set_colour(c_black);
+	draw_rectangle(
+		_val_badge_x - (_val_badge_size * 0.5),
+		_val_badge_y - (_val_badge_size * 0.5),
+		_val_badge_x + (_val_badge_size * 0.5),
+		_val_badge_y + (_val_badge_size * 0.5),
+		false
+	);
+
+	draw_set_colour(c_white);
+	draw_rectangle(
+		_val_badge_x - (_val_badge_size * 0.5),
+		_val_badge_y - (_val_badge_size * 0.5),
+		_val_badge_x + (_val_badge_size * 0.5),
+		_val_badge_y + (_val_badge_size * 0.5),
+		true
+	);
+
+	draw_sprite_ext(
+		_stct_held_item._spr_item,
+		0,
+		_val_badge_x,
+		_val_badge_y,
+		1,
+		1,
+		0,
+		c_white,
+		1
+	);
+}
+
+#endregion

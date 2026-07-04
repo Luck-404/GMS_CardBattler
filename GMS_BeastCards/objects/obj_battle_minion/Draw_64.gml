@@ -46,7 +46,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	#region DRAW TOOLTIP
 	if (keyboard_check(vk_lcontrol) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 
-		var _str_host_name = (_ref_host != undefined && _ref_host._stct_unit != undefined) ? string(_ref_host._stct_unit.beast_name) : "UNKNOWN";
+		var _str_host_name = (_ref_host != undefined && _ref_host._stct_unit != undefined) ? string(_ref_host._stct_unit._str_beast_name) : "UNKNOWN";
 		var _str_title = _str_name + " | " + _str_host_name;
 
 		var _val_panel_w = string_width(_str_title) + 40;

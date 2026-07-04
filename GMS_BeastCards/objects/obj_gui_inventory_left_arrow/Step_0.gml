@@ -14,6 +14,11 @@ if (!instance_exists(obj_gui_inventory_pane)){
 	instance_destroy();
 }
 
+if (instance_exists(_ref_gui_pane) && _ref_gui_pane._flag_prompt_active){
+	image_index = 0;
+	exit;
+}
+
 //-----//
 //HOVER//
 //-----//

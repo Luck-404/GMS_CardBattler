@@ -10,6 +10,7 @@
 //----//
 //DRAW//
 //----//
+
 draw_sprite(spr_popup_banner,_val_image_index,x,y);
 
 //-------------//

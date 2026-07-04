@@ -9,7 +9,7 @@
 function scr_cast_card(){
 
 	var _ref_card = global.ref_cast_card;
-	var _stct_card = _ref_card._stct_card;
+	var _stct_card = _ref_card._ref_card;
 
 	var _ref_caster = global.ref_caster_beast;
 	var _ref_target = global.ref_target_beast;

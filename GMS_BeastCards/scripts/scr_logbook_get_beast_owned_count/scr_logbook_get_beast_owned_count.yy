@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_logbook_get_beast_owned_count",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_logbook_get_beast_owned_count",
+  "parent":{
+    "name":"LOGBOOK",
+    "path":"folders/GUI/LOGBOOK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

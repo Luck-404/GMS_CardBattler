@@ -37,10 +37,10 @@ _flag_battle_ended = false;
 function hscr_pass_turn(){
 	if (_val_turn_tracker == 0){
 		_val_turn_tracker++;
-		_ref_enemy_controller._enemy_state = ENEMY_STATE.TURN_START;
+		_ref_enemy_controller._state_enemy = ENUM_ENEMY_STATE.TURN_START;
 	}
 	else{
 		_val_turn_tracker = 0;
-		_ref_player_controller._player_state = PLAYER_STATE.TURN_START;
+		_ref_player_controller._state_player = ENUM_PLAYER_STATE.TURN_START;
 	}
 }

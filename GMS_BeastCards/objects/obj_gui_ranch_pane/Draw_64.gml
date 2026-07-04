@@ -64,6 +64,9 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 20,1,1,0,c_white,1);
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 
+		// HELD ITEM BADGE
+		hscr_draw_held_item_badge(_stct_unit,_val_box_x,_val_box_y);
+
 		draw_set_colour(c_black);
 
 		draw_text(_val_box_x + 125,_val_box_y + 20,_stct_unit._str_beast_name);
@@ -156,6 +159,9 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 20,1,1,0,c_white,1);
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 
+		// HELD ITEM BADGE
+		hscr_draw_held_item_badge(_stct_unit,_val_box_x,_val_box_y);
+
 		draw_set_colour(c_black);
 
 		draw_text(_val_box_x + 125,_val_box_y + 20,_stct_unit._str_beast_name);
@@ -173,7 +179,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 				ds_list_add(global.list_player_party,_stct_unit);
 				ds_list_delete(global.list_player_ranch,_val_ranch_index);
 
-				obj_ranch_interactable.hscr_destroy_ranch_unit(_stct_unit.beast_uid);
+				obj_ranch_interactable.hscr_destroy_ranch_unit(_stct_unit._uid_beast);
 
 				_ct_party = ds_list_size(global.list_player_party);
 				_ct_ranch = ds_list_size(global.list_player_ranch);
@@ -185,7 +191,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 			_val_cooldown = 10;
 
 			ds_list_delete(global.list_player_ranch,_val_ranch_index);
-			obj_ranch_interactable.hscr_destroy_ranch_unit(_stct_unit.beast_uid);
+			obj_ranch_interactable.hscr_destroy_ranch_unit(_stct_unit._uid_beast);
 
 			_ct_party = ds_list_size(global.list_player_party);
 			_ct_ranch = ds_list_size(global.list_player_ranch);

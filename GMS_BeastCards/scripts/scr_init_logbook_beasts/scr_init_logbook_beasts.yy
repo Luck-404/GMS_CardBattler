@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_init_logbook_beasts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_init_logbook_beasts",
+  "parent":{
+    "name":"LOGBOOK",
+    "path":"folders/GUI/LOGBOOK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

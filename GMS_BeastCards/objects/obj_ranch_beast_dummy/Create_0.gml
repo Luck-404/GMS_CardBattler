@@ -13,13 +13,13 @@
 depth = 1;
 
 // IDENTIFIERS
-_uid = undefined;
-_shadow = spr_player_shadow;
+_uid_dummy = undefined;
+_spr_shadow = spr_player_shadow;
 
 //---------//
 //STATES//
 //---------//
-enum BEAST_STATE{
+enum ENUM_DUMMY_STATE{
 	FIND_LOCATION,
 	IDLE,
 	MOVE,
@@ -27,10 +27,10 @@ enum BEAST_STATE{
 	REST
 }
 
-_beast_state = choose(
-	BEAST_STATE.FIND_LOCATION,
-	BEAST_STATE.IDLE,
-	BEAST_STATE.MOVE
+_state_dummy = choose(
+	ENUM_DUMMY_STATE.FIND_LOCATION,
+	ENUM_DUMMY_STATE.IDLE,
+	ENUM_DUMMY_STATE.MOVE
 );
 
 //---------//

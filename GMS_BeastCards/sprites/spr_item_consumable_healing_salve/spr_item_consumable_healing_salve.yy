@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"HEALING SALVE",
-    "path":"folders/GUI/INVENTORY/ITEM LIST/CONSUMABLE/HEALING SALVE.yy",
+    "path":"folders/INVENTORY/ITEM LIST/CONSUMABLE/HEALING SALVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

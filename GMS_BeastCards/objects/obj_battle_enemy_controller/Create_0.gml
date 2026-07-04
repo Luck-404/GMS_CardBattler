@@ -12,7 +12,7 @@
 //---------//
 
 // BEASTS
-_ct_beast = irandom_range(1,1);
+_ct_beast = irandom_range(1,3);
 
 _list_beasts = ds_list_create();
 _list_beasts_alive = ds_list_create();
@@ -26,7 +26,7 @@ _flag_cast_init = false;
 _flag_minions_init = false;
 
 // ENEMY STATE
-enum ENEMY_STATE{
+enum ENUM_ENEMY_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
 	TRIGGER_ENTRY_EFFECTS,
@@ -38,7 +38,7 @@ enum ENEMY_STATE{
 	TURN_END
 }
 
-_enemy_state = ENEMY_STATE.INIT_BEASTS;
+_state_enemy = ENUM_ENEMY_STATE.INIT_BEASTS;
 
 //----//
 //INIT//

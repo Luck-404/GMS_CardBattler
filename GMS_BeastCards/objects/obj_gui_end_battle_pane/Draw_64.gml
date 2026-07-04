@@ -60,7 +60,7 @@ switch(_str_condition){
 
 				var _ref_check_beast = ds_list_find_value(obj_battle_player_controller._list_beasts,_it_battle_unit);
 
-				if (_ref_check_beast._uid == _stct_unit.beast_uid){
+				if (_ref_check_beast._uid_beast == _stct_unit._uid_beast){
 					_ref_battle_unit = _ref_check_beast;
 					break;
 				}
@@ -70,7 +70,7 @@ switch(_str_condition){
 				continue;
 			}
 
-			var _flag_dead = (_ref_battle_unit._cur_hp <= 0);
+			var _flag_dead = (_ref_battle_unit._val_cur_hp <= 0);
 
 			var _val_box_x = _val_row_start_x + ((_val_slot_size + _val_spacing) * _val_display_index);
 			var _val_box_y = _val_row_y;
@@ -103,7 +103,7 @@ switch(_str_condition){
 				_str_hp = "DEAD";
 			}
 			else{
-				_str_hp = "HP: " + string(_ref_battle_unit._cur_hp) + "/" + string(_ref_battle_unit._max_hp);
+				_str_hp = "HP: " + string(_ref_battle_unit._val_cur_hp) + "/" + string(_ref_battle_unit._val_max_hp);
 			}
 
 			var _val_text_x = _val_unit_x;
@@ -116,8 +116,10 @@ switch(_str_condition){
 		#region CONFIRM
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 
+			scr_market_register_battle_complete();
+	
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);
-			_ref_transition._destination = rm_ow_ranch;
+			_ref_transition._rm_destination = rm_ow_ranch;
 
 			scr_spawn_popup_banner("RANCH ROOM");
 
@@ -214,14 +216,14 @@ switch(_str_condition){
 
 					var _ref_check_beast = ds_list_find_value(obj_battle_player_controller._list_beasts,_it_battle_unit);
 
-					if (_ref_check_beast._uid == _stct_unit.beast_uid){
+					if (_ref_check_beast._uid_beast == _stct_unit._uid_beast){
 						_ref_battle_unit = _ref_check_beast;
 						break;
 					}
 				}
 
 				if (instance_exists(_ref_battle_unit)){
-					_stct_unit._val_beast_hp_cur = _ref_battle_unit._cur_hp;
+					_stct_unit._val_beast_hp_cur = _ref_battle_unit._val_cur_hp;
 				}
 
 				if (_stct_unit._val_beast_hp_cur > 0){
@@ -317,7 +319,7 @@ switch(_str_condition){
 
 				var _ref_check_beast = ds_list_find_value(obj_battle_player_controller._list_beasts,_it_battle_unit);
 
-				if (_ref_check_beast._uid == _stct_unit.beast_uid){
+				if (_ref_check_beast._uid_beast == _stct_unit._uid_beast){
 					_ref_battle_unit = _ref_check_beast;
 					break;
 				}
@@ -327,7 +329,7 @@ switch(_str_condition){
 				continue;
 			}
 
-			var _flag_dead = (_ref_battle_unit._cur_hp <= 0);
+			var _flag_dead = (_ref_battle_unit._val_cur_hp <= 0);
 
 			var _val_box_x = _val_row_start_x + ((_val_slot_size + _val_spacing) * _val_display_index);
 			var _val_box_y = _val_row_y;
@@ -360,7 +362,7 @@ switch(_str_condition){
 				_str_hp = "DEAD";
 			}
 			else{
-				_str_hp = "HP: " + string(_ref_battle_unit._cur_hp) + "/" + string(_ref_battle_unit._max_hp);
+				_str_hp = "HP: " + string(_ref_battle_unit._val_cur_hp) + "/" + string(_ref_battle_unit._val_max_hp);
 			}
 
 			var _val_text_x = _val_unit_x;
@@ -376,8 +378,10 @@ switch(_str_condition){
 		#region CONFIRM
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 
+			scr_market_register_battle_complete();
+			
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);
-			_ref_transition._destination = global.ref_last_player_room;
+			_ref_transition._rm_destination = global.rm_last_player;
 
 			scr_spawn_popup_banner(global.str_last_player_banner);
 

@@ -14,6 +14,11 @@ if (!instance_exists(obj_gui_inventory_pane)){
 	instance_destroy();
 }
 
+if (instance_exists(_ref_gui_pane) && _ref_gui_pane._flag_prompt_active){
+	image_index = 0;
+	exit;
+}
+
 //-----//
 //HOVER//
 //-----//
@@ -24,7 +29,7 @@ if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 		_ct_cooldown = 10;
 		_flag_clicked = true;
 
-		var _ct_total_pages = max(1,ceil(ds_list_size(global.list_player_inventory) / _ref_gui_pane._ct_inventory_per_page));
+		var _ct_total_pages = _ref_gui_pane._ct_inventory_total_pages;
 
 		if (_ref_gui_pane._ct_inventory_page < _ct_total_pages - 1){
 			_ref_gui_pane._ct_inventory_page++;

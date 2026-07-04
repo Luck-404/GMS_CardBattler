@@ -49,7 +49,7 @@ _list_battle_discard = ds_list_create();
 _list_battle_exhaust = ds_list_create();
 
 // PLAYER STATE
-enum PLAYER_STATE{
+enum ENUM_PLAYER_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
 	TRIGGER_ENTRY_EFFECTS,
@@ -64,7 +64,7 @@ enum PLAYER_STATE{
 	DISCARD_DOWN
 }
 
-_player_state = PLAYER_STATE.INIT_BEASTS;
+_state_player = ENUM_PLAYER_STATE.INIT_BEASTS;
 
 // CLICK COOLDOWN
 _flag_clicked = false;
@@ -90,10 +90,10 @@ function hscr_check_battle_card_oom(_list_cards){
 		var _val_card_cost = _ref_card._ref_card._val_card_mana_cost;
 
 		if (_val_card_cost <= _val_cur_mana){
-			_ref_card._card_oom_check = false;
+			_ref_card._flag_card_oom_check = false;
 		}
 		else{
-			_ref_card._card_oom_check = true;
+			_ref_card._flag_card_oom_check = true;
 		}
 	}
 }
@@ -132,7 +132,7 @@ function hscr_check_battle_beast_color(_list_beast_check){
 			}
 		}
 
-		_ref_beast._beast_color_check = _flag_match;
+		_ref_beast._flag_beast_color_check = _flag_match;
 	}
 }
 
@@ -150,10 +150,10 @@ function hscr_check_battle_beast_archetype(_list_beast_check){
 		var _str_beast_archetype = _ref_beast._ref_unit._str_beast_archetype;
 
 		if (_str_card_archetype == undefined || _str_card_archetype == _str_beast_archetype){
-			_ref_beast._beast_archetype_check = true;
+			_ref_beast._flag_beast_archetype_check = true;
 		}
 		else{
-			_ref_beast._beast_archetype_check = false;
+			_ref_beast._flag_beast_archetype_check = false;
 		}
 	}
 }
@@ -172,10 +172,10 @@ function hscr_check_battle_beast_class(_list_beast_check){
 		var _str_beast_class = _ref_beast._ref_unit._str_beast_class;
 
 		if (_str_card_class == undefined || _str_card_class == _str_beast_class){
-			_ref_beast._beast_class_check = true;
+			_ref_beast._flag_beast_class_check = true;
 		}
 		else{
-			_ref_beast._beast_class_check = false;
+			_ref_beast._flag_beast_class_check = false;
 		}
 	}
 }
@@ -195,27 +195,27 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 		switch(_str_range){
 
 			case "SELF":
-				_ref_beast_player._beast_range_check = (_ref_beast_player == global.ref_caster_beast);
+				_ref_beast_player._flag_beast_range_check = (_ref_beast_player == global.ref_caster_beast);
 			break;
 
 			case "MELEE":
-				_ref_beast_player._beast_range_check = true;
+				_ref_beast_player._flag_beast_range_check = true;
 			break;
 
 			case "TEAM":
-				_ref_beast_player._beast_range_check = (_ref_beast_player != global.ref_caster_beast);
+				_ref_beast_player._flag_beast_range_check = (_ref_beast_player != global.ref_caster_beast);
 			break;
 
 			case "RANGED":
-				_ref_beast_player._beast_range_check = true;
+				_ref_beast_player._flag_beast_range_check = true;
 			break;
 
 			case "BACK":
-				_ref_beast_player._beast_range_check = true;
+				_ref_beast_player._flag_beast_range_check = true;
 			break;
 
 			default:
-				_ref_beast_player._beast_range_check = false;
+				_ref_beast_player._flag_beast_range_check = false;
 			break;
 		}
 	}
@@ -228,27 +228,27 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 		switch(_str_range){
 
 			case "SELF":
-				_ref_beast_enemy._beast_range_check = false;
+				_ref_beast_enemy._flag_beast_range_check = false;
 			break;
 
 			case "MELEE":
-				_ref_beast_enemy._beast_range_check = (_it_beast == 0);
+				_ref_beast_enemy._flag_beast_range_check = (_it_beast == 0);
 			break;
 
 			case "RANGED":
-				_ref_beast_enemy._beast_range_check = true;
+				_ref_beast_enemy._flag_beast_range_check = true;
 			break;
 
 			case "TEAM":
-				_ref_beast_enemy._beast_range_check = false;
+				_ref_beast_enemy._flag_beast_range_check = false;
 			break;
 
 			case "BACK":
-				_ref_beast_enemy._beast_range_check = (_it_beast == ds_list_size(obj_battle_enemy_controller._list_beasts_alive) - 1);
+				_ref_beast_enemy._flag_beast_range_check = (_it_beast == ds_list_size(obj_battle_enemy_controller._list_beasts_alive) - 1);
 			break;
 
 			default:
-				_ref_beast_enemy._beast_range_check = false;
+				_ref_beast_enemy._flag_beast_range_check = false;
 			break;
 		}
 	}
@@ -283,10 +283,10 @@ function hscr_check_battle_beast_able(_list_beast_check){
 		var _ref_status = scr_check_for_status("STUN",_ref_beast);
 
 		if (_ref_status != -1){
-			_ref_beast._beast_able_check = false;
+			_ref_beast._flag_beast_able_check = false;
 		}
 		else{
-			_ref_beast._beast_able_check = true;
+			_ref_beast._flag_beast_able_check = true;
 		}
 	}
 }
