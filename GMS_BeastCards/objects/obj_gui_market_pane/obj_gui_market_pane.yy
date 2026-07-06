@@ -9,8 +9,8 @@
   "name":"obj_gui_market_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"EGG MARKET",
-    "path":"folders/GUI/MARKETS/EGG MARKET.yy",
+    "name":"MARKETS",
+    "path":"folders/GUI/MARKETS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

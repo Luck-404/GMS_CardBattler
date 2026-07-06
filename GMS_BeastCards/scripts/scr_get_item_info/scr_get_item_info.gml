@@ -50,15 +50,27 @@ function scr_get_item_info(_str_item_id){
 		#endregion
 
 		#region PRISM
-		case "PRISM_BASIC_PRISM":
-			_stct_return_item._str_item_name = "BASIC PRISM";
-			_stct_return_item._spr_item = spr_item_prism_basic;
-			_stct_return_item._str_item_type = "PRISM";
-			_stct_return_item._scr_item = undefined;
-			_stct_return_item._str_item_desc = "Used to capture beasts.";
-			_stct_return_item._flag_stackable = true;
-			_stct_return_item._ct_item_amount = 1;
-			_stct_return_item._ct_item_max_amount = 10;
+		case "PRISM_COMMON":
+		case "PRISM_UNCOMMON":
+		case "PRISM_RARE":
+		case "PRISM_EPIC":
+		case "PRISM_LEGENDARY":
+		case "PRISM_ARCWORK":
+
+			var _stct_prism_info = scr_get_prism_info(_str_item_id);
+
+			if (_stct_prism_info != undefined){
+				_stct_return_item._str_item_id = _stct_prism_info._str_item_id;
+				_stct_return_item._str_item_name = _stct_prism_info._str_item_name;
+				_stct_return_item._spr_item = _stct_prism_info._spr_item;
+				_stct_return_item._str_item_type = "PRISM";
+				_stct_return_item._scr_item = scr_inventory_use_prism_item_ow;
+				_stct_return_item._str_item_desc = _stct_prism_info._str_item_desc;
+				_stct_return_item._flag_stackable = true;
+				_stct_return_item._ct_item_amount = 1;
+				_stct_return_item._ct_item_max_amount = 10;
+			}
+
 		break;
 		#endregion
 

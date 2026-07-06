@@ -10,9 +10,19 @@
 function scr_get_random_item(_list_pool){
 	var _stct_weights = {
 		QUEST_IMPORTANT_NOTEBOOK : 5,
+		
 		HELD_POWERFUL_STONE : 10,
+		
 		CONSUMABLE_HEALING_SALVE : 50,
-		PRISM_BASIC_PRISM : 50,
+		
+		#region PRISM
+		PRISM_COMMON : 50,
+		PRISM_UNCOMMON : 20,
+		PRISM_RARE : 6,
+		PRISM_EPIC : 2,
+		PRISM_LEGENDARY : 1,
+		PRISM_ARCWORK : 0,
+		#endregion
 
 		#region VIRIDIAN
 		EGG_ARBRAWN : 10,

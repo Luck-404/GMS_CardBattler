@@ -48,6 +48,15 @@ _list_battle_hand = ds_list_create();
 _list_battle_discard = ds_list_create();
 _list_battle_exhaust = ds_list_create();
 
+//PRISMS
+// PRISM FLOW
+_stct_selected_prism = undefined;
+
+_val_prism_button_x1 = 20;
+_val_prism_button_y1 = 20;
+_val_prism_button_x2 = 160;
+_val_prism_button_y2 = 60;
+
 // PLAYER STATE
 enum ENUM_PLAYER_STATE{
 	INIT_BEASTS,
@@ -57,6 +66,8 @@ enum ENUM_PLAYER_STATE{
 	TURN_START,
 	TRIGGER_MINIONS,
 	SELECT_CARD,
+	SELECT_PRISM,
+	SELECT_PRISM_TARGET,
 	SELECT_CASTER,
 	SELECT_TARGET,
 	CARD_EXECUTE,
@@ -77,6 +88,219 @@ _val_cooldown = 10;
 //-------//
 //METHODS//
 //-------//
+//—------------------------------------------------------------------------------//
+// hscr_is_mouse_in_box
+// FUNCTION: Returns whether a gui mouse point is inside a rectangle.
+//—------------------------------------------------------------------------------//
+function hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_x1,_val_y1,_val_x2,_val_y2){
+	return (_val_mouse_x >= _val_x1 && _val_mouse_x <= _val_x2 && _val_mouse_y >= _val_y1 && _val_mouse_y <= _val_y2);
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_get_prism_stacks
+// FUNCTION: Returns an array of prism item stacks from player inventory.
+//—------------------------------------------------------------------------------//
+function hscr_get_prism_stacks(){
+
+	var _arr_prisms = [];
+
+	for (var _it_item = 0; _it_item < ds_list_size(global.list_player_inventory); _it_item++){
+
+		var _stct_item = ds_list_find_value(global.list_player_inventory,_it_item);
+
+		if (_stct_item == undefined){
+			continue;
+		}
+
+		if (_stct_item._str_item_type != "PRISM"){
+			continue;
+		}
+
+		if (_stct_item._ct_item_amount <= 0){
+			continue;
+		}
+
+		array_push(_arr_prisms,_stct_item);
+	}
+
+	return _arr_prisms;
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_check_prism_targets
+// FUNCTION: Marks enemy beasts as valid prism targets.
+//           Clears player beasts as invalid targets.
+//—------------------------------------------------------------------------------//
+function hscr_check_prism_targets(){
+
+	for (var _it_player = 0; _it_player < ds_list_size(_list_beasts_alive); _it_player++){
+
+		var _ref_player_beast = ds_list_find_value(_list_beasts_alive,_it_player);
+
+		if (instance_exists(_ref_player_beast)){
+			_ref_player_beast._flag_beast_range_check = false;
+		}
+	}
+
+	for (var _it_enemy = 0; _it_enemy < ds_list_size(obj_battle_enemy_controller._list_beasts_alive); _it_enemy++){
+
+		var _ref_enemy_beast = ds_list_find_value(obj_battle_enemy_controller._list_beasts_alive,_it_enemy);
+
+		if (instance_exists(_ref_enemy_beast)){
+			_ref_enemy_beast._flag_beast_range_check = true;
+		}
+	}
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_draw_prism_button
+// FUNCTION: Draws the battle prism button.
+//—------------------------------------------------------------------------------//
+function hscr_draw_prism_button(){
+
+	var _val_mouse_x = device_mouse_x_to_gui(0);
+	var _val_mouse_y = device_mouse_y_to_gui(0);
+
+	var _flag_hover = hscr_is_mouse_in_box(
+		_val_mouse_x,
+		_val_mouse_y,
+		_val_prism_button_x1,
+		_val_prism_button_y1,
+		_val_prism_button_x2,
+		_val_prism_button_y2
+	);
+
+	draw_set_font(fnt_medium_gui);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+
+	draw_set_colour(_flag_hover || _state_player == ENUM_PLAYER_STATE.SELECT_PRISM || _state_player == ENUM_PLAYER_STATE.SELECT_PRISM_TARGET ? c_white : c_gray);
+	draw_rectangle(_val_prism_button_x1,_val_prism_button_y1,_val_prism_button_x2,_val_prism_button_y2,false);
+
+	draw_set_colour(c_black);
+	draw_rectangle(_val_prism_button_x1,_val_prism_button_y1,_val_prism_button_x2,_val_prism_button_y2,true);
+
+	draw_text((_val_prism_button_x1 + _val_prism_button_x2) * 0.5,(_val_prism_button_y1 + _val_prism_button_y2) * 0.5,"PRISMS");
+
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_draw_prism_menu
+// FUNCTION: Draws available prism stacks while selecting a prism.
+//—------------------------------------------------------------------------------//
+function hscr_draw_prism_menu(){
+
+	if (_state_player != ENUM_PLAYER_STATE.SELECT_PRISM){
+		return;
+	}
+
+	var _arr_prisms = hscr_get_prism_stacks();
+
+	draw_set_font(fnt_small_gui);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_top);
+
+	if (array_length(_arr_prisms) <= 0){
+		draw_set_colour(c_black);
+		draw_text(room_width * 0.5,560,"NO PRISMS");
+		draw_set_halign(fa_left);
+		draw_set_valign(fa_top);
+		return;
+	}
+
+	var _val_slot_w = 150;
+	var _val_slot_h = 85;
+	var _val_gap = 10;
+
+	var _ct_prisms = array_length(_arr_prisms);
+	var _val_total_w = (_ct_prisms * _val_slot_w) + ((_ct_prisms - 1) * _val_gap);
+
+	var _val_start_x = room_width * 0.5 - (_val_total_w * 0.5);
+	var _val_y = 520;
+
+	for (var _it_prism = 0; _it_prism < _ct_prisms; _it_prism++){
+
+		var _stct_item = _arr_prisms[_it_prism];
+
+		var _val_x1 = _val_start_x + (_it_prism * (_val_slot_w + _val_gap));
+		var _val_y1 = _val_y;
+		var _val_x2 = _val_x1 + _val_slot_w;
+		var _val_y2 = _val_y1 + _val_slot_h;
+
+		var _val_mouse_x = device_mouse_x_to_gui(0);
+		var _val_mouse_y = device_mouse_y_to_gui(0);
+
+		var _flag_hover = hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_x1,_val_y1,_val_x2,_val_y2);
+
+		draw_set_colour(_flag_hover ? c_white : c_gray);
+		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
+
+		draw_set_colour(c_black);
+		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,true);
+
+		draw_sprite_ext(_stct_item._spr_item,0,_val_x1 + 25,_val_y1 + 35,1.5,1.5,0,c_white,1);
+
+		draw_set_colour(c_black);
+		draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 12,string(_stct_item._str_item_name));
+		draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 34,"x" + string(_stct_item._ct_item_amount));
+
+		var _stct_prism_info = scr_get_prism_info(_stct_item._str_item_id);
+
+		if (_stct_prism_info != undefined){
+			draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 54,"+" + string(_stct_prism_info._val_tame_bonus) + "% | " + string(_stct_prism_info._val_mana_cost) + " MANA");
+		}
+	}
+
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_handle_prism_menu_input
+// FUNCTION: Handles click input for selecting a prism stack.
+//—------------------------------------------------------------------------------//
+function hscr_handle_prism_menu_input(){
+
+	var _arr_prisms = hscr_get_prism_stacks();
+
+	if (array_length(_arr_prisms) <= 0){
+		return;
+	}
+
+	var _val_slot_w = 150;
+	var _val_slot_h = 85;
+	var _val_gap = 10;
+
+	var _ct_prisms = array_length(_arr_prisms);
+	var _val_total_w = (_ct_prisms * _val_slot_w) + ((_ct_prisms - 1) * _val_gap);
+
+	var _val_start_x = room_width * 0.5 - (_val_total_w * 0.5);
+	var _val_y = 520;
+
+	var _val_mouse_x = device_mouse_x_to_gui(0);
+	var _val_mouse_y = device_mouse_y_to_gui(0);
+
+	for (var _it_prism = 0; _it_prism < _ct_prisms; _it_prism++){
+
+		var _val_x1 = _val_start_x + (_it_prism * (_val_slot_w + _val_gap));
+		var _val_y1 = _val_y;
+		var _val_x2 = _val_x1 + _val_slot_w;
+		var _val_y2 = _val_y1 + _val_slot_h;
+
+		if (hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_x1,_val_y1,_val_x2,_val_y2)){
+
+			_stct_selected_prism = _arr_prisms[_it_prism];
+
+			hscr_check_prism_targets();
+
+			_state_player = ENUM_PLAYER_STATE.SELECT_PRISM_TARGET;
+
+			return;
+		}
+	}
+}
 
 //—------------------------------------------------------------------------------//
 // hscr_check_battle_card_oom

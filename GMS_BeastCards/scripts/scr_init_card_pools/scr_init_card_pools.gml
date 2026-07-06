@@ -10,7 +10,7 @@ function scr_init_card_pools(){
 	#region I
 		ds_list_add(global.list_pool_cards_rarity_I,"STRIKE");
 		ds_list_add(global.list_pool_cards_rarity_I,"BLOCK");
-		ds_list_add(global.list_pool_cards_rarity_I,"RESPOSITION");
+		ds_list_add(global.list_pool_cards_rarity_I,"REPOSITION");
 		ds_list_add(global.list_pool_cards_rarity_I,"CLEARCAST");		
 		ds_list_add(global.list_pool_cards_rarity_I,"LIFE_SPIRIT");	
 		ds_list_add(global.list_pool_cards_rarity_I,"EMERALD_SLAM");	

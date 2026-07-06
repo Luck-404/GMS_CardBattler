@@ -54,6 +54,25 @@ if (room != rm_battle){
 		}
 	}
 
+	//---------------------------//
+	//TOGGLE COMPANION SUMMONING//
+	//---------------------------//
+	if (keyboard_check_pressed(ord("G")) && global.ref_active_gui == undefined){
+
+		global.flag_companion_summoned = !global.flag_companion_summoned;
+
+		if (global.flag_companion_summoned){
+			scr_spawn_player_follow_beast();
+		}
+		else{
+			with (obj_beast_world){
+				if (_str_team == "PLAYER"){
+					instance_destroy();
+				}
+			}
+		}
+	}
+
 	//---------------------//
 	//ACTIVATE LOGBOOK PANE//
 	//---------------------//

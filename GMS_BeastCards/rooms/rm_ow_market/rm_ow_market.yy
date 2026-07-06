@@ -48,6 +48,7 @@
     {"name":"inst_367B5D9F","path":"rooms/rm_ow_market/rm_ow_market.yy",},
     {"name":"inst_51073CB","path":"rooms/rm_ow_market/rm_ow_market.yy",},
     {"name":"inst_14A95FB2","path":"rooms/rm_ow_market/rm_ow_market.yy",},
+    {"name":"inst_3ECD2551","path":"rooms/rm_ow_market/rm_ow_market.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -59,6 +60,7 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_market_egg_interactable","path":"objects/obj_market_egg_interactable/obj_market_egg_interactable.yy",},"propertyId":{"name":"_str_market_uid","path":"objects/obj_market_egg_interactable/obj_market_egg_interactable.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"EGG_MARKET_01\"",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":256.0,"y":384.0,},
         {"$GMRInstance":"v4","%Name":"inst_14A95FB2","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_14A95FB2","objectId":{"name":"obj_healing_pool_interactable","path":"objects/obj_healing_pool_interactable/obj_healing_pool_interactable.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":608.0,"y":128.0,},
+        {"$GMRInstance":"v4","%Name":"inst_3ECD2551","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3ECD2551","objectId":{"name":"obj_market_prism_interactable","path":"objects/obj_market_prism_interactable/obj_market_prism_interactable.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":256.0,"y":672.0,},
       ],"layers":[],"name":"ily_npcs","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"ily_zones","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"_zone_trans_3_6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"_zone_trans_3_6","objectId":{"name":"obj_transition_zone","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"properties":[

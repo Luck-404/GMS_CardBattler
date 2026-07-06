@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// DRAW GUI: OBJ_BATTLE_PLAYER_CONTROLLER
+// DRAW: OBJ_BATTLE_PLAYER_CONTROLLER
 // FUNCTION: Draws player battle HUD information.
 //           Displays mana, echo count, card pile counts, selection lines,
 //           and ctrl inspection data.
@@ -32,6 +32,8 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	draw_text(880,800,"DIS: " + string(ds_list_size(_list_battle_discard)));
 	draw_text(950,800,"EXH: " + string(ds_list_size(_list_battle_exhaust)));
 	#endregion
+
+
 
 	#region CARD TO MOUSE
 	if (_state_player == ENUM_PLAYER_STATE.SELECT_CASTER){

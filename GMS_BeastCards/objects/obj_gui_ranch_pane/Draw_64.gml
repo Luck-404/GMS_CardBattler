@@ -33,7 +33,7 @@ draw_set_font(fnt_small_gui);
 //
 #region PARTY DRAW AND MOVING TO RANCH
 for (var _it_unit = 0; _it_unit < 5; _it_unit++){
-
+	
 	var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
 
 	var _val_box_x = _val_party_x;
@@ -105,6 +105,7 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 
 						_flag_clicked = true;
 						_val_cooldown = 10;
+						scr_spawn_player_follow_beast();
 					}
 
 					break;
@@ -183,6 +184,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 
 				_ct_party = ds_list_size(global.list_player_party);
 				_ct_ranch = ds_list_size(global.list_player_ranch);
+				scr_spawn_player_follow_beast();
 			}
 		}
 

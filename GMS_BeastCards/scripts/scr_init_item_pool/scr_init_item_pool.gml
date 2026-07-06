@@ -21,7 +21,12 @@ function scr_init_item_pool(){
 	#endregion
 
 	#region PRISM
-	ds_list_add(global.list_pool_items,"PRISM_BASIC_PRISM");
+	ds_list_add(global.list_pool_items,"PRISM_COMMON");
+	ds_list_add(global.list_pool_items,"PRISM_UNCOMMON");
+	ds_list_add(global.list_pool_items,"PRISM_RARE");
+	ds_list_add(global.list_pool_items,"PRISM_EPIC");
+	ds_list_add(global.list_pool_items,"PRISM_LEGENDARY");
+	ds_list_add(global.list_pool_items,"PRISM_ARCWORK");
 	#endregion
 	
 	#region EGG

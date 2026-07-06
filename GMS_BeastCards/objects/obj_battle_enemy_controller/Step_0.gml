@@ -16,7 +16,19 @@ switch(_state_enemy){
 		for (var _it_beast = 0; _it_beast < _ct_beast; _it_beast++){
 
 			// CREATE BEAST STRUCT
-			var _stct_unit = scr_get_random_beast(global.arr_last_enemy_pool);
+			var _stct_unit;
+
+			if (
+				_it_beast == 0 &&
+				variable_global_exists("stct_forced_enemy_unit") &&
+				global.stct_forced_enemy_unit != undefined
+			){
+				_stct_unit = global.stct_forced_enemy_unit;
+				global.stct_forced_enemy_unit = undefined;
+			}
+			else{
+				_stct_unit = scr_get_random_beast(global.arr_last_enemy_pool);
+			}
 
 			// UPDATE LOGBOOK
 			if (_stct_unit != undefined && variable_global_exists("map_logbook_beasts")){

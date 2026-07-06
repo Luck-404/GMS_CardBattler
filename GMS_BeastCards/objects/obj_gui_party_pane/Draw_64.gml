@@ -95,6 +95,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 
 					_flag_clicked = true;
 					_val_cooldown = 10;
+					scr_spawn_player_follow_beast();
 				}
 
 				break;

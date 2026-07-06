@@ -247,6 +247,31 @@ switch(_state_player){
 		_flag_minions_init = false;
 
 		//
+		// OPEN PRISM MENU
+		//
+		#region OPEN PRISM MENU
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+
+			var _val_mouse_x = device_mouse_x_to_gui(0);
+			var _val_mouse_y = device_mouse_y_to_gui(0);
+
+			if (hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_prism_button_x1,_val_prism_button_y1,_val_prism_button_x2,_val_prism_button_y2)){
+
+				_flag_clicked = true;
+
+				if (array_length(hscr_get_prism_stacks()) <= 0){
+					scr_spawn_popup_error("NO PRISMS",60);
+				}
+				else{
+					_state_player = ENUM_PLAYER_STATE.SELECT_PRISM;
+				}
+
+				break;
+			}
+		}
+		#endregion
+
+		//
 		// END TURN
 		//
 		#region END TURN
@@ -283,7 +308,133 @@ switch(_state_player){
 
 	break;
 	#endregion
-	
+
+	//
+	// SELECT PRISM
+	//
+	#region SELECT PRISM
+	case ENUM_PLAYER_STATE.SELECT_PRISM:
+
+		//
+		// RIGHT CLICK SENDS BACK
+		//
+		#region RIGHT CLICK SENDS BACK
+		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+			_flag_clicked = true;
+
+			_stct_selected_prism = undefined;
+			_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
+
+			break;
+		}
+		#endregion
+
+		//
+		// END TURN
+		//
+		#region END TURN
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			_flag_clicked = true;
+			_stct_selected_prism = undefined;
+			_state_player = ENUM_PLAYER_STATE.TURN_END;
+			break;
+		}
+		#endregion
+
+		//
+		// CLICK PRISM BUTTON AGAIN TO CLOSE
+		//
+		#region CLOSE PRISM MENU
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+
+			var _val_mouse_x = device_mouse_x_to_gui(0);
+			var _val_mouse_y = device_mouse_y_to_gui(0);
+
+			if (hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_prism_button_x1,_val_prism_button_y1,_val_prism_button_x2,_val_prism_button_y2)){
+				_flag_clicked = true;
+				_stct_selected_prism = undefined;
+				_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
+				break;
+			}
+		}
+		#endregion
+
+		//
+		// SELECT PRISM STACK
+		//
+		#region SELECT PRISM STACK
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+			_flag_clicked = true;
+			hscr_handle_prism_menu_input();
+			break;
+		}
+		#endregion
+
+	break;
+	#endregion
+
+	//
+	// SELECT PRISM TARGET
+	//
+	#region SELECT PRISM TARGET
+	case ENUM_PLAYER_STATE.SELECT_PRISM_TARGET:
+
+		//
+		// RIGHT CLICK SENDS BACK
+		//
+		#region RIGHT CLICK SENDS BACK
+		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+			_flag_clicked = true;
+
+			_stct_selected_prism = undefined;
+			_state_player = ENUM_PLAYER_STATE.SELECT_PRISM;
+
+			break;
+		}
+		#endregion
+
+		//
+		// END TURN
+		//
+		#region END TURN
+		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			_flag_clicked = true;
+			_stct_selected_prism = undefined;
+			_state_player = ENUM_PLAYER_STATE.TURN_END;
+			break;
+		}
+		#endregion
+
+		//
+		// CLICK ENEMY TARGET
+		//
+		#region CLICK ENEMY TARGET
+		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast) && mouse_check_button_pressed(mb_left) && !_flag_clicked){
+
+			_flag_clicked = true;
+
+			var _ref_beast_clicked = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast);
+
+			if (
+				instance_exists(_ref_beast_clicked) &&
+				_ref_beast_clicked._str_team == "ENEMY" &&
+				_ref_beast_clicked._str_list == "ALIVE" &&
+				_ref_beast_clicked._val_cur_hp > 0
+			){
+				scr_battle_try_prism_capture(_stct_selected_prism,_ref_beast_clicked);
+
+				_stct_selected_prism = undefined;
+
+				hscr_check_battle_card_oom(_list_battle_hand);
+
+				_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
+			}
+		}
+		#endregion
+
+	break;
+	#endregion
+
 	//
 	// SELECT CASTER
 	//

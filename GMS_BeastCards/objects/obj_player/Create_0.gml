@@ -88,6 +88,7 @@
 	global.rm_last_player = rm_ow_center;
 	global.str_last_player_banner = "";
 	global.arr_last_enemy_pool = "";
+	global.stct_forced_enemy_unit = undefined;
 	#endregion
 
 	#region CAMERA
@@ -102,6 +103,8 @@
 	global.val_cam_target_height = global.val_cam_height;
 	global.ref_camera = undefined;
 	#endregion
+	
+	global.flag_companion_summoned = true;	
 #endregion
 
 //----//
@@ -166,7 +169,7 @@
 	//scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
 	//scr_add_card_to_deck(scr_get_card_info("ECHO"));
 	//scr_add_card_to_deck(scr_get_card_info("DEFT_STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("RESPOSITION"));
+	//scr_add_card_to_deck(scr_get_card_info("REPOSITION"));
 	//scr_add_card_to_deck(scr_get_card_info("CLEARCAST"));
 	//scr_add_card_to_deck(scr_get_card_info("RAPID_STRIKES"));
 	//scr_add_card_to_deck(scr_get_card_info("LIFE_SPIRIT"));
@@ -193,7 +196,9 @@
 	//—------------------------------------------------------------------------------//
 	scr_add_item_to_inventory("QUEST_IMPORTANT_NOTEBOOK",1);
 	scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",3);
-	scr_add_item_to_inventory("PRISM_BASIC_PRISM",7);
+	scr_add_item_to_inventory("PRISM_COMMON",7);
+	scr_add_item_to_inventory("PRISM_ARCWORK",7);
+	scr_add_item_to_inventory("PRISM_RARE",7);
 	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
 	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);	
 	scr_add_item_to_inventory("EGG_ARBRAWN",2);	

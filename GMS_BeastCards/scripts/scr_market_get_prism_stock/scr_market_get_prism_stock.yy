@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_market_get_prism_stock",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_market_get_prism_stock",
+  "parent":{
+    "name":"MARKETS",
+    "path":"folders/GUI/MARKETS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
