@@ -16,6 +16,7 @@
 	_flag_player_moving = false;
 	_flag_player_sprinting = false;	
 	_val_player_speed = 3;
+	global._val_bonus_speed_scalar = 1;
 	_ct_player_bounce = 0;
 	_val_player_bounce_frame = 0;
 	_ct_player_step_particle_timer = 0;
@@ -104,6 +105,7 @@
 	global.ref_camera = undefined;
 	#endregion
 	
+	global.c_dk_gray = make_colour_rgb(50,50,50);
 	global.flag_companion_summoned = true;	
 #endregion
 
@@ -136,7 +138,12 @@
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO PARTY
 	//—------------------------------------------------------------------------------//
-	scr_add_beast_to_party(scr_init_beast_random("ARBRAWN"));
+	for (var _it_beast = 0; _it_beast < 5; _it_beast++){
+		//var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA","AMMOMARSH","BLIZZDRIFT","CAUDAQUA","CEPHARIME","CHELONSEA","CORALLIARC","FROSTUSK","GALENATRIUM","GLACIMIGHT","GULFLOW","ISTIRAIN","KELPLATANI","LONTRIVER","MARITIMICE","SALTWAGG","SPHENISKIP","ASCHEMASS","CANIGNIS","DAIMONIS","DRAKOAL","EMBEROOST","HELLSHROOM","IMPARCH","INFERNUS","LAVAROWANA","PYREKNIGHT","PYROPLUME","SANGUINAUT","SLAGOLEM","SOLEMOLD","WRATHOOD","WYRMELTA")
+		//var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA");
+		var _beast = "FLITSAGE";
+		scr_add_beast_to_party(scr_init_beast_random(_beast));
+	}
 	//scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
 	//scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
 	//scr_add_beast_to_party(scr_init_beast_random("ARGENTBUD"));
@@ -194,14 +201,22 @@
 	//—------------------------------------------------------------------------------//
 	// ADD ITEMS TO INVENTORY
 	//—------------------------------------------------------------------------------//
-	scr_add_item_to_inventory("QUEST_IMPORTANT_NOTEBOOK",1);
-	scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",3);
-	scr_add_item_to_inventory("PRISM_COMMON",7);
-	scr_add_item_to_inventory("PRISM_ARCWORK",7);
-	scr_add_item_to_inventory("PRISM_RARE",7);
-	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
-	scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);	
-	scr_add_item_to_inventory("EGG_ARBRAWN",2);	
+	//scr_add_item_to_inventory("QUEST_IMPORTANT_NOTEBOOK",1);
+	//scr_add_item_to_inventory("CONSUMABLE_HEALING_SALVE",3);
+	//scr_add_item_to_inventory("PRISM_COMMON",7);
+	//scr_add_item_to_inventory("PRISM_ARCWORK",7);
+	//scr_add_item_to_inventory("PRISM_RARE",7);
+	//scr_add_item_to_inventory("HELD_VERDANT_SEED",1);
+	//scr_add_item_to_inventory("HELD_POWERFUL_STONE",1);
+	//scr_add_item_to_inventory("HELD_SORCEROUS_GEM",1);
+	//scr_add_item_to_inventory("HELD_INSPIRING_CHIME",5);
+	//scr_add_item_to_inventory("EGG_ARBRAWN",2);	
+	scr_add_item_to_inventory("HELD_EMERALD_TALISMAN",2);	
+	scr_add_item_to_inventory("HELD_BURNING_ASH",1);	
+	scr_add_item_to_inventory("HELD_BOLSTERING_SHELL",1);	
+	scr_add_item_to_inventory("HELD_HEALING_FRUIT",1);	
+	scr_add_item_to_inventory("HELD_GOLD_FANG",1);	
+	
 	#endregion
 #endregion
 

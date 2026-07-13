@@ -230,7 +230,7 @@ function scr_get_card_info(_str_card_name){
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "MELEE",
 					_str_card_type : "ATTACK",
-					_str_card_stat : "NEU",
+					_str_card_stat : "PHY",
 					_val_card_magnitude : 8,
 					_val_card_targets : 1,
 					_str_card_archetype_req : undefined,

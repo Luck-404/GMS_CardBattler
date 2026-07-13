@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_beast_vermilion_pyroplume_death",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.99,
+  "exportDir":"",
+  "name":"snd_beast_vermilion_pyroplume_death",
+  "parent":{
+    "name":"PYROPLUME",
+    "path":"folders/BEASTS/BEAST LIST/VERMILION/PYROPLUME.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_beast_vermilion_pyroplume_death.wav",
+  "volume":0.1,
+}

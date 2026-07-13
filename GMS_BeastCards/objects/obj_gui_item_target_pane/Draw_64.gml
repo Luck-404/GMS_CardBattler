@@ -60,7 +60,7 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 
 	var _flag_hover = _val_mouse_x > _val_box_x && _val_mouse_x < _val_box_x + _val_slot_w && _val_mouse_y > _val_box_y && _val_mouse_y < _val_box_y + _val_slot_h;
 
-	draw_set_colour(_flag_hover ? c_white : c_gray);
+	draw_set_colour(_flag_hover ? c_white : global.c_dk_gray);
 	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
 	draw_set_colour(c_black);
@@ -72,7 +72,7 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 	var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 
 	if (_spr_shadow != undefined){
-		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 14,0.55,0.55,0,c_white,1);
+		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,0.55,0.55,0,c_white,1);
 	}
 
 	draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.075,0.075,0,c_white,1);

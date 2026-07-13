@@ -19,13 +19,13 @@ function scr_status_event_rapid_growth(_str_tag,_ref_status){
 				return _ref_existing_status;
 			}
 
-			var _ref_new_status = instance_create_layer(x,y,"ily_status",obj_battle_status);
+			var _ref_new_status = instance_create_layer(room_width/2,room_width/2,"ily_status",obj_battle_status);
 
 			_ref_new_status._val_status_lifetime = 15;
 			_ref_new_status._scr_status = scr_status_event_rapid_growth;
 			_ref_new_status._ref_host = undefined;
 			_ref_new_status._str_status_name = "WEATHER: RAPID GROWTH";
-			_ref_new_status._str_status_desc = "GREEN DAMAGE +25%, RANDOMLY SPAWN 2 MINIONS AT THE END OF EVERY ROUND, ALSO HEAL SELECTED BY 1";
+			_ref_new_status._str_status_desc = "GREEN DAMAGE +25%, RANDOMLY SPAWN 2 VIRIDIAN MINIONS AT THE END OF EVERY ROUND, ALSO HEAL SELECTED BY 1";
 			_ref_new_status._spr_status = spr_status_event_rapid_growth;
 			_ref_new_status._str_trigger_region = "END";
 			_ref_new_status._str_status_type = "GLOBAL";

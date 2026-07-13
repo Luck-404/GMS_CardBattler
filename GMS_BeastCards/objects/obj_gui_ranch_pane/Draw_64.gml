@@ -42,7 +42,7 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 	draw_set_colour(c_black);
 	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
-	draw_set_colour(c_gray);
+	draw_set_colour(global.c_dk_gray);
 	draw_rectangle(_val_box_x + 4,_val_box_y + 4,_val_box_x + _val_slot_w - 4,_val_box_y + _val_slot_h - 4,false);
 
 	if (_stct_unit != undefined){
@@ -61,7 +61,7 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 
 		var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 
-		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 20,1,1,0,c_white,1);
+		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 
 		// HELD ITEM BADGE
@@ -132,7 +132,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 	draw_set_colour(c_black);
 	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
-	draw_set_colour(c_gray);
+	draw_set_colour(global.c_dk_gray);
 	draw_rectangle(_val_box_x + 4,_val_box_y + 4,_val_box_x + _val_slot_w - 4,_val_box_y + _val_slot_h - 4,false);
 
 	if (_val_ranch_index < ds_list_size(global.list_player_ranch)){
@@ -157,7 +157,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 
 		var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 
-		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 20,1,1,0,c_white,1);
+		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
 
 		// HELD ITEM BADGE

@@ -202,7 +202,7 @@ function hscr_draw_offer_panel(_it_offer,_val_panel_x,_val_panel_y,_val_mouse_x,
 	draw_set_colour(c_black);
 	draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
 
-	draw_set_colour(_flag_hover ? c_ltgray : c_gray);
+	draw_set_colour(_flag_hover ? c_ltgray : global.c_dk_gray);
 	draw_rectangle(_val_x1 + 4,_val_y1 + 4,_val_x2 - 4,_val_y2 - 4,false);
 
 	var _stct_offer = _arr_stock[_it_offer];

@@ -10,6 +10,56 @@
 if (!instance_exists(obj_gui_end_battle_pane)){
 
 	//
+	// BATTLE ENTRY TRIGGERS
+	//
+	#region BATTLE ENTRY TRIGGERS
+
+	if (!_flag_entry_triggers_complete){
+
+		var _flag_player_ready = (
+			_ref_player_controller._state_player == ENUM_PLAYER_STATE.WAIT
+		);
+
+		var _flag_enemy_ready = (
+			_ref_enemy_controller._state_enemy == ENUM_ENEMY_STATE.WAIT
+		);
+
+		//-------------------//
+		//BUILD TRIGGER QUEUE//
+		//-------------------//
+		if (!_flag_entry_triggers_init && _flag_player_ready && _flag_enemy_ready){
+			hscr_build_entry_trigger_queue();
+		}
+
+		//---------------------//
+		//EXECUTE TRIGGER QUEUE//
+		//---------------------//
+		if (_flag_entry_triggers_init && !instance_exists(obj_wait)){
+
+			if (ds_list_size(_list_entry_triggers) > 0){
+
+				var _stct_trigger = ds_list_find_value(_list_entry_triggers,0);
+
+				hscr_execute_entry_trigger(_stct_trigger);
+
+				ds_list_delete(_list_entry_triggers,0);
+
+				scr_init_battle_wait(60);
+			}
+			else{
+
+				ds_list_destroy(_list_entry_triggers);
+				_list_entry_triggers = undefined;
+
+				_flag_entry_triggers_complete = true;
+				_flag_game_start = true;
+			}
+		}
+	}
+
+	#endregion
+
+	//
 	// CHECK WIN CONDITIONS
 	//
 	if (_flag_game_start){

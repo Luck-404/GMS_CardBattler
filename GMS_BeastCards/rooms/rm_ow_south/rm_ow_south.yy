@@ -229,6 +229,7 @@
     {"name":"inst_516EEAFB","path":"rooms/rm_ow_south/rm_ow_south.yy",},
     {"name":"inst_679D60DC","path":"rooms/rm_ow_south/rm_ow_south.yy",},
     {"name":"inst_9E45D7B","path":"rooms/rm_ow_south/rm_ow_south.yy",},
+    {"name":"inst_64CF5EE9","path":"rooms/rm_ow_south/rm_ow_south.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -249,6 +250,10 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_transition_zone","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"propertyId":{"name":"_str_to_id","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"SOUTHWEST\"",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_transition_zone","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"propertyId":{"name":"_str_from_id","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"SOUTH\"",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":3.0,"x":0.0,"y":480.0,},
+        {"$GMRInstance":"v4","%Name":"inst_64CF5EE9","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_64CF5EE9","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_encounter_beasts","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"BEAVINE\", \"CHITROOPER\", \"MAMBARK\", \"MORELUSH\", \"SPOROSE\", \"TURFRANTULA\"",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_loot_table","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"PRISM_BASIC_PRISM\"",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":10.0,"scaleY":9.0,"x":384.0,"y":672.0,},
       ],"layers":[],"name":"ily_zones","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"ily_decor","depth":500,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_41EB6B07_4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_41EB6B07_4","objectId":{"name":"obj_decor_sign","path":"objects/obj_decor_sign/obj_decor_sign.yy",},"properties":[

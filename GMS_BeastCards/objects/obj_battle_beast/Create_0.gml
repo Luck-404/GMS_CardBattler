@@ -19,6 +19,9 @@ _uid_beast = -1;
 _str_team = "PLAYER";
 _str_list = "ALIVE";
 _val_pos = -1;
+_snd_cry = undefined;
+_snd_death = undefined;
+_stct_held_item = undefined;
 
 // HP / DEFENSE
 _val_cur_hp = 1;

@@ -63,6 +63,8 @@ if (room != rm_battle){
 
 		if (global.flag_companion_summoned){
 			scr_spawn_player_follow_beast();
+			var _ref_unit = ds_list_find_value(global.list_player_party,0);
+			audio_play_sound(_ref_unit._snd_beast_cry,0,false);
 		}
 		else{
 			with (obj_beast_world){
@@ -156,8 +158,9 @@ if (room != rm_battle){
 	if (room == rm_ow_ranch){
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy) && mouse_check_button_pressed(mb_left)){
 			var _ref_beast = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_ranch_beast_dummy);
-
+			
 			if (_ref_beast._state_dummy != ENUM_DUMMY_STATE.REST){
+				audio_play_sound(_ref_beast._snd_cry,0,false);
 				_ref_beast._spr_emoji = choose(spr_ranch_beast_happy,spr_ranch_beast_love,spr_ranch_beast_excited);
 				_ref_beast._ct_emoji_timer = irandom_range(60,120);
 				_ref_beast._state_dummy = ENUM_DUMMY_STATE.SHAKE;

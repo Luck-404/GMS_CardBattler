@@ -26,11 +26,19 @@ _flag_statuses_init = false;
 _flag_cast_init = false;
 _flag_minions_init = false;
 
+// TURN START ITEMS
+_flag_turn_start_items_init = false;
+_flag_turn_start_items_complete = false;
+_list_turn_start_items = undefined;
+// TURN END ITEMS
+_flag_turn_end_items_init = false;
+_flag_turn_end_items_complete = false;
+_list_turn_end_items = undefined;
+
 // ENEMY STATE
 enum ENUM_ENEMY_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
-	TRIGGER_ENTRY_EFFECTS,
 	WAIT,
 	TURN_START,
 	TRIGGER_MINIONS,

@@ -35,8 +35,11 @@ switch(_state_player){
 			
 			_ref_beast._spr_beast = _stct_unit._spr_beast;
 			_ref_beast._ref_unit = _stct_unit;
+			_ref_beast._stct_held_item = _stct_unit._ref_beast_held_item;
 			_ref_beast._str_team = "PLAYER";
 			_ref_beast._uid_beast = _stct_unit._uid_beast;
+			_ref_beast._snd_cry = _stct_unit._snd_beast_cry;
+			_ref_beast._snd_death = _stct_unit._snd_beast_death;
 
 			// COMPACT SLOT INDEX
 			_ref_beast._val_pos = _val_spawn_index;
@@ -85,30 +88,28 @@ switch(_state_player){
 
 		scr_draw_cards(_ct_hand_size);
 
-		_state_player = ENUM_PLAYER_STATE.TRIGGER_ENTRY_EFFECTS;
-
-	break;
-	#endregion
-
-	//
-	// TRIGGER ENTRY EFFECTS
-	//
-	#region TRIGGER ENTRY EFFECTS
-	case ENUM_PLAYER_STATE.TRIGGER_ENTRY_EFFECTS:
-
 		obj_battle_turn_controller._flag_game_start = true;
 
 		_state_player = ENUM_PLAYER_STATE.WAIT;
 
 	break;
 	#endregion
-	
+
 	//
 	// WAIT
 	//
 	#region WAIT
 	case ENUM_PLAYER_STATE.WAIT:
 
+		// TURN START ITEMS
+		_flag_turn_start_items_init = false;
+		_flag_turn_start_items_complete = false;
+
+		// TURN END ITEMS
+		_flag_turn_end_items_init = false;
+		_flag_turn_end_items_complete = false;
+
+		// STATUSES / MINIONS
 		_flag_statuses_init = false;
 		_flag_minions_init = false;
 
@@ -121,9 +122,14 @@ switch(_state_player){
 	#region TURN START
 	case ENUM_PLAYER_STATE.TURN_START:
 
-		if (!_flag_statuses_init){
+		//-----------------------//
+		//BUILD HELD ITEM QUEUE//
+		//-----------------------//
+		if (!_flag_turn_start_items_init){
 
-			_flag_statuses_init = true;
+			_flag_turn_start_items_init = true;
+
+			_list_turn_start_items = ds_list_create();
 
 			// RESTORE MANA
 			_val_max_mana = _val_max_mana;
@@ -137,7 +143,90 @@ switch(_state_player){
 				scr_degrade_shield(_ref_beast);
 			}
 
-			// BUILD STATUS QUEUE
+			// BUILD TURN START ITEM QUEUE
+			for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
+
+				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
+
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				var _stct_item = _ref_beast._stct_held_item;
+
+				if (_stct_item == undefined || _stct_item == "EMPTY"){
+					continue;
+				}
+
+				if (_stct_item._str_item_trigger_type != "TURN_START"){
+					continue;
+				}
+
+				var _stct_trigger = {
+					_ref_beast : _ref_beast,
+					_stct_item : _stct_item
+				};
+
+				ds_list_add(_list_turn_start_items,_stct_trigger);
+			}
+		}
+
+		//-------------------------//
+		//EXECUTE HELD ITEM QUEUE//
+		//-------------------------//
+		if (
+			_flag_turn_start_items_init &&
+			!_flag_turn_start_items_complete &&
+			!instance_exists(obj_wait)
+		){
+
+			if (ds_list_size(_list_turn_start_items) > 0){
+
+				var _stct_trigger = ds_list_find_value(_list_turn_start_items,0);
+
+				var _ref_beast = _stct_trigger._ref_beast;
+				var _stct_item = _stct_trigger._stct_item;
+
+				if (
+					instance_exists(_ref_beast) &&
+					_stct_item != undefined &&
+					_stct_item._scr_item != undefined
+				){
+
+					scr_spawn_popup_trigger_banner(_stct_item._str_item_name);
+
+					var _flag_triggered = script_execute(
+						_stct_item._scr_item,
+						"TRIGGER",
+						_stct_item,
+						_ref_beast
+					);
+
+					if (_flag_triggered){
+						_ref_beast._stct_held_item = "EMPTY";
+					}
+				}
+
+				ds_list_delete(_list_turn_start_items,0);
+
+				scr_init_battle_wait(60);
+			}
+			else{
+
+				ds_list_destroy(_list_turn_start_items);
+				_list_turn_start_items = undefined;
+
+				_flag_turn_start_items_complete = true;
+			}
+		}
+
+		//------------------//
+		//BUILD STATUS QUEUE//
+		//------------------//
+		if (_flag_turn_start_items_complete && !_flag_statuses_init){
+
+			_flag_statuses_init = true;
+
 			_list_statuses = ds_list_create();
 
 			for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
@@ -154,6 +243,9 @@ switch(_state_player){
 			}
 		}
 
+		//--------------------//
+		//EXECUTE STATUS QUEUE//
+		//--------------------//
 		if (_flag_statuses_init && !instance_exists(obj_wait)){
 
 			if (ds_list_size(_list_statuses) > 0){
@@ -598,7 +690,93 @@ switch(_state_player){
 	#region TURN END
 	case ENUM_PLAYER_STATE.TURN_END:
 
-		if (!_flag_statuses_init){
+		//---------------------//
+		//BUILD HELD ITEM QUEUE//
+		//---------------------//
+		if (!_flag_turn_end_items_init){
+
+			_flag_turn_end_items_init = true;
+
+			_list_turn_end_items = ds_list_create();
+
+			for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
+
+				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
+
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				var _stct_item = _ref_beast._stct_held_item;
+
+				if (_stct_item == undefined || _stct_item == "EMPTY"){
+					continue;
+				}
+
+				if (_stct_item._str_item_trigger_type != "TURN_END"){
+					continue;
+				}
+
+				var _stct_trigger = {
+					_ref_beast : _ref_beast,
+					_stct_item : _stct_item
+				};
+
+				ds_list_add(_list_turn_end_items,_stct_trigger);
+			}
+		}
+
+		//-----------------------//
+		//EXECUTE HELD ITEM QUEUE//
+		//-----------------------//
+		if (
+			_flag_turn_end_items_init &&
+			!_flag_turn_end_items_complete &&
+			!instance_exists(obj_wait)
+		){
+
+			if (ds_list_size(_list_turn_end_items) > 0){
+
+				var _stct_trigger = ds_list_find_value(_list_turn_end_items,0);
+
+				var _ref_beast = _stct_trigger._ref_beast;
+				var _stct_item = _stct_trigger._stct_item;
+
+				if (
+					instance_exists(_ref_beast) &&
+					_stct_item != undefined &&
+					_stct_item._scr_item != undefined
+				){
+
+					var _flag_triggered = script_execute(
+						_stct_item._scr_item,
+						"TRIGGER",
+						_stct_item,
+						_ref_beast
+					);
+
+					if (
+						_flag_triggered &&
+						_stct_item._flag_consumed_on_trigger
+					){
+						_ref_beast._stct_held_item = "EMPTY";
+					}
+				}
+
+				ds_list_delete(_list_turn_end_items,0);
+
+				scr_init_battle_wait(60);
+			}
+			else{
+
+				ds_list_destroy(_list_turn_end_items);
+				_list_turn_end_items = undefined;
+
+				_flag_turn_end_items_complete = true;
+			}
+		}
+
+		if (_flag_turn_end_items_complete && !_flag_statuses_init){
 
 			_flag_statuses_init = true;
 

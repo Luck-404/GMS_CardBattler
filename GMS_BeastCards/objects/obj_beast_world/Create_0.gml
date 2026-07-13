@@ -11,8 +11,8 @@
 //VARIABLES//
 //---------//
 _str_team = "WILD"; // PLAYER, WILD
-
 _ref_unit = undefined;
+_spr_shadow = undefined
 _ref_home = noone;
 
 _str_disposition = "CHILL"; // ANGRY, CHILL, SCARED

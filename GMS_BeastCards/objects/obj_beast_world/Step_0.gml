@@ -6,6 +6,7 @@
 //           Wild beasts wander, chase, flee, or idle based on disposition.
 //
 //===============================================================================//
+var _val_dist_player;
 
 if (global.flag_pause){
 	exit;

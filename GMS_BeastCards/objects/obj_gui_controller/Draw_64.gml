@@ -65,7 +65,7 @@ if (room != rm_battle){
 				draw_set_colour(c_maroon);
 			}
 			else{
-				draw_set_colour(c_gray);
+				draw_set_colour(global.c_dk_gray);
 			}
 
 			draw_rectangle(_val_box_x + 3,_val_box_y + 3,_val_box_x + _val_slot_w - 3,_val_box_y + _val_slot_h - 3,false);
@@ -75,7 +75,7 @@ if (room != rm_battle){
 
 			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 
-			draw_sprite_ext(_spr_shadow,0,_val_center_x,_val_center_y + 10,1,1,0,c_white,1);
+			draw_sprite_ext(_spr_shadow,0,_val_center_x,_val_center_y + 24,1,1,0,c_white,1);
 			draw_sprite_ext(_stct_unit._spr_beast,0,_val_center_x,_val_center_y,0.10,0.10,0,c_white,1);
 		}
 
@@ -131,7 +131,7 @@ if (room != rm_battle){
 		draw_set_colour(c_black);
 		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
 
-		draw_set_colour(c_gray);
+		draw_set_colour(global.c_dk_gray);
 		draw_rectangle(_val_x1 + 3,_val_y1 + 3,_val_x2 - 3,_val_y2 - 3,false);
 
 		draw_set_valign(fa_top);

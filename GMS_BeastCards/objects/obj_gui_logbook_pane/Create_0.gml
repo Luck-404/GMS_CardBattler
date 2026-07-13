@@ -321,7 +321,7 @@ hscr_draw_entry_row = function(_stct_entry,_it_slot,_val_mouse_x,_val_mouse_y){
 		draw_set_colour(c_dkgray);
 	}
 	else if (_flag_hover){
-		draw_set_colour(c_gray);
+		draw_set_colour(global.c_dk_gray);
 	}
 	else{
 		draw_set_colour(c_ltgray);

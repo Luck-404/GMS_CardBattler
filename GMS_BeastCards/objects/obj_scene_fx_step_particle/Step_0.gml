@@ -12,9 +12,3 @@ if (_ct_life <= 0){
 } else {
 	_ct_life--;
 }
-
-if (_ct_life <= 0){
-	instance_destroy();	
-} else {
-	_ct_life--;
-}

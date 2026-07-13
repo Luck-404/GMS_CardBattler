@@ -80,14 +80,14 @@ switch(_str_condition){
 			draw_set_colour(c_black);
 			draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_size,_val_box_y + _val_slot_size,false);
 
-			draw_set_colour(_flag_dead ? c_maroon : c_gray);
+			draw_set_colour(_flag_dead ? c_maroon : global.c_dk_gray);
 			draw_rectangle(_val_box_x + 5,_val_box_y + 5,_val_box_x + 95,_val_box_y + 95,false);
 
 			var _val_unit_x = _val_box_x + (_val_slot_size * 0.5);
 			var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
 			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
-			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 25,1,1,0,c_white,1);
+			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 
 			var _c_unit = _flag_dead ? c_ltgray : c_white;
 			draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
@@ -155,7 +155,53 @@ switch(_str_condition){
 
 			scr_heal_ranch_units(0.33);
 
-			var _val_gold_reward = irandom_range(25,100);
+			//-----------//
+			//GOLD REWARD//
+			//-----------//
+			var _val_gold_reward = 100;
+			var _val_gold_bonus = 0;
+
+			//----------------------//
+			//BATTLE EXIT HELD ITEMS//
+			//----------------------//
+			for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_player_controller._list_beasts); _it_beast++){
+
+				var _ref_beast = ds_list_find_value(obj_battle_player_controller._list_beasts,_it_beast);
+
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				var _stct_item = _ref_beast._stct_held_item;
+
+				if (_stct_item == undefined || _stct_item == "EMPTY"){
+					continue;
+				}
+
+				if (_stct_item._str_item_trigger_type != "BATTLE_EXIT"){
+					continue;
+				}
+
+				if (_stct_item._scr_item == undefined){
+					continue;
+				}
+
+				var _val_item_bonus = script_execute(
+					_stct_item._scr_item,
+					"TRIGGER",
+					_stct_item
+				);
+
+				_val_gold_bonus += _val_item_bonus;
+			}
+
+			//----------------//
+			//APPLY GOLD BONUS//
+			//----------------//
+			if (_val_gold_bonus > 0){
+				_val_gold_reward = ceil(_val_gold_reward * (1 + _val_gold_bonus));
+			}
+
 			global.val_player_gold += _val_gold_reward;
 
 			array_push(_arr_rewards,["GOLD",_val_gold_reward]);
@@ -339,14 +385,14 @@ switch(_str_condition){
 			draw_set_colour(c_black);
 			draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_size,_val_box_y + _val_slot_size,false);
 
-			draw_set_colour(_flag_dead ? c_maroon : c_gray);
+			draw_set_colour(_flag_dead ? c_maroon : global.c_dk_gray);
 			draw_rectangle(_val_box_x + 5,_val_box_y + 5,_val_box_x + 95,_val_box_y + 95,false);
 
 			var _val_unit_x = _val_box_x + (_val_slot_size * 0.5);
 			var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
 			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
-			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 25,1,1,0,c_white,1);
+			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 
 			var _c_unit = _flag_dead ? c_ltgray : c_white;
 			draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);

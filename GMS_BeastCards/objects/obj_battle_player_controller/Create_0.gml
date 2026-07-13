@@ -57,11 +57,20 @@ _val_prism_button_y1 = 20;
 _val_prism_button_x2 = 160;
 _val_prism_button_y2 = 60;
 
+// TURN START ITEMS
+_flag_turn_start_items_init = false;
+_flag_turn_start_items_complete = false;
+_list_turn_start_items = undefined;
+
+// TURN END ITEMS
+_flag_turn_end_items_init = false;
+_flag_turn_end_items_complete = false;
+_list_turn_end_items = undefined;
+
 // PLAYER STATE
 enum ENUM_PLAYER_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
-	TRIGGER_ENTRY_EFFECTS,
 	WAIT,
 	TURN_START,
 	TRIGGER_MINIONS,
@@ -174,7 +183,7 @@ function hscr_draw_prism_button(){
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
 
-	draw_set_colour(_flag_hover || _state_player == ENUM_PLAYER_STATE.SELECT_PRISM || _state_player == ENUM_PLAYER_STATE.SELECT_PRISM_TARGET ? c_white : c_gray);
+	draw_set_colour(_flag_hover || _state_player == ENUM_PLAYER_STATE.SELECT_PRISM || _state_player == ENUM_PLAYER_STATE.SELECT_PRISM_TARGET ? c_white : global.c_dk_gray);
 	draw_rectangle(_val_prism_button_x1,_val_prism_button_y1,_val_prism_button_x2,_val_prism_button_y2,false);
 
 	draw_set_colour(c_black);
@@ -234,7 +243,7 @@ function hscr_draw_prism_menu(){
 
 		var _flag_hover = hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_x1,_val_y1,_val_x2,_val_y2);
 
-		draw_set_colour(_flag_hover ? c_white : c_gray);
+		draw_set_colour(_flag_hover ? c_white : global.c_dk_gray);
 		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
 
 		draw_set_colour(c_black);

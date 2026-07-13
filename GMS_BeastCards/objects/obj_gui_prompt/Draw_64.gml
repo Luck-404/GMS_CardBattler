@@ -52,7 +52,7 @@ draw_text(x,y - 45,_str_prompt_text);
 //-----//
 //YES//
 //-----//
-draw_set_colour(_flag_yes_hover ? c_white : c_gray);
+draw_set_colour(_flag_yes_hover ? c_white : global.c_dk_gray);
 draw_rectangle(_val_yes_x1,_val_yes_y1,_val_yes_x2,_val_yes_y2,false);
 
 draw_set_colour(c_black);
@@ -61,7 +61,7 @@ draw_text((_val_yes_x1 + _val_yes_x2) * 0.5,(_val_yes_y1 + _val_yes_y2) * 0.5,_s
 //----//
 //NO//
 //----//
-draw_set_colour(_flag_no_hover ? c_white : c_gray);
+draw_set_colour(_flag_no_hover ? c_white : global.c_dk_gray);
 draw_rectangle(_val_no_x1,_val_no_y1,_val_no_x2,_val_no_y2,false);
 
 draw_set_colour(c_black);

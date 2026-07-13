@@ -11,7 +11,7 @@
 // DRAW SHADOW AND BEAST
 //
 #region DRAW SHADOW AND BEAST
-draw_sprite_ext(_spr_shadow,0,x,y + 30,1,1,0,c_white,1);
+draw_sprite_ext(_spr_shadow,0,x,y + 24,1,1,0,c_white,1);
 
 if (_state_dummy == ENUM_DUMMY_STATE.REST){
 
@@ -23,7 +23,7 @@ if (_state_dummy == ENUM_DUMMY_STATE.REST){
 		image_xscale * 0.15,
 		0.15,
 		_val_draw_rotation,
-		c_gray,
+		global.c_dk_gray,
 		1
 	);
 

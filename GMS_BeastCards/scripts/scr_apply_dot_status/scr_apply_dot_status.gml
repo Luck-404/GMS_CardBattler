@@ -50,5 +50,20 @@ function scr_apply_dot_status(_str_status_name){
 			);
 
 		break;
+		
+		case "BURN":
+
+			scr_status_dot_burn("APPLY",undefined);
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"+1 BURN",
+				undefined,
+				c_maroon,
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			);
+
+		break;		
 	}
 }

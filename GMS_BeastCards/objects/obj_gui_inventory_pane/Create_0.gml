@@ -345,7 +345,7 @@ function hscr_get_item_type_color(_str_item_type){
 		case "EGG": return make_colour_rgb(180,100,255);
 	}
 
-	return c_gray;
+	return global.c_dk_gray;
 }
 
 //—------------------------------------------------------------------------------//
@@ -494,7 +494,7 @@ function hscr_draw_sort_filter_buttons(){
 
 	var _flag_sort_hover = _val_mouse_x > _val_sort_x && _val_mouse_x < _val_sort_x + 200 && _val_mouse_y > _val_sort_y && _val_mouse_y < _val_sort_y + 25;
 
-	draw_set_colour(_flag_sort_hover ? c_white : c_gray);
+	draw_set_colour(_flag_sort_hover ? c_white : global.c_dk_gray);
 	draw_rectangle(_val_sort_x,_val_sort_y,_val_sort_x + 200,_val_sort_y + 25,false);
 
 	draw_set_colour(c_black);
@@ -505,7 +505,7 @@ function hscr_draw_sort_filter_buttons(){
 
 	var _flag_filter_hover = _val_mouse_x > _val_filter_x && _val_mouse_x < _val_filter_x + 200 && _val_mouse_y > _val_filter_y && _val_mouse_y < _val_filter_y + 25;
 
-	draw_set_colour(_flag_filter_hover ? c_white : c_gray);
+	draw_set_colour(_flag_filter_hover ? c_white : global.c_dk_gray);
 	draw_rectangle(_val_filter_x,_val_filter_y,_val_filter_x + 200,_val_filter_y + 25,false);
 
 	draw_set_colour(c_black);

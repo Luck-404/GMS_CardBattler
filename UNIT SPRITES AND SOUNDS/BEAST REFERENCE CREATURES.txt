@@ -1,0 +1,49 @@
+Gorilla	ARBRAWN
+Plant	ARGENTBUD
+Beaver	BEAVINE
+Frog	BRYOBITE
+Ant	CHITROOPER
+Mantis	CRUSABER
+Ent woman	DRYADAE
+Tree	FIGHTREE
+Hummingbird	FLITSAGE
+Wolf	FURN
+Rabbit	LEPOROOT
+Deer	LUMBUCK
+Snake	MAMBARK
+Morel	MORELUSH
+Iguana	SPOROSE
+Owl	STRIGIBLOOM
+Turantula	TURFRANTULA
+Ammonite	AMMOMARSH
+Jellyfish	BLIZZDRIFT
+Salamander	CAUDAQUA
+Octopus	CEPHARIME
+Turtle	CHELONSEA
+Coral	CORALLIARC
+Yeti	FROSTUSK
+Shark	GALENATRIUM
+Frost Elemental	GLACIMIGHT
+Water Elemental	GULFLOW
+Fish	ISTIRAIN
+Dolphin	KELPLATANI
+Otter	LONTRIVER
+Polar Bear	MARITIMICE
+Seal	SALTWAGG
+Penguin	SPHENISKIP
+Ash golem	ASCHEMASS
+Hellhound	CANIGNIS
+Demonic Caller	DAIMONIS
+Drake	DRAKOAL
+Pheonix	EMBEROOST
+Hellshroom	HELLSHROOM
+Imp	IMPARCH
+Fire Elemental	INFERNUS
+Fire Fish	LAVAROWANA
+Dragon Knight	PYREKNIGHT
+Winged fire humanoid	PYROPLUME
+Vampire	SANGUINAUT
+Magma golem	SLAGOLEM
+Demonic Ant/builder	SOLEMOLD
+Robed demon	WRATHOOD
+Fire Worm	WYRMELTA

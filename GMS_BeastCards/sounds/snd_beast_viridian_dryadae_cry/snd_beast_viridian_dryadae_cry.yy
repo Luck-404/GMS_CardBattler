@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_beast_viridian_dryadae_cry",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.54,
+  "exportDir":"",
+  "name":"snd_beast_viridian_dryadae_cry",
+  "parent":{
+    "name":"DRYADAE",
+    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/DRYADAE.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_beast_viridian_dryadae_cry.wav",
+  "volume":0.1,
+}

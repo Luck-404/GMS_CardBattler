@@ -18,10 +18,10 @@ if (!global.flag_pause){
 	var _val_move_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 	if (keyboard_check(vk_lshift) && _val_player_speed != 0){
 		_flag_player_sprinting = true;
-		_val_player_speed = 4;
+		_val_player_speed = 4 * global._val_bonus_speed_scalar;
 	} else if (_val_player_speed != 0){
 		_flag_player_sprinting = false;
-		_val_player_speed = 3;
+		_val_player_speed = 3 * global._val_bonus_speed_scalar;
 	}
 #endregion
 

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_beast_viridian_arbrawn_death",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.78,
+  "exportDir":"",
+  "name":"snd_beast_viridian_arbrawn_death",
+  "parent":{
+    "name":"ARBRAWN",
+    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/ARBRAWN.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_beast_viridian_arbrawn_death.wav",
+  "volume":0.1,
+}

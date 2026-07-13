@@ -90,6 +90,8 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		_ref_target_beast.x,
 		_ref_target_beast.y - 48
 	);
+	
+	audio_play_sound(_ref_target_beast._ref_unit._snd_beast_cry,0,false);
 
 	return true;
 }

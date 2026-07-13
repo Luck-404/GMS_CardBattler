@@ -49,9 +49,9 @@
     {"name":"inst_45C79E27","path":"rooms/rm_ow_north/rm_ow_north.yy",},
     {"name":"inst_4EC24D01","path":"rooms/rm_ow_north/rm_ow_north.yy",},
     {"name":"inst_604202CF","path":"rooms/rm_ow_north/rm_ow_north.yy",},
-    {"name":"inst_725E7384","path":"rooms/rm_ow_north/rm_ow_north.yy",},
     {"name":"inst_10EAE210","path":"rooms/rm_ow_north/rm_ow_north.yy",},
     {"name":"inst_35F92E7D","path":"rooms/rm_ow_north/rm_ow_north.yy",},
+    {"name":"inst_2FBA440F","path":"rooms/rm_ow_north/rm_ow_north.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -77,9 +77,13 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_transition_zone","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"propertyId":{"name":"_str_from_id","path":"objects/obj_transition_zone/obj_transition_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"NORTH\"",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":3.0,"x":0.0,"y":480.0,},
         {"$GMRInstance":"v4","%Name":"inst_604202CF","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_604202CF","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"properties":[
-            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_encounter_beasts","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"ARBRAWN\", \"FIGHTREE\", \"MAMBARK\"",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_encounter_beasts","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"ARBRAWN\", \"BRYOBITE\", \"DRYADAE\", \"FLITSAGE\", \"FURN\", \"STRIGIBLOOM\"",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_loot_table","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"QUEST_IMPORTANT_NOTEBOOK\"",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":9.0,"scaleY":10.0,"x":672.0,"y":96.0,},
-        {"$GMRInstance":"v4","%Name":"inst_725E7384","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_725E7384","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":5.0,"scaleY":9.0,"x":640.0,"y":704.0,},
+        {"$GMRInstance":"v4","%Name":"inst_2FBA440F","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2FBA440F","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_encounter_beasts","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"ARBRAWN\", \"BRYOBITE\", \"DRYADAE\", \"FLITSAGE\", \"FURN\", \"STRIGIBLOOM\"",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_zone","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"propertyId":{"name":"_arr_loot_table","path":"objects/obj_battle_zone/obj_battle_zone.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"QUEST_IMPORTANT_NOTEBOOK\"",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":5.0,"scaleY":9.0,"x":640.0,"y":704.0,},
       ],"layers":[],"name":"ily_zones","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"ily_decor","depth":500,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_41EB6B07_1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_41EB6B07_1","objectId":{"name":"obj_decor_sign","path":"objects/obj_decor_sign/obj_decor_sign.yy",},"properties":[

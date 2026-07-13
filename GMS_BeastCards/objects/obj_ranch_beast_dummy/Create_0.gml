@@ -15,6 +15,8 @@ depth = 1;
 // IDENTIFIERS
 _uid_dummy = undefined;
 _spr_shadow = spr_player_shadow;
+_snd_cry = undefined;
+_snd_death = undefined;
 
 //---------//
 //STATES//

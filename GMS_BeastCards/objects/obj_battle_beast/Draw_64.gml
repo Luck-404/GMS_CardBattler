@@ -101,7 +101,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	//--------//
 	var _spr_shadow = scr_get_beast_type_shadow(_ref_unit._str_beast_color_type);
 
-	draw_sprite_ext(_spr_shadow,0,x,y + 34,1,1,0,c_white,1);
+	draw_sprite_ext(_spr_shadow,0,x,y + 40,1.5,1.5,0,c_white,1);
 
 	//-------------//
 	//BEAST SPRITE//
@@ -249,6 +249,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		_flag_death_handled = true;
 		_val_cur_hp = 0;
+		audio_play_sound(_snd_death,0,false);
 		_str_list = "DEAD";
 
 		for (var _it_minion = ds_list_size(_list_minions) - 1; _it_minion >= 0; _it_minion--){

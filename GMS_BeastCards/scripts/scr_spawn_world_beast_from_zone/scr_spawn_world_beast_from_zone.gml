@@ -17,7 +17,7 @@ function scr_spawn_world_beast_from_zone(_ref_zone){
 		exit;
 	}
 
-	if (irandom_range(1,100) > 20){
+	if (irandom_range(1,100) > 30){
 		exit;
 	}
 
@@ -34,10 +34,12 @@ function scr_spawn_world_beast_from_zone(_ref_zone){
 
 	_ref_beast._str_team = "WILD";
 	_ref_beast._ref_unit = _stct_unit;
+	
 	_ref_beast._ref_home = _ref_zone;
 
 	_ref_beast._val_home_x = _ref_zone.x;
 	_ref_beast._val_home_y = _ref_zone.y;
 
 	_ref_beast._spr_beast = _stct_unit._spr_beast;
+	_ref_beast._spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
 }

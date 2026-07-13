@@ -13,8 +13,11 @@ function scr_get_item_info(_str_item_id){
 		_str_item_name : "DEFAULT",
 		_spr_item : spr_item_egg_arbrawn,
 		_str_item_type : undefined,
+		_str_trigger_text : undefined,
+		_str_item_trigger_type : undefined,
 		_scr_item : undefined,
 		_str_item_desc : "DEFAULT",
+		_flag_consumed_on_trigger : false,
 		_flag_stackable : false,
 		_ct_item_amount : 1,
 		_ct_item_max_amount : 1,
@@ -79,12 +82,114 @@ function scr_get_item_info(_str_item_id){
 			_stct_return_item._str_item_name = "POWERFUL STONE";
 			_stct_return_item._spr_item = spr_item_held_powerful_stone;
 			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "STATS";
 			_stct_return_item._scr_item = scr_item_held_powerful_stone;
-			_stct_return_item._str_item_desc = "Can be given to a beast to increase their power.";
+			_stct_return_item._str_item_desc = "Can be given to a beast to increase their phyiscal power.";
 			_stct_return_item._flag_stackable = false;
 			_stct_return_item._ct_item_amount = 1;
 			_stct_return_item._ct_item_max_amount = 1;
 		break;
+		
+		case "HELD_SORCEROUS_GEM":
+			_stct_return_item._str_item_name = "SORCEROUS GEM";
+			_stct_return_item._spr_item = spr_item_held_sorcerous_gem;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "STATS";
+			_stct_return_item._scr_item = scr_item_held_sorcerous_gem;
+			_stct_return_item._str_item_desc = "Can be given to a beast to increase their magic power.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;	
+		
+		case "HELD_INSPIRING_CHIME":
+			_stct_return_item._str_item_name = "INSPIRING CHIME";
+			_stct_return_item._spr_item = spr_item_held_inspiring_chime;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "PLAYER";
+			_stct_return_item._scr_item = scr_item_held_inspiring_chime;
+			_stct_return_item._str_item_desc = "Can be given to a beast to increase the move speed of a player by 15%. Stacks.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;	
+		
+		case "HELD_VERDANT_SEED":
+			_stct_return_item._str_item_name = "VERDANT SEED";
+			_stct_return_item._spr_item = spr_item_held_verdant_seed;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_trigger_text = "STARTED EVENT: RAPID GROWTH";
+			_stct_return_item._str_item_trigger_type = "ENTRY";
+			_stct_return_item._scr_item = scr_item_held_verdant_seed;
+			_stct_return_item._str_item_desc = "Can be given to a beast to trigger a Rapid Growth event upon battle entry.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;			
+		
+		case "HELD_EMERALD_TALISMAN":
+			_stct_return_item._str_item_name = "EMERALD TALISMAN";
+			_stct_return_item._spr_item = spr_item_held_emerald_talisman;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_trigger_text = "SPAWNED VIRIDIAN MINION";
+			_stct_return_item._str_item_trigger_type = "TURN_START";
+			_stct_return_item._scr_item = scr_item_held_emerald_talisman;
+			_stct_return_item._str_item_desc = "Can be given to a beast to spawn a random viridian minion upon turn start.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;		
+		
+		case "HELD_BURNING_ASH":
+			_stct_return_item._str_item_name = "BURNING ASH";
+			_stct_return_item._spr_item = spr_item_held_burning_ash;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "ON_HIT";
+			_stct_return_item._scr_item = scr_item_held_burning_ash;
+			_stct_return_item._str_item_desc = "Physical attacks have a 25% chance to apply Burn.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;		
+				
+		case "HELD_HEALING_FRUIT":
+			_stct_return_item._str_item_name = "HEALING FRUIT";
+			_stct_return_item._spr_item = spr_item_held_healing_fruit;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "ON_TARGET";
+			_stct_return_item._str_trigger_text = "HEALED FOR 50% HP";
+			_stct_return_item._scr_item = scr_item_held_healing_fruit;
+			_stct_return_item._str_item_desc = "When damaged below 50% HP, restores 50% of maximum HP.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;			
+		
+		case "HELD_BOLSTERING_SHELL":
+			_stct_return_item._str_item_name = "BOLSTERING SHELL";
+			_stct_return_item._spr_item = spr_item_held_bolstering_shell;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "TURN_END";
+			_stct_return_item._scr_item = scr_item_held_bolstering_shell;
+			_stct_return_item._str_item_desc = "Grants 3 Armor to its holder at the end of every turn.";
+			_stct_return_item._flag_consumed_on_trigger = false;
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;			
+		
+		case "HELD_GOLD_FANG":
+			_stct_return_item._str_item_name = "GOLD FANG";
+			_stct_return_item._spr_item = spr_item_held_gold_fang;
+			_stct_return_item._str_item_type = "HELD";
+			_stct_return_item._str_item_trigger_type = "BATTLE_EXIT";
+			_stct_return_item._scr_item = scr_item_held_gold_fang;
+			_stct_return_item._str_item_desc = "Increases gold gained from victorious battles by 10%.";
+			_stct_return_item._flag_stackable = false;
+			_stct_return_item._ct_item_amount = 1;
+			_stct_return_item._ct_item_max_amount = 1;
+		break;
+
 		#endregion
 
 		#region EGG

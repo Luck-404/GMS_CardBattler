@@ -104,7 +104,7 @@ function hscr_draw_card_slot(_val_box_x,_val_box_y){
 	draw_set_colour(c_black);
 	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
 
-	draw_set_colour(c_gray);
+	draw_set_colour(global.c_dk_gray);
 	draw_rectangle(_val_box_x + 2,_val_box_y + 2,_val_box_x + _val_slot_w - 2,_val_box_y + _val_slot_h - 2,false);
 }
 

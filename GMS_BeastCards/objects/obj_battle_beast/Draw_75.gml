@@ -87,10 +87,7 @@ if (_flag_preview_beast && _ref_unit != undefined){
 
 	var _str_held_item = "NONE";
 
-	if (_ref_unit._ref_beast_held_item != undefined && _ref_unit._ref_beast_held_item != "EMPTY"){
-
-		var _stct_held_item = _ref_unit._ref_beast_held_item;
-
+	if (_stct_held_item != undefined && _stct_held_item != "EMPTY"){
 		_str_held_item = string(_stct_held_item._str_item_name);
 	}
 

@@ -139,7 +139,7 @@ function hscr_draw_selected_held_item(_stct_unit,_val_x,_val_y){
 
 	var _flag_hover = _val_mouse_x > _val_box_x1 && _val_mouse_x < _val_box_x2 && _val_mouse_y > _val_box_y1 && _val_mouse_y < _val_box_y2;
 
-	draw_set_colour(_flag_hover ? c_white : c_gray);
+	draw_set_colour(_flag_hover ? c_white : global.c_dk_gray);
 	draw_rectangle(_val_box_x1,_val_box_y1,_val_box_x2,_val_box_y2,false);
 
 	draw_set_colour(c_black);

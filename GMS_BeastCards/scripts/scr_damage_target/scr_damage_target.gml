@@ -189,10 +189,83 @@ function scr_damage_target(_val_damage,_ref_target){
 	//
 	// HOST HP
 	//
+	#region HOST HP
 	if (_val_damage_left > 0){
 
-		scr_spawn_popup_scrolling("TEXT","-" + string(_val_damage_left),undefined,c_maroon,_ref_target.x + irandom_range(-32,32),_ref_target.y - 24 + irandom_range(-32,32));
+		scr_spawn_popup_scrolling(
+			"TEXT",
+			"-" + string(_val_damage_left),
+			undefined,
+			c_maroon,
+			_ref_target.x + irandom_range(-32,32),
+			_ref_target.y - 24 + irandom_range(-32,32)
+		);
 
 		_ref_target._val_cur_hp -= _val_damage_left;
 	}
+	#endregion
+
+	//
+	// ON TARGET HELD ITEM
+	//
+	#region ON TARGET HELD ITEM
+
+	if (_val_damage_left > 0){
+
+		var _stct_target_item = _ref_target._stct_held_item;
+
+		if (_stct_target_item != undefined && _stct_target_item != "EMPTY"){
+
+			if (_stct_target_item._str_item_trigger_type == "ON_TARGET"){
+
+				if (_stct_target_item._scr_item != undefined){
+
+					var _flag_triggered = script_execute(
+						_stct_target_item._scr_item,
+						"TRIGGER",
+						_stct_target_item,
+						_ref_target
+					);
+
+					if (_flag_triggered){
+						_ref_target._stct_held_item = "EMPTY";
+					}
+				}
+			}
+		}
+	}
+
+	#endregion
+
+	//
+	// ON HIT HELD ITEM
+	//
+	#region ON HIT HELD ITEM
+
+	var _ref_caster = global.ref_caster_beast;
+
+	if (instance_exists(_ref_caster)){
+
+		var _stct_item = _ref_caster._stct_held_item;
+
+		if (_stct_item != undefined && _stct_item != "EMPTY"){
+
+			if (_stct_item._str_item_trigger_type == "ON_HIT"){
+
+				if (_stct_item._scr_item != undefined){
+
+					script_execute(
+						_stct_item._scr_item,
+						"TRIGGER",
+						_stct_item,
+						_ref_caster,
+						_ref_target,
+						_str_card_stat
+					);
+				}
+			}
+		}
+	}
+
+	#endregion
 }

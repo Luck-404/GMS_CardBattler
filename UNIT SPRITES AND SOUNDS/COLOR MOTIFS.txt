@@ -1,0 +1,46 @@
+> GREEN COLOR <
+Other terms: Viridian (Magic), Emerald (Color)
+
+Themes (the types of ideas, features that this ‘color’ invokes in BEASTS, zones, spells, etc)
+Overall: Nature, Life, Wild
+Form: mostly organic animals, beasts, insects, plants, mushrooms
+Visual Motifs: Thorns, claws, vines, plants
+Combat Ideas: Sleeping, venom, poison, healing
+Potential other themes: druidic magic, shamanistic magic, lycanthropy, disease/viruses, mutation, transformation (druid forms)
+(Future) hidden classes / designs / subtyping / bonuses: druid (class)
+Statuses and effects: Bleed, Poison, Venom (unique)
+Favored Class: Adventurer
+Subtyping: Wild. Natural, Botanical
+
+
+
+> BLUE <
+Other terms: Cerulean (Magic), Sapphire (Color)
+
+Themes
+Overall: Ocean, Water, Ice
+Form: Watery elementals, ice constructs, water-based fauna (fish, amphibians, crustaceans, cephalopods, etc)
+Visual Motifs: Ice/rime, corals, shells, blubbery/fusiform, fins, gills
+Combat Ideas: Freezing, snow, icebergs, lurking, wet, pressure, shattering, shivering
+Potential other themes: Weather, abyss, hydras, waves/flow, bubbles
+(Future) hidden classes / designs / subtyping / bonuses: Abyssal, Siren
+Statuses and effects: Bleed, Frostburn, Frostbite
+Favored Class: Sailor
+Subtyping: Abyss, Wave, Frost
+
+
+
+> RED <
+Other terms: Vermilion (Magic), Ruby (Color)
+
+Themes
+Overall: Blood, vampirism, heat, fire, rage
+Form: fire elementals, phoenixes, dragons, ash, magma, hellish creatures
+Visual Motifs: flames, sparks, embers, lava floes, smoke, ash, explosions, glowing, scorchmarks
+Combat Ideas: fireballs, lava pools, chain reactions, explosions, self power boosts and explosions, rage
+Potential other themes: rebirth, heat, solar energy/sun, ash/ruin/wastes
+(Future) hidden classes / designs / subtyping / bonuses: berserker, pyromancer, demon, rebirth
+Statuses and effects: Bleed, Char, Burn
+Favored Class: Soldier
+Subtyping: Ash, Magma, Pyre
+

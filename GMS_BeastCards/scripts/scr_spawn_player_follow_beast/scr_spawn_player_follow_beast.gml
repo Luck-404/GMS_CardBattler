@@ -32,5 +32,8 @@ function scr_spawn_player_follow_beast(){
 
 	_ref_beast._str_team = "PLAYER";
 	_ref_beast._ref_unit = _ref_unit;
+	_ref_beast._spr_shadow = scr_get_beast_type_shadow(_ref_unit._str_beast_color_type);
 	_ref_beast._spr_beast = _ref_unit._spr_beast;
+	
+
 }

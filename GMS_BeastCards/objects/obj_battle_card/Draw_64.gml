@@ -32,7 +32,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				break;
 
 				case "EXHAUST":
-					draw_sprite_ext(spr_card_back,0,x,y,_val_scale_x,_val_scale_y,0,c_gray,1);
+					draw_sprite_ext(spr_card_back,0,x,y,_val_scale_x,_val_scale_y,0,global.c_dk_gray,1);
 				break;
 
 				default:

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_beast_vermilion_canignis_cry",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.42,
+  "exportDir":"",
+  "name":"snd_beast_vermilion_canignis_cry",
+  "parent":{
+    "name":"CANIGNIS",
+    "path":"folders/BEASTS/BEAST LIST/VERMILION/CANIGNIS.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_beast_vermilion_canignis_cry.wav",
+  "volume":0.1,
+}

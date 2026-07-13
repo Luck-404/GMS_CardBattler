@@ -34,7 +34,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 		draw_set_colour(c_maroon);
 	}
 	else{
-		draw_set_colour(c_gray);
+		draw_set_colour(global.c_dk_gray);
 	}
 
 	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_size,_val_box_y + _val_slot_size,false);
@@ -47,7 +47,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 
 	// SHADOW
 	var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
-	draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 25,1,1,0,c_white,1);
+	draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 
 	// UNIT
 	if (_stct_unit._val_beast_hp_cur <= 0){
@@ -72,7 +72,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
 			_val_cooldown = 10;
 			_flag_clicked = true;
-
+			audio_play_sound(_stct_unit_selected._snd_beast_cry,0,false);
 			_val_pos = _it_unit;
 			_stct_unit_selected = ds_list_find_value(global.list_player_party,_val_pos);
 		}
