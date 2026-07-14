@@ -7,6 +7,126 @@
 //
 //===============================================================================//
 
+//===============================================================================//
+//
+// STEP: OBJ_GUI_CONTROLLER
+// FUNCTION: Manages background music and global GUI input.
+//           Switches immediately between overworld and battle music.
+//           Plays each music track to completion before selecting another.
+//
+//===============================================================================//
+
+//-------------//
+//MUSIC CONTROL//
+//-------------//
+#region MUSIC CONTROL
+
+var _str_target_music_mode = (room == rm_battle) ? "BATTLE" : "OVERWORLD";
+
+//-----------//
+//MODE CHANGE//
+//-----------//
+if (_str_music_mode != _str_target_music_mode){
+
+	_str_music_mode = _str_target_music_mode;
+
+	// STOP CURRENT MUSIC
+	if (_val_music_instance != -1){
+		audio_stop_sound(_val_music_instance);
+	}
+
+	_val_music_instance = -1;
+	_snd_current_music = undefined;
+
+	_flag_music_silence = false;
+	_ct_music_silence_timer = 0;
+
+	// ENTERING BATTLE
+	if (_str_music_mode == "BATTLE"){
+
+		if (_val_ambiance_instance != -1){
+			audio_stop_sound(_val_ambiance_instance);
+		}
+
+		_val_ambiance_instance = -1;
+	}
+
+	// RETURNING TO OVERWORLD
+	else{
+		hscr_reset_ambiance_timer();
+	}
+}
+
+
+//------------//
+//BATTLE MUSIC//
+//------------//
+if (_str_music_mode == "BATTLE"){
+
+	if (_val_music_instance == -1 || !audio_is_playing(_val_music_instance)){
+		hscr_play_random_music(_arr_music_battle);
+	}
+}
+
+
+//---------------//
+//OVERWORLD MUSIC//
+//---------------//
+else{
+
+	// MUSIC SILENCE
+	if (_flag_music_silence){
+
+		if (_ct_music_silence_timer > 0){
+			_ct_music_silence_timer--;
+		}
+		else{
+			_flag_music_silence = false;
+			_ct_music_silence_timer = 0;
+
+			hscr_play_random_music(_arr_music_overworld);
+		}
+	}
+
+	// MUSIC TRACK FINISHED
+	else if (_val_music_instance == -1 || !audio_is_playing(_val_music_instance)){
+
+		// 25% CHANCE FOR SILENCE
+		if (irandom_range(1,100) <= 25){
+			hscr_start_music_silence();
+		}
+		else{
+			hscr_play_random_music(_arr_music_overworld);
+		}
+	}
+}
+
+#endregion
+
+
+//----------------//
+//AMBIANCE CONTROL//
+//----------------//
+#region AMBIANCE CONTROL
+
+if (_str_music_mode == "OVERWORLD"){
+
+	if (_ct_ambiance_timer > 0){
+		_ct_ambiance_timer--;
+	}
+	else{
+
+		// DO NOT OVERLAP AMBIANCE SOUNDS
+		if (_val_ambiance_instance == -1 || !audio_is_playing(_val_ambiance_instance)){
+
+			hscr_play_random_ambiance();
+			hscr_reset_ambiance_timer();
+		}
+	}
+}
+
+#endregion
+
 //-----------------//
 //FULLSCREEN TOGGLE//
 //-----------------//
