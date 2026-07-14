@@ -46,8 +46,8 @@
   },
   "origin":4,
   "parent":{
-    "name":"OLD",
-    "path":"folders/CARDS/CARD LIST/OLD.yy",
+    "name":"SPRITES",
+    "path":"folders/CARDS/CARD LIST/OLD/SPRITES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
