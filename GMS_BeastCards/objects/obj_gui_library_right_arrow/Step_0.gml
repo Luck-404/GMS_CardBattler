@@ -25,6 +25,7 @@ if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 	image_index = 1;
 
 	if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+		audio_play_sound(snd_gui_press,0,false);
 		_flag_clicked = true;
 		_val_cooldown = 10;
 

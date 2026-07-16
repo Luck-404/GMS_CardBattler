@@ -26,7 +26,8 @@ function scr_card_uncolored_clearcast(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-
+	audio_play_sound(snd_buff,0,false);
+	
 	//-------------//
 	//SPAWN POPUP//
 	//-------------//

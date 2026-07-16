@@ -45,6 +45,9 @@ function scr_status_dot_burn(_str_tag,_ref_status){
 			var _ref_host = _ref_status._ref_host;
 
 			repeat (_ct_burn){
+				
+				audio_play_sound(snd_attack,0,false);
+				
 				var _val_damage = 1;
 				if (_val_damage > 0 && _ref_host._val_overhealth > 0){
 

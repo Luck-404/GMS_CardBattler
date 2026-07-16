@@ -267,7 +267,7 @@ hscr_handle_mode_and_page_input = function(){
 
 	// PREVIOUS PAGE
 	if (keyboard_check_pressed(vk_left)){
-
+		audio_play_sound(snd_gui_press,0,false);
 		if (_ct_logbook_page > 0){
 			_ct_logbook_page--;
 			_str_entry_selected_id = "";
@@ -276,7 +276,7 @@ hscr_handle_mode_and_page_input = function(){
 
 	// NEXT PAGE
 	if (keyboard_check_pressed(vk_right)){
-
+		audio_play_sound(snd_gui_press,0,false);
 		if (_ct_logbook_page < _ct_total_pages - 1){
 			_ct_logbook_page++;
 			_str_entry_selected_id = "";
@@ -331,6 +331,7 @@ hscr_draw_entry_row = function(_stct_entry,_it_slot,_val_mouse_x,_val_mouse_y){
 
 	// CLICK SELECT
 	if (_flag_hover && mouse_check_button_pressed(mb_left) && !_flag_clicked){
+		audio_play_sound(snd_gui_press,0,false);
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 		_str_entry_selected_id = _str_entry_id;

@@ -20,4 +20,5 @@ function scr_card_viridian_miracle_musa(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
+	audio_play_sound(snd_buff,0,false);
 }

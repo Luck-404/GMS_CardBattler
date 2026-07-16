@@ -22,6 +22,8 @@ function scr_inventory_use_quest_item(_stct_item,_ref_inventory_pane){
 			obj_gui_scrolling_textbox
 		);
 
+		audio_play_sound(snd_use_item,0,false);
+
 		_ref_textbox._ref_parent_gui = _ref_inventory_pane;
 		_ref_textbox._str_text = "Nothing seems to happen.";
 

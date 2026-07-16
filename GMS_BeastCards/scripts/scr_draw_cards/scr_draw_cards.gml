@@ -8,6 +8,8 @@
 //===============================================================================//
 function scr_draw_cards(_ct_amount){
 
+	audio_play_sound(snd_card_draw,0,false);
+
 	var _val_base_x = 548;
 	var _val_card_spacing = 15;
 	var _val_card_width = 120;

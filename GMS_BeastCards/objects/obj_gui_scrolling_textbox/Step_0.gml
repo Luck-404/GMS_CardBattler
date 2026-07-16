@@ -29,7 +29,7 @@ if (_ct_input_delay > 0){
 //CLICK//
 //-----//
 if (mouse_check_button_pressed(mb_left)){
-
+	audio_play_sound(snd_gui_press,0,false);
 	if (_ct_char < string_length(_str_text)){
 		_ct_char = string_length(_str_text);
 		_str_visible_text = _str_text;

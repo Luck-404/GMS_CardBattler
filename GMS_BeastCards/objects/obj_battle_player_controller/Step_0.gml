@@ -343,7 +343,6 @@ switch(_state_player){
 		//
 		#region OPEN PRISM MENU
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-
 			var _val_mouse_x = device_mouse_x_to_gui(0);
 			var _val_mouse_y = device_mouse_y_to_gui(0);
 
@@ -352,9 +351,11 @@ switch(_state_player){
 				_flag_clicked = true;
 
 				if (array_length(hscr_get_prism_stacks()) <= 0){
+					audio_play_sound(snd_error,0,false);
 					scr_spawn_popup_error("NO PRISMS",60);
 				}
 				else{
+					audio_play_sound(snd_gui_press,0,false);
 					_state_player = ENUM_PLAYER_STATE.SELECT_PRISM;
 				}
 
@@ -368,6 +369,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			audio_play_sound(snd_end_turn,0,false);
 			_flag_clicked = true;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
 			break;
@@ -379,7 +381,7 @@ switch(_state_player){
 		//
 		#region LEFT CLICK SELECTS CARD
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card) && mouse_check_button_pressed(mb_left) && !_flag_clicked){
-
+			audio_play_sound(snd_card_move,0,false);
 			_flag_clicked = true;
 
 			var _ref_card = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card);
@@ -412,6 +414,7 @@ switch(_state_player){
 		//
 		#region RIGHT CLICK SENDS BACK
 		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+			audio_play_sound(snd_gui_close,0,false);
 			_flag_clicked = true;
 
 			_stct_selected_prism = undefined;
@@ -426,6 +429,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			audio_play_sound(snd_end_turn,0,false);
 			_flag_clicked = true;
 			_stct_selected_prism = undefined;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
@@ -438,7 +442,7 @@ switch(_state_player){
 		//
 		#region CLOSE PRISM MENU
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-
+			audio_play_sound(snd_gui_close,0,false);
 			var _val_mouse_x = device_mouse_x_to_gui(0);
 			var _val_mouse_y = device_mouse_y_to_gui(0);
 
@@ -456,6 +460,7 @@ switch(_state_player){
 		//
 		#region SELECT PRISM STACK
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+			audio_play_sound(snd_gui_press,0,false);
 			_flag_clicked = true;
 			hscr_handle_prism_menu_input();
 			break;
@@ -476,6 +481,7 @@ switch(_state_player){
 		//
 		#region RIGHT CLICK SENDS BACK
 		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+			audio_play_sound(snd_gui_close,0,false);
 			_flag_clicked = true;
 
 			_stct_selected_prism = undefined;
@@ -490,6 +496,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			audio_play_sound(snd_end_turn,0,false);
 			_flag_clicked = true;
 			_stct_selected_prism = undefined;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
@@ -502,8 +509,7 @@ switch(_state_player){
 		//
 		#region CLICK ENEMY TARGET
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast) && mouse_check_button_pressed(mb_left) && !_flag_clicked){
-
-			_flag_clicked = true;
+			audio_play_sound(snd_gui_close,0,false);
 
 			var _ref_beast_clicked = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast);
 
@@ -538,6 +544,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			audio_play_sound(snd_end_turn,0,false);
 			_flag_clicked = true;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
 			break;
@@ -549,6 +556,7 @@ switch(_state_player){
 		//
 		#region RIGHT CLICK SENDS BACK
 		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+			audio_play_sound(snd_gui_close,0,false);
 			_flag_clicked = true;
 
 			_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
@@ -565,7 +573,7 @@ switch(_state_player){
 		//
 		#region LEFT CLICK SELECTS CASTER
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast) && mouse_check_button_pressed(mb_left) && !_flag_clicked){
-
+			audio_play_sound(snd_gui_press,0,false);
 			_flag_clicked = true;
 
 			var _ref_beast_clicked = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast);
@@ -602,6 +610,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+			audio_play_sound(snd_end_turn,0,false);
 			_flag_clicked = true;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
 			break;
@@ -613,6 +622,7 @@ switch(_state_player){
 		//
 		#region RIGHT CLICK SENDS BACK
 		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+			audio_play_sound(snd_gui_close,0,false);
 			_flag_clicked = true;
 
 			_state_player = ENUM_PLAYER_STATE.SELECT_CASTER;
@@ -636,6 +646,8 @@ switch(_state_player){
 		if (_str_card_range == "GLOBAL"){
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+				audio_play_sound(snd_gui_press,0,false);
+				
 				_flag_clicked = true;
 
 				global.ref_target_beast = "GLOBAL";
@@ -650,7 +662,7 @@ switch(_state_player){
 		//
 		#region LEFT CLICK SELECTS TARGET
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast) && mouse_check_button_pressed(mb_left) && !_flag_clicked && _str_card_range != "GLOBAL"){
-
+			audio_play_sound(snd_gui_press,0,false);
 			_flag_clicked = true;
 
 			var _ref_beast_clicked = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast);
@@ -879,7 +891,7 @@ switch(_state_player){
 			if (mouse_check_button_pressed(mb_left)){
 
 				if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card)){
-
+				audio_play_sound(snd_card_move,0,false);
 					_flag_clicked = true;
 
 					var _ref_card = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card);

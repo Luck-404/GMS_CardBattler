@@ -43,6 +43,8 @@ function scr_status_dot_bleed(_str_tag,_ref_status){
 
 			var _val_damage = _ref_status._ct_status_stacks;
 			var _ref_host = _ref_status._ref_host;
+			
+			audio_play_sound(snd_attack,0,false);
 
 			if (_val_damage > 0 && _ref_host._val_overhealth > 0){
 

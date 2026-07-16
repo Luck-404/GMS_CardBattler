@@ -22,5 +22,6 @@ function scr_card_uncolored_rapid_strikes(_stct_card,_ref_caster,_ref_target){
 		//-----------//
 		//PLAY SOUND//
 		//-----------//
+		audio_play_sound(snd_attack,0,false);
 	}
 }

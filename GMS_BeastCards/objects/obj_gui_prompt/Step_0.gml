@@ -43,7 +43,7 @@ var _flag_yes_hover = _val_mouse_x > _val_yes_x1 && _val_mouse_x < _val_yes_x2 &
 var _flag_no_hover = _val_mouse_x > _val_no_x1 && _val_mouse_x < _val_no_x2 && _val_mouse_y > _val_no_y1 && _val_mouse_y < _val_no_y2;
 
 if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-
+	audio_play_sound(snd_gui_press,0,false);
 	if (_flag_yes_hover){
 		_flag_clicked = true;
 		_ct_cooldown = 8;

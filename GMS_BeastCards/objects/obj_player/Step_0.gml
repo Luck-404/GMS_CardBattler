@@ -117,6 +117,7 @@ if (!global.flag_pause){
 	if (_flag_player_moving){
 		if (_ct_player_step_particle_timer <= 0){
 			_ct_player_step_particle_timer = 15;
+			audio_play_sound(snd_ambiance_walking_grass,0,false);
 			hscr_spawn_step_particles();
 		} else {
 			_ct_player_step_particle_timer--;

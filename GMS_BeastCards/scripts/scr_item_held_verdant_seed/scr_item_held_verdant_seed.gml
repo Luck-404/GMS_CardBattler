@@ -23,6 +23,8 @@ function scr_item_held_verdant_seed(_str_state,_stct_item,_stct_target_unit){
 
 			scr_apply_event_status("RAPID GROWTH");
 
+			audio_play_sound(snd_buff,0,false);
+
 			return true;
 
 		break;

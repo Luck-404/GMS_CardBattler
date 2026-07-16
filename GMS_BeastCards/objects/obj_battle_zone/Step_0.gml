@@ -35,6 +35,8 @@ if (place_meeting(x, y, obj_player) && obj_player._flag_player_moving){ //IF TOU
 			//HIDE PLAYER
 			obj_player.visible = false;			
 			
+			audio_play_sound(snd_battle_trigger,0,false);
+			
 			//SPAWN NEW TRANSITION
 			scr_trigger_transition(rm_battle);
 		}

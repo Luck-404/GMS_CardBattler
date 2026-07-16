@@ -82,6 +82,7 @@ if (room != rm_battle){
 		draw_set_alpha(1);
 
 		if (device_mouse_x_to_gui(0) >= _val_ui_x1 && device_mouse_x_to_gui(0) <= _val_ui_x2 && device_mouse_y_to_gui(0) >= _val_ui_y1 && device_mouse_y_to_gui(0) <= _val_ui_y2 && mouse_check_button_pressed(mb_left)){
+			audio_play_sound(snd_gui_open,0,false);
 			draw_set_colour(c_fuchsia);
 			draw_rectangle(_val_ui_x1 + 5,_val_ui_y1 + 5,_val_ui_x2 - 5,_val_ui_y2 - 5,true);
 			draw_set_colour(c_white);
@@ -173,6 +174,7 @@ if (room != rm_battle){
 		draw_set_alpha(1);
 
 		if (_flag_hover && mouse_check_button_pressed(mb_left)){
+			audio_play_sound(snd_gui_open,0,false);
 			hscr_destroy_gui_open();
 			hscr_toggle_gui_pause(true);
 			global.ref_active_gui = instance_create_layer(room_width / 2,room_height / 2,"ily_fx",obj_gui_deck_pane);

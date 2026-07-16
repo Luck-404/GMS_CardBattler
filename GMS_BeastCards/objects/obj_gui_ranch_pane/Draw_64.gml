@@ -78,6 +78,7 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 			draw_sprite(spr_gui_ranch_highlight,0,_val_party_x + 185,_val_box_y + 65);
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+				audio_play_sound(snd_beast_move,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
@@ -174,6 +175,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 			draw_sprite(spr_gui_ranch_highlight,0,_val_ranch_x + 185,_val_box_y + 65);
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+				audio_play_sound(snd_beast_move,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
@@ -189,6 +191,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 		}
 
 		if (keyboard_check_pressed(vk_delete) && !_flag_clicked){
+			audio_play_sound(snd_destroy,0,false);
 			_flag_clicked = true;
 			_val_cooldown = 10;
 

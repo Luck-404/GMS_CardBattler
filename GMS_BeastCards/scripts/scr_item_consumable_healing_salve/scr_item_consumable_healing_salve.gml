@@ -45,5 +45,7 @@ function scr_item_consumable_healing_salve(_stct_item,_stct_target_unit,_val_pop
 		_val_popup_y
 	);
 
+	audio_play_sound(snd_heal,0,false);
+
 	return true;
 }

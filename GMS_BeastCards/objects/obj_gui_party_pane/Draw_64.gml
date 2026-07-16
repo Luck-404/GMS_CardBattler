@@ -70,6 +70,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 		draw_sprite(spr_gui_party_highlight,0,_val_unit_x,_val_unit_y);
 
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+			audio_play_sound(snd_gui_press,0,false);
 			_val_cooldown = 10;
 			_flag_clicked = true;
 			audio_play_sound(_stct_unit_selected._snd_beast_cry,0,false);
@@ -80,6 +81,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 		// NUMBER KEY REORDER
 		for (var _it_key = 1; _it_key <= 5; _it_key++){
 			if (keyboard_check_pressed(ord(string(_it_key)))){
+				audio_play_sound(snd_gui_press,0,false);
 				var _val_target = _it_key - 1;
 
 				if (_val_target < _ct_unit && _val_target != _it_unit){

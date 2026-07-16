@@ -417,6 +417,7 @@ function hscr_draw_inventory_slots(_list_filtered){
 			}
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+				audio_play_sound(snd_gui_press,0,false);
 				_flag_clicked = true;
 				_ct_cooldown = 10;
 
@@ -455,6 +456,7 @@ function hscr_handle_sort_filter_input(){
 
 	if (mouse_check_button_pressed(mb_left)){
 		if (_flag_sort_hover){
+			audio_play_sound(snd_gui_press,0,false);
 			switch(_str_sort_mode){
 				case "RECENT": _str_sort_mode = "TYPE"; break;
 				case "TYPE": _str_sort_mode = "ALPHABETICAL"; break;

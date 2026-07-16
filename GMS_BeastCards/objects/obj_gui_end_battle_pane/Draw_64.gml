@@ -115,7 +115,7 @@ switch(_str_condition){
 
 		#region CONFIRM
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
-
+			audio_play_sound(snd_gui_press,0,false);
 			scr_market_register_battle_complete();
 	
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);
@@ -423,7 +423,7 @@ switch(_str_condition){
 
 		#region CONFIRM
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
-
+			audio_play_sound(snd_gui_press,0,false);
 			scr_market_register_battle_complete();
 			
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);

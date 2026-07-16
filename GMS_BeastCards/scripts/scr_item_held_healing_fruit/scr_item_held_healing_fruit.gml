@@ -48,6 +48,8 @@ function scr_item_held_healing_fruit(_str_state,_stct_item,_ref_target){
 				_ref_target.x + irandom_range(-32,32),
 				_ref_target.y - 24 + irandom_range(-32,32)
 			);
+	
+			audio_play_sound(snd_heal,0,false);
 
 			scr_spawn_popup_trigger_banner(_stct_item._str_item_name + " " + _stct_item._str_trigger_text);
 

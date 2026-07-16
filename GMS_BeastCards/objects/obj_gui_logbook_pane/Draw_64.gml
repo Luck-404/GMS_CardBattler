@@ -142,6 +142,7 @@ if (hscr_is_mouse_in_rect(_val_mouse_x,_val_mouse_y,_val_left_button_x1,_val_lef
 	);
 
 	if (mouse_check_button_pressed(mb_left) && !_flag_clicked && _ct_logbook_page > 0){
+		audio_play_sound(snd_gui_press,0,false);
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 
@@ -175,6 +176,7 @@ if (hscr_is_mouse_in_rect(_val_mouse_x,_val_mouse_y,_val_right_button_x1,_val_ri
 	);
 
 	if (mouse_check_button_pressed(mb_left) && !_flag_clicked && _ct_logbook_page < _ct_total_pages - 1){
+		audio_play_sound(snd_gui_press,0,false);
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 

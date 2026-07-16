@@ -144,11 +144,13 @@ function hscr_attempt_purchase(_it_offer){
 	}
 
 	if (_stct_offer._str_offer_type == "EGG" && _stct_offer._flag_sold){
+		audio_play_sound(snd_error,0,false);
 		scr_spawn_popup_error("SOLD OUT",60);
 		return;
 	}
 
 	if (global.val_player_gold < _stct_offer._val_gold_cost){
+		audio_play_sound(snd_error,0,false);
 		scr_spawn_popup_error("NOT ENOUGH GOLD",60);
 		return;
 	}
@@ -172,7 +174,7 @@ function hscr_attempt_purchase(_it_offer){
 	_arr_stock[_it_offer] = _stct_offer;
 
 	scr_market_set_stock(_str_market_uid,_arr_stock);
-
+	audio_play_sound(snd_purchase,0,false);
 	scr_spawn_popup(
 		"TEXT",
 		"+" + string(_stct_offer._stct_item._str_item_name),

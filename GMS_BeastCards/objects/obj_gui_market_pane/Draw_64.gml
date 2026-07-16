@@ -16,6 +16,7 @@ hscr_update_click_cooldown();
 //RIGHT CLOSE//
 //------------//
 if (mouse_check_button_pressed(mb_right)){
+	audio_play_sound(snd_gui_close,0,false);
 	obj_gui_controller.hscr_destroy_gui_open();
 	obj_gui_controller.hscr_toggle_gui_pause(false);
 	global.ref_active_gui = undefined;

@@ -131,6 +131,7 @@ if (_str_music_mode == "OVERWORLD"){
 //FULLSCREEN TOGGLE//
 //-----------------//
 if (keyboard_check_pressed(ord("F"))){
+	audio_play_sound(snd_gui_press,0,false);
 	window_set_fullscreen(!window_get_fullscreen());
 }
 
@@ -138,9 +139,11 @@ if (keyboard_check_pressed(ord("F"))){
 //ESC INPUT//
 //--------//
 if (keyboard_check_pressed(vk_escape) && global.ref_active_gui == undefined){
+	audio_play_sound(snd_error,0,false);
 	show_debug_message("\n\n\n\n\n\nPLAYER PRESSED ESCAPE TO END GAME");
 	game_end();
 } else if (keyboard_check_pressed(vk_escape)){
+	audio_play_sound(snd_gui_close,0,false);
 	hscr_destroy_gui_open();
 	hscr_toggle_gui_pause(false);
 }
@@ -154,6 +157,7 @@ if (room != rm_battle){
 	//PAUSE HANDLING//
 	//--------------//
 	if (keyboard_check_pressed(ord("T")) && global.ref_active_gui == undefined){
+		audio_play_sound(snd_gui_open,0,false);
 		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED T TOGGLE PAUSE GAME");
 		hscr_toggle_gui_pause(!global.flag_pause);
 	}
@@ -162,6 +166,7 @@ if (room != rm_battle){
 	//ACTIVATE PARTY PANE//
 	//-------------------//
 	if (keyboard_check_pressed(ord("P"))){
+		audio_play_sound(snd_gui_open,0,false);
 		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED P TOGGLE PARTY PANE");
 
 		if (global.ref_active_gui != undefined && global.ref_active_gui._str_type == "PARTY"){
@@ -178,7 +183,7 @@ if (room != rm_battle){
 	//TOGGLE COMPANION SUMMONING//
 	//---------------------------//
 	if (keyboard_check_pressed(ord("G")) && global.ref_active_gui == undefined){
-
+		audio_play_sound(snd_beast_summon,0,false);
 		global.flag_companion_summoned = !global.flag_companion_summoned;
 
 		if (global.flag_companion_summoned){
@@ -199,7 +204,7 @@ if (room != rm_battle){
 	//ACTIVATE LOGBOOK PANE//
 	//---------------------//
 	if (keyboard_check_pressed(ord("B"))){
-
+		audio_play_sound(snd_gui_open,0,false);
 		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED B TOGGLE LOGBOOK PANE");
 
 		if (global.ref_active_gui != undefined && global.ref_active_gui._str_type == "LOGBOOK"){
@@ -226,7 +231,7 @@ if (room != rm_battle){
 	//-----------------------//
 	if (keyboard_check_pressed(ord("I"))){
 		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED I TOGGLE INVENTORY PANE");
-
+		audio_play_sound(snd_gui_open,0,false);
 		if (global.ref_active_gui != undefined && global.ref_active_gui._str_type == "INVENTORY"){
 			hscr_destroy_gui_open();
 			hscr_toggle_gui_pause(false);
@@ -242,6 +247,7 @@ if (room != rm_battle){
 	//---------------------//
 	if (global.ref_active_gui != undefined && global.ref_active_gui.sprite_index == spr_gui_party_pane){
 		if (keyboard_check_pressed(vk_left)){
+			audio_play_sound(snd_gui_press,0,false);
 			if (ds_list_find_value(global.list_player_party,global.ref_active_gui._pos - 1) != undefined){
 				global.ref_active_gui._pos--;
 				global.ref_active_gui._unit_selected = ds_list_find_value(global.list_player_party,global.ref_active_gui._pos);
@@ -249,6 +255,7 @@ if (room != rm_battle){
 		}
 
 		if (keyboard_check_pressed(vk_right)){
+			audio_play_sound(snd_gui_press,0,false);
 			if (ds_list_find_value(global.list_player_party,global.ref_active_gui._pos + 1) != undefined){
 				global.ref_active_gui._pos++;
 				global.ref_active_gui._unit_selected = ds_list_find_value(global.list_player_party,global.ref_active_gui._pos);
@@ -261,7 +268,7 @@ if (room != rm_battle){
 	//------------------//
 	if (keyboard_check_pressed(ord("K"))){
 		show_debug_message("\n\n\n\n\n\nPLAYER PRESSED K TOGGLE DECK PANE");
-
+		audio_play_sound(snd_gui_open,0,false);
 		if (global.ref_active_gui != undefined && global.ref_active_gui._str_type == "DECK"){
 			hscr_destroy_gui_open();
 			hscr_toggle_gui_pause(false);

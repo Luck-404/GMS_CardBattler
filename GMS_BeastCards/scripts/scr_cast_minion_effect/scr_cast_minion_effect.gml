@@ -27,6 +27,7 @@ function scr_cast_minion_effect(_ref_minion){
 
 		case "LIFE SPIRIT":
 			scr_heal_target(2,_ref_minion._ref_host);
+			audio_play_sound(snd_heal,0,false);
 		break;
 	}
 }

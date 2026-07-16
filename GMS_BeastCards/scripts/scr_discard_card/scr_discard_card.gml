@@ -9,7 +9,9 @@ function scr_discard_card(_ref_card){
 
 	var _list_hand = obj_battle_player_controller._list_battle_hand;
 	var _list_discard = obj_battle_player_controller._list_battle_discard;
-
+	
+	
+	
 	//
 	// REMOVE FROM HAND
 	//

@@ -14,6 +14,8 @@ function scr_inventory_use_prism_item_ow(_stct_item,_ref_inventory_pane){
 		"ily_fx",
 		obj_gui_scrolling_textbox
 	);
+	
+	audio_play_sound(snd_use_item,0,false);
 
 	_ref_textbox._ref_parent_gui = _ref_inventory_pane;
 	_ref_textbox._str_text = string(_stct_item._str_item_desc) + "\n\nThis item does nothing outside of battle...";

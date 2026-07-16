@@ -43,6 +43,7 @@ if (hscr_get_current_item_amount() <= 0){
 //RIGHT CLICK//
 //-----------//
 if (mouse_check_button_pressed(mb_right)){
+	audio_play_sound(snd_gui_close,0,false);
 	hscr_close_target_pane();
 	exit;
 }
@@ -85,6 +86,8 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 
 			exit;
 		}
+		
+		audio_play_sound(snd_use_item,0,false);
 
 		var _flag_used = false;
 

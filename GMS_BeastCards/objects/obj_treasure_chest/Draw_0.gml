@@ -27,17 +27,34 @@ else
 	//-----------//
 	if (instance_exists(obj_player) && distance_to_object(obj_player) < 48)
 	{
-		draw_sprite(spr_treasure_chest_highlight, 0, x, y);
-	
+		draw_sprite(spr_treasure_chest_highlight,0,x,y);
+
+		//--------------------//
+		//NEARBY SPARKLE SOUND//
+		//--------------------//
+		if (!audio_is_playing(_val_nearby_sound_instance))
+		{
+			_val_nearby_sound_instance = audio_play_sound(snd_treasure_nearby,2,true);
+		}
+
 		if (keyboard_check_pressed(ord("E")))
 		{
-			show_debug_message("\nCHEST: PLAYER HAS PRESSED 'E' ON A CHEST");
+			if (audio_is_playing(_val_nearby_sound_instance))
+			{
+				audio_stop_sound(_val_nearby_sound_instance);
+				_val_nearby_sound_instance = -1;
+			}
 
+			audio_play_sound(snd_treasure_chest_open,2,false);
+			audio_play_sound(snd_treasure_claim,2,false);
+
+			show_debug_message("\nCHEST: PLAYER HAS PRESSED 'E' ON A CHEST");
+		
 			_flag_triggered = true;
 			image_index = 1;
-			
-			global.map_player_chests_opened[?_uid_chest] = true;
 		
+			global.map_player_chests_opened[?_uid_chest] = true;
+	
 			if (_str_loot_type == "RANDOM")
 			{
 				show_debug_message("\nCHEST: ROLL RANDOM LOOT");
@@ -48,6 +65,14 @@ else
 				show_debug_message("\nCHEST: ROLL SPECIFIC LOOT");
 				hscr_award_custom_treasure_chest_loot();
 			}
+		}
+	}
+	else
+	{
+		if (audio_is_playing(_val_nearby_sound_instance))
+		{
+			audio_stop_sound(_val_nearby_sound_instance);
+			_val_nearby_sound_instance = -1;
 		}
 	}
 }

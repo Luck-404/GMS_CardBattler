@@ -10,6 +10,8 @@ function scr_gather_discards(){
 	var _list_deck = obj_battle_player_controller._list_battle_deck;
 	var _list_discard = obj_battle_player_controller._list_battle_discard;
 
+	audio_play_sound(snd_card_shuffle,0,false);
+
 	while (ds_list_size(_list_discard) > 0){
 
 		var _ref_card = ds_list_find_value(_list_discard,0);

@@ -22,7 +22,7 @@ function scr_item_quest_important_notebook(_stct_item,_ref_inventory_pane){
 	//SUCCESS//
 	//--------//
 	if (_flag_success){
-
+		audio_play_sound(snd_treasure_claim,0,false);
 		var _arr_card_ids = [
 			"ECHO",
 			"EMERALD_WISDOM",
@@ -71,6 +71,7 @@ function scr_item_quest_important_notebook(_stct_item,_ref_inventory_pane){
 	//FAILURE//
 	//--------//
 	else{
+		audio_play_sound(snd_error,0,false);
 		_str_text = "Nothing seems to happen.";
 	}
 

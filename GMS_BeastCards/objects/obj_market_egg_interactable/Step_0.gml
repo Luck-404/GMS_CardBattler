@@ -18,7 +18,7 @@ if (instance_exists(obj_player) && distance_to_object(obj_player) < 48 && !globa
 	if (!_flag_triggered && _ct_cooldown == 0){
 
 		if (keyboard_check_pressed(ord("E"))){
-
+		audio_play_sound(snd_gui_open,0,false);
 			_flag_triggered = true;
 			_ct_cooldown = 60;
 

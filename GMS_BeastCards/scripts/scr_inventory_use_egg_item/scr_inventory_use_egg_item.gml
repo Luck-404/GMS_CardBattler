@@ -40,7 +40,9 @@ function scr_inventory_use_egg_item(_stct_item,_ref_inventory_pane){
 
 	scr_add_beast_to_party(_stct_new_beast);
 
+	audio_play_sound(snd_beast_hatch,0,false);
 	audio_play_sound(_stct_new_beast._snd_beast_cry,0,false);
+	
 	scr_remove_item_from_inventory(_stct_item,1);
 
 	var _ref_textbox = instance_create_layer(

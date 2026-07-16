@@ -11,7 +11,7 @@
 //VARIABLES//
 //---------//
 _val_loot_amount = 1;
-
+_val_nearby_sound_instance = -1;
 _flag_triggered = false;
 
 _val_rand_x = irandom_range(-48,48);

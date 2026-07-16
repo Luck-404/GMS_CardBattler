@@ -78,7 +78,9 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 				_ref_player_controller._state_player = ENUM_PLAYER_STATE.WAIT;
 				_ref_enemy_controller._state_enemy = ENUM_ENEMY_STATE.WAIT;
-
+				
+				audio_play_sound(snd_battle_loss,0,false);
+				
 				var _ref_end_gui = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_gui_end_battle_pane);
 				_ref_end_gui._str_condition = "LOSS";
 			}
@@ -94,6 +96,8 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 				_ref_player_controller._state_player = ENUM_PLAYER_STATE.WAIT;
 				_ref_enemy_controller._state_enemy = ENUM_ENEMY_STATE.WAIT;
+				
+				audio_play_sound(snd_battle_victory,0,false);
 
 				var _ref_end_gui = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_gui_end_battle_pane);
 				_ref_end_gui._str_condition = "WIN";

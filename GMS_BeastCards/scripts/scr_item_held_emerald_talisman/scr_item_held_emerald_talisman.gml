@@ -39,6 +39,8 @@ function scr_item_held_emerald_talisman(_str_state,_stct_item,_stct_target_unit)
 				_stct_target_unit
 			);
 
+			audio_play_sound(snd_buff,0,false);
+			
 			return true;
 
 		break;

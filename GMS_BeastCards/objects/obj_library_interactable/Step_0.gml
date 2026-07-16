@@ -16,6 +16,7 @@ if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 
 	if (!_flag_triggered && _val_cooldown == 0){
 		if (keyboard_check(ord("E"))){
+			audio_play_sound(snd_gui_open,0,false);
 			_flag_triggered = true;
 			_val_cooldown = 60;
 

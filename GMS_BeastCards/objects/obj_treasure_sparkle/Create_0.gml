@@ -11,7 +11,7 @@
 //VARIABLES//
 //---------//
 _str_rarity = "";
-
+_val_nearby_sound_instance = -1;
 _c_sparkle = c_white;
 
 _val_visibility_timer = 300;

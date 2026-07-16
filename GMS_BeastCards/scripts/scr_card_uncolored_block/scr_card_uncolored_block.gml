@@ -20,4 +20,5 @@ function scr_card_uncolored_block(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//PLAY SOUND//
 	//----------------//
+	audio_play_sound(snd_shield,0,false);
 }

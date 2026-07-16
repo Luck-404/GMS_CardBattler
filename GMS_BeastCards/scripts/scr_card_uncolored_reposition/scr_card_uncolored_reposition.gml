@@ -37,6 +37,7 @@ function scr_card_uncolored_reposition(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
+	audio_play_sound(snd_beast_summon,0,false);
 
 	//-------------//
 	//SPAWN POPUPS//

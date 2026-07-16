@@ -33,6 +33,8 @@ function scr_trigger_world_beast_battle(_ref_world_beast){
 	global.arr_last_enemy_pool = _arr_pool;
 	global.stct_forced_enemy_unit = _ref_world_beast._ref_unit;
 
+	audio_play_sound(snd_battle_trigger,0,false);
+	
 	scr_toggle_player_movement("STOP");
 
 	obj_player.visible = false;
