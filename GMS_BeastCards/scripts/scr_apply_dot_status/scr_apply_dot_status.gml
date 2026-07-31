@@ -59,11 +59,41 @@ function scr_apply_dot_status(_str_status_name){
 				"TEXT",
 				"+1 BURN",
 				undefined,
-				c_maroon,
+				c_red,
 				global.ref_target_beast.x + irandom_range(-32,32),
 				global.ref_target_beast.y - 24 + irandom_range(-32,32)
 			);
 
 		break;		
+		
+		case "POISON":
+
+			scr_status_dot_poison("APPLY",undefined);
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"+1 POISON",
+				undefined,
+				c_lime,
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			);
+
+		break;		
+		
+		case "VENOM":
+
+			scr_status_dot_venom("APPLY",undefined);
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"+1 VENOM",
+				undefined,
+				c_purple,
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			);
+
+		break;				
 	}
 }

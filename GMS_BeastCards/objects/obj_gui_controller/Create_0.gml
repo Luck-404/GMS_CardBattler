@@ -182,18 +182,24 @@ function hscr_destroy_gui_open(){
 
 //—------------------------------------------------------------------------------//
 // hscr_toggle_gui_pause
-// FUNCTION: Toggles player movement based on current movement state.
-//           Stops movement when opening GUI and restores movement when closing GUI.
+// FUNCTION: Explicitly pauses or resumes the game and player movement.
+//           Uses the requested pause state instead of toggling blindly.
 //—------------------------------------------------------------------------------//
 function hscr_toggle_gui_pause(_flag_pause){
 
 	global.flag_pause = _flag_pause;
 
-	if (obj_player._val_player_speed == 0){
-		scr_toggle_player_movement("START");
+	if (!instance_exists(obj_player)){
+		return;
+	}
+
+	if (_flag_pause){
+
+		scr_toggle_player_movement("STOP");
 	}
 	else{
-		scr_toggle_player_movement("STOP");
+
+		scr_toggle_player_movement("START");
 	}
 }
 

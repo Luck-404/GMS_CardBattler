@@ -24,7 +24,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status){
 
 			var _ref_new_status = instance_create_layer(_ref_target.x,_ref_target.y,"ily_status",obj_battle_status);
 
-			_ref_new_status._val_status_lifetime = 5;
+			_ref_new_status._val_status_lifetime = 4;
 			_ref_new_status._scr_status = scr_status_dot_bleed;
 			_ref_new_status._ref_host = _ref_target;
 			_ref_new_status._str_status_name = "BLEED";

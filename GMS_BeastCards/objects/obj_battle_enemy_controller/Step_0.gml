@@ -400,6 +400,34 @@ switch(_state_enemy){
 
 				var _ref_card = ds_list_find_value(_ref_beast._list_deck,_ref_beast._val_hand_pos);
 
+				//--------------------//
+				// DISABLED ENEMY CARD
+				//--------------------//
+				if (_ref_card._flag_card_disabled){
+
+					scr_spawn_popup_scrolling(
+						"TEXT",
+						"CARD DISABLED",
+						undefined,
+						c_black,
+						_ref_beast.x,
+						_ref_beast.y - 72
+					);
+
+					audio_play_sound(snd_debuff,0,false);
+
+					_ref_card.visible = false;
+
+					ds_list_delete(
+						_list_casting_units,
+						0
+					);
+
+					scr_init_battle_wait(30);
+
+					break;
+				}
+	
 				if (_ref_beast._flag_beast_able_check){
 
 					var _str_card_type = _ref_card._ref_card._str_card_type;
@@ -564,6 +592,7 @@ switch(_state_enemy){
 			// HIDE OLD CARD
 			var _ref_old_card = ds_list_find_value(_ref_beast._list_deck,_ref_beast._val_hand_pos);
 
+			_ref_old_card._flag_card_disabled = false;
 			_ref_old_card.visible = false;
 			_ref_old_card._str_location = "DECK";
 
@@ -577,6 +606,7 @@ switch(_state_enemy){
 			// SHOW NEW CARD
 			var _ref_new_card = ds_list_find_value(_ref_beast._list_deck,_ref_beast._val_hand_pos);
 
+			_ref_new_card._flag_card_disabled = false;
 			_ref_new_card.visible = true;
 			_ref_new_card._str_location = "HAND";
 		}

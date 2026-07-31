@@ -29,6 +29,7 @@ _spr_status = undefined;
 
 // STACKS / TRIGGER
 _ct_status_stacks = 1;
+_val_status_damage = 0;
 _str_trigger_region = "START"; // START, END, or undefined
 
 //----//

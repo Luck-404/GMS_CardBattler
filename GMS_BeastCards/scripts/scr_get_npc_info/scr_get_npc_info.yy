@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_npc_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_npc_info",
+  "parent":{
+    "name":"NPCS",
+    "path":"folders/NPCS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

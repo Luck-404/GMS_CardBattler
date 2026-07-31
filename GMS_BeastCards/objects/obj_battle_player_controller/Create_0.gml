@@ -24,6 +24,7 @@ _ct_draw_amount = 2;
 global.ref_cast_card = undefined;
 global.ref_caster_beast = undefined;
 global.ref_target_beast = undefined;
+global.ref_target_card = undefined;
 
 global.ct_echo = 0;
 
@@ -67,7 +68,10 @@ _flag_turn_end_items_init = false;
 _flag_turn_end_items_complete = false;
 _list_turn_end_items = undefined;
 
-// PLAYER STATE
+// EXTRA TURN FLOW
+_flag_extra_turn_pending = false;
+_flag_begin_extra_turn = false;
+
 enum ENUM_PLAYER_STATE{
 	INIT_BEASTS,
 	INIT_CARDS,
@@ -79,6 +83,7 @@ enum ENUM_PLAYER_STATE{
 	SELECT_PRISM_TARGET,
 	SELECT_CASTER,
 	SELECT_TARGET,
+	SELECT_ENEMY_CARD,
 	CARD_EXECUTE,
 	TURN_END,
 	DISCARD_DOWN
@@ -97,6 +102,37 @@ _val_cooldown = 10;
 //-------//
 //METHODS//
 //-------//
+//—------------------------------------------------------------------------------//
+// hscr_finish_player_turn
+// FUNCTION: Finishes the active player turn.
+//           Starts a pending extra player turn when available.
+//           Otherwise passes turn control to the enemy.
+//—------------------------------------------------------------------------------//
+hscr_finish_player_turn = function(){
+
+	_state_player = ENUM_PLAYER_STATE.WAIT;
+
+	//-----------------//
+	// EXTRA TURN
+	//-----------------//
+	if (_flag_extra_turn_pending){
+
+		_flag_extra_turn_pending = false;
+		_flag_begin_extra_turn = true;
+
+		scr_spawn_popup_trigger_banner(
+			"CHRONO: EXTRA TURN"
+		);
+
+		return;
+	}
+
+	//-----------------//
+	// NORMAL TURN PASS
+	//-----------------//
+	obj_battle_turn_controller.hscr_pass_turn();
+};
+
 //—------------------------------------------------------------------------------//
 // hscr_is_mouse_in_box
 // FUNCTION: Returns whether a gui mouse point is inside a rectangle.
@@ -331,36 +367,69 @@ function hscr_check_battle_card_oom(_list_cards){
 	}
 }
 
-//—------------------------------------------------------------------------------//
-// hscr_check_battle_beast_color
-// FUNCTION: Checks whether each beast can cast the selected card by color.
-//—------------------------------------------------------------------------------//
 function hscr_check_battle_beast_color(_list_beast_check){
 
-	var _arr_card_colors = global.ref_cast_card._ref_card._arr_card_colors;
+	var _arr_card_colors =
+		global.ref_cast_card._ref_card._arr_card_colors;
 
 	var _str_card_color_1 = _arr_card_colors[0];
 	var _str_card_color_2 = _arr_card_colors[1];
 
-	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+	for (
+		var _it_beast = 0;
+		_it_beast < ds_list_size(_list_beast_check);
+		_it_beast++
+	){
 
-		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
-		var _arr_beast_colors = _ref_beast._ref_unit._arr_beast_colors;
+		var _ref_beast = ds_list_find_value(
+			_list_beast_check,
+			_it_beast
+		);
+
+		//------------------------//
+		// MALLEABILITY OVERRIDE
+		//------------------------//
+		if (_ref_beast._flag_ignore_caster_requirements){
+
+			_ref_beast._flag_beast_color_check = true;
+
+			continue;
+		}
+
+		var _arr_beast_colors =
+			_ref_beast._ref_unit._arr_beast_colors;
 
 		var _str_beast_color_1 = _arr_beast_colors[0];
 		var _str_beast_color_2 = _arr_beast_colors[1];
 
 		var _flag_match = false;
 
-		if (_str_card_color_1 == "UNCOLORED" || _str_beast_color_1 == "UNCOLORED" || _str_beast_color_2 == "UNCOLORED"){
+		if (
+			_str_card_color_1 == "UNCOLORED" ||
+			_str_beast_color_1 == "UNCOLORED" ||
+			_str_beast_color_2 == "UNCOLORED"
+		){
 			_flag_match = true;
 		}
 		else{
-			if (_str_card_color_1 != undefined && (_str_card_color_1 == _str_beast_color_1 || _str_card_color_1 == _str_beast_color_2)){
+
+			if (
+				_str_card_color_1 != undefined &&
+				(
+					_str_card_color_1 == _str_beast_color_1 ||
+					_str_card_color_1 == _str_beast_color_2
+				)
+			){
 				_flag_match = true;
 			}
 
-			if (_str_card_color_2 != undefined && (_str_card_color_2 == _str_beast_color_1 || _str_card_color_2 == _str_beast_color_2)){
+			if (
+				_str_card_color_2 != undefined &&
+				(
+					_str_card_color_2 == _str_beast_color_1 ||
+					_str_card_color_2 == _str_beast_color_2
+				)
+			){
 				_flag_match = true;
 			}
 		}
@@ -380,6 +449,17 @@ function hscr_check_battle_beast_archetype(_list_beast_check){
 	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
 
 		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+		
+		//------------------------//
+		// MALLEABILITY OVERRIDE
+		//------------------------//
+		if (_ref_beast._flag_ignore_caster_requirements){
+
+			_ref_beast._flag_beast_color_check = true;
+
+			continue;
+		}
+
 		var _str_beast_archetype = _ref_beast._ref_unit._str_beast_archetype;
 
 		if (_str_card_archetype == undefined || _str_card_archetype == _str_beast_archetype){
@@ -402,6 +482,17 @@ function hscr_check_battle_beast_class(_list_beast_check){
 	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
 
 		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+		
+		//------------------------//
+		// MALLEABILITY OVERRIDE
+		//------------------------//
+		if (_ref_beast._flag_ignore_caster_requirements){
+
+			_ref_beast._flag_beast_color_check = true;
+
+			continue;
+		}
+		
 		var _str_beast_class = _ref_beast._ref_unit._str_beast_class;
 
 		if (_str_card_class == undefined || _str_card_class == _str_beast_class){

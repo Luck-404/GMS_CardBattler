@@ -1,0 +1,20 @@
+{
+  "$GMPath":"",
+  "%Name":"path_npc_test",
+  "closed":false,
+  "kind":0,
+  "name":"path_npc_test",
+  "parent":{
+    "name":"NPCS",
+    "path":"folders/NPCS.yy",
+  },
+  "points":[
+    {"speed":100.0,"x":0.49987793,"y":1.5,},
+    {"speed":100.0,"x":255.49988,"y":3.5,},
+    {"speed":100.0,"x":256.49988,"y":257.5,},
+    {"speed":100.0,"x":0.49987793,"y":254.5,},
+  ],
+  "precision":4,
+  "resourceType":"GMPath",
+  "resourceVersion":"2.0",
+}

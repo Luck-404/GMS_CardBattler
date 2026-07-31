@@ -8,7 +8,7 @@
 //
 //===============================================================================//
 function scr_toggle_player_movement(_str_state){
-	if (_str_state = "STOP"){	//STOP
+	if (_str_state == "STOP"){	//STOP
 		obj_player._val_player_speed = 0;
 		obj_player._flag_player_moving = false;	
 		obj_player._flag_player_sprinting = false;

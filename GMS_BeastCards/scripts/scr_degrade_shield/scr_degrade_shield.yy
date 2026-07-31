@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_degrade_shield",
   "parent":{
-    "name":"COMBAT LOGIC",
-    "path":"folders/BATTLE/COMBAT LOGIC.yy",
+    "name":"CARD CAST LOGIC",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

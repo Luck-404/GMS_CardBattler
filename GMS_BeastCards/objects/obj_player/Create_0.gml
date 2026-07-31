@@ -42,7 +42,9 @@
 	#region MINIONS
 	global.list_pool_viridian_minions = ds_list_create();
 	#endregion
-
+	
+	global.ref_interacting_npc = undefined;	
+	
 	#region ITEM GLOBALS
 	
 	#region MARKET TRACKING
@@ -58,7 +60,8 @@
 		"FLITSAGE",
 		"FURN"
 	];
-	#endregion	
+	
+
 	
 	global.uid_next_item = 0;	
 	global.list_player_inventory = ds_list_create();	
@@ -139,9 +142,7 @@
 	// ADD TEST BEASTS TO PARTY
 	//—------------------------------------------------------------------------------//
 	for (var _it_beast = 0; _it_beast < 5; _it_beast++){
-		//var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA","AMMOMARSH","BLIZZDRIFT","CAUDAQUA","CEPHARIME","CHELONSEA","CORALLIARC","FROSTUSK","GALENATRIUM","GLACIMIGHT","GULFLOW","ISTIRAIN","KELPLATANI","LONTRIVER","MARITIMICE","SALTWAGG","SPHENISKIP","ASCHEMASS","CANIGNIS","DAIMONIS","DRAKOAL","EMBEROOST","HELLSHROOM","IMPARCH","INFERNUS","LAVAROWANA","PYREKNIGHT","PYROPLUME","SANGUINAUT","SLAGOLEM","SOLEMOLD","WRATHOOD","WYRMELTA")
-		//var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA");
-		var _beast = "FLITSAGE";
+		var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA","AMMOMARSH","BLIZZDRIFT","CAUDAQUA","CEPHARIME","CHELONSEA","CORALLIARC","FROSTUSK","GALENATRIUM","GLACIMIGHT","GULFLOW","ISTIRAIN","KELPLATANI","LONTRIVER","MARITIMICE","SALTWAGG","SPHENISKIP","ASCHEMASS","CANIGNIS","DAIMONIS","DRAKOAL","EMBEROOST","HELLSHROOM","IMPARCH","INFERNUS","LAVAROWANA","PYREKNIGHT","PYROPLUME","SANGUINAUT","SLAGOLEM","SOLEMOLD","WRATHOOD","WYRMELTA")
 		scr_add_beast_to_party(scr_init_beast_random(_beast));
 	}
 	//scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
@@ -168,13 +169,11 @@
 	// ADD TEST CARDS TO DECK
 	//—------------------------------------------------------------------------------//
 	//scr_add_card_to_deck(scr_get_card_info("STRIKE"));
-	repeat(10){
-		scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
-	}
+	//scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
 	//scr_add_card_to_deck(scr_get_card_info("BLOCK"));
 	//scr_add_card_to_deck(scr_get_card_info("BULWARK"));
 	//scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
-	//scr_add_card_to_deck(scr_get_card_info("ECHO"));
+	scr_add_card_to_deck(scr_get_card_info("ECHO"));
 	//scr_add_card_to_deck(scr_get_card_info("DEFT_STRIKE"));
 	//scr_add_card_to_deck(scr_get_card_info("REPOSITION"));
 	//scr_add_card_to_deck(scr_get_card_info("CLEARCAST"));
@@ -187,7 +186,25 @@
 	//scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
 	//scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
 	//scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
-
+	//scr_add_card_to_deck(scr_get_card_info("SHIV"));
+	//scr_add_card_to_deck(scr_get_card_info("SPELLBOOK_WILDCARD"));
+	//scr_add_card_to_deck(scr_get_card_info("MALLEABILITY"));
+	//scr_add_card_to_deck(scr_get_card_info("ARTIFACT_HOURGLASS"));
+	//scr_add_card_to_deck(scr_get_card_info("THOUGHTSTEAL"));
+	scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
+	scr_add_card_to_deck(scr_get_card_info("FELL"));
+	//scr_add_card_to_deck(scr_get_card_info("VERDANT_BOLT"));
+	scr_add_card_to_deck(scr_get_card_info("CLAW"));
+	scr_add_card_to_deck(scr_get_card_info("SPINESLING"));
+	scr_add_card_to_deck(scr_get_card_info("BIOBOLT"));
+	scr_add_card_to_deck(scr_get_card_info("SPORE_CLOUD"));
+	scr_add_card_to_deck(scr_get_card_info("STALKING_SWIPE"));
+	scr_add_card_to_deck(scr_get_card_info("UNSEEN_ROOT"));
+	scr_add_card_to_deck(scr_get_card_info("FERAL_FRENZY"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_SWIPES"));
+	scr_add_card_to_deck(scr_get_card_info("BRAMBLE_ERUPTION"));
+	scr_add_card_to_deck(scr_get_card_info("STAMPEDE"));
+	
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO LIBRARY
 	//—------------------------------------------------------------------------------//

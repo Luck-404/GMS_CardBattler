@@ -52,6 +52,7 @@ _flag_beast_archetype_check = true;
 _flag_beast_class_check = true;
 _flag_beast_range_check = true;
 _flag_beast_able_check = true;
+_flag_ignore_caster_requirements = false;
 
 //----//
 //INIT//

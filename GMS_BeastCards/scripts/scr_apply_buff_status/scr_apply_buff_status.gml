@@ -54,5 +54,23 @@ function scr_apply_buff_status(_str_status_name){
 			);
 
 		break;
+		
+		case "MALLEABILITY":
+
+			scr_status_buff_malleability(
+				"APPLY",
+				undefined
+			);
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"MALLEABILITY",
+				undefined,
+				c_white,
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			);
+
+		break;
 	}
 }

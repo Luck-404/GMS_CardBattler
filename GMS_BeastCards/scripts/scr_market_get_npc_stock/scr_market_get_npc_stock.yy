@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_market_get_npc_stock",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_market_get_npc_stock",
+  "parent":{
+    "name":"NPCS",
+    "path":"folders/NPCS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

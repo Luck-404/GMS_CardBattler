@@ -98,10 +98,13 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				if (obj_battle_enemy_controller._state_enemy == ENUM_ENEMY_STATE.CAST_CARDS){
 					visible = false;
 				}
-				else {
+				else{
 					visible = true;
 				}
 
+				//-------//
+				// HOVER
+				//-------//
 				if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 
 					_val_scale_x *= 1.15;
@@ -112,7 +115,55 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 					}
 				}
 
-				draw_sprite_ext(_spr_card,0,x,y,_val_scale_x,_val_scale_y,0,c_white,1);
+				//----------------------//
+				// DRAW DISABLED CARD
+				//----------------------//
+				if (_flag_card_disabled){
+
+					draw_sprite_ext(
+						_spr_card,
+						0,
+						x,
+						y,
+						_val_scale_x,
+						_val_scale_y,
+						0,
+						c_ltgray,
+						1
+					);
+
+					draw_set_font(fnt_small_gui);
+					draw_set_colour(c_black);
+					draw_set_halign(fa_center);
+					draw_set_valign(fa_middle);
+
+					draw_text(
+						x,
+						y - 60,
+						"DISABLED"
+					);
+
+					draw_set_halign(fa_left);
+					draw_set_valign(fa_top);
+				}
+
+				//--------------------//
+				// DRAW NORMAL CARD
+				//--------------------//
+				else{
+
+					draw_sprite_ext(
+						_spr_card,
+						0,
+						x,
+						y,
+						_val_scale_x,
+						_val_scale_y,
+						0,
+						c_white,
+						1
+					);
+				}
 			}
 		}
 	}

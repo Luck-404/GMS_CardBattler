@@ -20,6 +20,11 @@ _ct_cols = 3;
 _val_panel_row_gap = 20;
 _str_header_text = "BEAST EGG MARKET";
 
+_ref_npc = undefined;
+_arr_external_stock = [];
+_flag_return_to_npc = false;
+_flag_npc_interaction_released = false;
+
 _arr_stock = [];
 
 _val_pane_w = 800;
@@ -54,19 +59,28 @@ _ct_cooldown = 0;
 //—------------------------------------------------------------------------------//
 // hscr_market_init
 // FUNCTION: Initializes market stock after external values are assigned.
-//           Supports egg markets and prism vendors.
-//           Updates panel layout for the selected market type.
+//           Supports egg, prism, and NPC vendors.
 //—------------------------------------------------------------------------------//
 function hscr_market_init(){
 
 	switch(_str_market_type){
 
+		//-----//
+		// EGG //
+		//-----//
 		case "EGG":
-			_arr_stock = scr_market_get_egg_stock(_str_market_uid);
 
-			_str_header_text = "BEAST EGG MARKET";
+			_arr_stock =
+				scr_market_get_egg_stock(
+					_str_market_uid
+				);
 
-			_ct_offers = array_length(_arr_stock);
+			_str_header_text =
+				"BEAST EGG MARKET";
+
+			_ct_offers =
+				array_length(_arr_stock);
+
 			_ct_cols = 3;
 
 			_val_panel_w = 220;
@@ -74,14 +88,26 @@ function hscr_market_init(){
 			_val_panel_gap = 30;
 			_val_panel_row_gap = 20;
 			_val_panel_y = _val_pane_top + 95;
+
 		break;
 
+
+		//-------//
+		// PRISM //
+		//-------//
 		case "PRISM":
-			_arr_stock = scr_market_get_prism_stock(_str_market_uid);
 
-			_str_header_text = "PRISM VENDOR";
+			_arr_stock =
+				scr_market_get_prism_stock(
+					_str_market_uid
+				);
 
-			_ct_offers = array_length(_arr_stock);
+			_str_header_text =
+				"PRISM VENDOR";
+
+			_ct_offers =
+				array_length(_arr_stock);
+
 			_ct_cols = 3;
 
 			_val_panel_w = 170;
@@ -89,6 +115,49 @@ function hscr_market_init(){
 			_val_panel_gap = 25;
 			_val_panel_row_gap = 20;
 			_val_panel_y = _val_pane_top + 95;
+
+		break;
+
+
+		//-----//
+		// NPC //
+		//-----//
+		case "NPC":
+
+			_arr_stock =
+				scr_market_get_npc_stock(
+					_str_market_uid,
+					_arr_external_stock
+				);
+
+			if (
+				_ref_npc != undefined &&
+				instance_exists(_ref_npc) &&
+				_ref_npc._stct_npc != undefined
+			){
+				_str_header_text =
+					string(
+						_ref_npc._stct_npc._str_npc_name
+					) +
+					" | TRADE";
+			}
+			else{
+				_str_header_text = "VENDOR";
+			}
+
+			_ct_offers =
+				array_length(_arr_stock);
+
+			_ct_cols = 3;
+
+			_val_panel_w = 170;
+			_val_panel_h = 210;
+			_val_panel_gap = 25;
+			_val_panel_row_gap = 20;
+			_val_panel_y = _val_pane_top + 95;
+
+			_flag_return_to_npc = true;
+
 		break;
 	}
 }
@@ -128,56 +197,145 @@ function hscr_is_mouse_in_box(_val_mouse_x,_val_mouse_y,_val_x1,_val_y1,_val_x2,
 //—------------------------------------------------------------------------------//
 // hscr_attempt_purchase
 // FUNCTION: Attempts to buy a market offer.
-//           Egg offers are sold once purchased.
-//           Prism offers are infinite and increase in cost after each purchase.
+//           Supports egg, prism, and NPC vendor offers.
 //—------------------------------------------------------------------------------//
 function hscr_attempt_purchase(_it_offer){
 
-	if (_it_offer < 0 || _it_offer >= array_length(_arr_stock)){
+	if (
+		_it_offer < 0 ||
+		_it_offer >= array_length(_arr_stock)
+	){
 		return;
 	}
 
-	var _stct_offer = _arr_stock[_it_offer];
+	var _stct_offer =
+		_arr_stock[_it_offer];
 
 	if (_stct_offer == undefined){
 		return;
 	}
 
-	if (_stct_offer._str_offer_type == "EGG" && _stct_offer._flag_sold){
-		audio_play_sound(snd_error,0,false);
-		scr_spawn_popup_error("SOLD OUT",60);
+	//----------------//
+	// SOLD-OUT CHECK //
+	//----------------//
+	if (
+		variable_struct_exists(
+			_stct_offer,
+			"_flag_sold"
+		) &&
+		_stct_offer._flag_sold
+	){
+		audio_play_sound(
+			snd_error,
+			0,
+			false
+		);
+
+		scr_spawn_popup_error(
+			"SOLD OUT",
+			60
+		);
+
 		return;
 	}
 
-	if (global.val_player_gold < _stct_offer._val_gold_cost){
-		audio_play_sound(snd_error,0,false);
-		scr_spawn_popup_error("NOT ENOUGH GOLD",60);
+	//------------//
+	// GOLD CHECK //
+	//------------//
+	if (
+		global.val_player_gold <
+		_stct_offer._val_gold_cost
+	){
+		audio_play_sound(
+			snd_error,
+			0,
+			false
+		);
+
+		scr_spawn_popup_error(
+			"NOT ENOUGH GOLD",
+			60
+		);
+
 		return;
 	}
 
-	global.val_player_gold -= _stct_offer._val_gold_cost;
+	//----------//
+	// PURCHASE //
+	//----------//
+	global.val_player_gold -=
+		_stct_offer._val_gold_cost;
 
-	scr_add_item_to_inventory(_stct_offer._str_item_id,1);
+	scr_add_item_to_inventory(
+		_stct_offer._str_item_id,
+		1
+	);
 
+	//-------------------//
+	// UPDATE OFFER TYPE //
+	//-------------------//
 	switch(_stct_offer._str_offer_type){
 
 		case "EGG":
+
 			_stct_offer._flag_sold = true;
+
 		break;
 
+
 		case "PRISM":
+
 			_stct_offer._ct_bought++;
-			_stct_offer._val_gold_cost = scr_market_get_prism_cost(_stct_offer);
+
+			_stct_offer._val_gold_cost =
+				scr_market_get_prism_cost(
+					_stct_offer
+				);
+
+		break;
+
+
+		case "NPC":
+
+			/*
+				-1 means infinite stock.
+			*/
+			if (_stct_offer._ct_stock > 0){
+
+				_stct_offer._ct_stock--;
+
+				if (_stct_offer._ct_stock <= 0){
+
+					_stct_offer._ct_stock = 0;
+					_stct_offer._flag_sold = true;
+				}
+			}
+
 		break;
 	}
 
 	_arr_stock[_it_offer] = _stct_offer;
 
-	scr_market_set_stock(_str_market_uid,_arr_stock);
-	audio_play_sound(snd_purchase,0,false);
+	scr_market_set_stock(
+		_str_market_uid,
+		_arr_stock
+	);
+
+	//----------//
+	// FEEDBACK //
+	//----------//
+	audio_play_sound(
+		snd_purchase,
+		0,
+		false
+	);
+
 	scr_spawn_popup(
 		"TEXT",
-		"+" + string(_stct_offer._stct_item._str_item_name),
+		"+" +
+		string(
+			_stct_offer._stct_item._str_item_name
+		),
 		undefined,
 		c_yellow,
 		obj_player.x,
@@ -226,7 +384,10 @@ function hscr_draw_offer_panel(_it_offer,_val_panel_x,_val_panel_y,_val_mouse_x,
 	//------//
 	var _val_icon_scale = 3;
 
-	if (_stct_offer._str_offer_type == "PRISM"){
+	if (
+		_stct_offer._str_offer_type == "PRISM" ||
+		_stct_offer._str_offer_type == "NPC"
+	){
 		_val_icon_scale = 2;
 	}
 
@@ -241,6 +402,57 @@ function hscr_draw_offer_panel(_it_offer,_val_panel_x,_val_panel_y,_val_mouse_x,
 	draw_set_valign(fa_top);
 
 	switch(_stct_offer._str_offer_type){
+
+		//-----//
+		// NPC //
+		//-----//
+		case "NPC":
+
+			draw_text(
+				_val_center_x,
+				_val_y1 + 118,
+				_stct_item._str_item_name
+			);
+
+			draw_set_colour(c_dkgray);
+
+			draw_text_ext(
+				_val_x1 + 16,
+				_val_y1 + 140,
+				_stct_item._str_item_desc,
+				14,
+				_val_panel_w - 32
+			);
+
+			draw_set_colour(c_black);
+
+			draw_text(
+				_val_center_x,
+				_val_y2 - 52,
+				"COST: " +
+				string(_stct_offer._val_gold_cost) +
+				" gp"
+			);
+
+			if (_stct_offer._ct_stock < 0){
+
+				draw_text(
+					_val_center_x,
+					_val_y2 - 34,
+					"STOCK: UNLIMITED"
+				);
+			}
+			else{
+
+				draw_text(
+					_val_center_x,
+					_val_y2 - 34,
+					"STOCK: " +
+					string(_stct_offer._ct_stock)
+				);
+			}
+
+		break;
 
 		//-----//
 		//EGG//
@@ -330,4 +542,74 @@ function hscr_draw_offer_panel(_it_offer,_val_panel_x,_val_panel_y,_val_mouse_x,
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 }
+
+//—------------------------------------------------------------------------------//
+// hscr_release_npc_vendor
+// FUNCTION: Fully releases an NPC vendor interaction.
+//           Safe to call from explicit close logic or the Cleanup event.
+//—------------------------------------------------------------------------------//
+function hscr_release_npc_vendor(){
+
+	if (_flag_npc_interaction_released){
+		return;
+	}
+
+	if (_str_market_type != "NPC"){
+		return;
+	}
+
+	_flag_npc_interaction_released = true;
+
+	var _ref_closing_npc = _ref_npc;
+
+	//-----------------------//
+	// FALLBACK NPC REFERENCE
+	//-----------------------//
+	if (
+		_ref_closing_npc == undefined ||
+		!instance_exists(_ref_closing_npc)
+	){
+		if (
+			variable_global_exists("ref_interacting_npc") &&
+			global.ref_interacting_npc != undefined &&
+			instance_exists(global.ref_interacting_npc)
+		){
+			_ref_closing_npc =
+				global.ref_interacting_npc;
+		}
+	}
+
+	//-----------------------//
+	// RELEASE NPC INTERACTION
+	//-----------------------//
+	if (
+		_ref_closing_npc != undefined &&
+		instance_exists(_ref_closing_npc)
+	){
+
+		show_debug_message(
+			"NPC MARKET RELEASE | UID: " +
+			string(_ref_closing_npc._uid_npc)
+		);
+
+		_ref_closing_npc.hscr_close_npc_interaction();
+	}
+	else{
+
+		show_debug_message(
+			"NPC MARKET RELEASE ERROR: NPC REFERENCE LOST"
+		);
+
+		global.ref_interacting_npc = undefined;
+		global.flag_pause = false;
+
+		if (instance_exists(obj_gui_controller)){
+			obj_gui_controller.hscr_toggle_gui_pause(false);
+		}
+		else if (instance_exists(obj_player)){
+			scr_toggle_player_movement("START");
+		}
+	}
+}
+
 #endregion

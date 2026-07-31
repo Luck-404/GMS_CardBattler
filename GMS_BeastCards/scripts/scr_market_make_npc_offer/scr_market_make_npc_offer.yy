@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_market_make_npc_offer",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_market_make_npc_offer",
+  "parent":{
+    "name":"NPCS",
+    "path":"folders/NPCS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

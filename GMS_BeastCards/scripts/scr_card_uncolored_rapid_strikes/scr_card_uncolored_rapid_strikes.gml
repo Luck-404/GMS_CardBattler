@@ -11,7 +11,7 @@ function scr_card_uncolored_rapid_strikes(_stct_card,_ref_caster,_ref_target){
 	//----------------------//
 	//DEAL DAMAGE (3 HITS)//
 	//----------------------//
-	for (var _it_hit = 0; _it_hit < 3; _it_hit++){
+	repeat (3){
 
 		scr_damage_target(_stct_card._val_card_magnitude,_ref_target);
 
@@ -19,9 +19,10 @@ function scr_card_uncolored_rapid_strikes(_stct_card,_ref_caster,_ref_target){
 		//PLAY ANIMATION//
 		//----------------//
 
-		//-----------//
-		//PLAY SOUND//
-		//-----------//
-		audio_play_sound(snd_attack,0,false);
 	}
+	
+	//-----------//
+	//PLAY SOUND//
+	//-----------//
+	audio_play_sound(snd_attack,0,false);	
 }

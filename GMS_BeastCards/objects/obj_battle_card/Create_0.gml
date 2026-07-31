@@ -32,7 +32,7 @@ _val_preview_scale = 1.0;
 
 // CHECKS
 _flag_card_oom_check = false;
-
+_flag_card_disabled = false;
 //----//
 //INIT//
 //----//

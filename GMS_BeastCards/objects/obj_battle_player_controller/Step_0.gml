@@ -113,6 +113,20 @@ switch(_state_player){
 		_flag_statuses_init = false;
 		_flag_minions_init = false;
 
+		//-------------------------//
+		// BEGIN PENDING EXTRA TURN
+		//-------------------------//
+		if (
+			_flag_begin_extra_turn &&
+			!instance_exists(obj_wait)
+		){
+
+			_flag_begin_extra_turn = false;
+
+			_state_player =
+				ENUM_PLAYER_STATE.TURN_START;
+		}
+
 	break;
 	#endregion
 	
@@ -584,12 +598,33 @@ switch(_state_player){
 
 					global.ref_caster_beast = _ref_beast_clicked;
 
-					_state_player = ENUM_PLAYER_STATE.SELECT_TARGET;
+					var _str_card_range =
+						global.ref_cast_card._ref_card._str_card_range;
 
-					var _str_card_range = global.ref_cast_card._ref_card._str_card_range;
+					//-------------------//
+					// ENEMY CARD TARGET
+					//-------------------//
+					if (_str_card_range == "ENEMY_CARD"){
 
-					if (_str_card_range != "GLOBAL"){
-						hscr_check_battle_beast_range(_list_beasts_alive,_str_card_range);
+						_state_player =
+							ENUM_PLAYER_STATE.SELECT_ENEMY_CARD;
+					}
+
+					//--------------//
+					// BEAST TARGET
+					//--------------//
+					else{
+
+						_state_player =
+							ENUM_PLAYER_STATE.SELECT_TARGET;
+
+						if (_str_card_range != "GLOBAL"){
+
+							hscr_check_battle_beast_range(
+								_list_beasts_alive,
+								_str_card_range
+							);
+						}
 					}
 				}
 			}
@@ -680,6 +715,132 @@ switch(_state_player){
 
 	break;
 	#endregion
+	
+	//
+	// SELECT ENEMY CARD
+	//
+	#region SELECT ENEMY CARD
+	case ENUM_PLAYER_STATE.SELECT_ENEMY_CARD:
+
+		//
+		// END TURN
+		//
+		#region END TURN
+		if (
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked &&
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_end_turn_button
+			)
+		){
+
+			audio_play_sound(snd_end_turn,0,false);
+
+			_flag_clicked = true;
+
+			global.ref_target_card = undefined;
+
+			_state_player =
+				ENUM_PLAYER_STATE.TURN_END;
+
+			break;
+		}
+		#endregion
+
+		//
+		// RIGHT CLICK RETURNS TO CASTER SELECTION
+		//
+		#region RIGHT CLICK RETURNS
+		if (
+			mouse_check_button_pressed(mb_right) &&
+			!_flag_clicked
+		){
+
+			audio_play_sound(snd_gui_close,0,false);
+
+			_flag_clicked = true;
+
+			global.ref_caster_beast = undefined;
+			global.ref_target_card = undefined;
+
+			_state_player =
+				ENUM_PLAYER_STATE.SELECT_CASTER;
+
+			hscr_check_battle_beast_able(
+				_list_beasts_alive
+			);
+
+			hscr_check_battle_beast_color(
+				_list_beasts_alive
+			);
+
+			hscr_check_battle_beast_archetype(
+				_list_beasts_alive
+			);
+
+			hscr_check_battle_beast_class(
+				_list_beasts_alive
+			);
+
+			break;
+		}
+		#endregion
+
+		//
+		// SELECT REVEALED ENEMY CARD
+		//
+		#region SELECT REVEALED ENEMY CARD
+		if (
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_card
+			) &&
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked
+		){
+
+			var _ref_card_clicked = instance_nearest(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_card
+			);
+
+			if (
+				instance_exists(_ref_card_clicked) &&
+				_ref_card_clicked._str_team == "ENEMY" &&
+				_ref_card_clicked._str_location == "HAND" &&
+				!_ref_card_clicked._flag_card_disabled &&
+				instance_exists(_ref_card_clicked._ref_unit) &&
+				_ref_card_clicked._ref_unit._str_list == "ALIVE"
+			){
+
+				audio_play_sound(snd_gui_press,0,false);
+
+				_flag_clicked = true;
+
+				global.ref_target_card =
+					_ref_card_clicked;
+
+				_state_player =
+					ENUM_PLAYER_STATE.CARD_EXECUTE;
+			}
+			else{
+
+				audio_play_sound(snd_error,0,false);
+
+				scr_spawn_popup_error(
+					"INVALID CARD",
+					60
+				);
+			}
+		}
+		#endregion
+
+	break;
+	#endregion	
 	
 	//
 	// CARD EXECUTE
@@ -857,9 +1018,7 @@ switch(_state_player){
 
 					hscr_check_battle_card_oom(_list_battle_hand);
 
-					obj_battle_turn_controller.hscr_pass_turn();
-
-					_state_player = ENUM_PLAYER_STATE.WAIT;
+					hscr_finish_player_turn();
 				}
 			}
 		}
@@ -879,9 +1038,7 @@ switch(_state_player){
 
 			scr_reposition_cards();
 
-			_state_player = ENUM_PLAYER_STATE.WAIT;
-
-			obj_battle_turn_controller.hscr_pass_turn();
+			hscr_finish_player_turn();
 
 			break;
 		}
