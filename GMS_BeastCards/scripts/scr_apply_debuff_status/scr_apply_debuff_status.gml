@@ -50,5 +50,23 @@ function scr_apply_debuff_status(_str_status_name){
 			);
 
 		break;
+		
+		case "VULNERABLE":
+
+			scr_status_debuff_vulnerable(
+				"APPLY",
+				undefined
+			);
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"VULNERABLE",
+				undefined,
+				c_maroon,
+				global.ref_target_beast.x + irandom_range(-32,32),
+				global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			);
+
+		break;		
 	}
 }

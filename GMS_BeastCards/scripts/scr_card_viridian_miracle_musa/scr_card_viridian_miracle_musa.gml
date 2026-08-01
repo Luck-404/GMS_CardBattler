@@ -11,7 +11,7 @@ function scr_card_viridian_miracle_musa(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	//APPLY BUFF STATUS//
 	//------------------//
-	scr_apply_buff_status("OVERHEALTH");
+	scr_apply_buff_status("OVERHEALTH",0,4);
 
 	//----------------//
 	//PLAY ANIMATION//

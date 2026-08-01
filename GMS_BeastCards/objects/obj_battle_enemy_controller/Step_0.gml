@@ -101,9 +101,7 @@ switch(_state_enemy){
 					)
 				){
 					var _stct_seen_test =
-						global.map_logbook_beasts[
-							? _stct_unit._str_beast_name
-						];
+						global.map_logbook_beasts[? _stct_unit._str_beast_name];
 
 					show_debug_message(
 						"LOGBOOK SEEN: " +
@@ -151,8 +149,17 @@ switch(_state_enemy){
 			_ref_beast._val_pos =
 				_it_beast;
 
+			//-----------------------//
+			//TRANSFER COMBAT STATS//
+			//-----------------------//
 			_ref_beast._ct_minions_max =
 				_stct_unit._val_beast_min_stat;
+
+			_ref_beast._val_crit_chance =
+				_stct_unit._val_beast_crit_stat;
+
+			_ref_beast._val_crit_damage =
+				_stct_unit._val_beast_crit_dmg_stat;
 
 			_ref_beast._val_cur_hp =
 				_stct_unit._val_beast_hp_cur;

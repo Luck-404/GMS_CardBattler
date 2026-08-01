@@ -6,9 +6,61 @@
 //           Spawns feedback popup text for successful applications.
 //
 //===============================================================================//
-function scr_apply_buff_status(_str_status_name){
+function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 
 	switch(_str_status_name){
+
+		case "ARMOR_OVER_TIME":
+
+			var _ref_status =
+				scr_status_buff_armor_over_time(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ARMOR OVER TIME",
+					undefined,
+					c_green,
+					global.ref_target_beast.x +
+						irandom_range(-32,32),
+					global.ref_target_beast.y -
+						24 +
+						irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "REDIRECT":
+
+			var _ref_redirect_status =
+				scr_status_buff_redirect(
+					"APPLY",
+					undefined
+				);
+
+			if (_ref_redirect_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"REDIRECT",
+					undefined,
+					c_green,
+					global.ref_target_beast.x +
+						irandom_range(-32,32),
+					global.ref_target_beast.y -
+						24 +
+						irandom_range(-32,32)
+				);
+			}
+
+		break;
 
 		case "INSPIRATION":
 

@@ -13,15 +13,14 @@
   "For3D":false,
   "frames":[
     {"$GMSpriteFrame":"v1","%Name":"a53720db-d601-48e1-9be2-71edbc409da6","name":"a53720db-d601-48e1-9be2-71edbc409da6","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"de431246-87d4-477a-bed2-c19255b02afd","name":"de431246-87d4-477a-bed2-c19255b02afd","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"36bef00c-2a66-4850-ab40-b3505cfb7089","name":"36bef00c-2a66-4850-ab40-b3505cfb7089","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"0898d87e-5ecf-4164-b41a-b835886ed42d","name":"0898d87e-5ecf-4164-b41a-b835886ed42d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":600,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"f7db3414-c112-4818-b8b5-2e9e0e597ebf","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"f7db3414-c112-4818-b8b5-2e9e0e597ebf","opacity":25.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":false,},
     {"$GMImageLayer":"","%Name":"c811d480-db19-47d9-a343-67666f51a570","blendMode":0,"displayName":"default","isLocked":false,"name":"c811d480-db19-47d9-a343-67666f51a570","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_card_viridian_verdant_bolt",
@@ -73,13 +72,13 @@
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
                 "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a53720db-d601-48e1-9be2-71edbc409da6","path":"sprites/spr_card_viridian_verdant_bolt/spr_card_viridian_verdant_bolt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"25ff20c3-70fd-4de3-885a-b17da574a78a","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+              },"Disabled":false,"id":"bffafae6-4034-4c18-8e83-61f65dae6c93","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"de431246-87d4-477a-bed2-c19255b02afd","path":"sprites/spr_card_viridian_verdant_bolt/spr_card_viridian_verdant_bolt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"b1c6021d-ba62-4bc7-90a9-7d4e9102cc00","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0898d87e-5ecf-4164-b41a-b835886ed42d","path":"sprites/spr_card_viridian_verdant_bolt/spr_card_viridian_verdant_bolt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"8aa5166c-ea0f-46a1-9e19-77d64a6ecc92","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"36bef00c-2a66-4850-ab40-b3505cfb7089","path":"sprites/spr_card_viridian_verdant_bolt/spr_card_viridian_verdant_bolt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"66845f8e-3b5a-4971-bcd0-9ce0ab27532d","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","path":"sprites/spr_card_viridian_verdant_bolt/spr_card_viridian_verdant_bolt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"959f576c-11d0-4bcd-b601-f5a8892c2a55","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

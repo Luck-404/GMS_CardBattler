@@ -27,6 +27,8 @@ function scr_status_dot_burn(_str_tag,_ref_status){
 			_ref_new_status._val_status_lifetime = 3;
 			_ref_new_status._scr_status = scr_status_dot_burn;
 			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "DOT";
 			_ref_new_status._str_status_name = "BURN";
 			_ref_new_status._str_status_desc = "BURNED";
 			_ref_new_status._spr_status = spr_status_dot_burn;

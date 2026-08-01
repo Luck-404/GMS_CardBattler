@@ -7,6 +7,10 @@
 //
 //===============================================================================//
 
+if (_state_player != ENUM_PLAYER_STATE.SELECT_TARGET){
+	_arr_target_preview = [];
+}
+
 switch(_state_player){
 
 	//
@@ -104,8 +108,17 @@ switch(_state_player){
 			_ref_beast._val_pos =
 				_val_spawn_index;
 
+			//-----------------------//
+			//TRANSFER COMBAT STATS//
+			//-----------------------//
 			_ref_beast._ct_minions_max =
 				_stct_unit._val_beast_min_stat;
+
+			_ref_beast._val_crit_chance =
+				_stct_unit._val_beast_crit_stat;
+
+			_ref_beast._val_crit_damage =
+				_stct_unit._val_beast_crit_dmg_stat;
 
 			_ref_beast._val_cur_hp =
 				_stct_unit._val_beast_hp_cur;
@@ -716,6 +729,34 @@ switch(_state_player){
 	//
 	#region SELECT TARGET
 	case ENUM_PLAYER_STATE.SELECT_TARGET:
+
+	//----------------------//
+	//BUILD TARGET PREVIEW//
+	//----------------------//
+	_arr_target_preview = [];
+
+	var _val_mouse_x = device_mouse_x_to_gui(0);
+	var _val_mouse_y = device_mouse_y_to_gui(0);
+
+	var _ref_hovered_beast = instance_position(
+		_val_mouse_x,
+		_val_mouse_y,
+		obj_battle_beast
+	);
+
+	if (
+		instance_exists(_ref_hovered_beast) &&
+		_ref_hovered_beast._str_list == "ALIVE" &&
+		_ref_hovered_beast._val_cur_hp > 0 &&
+		_ref_hovered_beast._flag_beast_range_check
+	){
+
+		_arr_target_preview =
+			scr_get_card_preview_targets(
+				global.ref_cast_card._ref_card,
+				_ref_hovered_beast
+			);
+	}
 
 		//
 		// END TURN

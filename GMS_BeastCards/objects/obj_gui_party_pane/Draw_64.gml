@@ -73,9 +73,12 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 			audio_play_sound(snd_gui_press,0,false);
 			_val_cooldown = 10;
 			_flag_clicked = true;
-			audio_play_sound(_stct_unit_selected._snd_beast_cry,0,false);
 			_val_pos = _it_unit;
 			_stct_unit_selected = ds_list_find_value(global.list_player_party,_val_pos);
+
+			if (is_struct(_stct_unit_selected)){
+				audio_play_sound(_stct_unit_selected._snd_beast_cry,0,false);
+			}
 		}
 
 		// NUMBER KEY REORDER
@@ -197,16 +200,57 @@ if (_stct_unit_selected != undefined){
 	_val_y += _val_sg;
 
 	// SECONDARY
-	draw_text(_val_x,_val_y,"=== SECONDARY STATS ===");
+	//--------------------------//
+	//READ CRIT DAMAGE SAFELY//
+	//--------------------------//
+	var _val_crit_dmg = 25;
+
+	if (
+		variable_struct_exists(
+			_stct_unit,
+			"_val_beast_crit_dmg_stat"
+		)
+	){
+		_val_crit_dmg =
+			_stct_unit._val_beast_crit_dmg_stat;
+	}
+
+	//----------------//
+	//SECONDARY STATS//
+	//----------------//
+	draw_text(
+		_val_x,
+		_val_y,
+		"CRIT CHANCE: " +
+		string(_stct_unit._val_beast_crit_stat) +
+		"%"
+	);
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"CRIT: " + string(_stct_unit._val_beast_crit_stat));
+	draw_text(
+		_val_x,
+		_val_y,
+		"CRIT DAMAGE: +" +
+		string(_val_crit_dmg) +
+		"%"
+	);
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"DODGE: " + string(_stct_unit._val_beast_dod_stat));
+	draw_text(
+		_val_x,
+		_val_y,
+		"DODGE: " +
+		string(_stct_unit._val_beast_dod_stat) +
+		"%"
+	);
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"MINION COUNT: " + string(_stct_unit._val_beast_min_stat));
+	draw_text(
+		_val_x,
+		_val_y,
+		"MINION COUNT: " +
+		string(_stct_unit._val_beast_min_stat)
+	);
 	_val_y += _val_sg;
 
 	// HELD ITEM

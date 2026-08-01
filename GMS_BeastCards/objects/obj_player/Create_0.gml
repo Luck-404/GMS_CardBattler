@@ -141,14 +141,14 @@
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO PARTY
 	//—------------------------------------------------------------------------------//
-	for (var _it_beast = 0; _it_beast < 5; _it_beast++){
-		var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA","AMMOMARSH","BLIZZDRIFT","CAUDAQUA","CEPHARIME","CHELONSEA","CORALLIARC","FROSTUSK","GALENATRIUM","GLACIMIGHT","GULFLOW","ISTIRAIN","KELPLATANI","LONTRIVER","MARITIMICE","SALTWAGG","SPHENISKIP","ASCHEMASS","CANIGNIS","DAIMONIS","DRAKOAL","EMBEROOST","HELLSHROOM","IMPARCH","INFERNUS","LAVAROWANA","PYREKNIGHT","PYROPLUME","SANGUINAUT","SLAGOLEM","SOLEMOLD","WRATHOOD","WYRMELTA")
-		scr_add_beast_to_party(scr_init_beast_random(_beast));
-	}
-	//scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
-	//scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
-	//scr_add_beast_to_party(scr_init_beast_random("ARGENTBUD"));
-	//scr_add_beast_to_party(scr_init_beast_random("FURN"));
+	//for (var _it_beast = 0; _it_beast < 5; _it_beast++){
+	//	var _beast = choose("ARBRAWN","ARGENTBUD","BEAVINE","BRYOBITE","CHITROOPER","CRUSABER","DRYADAE","FIGHTREE","FLITSAGE","FURN","LEPOROOT","LUMBUCK","MAMBARK","MORELUSH","SPOROSE","STRIGIBLOOM","TURFRANTULA","AMMOMARSH","BLIZZDRIFT","CAUDAQUA","CEPHARIME","CHELONSEA","CORALLIARC","FROSTUSK","GALENATRIUM","GLACIMIGHT","GULFLOW","ISTIRAIN","KELPLATANI","LONTRIVER","MARITIMICE","SALTWAGG","SPHENISKIP","ASCHEMASS","CANIGNIS","DAIMONIS","DRAKOAL","EMBEROOST","HELLSHROOM","IMPARCH","INFERNUS","LAVAROWANA","PYREKNIGHT","PYROPLUME","SANGUINAUT","SLAGOLEM","SOLEMOLD","WRATHOOD","WYRMELTA")
+	//	scr_add_beast_to_party(scr_init_beast_random(_beast));
+	//}
+	
+	scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
+	scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
+	scr_add_beast_to_party(scr_init_beast_random("FURN"));
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO RANCH
@@ -168,53 +168,90 @@
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO DECK
 	//—------------------------------------------------------------------------------//
-	//scr_add_card_to_deck(scr_get_card_info("STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("BLOCK"));
-	//scr_add_card_to_deck(scr_get_card_info("BULWARK"));
-	//scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
+
+	#region UNCOLORED
+
+	scr_add_card_to_deck(scr_get_card_info("ARTIFACT_HOURGLASS"));
+	scr_add_card_to_deck(scr_get_card_info("BLOCK"));
+	scr_add_card_to_deck(scr_get_card_info("BULWARK"));
+	scr_add_card_to_deck(scr_get_card_info("CLEARCAST"));
+	scr_add_card_to_deck(scr_get_card_info("DEFT_STRIKE"));
 	scr_add_card_to_deck(scr_get_card_info("ECHO"));
-	//scr_add_card_to_deck(scr_get_card_info("DEFT_STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("REPOSITION"));
-	//scr_add_card_to_deck(scr_get_card_info("CLEARCAST"));
-	//scr_add_card_to_deck(scr_get_card_info("RAPID_STRIKES"));
-	//scr_add_card_to_deck(scr_get_card_info("LIFE_SPIRIT"));
-	//scr_add_card_to_deck(scr_get_card_info("MIRACLE_MUSA"));
-	//scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
-	//scr_add_card_to_deck(scr_get_card_info("DISEASE"));
-	//scr_add_card_to_deck(scr_get_card_info("EMERALD_SLAM"));
-	//scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
-	//scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
-	//scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
-	//scr_add_card_to_deck(scr_get_card_info("SHIV"));
-	//scr_add_card_to_deck(scr_get_card_info("SPELLBOOK_WILDCARD"));
-	//scr_add_card_to_deck(scr_get_card_info("MALLEABILITY"));
-	//scr_add_card_to_deck(scr_get_card_info("ARTIFACT_HOURGLASS"));
-	//scr_add_card_to_deck(scr_get_card_info("THOUGHTSTEAL"));
-	scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
-	scr_add_card_to_deck(scr_get_card_info("FELL"));
-	//scr_add_card_to_deck(scr_get_card_info("VERDANT_BOLT"));
-	scr_add_card_to_deck(scr_get_card_info("CLAW"));
-	scr_add_card_to_deck(scr_get_card_info("SPINESLING"));
+	scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
+	scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
+	scr_add_card_to_deck(scr_get_card_info("MALLEABILITY"));
+	scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
+	scr_add_card_to_deck(scr_get_card_info("RAPID_STRIKES"));
+	scr_add_card_to_deck(scr_get_card_info("REPOSITION"));
+	scr_add_card_to_deck(scr_get_card_info("SHIV"));
+	scr_add_card_to_deck(scr_get_card_info("SPELLBOOK_WILDCARD"));
+	scr_add_card_to_deck(scr_get_card_info("STRIKE"));
+	scr_add_card_to_deck(scr_get_card_info("THOUGHTSTEAL"));
+
+	#endregion
+
+
+	#region VIRIDIAN
+
+	scr_add_card_to_deck(scr_get_card_info("BARKSKIN"));
+	scr_add_card_to_deck(scr_get_card_info("BEASTIAL_WRATH"));
 	scr_add_card_to_deck(scr_get_card_info("BIOBOLT"));
+	scr_add_card_to_deck(scr_get_card_info("BIOSTORM"));
+	scr_add_card_to_deck(scr_get_card_info("BLOOMING_SHIELD"));
+	scr_add_card_to_deck(scr_get_card_info("BLOWDART"));
+	scr_add_card_to_deck(scr_get_card_info("BRAMBLE_ERUPTION"));
+	scr_add_card_to_deck(scr_get_card_info("CLAW"));
+	scr_add_card_to_deck(scr_get_card_info("DISEASE"));
+	scr_add_card_to_deck(scr_get_card_info("EMERALD_SLAM"));
+	scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
+	scr_add_card_to_deck(scr_get_card_info("FELL"));
+	scr_add_card_to_deck(scr_get_card_info("FERAL_FRENZY"));
+	scr_add_card_to_deck(scr_get_card_info("GREENFLOW"));
+	scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
+	scr_add_card_to_deck(scr_get_card_info("HUNTERS_INSTINCT"));
+	scr_add_card_to_deck(scr_get_card_info("HUNTERS_JAVELIN"));
+	scr_add_card_to_deck(scr_get_card_info("LIFE_SPIRIT"));
+	scr_add_card_to_deck(scr_get_card_info("MIRACLE_MUSA"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_FURY"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_WRATH"));
+	scr_add_card_to_deck(scr_get_card_info("OLD_GROWTH_PUMMEL"));
+	scr_add_card_to_deck(scr_get_card_info("OVERGROWTH"));
+	scr_add_card_to_deck(scr_get_card_info("POTENT_SPORE"));
+	scr_add_card_to_deck(scr_get_card_info("PRIMAL_BLAST"));
+	scr_add_card_to_deck(scr_get_card_info("RAKE"));
+	scr_add_card_to_deck(scr_get_card_info("REGENERATE"));
+	scr_add_card_to_deck(scr_get_card_info("ROT_BLOOM"));
+	scr_add_card_to_deck(scr_get_card_info("SAVAGE_MAUL"));
+	scr_add_card_to_deck(scr_get_card_info("SEED_BARRAGE"));
+	scr_add_card_to_deck(scr_get_card_info("SNARLING_BITE"));
+	scr_add_card_to_deck(scr_get_card_info("SPINESLING"));
+	scr_add_card_to_deck(scr_get_card_info("SPIKE_PIERCE"));
+	scr_add_card_to_deck(scr_get_card_info("SPIRIT_FANG"));
+	scr_add_card_to_deck(scr_get_card_info("SPIRIT_PIERCE"));
+	scr_add_card_to_deck(scr_get_card_info("SPIT_VENOM"));
 	scr_add_card_to_deck(scr_get_card_info("SPORE_CLOUD"));
 	scr_add_card_to_deck(scr_get_card_info("STALKING_SWIPE"));
-	scr_add_card_to_deck(scr_get_card_info("UNSEEN_ROOT"));
-	scr_add_card_to_deck(scr_get_card_info("FERAL_FRENZY"));
-	scr_add_card_to_deck(scr_get_card_info("VERDANT_SWIPES"));
-	scr_add_card_to_deck(scr_get_card_info("BRAMBLE_ERUPTION"));
 	scr_add_card_to_deck(scr_get_card_info("STAMPEDE"));
+	scr_add_card_to_deck(scr_get_card_info("SYMBIOSIS"));
+	scr_add_card_to_deck(scr_get_card_info("THORN_STORM"));
+	scr_add_card_to_deck(scr_get_card_info("TOXIC_ERUPTION"));
+	scr_add_card_to_deck(scr_get_card_info("UNSEEN_ROOT"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_BOLT"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_SWIPES"));
+	scr_add_card_to_deck(scr_get_card_info("VIRAL_SURGE"));
+	scr_add_card_to_deck(scr_get_card_info("VIRIDIAN_BURST"));
+	scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
+	
+	scr_add_card_to_deck(scr_get_card_info("INTERLOCKING_SCALES"));	
+
+	#endregion
+
 	
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO LIBRARY
 	//—------------------------------------------------------------------------------//
 	//ds_list_add(global.player_library,scr_get_card_info("STRIKE"));
-	//ds_list_add(global.player_library,scr_get_card_info("POWER_STRIKE"));
-	//ds_list_add(global.player_library,scr_get_card_info("BLOCK"));
 
-	show_debug_message("ARBRAWN OWNED COUNT: " + string(scr_logbook_get_beast_owned_count("ARBRAWN")));
-	show_debug_message("POWER STRIKE OWNED COUNT: " + string(scr_logbook_get_card_owned_count("POWER_STRIKE")));	
-	
 	//—------------------------------------------------------------------------------//
 	// ADD ITEMS TO INVENTORY
 	//—------------------------------------------------------------------------------//

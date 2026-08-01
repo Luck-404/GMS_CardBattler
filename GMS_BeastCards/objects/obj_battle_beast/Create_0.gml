@@ -29,6 +29,40 @@ _val_max_hp = 1;
 _val_overhealth = 0;
 _val_armor = 0;
 
+//--------------//
+//COMBAT STATS//
+//--------------//
+_val_crit_chance = 0;
+_val_crit_damage = 25;
+
+//------------------//
+//DAMAGE MODIFIERS//
+//------------------//
+_val_dmg_linear_bonus = 0;
+_val_dmg_linear_reduction = 0;
+
+_val_dmg_scalar_bonus = 0;
+_val_dmg_scalar_reduction = 0;
+
+//--------------------------//
+//OUTGOING DAMAGE MODIFIERS//
+//--------------------------//
+_val_dmg_linear_bonus = 0;
+_val_dmg_linear_reduction = 0;
+
+_val_dmg_scalar_bonus = 0;
+_val_dmg_scalar_reduction = 0;
+
+//---------------------------//
+//INCOMING DAMAGE MODIFIERS//
+//---------------------------//
+_val_dmg_taken_linear_bonus = 0;
+_val_dmg_taken_linear_reduction = 0;
+
+_val_dmg_taken_scalar_bonus = 0;
+_val_dmg_taken_scalar_reduction = 0;
+
+
 // STATUS / MINIONS
 _list_statuses = ds_list_create();
 

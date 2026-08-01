@@ -25,12 +25,18 @@ function scr_card_viridian_snarling_bite(_stct_card,_ref_caster,_ref_target){
 	//--------------------------------//
 	//APPLY VULNERABLE IF HP WAS HIT//
 	//--------------------------------//
-	if (
-		_ref_target._val_cur_hp < _val_target_hp_before &&
-		_ref_target._val_cur_hp > 0
-	){
-		scr_apply_debuff_status("VULNERABLE");
-	}
+		var _val_hp_after =
+			_ref_target._val_cur_hp;
+
+		if (_val_hp_after < _val_hp_before){
+
+			global.ref_target_beast =
+				_ref_target;
+
+			scr_apply_debuff_status(
+				"VULNERABLE"
+			);
+		}
 
 	//----------------//
 	//PLAY ANIMATION//

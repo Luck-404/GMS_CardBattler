@@ -28,6 +28,9 @@ global.ref_target_card = undefined;
 
 global.ct_echo = 0;
 
+// TARGET PREVIEW
+_arr_target_preview = [];
+
 // MINIONS
 _flag_minions_init = false;
 _list_casting_minions = undefined;

@@ -11,7 +11,7 @@ function scr_card_viridian_emerald_wisdom(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	//APPLY BUFF STATUS//
 	//------------------//
-	scr_apply_buff_status("DRAW_2");
+	scr_apply_buff_status("DRAW_2",0,3);
 
 	//----------------//
 	//PLAY ANIMATION//

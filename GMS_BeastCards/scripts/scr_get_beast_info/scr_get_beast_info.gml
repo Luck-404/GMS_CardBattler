@@ -30,6 +30,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 74,
 
 					_val_beast_crit_stat : 5,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 4,
 					_val_beast_min_stat : 2,
 
@@ -78,6 +79,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 168,
 
 					_val_beast_crit_stat : 4,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 9,
 					_val_beast_min_stat : 3,
 
@@ -126,6 +128,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 52,
 
 					_val_beast_crit_stat : 7,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 18,
 					_val_beast_min_stat : 2,
 
@@ -174,6 +177,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 122,
 
 					_val_beast_crit_stat : 2,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 12,
 					_val_beast_min_stat : 2,
 
@@ -222,6 +226,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 36,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 0,
 					_val_beast_min_stat : 5,
 
@@ -270,6 +275,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 176,
 
 					_val_beast_crit_stat : 1,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 4,
 
@@ -318,6 +324,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 122,
 
 					_val_beast_crit_stat : 5,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 5,
 					_val_beast_min_stat : 1,
 
@@ -366,6 +373,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 48,
 
 					_val_beast_crit_stat : 12,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 10,
 					_val_beast_min_stat : 1,
 
@@ -414,6 +422,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 182,
 
 					_val_beast_crit_stat : 5,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 1,
 
@@ -462,6 +471,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 58,
 
 					_val_beast_crit_stat : 1,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 4,
 					_val_beast_min_stat : 3,
 
@@ -510,6 +520,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 42,
 
 					_val_beast_crit_stat : 14,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 10,
 					_val_beast_min_stat : 2,
 
@@ -558,6 +569,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 66,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 6,
 					_val_beast_min_stat : 3,
 
@@ -606,6 +618,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 84,
 
 					_val_beast_crit_stat : 10,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 6,
 					_val_beast_min_stat : 2,
 
@@ -654,6 +667,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 56,
 
 					_val_beast_crit_stat : 2,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 1,
 
@@ -702,6 +716,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 48,
 
 					_val_beast_crit_stat : 12,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 2,
 
@@ -750,6 +765,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 112,
 
 					_val_beast_crit_stat : 6,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 7,
 					_val_beast_min_stat : 2,
 
@@ -800,6 +816,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 56,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 0,
 					_val_beast_min_stat : 2,
 
@@ -848,6 +865,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 38,
 
 					_val_beast_crit_stat : 12,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 8,
 					_val_beast_min_stat : 3,
 
@@ -896,6 +914,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 118,
 
 					_val_beast_crit_stat : 1,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 6,
 
@@ -944,6 +963,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 48,
 
 					_val_beast_crit_stat : 8,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 6,
 					_val_beast_min_stat : 2,
 
@@ -992,6 +1012,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 152,
 
 					_val_beast_crit_stat : 6,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 8,
 					_val_beast_min_stat : 2,
 
@@ -1040,6 +1061,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 54,
 
 					_val_beast_crit_stat : 8,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 5,
 
@@ -1088,6 +1110,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 22,
 
 					_val_beast_crit_stat : 6,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 22,
 					_val_beast_min_stat : 5,
 
@@ -1136,6 +1159,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 196,
 
 					_val_beast_crit_stat : 3,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 4,
 					_val_beast_min_stat : 1,
 
@@ -1184,6 +1208,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 40,
 
 					_val_beast_crit_stat : 10,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 5,
 					_val_beast_min_stat : 4,
 
@@ -1232,6 +1257,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 94,
 
 					_val_beast_crit_stat : 12,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 0,
 					_val_beast_min_stat : 2,
 
@@ -1280,6 +1306,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 104,
 
 					_val_beast_crit_stat : 10,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 8,
 					_val_beast_min_stat : 1,
 
@@ -1328,6 +1355,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 48,
 
 					_val_beast_crit_stat : 12,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 18,
 					_val_beast_min_stat : 1,
 
@@ -1376,6 +1404,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 64,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 0,
 					_val_beast_min_stat : 1,
 
@@ -1424,6 +1453,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 76,
 
 					_val_beast_crit_stat : 2,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 4,
 					_val_beast_min_stat : 5,
 
@@ -1472,6 +1502,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 44,
 
 					_val_beast_crit_stat : 6,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 3,
 
@@ -1520,6 +1551,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 168,
 
 					_val_beast_crit_stat : 7,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 6,
 					_val_beast_min_stat : 3,
 
@@ -1570,6 +1602,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 52,
 
 					_val_beast_crit_stat : 1,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 3,
 					_val_beast_min_stat : 1,
 
@@ -1618,6 +1651,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 68,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 1,
 					_val_beast_min_stat : 5,
 
@@ -1666,6 +1700,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 60,
 
 					_val_beast_crit_stat : 2,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 4,
 					_val_beast_min_stat : 5,
 
@@ -1714,6 +1749,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 120,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 0,
 					_val_beast_min_stat : 1,
 
@@ -1762,6 +1798,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 44,
 
 					_val_beast_crit_stat : 14,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 2,
 					_val_beast_min_stat : 3,
 
@@ -1810,6 +1847,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 82,
 
 					_val_beast_crit_stat : 7,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 5,
 					_val_beast_min_stat : 2,
 
@@ -1858,6 +1896,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 72,
 
 					_val_beast_crit_stat : 1,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 4,
 					_val_beast_min_stat : 4,
 
@@ -1906,6 +1945,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 110,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 0,
 					_val_beast_min_stat : 1,
 
@@ -1954,6 +1994,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 28,
 
 					_val_beast_crit_stat : 4,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 16,
 					_val_beast_min_stat : 2,
 
@@ -2002,6 +2043,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 34,
 
 					_val_beast_crit_stat : 11,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 18,
 					_val_beast_min_stat : 2,
 
@@ -2050,6 +2092,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 42,
 
 					_val_beast_crit_stat : 1,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 10,
 					_val_beast_min_stat : 3,
 
@@ -2098,6 +2141,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 102,
 
 					_val_beast_crit_stat : 2,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 3,
 					_val_beast_min_stat : 4,
 
@@ -2146,6 +2190,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 82,
 
 					_val_beast_crit_stat : 16,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 14,
 					_val_beast_min_stat : 2,
 
@@ -2194,6 +2239,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 74,
 
 					_val_beast_crit_stat : 0,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 1,
 					_val_beast_min_stat : 6,
 
@@ -2242,6 +2288,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 68,
 
 					_val_beast_crit_stat : 3,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 3,
 					_val_beast_min_stat : 2,
 
@@ -2290,6 +2337,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 134,
 
 					_val_beast_crit_stat : 2,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 17,
 					_val_beast_min_stat : 3,
 
@@ -2338,6 +2386,7 @@ function scr_get_beast_info(_str_beast_name){
 					_val_beast_mdef_stat : 96,
 
 					_val_beast_crit_stat : 6,
+					_val_beast_crit_dmg_stat : 25,
 					_val_beast_dod_stat : 12,
 					_val_beast_min_stat : 5,
 

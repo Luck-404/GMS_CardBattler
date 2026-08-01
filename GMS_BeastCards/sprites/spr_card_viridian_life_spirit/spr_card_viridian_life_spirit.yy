@@ -13,8 +13,8 @@
   "For3D":false,
   "frames":[
     {"$GMSpriteFrame":"v1","%Name":"a53720db-d601-48e1-9be2-71edbc409da6","name":"a53720db-d601-48e1-9be2-71edbc409da6","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"cc7acf9b-f3a7-41aa-9e34-8e90193d1b21","name":"cc7acf9b-f3a7-41aa-9e34-8e90193d1b21","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"649d46b3-308c-4bbc-ad8f-95152a6ae9b0","name":"649d46b3-308c-4bbc-ad8f-95152a6ae9b0","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"0898d87e-5ecf-4164-b41a-b835886ed42d","name":"0898d87e-5ecf-4164-b41a-b835886ed42d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -72,13 +72,13 @@
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
                 "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a53720db-d601-48e1-9be2-71edbc409da6","path":"sprites/spr_card_viridian_life_spirit/spr_card_viridian_life_spirit.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"f0b588fd-6a18-4175-b737-55514e610f3e","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+              },"Disabled":false,"id":"bffafae6-4034-4c18-8e83-61f65dae6c93","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"cc7acf9b-f3a7-41aa-9e34-8e90193d1b21","path":"sprites/spr_card_viridian_life_spirit/spr_card_viridian_life_spirit.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"a65d294c-b314-4119-a6e6-f38c99f5d6c3","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0898d87e-5ecf-4164-b41a-b835886ed42d","path":"sprites/spr_card_viridian_life_spirit/spr_card_viridian_life_spirit.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"8aa5166c-ea0f-46a1-9e19-77d64a6ecc92","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"649d46b3-308c-4bbc-ad8f-95152a6ae9b0","path":"sprites/spr_card_viridian_life_spirit/spr_card_viridian_life_spirit.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"1a0f5ae5-9376-4561-b14f-3387f9f68a28","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","path":"sprites/spr_card_viridian_life_spirit/spr_card_viridian_life_spirit.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"959f576c-11d0-4bcd-b601-f5a8892c2a55","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
