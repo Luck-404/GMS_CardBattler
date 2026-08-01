@@ -268,8 +268,16 @@ switch(_str_condition){
 					}
 				}
 
+				//----------------------//
+				//STORE POST-BATTLE HP//
+				//----------------------//
 				if (instance_exists(_ref_battle_unit)){
-					_stct_unit._val_beast_hp_cur = _ref_battle_unit._val_cur_hp;
+
+					_stct_unit._val_beast_hp_cur = clamp(
+						_ref_battle_unit._val_cur_hp,
+						0,
+						_stct_unit._val_beast_hp_max
+					);
 				}
 
 				if (_stct_unit._val_beast_hp_cur > 0){

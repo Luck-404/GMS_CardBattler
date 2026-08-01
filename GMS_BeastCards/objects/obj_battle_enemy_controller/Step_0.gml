@@ -15,40 +15,108 @@ switch(_state_enemy){
 
 		for (var _it_beast = 0; _it_beast < _ct_beast; _it_beast++){
 
-			// CREATE BEAST STRUCT
-			var _stct_unit;
+			//---------------------//
+			//CREATE BEAST STRUCT//
+			//---------------------//
+			var _stct_unit = undefined;
 
 			if (
 				_it_beast == 0 &&
 				variable_global_exists("stct_forced_enemy_unit") &&
 				global.stct_forced_enemy_unit != undefined
 			){
-				_stct_unit = global.stct_forced_enemy_unit;
-				global.stct_forced_enemy_unit = undefined;
+				_stct_unit =
+					global.stct_forced_enemy_unit;
+
+				global.stct_forced_enemy_unit =
+					undefined;
 			}
 			else{
-				_stct_unit = scr_get_random_beast(global.arr_last_enemy_pool);
+				_stct_unit = scr_get_random_beast(
+					global.arr_last_enemy_pool
+				);
 			}
 
-			// UPDATE LOGBOOK
-			if (_stct_unit != undefined && variable_global_exists("map_logbook_beasts")){
-				scr_logbook_mark_beast_seen(_stct_unit._str_beast_name);
-			}
-			
-			
-			
-						var _stct_seen_test = global.map_logbook_beasts[? _stct_unit._str_beast_name];
+			//----------------//
+			//VALIDATE BEAST//
+			//----------------//
+			if (!is_struct(_stct_unit)){
 
-						show_debug_message(
-							"LOGBOOK SEEN: " 
-							+ string(_stct_unit._str_beast_name) 
-							+ " | COUNT: " 
-							+ string(_stct_seen_test._ct_seen)
-						);
-			
-			
-			
-			// CREATE BATTLE BEAST
+				show_debug_message(
+					"ENEMY BATTLE INIT ERROR | INVALID BEAST STRUCT | INDEX: " +
+					string(_it_beast)
+				);
+
+				continue;
+			}
+
+			//---------------------//
+			//VALIDATE MAXIMUM HP//
+			//---------------------//
+			if (_stct_unit._val_beast_hp_max <= 0){
+
+				show_debug_message(
+					"ENEMY BATTLE INIT ERROR | INVALID MAX HP | " +
+					string(_stct_unit._str_beast_name)
+				);
+
+				continue;
+			}
+
+			//----------------//
+			//CLAMP CURRENT HP//
+			//----------------//
+			_stct_unit._val_beast_hp_cur = clamp(
+				_stct_unit._val_beast_hp_cur,
+				0,
+				_stct_unit._val_beast_hp_max
+			);
+
+			//--------------------------------//
+			//ENEMIES MUST ENTER BATTLE ALIVE//
+			//--------------------------------//
+			if (_stct_unit._val_beast_hp_cur <= 0){
+
+				show_debug_message(
+					"ENEMY BATTLE INIT ERROR | DEAD ENEMY | " +
+					string(_stct_unit._str_beast_name)
+				);
+
+				continue;
+			}
+
+			//---------------//
+			//UPDATE LOGBOOK//
+			//---------------//
+			if (variable_global_exists("map_logbook_beasts")){
+
+				scr_logbook_mark_beast_seen(
+					_stct_unit._str_beast_name
+				);
+
+				if (
+					ds_map_exists(
+						global.map_logbook_beasts,
+						_stct_unit._str_beast_name
+					)
+				){
+					var _stct_seen_test =
+						global.map_logbook_beasts[
+							? _stct_unit._str_beast_name
+						];
+
+					show_debug_message(
+						"LOGBOOK SEEN: " +
+						string(_stct_unit._str_beast_name) +
+						" | COUNT: " +
+						string(_stct_seen_test._ct_seen)
+					);
+				}
+			}
+
+			//--------------------//
+			//CREATE BATTLE BEAST//
+			//--------------------//
 			var _ref_beast = instance_create_layer(
 				room_width * 0.5 + 80 + (100 * _it_beast),
 				room_height * 0.5,
@@ -56,25 +124,58 @@ switch(_state_enemy){
 				obj_battle_beast
 			);
 
-			_ref_beast._spr_beast = _stct_unit._spr_beast;
-			_ref_beast._ref_unit = _stct_unit;
-			_ref_beast._stct_held_item = _stct_unit._ref_beast_held_item;
-			_ref_beast._str_team = "ENEMY";
-			_ref_beast._uid_beast = _stct_unit._uid_beast;
-			_ref_beast._snd_cry = _stct_unit._snd_beast_cry;
-			_ref_beast._snd_death = _stct_unit._snd_beast_death;			
-			_ref_beast._val_pos = _it_beast;
-			_ref_beast._ct_minions_max = _stct_unit._val_beast_min_stat;
-			_ref_beast._val_cur_hp = _stct_unit._val_beast_hp_cur;
-			_ref_beast._val_max_hp = _stct_unit._val_beast_hp_max;
+			//--------------------//
+			//TRANSFER BEAST DATA//
+			//--------------------//
+			_ref_beast._spr_beast =
+				_stct_unit._spr_beast;
 
-			// TRACK BEAST
-			ds_list_add(_list_beasts,_ref_beast);
-			ds_list_add(_list_beasts_alive,_ref_beast);
+			_ref_beast._ref_unit =
+				_stct_unit;
+
+			_ref_beast._stct_held_item =
+				_stct_unit._ref_beast_held_item;
+
+			_ref_beast._str_team =
+				"ENEMY";
+
+			_ref_beast._uid_beast =
+				_stct_unit._uid_beast;
+
+			_ref_beast._snd_cry =
+				_stct_unit._snd_beast_cry;
+
+			_ref_beast._snd_death =
+				_stct_unit._snd_beast_death;
+
+			_ref_beast._val_pos =
+				_it_beast;
+
+			_ref_beast._ct_minions_max =
+				_stct_unit._val_beast_min_stat;
+
+			_ref_beast._val_cur_hp =
+				_stct_unit._val_beast_hp_cur;
+
+			_ref_beast._val_max_hp =
+				_stct_unit._val_beast_hp_max;
+
+			//-------------//
+			//TRACK BEAST//
+			//-------------//
+			ds_list_add(
+				_list_beasts,
+				_ref_beast
+			);
+
+			ds_list_add(
+				_list_beasts_alive,
+				_ref_beast
+			);
 		}
 
-		_state_enemy = ENUM_ENEMY_STATE.INIT_CARDS;
-		
+		_state_enemy =
+			ENUM_ENEMY_STATE.INIT_CARDS;
 
 	break;
 	#endregion

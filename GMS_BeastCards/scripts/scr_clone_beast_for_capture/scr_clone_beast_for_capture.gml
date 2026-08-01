@@ -59,10 +59,21 @@ function scr_clone_beast_for_capture(_ref_battle_beast){
 	global.uid_next_beast++;
 
 	//—------------------------------------------------------------------------------//
-	// PRESERVE BATTLE HP, BUT DO NOT CAPTURE AS DEAD
+	// PRESERVE PERMANENT MAX HP AND CURRENT BATTLE HP
 	//—------------------------------------------------------------------------------//
-	_stct_copy._val_beast_hp_cur = max(1,_ref_battle_beast._val_cur_hp);
-	_stct_copy._val_beast_hp_max = _ref_battle_beast._val_max_hp;
+	var _val_captured_max_hp = max(
+		1,
+		_stct_source._val_beast_hp_max
+	);
+
+	_stct_copy._val_beast_hp_max =
+		_val_captured_max_hp;
+
+	_stct_copy._val_beast_hp_cur = clamp(
+		_ref_battle_beast._val_cur_hp,
+		1,
+		_val_captured_max_hp
+	);
 
 	return _stct_copy;
 }

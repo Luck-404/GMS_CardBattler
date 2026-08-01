@@ -1,55 +1,97 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_INIT_BEAST_SPECIFIC
-// FUNCTION: Creates a beast struct from a base beast.
-//           Applies a specific color subtype, ability, and breed.
-//           Initializes HP values and assigns a unique UID.
+// FUNCTION: Creates a Beast struct from its base Beast data.
+//           Applies a specified color subtype, ability, and breed.
+//           Calculates maximum HP and assigns a unique Beast UID.
 //
 //===============================================================================//
 
 function scr_init_beast_specific(_str_beast_name,_arr_specific_data){
 
-	// GET BASE BEAST
+	//----------------//
+	//GET BASE BEAST//
+	//----------------//
 	var _stct_new_beast = scr_get_beast_info(_str_beast_name);
 
-	//
-	// COLOR TYPE
-	//
+	if (!is_struct(_stct_new_beast)){
+
+		show_debug_message(
+			"BEAST INIT ERROR | INVALID BEAST: " +
+			string(_str_beast_name)
+		);
+
+		return undefined;
+	}
+
+	//----------//
+	//COLOR TYPE//
+	//----------//
 	#region COLOR TYPE
-	_stct_new_beast._str_beast_color_type = _arr_specific_data[0];
+
+	_stct_new_beast._str_beast_color_type =
+		_arr_specific_data[0];
+
 	#endregion
 
-	//
-	// ABILITY
-	//
+	//-------//
+	//ABILITY//
+	//-------//
 	#region ABILITY
-	_stct_new_beast._str_beast_ability = _arr_specific_data[1];
+
+	_stct_new_beast._str_beast_ability =
+		_arr_specific_data[1];
+
 	#endregion
 
-	//
-	// BREED
-	//
+	//-----//
+	//BREED//
+	//-----//
 	#region BREED
-	_stct_new_beast._str_beast_breed = _arr_specific_data[2];
+
+	_stct_new_beast._str_beast_breed =
+		_arr_specific_data[2];
+
 	#endregion
 
-	//
-	// INITIALIZE HP
-	//
+	//-------------//
+	//INITIALIZE HP//
+	//-------------//
 	#region HP
-	var _val_hp_modifier = scr_get_beast_grade_modifier(_stct_new_beast._val_beast_hp_stat);
-	var _val_hp = ceil(10 + ((_val_hp_modifier * 10) * _stct_new_beast._val_beast_level) / 4);
 
-	_stct_new_beast._val_beast_hp_cur = _val_hp;
-	_stct_new_beast._val_beast_hp_max = _val_hp;
+	var _val_max_hp = scr_get_beast_max_hp(
+		_stct_new_beast._val_beast_hp_stat,
+		_stct_new_beast._val_beast_level
+	);
+
+	_stct_new_beast._val_beast_hp_max =
+		_val_max_hp;
+
+	_stct_new_beast._val_beast_hp_cur =
+		_val_max_hp;
+
+	if (_stct_new_beast._val_beast_hp_max <= 0){
+
+		show_debug_message(
+			"BEAST INIT ERROR | INVALID MAX HP | " +
+			_stct_new_beast._str_beast_name
+		);
+
+		return undefined;
+	}
+
 	#endregion
 
-	//
-	// ASSIGN UID
-	//
+	//----------//
+	//ASSIGN UID//
+	//----------//
 	#region UID
-	_stct_new_beast._uid_beast = global.uid_next_beast;
+
+	_stct_new_beast._uid_beast =
+		global.uid_next_beast;
+
 	global.uid_next_beast++;
+
 	#endregion
 
 	return _stct_new_beast;
