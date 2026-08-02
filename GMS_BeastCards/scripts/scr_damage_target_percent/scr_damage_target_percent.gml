@@ -590,5 +590,19 @@ function scr_damage_target_percent(_val_damage_percent,_ref_target){
 		);
 	}
 
+	//------------------//
+	//THORNS RETALIATION//
+	//------------------//
+	if (
+		!global.flag_thorns_retaliating &&
+		_stct_card._str_card_type == "ATTACK" &&
+		_stct_card._str_card_range == "MELEE"
+	){
+		scr_trigger_thorns(
+			_ref_target,
+			_ref_caster
+		);
+	}
+
 	return true;
 }

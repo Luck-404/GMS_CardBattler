@@ -699,6 +699,13 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		!_flag_death_handled
 	){
 
+		//----------------//
+		//TRY SECOND LIFE//
+		//----------------//
+		if (scr_try_second_life(self)){
+			exit;
+		}
+
 		_flag_death_handled = true;
 
 		_val_cur_hp = 0;

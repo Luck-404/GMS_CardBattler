@@ -210,9 +210,12 @@
 	scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
 	scr_add_card_to_deck(scr_get_card_info("HUNTERS_INSTINCT"));
 	scr_add_card_to_deck(scr_get_card_info("HUNTERS_JAVELIN"));
+	scr_add_card_to_deck(scr_get_card_info("INTERLOCKING_SCALES"));
 	scr_add_card_to_deck(scr_get_card_info("LIFE_SPIRIT"));
 	scr_add_card_to_deck(scr_get_card_info("MIRACLE_MUSA"));
+	scr_add_card_to_deck(scr_get_card_info("NATURAL_RECOVERY"));
 	scr_add_card_to_deck(scr_get_card_info("NATURES_FURY"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_GRACE"));
 	scr_add_card_to_deck(scr_get_card_info("NATURES_WRATH"));
 	scr_add_card_to_deck(scr_get_card_info("OLD_GROWTH_PUMMEL"));
 	scr_add_card_to_deck(scr_get_card_info("OVERGROWTH"));
@@ -220,9 +223,12 @@
 	scr_add_card_to_deck(scr_get_card_info("PRIMAL_BLAST"));
 	scr_add_card_to_deck(scr_get_card_info("RAKE"));
 	scr_add_card_to_deck(scr_get_card_info("REGENERATE"));
+	scr_add_card_to_deck(scr_get_card_info("ROOTED_DEFENSE"));
 	scr_add_card_to_deck(scr_get_card_info("ROT_BLOOM"));
 	scr_add_card_to_deck(scr_get_card_info("SAVAGE_MAUL"));
+	scr_add_card_to_deck(scr_get_card_info("SECOND_BLOOM"));
 	scr_add_card_to_deck(scr_get_card_info("SEED_BARRAGE"));
+	scr_add_card_to_deck(scr_get_card_info("SINEWY_VINES"));
 	scr_add_card_to_deck(scr_get_card_info("SNARLING_BITE"));
 	scr_add_card_to_deck(scr_get_card_info("SPINESLING"));
 	scr_add_card_to_deck(scr_get_card_info("SPIKE_PIERCE"));
@@ -232,8 +238,11 @@
 	scr_add_card_to_deck(scr_get_card_info("SPORE_CLOUD"));
 	scr_add_card_to_deck(scr_get_card_info("STALKING_SWIPE"));
 	scr_add_card_to_deck(scr_get_card_info("STAMPEDE"));
+	scr_add_card_to_deck(scr_get_card_info("STEELFUR"));
 	scr_add_card_to_deck(scr_get_card_info("SYMBIOSIS"));
+	scr_add_card_to_deck(scr_get_card_info("THICK_HIDE"));
 	scr_add_card_to_deck(scr_get_card_info("THORN_STORM"));
+	scr_add_card_to_deck(scr_get_card_info("THORNMAIL"));
 	scr_add_card_to_deck(scr_get_card_info("TOXIC_ERUPTION"));
 	scr_add_card_to_deck(scr_get_card_info("UNSEEN_ROOT"));
 	scr_add_card_to_deck(scr_get_card_info("VERDANT_BOLT"));
@@ -241,9 +250,7 @@
 	scr_add_card_to_deck(scr_get_card_info("VIRAL_SURGE"));
 	scr_add_card_to_deck(scr_get_card_info("VIRIDIAN_BURST"));
 	scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
-	
-	scr_add_card_to_deck(scr_get_card_info("INTERLOCKING_SCALES"));	
-	scr_add_card_to_deck(scr_get_card_info("NATURAL_RECOVERY"));
+	scr_add_card_to_deck(scr_get_card_info("WILDWARD"));
 	
 	#endregion
 

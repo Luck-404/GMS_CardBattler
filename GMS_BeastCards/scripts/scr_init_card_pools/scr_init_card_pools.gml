@@ -43,7 +43,9 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"CLAW");
 		ds_list_add(global.list_pool_cards_rarity_I,"EMERALD_SLAM");
 		ds_list_add(global.list_pool_cards_rarity_I,"FERAL_FRENZY");
+		ds_list_add(global.list_pool_cards_rarity_I,"INTERLOCKING_SCALES");
 		ds_list_add(global.list_pool_cards_rarity_I,"RAKE");
+		ds_list_add(global.list_pool_cards_rarity_I,"SINEWY_VINES");
 		ds_list_add(global.list_pool_cards_rarity_I,"SNARLING_BITE");
 		ds_list_add(global.list_pool_cards_rarity_I,"SPINESLING");
 		ds_list_add(global.list_pool_cards_rarity_I,"SPIKE_PIERCE");
@@ -53,9 +55,6 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"VERDANT_BOLT");
 		ds_list_add(global.list_pool_cards_rarity_I,"VERDANT_SWIPES");
 		ds_list_add(global.list_pool_cards_rarity_I,"WILDSTRIKE");
-		
-		ds_list_add(global.list_pool_cards_rarity_I,"INTERLOCKING_SCALES");
-		
 
 	#endregion
 
@@ -76,12 +75,10 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"POWER_STRIKE");
 		ds_list_add(global.list_pool_cards_rarity_II,"RAPID_STRIKES");
 		ds_list_add(global.list_pool_cards_rarity_II,"SHIV");
-		ds_list_add(global.list_pool_cards_rarity_II,"THOUGHTSTEAL");
 
 		//--------//
 		//VIRIDIAN//
 		//--------//
-
 		ds_list_add(global.list_pool_cards_rarity_II,"BEASTIAL_WRATH");
 		ds_list_add(global.list_pool_cards_rarity_II,"BLOWDART");
 		ds_list_add(global.list_pool_cards_rarity_II,"BRAMBLE_ERUPTION");
@@ -92,6 +89,7 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"HUNTERS_JAVELIN");
 		ds_list_add(global.list_pool_cards_rarity_II,"LIFE_SPIRIT");
 		ds_list_add(global.list_pool_cards_rarity_II,"MIRACLE_MUSA");
+		ds_list_add(global.list_pool_cards_rarity_II,"NATURAL_RECOVERY");
 		ds_list_add(global.list_pool_cards_rarity_II,"NATURES_FURY");
 		ds_list_add(global.list_pool_cards_rarity_II,"NATURES_WRATH");
 		ds_list_add(global.list_pool_cards_rarity_II,"OLD_GROWTH_PUMMEL");
@@ -105,9 +103,10 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"SPIT_VENOM");
 		ds_list_add(global.list_pool_cards_rarity_II,"SPORE_CLOUD");
 		ds_list_add(global.list_pool_cards_rarity_II,"SYMBIOSIS");
+		ds_list_add(global.list_pool_cards_rarity_II,"THICK_HIDE");
+		ds_list_add(global.list_pool_cards_rarity_II,"THORNMAIL");
 		ds_list_add(global.list_pool_cards_rarity_II,"VIRIDIAN_BURST");
-		
-		ds_list_add(global.list_pool_cards_rarity_II,"NATURAL_RECOVERY");
+
 	#endregion
 
 
@@ -121,8 +120,7 @@ function scr_init_card_pools(){
 		//---------//
 		//UNCOLORED//
 		//---------//
-		ds_list_add(global.list_pool_cards_rarity_III,"ARTIFACT_HOURGLASS");
-		ds_list_add(global.list_pool_cards_rarity_III,"ECHO");
+
 		ds_list_add(global.list_pool_cards_rarity_III,"MALLEABILITY");
 		ds_list_add(global.list_pool_cards_rarity_III,"SPELLBOOK_WILDCARD");
 
@@ -132,11 +130,16 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_III,"BIOSTORM");
 		ds_list_add(global.list_pool_cards_rarity_III,"EMERALD_WISDOM");
 		ds_list_add(global.list_pool_cards_rarity_III,"GROWTH_SIGIL");
+		ds_list_add(global.list_pool_cards_rarity_III,"NATURES_GRACE");
 		ds_list_add(global.list_pool_cards_rarity_III,"REGENERATE");
+		ds_list_add(global.list_pool_cards_rarity_III,"ROOTED_DEFENSE");
+		ds_list_add(global.list_pool_cards_rarity_III,"SECOND_BLOOM");
 		ds_list_add(global.list_pool_cards_rarity_III,"STAMPEDE");
+		ds_list_add(global.list_pool_cards_rarity_III,"STEELFUR");
 		ds_list_add(global.list_pool_cards_rarity_III,"THORN_STORM");
 		ds_list_add(global.list_pool_cards_rarity_III,"TOXIC_ERUPTION");
 		ds_list_add(global.list_pool_cards_rarity_III,"VIRAL_SURGE");
+		ds_list_add(global.list_pool_cards_rarity_III,"WILDWARD");
 
 	#endregion
 
@@ -147,8 +150,13 @@ function scr_init_card_pools(){
 	//
 	//===============================================================================//
 	#region IV
-
-		// No implemented Rarity IV cards currently.
-
+	
+		//---------//
+		//UNCOLORED//
+		//---------//
+		ds_list_add(global.list_pool_cards_rarity_III,"ARTIFACT_HOURGLASS");
+		ds_list_add(global.list_pool_cards_rarity_III,"ECHO");
+		ds_list_add(global.list_pool_cards_rarity_II,"THOUGHTSTEAL");
+		
 	#endregion
 }

@@ -25,7 +25,7 @@ global.ref_cast_card = undefined;
 global.ref_caster_beast = undefined;
 global.ref_target_beast = undefined;
 global.ref_target_card = undefined;
-
+global.flag_thorns_retaliating = false;
 global.ct_echo = 0;
 
 // TARGET PREVIEW

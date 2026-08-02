@@ -28,7 +28,7 @@ function scr_status_event_rapid_growth(_str_tag,_ref_status){
 			_ref_new_status._str_status_desc = "GREEN DAMAGE +25%, RANDOMLY SPAWN 2 VIRIDIAN MINIONS AT THE END OF EVERY ROUND, ALSO HEAL SELECTED BY 1";
 			_ref_new_status._spr_status = spr_status_event_rapid_growth;
 			_ref_new_status._str_trigger_region = "END";
-			_ref_new_status._str_status_type = "GLOBAL";
+			_ref_new_status._str_status_type = "WEATHER";
 
 			ds_list_add(global.list_statuses,_ref_new_status);
 

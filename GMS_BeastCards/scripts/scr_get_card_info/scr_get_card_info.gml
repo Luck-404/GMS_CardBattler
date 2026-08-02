@@ -614,6 +614,31 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region NATURES_GRACE
+			case "NATURES_GRACE":
+				_stct_return_card = {
+					_str_card_name : "NATURE'S GRACE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_natures_grace,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 20,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_viridian_natures_grace,
+					_str_card_description : "EXHAUSTS. ST. Ranged. Apply 20 Armor."
+				};
+			break;
+			#endregion
+
 			#region OLD_GROWTH_PUMMEL
 			case "OLD_GROWTH_PUMMEL":
 				_stct_return_card = {
@@ -812,6 +837,30 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region SECOND_BLOOM
+			case "SECOND_BLOOM":
+				_stct_return_card = {
+					_str_card_name : "SECOND BLOOM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_second_bloom,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_viridian_second_bloom,
+					_str_card_description : "EXHAUSTS. ST. Ranged. Second Life: The next time target would be defeated, restore it to 25% maximum HP instead. Lasts 4 turns."
+				};
+			break;
+			#endregion
+
 			#region SEED_BARRAGE
 			case "SEED_BARRAGE":
 				_stct_return_card = {
@@ -836,6 +885,31 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region SINEWY_VINES
+			case "SINEWY_VINES":
+				_stct_return_card = {
+					_str_card_name : "SINEWY VINES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_sinewy_vines,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 3,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_viridian_sinewy_vines,
+					_str_card_description : "ST. Self. Apply [Linear] Armor - scales with MAGPOW (base 3)."
+				};
+			break;
+			#endregion
 
 			#region SNARLING_BITE
 			case "SNARLING_BITE":
@@ -1057,6 +1131,30 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion				
 
+			#region STEELFUR
+			case "STEELFUR":
+				_stct_return_card = {
+					_str_card_name : "STEELFUR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_steelfur,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 0,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_viridian_steelfur,
+					_str_card_description : "EXHAUSTS. ST. Self. Double Armor."
+				};
+			break;
+			#endregion
+
 			#region SYMBIOSIS
 			case "SYMBIOSIS":
 				_stct_return_card = {
@@ -1082,6 +1180,30 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region THICK_HIDE
+			case "THICK_HIDE":
+				_stct_return_card = {
+					_str_card_name : "THICK HIDE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_thick_hide,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 6,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_viridian_thick_hide,
+					_str_card_description : "ST. Self. Apply 6 Armor. Apply 1 additional Armor for each status hosted."
+				};
+			break;
+			#endregion
+
 			#region THORN_STORM
 			case "THORN_STORM":
 				_stct_return_card = {
@@ -1103,6 +1225,31 @@ function scr_get_card_info(_str_card_name){
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_thorn_storm,
 					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [Linear] mag dmg to the selected enemy team twice (base 8 per hit)."
+				};
+			break;
+			#endregion
+
+			#region THORNMAIL
+			case "THORNMAIL":
+				_stct_return_card = {
+					_str_card_name : "THORNMAIL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_thornmail,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_viridian_thornmail,
+					_str_card_description : "ST. Self. Apply 4 Armor. Gain Thorns."
 				};
 			break;
 			#endregion
@@ -1277,6 +1424,31 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion				
+		
+			#region WILDWARD
+			case "WILDWARD":
+				_stct_return_card = {
+					_str_card_name : "WILDWARD",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_wildward,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 12,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_viridian_wildward,
+					_str_card_description : "EXHAUSTS. Teamwide. Apply [Linear] Armor to all allied Beasts (base 12)."
+				};
+			break;
+			#endregion		
 		#endregion
 
 		#region UNCOLORED
@@ -1296,7 +1468,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
-					_str_card_rarity : "III",
+					_str_card_rarity : "IV",
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_artifact_hourglass,
@@ -1417,7 +1589,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 1,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
-					_str_card_rarity : "III",
+					_str_card_rarity : "IV",
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_echo,
@@ -1657,7 +1829,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
-					_str_card_rarity : "II",
+					_str_card_rarity : "IV",
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_thoughtsteal,
