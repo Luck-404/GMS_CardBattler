@@ -192,7 +192,7 @@
 
 
 	#region VIRIDIAN
-
+	
 	scr_add_card_to_deck(scr_get_card_info("BARKSKIN"));
 	scr_add_card_to_deck(scr_get_card_info("BEASTIAL_WRATH"));
 	scr_add_card_to_deck(scr_get_card_info("BIOBOLT"));
@@ -243,7 +243,8 @@
 	scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
 	
 	scr_add_card_to_deck(scr_get_card_info("INTERLOCKING_SCALES"));	
-
+	scr_add_card_to_deck(scr_get_card_info("NATURAL_RECOVERY"));
+	
 	#endregion
 
 	

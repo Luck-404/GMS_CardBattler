@@ -31,6 +31,7 @@ function scr_status_cc_stun(_str_tag,_ref_status){
 			_ref_new_status._spr_status = spr_status_cc_stun;
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_status_type = "CC";
 
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 

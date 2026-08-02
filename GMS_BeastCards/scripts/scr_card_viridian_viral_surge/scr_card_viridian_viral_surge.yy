@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_viridian_viral_surge",
   "parent":{
-    "name":"VIRAL_SURGE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VIRAL_SURGE.yy",
+    "name":"VIRAL SURGE",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VIRAL SURGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

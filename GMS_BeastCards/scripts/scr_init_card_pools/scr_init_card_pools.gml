@@ -81,6 +81,7 @@ function scr_init_card_pools(){
 		//--------//
 		//VIRIDIAN//
 		//--------//
+
 		ds_list_add(global.list_pool_cards_rarity_II,"BEASTIAL_WRATH");
 		ds_list_add(global.list_pool_cards_rarity_II,"BLOWDART");
 		ds_list_add(global.list_pool_cards_rarity_II,"BRAMBLE_ERUPTION");
@@ -105,7 +106,8 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"SPORE_CLOUD");
 		ds_list_add(global.list_pool_cards_rarity_II,"SYMBIOSIS");
 		ds_list_add(global.list_pool_cards_rarity_II,"VIRIDIAN_BURST");
-
+		
+		ds_list_add(global.list_pool_cards_rarity_II,"NATURAL_RECOVERY");
 	#endregion
 
 

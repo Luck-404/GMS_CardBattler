@@ -540,6 +540,31 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion	
 
+			#region NATURAL_RECOVERY
+			case "NATURAL_RECOVERY":
+				_stct_return_card = {
+					_str_card_name : "NATURAL RECOVERY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_natural_recovery,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_viridian_natural_recovery,
+					_str_card_description : "ST. Ranged. Grant 4 Armor. Cleanse 1 CC; if none, cleanse 1 DoT. Heal 4 HP."
+				};
+			break;
+			#endregion
+
 			#region NATURES_FURY
 			case "NATURES_FURY":
 				_stct_return_card = {

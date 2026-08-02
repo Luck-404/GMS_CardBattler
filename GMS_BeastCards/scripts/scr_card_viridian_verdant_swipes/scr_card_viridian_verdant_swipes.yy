@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_viridian_verdant_swipes",
   "parent":{
-    "name":"VERDANT_SWIPES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT_SWIPES.yy",
+    "name":"VERDANT SWIPES",
+    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT SWIPES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

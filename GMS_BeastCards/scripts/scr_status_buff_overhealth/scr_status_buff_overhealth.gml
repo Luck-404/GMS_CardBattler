@@ -33,6 +33,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status){
 			_ref_new_status._spr_status = spr_status_buff_overhealth;
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._str_trigger_region = "START";
+			_ref_new_status._str_status_type = "NUFF"
 
 			_ref_target._val_overhealth += 5;
 

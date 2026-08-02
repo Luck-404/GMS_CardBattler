@@ -28,6 +28,11 @@ _str_status_name = "NONE";
 _str_status_desc = "NONE";
 _spr_status = undefined;
 
+//----------------//
+//STATUS CLEANSE//
+//----------------//
+_flag_status_uncleansable = false;
+
 //------------------//
 //STATUS MAGNITUDES//
 //------------------//
