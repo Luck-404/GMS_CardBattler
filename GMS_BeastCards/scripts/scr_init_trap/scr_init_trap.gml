@@ -1,0 +1,75 @@
+//===============================================================================//
+//
+// SCRIPT: SCR_INIT_TRAP
+// FUNCTION: Creates and attaches a Trap to a target Beast.
+//           Initializes Trap-specific data and announces that a Trap was set.
+//
+//===============================================================================//
+
+function scr_init_trap(_str_trap_id,_stct_card,_ref_caster,_ref_target){
+
+	if (!instance_exists(_ref_caster)){
+		return undefined;
+	}
+
+	if (!instance_exists(_ref_target)){
+		return undefined;
+	}
+
+	var _ref_new_trap =
+		instance_create_layer(
+			_ref_target.x,
+			_ref_target.y,
+			"ily_status",
+			obj_battle_trap
+		);
+
+	_ref_new_trap._ref_host =
+		_ref_target;
+
+	_ref_new_trap._ref_owner =
+		_ref_caster;
+
+	_ref_new_trap._str_owner_team =
+		_ref_caster._str_team;
+
+	_ref_new_trap._str_trap_id =
+		_str_trap_id;
+
+	switch(_str_trap_id){
+
+		case "DISTRACTING_TRAP":
+
+			_ref_new_trap._str_trap_name =
+				"DISTRACTING TRAP";
+
+			_ref_new_trap._str_trigger_type =
+				"TARGETED";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_distracting_trap;
+
+			_ref_new_trap._val_magnitude =
+				0;
+
+		break;
+	}
+
+	ds_list_add(
+		_ref_target._list_traps,
+		_ref_new_trap
+	);
+
+	//----------------//
+	//ANNOUNCE TRAP//
+	//----------------//
+	var _str_team_text =
+		_ref_caster._str_team;
+
+	scr_spawn_popup_trigger_banner(
+		_str_team_text +
+		" HAS SET A TRAP"
+	);
+
+	return _ref_new_trap;
+}

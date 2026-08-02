@@ -62,12 +62,15 @@ _val_dmg_taken_linear_reduction = 0;
 _val_dmg_taken_scalar_bonus = 0;
 _val_dmg_taken_scalar_reduction = 0;
 
+_val_dodge_bonus = 0;
 
-// STATUS / MINIONS
+// STATUS / MINIONS / TRAPS
 _list_statuses = ds_list_create();
 
 _ct_minions_max = 1;
 _list_minions = ds_list_create();
+
+_list_traps = ds_list_create();
 
 // CARDS
 _list_deck = ds_list_create();

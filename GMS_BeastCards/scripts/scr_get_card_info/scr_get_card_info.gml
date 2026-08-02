@@ -175,6 +175,70 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region BLOOMING_SPRITE
+			case "BLOOMING_SPRITE":
+				_stct_return_card = {
+					_str_card_name : "BLOOMING SPRITE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_blooming_sprite,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : undefined,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_blooming_sprite,
+
+					_str_card_description :
+						"ST. Ranged. Summon a 2 HP Blooming Sprite. While alive, it grants its host +5 linear damage."
+				};
+			break;
+			#endregion
+
+			#region BLOOMTIDE
+			case "BLOOMTIDE":
+				_stct_return_card = {
+					_str_card_name : "BLOOMTIDE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_bloomtide,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "WEATHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : undefined,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_bloomtide,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Summons the Bloomtide weather event."
+				};
+			break;
+			#endregion
+
 			#region BLOWDART
 			case "BLOWDART":
 				_stct_return_card = {
@@ -268,6 +332,38 @@ function scr_get_card_info(_str_card_name){
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_disease,
 					_str_card_description : "Ranged, ST, Weaken for 3 rounds"
+				};
+			break;
+			#endregion
+
+			#region DISTRACTING_TRAP
+			case "DISTRACTING_TRAP":
+				_stct_return_card = {
+					_str_card_name : "DISTRACTING TRAP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_distracting_trap,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_distracting_trap,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Set a Trap on a friendly Beast. The first enemy Attack that targets it misses. Then gain Dodge and draw 1 card."
 				};
 			break;
 			#endregion

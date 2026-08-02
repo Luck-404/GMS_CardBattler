@@ -78,7 +78,8 @@ function scr_damage_target_percent(_val_damage_percent,_ref_target){
 	//TARGET DODGE//
 	//-------------//
 	var _val_dodge = clamp(
-		_ref_target._ref_unit._val_beast_dod_stat,
+		_ref_target._ref_unit._val_beast_dod_stat +
+		_ref_target._val_dodge_bonus,
 		0,
 		100
 	);

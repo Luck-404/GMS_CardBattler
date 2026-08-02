@@ -21,6 +21,7 @@ _scr_status = undefined;
 // HOST / LINK
 _ref_host = undefined;
 _ref_status_target = undefined;
+_ref_source_minion = undefined;
 
 // STATUS DATA
 _str_status_type = "DEFAULT";

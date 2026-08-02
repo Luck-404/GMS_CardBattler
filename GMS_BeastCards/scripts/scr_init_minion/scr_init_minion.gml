@@ -11,12 +11,28 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 	var _ref_new_minion = instance_create_layer(_ref_target.x,_ref_target.y,"ily_minions",obj_battle_minion);
 
 	switch(_str_id){
+		
+		case "BLOOMING_SPRITE":
+			_ref_new_minion._str_team = _ref_target._str_team;
+			_ref_new_minion._str_name = "BLOOMING SPRITE";
+
+			_ref_new_minion._val_cur_hp = 2;
+			_ref_new_minion._val_max_hp = 2;
+
+			_ref_new_minion._val_magnitude = 5;
+
+			_ref_new_minion._ref_host = _ref_target;
+			_ref_new_minion._spr_minion = spr_minion_blooming_sprite;
+		break;
 
 		case "LIFE_SPIRIT":
 			_ref_new_minion._str_team = _ref_target._str_team;
 			_ref_new_minion._str_name = "LIFE SPIRIT";
+
 			_ref_new_minion._val_cur_hp = 2;
 			_ref_new_minion._val_max_hp = 2;
+			_ref_new_minion._val_magnitude = 2;
+
 			_ref_new_minion._ref_host = _ref_target;
 			_ref_new_minion._spr_minion = spr_minion_life_spirit;
 		break;

@@ -53,22 +53,60 @@ function scr_cast_card(){
 			_it_echo++
 		){
 
-			_fn_script(
-				_stct_card,
-				_ref_caster,
-				_ref_target
-			);
+			var _flag_cast_cancelled =
+				false;
+
+			if (
+				_stct_card._str_card_type == "ATTACK" &&
+				instance_exists(_ref_target)
+			){
+
+				_flag_cast_cancelled =
+					scr_trigger_target_traps(
+						_ref_caster,
+						_ref_target,
+						_stct_card
+					);
+			}
+
+			if (!_flag_cast_cancelled){
+
+				_fn_script(
+					_stct_card,
+					_ref_caster,
+					_ref_target
+				);
+			}
 		}
 
 		global.ct_echo = 0;
 	}
 	else{
 
-		_fn_script(
-			_stct_card,
-			_ref_caster,
-			_ref_target
-		);
+		var _flag_cast_cancelled =
+			false;
+
+		if (
+			_stct_card._str_card_type == "ATTACK" &&
+			instance_exists(_ref_target)
+		){
+
+			_flag_cast_cancelled =
+				scr_trigger_target_traps(
+					_ref_caster,
+					_ref_target,
+					_stct_card
+				);
+		}
+
+		if (!_flag_cast_cancelled){
+
+			_fn_script(
+				_stct_card,
+				_ref_caster,
+				_ref_target
+			);
+		}
 	}
 
 	//------------//

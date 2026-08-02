@@ -24,10 +24,34 @@ function scr_cast_minion_effect(_ref_minion){
 	}
 
 	switch(_str_minion_name){
+		
+		case "BLOOMING SPRITE":
+
+			scr_status_buff_blooming_sprite(
+				"APPLY",
+				undefined,
+				_ref_minion
+			);
+
+			audio_play_sound(
+				snd_buff,
+				0,
+				false
+			);
+
+		break;
 
 		case "LIFE SPIRIT":
-			scr_heal_target(2,_ref_minion._ref_host);
-			audio_play_sound(snd_heal,0,false);
+			scr_heal_target(
+				_ref_minion._val_magnitude,
+				_ref_minion._ref_host
+			);
+
+			audio_play_sound(
+				snd_heal,
+				0,
+				false
+			);
 		break;
 	}
 }
