@@ -13,22 +13,22 @@ function scr_degrade_shield(_ref_beast){
 
 		case "MARTIAL":
 			// Lose 20% of current armor
-			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.8);
+			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.9);
 		break;
 
 		case "TECHNICAL":
 			// Lose 40% of current armor
-			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.6);
+			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.8);
 		break;
 
 		case "MAGICAL":
 			// Lose 60% of current armor
-			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.4);
+			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.7);
 		break;
 
 		case "OTHER":
 			// Lose 60% of current armor
-			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.4);
+			_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.7);
 		break;
 	}
 }
