@@ -55,6 +55,9 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"VERDANT_BOLT");
 		ds_list_add(global.list_pool_cards_rarity_I,"VERDANT_SWIPES");
 		ds_list_add(global.list_pool_cards_rarity_I,"WILDSTRIKE");
+		
+		ds_list_add(global.list_pool_cards_rarity_I,"DISTRACTING_TRAP");	
+		ds_list_add(global.list_pool_cards_rarity_I,"GERMINATE");			
 
 	#endregion
 
@@ -106,6 +109,10 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"THICK_HIDE");
 		ds_list_add(global.list_pool_cards_rarity_II,"THORNMAIL");
 		ds_list_add(global.list_pool_cards_rarity_II,"VIRIDIAN_BURST");
+		
+		ds_list_add(global.list_pool_cards_rarity_II,"BLOOMING_SPRITE");
+		ds_list_add(global.list_pool_cards_rarity_II,"BLOOMTIDE");	
+		ds_list_add(global.list_pool_cards_rarity_II,"DORMANT_SEED");			
 
 	#endregion
 
@@ -140,6 +147,8 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_III,"TOXIC_ERUPTION");
 		ds_list_add(global.list_pool_cards_rarity_III,"VIRAL_SURGE");
 		ds_list_add(global.list_pool_cards_rarity_III,"WILDWARD");
+		
+		ds_list_add(global.list_pool_cards_rarity_III,"FUNGAL_RECYCLING");		
 
 	#endregion
 

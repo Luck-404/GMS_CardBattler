@@ -12,7 +12,7 @@ function scr_card_viridian_snarling_bite(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	//SNAPSHOT TARGET HP//
 	//-------------------//
-	var _val_target_hp_before = _ref_target._val_cur_hp;
+	var _val_hp_before = _ref_target._val_cur_hp;
 
 	//------------//
 	//DEAL DAMAGE//

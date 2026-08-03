@@ -363,8 +363,41 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_distracting_trap,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Ranged. Set a Trap on a friendly Beast. The first enemy Attack that targets it misses. Then gain Dodge and draw 1 card."
+						"EXHAUSTS. ST. Ranged. Set a Trap on a friendly Beast. The first enemy Attack that targets it misses. Draw 1 card."
 				};
+			break;
+			#endregion
+
+			#region DORMANT_SEED
+			case "DORMANT_SEED":
+
+				_stct_return_card = {
+					_str_card_name : "DORMANT SEED",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_dormant_seed,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : "SUMMONER",
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_dormant_seed,
+
+					_str_card_description : "ST. Ranged. Spawn one Dormant Seed minion. After 2 rounds, it transforms into a random Viridian minion."
+				};
+
 			break;
 			#endregion
 
@@ -465,6 +498,72 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region FUNGAL_RECYCLING
+			case "FUNGAL_RECYCLING":
+
+				_stct_return_card = {
+					_str_card_name : "FUNGAL RECYCLING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_fungal_recycling,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "CORPSE_OPTIONAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "CARD_MANIPULATION",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "CORPSE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_fungal_recycling,
+
+					_str_card_description : "EXHAUSTS. Global. Sacrifice a corpse. Return a random exhausted Viridian card to the draw pile. If no corpse is available, caster loses 10 HP instead."
+				};
+
+			break;
+			#endregion
+
+			#region GERMINATE
+			case "GERMINATE":
+
+				_stct_return_card = {
+					_str_card_name : "GERMINATE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_germinate,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_germinate,
+
+					_str_card_description : "ST. Ranged. Hatch all existing Dormant Seeds on target, then summon 2 Dormant Seeds."
+				};
+
+			break;
+			#endregion
+
 			#region GREENFLOW
 			case "GREENFLOW":
 				_stct_return_card = {
@@ -489,6 +588,38 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region GREENSTEP
+			case "GREENSTEP":
+				_stct_return_card = {
+					_str_card_name : "GREENSTEP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_greenstep,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "TEAM",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "REPOSITION",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 3,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_greenstep,
+
+					_str_card_description :
+						"ST. Ranged. Swap places with target. Heal both caster and target for 3 HP."
+				};
+			break;
+			#endregion
 
 			#region GROWTH_SIGIL
 			case "GROWTH_SIGIL":
@@ -612,6 +743,38 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region MANAVINE
+			case "MANAVINE":
+				_stct_return_card = {
+					_str_card_name : "MANAVINE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_manavine,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "MANA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_manavine,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Generate 1 extra mana for 3 rounds."
+				};
+			break;
+			#endregion
+
 			#region MIRACLE_MUSA
 			case "MIRACLE_MUSA":
 				_stct_return_card = {
@@ -619,22 +782,62 @@ function scr_get_card_info(_str_card_name){
 					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_miracle_musa,
 					_arr_card_colors : ["VIRIDIAN",undefined],
-					_str_card_range : "RANGED",
+
+					_str_card_range : "SELF",
 					_str_card_type : "SUPPORT",
 					_str_card_effect_type : "BUFF",
-					_str_card_stat : "NEU",
-					_str_card_target_count : "ST",
-					_val_card_magnitude : undefined,
+					_str_card_stat : "MAG",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 3,
+					_str_card_scalar : "LINEAR",
+
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
-					_str_card_rarity : "II",
+
+					_str_card_rarity : "I",
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
+
 					_scr_card : scr_card_viridian_miracle_musa,
-					_str_card_description : "Ranged, ST, OVERHEALTH by [linear], lasts 3 turns."
+
+					_str_card_description :
+						"ST. Self. Gain [Linear] Overhealth for 3 turns (base 3). Scales with MAGPOW."
 				};
 			break;
-			#endregion	
+			#endregion
+
+			#region NATURAL_CYCLE
+			case "NATURAL_CYCLE":
+				_stct_return_card = {
+					_str_card_name : "NATURAL CYCLE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_natural_cycle,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "TEAM",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "OTHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_natural_cycle,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Sacrifice the oldest Minion on target ally. Draw 2 cards and heal its former host for 5 HP."
+				};
+			break;
+			#endregion
 
 			#region NATURAL_RECOVERY
 			case "NATURAL_RECOVERY":
@@ -785,6 +988,38 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region PHEROMONES
+			case "PHEROMONES":
+				_stct_return_card = {
+					_str_card_name : "PHEROMONES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_pheromones,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_pheromones,
+
+					_str_card_description :
+						"ST. Self. Taunt. Be the only available target for 2 rounds."
+				};
+			break;
+			#endregion
+
 			#region POTENT_SPORE
 			case "POTENT_SPORE":
 				_stct_return_card = {
@@ -884,6 +1119,70 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region RETURN_TO_NATURE
+			case "RETURN_TO_NATURE":
+				_stct_return_card = {
+					_str_card_name : "RETURN TO NATURE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_return_to_nature,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "CORPSE_OPTIONAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "MANA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "CORPSE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_return_to_nature,
+
+					_str_card_description :
+						"ST. Ranged. Sacrifice a corpse to generate 1 Mana. If no corpse is available, caster loses 10 HP instead."
+				};
+			break;
+			#endregion
+
+			#region ROOTED_DEFENSE
+			case "ROOTED_DEFENSE":
+				_stct_return_card = {
+					_str_card_name : "ROOTED DEFENSE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_rooted_defense,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 20,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_rooted_defense,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Self. Apply 20 Armor."
+				};
+			break;
+			#endregion
+
 			#region ROT_BLOOM
 			case "ROT_BLOOM":
 				_stct_return_card = {
@@ -908,6 +1207,38 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region ROTTING_SPORES
+			case "ROTTING_SPORES":
+				_stct_return_card = {
+					_str_card_name : "ROTTING SPORES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_rotting_spores,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "ENEMY",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_rotting_spores,
+
+					_str_card_description :
+						"EXHAUSTS. Trap. Place on an enemy Beast. The next time that Beast receives healing, cancel the healing, apply 1 Venom, and deal 5 magical damage."
+				};
+			break;
+			#endregion
 
 			#region SAVAGE_MAUL
 			case "SAVAGE_MAUL":
@@ -1400,7 +1731,7 @@ function scr_get_card_info(_str_card_name){
 			#endregion	
 
 			#region VERDANT_BOLT
-			case "VERDANTBOLT":
+			case "VERDANT_BOLT":
 				_stct_return_card = {
 					_str_card_name : "VERDANT BOLT",
 					_str_card_id : _str_card_name,

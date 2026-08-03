@@ -11,8 +11,10 @@
 //VARIABLES//
 //---------//
 
+// REFERENCES
 _ref_host = undefined;
 _ref_owner = undefined;
+_ref_source_card = undefined;
 
 _str_owner_team = "";
 

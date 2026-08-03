@@ -547,20 +547,41 @@ switch(_state_enemy){
 							var _list_enemy = obj_battle_player_controller._list_beasts_alive;
 
 							if (ds_list_size(_list_enemy) > 0){
+								var _ref_taunt_target = scr_get_taunt_target(_list_enemy);
 
-								switch(_ref_card._ref_card._str_card_range){
+								//----------------//
+								//TAUNT OVERRIDE//
+								//----------------//
+								if (instance_exists(_ref_taunt_target)){
 
-									case "MELEE":
-										_ref_target = ds_list_find_value(_list_enemy,0);
-									break;
+									_ref_target = _ref_taunt_target;
+								}
 
-									case "BACK":
-										_ref_target = ds_list_find_value(_list_enemy,ds_list_size(_list_enemy) - 1);
-									break;
+								//-----------------//
+								//NORMAL TARGETING//
+								//-----------------//
+								else{
 
-									default:
-										_ref_target = ds_list_find_value(_list_enemy,irandom(ds_list_size(_list_enemy) - 1));
-									break;
+									switch(_ref_card._ref_card._str_card_range){
+
+										case "MELEE":
+											_ref_target = ds_list_find_value(_list_enemy,0);
+										break;
+
+										case "BACK":
+											_ref_target = ds_list_find_value(
+												_list_enemy,
+												ds_list_size(_list_enemy) - 1
+											);
+										break;
+
+										default:
+											_ref_target = ds_list_find_value(
+												_list_enemy,
+												irandom(ds_list_size(_list_enemy) - 1)
+											);
+										break;
+									}
 								}
 
 								global.ref_cast_card = _ref_card;

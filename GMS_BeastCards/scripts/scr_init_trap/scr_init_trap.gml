@@ -30,6 +30,9 @@ function scr_init_trap(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 	_ref_new_trap._ref_owner =
 		_ref_caster;
 
+	_ref_new_trap._ref_source_card =
+		global.ref_cast_card;
+
 	_ref_new_trap._str_owner_team =
 		_ref_caster._str_team;
 
@@ -37,6 +40,25 @@ function scr_init_trap(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 		_str_trap_id;
 
 	switch(_str_trap_id){
+
+		case "ROTTING_SPORES":
+
+			_ref_new_trap._str_trap_id =
+				"ROTTING_SPORES";
+
+			_ref_new_trap._str_trap_name =
+				"ROTTING SPORES";
+
+			_ref_new_trap._str_trigger_type =
+				"HEALED";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_rotting_spores;
+
+			_ref_new_trap._val_magnitude =
+				5;
+
+		break;
 
 		case "DISTRACTING_TRAP":
 

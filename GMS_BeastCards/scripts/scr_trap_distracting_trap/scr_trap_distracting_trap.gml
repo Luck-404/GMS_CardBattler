@@ -7,7 +7,6 @@
 //           reveals the Trap, and consumes it.
 //
 //===============================================================================//
-
 function scr_trap_distracting_trap(
 	_str_tag,
 	_ref_trap,
@@ -35,46 +34,28 @@ function scr_trap_distracting_trap(
 				return false;
 			}
 
-			_ref_trap._flag_triggered =
-				true;
+			_ref_trap._flag_triggered = true;
 
 			//----------------//
 			//REVEAL TRAP//
 			//----------------//
-			scr_spawn_popup_trigger_banner(
-				"TRAP TRIGGERED: DISTRACTING TRAP"
-			);
-
-			//-------------//
-			//GAIN DODGE//
-			//-------------//
-
-			/*
-				Dodge amount has not yet been defined
-				in the card design.
-
-				Once chosen:
-				_ref_target._val_dodge_bonus += X;
-			*/
+			scr_spawn_popup("TEXT","DISTRACTING TRAP TRIGGERED",undefined,c_red,room_width/2,room_height/2 - 325);
 
 			//-----------//
 			//DRAW CARD//
 			//-----------//
 			if (_ref_trap._str_owner_team == "PLAYER"){
-
-				scr_draw_cards(
-					1
-				);
+				scr_draw_cards(1);
 			}
 
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(
-				_ref_trap
-			);
+			scr_destroy_trap(_ref_trap);
 
-			// ATTACK MISSES
+			//---------------//
+			//ATTACK MISSES//
+			//---------------//
 			return true;
 
 		break;

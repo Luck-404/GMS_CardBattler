@@ -1,17 +1,36 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_MIRACLE_MUSA
-// FUNCTION: Resolves the Miracle Musa card effect.
-//           Applies the Overhealth buff to the target.
-//           Plays the associated animation and sound effects.
+// FUNCTION: Resolves Miracle Musa.
+//           Grants the caster MAG-scaled temporary Overhealth for 3 turns.
 //
 //===============================================================================//
+
 function scr_card_viridian_miracle_musa(_stct_card,_ref_caster,_ref_target){
 
+	//----------------------//
+	//CALCULATE OVERHEALTH//
+	//----------------------//
+	var _val_mpow_stat =
+		_ref_caster._ref_unit._val_beast_mpow_stat;
+
+	var _val_mpow_mod =
+		scr_get_beast_grade_modifier(_val_mpow_stat);
+
+	var _val_overhealth =
+		ceil(
+			_stct_card._val_card_magnitude *
+			_val_mpow_mod
+		);
+
 	//------------------//
-	//APPLY BUFF STATUS//
+	//APPLY OVERHEALTH//
 	//------------------//
-	scr_apply_buff_status("OVERHEALTH",0,4);
+	scr_apply_buff_status(
+		"OVERHEALTH",
+		_val_overhealth,
+		3
+	);
 
 	//----------------//
 	//PLAY ANIMATION//

@@ -19,6 +19,13 @@ function scr_cast_card(){
 		_ref_target = global.ref_target_card;
 	}
 
+	if (
+		_stct_card._str_card_range == "CORPSE" ||
+		_stct_card._str_card_range == "CORPSE_OPTIONAL"
+	){
+		_ref_target = global.ref_target_corpse;
+	}
+
 	var _fn_script = _stct_card._scr_card;
 	var _val_cost = _stct_card._val_card_mana_cost;
 

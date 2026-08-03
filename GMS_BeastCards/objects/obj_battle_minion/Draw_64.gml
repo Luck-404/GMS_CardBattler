@@ -8,7 +8,7 @@
 
 if (!instance_exists(obj_gui_end_battle_pane)){
 
-	if (_ref_host == undefined){
+	if (!instance_exists(_ref_host)){
 		exit;
 	}
 
@@ -40,29 +40,117 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	draw_text(x - string_width(_str_hp) * 0.5,y + 20,_str_hp);
 	#endregion
 
-	//
-	// DRAW TOOLTIP
-	//
-	#region DRAW TOOLTIP
-	if (keyboard_check(vk_lcontrol) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+//
+// DRAW TOOLTIP
+//
+#region DRAW TOOLTIP
 
-		var _str_host_name = (_ref_host != undefined && _ref_host._stct_unit != undefined) ? string(_ref_host._stct_unit._str_beast_name) : "UNKNOWN";
-		var _str_title = _str_name + " | " + _str_host_name;
+if (
+	keyboard_check(vk_lcontrol) &&
+	position_meeting(
+		device_mouse_x_to_gui(0),
+		device_mouse_y_to_gui(0),
+		self
+	)
+){
 
-		var _val_panel_w = string_width(_str_title) + 40;
-		var _val_panel_h = 40;
+	var _str_host_name = "UNKNOWN";
 
-		var _val_panel_x = room_width * 0.5 - (_val_panel_w * 0.5);
-		var _val_panel_y = 20;
-
-		draw_set_colour(c_dkgray);
-		draw_rectangle(_val_panel_x,_val_panel_y,_val_panel_x + _val_panel_w,_val_panel_y + _val_panel_h,false);
-
-		draw_set_colour(c_black);
-		draw_rectangle(_val_panel_x,_val_panel_y,_val_panel_x + _val_panel_w,_val_panel_y + _val_panel_h,true);
-
-		draw_set_colour(c_white);
-		draw_text(_val_panel_x + (_val_panel_w * 0.5) - (string_width(_str_title) * 0.5),_val_panel_y + 12,_str_title);
+	if (
+		instance_exists(_ref_host) &&
+		_ref_host._ref_unit != undefined
+	){
+		_str_host_name =
+			string(_ref_host._ref_unit._str_beast_name);
 	}
-	#endregion
+
+	var _str_title =
+		_str_name +
+		" | " +
+		_str_host_name;
+
+	var _str_age = "";
+
+	//-----------------//
+	//DORMANT SEED AGE//
+	//-----------------//
+	if (_str_name == "DORMANT SEED"){
+		_str_age = "AGE: " + string(_ct_age) + " / 2";
+	}
+
+	//------------//
+	//PANEL SIZE//
+	//------------//
+	var _val_panel_w =
+		string_width(_str_title) + 40;
+
+	if (_str_age != ""){
+		_val_panel_w =
+			max(
+				_val_panel_w,
+				string_width(_str_age) + 40
+			);
+	}
+
+	var _val_panel_h =
+		(_str_age != "") ? 60 : 40;
+
+	var _val_panel_x =
+		room_width * 0.5 -
+		(_val_panel_w * 0.5);
+
+	var _val_panel_y = 20;
+
+	//-----------//
+	//DRAW PANEL//
+	//-----------//
+	draw_set_colour(c_dkgray);
+
+	draw_rectangle(
+		_val_panel_x,
+		_val_panel_y,
+		_val_panel_x + _val_panel_w,
+		_val_panel_y + _val_panel_h,
+		false
+	);
+
+	draw_set_colour(c_black);
+
+	draw_rectangle(
+		_val_panel_x,
+		_val_panel_y,
+		_val_panel_x + _val_panel_w,
+		_val_panel_y + _val_panel_h,
+		true
+	);
+
+	//-----------//
+	//DRAW TITLE//
+	//-----------//
+	draw_set_colour(c_white);
+
+	draw_text(
+		_val_panel_x +
+			(_val_panel_w * 0.5) -
+			(string_width(_str_title) * 0.5),
+		_val_panel_y + 12,
+		_str_title
+	);
+
+	//----------//
+	//DRAW AGE//
+	//----------//
+	if (_str_age != ""){
+
+		draw_text(
+			_val_panel_x +
+				(_val_panel_w * 0.5) -
+				(string_width(_str_age) * 0.5),
+			_val_panel_y + 32,
+			_str_age
+		);
+	}
+}
+
+#endregion
 }

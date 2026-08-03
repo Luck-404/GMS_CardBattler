@@ -413,17 +413,9 @@ function scr_damage_target_armor_pierce(_val_damage,_ref_target){
 
 			if (_ref_minion._val_cur_hp <= 0){
 
-				_ref_minion._val_cur_hp =
-					0;
+				_ref_minion._val_cur_hp = 0;
 
-				ds_list_delete(
-					_list_minions,
-					_it_minion
-				);
-
-				instance_destroy(
-					_ref_minion
-				);
+				scr_destroy_minion(_ref_minion);
 			}
 		}
 

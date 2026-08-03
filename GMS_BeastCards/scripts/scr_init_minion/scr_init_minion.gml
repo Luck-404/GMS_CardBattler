@@ -19,10 +19,26 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 			_ref_new_minion._val_cur_hp = 2;
 			_ref_new_minion._val_max_hp = 2;
 
-			_ref_new_minion._val_magnitude = 5;
+			_ref_new_minion._val_magnitude = 2;
 
 			_ref_new_minion._ref_host = _ref_target;
 			_ref_new_minion._spr_minion = spr_minion_blooming_sprite;
+		break;
+
+		case "DORMANT_SEED":
+
+			_ref_new_minion._str_team = _ref_target._str_team;
+			_ref_new_minion._str_name = "DORMANT SEED";
+
+			_ref_new_minion._val_cur_hp = 1;
+			_ref_new_minion._val_max_hp = 1;
+
+			_ref_new_minion._val_magnitude = 0;
+			_ref_new_minion._ct_age = 0;
+
+			_ref_new_minion._ref_host = _ref_target;
+			_ref_new_minion._spr_minion = spr_minion_dormant_seed;
+
 		break;
 
 		case "LIFE_SPIRIT":
@@ -36,6 +52,20 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 			_ref_new_minion._ref_host = _ref_target;
 			_ref_new_minion._spr_minion = spr_minion_life_spirit;
 		break;
+		
+		case "THORNLING":
+
+			_ref_new_minion._str_team = _ref_target._str_team;
+			_ref_new_minion._str_name = "THORNLING";
+
+			_ref_new_minion._val_cur_hp = 1;
+			_ref_new_minion._val_max_hp = 1;
+			_ref_new_minion._val_magnitude = 2;
+
+			_ref_new_minion._ref_host = _ref_target;
+			_ref_new_minion._spr_minion = spr_minion_thornling;
+
+		break;		
 	}
 	
 	if (ds_list_size(_ref_target._list_minions) < _ref_target._ct_minions_max){
@@ -46,17 +76,45 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 	}
 	else{
 
-		var _ref_old_minion = ds_list_find_value(_ref_target._list_minions,0);
-
-		ds_list_replace(_ref_target._list_minions,0,_ref_new_minion);
+		var _ref_old_minion =
+			ds_list_find_value(
+				_ref_target._list_minions,
+				0
+			);
 
 		if (instance_exists(_ref_old_minion)){
-			instance_destroy(_ref_old_minion);
+			scr_destroy_minion(_ref_old_minion);
 		}
 
-		scr_spawn_popup_scrolling("TEXT","+ MINION (REPLACED OLDEST)",undefined,c_black,_ref_target.x + irandom_range(-32,32),_ref_target.y - 24 + irandom_range(-32,32));
+		ds_list_add(
+			_ref_target._list_minions,
+			_ref_new_minion
+		);
+
+		scr_spawn_popup_scrolling(
+			"TEXT",
+			"+ MINION (REPLACED OLDEST)",
+			undefined,
+			c_black,
+			_ref_target.x + irandom_range(-32,32),
+			_ref_target.y - 24 + irandom_range(-32,32)
+		);
+	}
+	
+	//----------------------//
+	//APPLY PASSIVE EFFECTS//
+	//----------------------//
+	if (_ref_new_minion._str_name == "BLOOMING SPRITE"){
+		scr_status_buff_blooming_sprite("APPLY",undefined,_ref_new_minion);
 	}
 
 	scr_reposition_minions(_ref_target);
 	scr_reposition_statuses(_ref_target);
+
+	return _ref_new_minion;
+
+	scr_reposition_minions(_ref_target);
+	scr_reposition_statuses(_ref_target);
+	
+	return _ref_new_minion;	
 }

@@ -694,28 +694,61 @@ switch(_state_player){
 					//-------------------//
 					// ENEMY CARD TARGET
 					//-------------------//
-					if (_str_card_range == "ENEMY_CARD"){
+			if (_str_card_range == "ENEMY_CARD"){
 
-						_state_player =
-							ENUM_PLAYER_STATE.SELECT_ENEMY_CARD;
-					}
+				_state_player = ENUM_PLAYER_STATE.SELECT_ENEMY_CARD;
+			}
 
-					//--------------//
-					// BEAST TARGET
-					//--------------//
-					else{
+			//------------------------//
+			// OPTIONAL CORPSE TARGET
+			//------------------------//
+			else if (_str_card_range == "CORPSE_OPTIONAL"){
 
-						_state_player =
-							ENUM_PLAYER_STATE.SELECT_TARGET;
+				global.ref_target_corpse = undefined;
 
-						if (_str_card_range != "GLOBAL"){
+				_state_player =
+					ENUM_PLAYER_STATE.SELECT_CORPSE;
+			}
 
-							hscr_check_battle_beast_range(
-								_list_beasts_alive,
-								_str_card_range
-							);
-						}
-					}
+			//---------------//
+			// CORPSE TARGET
+			//---------------//
+			else if (_str_card_range == "CORPSE"){
+
+				if (scr_battle_has_corpse()){
+
+					global.ref_target_corpse = undefined;
+
+					_state_player =
+						ENUM_PLAYER_STATE.SELECT_CORPSE;
+				}
+				else{
+
+					audio_play_sound(snd_error,0,false);
+
+					scr_spawn_popup_error(
+						"NO CORPSES",
+						60
+					);
+
+					global.ref_caster_beast = undefined;
+
+					_state_player =
+						ENUM_PLAYER_STATE.SELECT_CASTER;
+				}
+			}
+
+			//--------------//
+			// BEAST TARGET
+			//--------------//
+			else{
+
+				_state_player = ENUM_PLAYER_STATE.SELECT_TARGET;
+
+				if (_str_card_range != "GLOBAL"){
+					hscr_check_battle_beast_range(_list_beasts_alive,_str_card_range);
+				}
+			}
 				}
 			}
 		}
@@ -730,42 +763,54 @@ switch(_state_player){
 	#region SELECT TARGET
 	case ENUM_PLAYER_STATE.SELECT_TARGET:
 
-	//----------------------//
-	//BUILD TARGET PREVIEW//
-	//----------------------//
-	_arr_target_preview = [];
+		//----------------------//
+		//BUILD TARGET PREVIEW//
+		//----------------------//
+		_arr_target_preview = [];
 
-	var _val_mouse_x = device_mouse_x_to_gui(0);
-	var _val_mouse_y = device_mouse_y_to_gui(0);
+		var _val_mouse_x = device_mouse_x_to_gui(0);
+		var _val_mouse_y = device_mouse_y_to_gui(0);
 
-	var _ref_hovered_beast = instance_position(
-		_val_mouse_x,
-		_val_mouse_y,
-		obj_battle_beast
-	);
+		var _ref_hovered_beast = instance_position(
+			_val_mouse_x,
+			_val_mouse_y,
+			obj_battle_beast
+		);
 
-	if (
-		instance_exists(_ref_hovered_beast) &&
-		_ref_hovered_beast._str_list == "ALIVE" &&
-		_ref_hovered_beast._val_cur_hp > 0 &&
-		_ref_hovered_beast._flag_beast_range_check
-	){
+		if (
+			instance_exists(_ref_hovered_beast) &&
+			_ref_hovered_beast._str_list == "ALIVE" &&
+			_ref_hovered_beast._val_cur_hp > 0 &&
+			_ref_hovered_beast._flag_beast_range_check
+		){
 
-		_arr_target_preview =
-			scr_get_card_preview_targets(
+			_arr_target_preview = scr_get_card_preview_targets(
 				global.ref_cast_card._ref_card,
 				_ref_hovered_beast
 			);
-	}
+		}
 
 		//
 		// END TURN
 		//
 		#region END TURN
-		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
+		if (
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked &&
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_end_turn_button
+			)
+		){
+
 			audio_play_sound(snd_end_turn,0,false);
+
 			_flag_clicked = true;
-			_state_player = ENUM_PLAYER_STATE.TURN_END;
+
+			_state_player =
+				ENUM_PLAYER_STATE.TURN_END;
+
 			break;
 		}
 		#endregion
@@ -774,12 +819,20 @@ switch(_state_player){
 		// RIGHT CLICK SENDS BACK
 		//
 		#region RIGHT CLICK SENDS BACK
-		if (mouse_check_button_pressed(mb_right) && !_flag_clicked){
+		if (
+			mouse_check_button_pressed(mb_right) &&
+			!_flag_clicked
+		){
+
 			audio_play_sound(snd_gui_close,0,false);
+
 			_flag_clicked = true;
 
-			_state_player = ENUM_PLAYER_STATE.SELECT_CASTER;
-			global.ref_caster_beast = undefined;
+			_state_player =
+				ENUM_PLAYER_STATE.SELECT_CASTER;
+
+			global.ref_caster_beast =
+				undefined;
 
 			hscr_check_battle_beast_able(_list_beasts_alive);
 			hscr_check_battle_beast_color(_list_beasts_alive);
@@ -790,7 +843,8 @@ switch(_state_player){
 		}
 		#endregion
 
-		var _str_card_range = global.ref_cast_card._ref_card._str_card_range;
+		var _str_card_range =
+			global.ref_cast_card._ref_card._str_card_range;
 
 		//
 		// GLOBAL CARD HANDLE
@@ -798,14 +852,20 @@ switch(_state_player){
 		#region GLOBAL CARD HANDLE
 		if (_str_card_range == "GLOBAL"){
 
-			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+			if (
+				mouse_check_button_pressed(mb_left) &&
+				!_flag_clicked
+			){
+
 				audio_play_sound(snd_gui_press,0,false);
-				
+
 				_flag_clicked = true;
 
-				global.ref_target_beast = "GLOBAL";
+				global.ref_target_beast =
+					"GLOBAL";
 
-				_state_player = ENUM_PLAYER_STATE.CARD_EXECUTE;
+				_state_player =
+					ENUM_PLAYER_STATE.CARD_EXECUTE;
 			}
 		}
 		#endregion
@@ -814,19 +874,39 @@ switch(_state_player){
 		// LEFT CLICK SELECTS TARGET
 		//
 		#region LEFT CLICK SELECTS TARGET
-		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast) && mouse_check_button_pressed(mb_left) && !_flag_clicked && _str_card_range != "GLOBAL"){
-			audio_play_sound(snd_gui_press,0,false);
-			_flag_clicked = true;
+		if (
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_beast
+			) &&
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked &&
+			_str_card_range != "GLOBAL"
+		){
 
-			var _ref_beast_clicked = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_beast);
+			var _ref_beast_clicked = instance_nearest(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_beast
+			);
 
-			if (_ref_beast_clicked != undefined && _ref_beast_clicked._val_cur_hp > 0){
+			if (
+				instance_exists(_ref_beast_clicked) &&
+				_ref_beast_clicked._str_list == "ALIVE" &&
+				_ref_beast_clicked._val_cur_hp > 0 &&
+				_ref_beast_clicked._flag_beast_range_check
+			){
 
-				if (_ref_beast_clicked._flag_beast_range_check){
-					global.ref_target_beast = _ref_beast_clicked;
+				audio_play_sound(snd_gui_press,0,false);
 
-					_state_player = ENUM_PLAYER_STATE.CARD_EXECUTE;
-				}
+				_flag_clicked = true;
+
+				global.ref_target_beast =
+					_ref_beast_clicked;
+
+				_state_player =
+					ENUM_PLAYER_STATE.CARD_EXECUTE;
 			}
 		}
 		#endregion
@@ -961,6 +1041,146 @@ switch(_state_player){
 	#endregion	
 	
 	//
+	// SELECT CORPSE
+	//
+	#region SELECT CORPSE
+	case ENUM_PLAYER_STATE.SELECT_CORPSE:
+
+		//
+		// END TURN
+		//
+		#region END TURN
+		if (
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked &&
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_end_turn_button
+			)
+		){
+
+			audio_play_sound(snd_end_turn,0,false);
+
+			_flag_clicked = true;
+
+			global.ref_target_corpse = undefined;
+			global.ref_caster_beast = undefined;
+
+			_state_player =
+				ENUM_PLAYER_STATE.TURN_END;
+
+			break;
+		}
+		#endregion
+
+		//
+		// RIGHT CLICK SENDS BACK
+		//
+		#region RIGHT CLICK SENDS BACK
+		if (
+			mouse_check_button_pressed(mb_right) &&
+			!_flag_clicked
+		){
+
+			audio_play_sound(snd_gui_close,0,false);
+
+			_flag_clicked = true;
+
+			global.ref_target_corpse = undefined;
+			global.ref_caster_beast = undefined;
+
+			_state_player =
+				ENUM_PLAYER_STATE.SELECT_CASTER;
+
+			hscr_check_battle_beast_able(_list_beasts_alive);
+			hscr_check_battle_beast_color(_list_beasts_alive);
+			hscr_check_battle_beast_archetype(_list_beasts_alive);
+			hscr_check_battle_beast_class(_list_beasts_alive);
+
+			break;
+		}
+		#endregion
+
+		//
+		// SELECT CORPSE
+		//
+		#region SELECT CORPSE
+		if (
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_beast
+			) &&
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked
+		){
+
+			var _ref_corpse = instance_nearest(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_beast
+			);
+
+			if (
+				instance_exists(_ref_corpse) &&
+				_ref_corpse._str_list == "DEAD" &&
+				_ref_corpse._val_cur_hp <= 0 &&
+				!_ref_corpse._flag_captured &&
+				!_ref_corpse._flag_corpse_consumed
+			){
+
+				audio_play_sound(snd_gui_press,0,false);
+
+				_flag_clicked = true;
+
+				global.ref_target_corpse =
+					_ref_corpse;
+
+				_state_player =
+					ENUM_PLAYER_STATE.CARD_EXECUTE;
+			}
+			else{
+
+				audio_play_sound(snd_error,0,false);
+
+				scr_spawn_popup_error("INVALID CORPSE",60);
+			}
+		}
+		#endregion
+
+		//
+		// OPTIONAL EMPTY TARGET
+		//
+		#region OPTIONAL EMPTY TARGET
+		if (
+			global.ref_cast_card._ref_card._str_card_range == "CORPSE_OPTIONAL" &&
+			!scr_battle_has_corpse() &&
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked &&
+			!position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_beast
+			)
+		){
+
+			audio_play_sound(snd_gui_press,0,false);
+
+			_flag_clicked = true;
+
+			global.ref_target_corpse =
+				undefined;
+
+			_state_player =
+				ENUM_PLAYER_STATE.CARD_EXECUTE;
+		}
+		#endregion
+
+	break;
+	#endregion
+
+	//
 	// CARD EXECUTE
 	//
 	#region CARD EXECUTE
@@ -1087,13 +1307,25 @@ switch(_state_player){
 				}
 			}
 
-			for (var _it_global_statuses = 0; _it_global_statuses < ds_list_size(_list_beasts_alive); _it_global_statuses++){
+			for (
+				var _it_global_status = 0;
+				_it_global_status < ds_list_size(global.list_statuses);
+				_it_global_status++
+			){
 
-				var _ref_status = ds_list_find_value(global.list_statuses,_it_global_statuses)
-					ds_list_add(
-						_list_statuses,
-						_ref_status
-					);
+				var _ref_status = ds_list_find_value(
+					global.list_statuses,
+					_it_global_status
+				);
+
+				if (!instance_exists(_ref_status)){
+					continue;
+				}
+
+				ds_list_add(
+					_list_statuses,
+					_ref_status
+				);
 			}
 		}
 

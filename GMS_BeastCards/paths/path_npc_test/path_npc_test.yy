@@ -1,7 +1,7 @@
 {
   "$GMPath":"",
   "%Name":"path_npc_test",
-  "closed":false,
+  "closed":true,
   "kind":0,
   "name":"path_npc_test",
   "parent":{

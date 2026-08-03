@@ -22,7 +22,7 @@ function scr_card_viridian_thornmail(_stct_card,_ref_caster,_ref_target){
 	scr_apply_buff_status(
 		"THORNS",
 		3,
-		-1
+		3
 	);
 
 	//----------------//

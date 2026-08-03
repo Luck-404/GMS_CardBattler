@@ -27,6 +27,7 @@ global.ref_target_beast = undefined;
 global.ref_target_card = undefined;
 global.flag_thorns_retaliating = false;
 global.ct_echo = 0;
+global.ref_target_corpse = undefined;
 
 // TARGET PREVIEW
 _arr_target_preview = [];
@@ -87,6 +88,7 @@ enum ENUM_PLAYER_STATE{
 	SELECT_CASTER,
 	SELECT_TARGET,
 	SELECT_ENEMY_CARD,
+	SELECT_CORPSE,
 	CARD_EXECUTE,
 	TURN_END,
 	DISCARD_DOWN
@@ -577,6 +579,46 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 			default:
 				_ref_beast_enemy._flag_beast_range_check = false;
 			break;
+		}
+	}
+
+	//----------------//
+	//TAUNT OVERRIDE//
+	//----------------//
+	if (instance_exists(global.ref_cast_card)){
+
+		var _stct_card = global.ref_cast_card._ref_card;
+
+		if (
+			_stct_card._str_card_type == "ATTACK" ||
+			_stct_card._str_card_effect_type == "DOT"
+		){
+
+			var _ref_taunt_target = scr_get_taunt_target(
+				obj_battle_enemy_controller._list_beasts_alive
+			);
+
+			if (instance_exists(_ref_taunt_target)){
+
+				for (
+					var _it_enemy = 0;
+					_it_enemy < ds_list_size(obj_battle_enemy_controller._list_beasts_alive);
+					_it_enemy++
+				){
+
+					var _ref_enemy = ds_list_find_value(
+						obj_battle_enemy_controller._list_beasts_alive,
+						_it_enemy
+					);
+
+					if (!instance_exists(_ref_enemy)){
+						continue;
+					}
+
+					_ref_enemy._flag_beast_range_check =
+						(_ref_enemy == _ref_taunt_target);
+				}
+			}
 		}
 	}
 }

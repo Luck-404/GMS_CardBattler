@@ -28,7 +28,7 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 			}
 
 			if (_val_lifetime == undefined){
-				_val_lifetime = -1;
+				_val_lifetime = 3;
 			}
 
 			_val_magnitude =
@@ -58,10 +58,10 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 				//UPDATE LIFETIME//
 				//----------------//
 				if (
-					_ref_existing_status._val_status_lifetime == -1 ||
-					_val_lifetime == -1
+					_ref_existing_status._val_status_lifetime == 3 ||
+					_val_lifetime == 3
 				){
-					_ref_existing_status._val_status_lifetime = -1;
+					_ref_existing_status._val_status_lifetime = 3;
 					_ref_existing_status._str_trigger_region = undefined;
 				}
 				else{

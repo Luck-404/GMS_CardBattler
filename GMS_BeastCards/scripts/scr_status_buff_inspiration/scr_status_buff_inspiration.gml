@@ -53,17 +53,31 @@ function scr_status_buff_inspiration(_str_tag,_ref_status){
 			scr_reposition_statuses(global.list_statuses);
 
 		break;
-
+		
 		case "DEATH":
 
-			obj_battle_player_controller._val_max_mana = obj_battle_player_controller._val_saved_max_mana;
-			obj_battle_player_controller._val_cur_mana -= 2;
-
-			if (obj_battle_player_controller._val_cur_mana < 0){
-				obj_battle_player_controller._val_cur_mana = 0;
+			if (!instance_exists(_ref_status)){
+				return undefined;
 			}
 
-			scr_destroy_status(_ref_status);
+			//----------------------//
+			//REMOVE INSPIRATION//
+			//----------------------//
+			obj_battle_player_controller._val_max_mana =
+				max(
+					obj_battle_player_controller._val_saved_max_mana,
+					obj_battle_player_controller._val_max_mana - 2
+				);
+
+			obj_battle_player_controller._val_cur_mana =
+				min(
+					obj_battle_player_controller._val_cur_mana,
+					obj_battle_player_controller._val_max_mana
+				);
+
+			scr_destroy_status(
+				_ref_status
+			);
 
 		break;
 	}

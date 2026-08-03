@@ -13,5 +13,6 @@ function scr_init_minion_pools(){
 	#region VIRIDIAN
 	ds_list_add(global.list_pool_viridian_minions,"LIFE_SPIRIT");
 	ds_list_add(global.list_pool_viridian_minions,"BLOOMING_SPRITE");
+	ds_list_add(global.list_pool_viridian_minions,"THORNLING");
 	#endregion
 }

@@ -10,6 +10,29 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 
 	switch(_str_status_name){
 
+		case "MANAVINE":
+
+			var _ref_manavine_status = scr_status_buff_manavine(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (_ref_manavine_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 MANA",
+					undefined,
+					c_green,
+					global.ref_caster_beast.x + irandom_range(-32,32),
+					global.ref_caster_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
 		case "THORNS":
 
 			var _ref_thorns_status =
@@ -59,6 +82,28 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 					global.ref_target_beast.y -
 						24 +
 						irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "TAUNT":
+
+			var _ref_taunt_status = scr_status_buff_taunt(
+				"APPLY",
+				undefined,
+				_val_lifetime
+			);
+
+			if (_ref_taunt_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"TAUNT",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -159,16 +204,25 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 
 		case "OVERHEALTH":
 
-			scr_status_buff_overhealth("APPLY",undefined);
+			var _ref_overhealth_status =
+				scr_status_buff_overhealth(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+5 OVERHEALTH",
-				undefined,
-				c_green,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_overhealth_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+" + string(_val_magnitude) + " OVERHEALTH",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
 
 		break;
 

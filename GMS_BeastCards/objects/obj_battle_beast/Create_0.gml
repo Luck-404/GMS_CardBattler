@@ -79,9 +79,11 @@ _val_hand_pos = 0;
 // UNIT REF
 _ref_unit = undefined;
 _flag_captured = false;
+
 // STATE FLAGS
 _flag_death_handled = false;
 _flag_preview_beast = false;
+_flag_corpse_consumed = false;
 
 // CASTING CHECKS
 _flag_beast_color_check = true;

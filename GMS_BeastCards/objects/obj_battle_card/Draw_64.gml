@@ -95,13 +95,6 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			}
 			else{
 
-				if (obj_battle_enemy_controller._state_enemy == ENUM_ENEMY_STATE.CAST_CARDS){
-					visible = false;
-				}
-				else{
-					visible = true;
-				}
-
 				//-------//
 				// HOVER
 				//-------//

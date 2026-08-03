@@ -1,28 +1,67 @@
 //===============================================================================//
 //
-// SCR_HEAL_TARGET
-// FUNCTION: Restores HP to a target battle beast.
-//           Healing cannot exceed the target's maximum HP.
-//           Spawns a healing popup when HP is restored.
+// SCRIPT: SCR_HEAL_TARGET
+// FUNCTION: Restores HP to a target battle Beast.
+//           Checks healing-triggered Traps before restoring HP.
+//           Healing cannot exceed maximum HP.
+//           Returns false when healing is invalid or cancelled.
 //
 //===============================================================================//
 function scr_heal_target(_val_amount,_ref_target){
 
-	if (_ref_target._val_cur_hp != _ref_target._val_max_hp){
+	//----------------//
+	//VALIDATE TARGET//
+	//----------------//
+	if (!instance_exists(_ref_target)){
+		return false;
+	}
 
-		_ref_target._val_cur_hp += _val_amount;
+	if (_val_amount <= 0){
+		return false;
+	}
 
-		if (_ref_target._val_cur_hp > _ref_target._val_max_hp){
-			_ref_target._val_cur_hp = _ref_target._val_max_hp;
-		}
+	//----------------//
+	//CHECK MISSING HP//
+	//----------------//
+	if (_ref_target._val_cur_hp >= _ref_target._val_max_hp){
+		return false;
+	}
+
+	//-------------------//
+	//CHECK HEALING TRAPS//
+	//-------------------//
+	if (scr_trigger_heal_traps(_ref_target)){
+		return false;
+	}
+
+	//--------------//
+	//APPLY HEALING//
+	//--------------//
+	var _val_hp_before =
+		_ref_target._val_cur_hp;
+
+	_ref_target._val_cur_hp = min(
+		_ref_target._val_max_hp,
+		_ref_target._val_cur_hp + _val_amount
+	);
+
+	var _val_healed =
+		_ref_target._val_cur_hp - _val_hp_before;
+
+	//-------------//
+	//SPAWN POPUP//
+	//-------------//
+	if (_val_healed > 0){
 
 		scr_spawn_popup_scrolling(
 			"TEXT",
-			"+" + string(_val_amount),
+			"+" + string(_val_healed),
 			undefined,
 			c_green,
 			_ref_target.x + irandom_range(-32,32),
 			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 	}
+
+	return (_val_healed > 0);
 }

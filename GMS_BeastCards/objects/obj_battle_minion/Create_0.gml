@@ -26,6 +26,8 @@ _val_cur_hp = 2;
 _val_max_hp = 2;
 _val_magnitude = 0;
 
+_ct_age = 0;
+
 // FLAGS
 _flag_host_greyed = false;
 

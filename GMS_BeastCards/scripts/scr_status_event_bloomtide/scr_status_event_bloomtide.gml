@@ -201,32 +201,33 @@ function scr_status_event_bloomtide(_str_tag,_ref_status){
 
 
 			//--------------------------//
-			//GIVE RANDOM BEAST BLOOM//
+			//GIVE 3 RANDOM BEASTS BLOOM//
 			//--------------------------//
 			if (ds_list_size(_list_beasts) > 0){
+				repeat (3){
+					var _ref_bloom_target =
+						ds_list_find_value(
+							_list_beasts,
+							irandom(
+								ds_list_size(_list_beasts) - 1
+							)
+						);
 
-				var _ref_bloom_target =
-					ds_list_find_value(
-						_list_beasts,
-						irandom(
-							ds_list_size(_list_beasts) - 1
-						)
+					var _ref_original_target =
+						global.ref_target_beast;
+
+					global.ref_target_beast =
+						_ref_bloom_target;
+
+					scr_apply_buff_status(
+						"BLOOM",
+						5,
+						2
 					);
 
-				var _ref_original_target =
-					global.ref_target_beast;
-
-				global.ref_target_beast =
-					_ref_bloom_target;
-
-				scr_apply_buff_status(
-					"BLOOM",
-					5,
-					2
-				);
-
-				global.ref_target_beast =
-					_ref_original_target;
+					global.ref_target_beast =
+						_ref_original_target;
+				}
 			}
 
 
