@@ -535,6 +535,10 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 				_ref_beast_player._flag_beast_range_check = (_ref_beast_player != global.ref_caster_beast);
 			break;
 
+			case "ENEMY":
+				_ref_beast_player._flag_beast_range_check = false;
+			break;
+
 			case "RANGED":
 				_ref_beast_player._flag_beast_range_check = true;
 			break;
@@ -565,6 +569,10 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 			break;
 
 			case "RANGED":
+				_ref_beast_enemy._flag_beast_range_check = true;
+			break;
+
+			case "ENEMY":
 				_ref_beast_enemy._flag_beast_range_check = true;
 			break;
 

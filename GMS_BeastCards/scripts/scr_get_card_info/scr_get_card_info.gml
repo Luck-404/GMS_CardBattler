@@ -1313,6 +1313,74 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region SEED_THE_FIELD
+			case "SEED_THE_FIELD":
+
+				_stct_return_card = {
+					_str_card_name : "SEED THE FIELD",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_seed_the_field,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_seed_the_field,
+
+					_str_card_description :
+						"Teamwide. Spawn one Dormant Seed in each available allied Minion slot."
+				};
+
+			break;
+			#endregion
+			
+			#region SERPENT_SUMMON
+			case "SERPENT_SUMMON":
+
+				_stct_return_card = {
+					_str_card_name : "SERPENT SUMMON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_serpent_summon,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : "SUMMONER",
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_serpent_summon,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Self. Summon 3 Serpents (3/3). Each Serpent attacks a random enemy and applies 1 Venom each round."
+				};
+
+			break;
+			#endregion
+
 			#region SINEWY_VINES
 			case "SINEWY_VINES":
 				_stct_return_card = {
@@ -1631,6 +1699,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region THORN_NET
+			case "THORN_NET":
+
+				_stct_return_card = {
+					_str_card_name : "THORN NET",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_thorn_net,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "ENEMY",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_thorn_net,
+
+					_str_card_description :
+						"EXHAUSTS. Trap. Place on an enemy Beast. The next time that Beast attacks, cancel the Attack, deal 4 damage, and apply Vulnerable."
+				};
+
+			break;
+			#endregion
+
 			#region THORN_STORM
 			case "THORN_STORM":
 				_stct_return_card = {
@@ -1706,6 +1808,74 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region TOXIC_SNARE
+			case "TOXIC_SNARE":
+
+				_stct_return_card = {
+					_str_card_name : "TOXIC SNARE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_toxic_snare,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "ENEMY",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_toxic_snare,
+
+					_str_card_description :
+						"EXHAUSTS. Trap. Place on an enemy Beast. At 5 total DoT stacks or 3 different DoTs, Stun it and apply 2 Poison to adjacent enemies."
+				};
+
+			break;
+			#endregion
+
+			#region TRANQUILITY
+			case "TRANQUILITY":
+
+				_stct_return_card = {
+					_str_card_name : "TRANQUILITY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_tranquility,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "ECHO",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_tranquility,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Add 1 Echo. Heal all allied Beasts for 3 HP."
+				};
+
+			break;
+			#endregion
+
 			#region UNSEEN_ROOT
 			case "UNSEEN_ROOT":
 				_stct_return_card = {
@@ -1729,6 +1899,40 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion	
+
+			#region VENOM_BLOOM
+			case "VENOM_BLOOM":
+
+				_stct_return_card = {
+					_str_card_name : "VENOM BLOOM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_venom_bloom,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "ENEMY",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_venom_bloom,
+
+					_str_card_description :
+						"EXHAUSTS. Trap. Place on an enemy Beast. When it dies, apply Poison and summon a Sporeling on each adjacent Beast."
+				};
+
+			break;
+			#endregion
 
 			#region VERDANT_BOLT
 			case "VERDANT_BOLT":
@@ -2010,7 +2214,7 @@ function scr_get_card_info(_str_card_name){
 					_arr_card_colors : ["UNCOLORED",undefined],
 					_str_card_range : "GLOBAL",
 					_str_card_type : "UTILITY",
-					_str_card_effect_type : "OTHER",
+					_str_card_effect_type : "ECHO",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "GLOBAL",
 					_val_card_magnitude : 1,

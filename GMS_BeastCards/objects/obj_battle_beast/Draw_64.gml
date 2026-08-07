@@ -710,6 +710,15 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		_val_cur_hp = 0;
 
+		_flag_death_handled = true;
+
+		_val_cur_hp = 0;
+
+		//-------------------//
+		//TRIGGER DEATH TRAPS//
+		//-------------------//
+		scr_trigger_death_traps(self);
+
 		audio_play_sound(
 			_snd_death,
 			0,

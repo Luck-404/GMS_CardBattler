@@ -41,6 +41,54 @@ function scr_init_trap(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 
 	switch(_str_trap_id){
 
+		case "THORN_NET":
+
+			_ref_new_trap._str_trap_name =
+				"THORN NET";
+
+			_ref_new_trap._str_trigger_type =
+				"ATTACKING";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_thorn_net;
+
+			_ref_new_trap._val_magnitude =
+				4;
+
+		break;
+
+		case "VENOM_BLOOM":
+
+			_ref_new_trap._str_trap_name =
+				"VENOM BLOOM";
+
+			_ref_new_trap._str_trigger_type =
+				"DEATH";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_venom_bloom;
+
+			_ref_new_trap._val_magnitude =
+				0;
+
+		break;
+
+		case "TOXIC_SNARE":
+
+			_ref_new_trap._str_trap_name =
+				"TOXIC SNARE";
+
+			_ref_new_trap._str_trigger_type =
+				"DOT_THRESHOLD";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_toxic_snare;
+
+			_ref_new_trap._val_magnitude =
+				0;
+
+		break;
+
 		case "ROTTING_SPORES":
 
 			_ref_new_trap._str_trap_id =

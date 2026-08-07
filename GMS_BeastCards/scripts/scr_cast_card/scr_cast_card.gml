@@ -45,20 +45,64 @@ function scr_cast_card(){
 		);
 	}
 
+	//----------------------//
+	//CHECK ATTACKING TRAPS//
+	//----------------------//
+	var _flag_attack_cancelled = false;
+
+	if (_stct_card._str_card_type == "ATTACK"){
+
+		_flag_attack_cancelled = scr_trigger_attack_traps(
+			_ref_caster,
+			_ref_target,
+			_stct_card
+		);
+	}
+
 	//-----------//
 	// CAST CARD
 	//-----------//
-	if (
-		_ref_caster._str_team == "PLAYER" &&
-		global.ct_echo != 0 &&
-		_stct_card._str_card_name != "ECHO"
-	){
-
-		for (
-			var _it_echo = 0;
-			_it_echo < global.ct_echo + 1;
-			_it_echo++
+	if (!_flag_attack_cancelled){
+		if (
+			_ref_caster._str_team == "PLAYER" &&
+			global.ct_echo != 0 &&
+			_stct_card._str_card_effect_type != "ECHO"
 		){
+			for (
+				var _it_echo = 0;
+				_it_echo < global.ct_echo + 1;
+				_it_echo++
+			){
+
+				var _flag_cast_cancelled =
+					false;
+
+				if (
+					_stct_card._str_card_type == "ATTACK" &&
+					instance_exists(_ref_target)
+				){
+
+					_flag_cast_cancelled =
+						scr_trigger_target_traps(
+							_ref_caster,
+							_ref_target,
+							_stct_card
+						);
+				}
+
+				if (!_flag_cast_cancelled){
+
+					_fn_script(
+						_stct_card,
+						_ref_caster,
+						_ref_target
+					);
+				}
+			}
+
+			global.ct_echo = 0;
+		}
+		else{
 
 			var _flag_cast_cancelled =
 				false;
@@ -84,35 +128,6 @@ function scr_cast_card(){
 					_ref_target
 				);
 			}
-		}
-
-		global.ct_echo = 0;
-	}
-	else{
-
-		var _flag_cast_cancelled =
-			false;
-
-		if (
-			_stct_card._str_card_type == "ATTACK" &&
-			instance_exists(_ref_target)
-		){
-
-			_flag_cast_cancelled =
-				scr_trigger_target_traps(
-					_ref_caster,
-					_ref_target,
-					_stct_card
-				);
-		}
-
-		if (!_flag_cast_cancelled){
-
-			_fn_script(
-				_stct_card,
-				_ref_caster,
-				_ref_target
-			);
 		}
 	}
 

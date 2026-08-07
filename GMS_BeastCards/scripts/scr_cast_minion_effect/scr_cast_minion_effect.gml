@@ -41,6 +41,107 @@ function scr_cast_minion_effect(_ref_minion){
 
 	switch(_str_minion_name){
 
+		//-----------//
+		//SPORELING//
+		//-----------//
+		case "SPORELING":
+
+			if (!instance_exists(_ref_minion._ref_host)){
+				break;
+			}
+
+			if (
+				_ref_minion._ref_host._str_list != "ALIVE" ||
+				_ref_minion._ref_host._val_cur_hp <= 0
+			){
+				break;
+			}
+
+			//----------------------//
+			//STORE CURRENT TARGET//
+			//----------------------//
+			var _ref_original_target =
+				global.ref_target_beast;
+
+			//--------------//
+			//POISON HOST//
+			//--------------//
+			global.ref_target_beast =
+				_ref_minion._ref_host;
+
+			scr_apply_dot_status(
+				"POISON"
+			);
+
+			//----------------//
+			//RESTORE TARGET//
+			//----------------//
+			global.ref_target_beast =
+				_ref_original_target;
+
+			//-----------//
+			//PLAY SOUND//
+			//-----------//
+			audio_play_sound(snd_debuff,0,false);
+
+		break;
+
+		//--------//
+		//SERPENT//
+		//--------//
+		case "SERPENT":
+
+			if (ds_list_size(_list_enemy) <= 0){
+				break;
+			}
+
+			//-------------------//
+			//GET RANDOM ENEMY//
+			//-------------------//
+			var _ref_target = ds_list_find_value(
+				_list_enemy,
+				irandom(ds_list_size(_list_enemy) - 1)
+			);
+
+			if (!instance_exists(_ref_target)){
+				break;
+			}
+
+			//------------//
+			//DEAL DAMAGE//
+			//------------//
+			scr_damage_target_minion(
+				_ref_minion._val_magnitude,
+				_ref_target
+			);
+
+			//--------------//
+			//APPLY VENOM//
+			//--------------//
+			if (
+				instance_exists(_ref_target) &&
+				_ref_target._val_cur_hp > 0
+			){
+
+				var _ref_original_target =
+					global.ref_target_beast;
+
+				global.ref_target_beast =
+					_ref_target;
+
+				scr_apply_dot_status("VENOM");
+
+				global.ref_target_beast =
+					_ref_original_target;
+			}
+
+			//-----------//
+			//PLAY SOUND//
+			//-----------//
+			audio_play_sound(snd_attack,0,false);
+
+		break;
+
 		//--------------//
 		//DORMANT SEED//
 		//--------------//

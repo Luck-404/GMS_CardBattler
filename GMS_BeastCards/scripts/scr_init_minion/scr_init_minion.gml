@@ -12,6 +12,56 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 
 	switch(_str_id){
 		
+		case "SPORELING":
+
+			_ref_new_minion._str_team =
+				_ref_target._str_team;
+
+			_ref_new_minion._str_name =
+				"SPORELING";
+
+			_ref_new_minion._val_cur_hp =
+				1;
+
+			_ref_new_minion._val_max_hp =
+				1;
+
+			_ref_new_minion._val_magnitude =
+				1;
+
+			_ref_new_minion._ref_host =
+				_ref_target;
+
+			_ref_new_minion._spr_minion =
+				spr_minion_sporeling;
+
+		break;		
+		
+		case "SERPENT":
+
+			_ref_new_minion._str_team =
+				_ref_target._str_team;
+
+			_ref_new_minion._str_name =
+				"SERPENT";
+
+			_ref_new_minion._val_cur_hp =
+				3;
+
+			_ref_new_minion._val_max_hp =
+				3;
+
+			_ref_new_minion._val_magnitude =
+				3;
+
+			_ref_new_minion._ref_host =
+				_ref_target;
+
+			_ref_new_minion._spr_minion =
+				spr_minion_serpent;
+
+		break;		
+		
 		case "BLOOMING_SPRITE":
 			_ref_new_minion._str_team = _ref_target._str_team;
 			_ref_new_minion._str_name = "BLOOMING SPRITE";

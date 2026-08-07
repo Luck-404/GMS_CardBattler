@@ -96,4 +96,11 @@ function scr_apply_dot_status(_str_status_name){
 
 		break;				
 	}
+	
+	//------------------//
+	//CHECK DOT TRAPS//
+	//------------------//
+	scr_trigger_dot_traps(
+		global.ref_target_beast
+	);	
 }
