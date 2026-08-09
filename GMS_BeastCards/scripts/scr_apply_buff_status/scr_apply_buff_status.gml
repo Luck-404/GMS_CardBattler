@@ -1,29 +1,30 @@
 //===============================================================================//
 //
-// SCR_APPLY_BUFF_STATUS
-// FUNCTION: Applies a buff status or immediate buff effect.
-//           Handles mana gain, overhealth, and card draw modifiers.
-//           Spawns feedback popup text for successful applications.
+// SCRIPT: SCR_APPLY_BUFF_STATUS
+// FUNCTION: Applies Buff statuses through their shared status callbacks.
+//           Passes configurable magnitude and lifetime where supported.
+//           Infinite Buffs ignore supplied lifetime.
 //
 //===============================================================================//
-function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
+function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=undefined){
 
 	switch(_str_status_name){
 
 		case "MANAVINE":
 
-			var _ref_manavine_status = scr_status_buff_manavine(
-				"APPLY",
-				undefined,
-				_val_magnitude,
-				_val_lifetime
-			);
+			var _ref_manavine_status =
+				scr_status_buff_manavine(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
 
 			if (_ref_manavine_status != undefined){
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
-					"+1 MANA",
+					"+" + string(_ref_manavine_status._val_status_magnitude) + " MANA",
 					undefined,
 					c_green,
 					global.ref_caster_beast.x + irandom_range(-32,32),
@@ -32,6 +33,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 			}
 
 		break;
+
 
 		case "THORNS":
 
@@ -50,15 +52,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 					"THORNS",
 					undefined,
 					c_green,
-					global.ref_target_beast.x +
-						irandom_range(-32,32),
-					global.ref_target_beast.y -
-						24 +
-						irandom_range(-32,32)
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
 				);
 			}
 
 		break;
+
 
 		case "BLOOM":
 
@@ -74,26 +74,25 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
-					"BLOOM +5 OVERHEALTH",
+					"BLOOM +" + string(_val_magnitude) + " OVERHEALTH",
 					undefined,
 					c_green,
-					global.ref_target_beast.x +
-						irandom_range(-32,32),
-					global.ref_target_beast.y -
-						24 +
-						irandom_range(-32,32)
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
 				);
 			}
 
 		break;
 
+
 		case "TAUNT":
 
-			var _ref_taunt_status = scr_status_buff_taunt(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			var _ref_taunt_status =
+				scr_status_buff_taunt(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
 			if (_ref_taunt_status != undefined){
 
@@ -109,9 +108,10 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 
 		break;
 
+
 		case "ARMOR_OVER_TIME":
 
-			var _ref_status =
+			var _ref_armor_status =
 				scr_status_buff_armor_over_time(
 					"APPLY",
 					undefined,
@@ -119,22 +119,20 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 					_val_lifetime
 				);
 
-			if (_ref_status != undefined){
+			if (_ref_armor_status != undefined){
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
 					"ARMOR OVER TIME",
 					undefined,
 					c_green,
-					global.ref_target_beast.x +
-						irandom_range(-32,32),
-					global.ref_target_beast.y -
-						24 +
-						irandom_range(-32,32)
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
 				);
 			}
 
 		break;
+
 
 		case "REDIRECT":
 
@@ -151,15 +149,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 					"REDIRECT",
 					undefined,
 					c_green,
-					global.ref_target_beast.x +
-						irandom_range(-32,32),
-					global.ref_target_beast.y -
-						24 +
-						irandom_range(-32,32)
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
 				);
 			}
 
 		break;
+
 
 		case "SECOND_LIFE":
 
@@ -177,30 +173,37 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 					"SECOND LIFE",
 					undefined,
 					c_green,
-					global.ref_target_beast.x +
-						irandom_range(-32,32),
-					global.ref_target_beast.y -
-						24 +
-						irandom_range(-32,32)
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
 				);
 			}
 
 		break;
 
+
 		case "INSPIRATION":
 
-			scr_status_buff_inspiration("APPLY",undefined);
+			var _ref_inspiration_status =
+				scr_status_buff_inspiration(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+2 MANA",
-				undefined,
-				c_black,
-				global.ref_caster_beast.x + irandom_range(-32,32),
-				global.ref_caster_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_inspiration_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+2 MANA",
+					undefined,
+					c_black,
+					global.ref_caster_beast.x + irandom_range(-32,32),
+					global.ref_caster_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
 
 		break;
+
 
 		case "OVERHEALTH":
 
@@ -226,36 +229,50 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude,_val_lifetime){
 
 		break;
 
+
 		case "DRAW_2":
 
-			scr_status_buff_draw_2("APPLY",undefined);
+			var _ref_draw_status =
+				scr_status_buff_draw_2(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+2 CARD DRAW",
-				undefined,
-				c_green,
-				global.ref_caster_beast.x + irandom_range(-32,32),
-				global.ref_caster_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_draw_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+2 CARD DRAW",
+					undefined,
+					c_green,
+					global.ref_caster_beast.x + irandom_range(-32,32),
+					global.ref_caster_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
 
 		break;
-		
+
+
 		case "MALLEABILITY":
 
-			scr_status_buff_malleability(
-				"APPLY",
-				undefined
-			);
+			var _ref_malleability_status =
+				scr_status_buff_malleability(
+					"APPLY",
+					undefined
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"MALLEABILITY",
-				undefined,
-				c_white,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_malleability_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"MALLEABILITY",
+					undefined,
+					c_white,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
 
 		break;
 	}

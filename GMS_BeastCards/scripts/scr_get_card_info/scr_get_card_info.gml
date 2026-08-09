@@ -264,6 +264,41 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+
+			#region BRAMBLE_AURA
+			case "BRAMBLE_AURA":
+
+				_stct_return_card = {
+					_str_card_name : "BRAMBLE AURA",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_bramble_aura,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 3,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_bramble_aura,
+
+					_str_card_description :
+						"ST. Ranged. Grant Thorns for 3 turns. Melee attackers take 3 neutral damage."
+				};
+
+			break;
+			#endregion
+
 			#region BRAMBLE_ERUPTION
 			case "BRAMBLE_ERUPTION":
 				_stct_return_card = {
@@ -287,6 +322,7 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion			
+
 
 			#region CLAW
 			case "CLAW":

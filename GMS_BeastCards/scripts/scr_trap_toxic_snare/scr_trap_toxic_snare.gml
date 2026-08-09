@@ -93,7 +93,7 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			global.ref_target_beast =
 				_ref_target;
 
-			scr_apply_cc_status("STUN");
+			scr_apply_cc_status("STUN",1);
 
 			//-------------------//
 			//DESTROY TRAP FIRST//

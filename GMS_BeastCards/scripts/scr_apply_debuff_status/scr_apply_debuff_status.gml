@@ -1,21 +1,50 @@
 //===============================================================================//
 //
-// SCR_APPLY_DEBUFF_STATUS
-// FUNCTION: Attempts to apply a debuff status to the current target.
+// SCRIPT: SCR_APPLY_DEBUFF_STATUS
+// FUNCTION: Attempts to apply a Debuff status to the current target.
 //           Checks target resistance from CON before applying.
-//           Spawns feedback popup text for resisted or successful applications.
+//           Accepts an optional lifetime override.
+//           Spawns feedback popup text for successful applications.
 //
 //===============================================================================//
-function scr_apply_debuff_status(_str_status_name){
+function scr_apply_debuff_status(_str_status_name,_val_lifetime=undefined){
 
-	//
-	// RESIST CHECK
-	//
-	var _val_res_stat = global.ref_target_beast._ref_unit._val_beast_con_stat;
-	var _val_res_mod = scr_get_beast_grade_modifier(_val_res_stat);
-	var _val_resist_chance = floor(5 * _val_res_mod);
+	//----------------//
+	//VALIDATE TARGET//
+	//----------------//
+	var _ref_target =
+		global.ref_target_beast;
 
-	var _val_roll = irandom_range(0,100);
+	if (!instance_exists(_ref_target)){
+		return undefined;
+	}
+
+	if (_ref_target._ref_unit == undefined){
+		return undefined;
+	}
+
+	//--------------//
+	//RESIST CHECK//
+	//--------------//
+	var _val_res_stat =
+		_ref_target._ref_unit._val_beast_con_stat;
+
+	var _val_res_mod =
+		scr_get_beast_grade_modifier(
+			_val_res_stat
+		);
+
+	var _val_resist_chance =
+		floor(
+			5 *
+			_val_res_mod
+		);
+
+	var _val_roll =
+		irandom_range(
+			0,
+			100
+		);
 
 	if (_val_roll < _val_resist_chance){
 
@@ -24,49 +53,74 @@ function scr_apply_debuff_status(_str_status_name){
 			"RESISTED",
 			undefined,
 			c_black,
-			global.ref_target_beast.x + irandom_range(-32,32),
-			global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			_ref_target.x + irandom_range(-32,32),
+			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 
-		exit;
+		return undefined;
 	}
 
-	//
-	// APPLY STATUS
-	//
+	//--------------//
+	//APPLY STATUS//
+	//--------------//
+	var _ref_status =
+		undefined;
+
 	switch(_str_status_name){
 
+		//----------//
+		//WEAKNESS//
+		//----------//
 		case "WEAKNESS":
 
-			scr_status_debuff_weakness("APPLY",undefined);
+			_ref_status =
+				scr_status_debuff_weakness(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"WEAKNESS",
-				undefined,
-				c_black,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"WEAKNESS",
+					undefined,
+					c_black,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
 
 		break;
-		
+
+
+		//------------//
+		//VULNERABLE//
+		//------------//
 		case "VULNERABLE":
 
-			scr_status_debuff_vulnerable(
-				"APPLY",
-				undefined
-			);
+			_ref_status =
+				scr_status_debuff_vulnerable(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"VULNERABLE",
-				undefined,
-				c_maroon,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_status != undefined){
 
-		break;		
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"VULNERABLE",
+					undefined,
+					c_maroon,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
 	}
+
+	return _ref_status;
 }

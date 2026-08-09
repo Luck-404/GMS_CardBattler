@@ -1,12 +1,11 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_BLOOMING_SPRITE
-// FUNCTION: Handles the Blooming Sprite buff.
-//           Grants the host linear damage equal to the source minion's magnitude.
-//           Remains active only while that exact Blooming Sprite exists.
+// FUNCTION: Handles the Blooming Sprite Buff.
+//           Grants linear damage from one exact source Minion.
+//           Infinite while that specific Blooming Sprite remains alive.
 //
 //===============================================================================//
-
 function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion){
 
 	switch(_str_tag){
@@ -68,7 +67,12 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 					obj_battle_status
 				);
 
-			_ref_new_status._val_status_lifetime = -1;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				-1,
+				false,
+				true
+			);
 
 			_ref_new_status._scr_status =
 				scr_status_buff_blooming_sprite;
@@ -90,17 +94,15 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 
 			_ref_new_status._str_status_desc =
 				"+" +
-				string(
-					_ref_new_status._val_status_magnitude
-				) +
+				string(_ref_new_status._val_status_magnitude) +
 				" LINEAR DAMAGE WHILE BLOOMING SPRITE LIVES";
 
 			_ref_new_status._spr_status =
 				spr_status_buff_blooming_sprite;
 
-			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._ct_status_stacks =
+				1;
 
-			// SOURCE-LINKED; DOES NOT TICK
 			_ref_new_status._str_trigger_region =
 				undefined;
 
@@ -110,9 +112,6 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 			_ref_target._val_dmg_linear_bonus +=
 				_ref_new_status._val_status_magnitude;
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
@@ -139,9 +138,6 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 			var _ref_host =
 				_ref_status._ref_host;
 
-			//--------------------//
-			//REMOVE DAMAGE BONUS//
-			//--------------------//
 			if (instance_exists(_ref_host)){
 
 				_ref_host._val_dmg_linear_bonus -=
@@ -154,9 +150,6 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 					);
 			}
 
-			//----------------//
-			//REMOVE STATUS//
-			//----------------//
 			if (instance_exists(_ref_host)){
 
 				var _it_status =

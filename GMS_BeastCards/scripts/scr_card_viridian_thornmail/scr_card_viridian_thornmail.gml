@@ -2,7 +2,7 @@
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_THORNMAIL
 // FUNCTION: Resolves the Thornmail card effect.
-//           Grants Armor to the caster and applies permanent Thorns.
+//           Grants Armor to the caster and applies Thorns for three turns.
 //
 //===============================================================================//
 

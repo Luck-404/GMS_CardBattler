@@ -2,71 +2,114 @@
 //
 // SCRIPT: SCR_STATUS_DOT_POISON
 // FUNCTION: Handles the Poison damage-over-time status.
-//           Lasts 5 turns and ramps damage as its lifetime decreases.
-//           Deals 20%, 40%, 60%, 80%, then 100% of stacks, rounded up.
+//           Stackable Timed.
+//           Damage increases as Poison ages through its maximum duration.
+//           Reapplications add one stack and refresh to the stored maximum life.
 //
 //===============================================================================//
-function scr_status_dot_poison(_str_tag,_ref_status){
+function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
 		//-------//
-		// APPLY //
+		//APPLY//
 		//-------//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
+			var _ref_target =
+				global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			//----------------------//
-			//STACK EXISTING POISON//
-			//----------------------//
-			var _ref_existing_status = scr_check_for_status(
-				"POISON",
-				_ref_target
-			);
+			//----------------//
+			//DEFAULT LENGTH//
+			//----------------//
+			if (_val_lifetime == undefined){
+				_val_lifetime = 5;
+			}
 
+			//----------------//
+			//CHECK EXISTING//
+			//----------------//
+			var _ref_existing_status =
+				scr_check_for_status(
+					"POISON",
+					_ref_target
+				);
+
+			//----------------//
+			//STACK EXISTING//
+			//----------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_lifetime = 5;
 				_ref_existing_status._ct_status_stacks++;
+
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
 
-			//-----------------//
-			//CREATE NEW POISON//
-			//-----------------//
-			var _ref_new_status = instance_create_layer(
-				_ref_target.x,
-				_ref_target.y,
-				"ily_status",
-				obj_battle_status
+			//---------------//
+			//CREATE STATUS//
+			//---------------//
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
+
+			_ref_new_status._scr_status =
+				scr_status_dot_poison;
+
+			_ref_new_status._ref_host =
+				_ref_target;
+
+			_ref_new_status._str_status_type =
+				"DOT";
+
+			_ref_new_status._str_status_name =
+				"POISON";
+
+			_ref_new_status._str_status_desc =
+				"DAMAGE INCREASES AS POISON AGES";
+
+			_ref_new_status._spr_status =
+				spr_status_dot_poison;
+
+			_ref_new_status._ct_status_stacks =
+				1;
+
+			_ref_new_status._str_trigger_region =
+				"START";
+
+			//---------------------//
+			//INITIALIZE LIFETIME//
+			//---------------------//
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				true,
+				false
 			);
 
-			_ref_new_status._val_status_lifetime = 5;
-			_ref_new_status._scr_status = scr_status_dot_poison;
-			_ref_new_status._ref_host = _ref_target;
-
-			_ref_new_status._str_status_type = "DOT";
-			_ref_new_status._str_status_name = "POISON";
-			_ref_new_status._str_status_desc = "DAMAGE INCREASES AS POISON AGES";
-
-			_ref_new_status._spr_status = spr_status_dot_poison;
-
-			_ref_new_status._ct_status_stacks = 1;
-
-			_ref_new_status._str_trigger_region = "START";
-
+			//----------------//
+			//REGISTER STATUS//
+			//----------------//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_reposition_statuses(
+				_ref_target
+			);
 
 			return _ref_new_status;
 
@@ -74,7 +117,7 @@ function scr_status_dot_poison(_str_tag,_ref_status){
 
 
 		//--------//
-		// REPEAT //
+		//REPEAT//
 		//--------//
 		case "REPEAT":
 
@@ -82,18 +125,30 @@ function scr_status_dot_poison(_str_tag,_ref_status){
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				_ref_status._str_status_command = "DEATH";
+				_ref_status._str_status_command =
+					"DEATH";
+
 				return undefined;
 			}
 
-			//----------//
-			// LIFETIME //
-			//----------//
-			_ref_status._val_status_lifetime--;
+			//----------------//
+			//ADVANCE POISON//
+			//----------------//
+			/*
+				Poison historically ages BEFORE calculating
+				its damage for the current trigger.
+
+				That gives a 5-turn Poison:
+				20%, 40%, 60%, 80%, 100%.
+			*/
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 			//---------------//
 			//POISON DAMAGE//
@@ -101,28 +156,49 @@ function scr_status_dot_poison(_str_tag,_ref_status){
 			var _ct_poison_stacks =
 				_ref_status._ct_status_stacks;
 
-			var _val_poison_life =
+			var _val_poison_max =
+				max(
+					1,
+					_ref_status._val_status_lifetime_max
+				);
+
+			var _val_poison_age =
+				_val_poison_max -
 				_ref_status._val_status_lifetime;
 
-			var _val_damage = ceil(
-				_ct_poison_stacks *
-				((5 - _val_poison_life) / 5)
+			var _val_poison_progress =
+				clamp(
+					_val_poison_age /
+					_val_poison_max,
+					0,
+					1
+				);
+
+			var _val_damage =
+				ceil(
+					_ct_poison_stacks *
+					_val_poison_progress
+				);
+
+			audio_play_sound(
+				snd_attack,
+				0,
+				false
 			);
 
-			audio_play_sound(snd_attack,0,false);
-
 			//------------//
-			// OVERHEALTH //
+			//OVERHEALTH//
 			//------------//
 			if (
 				_val_damage > 0 &&
 				_ref_host._val_overhealth > 0
 			){
 
-				var _val_blocked = min(
-					_ref_host._val_overhealth,
-					_val_damage
-				);
+				var _val_blocked =
+					min(
+						_ref_host._val_overhealth,
+						_val_damage
+					);
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
@@ -133,19 +209,23 @@ function scr_status_dot_poison(_str_tag,_ref_status){
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_overhealth -= _val_blocked;
-				_val_damage -= _val_blocked;
+				_ref_host._val_overhealth -=
+					_val_blocked;
+
+				_val_damage -=
+					_val_blocked;
 			}
 
 			//---------//
-			// HOST HP //
+			//HOST HP//
 			//---------//
 			if (_val_damage > 0){
 
-				var _val_actual_damage = min(
-					_val_damage,
-					_ref_host._val_cur_hp
-				);
+				var _val_actual_damage =
+					min(
+						_val_damage,
+						_ref_host._val_cur_hp
+					);
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
@@ -156,29 +236,23 @@ function scr_status_dot_poison(_str_tag,_ref_status){
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_cur_hp = max(
-					0,
-					_ref_host._val_cur_hp - _val_actual_damage
-				);
+				_ref_host._val_cur_hp =
+					max(
+						0,
+						_ref_host._val_cur_hp -
+						_val_actual_damage
+					);
 			}
 
-			//---------------//
-			//LIFETIME CHECK//
-			//---------------//
-			if (_ref_status._val_status_lifetime <= 0){
-				_ref_status._str_status_command = "DEATH";
-			}
-			else{
-				_ref_status._str_status_command = "WAIT";
-			}
-
-			scr_reposition_statuses(_ref_host);
+			scr_reposition_statuses(
+				_ref_host
+			);
 
 		break;
 
 
 		//-------//
-		// DEATH //
+		//DEATH//
 		//-------//
 		case "DEATH":
 

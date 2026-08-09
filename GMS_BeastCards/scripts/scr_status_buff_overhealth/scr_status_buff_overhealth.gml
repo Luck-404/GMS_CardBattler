@@ -2,13 +2,12 @@
 //
 // SCRIPT: SCR_STATUS_BUFF_OVERHEALTH
 // FUNCTION: Handles temporary Overhealth.
-//           Grants a supplied amount of Overhealth for a supplied duration.
-//           Reapplications add Overhealth and refresh duration.
-//           Removes remaining status-granted Overhealth when expired.
+//           Reapplications add another stack and more Overhealth.
+//           Reapplication refreshes to the highest stored lifetime.
+//           Removes remaining status-owned Overhealth on expiration.
 //
 //===============================================================================//
-
-function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lifetime){
+function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
@@ -31,6 +30,12 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lif
 			if (_val_lifetime == undefined){
 				_val_lifetime = 3;
 			}
+
+			_val_magnitude =
+				max(0,_val_magnitude);
+
+			_val_lifetime =
+				max(1,_val_lifetime);
 
 			//----------------//
 			//CHECK EXISTING//
@@ -57,8 +62,10 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lif
 
 				_ref_existing_status._ct_status_stacks++;
 
-				_ref_existing_status._val_status_lifetime =
-					_val_lifetime;
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
@@ -74,8 +81,12 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lif
 					obj_battle_status
 				);
 
-			_ref_new_status._val_status_lifetime =
-				_val_lifetime;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				true,
+				false
+			);
 
 			_ref_new_status._val_status_magnitude =
 				_val_magnitude;
@@ -107,9 +118,6 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lif
 			_ref_new_status._str_trigger_region =
 				"START";
 
-			//----------------//
-			//GRANT OVERHEALTH//
-			//----------------//
 			_ref_target._val_overhealth +=
 				_val_magnitude;
 
@@ -141,31 +149,22 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lif
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_destroy_status(
+					_ref_status
+				);
 
 				return undefined;
 			}
 
-			//----------------------------//
-			//TRACK REMAINING OVERHEALTH//
-			//----------------------------//
 			_ref_status._val_status_remaining =
 				min(
 					_ref_status._val_status_remaining,
 					_ref_host._val_overhealth
 				);
 
-			//----------------//
-			//REDUCE LIFETIME//
-			//----------------//
-			_ref_status._val_status_lifetime--;
-
-			if (_ref_status._val_status_lifetime <= 0){
-				_ref_status._str_status_command = "DEATH";
-			}
-			else{
-				_ref_status._str_status_command = "WAIT";
-			}
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 		break;
 
@@ -192,7 +191,9 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude,_val_lif
 					);
 			}
 
-			scr_destroy_status(_ref_status);
+			scr_destroy_status(
+				_ref_status
+			);
 
 		break;
 	}

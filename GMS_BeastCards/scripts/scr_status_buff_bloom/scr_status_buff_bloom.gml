@@ -1,15 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_BLOOM
-// FUNCTION: Handles the Bloom buff.
-//           Grants 5 temporary Overhealth per stack for 2 turns.
-//           Reapplications add a stack and refresh duration.
-//           Regenerates up to 5 missing Bloom Overhealth each round.
-//           Removes remaining Bloom-granted Overhealth when expired.
+// FUNCTION: Handles the Bloom Buff.
+//           Each application adds one stack and temporary Overhealth.
+//           Reapplication refreshes to the status's stored maximum lifetime.
+//           Regenerates lost Bloom Overhealth each round.
 //
 //===============================================================================//
-
-function scr_status_buff_bloom(_str_tag,_ref_status,_val_magnitude,_val_lifetime){
+function scr_status_buff_bloom(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
@@ -18,7 +16,8 @@ function scr_status_buff_bloom(_str_tag,_ref_status,_val_magnitude,_val_lifetime
 		//-------//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
+			var _ref_target =
+				global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -32,23 +31,38 @@ function scr_status_buff_bloom(_str_tag,_ref_status,_val_magnitude,_val_lifetime
 				_val_lifetime = 2;
 			}
 
+			_val_magnitude =
+				max(0,_val_magnitude);
+
+			_val_lifetime =
+				max(1,_val_lifetime);
+
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status("BLOOM",_ref_target);
+			var _ref_existing_status =
+				scr_check_for_status(
+					"BLOOM",
+					_ref_target
+				);
 
 			//-------------//
 			//STACK BLOOM//
 			//-------------//
 			if (_ref_existing_status != -1){
 
-				_ref_target._val_overhealth += _val_magnitude;
+				_ref_target._val_overhealth +=
+					_val_magnitude;
 
-				_ref_existing_status._val_status_remaining += _val_magnitude;
+				_ref_existing_status._val_status_remaining +=
+					_val_magnitude;
 
 				_ref_existing_status._ct_status_stacks++;
 
-				_ref_existing_status._val_status_lifetime = _val_lifetime;
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
@@ -56,15 +70,20 @@ function scr_status_buff_bloom(_str_tag,_ref_status,_val_magnitude,_val_lifetime
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
-			var _ref_new_status = instance_create_layer(
-				_ref_target.x,
-				_ref_target.y,
-				"ily_status",
-				obj_battle_status
-			);
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
 
-			_ref_new_status._val_status_lifetime =
-				_val_lifetime;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				true,
+				false
+			);
 
 			_ref_new_status._val_status_magnitude =
 				_val_magnitude;
@@ -188,20 +207,11 @@ function scr_status_buff_bloom(_str_tag,_ref_status,_val_magnitude,_val_lifetime
 			}
 
 			//----------------//
-			//REDUCE LIFETIME//
+			//UPDATE LIFETIME//
 			//----------------//
-			_ref_status._val_status_lifetime--;
-
-			if (_ref_status._val_status_lifetime <= 0){
-
-				_ref_status._str_status_command =
-					"DEATH";
-			}
-			else{
-
-				_ref_status._str_status_command =
-					"WAIT";
-			}
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 		break;
 

@@ -1,13 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_ARMOR_OVER_TIME
-// FUNCTION: Handles the generic Armor Over Time buff.
-//           Stores configurable Armor magnitude and lifetime on the status.
-//           Grants stored Armor at the end of each turn until expiration.
+// FUNCTION: Handles the generic Armor Over Time Buff.
+//           Stores configurable Armor magnitude and lifetime.
+//           Reapplication updates magnitude and refreshes duration.
+//           Grants stored Armor at the end of each turn.
 //
 //===============================================================================//
-
-function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_val_lifetime){
+function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
@@ -23,9 +23,6 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 				return undefined;
 			}
 
-			//----------------//
-			//VALIDATE VALUES//
-			//----------------//
 			if (_val_magnitude == undefined){
 				_val_magnitude = 0;
 			}
@@ -49,16 +46,15 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 					_ref_target
 				);
 
-			//-------------------//
-			//REFRESH / REPLACE//
-			//-------------------//
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._val_status_magnitude =
 					_val_magnitude;
 
-				_ref_existing_status._val_status_lifetime =
-					_val_lifetime;
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				_ref_existing_status._str_status_desc =
 					"+" +
@@ -68,9 +64,9 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 				return _ref_existing_status;
 			}
 
-			//----------------//
+			//---------------//
 			//CREATE STATUS//
-			//----------------//
+			//---------------//
 			var _ref_new_status =
 				instance_create_layer(
 					_ref_target.x,
@@ -79,8 +75,12 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 					obj_battle_status
 				);
 
-			_ref_new_status._val_status_lifetime =
-				_val_lifetime;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
 
 			_ref_new_status._scr_status =
 				scr_status_buff_armor_over_time;
@@ -96,8 +96,8 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 
 			_ref_new_status._str_status_desc =
 				"+" +
-				string(_val_magnitude) +
-				" ARMOR AT TURN END";
+					string(_val_magnitude) +
+					" ARMOR AT TURN END";
 
 			_ref_new_status._spr_status =
 				spr_status_buff_armor_over_time;
@@ -111,9 +111,6 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 			_ref_new_status._str_trigger_region =
 				"END";
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
@@ -158,22 +155,11 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 			);
 
 			//----------------//
-			//REDUCE LIFETIME//
+			//UPDATE LIFETIME//
 			//----------------//
-			_ref_status._val_status_lifetime--;
-
-			if (
-				_ref_status._val_status_lifetime <= 0
-			){
-
-				_ref_status._str_status_command =
-					"DEATH";
-			}
-			else{
-
-				_ref_status._str_status_command =
-					"WAIT";
-			}
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 			scr_reposition_statuses(
 				_ref_host
@@ -187,13 +173,9 @@ function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude,_va
 		//-------//
 		case "DEATH":
 
-			if (!instance_exists(_ref_status)){
-				return undefined;
+			if (instance_exists(_ref_status)){
+				scr_destroy_status(_ref_status);
 			}
-
-			scr_destroy_status(
-				_ref_status
-			);
 
 		break;
 	}

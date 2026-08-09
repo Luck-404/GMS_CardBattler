@@ -1,13 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_SECOND_LIFE
-// FUNCTION: Handles the Second Life buff.
+// FUNCTION: Handles the Second Life Buff.
 //           Prevents the host's next defeat while active.
-//           Restores the host to 25% maximum HP and consumes the status.
+//           Reapplication refreshes duration without stacking.
+//           Restores 25% maximum HP when triggered.
 //
 //===============================================================================//
-
-function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
+function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
@@ -39,13 +39,12 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 					_ref_target
 				);
 
-			//----------------//
-			//REFRESH STATUS//
-			//----------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_lifetime =
-					_val_lifetime;
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
@@ -61,8 +60,12 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 					obj_battle_status
 				);
 
-			_ref_new_status._val_status_lifetime =
-				_val_lifetime;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
 
 			_ref_new_status._scr_status =
 				scr_status_buff_second_life;
@@ -88,9 +91,6 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 			_ref_new_status._str_trigger_region =
 				"END";
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
@@ -126,23 +126,9 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 				return undefined;
 			}
 
-			//----------------//
-			//REDUCE LIFETIME//
-			//----------------//
-			_ref_status._val_status_lifetime--;
-
-			if (
-				_ref_status._val_status_lifetime <= 0
-			){
-
-				_ref_status._str_status_command =
-					"DEATH";
-			}
-			else{
-
-				_ref_status._str_status_command =
-					"WAIT";
-			}
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 			scr_reposition_statuses(
 				_ref_host
@@ -167,9 +153,6 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 				return false;
 			}
 
-			//----------------//
-			//RESTORE 25% HP//
-			//----------------//
 			_ref_host._val_cur_hp =
 				max(
 					1,
@@ -179,9 +162,6 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 					)
 				);
 
-			//-------------//
-			//SPAWN POPUP//
-			//-------------//
 			scr_spawn_popup_scrolling(
 				"TEXT",
 				"SECOND LIFE",
@@ -197,9 +177,6 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 				false
 			);
 
-			//----------------//
-			//CONSUME STATUS//
-			//----------------//
 			scr_destroy_status(
 				_ref_status
 			);
@@ -215,9 +192,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime){
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(
-					_ref_status
-				);
+				scr_destroy_status(_ref_status);
 			}
 
 		break;

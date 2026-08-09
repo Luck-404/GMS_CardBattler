@@ -1,21 +1,50 @@
 //===============================================================================//
 //
-// SCR_APPLY_DOT_STATUS
+// SCRIPT: SCR_APPLY_DOT_STATUS
 // FUNCTION: Attempts to apply a damage-over-time status to the current target.
 //           Checks target resistance from CON before applying.
+//           Accepts an optional lifetime override.
 //           Spawns feedback popup text for resisted or successful applications.
 //
 //===============================================================================//
-function scr_apply_dot_status(_str_status_name){
+function scr_apply_dot_status(_str_status_name,_val_lifetime=undefined){
 
-	//
-	// RESIST CHECK
-	//
-	var _val_res_stat = global.ref_target_beast._ref_unit._val_beast_con_stat;
-	var _val_res_mod = scr_get_beast_grade_modifier(_val_res_stat);
-	var _val_resist_chance = floor(5 * _val_res_mod);
+	//----------------//
+	//VALIDATE TARGET//
+	//----------------//
+	var _ref_target =
+		global.ref_target_beast;
 
-	var _val_roll = irandom_range(0,100);
+	if (!instance_exists(_ref_target)){
+		return undefined;
+	}
+
+	if (_ref_target._ref_unit == undefined){
+		return undefined;
+	}
+
+	//--------------//
+	//RESIST CHECK//
+	//--------------//
+	var _val_res_stat =
+		_ref_target._ref_unit._val_beast_con_stat;
+
+	var _val_res_mod =
+		scr_get_beast_grade_modifier(
+			_val_res_stat
+		);
+
+	var _val_resist_chance =
+		floor(
+			5 *
+			_val_res_mod
+		);
+
+	var _val_roll =
+		irandom_range(
+			0,
+			100
+		);
 
 	if (_val_roll < _val_resist_chance){
 
@@ -24,83 +53,136 @@ function scr_apply_dot_status(_str_status_name){
 			"RESISTED",
 			undefined,
 			c_black,
-			global.ref_target_beast.x + irandom_range(-32,32),
-			global.ref_target_beast.y - 24 + irandom_range(-32,32)
+			_ref_target.x + irandom_range(-32,32),
+			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 
-		exit;
+		return undefined;
 	}
 
-	//
-	// APPLY STATUS
-	//
+	//--------------//
+	//APPLY STATUS//
+	//--------------//
+	var _ref_status =
+		undefined;
+
 	switch(_str_status_name){
 
+		//-------//
+		//BLEED//
+		//-------//
 		case "BLEED":
 
-			scr_status_dot_bleed("APPLY",undefined);
+			_ref_status =
+				scr_status_dot_bleed(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+1 BLEED",
-				undefined,
-				c_maroon,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 BLEED",
+					undefined,
+					c_maroon,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
 
 		break;
-		
+
+
+		//------//
+		//BURN//
+		//------//
 		case "BURN":
 
-			scr_status_dot_burn("APPLY",undefined);
+			_ref_status =
+				scr_status_dot_burn(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+1 BURN",
-				undefined,
-				c_red,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_status != undefined){
 
-		break;		
-		
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 BURN",
+					undefined,
+					c_red,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+
+		//--------//
+		//POISON//
+		//--------//
 		case "POISON":
 
-			scr_status_dot_poison("APPLY",undefined);
+			_ref_status =
+				scr_status_dot_poison(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+1 POISON",
-				undefined,
-				c_lime,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_status != undefined){
 
-		break;		
-		
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 POISON",
+					undefined,
+					c_lime,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+
+		//-------//
+		//VENOM//
+		//-------//
 		case "VENOM":
 
-			scr_status_dot_venom("APPLY",undefined);
+			_ref_status =
+				scr_status_dot_venom(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"+1 VENOM",
-				undefined,
-				c_purple,
-				global.ref_target_beast.x + irandom_range(-32,32),
-				global.ref_target_beast.y - 24 + irandom_range(-32,32)
-			);
+			if (_ref_status != undefined){
 
-		break;				
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 VENOM",
+					undefined,
+					c_purple,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
 	}
 	
+
 	//------------------//
 	//CHECK DOT TRAPS//
 	//------------------//
 	scr_trigger_dot_traps(
 		global.ref_target_beast
-	);	
+	);		
+
+	return _ref_status;
 }

@@ -1,13 +1,12 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_MANAVINE
-// FUNCTION: Handles the Manavine global mana buff.
-//           Grants one temporary maximum/current mana for three rounds.
-//           Refreshes its own duration when reapplied.
-//           Removes only its own mana bonus when the effect expires.
+// FUNCTION: Handles the Manavine global Mana Buff.
+//           Grants temporary maximum/current Mana.
+//           Reapplication refreshes duration without stacking its Mana bonus.
 //
 //===============================================================================//
-function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifetime){
+function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
@@ -24,21 +23,27 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 				_val_lifetime = 3;
 			}
 
+			_val_magnitude =
+				max(0,_val_magnitude);
+
+			_val_lifetime =
+				max(1,_val_lifetime);
+
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status(
-				"MANAVINE",
-				global.list_statuses
-			);
+			var _ref_existing_status =
+				scr_check_for_status(
+					"MANAVINE",
+					global.list_statuses
+				);
 
-			//----------------//
-			//REFRESH STATUS//
-			//----------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_lifetime =
-					_val_lifetime;
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
@@ -46,15 +51,20 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
-			var _ref_new_status = instance_create_layer(
-				room_width * 0.5,
-				room_height * 0.5,
-				"ily_status",
-				obj_battle_status
-			);
+			var _ref_new_status =
+				instance_create_layer(
+					room_width * 0.5,
+					room_height * 0.5,
+					"ily_status",
+					obj_battle_status
+				);
 
-			_ref_new_status._val_status_lifetime =
-				_val_lifetime;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
 
 			_ref_new_status._val_status_magnitude =
 				_val_magnitude;
@@ -69,7 +79,11 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 				"MANAVINE";
 
 			_ref_new_status._str_status_desc =
-				"+1 MANA FOR 3 ROUNDS";
+				"+" +
+				string(_val_magnitude) +
+				" MANA FOR " +
+				string(_val_lifetime) +
+				" ROUNDS";
 
 			_ref_new_status._spr_status =
 				spr_status_buff_manavine;
@@ -80,6 +94,9 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 			_ref_new_status._str_status_type =
 				"GLOBAL";
 
+			_ref_new_status._ct_status_stacks =
+				1;
+
 			//-----------------//
 			//GRANT MANA BONUS//
 			//-----------------//
@@ -89,9 +106,6 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 			obj_battle_player_controller._val_cur_mana +=
 				_val_magnitude;
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
 			ds_list_add(
 				global.list_statuses,
 				_ref_new_status
@@ -115,18 +129,9 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 				return undefined;
 			}
 
-			_ref_status._val_status_lifetime--;
-
-			if (_ref_status._val_status_lifetime <= 0){
-
-				_ref_status._str_status_command =
-					"DEATH";
-			}
-			else{
-
-				_ref_status._str_status_command =
-					"WAIT";
-			}
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 			scr_reposition_statuses(
 				global.list_statuses
@@ -147,9 +152,6 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude,_val_lifet
 			var _val_mana_bonus =
 				_ref_status._val_status_magnitude;
 
-			//-----------------//
-			//REMOVE OWN BONUS//
-			//-----------------//
 			obj_battle_player_controller._val_max_mana =
 				max(
 					obj_battle_player_controller._val_saved_max_mana,

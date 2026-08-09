@@ -13,6 +13,11 @@
 
 // STATE
 _val_status_lifetime = 3;
+_val_status_lifetime_max = 3;
+
+_flag_status_stackable = false;
+_flag_status_infinite = false;
+
 _str_status_command = "WAIT";
 
 // SCRIPT

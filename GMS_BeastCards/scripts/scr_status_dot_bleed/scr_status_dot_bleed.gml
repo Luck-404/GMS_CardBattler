@@ -2,71 +2,114 @@
 //
 // SCRIPT: SCR_STATUS_DOT_BLEED
 // FUNCTION: Handles the Bleed damage-over-time status.
+//           Stackable Timed.
 //           Deals one hit equal to the current Bleed stack count.
-//           Lasts 4 turns and refreshes to 4 turns when another stack is added.
+//           Reapplications add one stack and refresh to the stored maximum life.
 //
 //===============================================================================//
-function scr_status_dot_bleed(_str_tag,_ref_status){
+function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
 		//-------//
-		// APPLY //
+		//APPLY//
 		//-------//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
+			var _ref_target =
+				global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			//--------------------//
-			//STACK EXISTING BLEED//
-			//--------------------//
-			var _ref_existing_status = scr_check_for_status(
-				"BLEED",
-				_ref_target
-			);
+			//----------------//
+			//DEFAULT LENGTH//
+			//----------------//
+			if (_val_lifetime == undefined){
+				_val_lifetime = 4;
+			}
 
+			//----------------//
+			//CHECK EXISTING//
+			//----------------//
+			var _ref_existing_status =
+				scr_check_for_status(
+					"BLEED",
+					_ref_target
+				);
+
+			//----------------//
+			//STACK EXISTING//
+			//----------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_lifetime = 4;
 				_ref_existing_status._ct_status_stacks++;
+
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
 
-			//----------------//
-			//CREATE NEW BLEED//
-			//----------------//
-			var _ref_new_status = instance_create_layer(
-				_ref_target.x,
-				_ref_target.y,
-				"ily_status",
-				obj_battle_status
+			//---------------//
+			//CREATE STATUS//
+			//---------------//
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
+
+			_ref_new_status._scr_status =
+				scr_status_dot_bleed;
+
+			_ref_new_status._ref_host =
+				_ref_target;
+
+			_ref_new_status._str_status_type =
+				"DOT";
+
+			_ref_new_status._str_status_name =
+				"BLEED";
+
+			_ref_new_status._str_status_desc =
+				"DEALS DAMAGE EQUAL TO BLEED STACKS";
+
+			_ref_new_status._spr_status =
+				spr_status_dot_bleed;
+
+			_ref_new_status._ct_status_stacks =
+				1;
+
+			_ref_new_status._str_trigger_region =
+				"START";
+
+			//---------------------//
+			//INITIALIZE LIFETIME//
+			//---------------------//
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				true,
+				false
 			);
 
-			_ref_new_status._val_status_lifetime = 4;
-			_ref_new_status._scr_status = scr_status_dot_bleed;
-			_ref_new_status._ref_host = _ref_target;
-
-			_ref_new_status._str_status_type = "DOT";
-			_ref_new_status._str_status_name = "BLEED";
-			_ref_new_status._str_status_desc = "DEALS DAMAGE EQUAL TO BLEED STACKS";
-
-			_ref_new_status._spr_status = spr_status_dot_bleed;
-
-			_ref_new_status._ct_status_stacks = 1;
-
-			_ref_new_status._str_trigger_region = "START";
-
+			//----------------//
+			//REGISTER STATUS//
+			//----------------//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_reposition_statuses(
+				_ref_target
+			);
 
 			return _ref_new_status;
 
@@ -74,7 +117,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status){
 
 
 		//--------//
-		// REPEAT //
+		//REPEAT//
 		//--------//
 		case "REPEAT":
 
@@ -82,33 +125,42 @@ function scr_status_dot_bleed(_str_tag,_ref_status){
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				_ref_status._str_status_command = "DEATH";
+				_ref_status._str_status_command =
+					"DEATH";
+
 				return undefined;
 			}
 
-			//--------------------------//
+			//-------------------------//
 			//DAMAGE = CURRENT STACKS//
-			//--------------------------//
-			var _val_damage = _ref_status._ct_status_stacks;
+			//-------------------------//
+			var _val_damage =
+				_ref_status._ct_status_stacks;
 
-			audio_play_sound(snd_attack,0,false);
+			audio_play_sound(
+				snd_attack,
+				0,
+				false
+			);
 
 			//------------//
-			// OVERHEALTH //
+			//OVERHEALTH//
 			//------------//
 			if (
 				_val_damage > 0 &&
 				_ref_host._val_overhealth > 0
 			){
 
-				var _val_blocked = min(
-					_ref_host._val_overhealth,
-					_val_damage
-				);
+				var _val_blocked =
+					min(
+						_ref_host._val_overhealth,
+						_val_damage
+					);
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
@@ -119,19 +171,23 @@ function scr_status_dot_bleed(_str_tag,_ref_status){
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_overhealth -= _val_blocked;
-				_val_damage -= _val_blocked;
+				_ref_host._val_overhealth -=
+					_val_blocked;
+
+				_val_damage -=
+					_val_blocked;
 			}
 
 			//---------//
-			// HOST HP //
+			//HOST HP//
 			//---------//
 			if (_val_damage > 0){
 
-				var _val_actual_damage = min(
-					_val_damage,
-					_ref_host._val_cur_hp
-				);
+				var _val_actual_damage =
+					min(
+						_val_damage,
+						_ref_host._val_cur_hp
+					);
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
@@ -142,31 +198,30 @@ function scr_status_dot_bleed(_str_tag,_ref_status){
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_cur_hp = max(
-					0,
-					_ref_host._val_cur_hp - _val_actual_damage
-				);
+				_ref_host._val_cur_hp =
+					max(
+						0,
+						_ref_host._val_cur_hp -
+						_val_actual_damage
+					);
 			}
 
-			//----------//
-			// LIFETIME //
-			//----------//
-			_ref_status._val_status_lifetime--;
+			//----------------//
+			//REDUCE LIFETIME//
+			//----------------//
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
-			if (_ref_status._val_status_lifetime <= 0){
-				_ref_status._str_status_command = "DEATH";
-			}
-			else{
-				_ref_status._str_status_command = "WAIT";
-			}
-
-			scr_reposition_statuses(_ref_host);
+			scr_reposition_statuses(
+				_ref_host
+			);
 
 		break;
 
 
 		//-------//
-		// DEATH //
+		//DEATH//
 		//-------//
 		case "DEATH":
 

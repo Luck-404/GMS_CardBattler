@@ -1,13 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_THORNS
-// FUNCTION: Handles the Thorns buff status.
-//           Stores neutral retaliation damage.
-//           Supports permanent or temporary Thorns durations.
+// FUNCTION: Handles the Thorns Buff.
+//           Causes melee attackers to receive stored neutral damage.
+//           Reapplication keeps the strongest damage magnitude
+//           and refreshes its unstackable timed duration.
 //
 //===============================================================================//
-
-function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetime){
+function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
 	switch(_str_tag){
 
@@ -34,6 +34,9 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 			_val_magnitude =
 				max(0,_val_magnitude);
 
+			_val_lifetime =
+				max(1,_val_lifetime);
+
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
@@ -55,24 +58,12 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 					);
 
 				//----------------//
-				//UPDATE LIFETIME//
+				//REFRESH LIFE//
 				//----------------//
-				if (
-					_ref_existing_status._val_status_lifetime == 3 ||
-					_val_lifetime == 3
-				){
-					_ref_existing_status._val_status_lifetime = 3;
-					_ref_existing_status._str_trigger_region = undefined;
-				}
-				else{
-					_ref_existing_status._val_status_lifetime =
-						max(
-							_ref_existing_status._val_status_lifetime,
-							_val_lifetime
-						);
-
-					_ref_existing_status._str_trigger_region = "END";
-				}
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				_ref_existing_status._str_status_desc =
 					"MELEE ATTACKERS TAKE " +
@@ -93,8 +84,12 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 					obj_battle_status
 				);
 
-			_ref_new_status._val_status_lifetime =
-				_val_lifetime;
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
 
 			_ref_new_status._scr_status =
 				scr_status_buff_thorns;
@@ -110,8 +105,8 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 
 			_ref_new_status._str_status_desc =
 				"MELEE ATTACKERS TAKE " +
-				string(_val_magnitude) +
-				" NEUTRAL DAMAGE";
+					string(_val_magnitude) +
+					" NEUTRAL DAMAGE";
 
 			_ref_new_status._spr_status =
 				spr_status_buff_thorns;
@@ -122,19 +117,9 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 			_ref_new_status._val_status_magnitude =
 				_val_magnitude;
 
-			// PERMANENT THORNS DOES NOT TICK
-			if (_val_lifetime == -1){
-				_ref_new_status._str_trigger_region =
-					undefined;
-			}
-			else{
-				_ref_new_status._str_trigger_region =
-					"END";
-			}
+			_ref_new_status._str_trigger_region =
+				"END";
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
@@ -158,19 +143,9 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude,_val_lifetim
 				return undefined;
 			}
 
-			if (_ref_status._val_status_lifetime == -1){
-				_ref_status._str_status_command = "WAIT";
-				return _ref_status;
-			}
-
-			_ref_status._val_status_lifetime--;
-
-			if (_ref_status._val_status_lifetime <= 0){
-				_ref_status._str_status_command = "DEATH";
-			}
-			else{
-				_ref_status._str_status_command = "WAIT";
-			}
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 		break;
 

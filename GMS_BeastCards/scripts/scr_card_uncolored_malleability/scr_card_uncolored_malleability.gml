@@ -12,7 +12,7 @@ function scr_card_uncolored_malleability(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	//APPLY BUFF STATUS//
 	//------------------//
-	scr_apply_buff_status("MALLEABILITY",0,-1);
+	scr_apply_buff_status("MALLEABILITY");
 
 	//----------------//
 	//PLAY ANIMATION//
