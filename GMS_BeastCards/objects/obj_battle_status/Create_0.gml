@@ -20,6 +20,7 @@ _flag_status_infinite = false;
 
 _str_status_command = "WAIT";
 
+
 // SCRIPT
 _scr_status = undefined;
 
@@ -33,6 +34,17 @@ _str_status_type = "DEFAULT";
 _str_status_name = "NONE";
 _str_status_desc = "NONE";
 _spr_status = undefined;
+
+//----------------------//
+//MOVEMENT RESTRICTIONS//
+//----------------------//
+_flag_status_prevent_reposition = false;
+
+//------//
+//AURA//
+//------//
+_str_aura_scope = undefined;   // SELF, TEAMWIDE, GLOBAL
+_str_aura_trigger = undefined; // HEALED, future trigger types
 
 //----------------//
 //STATUS CLEANSE//

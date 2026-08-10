@@ -35,44 +35,36 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 			_ref_new_minion._spr_minion =
 				spr_minion_sporeling;
 
-		break;		
+		break;	
 		
 		case "SERPENT":
 
-			_ref_new_minion._str_team =
-				_ref_target._str_team;
+			_ref_new_minion._str_team = _ref_target._str_team;
+			_ref_new_minion._str_name = "SERPENT";
 
-			_ref_new_minion._str_name =
-				"SERPENT";
+			_ref_new_minion._val_cur_hp = 3;
+			_ref_new_minion._val_max_hp = 3;
 
-			_ref_new_minion._val_cur_hp =
-				3;
+			_ref_new_minion._val_magnitude = 1;
 
-			_ref_new_minion._val_max_hp =
-				3;
+			_ref_new_minion._ref_host = _ref_target;
+			_ref_new_minion._spr_minion = spr_minion_serpent;
 
-			_ref_new_minion._val_magnitude =
-				3;
-
-			_ref_new_minion._ref_host =
-				_ref_target;
-
-			_ref_new_minion._spr_minion =
-				spr_minion_serpent;
-
-		break;		
+		break;
 		
 		case "BLOOMING_SPRITE":
+
 			_ref_new_minion._str_team = _ref_target._str_team;
 			_ref_new_minion._str_name = "BLOOMING SPRITE";
 
 			_ref_new_minion._val_cur_hp = 2;
 			_ref_new_minion._val_max_hp = 2;
 
-			_ref_new_minion._val_magnitude = 2;
+			_ref_new_minion._val_magnitude = 1;
 
 			_ref_new_minion._ref_host = _ref_target;
 			_ref_new_minion._spr_minion = spr_minion_blooming_sprite;
+
 		break;
 
 		case "DORMANT_SEED":
@@ -92,15 +84,18 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 		break;
 
 		case "LIFE_SPIRIT":
+
 			_ref_new_minion._str_team = _ref_target._str_team;
 			_ref_new_minion._str_name = "LIFE SPIRIT";
 
 			_ref_new_minion._val_cur_hp = 2;
 			_ref_new_minion._val_max_hp = 2;
-			_ref_new_minion._val_magnitude = 2;
+
+			_ref_new_minion._val_magnitude = 1;
 
 			_ref_new_minion._ref_host = _ref_target;
 			_ref_new_minion._spr_minion = spr_minion_life_spirit;
+
 		break;
 		
 		case "THORNLING":
@@ -108,14 +103,15 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 			_ref_new_minion._str_team = _ref_target._str_team;
 			_ref_new_minion._str_name = "THORNLING";
 
-			_ref_new_minion._val_cur_hp = 1;
-			_ref_new_minion._val_max_hp = 1;
-			_ref_new_minion._val_magnitude = 2;
+			_ref_new_minion._val_cur_hp = 2;
+			_ref_new_minion._val_max_hp = 2;
+
+			_ref_new_minion._val_magnitude = 1;
 
 			_ref_new_minion._ref_host = _ref_target;
 			_ref_new_minion._spr_minion = spr_minion_thornling;
 
-		break;		
+		break;	
 	}
 	
 	if (ds_list_size(_ref_target._list_minions) < _ref_target._ct_minions_max){

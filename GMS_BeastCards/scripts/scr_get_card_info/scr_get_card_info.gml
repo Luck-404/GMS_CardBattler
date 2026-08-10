@@ -201,8 +201,7 @@ function scr_get_card_info(_str_card_name){
 
 					_scr_card : scr_card_viridian_blooming_sprite,
 
-					_str_card_description :
-						"ST. Ranged. Summon a 2 HP Blooming Sprite. While alive, it grants its host +5 linear damage."
+					_str_card_description : "ST. Ranged. Summon a Blooming Sprite (2/1). While alive, its host gains +2 linear damage per Magnitude."
 				};
 			break;
 			#endregion
@@ -323,6 +322,73 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion			
 
+			#region BURGEONING_BLOOM
+			case "BURGEONING_BLOOM":
+
+				_stct_return_card = {
+					_str_card_name : "BURGEONING BLOOM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_burgeoning_bloom,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0.25,
+					_str_card_scalar : "PERCENT",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_burgeoning_bloom,
+
+					_str_card_description :
+						"Self Aura. (+) When this Beast receives healing, adjacent allied Beasts heal for 25% of the amount restored. (-) This Beast's Maximum HP is reduced by 15%."
+				};
+
+			break;
+			#endregion
+
+			#region BURSTING_SEED
+			case "BURSTING_SEED":
+
+				_stct_return_card = {
+					_str_card_name : "BURSTING SEED",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_bursting_seed,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_bursting_seed,
+
+					_str_card_description :
+						"ST. Ranged. Apply Armorbreak for 2 rounds and Vulnerable for 1 round."
+				};
+
+			break;
+			#endregion
 
 			#region CLAW
 			case "CLAW":
@@ -347,6 +413,74 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion
+
+			#region CRIPPLING_VINES
+			case "CRIPPLING_VINES":
+
+				_stct_return_card = {
+					_str_card_name : "CRIPPLING VINES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_crippling_vines,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_crippling_vines,
+
+					_str_card_description :
+						"ST. Ranged. Reduce the target's Physical Power by 1 major stage for 3 rounds and prevent repositioning."
+				};
+
+			break;
+			#endregion
+
+		#region CULTIVATE
+		case "CULTIVATE":
+
+			_stct_return_card = {
+				_str_card_name : "CULTIVATE",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_cultivate,
+				_arr_card_colors : ["VIRIDIAN",undefined],
+
+				_str_card_range : "RANGED",
+				_str_card_type : "SUPPORT",
+				_str_card_effect_type : "BUFF",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "ST",
+
+				_val_card_magnitude : 2,
+				_str_card_scalar : "LINEAR",
+
+				_str_card_archetype_req : undefined,
+				_str_card_class_req : undefined,
+
+				_str_card_rarity : "III",
+				_val_card_mana_cost : 2,
+				_flag_card_exhausts : false,
+
+				_scr_card : scr_card_viridian_cultivate,
+
+				_str_card_description :
+					"ST. Ranged. Increase the current HP, maximum HP, and Magnitude of all minions on target by 2 for the remainder of battle."
+			};
+
+		break;
+		#endregion
 
 			#region DISEASE
 			case "DISEASE":
@@ -431,7 +565,7 @@ function scr_get_card_info(_str_card_name){
 
 					_scr_card : scr_card_viridian_dormant_seed,
 
-					_str_card_description : "ST. Ranged. Spawn one Dormant Seed minion. After 2 rounds, it transforms into a random Viridian minion."
+					_str_card_description : "ST. Ranged. Spawn one Dormant Seed (1/0). After 2 rounds, it hatches into a random Viridian minion. HP and Magnitude bonuses carry over to the hatched minion."
 				};
 
 			break;
@@ -774,7 +908,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_life_spirit,
-					_str_card_description : "Ranged, ST, Summons 2/2 Life Spirit that heals host for +2 each round."
+					_str_card_description : "Ranged, ST. Summons a Life Spirit (2/1) that heals its host for 2 HP per Magnitude each round."
 				};
 			break;
 			#endregion
@@ -1411,7 +1545,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_serpent_summon,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Self. Summon 3 Serpents (3/3). Each Serpent attacks a random enemy and applies 1 Venom each round."
+						"EXHAUSTS. ST. Self. Spawn 3 Serpents (3/1). Each Serpent applies 1 Venom per Magnitude to one random enemy each round."
 				};
 
 			break;
@@ -1964,7 +2098,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_venom_bloom,
 
 					_str_card_description :
-						"EXHAUSTS. Trap. Place on an enemy Beast. When it dies, apply Poison and summon a Sporeling on each adjacent Beast."
+						"EXHAUSTS. Trap. Place on an enemy Beast. When that Beast dies, apply Poison to adjacent Beasts and summon a Sporeling (1/1) on each affected Beast. Each Sporeling applies 1 Poison per Magnitude to its host each round."
 				};
 
 			break;
@@ -2430,6 +2564,40 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_uncolored_shiv,
 					_str_card_description : "Melee, ST, Deal [linear] damage, pierce armor and overhealth."
 				};
+			break;
+			#endregion
+
+			#region SOULCLEANSE
+			case "SOULCLEANSE":
+
+				_stct_return_card = {
+					_str_card_name : "SOULCLEANSE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_uncolored_soulcleanse,
+					_arr_card_colors : ["UNCOLORED",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CLEANSE",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_uncolored_soulcleanse,
+
+					_str_card_description :
+						"ST. Ranged. Cleanse all Auras from the target."
+				};
+
 			break;
 			#endregion
 

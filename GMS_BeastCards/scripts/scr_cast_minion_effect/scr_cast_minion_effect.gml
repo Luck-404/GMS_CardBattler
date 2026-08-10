@@ -41,7 +41,7 @@ function scr_cast_minion_effect(_ref_minion){
 
 	switch(_str_minion_name){
 
-		//-----------//
+//-----------//
 		//SPORELING//
 		//-----------//
 		case "SPORELING":
@@ -69,9 +69,9 @@ function scr_cast_minion_effect(_ref_minion){
 			global.ref_target_beast =
 				_ref_minion._ref_host;
 
-			scr_apply_dot_status(
-				"POISON"
-			);
+			repeat (_ref_minion._val_magnitude){
+				scr_apply_dot_status("POISON");
+			}
 
 			//----------------//
 			//RESTORE TARGET//
@@ -95,9 +95,9 @@ function scr_cast_minion_effect(_ref_minion){
 				break;
 			}
 
-			//-------------------//
+			//-----------------//
 			//GET RANDOM ENEMY//
-			//-------------------//
+			//-----------------//
 			var _ref_target = ds_list_find_value(
 				_list_enemy,
 				irandom(ds_list_size(_list_enemy) - 1)
@@ -107,38 +107,29 @@ function scr_cast_minion_effect(_ref_minion){
 				break;
 			}
 
-			//------------//
-			//DEAL DAMAGE//
-			//------------//
-			scr_damage_target_minion(
-				_ref_minion._val_magnitude,
-				_ref_target
-			);
+			//----------------------//
+			//STORE CURRENT TARGET//
+			//----------------------//
+			var _ref_original_target = global.ref_target_beast;
 
-			//--------------//
+			//-------------//
 			//APPLY VENOM//
-			//--------------//
-			if (
-				instance_exists(_ref_target) &&
-				_ref_target._val_cur_hp > 0
-			){
+			//-------------//
+			global.ref_target_beast = _ref_target;
 
-				var _ref_original_target =
-					global.ref_target_beast;
-
-				global.ref_target_beast =
-					_ref_target;
-
+			repeat (_ref_minion._val_magnitude){
 				scr_apply_dot_status("VENOM");
-
-				global.ref_target_beast =
-					_ref_original_target;
 			}
+
+			//----------------//
+			//RESTORE TARGET//
+			//----------------//
+			global.ref_target_beast = _ref_original_target;
 
 			//-----------//
 			//PLAY SOUND//
 			//-----------//
-			audio_play_sound(snd_attack,0,false);
+			audio_play_sound(snd_debuff,0,false);
 
 		break;
 
@@ -155,7 +146,6 @@ function scr_cast_minion_effect(_ref_minion){
 
 		break;
 
-
 		//----------//
 		//THORNLING//
 		//----------//
@@ -165,28 +155,34 @@ function scr_cast_minion_effect(_ref_minion){
 				break;
 			}
 
-			var _ref_target =
-				ds_list_find_value(
-					_list_enemy,
-					irandom(
-						ds_list_size(_list_enemy) - 1
-					)
-				);
+			//-----------------//
+			//GET RANDOM ENEMY//
+			//-----------------//
+			var _ref_target = ds_list_find_value(
+				_list_enemy,
+				irandom(ds_list_size(_list_enemy) - 1)
+			);
 
 			if (!instance_exists(_ref_target)){
 				break;
 			}
 
-			scr_damage_target_minion(
-				_ref_minion._val_magnitude,
-				_ref_target
-			);
+			//----------------//
+			//CALCULATE DAMAGE//
+			//----------------//
+			var _val_damage =
+				_ref_minion._val_magnitude *
+				2;
 
-			audio_play_sound(
-				snd_attack,
-				0,
-				false
-			);
+			//------------//
+			//DEAL DAMAGE//
+			//------------//
+			scr_damage_target_minion(_val_damage,_ref_target);
+
+			//-----------//
+			//PLAY SOUND//
+			//-----------//
+			audio_play_sound(snd_attack,0,false);
 
 		break;
 
@@ -200,16 +196,22 @@ function scr_cast_minion_effect(_ref_minion){
 				break;
 			}
 
-			scr_heal_target(
-				_ref_minion._val_magnitude,
-				_ref_minion._ref_host
-			);
+			//-----------------//
+			//CALCULATE HEALING//
+			//-----------------//
+			var _val_healing =
+				_ref_minion._val_magnitude *
+				2;
 
-			audio_play_sound(
-				snd_heal,
-				0,
-				false
-			);
+			//---------//
+			//HEAL HOST//
+			//---------//
+			scr_heal_target(_val_healing,_ref_minion._ref_host);
+
+			//-----------//
+			//PLAY SOUND//
+			//-----------//
+			audio_play_sound(snd_heal,0,false);
 
 		break;
 	}
