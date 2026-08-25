@@ -68,6 +68,27 @@ function scr_apply_debuff_status(_str_status_name,_val_lifetime=undefined){
 
 	switch(_str_status_name){
 
+		//--------//
+		//DRAINED//
+		//--------//
+		case "DRAINED":
+
+			_ref_status = scr_status_debuff_drained("APPLY",undefined,_val_lifetime);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"DRAINED",
+					undefined,
+					c_maroon,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
 		//------------//
 		//ARMORBREAK//
 		//------------//
@@ -146,6 +167,26 @@ function scr_apply_debuff_status(_str_status_name,_val_lifetime=undefined){
 
 		break;
 
+		//--------//
+		//WITHER//
+		//--------//
+		case "WITHER":
+
+			_ref_status = scr_status_debuff_wither("APPLY",undefined,_val_lifetime);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"WITHER",
+					undefined,
+					c_maroon,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
 
 		//------------//
 		//VULNERABLE//

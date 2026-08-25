@@ -448,39 +448,107 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
-		#region CULTIVATE
-		case "CULTIVATE":
+			#region CULTIVATE
+			case "CULTIVATE":
 
-			_stct_return_card = {
-				_str_card_name : "CULTIVATE",
-				_str_card_id : _str_card_name,
-				_spr_card : spr_card_viridian_cultivate,
-				_arr_card_colors : ["VIRIDIAN",undefined],
+				_stct_return_card = {
+					_str_card_name : "CULTIVATE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_cultivate,
+					_arr_card_colors : ["VIRIDIAN",undefined],
 
-				_str_card_range : "RANGED",
-				_str_card_type : "SUPPORT",
-				_str_card_effect_type : "BUFF",
-				_str_card_stat : "NEU",
-				_str_card_target_count : "ST",
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
 
-				_val_card_magnitude : 2,
-				_str_card_scalar : "LINEAR",
+					_val_card_magnitude : 2,
+					_str_card_scalar : "LINEAR",
 
-				_str_card_archetype_req : undefined,
-				_str_card_class_req : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
 
-				_str_card_rarity : "III",
-				_val_card_mana_cost : 2,
-				_flag_card_exhausts : false,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
 
-				_scr_card : scr_card_viridian_cultivate,
+					_scr_card : scr_card_viridian_cultivate,
 
-				_str_card_description :
-					"ST. Ranged. Increase the current HP, maximum HP, and Magnitude of all minions on target by 2 for the remainder of battle."
-			};
+					_str_card_description :
+						"ST. Ranged. Increase the current HP, maximum HP, and Magnitude of all minions on target by 2 for the remainder of battle."
+				};
 
-		break;
-		#endregion
+			break;
+			#endregion
+
+			#region CURE_ALL
+			case "CURE_ALL":
+
+				_stct_return_card = {
+					_str_card_name : "CURE ALL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_cure_all,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CLEANSE",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_cure_all,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Remove all negative statuses from the target."
+				};
+
+			break;
+			#endregion
+
+			#region DECAYING_TOUCH
+			case "DECAYING_TOUCH":
+
+				_stct_return_card = {
+					_str_card_name : "DECAYING TOUCH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_decaying_touch,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_decaying_touch,
+
+					_str_card_description :
+						"ST. Ranged. Apply Wither for 3 rounds. Wither reduces current and maximum HP by 25%. If the target is Poisoned, Wither lasts 5 rounds instead."
+				};
+
+			break;
+			#endregion
 
 			#region DISEASE
 			case "DISEASE":
@@ -498,7 +566,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
-					_val_card_mana_cost : 2,
+					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_disease,
 					_str_card_description : "Ranged, ST, Weaken for 3 rounds"
@@ -571,27 +639,71 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region DRAINING_KISS
+			case "DRAINING_KISS":
+
+				_stct_return_card = {
+					_str_card_name : "DRAINING KISS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_draining_kiss,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_draining_kiss,
+
+					_str_card_description :
+						"ST. Ranged. Heal caster for 5 HP. Apply Drained for 3 rounds. Drained reduces Magical Power and Magical Defense by 20."
+				};
+
+			break;
+			#endregion
+
 			#region EMERALD_SLAM
 			case "EMERALD_SLAM":
+
 				_stct_return_card = {
 					_str_card_name : "EMERALD SLAM",
 					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_emerald_slam,
 					_arr_card_colors : ["VIRIDIAN",undefined],
+
 					_str_card_range : "MELEE",
-					_str_card_type : "ATTACK",
+					_str_card_type : "SUPPORT",
 					_str_card_effect_type : "CC",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : undefined,
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
+
 					_str_card_rarity : "I",
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
+
 					_scr_card : scr_card_viridian_emerald_slam,
-					_str_card_description : "Melee, ST, Stun for 1 turn"
+
+					_str_card_description :
+						"ST. Melee. Stun for 1 turn."
 				};
+
 			break;
 			#endregion
 
@@ -616,6 +728,40 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_emerald_wisdom,
 					_str_card_description : "Exhausts. Global. Draw 2 more cards per turn, also heal lowest beast."
 				};
+			break;
+			#endregion
+
+			#region ENTANGLE
+			case "ENTANGLE":
+
+				_stct_return_card = {
+					_str_card_name : "ENTANGLE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_entangle,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_entangle,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Stun for 1 round."
+				};
+
 			break;
 			#endregion
 
