@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"BATTLE ROOM",
-    "path":"folders/BATTLE/BATTLE ROOM.yy",
+    "name":"COMBAT LOGIC",
+    "path":"folders/BATTLE/COMBAT LOGIC.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

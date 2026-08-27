@@ -624,8 +624,8 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : "MAGICAL",
-					_str_card_class_req : "SUMMONER",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
 
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 1,
