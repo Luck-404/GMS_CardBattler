@@ -35,6 +35,7 @@ _val_armor = 0;
 _val_crit_chance = 0;
 _val_crit_damage = 25;
 
+
 //------------------//
 //DAMAGE MODIFIERS//
 //------------------//
@@ -63,6 +64,7 @@ _val_dmg_taken_scalar_bonus = 0;
 _val_dmg_taken_scalar_reduction = 0;
 
 _val_dodge_bonus = 0;
+_ct_dodge_disabled = 0;
 
 // STATUS / MINIONS / TRAPS
 _list_statuses = ds_list_create();

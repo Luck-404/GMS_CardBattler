@@ -3,7 +3,7 @@
 // SCRIPT: SCR_CARD_VIRIDIAN_DRAINING_KISS
 // FUNCTION: Resolves the Draining Kiss card effect.
 //           Heals the caster for 5 HP.
-//           Applies Drained to the selected target for three rounds.
+//           Applies Drained to the selected target for 3 rounds.
 //
 //===============================================================================//
 function scr_card_viridian_draining_kiss(_stct_card,_ref_caster,_ref_target){

@@ -11,6 +11,7 @@ function scr_cast_card(){
 
 	var _ref_card = global.ref_cast_card;
 	var _stct_card = _ref_card._ref_card;
+	var _flag_card_resolved = false;
 
 	var _ref_caster = global.ref_caster_beast;
 	var _ref_target = global.ref_target_beast;
@@ -127,8 +128,16 @@ function scr_cast_card(){
 					_ref_caster,
 					_ref_target
 				);
+				_flag_card_resolved = true;
 			}
 		}
+	}
+
+	//------------------------//
+	//TRIGGER CARD CAST AURAS//
+	//------------------------//
+	if (_flag_card_resolved){
+		scr_trigger_card_cast_auras(_ref_caster,_stct_card);
 	}
 
 	//------------//

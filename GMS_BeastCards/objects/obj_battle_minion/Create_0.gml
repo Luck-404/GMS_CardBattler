@@ -26,6 +26,12 @@ _val_cur_hp = 2;
 _val_max_hp = 2;
 _val_magnitude = 0;
 
+//----------------//
+//BASE SPAWN STATS//
+//----------------//
+_val_base_max_hp = 0;
+_val_base_magnitude = 0;
+
 _ct_age = 0;
 
 // FLAGS

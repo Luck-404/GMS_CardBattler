@@ -46,7 +46,7 @@ function scr_card_viridian_natural_cycle(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//SACRIFICE MINION//
 	//----------------//
-	scr_destroy_minion(_ref_minion);
+	scr_destroy_minion(_ref_minion,"SACRIFICE");
 
 	//-----------//
 	//HEAL HOST//

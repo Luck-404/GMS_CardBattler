@@ -172,95 +172,183 @@
 
 	#region UNCOLORED
 
-	//scr_add_card_to_deck(scr_get_card_info("ARTIFACT_HOURGLASS"));
-	//scr_add_card_to_deck(scr_get_card_info("BLOCK"));
-	//scr_add_card_to_deck(scr_get_card_info("BULWARK"));
-	//scr_add_card_to_deck(scr_get_card_info("CLEARCAST"));
-	//scr_add_card_to_deck(scr_get_card_info("DEFT_STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("ECHO"));
-	//scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
-	//scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
-	//scr_add_card_to_deck(scr_get_card_info("MALLEABILITY"));
-	//scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("RAPID_STRIKES"));
-	//scr_add_card_to_deck(scr_get_card_info("REPOSITION"));
-	//scr_add_card_to_deck(scr_get_card_info("SHIV"));
-	//scr_add_card_to_deck(scr_get_card_info("SPELLBOOK_WILDCARD"));
-	//scr_add_card_to_deck(scr_get_card_info("STRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("THOUGHTSTEAL"));
+	scr_add_card_to_deck(scr_get_card_info("ARTIFACT_HOURGLASS"));
+	scr_add_card_to_deck(scr_get_card_info("BLOCK"));
+	scr_add_card_to_deck(scr_get_card_info("BULWARK"));
+	scr_add_card_to_deck(scr_get_card_info("CLEARCAST"));
+	scr_add_card_to_deck(scr_get_card_info("DEFT_STRIKE"));
+	scr_add_card_to_deck(scr_get_card_info("ECHO"));
+	scr_add_card_to_deck(scr_get_card_info("HIDDEN_CARD"));
+	scr_add_card_to_deck(scr_get_card_info("INSPIRATION"));
+	scr_add_card_to_deck(scr_get_card_info("MALLEABILITY"));
+	scr_add_card_to_deck(scr_get_card_info("POWER_STRIKE"));
+	scr_add_card_to_deck(scr_get_card_info("RAPID_STRIKES"));
+	scr_add_card_to_deck(scr_get_card_info("REPOSITION"));
+	scr_add_card_to_deck(scr_get_card_info("SHIV"));
+	scr_add_card_to_deck(scr_get_card_info("SOULCLEANSE"));
+	scr_add_card_to_deck(scr_get_card_info("SPELLBOOK_WILDCARD"));
+	scr_add_card_to_deck(scr_get_card_info("STRIKE"));
+	scr_add_card_to_deck(scr_get_card_info("THOUGHTSTEAL"));
 
 	#endregion
 
 
 	#region VIRIDIAN
-	
-	//scr_add_card_to_deck(scr_get_card_info("BARKSKIN"));
-	//scr_add_card_to_deck(scr_get_card_info("BEASTIAL_WRATH"));
-	//scr_add_card_to_deck(scr_get_card_info("BIOBOLT"));
-	//scr_add_card_to_deck(scr_get_card_info("BIOSTORM"));
-	//scr_add_card_to_deck(scr_get_card_info("BLOOMING_SHIELD"));
-	//scr_add_card_to_deck(scr_get_card_info("BLOWDART"));
-	//scr_add_card_to_deck(scr_get_card_info("BRAMBLE_ERUPTION"));
-	//scr_add_card_to_deck(scr_get_card_info("CLAW"));
-	//scr_add_card_to_deck(scr_get_card_info("DISEASE"));
-	//scr_add_card_to_deck(scr_get_card_info("EMERALD_SLAM"));
-	//scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
-	//scr_add_card_to_deck(scr_get_card_info("FELL"));
-	//scr_add_card_to_deck(scr_get_card_info("FERAL_FRENZY"));
-	//scr_add_card_to_deck(scr_get_card_info("GREENFLOW"));
+
+	//---------------//
+	//ATTACK: DIRECT//
+	//---------------//
+
+	scr_add_card_to_deck(scr_get_card_info("BIOBOLT"));
+	scr_add_card_to_deck(scr_get_card_info("BIOSTORM"));
+	scr_add_card_to_deck(scr_get_card_info("BRAMBLE_ERUPTION"));
+	scr_add_card_to_deck(scr_get_card_info("CLAW"));
+	scr_add_card_to_deck(scr_get_card_info("FELL"));
+	scr_add_card_to_deck(scr_get_card_info("FERAL_FRENZY"));
+	scr_add_card_to_deck(scr_get_card_info("HUNTERS_JAVELIN"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_FURY"));
+	scr_add_card_to_deck(scr_get_card_info("PRIMAL_BLAST"));
+	scr_add_card_to_deck(scr_get_card_info("SAVAGE_MAUL"));
+	scr_add_card_to_deck(scr_get_card_info("SPIKE_PIERCE"));
+	scr_add_card_to_deck(scr_get_card_info("SPINESLING"));
+	scr_add_card_to_deck(scr_get_card_info("SPIRIT_PIERCE"));
+	scr_add_card_to_deck(scr_get_card_info("SPORE_CLOUD"));
+	scr_add_card_to_deck(scr_get_card_info("STALKING_SWIPE"));
+	scr_add_card_to_deck(scr_get_card_info("STAMPEDE"));
+	scr_add_card_to_deck(scr_get_card_info("UNSEEN_ROOT"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_SWIPES"));
+	scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
+
+
+	//-------------------------//
+	//ATTACK: DIRECT SPECIALTY//
+	//-------------------------//
+
+	scr_add_card_to_deck(scr_get_card_info("BEASTIAL_WRATH"));
+	scr_add_card_to_deck(scr_get_card_info("GREENFLOW"));
+	scr_add_card_to_deck(scr_get_card_info("HUNTERS_INSTINCT"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_WRATH"));
+	scr_add_card_to_deck(scr_get_card_info("OLD_GROWTH_PUMMEL"));
+	scr_add_card_to_deck(scr_get_card_info("ROT_BLOOM"));
+	scr_add_card_to_deck(scr_get_card_info("SEED_BARRAGE"));
+	scr_add_card_to_deck(scr_get_card_info("SNARLING_BITE"));
+	scr_add_card_to_deck(scr_get_card_info("THORN_STORM"));
+	scr_add_card_to_deck(scr_get_card_info("TOXIC_ERUPTION"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_BOLT"));
+	scr_add_card_to_deck(scr_get_card_info("VIRIDIAN_BURST"));
+
+
+	//------------//
+	//ATTACK: DOT//
+	//------------//
+
+	scr_add_card_to_deck(scr_get_card_info("BLOWDART"));
+	scr_add_card_to_deck(scr_get_card_info("POTENT_SPORE"));
+	scr_add_card_to_deck(scr_get_card_info("RAKE"));
+	scr_add_card_to_deck(scr_get_card_info("SPIRIT_FANG"));
+	scr_add_card_to_deck(scr_get_card_info("SPIT_VENOM"));
+	scr_add_card_to_deck(scr_get_card_info("VIRAL_SURGE"));
+
+
+	//-------//
+	//DEFENSE//
+	//-------//
+
+	scr_add_card_to_deck(scr_get_card_info("BARKSKIN"));
+	scr_add_card_to_deck(scr_get_card_info("BLOOMING_SHIELD"));
+	scr_add_card_to_deck(scr_get_card_info("INTERLOCKING_SCALES"));
+	scr_add_card_to_deck(scr_get_card_info("NATURAL_RECOVERY"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_GRACE"));
+	scr_add_card_to_deck(scr_get_card_info("OVERGROWTH"));
+	scr_add_card_to_deck(scr_get_card_info("REGENERATE"));
+	scr_add_card_to_deck(scr_get_card_info("ROOTED_DEFENSE"));
+	scr_add_card_to_deck(scr_get_card_info("SECOND_BLOOM"));
+	scr_add_card_to_deck(scr_get_card_info("SINEWY_VINES"));
+	scr_add_card_to_deck(scr_get_card_info("STEELFUR"));
+	scr_add_card_to_deck(scr_get_card_info("SYMBIOSIS"));
+	scr_add_card_to_deck(scr_get_card_info("THICK_HIDE"));
+	scr_add_card_to_deck(scr_get_card_info("THORNMAIL"));
+	scr_add_card_to_deck(scr_get_card_info("WILDWARD"));
+
+
+	//-------//
+	//UTILITY//
+	//-------//
+
+	scr_add_card_to_deck(scr_get_card_info("BLOOMING_SPRITE"));
+	scr_add_card_to_deck(scr_get_card_info("BLOOMTIDE"));
+	scr_add_card_to_deck(scr_get_card_info("DISTRACTING_TRAP"));
+	scr_add_card_to_deck(scr_get_card_info("DORMANT_SEED"));
+	scr_add_card_to_deck(scr_get_card_info("EMERALD_WISDOM"));
+	scr_add_card_to_deck(scr_get_card_info("FUNGAL_RECYCLING"));
+	scr_add_card_to_deck(scr_get_card_info("GERMINATE"));
+	scr_add_card_to_deck(scr_get_card_info("GREENSTEP"));
 	scr_add_card_to_deck(scr_get_card_info("GROWTH_SIGIL"));
-	//scr_add_card_to_deck(scr_get_card_info("HUNTERS_INSTINCT"));
-	//scr_add_card_to_deck(scr_get_card_info("HUNTERS_JAVELIN"));
-	//scr_add_card_to_deck(scr_get_card_info("INTERLOCKING_SCALES"));
-	//scr_add_card_to_deck(scr_get_card_info("LIFE_SPIRIT"));
-	//scr_add_card_to_deck(scr_get_card_info("MIRACLE_MUSA"));
-	//scr_add_card_to_deck(scr_get_card_info("NATURAL_RECOVERY"));
-	//scr_add_card_to_deck(scr_get_card_info("NATURES_FURY"));
-	//scr_add_card_to_deck(scr_get_card_info("NATURES_GRACE"));
-	//scr_add_card_to_deck(scr_get_card_info("NATURES_WRATH"));
-	//scr_add_card_to_deck(scr_get_card_info("OLD_GROWTH_PUMMEL"));
-	//scr_add_card_to_deck(scr_get_card_info("OVERGROWTH"));
-	//scr_add_card_to_deck(scr_get_card_info("POTENT_SPORE"));
-	//scr_add_card_to_deck(scr_get_card_info("PRIMAL_BLAST"));
-	//scr_add_card_to_deck(scr_get_card_info("RAKE"));
-	//scr_add_card_to_deck(scr_get_card_info("REGENERATE"));
-	//scr_add_card_to_deck(scr_get_card_info("ROOTED_DEFENSE"));
-	//scr_add_card_to_deck(scr_get_card_info("ROT_BLOOM"));
-	//scr_add_card_to_deck(scr_get_card_info("SAVAGE_MAUL"));
-	//scr_add_card_to_deck(scr_get_card_info("SECOND_BLOOM"));
-	//scr_add_card_to_deck(scr_get_card_info("SEED_BARRAGE"));
-	//scr_add_card_to_deck(scr_get_card_info("SINEWY_VINES"));
-	//scr_add_card_to_deck(scr_get_card_info("SNARLING_BITE"));
-	//scr_add_card_to_deck(scr_get_card_info("SPINESLING"));
-	//scr_add_card_to_deck(scr_get_card_info("SPIKE_PIERCE"));
-	//scr_add_card_to_deck(scr_get_card_info("SPIRIT_FANG"));
-	//scr_add_card_to_deck(scr_get_card_info("SPIRIT_PIERCE"));
-	//scr_add_card_to_deck(scr_get_card_info("SPIT_VENOM"));
-	//scr_add_card_to_deck(scr_get_card_info("SPORE_CLOUD"));
-	//scr_add_card_to_deck(scr_get_card_info("STALKING_SWIPE"));
-	//scr_add_card_to_deck(scr_get_card_info("STAMPEDE"));
-	//scr_add_card_to_deck(scr_get_card_info("STEELFUR"));
-	//scr_add_card_to_deck(scr_get_card_info("SYMBIOSIS"));
-	//scr_add_card_to_deck(scr_get_card_info("THICK_HIDE"));
-	//scr_add_card_to_deck(scr_get_card_info("THORN_STORM"));
-	//scr_add_card_to_deck(scr_get_card_info("THORNMAIL"));
-	//scr_add_card_to_deck(scr_get_card_info("TOXIC_ERUPTION"));
-	//scr_add_card_to_deck(scr_get_card_info("UNSEEN_ROOT"));
-	//scr_add_card_to_deck(scr_get_card_info("VERDANT_BOLT"));
-	//scr_add_card_to_deck(scr_get_card_info("VERDANT_SWIPES"));
-	//scr_add_card_to_deck(scr_get_card_info("VIRAL_SURGE"));
-	//scr_add_card_to_deck(scr_get_card_info("VIRIDIAN_BURST"));
-	//scr_add_card_to_deck(scr_get_card_info("WILDSTRIKE"));
-	//scr_add_card_to_deck(scr_get_card_info("WILDWARD"));
-	//scr_add_card_to_deck(scr_get_card_info("BLOOMING_SPRITE"));
-	//scr_add_card_to_deck(scr_get_card_info("BLOOMTIDE"));
-	//scr_add_card_to_deck(scr_get_card_info("DISTRACTING_TRAP"));
-	//scr_add_card_to_deck(scr_get_card_info("DORMANT_SEED"));
-	//scr_add_card_to_deck(scr_get_card_info("FUNGAL_RECYCLING"));
-	//scr_add_card_to_deck(scr_get_card_info("GERMINATE"));	
-	//scr_add_card_to_deck(scr_get_card_info("GREENSTEP"));	
-	scr_add_card_to_deck(scr_get_card_info("MANAVINE"));	
-	
+	scr_add_card_to_deck(scr_get_card_info("LIFE_SPIRIT"));
+	scr_add_card_to_deck(scr_get_card_info("MANAVINE"));
+	scr_add_card_to_deck(scr_get_card_info("NATURAL_CYCLE"));
+	scr_add_card_to_deck(scr_get_card_info("PHEROMONES"));
+	scr_add_card_to_deck(scr_get_card_info("RETURN_TO_NATURE"));
+	scr_add_card_to_deck(scr_get_card_info("ROTTING_SPORES"));
+	scr_add_card_to_deck(scr_get_card_info("SEED_THE_FIELD"));
+	scr_add_card_to_deck(scr_get_card_info("SERPENT_SUMMON"));
+	scr_add_card_to_deck(scr_get_card_info("THORN_NET"));
+	scr_add_card_to_deck(scr_get_card_info("TOXIC_SNARE"));
+	scr_add_card_to_deck(scr_get_card_info("TRANQUILITY"));
+	scr_add_card_to_deck(scr_get_card_info("VENOM_BLOOM"));
+
+
+	//-------//
+	//SUPPORT//
+	//-------//
+
+	scr_add_card_to_deck(scr_get_card_info("BRAMBLE_AURA"));
+	scr_add_card_to_deck(scr_get_card_info("BURGEONING_BLOOM"));
+	scr_add_card_to_deck(scr_get_card_info("BURSTING_SEED"));
+	scr_add_card_to_deck(scr_get_card_info("CRIPPLING_VINES"));
+	scr_add_card_to_deck(scr_get_card_info("CULTIVATE"));
+	scr_add_card_to_deck(scr_get_card_info("CURE_ALL"));
+	scr_add_card_to_deck(scr_get_card_info("DECAYING_TOUCH"));
+	scr_add_card_to_deck(scr_get_card_info("DISEASE"));
+	scr_add_card_to_deck(scr_get_card_info("DRAINING_KISS"));
+	scr_add_card_to_deck(scr_get_card_info("EMERALD_SLAM"));
+	scr_add_card_to_deck(scr_get_card_info("ENTANGLE"));
+	scr_add_card_to_deck(scr_get_card_info("HONEYED_SCENT"));
+	scr_add_card_to_deck(scr_get_card_info("LIFEBLOOM"));
+	scr_add_card_to_deck(scr_get_card_info("MIRACLE_MUSA"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_BOND"));
+	scr_add_card_to_deck(scr_get_card_info("NATURES_MEND"));
+	scr_add_card_to_deck(scr_get_card_info("PACK_INSTINCT"));
+	scr_add_card_to_deck(scr_get_card_info("POLLINATE"));
+	scr_add_card_to_deck(scr_get_card_info("POTENT_FRUIT"));
+	scr_add_card_to_deck(scr_get_card_info("PREDATORS_MARK"));
+	scr_add_card_to_deck(scr_get_card_info("PREDATORY_SCENT"));
+	scr_add_card_to_deck(scr_get_card_info("REJUVENATE"));
+	scr_add_card_to_deck(scr_get_card_info("SAPSPRING"));
+	scr_add_card_to_deck(scr_get_card_info("SHIMMERING_SPORES"));
+	scr_add_card_to_deck(scr_get_card_info("SLEEP_DART"));
+	scr_add_card_to_deck(scr_get_card_info("SLEEPING_POLLEN"));
+	scr_add_card_to_deck(scr_get_card_info("TOXIC_HIDE"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_EMBRACE"));
+	scr_add_card_to_deck(scr_get_card_info("VERDANT_INSIGHT"));
+	scr_add_card_to_deck(scr_get_card_info("WILD_VIGOR"));
+	scr_add_card_to_deck(scr_get_card_info("WILT"));
+
+
+	//---------//
+	//ARCHETYPE//
+	//---------//
+
+	scr_add_card_to_deck(scr_get_card_info("ANCIENT_GROVE"));
+	scr_add_card_to_deck(scr_get_card_info("APEX_PREDATOR"));
+	scr_add_card_to_deck(scr_get_card_info("CHANNEL_THE_SPIRITS"));
+	scr_add_card_to_deck(scr_get_card_info("CIRCLE_OF_LIFE"));
+	scr_add_card_to_deck(scr_get_card_info("ENDLESS_BLOOM"));
+	scr_add_card_to_deck(scr_get_card_info("FOR_THE_THROAT"));
+	scr_add_card_to_deck(scr_get_card_info("HEART_OF_THE_FOREST"));
+	scr_add_card_to_deck(scr_get_card_info("PLAGUE_GARDEN"));
+	scr_add_card_to_deck(scr_get_card_info("PROLIFERATE"));
+
 	#endregion
 
 	

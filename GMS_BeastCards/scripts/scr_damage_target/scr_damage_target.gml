@@ -65,15 +65,20 @@ function scr_damage_target(_val_damage,_ref_target){
 		return false;
 	}
 
-	//-------------//
-	//TARGET DODGE//
-	//-------------//
-	var _val_dodge = clamp(
+//-------------//
+//TARGET DODGE//
+//-------------//
+var _val_dodge = 0;
+
+if (_ref_target._ct_dodge_disabled <= 0){
+
+	_val_dodge = clamp(
 		_ref_target._ref_unit._val_beast_dod_stat +
 		_ref_target._val_dodge_bonus,
 		0,
 		100
 	);
+}
 
 	var _val_dodge_roll =
 		irandom_range(1,100);
@@ -93,10 +98,10 @@ function scr_damage_target(_val_damage,_ref_target){
 	}
 
 	//--------------------------//
-	//RAPID GROWTH COLOR BONUS//
+	//SEEDFALL COLOR BONUS//
 	//--------------------------//
 	var _ref_status = scr_check_for_status(
-		"WEATHER: RAPID GROWTH",
+		"WEATHER: SEEDFALL",
 		global.list_statuses
 	);
 
@@ -415,7 +420,7 @@ function scr_damage_target(_val_damage,_ref_target){
 
 				_ref_minion._val_cur_hp = 0;
 
-				scr_destroy_minion(_ref_minion);
+				scr_destroy_minion(_ref_minion,"DEATH");
 			}
 		}
 
@@ -430,6 +435,10 @@ function scr_damage_target(_val_damage,_ref_target){
 			_ref_target
 		);
 	}
+	//-------------------//
+	//TRACK BEAST DAMAGE//
+	//-------------------//
+	var _val_beast_damage = 0;
 
 	//-------//
 	//ARMOR//
@@ -487,13 +496,15 @@ function scr_damage_target(_val_damage,_ref_target){
 
 		_val_damage_left -=
 			_val_overhealth_blocked;
+
+		_val_beast_damage +=
+			_val_overhealth_blocked;
 	}
 
 	//--------//
 	//HOST HP//
 	//--------//
-	var _val_hp_damage =
-		0;
+	var _val_hp_damage = 0;
 
 	if (_val_damage_left > 0){
 
@@ -518,7 +529,17 @@ function scr_damage_target(_val_damage,_ref_target){
 				_ref_target._val_cur_hp -
 				_val_hp_damage
 			);
+
+			_val_beast_damage +=
+				_val_hp_damage;
 		}
+	}
+
+	//------------//
+	//WAKE SLEEP//
+	//------------//
+	if (_val_beast_damage > 0){
+		scr_wake_sleep_on_damage(_ref_target);
 	}
 
 	//--------------------//
@@ -574,15 +595,15 @@ function scr_damage_target(_val_damage,_ref_target){
 		);
 	}
 
-	//------------------//
-	//THORNS RETALIATION//
-	//------------------//
+	//----------------------//
+	//MELEE DEFENSE TRIGGERS//
+	//----------------------//
 	if (
 		!global.flag_thorns_retaliating &&
 		_stct_card._str_card_type == "ATTACK" &&
 		_stct_card._str_card_range == "MELEE"
 	){
-		scr_trigger_thorns(
+		scr_trigger_melee_defense_buffs(
 			_ref_target,
 			_ref_caster
 		);

@@ -512,19 +512,28 @@ function hscr_check_battle_beast_class(_list_beast_check){
 //—------------------------------------------------------------------------------//
 // hscr_check_battle_beast_range
 // FUNCTION: Checks valid targets based on selected card range.
-//           Updates player and enemy beast range flags.
+//           Updates player and enemy Beast range flags.
+//           Applies Taunt targeting overrides to hostile Attacks.
+//           Applies Blind restrictions while preserving valid Taunt behavior.
 //—------------------------------------------------------------------------------//
 function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 
-	// PLAYER TEAM
+	//----------------//
+	//PLAYER TEAM//
+	//----------------//
 	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
 
 		var _ref_beast_player = ds_list_find_value(_list_beast_check,_it_beast);
 
+		if (!instance_exists(_ref_beast_player)){
+			continue;
+		}
+
 		switch(_str_range){
 
 			case "SELF":
-				_ref_beast_player._flag_beast_range_check = (_ref_beast_player == global.ref_caster_beast);
+				_ref_beast_player._flag_beast_range_check =
+					(_ref_beast_player == global.ref_caster_beast);
 			break;
 
 			case "MELEE":
@@ -532,7 +541,8 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 			break;
 
 			case "TEAM":
-				_ref_beast_player._flag_beast_range_check = (_ref_beast_player != global.ref_caster_beast);
+				_ref_beast_player._flag_beast_range_check =
+					(_ref_beast_player != global.ref_caster_beast);
 			break;
 
 			case "ENEMY":
@@ -553,10 +563,21 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 		}
 	}
 
-	// ENEMY TEAM
-	for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_alive); _it_beast++){
 
-		var _ref_beast_enemy = ds_list_find_value(obj_battle_enemy_controller._list_beasts_alive,_it_beast);
+	//----------------//
+	//ENEMY TEAM//
+	//----------------//
+	var _list_enemy =
+		obj_battle_enemy_controller._list_beasts_alive;
+
+	for (var _it_beast = 0; _it_beast < ds_list_size(_list_enemy); _it_beast++){
+
+		var _ref_beast_enemy =
+			ds_list_find_value(_list_enemy,_it_beast);
+
+		if (!instance_exists(_ref_beast_enemy)){
+			continue;
+		}
 
 		switch(_str_range){
 
@@ -565,7 +586,8 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 			break;
 
 			case "MELEE":
-				_ref_beast_enemy._flag_beast_range_check = (_it_beast == 0);
+				_ref_beast_enemy._flag_beast_range_check =
+					(_it_beast == 0);
 			break;
 
 			case "RANGED":
@@ -581,7 +603,8 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 			break;
 
 			case "BACK":
-				_ref_beast_enemy._flag_beast_range_check = (_it_beast == ds_list_size(obj_battle_enemy_controller._list_beasts_alive) - 1);
+				_ref_beast_enemy._flag_beast_range_check =
+					(_it_beast == ds_list_size(_list_enemy) - 1);
 			break;
 
 			default:
@@ -590,43 +613,207 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 		}
 	}
 
-	//----------------//
-	//TAUNT OVERRIDE//
-	//----------------//
-	if (instance_exists(global.ref_cast_card)){
 
-		var _stct_card = global.ref_cast_card._ref_card;
+	//----------------------//
+	//GET ACTIVE CARD DATA//
+	//----------------------//
+	if (
+		!instance_exists(global.ref_cast_card) ||
+		!instance_exists(global.ref_caster_beast)
+	){
+		return;
+	}
 
-		if (
+	var _stct_card =
+		global.ref_cast_card._ref_card;
+
+	if (!is_struct(_stct_card)){
+		return;
+	}
+
+
+	//--------------------//
+	//CHECK HOSTILE ATTACK//
+	//--------------------//
+	var _flag_hostile_attack =
+		(
 			_stct_card._str_card_type == "ATTACK" ||
 			_stct_card._str_card_effect_type == "DOT"
-		){
+		);
 
-			var _ref_taunt_target = scr_get_taunt_target(
-				obj_battle_enemy_controller._list_beasts_alive
-			);
+	if (!_flag_hostile_attack){
+		return;
+	}
 
-			if (instance_exists(_ref_taunt_target)){
 
-				for (
-					var _it_enemy = 0;
-					_it_enemy < ds_list_size(obj_battle_enemy_controller._list_beasts_alive);
-					_it_enemy++
-				){
+	//----------------//
+	//GET TAUNT TARGET//
+	//----------------//
+	var _ref_taunt_target =
+		scr_get_taunt_target(_list_enemy);
 
-					var _ref_enemy = ds_list_find_value(
-						obj_battle_enemy_controller._list_beasts_alive,
-						_it_enemy
-					);
 
-					if (!instance_exists(_ref_enemy)){
-						continue;
-					}
+	//----------------//
+	//GET BLIND MODE//
+	//----------------//
+	var _str_blind_mode =
+		scr_get_blind_attack_target_mode(
+			global.ref_caster_beast,
+			_stct_card
+		);
 
-					_ref_enemy._flag_beast_range_check =
-						(_ref_enemy == _ref_taunt_target);
-				}
+
+	//=======================================================================//
+	//
+	// BLIND: BLOCK
+	//
+	// Flank / Backline Attacks cannot be used while Blinded.
+	// Taunt does not override this restriction.
+	//
+	//=======================================================================//
+	if (_str_blind_mode == "BLOCK"){
+
+		//----------------//
+		//DISABLE ALLIES//
+		//----------------//
+		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+			var _ref_beast =
+				ds_list_find_value(
+					_list_beast_check,
+					_it_beast
+				);
+
+			if (instance_exists(_ref_beast)){
+				_ref_beast._flag_beast_range_check = false;
 			}
+		}
+
+		//----------------//
+		//DISABLE ENEMIES//
+		//----------------//
+		for (var _it_enemy = 0; _it_enemy < ds_list_size(_list_enemy); _it_enemy++){
+
+			var _ref_enemy =
+				ds_list_find_value(
+					_list_enemy,
+					_it_enemy
+				);
+
+			if (instance_exists(_ref_enemy)){
+				_ref_enemy._flag_beast_range_check = false;
+			}
+		}
+
+		return;
+	}
+
+
+	//=======================================================================//
+	//
+	// BLIND: FRONT
+	//
+	// Ordinary hostile Attacks behave as though they can only target
+	// the front enemy Beast.
+	//
+	// If the front Beast is Taunting, Taunt still works normally.
+	//
+	// If a different Beast is Taunting, Blind prevents the caster from
+	// targeting that Beast, so the front Beast remains the valid target.
+	//
+	//=======================================================================//
+	if (_str_blind_mode == "FRONT"){
+
+		//----------------//
+		//DISABLE ALLIES//
+		//----------------//
+		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+
+			var _ref_beast =
+				ds_list_find_value(
+					_list_beast_check,
+					_it_beast
+				);
+
+			if (instance_exists(_ref_beast)){
+				_ref_beast._flag_beast_range_check = false;
+			}
+		}
+
+		//----------------//
+		//GET FRONT ENEMY//
+		//----------------//
+		var _ref_front_enemy =
+			undefined;
+
+		if (ds_list_size(_list_enemy) > 0){
+
+			_ref_front_enemy =
+				ds_list_find_value(
+					_list_enemy,
+					0
+				);
+		}
+
+		//----------------------//
+		//SET FRONT TARGET ONLY//
+		//----------------------//
+		for (var _it_enemy = 0; _it_enemy < ds_list_size(_list_enemy); _it_enemy++){
+
+			var _ref_enemy =
+				ds_list_find_value(
+					_list_enemy,
+					_it_enemy
+				);
+
+			if (!instance_exists(_ref_enemy)){
+				continue;
+			}
+
+			_ref_enemy._flag_beast_range_check =
+				(_ref_enemy == _ref_front_enemy);
+		}
+
+		/*
+			TAUNT + BLIND INTERACTION:
+
+			If the Taunting Beast is the front Beast, it is already
+			the only valid target, so Taunt works normally.
+
+			If the Taunting Beast is not the front Beast, Blind prevents
+			the caster from targeting it. The front Beast therefore
+			remains the only valid target.
+		*/
+
+		return;
+	}
+
+
+	//=======================================================================//
+	//
+	// NORMAL TAUNT
+	//
+	// No Blind restriction is active.
+	// Taunt retains its existing behavior and becomes the sole hostile
+	// Attack target regardless of the card's normal range.
+	//
+	//=======================================================================//
+	if (instance_exists(_ref_taunt_target)){
+
+		for (var _it_enemy = 0; _it_enemy < ds_list_size(_list_enemy); _it_enemy++){
+
+			var _ref_enemy =
+				ds_list_find_value(
+					_list_enemy,
+					_it_enemy
+				);
+
+			if (!instance_exists(_ref_enemy)){
+				continue;
+			}
+
+			_ref_enemy._flag_beast_range_check =
+				(_ref_enemy == _ref_taunt_target);
 		}
 	}
 }
@@ -649,21 +836,31 @@ function hscr_reroll_hand(){
 
 //—------------------------------------------------------------------------------//
 // hscr_check_battle_beast_able
-// FUNCTION: Flags beasts as unable to act when stunned.
+// FUNCTION: Flags Beasts as unable to act while affected by action-locking CC.
+//           Stun, Sleep, and Frozen prevent actions.
+//           Other CC types retain their own specialized restrictions.
 //—------------------------------------------------------------------------------//
 function hscr_check_battle_beast_able(_list_beast_check){
 
-	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beast_check); _it_beast++){
+	for (
+		var _it_beast = 0;
+		_it_beast < ds_list_size(_list_beast_check);
+		_it_beast++
+	){
 
-		var _ref_beast = ds_list_find_value(_list_beast_check,_it_beast);
+		var _ref_beast =
+			ds_list_find_value(
+				_list_beast_check,
+				_it_beast
+			);
 
-		var _ref_status = scr_check_for_status("STUN",_ref_beast);
-
-		if (_ref_status != -1){
-			_ref_beast._flag_beast_able_check = false;
+		if (!instance_exists(_ref_beast)){
+			continue;
 		}
-		else{
-			_ref_beast._flag_beast_able_check = true;
-		}
+
+		_ref_beast._flag_beast_able_check =
+			!scr_is_beast_action_locked(
+				_ref_beast
+			);
 	}
 }

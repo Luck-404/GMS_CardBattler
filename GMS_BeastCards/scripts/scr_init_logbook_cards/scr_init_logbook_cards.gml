@@ -31,8 +31,7 @@ function scr_init_logbook_cards(){
 		//-------------//
 		//GET CARD INFO//
 		//-------------//
-		var _stct_card_info =
-			scr_get_card_info(_str_card_id);
+		var _stct_card_info = scr_get_card_info(_str_card_id);
 
 		var _flag_has_card_info =
 			(_stct_card_info != undefined);
@@ -93,12 +92,10 @@ function scr_init_logbook_cards(){
 		//----------------//
 		//REGISTER ENTRY//
 		//----------------//
-		ds_list_add(
-			global.list_logbook_cards,
-			_stct_entry
-		);
+		ds_list_add(global.list_logbook_cards,_stct_entry);
 
-		global.map_logbook_cards[? _str_card_id] = _stct_entry;
+		global.map_logbook_cards[? _str_card_id] =
+			_stct_entry;
 	}
 
 
@@ -141,91 +138,173 @@ function scr_init_logbook_cards(){
 	#region VIRIDIAN
 
 
-	//----------------------//
-	//EARLY / GENERAL CARDS//
-	//----------------------//
+	//===============================================================================//
+	//
+	// ATTACK - DIRECT
+	//
+	//===============================================================================//
 
-	hscr_add_card_entry("LIFE_SPIRIT","VIRIDIAN");
-	hscr_add_card_entry("MIRACLE_MUSA","VIRIDIAN");
-	hscr_add_card_entry("DISEASE","VIRIDIAN");
-	hscr_add_card_entry("EMERALD_SLAM","VIRIDIAN");
-	hscr_add_card_entry("GROWTH_SIGIL","VIRIDIAN");
-	hscr_add_card_entry("EMERALD_WISDOM","VIRIDIAN");
-
-
-	//---------------//
-	//ATTACK: DIRECT//
-	//---------------//
-
+	hscr_add_card_entry("BIOBOLT","VIRIDIAN");
+	hscr_add_card_entry("BIOSTORM","VIRIDIAN");
+	hscr_add_card_entry("BRAMBLE_ERUPTION","VIRIDIAN");
 	hscr_add_card_entry("CLAW","VIRIDIAN");
+	hscr_add_card_entry("FELL","VIRIDIAN");
+	hscr_add_card_entry("FERAL_FRENZY","VIRIDIAN");
+	hscr_add_card_entry("HUNTERS_JAVELIN","VIRIDIAN");
+	hscr_add_card_entry("NATURES_FURY","VIRIDIAN");
+	hscr_add_card_entry("PRIMAL_BLAST","VIRIDIAN");
+	hscr_add_card_entry("SAVAGE_MAUL","VIRIDIAN");
+	hscr_add_card_entry("SPIKE_PIERCE","VIRIDIAN");
+	hscr_add_card_entry("SPINESLING","VIRIDIAN");
+	hscr_add_card_entry("SPIRIT_PIERCE","VIRIDIAN");
+	hscr_add_card_entry("SPORE_CLOUD","VIRIDIAN");
+	hscr_add_card_entry("STALKING_SWIPE","VIRIDIAN");
+	hscr_add_card_entry("STAMPEDE","VIRIDIAN");
+	hscr_add_card_entry("UNSEEN_ROOT","VIRIDIAN");
+	hscr_add_card_entry("VERDANT_SWIPES","VIRIDIAN");
 	hscr_add_card_entry("WILDSTRIKE","VIRIDIAN");
 
-	hscr_add_card_entry("SPINESLING","VIRIDIAN");
-	hscr_add_card_entry("BIOBOLT","VIRIDIAN");
 
-	hscr_add_card_entry("VERDANT_BOLT","VIRIDIAN");
+	//===============================================================================//
+	//
+	// ATTACK - DIRECT SPECIALTY
+	//
+	//===============================================================================//
 
-	hscr_add_card_entry("FELL","VIRIDIAN");
-	hscr_add_card_entry("SPORE_CLOUD","VIRIDIAN");
-
-	hscr_add_card_entry("STALKING_SWIPE","VIRIDIAN");
-	hscr_add_card_entry("UNSEEN_ROOT","VIRIDIAN");
-
-	hscr_add_card_entry("FERAL_FRENZY","VIRIDIAN");
-	hscr_add_card_entry("VERDANT_SWIPES","VIRIDIAN");
-
-	hscr_add_card_entry("BRAMBLE_ERUPTION","VIRIDIAN");
-
-	hscr_add_card_entry("STAMPEDE","VIRIDIAN");
-	hscr_add_card_entry("BIOSTORM","VIRIDIAN");
-
-	hscr_add_card_entry("SPIKE_PIERCE","VIRIDIAN");
-	hscr_add_card_entry("SPIRIT_PIERCE","VIRIDIAN");
-
-	hscr_add_card_entry("SAVAGE_MAUL","VIRIDIAN");
-	hscr_add_card_entry("NATURES_FURY","VIRIDIAN");
-
-	hscr_add_card_entry("HUNTERS_JAVELIN","VIRIDIAN");
-	hscr_add_card_entry("PRIMAL_BLAST","VIRIDIAN");
-
-	hscr_add_card_entry("SNARLING_BITE","VIRIDIAN");
-
+	hscr_add_card_entry("BEASTIAL_WRATH","VIRIDIAN");
 	hscr_add_card_entry("GREENFLOW","VIRIDIAN");
-	hscr_add_card_entry("ROT_BLOOM","VIRIDIAN");
-	hscr_add_card_entry("TOXIC_ERUPTION","VIRIDIAN");
-
 	hscr_add_card_entry("HUNTERS_INSTINCT","VIRIDIAN");
 	hscr_add_card_entry("NATURES_WRATH","VIRIDIAN");
-
-	hscr_add_card_entry("SEED_BARRAGE","VIRIDIAN");
-
-	hscr_add_card_entry("THORN_STORM","VIRIDIAN");
 	hscr_add_card_entry("OLD_GROWTH_PUMMEL","VIRIDIAN");
-
+	hscr_add_card_entry("ROT_BLOOM","VIRIDIAN");
+	hscr_add_card_entry("SEED_BARRAGE","VIRIDIAN");
+	hscr_add_card_entry("SNARLING_BITE","VIRIDIAN");
+	hscr_add_card_entry("THORN_STORM","VIRIDIAN");
+	hscr_add_card_entry("TOXIC_ERUPTION","VIRIDIAN");
+	hscr_add_card_entry("VERDANT_BOLT","VIRIDIAN");
 	hscr_add_card_entry("VIRIDIAN_BURST","VIRIDIAN");
-	hscr_add_card_entry("BEASTIAL_WRATH","VIRIDIAN");
 
 
-	//------------//
-	//ATTACK: DOT//
-	//------------//
+	//===============================================================================//
+	//
+	// ATTACK - DOT
+	//
+	//===============================================================================//
 
-	hscr_add_card_entry("VIRAL_SURGE","VIRIDIAN");
-	hscr_add_card_entry("POTENT_SPORE","VIRIDIAN");
 	hscr_add_card_entry("BLOWDART","VIRIDIAN");
+	hscr_add_card_entry("POTENT_SPORE","VIRIDIAN");
 	hscr_add_card_entry("RAKE","VIRIDIAN");
-	hscr_add_card_entry("SPIT_VENOM","VIRIDIAN");
 	hscr_add_card_entry("SPIRIT_FANG","VIRIDIAN");
+	hscr_add_card_entry("SPIT_VENOM","VIRIDIAN");
+	hscr_add_card_entry("VIRAL_SURGE","VIRIDIAN");
 
 
-	//-------//
-	//DEFENSE//
-	//-------//
+	//===============================================================================//
+	//
+	// DEFENSE
+	//
+	//===============================================================================//
 
 	hscr_add_card_entry("BARKSKIN","VIRIDIAN");
 	hscr_add_card_entry("BLOOMING_SHIELD","VIRIDIAN");
+	hscr_add_card_entry("INTERLOCKING_SCALES","VIRIDIAN");
+	hscr_add_card_entry("NATURAL_RECOVERY","VIRIDIAN");
+	hscr_add_card_entry("NATURES_GRACE","VIRIDIAN");
 	hscr_add_card_entry("OVERGROWTH","VIRIDIAN");
+	hscr_add_card_entry("REGENERATE","VIRIDIAN");
+	hscr_add_card_entry("ROOTED_DEFENSE","VIRIDIAN");
+	hscr_add_card_entry("SECOND_BLOOM","VIRIDIAN");
+	hscr_add_card_entry("SINEWY_VINES","VIRIDIAN");
+	hscr_add_card_entry("STEELFUR","VIRIDIAN");
 	hscr_add_card_entry("SYMBIOSIS","VIRIDIAN");
+	hscr_add_card_entry("THICK_HIDE","VIRIDIAN");
+	hscr_add_card_entry("THORNMAIL","VIRIDIAN");
+	hscr_add_card_entry("WILDWARD","VIRIDIAN");
+
+
+	//===============================================================================//
+	//
+	// UTILITY
+	//
+	//===============================================================================//
+
+	hscr_add_card_entry("BLOOMING_SPRITE","VIRIDIAN");
+	hscr_add_card_entry("BLOOMTIDE","VIRIDIAN");
+	hscr_add_card_entry("DISTRACTING_TRAP","VIRIDIAN");
+	hscr_add_card_entry("DORMANT_SEED","VIRIDIAN");
+	hscr_add_card_entry("EMERALD_WISDOM","VIRIDIAN");
+	hscr_add_card_entry("FUNGAL_RECYCLING","VIRIDIAN");
+	hscr_add_card_entry("GERMINATE","VIRIDIAN");
+	hscr_add_card_entry("GREENSTEP","VIRIDIAN");
+	hscr_add_card_entry("GROWTH_SIGIL","VIRIDIAN");
+	hscr_add_card_entry("LIFE_SPIRIT","VIRIDIAN");
+	hscr_add_card_entry("MANAVINE","VIRIDIAN");
+	hscr_add_card_entry("NATURAL_CYCLE","VIRIDIAN");
+	hscr_add_card_entry("PHEROMONES","VIRIDIAN");
+	hscr_add_card_entry("RETURN_TO_NATURE","VIRIDIAN");
+	hscr_add_card_entry("ROTTING_SPORES","VIRIDIAN");
+	hscr_add_card_entry("SEED_THE_FIELD","VIRIDIAN");
+	hscr_add_card_entry("SERPENT_SUMMON","VIRIDIAN");
+	hscr_add_card_entry("THORN_NET","VIRIDIAN");
+	hscr_add_card_entry("TOXIC_SNARE","VIRIDIAN");
+	hscr_add_card_entry("TRANQUILITY","VIRIDIAN");
+	hscr_add_card_entry("VENOM_BLOOM","VIRIDIAN");
+
+
+	//===============================================================================//
+	//
+	// SUPPORT
+	//
+	//===============================================================================//
+
+	hscr_add_card_entry("BRAMBLE_AURA","VIRIDIAN");
+	hscr_add_card_entry("BURGEONING_BLOOM","VIRIDIAN");
+	hscr_add_card_entry("BURSTING_SEED","VIRIDIAN");
+	hscr_add_card_entry("CRIPPLING_VINES","VIRIDIAN");
+	hscr_add_card_entry("CULTIVATE","VIRIDIAN");
+	hscr_add_card_entry("CURE_ALL","VIRIDIAN");
+	hscr_add_card_entry("DECAYING_TOUCH","VIRIDIAN");
+	hscr_add_card_entry("DISEASE","VIRIDIAN");
+	hscr_add_card_entry("DRAINING_KISS","VIRIDIAN");
+	hscr_add_card_entry("EMERALD_SLAM","VIRIDIAN");
+	hscr_add_card_entry("ENTANGLE","VIRIDIAN");
+	hscr_add_card_entry("HONEYED_SCENT","VIRIDIAN");
+	hscr_add_card_entry("LIFEBLOOM","VIRIDIAN");
+	hscr_add_card_entry("MIRACLE_MUSA","VIRIDIAN");
+	hscr_add_card_entry("NATURES_BOND","VIRIDIAN");
+	hscr_add_card_entry("NATURES_MEND","VIRIDIAN");
+	hscr_add_card_entry("PACK_INSTINCT","VIRIDIAN");
+	hscr_add_card_entry("POLLINATE","VIRIDIAN");
+	hscr_add_card_entry("POTENT_FRUIT","VIRIDIAN");
+	hscr_add_card_entry("PREDATORS_MARK","VIRIDIAN");
+	hscr_add_card_entry("PREDATORY_SCENT","VIRIDIAN");
+	hscr_add_card_entry("REJUVENATE","VIRIDIAN");
+	hscr_add_card_entry("SAPSPRING","VIRIDIAN");
+	hscr_add_card_entry("SHIMMERING_SPORES","VIRIDIAN");
+	hscr_add_card_entry("SLEEP_DART","VIRIDIAN");
+	hscr_add_card_entry("SLEEPING_POLLEN","VIRIDIAN");
+	hscr_add_card_entry("TOXIC_HIDE","VIRIDIAN");
+	hscr_add_card_entry("VERDANT_EMBRACE","VIRIDIAN");
+	hscr_add_card_entry("VERDANT_INSIGHT","VIRIDIAN");
+	hscr_add_card_entry("WILD_VIGOR","VIRIDIAN");
+	hscr_add_card_entry("WILT","VIRIDIAN");
+
+
+	//===============================================================================//
+	//
+	// ARCHETYPE
+	//
+	//===============================================================================//
+
+	hscr_add_card_entry("ANCIENT_GROVE","VIRIDIAN");
+	hscr_add_card_entry("APEX_PREDATOR","VIRIDIAN");
+	hscr_add_card_entry("CHANNEL_THE_SPIRITS","VIRIDIAN");
+	hscr_add_card_entry("CIRCLE_OF_LIFE","VIRIDIAN");
+	hscr_add_card_entry("ENDLESS_BLOOM","VIRIDIAN");
+	hscr_add_card_entry("FOR_THE_THROAT","VIRIDIAN");
+	hscr_add_card_entry("HEART_OF_THE_FOREST","VIRIDIAN");
+	hscr_add_card_entry("PLAGUE_GARDEN","VIRIDIAN");
+	hscr_add_card_entry("PROLIFERATE","VIRIDIAN");
 
 
 	#endregion

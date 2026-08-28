@@ -118,10 +118,10 @@ function scr_get_item_info(_str_item_id){
 			_stct_return_item._str_item_name = "VERDANT SEED";
 			_stct_return_item._spr_item = spr_item_held_verdant_seed;
 			_stct_return_item._str_item_type = "HELD";
-			_stct_return_item._str_trigger_text = "STARTED EVENT: RAPID GROWTH";
+			_stct_return_item._str_trigger_text = "STARTED EVENT: SEEDFALL";
 			_stct_return_item._str_item_trigger_type = "ENTRY";
 			_stct_return_item._scr_item = scr_item_held_verdant_seed;
-			_stct_return_item._str_item_desc = "Can be given to a beast to trigger a Rapid Growth event upon battle entry.";
+			_stct_return_item._str_item_desc = "Can be given to a beast to trigger a SEEDFALL event upon battle entry.";
 			_stct_return_item._flag_stackable = false;
 			_stct_return_item._ct_item_amount = 1;
 			_stct_return_item._ct_item_max_amount = 1;

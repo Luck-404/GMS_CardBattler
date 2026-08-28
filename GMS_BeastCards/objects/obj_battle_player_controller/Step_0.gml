@@ -1208,6 +1208,13 @@ switch(_state_player){
 
 			_flag_turn_end_items_init = true;
 
+			//----------------//
+			//HEAL MINIONS//
+			//----------------//
+			scr_heal_minions(
+				_list_beasts_alive
+			);
+
 			_list_turn_end_items = ds_list_create();
 
 			for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){

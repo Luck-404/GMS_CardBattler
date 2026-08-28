@@ -10,6 +10,255 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 	switch(_str_status_name){
 
+//-------------//
+//PLAGUE GARDEN//
+//-------------//
+case "PLAGUE_GARDEN":
+
+	var _ref_plague_garden_status =
+		scr_status_buff_plague_garden(
+			"APPLY",
+			undefined,
+			_val_magnitude,
+			_val_lifetime
+		);
+
+	if (_ref_plague_garden_status != undefined){
+
+		scr_spawn_popup_scrolling(
+			"TEXT",
+			"PLAGUE GARDEN",
+			undefined,
+			c_green,
+			room_width * 0.5,
+			room_height * 0.5
+		);
+	}
+
+break;
+
+		//-------------------//
+		//HEART OF THE FOREST//
+		//-------------------//
+		case "HEART_OF_THE_FOREST":
+
+			var _ref_heart_status =
+				scr_status_buff_heart_of_the_forest(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_heart_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"HEART OF THE FOREST",
+					undefined,
+					c_green,
+					room_width * 0.5,
+					room_height * 0.5
+				);
+			}
+
+		break;
+
+	//-------------//
+	//ENDLESS BLOOM//
+	//-------------//
+	case "ENDLESS_BLOOM":
+
+		var _ref_endless_bloom_status =
+			scr_status_buff_endless_bloom(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+		if (_ref_endless_bloom_status != undefined){
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"ENDLESS BLOOM",
+				undefined,
+				c_green,
+				room_width * 0.5,
+				room_height * 0.5
+			);
+		}
+
+	break;
+
+		//-----------------//
+		//VERDANT INSIGHT//
+		//-----------------//
+		case "VERDANT_INSIGHT":
+
+			var _ref_verdant_insight_status =
+				scr_status_buff_verdant_insight(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_verdant_insight_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"VERDANT INSIGHT",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		//----------//
+		//WILD VIGOR//
+		//----------//
+		case "WILD_VIGOR":
+
+			var _ref_wild_vigor_status =
+				scr_status_buff_wild_vigor(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_wild_vigor_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"WILD VIGOR",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "BOOST":
+
+			var _ref_boost_status =
+				scr_status_buff_boost(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_boost_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"BOOST",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "REGENERATION":
+
+			var _ref_regeneration_status =
+				scr_status_buff_regeneration(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_regeneration_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"REGENERATION",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "PACK_INSTINCT":
+
+			var _ref_pack_instinct_status = scr_status_buff_pack_instinct("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_pack_instinct_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"PACK INSTINCT",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "TOXIC_HIDE":
+
+			var _ref_toxic_hide_status =
+				scr_status_buff_toxic_hide(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_toxic_hide_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"TOXIC HIDE",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		case "NATURES_BOND":
+
+			var _ref_natures_bond_status =
+				scr_status_buff_natures_bond(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_natures_bond_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"NATURE'S BOND",
+					undefined,
+					c_green,
+					global.ref_target_beast.x + irandom_range(-32,32),
+					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
 		case "MANAVINE":
 
 			var _ref_manavine_status =

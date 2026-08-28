@@ -2,7 +2,7 @@
 //
 // SCRIPT: SCR_ITEM_HELD_VERDANT_SEED
 // FUNCTION: Handles Verdant Seed held item behavior.
-//           Triggers Rapid Growth when activated in battle.
+//           Triggers SEEDFALL when activated in battle.
 //           Returns whether the trigger successfully resolved.
 //
 //===============================================================================//
@@ -21,7 +21,7 @@ function scr_item_held_verdant_seed(_str_state,_stct_item,_stct_target_unit){
 
 		case "TRIGGER":
 
-			scr_apply_event_status("RAPID GROWTH");
+			scr_apply_weather_status("SEEDFALL");
 
 			audio_play_sound(snd_buff,0,false);
 

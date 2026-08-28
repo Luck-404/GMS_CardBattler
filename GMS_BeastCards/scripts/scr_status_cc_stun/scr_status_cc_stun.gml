@@ -79,7 +79,7 @@ function scr_status_cc_stun(_str_tag,_ref_status,_val_lifetime=undefined){
 				"STUN";
 
 			_ref_new_status._str_status_desc =
-				"STUNNED, CANNOT MOVE";
+				"STUNNED, CANNOT ACT";
 
 			_ref_new_status._spr_status =
 				spr_status_cc_stun;

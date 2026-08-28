@@ -754,14 +754,18 @@ switch(_state_enemy){
 	//
 	#region TURN END
 	case ENUM_ENEMY_STATE.TURN_END:
-	//---------------------//
-	//BUILD HELD ITEM QUEUE//
-	//---------------------//
-	if (!_flag_turn_end_items_init){
+		if (!_flag_turn_end_items_init){
 
-		_flag_turn_end_items_init = true;
+			_flag_turn_end_items_init = true;
 
-		_list_turn_end_items = ds_list_create();
+			//----------------//
+			//HEAL MINIONS//
+			//----------------//
+			scr_heal_minions(
+				_list_beasts_alive
+			);
+
+			_list_turn_end_items = ds_list_create();
 
 		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
 

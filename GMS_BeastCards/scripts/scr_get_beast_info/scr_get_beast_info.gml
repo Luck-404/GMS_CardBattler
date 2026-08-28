@@ -1956,7 +1956,7 @@ function scr_get_beast_info(_str_beast_name){
 					_str_beast_class : "SOLDIER",
 
 					_arr_beast_talent_trees : ["JUGGERNAUT","ECHO"],
-					_str_beast_ability : ["STEELBLOOD","EMERALD SCALE","WEATHERCALL: RAPID GROWTH"],
+					_str_beast_ability : ["STEELBLOOD","EMERALD SCALE","WEATHERCALL: SEEDFALL"],
 
 					_str_beast_breed : undefined,
 					_val_beast_prestige_stat : undefined,

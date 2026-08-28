@@ -13,7 +13,7 @@ function scr_get_card_info(_str_card_name){
 	// RANGE			- SELF, MELEE, RANGED, BACK, GLOBAL, TEAN
 	// MAIN TYPE        - ATTACK, DEFENSE, SUPPORT, UTILITY, ARCHETYPE
 	// EFFECT TYPE      - DIRECT, DOT, DEBUFF, CC, BUFF, ARMOR, HEAL, SUMMON,
-	//                    WEATHER, CARD_DRAW, MANA, TURN, REPOSITION,
+	//                    WEATHER, CARD_DRAW, MANA, TURN, REPOSITION, EVENT
 	//                    CARD_MANIPULATION, OTHER
 	// STAT TYPE        - NEU, MAG, PHY
 	// TARGET COUNT     - SELF, ST, ADJACENT, TEAMWIDE, GLOBAL, CARD
@@ -50,6 +50,74 @@ function scr_get_card_info(_str_card_name){
 	
 	switch(_str_card_name){
 		#region VIRIDIAN
+
+		#region ANCIENT_GROVE
+		case "ANCIENT_GROVE":
+
+			_stct_return_card = {
+				_str_card_name : "ANCIENT GROVE",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_ancient_grove,
+				_arr_card_colors : ["VIRIDIAN",undefined],
+
+				_str_card_range : "SELF",
+				_str_card_type : "ARCHETYPE",
+				_str_card_effect_type : "SUMMON",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "TEAMWIDE",
+
+				_val_card_magnitude : 0,
+				_str_card_scalar : undefined,
+
+				_str_card_archetype_req : "MAGICAL",
+				_str_card_class_req : "SUMMONER",
+
+				_str_card_rarity : "IV",
+				_val_card_mana_cost : 3,
+				_flag_card_exhausts : true,
+
+				_scr_card : scr_card_viridian_ancient_grove,
+
+				_str_card_description :
+					"EXHAUSTS. Teamwide. Summon a Grove Spirit (5/1) on each allied Beast. Each Grove Spirit heals its host for 3 HP per round. Whenever its host gains Armor, the Grove Spirit gains 1 Magnitude and 2 HP. At 10 maximum HP, it also deals 1 NEU dmg per Magnitude to the front enemy each round. At 20 maximum HP, its attacks also Stun for 1 round."
+			};
+
+		break;
+		#endregion
+
+		#region APEX_PREDATOR
+		case "APEX_PREDATOR":
+
+			_stct_return_card = {
+				_str_card_name : "APEX PREDATOR",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_apex_predator,
+				_arr_card_colors : ["VIRIDIAN",undefined],
+
+				_str_card_range : "SELF",
+				_str_card_type : "ARCHETYPE",
+				_str_card_effect_type : "CLEANSE",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "SELF",
+
+				_val_card_magnitude : 0,
+				_str_card_scalar : undefined,
+
+				_str_card_archetype_req : "MARTIAL",
+				_str_card_class_req : undefined,
+
+				_str_card_rarity : "IV",
+				_val_card_mana_cost : 3,
+				_flag_card_exhausts : true,
+
+				_scr_card : scr_card_viridian_apex_predator,
+
+				_str_card_description :
+					"EXHAUSTS. ST. Self. Remove all DoTs, Debuffs, and CC from all allied Beasts. For each stack removed, permanently increase the caster's linear damage by 2 and heal the caster for 2 HP."
+			};
+
+		break;
+		#endregion
 
 			#region BARKSKIN
 			case "BARKSKIN":
@@ -216,7 +284,7 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_range : "GLOBAL",
 					_str_card_type : "UTILITY",
-					_str_card_effect_type : "WEATHER",
+					_str_card_effect_type : "EVENT",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "GLOBAL",
 
@@ -233,7 +301,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_bloomtide,
 
 					_str_card_description :
-						"EXHAUSTS. Global. Summons the Bloomtide weather event."
+						"EXHAUSTS. Global. Begin the Bloomtide Event."
 				};
 			break;
 			#endregion
@@ -385,6 +453,74 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"ST. Ranged. Apply Armorbreak for 2 rounds and Vulnerable for 1 round."
+				};
+
+			break;
+			#endregion
+
+			#region CHANNEL_THE_SPIRITS
+			case "CHANNEL_THE_SPIRITS":
+
+				_stct_return_card = {
+					_str_card_name : "CHANNEL THE SPIRITS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_channel_the_spirits,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_channel_the_spirits,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Deal [Linear] MAG dmg 12 times to random enemy Beasts (base 6 per hit)."
+				};
+
+			break;
+			#endregion
+
+			#region CIRCLE_OF_LIFE
+			case "CIRCLE_OF_LIFE":
+
+				_stct_return_card = {
+					_str_card_name : "CIRCLE OF LIFE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_circle_of_life,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "SACRIFICE",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_circle_of_life,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Expend all corpses. For each corpse expended, generate 1 Mana, heal all allied Beasts for 5 HP, and summon a Dormant Seed (1/0) in an available allied Minion slot. If no slot is available, increase an existing allied Minion's current HP, maximum HP, and Magnitude by 1 instead."
 				};
 
 			break;
@@ -639,39 +775,39 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
-			#region DRAINING_KISS
-			case "DRAINING_KISS":
+		#region DRAINING_KISS
+		case "DRAINING_KISS":
 
-				_stct_return_card = {
-					_str_card_name : "DRAINING KISS",
-					_str_card_id : _str_card_name,
-					_spr_card : spr_card_viridian_draining_kiss,
-					_arr_card_colors : ["VIRIDIAN",undefined],
+			_stct_return_card = {
+				_str_card_name : "DRAINING KISS",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_draining_kiss,
+				_arr_card_colors : ["VIRIDIAN",undefined],
 
-					_str_card_range : "RANGED",
-					_str_card_type : "SUPPORT",
-					_str_card_effect_type : "DEBUFF",
-					_str_card_stat : "NEU",
-					_str_card_target_count : "ST",
+				_str_card_range : "RANGED",
+				_str_card_type : "SUPPORT",
+				_str_card_effect_type : "DEBUFF",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "ST",
 
-					_val_card_magnitude : 5,
-					_str_card_scalar : "LINEAR",
+				_val_card_magnitude : 5,
+				_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : undefined,
-					_str_card_class_req : undefined,
+				_str_card_archetype_req : undefined,
+				_str_card_class_req : undefined,
 
-					_str_card_rarity : "II",
-					_val_card_mana_cost : 2,
-					_flag_card_exhausts : false,
+				_str_card_rarity : "II",
+				_val_card_mana_cost : 2,
+				_flag_card_exhausts : false,
 
-					_scr_card : scr_card_viridian_draining_kiss,
+				_scr_card : scr_card_viridian_draining_kiss,
 
-					_str_card_description :
-						"ST. Ranged. Heal caster for 5 HP. Apply Drained for 3 rounds. Drained reduces Magical Power and Magical Defense by 20."
-				};
+				_str_card_description :
+					"ST. Ranged. Heal the caster for 5 HP. Apply Drained for 3 rounds. Drained reduces MAGPOW and MAGDEF by 20."
+			};
 
-			break;
-			#endregion
+		break;
+		#endregion
 
 			#region EMERALD_SLAM
 			case "EMERALD_SLAM":
@@ -728,6 +864,40 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_emerald_wisdom,
 					_str_card_description : "Exhausts. Global. Draw 2 more cards per turn, also heal lowest beast."
 				};
+			break;
+			#endregion
+
+			#region ENDLESS_BLOOM
+			case "ENDLESS_BLOOM":
+
+				_stct_return_card = {
+					_str_card_name : "ENDLESS BLOOM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_endless_bloom,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_endless_bloom,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. For 6 rounds, whenever an allied Minion dies, replace it with a Dormant Seed (1/0). The Dormant Seed inherits the defeated Minion's HP and Magnitude bonuses."
+				};
+
 			break;
 			#endregion
 
@@ -811,6 +981,42 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_feral_frenzy,
 					_str_card_description : "ST. Melee. Deal [Linear] phy dmg 3 times."
 				};
+			break;
+			#endregion
+
+			#region FOR_THE_THROAT
+			case "FOR_THE_THROAT":
+
+				_stct_return_card = {
+					_str_card_name : "FOR THE THROAT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_for_the_throat,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					// Current percent-damage API:
+					// 30 = 30% of maximum HP.
+					_val_card_magnitude : 30,
+					_str_card_scalar : "PERCENT",
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_for_the_throat,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Melee. Deal [%] PHY dmg (base 30% of target's maximum HP). Apply 5 Bleed. Stun the caster for 2 rounds. EXECUTE: Heal the caster for 30% of its maximum HP."
+				};
+
 			break;
 			#endregion
 
@@ -956,10 +1162,78 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_growth_sigil,
-					_str_card_description : "Exhausts. Global. Set up rapid growth weather."
+					_str_card_description : "EXHAUSTS. Global. Begin Seedfall Weather."
 				};
 			break;
 			#endregion					
+
+			#region HEART_OF_THE_FOREST
+			case "HEART_OF_THE_FOREST":
+
+				_stct_return_card = {
+					_str_card_name : "HEART OF THE FOREST",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_heart_of_the_forest,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_heart_of_the_forest,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. For 5 rounds, whenever an allied Beast receives healing, it gains an equal amount of Armor and each Minion hosted by that Beast gains +1 maximum HP."
+				};
+
+			break;
+			#endregion
+
+			#region HONEYED_SCENT
+			case "HONEYED_SCENT":
+
+				_stct_return_card = {
+					_str_card_name : "HONEYED SCENT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_honeyed_scent,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : "PERCENT",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : "SUMMONER",
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_honeyed_scent,
+
+					_str_card_description :
+						"Global. Teamwide Aura. (+) Whenever an allied Beast casts an Attack card, summon a Wasp Drone (2/1) on that Beast. Each Wasp Drone deals 1 NEU dmg per Magnitude to a random enemy each round and applies Weakness for 1 round to another random enemy. (-) The caster has 0 Dodge and takes 10% more damage while this Aura is active."
+				};
+
+			break;
+			#endregion
 
 			#region HUNTERS_INSTINCT
 			case "HUNTERS_INSTINCT":
@@ -1056,6 +1330,40 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_life_spirit,
 					_str_card_description : "Ranged, ST. Summons a Life Spirit (2/1) that heals its host for 2 HP per Magnitude each round."
 				};
+			break;
+			#endregion
+
+			#region LIFEBLOOM
+			case "LIFEBLOOM":
+
+				_stct_return_card = {
+					_str_card_name : "LIFEBLOOM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_lifebloom,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_lifebloom,
+
+					_str_card_description :
+						"ST. Ranged. Heal [Linear] HP (base 6)."
+				};
+
 			break;
 			#endregion
 
@@ -1229,6 +1537,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region NATURES_BOND
+			case "NATURES_BOND":
+
+				_stct_return_card = {
+					_str_card_name : "NATURE'S BOND",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_natures_bond,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_natures_bond,
+
+					_str_card_description :
+						"ST. Self. Heal the caster for 5 HP. Gain Nature's Bond for 5 rounds. Whenever the caster receives healing, gain 2 Armor per stack."
+				};
+
+			break;
+			#endregion
+
 			#region NATURES_GRACE
 			case "NATURES_GRACE":
 				_stct_return_card = {
@@ -1251,6 +1593,40 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_natures_grace,
 					_str_card_description : "EXHAUSTS. ST. Ranged. Apply 20 Armor."
 				};
+			break;
+			#endregion
+
+			#region NATURES_MEND
+			case "NATURES_MEND":
+
+				_stct_return_card = {
+					_str_card_name : "NATURE'S MEND",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_natures_mend,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CLEANSE",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_natures_mend,
+
+					_str_card_description :
+						"ST. Ranged. Remove 1 stack from each DoT and Debuff on the target. Remove any status reduced to 0 stacks."
+				};
+
 			break;
 			#endregion
 
@@ -1304,6 +1680,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region PACK_INSTINCT
+			case "PACK_INSTINCT":
+
+				_stct_return_card = {
+					_str_card_name : "PACK INSTINCT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_pack_instinct,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_pack_instinct,
+
+					_str_card_description :
+						"Global. For 4 rounds, each allied Beast gains +2 damage and +2 maximum HP for each living Minion attached to it."
+				};
+
+			break;
+			#endregion
+
 			#region PHEROMONES
 			case "PHEROMONES":
 				_stct_return_card = {
@@ -1336,6 +1746,74 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region POLLINATE
+			case "POLLINATE":
+
+				_stct_return_card = {
+					_str_card_name : "POLLINATE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_pollinate,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TARGET_BEHIND",
+
+					_val_card_magnitude : 0.05,
+					_str_card_scalar : "PERCENT",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_pollinate,
+
+					_str_card_description :
+						"AoE-2. Ranged. Apply Regeneration to the target and the allied Beast behind it for 3 rounds. Heal [Scalar] HP immediately and each round."
+				};
+
+			break;
+			#endregion
+
+			#region REJUVENATE
+			case "REJUVENATE":
+
+				_stct_return_card = {
+					_str_card_name : "REJUVENATE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_rejuvenate,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_rejuvenate,
+
+					_str_card_description :
+						"ST. Ranged. Apply Regeneration for 3 rounds. Heal [Linear] HP at the start of each round (base 5)."
+				};
+
+			break;
+			#endregion
+
 			#region POTENT_SPORE
 			case "POTENT_SPORE":
 				_stct_return_card = {
@@ -1361,6 +1839,108 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region POTENT_FRUIT
+			case "POTENT_FRUIT":
+
+				_stct_return_card = {
+					_str_card_name : "POTENT FRUIT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_potent_fruit,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_potent_fruit,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Self. Gain Boost for 2 rounds. Boost increases damage dealt by 25%."
+				};
+
+			break;
+			#endregion
+
+			#region PREDATORS_MARK
+			case "PREDATORS_MARK":
+
+				_stct_return_card = {
+					_str_card_name : "PREDATOR'S MARK",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_predators_mark,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_predators_mark,
+
+					_str_card_description :
+						"ST. Ranged. Apply Vulnerable. If the target has Bleed, Poison, or Venom, increase Vulnerable's duration by 1 round."
+				};
+
+			break;
+			#endregion
+
+			#region PREDATORY_SCENT
+			case "PREDATORY_SCENT":
+
+				_stct_return_card = {
+					_str_card_name : "PREDATORY SCENT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_predatory_scent,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_predatory_scent,
+
+					_str_card_description :
+						"ST. Ranged. Apply Focus for 3 rounds. Allied Minions prioritize the target."
+				};
+
+			break;
+			#endregion
+
 			#region PRIMAL_BLAST
 			case "PRIMAL_BLAST":
 				_stct_return_card = {
@@ -1382,6 +1962,40 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_primal_blast,
 					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [Linear] mag dmg (base 10)."
 				};
+			break;
+			#endregion
+
+			#region PROLIFERATE
+			case "PROLIFERATE":
+
+				_stct_return_card = {
+					_str_card_name : "PROLIFERATE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_proliferate,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DOT",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_proliferate,
+
+					_str_card_description :
+	"EXHAUSTS. Teamwide. Starting with the front enemy Beast, copy all of its DoTs onto the next Beast. Continue toward the back, copying each Beast's current DoTs onto the next, then reverse direction and repeat until the effect returns to the front Beast. Copied DoTs ignore CON resistance rolls."
+	};
+
 			break;
 			#endregion
 
@@ -1523,6 +2137,40 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region SAPSPRING
+			case "SAPSPRING":
+
+				_stct_return_card = {
+					_str_card_name : "SAPSPRING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_sapspring,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ADJACENT",
+
+					_val_card_magnitude : 12,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_sapspring,
+
+					_str_card_description :
+						"EXHAUSTS. AoE-3. Ranged. Heal up to 3 selected allied Beasts for [Linear] HP (base 12)."
+				};
+
+			break;
+			#endregion
 
 			#region ROTTING_SPORES
 			case "ROTTING_SPORES":
@@ -1697,6 +2345,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+		#region SHIMMERING_SPORES
+		case "SHIMMERING_SPORES":
+
+			_stct_return_card = {
+				_str_card_name : "SHIMMERING SPORES",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_shimmering_spores,
+				_arr_card_colors : ["VIRIDIAN",undefined],
+
+				_str_card_range : "RANGED",
+				_str_card_type : "SUPPORT",
+				_str_card_effect_type : "CC",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "ST",
+
+				_val_card_magnitude : 0,
+				_str_card_scalar : undefined,
+
+				_str_card_archetype_req : undefined,
+				_str_card_class_req : undefined,
+
+				_str_card_rarity : "II",
+				_val_card_mana_cost : 1,
+				_flag_card_exhausts : false,
+
+				_scr_card : scr_card_viridian_shimmering_spores,
+
+				_str_card_description :
+					"ST. Ranged. Blind the target for 3 rounds."
+			};
+
+		break;
+		#endregion
+
 			#region SINEWY_VINES
 			case "SINEWY_VINES":
 				_stct_return_card = {
@@ -1719,6 +2401,74 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_sinewy_vines,
 					_str_card_description : "ST. Self. Apply [Linear] Armor - scales with MAGPOW (base 3)."
 				};
+			break;
+			#endregion
+
+			#region SLEEP_DART
+			case "SLEEP_DART":
+
+				_stct_return_card = {
+					_str_card_name : "SLEEP DART",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_sleep_dart,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_sleep_dart,
+
+					_str_card_description :
+						"ST. Ranged. Sleep the target for 3 rounds."
+				};
+
+			break;
+			#endregion
+
+			#region SLEEPING_POLLEN
+			case "SLEEPING_POLLEN":
+
+				_stct_return_card = {
+					_str_card_name : "SLEEPING POLLEN",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_sleeping_pollen,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ADJACENT",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_sleeping_pollen,
+
+					_str_card_description :
+						"EXHAUSTS. AoE-3. Ranged. Sleep up to 3 selected enemies for 2 rounds."
+				};
+
 			break;
 			#endregion
 
@@ -2124,6 +2874,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region TOXIC_HIDE
+			case "TOXIC_HIDE":
+
+				_stct_return_card = {
+					_str_card_name : "TOXIC HIDE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_toxic_hide,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_toxic_hide,
+
+					_str_card_description :
+						"ST. Self. Gain Toxic Hide for 3 rounds. When an enemy successfully deals Melee damage to the caster, apply 1 Poison to that enemy per stack."
+				};
+
+			break;
+			#endregion
+
 			#region TOXIC_SNARE
 			case "TOXIC_SNARE":
 
@@ -2274,6 +3058,74 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region VERDANT_EMBRACE
+			case "VERDANT_EMBRACE":
+
+				_stct_return_card = {
+					_str_card_name : "VERDANT EMBRACE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_verdant_embrace,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_viridian_verdant_embrace,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Heal all Beasts for [Linear] HP (base 15)."
+				};
+
+			break;
+			#endregion
+
+			#region VERDANT_INSIGHT
+			case "VERDANT_INSIGHT":
+
+				_stct_return_card = {
+					_str_card_name : "VERDANT INSIGHT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_verdant_insight,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_verdant_insight,
+
+					_str_card_description :
+						"ST. Ranged. Increase the target's MAGPOW and MAGDEF by 20 for 3 rounds."
+				};
+
+			break;
+			#endregion
+
 			#region VERDANT_SWIPES
 			case "VERDANT_SWIPES":
 				_stct_return_card = {
@@ -2348,6 +3200,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region WILD_VIGOR
+			case "WILD_VIGOR":
+
+				_stct_return_card = {
+					_str_card_name : "WILD VIGOR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_wild_vigor,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_wild_vigor,
+
+					_str_card_description :
+						"ST. Ranged. Increase the target's PHYPOW and PHYDEF by 20 for 3 rounds."
+				};
+
+			break;
+			#endregion
+
 			#region WILDSTRIKE
 			case "WILDSTRIKE":
 				_stct_return_card = {
@@ -2396,6 +3282,40 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
+		#endregion
+
+		#region WILT
+		case "WILT":
+
+			_stct_return_card = {
+				_str_card_name : "WILT",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_wilt,
+				_arr_card_colors : ["VIRIDIAN",undefined],
+
+				_str_card_range : "RANGED",
+				_str_card_type : "SUPPORT",
+				_str_card_effect_type : "DEBUFF",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "ST",
+
+				_val_card_magnitude : 0,
+				_str_card_scalar : undefined,
+
+				_str_card_archetype_req : undefined,
+				_str_card_class_req : undefined,
+
+				_str_card_rarity : "II",
+				_val_card_mana_cost : 2,
+				_flag_card_exhausts : false,
+
+				_scr_card : scr_card_viridian_wilt,
+
+				_str_card_description :
+					"ST. Ranged. Apply Wither for 3 rounds."
+			};
+
+		break;
 		#endregion
 
 		#region UNCOLORED

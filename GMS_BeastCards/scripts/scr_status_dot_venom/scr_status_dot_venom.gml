@@ -8,7 +8,7 @@
 //           Reapplications add one stack and refresh to the stored maximum life.
 //
 //===============================================================================//
-function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag_trigger_plague_garden=true){
 
 	switch(_str_tag){
 
@@ -55,6 +55,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_existing_status,
 					_val_lifetime
 				);
+
 
 				//--------------------//
 				//REDUCE TARGET STATS//
@@ -119,6 +120,14 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_existing_status._val_venom_mdef_reduction +=
 					_val_old_mdef -
 					_ref_target._ref_unit._val_beast_mdef_stat;
+				
+				if (_flag_trigger_plague_garden){
+
+					scr_trigger_plague_garden(
+						_ref_target,
+						"VENOM"
+					);
+				}
 
 
 				return _ref_existing_status;
@@ -258,6 +267,14 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined){
 			scr_reposition_statuses(
 				_ref_target
 			);
+
+			if (_flag_trigger_plague_garden){
+
+				scr_trigger_plague_garden(
+					_ref_target,
+					"VENOM"
+				);
+			}
 
 			return _ref_new_status;
 

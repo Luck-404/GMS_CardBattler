@@ -1,14 +1,12 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_EVENT_BLOOMTIDE
-// FUNCTION: Handles the Bloomtide global Weather status.
-//           Unstackable Timed.
-//           At the end of each round:
-//           - Heals every living Beast by 2.
-//           - Cleanses one negative effect from one random living Beast.
-//           - Applies Bloom to three random living Beasts.
+// FUNCTION: Handles the Bloomtide global Event.
+//           Converts excess healing into Overhealth while active.
+//           Heals every living Beast by 2 at the end of each round.
 //
 //===============================================================================//
+
 function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined){
 
 	switch(_str_tag){
@@ -19,7 +17,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 		case "APPLY":
 
 			if (_val_lifetime == undefined){
-				_val_lifetime = 15;
+				_val_lifetime = 3;
 			}
 
 			_val_lifetime = max(1,_val_lifetime);
@@ -28,7 +26,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status = scr_check_for_status(
-				"WEATHER: BLOOMTIDE",
+				"EVENT: BLOOMTIDE",
 				global.list_statuses
 			);
 
@@ -49,26 +47,33 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				obj_battle_status
 			);
 
-			_ref_new_status._scr_status = scr_status_event_bloomtide;
+			_ref_new_status._scr_status =
+				scr_status_event_bloomtide;
 
-			_ref_new_status._ref_host = undefined;
+			_ref_new_status._ref_host =
+				undefined;
 
-			_ref_new_status._str_status_name = "WEATHER: BLOOMTIDE";
+			_ref_new_status._str_status_type =
+				"EVENT";
+
+			_ref_new_status._str_status_name =
+				"EVENT: BLOOMTIDE";
 
 			_ref_new_status._str_status_desc =
-				"END OF ROUND: HEAL ALL BEASTS 2, CLEANSE 1 NEGATIVE EFFECT FROM A RANDOM BEAST, AND GIVE BLOOM TO 3 RANDOM BEASTS.";
+				"HEALING BEYOND MAXIMUM HP BECOMES OVERHEALTH. END OF ROUND: HEAL ALL LIVING BEASTS 2.";
 
-			_ref_new_status._spr_status = spr_status_event_bloomtide;
+			_ref_new_status._spr_status =
+				spr_status_event_bloomtide;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region =
+				"END";
 
-			_ref_new_status._str_status_type = "WEATHER";
+			_ref_new_status._ct_status_stacks =
+				1;
 
-			_ref_new_status._ct_status_stacks = 1;
-
-			//---------------------//
+			//-------------------//
 			//INITIALIZE LIFETIME//
-			//---------------------//
+			//-------------------//
 			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
 
 			//----------------//
@@ -77,7 +82,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			ds_list_add(global.list_statuses,_ref_new_status);
 
 			//-------------------//
-			//CHANGE BACKGROUND//
+			//CHANGE EVENT VISUAL//
 			//-------------------//
 			var _ref_layer = layer_get_id("bly_event");
 
@@ -99,59 +104,15 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				return undefined;
 			}
 
-			//------------------//
-			//BUILD BEAST LIST//
-			//------------------//
-			var _list_beasts = ds_list_create();
-
-			//--------------------//
-			//GET PLAYER BEASTS//
-			//--------------------//
-			for (
-				var _it_beast = 0;
-				_it_beast < ds_list_size(obj_battle_player_controller._list_beasts_alive);
-				_it_beast++
-			){
+			//-------------------//
+			//HEAL PLAYER BEASTS//
+			//-------------------//
+			for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_player_controller._list_beasts_alive); _it_beast++){
 
 				var _ref_beast = ds_list_find_value(
 					obj_battle_player_controller._list_beasts_alive,
 					_it_beast
 				);
-
-				if (instance_exists(_ref_beast)){
-					ds_list_add(_list_beasts,_ref_beast);
-				}
-			}
-
-			//-------------------//
-			//GET ENEMY BEASTS//
-			//-------------------//
-			for (
-				var _it_beast = 0;
-				_it_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_alive);
-				_it_beast++
-			){
-
-				var _ref_beast = ds_list_find_value(
-					obj_battle_enemy_controller._list_beasts_alive,
-					_it_beast
-				);
-
-				if (instance_exists(_ref_beast)){
-					ds_list_add(_list_beasts,_ref_beast);
-				}
-			}
-
-			//----------------//
-			//HEAL ALL BY 2//
-			//----------------//
-			for (
-				var _it_beast = 0;
-				_it_beast < ds_list_size(_list_beasts);
-				_it_beast++
-			){
-
-				var _ref_beast = ds_list_find_value(_list_beasts,_it_beast);
 
 				if (!instance_exists(_ref_beast)){
 					continue;
@@ -160,49 +121,22 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				scr_heal_target(2,_ref_beast);
 			}
 
-			//--------------------------------//
-			//CLEANSE RANDOM LIVING BEAST//
-			//--------------------------------//
-			if (ds_list_size(_list_beasts) > 0){
+			//------------------//
+			//HEAL ENEMY BEASTS//
+			//------------------//
+			for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_alive); _it_beast++){
 
-				var _ref_cleanse_target = ds_list_find_value(
-					_list_beasts,
-					irandom(ds_list_size(_list_beasts) - 1)
+				var _ref_beast = ds_list_find_value(
+					obj_battle_enemy_controller._list_beasts_alive,
+					_it_beast
 				);
 
-				scr_cleanse_negative(_ref_cleanse_target,1);
-			}
-
-			//----------------------------//
-			//GIVE 3 RANDOM BEASTS BLOOM//
-			//----------------------------//
-			if (ds_list_size(_list_beasts) > 0){
-
-				repeat (3){
-
-					var _ref_bloom_target = ds_list_find_value(
-						_list_beasts,
-						irandom(ds_list_size(_list_beasts) - 1)
-					);
-
-					if (!instance_exists(_ref_bloom_target)){
-						continue;
-					}
-
-					var _ref_original_target = global.ref_target_beast;
-
-					global.ref_target_beast = _ref_bloom_target;
-
-					scr_apply_buff_status("BLOOM",5,2);
-
-					global.ref_target_beast = _ref_original_target;
+				if (!instance_exists(_ref_beast)){
+					continue;
 				}
-			}
 
-			//---------------//
-			//DESTROY LIST//
-			//---------------//
-			ds_list_destroy(_list_beasts);
+				scr_heal_target(2,_ref_beast);
+			}
 
 			//----------------//
 			//UPDATE LIFETIME//
@@ -223,6 +157,9 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				return undefined;
 			}
 
+			//------------------//
+			//CLEAR EVENT VISUAL//
+			//------------------//
 			var _ref_layer = layer_get_id("bly_event");
 
 			layer_background_change(_ref_layer,spr_bg_blank);

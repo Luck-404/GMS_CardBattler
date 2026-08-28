@@ -7,7 +7,11 @@
 //           Spawns feedback popup text for successful applications.
 //
 //===============================================================================//
-function scr_apply_cc_status(_str_status_name,_val_lifetime=undefined){
+function scr_apply_cc_status(
+	_str_status_name,
+	_val_lifetime=undefined,
+	_flag_ignore_resistance=false
+){
 
 	//----------------//
 	//VALIDATE TARGET//
@@ -26,38 +30,41 @@ function scr_apply_cc_status(_str_status_name,_val_lifetime=undefined){
 	//--------------//
 	//RESIST CHECK//
 	//--------------//
-	var _val_res_stat =
-		_ref_target._ref_unit._val_beast_con_stat;
+	if (!_flag_ignore_resistance){
 
-	var _val_res_mod =
-		scr_get_beast_grade_modifier(
-			_val_res_stat
-		);
+		var _val_res_stat =
+			_ref_target._ref_unit._val_beast_con_stat;
 
-	var _val_resist_chance =
-		floor(
-			5 *
-			_val_res_mod
-		);
+		var _val_res_mod =
+			scr_get_beast_grade_modifier(
+				_val_res_stat
+			);
 
-	var _val_roll =
-		irandom_range(
-			0,
-			100
-		);
+		var _val_resist_chance =
+			floor(
+				5 *
+				_val_res_mod
+			);
 
-	if (_val_roll < _val_resist_chance){
+		var _val_roll =
+			irandom_range(
+				0,
+				100
+			);
 
-		scr_spawn_popup_scrolling(
-			"TEXT",
-			"RESISTED",
-			undefined,
-			c_black,
-			_ref_target.x + irandom_range(-32,32),
-			_ref_target.y - 24 + irandom_range(-32,32)
-		);
+		if (_val_roll < _val_resist_chance){
 
-		return undefined;
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"RESISTED",
+				undefined,
+				c_black,
+				_ref_target.x + irandom_range(-32,32),
+				_ref_target.y - 24 + irandom_range(-32,32)
+			);
+
+			return undefined;
+		}
 	}
 
 	//--------------//
@@ -67,6 +74,54 @@ function scr_apply_cc_status(_str_status_name,_val_lifetime=undefined){
 		undefined;
 
 	switch(_str_status_name){
+		//-----//
+		//SLEEP//
+		//-----//
+		case "SLEEP":
+
+			_ref_status =
+				scr_status_cc_sleep(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ASLEEP",
+					undefined,
+					c_black,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;		
+		
+case "BLIND":
+
+	_ref_status =
+		scr_status_cc_blind(
+			"APPLY",
+			undefined,
+			_val_lifetime
+		);
+
+	if (_ref_status != undefined){
+
+		scr_spawn_popup_scrolling(
+			"TEXT",
+			"BLINDED",
+			undefined,
+			c_black,
+			_ref_target.x + irandom_range(-32,32),
+			_ref_target.y - 24 + irandom_range(-32,32)
+		);
+	}
+
+break;
 
 		case "STUN":
 

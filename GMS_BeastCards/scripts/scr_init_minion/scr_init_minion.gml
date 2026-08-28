@@ -12,6 +12,62 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 
 	switch(_str_id){
 		
+		case "GROVE_SPIRIT":
+
+			_ref_new_minion._str_team =
+				_ref_target._str_team;
+
+			_ref_new_minion._str_name =
+				"GROVE SPIRIT";
+
+			//------//
+			//HP 5//
+			//------//
+			_ref_new_minion._val_cur_hp =
+				5;
+
+			_ref_new_minion._val_max_hp =
+				5;
+
+			//-----------//
+			//MAGNITUDE 1//
+			//-----------//
+			_ref_new_minion._val_magnitude =
+				1;
+
+			_ref_new_minion._ref_host =
+				_ref_target;
+
+			_ref_new_minion._spr_minion =
+				spr_minion_grove_spirit;
+
+		break;
+		
+		case "WASP_DRONE":
+
+			_ref_new_minion._str_team =
+				_ref_target._str_team;
+
+			_ref_new_minion._str_name =
+				"WASP DRONE";
+
+			_ref_new_minion._val_cur_hp =
+				2;
+
+			_ref_new_minion._val_max_hp =
+				2;
+
+			_ref_new_minion._val_magnitude =
+				1;
+
+			_ref_new_minion._ref_host =
+				_ref_target;
+
+			_ref_new_minion._spr_minion =
+				spr_minion_wasp_drone;
+
+		break;		
+		
 		case "SPORELING":
 
 			_ref_new_minion._str_team =
@@ -114,6 +170,15 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 		break;	
 	}
 	
+	//----------------//
+	//STORE BASE STATS//
+	//----------------//
+	_ref_new_minion._val_base_max_hp =
+		_ref_new_minion._val_max_hp;
+
+	_ref_new_minion._val_base_magnitude =
+		_ref_new_minion._val_magnitude;
+	
 	if (ds_list_size(_ref_target._list_minions) < _ref_target._ct_minions_max){
 
 		ds_list_add(_ref_target._list_minions,_ref_new_minion);
@@ -129,7 +194,7 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 			);
 
 		if (instance_exists(_ref_old_minion)){
-			scr_destroy_minion(_ref_old_minion);
+			scr_destroy_minion(_ref_old_minion,"REPLACE");
 		}
 
 		ds_list_add(
@@ -147,20 +212,22 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 		);
 	}
 	
+	
+	
 	//----------------------//
 	//APPLY PASSIVE EFFECTS//
 	//----------------------//
 	if (_ref_new_minion._str_name == "BLOOMING SPRITE"){
 		scr_status_buff_blooming_sprite("APPLY",undefined,_ref_new_minion);
 	}
+	
+	//--------------------------//
+	//TRIGGER MINION COUNT BUFFS//
+	//--------------------------//
+	scr_trigger_minion_count_buffs(_ref_target);
 
 	scr_reposition_minions(_ref_target);
 	scr_reposition_statuses(_ref_target);
 
 	return _ref_new_minion;
-
-	scr_reposition_minions(_ref_target);
-	scr_reposition_statuses(_ref_target);
-	
-	return _ref_new_minion;	
 }

@@ -42,17 +42,10 @@ function scr_card_viridian_cultivate(_stct_card,_ref_caster,_ref_target){
 		//-------------//
 		//INCREASE HP//
 		//-------------//
-		_ref_minion._val_cur_hp +=
-			_stct_card._val_card_magnitude;
-
-		_ref_minion._val_max_hp +=
-			_stct_card._val_card_magnitude;
-
-		//-------------------//
-		//INCREASE MAGNITUDE//
-		//-------------------//
-		_ref_minion._val_magnitude +=
-			_stct_card._val_card_magnitude;
+		scr_grow_minion(
+			_ref_minion,
+			_stct_card._val_card_magnitude
+		);
 
 		//-------------------------//
 		//REFRESH PASSIVE MINIONS//

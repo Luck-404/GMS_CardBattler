@@ -3,7 +3,7 @@
 // SCRIPT: SCR_STATUS_DEBUFF_DRAINED
 // FUNCTION: Handles the Drained Debuff.
 //           Unstackable Timed.
-//           Reduces Magical Power and Magical Defense by 20.
+//           Reduces MAGPOW and MAGDEF by 20.
 //           Reapplication refreshes duration without reducing stats again.
 //           Restores the exact removed stat amounts when the Debuff ends.
 //
@@ -60,8 +60,7 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 			_ref_target._ref_unit._val_beast_mpow_stat =
 				max(
 					0,
-					_ref_target._ref_unit._val_beast_mpow_stat -
-					20
+					_ref_target._ref_unit._val_beast_mpow_stat - 20
 				);
 
 			var _val_mpow_reduction =
@@ -77,8 +76,7 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 			_ref_target._ref_unit._val_beast_mdef_stat =
 				max(
 					0,
-					_ref_target._ref_unit._val_beast_mdef_stat -
-					20
+					_ref_target._ref_unit._val_beast_mdef_stat - 20
 				);
 
 			var _val_mdef_reduction =

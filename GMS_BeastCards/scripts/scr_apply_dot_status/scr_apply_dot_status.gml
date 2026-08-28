@@ -7,7 +7,11 @@
 //           Spawns feedback popup text for resisted or successful applications.
 //
 //===============================================================================//
-function scr_apply_dot_status(_str_status_name,_val_lifetime=undefined){
+function scr_apply_dot_status(
+	_str_status_name,
+	_val_lifetime=undefined,
+	_flag_trigger_plague_garden=true
+){
 
 	//----------------//
 	//VALIDATE TARGET//
@@ -73,12 +77,12 @@ function scr_apply_dot_status(_str_status_name,_val_lifetime=undefined){
 		//-------//
 		case "BLEED":
 
-			_ref_status =
-				scr_status_dot_bleed(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+		_ref_status = scr_status_dot_bleed(
+		"APPLY",
+		undefined,
+		_val_lifetime,
+		_flag_trigger_plague_garden
+	);
 
 			if (_ref_status != undefined){
 
@@ -131,7 +135,8 @@ function scr_apply_dot_status(_str_status_name,_val_lifetime=undefined){
 				scr_status_dot_poison(
 					"APPLY",
 					undefined,
-					_val_lifetime
+					_val_lifetime,
+					_flag_trigger_plague_garden
 				);
 
 			if (_ref_status != undefined){
@@ -158,7 +163,8 @@ function scr_apply_dot_status(_str_status_name,_val_lifetime=undefined){
 				scr_status_dot_venom(
 					"APPLY",
 					undefined,
-					_val_lifetime
+					_val_lifetime,
+					_flag_trigger_plague_garden
 				);
 
 			if (_ref_status != undefined){

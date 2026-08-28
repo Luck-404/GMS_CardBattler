@@ -7,7 +7,12 @@
 //           Reapplications add one stack and refresh to the stored maximum life.
 //
 //===============================================================================//
-function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_dot_bleed(
+	_str_tag,
+	_ref_status,
+	_val_lifetime=undefined,
+	_flag_trigger_plague_garden=true
+){
 
 	switch(_str_tag){
 
@@ -51,6 +56,14 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined){
 					_val_lifetime
 				);
 
+				if (_flag_trigger_plague_garden){
+
+					scr_trigger_plague_garden(
+						_ref_target,
+						"BLEED"
+					);
+				}
+				
 				return _ref_existing_status;
 			}
 
@@ -110,6 +123,14 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined){
 			scr_reposition_statuses(
 				_ref_target
 			);
+
+			if (_flag_trigger_plague_garden){
+
+				scr_trigger_plague_garden(
+					_ref_target,
+					"BLEED"
+				);
+			}
 
 			return _ref_new_status;
 

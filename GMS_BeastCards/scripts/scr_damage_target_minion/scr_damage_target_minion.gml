@@ -115,13 +115,18 @@ function scr_damage_target_minion(_val_damage,_ref_target){
 
 				_ref_minion._val_cur_hp = 0;
 
-				scr_destroy_minion(_ref_minion);
+				scr_destroy_minion(_ref_minion,"DEATH");
 			}
 		}
 
 		_val_damage_left -=
 			_val_total_applied;
 	}
+
+	//-------------------//
+	//TRACK BEAST DAMAGE//
+	//-------------------//
+	var _val_beast_damage = 0;
 
 	//-------//
 	//ARMOR//
@@ -161,16 +166,18 @@ function scr_damage_target_minion(_val_damage,_ref_target){
 		_ref_target._val_overhealth > 0
 	){
 
-		var _val_overhealth_damage =
-			min(
-				_ref_target._val_overhealth,
-				_val_damage_left
-			);
+		var _val_overhealth_damage = min(
+			_ref_target._val_overhealth,
+			_val_damage_left
+		);
 
 		_ref_target._val_overhealth -=
 			_val_overhealth_damage;
 
 		_val_damage_left -=
+			_val_overhealth_damage;
+
+		_val_beast_damage +=
 			_val_overhealth_damage;
 
 		scr_spawn_popup_scrolling(
@@ -188,20 +195,21 @@ function scr_damage_target_minion(_val_damage,_ref_target){
 	//--------//
 	if (_val_damage_left > 0){
 
-		var _val_hp_damage =
-			min(
-				_val_damage_left,
-				_ref_target._val_cur_hp
-			);
+		var _val_hp_damage = min(
+			_val_damage_left,
+			_ref_target._val_cur_hp
+		);
 
 		if (_val_hp_damage > 0){
 
-			_ref_target._val_cur_hp =
-				max(
-					0,
-					_ref_target._val_cur_hp -
-					_val_hp_damage
-				);
+			_ref_target._val_cur_hp = max(
+				0,
+				_ref_target._val_cur_hp -
+				_val_hp_damage
+			);
+
+			_val_beast_damage +=
+				_val_hp_damage;
 
 			scr_spawn_popup_scrolling(
 				"TEXT",
@@ -213,6 +221,15 @@ function scr_damage_target_minion(_val_damage,_ref_target){
 			);
 		}
 	}
+
+	//------------//
+	//WAKE SLEEP//
+	//------------//
+	if (_val_beast_damage > 0){
+		scr_wake_sleep_on_damage(_ref_target);
+	}
+
+	return true;
 
 	return true;
 }

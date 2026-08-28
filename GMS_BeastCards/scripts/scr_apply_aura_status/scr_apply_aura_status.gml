@@ -20,6 +20,27 @@ function scr_apply_aura_status(_str_status_name,_val_magnitude=0){
 
 	switch(_str_status_name){
 
+		//---------------//
+		//HONEYED SCENT//
+		//---------------//
+		case "HONEYED_SCENT":
+
+			_ref_status = scr_status_aura_honeyed_scent("APPLY",undefined,_val_magnitude);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"HONEYED SCENT",
+					undefined,
+					c_green,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
 		//------------------//
 		//BURGEONING BLOOM//
 		//------------------//
