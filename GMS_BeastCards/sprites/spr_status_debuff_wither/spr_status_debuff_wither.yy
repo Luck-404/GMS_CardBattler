@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"WITHER",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/WITHER.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/WITHER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

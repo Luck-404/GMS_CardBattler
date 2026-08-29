@@ -6,7 +6,7 @@
   "name":"scr_status_buff_pack_instinct",
   "parent":{
     "name":"PACK_INSTINCT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/PACK_INSTINCT.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/PACK_INSTINCT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

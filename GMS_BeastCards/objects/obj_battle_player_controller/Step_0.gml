@@ -990,29 +990,73 @@ switch(_state_player){
 		// SELECT REVEALED ENEMY CARD
 		//
 		#region SELECT REVEALED ENEMY CARD
+
 		if (
-			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			) &&
 			mouse_check_button_pressed(mb_left) &&
 			!_flag_clicked
 		){
 
-			var _ref_card_clicked = instance_nearest(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			);
+			var _val_mouse_x = device_mouse_x_to_gui(0);
+			var _val_mouse_y = device_mouse_y_to_gui(0);
 
+			var _ref_card_clicked = undefined;
+
+			//-----------------------//
+			//CHECK ENEMY HAND CARDS//
+			//-----------------------//
+			for (
+				var _it_enemy = 0;
+				_it_enemy < ds_list_size(obj_battle_enemy_controller._list_beasts_alive);
+				_it_enemy++
+			){
+
+				var _ref_enemy = ds_list_find_value(
+					obj_battle_enemy_controller._list_beasts_alive,
+					_it_enemy
+				);
+
+				if (!instance_exists(_ref_enemy)){
+					continue;
+				}
+
+				if (
+					_ref_enemy._str_list != "ALIVE" ||
+					_ref_enemy._val_cur_hp <= 0
+				){
+					continue;
+				}
+
+				var _ref_hand_card = ds_list_find_value(
+					_ref_enemy._list_deck,
+					_ref_enemy._val_hand_pos
+				);
+
+				if (!instance_exists(_ref_hand_card)){
+					continue;
+				}
+
+				if (
+					position_meeting(
+						_val_mouse_x,
+						_val_mouse_y,
+						_ref_hand_card
+					)
+				){
+					_ref_card_clicked =
+						_ref_hand_card;
+
+					break;
+				}
+			}
+
+			//------------------//
+			//VALID ENEMY CARD//
+			//------------------//
 			if (
 				instance_exists(_ref_card_clicked) &&
 				_ref_card_clicked._str_team == "ENEMY" &&
 				_ref_card_clicked._str_location == "HAND" &&
-				!_ref_card_clicked._flag_card_disabled &&
-				instance_exists(_ref_card_clicked._ref_unit) &&
-				_ref_card_clicked._ref_unit._str_list == "ALIVE"
+				!_ref_card_clicked._flag_card_disabled
 			){
 
 				audio_play_sound(snd_gui_press,0,false);
@@ -1025,17 +1069,22 @@ switch(_state_player){
 				_state_player =
 					ENUM_PLAYER_STATE.CARD_EXECUTE;
 			}
+
+			//--------------//
+			//INVALID CARD//
+			//--------------//
 			else{
 
 				audio_play_sound(snd_error,0,false);
 
 				scr_spawn_popup_error(
-					"INVALID CARD",
-					60
-				);
-			}
-		}
-		#endregion
+			"INVALID CARD",
+			60
+		);
+	}
+}
+
+#endregion
 
 	break;
 	#endregion	
@@ -1153,15 +1202,43 @@ switch(_state_player){
 		// OPTIONAL EMPTY TARGET
 		//
 		#region OPTIONAL EMPTY TARGET
+
+		var _stct_corpse_card =
+			global.ref_cast_card._ref_card;
+
+		var _flag_allow_empty_target =
+			!scr_battle_has_corpse();
+
 		if (
-			global.ref_cast_card._ref_card._str_card_range == "CORPSE_OPTIONAL" &&
-			!scr_battle_has_corpse() &&
+			variable_struct_exists(
+				_stct_corpse_card,
+				"_flag_allow_empty_corpse_target"
+			)
+		){
+			_flag_allow_empty_target =
+				_flag_allow_empty_target ||
+				_stct_corpse_card._flag_allow_empty_corpse_target;
+		}
+
+		if (
+			_stct_corpse_card._str_card_range == "CORPSE_OPTIONAL" &&
+			_flag_allow_empty_target &&
 			mouse_check_button_pressed(mb_left) &&
 			!_flag_clicked &&
 			!position_meeting(
 				device_mouse_x_to_gui(0),
 				device_mouse_y_to_gui(0),
 				obj_battle_beast
+			) &&
+			!position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_card
+			) &&
+			!position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_end_turn_button
 			)
 		){
 
@@ -1175,6 +1252,7 @@ switch(_state_player){
 			_state_player =
 				ENUM_PLAYER_STATE.CARD_EXECUTE;
 		}
+
 		#endregion
 
 	break;

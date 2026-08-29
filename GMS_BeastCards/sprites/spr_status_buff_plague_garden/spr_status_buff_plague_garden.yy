@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"PLAGUE_GARDEN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/PLAGUE_GARDEN.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/PLAGUE_GARDEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

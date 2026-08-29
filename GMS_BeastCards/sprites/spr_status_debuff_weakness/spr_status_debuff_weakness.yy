@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"WEAKNESS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/WEAKNESS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/WEAKNESS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

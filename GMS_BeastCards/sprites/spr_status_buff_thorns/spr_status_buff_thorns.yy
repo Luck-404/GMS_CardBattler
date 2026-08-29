@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"THORNS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/THORNS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/THORNS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

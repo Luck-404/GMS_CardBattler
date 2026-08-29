@@ -27,9 +27,16 @@ function scr_trigger_attack_traps(_ref_attacker,_ref_target,_stct_card){
 	//-----------------------//
 	//CHECK ATTACHED TRAPS//
 	//-----------------------//
-	for (var _it_trap = 0; _it_trap < ds_list_size(_ref_attacker._list_traps); _it_trap++){
+	for (
+		var _it_trap = 0;
+		_it_trap < ds_list_size(_ref_attacker._list_traps);
+		_it_trap++
+	){
 
-		var _ref_trap = ds_list_find_value(_ref_attacker._list_traps,_it_trap);
+		var _ref_trap = ds_list_find_value(
+			_ref_attacker._list_traps,
+			_it_trap
+		);
 
 		if (!instance_exists(_ref_trap)){
 			continue;
@@ -40,13 +47,6 @@ function scr_trigger_attack_traps(_ref_attacker,_ref_target,_stct_card){
 		}
 
 		if (_ref_trap._str_trigger_type != "ATTACKING"){
-			continue;
-		}
-
-		//----------------------//
-		//MUST BE ENEMY TRAP//
-		//----------------------//
-		if (_ref_attacker._str_team == _ref_trap._str_owner_team){
 			continue;
 		}
 

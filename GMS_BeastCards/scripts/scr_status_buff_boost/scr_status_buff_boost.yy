@@ -6,7 +6,7 @@
   "name":"scr_status_buff_boost",
   "parent":{
     "name":"BOOST",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/BOOST.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/BOOST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

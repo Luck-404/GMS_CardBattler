@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"DORMANT SEED",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DORMANT SEED.yy",
+    "name":"VIRIDIAN",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS/MINION SPRITES/VIRIDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

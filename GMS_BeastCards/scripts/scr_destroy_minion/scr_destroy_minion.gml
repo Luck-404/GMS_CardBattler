@@ -40,6 +40,12 @@ function scr_destroy_minion(_ref_minion,_str_reason="REMOVE"){
 		)
 	);
 
+	var _flag_fungi_sleep =
+	(
+		_ref_minion._str_name == "FUNGI" &&
+		_str_reason == "DEATH"
+	);
+
 	//------------------------//
 	//CHECK ENDLESS BLOOM//
 	//------------------------//
@@ -250,6 +256,32 @@ function scr_destroy_minion(_ref_minion,_str_reason="REMOVE"){
 			global.ref_target_beast =
 				_ref_host;
 		}
+	}
+
+	//------------------//
+	//FUNGI DEATH SLEEP//
+	//------------------//
+	if (
+		_flag_fungi_sleep &&
+		instance_exists(_ref_host) &&
+		_ref_host._str_list == "ALIVE" &&
+		_ref_host._val_cur_hp > 0
+	){
+
+		var _ref_original_target =
+			global.ref_target_beast;
+
+		global.ref_target_beast =
+			_ref_host;
+
+		scr_apply_cc_status(
+			"SLEEP",
+			3,
+			true
+		);
+
+		global.ref_target_beast =
+			_ref_original_target;
 	}
 
 	//---------------//

@@ -2,7 +2,7 @@
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_THORN_NET
 // FUNCTION: Resolves Thorn Net.
-//           Places an Attack-triggered Trap on the selected enemy Beast.
+//           Places an Attack-triggered Trap on the selected Beast.
 //
 //===============================================================================//
 function scr_card_viridian_thorn_net(_stct_card,_ref_caster,_ref_target){

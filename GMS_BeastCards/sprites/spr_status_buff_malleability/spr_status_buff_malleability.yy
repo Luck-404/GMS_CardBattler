@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"MALLEABILITY",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/MALLEABILITY.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/MALLEABILITY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

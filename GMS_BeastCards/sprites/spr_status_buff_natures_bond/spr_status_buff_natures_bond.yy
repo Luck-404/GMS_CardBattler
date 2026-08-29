@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"NATURES_BOND",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/NATURES_BOND.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/NATURES_BOND.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

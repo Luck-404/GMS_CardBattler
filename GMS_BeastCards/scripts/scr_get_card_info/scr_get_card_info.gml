@@ -79,7 +79,7 @@ function scr_get_card_info(_str_card_name){
 				_scr_card : scr_card_viridian_ancient_grove,
 
 				_str_card_description :
-					"EXHAUSTS. Teamwide. Summon a Grove Spirit (5/1) on each allied Beast. Each Grove Spirit heals its host for 3 HP per round. Whenever its host gains Armor, the Grove Spirit gains 1 Magnitude and 2 HP. At 10 maximum HP, it also deals 1 NEU dmg per Magnitude to the front enemy each round. At 20 maximum HP, its attacks also Stun for 1 round."
+					"EXHAUSTS. Teamwide. Summon a Grove Spirit (5/1) on each allied Beast. Each Grove Spirit heals its host for 3 HP per round. Whenever its host gains Armor, the Grove Spirit gains 1 Magnitude and 2 maximum HP. At 10 HP, it also deals 1 NEU dmg per Magnitude to the front enemy each round. At 20 HP, its attacks also Stun for 1 round."
 			};
 
 		break;
@@ -113,7 +113,7 @@ function scr_get_card_info(_str_card_name){
 				_scr_card : scr_card_viridian_apex_predator,
 
 				_str_card_description :
-					"EXHAUSTS. ST. Self. Remove all DoTs, Debuffs, and CC from all allied Beasts. For each stack removed, permanently increase the caster's linear damage by 2 and heal the caster for 2 HP."
+					"EXHAUSTS. ST. Self. Remove all DoTs, Debuffs, and CC from all allied Beasts. For each stack removed, permanently increase the caster’s linear damage by 2 and heal the caster for 2 HP."
 			};
 
 		break;
@@ -164,7 +164,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_beastial_wrath,
-					_str_card_description : "AoE-2. Melee. Deal [Linear] phy dmg to the front two Beasts (base 6). Stun the front target."
+					_str_card_description : "AoE-2. Melee. Deal [Linear] PHY dmg to the front target and the Beast behind it (base 6). Stun the front target for 1 round."
 				};
 			break;
 			#endregion		
@@ -188,7 +188,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_biobolt,
-					_str_card_description : "ST. Ranged. Deal [Linear] mag dmg (base 4)."
+					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg (base 4)."
 				};
 			break;
 			#endregion	
@@ -213,7 +213,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_biostorm,
-					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [%] mag dmg (10% of target max hp)."
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [%] MAG dmg (base 10% of each target’s maximum HP)."
 				};
 			break;
 			#endregion
@@ -238,7 +238,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_blooming_shield,
-					_str_card_description : "ST. Ranged. Grant 7 Armor."
+					_str_card_description : "ST. Ranged. Target gains 7 Armor."
 				};
 			break;
 			#endregion		
@@ -326,19 +326,19 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_blowdart,
-					_str_card_description : "ST. Ranged. Deal 4 neutral dmg and apply 1 Poison stack."
+					_str_card_description : "ST. Ranged. Deal 4 NEU dmg. Apply 1 Poison."
 				};
 			break;
 			#endregion		
 
 
-			#region BRAMBLE_AURA
-			case "BRAMBLE_AURA":
+			#region BRAMBLE_HIDE
+			case "BRAMBLE_HIDE":
 
 				_stct_return_card = {
-					_str_card_name : "BRAMBLE AURA",
+					_str_card_name : "BRAMBLE HIDE",
 					_str_card_id : _str_card_name,
-					_spr_card : spr_card_viridian_bramble_aura,
+					_spr_card : spr_card_viridian_bramble_hide,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 
 					_str_card_range : "RANGED",
@@ -357,10 +357,10 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 
-					_scr_card : scr_card_viridian_bramble_aura,
+					_scr_card : scr_card_viridian_bramble_hide,
 
 					_str_card_description :
-						"ST. Ranged. Grant Thorns for 3 turns. Melee attackers take 3 neutral damage."
+						"ST. Ranged. Grant Thorns for 3 rounds. When attacked, deal 3 NEU dmg to the attacker."
 				};
 
 			break;
@@ -385,7 +385,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_bramble_eruption,
-					_str_card_description : "AOE-3. Ranged. Deal [Linear] mag dmg to up to 3 selected beasts."
+					_str_card_description : "AoE-3. Ranged. Deal [Linear] MAG dmg to up to 3 selected Beasts (base 8)."
 				};
 			break;
 			#endregion			
@@ -418,7 +418,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_burgeoning_bloom,
 
 					_str_card_description :
-						"Self Aura. (+) When this Beast receives healing, adjacent allied Beasts heal for 25% of the amount restored. (-) This Beast's Maximum HP is reduced by 15%."
+						"Self Aura. (+) When this Beast receives a healing effect, adjacent allied Beasts heal for 25% of that effect. (-) This Beast's Maximum HP is reduced by 15%."
 				};
 
 			break;
@@ -520,7 +520,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_circle_of_life,
 
 					_str_card_description :
-						"EXHAUSTS. Global. Expend all corpses. For each corpse expended, generate 1 Mana, heal all allied Beasts for 5 HP, and summon a Dormant Seed (1/0) in an available allied Minion slot. If no slot is available, increase an existing allied Minion's current HP, maximum HP, and Magnitude by 1 instead."
+						"EXHAUSTS. Global. Expend all corpses. For each corpse expended, generate 1 Mana, heal all allied Beasts for 5 HP, and summon a Dormant Seed (1/0) in an available allied Minion slot. If no slot is available, increase an existing allied Minion’s current HP, maximum HP, and Magnitude by 1 instead."
 				};
 
 			break;
@@ -545,7 +545,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_claw,
-					_str_card_description : "ST. Melee. Deal [Linear] phy dmg (base 5)."
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg (base 5)."
 				};
 			break;
 			#endregion
@@ -578,7 +578,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_crippling_vines,
 
 					_str_card_description :
-						"ST. Ranged. Reduce the target's Physical Power by 1 major stage for 3 rounds and prevent repositioning."
+						"ST. Ranged. Reduce the target’s PHYPOW by 20 for 3 rounds and prevent repositioning."
 				};
 
 			break;
@@ -612,7 +612,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_cultivate,
 
 					_str_card_description :
-						"ST. Ranged. Increase the current HP, maximum HP, and Magnitude of all minions on target by 2 for the remainder of battle."
+						"ST. Ranged. Increase the current HP, maximum HP, and Magnitude of all Minions on the target by 2 for the remainder of battle."
 				};
 
 			break;
@@ -680,7 +680,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_decaying_touch,
 
 					_str_card_description :
-						"ST. Ranged. Apply Wither for 3 rounds. Wither reduces current and maximum HP by 25%. If the target is Poisoned, Wither lasts 5 rounds instead."
+						"ST. Ranged. Apply Wither for 3 rounds. If the target is Poisoned, Wither lasts 5 rounds instead."
 				};
 
 			break;
@@ -705,13 +705,14 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_disease,
-					_str_card_description : "Ranged, ST, Weaken for 3 rounds"
+					_str_card_description : "ST. Ranged. Weaken the target for 3 rounds."
 				};
 			break;
 			#endregion
 
 			#region DISTRACTING_TRAP
 			case "DISTRACTING_TRAP":
+
 				_stct_return_card = {
 					_str_card_name : "DISTRACTING TRAP",
 					_str_card_id : _str_card_name,
@@ -737,8 +738,9 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_distracting_trap,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Ranged. Set a Trap on a friendly Beast. The first enemy Attack that targets it misses. Draw 1 card."
+						"EXHAUSTS. ST. Ranged. Set a Trap on a Beast. The first Attack that targets it misses. Draw 1 card."
 				};
+
 			break;
 			#endregion
 
@@ -769,7 +771,7 @@ function scr_get_card_info(_str_card_name){
 
 					_scr_card : scr_card_viridian_dormant_seed,
 
-					_str_card_description : "ST. Ranged. Spawn one Dormant Seed (1/0). After 2 rounds, it hatches into a random Viridian minion. HP and Magnitude bonuses carry over to the hatched minion."
+					_str_card_description : "ST. Ranged. Summon a Dormant Seed (1/0). After 2 rounds, it hatches into a random Viridian Minion. HP and Magnitude bonuses carry over to the hatched Minion."
 				};
 
 			break;
@@ -837,7 +839,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_emerald_slam,
 
 					_str_card_description :
-						"ST. Melee. Stun for 1 turn."
+						"ST. Melee. Stun the target for 1 round."
 				};
 
 			break;
@@ -862,7 +864,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_emerald_wisdom,
-					_str_card_description : "Exhausts. Global. Draw 2 more cards per turn, also heal lowest beast."
+					_str_card_description : "EXHAUSTS. Global. Draw 2 additional cards per turn for 3 rounds."
 				};
 			break;
 			#endregion
@@ -895,11 +897,45 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_endless_bloom,
 
 					_str_card_description :
-						"EXHAUSTS. Teamwide. For 6 rounds, whenever an allied Minion dies, replace it with a Dormant Seed (1/0). The Dormant Seed inherits the defeated Minion's HP and Magnitude bonuses."
+						"EXHAUSTS. Teamwide. For 6 rounds, whenever an allied Minion dies, replace it with a Dormant Seed (1/0). The Dormant Seed inherits the defeated Minion’s HP and Magnitude bonuses."
 				};
 
 			break;
 			#endregion
+
+		#region PLAGUE_GARDEN
+		case "PLAGUE_GARDEN":
+
+			_stct_return_card = {
+				_str_card_name : "PLAGUE GARDEN",
+				_str_card_id : _str_card_name,
+				_spr_card : spr_card_viridian_plague_garden,
+				_arr_card_colors : ["VIRIDIAN",undefined],
+
+				_str_card_range : "SELF",
+				_str_card_type : "ARCHETYPE",
+				_str_card_effect_type : "SUMMON",
+				_str_card_stat : "NEU",
+				_str_card_target_count : "TEAMWIDE",
+
+				_val_card_magnitude : 0,
+				_str_card_scalar : undefined,
+
+				_str_card_archetype_req : "MAGICAL",
+				_str_card_class_req : undefined,
+
+				_str_card_rarity : "IV",
+				_val_card_mana_cost : 3,
+				_flag_card_exhausts : true,
+
+				_scr_card : scr_card_viridian_plague_garden,
+
+				_str_card_description :
+					"EXHAUSTS. Teamwide. For 5 rounds, whenever an enemy gains Bleed, Poison, or Venom, summon a Sporeling (1/1) on that Beast. If necessary, replace an existing Minion. When a Sporeling is replaced or killed, apply 1 Poison to its host."
+			};
+
+		break;
+		#endregion
 
 			#region ENTANGLE
 			case "ENTANGLE":
@@ -929,7 +965,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_entangle,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Ranged. Stun for 1 round."
+						"EXHAUSTS. ST. Ranged. Stun the target for 1 round."
 				};
 
 			break;
@@ -955,7 +991,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_fell,
-					_str_card_description : "EXHAUSTS. ST. Melee. Deal [%] phy dmg (base 15% of target max hp)."
+					_str_card_description : "EXHAUSTS. ST. Melee. Deal [%] PHY dmg (base 15% of target’s maximum HP)."
 				};
 			break;
 			#endregion		
@@ -979,7 +1015,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_feral_frenzy,
-					_str_card_description : "ST. Melee. Deal [Linear] phy dmg 3 times."
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg 3 times (base 2 per hit)."
 				};
 			break;
 			#endregion
@@ -1014,7 +1050,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_for_the_throat,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Melee. Deal [%] PHY dmg (base 30% of target's maximum HP). Apply 5 Bleed. Stun the caster for 2 rounds. EXECUTE: Heal the caster for 30% of its maximum HP."
+						"EXHAUSTS. ST. Melee. Deal [%] PHY dmg (base 30% of target’s maximum HP). Apply 5 Bleed. Stun the caster for 2 rounds. EXECUTE: Heal the caster for 30% of its maximum HP."
 				};
 
 			break;
@@ -1035,6 +1071,8 @@ function scr_get_card_info(_str_card_name){
 					_str_card_stat : "NEU",
 					_str_card_target_count : "CORPSE",
 
+					_flag_allow_empty_corpse_target : true,
+					
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
@@ -1047,7 +1085,7 @@ function scr_get_card_info(_str_card_name){
 
 					_scr_card : scr_card_viridian_fungal_recycling,
 
-					_str_card_description : "EXHAUSTS. Global. Sacrifice a corpse. Return a random exhausted Viridian card to the draw pile. If no corpse is available, caster loses 10 HP instead."
+					_str_card_description : "EXHAUSTS. Global. Sacrifice a corpse. Return a random exhausted Viridian card to the draw pile. If no corpse is available, the caster loses 10 HP instead."
 				};
 
 			break;
@@ -1080,7 +1118,7 @@ function scr_get_card_info(_str_card_name){
 
 					_scr_card : scr_card_viridian_germinate,
 
-					_str_card_description : "ST. Ranged. Hatch all existing Dormant Seeds on target, then summon 2 Dormant Seeds."
+					_str_card_description : "ST. Ranged. Hatch all existing Dormant Seeds on the target, then summon 2 Dormant Seeds."
 				};
 
 			break;
@@ -1106,7 +1144,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_greenflow,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Fire X magic bolts dealing 5 dmg each. X is equal to minions controlled by the caster."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Deal 5 NEU dmg X times. X equals the number of Minions controlled by the caster."
 				};
 			break;
 			#endregion		
@@ -1138,7 +1176,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_greenstep,
 
 					_str_card_description :
-						"ST. Ranged. Swap places with target. Heal both caster and target for 3 HP."
+						"ST. Ranged. Swap the caster’s position with the target allied Beast. Heal both Beasts for 3 HP."
 				};
 			break;
 			#endregion
@@ -1255,7 +1293,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_hunters_instinct,
-					_str_card_description : "ST. Melee. Deal [Linear] phy dmg (base 4). Deal 4 additional damage to Bleeding targets."
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg (base 4). Deal 4 additional dmg if the target is Bleeding."
 				};
 			break;
 			#endregion		
@@ -1279,7 +1317,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_hunters_javelin,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [Linear] phy dmg (base 10)."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [Linear] PHY dmg (base 10)."
 				};
 			break;
 			#endregion
@@ -1304,7 +1342,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_interlocking_scales,
-					_str_card_description : "ST. Self. Gain [Linear] Armor (base 3). Scales with PHYPOW."
+					_str_card_description : "ST. Self. Gain [Linear] Armor (base 3)."
 				};
 			break;
 			#endregion
@@ -1328,7 +1366,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_life_spirit,
-					_str_card_description : "Ranged, ST. Summons a Life Spirit (2/1) that heals its host for 2 HP per Magnitude each round."
+					_str_card_description : "ST. Ranged. Summon a Life Spirit (2/1). Each round, it heals its host for 2 HP per Magnitude."
 				};
 			break;
 			#endregion
@@ -1394,7 +1432,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_manavine,
 
 					_str_card_description :
-						"EXHAUSTS. Global. Generate 1 extra mana for 3 rounds."
+						"EXHAUSTS. Global. Gain +1 maximum and current Mana for 3 rounds."
 				};
 			break;
 			#endregion
@@ -1426,7 +1464,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_miracle_musa,
 
 					_str_card_description :
-						"ST. Self. Gain [Linear] Overhealth for 3 turns (base 3). Scales with MAGPOW."
+						"ST. Self. Gain [Linear] Overhealth for 3 rounds (base 3). Each round, regenerate up to 1 stack's worth of this Overhealth, up to the total granted by all stacks."
 				};
 			break;
 			#endregion
@@ -1458,7 +1496,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_natural_cycle,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Ranged. Sacrifice the oldest Minion on target ally. Draw 2 cards and heal its former host for 5 HP."
+						"EXHAUSTS. ST. Ranged. Sacrifice the oldest Minion on the target allied Beast. Draw 2 cards and heal that Beast for 5 HP."
 				};
 			break;
 			#endregion
@@ -1483,7 +1521,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_natural_recovery,
-					_str_card_description : "ST. Ranged. Grant 4 Armor. Cleanse 1 CC; if none, cleanse 1 DoT. Heal 4 HP."
+					_str_card_description : "ST. Ranged. Target gains 4 Armor, removes 1 Crowd Control or DoT, and heals for 4 HP."
 				};
 			break;
 			#endregion
@@ -1507,7 +1545,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_natures_fury,
-					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] mag dmg (base 12)."
+					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] MAG dmg (base 12)."
 				};
 			break;
 			#endregion
@@ -1532,7 +1570,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_natures_wrath,
-					_str_card_description : "ST. Ranged. Deal [Linear] mag dmg (base 4). Deal 1 additional dmg per Poison stack on the target."
+					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg (base 4). Deal 1 additional dmg per Poison stack on the target. POISONFLOW: Consume up to 2 Poison. Heal the caster for 2 HP per Poison consumed."
 				};
 			break;
 			#endregion		
@@ -1565,7 +1603,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_natures_bond,
 
 					_str_card_description :
-						"ST. Self. Heal the caster for 5 HP. Gain Nature's Bond for 5 rounds. Whenever the caster receives healing, gain 2 Armor per stack."
+						"ST. Self. Heal the caster for 5 HP. Gain Nature’s Bond for 5 rounds. Whenever the caster receives healing, gain 2 Armor per stack."
 				};
 
 			break;
@@ -1591,7 +1629,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_natures_grace,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Apply 20 Armor."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Target gains 20 Armor."
 				};
 			break;
 			#endregion
@@ -1650,7 +1688,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_old_growth_pummel,
-					_str_card_description : "ST. Melee. Deal [Linear] phy dmg 3 times (base 3 per hit). Each hit deals +1 dmg for every 5 Armor on the caster."
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg 3 times (base 3 per hit). Each hit deals 1 additional dmg for every 5 Armor on the caster."
 				};
 			break;
 			#endregion		
@@ -1675,7 +1713,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_overgrowth,
-					_str_card_description : "AoE-3. Self. Grant [Linear] Armor to self and adjacent Beasts (base 4). Scales with PHYPOW."
+					_str_card_description : "AoE-3. Self. Gain [Linear] Armor on the caster and adjacent allied Beasts (base 4)."
 				};
 			break;
 			#endregion		
@@ -1741,7 +1779,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_pheromones,
 
 					_str_card_description :
-						"ST. Self. Taunt. Be the only available target for 2 rounds."
+						"ST. Self. Taunt for 2 rounds. The caster is the only available target for attacks while Taunt is active."
 				};
 			break;
 			#endregion
@@ -1834,7 +1872,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_potent_spore,
-					_str_card_description : "ST. Ranged. Apply 3 Poison stacks to the selected target."
+					_str_card_description : "ST. Ranged. Apply 3 Poison."
 				};
 			break;
 			#endregion		
@@ -1901,7 +1939,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_predators_mark,
 
 					_str_card_description :
-						"ST. Ranged. Apply Vulnerable. If the target has Bleed, Poison, or Venom, increase Vulnerable's duration by 1 round."
+						"ST. Ranged. Apply Vulnerable. If the target has Bleed, Poison, or Venom, increase Vulnerable’s duration by 1 round."
 				};
 
 			break;
@@ -1935,7 +1973,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_predatory_scent,
 
 					_str_card_description :
-						"ST. Ranged. Apply Focus for 3 rounds. Allied Minions prioritize the target."
+						"ST. Ranged. Apply Focus for 3 rounds. Allied Minions prioritize the target. POISONFLOW: Consume 3 Poison to grow all Minions on the caster by 1."
 				};
 
 			break;
@@ -1960,7 +1998,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_primal_blast,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [Linear] mag dmg (base 10)."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [Linear] MAG dmg (base 10)."
 				};
 			break;
 			#endregion
@@ -1974,7 +2012,7 @@ function scr_get_card_info(_str_card_name){
 					_spr_card : spr_card_viridian_proliferate,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 
-					_str_card_range : "SELF",
+					_str_card_range : "RANGED",
 					_str_card_type : "ARCHETYPE",
 					_str_card_effect_type : "DOT",
 					_str_card_stat : "NEU",
@@ -1993,8 +2031,11 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_proliferate,
 
 					_str_card_description :
-	"EXHAUSTS. Teamwide. Starting with the front enemy Beast, copy all of its DoTs onto the next Beast. Continue toward the back, copying each Beast's current DoTs onto the next, then reverse direction and repeat until the effect returns to the front Beast. Copied DoTs ignore CON resistance rolls."
-	};
+						"EXHAUSTS. Teamwide. Starting with the front enemy Beast, copy all of its DoTs onto the next Beast. Continue toward the back, copying each Beast’s current DoTs onto the next, then reverse direction and repeat until the effect returns to the front Beast."
+				};
+
+			break;
+			#endregion
 
 			break;
 			#endregion
@@ -2019,7 +2060,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_rake,
-					_str_card_description : "ST. Melee. Deal [Linear] phy dmg (base 4). Apply 1 Bleed stack."
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg (base 4). Apply 1 Bleed."
 				};
 			break;
 			#endregion		
@@ -2044,7 +2085,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_regenerate,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Gain 8 Armor at the end of each turn for 5 rounds."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Target gains 8 Armor at the end of each round for 5 rounds."
 				};
 			break;
 			#endregion		
@@ -2076,7 +2117,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_return_to_nature,
 
 					_str_card_description :
-						"ST. Ranged. Sacrifice a corpse to generate 1 Mana. If no corpse is available, caster loses 10 HP instead."
+						"ST. Ranged. Sacrifice a corpse to generate 1 Mana. If no corpse is available, the caster loses 10 HP instead."
 				};
 			break;
 			#endregion
@@ -2108,7 +2149,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_rooted_defense,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Self. Apply 20 Armor."
+						"EXHAUSTS. ST. Self. Gain 20 Armor."
 				};
 			break;
 			#endregion
@@ -2133,7 +2174,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_rot_bloom,
-					_str_card_description : "EXHAUSTS. AoE-3. Ranged. Deal 8 dmg to each unit. Poisoned targets take 1 additional dmg per stack."
+					_str_card_description : "EXHAUSTS. AoE-3. Ranged. Deal 8 NEU dmg to each target. Each target takes 1 additional dmg per Poison stack it has."
 				};
 			break;
 			#endregion		
@@ -2174,13 +2215,14 @@ function scr_get_card_info(_str_card_name){
 
 			#region ROTTING_SPORES
 			case "ROTTING_SPORES":
+
 				_stct_return_card = {
 					_str_card_name : "ROTTING SPORES",
 					_str_card_id : _str_card_name,
 					_spr_card : spr_card_viridian_rotting_spores,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 
-					_str_card_range : "ENEMY",
+					_str_card_range : "RANGED",
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "TRAP",
 					_str_card_stat : "NEU",
@@ -2199,8 +2241,9 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_rotting_spores,
 
 					_str_card_description :
-						"EXHAUSTS. Trap. Place on an enemy Beast. The next time that Beast receives healing, cancel the healing, apply 1 Venom, and deal 5 magical damage."
+						"EXHAUSTS. ST. Ranged. Set a Trap on a Beast. The next time that Beast receives healing, cancel the healing, apply 1 Venom, and deal 5 magical damage."
 				};
+
 			break;
 			#endregion
 
@@ -2223,7 +2266,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_savage_maul,
-					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] phy dmg (base 12)."
+					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 12)."
 				};
 			break;
 			#endregion
@@ -2247,7 +2290,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_second_bloom,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Second Life: The next time target would be defeated, restore it to 25% maximum HP instead. Lasts 4 turns."
+					_str_card_description : "EXHAUSTS. ST. Ranged. For 4 rounds, the next time the target would be defeated, restore it to 25% of its maximum HP instead."
 				};
 			break;
 			#endregion
@@ -2272,7 +2315,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_seed_barrage,
-					_str_card_description : "Teamwide. Ranged. Deal [Linear] mag dmg 4 times to random targets on the selected team (base 4)."
+					_str_card_description : "Teamwide. Ranged. Deal [Linear] MAG dmg 4 times to random Beasts on the selected team (base 4 per hit)."
 				};
 			break;
 			#endregion		
@@ -2305,7 +2348,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_seed_the_field,
 
 					_str_card_description :
-						"Teamwide. Spawn one Dormant Seed in each available allied Minion slot."
+						"Teamwide. Summon 1 Dormant Seed (1/0) in each available allied Minion slot."
 				};
 
 			break;
@@ -2339,7 +2382,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_serpent_summon,
 
 					_str_card_description :
-						"EXHAUSTS. ST. Self. Spawn 3 Serpents (3/1). Each Serpent applies 1 Venom per Magnitude to one random enemy each round."
+						"EXHAUSTS. ST. Self. Summon 3 Serpents (3/1). Each Serpent applies 1 Venom per Magnitude to a random enemy each round."
 				};
 
 			break;
@@ -2399,7 +2442,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_sinewy_vines,
-					_str_card_description : "ST. Self. Apply [Linear] Armor - scales with MAGPOW (base 3)."
+					_str_card_description : "ST. Self. Gain [Linear] Armor (base 3)."
 				};
 			break;
 			#endregion
@@ -2491,7 +2534,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_snarling_bite,
-					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] phy dmg (base 4). Apply Vulnerable if health is hit."
+					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 4). If the attack deals HP damage, apply Vulnerable."
 				};
 			break;
 			#endregion
@@ -2515,7 +2558,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_spike_pierce,
-					_str_card_description : "EXHAUSTS. ST. Melee. Pierce armor and deal [Linear] phy dmg to overhp+health directly (Base 3)."
+					_str_card_description : "EXHAUSTS. ST. Melee. Pierce Armor and deal [Linear] PHY dmg directly to Overhealth and HP (base 3)."
 				};
 			break;
 			#endregion
@@ -2539,7 +2582,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_spinesling,
-					_str_card_description : "ST. Ranged. Deal [Linear] phy dmg (base 4)."
+					_str_card_description : "ST. Ranged. Deal [Linear] PHY dmg (base 4)."
 				};
 			break;
 			#endregion	
@@ -2564,7 +2607,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_spirit_fang,
-					_str_card_description : "ST. Melee. Deal [Linear] mag dmg (base 4). Apply 1 Venom stack."
+					_str_card_description : "ST. Melee. Deal [Linear] MAG dmg (base 4). Apply 1 Venom."
 				};
 			break;
 			#endregion		
@@ -2588,7 +2631,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_spirit_pierce,
-					_str_card_description : "EXHAUSTS. ST. Melee. Pierce armor and deal [Linear] mag dmg to overhp+health directly (Base 3)."
+					_str_card_description : "EXHAUSTS. ST. Melee. Pierce Armor and deal [Linear] MAG dmg directly to Overhealth and HP (base 3)."
 				};
 			break;
 			#endregion
@@ -2613,7 +2656,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_spit_venom,
-					_str_card_description : "ST. Ranged. Deal [Linear] phy dmg (base 3). Apply 1 Venom stack."
+					_str_card_description : "ST. Ranged. Deal [Linear] PHY dmg (base 3). Apply 1 Venom."
 				};
 			break;
 			#endregion		
@@ -2638,7 +2681,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_spore_cloud,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [%] mag dmg (base 12% of target max hp)."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [%] MAG dmg (base 12% of target’s maximum HP)."
 				};
 			break;
 			#endregion				
@@ -2662,7 +2705,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_stalking_swipe,
-					_str_card_description : "ST. Flank. Deal [Linear] phy dmg (base 5)."
+					_str_card_description : "ST. Flank. Deal [Linear] PHY dmg (base 5)."
 				};
 			break;
 			#endregion
@@ -2687,7 +2730,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_stampede,
-					_str_card_description : "EXHAUSTS. Teamwide. Deal [%] phy dmg (15% of target max hp)."
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [%] PHY dmg (base 15% of each target’s maximum HP)."
 				};
 			break;
 			#endregion				
@@ -2711,7 +2754,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_steelfur,
-					_str_card_description : "EXHAUSTS. ST. Self. Double Armor."
+					_str_card_description : "EXHAUSTS. ST. Self. Double current Armor."
 				};
 			break;
 			#endregion
@@ -2736,7 +2779,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_symbiosis,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Link target with caster. Redirect the target's next incoming damage instance to the caster."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Redirect the next damage instance intended for the target allied Beast to the caster."
 				};
 			break;
 			#endregion		
@@ -2760,7 +2803,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_thick_hide,
-					_str_card_description : "ST. Self. Apply 6 Armor. Apply 1 additional Armor for each status hosted."
+					_str_card_description : "ST. Self. Gain 6 Armor plus 1 additional Armor for each status on the caster."
 				};
 			break;
 			#endregion
@@ -2774,7 +2817,7 @@ function scr_get_card_info(_str_card_name){
 					_spr_card : spr_card_viridian_thorn_net,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 
-					_str_card_range : "ENEMY",
+					_str_card_range : "RANGED",
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "TRAP",
 					_str_card_stat : "NEU",
@@ -2793,7 +2836,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_thorn_net,
 
 					_str_card_description :
-						"EXHAUSTS. Trap. Place on an enemy Beast. The next time that Beast attacks, cancel the Attack, deal 4 damage, and apply Vulnerable."
+						"EXHAUSTS. ST. Ranged. Set a Trap on a Beast. The next time that Beast attacks, cancel the Attack, deal 4 damage, and apply Vulnerable."
 				};
 
 			break;
@@ -2819,7 +2862,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_thorn_storm,
-					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [Linear] mag dmg to the selected enemy team twice (base 8 per hit)."
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [Linear] MAG dmg to each Beast on the selected team twice (base 8 per hit)."
 				};
 			break;
 			#endregion
@@ -2844,7 +2887,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_thornmail,
-					_str_card_description : "ST. Self. Apply 4 Armor. Gain Thorns."
+					_str_card_description : "ST. Self. Gain 4 Armor. Gain Thorns for 3 rounds."
 				};
 			break;
 			#endregion
@@ -2869,7 +2912,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_toxic_eruption,
-					_str_card_description : "Teamwide. Consume all Poison from each target. Deal 2 neutral dmg per Poison stack consumed from that target."
+					_str_card_description : "Teamwide. Ranged. Consume all Poison from each target. Deal 2 NEU dmg per Poison stack consumed from that target."
 				};
 			break;
 			#endregion		
@@ -2917,7 +2960,7 @@ function scr_get_card_info(_str_card_name){
 					_spr_card : spr_card_viridian_toxic_snare,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 
-					_str_card_range : "ENEMY",
+					_str_card_range : "RANGED",
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "TRAP",
 					_str_card_stat : "NEU",
@@ -2936,7 +2979,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_toxic_snare,
 
 					_str_card_description :
-						"EXHAUSTS. Trap. Place on an enemy Beast. At 5 total DoT stacks or 3 different DoTs, Stun it and apply 2 Poison to adjacent enemies."
+						"EXHAUSTS. ST. Ranged. Set a Trap on a Beast. At 5 total DoT stacks or 3 different DoTs, Stun it for 1 round and apply 2 Poison to adjacent Beasts."
 				};
 
 			break;
@@ -2970,7 +3013,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_tranquility,
 
 					_str_card_description :
-						"EXHAUSTS. Teamwide. Add 1 Echo. Heal all allied Beasts for 3 HP."
+						"EXHAUSTS. Teamwide. Gain 1 Echo. Heal all allied Beasts for 3 HP."
 				};
 
 			break;
@@ -2995,11 +3038,11 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_unseen_root,
-					_str_card_description : "ST. Flank. Deal [Linear] mag dmg (base 5)."
+					_str_card_description : "ST. Flank. Deal [Linear] MAG dmg (base 5)."
 				};
 			break;
 			#endregion	
-
+			
 			#region VENOM_BLOOM
 			case "VENOM_BLOOM":
 
@@ -3009,7 +3052,7 @@ function scr_get_card_info(_str_card_name){
 					_spr_card : spr_card_viridian_venom_bloom,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 
-					_str_card_range : "ENEMY",
+					_str_card_range : "RANGED",
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "TRAP",
 					_str_card_stat : "NEU",
@@ -3028,7 +3071,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_venom_bloom,
 
 					_str_card_description :
-						"EXHAUSTS. Trap. Place on an enemy Beast. When that Beast dies, apply Poison to adjacent Beasts and summon a Sporeling (1/1) on each affected Beast. Each Sporeling applies 1 Poison per Magnitude to its host each round."
+						"EXHAUSTS. ST. Ranged. Set a Trap on a Beast. When that Beast dies, apply Poison to adjacent Beasts and summon a Sporeling (1/1) on each. Each Sporeling applies 1 Poison per Magnitude to its host each round."
 				};
 
 			break;
@@ -3053,7 +3096,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_verdant_bolt,
-					_str_card_description : "Ranged, ST, deal [linear] dmg, applies 1 dot stack at random (Poison, Bleed, Venom)."
+					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg (base 3). Apply 1 random DoT: Bleed, Poison, or Venom."
 				};
 			break;
 			#endregion		
@@ -3086,7 +3129,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_verdant_embrace,
 
 					_str_card_description :
-						"EXHAUSTS. Global. Heal all Beasts for [Linear] HP (base 15)."
+						"EXHAUSTS. Teamwide. Ranged. Heal all allied Beasts for [Linear] HP (base 15)."
 				};
 
 			break;
@@ -3120,7 +3163,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_verdant_insight,
 
 					_str_card_description :
-						"ST. Ranged. Increase the target's MAGPOW and MAGDEF by 20 for 3 rounds."
+						"ST. Ranged. Increase the target’s MAGPOW and MAGDEF by 20 for 3 rounds."
 				};
 
 			break;
@@ -3145,7 +3188,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_verdant_swipes,
-					_str_card_description : "ST. Ranged. Deal [Linear] mag dmg 3 times."
+					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg 3 times (base 2 per hit)."
 				};
 			break;
 			#endregion	
@@ -3195,7 +3238,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_viridian_burst,
-					_str_card_description : "AoE-3. Ranged. Deal [Linear] phy dmg (base 5). Apply 1 Poison to each target."
+					_str_card_description : "AoE-3. Ranged. Deal [Linear] PHY dmg to up to 3 selected Beasts (base 5). Apply 1 Poison to each target."
 				};
 			break;
 			#endregion		
@@ -3228,7 +3271,7 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_viridian_wild_vigor,
 
 					_str_card_description :
-						"ST. Ranged. Increase the target's PHYPOW and PHYDEF by 20 for 3 rounds."
+						"ST. Ranged. Increase the target’s PHYPOW and PHYDEF by 20 for 3 rounds."
 				};
 
 			break;
@@ -3253,7 +3296,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_wildstrike,
-					_str_card_description : "ST. Melee. Deal [Linear] mag dmg (base 5)."
+					_str_card_description : "ST. Melee. Deal [Linear] MAG dmg (base 5)."
 				};
 			break;
 			#endregion				
@@ -3278,7 +3321,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_wildward,
-					_str_card_description : "EXHAUSTS. Teamwide. Apply [Linear] Armor to all allied Beasts (base 12)."
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. All allied Beasts gain [Linear] Armor (base 12)."
 				};
 			break;
 			#endregion		
@@ -3339,7 +3382,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_artifact_hourglass,
-					_str_card_description : "Exhausts. After this turn ends, take another full turn."
+					_str_card_description : "EXHAUSTS. Global. After this turn ends, take another full turn."
 				};
 
 			break;
@@ -3364,7 +3407,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_block,
-					_str_card_description : "Self, ST, Add 6 armor to self."
+					_str_card_description : "ST. Self. Gain 6 Armor."
 				};
 			break;
 			#endregion
@@ -3388,7 +3431,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_bulwark,
-					_str_card_description : "Self, ST, Add 12 armor to self."
+					_str_card_description : "ST. Self. Gain 12 Armor."
 				};
 			break;
 			#endregion
@@ -3412,7 +3455,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_clearcast,
-					_str_card_description : "Exhausts. Global, Clear all weather"
+					_str_card_description : "EXHAUSTS. Global. Clear the active Weather."
 				};
 			break;
 			#endregion			
@@ -3436,7 +3479,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_deft_strike,
-					_str_card_description : "Backline, ST, Deals [linear] damage, apply one bleed stack"
+					_str_card_description : "ST. Backline. Deal [Linear] NEU dmg (base 3). Apply 1 Bleed."
 				};
 			break;
 			#endregion
@@ -3460,7 +3503,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_echo,
-					_str_card_description : "Exhausts. Global, Increase echo count by 1, echo causes the next non-echo spell to cast X more times."
+					_str_card_description : "EXHAUSTS. Global. Gain 1 Echo. The next non-Echo card is cast 1 additional time per Echo."
 				};
 			break;
 			#endregion
@@ -3484,7 +3527,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_hidden_card,
-					_str_card_description : "Exhausts. Global. Draw a card."
+					_str_card_description : "EXHAUSTS. Global. Draw 1 card."
 				};
 			break;
 			#endregion		
@@ -3508,7 +3551,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_inspiration,
-					_str_card_description : "Exhausts. Global, Generates 1 bonus mana per turn, effect lasts 3 turns."
+					_str_card_description : "EXHAUSTS. Global. Gain +2 maximum and current Mana for 3 rounds."
 				};
 			break;
 			#endregion
@@ -3532,7 +3575,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_malleability,
-					_str_card_description : "Exhausts. The next spell cast by this unit ignores caster requirements."
+					_str_card_description : "EXHAUSTS. ST. Self. The next card cast by this Beast ignores caster requirements."
 				};
 			break;
 			#endregion			
@@ -3556,7 +3599,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_power_strike,
-					_str_card_description : "Melee, ST, Deals 8 melee damage."
+					_str_card_description : "ST. Melee. Deal [Linear] NEU dmg (base 8)."
 				};
 			break;
 			#endregion
@@ -3580,7 +3623,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_rapid_strikes,
-					_str_card_description : "Ranged, ST, Deals 2 damage three times."
+					_str_card_description : "ST. Ranged. Deal [Linear] NEU dmg 3 times (base 2 per hit)."
 				};
 			break;
 			#endregion
@@ -3604,7 +3647,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_reposition,
-					_str_card_description : "Self, ST, Swap Positions with another team unit"
+					_str_card_description : "ST. Ranged. Swap the caster’s position with the target allied Beast."
 				};
 			break;
 			#endregion
@@ -3628,7 +3671,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_shiv,
-					_str_card_description : "Melee, ST, Deal [linear] damage, pierce armor and overhealth."
+					_str_card_description : "ST. Melee. Pierce Armor and deal [Linear] NEU dmg directly to Overhealth and HP (base 2)."
 				};
 			break;
 			#endregion
@@ -3686,7 +3729,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_spellbook_wildcard,
-					_str_card_description : "Exhausts. Apply 5 random DoTs to a target."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Apply 5 random DoT stacks."
 				};
 			break;
 			#endregion			
@@ -3710,7 +3753,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_strike,
-					_str_card_description : "Melee, ST, Deals [linear] melee damage."
+					_str_card_description : "ST. Melee. Deal [Linear] NEU dmg (base 5)."
 				};
 			break;
 			#endregion
@@ -3734,7 +3777,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_thoughtsteal,
-					_str_card_description : "Exhausts. Select a revealed enemy card. Gain Mana equal to its cost and disable it for its next cast."
+					_str_card_description : "EXHAUSTS. ST. Card. Select a revealed enemy card. Gain Mana equal to its Mana cost and disable it for its next cast."
 				};
 
 			break;

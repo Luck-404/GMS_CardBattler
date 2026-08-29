@@ -11,6 +11,31 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 	switch(_str_status_name){
 
 //-------------//
+//APEX PREDATOR//
+//-------------//
+case "APEX_PREDATOR":
+
+	var _ref_apex_status = scr_status_buff_apex_predator(
+		"APPLY",
+		undefined,
+		_val_magnitude
+	);
+
+	if (_ref_apex_status != undefined){
+
+		scr_spawn_popup_scrolling(
+			"TEXT",
+			"APEX +" + string(_val_magnitude),
+			undefined,
+			c_green,
+			global.ref_target_beast.x,
+			global.ref_target_beast.y - 48
+		);
+	}
+
+break;
+
+//-------------//
 //PLAGUE GARDEN//
 //-------------//
 case "PLAGUE_GARDEN":

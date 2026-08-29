@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"DRAW 2",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/DRAW 2.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/DRAW 2.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

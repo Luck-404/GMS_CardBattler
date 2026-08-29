@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BLOOMING SPRITE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/BLOOMING SPRITE.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/BLOOMING SPRITE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_status_debuff_weakness",
   "parent":{
     "name":"WEAKNESS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/WEAKNESS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/WEAKNESS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

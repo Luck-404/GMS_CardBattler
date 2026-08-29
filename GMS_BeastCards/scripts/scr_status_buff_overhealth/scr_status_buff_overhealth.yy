@@ -6,7 +6,7 @@
   "name":"scr_status_buff_overhealth",
   "parent":{
     "name":"OVERHEALTH",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/OVERHEALTH.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/OVERHEALTH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

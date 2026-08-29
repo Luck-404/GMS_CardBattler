@@ -1,6 +1,6 @@
 {
   "$GMSprite":"v2",
-  "%Name":"spr_card_viridian_bramble_aura",
+  "%Name":"spr_card_cerulean",
   "bboxMode":2,
   "bbox_bottom":420,
   "bbox_left":120,
@@ -23,19 +23,19 @@
   "layers":[
     {"$GMImageLayer":"","%Name":"c811d480-db19-47d9-a343-67666f51a570","blendMode":0,"displayName":"default","isLocked":false,"name":"c811d480-db19-47d9-a343-67666f51a570","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_card_viridian_bramble_aura",
+  "name":"spr_card_cerulean",
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"BRAMBLE AURA",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BRAMBLE AURA.yy",
+    "name":"CARD SPRITES",
+    "path":"folders/CARDS/CARD SPRITES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"v1",
-    "%Name":"spr_card_viridian_bramble_aura",
+    "%Name":"spr_card_cerulean",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -59,7 +59,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_card_viridian_bramble_aura",
+    "name":"spr_card_cerulean",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -71,13 +71,13 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a53720db-d601-48e1-9be2-71edbc409da6","path":"sprites/spr_card_viridian_bramble_aura/spr_card_viridian_bramble_aura.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a53720db-d601-48e1-9be2-71edbc409da6","path":"sprites/spr_card_cerulean/spr_card_cerulean.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"bffafae6-4034-4c18-8e83-61f65dae6c93","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0898d87e-5ecf-4164-b41a-b835886ed42d","path":"sprites/spr_card_viridian_bramble_aura/spr_card_viridian_bramble_aura.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0898d87e-5ecf-4164-b41a-b835886ed42d","path":"sprites/spr_card_cerulean/spr_card_cerulean.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"8aa5166c-ea0f-46a1-9e19-77d64a6ecc92","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","path":"sprites/spr_card_viridian_bramble_aura/spr_card_viridian_bramble_aura.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d40fc4be-2c5e-450d-ab04-b179f7ca9eb5","path":"sprites/spr_card_cerulean/spr_card_cerulean.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"959f576c-11d0-4bcd-b601-f5a8892c2a55","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],

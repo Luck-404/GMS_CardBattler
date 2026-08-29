@@ -257,7 +257,7 @@ function scr_init_logbook_cards(){
 	//
 	//===============================================================================//
 
-	hscr_add_card_entry("BRAMBLE_AURA","VIRIDIAN");
+	hscr_add_card_entry("BRAMBLE_HIDE","VIRIDIAN");
 	hscr_add_card_entry("BURGEONING_BLOOM","VIRIDIAN");
 	hscr_add_card_entry("BURSTING_SEED","VIRIDIAN");
 	hscr_add_card_entry("CRIPPLING_VINES","VIRIDIAN");

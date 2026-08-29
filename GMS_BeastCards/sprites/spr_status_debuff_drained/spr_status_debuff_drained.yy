@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"DRAINED",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/DRAINED.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/VIRIDIAN/DRAINED.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_status_buff_thorns",
   "parent":{
     "name":"THORNS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/THORNS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/THORNS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

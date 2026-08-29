@@ -31,4 +31,6 @@ function scr_clear_weather(){
 			scr_destroy_status(_ref_status);
 		}
 	}
+	var _ref_layer = layer_get_id("bly_weather");
+	layer_background_change(_ref_layer,spr_bg_blank);
 }

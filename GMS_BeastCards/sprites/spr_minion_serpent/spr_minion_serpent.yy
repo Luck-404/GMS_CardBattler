@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"SERPENT SUMMON",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SERPENT SUMMON.yy",
+    "name":"VIRIDIAN",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS/MINION SPRITES/VIRIDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -133,7 +133,7 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"NATURAL_CYCLE");
 		ds_list_add(global.list_pool_cards_rarity_II,"RETURN_TO_NATURE");
 
-		ds_list_add(global.list_pool_cards_rarity_II,"BRAMBLE_AURA");
+		ds_list_add(global.list_pool_cards_rarity_II,"BRAMBLE_HIDE");
 		ds_list_add(global.list_pool_cards_rarity_II,"BURGEONING_BLOOM");
 		ds_list_add(global.list_pool_cards_rarity_II,"BURSTING_SEED");
 		ds_list_add(global.list_pool_cards_rarity_II,"CRIPPLING_VINES");

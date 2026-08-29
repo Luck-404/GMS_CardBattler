@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"WILD VIGOR",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/WILD VIGOR.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/WILD VIGOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

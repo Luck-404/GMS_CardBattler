@@ -41,6 +41,45 @@ function scr_cast_minion_effect(_ref_minion){
 
 	switch(_str_minion_name){
 
+		//-----//
+		//FUNGI//
+		//-----//
+		case "FUNGI":
+
+			if (_str_minion_team != "PLAYER"){
+				break;
+			}
+
+			//----------------//
+			//CALCULATE DRAW//
+			//----------------//
+			var _ct_draw =
+				1 +
+				floor(
+					_ref_minion._val_max_hp /
+					5
+				);
+
+			//-----------//
+			//DRAW CARDS//
+			//-----------//
+			scr_draw_cards(
+				_ct_draw
+			);
+
+			scr_spawn_popup_scrolling(
+				"TEXT",
+				"+" +
+					string(_ct_draw) +
+					" CARD DRAW",
+				undefined,
+				c_green,
+				_ref_minion.x,
+				_ref_minion.y - 24
+			);
+
+		break;
+
 		//-------------//
 		//GROVE SPIRIT//
 		//-------------//

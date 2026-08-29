@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"GERMINATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GERMINATE.yy",
+    "name":"VIRIDIAN",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS/MINION SPRITES/VIRIDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

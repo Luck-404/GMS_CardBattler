@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ARMOR OVER TIME",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/ARMOR OVER TIME.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/ARMOR OVER TIME.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

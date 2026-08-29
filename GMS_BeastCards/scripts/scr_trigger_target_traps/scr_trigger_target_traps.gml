@@ -6,7 +6,6 @@
 //           Returns true when the incoming action should be cancelled.
 //
 //===============================================================================//
-
 function scr_trigger_target_traps(_ref_attacker,_ref_target,_stct_card){
 
 	if (!instance_exists(_ref_attacker)){
@@ -54,14 +53,6 @@ function scr_trigger_target_traps(_ref_attacker,_ref_target,_stct_card){
 		}
 
 		if (_ref_trap._str_trigger_type != "TARGETED"){
-			continue;
-		}
-
-		// MUST BE AN ENEMY OF THE TRAP OWNER
-		if (
-			_ref_attacker._str_team ==
-			_ref_trap._str_owner_team
-		){
 			continue;
 		}
 

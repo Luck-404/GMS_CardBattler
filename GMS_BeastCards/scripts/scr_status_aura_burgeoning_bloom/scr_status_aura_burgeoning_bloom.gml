@@ -4,8 +4,8 @@
 // FUNCTION: Handles the Burgeoning Bloom Aura.
 //           Unstackable Infinite Self Aura.
 //           Reduces the host's Maximum HP by 15% while active.
-//           When the host is healed, 25% of actual HP restored
-//           is splashed to adjacent allied Beasts.
+//           Healing effects splash 25% of their attempted healing amount
+//           to adjacent allied Beasts without retriggering healing Auras.
 //
 //===============================================================================//
 function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=undefined,_val_trigger_amount=undefined){
@@ -81,7 +81,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 				"BURGEONING_BLOOM";
 
 			_ref_new_status._str_status_desc =
-				"HEALING SPLASHES 25% TO ADJACENT ALLIES; MAX HP -15%";
+				"HEALING EFFECTS SPLASH 25% TO ADJACENT ALLIES; MAX HP -15%";
 
 			_ref_new_status._spr_status =
 				spr_status_aura_burgeoning_bloom;

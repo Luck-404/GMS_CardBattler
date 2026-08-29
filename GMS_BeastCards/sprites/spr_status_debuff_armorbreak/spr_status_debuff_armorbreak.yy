@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ARMORBREAK",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/ARMORBREAK.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/ARMORBREAK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

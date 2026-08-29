@@ -30,37 +30,7 @@ function scr_apply_dot_status(
 	//--------------//
 	//RESIST CHECK//
 	//--------------//
-	var _val_res_stat =
-		_ref_target._ref_unit._val_beast_con_stat;
-
-	var _val_res_mod =
-		scr_get_beast_grade_modifier(
-			_val_res_stat
-		);
-
-	var _val_resist_chance =
-		floor(
-			5 *
-			_val_res_mod
-		);
-
-	var _val_roll =
-		irandom_range(
-			0,
-			100
-		);
-
-	if (_val_roll < _val_resist_chance){
-
-		scr_spawn_popup_scrolling(
-			"TEXT",
-			"RESISTED",
-			undefined,
-			c_black,
-			_ref_target.x + irandom_range(-32,32),
-			_ref_target.y - 24 + irandom_range(-32,32)
-		);
-
+	if (scr_check_con_resistance(_ref_target)){
 		return undefined;
 	}
 

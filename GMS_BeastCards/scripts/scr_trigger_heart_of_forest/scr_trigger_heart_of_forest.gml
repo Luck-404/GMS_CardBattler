@@ -41,17 +41,9 @@ function scr_trigger_heart_of_forest(_ref_target,_val_healed){
 	//---------------------//
 	//GROW HOSTED MINIONS//
 	//---------------------//
-	for (
-		var _it_minion = 0;
-		_it_minion < ds_list_size(_ref_target._list_minions);
-		_it_minion++
-	){
+	for (var _it_minion = 0; _it_minion < ds_list_size(_ref_target._list_minions); _it_minion++){
 
-		var _ref_minion =
-			ds_list_find_value(
-				_ref_target._list_minions,
-				_it_minion
-			);
+		var _ref_minion = ds_list_find_value(_ref_target._list_minions,_it_minion);
 
 		if (!instance_exists(_ref_minion)){
 			continue;
@@ -61,11 +53,11 @@ function scr_trigger_heart_of_forest(_ref_target,_val_healed){
 			continue;
 		}
 
-		//------------------//
-		//+1 MAXIMUM HP ONLY//
-		//------------------//
-		_ref_minion._val_max_hp +=
-			1;
+		//----------------------//
+		//+1 MAXIMUM/CURRENT HP//
+		//----------------------//
+		_ref_minion._val_max_hp += 1;
+		_ref_minion._val_cur_hp += 1;
 	}
 
 	//----------//

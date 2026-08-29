@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"MANAVINE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/MANAVINE.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/MANAVINE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

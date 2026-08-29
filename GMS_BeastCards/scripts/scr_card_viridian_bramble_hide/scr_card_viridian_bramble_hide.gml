@@ -1,12 +1,12 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_CARD_VIRIDIAN_BRAMBLE_AURA
-// FUNCTION: Resolves the Bramble Aura card effect.
+// SCRIPT: SCR_CARD_VIRIDIAN_BRAMBLE_HIDE
+// FUNCTION: Resolves the Bramble Hide card effect.
 //           Grants the selected Beast Thorns for three turns.
 //           Thorns deals stored neutral damage back to melee attackers.
 //
 //===============================================================================//
-function scr_card_viridian_bramble_aura(_stct_card,_ref_caster,_ref_target){
+function scr_card_viridian_bramble_hide(_stct_card,_ref_caster,_ref_target){
 
 	//--------------//
 	//APPLY THORNS//

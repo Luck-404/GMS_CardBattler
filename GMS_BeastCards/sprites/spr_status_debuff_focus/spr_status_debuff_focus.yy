@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FOCUS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/FOCUS.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/FOCUS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

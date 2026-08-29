@@ -593,36 +593,129 @@ switch(_state_enemy){
 						break;
 
 						case "SUPPORT":
-							_ref_target = _ref_beast;
 
-							if (_ref_card._ref_card._str_card_range == "RANGED"){
+							var _str_effect_type =
+								_ref_card._ref_card._str_card_effect_type;
 
-								if (random(1) < 0.25){
+							//-------------------//
+							//HOSTILE SUPPORT CARD//
+							//-------------------//
+							if (
+								_str_effect_type == "CC" ||
+								_str_effect_type == "DEBUFF"
+							){
 
-									var _ct_ally = ds_list_size(_list_beasts_alive);
+								var _list_enemy =
+									obj_battle_player_controller._list_beasts_alive;
 
-									if (_ct_ally > 1){
+								if (ds_list_size(_list_enemy) > 0){
 
-										repeat(10){
+									switch(_ref_card._ref_card._str_card_range){
 
-											var _ref_candidate = ds_list_find_value(_list_beasts_alive,irandom(_ct_ally - 1));
+										//----------------//
+										//FRONTLINE TARGET//
+										//----------------//
+										case "MELEE":
 
-											if (_ref_candidate != _ref_beast){
-												_ref_target = _ref_candidate;
-												break;
+											_ref_target =
+												ds_list_find_value(
+													_list_enemy,
+													0
+												);
+
+										break;
+
+										//---------------//
+										//BACKLINE TARGET//
+										//---------------//
+										case "BACK":
+
+											_ref_target =
+												ds_list_find_value(
+													_list_enemy,
+													ds_list_size(_list_enemy) - 1
+												);
+
+										break;
+
+										//-------------//
+										//RANDOM TARGET//
+										//-------------//
+										default:
+
+											_ref_target =
+												ds_list_find_value(
+													_list_enemy,
+													irandom(ds_list_size(_list_enemy) - 1)
+												);
+
+										break;
+									}
+								}
+							}
+
+							//--------------------//
+							//FRIENDLY SUPPORT CARD//
+							//--------------------//
+							else{
+
+								_ref_target =
+									_ref_beast;
+
+								if (_ref_card._ref_card._str_card_range == "RANGED"){
+
+									if (random(1) < 0.25){
+
+										var _ct_ally =
+											ds_list_size(
+												_list_beasts_alive
+											);
+
+										if (_ct_ally > 1){
+
+											repeat(10){
+
+												var _ref_candidate =
+													ds_list_find_value(
+														_list_beasts_alive,
+														irandom(_ct_ally - 1)
+													);
+
+												if (_ref_candidate != _ref_beast){
+
+													_ref_target =
+														_ref_candidate;
+
+													break;
+												}
 											}
 										}
 									}
 								}
 							}
 
-							global.ref_cast_card = _ref_card;
-							global.ref_caster_beast = _ref_beast;
-							global.ref_target_beast = _ref_target;
+							//---------//
+							//CAST CARD//
+							//---------//
+							if (instance_exists(_ref_target)){
 
-							scr_cast_card();
-							
+								global.ref_cast_card =
+									_ref_card;
+
+								global.ref_caster_beast =
+									_ref_beast;
+
+								global.ref_target_beast =
+									_ref_target;
+
+								scr_cast_card();
+							}
+
+						break;
+
+
 						case "UTILITY":
+
 							_ref_target = _ref_beast;
 
 							if (_ref_card._ref_card._str_card_range == "RANGED"){
@@ -651,8 +744,12 @@ switch(_state_enemy){
 							global.ref_target_beast = _ref_target;
 
 							scr_cast_card();
-							
+
+						break;
+
+
 						case "DEFENSE":
+
 							_ref_target = _ref_beast;
 
 							if (_ref_card._ref_card._str_card_range == "RANGED"){
@@ -681,6 +778,7 @@ switch(_state_enemy){
 							global.ref_target_beast = _ref_target;
 
 							scr_cast_card();
+
 						break;
 					}
 

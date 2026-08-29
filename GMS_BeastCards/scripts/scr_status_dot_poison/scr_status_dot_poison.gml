@@ -173,6 +173,9 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 			var _ct_poison_stacks =
 				_ref_status._ct_status_stacks;
 
+			//----------------------//
+			//POISON BUILDUP SPEED//
+			//----------------------//
 			var _val_poison_max =
 				max(
 					1,
@@ -181,12 +184,27 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 
 			var _val_poison_age =
 				_val_poison_max -
-				_ref_status._val_status_lifetime;
+					_ref_status._val_status_lifetime;
+
+			var _val_poison_buildup = 5;
+
+			if (_ct_poison_stacks >= 15){
+				_val_poison_buildup = 1;
+			}
+			else if (_ct_poison_stacks >= 10){
+				_val_poison_buildup = 2;
+			}
+			else if (_ct_poison_stacks >= 6){
+				_val_poison_buildup = 3;
+			}
+			else if (_ct_poison_stacks >= 4){
+				_val_poison_buildup = 4;
+			}
 
 			var _val_poison_progress =
 				clamp(
 					_val_poison_age /
-					_val_poison_max,
+					_val_poison_buildup,
 					0,
 					1
 				);

@@ -6,7 +6,7 @@
   "name":"scr_status_buff_bloom",
   "parent":{
     "name":"BLOOM",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/BLOOM.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/BLOOM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

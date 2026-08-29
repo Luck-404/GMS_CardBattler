@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BLOOM",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/BLOOM.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

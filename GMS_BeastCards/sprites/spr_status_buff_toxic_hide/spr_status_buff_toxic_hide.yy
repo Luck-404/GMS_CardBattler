@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"TOXIC HIDE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/TOXIC HIDE.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/TOXIC HIDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

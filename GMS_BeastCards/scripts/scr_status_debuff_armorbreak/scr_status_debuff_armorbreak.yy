@@ -6,7 +6,7 @@
   "name":"scr_status_debuff_armorbreak",
   "parent":{
     "name":"ARMORBREAK",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/ARMORBREAK.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/ARMORBREAK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

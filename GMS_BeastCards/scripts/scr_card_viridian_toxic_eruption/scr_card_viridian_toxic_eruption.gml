@@ -1,9 +1,9 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_TOXIC_ERUPTION
-// FUNCTION: Resolves the Toxic Eruption card effect.
-//           Consumes all Poison from each Beast on the selected team.
-//           Deals 2 neutral damage per Poison stack consumed from each Beast.
+// FUNCTION: Resolves Toxic Eruption.
+//           Consumes all Poison from each Beast on the selected team through
+//           POISONFLOW and deals 2 neutral damage per stack consumed.
 //
 //===============================================================================//
 
@@ -12,42 +12,46 @@ function scr_card_viridian_toxic_eruption(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET TARGET TEAM LIST//
 	//--------------------//
-	var _list_targets = scr_get_target_team_list(_ref_target);
+	var _list_targets =
+		scr_get_target_team_list(
+			_ref_target
+		);
 
 	if (_list_targets == undefined){
 		return;
 	}
 
-	//----------------------//
-	//ERUPT EACH UNIT'S POISON//
-	//----------------------//
+	//------------------//
+	//ERUPT EACH TARGET//
+	//------------------//
 	for (
 		var _it_target = 0;
 		_it_target < ds_list_size(_list_targets);
 		_it_target++
 	){
 
-		var _ref_hit_target = ds_list_find_value(
-			_list_targets,
-			_it_target
-		);
+		var _ref_hit_target =
+			ds_list_find_value(
+				_list_targets,
+				_it_target
+			);
 
 		if (!instance_exists(_ref_hit_target)){
 			continue;
 		}
 
-		//----------------//
-		//CHECK FOR POISON//
-		//----------------//
-		var _ref_poison = scr_check_for_status(
-			"POISON",
-			_ref_hit_target
-		);
+		//------------//
+		//POISONFLOW//
+		//------------//
+		var _ct_poison_consumed =
+			scr_trigger_poisonflow(
+				_ref_hit_target
+			);
 
 		//----------------//
 		//NO POISON STACKS//
 		//----------------//
-		if (_ref_poison == -1){
+		if (_ct_poison_consumed <= 0){
 
 			scr_spawn_popup_scrolling(
 				"TEXT",
@@ -61,14 +65,11 @@ function scr_card_viridian_toxic_eruption(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//-------------------//
-		//SNAPSHOT POISON//
-		//-------------------//
-		var _ct_poison_stacks =
-			_ref_poison._ct_status_stacks;
-
+		//------------------//
+		//CALCULATE DAMAGE//
+		//------------------//
 		var _val_damage =
-			_ct_poison_stacks *
+			_ct_poison_consumed *
 			_stct_card._val_card_magnitude;
 
 		//------------//
@@ -78,18 +79,11 @@ function scr_card_viridian_toxic_eruption(_stct_card,_ref_caster,_ref_target){
 			_val_damage,
 			_ref_hit_target
 		);
-
-		//----------------//
-		//CONSUME POISON//
-		//----------------//
-		if (instance_exists(_ref_poison)){
-			scr_destroy_status(_ref_poison);
-		}
-
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
+
+	//----------------//
+	//PLAY ANIMATION//
+	//----------------//
 
 	//-----------//
 	//PLAY SOUND//

@@ -6,7 +6,7 @@
   "name":"scr_status_aura_burgeoning_bloom",
   "parent":{
     "name":"BURGEONING BLOOM",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/AURA/BURGEONING BLOOM.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/AURA/VIRIDIAN/BURGEONING BLOOM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

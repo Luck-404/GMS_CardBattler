@@ -2,14 +2,12 @@
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_APEX_PREDATOR
 // FUNCTION: Resolves the Apex Predator Archetype card.
-//           Removes all cleansable DoTs, Debuffs, and CC from every living
-//           allied Beast.
-//           Counts every individual status stack removed.
-//           For each stack consumed, permanently grants the caster +2 linear
-//           damage for the remainder of battle and heals the caster for 2 HP.
+//           Removes all cleansable DoTs, Debuffs, and CC from allied Beasts.
+//           Gains one permanent Apex stack per negative stack removed.
+//           Each Apex stack grants +2 linear damage.
+//           Heals the caster for 2 HP per negative stack removed.
 //
 //===============================================================================//
-
 function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 
 	if (!instance_exists(_ref_caster)){
@@ -19,32 +17,20 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET ALLIED TEAM LIST//
 	//--------------------//
-	var _list_allies =
-		scr_get_target_team_list(
-			_ref_caster
-		);
+	var _list_allies = scr_get_target_team_list(_ref_caster);
 
 	if (_list_allies == undefined){
 		return false;
 	}
 
-	var _ct_total_stacks =
-		0;
+	var _ct_total_stacks = 0;
 
 	//------------------------//
 	//CLEANSE THE ENTIRE TEAM//
 	//------------------------//
-	for (
-		var _it_ally = 0;
-		_it_ally < ds_list_size(_list_allies);
-		_it_ally++
-	){
+	for (var _it_ally = 0; _it_ally < ds_list_size(_list_allies); _it_ally++){
 
-		var _ref_ally =
-			ds_list_find_value(
-				_list_allies,
-				_it_ally
-			);
+		var _ref_ally = ds_list_find_value(_list_allies,_it_ally);
 
 		if (!instance_exists(_ref_ally)){
 			continue;
@@ -57,13 +43,7 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//----------------------//
-		//CLEANSE + COUNT STACKS//
-		//----------------------//
-		_ct_total_stacks +=
-			scr_cleanse_negative_stacks(
-				_ref_ally
-			);
+		_ct_total_stacks += scr_cleanse_negative_stacks(_ref_ally);
 	}
 
 	//----------------//
@@ -71,49 +51,45 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	if (_ct_total_stacks <= 0){
 
-		audio_play_sound(
-			snd_buff,
-			0,
-			false
-		);
+		audio_play_sound(snd_buff,0,false);
 
 		return true;
 	}
 
-	//-----------------------//
-	//CALCULATE APEX REWARD//
-	//-----------------------//
-	var _val_apex_bonus =
-		_ct_total_stacks *
-		2;
+	//----------------//
+	//STORE OLD TARGET//
+	//----------------//
+	var _ref_original_target =
+		global.ref_target_beast;
 
-	//-------------------------//
-	//PERMANENT DAMAGE INCREASE//
-	//-------------------------//
-	_ref_caster._val_dmg_linear_bonus +=
-		_val_apex_bonus;
+	//-------------//
+	//TARGET CASTER//
+	//-------------//
+	global.ref_target_beast =
+		_ref_caster;
+
+	//----------------//
+	//GAIN APEX STACKS//
+	//----------------//
+	scr_apply_buff_status(
+		"APEX_PREDATOR",
+		_ct_total_stacks,
+		-1
+	);
 
 	//-------------//
 	//HEAL CASTER//
 	//-------------//
 	scr_heal_target(
-		_val_apex_bonus,
+		_ct_total_stacks * 2,
 		_ref_caster
 	);
 
 	//----------------//
-	//BUFF FEEDBACK//
+	//RESTORE TARGET//
 	//----------------//
-	scr_spawn_popup_scrolling(
-		"TEXT",
-		"APEX +" +
-			string(_val_apex_bonus) +
-			" DAMAGE",
-		undefined,
-		c_green,
-		_ref_caster.x + irandom_range(-32,32),
-		_ref_caster.y - 48 + irandom_range(-16,16)
-	);
+	global.ref_target_beast =
+		_ref_original_target;
 
 	//----------------//
 	//PLAY ANIMATION//
@@ -122,11 +98,7 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
+	audio_play_sound(snd_buff,0,false);
 
 	return true;
 }

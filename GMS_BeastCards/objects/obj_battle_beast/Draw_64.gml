@@ -707,11 +707,6 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		}
 
 		_flag_death_handled = true;
-
-		_val_cur_hp = 0;
-
-		_flag_death_handled = true;
-
 		_val_cur_hp = 0;
 
 		//-------------------//
@@ -719,11 +714,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		//-------------------//
 		scr_trigger_death_traps(self);
 
-		audio_play_sound(
-			_snd_death,
-			0,
-			false
-		);
+		audio_play_sound(_snd_death,0,false);
 
 		_str_list = "DEAD";
 

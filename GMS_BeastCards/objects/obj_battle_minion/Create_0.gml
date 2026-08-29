@@ -17,6 +17,7 @@ _ref_host = undefined;
 // IDENTITY
 _str_name = "DEFAULT";
 _str_team = "PLAYER";
+_str_minion_tag = "NONE";
 
 // VISUALS
 _spr_minion = undefined;
@@ -25,6 +26,7 @@ _spr_minion = undefined;
 _val_cur_hp = 2;
 _val_max_hp = 2;
 _val_magnitude = 0;
+
 
 //----------------//
 //BASE SPAWN STATS//

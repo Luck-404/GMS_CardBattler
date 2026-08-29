@@ -2,59 +2,42 @@
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_PROLIFERATE
 // FUNCTION: Resolves the Proliferate Archetype card.
-//           Begins with the front enemy Beast.
-//           Copies each Beast's current DoTs onto the next Beast while moving
-//           toward the back of the formation.
-//           Reverses at the back and repeats toward the front.
-//           DoTs received earlier during Proliferate are included in later
-//           copies, causing the effect to accumulate as it travels.
+//           Uses the team belonging to the selected Beast.
+//           Copies current DoTs from front to back through that formation.
+//           Reverses at the back and copies them back toward the front.
+//           DoTs gained during this effect are included in later copies.
 //
 //===============================================================================//
-
 function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 
 	if (!instance_exists(_ref_caster)){
 		return;
 	}
 
-	//-------------------//
-	//GET OPPOSING TEAM//
-	//-------------------//
-	var _list_enemy;
-
-	if (_ref_caster._str_team == "PLAYER"){
-
-		_list_enemy =
-			obj_battle_enemy_controller._list_beasts_alive;
-	}
-	else{
-
-		_list_enemy =
-			obj_battle_player_controller._list_beasts_alive;
+	if (!instance_exists(_ref_target)){
+		return;
 	}
 
-	if (_list_enemy == undefined){
+	//--------------------//
+	//GET SELECTED TEAM//
+	//--------------------//
+	var _list_targets = scr_get_target_team_list(_ref_target);
+
+	if (_list_targets == undefined){
 		return;
 	}
 
 	//----------------//
 	//GET TEAM SIZE//
 	//----------------//
-	var _ct_enemies =
-		ds_list_size(
-			_list_enemy
-		);
+	var _ct_targets = ds_list_size(_list_targets);
 
 	//------------------//
 	//NEED 2+ TARGETS//
 	//------------------//
-	if (_ct_enemies <= 1){
+	if (_ct_targets <= 1){
 
-		audio_play_sound(
-			snd_debuff,
-			0,
-			false
-		);
+		audio_play_sound(snd_debuff,0,false);
 
 		return;
 	}
@@ -63,23 +46,10 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 	//=============================//
 	//FORWARD: FRONT TOWARD BACK//
 	//=============================//
-	for (
-		var _it_enemy = 0;
-		_it_enemy < _ct_enemies - 1;
-		_it_enemy++
-	){
+	for (var _it_target = 0; _it_target < _ct_targets - 1; _it_target++){
 
-		var _ref_source =
-			ds_list_find_value(
-				_list_enemy,
-				_it_enemy
-			);
-
-		var _ref_destination =
-			ds_list_find_value(
-				_list_enemy,
-				_it_enemy + 1
-			);
+		var _ref_source = ds_list_find_value(_list_targets,_it_target);
+		var _ref_destination = ds_list_find_value(_list_targets,_it_target + 1);
 
 		if (!instance_exists(_ref_source)){
 			continue;
@@ -96,14 +66,10 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//----------------//
+		//-----------------//
 		//COPY CURRENT DOTS//
-		//----------------//
-		var _ct_copied =
-			scr_copy_dot_statuses(
-				_ref_source,
-				_ref_destination
-			);
+		//-----------------//
+		var _ct_copied = scr_copy_dot_statuses(_ref_source,_ref_destination);
 
 		if (_ct_copied > 0){
 
@@ -126,23 +92,10 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 	//=============================//
 	//REVERSE: BACK TOWARD FRONT//
 	//=============================//
-	for (
-		var _it_enemy = _ct_enemies - 1;
-		_it_enemy > 0;
-		_it_enemy--
-	){
+	for (var _it_target = _ct_targets - 1; _it_target > 0; _it_target--){
 
-		var _ref_source =
-			ds_list_find_value(
-				_list_enemy,
-				_it_enemy
-			);
-
-		var _ref_destination =
-			ds_list_find_value(
-				_list_enemy,
-				_it_enemy - 1
-			);
+		var _ref_source = ds_list_find_value(_list_targets,_it_target);
+		var _ref_destination = ds_list_find_value(_list_targets,_it_target - 1);
 
 		if (!instance_exists(_ref_source)){
 			continue;
@@ -159,14 +112,10 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//----------------//
+		//-----------------//
 		//COPY CURRENT DOTS//
-		//----------------//
-		var _ct_copied =
-			scr_copy_dot_statuses(
-				_ref_source,
-				_ref_destination
-			);
+		//-----------------//
+		var _ct_copied = scr_copy_dot_statuses(_ref_source,_ref_destination);
 
 		if (_ct_copied > 0){
 
@@ -189,9 +138,5 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-	audio_play_sound(
-		snd_debuff,
-		0,
-		false
-	);
+	audio_play_sound(snd_debuff,0,false);
 }

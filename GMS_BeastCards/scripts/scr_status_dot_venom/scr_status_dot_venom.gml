@@ -3,7 +3,7 @@
 // SCRIPT: SCR_STATUS_DOT_VENOM
 // FUNCTION: Handles the Venom damage-over-time status.
 //           Stackable Timed.
-//           Deals 1 damage per turn.
+//           Deals 1 damage below 4 stacks, then +4 damage every 4 stacks.
 //           Each stack reduces PPOW, MPOW, PDEF, and MDEF by 2 while active.
 //           Reapplications add one stack and refresh to the stored maximum life.
 //
@@ -157,7 +157,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				"VENOM";
 
 			_ref_new_status._str_status_desc =
-				"DEALS 1 DAMAGE AND REDUCES COMBAT STATS";
+				"DAMAGE INCREASES EVERY 4 STACKS AND REDUCES COMBAT STATS";
 
 			_ref_new_status._spr_status =
 				spr_status_dot_venom;
@@ -290,28 +290,24 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
-
-				_ref_status._str_status_command =
-					"DEATH";
-
+				_ref_status._str_status_command = "DEATH";
 				return undefined;
 			}
 
-			//----------------//
-			//FIXED 1 DAMAGE//
-			//----------------//
-			var _val_damage =
-				1;
+			//-----------------------//
+			//CALCULATE VENOM DAMAGE//
+			//-----------------------//
+			var _ct_venom_stacks = _ref_status._ct_status_stacks;
 
-			audio_play_sound(
-				snd_attack,
-				0,
-				false
+			var _val_damage = max(
+				1,
+				floor(_ct_venom_stacks / 4) * 4
 			);
+
+			audio_play_sound(snd_attack,0,false);
 
 			//------------//
 			//OVERHEALTH//
@@ -321,11 +317,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				_ref_host._val_overhealth > 0
 			){
 
-				var _val_blocked =
-					min(
-						_ref_host._val_overhealth,
-						_val_damage
-					);
+				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
@@ -336,11 +328,8 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_overhealth -=
-					_val_blocked;
-
-				_val_damage -=
-					_val_blocked;
+				_ref_host._val_overhealth -= _val_blocked;
+				_val_damage -= _val_blocked;
 			}
 
 			//---------//
@@ -348,11 +337,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			//---------//
 			if (_val_damage > 0){
 
-				var _val_actual_damage =
-					min(
-						_val_damage,
-						_ref_host._val_cur_hp
-					);
+				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
 
 				scr_spawn_popup_scrolling(
 					"TEXT",
@@ -363,24 +348,15 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_cur_hp =
-					max(
-						0,
-						_ref_host._val_cur_hp -
-						_val_actual_damage
-					);
+				_ref_host._val_cur_hp = max(0,_ref_host._val_cur_hp - _val_actual_damage);
 			}
 
 			//----------------//
 			//REDUCE LIFETIME//
 			//----------------//
-			scr_status_tick_lifetime(
-				_ref_status
-			);
+			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(
-				_ref_host
-			);
+			scr_reposition_statuses(_ref_host);
 
 		break;
 

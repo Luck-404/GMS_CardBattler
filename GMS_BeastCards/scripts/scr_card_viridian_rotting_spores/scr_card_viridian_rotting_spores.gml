@@ -2,7 +2,7 @@
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_ROTTING_SPORES
 // FUNCTION: Resolves Rotting Spores.
-//           Places a healing-triggered Trap on the selected enemy Beast.
+//           Places a healing-triggered Trap on the selected Beast.
 //
 //===============================================================================//
 function scr_card_viridian_rotting_spores(_stct_card,_ref_caster,_ref_target){

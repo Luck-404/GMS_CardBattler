@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ENDLESS_BLOOM",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/ENDLESS_BLOOM.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/ENDLESS_BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

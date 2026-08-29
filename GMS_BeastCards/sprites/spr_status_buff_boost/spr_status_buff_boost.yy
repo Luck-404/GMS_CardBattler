@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BOOST",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/BOOST.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/BOOST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

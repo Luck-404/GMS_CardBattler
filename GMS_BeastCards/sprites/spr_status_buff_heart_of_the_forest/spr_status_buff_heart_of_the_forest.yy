@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"HEART_OF_THE_FOREST",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/HEART_OF_THE_FOREST.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/HEART_OF_THE_FOREST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

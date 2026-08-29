@@ -9,8 +9,38 @@
 function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 
 	var _ref_new_minion = instance_create_layer(_ref_target.x,_ref_target.y,"ily_minions",obj_battle_minion);
-
+	_ref_new_minion._str_minion_tag =
+		scr_get_minion_tag(
+			_str_id
+		);
+		
 	switch(_str_id){
+
+		case "FUNGI":
+
+			_ref_new_minion._str_team =
+				_ref_target._str_team;
+
+			_ref_new_minion._str_name =
+				"FUNGI";
+
+			_ref_new_minion._val_cur_hp =
+				1;
+
+			_ref_new_minion._val_max_hp =
+				1;
+
+			_ref_new_minion._val_magnitude =
+				1;
+
+			_ref_new_minion._ref_host =
+				_ref_target;
+
+			_ref_new_minion._spr_minion =
+				spr_minion_fungi;
+
+		break;
+		
 		
 		case "GROVE_SPIRIT":
 

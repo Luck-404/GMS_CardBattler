@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VERDANT_INSIGHT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VERDANT_INSIGHT.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/VERDANT_INSIGHT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

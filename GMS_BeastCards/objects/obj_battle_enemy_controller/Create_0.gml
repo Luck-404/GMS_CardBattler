@@ -13,7 +13,7 @@
 
 // BEASTS
 //_ct_beast = irandom_range(1,3);
-_ct_beast = 2;
+//_ct_beast = 3;
 
 
 _list_beasts = ds_list_create();

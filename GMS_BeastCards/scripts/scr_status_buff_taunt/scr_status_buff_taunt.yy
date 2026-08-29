@@ -6,7 +6,7 @@
   "name":"scr_status_buff_taunt",
   "parent":{
     "name":"TAUNT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/TAUNT.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/TAUNT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

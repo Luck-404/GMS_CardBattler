@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"PACK_INSTINCT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/PACK_INSTINCT.yy",
+    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/PACK_INSTINCT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
