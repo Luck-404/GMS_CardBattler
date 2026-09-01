@@ -147,10 +147,18 @@
 	//	scr_add_beast_to_party(scr_init_beast_random(_beast));
 	//}
 	
-	scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
-	scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
-	scr_add_beast_to_party(scr_init_beast_random("FURN"));
-	scr_add_beast_to_party(scr_init_beast_random("TURFRANTULA"));
+	//green testing
+	//scr_add_beast_to_party(scr_init_beast_random("BEAVINE"));
+	//scr_add_beast_to_party(scr_init_beast_random("FLITSAGE"));
+	//scr_add_beast_to_party(scr_init_beast_random("FURN"));
+	//scr_add_beast_to_party(scr_init_beast_random("TURFRANTULA"));
+	
+	//BLUE testing
+	scr_add_beast_to_party(scr_init_beast_random("SALTWAGG"));
+	scr_add_beast_to_party(scr_init_beast_random("FROSTUSK"));
+	scr_add_beast_to_party(scr_init_beast_random("GULFLOW"));
+	scr_add_beast_to_party(scr_init_beast_random("CHELONSEA"));	
+	
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO RANCH
@@ -241,8 +249,8 @@
 	//------------//
 	//ATTACK: DOT//
 	//------------//
-	scr_add_card_to_deck(scr_get_card_info("BLOWDART"));
-	scr_add_card_to_deck(scr_get_card_info("POTENT_SPORE"));
+	//scr_add_card_to_deck(scr_get_card_info("BLOWDART"));
+	//scr_add_card_to_deck(scr_get_card_info("POTENT_SPORE"));
 	//scr_add_card_to_deck(scr_get_card_info("RAKE"));
 	//scr_add_card_to_deck(scr_get_card_info("SPIRIT_FANG"));
 	//scr_add_card_to_deck(scr_get_card_info("SPIT_VENOM"));
@@ -346,6 +354,49 @@
 
 	#endregion
 
+	#region CERULEAN
+	//ATTACK - DIRECT & ATTACK - DOT
+		//scr_add_card_to_deck(scr_get_card_info("HAILSTONES"));
+		//scr_add_card_to_deck(scr_get_card_info("AVALANCHE_STRIKE"));
+		//scr_add_card_to_deck(scr_get_card_info("ICE_LANCE"));
+		//scr_add_card_to_deck(scr_get_card_info("TORRENT"));
+		//scr_add_card_to_deck(scr_get_card_info("BURST"));
+		//scr_add_card_to_deck(scr_get_card_info("TIDAL_SLASH"));
+		//scr_add_card_to_deck(scr_get_card_info("GLACIAL_CRUSH"));
+		//scr_add_card_to_deck(scr_get_card_info("RAZOR_FIN"));
+		//scr_add_card_to_deck(scr_get_card_info("ABYSSAL_TOUCH"));
+		//scr_add_card_to_deck(scr_get_card_info("DEEP_CURRENT"));
+		//scr_add_card_to_deck(scr_get_card_info("FROZEN_FANG"));
+		//scr_add_card_to_deck(scr_get_card_info("FROSTBOLT"));
+		//scr_add_card_to_deck(scr_get_card_info("CHILLING_WORD"));
+		//scr_add_card_to_deck(scr_get_card_info("FROZEN_SPEAR"));
+		//scr_add_card_to_deck(scr_get_card_info("ARCTIC_VOLLEY"));
+		//scr_add_card_to_deck(scr_get_card_info("CRASHING_WAVE"));
+		//scr_add_card_to_deck(scr_get_card_info("WHITEWATER"));
+		
+	//ATTACK - DIRECT (SPECIALITY)
+		//scr_add_card_to_deck(scr_get_card_info("SHATTER_STRIKE"));
+		//scr_add_card_to_deck(scr_get_card_info("PRESSURE_SPIKE"));
+		//scr_add_card_to_deck(scr_get_card_info("COLD_SNAP"));
+		//scr_add_card_to_deck(scr_get_card_info("TIDAL_BREAK"));
+		//scr_add_card_to_deck(scr_get_card_info("DEPTH_CHARGE"));
+		//scr_add_card_to_deck(scr_get_card_info("WINTERS_BITE"));
+		//scr_add_card_to_deck(scr_get_card_info("WINTER_RESONANCE"));
+		//scr_add_card_to_deck(scr_get_card_info("ABSOLUTE_ZERO"));
+		//scr_add_card_to_deck(scr_get_card_info("BITTER_CHILL"));
+		//scr_add_card_to_deck(scr_get_card_info("PRESSURE_CRUSH"));
+		//scr_add_card_to_deck(scr_get_card_info("KRAKENSLAM"));
+		//scr_add_card_to_deck(scr_get_card_info("FROSTBURN_NOVA"));
+		//scr_add_card_to_deck(scr_get_card_info("GLACIAL_ERUPTION"));
+		//scr_add_card_to_deck(scr_get_card_info("FRACTURE"));
+			
+		//DEFENSE
+		scr_add_card_to_deck(scr_get_card_info("SHELL_SHIELD"));
+		scr_add_card_to_deck(scr_get_card_info("ICE_PLATING"));
+		scr_add_card_to_deck(scr_get_card_info("FROZEN_BULWARK"));
+		scr_add_card_to_deck(scr_get_card_info("SNOWFORT"));
+		scr_add_card_to_deck(scr_get_card_info("SNOWDRIFT"));
+	#endregion
 	
 	//—------------------------------------------------------------------------------//
 	// ADD TEST CARDS TO LIBRARY

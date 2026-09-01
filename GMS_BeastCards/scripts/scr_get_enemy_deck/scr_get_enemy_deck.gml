@@ -405,7 +405,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_get_card_info("PREDATORS_MARK"));
+						ds_list_add(_list_return_deck,scr_get_card_info("WILD_VIGOR"));
 						ds_list_add(_list_return_deck,scr_get_card_info("SNARLING_BITE"));
 					break;
 				}
@@ -478,7 +478,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 
 					case "WILD":
 						ds_list_add(_list_return_deck,scr_get_card_info("TOXIC_HIDE"));
-						ds_list_add(_list_return_deck,scr_get_card_info("THORN_NET"));
+						ds_list_add(_list_return_deck,scr_get_card_info("WILDSTRIKE"));
 					break;
 				}
 
@@ -603,7 +603,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 				ds_list_add(_list_return_deck,scr_get_card_info("VERDANT_INSIGHT"));
 				ds_list_add(_list_return_deck,scr_get_card_info("SECOND_BLOOM"));
 				ds_list_add(_list_return_deck,scr_get_card_info("WILDSTRIKE"));
-				ds_list_add(_list_return_deck,scr_get_card_info("WILD_VIGOR"));
+				ds_list_add(_list_return_deck,scr_get_card_info("BLOOMING_SHIELD"));
 
 				//---------//
 				// SUBTYPE //
@@ -653,7 +653,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 
 					case "NATURAL":
 						ds_list_add(_list_return_deck,scr_get_card_info("NATURES_MEND"));
-						ds_list_add(_list_return_deck,scr_get_card_info("SECOND_BLOOM"));
+						ds_list_add(_list_return_deck,scr_get_card_info("NATURES_BOND"));
 					break;
 
 					case "WILD":
@@ -729,7 +729,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 
 					case "WILD":
 						ds_list_add(_list_return_deck,scr_get_card_info("POTENT_SPORE"));
-						ds_list_add(_list_return_deck,scr_get_card_info("TOXIC_SNARE"));
+						ds_list_add(_list_return_deck,scr_get_card_info("DECAYING_TOUCH"));
 					break;
 				}
 
@@ -745,7 +745,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 				//--------//
 				ds_list_add(_list_return_deck,scr_get_card_info("UNSEEN_ROOT"));
 				ds_list_add(_list_return_deck,scr_get_card_info("SLEEP_DART"));
-				ds_list_add(_list_return_deck,scr_get_card_info("PREDATORS_MARK"));
+				ds_list_add(_list_return_deck,scr_get_card_info("THORN_NET"));
 
 				//---------//
 				// SUBTYPE //
@@ -781,7 +781,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 				ds_list_add(_list_return_deck,scr_get_card_info("SPORE_CLOUD"));
 				ds_list_add(_list_return_deck,scr_get_card_info("DORMANT_SEED"));
 				ds_list_add(_list_return_deck,scr_get_card_info("GROWTH_SIGIL"));
-				ds_list_add(_list_return_deck,scr_get_card_info("ROTTING_SPORES"));
+				ds_list_add(_list_return_deck,scr_get_card_info("PACK_INSTINCT"));
 
 				//---------//
 				// SUBTYPE //
@@ -799,7 +799,7 @@ function scr_get_enemy_deck(_str_beast_name,_str_beast_type){
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_get_card_info("TOXIC_SNARE"));
+						ds_list_add(_list_return_deck,scr_get_card_info("SERPENT_SUMMON"));
 						ds_list_add(_list_return_deck,scr_get_card_info("VENOM_BLOOM"));
 					break;
 				}

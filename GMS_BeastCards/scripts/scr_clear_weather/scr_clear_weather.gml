@@ -1,14 +1,24 @@
+//===============================================================================//
+//
+// SCRIPT: SCR_CLEAR_WEATHER
+// FUNCTION: Removes every active Weather status.
+//           Runs each Weather's normal DEATH cleanup before removal.
+//
+//===============================================================================//
+
 function scr_clear_weather(){
+
 	for (
 		var _it_status = ds_list_size(global.list_statuses) - 1;
 		_it_status >= 0;
 		_it_status--
 	){
 
-		var _ref_status = ds_list_find_value(
-			global.list_statuses,
-			_it_status
-		);
+		var _ref_status =
+			ds_list_find_value(
+				global.list_statuses,
+				_it_status
+			);
 
 		if (!instance_exists(_ref_status)){
 			continue;
@@ -18,19 +28,21 @@ function scr_clear_weather(){
 			continue;
 		}
 
-		//----------------------//
+		//-------------------//
 		//RUN WEATHER CLEANUP//
-		//----------------------//
+		//-------------------//
 		if (_ref_status._scr_status != undefined){
+
 			_ref_status._scr_status(
 				"DEATH",
 				_ref_status
 			);
 		}
 		else{
-			scr_destroy_status(_ref_status);
+
+			scr_destroy_status(
+				_ref_status
+			);
 		}
 	}
-	var _ref_layer = layer_get_id("bly_weather");
-	layer_background_change(_ref_layer,spr_bg_blank);
 }

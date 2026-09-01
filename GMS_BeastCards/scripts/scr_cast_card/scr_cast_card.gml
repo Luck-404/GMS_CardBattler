@@ -139,7 +139,14 @@ function scr_cast_card(){
 	if (_flag_card_resolved){
 		scr_trigger_card_cast_auras(_ref_caster,_stct_card);
 	}
-
+	
+	//-------------------//
+	//TRIGGER ACTION DOTS//
+	//-------------------//
+	if (_flag_card_resolved){
+		scr_trigger_stormstruck_action(_ref_caster);
+	}
+	
 	//------------//
 	// SPEND MANA
 	//------------//

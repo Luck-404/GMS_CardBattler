@@ -309,6 +309,70 @@ function scr_init_logbook_cards(){
 
 	#endregion
 
+	//===============================================================================//
+	//
+	// CERULEAN
+	//
+	//===============================================================================//
+	#region CERULEAN
+
+
+	//===============================================================================//
+	//
+	// ATTACK - DIRECT
+	//
+	//===============================================================================//
+	hscr_add_card_entry("HAILSTONES","CERULEAN");
+	hscr_add_card_entry("AVALANCHE_STRIKE","CERULEAN");
+	hscr_add_card_entry("ICE_LANCE","CERULEAN");
+	hscr_add_card_entry("TORRENT","CERULEAN");
+	hscr_add_card_entry("BURST","CERULEAN");
+	hscr_add_card_entry("TIDAL_SLASH","CERULEAN");
+	hscr_add_card_entry("GLACIAL_CRUSH","CERULEAN");
+	hscr_add_card_entry("RAZOR_FIN","CERULEAN");
+	hscr_add_card_entry("ABYSSAL_TOUCH","CERULEAN");
+	hscr_add_card_entry("DEEP_CURRENT","CERULEAN");
+	hscr_add_card_entry("FROZEN_FANG","CERULEAN");
+	hscr_add_card_entry("FROSTBOLT","CERULEAN");
+	hscr_add_card_entry("CHILLING_WORD","CERULEAN");
+	hscr_add_card_entry("FROZEN_SPEAR","CERULEAN");
+	hscr_add_card_entry("ARCTIC_VOLLEY","CERULEAN");
+	hscr_add_card_entry("CRASHING_WAVE","CERULEAN");
+	hscr_add_card_entry("WHITEWATER","CERULEAN");
+	
+	
+	//===============================================================================//
+	//
+	// ATTACK - SPECIALITY
+	//
+	//===============================================================================//
+	hscr_add_card_entry("SHATTER_STRIKE","CERULEAN");
+	hscr_add_card_entry("PRESSURE_SPIKE","CERULEAN");
+	hscr_add_card_entry("COLD_SNAP","CERULEAN");
+	hscr_add_card_entry("TIDAL_BREAK","CERULEAN");
+	hscr_add_card_entry("DEPTH_CHARGE","CERULEAN");
+	hscr_add_card_entry("WINTERS_BITE","CERULEAN");
+	hscr_add_card_entry("WINTER_RESONANCE","CERULEAN");
+	hscr_add_card_entry("ABSOLUTE_ZERO","CERULEAN");
+	hscr_add_card_entry("BITTER_CHILL","CERULEAN");
+	hscr_add_card_entry("PRESSURE_CRUSH","CERULEAN");
+	hscr_add_card_entry("KRAKENSLAM","CERULEAN");
+	hscr_add_card_entry("FROSTBURN_NOVA","CERULEAN");
+	hscr_add_card_entry("GLACIAL_ERUPTION","CERULEAN");
+	hscr_add_card_entry("FRACTURE","CERULEAN");
+
+	//===============================================================================//
+	//
+	// DEFENSE
+	//
+	//===============================================================================//
+	hscr_add_card_entry("SHELL_SHIELD","CERULEAN");
+	hscr_add_card_entry("ICE_PLATING","CERULEAN");
+	hscr_add_card_entry("FROZEN_BULWARK","CERULEAN");
+	hscr_add_card_entry("SNOWFORT","CERULEAN");
+	hscr_add_card_entry("SNOWDRIFT","CERULEAN");
+	
+	#endregion
 
 	//----------------//
 	//UPDATE REVISION//

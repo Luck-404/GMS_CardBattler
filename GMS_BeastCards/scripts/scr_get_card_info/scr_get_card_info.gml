@@ -49,75 +49,1301 @@ function scr_get_card_info(_str_card_name){
 				};
 	
 	switch(_str_card_name){
+		#region CERULEAN
+			#region ABSOLUTE_ZERO
+			case "ABSOLUTE_ZERO":
+
+				_stct_return_card = {
+					_str_card_name : "ABSOLUTE ZERO",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_absolute_zero,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 16,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : "MAGE",
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_absolute_zero,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Deal [Linear] MAG dmg (base 16). ICEBREAKER."
+				};
+
+			break;
+			#endregion		
+		
+			#region ABYSSAL_TOUCH
+			case "ABYSSAL_TOUCH":
+
+				_stct_return_card = {
+					_str_card_name : "ABYSSAL TOUCH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_abyssal_touch,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_abyssal_touch,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] MAG dmg (base 6)."
+				};
+
+			break;
+			#endregion
+
+			#region ARCTIC_VOLLEY
+			case "ARCTIC_VOLLEY":
+
+				_stct_return_card = {
+					_str_card_name : "ARCTIC VOLLEY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_arctic_volley,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 3,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_arctic_volley,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] PHY dmg 3 times (base 3 per hit)."
+				};
+
+			break;
+			#endregion
+
+			#region AVALANCHE_STRIKE
+			case "AVALANCHE_STRIKE":
+
+				_stct_return_card = {
+					_str_card_name : "AVALANCHE STRIKE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_avalanche_strike,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "FRONT2",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_avalanche_strike,
+
+					_str_card_description :
+						"EXHAUSTS. AoE-2. Melee. Deal [Linear] PHY dmg to the front two enemy Beasts (base 15)."
+				};
+
+			break;
+			#endregion
+
+			#region BITTER_CHILL
+			case "BITTER_CHILL":
+
+				_stct_return_card = {
+					_str_card_name : "BITTER CHILL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_bitter_chill,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DOT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 7,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_bitter_chill,
+
+					_str_card_description :
+						"ST. Ranged. Apply 1 Frostbite and Weaken the target."
+				};
+
+			break;
+			#endregion
+
+			#region BURST
+			case "BURST":
+
+				_stct_return_card = {
+					_str_card_name : "BURST",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_burst,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_burst,
+
+					_str_card_description :
+						"ST. Melee. Deal [Linear] PHY dmg (base 6)."
+				};
+
+			break;
+			#endregion
+			
+			#region CHILLING_WORD
+			case "CHILLING_WORD":
+
+				_stct_return_card = {
+					_str_card_name : "CHILLING WORD",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_chilling_word,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DOT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_chilling_word,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Ranged. Apply 1 Frostburn to each enemy Beast."
+				};
+
+			break;
+			#endregion			
+			
+			#region COLD_SNAP
+			case "COLD_SNAP":
+
+				_stct_return_card = {
+					_str_card_name : "COLD SNAP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_cold_snap,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 7,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_cold_snap,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Deal [Linear] MAG dmg (base 7). If the target has Frostbite, Freeze it."
+				};
+
+			break;
+			#endregion			
+			
+			#region CRASHING_WAVE
+			case "CRASHING_WAVE":
+
+				_stct_return_card = {
+					_str_card_name : "CRASHING WAVE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_crashing_wave,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ADJACENT",
+
+					_val_card_magnitude : 7,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_crashing_wave,
+
+					_str_card_description :
+						"AoE-3. Deal [Linear] PHY dmg to the target and adjacent Beasts (base 7)."
+				};
+
+			break;
+			#endregion			
+			
+			#region DEEP_CURRENT
+			case "DEEP_CURRENT":
+
+				_stct_return_card = {
+					_str_card_name : "DEEP CURRENT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_deep_current,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 7,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_deep_current,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] MAG dmg (base 7). Draw 1 card."
+				};
+
+			break;
+			#endregion
+
+			#region DEPTH_CHARGE
+			case "DEPTH_CHARGE":
+
+				_stct_return_card = {
+					_str_card_name : "DEPTH CHARGE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_depth_charge,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_depth_charge,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] MAG dmg (base 8). Deal 25% additional dmg if Cerulean Weather is active."
+				};
+
+			break;
+			#endregion
+			
+			#region FRACTURE
+			case "FRACTURE":
+
+				_stct_return_card = {
+					_str_card_name : "FRACTURE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_fracture,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_fracture,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Ranged. Deal [Linear] MAG dmg to each enemy Beast (base 8). SHATTER each target. Apply 1 Bleed to each target. Begin Snow Weather."
+				};
+
+			break;
+			#endregion
+			
+			#region FROSTBOLT
+			case "FROSTBOLT":
+
+				_stct_return_card = {
+					_str_card_name : "FROSTBOLT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frostbolt,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frostbolt,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] MAG dmg (base 6). Apply 1 Frostbite."
+				};
+
+			break;
+			#endregion			
+
+			#region FROSTBURN_NOVA
+			case "FROSTBURN_NOVA":
+
+				_stct_return_card = {
+					_str_card_name : "FROSTBURN NOVA",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frostburn_nova,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DOT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ADJACENT",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_frostburn_nova,
+
+					_str_card_description :
+						"EXHAUSTS. AoE-3. Ranged. Apply 1 Frostburn to up to 3 selected enemies. Frozen targets gain 1 additional Frostburn."
+				};
+
+			break;
+			#endregion
+
+			#region FROZEN_BULWARK
+			case "FROZEN_BULWARK":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN BULWARK",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_bulwark,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_bulwark,
+
+					_str_card_description :
+						"ST. Ranged. Target allied Beast gains 10 Armor."
+				};
+
+			break;
+			#endregion
+			
+			#region FROZEN_FANG
+			case "FROZEN_FANG":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN FANG",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_fang,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_fang,
+
+					_str_card_description :
+						"ST. Melee. Deal [Linear] PHY dmg (base 6). Apply 1 Frostbite."
+				};
+
+			break;
+			#endregion			
+			
+			#region FROZEN_SPEAR
+			case "FROZEN_SPEAR":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN SPEAR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_spear,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "BACK",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_spear,
+
+					_str_card_description :
+						"ST. Flank. Deal [Linear] PHY dmg (base 2)."
+				};
+
+			break;
+			#endregion			
+			
+			#region GLACIAL_CRUSH
+			case "GLACIAL_CRUSH":
+
+				_stct_return_card = {
+					_str_card_name : "GLACIAL CRUSH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_glacial_crush,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 12,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_glacial_crush,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 12)."
+				};
+
+			break;
+			#endregion
+
+			#region GLACIAL_ERUPTION
+			case "GLACIAL_ERUPTION":
+
+				_stct_return_card = {
+					_str_card_name : "GLACIAL ERUPTION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_glacial_eruption,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ADJACENT",
+
+					_val_card_magnitude : 9,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_glacial_eruption,
+
+					_str_card_description :
+						"EXHAUSTS. AoE-3. Ranged. Deal [Linear] MAG dmg to up to 3 selected enemies (base 9). Freeze the center target."
+				};
+
+			break;
+			#endregion
+
+			#region HAILSTONES
+			case "HAILSTONES":
+
+				_stct_return_card = {
+					_str_card_name : "HAILSTONES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_hailstones,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ADJACENT",
+
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_hailstones,
+
+					_str_card_description :
+						"AoE-3. Ranged. Deal [Linear] MAG dmg to the target and adjacent Beasts (base 4)."
+				};
+
+			break;
+			#endregion
+			
+			#region ICE_LANCE
+			case "ICE_LANCE":
+
+				_stct_return_card = {
+					_str_card_name : "ICE LANCE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_lance,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_ice_lance,
+
+					_str_card_description :
+						"ST. Ranged. Pierce Armor and deal [Linear] MAG dmg directly to Overhealth and HP (base 4)."
+				};
+
+			break;
+			#endregion
+
+			#region ICE_PLATING
+			case "ICE_PLATING":
+
+				_stct_return_card = {
+					_str_card_name : "ICE PLATING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_plating,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 12,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_ice_plating,
+
+					_str_card_description :
+						"ST. Self. Gain 12 Armor."
+				};
+
+			break;
+			#endregion
+			
+			#region KRAKENSLAM
+			case "KRAKENSLAM":
+
+				_stct_return_card = {
+					_str_card_name : "KRAKENSLAM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_krakenslam,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_krakenslam,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Deal [Linear] PHY dmg (base 15). Apply Bleed and Stormstruck."
+				};
+
+			break;
+			#endregion
+
+			#region PRESSURE_CRUSH
+			case "PRESSURE_CRUSH":
+
+				_stct_return_card = {
+					_str_card_name : "PRESSURE CRUSH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_pressure_crush,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 20,
+					_str_card_scalar : "PERCENT",
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_pressure_crush,
+
+					_str_card_description :
+						"ST. Ranged. Pierce Armor and deal PHY dmg equal to 20% of the target's current Armor directly to Overhealth and HP."
+				};
+
+			break;
+			#endregion
+
+			#region PRESSURE_SPIKE
+			case "PRESSURE_SPIKE":
+
+				_stct_return_card = {
+					_str_card_name : "PRESSURE SPIKE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_pressure_spike,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_pressure_spike,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] MAG dmg (base 8). Deal 25% additional dmg if the target has no Armor."
+				};
+
+			break;
+			#endregion
+
+			#region RAZOR_FIN
+			case "RAZOR_FIN":
+
+				_stct_return_card = {
+					_str_card_name : "RAZOR FIN",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_razor_fin,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 7,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_razor_fin,
+
+					_str_card_description :
+						"ST. Melee. Deal [Linear] PHY dmg (base 7). Apply 1 Bleed."
+				};
+
+			break;
+			#endregion
+			
+			#region SHATTER_STRIKE
+			case "SHATTER_STRIKE":
+
+				_stct_return_card = {
+					_str_card_name : "SHATTER STRIKE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_shatter_strike,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_shatter_strike,
+
+					_str_card_description :
+						"ST. Melee. Deal [Linear] PHY dmg (base 8). SHATTER the target."
+				};
+
+			break;
+			#endregion
+
+			#region SHELL_SHIELD
+			case "SHELL_SHIELD":
+
+				_stct_return_card = {
+					_str_card_name : "SHELL SHIELD",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_shell_shield,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_shell_shield,
+
+					_str_card_description :
+						"ST. Self. Gain 6 Armor."
+				};
+
+			break;
+			#endregion
+			
+			#region SNOWDRIFT
+			case "SNOWDRIFT":
+
+				_stct_return_card = {
+					_str_card_name : "SNOWDRIFT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_snowdrift,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 4,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_snowdrift,
+
+					_str_card_description :
+						"ST. Self. Gain 4 Armor at the end of each round for 3 rounds."
+				};
+
+			break;
+			#endregion
+			
+			#region SNOWFORT
+			case "SNOWFORT":
+
+				_stct_return_card = {
+					_str_card_name : "SNOWFORT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_snowfort,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "TEAM",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_snowfort,
+
+					_str_card_description :
+						"Teamwide. All allied Beasts gain 6 Armor."
+				};
+
+			break;
+			#endregion
+			
+			#region TIDAL_BREAK
+			case "TIDAL_BREAK":
+
+				_stct_return_card = {
+					_str_card_name : "TIDAL BREAK",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_tidal_break,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 9,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SAILOR",
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_tidal_break,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 9). If this attack breaks Armor, apply 2 Stormstruck."
+				};
+
+			break;
+			#endregion
+			
+			#region TIDAL_SLASH
+			case "TIDAL_SLASH":
+
+				_stct_return_card = {
+					_str_card_name : "TIDAL SLASH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_tidal_slash,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_tidal_slash,
+
+					_str_card_description :
+						"ST. Melee. Deal [Linear] PHY dmg (base 6). If Rain is active, deal 5 additional dmg."
+				};
+
+			break;
+			#endregion
+
+			#region TORRENT
+			case "TORRENT":
+
+				_stct_return_card = {
+					_str_card_name : "TORRENT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_torrent,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "BACK",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 6,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_torrent,
+
+					_str_card_description :
+						"ST. Flank. Deal [Linear] MAG dmg (base 6)."
+				};
+
+			break;
+			#endregion
+
+			#region WHITEWATER
+			case "WHITEWATER":
+
+				_stct_return_card = {
+					_str_card_name : "WHITEWATER",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_whitewater,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "REPOSITION",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SAILOR",
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_whitewater,
+
+					_str_card_description :
+						"ST. Ranged. Deal [Linear] PHY dmg (base 8). Move the target forward 1 position."
+				};
+
+			break;
+			#endregion
+
+			#region WINTER_RESONANCE
+			case "WINTER_RESONANCE":
+
+				_stct_return_card = {
+					_str_card_name : "WINTER RESONANCE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_winter_resonance,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "SHATTER",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_winter_resonance,
+
+					_str_card_description :
+						"ST. Ranged. SHATTER the target."
+				};
+
+			break;
+			#endregion
+
+			#region WINTERS_BITE
+			case "WINTERS_BITE":
+
+				_stct_return_card = {
+					_str_card_name : "WINTER'S BITE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_winters_bite,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_winters_bite,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 10). ICEBREAKER."
+				};
+
+			break;
+			#endregion
+		#endregion
+		
 		#region VIRIDIAN
 
-		#region ANCIENT_GROVE
-		case "ANCIENT_GROVE":
+			#region ANCIENT_GROVE
+			case "ANCIENT_GROVE":
 
-			_stct_return_card = {
-				_str_card_name : "ANCIENT GROVE",
-				_str_card_id : _str_card_name,
-				_spr_card : spr_card_viridian_ancient_grove,
-				_arr_card_colors : ["VIRIDIAN",undefined],
+				_stct_return_card = {
+					_str_card_name : "ANCIENT GROVE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_ancient_grove,
+					_arr_card_colors : ["VIRIDIAN",undefined],
 
-				_str_card_range : "SELF",
-				_str_card_type : "ARCHETYPE",
-				_str_card_effect_type : "SUMMON",
-				_str_card_stat : "NEU",
-				_str_card_target_count : "TEAMWIDE",
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
 
-				_val_card_magnitude : 0,
-				_str_card_scalar : undefined,
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
 
-				_str_card_archetype_req : "MAGICAL",
-				_str_card_class_req : "SUMMONER",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : "SUMMONER",
 
-				_str_card_rarity : "IV",
-				_val_card_mana_cost : 3,
-				_flag_card_exhausts : true,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
 
-				_scr_card : scr_card_viridian_ancient_grove,
+					_scr_card : scr_card_viridian_ancient_grove,
 
-				_str_card_description :
-					"EXHAUSTS. Teamwide. Summon a Grove Spirit (5/1) on each allied Beast. Each Grove Spirit heals its host for 3 HP per round. Whenever its host gains Armor, the Grove Spirit gains 1 Magnitude and 2 maximum HP. At 10 HP, it also deals 1 NEU dmg per Magnitude to the front enemy each round. At 20 HP, its attacks also Stun for 1 round."
-			};
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Summon a Grove Spirit (5/1) on each allied Beast. Each Grove Spirit heals its host for 3 HP per round. Whenever its host gains Armor, the Grove Spirit gains 1 Magnitude and 2 maximum HP. At 10 HP, it also deals 1 NEU dmg per Magnitude to the front enemy each round. At 20 HP, its attacks also Stun for 1 round."
+				};
 
-		break;
-		#endregion
+			break;
+			#endregion
 
-		#region APEX_PREDATOR
-		case "APEX_PREDATOR":
+			#region APEX_PREDATOR
+			case "APEX_PREDATOR":
 
-			_stct_return_card = {
-				_str_card_name : "APEX PREDATOR",
-				_str_card_id : _str_card_name,
-				_spr_card : spr_card_viridian_apex_predator,
-				_arr_card_colors : ["VIRIDIAN",undefined],
+				_stct_return_card = {
+					_str_card_name : "APEX PREDATOR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_apex_predator,
+					_arr_card_colors : ["VIRIDIAN",undefined],
 
-				_str_card_range : "SELF",
-				_str_card_type : "ARCHETYPE",
-				_str_card_effect_type : "CLEANSE",
-				_str_card_stat : "NEU",
-				_str_card_target_count : "SELF",
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "CLEANSE",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
 
-				_val_card_magnitude : 0,
-				_str_card_scalar : undefined,
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
 
-				_str_card_archetype_req : "MARTIAL",
-				_str_card_class_req : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
 
-				_str_card_rarity : "IV",
-				_val_card_mana_cost : 3,
-				_flag_card_exhausts : true,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
 
-				_scr_card : scr_card_viridian_apex_predator,
+					_scr_card : scr_card_viridian_apex_predator,
 
-				_str_card_description :
-					"EXHAUSTS. ST. Self. Remove all DoTs, Debuffs, and CC from all allied Beasts. For each stack removed, permanently increase the caster’s linear damage by 2 and heal the caster for 2 HP."
-			};
+					_str_card_description :
+						"EXHAUSTS. ST. Self. Remove all DoTs, Debuffs, and CC from all allied Beasts. For each stack removed, permanently increase the caster’s linear damage by 2 and heal the caster for 2 HP."
+				};
 
-		break;
-		#endregion
+			break;
+			#endregion
 
 			#region BARKSKIN
 			case "BARKSKIN":
@@ -158,7 +1384,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_target_count : "FRONT2",
 					_val_card_magnitude : 6,
 					_str_card_scalar : "LINEAR",
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
@@ -260,7 +1486,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : undefined,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "II",
@@ -330,7 +1556,6 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
-
 
 			#region BRAMBLE_HIDE
 			case "BRAMBLE_HIDE":
@@ -777,7 +2002,7 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
-		#region DRAINING_KISS
+			#region DRAINING_KISS
 		case "DRAINING_KISS":
 
 			_stct_return_card = {
@@ -903,7 +2128,7 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
-		#region PLAGUE_GARDEN
+			#region PLAGUE_GARDEN
 		case "PLAGUE_GARDEN":
 
 			_stct_return_card = {
@@ -1041,7 +2266,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_scalar : "PERCENT",
 
 					_str_card_archetype_req : "TECHNICAL",
-					_str_card_class_req : undefined,
+					_str_card_class_req : "HUNTER",
 
 					_str_card_rarity : "IV",
 					_val_card_mana_cost : 3,
@@ -1076,7 +2301,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "III",
@@ -1109,7 +2334,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "I",
@@ -1257,8 +2482,8 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 10,
 					_str_card_scalar : "PERCENT",
 
-					_str_card_archetype_req : "MAGICAL",
-					_str_card_class_req : "SUMMONER",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
 
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
@@ -1312,7 +2537,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 10,
 					_str_card_archetype_req : "TECHNICAL",
-					_str_card_class_req : undefined,
+					_str_card_class_req : "HUNTER",
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : true,
@@ -1515,7 +2740,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 4,
 					_str_card_scalar : "LINEAR",
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 1,
@@ -1836,7 +3061,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 5,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "II",
@@ -1866,7 +3091,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
@@ -1930,7 +3155,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_scalar : undefined,
 
 					_str_card_archetype_req : "TECHNICAL",
-					_str_card_class_req : undefined,
+					_str_card_class_req : "HUNTER",
 
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
@@ -1963,8 +3188,8 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 
-					_str_card_archetype_req : undefined,
-					_str_card_class_req : undefined,
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : "HUNTER",
 
 					_str_card_rarity : "I",
 					_val_card_mana_cost : 0,
@@ -2021,7 +3246,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "IV",
@@ -2033,9 +3258,6 @@ function scr_get_card_info(_str_card_name){
 					_str_card_description :
 						"EXHAUSTS. Teamwide. Starting with the front enemy Beast, copy all of its DoTs onto the next Beast. Continue toward the back, copying each Beast’s current DoTs onto the next, then reverse direction and repeat until the effect returns to the front Beast."
 				};
-
-			break;
-			#endregion
 
 			break;
 			#endregion
@@ -2260,7 +3482,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_stat : "PHY",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 12,
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
@@ -2309,7 +3531,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_target_count : "TEAMWIDE",
 					_val_card_magnitude : 4,
 					_str_card_scalar : "LINEAR",
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 1,
@@ -2338,7 +3560,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "III",
@@ -2388,7 +3610,7 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
-		#region SHIMMERING_SPORES
+			#region SHIMMERING_SPORES
 		case "SHIMMERING_SPORES":
 
 			_stct_return_card = {
@@ -2699,7 +3921,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_stat : "PHY",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 5,
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "I",
 					_val_card_mana_cost : 1,
@@ -2826,7 +4048,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "I",
@@ -2935,7 +4157,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "II",
@@ -2969,7 +4191,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
 
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "I",
@@ -3090,7 +4312,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 4,
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "I",
 					_val_card_mana_cost : 1,
@@ -3261,7 +4483,7 @@ function scr_get_card_info(_str_card_name){
 					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 
-					_str_card_archetype_req : "MAGICAL",
+					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
 
 					_str_card_rarity : "II",
@@ -3325,41 +4547,41 @@ function scr_get_card_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region WILT
+			case "WILT":
+
+				_stct_return_card = {
+					_str_card_name : "WILT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_viridian_wilt,
+					_arr_card_colors : ["VIRIDIAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_viridian_wilt,
+
+					_str_card_description :
+						"ST. Ranged. Apply Wither for 3 rounds."
+				};
+
+			break;
 		#endregion
-
-		#region WILT
-		case "WILT":
-
-			_stct_return_card = {
-				_str_card_name : "WILT",
-				_str_card_id : _str_card_name,
-				_spr_card : spr_card_viridian_wilt,
-				_arr_card_colors : ["VIRIDIAN",undefined],
-
-				_str_card_range : "RANGED",
-				_str_card_type : "SUPPORT",
-				_str_card_effect_type : "DEBUFF",
-				_str_card_stat : "NEU",
-				_str_card_target_count : "ST",
-
-				_val_card_magnitude : 0,
-				_str_card_scalar : undefined,
-
-				_str_card_archetype_req : undefined,
-				_str_card_class_req : undefined,
-
-				_str_card_rarity : "II",
-				_val_card_mana_cost : 2,
-				_flag_card_exhausts : false,
-
-				_scr_card : scr_card_viridian_wilt,
-
-				_str_card_description :
-					"ST. Ranged. Apply Wither for 3 rounds."
-			};
-
-		break;
-		#endregion
+	#endregion		
 
 		#region UNCOLORED
 
@@ -3593,7 +4815,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 8,
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 1,

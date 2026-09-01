@@ -50,6 +50,38 @@ switch(_state_enemy){
 				continue;
 			}
 
+			//------------------//
+			//ROLL ENEMY LEVEL//
+			//------------------//
+			var _val_enemy_level = irandom_range(
+				_val_enemy_level_min,
+				_val_enemy_level_max
+			);
+
+			if (!scr_set_beast_level(_stct_unit,_val_enemy_level,true)){
+
+				show_debug_message(
+					"ENEMY BATTLE INIT ERROR | FAILED TO SET LEVEL | " +
+					string(_stct_unit._str_beast_name)
+				);
+
+				continue;
+			}
+
+			//-------------//
+			//DEBUG OUTPUT//
+			//-------------//
+			show_debug_message(
+				"ENEMY SPAWN | " +
+				string(_stct_unit._str_beast_name) +
+				" | LVL " +
+				string(_stct_unit._val_beast_level) +
+				" | HP " +
+				string(_stct_unit._val_beast_hp_cur) +
+				"/" +
+				string(_stct_unit._val_beast_hp_max)
+			);
+
 			//---------------------//
 			//VALIDATE MAXIMUM HP//
 			//---------------------//
@@ -716,34 +748,127 @@ switch(_state_enemy){
 
 						case "UTILITY":
 
-							_ref_target = _ref_beast;
+							var _str_effect_type =
+								_ref_card._ref_card._str_card_effect_type;
 
-							if (_ref_card._ref_card._str_card_range == "RANGED"){
+							var _str_card_id =
+								_ref_card._ref_card._str_card_id;
 
-								if (random(1) < 0.25){
+							//----------------//
+							//HOSTILE TRAP//
+							//----------------//
+							if (
+								_str_effect_type == "TRAP" &&
+								_str_card_id != "DISTRACTING_TRAP"
+							){
 
-									var _ct_ally = ds_list_size(_list_beasts_alive);
+								var _list_enemy =
+									obj_battle_player_controller._list_beasts_alive;
 
-									if (_ct_ally > 1){
+								if (ds_list_size(_list_enemy) > 0){
 
-										repeat(10){
+									switch(_ref_card._ref_card._str_card_range){
 
-											var _ref_candidate = ds_list_find_value(_list_beasts_alive,irandom(_ct_ally - 1));
+										//----------------//
+										//FRONTLINE TARGET//
+										//----------------//
+										case "MELEE":
 
-											if (_ref_candidate != _ref_beast){
-												_ref_target = _ref_candidate;
-												break;
+											_ref_target =
+												ds_list_find_value(
+													_list_enemy,
+													0
+												);
+
+										break;
+
+
+										//---------------//
+										//BACKLINE TARGET//
+										//---------------//
+										case "BACK":
+
+											_ref_target =
+												ds_list_find_value(
+													_list_enemy,
+													ds_list_size(_list_enemy) - 1
+												);
+
+										break;
+
+
+										//-------------//
+										//RANDOM TARGET//
+										//-------------//
+										default:
+
+											_ref_target =
+												ds_list_find_value(
+													_list_enemy,
+													irandom(ds_list_size(_list_enemy) - 1)
+												);
+
+										break;
+									}
+								}
+							}
+
+							//----------------//
+							//FRIENDLY UTILITY//
+							//----------------//
+							else{
+
+								_ref_target =
+									_ref_beast;
+
+								if (_ref_card._ref_card._str_card_range == "RANGED"){
+
+									if (random(1) < 0.25){
+
+										var _ct_ally =
+											ds_list_size(
+												_list_beasts_alive
+											);
+
+										if (_ct_ally > 1){
+
+											repeat(10){
+
+												var _ref_candidate =
+													ds_list_find_value(
+														_list_beasts_alive,
+														irandom(_ct_ally - 1)
+													);
+
+												if (_ref_candidate != _ref_beast){
+
+													_ref_target =
+														_ref_candidate;
+
+													break;
+												}
 											}
 										}
 									}
 								}
 							}
 
-							global.ref_cast_card = _ref_card;
-							global.ref_caster_beast = _ref_beast;
-							global.ref_target_beast = _ref_target;
+							//---------//
+							//CAST CARD//
+							//---------//
+							if (instance_exists(_ref_target)){
 
-							scr_cast_card();
+								global.ref_cast_card =
+									_ref_card;
+
+								global.ref_caster_beast =
+									_ref_beast;
+
+								global.ref_target_beast =
+									_ref_target;
+
+								scr_cast_card();
+							}
 
 						break;
 

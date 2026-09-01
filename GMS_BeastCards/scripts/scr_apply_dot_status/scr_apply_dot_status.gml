@@ -41,6 +41,82 @@ function scr_apply_dot_status(
 		undefined;
 
 	switch(_str_status_name){
+		//------------//
+		//STORMSTRUCK//
+		//------------//
+		case "STORMSTRUCK":
+
+			_ref_status = scr_status_dot_stormstruck(
+				"APPLY",
+				undefined,
+				_val_lifetime
+			);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 STORMSTRUCK",
+					undefined,
+					c_aqua,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
+		//---------//
+		//FROSTBURN//
+		//---------//
+		case "FROSTBURN":
+
+			_ref_status =
+				scr_status_dot_frostburn(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 FROSTBURN",
+					undefined,
+					c_aqua,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+		
+		//---------//
+		//FROSTBITE//
+		//---------//
+		case "FROSTBITE":
+
+			_ref_status =
+				scr_status_dot_frostbite(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"+1 FROSTBITE",
+					undefined,
+					c_aqua,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
 
 		//-------//
 		//BLEED//

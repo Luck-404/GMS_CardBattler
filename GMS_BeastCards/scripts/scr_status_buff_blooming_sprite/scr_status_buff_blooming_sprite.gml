@@ -115,7 +115,9 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 			//-------------//
 			_ref_new_status._scr_status =
 				scr_status_buff_blooming_sprite;
-
+				
+			_ref_new_status._flag_status_uncleansable = true;
+	
 			_ref_new_status._ref_host =
 				_ref_target;
 
