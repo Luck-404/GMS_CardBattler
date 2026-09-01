@@ -220,6 +220,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region BUBBLE
+			case "BUBBLE":
+
+				_stct_return_card = {
+					_str_card_name : "BUBBLE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_bubble,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_bubble,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Self. Gain Divine Protection. Block the next Attack."
+				};
+
+			break;
+			#endregion
+
 			#region BURST
 			case "BURST":
 
@@ -351,6 +385,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"AoE-3. Deal [Linear] PHY dmg to the target and adjacent Beasts (base 7)."
+				};
+
+			break;
+			#endregion			
+			
+			#region CRYSTAL_SHELL
+			case "CRYSTAL_SHELL":
+
+				_stct_return_card = {
+					_str_card_name : "CRYSTAL SHELL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_crystal_shell,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_crystal_shell,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Target allied Beast gains 2 Divine Protection. Block the next 2 Attacks."
 				};
 
 			break;
@@ -521,6 +589,74 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"EXHAUSTS. AoE-3. Ranged. Apply 1 Frostburn to up to 3 selected enemies. Frozen targets gain 1 additional Frostburn."
+				};
+
+			break;
+			#endregion
+
+			#region FROZEN_ARMOR
+			case "FROZEN_ARMOR":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN ARMOR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_armor,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_armor,
+
+					_str_card_description :
+						"ST. Self. For 3 rounds, when the caster is struck, apply 1 Frostbite to the attacker."
+				};
+
+			break;
+			#endregion
+
+			#region FROZEN_BASTION
+			case "FROZEN_BASTION":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN BASTION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_bastion,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_bastion,
+
+					_str_card_description :
+						"ST. Self. Double current Armor."
 				};
 
 			break;
@@ -729,6 +865,40 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion
+			
+			#region ICE_ACCRETION
+			case "ICE_ACCRETION":
+
+				_stct_return_card = {
+					_str_card_name : "ICE ACCRETION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_accretion,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_ice_accretion,
+
+					_str_card_description :
+						"ST. Ranged. Target allied Beast gains 5 Armor at the end of each round for 3 rounds."
+				};
+
+			break;
+			#endregion			
 			
 			#region ICE_LANCE
 			case "ICE_LANCE":

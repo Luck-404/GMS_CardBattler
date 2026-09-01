@@ -391,11 +391,16 @@
 		//scr_add_card_to_deck(scr_get_card_info("FRACTURE"));
 			
 		//DEFENSE
-		scr_add_card_to_deck(scr_get_card_info("SHELL_SHIELD"));
-		scr_add_card_to_deck(scr_get_card_info("ICE_PLATING"));
-		scr_add_card_to_deck(scr_get_card_info("FROZEN_BULWARK"));
-		scr_add_card_to_deck(scr_get_card_info("SNOWFORT"));
-		scr_add_card_to_deck(scr_get_card_info("SNOWDRIFT"));
+		//scr_add_card_to_deck(scr_get_card_info("SHELL_SHIELD"));
+		//scr_add_card_to_deck(scr_get_card_info("ICE_PLATING"));
+		//scr_add_card_to_deck(scr_get_card_info("FROZEN_BULWARK"));
+		//scr_add_card_to_deck(scr_get_card_info("SNOWFORT"));
+		//scr_add_card_to_deck(scr_get_card_info("SNOWDRIFT"));
+		scr_add_card_to_deck(scr_get_card_info("ICE_ACCRETION"));
+		scr_add_card_to_deck(scr_get_card_info("FROZEN_BASTION"));
+		scr_add_card_to_deck(scr_get_card_info("BUBBLE"));
+		scr_add_card_to_deck(scr_get_card_info("CRYSTAL_SHELL"));
+		scr_add_card_to_deck(scr_get_card_info("FROZEN_ARMOR"));
 	#endregion
 	
 	//—------------------------------------------------------------------------------//

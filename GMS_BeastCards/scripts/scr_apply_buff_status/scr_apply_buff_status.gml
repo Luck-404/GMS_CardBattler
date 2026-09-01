@@ -9,58 +9,110 @@
 function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=undefined){
 
 	switch(_str_status_name){
+		//-----------------//
+		//FROZEN_ARMOR//
+		//-----------------//		
+		case "FROZEN_ARMOR":
 
-//-------------//
-//APEX PREDATOR//
-//-------------//
-case "APEX_PREDATOR":
+			var _ref_frozen_armor_status =
+				scr_status_buff_frozen_armor(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
 
-	var _ref_apex_status = scr_status_buff_apex_predator(
-		"APPLY",
-		undefined,
-		_val_magnitude
-	);
+			if (_ref_frozen_armor_status != undefined){
 
-	if (_ref_apex_status != undefined){
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"FROZEN ARMOR",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
 
-		scr_spawn_popup_scrolling(
-			"TEXT",
-			"APEX +" + string(_val_magnitude),
-			undefined,
-			c_green,
-			global.ref_target_beast.x,
-			global.ref_target_beast.y - 48
-		);
-	}
+		break;
 
-break;
+		//-----------------//
+		//DIVINE PROTECTION//
+		//-----------------//
+		case "DIVINE_PROTECTION":
 
-//-------------//
-//PLAGUE GARDEN//
-//-------------//
-case "PLAGUE_GARDEN":
+			var _ref_divine_protection_status =
+				scr_status_buff_divine_protection(
+					"APPLY",
+					undefined,
+					_val_magnitude
+				);
 
-	var _ref_plague_garden_status =
-		scr_status_buff_plague_garden(
-			"APPLY",
-			undefined,
-			_val_magnitude,
-			_val_lifetime
-		);
+			if (_ref_divine_protection_status != undefined){
 
-	if (_ref_plague_garden_status != undefined){
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"DIVINE PROTECTION",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
 
-		scr_spawn_popup_scrolling(
-			"TEXT",
-			"PLAGUE GARDEN",
-			undefined,
-			c_green,
-			room_width * 0.5,
-			room_height * 0.5
-		);
-	}
+		break;
 
-break;
+		//-------------//
+		//APEX PREDATOR//
+		//-------------//
+		case "APEX_PREDATOR":
+
+			var _ref_apex_status = scr_status_buff_apex_predator(
+				"APPLY",
+				undefined,
+				_val_magnitude
+			);
+
+			if (_ref_apex_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"APEX +" + string(_val_magnitude),
+					undefined,
+					c_green,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//-------------//
+		//PLAGUE GARDEN//
+		//-------------//
+		case "PLAGUE_GARDEN":
+
+			var _ref_plague_garden_status =
+				scr_status_buff_plague_garden(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_plague_garden_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"PLAGUE GARDEN",
+					undefined,
+					c_green,
+					room_width * 0.5,
+					room_height * 0.5
+				);
+			}
+
+		break;
 
 		//-------------------//
 		//HEART OF THE FOREST//

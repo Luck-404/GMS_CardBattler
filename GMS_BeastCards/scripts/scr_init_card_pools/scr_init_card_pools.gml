@@ -86,7 +86,9 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"SHELL_SHIELD");
 		ds_list_add(global.list_pool_cards_rarity_I,"ICE_PLATING");
 		ds_list_add(global.list_pool_cards_rarity_I,"SNOWDRIFT");
-		
+		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_ARMOR");
+		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_ARMOR");
+
 	#endregion
 
 
@@ -246,6 +248,9 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_III,"FROSTBURN_NOVA");
 		ds_list_add(global.list_pool_cards_rarity_III,"GLACIAL_ERUPTION");
 		ds_list_add(global.list_pool_cards_rarity_III,"FRACTURE");
+		ds_list_add(global.list_pool_cards_rarity_III,"ICE_ACCRETION");
+		ds_list_add(global.list_pool_cards_rarity_III,"FROZEN_BASTION");
+		ds_list_add(global.list_pool_cards_rarity_III,"CRYSTAL_SHELL");
 	
 	#endregion
 

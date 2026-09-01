@@ -371,6 +371,11 @@ function scr_init_logbook_cards(){
 	hscr_add_card_entry("FROZEN_BULWARK","CERULEAN");
 	hscr_add_card_entry("SNOWFORT","CERULEAN");
 	hscr_add_card_entry("SNOWDRIFT","CERULEAN");
+	hscr_add_card_entry("ICE_ACCRETION","CERULEAN");
+	hscr_add_card_entry("FROZEN_BASTION","CERULEAN");
+	hscr_add_card_entry("BUBBLE","CERULEAN");
+	hscr_add_card_entry("CRYSTAL_SHELL","CERULEAN");
+	hscr_add_card_entry("FROZEN_ARMOR","CERULEAN");
 	
 	#endregion
 

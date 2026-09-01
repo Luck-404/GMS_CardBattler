@@ -106,6 +106,13 @@ if (_ref_target._ct_dodge_disabled <= 0){
 		return false;
 	}
 
+	//-------------------//
+	//DIVINE PROTECTION//
+	//-------------------//
+	if (scr_trigger_divine_protection(_ref_target)){
+		return false;
+	}
+
 	//--------------------------//
 	//SEEDFALL COLOR BONUS//
 	//--------------------------//
@@ -600,6 +607,19 @@ if (_ref_target._ct_dodge_disabled <= 0){
 			_ref_caster,
 			_ref_target,
 			_str_card_stat
+		);
+	}
+
+	//------------------//
+	//ON DEFENSE BUFFS//
+	//------------------//
+	if (
+		instance_exists(global.ref_caster_beast) &&
+		instance_exists(_ref_target)
+	){
+		scr_trigger_on_defense_buffs(
+			_ref_target,
+			global.ref_caster_beast
 		);
 	}
 
