@@ -20,7 +20,7 @@ function scr_card_uncolored_hidden_card(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-	audio_play_sound(snd_card_draw,0,false);
+	audio_play_sound(snd_battle_sfx_draw_card,0,false);
 
 	//-------------//
 	//SPAWN POPUP//

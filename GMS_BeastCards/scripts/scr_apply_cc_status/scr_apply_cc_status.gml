@@ -45,6 +45,32 @@ function scr_apply_cc_status(
 	var _ref_status = undefined;
 
 	switch(_str_status_name){
+		//------//
+		//BANISH//
+		//------//
+		case "BANISH":
+
+			_ref_status =
+				scr_status_cc_banish(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+
+			if (_ref_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"BANISHED",
+					undefined,
+					c_aqua,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;		
+		
 		//--------//
 		//FROZEN//
 		//--------//

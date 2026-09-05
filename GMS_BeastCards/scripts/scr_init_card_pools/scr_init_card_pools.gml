@@ -86,8 +86,23 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"SHELL_SHIELD");
 		ds_list_add(global.list_pool_cards_rarity_I,"ICE_PLATING");
 		ds_list_add(global.list_pool_cards_rarity_I,"SNOWDRIFT");
-		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_ARMOR");
-		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_ARMOR");
+		ds_list_add(global.list_pool_cards_rarity_I,"ARMOR_TRANSFER");
+		ds_list_add(global.list_pool_cards_rarity_I,"STATIC_BARRIER");
+		ds_list_add(global.list_pool_cards_rarity_I,"SEA_LEGS");
+		ds_list_add(global.list_pool_cards_rarity_I,"RAIN");
+		ds_list_add(global.list_pool_cards_rarity_I,"SNOWFALL");
+		ds_list_add(global.list_pool_cards_rarity_I,"THIN_ICE");
+		ds_list_add(global.list_pool_cards_rarity_I,"STORM_BEACON");
+		ds_list_add(global.list_pool_cards_rarity_I,"ABYSSAL_HARPOON");
+		ds_list_add(global.list_pool_cards_rarity_I,"UNDERTOW");
+		ds_list_add(global.list_pool_cards_rarity_I,"RIP_CURRENT");
+		ds_list_add(global.list_pool_cards_rarity_I,"AQUA_STEP");
+		ds_list_add(global.list_pool_cards_rarity_I,"PURIFY_WATERS");
+		ds_list_add(global.list_pool_cards_rarity_I,"ICEBOUND_SEAL");
+		ds_list_add(global.list_pool_cards_rarity_I,"SAILORS_RESOLVE");
+		ds_list_add(global.list_pool_cards_rarity_I,"FROST_WEAPON");
+		
+
 
 	#endregion
 
@@ -186,7 +201,20 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"PRESSURE_CRUSH");
 		ds_list_add(global.list_pool_cards_rarity_II,"SNOWFORT");
 		ds_list_add(global.list_pool_cards_rarity_II,"SNOWDRIFT");
-
+		ds_list_add(global.list_pool_cards_rarity_II,"RAZOR_SHELL");
+		ds_list_add(global.list_pool_cards_rarity_II,"ICE_MIRROR");
+		ds_list_add(global.list_pool_cards_rarity_II,"SHARED_BULWARK");
+		ds_list_add(global.list_pool_cards_rarity_II,"COLD_RESERVE");
+		ds_list_add(global.list_pool_cards_rarity_II,"THUNDERSTORM");
+		ds_list_add(global.list_pool_cards_rarity_II,"ICE_WALL");
+		ds_list_add(global.list_pool_cards_rarity_II,"STORM_WISP");
+		ds_list_add(global.list_pool_cards_rarity_II,"CORAL_GUARDIAN");
+		ds_list_add(global.list_pool_cards_rarity_II,"ANCHOR_STONE");
+		ds_list_add(global.list_pool_cards_rarity_II,"TIDAL_FLOW");
+		ds_list_add(global.list_pool_cards_rarity_II,"MANA_SPRING");
+		ds_list_add(global.list_pool_cards_rarity_II,"RIPPLING_POOL");
+		ds_list_add(global.list_pool_cards_rarity_II,"DEEP_REFLECTION");
+		ds_list_add(global.list_pool_cards_rarity_II,"ARCTIC_FOCUS");
 
 	#endregion
 
@@ -251,6 +279,11 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_III,"ICE_ACCRETION");
 		ds_list_add(global.list_pool_cards_rarity_III,"FROZEN_BASTION");
 		ds_list_add(global.list_pool_cards_rarity_III,"CRYSTAL_SHELL");
+		ds_list_add(global.list_pool_cards_rarity_III,"DROP_ANCHOR");
+		ds_list_add(global.list_pool_cards_rarity_III,"PULLED_UNDER");
+		ds_list_add(global.list_pool_cards_rarity_III,"RIMEFROST_ELEMENTAL");
+		ds_list_add(global.list_pool_cards_rarity_III,"DEEPFLOW_WHISPERSONG");
+		ds_list_add(global.list_pool_cards_rarity_III,"ANCIENT_CHARTS");
 	
 	#endregion
 
@@ -286,6 +319,7 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_IV,"HEART_OF_THE_FOREST");
 		ds_list_add(global.list_pool_cards_rarity_IV,"PLAGUE_GARDEN");
 		ds_list_add(global.list_pool_cards_rarity_IV,"PROLIFERATE");
+		ds_list_add(global.list_pool_cards_rarity_IV,"TIDEHEART");
 
 	#endregion
 }

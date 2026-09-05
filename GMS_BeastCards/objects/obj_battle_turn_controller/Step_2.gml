@@ -65,13 +65,15 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	if (_flag_game_start){
 
 		if (!_flag_started_game){
+
 			_flag_started_game = true;
-			_ref_player_controller._state_player = ENUM_PLAYER_STATE.TURN_START;
+
+			hscr_set_initial_turn_order();
 		}
 
 		// PLAYER TEAM DEAD
 		#region PLAYER TEAM DEAD
-		if (ds_list_size(_ref_player_controller._list_beasts_alive) < 1){
+		if (!scr_team_has_combatants("PLAYER")){
 
 			if (!_flag_battle_ended){
 				_flag_battle_ended = true;
@@ -89,7 +91,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		// ENEMY TEAM DEAD
 		#region ENEMY TEAM DEAD
-		if (ds_list_size(_ref_enemy_controller._list_beasts_alive) < 1){
+		if (!scr_team_has_combatants("ENEMY")){
 
 			if (!_flag_battle_ended){
 				_flag_battle_ended = true;

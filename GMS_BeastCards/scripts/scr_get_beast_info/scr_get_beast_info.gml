@@ -2423,5 +2423,12 @@ function scr_get_beast_info(_str_beast_name){
 
 	}
 
+	//----------------//
+	//ASSIGN SPEED STAT//
+	//----------------//
+	if (is_struct(_stct_return_beast)){
+		_stct_return_beast._val_beast_speed_stat = scr_get_beast_speed_stat(_str_beast_name);
+	}
+
 	return _stct_return_beast;
 }

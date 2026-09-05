@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_power_strike",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.3129932,
+  "exportDir":"",
+  "name":"snd_power_strike",
+  "parent":{
+    "name":"UNCOLORED",
+    "path":"folders/CARDS/CARD SFX/UNCOLORED.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_power_strike.wav",
+  "volume":0.5,
+}

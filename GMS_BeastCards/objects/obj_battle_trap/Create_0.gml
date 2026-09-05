@@ -29,6 +29,10 @@ _val_magnitude = 0;
 
 _flag_triggered = false;
 
+_str_trap_scope = "HOST";
+_str_trigger_phase = "BEFORE";
+_str_target_team = "";
+
 //----//
 //INIT//
 //----//

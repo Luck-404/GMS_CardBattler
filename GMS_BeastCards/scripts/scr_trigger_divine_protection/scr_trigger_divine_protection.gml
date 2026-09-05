@@ -56,6 +56,10 @@ function scr_trigger_divine_protection(_ref_target){
 	//----------//
 	//FEEDBACK//
 	//----------//
+	scr_battle_vfx_blocked(
+		_ref_target
+	);
+
 	scr_spawn_popup_scrolling(
 		"TEXT",
 		"BLOCKED",

@@ -11,6 +11,8 @@
 //VARIABLES//
 //---------//
 
+_arr_team_traps = [];
+
 // CONTROLLERS
 _ref_player_controller = instance_create_layer(x,y,"ily_player",obj_battle_player_controller);
 _ref_enemy_controller = instance_create_layer(x,y,"ily_enemy",obj_battle_enemy_controller);
@@ -78,21 +80,113 @@ function hscr_add_entry_item_triggers(_list_beasts){
 
 //—------------------------------------------------------------------------------//
 // hscr_build_entry_trigger_queue
-// FUNCTION: Builds the ordered battle-entry trigger queue.
-//           Adds player triggers first, followed by enemy triggers.
-//           Preserves current beast list position order.
+// FUNCTION: Builds the battle-entry trigger queue.
+//           Collects Beast-owned entry triggers from both teams.
+//           Sorts simultaneous triggers by current Beast Speed.
+//           Exact Speed ties receive a randomized Beast order.
 //—------------------------------------------------------------------------------//
 function hscr_build_entry_trigger_queue(){
 
 	_list_entry_triggers = ds_list_create();
 
-	// PLAYER POSITION ORDER
+	//--------------------//
+	//COLLECT ALL TRIGGERS//
+	//--------------------//
 	hscr_add_entry_item_triggers(_ref_player_controller._list_beasts_alive);
-
-	// ENEMY POSITION ORDER
 	hscr_add_entry_item_triggers(_ref_enemy_controller._list_beasts_alive);
 
+	//----------------//
+	//SORT BY SPEED//
+	//----------------//
+	scr_sort_beast_trigger_queue_by_speed(_list_entry_triggers);
+
 	_flag_entry_triggers_init = true;
+}
+
+//—------------------------------------------------------------------------------//
+// hscr_set_initial_turn_order
+// FUNCTION: Calculates each team's average current Speed.
+//           Gives the first turn to the team with the higher average Speed.
+//           Resolves an exact team-average tie with a 50/50 coin flip.
+//           Sets the turn tracker so normal alternating turn flow continues.
+//
+//—------------------------------------------------------------------------------//
+function hscr_set_initial_turn_order(){
+
+	var _val_player_speed =
+		scr_get_team_average_speed(
+			_ref_player_controller._list_beasts_alive
+		);
+
+	var _val_enemy_speed =
+		scr_get_team_average_speed(
+			_ref_enemy_controller._list_beasts_alive
+		);
+
+	var _flag_player_first = false;
+
+	//--------------------//
+	//PLAYER FASTER//
+	//--------------------//
+	if (_val_player_speed > _val_enemy_speed){
+
+		_flag_player_first = true;
+	}
+
+	//-------------------//
+	//ENEMY FASTER//
+	//-------------------//
+	else if (_val_enemy_speed > _val_player_speed){
+
+		_flag_player_first = false;
+	}
+
+	//----------------//
+	//EXACT SPEED TIE//
+	//----------------//
+	else{
+
+		_flag_player_first = (irandom(1) == 0);
+	}
+
+
+	//----------------//
+	//START FIRST TURN//
+	//----------------//
+	if (_flag_player_first){
+
+		_val_turn_tracker = 0;
+
+		_ref_player_controller._state_player =
+			ENUM_PLAYER_STATE.TURN_START;
+
+		show_debug_message(
+			"BATTLE INITIATIVE | PLAYER FIRST | PLAYER AVG SPEED: " +
+			string(_val_player_speed) +
+			" | ENEMY AVG SPEED: " +
+			string(_val_enemy_speed)
+		);
+	}
+	else{
+
+		/*
+			Tracker 1 represents the enemy side of the normal
+			player/enemy turn alternation. This ensures that
+			hscr_pass_turn() sends control to the player after
+			the enemy's opening turn.
+		*/
+		_val_turn_tracker = 1;
+
+		_ref_enemy_controller._state_enemy =
+			ENUM_ENEMY_STATE.TURN_START;
+
+		show_debug_message(
+			"BATTLE INITIATIVE | ENEMY FIRST | PLAYER AVG SPEED: " +
+			string(_val_player_speed) +
+			" | ENEMY AVG SPEED: " +
+			string(_val_enemy_speed)
+		);
+	}
 }
 
 //—------------------------------------------------------------------------------//
@@ -153,6 +247,11 @@ function hscr_execute_entry_trigger(_stct_trigger){
 // FUNCTION: Passes turn control between player and enemy controllers.
 //—------------------------------------------------------------------------------//
 function hscr_pass_turn(){
+
+	//----------------//
+	//UPDATE BANISH//
+	//----------------//
+	scr_update_banished_beasts();
 
 	if (_val_turn_tracker == 0){
 		_val_turn_tracker++;

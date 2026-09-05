@@ -85,7 +85,7 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 	//PLAY SOUND//
 	//-----------//
 	audio_play_sound(
-		snd_attack,
+		snd_battle_sfx_neu_hit,
 		0,
 		false
 	);

@@ -1,28 +1,73 @@
 //===============================================================================//
 //
-// DRAW: OBJ_BATTLE_PLAYER_CONTROLLER
 // FUNCTION: Draws player battle HUD information.
-//           Displays mana, echo count, card pile counts, selection lines,
+//           Displays mana, card pile counts, selection lines,
 //           and ctrl inspection data.
 //
 //===============================================================================//
 
-if (!instance_exists(obj_gui_end_battle_pane)){
+	if (!instance_exists(obj_gui_end_battle_pane)){
 
-	#region MANA COUNTER
-	draw_set_halign(fa_left);
-	draw_set_valign(fa_top);
-	draw_set_colour(c_black);
-	draw_set_font(fnt_large_gui);
+	//=========//
+	//MANA HUD//
+	//=========//
 
-	draw_text(50,50,"MANA: " + string(_val_cur_mana) + "/" + string(_val_max_mana));
-	#endregion
+	//---------------------//
+	//REFRESH MANA POSITIONS//
+	//---------------------//
+	if (
+		array_length(_arr_mana_positions) !=
+		_val_max_mana
+	){
 
-	#region ECHO COUNTER
-	if (global.ct_echo != 0){
-		draw_text(50,150,"ECHO: " + string(global.ct_echo));
+		scr_reposition_mana();
 	}
-	#endregion
+
+	//-------------------//
+	//GET DISPLAYED MANA//
+	//-------------------//
+	var _val_display_mana =
+		clamp(
+			_val_cur_mana,
+			0,
+			_val_max_mana
+		);
+
+	//----------------//
+	//DRAW MANA ORBS//
+	//----------------//
+	for (
+		var _it_mana = 0;
+		_it_mana < array_length(_arr_mana_positions);
+		_it_mana++
+	){
+
+		var _stct_mana_position =
+			_arr_mana_positions[_it_mana];
+
+		//----------------//
+		//GET ORB FRAME//
+		//----------------//
+		var _it_mana_frame =
+			_it_mana < _val_display_mana
+				? 0
+				: 1;
+
+		//---------//
+		//DRAW ORB//
+		//---------//
+		draw_sprite_ext(
+			spr_mana_orb,
+			_it_mana_frame,
+			_stct_mana_position._val_x,
+			_stct_mana_position._val_y,
+			_val_mana_orb_scale,
+			_val_mana_orb_scale,
+			0,
+			c_white,
+			1
+		);
+	}
 
 	#region CARD PILE COUNTS
 	draw_set_font(fnt_small_gui);

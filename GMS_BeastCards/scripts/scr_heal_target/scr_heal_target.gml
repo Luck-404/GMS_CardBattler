@@ -4,9 +4,10 @@
 // FUNCTION: Resolves a healing attempt on a target battle Beast.
 //           Healing still resolves when the target is at Maximum HP.
 //           Actual HP restored is capped at Maximum HP.
-//           Checks healing-triggered Traps before restoring HP.
+//           Checks BEFORE healing Traps before restoring HP.
+//           Checks AFTER healing Traps once healing has resolved.
 //           Converts excess healing into Overhealth during Bloomtide.
-//           Triggers healing-based effects using actual HP restored.
+//           Triggers healing-based effects.
 //
 //===============================================================================//
 
@@ -39,14 +40,16 @@ function scr_heal_target(_val_amount,_ref_target,_flag_trigger_auras=true){
 	var _flag_bloomtide =
 		(_ref_bloomtide != -1);
 
-	//-------------------//
-	//CHECK HEALING TRAPS//
-	//-------------------//
+	//---------------------------//
+	//CHECK BEFORE HEALING TRAPS//
+	//---------------------------//
 	/*
 		A valid healing attempt reaches this check even when
 		the target is already at Maximum HP.
+
+		BEFORE Traps may cancel the healing entirely.
 	*/
-	if (scr_trigger_heal_traps(_ref_target)){
+	if (scr_trigger_heal_traps(_ref_target,"BEFORE")){
 		return false;
 	}
 
@@ -165,6 +168,20 @@ function scr_heal_target(_val_amount,_ref_target,_flag_trigger_auras=true){
 	scr_trigger_heal_buffs(
 		_ref_target,
 		_val_amount
+	);
+
+	//--------------------------//
+	//CHECK AFTER HEALING TRAPS//
+	//--------------------------//
+	/*
+		PULLED UNDER resolves here.
+
+		The healing completes first, then the healed Beast
+		can be Banished.
+	*/
+	scr_trigger_heal_traps(
+		_ref_target,
+		"AFTER"
 	);
 
 	//------------------------//

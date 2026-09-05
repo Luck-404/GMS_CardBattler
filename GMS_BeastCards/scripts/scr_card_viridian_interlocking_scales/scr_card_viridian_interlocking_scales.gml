@@ -21,5 +21,5 @@ function scr_card_viridian_interlocking_scales(_stct_card,_ref_caster,_ref_targe
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-	audio_play_sound(snd_shield,0,false);
+	audio_play_sound(snd_battle_sfx_armor,0,false);
 }

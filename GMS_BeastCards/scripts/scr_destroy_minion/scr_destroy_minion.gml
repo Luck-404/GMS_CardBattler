@@ -4,6 +4,7 @@
 // FUNCTION: Removes a battle Minion.
 //           Distinguishes combat death from sacrifice, replacement, and other
 //           forms of removal.
+//           Plays Minion Death presentation on true combat death.
 //           Removes statuses sourced by the exact Minion.
 //           Endless Bloom converts defeated allied Minions into Dormant Seeds
 //           while preserving accumulated HP and Magnitude bonuses.
@@ -18,18 +19,48 @@
 
 function scr_destroy_minion(_ref_minion,_str_reason="REMOVE"){
 
+	//-----------------//
+	//VALIDATE MINION//
+	//-----------------//
 	if (!instance_exists(_ref_minion)){
 		return false;
 	}
 
-	//----------------//
+	//------------------//
 	//STORE MINION DATA//
-	//----------------//
+	//------------------//
 	var _ref_host =
 		_ref_minion._ref_host;
 
 	var _str_team =
 		_ref_minion._str_team;
+
+	//----------------//
+	//STORE POSITION//
+	//----------------//
+	var _val_minion_x =
+		_ref_minion.x;
+
+	var _val_minion_y =
+		_ref_minion.y;
+
+	//----------------//
+	//MINION DEATH VFX//
+	//----------------//
+	if (_str_reason == "DEATH"){
+
+		scr_battle_vfx(
+			undefined,
+			spr_battle_vfx_summon_death,
+			_val_minion_x,
+			_val_minion_y,
+			0,
+			0,
+			1,
+			0,
+			snd_battle_sfx_summon_death
+		);
+	}
 
 	var _flag_sporeling_poison =
 	(
@@ -45,7 +76,7 @@ function scr_destroy_minion(_ref_minion,_str_reason="REMOVE"){
 		_ref_minion._str_name == "FUNGI" &&
 		_str_reason == "DEATH"
 	);
-
+	
 	//------------------------//
 	//CHECK ENDLESS BLOOM//
 	//------------------------//
@@ -135,50 +166,12 @@ function scr_destroy_minion(_ref_minion,_str_reason="REMOVE"){
 	}
 
 
-	//================================//
-	//REMOVE MINION-SOURCED STATUSES//
-	//================================//
-	if (instance_exists(_ref_host)){
-
-		for (
-			var _it_status =
-				ds_list_size(_ref_host._list_statuses) - 1;
-			_it_status >= 0;
-			_it_status--
-		){
-
-			var _ref_status =
-				ds_list_find_value(
-					_ref_host._list_statuses,
-					_it_status
-				);
-
-			if (!instance_exists(_ref_status)){
-				continue;
-			}
-
-			if (
-				_ref_status._ref_source_minion !=
-				_ref_minion
-			){
-				continue;
-			}
-
-			if (_ref_status._scr_status != undefined){
-
-				_ref_status._scr_status(
-					"DEATH",
-					_ref_status
-				);
-			}
-			else{
-
-				scr_destroy_status(
-					_ref_status
-				);
-			}
-		}
-	}
+//================================//
+//REMOVE MINION-SOURCED STATUSES//
+//================================//
+scr_remove_minion_sourced_statuses(
+	_ref_minion
+);
 
 
 	//----------------------//

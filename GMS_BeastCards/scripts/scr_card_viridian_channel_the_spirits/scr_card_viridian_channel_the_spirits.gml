@@ -106,7 +106,7 @@ function scr_card_viridian_channel_the_spirits(_stct_card,_ref_caster,_ref_targe
 	//PLAY SOUND//
 	//-----------//
 	audio_play_sound(
-		snd_attack,
+		snd_battle_sfx_neu_hit,
 		0,
 		false
 	);

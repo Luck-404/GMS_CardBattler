@@ -16,6 +16,211 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 		
 	switch(_str_id){
 
+	//------------//
+	//ANCHOR STONE//
+	//------------//
+	case "ANCHOR_STONE":
+
+		_ref_new_minion._str_team =
+			_ref_target._str_team;
+
+		_ref_new_minion._str_name =
+			"ANCHOR STONE";
+
+		//------//
+		//HP 3//
+		//------//
+		_ref_new_minion._val_cur_hp =
+			3;
+
+		_ref_new_minion._val_max_hp =
+			3;
+
+		//-----------//
+		//MAGNITUDE 0//
+		//-----------//
+		_ref_new_minion._val_magnitude =
+			0;
+
+		_ref_new_minion._ref_host =
+			_ref_target;
+
+		_ref_new_minion._spr_minion =
+			spr_minion_anchor_stone;
+
+	break;
+
+	//--------------//
+	//CORAL GUARDIAN//
+	//--------------//
+	case "CORAL_GUARDIAN":
+
+		_ref_new_minion._str_team =
+			_ref_target._str_team;
+
+		_ref_new_minion._str_name =
+			"CORAL GUARDIAN";
+
+		//------//
+		//HP 4//
+		//------//
+		_ref_new_minion._val_cur_hp =
+			4;
+
+		_ref_new_minion._val_max_hp =
+			4;
+
+		//-----------//
+		//MAGNITUDE 1//
+		//-----------//
+		_ref_new_minion._val_magnitude =
+			1;
+
+		_ref_new_minion._ref_host =
+			_ref_target;
+
+		_ref_new_minion._spr_minion =
+			spr_minion_coral_guardian;
+
+	break;
+
+	//----------------//
+	//ABYSSAL HARPOON//
+	//----------------//
+	case "ABYSSAL_HARPOON":
+
+		_ref_new_minion._str_team =
+			_ref_target._str_team;
+
+		_ref_new_minion._str_name =
+			"ABYSSAL HARPOON";
+
+		//------//
+		//HP 3//
+		//------//
+		_ref_new_minion._val_cur_hp =
+			3;
+
+		_ref_new_minion._val_max_hp =
+			3;
+
+		//-----------//
+		//MAGNITUDE 1//
+		//-----------//
+		_ref_new_minion._val_magnitude =
+			1;
+
+		_ref_new_minion._ref_host =
+			_ref_target;
+
+		_ref_new_minion._spr_minion =
+			spr_minion_abyssal_harpoon;
+
+	break;
+
+	//----------//
+	//STORM WISP//
+	//----------//
+	case "STORM_WISP":
+
+		_ref_new_minion._str_team =
+			_ref_target._str_team;
+
+		_ref_new_minion._str_name =
+			"STORM WISP";
+
+		//------//
+		//HP 2//
+		//------//
+		_ref_new_minion._val_cur_hp =
+			2;
+
+		_ref_new_minion._val_max_hp =
+			2;
+
+		//-----------//
+		//MAGNITUDE 1//
+		//-----------//
+		_ref_new_minion._val_magnitude =
+			1;
+
+		_ref_new_minion._ref_host =
+			_ref_target;
+
+		_ref_new_minion._spr_minion =
+			spr_minion_storm_wisp;
+
+	break;
+
+	//----------------------//
+	//RIMEFROST ELEMENTAL//
+	//----------------------//
+	case "RIMEFROST_ELEMENTAL":
+
+		_ref_new_minion._str_team =
+			_ref_target._str_team;
+
+		_ref_new_minion._str_name =
+			"RIMEFROST ELEMENTAL";
+
+		//------//
+		//HP 2//
+		//------//
+		_ref_new_minion._val_cur_hp =
+			2;
+
+		_ref_new_minion._val_max_hp =
+			2;
+
+		//-----------//
+		//MAGNITUDE 1//
+		//-----------//
+		_ref_new_minion._val_magnitude =
+			1;
+
+		_ref_new_minion._ref_host =
+			_ref_target;
+
+		_ref_new_minion._spr_minion =
+			spr_minion_rimefrost_elemental;
+
+	break;
+
+
+	//--------//
+	//ICE WALL//
+	//--------//
+	case "ICE_WALL":
+
+		_ref_new_minion._str_team =
+			_ref_target._str_team;
+
+		_ref_new_minion._str_name =
+			"ICE WALL";
+
+		//-------//
+		//HP 10//
+		//-------//
+		_ref_new_minion._val_cur_hp =
+			10;
+
+		_ref_new_minion._val_max_hp =
+			10;
+
+		//-----------//
+		//MAGNITUDE 0//
+		//-----------//
+		_ref_new_minion._val_magnitude =
+			0;
+
+		_ref_new_minion._ref_host =
+			_ref_target;
+
+		_ref_new_minion._spr_minion =
+			spr_minion_ice_wall;
+
+	break;
+
 		case "FUNGI":
 
 			_ref_new_minion._str_team =
@@ -153,6 +358,40 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 
 		break;
 
+//--------//
+//TENTACLE//
+//--------//
+case "TENTACLE":
+
+	_ref_new_minion._str_team =
+		_ref_target._str_team;
+
+	_ref_new_minion._str_name =
+		"TENTACLE";
+
+	//------//
+	//HP 3//
+	//------//
+	_ref_new_minion._val_cur_hp =
+		3;
+
+	_ref_new_minion._val_max_hp =
+		3;
+
+	//-----------//
+	//MAGNITUDE 1//
+	//-----------//
+	_ref_new_minion._val_magnitude =
+		1;
+
+	_ref_new_minion._ref_host =
+		_ref_target;
+
+	_ref_new_minion._spr_minion =
+		spr_minion_tentacle;
+
+break;
+
 		case "DORMANT_SEED":
 
 			_ref_new_minion._str_team = _ref_target._str_team;
@@ -241,23 +480,68 @@ function scr_init_minion(_str_id,_ref_card,_ref_caster,_ref_target){
 			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 	}
-	
-	
-	
+
 	//----------------------//
 	//APPLY PASSIVE EFFECTS//
 	//----------------------//
+
+	//----------------//
+	//BLOOMING SPRITE//
+	//----------------//
 	if (_ref_new_minion._str_name == "BLOOMING SPRITE"){
-		scr_status_buff_blooming_sprite("APPLY",undefined,_ref_new_minion);
+
+		scr_status_buff_blooming_sprite(
+			"APPLY",
+			undefined,
+			_ref_new_minion
+		);
 	}
-	
+
+	//------------//
+	//ANCHOR STONE//
+	//------------//
+	if (_ref_new_minion._str_name == "ANCHOR STONE"){
+
+		scr_apply_anchor_stone_passive(
+			_ref_new_minion
+		);
+	}
+
 	//--------------------------//
 	//TRIGGER MINION COUNT BUFFS//
 	//--------------------------//
-	scr_trigger_minion_count_buffs(_ref_target);
+	scr_trigger_minion_count_buffs(
+		_ref_target
+	);
 
-	scr_reposition_minions(_ref_target);
-	scr_reposition_statuses(_ref_target);
+	//-------------------//
+	//REPOSITION MINIONS//
+	//-------------------//
+	scr_reposition_minions(
+		_ref_target
+	);
+
+	scr_reposition_statuses(
+		_ref_target
+	);
+
+	//----------------//
+	//SUMMON SPAWN VFX//
+	//----------------//
+	if (instance_exists(_ref_new_minion)){
+
+		scr_battle_vfx(
+			_ref_new_minion,
+			spr_battle_vfx_summon_spawn,
+			undefined,
+			undefined,
+			0,
+			0,
+			1,
+			0,
+			snd_battle_sfx_summon_spawn
+		);
+	}
 
 	return _ref_new_minion;
 }

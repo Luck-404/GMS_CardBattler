@@ -25,6 +25,21 @@ function scr_trigger_icebreaker(_ref_target){
 	if (_ref_frozen == -1){
 		return 1;
 	}
+	
+	//------------------//
+	//ICEBREAKER VFX/SFX//
+	//------------------//
+	scr_battle_vfx(
+		_ref_target,
+		spr_battle_vfx_icebreaker,
+		undefined,
+		undefined,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_sfx_icebreaker
+	);	
 
 	//------------------//
 	//ICEBREAKER POPUP//

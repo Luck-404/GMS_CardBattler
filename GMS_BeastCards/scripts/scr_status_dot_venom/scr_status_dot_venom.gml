@@ -50,6 +50,21 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._ct_status_stacks++;
+				
+				//----------------//
+				//APPLICATION VFX//
+				//----------------//
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_venom,
+					undefined,
+					undefined,
+					16,
+					16,
+					1,
+					0,
+					snd_battle_sfx_venom
+				);
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -276,6 +291,18 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				);
 			}
 
+			scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_venom,
+					undefined,
+					undefined,
+					16,
+					16,
+					1,
+					0,
+					snd_battle_sfx_venom
+				);
+
 			return _ref_new_status;
 
 		break;
@@ -307,7 +334,6 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				floor(_ct_venom_stacks / 4) * 4
 			);
 
-			audio_play_sound(snd_attack,0,false);
 
 			//------------//
 			//OVERHEALTH//
@@ -350,6 +376,18 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 
 				_ref_host._val_cur_hp = max(0,_ref_host._val_cur_hp - _val_actual_damage);
 			}
+
+			scr_battle_vfx(
+				_ref_host,
+				spr_battle_vfx_venom_tick,
+				undefined,
+				undefined,
+				16,
+				16,
+				1,
+				0,
+				snd_battle_sfx_venom
+			);
 
 			//----------------//
 			//REDUCE LIFETIME//

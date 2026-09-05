@@ -46,6 +46,21 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._ct_status_stacks++;
+				
+				//----------------//
+				//APPLICATION VFX//
+				//----------------//
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_poison,
+					undefined,
+					undefined,
+					16,
+					16,
+					1,
+					0,
+					snd_battle_sfx_poison
+				);
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -127,6 +142,18 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 					"POISON"
 				);
 			}
+
+			scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_poison,
+					undefined,
+					undefined,
+					16,
+					16,
+					1,
+					0,
+					snd_battle_sfx_poison
+				);
 
 			return _ref_new_status;
 
@@ -215,10 +242,16 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 					_val_poison_progress
 				);
 
-			audio_play_sound(
-				snd_attack,
+			scr_battle_vfx(
+				_ref_host,
+				spr_battle_vfx_poison_tick,
+				undefined,
+				undefined,
+				16,
+				16,
+				1,
 				0,
-				false
+				snd_battle_sfx_poison
 			);
 
 			//------------//

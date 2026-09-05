@@ -4,6 +4,7 @@
 // FUNCTION: Grants Armor to a target battle Beast.
 //           Applies active Armor-gain modifiers before granting Armor.
 //           Armorbreak reduces Armor gained by 50% while active.
+//           Plays general Armor gain VFX and SFX.
 //           Triggers hosted Minion effects after successful Armor gain.
 //
 //===============================================================================//
@@ -57,6 +58,21 @@ function scr_armor_target(_val_amount,_ref_target){
 	//-------------//
 	_ref_target._val_armor +=
 		_val_armor_gain;
+
+	//-------------//
+	//ARMOR VFX/SFX//
+	//-------------//
+	scr_battle_vfx(
+		_ref_target,
+		spr_battle_vfx_armor,
+		undefined,
+		undefined,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_sfx_armor
+	);
 
 	//---------------------//
 	//TRIGGER HOSTED MINIONS//

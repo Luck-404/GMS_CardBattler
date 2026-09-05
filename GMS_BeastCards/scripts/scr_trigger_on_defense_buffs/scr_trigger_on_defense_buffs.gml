@@ -38,17 +38,38 @@ function scr_trigger_on_defense_buffs(_ref_defender,_ref_attacker){
 	//----------------//
 	//STATIC BARRIER//
 	//----------------//
-	// Added when STATIC_BARRIER is implemented.
+	if (
+		scr_trigger_static_barrier(
+			_ref_defender,
+			_ref_attacker
+		)
+	){
+		_flag_triggered = true;
+	}
 
 	//-----------//
 	//RAZOR SHELL//
 	//-----------//
-	// Added when RAZOR_SHELL is implemented.
+	if (
+		scr_trigger_razor_shell(
+			_ref_defender,
+			_ref_attacker
+		)
+	){
+		_flag_triggered = true;
+	}
 
 	//----------//
 	//ICE MIRROR//
 	//----------//
-	// Added when ICE_MIRROR is implemented.
+	if (
+		scr_trigger_ice_mirror(
+			_ref_defender,
+			_ref_attacker
+		)
+	){
+		_flag_triggered = true;
+	}
 
 	return _flag_triggered;
 }

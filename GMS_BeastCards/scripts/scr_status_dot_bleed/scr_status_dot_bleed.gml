@@ -51,6 +51,21 @@ function scr_status_dot_bleed(
 
 				_ref_existing_status._ct_status_stacks++;
 
+				//----------------//
+				//APPLICATION VFX//
+				//----------------//
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_bleed,
+					undefined,
+					undefined,
+					16,
+					16,
+					1,
+					0,
+					snd_battle_sfx_bleed
+				);
+				
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
@@ -131,6 +146,18 @@ function scr_status_dot_bleed(
 					"BLEED"
 				);
 			}
+			
+			scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_bleed,
+					undefined,
+					undefined,
+					16,
+					16,
+					1,
+					0,
+					snd_battle_sfx_bleed
+				);
 
 			return _ref_new_status;
 
@@ -162,12 +189,6 @@ function scr_status_dot_bleed(
 			//-------------------------//
 			var _val_damage =
 				_ref_status._ct_status_stacks;
-
-			audio_play_sound(
-				snd_attack,
-				0,
-				false
-			);
 
 			//------------//
 			//OVERHEALTH//
@@ -226,6 +247,21 @@ function scr_status_dot_bleed(
 						_val_actual_damage
 					);
 			}
+			
+			//--------//
+			//TICK VFX//
+			//--------//
+			scr_battle_vfx(
+				_ref_host,
+				spr_battle_vfx_bleed_tick,
+				undefined,
+				undefined,
+				16,
+				16,
+				1,
+				0,
+				snd_battle_sfx_bleed
+			);
 
 			//----------------//
 			//REDUCE LIFETIME//

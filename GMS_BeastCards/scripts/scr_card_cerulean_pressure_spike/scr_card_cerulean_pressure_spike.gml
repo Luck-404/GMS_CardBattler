@@ -50,7 +50,7 @@ function scr_card_cerulean_pressure_spike(
 	//PLAY SOUND//
 	//-----------//
 	audio_play_sound(
-		snd_attack,
+		snd_battle_sfx_neu_hit,
 		0,
 		false
 	);

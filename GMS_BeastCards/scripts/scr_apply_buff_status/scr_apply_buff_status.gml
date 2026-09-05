@@ -6,21 +6,137 @@
 //           Infinite Buffs ignore supplied lifetime.
 //
 //===============================================================================//
+
 function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=undefined){
 
 	switch(_str_status_name){
-		//-----------------//
-		//FROZEN_ARMOR//
-		//-----------------//		
+
+		//=======================================================================//
+		// CERULEAN
+		//=======================================================================//
+
+		//----------//
+		//IMMOVABLE//
+		//----------//
+		case "IMMOVABLE":
+
+			var _ref_immovable_status =
+				scr_status_buff_immovable("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_immovable_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"IMMOVABLE",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+
+		//----------//
+		//ICE MIRROR//
+		//----------//
+		case "ICE_MIRROR":
+
+			var _ref_ice_mirror_status =
+				scr_status_buff_ice_mirror("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_ice_mirror_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ICE MIRROR",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+
+		//-----------//
+		//MANA SPRING//
+		//-----------//
+		case "MANA_SPRING":
+
+			var _ref_mana_spring_status =
+				scr_status_buff_mana_spring("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_mana_spring_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"MANA SPRING",
+					undefined,
+					c_blue,
+					room_width * 0.5,
+					room_height * 0.5
+				);
+			}
+
+		break;
+
+
+		//-----------//
+		//RAZOR SHELL//
+		//-----------//
+		case "RAZOR_SHELL":
+
+			var _ref_razor_shell_status =
+				scr_status_buff_razor_shell("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_razor_shell_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"RAZOR SHELL",
+					undefined,
+					c_white,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+
+		//--------------//
+		//STATIC BARRIER//
+		//--------------//
+		case "STATIC_BARRIER":
+
+			var _ref_static_barrier_status =
+				scr_status_buff_static_barrier("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_static_barrier_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"STATIC BARRIER",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+
+		//------------//
+		//FROZEN ARMOR//
+		//------------//
 		case "FROZEN_ARMOR":
 
 			var _ref_frozen_armor_status =
-				scr_status_buff_frozen_armor(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_frozen_armor("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_frozen_armor_status != undefined){
 
@@ -36,17 +152,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
 		//-----------------//
 		//DIVINE PROTECTION//
 		//-----------------//
 		case "DIVINE_PROTECTION":
 
 			var _ref_divine_protection_status =
-				scr_status_buff_divine_protection(
-					"APPLY",
-					undefined,
-					_val_magnitude
-				);
+				scr_status_buff_divine_protection("APPLY",undefined,_val_magnitude);
 
 			if (_ref_divine_protection_status != undefined){
 
@@ -62,16 +175,18 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//=======================================================================//
+		// VIRIDIAN ARCHETYPE / GLOBAL
+		//=======================================================================//
+
 		//-------------//
 		//APEX PREDATOR//
 		//-------------//
 		case "APEX_PREDATOR":
 
-			var _ref_apex_status = scr_status_buff_apex_predator(
-				"APPLY",
-				undefined,
-				_val_magnitude
-			);
+			var _ref_apex_status =
+				scr_status_buff_apex_predator("APPLY",undefined,_val_magnitude);
 
 			if (_ref_apex_status != undefined){
 
@@ -87,18 +202,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
 		//-------------//
 		//PLAGUE GARDEN//
 		//-------------//
 		case "PLAGUE_GARDEN":
 
 			var _ref_plague_garden_status =
-				scr_status_buff_plague_garden(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_plague_garden("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_plague_garden_status != undefined){
 
@@ -114,18 +225,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
 		//-------------------//
 		//HEART OF THE FOREST//
 		//-------------------//
 		case "HEART_OF_THE_FOREST":
 
 			var _ref_heart_status =
-				scr_status_buff_heart_of_the_forest(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_heart_of_the_forest("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_heart_status != undefined){
 
@@ -141,45 +248,41 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
-	//-------------//
-	//ENDLESS BLOOM//
-	//-------------//
-	case "ENDLESS_BLOOM":
 
-		var _ref_endless_bloom_status =
-			scr_status_buff_endless_bloom(
-				"APPLY",
-				undefined,
-				_val_magnitude,
-				_val_lifetime
-			);
+		//-------------//
+		//ENDLESS BLOOM//
+		//-------------//
+		case "ENDLESS_BLOOM":
 
-		if (_ref_endless_bloom_status != undefined){
+			var _ref_endless_bloom_status =
+				scr_status_buff_endless_bloom("APPLY",undefined,_val_magnitude,_val_lifetime);
 
-			scr_spawn_popup_scrolling(
-				"TEXT",
-				"ENDLESS BLOOM",
-				undefined,
-				c_green,
-				room_width * 0.5,
-				room_height * 0.5
-			);
-		}
+			if (_ref_endless_bloom_status != undefined){
 
-	break;
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ENDLESS BLOOM",
+					undefined,
+					c_green,
+					room_width * 0.5,
+					room_height * 0.5
+				);
+			}
 
-		//-----------------//
+		break;
+
+
+		//=======================================================================//
+		// VIRIDIAN
+		//=======================================================================//
+
+		//---------------//
 		//VERDANT INSIGHT//
-		//-----------------//
+		//---------------//
 		case "VERDANT_INSIGHT":
 
 			var _ref_verdant_insight_status =
-				scr_status_buff_verdant_insight(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_verdant_insight("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_verdant_insight_status != undefined){
 
@@ -195,18 +298,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
 		//----------//
 		//WILD VIGOR//
 		//----------//
 		case "WILD_VIGOR":
 
 			var _ref_wild_vigor_status =
-				scr_status_buff_wild_vigor(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_wild_vigor("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_wild_vigor_status != undefined){
 
@@ -222,15 +321,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//-----//
+		//BOOST//
+		//-----//
 		case "BOOST":
 
 			var _ref_boost_status =
-				scr_status_buff_boost(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_boost("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_boost_status != undefined){
 
@@ -246,15 +344,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//------------//
+		//REGENERATION//
+		//------------//
 		case "REGENERATION":
 
 			var _ref_regeneration_status =
-				scr_status_buff_regeneration(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_regeneration("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_regeneration_status != undefined){
 
@@ -270,9 +367,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//-------------//
+		//PACK INSTINCT//
+		//-------------//
 		case "PACK_INSTINCT":
 
-			var _ref_pack_instinct_status = scr_status_buff_pack_instinct("APPLY",undefined,_val_magnitude,_val_lifetime);
+			var _ref_pack_instinct_status =
+				scr_status_buff_pack_instinct("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_pack_instinct_status != undefined){
 
@@ -288,15 +390,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//----------//
+		//TOXIC HIDE//
+		//----------//
 		case "TOXIC_HIDE":
 
 			var _ref_toxic_hide_status =
-				scr_status_buff_toxic_hide(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_toxic_hide("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_toxic_hide_status != undefined){
 
@@ -312,15 +413,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//-------------//
+		//NATURE'S BOND//
+		//-------------//
 		case "NATURES_BOND":
 
 			var _ref_natures_bond_status =
-				scr_status_buff_natures_bond(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_natures_bond("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_natures_bond_status != undefined){
 
@@ -336,15 +436,14 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+
+		//--------//
+		//MANAVINE//
+		//--------//
 		case "MANAVINE":
 
 			var _ref_manavine_status =
-				scr_status_buff_manavine(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_manavine("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_manavine_status != undefined){
 
@@ -361,15 +460,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//------//
+		//THORNS//
+		//------//
 		case "THORNS":
 
 			var _ref_thorns_status =
-				scr_status_buff_thorns(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_thorns("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_thorns_status != undefined){
 
@@ -386,15 +483,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//-----//
+		//BLOOM//
+		//-----//
 		case "BLOOM":
 
 			var _ref_bloom_status =
-				scr_status_buff_bloom(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_bloom("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_bloom_status != undefined){
 
@@ -411,14 +506,17 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//=======================================================================//
+		// GENERAL / UNCOLORED
+		//=======================================================================//
+
+		//-----//
+		//TAUNT//
+		//-----//
 		case "TAUNT":
 
 			var _ref_taunt_status =
-				scr_status_buff_taunt(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+				scr_status_buff_taunt("APPLY",undefined,_val_lifetime);
 
 			if (_ref_taunt_status != undefined){
 
@@ -435,15 +533,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//---------------//
+		//ARMOR OVER TIME//
+		//---------------//
 		case "ARMOR_OVER_TIME":
 
 			var _ref_armor_status =
-				scr_status_buff_armor_over_time(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_armor_over_time("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_armor_status != undefined){
 
@@ -460,13 +556,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//--------//
+		//REDIRECT//
+		//--------//
 		case "REDIRECT":
 
 			var _ref_redirect_status =
-				scr_status_buff_redirect(
-					"APPLY",
-					undefined
-				);
+				scr_status_buff_redirect("APPLY",undefined);
 
 			if (_ref_redirect_status != undefined){
 
@@ -483,14 +579,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//-----------//
+		//SECOND LIFE//
+		//-----------//
 		case "SECOND_LIFE":
 
 			var _ref_second_life_status =
-				scr_status_buff_second_life(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+				scr_status_buff_second_life("APPLY",undefined,_val_lifetime);
 
 			if (_ref_second_life_status != undefined){
 
@@ -507,14 +602,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//-----------//
+		//INSPIRATION//
+		//-----------//
 		case "INSPIRATION":
 
 			var _ref_inspiration_status =
-				scr_status_buff_inspiration(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+				scr_status_buff_inspiration("APPLY",undefined,_val_lifetime);
 
 			if (_ref_inspiration_status != undefined){
 
@@ -531,15 +625,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//----------//
+		//OVERHEALTH//
+		//----------//
 		case "OVERHEALTH":
 
 			var _ref_overhealth_status =
-				scr_status_buff_overhealth(
-					"APPLY",
-					undefined,
-					_val_magnitude,
-					_val_lifetime
-				);
+				scr_status_buff_overhealth("APPLY",undefined,_val_magnitude,_val_lifetime);
 
 			if (_ref_overhealth_status != undefined){
 
@@ -556,14 +648,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//------//
+		//DRAW 2//
+		//------//
 		case "DRAW_2":
 
 			var _ref_draw_status =
-				scr_status_buff_draw_2(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+				scr_status_buff_draw_2("APPLY",undefined,_val_lifetime);
 
 			if (_ref_draw_status != undefined){
 
@@ -580,13 +671,13 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		break;
 
 
+		//-------------//
+		//MALLEABILITY//
+		//-------------//
 		case "MALLEABILITY":
 
 			var _ref_malleability_status =
-				scr_status_buff_malleability(
-					"APPLY",
-					undefined
-				);
+				scr_status_buff_malleability("APPLY",undefined);
 
 			if (_ref_malleability_status != undefined){
 

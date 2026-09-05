@@ -43,7 +43,7 @@ function scr_card_cerulean_shatter_strike(
 	//PLAY SOUND//
 	//-----------//
 	audio_play_sound(
-		snd_attack,
+		snd_battle_sfx_neu_hit,
 		0,
 		false
 	);

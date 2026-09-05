@@ -16,7 +16,7 @@ if (_flag_preview_beast && _ref_unit != undefined){
 	var _val_panel_h = 420;
 
 	var _val_panel_x = room_width * 0.5 - (_val_panel_w * 0.5);
-	var _val_panel_y = 40;
+	var _val_panel_y = 30;
 
 	draw_set_colour(c_dkgray);
 	draw_rectangle(_val_panel_x,_val_panel_y,_val_panel_x + _val_panel_w,_val_panel_y + _val_panel_h,false);
@@ -45,6 +45,7 @@ if (_flag_preview_beast && _ref_unit != undefined){
 	var _val_mdef = _ref_unit._val_beast_mdef_stat;
 	var _val_crit = _ref_unit._val_beast_crit_stat;
 	var _val_dodge = _ref_unit._val_beast_dod_stat;
+	var _val_speed = scr_get_battle_beast_speed(self);	
 	var _val_minions = _ref_unit._val_beast_min_stat;
 
 	draw_text(_val_text_x,_val_text_y,"HP: " + string(_val_hp) + " (" + scr_get_beast_grade_letter(_val_hp) + " x" + string(scr_get_beast_grade_modifier(_val_hp)) + ")");
@@ -70,7 +71,15 @@ if (_flag_preview_beast && _ref_unit != undefined){
 
 	draw_text(_val_text_x,_val_text_y,"DODGE: " + string(_val_dodge));
 	_val_text_y += _val_lh;
-
+	
+	draw_text(
+		_val_text_x,
+		_val_text_y,
+		"SPEED: " +
+		string(_val_speed)
+	);	
+	_val_text_y += _val_lh;
+	
 	draw_text(_val_text_x,_val_text_y,"MINIONS: " + string(_val_minions));
 	_val_text_y += _val_lh * 2;
 

@@ -1,21 +1,22 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_UNCOLORED_THOUGHTSTEAL
-// FUNCTION: Resolves the Thoughtsteal card effect.
-//           Gains Mana equal to a selected enemy card's cost.
+// FUNCTION: Resolves Thoughtsteal.
+//           Gains Mana equal to the selected enemy card's Mana Cost.
 //           Disables that card for its next attempted cast.
-//           Plays the associated animation, sound, and popup effects.
+//           Uses the shared Mana Gain system for resource presentation.
 //
 //===============================================================================//
+
 function scr_card_uncolored_thoughtsteal(
 	_stct_card,
 	_ref_caster,
 	_ref_target_card
 ){
 
-	//----------------//
-	// VALIDATE TARGET
-	//----------------//
+	//---------------//
+	//VALIDATE TARGET//
+	//---------------//
 	if (!instance_exists(_ref_target_card)){
 		return false;
 	}
@@ -36,42 +37,33 @@ function scr_card_uncolored_thoughtsteal(
 	}
 
 	//------------//
-	// STEAL MANA
+	//STEAL MANA//
 	//------------//
-	var _val_mana_stolen = max(
-		0,
-		_ref_target_card
-			._ref_card
-			._val_card_mana_cost
+	var _val_mana_stolen =
+		max(
+			0,
+			_ref_target_card
+				._ref_card
+				._val_card_mana_cost
+		);
+
+	scr_gain_mana(
+		_val_mana_stolen
 	);
 
-	obj_battle_player_controller._val_cur_mana +=
-		_val_mana_stolen;
-
 	//--------------//
-	// DISABLE CARD
+	//DISABLE CARD//
 	//--------------//
-	_ref_target_card._flag_card_disabled = true;
+	_ref_target_card._flag_card_disabled =
+		true;
 
-	//----------------//
-	// PLAY ANIMATION
-	//----------------//
-
-	//-----------//
-	// PLAY SOUND
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
-
-	//-------------//
-	// SPAWN POPUPS
-	//-------------//
-	scr_spawn_popup_scrolling(
-		"TEXT",
-		"+" + string(_val_mana_stolen) + " MANA",
-		undefined,
-		c_blue,
-		_ref_caster.x,
-		_ref_caster.y - 48
+	//-------------------//
+	//DISABLE FEEDBACK//
+	//-------------------//
+	audio_play_sound(
+		snd_debuff,
+		0,
+		false
 	);
 
 	scr_spawn_popup_scrolling(

@@ -11,14 +11,42 @@
 //VARIABLES//
 //---------//
 
-// MANA
+//------//
+//MANA//
+//------//
 _val_cur_mana = 3;
 _val_max_mana = 3;
 _val_saved_max_mana = 3;
 
+//---------//
+//MANA HUD//
+//---------//
+_arr_mana_positions = [];
+
+_ct_mana_per_row = 5;
+
+_val_mana_orb_size = 51;
+_val_mana_orb_gap = 4;
+
+_val_mana_start_x = 40;
+_val_mana_start_y = 40;
+
+_val_mana_orb_scale = 1;
+
 // CARD FLOW
 _ct_hand_size = 5;
 _ct_draw_amount = 2;
+
+
+//----------//
+//TUTOR FLOW//
+//----------//
+_ct_utility_tutors_pending = 0;
+
+//--------------------//
+//CARD EFFECT DISCARD//
+//--------------------//
+_ct_effect_discards_pending = 0;
 
 // BATTLE GLOBALS
 global.ref_cast_card = undefined;
@@ -26,7 +54,6 @@ global.ref_caster_beast = undefined;
 global.ref_target_beast = undefined;
 global.ref_target_card = undefined;
 global.flag_thorns_retaliating = false;
-global.ct_echo = 0;
 global.ref_target_corpse = undefined;
 
 // TARGET PREVIEW
@@ -53,14 +80,29 @@ _list_battle_hand = ds_list_create();
 _list_battle_discard = ds_list_create();
 _list_battle_exhaust = ds_list_create();
 
-//PRISMS
-// PRISM FLOW
+//--------//
+//PRISMS//
+//--------//
+
+//-----------//
+//PRISM FLOW//
+//-----------//
 _stct_selected_prism = undefined;
 
-_val_prism_button_x1 = 20;
-_val_prism_button_y1 = 20;
-_val_prism_button_x2 = 160;
-_val_prism_button_y2 = 60;
+//--------------------//
+//PRISM BUTTON LAYOUT//
+//--------------------//
+_val_prism_button_x1 =
+	20;
+
+_val_prism_button_x2 =
+	160;
+
+_val_prism_button_y2 =
+	room_height - 300;
+
+_val_prism_button_y1 =
+	_val_prism_button_y2 - 40;
 
 // TURN START ITEMS
 _flag_turn_start_items_init = false;
@@ -90,7 +132,9 @@ enum ENUM_PLAYER_STATE{
 	SELECT_ENEMY_CARD,
 	SELECT_CORPSE,
 	CARD_EXECUTE,
+	TUTOR_SELECT,	
 	TURN_END,
+	DISCARD_EFFECT,
 	DISCARD_DOWN
 }
 
@@ -103,10 +147,101 @@ _val_cooldown = 10;
 //----//
 //INIT//
 //----//
+//----------------//
+//POSITION MANA HUD//
+//----------------//
+scr_reposition_mana();
 
 //-------//
 //METHODS//
 //-------//
+
+//—------------------------------------------------------------------------------//
+// hscr_open_utility_tutor
+// FUNCTION: Opens the battle Tutor GUI when Utility cards exist in the draw pile.
+//           Displays feedback and clears pending requests when none remain.
+//
+// RETURNS: TRUE when Tutor GUI opens.
+//          FALSE when there are no valid Utility cards.
+//
+//—------------------------------------------------------------------------------//
+hscr_open_utility_tutor = function(){
+
+	if (_ct_utility_tutors_pending <= 0){
+		return false;
+	}
+
+	//-------------------//
+	//GET UTILITY CARDS//
+	//-------------------//
+	var _arr_candidates =
+		scr_get_tutor_candidates("UTILITY");
+
+	//-------------------------//
+	//NO UTILITY CARDS FOUND//
+	//-------------------------//
+	if (array_length(_arr_candidates) <= 0){
+
+		_ct_utility_tutors_pending = 0;
+
+		scr_spawn_popup_scrolling(
+			"TEXT",
+			"NO UTILITY CARDS FOUND",
+			undefined,
+			c_aqua,
+			room_width * 0.5,
+			room_height * 0.5
+		);
+
+		return false;
+	}
+
+	//---------------//
+	//OPEN TUTOR GUI//
+	//---------------//
+	var _ref_tutor =
+		instance_create_layer(
+			room_width * 0.5,
+			room_height * 0.5,
+			"ily_fx",
+			obj_gui_battle_tutor
+		);
+
+	_ref_tutor.hscr_tutor_init(_arr_candidates);
+
+	return true;
+};
+
+//—------------------------------------------------------------------------------//
+// hscr_request_utility_tutor
+// FUNCTION: Adds one or more pending Utility Tutor selections.
+//           Requests accumulate so Echoed Tutor cards resolve sequentially.
+//—------------------------------------------------------------------------------//
+hscr_request_utility_tutor = function(_ct_amount){
+
+	if (_ct_amount <= 0){
+		return;
+	}
+
+	_ct_utility_tutors_pending +=
+		floor(_ct_amount);
+};
+
+//—------------------------------------------------------------------------------//
+// hscr_request_card_discard
+// FUNCTION: Adds a pending card-effect discard requirement.
+//           Allows repeated or Echoed effects to accumulate discard requests.
+//—------------------------------------------------------------------------------//
+hscr_request_card_discard = function(_ct_amount){
+
+	if (_ct_amount <= 0){
+		return;
+	}
+
+	_ct_effect_discards_pending +=
+		floor(_ct_amount);
+};
+
 //—------------------------------------------------------------------------------//
 // hscr_finish_player_turn
 // FUNCTION: Finishes the active player turn.

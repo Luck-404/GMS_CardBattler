@@ -45,6 +45,21 @@ function scr_shatter_target(_ref_target){
 		return 0;
 	}
 
+	//---------------//
+	//SHATTER VFX/SFX//
+	//---------------//
+	scr_battle_vfx(
+		_ref_target,
+		spr_battle_vfx_shatter,
+		undefined,
+		undefined,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_sfx_shatter
+	);
+
 	//----------------//
 	//SHATTER POPUP//
 	//----------------//

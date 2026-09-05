@@ -15,6 +15,40 @@ function scr_destroy_trap(_ref_trap){
 	var _ref_host =
 		_ref_trap._ref_host;
 
+	//----------------//
+	//TEAM TRAP//
+	//----------------//
+	if (_ref_trap._str_trap_scope == "TEAM"){
+
+	for (
+		var _it_trap =
+			array_length(obj_battle_turn_controller._arr_team_traps) - 1;
+		_it_trap >= 0;
+		_it_trap--
+	){
+
+		if (
+			obj_battle_turn_controller._arr_team_traps[_it_trap] ==
+			_ref_trap
+		){
+
+			array_delete(
+				obj_battle_turn_controller._arr_team_traps,
+				_it_trap,
+				1
+			);
+
+			break;
+		}
+	}
+
+	instance_destroy(_ref_trap);
+
+	return true;
+	}
+
+
+
 	if (instance_exists(_ref_host)){
 
 		var _it_trap =

@@ -26,6 +26,21 @@ function scr_trigger_discharge(_ref_host){
 	if (_ref_stormstruck._ct_status_stacks < 8){
 		return false;
 	}
+	
+	//----------------//
+	//DISCHARGE VFX/SFX//
+	//----------------//
+	scr_battle_vfx(
+		_ref_host,
+		spr_battle_vfx_discharge,
+		undefined,
+		undefined,
+		0,
+		0,
+		1.5,
+		0,
+		snd_battle_sfx_discharge
+	);
 
 	//-----------//
 	//DISCHARGE//

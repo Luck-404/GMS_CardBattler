@@ -11,6 +11,11 @@
 //VARIABLES//
 //---------//
 
+//-------------------//
+//SOURCE REQUIREMENTS//
+//-------------------//
+_flag_status_requires_live_source_minion = false;
+
 // STATE
 _val_status_lifetime = 3;
 _val_status_lifetime_max = 3;
@@ -28,6 +33,9 @@ _scr_status = undefined;
 _ref_host = undefined;
 _ref_status_target = undefined;
 _ref_source_minion = undefined;
+
+// PERSISTENT VFX
+_ref_persistent_vfx = undefined;
 
 // STATUS DATA
 _str_status_type = "DEFAULT";

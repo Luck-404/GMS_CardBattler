@@ -70,6 +70,21 @@ var _ct_consumed = _ct_available;
 		);
 	}
 
+	//------------------//
+	//POISONFLOW VFX/SFX//
+	//------------------//
+	scr_battle_vfx(
+		_ref_target,
+		spr_battle_vfx_poisonflow,
+		undefined,
+		undefined,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_sfx_poisonflow
+	);
+
 	//----------//
 	//NOTIFIER//
 	//----------//

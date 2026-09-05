@@ -12,7 +12,7 @@ function scr_card_uncolored_spellbook_wildcard(_stct_card,_ref_caster,_ref_targe
 //DISH OUT 5 DOTS//
 //---------------//
 repeat (5){
-	var _dot = choose("BLEED","BURN","POISON","VENOM");
+	var _dot = choose("BLEED","BURN","POISON","VENOM","FROSTBURN","STORMSTRUCK","FROSTBITE");
 	scr_apply_dot_status(_dot);
 }
 

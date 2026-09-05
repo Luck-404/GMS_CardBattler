@@ -160,8 +160,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 		//-------------//
 		//GENERATE MANA//
 		//-------------//
-		obj_battle_player_controller._val_cur_mana +=
-			1;
+		scr_gain_mana(1);
 
 		//----------------//
 		//HEAL ALL ALLIES//

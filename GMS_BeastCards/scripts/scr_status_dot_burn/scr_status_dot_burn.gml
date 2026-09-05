@@ -45,6 +45,18 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._ct_status_stacks++;
+				
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_burn,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_burn
+				);
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -111,6 +123,18 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_target
 			);
 
+			scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_burn,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_burn
+				);
+
 			return _ref_new_status;
 
 		break;
@@ -144,10 +168,19 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 			//-------------------------//
 			repeat (_ct_burn){
 
-				audio_play_sound(
-					snd_attack,
+				//--------//
+				//TICK VFX//
+				//--------//
+				scr_battle_vfx(
+					_ref_host,
+					spr_battle_vfx_burn_tick,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
 					0,
-					false
+					snd_battle_sfx_burn
 				);
 
 				var _val_damage =

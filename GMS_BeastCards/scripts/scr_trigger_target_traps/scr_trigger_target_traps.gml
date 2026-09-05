@@ -70,6 +70,11 @@ function scr_trigger_target_traps(_ref_attacker,_ref_target,_stct_card){
 			);
 
 		if (_flag_cancel_action){
+
+			scr_battle_vfx_blocked(
+				_ref_target
+			);
+
 			return true;
 		}
 	}

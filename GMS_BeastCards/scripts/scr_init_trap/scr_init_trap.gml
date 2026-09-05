@@ -41,6 +41,63 @@ function scr_init_trap(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 
 	switch(_str_trap_id){
 
+		case "PULLED_UNDER":
+
+			_ref_new_trap._str_trap_name =
+				"PULLED UNDER";
+
+			_ref_new_trap._str_trigger_type =
+				"HEALED";
+
+			_ref_new_trap._str_trigger_phase =
+				"AFTER";
+
+			_ref_new_trap._str_trap_scope =
+				"TEAM";
+
+			_ref_new_trap._str_target_team =
+				_ref_target._str_team;
+
+			_ref_new_trap._scr_trap =
+				scr_trap_pulled_under;
+
+			_ref_new_trap._val_magnitude =
+				0;
+
+		break;
+
+		case "THIN_ICE":
+
+			_ref_new_trap._str_trap_name =
+				"THIN ICE";
+
+			_ref_new_trap._str_trigger_type =
+				"ATTACKING";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_thin_ice;
+
+			_ref_new_trap._val_magnitude =
+				_stct_card._val_card_magnitude;
+
+		break;
+
+		case "STORM_BEACON":
+
+			_ref_new_trap._str_trap_name =
+				"STORM BEACON";
+
+			_ref_new_trap._str_trigger_type =
+				"CASTING";
+
+			_ref_new_trap._scr_trap =
+				scr_trap_storm_beacon;
+
+			_ref_new_trap._val_magnitude =
+				_stct_card._val_card_magnitude;
+
+		break;
+
 		case "THORN_NET":
 
 			_ref_new_trap._str_trap_name =
@@ -125,10 +182,23 @@ function scr_init_trap(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 		break;
 	}
 
+	//----------------//
+	//REGISTER TRAP//
+	//----------------//
+	if (_ref_new_trap._str_trap_scope == "TEAM"){
+
+	array_push(
+		obj_battle_turn_controller._arr_team_traps,
+		_ref_new_trap
+	);
+	}
+	else{
+
 	ds_list_add(
 		_ref_target._list_traps,
 		_ref_new_trap
 	);
+	}
 
 	//----------------//
 	//ANNOUNCE TRAP//

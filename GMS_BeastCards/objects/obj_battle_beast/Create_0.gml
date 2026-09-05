@@ -15,6 +15,20 @@
 _spr_beast = undefined;
 _uid_beast = -1;
 
+//------------------//
+//BATTLE VFX MOTION//
+//------------------//
+_str_vfx_motion = "NONE";
+
+_ct_vfx_motion = 0;
+_ct_vfx_motion_duration = 1;
+
+_val_vfx_motion_intensity = 0;
+
+_val_vfx_offset_x = 0;
+_val_vfx_offset_y = 0;
+_val_vfx_angle = 0;
+
 // TEAM / POSITION
 _str_team = "PLAYER";
 _str_list = "ALIVE";
@@ -34,6 +48,9 @@ _val_armor = 0;
 //--------------//
 _val_crit_chance = 0;
 _val_crit_damage = 25;
+
+_val_speed_base = 150;
+_val_speed_bonus = 0;
 
 
 //------------------//

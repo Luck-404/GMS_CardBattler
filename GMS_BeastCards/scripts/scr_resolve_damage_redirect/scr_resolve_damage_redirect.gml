@@ -57,6 +57,13 @@ function scr_resolve_damage_redirect(_ref_target){
 		_ref_target.x + irandom_range(-32,32),
 		_ref_target.y - 24 + irandom_range(-32,32)
 	);
+	
+	//-----------//
+	//BLOCKED VFX//
+	//-----------//
+	scr_battle_vfx_blocked(
+		_ref_target
+	);
 
 	//----------------//
 	//CONSUME STATUS//

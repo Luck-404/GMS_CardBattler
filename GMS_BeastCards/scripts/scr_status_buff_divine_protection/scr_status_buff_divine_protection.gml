@@ -40,6 +40,36 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 				_ref_existing_status._ct_status_stacks +=
 					_ct_stacks_added;
 
+				//----------------//
+				//SETUP VFX / SFX//
+				//----------------//
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_protection,
+					undefined,
+					undefined,
+					0,
+					0,
+					1,
+					0,
+					snd_battle_sfx_protection
+				);
+
+				//------------------------//
+				//ENSURE PERSISTENT VFX EXISTS//
+				//------------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx =
+						scr_battle_vfx_persistent(
+							_ref_target,
+							spr_battle_vfx_protected,
+							0,
+							-40,
+							1
+						);
+				}
+
 				scr_reposition_statuses(
 					_ref_target
 				);
@@ -99,6 +129,33 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 			scr_reposition_statuses(
 				_ref_target
 			);
+			
+			//----------------//
+			//SETUP VFX / SFX//
+			//----------------//
+			scr_battle_vfx(
+				_ref_target,
+				spr_battle_vfx_protection,
+				undefined,
+				undefined,
+				0,
+				0,
+				1,
+				0,
+				snd_battle_sfx_protection
+			);
+
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent(
+					_ref_target,
+					spr_battle_vfx_protected,
+					0,
+					-40,
+					1
+				);
 
 			return _ref_new_status;
 

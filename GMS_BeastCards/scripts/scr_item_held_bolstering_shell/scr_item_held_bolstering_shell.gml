@@ -32,7 +32,7 @@ function scr_item_held_bolstering_shell(_str_state,_stct_item,_ref_target){
 			scr_armor_target(3,_ref_target);
 
 			scr_spawn_popup_trigger_banner(_stct_item._str_item_name);
-			audio_play_sound(snd_shield,0,false);
+			audio_play_sound(snd_battle_sfx_armor,0,false);
 			return true;
 
 		break;

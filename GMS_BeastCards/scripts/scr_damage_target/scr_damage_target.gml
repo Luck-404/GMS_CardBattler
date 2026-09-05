@@ -8,7 +8,7 @@
 //
 //===============================================================================//
 
-function scr_damage_target(_val_damage,_ref_target){
+function scr_damage_target(_val_damage,_ref_target,_stct_presentation=undefined){
 
 	//----------------//
 	//VALIDATE TARGET//
@@ -85,6 +85,14 @@ if (_ref_target._ct_dodge_disabled <= 0){
 
 	if (_val_dodge_roll <= _val_dodge){
 
+		//---------------//
+		//DODGE ANIMATION//
+		//---------------//
+		scr_battle_vfx_dodge(_ref_target);
+
+		//----------//
+		//FEEDBACK//
+		//----------//
 		scr_spawn_popup_scrolling(
 			"TEXT",
 			"DODGED",
@@ -143,9 +151,12 @@ if (_ref_target._ct_dodge_disabled <= 0){
 		}
 	}
 
+
 	//------//
 	//CRIT//
 	//------//
+	var _flag_critical = false;	
+	
 	var _val_crit_chance = clamp(
 		_ref_caster._val_crit_chance,
 		0,
@@ -161,6 +172,8 @@ if (_ref_target._ct_dodge_disabled <= 0){
 		irandom_range(1,100);
 
 	if (_val_crit_roll <= _val_crit_chance){
+
+		_flag_critical = true;
 
 		_val_damage_left *=
 			1 +
@@ -329,6 +342,42 @@ if (_ref_target._ct_dodge_disabled <= 0){
 		return false;
 	}
 
+	//------------//
+	//PLAY HIT VFX//
+	//------------//
+	var _ref_hit_vfx =
+		scr_battle_vfx_damage_hit(
+			_ref_target,
+			_str_card_stat,
+			_val_damage_left,
+			_stct_presentation
+		);
+
+	var _ct_hit_vfx_delay = 0;
+
+	if (instance_exists(_ref_hit_vfx)){
+		_ct_hit_vfx_delay =
+			_ref_hit_vfx._ct_start_delay;
+	}
+
+	//--------//
+	//CRIT VFX//
+	//--------//
+	if (_flag_critical){
+
+		scr_battle_vfx(
+			_ref_target,
+			spr_battle_vfx_crit,
+			undefined,
+			undefined,
+			6,
+			6,
+			1,
+			_ct_hit_vfx_delay,
+			snd_battle_sfx_crit
+		);
+	}
+
 	//-------------------//
 	//MINION ABSORPTION//
 	//-------------------//
@@ -455,11 +504,23 @@ if (_ref_target._ct_dodge_disabled <= 0){
 		_ref_target._val_armor > 0
 	){
 
+		//------------------//
+		//STORE ARMOR BEFORE//
+		//------------------//
+		var _val_armor_before =
+			_ref_target._val_armor;
+
+		//-----------------------//
+		//CALCULATE ARMOR BLOCKED//
+		//-----------------------//
 		var _val_armor_blocked = min(
 			_ref_target._val_armor,
 			_val_damage_left
 		);
 
+		//----------//
+		//FEEDBACK//
+		//----------//
 		scr_spawn_popup_scrolling(
 			"TEXT",
 			"-" + string(_val_armor_blocked),
@@ -469,11 +530,49 @@ if (_ref_target._ct_dodge_disabled <= 0){
 			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 
+		//-------------//
+		//DAMAGE ARMOR//
+		//-------------//
 		_ref_target._val_armor -=
 			_val_armor_blocked;
 
 		_val_damage_left -=
 			_val_armor_blocked;
+
+		//------------------//
+		//FULL ARMOR BLOCK//
+		//------------------//
+		if (
+			_val_damage_left <= 0 &&
+			_stct_card._str_card_type == "ATTACK"
+		){
+
+			scr_battle_vfx_blocked(
+				_ref_target,
+				_ct_hit_vfx_delay
+			);
+		}
+
+		//----------------//
+		//ARMOR BREAK VFX//
+		//----------------//
+		if (
+			_val_armor_before > 0 &&
+			_ref_target._val_armor <= 0
+		){
+
+			scr_battle_vfx(
+				_ref_target,
+				spr_battle_vfx_armor_break,
+				undefined,
+				undefined,
+				4,
+				4,
+				1,
+				_ct_hit_vfx_delay,
+				snd_battle_sfx_armor_break
+			);
+		}
 	}
 
 	//------------//

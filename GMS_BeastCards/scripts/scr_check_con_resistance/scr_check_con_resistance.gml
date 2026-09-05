@@ -30,6 +30,11 @@ function scr_check_con_resistance(_ref_target,_flag_ignore_resistance=false){
 		return false;
 	}
 
+	//----------------//
+	//RESIST ANIMATION//
+	//----------------//
+	scr_battle_vfx_resist(_ref_target);
+
 	//----------//
 	//FEEDBACK//
 	//----------//

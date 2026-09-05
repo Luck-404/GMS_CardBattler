@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_battle_sfx_armor",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.9502041,
+  "exportDir":"",
+  "name":"snd_battle_sfx_armor",
+  "parent":{
+    "name":"COMBAT LOGIC",
+    "path":"folders/BATTLE/COMBAT LOGIC.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_battle_sfx_armor.wav",
+  "volume":0.5,
+}

@@ -35,6 +35,18 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._ct_status_stacks++;
+				
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_stormstruck,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_stormstruck
+				);
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -94,6 +106,18 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 
 			scr_reposition_statuses(_ref_target);
 
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_stormstruck,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_stormstruck
+				);
+			
 			return _ref_new_status;
 
 

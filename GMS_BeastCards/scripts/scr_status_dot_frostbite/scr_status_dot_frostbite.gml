@@ -58,6 +58,18 @@ function scr_status_dot_frostbite(
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._ct_status_stacks++;
+				
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_frostbite,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_frostbite
+				);
 
 				//------------------//
 				//REDUCE MAXIMUM HP//
@@ -171,6 +183,18 @@ function scr_status_dot_frostbite(
 				_ref_target
 			);
 
+			scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_frostbite,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_frostbite
+				);
+
 			return _ref_new_status;
 
 		break;
@@ -228,12 +252,6 @@ function scr_status_dot_frostbite(
 			//----------------//
 			var _val_damage =
 				_ct_frostbite;
-
-			audio_play_sound(
-				snd_attack,
-				0,
-				false
-			);
 
 			//------------//
 			//OVERHEALTH//
@@ -295,6 +313,18 @@ function scr_status_dot_frostbite(
 						_val_actual_damage
 					);
 			}
+
+			scr_battle_vfx(
+				_ref_host,
+				spr_battle_vfx_frostbite_tick,
+				undefined,
+				undefined,
+				32,
+				32,
+				1,
+				0,
+				snd_battle_sfx_frostbite
+			);
 
 			//----------------//
 			//REDUCE LIFETIME//

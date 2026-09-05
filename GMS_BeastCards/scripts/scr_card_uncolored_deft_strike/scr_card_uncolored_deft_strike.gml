@@ -25,5 +25,5 @@ function scr_card_uncolored_deft_strike(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-	audio_play_sound(snd_attack,0,false);
+	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

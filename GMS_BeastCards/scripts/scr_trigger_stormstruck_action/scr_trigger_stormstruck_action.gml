@@ -102,6 +102,18 @@ function scr_trigger_stormstruck_action(_ref_beast){
 		);
 	}
 
+	scr_battle_vfx(
+		_ref_beast,
+		spr_battle_vfx_stormstruck_tick,
+		undefined,
+		undefined,
+		32,
+		32,
+		1,
+		0,
+		snd_battle_sfx_stormstruck
+	);
+
 	//----------------//
 	//REMOVE 1 STACK//
 	//----------------//

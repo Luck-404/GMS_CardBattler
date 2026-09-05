@@ -199,6 +199,9 @@ switch(_state_enemy){
 			_ref_beast._val_max_hp =
 				_stct_unit._val_beast_hp_max;
 
+			_ref_beast._val_speed_base =
+				_stct_unit._val_beast_speed_stat;
+	
 			//-------------//
 			//TRACK BEAST//
 			//-------------//
@@ -306,6 +309,22 @@ switch(_state_enemy){
 	//
 	#region TURN START
 	case ENUM_ENEMY_STATE.TURN_START:
+
+		//--------------------------//
+		//BANISHED TEAM TURN SAFETY//
+		//--------------------------//
+		if (
+			ds_list_size(_list_beasts_alive) <= 0 &&
+			scr_team_has_combatants("ENEMY")
+		){
+
+			_state_enemy =
+				ENUM_ENEMY_STATE.WAIT;
+
+			obj_battle_turn_controller.hscr_pass_turn();
+
+			break;
+		}
 
 		//-----------------------//
 		//BUILD HELD ITEM QUEUE//
@@ -471,43 +490,50 @@ switch(_state_enemy){
 
 			_flag_minions_init = true;
 
-			_list_casting_minions = ds_list_create();
-
-			// BUILD MINION QUEUE
-			for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
-
-				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
-
-				for (var _it_minion = 0; _it_minion < ds_list_size(_ref_beast._list_minions); _it_minion++){
-
-					ds_list_add(
-						_list_casting_minions,
-						ds_list_find_value(_ref_beast._list_minions,_it_minion)
-					);
-				}
-			}
+			//------------------------//
+			//BUILD SPEED-ORDERED QUEUE//
+			//------------------------//
+			_list_casting_minions =
+				scr_build_minion_speed_queue(
+					_list_beasts_alive
+				);
 		}
 
 		if (_flag_minions_init && !instance_exists(obj_wait)){
 
 			if (ds_list_size(_list_casting_minions) > 0){
 
-				var _ref_minion = ds_list_find_value(_list_casting_minions,0);
+				var _ref_minion =
+					ds_list_find_value(
+						_list_casting_minions,
+						0
+					);
 
-				scr_cast_minion_effect(_ref_minion);
+				if (instance_exists(_ref_minion)){
+					scr_cast_minion_effect(_ref_minion);
+				}
 
-				ds_list_delete(_list_casting_minions,0);
+				ds_list_delete(
+					_list_casting_minions,
+					0
+				);
 
 				scr_init_battle_wait(15);
 			}
 			else{
 
-				ds_list_destroy(_list_casting_minions);
-				_list_casting_minions = undefined;
+				ds_list_destroy(
+					_list_casting_minions
+				);
 
-				_flag_minions_init = false;
+				_list_casting_minions =
+					undefined;
 
-				_state_enemy = ENUM_ENEMY_STATE.CAST_CARDS;
+				_flag_minions_init =
+					false;
+
+				_state_enemy =
+					ENUM_ENEMY_STATE.CAST_CARDS;
 			}
 		}
 

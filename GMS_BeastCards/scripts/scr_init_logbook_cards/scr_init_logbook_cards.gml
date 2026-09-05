@@ -376,7 +376,58 @@ function scr_init_logbook_cards(){
 	hscr_add_card_entry("BUBBLE","CERULEAN");
 	hscr_add_card_entry("CRYSTAL_SHELL","CERULEAN");
 	hscr_add_card_entry("FROZEN_ARMOR","CERULEAN");
+	hscr_add_card_entry("ARMOR_TRANSFER","CERULEAN");
+	hscr_add_card_entry("STATIC_BARRIER","CERULEAN");
+	hscr_add_card_entry("RAZOR_SHELL","CERULEAN");
+	hscr_add_card_entry("ICE_MIRROR","CERULEAN");
+	hscr_add_card_entry("SHARED_BULWARK","CERULEAN");
+	hscr_add_card_entry("COLD_RESERVE","CERULEAN");
 	
+	//===============================================================================//
+	//
+	// UTILITY
+	//
+	//===============================================================================//
+	hscr_add_card_entry("RAIN","CERULEAN");
+	hscr_add_card_entry("SNOWFALL","CERULEAN");
+	hscr_add_card_entry("THUNDERSTORM","CERULEAN");
+	hscr_add_card_entry("THIN_ICE","CERULEAN");
+	hscr_add_card_entry("STORM_BEACON","CERULEAN");
+	hscr_add_card_entry("PULLED_UNDER","CERULEAN");
+	hscr_add_card_entry("ICE_WALL","CERULEAN");
+	hscr_add_card_entry("RIMEFROST_ELEMENTAL","CERULEAN");
+	hscr_add_card_entry("STORM_WISP","CERULEAN");
+	hscr_add_card_entry("ABYSSAL_HARPOON","CERULEAN");
+	hscr_add_card_entry("CORAL_GUARDIAN","CERULEAN");
+	hscr_add_card_entry("ANCHOR_STONE","CERULEAN");
+	hscr_add_card_entry("DEEPFLOW_WHISPERSONG","CERULEAN");
+	hscr_add_card_entry("UNDERTOW","CERULEAN");
+	hscr_add_card_entry("RIP_CURRENT","CERULEAN");
+	hscr_add_card_entry("AQUA_STEP","CERULEAN");
+	hscr_add_card_entry("RIPPLING_POOL","CERULEAN");
+	hscr_add_card_entry("DEEP_REFLECTION","CERULEAN");
+	hscr_add_card_entry("ANCIENT_CHARTS","CERULEAN");
+	hscr_add_card_entry("TIDAL_FLOW","CERULEAN");
+	hscr_add_card_entry("MANA_SPRING","CERULEAN");
+	hscr_add_card_entry("PURIFY_WATERS","CERULEAN");
+	hscr_add_card_entry("ICEBOUND_SEAL","CERULEAN");
+	hscr_add_card_entry("TIDEHEART","CERULEAN");
+	
+	//===============================================================================//
+	//
+	// SUPPORT
+	//
+	//===============================================================================//	
+	hscr_add_card_entry("SAILORS_RESOLVE","CERULEAN");
+	hscr_add_card_entry("ARCTIC_FOCUS","CERULEAN");
+	hscr_add_card_entry("FROST_WEAPON","CERULEAN");
+	
+
+
+	
+	hscr_add_card_entry("SEA_LEGS","CERULEAN");
+	hscr_add_card_entry("DROP_ANCHOR","CERULEAN");
+
 	#endregion
 
 	//----------------//

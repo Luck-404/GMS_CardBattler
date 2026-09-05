@@ -2,11 +2,18 @@
 //
 // SCRIPT: SCR_STATUS_BUFF_MANAVINE
 // FUNCTION: Handles the Manavine global Mana Buff.
-//           Grants temporary maximum/current Mana.
+//           Grants temporary Maximum and Current Mana.
 //           Reapplication refreshes duration without stacking its Mana bonus.
+//           Uses the shared Mana Gain presentation system.
 //
 //===============================================================================//
-function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+
+function scr_status_buff_manavine(
+	_str_tag,
+	_ref_status,
+	_val_magnitude=undefined,
+	_val_lifetime=undefined
+){
 
 	switch(_str_tag){
 
@@ -15,6 +22,9 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 		//-------//
 		case "APPLY":
 
+			//----------//
+			//DEFAULTS//
+			//----------//
 			if (_val_magnitude == undefined){
 				_val_magnitude = 1;
 			}
@@ -24,10 +34,16 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			}
 
 			_val_magnitude =
-				max(0,_val_magnitude);
+				max(
+					0,
+					_val_magnitude
+				);
 
 			_val_lifetime =
-				max(1,_val_lifetime);
+				max(
+					1,
+					_val_lifetime
+				);
 
 			//----------------//
 			//CHECK EXISTING//
@@ -66,6 +82,9 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 				false
 			);
 
+			//-------------//
+			//STATUS DATA//
+			//-------------//
 			_ref_new_status._val_status_magnitude =
 				_val_magnitude;
 
@@ -81,7 +100,7 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			_ref_new_status._str_status_desc =
 				"+" +
 				string(_val_magnitude) +
-				" MANA FOR " +
+				" MAXIMUM/CURRENT MANA FOR " +
 				string(_val_lifetime) +
 				" ROUNDS";
 
@@ -97,15 +116,22 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			_ref_new_status._ct_status_stacks =
 				1;
 
-			//-----------------//
-			//GRANT MANA BONUS//
-			//-----------------//
+			//---------------------//
+			//INCREASE MAXIMUM MANA//
+			//---------------------//
 			obj_battle_player_controller._val_max_mana +=
 				_val_magnitude;
 
-			obj_battle_player_controller._val_cur_mana +=
-				_val_magnitude;
+			//-------------------//
+			//GAIN CURRENT MANA//
+			//-------------------//
+			scr_gain_mana(
+				_val_magnitude
+			);
 
+			//----------------//
+			//REGISTER STATUS//
+			//----------------//
 			ds_list_add(
 				global.list_statuses,
 				_ref_new_status
@@ -152,19 +178,33 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			var _val_mana_bonus =
 				_ref_status._val_status_magnitude;
 
+			//-------------------//
+			//REMOVE MAXIMUM MANA//
+			//-------------------//
 			obj_battle_player_controller._val_max_mana =
 				max(
 					obj_battle_player_controller._val_saved_max_mana,
 					obj_battle_player_controller._val_max_mana -
-					_val_mana_bonus
+						_val_mana_bonus
 				);
 
+			//-------------------//
+			//CLAMP CURRENT MANA//
+			//-------------------//
 			obj_battle_player_controller._val_cur_mana =
 				min(
 					obj_battle_player_controller._val_cur_mana,
 					obj_battle_player_controller._val_max_mana
 				);
 
+			//-------------------//
+			//REFRESH MANA HUD//
+			//-------------------//
+			scr_reposition_mana();
+
+			//---------------//
+			//DESTROY STATUS//
+			//---------------//
 			scr_destroy_status(
 				_ref_status
 			);

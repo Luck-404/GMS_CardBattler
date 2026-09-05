@@ -70,6 +70,18 @@ function scr_status_dot_frostburn(
 			if (_ref_existing_status != -1){
 
 				_ref_existing_status._ct_status_stacks++;
+				
+				scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_frostburn,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_frostburn
+				);
 
 				_ref_existing_status._str_status_desc =
 					"DEALS " +
@@ -149,6 +161,18 @@ function scr_status_dot_frostburn(
 				_ref_target
 			);
 
+			scr_battle_vfx(
+					_ref_target,
+					spr_battle_vfx_frostburn,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_sfx_frostburn
+				);
+				
 			return _ref_new_status;
 
 		break;
@@ -256,17 +280,19 @@ function scr_status_dot_frostburn(
 				);
 			}
 
-			//----------------//
-			//PLAY ANIMATION//
-			//----------------//
-
-			//-----------//
-			//PLAY SOUND//
-			//-----------//
-			audio_play_sound(
-				snd_attack,
+			//--------//
+			//TICK VFX//
+			//--------//
+			scr_battle_vfx(
+				_ref_host,
+				spr_battle_vfx_frostburn_tick,
+				undefined,
+				undefined,
+				32,
+				32,
+				1,
 				0,
-				false
+				snd_battle_sfx_frostburn
 			);
 
 			//----------------//

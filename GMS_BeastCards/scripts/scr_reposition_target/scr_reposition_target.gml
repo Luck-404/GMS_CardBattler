@@ -171,6 +171,33 @@ function scr_reposition_target(_stct_card,_ref_caster,_ref_target){
 		_ref_caster
 	);
 
+	//------------------//
+	//REPOSITION VFX/SFX//
+	//------------------//
+	scr_battle_vfx(
+		undefined,
+		spr_battle_vfx_move_poof,
+		_ref_caster.x,
+		_ref_caster.y,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_sfx_move_poof
+	);
+
+	scr_battle_vfx(
+		undefined,
+		spr_battle_vfx_move_poof,
+		_ref_target.x,
+		_ref_target.y,
+		0,
+		0,
+		1,
+		0,
+		undefined
+	);
+
 	//-------------//
 	//SPAWN POPUPS//
 	//-------------//

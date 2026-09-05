@@ -2,28 +2,16 @@
 //
 // SCRIPT: SCR_CARD_UNCOLORED_ECHO
 // FUNCTION: Resolves the Echo card effect.
-//           Increases the player's Echo counter by the card's magnitude.
-//           Plays the associated animation, sound, and popup effects.
+//           Adds Echo stacks through the shared Echo resource system.
 //
 //===============================================================================//
+
 function scr_card_uncolored_echo(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//GAIN ECHO STACKS//
-	//----------------//
-	global.ct_echo += _stct_card._val_card_magnitude;
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
 	//-----------//
-	//PLAY SOUND//
+	//GAIN ECHO//
 	//-----------//
-	audio_play_sound(snd_echo,0,false);
-	
-	//-------------//
-	//SPAWN POPUP//
-	//-------------//
-	scr_spawn_popup_scrolling("TEXT","+" + string(_stct_card._val_card_magnitude) + " ECHO",undefined,c_white,room_width / 2 - 300,room_height / 2);
+	scr_gain_echo(
+		_stct_card._val_card_magnitude
+	);
 }

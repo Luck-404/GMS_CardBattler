@@ -83,6 +83,40 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion		
+
+			#region ABYSSAL_HARPOON
+			case "ABYSSAL_HARPOON":
+
+				_stct_return_card = {
+					_str_card_name : "ABYSSAL HARPOON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_abyssal_harpoon,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : "ENGINEER",
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_abyssal_harpoon,
+
+					_str_card_description :
+						"ST. Self. Summon an Abyssal Harpoon (3/1). Each round, it targets a random enemy Beast (prefers the back half of the team), deals 2 NEU dmg per Magnitude, and pulls that Beast forward 1 position."
+				};
+
+			break;
+			#endregion		
 		
 			#region ABYSSAL_TOUCH
 			case "ABYSSAL_TOUCH":
@@ -118,6 +152,108 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region ANCHOR_STONE
+			case "ANCHOR_STONE":
+
+				_stct_return_card = {
+					_str_card_name : "ANCHOR STONE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_anchor_stone,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : "ENGINEER",
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_anchor_stone,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Summon an Anchor Stone (3/0) on the target allied Beast. While it lives, all allied Beasts gain Immovable."
+				};
+
+			break;
+			#endregion
+
+			#region ANCIENT_CHARTS
+			case "ANCIENT_CHARTS":
+
+				_stct_return_card = {
+					_str_card_name : "ANCIENT CHARTS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ancient_charts,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "CARD_MANIPULATION",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_ancient_charts,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Search your draw pile for a Utility card and draw it."
+				};
+
+			break;
+			#endregion
+
+			#region AQUA_STEP
+			case "AQUA_STEP":
+
+				_stct_return_card = {
+					_str_card_name : "AQUA STEP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_aqua_step,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "REPOSITION",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_aqua_step,
+
+					_str_card_description :
+						"ST. Ranged. Swap the caster's position with the target allied Beast."
+				};
+
+			break;
+			#endregion
+
 			#region ARCTIC_VOLLEY
 			case "ARCTIC_VOLLEY":
 
@@ -147,6 +283,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"ST. Ranged. Deal [Linear] PHY dmg 3 times (base 3 per hit)."
+				};
+
+			break;
+			#endregion
+
+			#region ARMOR_TRANSFER
+			case "ARMOR_TRANSFER":
+
+				_stct_return_card = {
+					_str_card_name : "ARMOR TRANSFER",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_armor_transfer,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_armor_transfer,
+
+					_str_card_description :
+						"ST. Ranged. Transfer all Armor from the caster to the target allied Beast."
 				};
 
 			break;
@@ -322,6 +492,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion			
 			
+			#region COLD_RESERVE
+			case "COLD_RESERVE":
+
+				_stct_return_card = {
+					_str_card_name : "COLD RESERVE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_cold_reserve,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_cold_reserve,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Self. Consume up to 10 Armor. Heal the caster for 1 HP per Armor consumed."
+				};
+
+			break;
+			#endregion			
+			
 			#region COLD_SNAP
 			case "COLD_SNAP":
 
@@ -351,6 +555,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"EXHAUSTS. ST. Ranged. Deal [Linear] MAG dmg (base 7). If the target has Frostbite, Freeze it."
+				};
+
+			break;
+			#endregion			
+			
+			#region CORAL_GUARDIAN
+			case "CORAL_GUARDIAN":
+
+				_stct_return_card = {
+					_str_card_name : "CORAL GUARDIAN",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_coral_guardian,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_coral_guardian,
+
+					_str_card_description :
+						"ST. Self. Summon a Coral Guardian (4/1). Each round, its host gains 2 Armor per Magnitude."
 				};
 
 			break;
@@ -458,6 +696,74 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region DEEP_REFLECTION
+			case "DEEP_REFLECTION":
+
+				_stct_return_card = {
+					_str_card_name : "DEEP REFLECTION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_deep_reflection,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "CARD_DRAW",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_deep_reflection,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Draw 2 cards, then discard 1 card."
+				};
+
+			break;
+			#endregion
+
+			#region DEEPFLOW_WHISPERSONG
+			case "DEEPFLOW_WHISPERSONG":
+
+				_stct_return_card = {
+					_str_card_name : "DEEPFLOW WHISPERSONG",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_deepflow_whispersong,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_deepflow_whispersong,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Randomly summon 10 Tentacles across the selected team's empty Minion slots. If a selected Beast has full Minion slots, instead give one of its Tentacles +1 HP and +1 Magnitude. TENTACLE: 3 HP. 1 Magnitude. Each round, deals 1 NEU dmg per Magnitude to a random enemy Beast."
+				};
+
+			break;
+#endregion
+
 			#region DEPTH_CHARGE
 			case "DEPTH_CHARGE":
 
@@ -491,6 +797,40 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion
+			
+			#region DROP_ANCHOR
+			case "DROP_ANCHOR":
+
+				_stct_return_card = {
+					_str_card_name : "DROP ANCHOR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_drop_anchor,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "TEAM",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SAILOR",
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_drop_anchor,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. All allied Beasts gain Immovable for 2 rounds."
+				};
+
+			break;
+			#endregion			
 			
 			#region FRACTURE
 			case "FRACTURE":
@@ -934,6 +1274,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region ICE_MIRROR
+			case "ICE_MIRROR":
+
+				_stct_return_card = {
+					_str_card_name : "ICE MIRROR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_mirror,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_ice_mirror,
+
+					_str_card_description :
+						"ST. Self. For 3 rounds, when the caster is struck, gain 2 Armor."
+				};
+
+			break;
+			#endregion
+
 			#region ICE_PLATING
 			case "ICE_PLATING":
 
@@ -968,6 +1342,74 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
+			#region ICE_WALL
+			case "ICE_WALL":
+
+				_stct_return_card = {
+					_str_card_name : "ICE WALL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_wall,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_ice_wall,
+
+					_str_card_description :
+						"ST. Self. Summon an Ice Wall (10/0)."
+				};
+
+			break;
+			#endregion
+			
+			#region ICEBOUND_SEAL
+			case "ICEBOUND_SEAL":
+
+				_stct_return_card = {
+					_str_card_name : "ICEBOUND SEAL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_icebound_seal,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "OTHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_icebound_seal,
+
+					_str_card_description :
+						"ST. Ranged. Transfer the caster's oldest Buff, including all stacks, to the target Beast."
+				};
+
+			break;
+			#endregion			
+			
 			#region KRAKENSLAM
 			case "KRAKENSLAM":
 
@@ -997,6 +1439,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"EXHAUSTS. ST. Ranged. Deal [Linear] PHY dmg (base 15). Apply Bleed and Stormstruck."
+				};
+
+			break;
+			#endregion
+
+			#region MANA_SPRING
+			case "MANA_SPRING":
+
+				_stct_return_card = {
+					_str_card_name : "MANA SPRING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_mana_spring,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "MANA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_mana_spring,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Gain +2 maximum and current Mana for 3 rounds."
 				};
 
 			break;
@@ -1070,6 +1546,108 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region PULLED_UNDER
+			case "PULLED_UNDER":
+
+				_stct_return_card = {
+					_str_card_name : "PULLED UNDER",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_pulled_under,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_pulled_under,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Set a Trap on the selected enemy team. The next Beast on that team that receives healing is Banished for 1 round."
+				};
+
+			break;
+			#endregion
+
+			#region PURIFY_WATERS
+			case "PURIFY_WATERS":
+
+				_stct_return_card = {
+					_str_card_name : "PURIFY WATERS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_purify_waters,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "OTHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_purify_waters,
+
+					_str_card_description :
+						"ST. Ranged. Transfer the caster's oldest DoT, including all stacks, to the target Beast."
+				};
+
+			break;
+			#endregion
+
+			#region RAIN
+			case "RAIN":
+
+				_stct_return_card = {
+					_str_card_name : "RAIN",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_rain,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "WEATHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_rain,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Begin Rain Weather."
+				};
+
+			break;
+			#endregion
+
 			#region RAZOR_FIN
 			case "RAZOR_FIN":
 
@@ -1099,6 +1677,210 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"ST. Melee. Deal [Linear] PHY dmg (base 7). Apply 1 Bleed."
+				};
+
+			break;
+			#endregion
+
+			#region RAZOR_SHELL
+			case "RAZOR_SHELL":
+
+				_stct_return_card = {
+					_str_card_name : "RAZOR SHELL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_razor_shell,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 3,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_razor_shell,
+
+					_str_card_description :
+						"ST. Self. For 3 rounds, when the caster is struck, deal 3 NEU dmg to the attacker."
+				};
+
+			break;
+			#endregion
+
+			#region RIP_CURRENT
+			case "RIP_CURRENT":
+
+				_stct_return_card = {
+					_str_card_name : "RIP CURRENT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_rip_current,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "REPOSITION",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_rip_current,
+
+					_str_card_description :
+						"ST. Ranged. Move the target Beast backward 1 position, swapping positions with the Beast behind it."
+				};
+
+			break;
+			#endregion
+
+			#region RIPPLING_POOL
+			case "RIPPLING_POOL":
+
+				_stct_return_card = {
+					_str_card_name : "RIPPLING POOL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_rippling_pool,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "CARD_DRAW",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_rippling_pool,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Draw 2 cards."
+				};
+
+			break;
+			#endregion
+
+			#region RIMEFROST_ELEMENTAL
+			case "RIMEFROST_ELEMENTAL":
+
+				_stct_return_card = {
+					_str_card_name : "RIMEFROST ELEMENTAL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_rimefrost_elemental,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_rimefrost_elemental,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Summon a Rimefrost Elemental (2/1). Each round, it applies 1 Frostbite per Magnitude to a random enemy Beast."
+				};
+
+			break;
+			#endregion
+
+			#region SEA_LEGS
+			case "SEA_LEGS":
+
+				_stct_return_card = {
+					_str_card_name : "SEA LEGS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_sea_legs,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_sea_legs,
+
+					_str_card_description :
+						"ST. Self. Gain Immovable for 2 rounds."
+				};
+
+			break;
+			#endregion
+
+			#region SHARED_BULWARK
+			case "SHARED_BULWARK":
+
+				_stct_return_card = {
+					_str_card_name : "SHARED BULWARK",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_shared_bulwark,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "TEAM",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_shared_bulwark,
+
+					_str_card_description :
+						"Teamwide. Redistribute the caster's current Armor evenly among all allied Beasts."
 				};
 
 			break;
@@ -1206,6 +1988,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
+			#region SNOWFALL
+			case "SNOWFALL":
+
+				_stct_return_card = {
+					_str_card_name : "SNOWFALL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_snowfall,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "WEATHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_snowfall,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Begin Snow Weather."
+				};
+
+			break;
+			#endregion			
+			
 			#region SNOWFORT
 			case "SNOWFORT":
 
@@ -1235,6 +2051,176 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"Teamwide. All allied Beasts gain 6 Armor."
+				};
+
+			break;
+			#endregion
+			
+			#region STATIC_BARRIER
+			case "STATIC_BARRIER":
+
+				_stct_return_card = {
+					_str_card_name : "STATIC BARRIER",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_static_barrier,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_static_barrier,
+
+					_str_card_description :
+						"ST. Self. For 3 rounds, when the caster is struck, apply 1 Stormstruck to the attacker."
+				};
+
+			break;
+			#endregion			
+
+			#region STORM_BEACON
+			case "STORM_BEACON":
+
+				_stct_return_card = {
+					_str_card_name : "STORM BEACON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_storm_beacon,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 3,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_storm_beacon,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Set a Trap on an enemy Beast. The next time that Beast casts a card, apply 3 Stormstruck to it."
+				};
+
+			break;
+			#endregion
+
+			#region STORM_WISP
+			case "STORM_WISP":
+
+				_stct_return_card = {
+					_str_card_name : "STORM WISP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_storm_wisp,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_storm_wisp,
+
+					_str_card_description :
+						"ST. Ranged. Summon a Storm Wisp (2/1). Each round, it deals 3 NEU dmg per Magnitude to a random enemy Beast."
+				};
+
+			break;
+			#endregion
+
+			#region THIN_ICE
+			case "THIN_ICE":
+
+				_stct_return_card = {
+					_str_card_name : "THIN ICE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_thin_ice,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "TRAP",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_thin_ice,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Set a Trap on an enemy Beast. The next time that Beast Attacks, apply 1 Frostbite to it."
+				};
+
+			break;
+			#endregion
+			
+			#region THUNDERSTORM
+			case "THUNDERSTORM":
+
+				_stct_return_card = {
+					_str_card_name : "THUNDERSTORM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_thunderstorm,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "WEATHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SAILOR",
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_thunderstorm,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Begin Storming Weather."
 				};
 
 			break;
@@ -1274,6 +2260,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
+			#region TIDAL_FLOW
+			case "TIDAL_FLOW":
+
+				_stct_return_card = {
+					_str_card_name : "TIDAL FLOW",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_tidal_flow,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "MANA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_tidal_flow,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Gain 1 Mana. Draw 1 card."
+				};
+
+			break;
+			#endregion			
+			
 			#region TIDAL_SLASH
 			case "TIDAL_SLASH":
 
@@ -1308,6 +2328,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region TIDEHEART
+			case "TIDEHEART":
+
+				_stct_return_card = {
+					_str_card_name : "TIDEHEART",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_tideheart,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "ECHO",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_tideheart,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Cleanse all negative statuses on caster. Add 1 to echo counter."
+				};
+
+			break;
+			#endregion
+
 			#region TORRENT
 			case "TORRENT":
 
@@ -1337,6 +2391,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"ST. Flank. Deal [Linear] MAG dmg (base 6)."
+				};
+
+			break;
+			#endregion
+
+			#region UNDERTOW
+			case "UNDERTOW":
+
+				_stct_return_card = {
+					_str_card_name : "UNDERTOW",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_undertow,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "UTILITY",
+					_str_card_effect_type : "REPOSITION",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_undertow,
+
+					_str_card_description :
+						"ST. Ranged. Move the target Beast forward 1 position, swapping positions with the Beast ahead of it."
 				};
 
 			break;

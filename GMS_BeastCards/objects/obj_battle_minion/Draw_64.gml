@@ -18,7 +18,41 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	#region BASIC SETUP
 	draw_set_font(fnt_small_party_draw);
 
-	var _val_scale = 0.125;
+	
+	//--------------------//
+	//BASE MINION SCALE//
+	//--------------------//
+	var _val_base_scale =
+		0.125;
+
+	//------------------------//
+	//MAGNITUDE SIZE INCREASE//
+	//------------------------//
+	var _ct_growth_tiers =
+		floor(
+			max(
+				0,
+				_val_magnitude
+			) /
+			5
+		);
+
+	var _val_magnitude_scale =
+		1 +
+		(
+			_ct_growth_tiers *
+			0.10
+		);
+
+	//----------------//
+	//FINAL DRAW SCALE//
+	//----------------//
+	var _val_scale =
+		_val_base_scale *
+		_val_magnitude_scale *
+		_val_vfx_scale;
+	
+	
 	var _val_flip = (_str_team == "ENEMY") ? -1 : 1;
 	#endregion
 
@@ -26,7 +60,17 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	// DRAW SPRITE
 	//
 	#region DRAW SPRITE
-	draw_sprite_ext(_spr_minion,0,x,y,_val_scale * _val_flip,_val_scale,0,c_white,1);
+	draw_sprite_ext(
+	_spr_minion,
+	0,
+	x + _val_vfx_offset_x,
+	y + _val_vfx_offset_y,
+	_val_scale * _val_flip,
+	_val_scale,
+	0,
+	c_white,
+	1
+);
 	#endregion
 
 	//

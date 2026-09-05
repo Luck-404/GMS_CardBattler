@@ -174,5 +174,32 @@ function scr_reposition_beast(_ref_beast,_val_move_amount){
 		_ref_swap_target
 	);
 
+	//------------------//
+	//REPOSITION VFX/SFX//
+	//------------------//
+	scr_battle_vfx(
+		undefined,
+		spr_battle_vfx_move_poof,
+		_ref_beast.x,
+		_ref_beast.y,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_sfx_move_poof
+	);
+
+	scr_battle_vfx(
+		undefined,
+		spr_battle_vfx_move_poof,
+		_ref_swap_target.x,
+		_ref_swap_target.y,
+		0,
+		0,
+		1,
+		0,
+		undefined
+	);
+
 	return true;
 }

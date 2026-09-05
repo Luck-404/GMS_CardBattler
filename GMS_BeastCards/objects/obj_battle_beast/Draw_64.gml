@@ -55,6 +55,9 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 	var _val_scale_x = (_str_team == "PLAYER") ? 0.2 : -0.2;
 	var _val_scale_y = 0.2;
+	
+	var _val_beast_draw_x = x + _val_vfx_offset_x;
+	var _val_beast_draw_y = y + _val_vfx_offset_y;
 
 	//-----------------//
 	//CAPTURED DISPLAY//
@@ -302,11 +305,11 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		draw_sprite_ext(
 			_spr_beast,
 			0,
-			x,
-			y,
+			_val_beast_draw_x,
+			_val_beast_draw_y,
 			_val_scale_x,
 			_val_scale_y,
-			0,
+			_val_vfx_angle,
 			c_ltgray,
 			1
 		);
@@ -335,11 +338,11 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		draw_sprite_ext(
 			_spr_beast,
 			0,
-			x,
-			y,
+			_val_beast_draw_x,
+			_val_beast_draw_y,
 			_val_scale_x,
 			_val_scale_y,
-			0,
+			_val_vfx_angle,
 			c_ltgray,
 			1
 		);
@@ -356,11 +359,11 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		draw_sprite_ext(
 			_spr_beast,
 			0,
-			x,
-			y,
+			_val_beast_draw_x,
+			_val_beast_draw_y,
 			_val_scale_x,
 			_val_scale_y,
-			0,
+			_val_vfx_angle,
 			c_ltgray,
 			1
 		);
@@ -374,11 +377,11 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		draw_sprite_ext(
 			_spr_beast,
 			0,
-			x,
-			y,
+			_val_beast_draw_x,
+			_val_beast_draw_y,
 			_val_scale_x,
 			_val_scale_y,
-			0,
+			_val_vfx_angle,
 			c_white,
 			1
 		);

@@ -1,12 +1,18 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_INSPIRATION
-// FUNCTION: Handles the Inspiration global Buff.
-//           Grants +2 maximum/current Mana while active.
+// FUNCTION: Handles the Inspiration global Mana Buff.
+//           Grants +2 temporary Maximum and Current Mana.
 //           Reapplication refreshes duration without stacking its Mana bonus.
+//           Uses the shared Mana Gain presentation system.
 //
 //===============================================================================//
-function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefined){
+
+function scr_status_buff_inspiration(
+	_str_tag,
+	_ref_status,
+	_val_lifetime=undefined
+){
 
 	switch(_str_tag){
 
@@ -15,13 +21,22 @@ function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefine
 		//-------//
 		case "APPLY":
 
+			//----------//
+			//DEFAULTS//
+			//----------//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 3;
 			}
 
 			_val_lifetime =
-				max(1,_val_lifetime);
+				max(
+					1,
+					_val_lifetime
+				);
 
+			//----------------//
+			//CHECK EXISTING//
+			//----------------//
 			var _ref_existing_status =
 				scr_check_for_status(
 					"INSPIRATION",
@@ -38,6 +53,9 @@ function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefine
 				return _ref_existing_status;
 			}
 
+			//---------------//
+			//CREATE STATUS//
+			//---------------//
 			var _ref_new_status =
 				instance_create_layer(
 					room_width * 0.5,
@@ -53,6 +71,9 @@ function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefine
 				false
 			);
 
+			//-------------//
+			//STATUS DATA//
+			//-------------//
 			_ref_new_status._scr_status =
 				scr_status_buff_inspiration;
 
@@ -63,9 +84,9 @@ function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefine
 				"INSPIRATION";
 
 			_ref_new_status._str_status_desc =
-				"+2 MANA FOR " +
+				"+2 MAXIMUM/CURRENT MANA FOR " +
 				string(_val_lifetime) +
-				" TURNS";
+				" ROUNDS";
 
 			_ref_new_status._spr_status =
 				spr_status_buff_inspiration;
@@ -82,12 +103,22 @@ function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefine
 			_ref_new_status._val_status_magnitude =
 				2;
 
+			//---------------------//
+			//INCREASE MAXIMUM MANA//
+			//---------------------//
 			obj_battle_player_controller._val_max_mana +=
-				2;
+				_ref_new_status._val_status_magnitude;
 
-			obj_battle_player_controller._val_cur_mana +=
-				2;
+			//-------------------//
+			//GAIN CURRENT MANA//
+			//-------------------//
+			scr_gain_mana(
+				_ref_new_status._val_status_magnitude
+			);
 
+			//----------------//
+			//REGISTER STATUS//
+			//----------------//
 			ds_list_add(
 				global.list_statuses,
 				_ref_new_status
@@ -134,19 +165,33 @@ function scr_status_buff_inspiration(_str_tag,_ref_status,_val_lifetime=undefine
 			var _val_mana_bonus =
 				_ref_status._val_status_magnitude;
 
+			//-------------------//
+			//REMOVE MAXIMUM MANA//
+			//-------------------//
 			obj_battle_player_controller._val_max_mana =
 				max(
 					obj_battle_player_controller._val_saved_max_mana,
 					obj_battle_player_controller._val_max_mana -
-					_val_mana_bonus
+						_val_mana_bonus
 				);
 
+			//-------------------//
+			//CLAMP CURRENT MANA//
+			//-------------------//
 			obj_battle_player_controller._val_cur_mana =
 				min(
 					obj_battle_player_controller._val_cur_mana,
 					obj_battle_player_controller._val_max_mana
 				);
 
+			//-------------------//
+			//REFRESH MANA HUD//
+			//-------------------//
+			scr_reposition_mana();
+
+			//---------------//
+			//DESTROY STATUS//
+			//---------------//
 			scr_destroy_status(
 				_ref_status
 			);

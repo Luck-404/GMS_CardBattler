@@ -23,5 +23,5 @@ function scr_card_viridian_blooming_shield(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//PLAY SOUND//
 	//-----------//
-	audio_play_sound(snd_shield,0,false);
+	audio_play_sound(snd_battle_sfx_armor,0,false);
 }

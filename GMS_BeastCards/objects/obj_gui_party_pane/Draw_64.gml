@@ -134,7 +134,7 @@ if (_stct_unit_selected != undefined){
 	var _stct_unit = _stct_unit_selected;
 
 	var _val_x = _val_pane_left + 25;
-	var _val_y = _val_row_y + _val_slot_size + 40;
+	var _val_y = _val_row_y + _val_slot_size + 10;
 
 	var _val_lh = 22;
 	var _val_sg = 32;
@@ -242,6 +242,14 @@ if (_stct_unit_selected != undefined){
 		"DODGE: " +
 		string(_stct_unit._val_beast_dod_stat) +
 		"%"
+	);
+	_val_y += _val_lh;
+
+	draw_text(
+		_val_x,
+		_val_y,
+		"SPEED: " +
+		string(_stct_unit._val_beast_speed_stat)
 	);
 	_val_y += _val_lh;
 

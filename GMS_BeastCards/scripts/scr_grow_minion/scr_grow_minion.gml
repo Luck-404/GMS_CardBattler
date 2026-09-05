@@ -3,12 +3,16 @@
 // SCRIPT: SCR_GROW_MINION
 // FUNCTION: Permanently increases a Minion's current HP, maximum HP,
 //           and Magnitude by the supplied amount.
+//           Plays the shared Minion Growth presentation.
 //           Refreshes Minion-dependent passive effects after Magnitude changes.
 //
 //===============================================================================//
 
 function scr_grow_minion(_ref_minion,_val_amount){
 
+	//-----------------//
+	//VALIDATE MINION//
+	//-----------------//
 	if (!instance_exists(_ref_minion)){
 		return false;
 	}
@@ -32,6 +36,13 @@ function scr_grow_minion(_ref_minion,_val_amount){
 	_ref_minion._val_magnitude +=
 		_val_amount;
 
+	//----------------//
+	//GROWTH VFX/SFX//
+	//----------------//
+	scr_battle_vfx_summon_growth(
+		_ref_minion
+	);
+
 	//-------------------------//
 	//REFRESH PASSIVE MINIONS//
 	//-------------------------//
@@ -39,6 +50,7 @@ function scr_grow_minion(_ref_minion,_val_amount){
 		_ref_minion._str_name ==
 		"BLOOMING SPRITE"
 	){
+
 		scr_status_buff_blooming_sprite(
 			"APPLY",
 			undefined,
@@ -57,8 +69,11 @@ function scr_grow_minion(_ref_minion,_val_amount){
 			string(_val_amount),
 		undefined,
 		c_green,
-		_ref_minion.x + irandom_range(-16,16),
-		_ref_minion.y - 16 + irandom_range(-16,16)
+		_ref_minion.x +
+			irandom_range(-16,16),
+		_ref_minion.y -
+			16 +
+			irandom_range(-16,16)
 	);
 
 	return true;

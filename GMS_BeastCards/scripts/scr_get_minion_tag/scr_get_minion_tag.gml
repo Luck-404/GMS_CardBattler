@@ -54,7 +54,7 @@ function scr_get_minion_tag(_str_id){
 		//TURRET//
 		//======//
 		case "MAGMA_CANNON":
-
+		case "ABYSSAL_HARPOON":
 			return "TURRET";
 	}
 
