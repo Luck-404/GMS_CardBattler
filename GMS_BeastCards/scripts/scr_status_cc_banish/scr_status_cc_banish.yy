@@ -6,7 +6,7 @@
   "name":"scr_status_cc_banish",
   "parent":{
     "name":"BANISH",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/BANISH.yy",
+    "path":"folders/BATTLE/STATUSES/CC/BANISH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

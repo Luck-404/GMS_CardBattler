@@ -6,7 +6,7 @@
   "name":"scr_trap_toxic_snare",
   "parent":{
     "name":"TOXIC SNARE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/TRAPS/TOXIC SNARE.yy",
+    "path":"folders/BATTLE/TRAPS/TOXIC SNARE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

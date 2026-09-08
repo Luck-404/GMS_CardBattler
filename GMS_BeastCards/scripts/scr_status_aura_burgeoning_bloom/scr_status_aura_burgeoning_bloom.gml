@@ -38,7 +38,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"BURGEONING_BLOOM",
 					_ref_target
 				);
@@ -155,7 +155,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -204,12 +204,12 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 			//GET ADJACENT BEASTS//
 			//----------------------//
 			var _ref_left_target =
-				scr_get_left_target(
+				scr_battle_get_left_target(
 					_ref_host
 				);
 
 			var _ref_right_target =
-				scr_get_right_target(
+				scr_battle_get_right_target(
 					_ref_host
 				);
 
@@ -225,7 +225,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 			){
 
 				if (
-					scr_heal_target(
+					scr_battle_heal_target(
 						_val_splash_heal,
 						_ref_left_target,
 						false
@@ -244,7 +244,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 			){
 
 				if (
-					scr_heal_target(
+					scr_battle_heal_target(
 						_val_splash_heal,
 						_ref_right_target,
 						false
@@ -283,7 +283,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

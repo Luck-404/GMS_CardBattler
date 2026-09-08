@@ -37,21 +37,9 @@ function scr_card_cerulean_pressure_spike(
 	//------------//
 	//DEAL DAMAGE//
 	//------------//
-	scr_damage_target(
+	scr_battle_damage_target(
 		_val_damage,
 		_ref_target
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

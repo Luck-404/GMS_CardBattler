@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_hellshroom_cry",
   "parent":{
     "name":"HELLSHROOM",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/HELLSHROOM.yy",
+    "path":"folders/BEASTS/VERMILION/HELLSHROOM.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

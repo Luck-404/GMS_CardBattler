@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_ARMOR",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/CERULEAN/FROZEN_ARMOR.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/FROZEN_ARMOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

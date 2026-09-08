@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"STORMING",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/WEATHER/STORMING.yy",
+    "path":"folders/BATTLE/STATUSES/WEATHER/STORMING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

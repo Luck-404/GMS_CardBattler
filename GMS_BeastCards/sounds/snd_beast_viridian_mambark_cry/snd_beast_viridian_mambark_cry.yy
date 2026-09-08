@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_mambark_cry",
   "parent":{
     "name":"MAMBARK",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/MAMBARK.yy",
+    "path":"folders/BEASTS/VIRIDIAN/MAMBARK.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

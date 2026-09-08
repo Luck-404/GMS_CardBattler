@@ -48,7 +48,7 @@ function scr_status_buff_regeneration(_str_tag,_ref_status,_val_magnitude=undefi
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"REGENERATION",
 					_ref_target
 				);
@@ -137,7 +137,7 @@ function scr_status_buff_regeneration(_str_tag,_ref_status,_val_magnitude=undefi
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -158,7 +158,7 @@ function scr_status_buff_regeneration(_str_tag,_ref_status,_val_magnitude=undefi
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -166,7 +166,7 @@ function scr_status_buff_regeneration(_str_tag,_ref_status,_val_magnitude=undefi
 			//-----------//
 			//HEAL HOST//
 			//-----------//
-			scr_heal_target(
+			scr_battle_heal_target(
 				_ref_status._val_status_magnitude,
 				_ref_host
 			);
@@ -176,7 +176,7 @@ function scr_status_buff_regeneration(_str_tag,_ref_status,_val_magnitude=undefi
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -187,7 +187,7 @@ function scr_status_buff_regeneration(_str_tag,_ref_status,_val_magnitude=undefi
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

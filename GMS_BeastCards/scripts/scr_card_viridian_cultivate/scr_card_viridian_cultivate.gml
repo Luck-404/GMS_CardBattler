@@ -44,7 +44,7 @@ function scr_card_viridian_cultivate(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_grow_minion(
+		scr_minion_grow(
 			_ref_minion,
 			_stct_card._val_card_magnitude
 		);

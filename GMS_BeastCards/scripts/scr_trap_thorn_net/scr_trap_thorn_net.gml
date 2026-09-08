@@ -28,8 +28,15 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 				return false;
 			}
 
-			_ref_trap._flag_triggered =
-				true;
+_ref_trap._flag_triggered =
+	true;
+
+//----------------//
+//TRAP TRIGGER VFX//
+//----------------//
+scr_trap_vfx_trigger(
+	_ref_trap
+);
 
 			//----------------//
 			//REVEAL TRAP//
@@ -46,7 +53,7 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 				!instance_exists(_ref_trap._ref_source_card)
 			){
 
-				scr_destroy_trap(_ref_trap);
+				scr_trap_destroy(_ref_trap);
 
 				return true;
 			}
@@ -78,7 +85,7 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//------------//
 			//DEAL DAMAGE//
 			//------------//
-			scr_damage_target(
+			scr_battle_damage_target(
 				_ref_trap._val_magnitude,
 				_ref_attacker
 			);
@@ -94,7 +101,7 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 				global.ref_target_beast =
 					_ref_attacker;
 
-				scr_apply_debuff_status(
+				scr_status_apply_debuff(
 					"VULNERABLE"
 				);
 			}
@@ -114,7 +121,7 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(
+			scr_trap_destroy(
 				_ref_trap
 			);
 

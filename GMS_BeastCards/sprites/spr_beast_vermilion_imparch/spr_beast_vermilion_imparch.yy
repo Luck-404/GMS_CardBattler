@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"IMPARCH",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/IMPARCH.yy",
+    "path":"folders/BEASTS/VERMILION/IMPARCH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

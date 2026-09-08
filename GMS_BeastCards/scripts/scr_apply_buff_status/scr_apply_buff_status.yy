@@ -6,7 +6,7 @@
   "name":"scr_apply_buff_status",
   "parent":{
     "name":"BUFFS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

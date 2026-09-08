@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"END BATTLE",
-    "path":"folders/BATTLE/END BATTLE.yy",
+    "name":"RESULTS",
+    "path":"folders/BATTLE/RESULTS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

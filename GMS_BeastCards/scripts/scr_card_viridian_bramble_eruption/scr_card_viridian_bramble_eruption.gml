@@ -12,15 +12,15 @@ function scr_card_viridian_bramble_eruption(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET ADJACENT TARGETS//
 	//--------------------//
-	var _ref_left_target = scr_get_left_target(_ref_target);
-	var _ref_right_target = scr_get_right_target(_ref_target);
+	var _ref_left_target = scr_battle_get_left_target(_ref_target);
+	var _ref_right_target = scr_battle_get_right_target(_ref_target);
 
 	//------------------//
 	//HIT LEFT ADJACENT//
 	//------------------//
 	if (_ref_left_target != undefined){
 
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_left_target
 		);
@@ -29,7 +29,7 @@ function scr_card_viridian_bramble_eruption(_stct_card,_ref_caster,_ref_target){
 	//---------------//
 	//HIT MAIN TARGET//
 	//---------------//
-	scr_damage_target(
+	scr_battle_damage_target(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
@@ -39,18 +39,10 @@ function scr_card_viridian_bramble_eruption(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	if (_ref_right_target != undefined){
 
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_right_target
 		);
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

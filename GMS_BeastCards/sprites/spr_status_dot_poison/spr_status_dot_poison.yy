@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"POISON",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/POISON.yy",
+    "path":"folders/BATTLE/STATUSES/DOTs/POISON.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

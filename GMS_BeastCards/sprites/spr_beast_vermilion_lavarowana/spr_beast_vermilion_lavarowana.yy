@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"LAVAROWANA",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/LAVAROWANA.yy",
+    "path":"folders/BEASTS/VERMILION/LAVAROWANA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

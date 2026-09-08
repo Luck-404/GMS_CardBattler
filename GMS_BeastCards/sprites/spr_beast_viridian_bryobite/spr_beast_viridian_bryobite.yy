@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BRYOBITE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/BRYOBITE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/BRYOBITE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

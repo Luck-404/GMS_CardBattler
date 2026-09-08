@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SANGUINAUT",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/SANGUINAUT.yy",
+    "path":"folders/BEASTS/VERMILION/SANGUINAUT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"GALENATRIUM",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/GALENATRIUM.yy",
+    "path":"folders/BEASTS/CERULEAN/GALENATRIUM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

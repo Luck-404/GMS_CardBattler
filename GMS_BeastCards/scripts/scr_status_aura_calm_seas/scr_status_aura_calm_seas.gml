@@ -1,0 +1,269 @@
+//===============================================================================//
+//
+// SCRIPT: SCR_STATUS_AURA_CALM_SEAS
+// FUNCTION: Handles Calm Seas.
+//           Infinite Team Aura.
+//           Allied Beasts heal 3 HP each round.
+//           Allied Beasts deal 2 less Linear damage.
+//
+//===============================================================================//
+
+function scr_status_aura_calm_seas(_str_tag,_ref_status,_val_magnitude=undefined){
+
+	switch(_str_tag){
+
+		//-------//
+		//APPLY//
+		//-------//
+		case "APPLY":
+
+			var _ref_target =
+				global.ref_target_beast;
+
+			if (!instance_exists(_ref_target)){
+				return undefined;
+			}
+
+			//----------------//
+			//CHECK EXISTING//
+			//----------------//
+			var _list_team =
+				(_ref_target._str_team == "PLAYER")
+				? obj_battle_player_controller._list_beasts
+				: obj_battle_enemy_controller._list_beasts;
+
+			for (
+				var _it_beast = 0;
+				_it_beast < ds_list_size(_list_team);
+				_it_beast++
+			){
+
+				var _ref_beast =
+					ds_list_find_value(
+						_list_team,
+						_it_beast
+					);
+
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				var _ref_existing_status =
+					scr_status_check(
+						"CALM_SEAS",
+						_ref_beast
+					);
+
+				if (_ref_existing_status != -1){
+					return _ref_existing_status;
+				}
+			}
+
+			//---------------//
+			//CREATE STATUS//
+			//---------------//
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
+
+			scr_status_init_lifetime(
+				_ref_new_status,
+				-1,
+				false,
+				true
+			);
+
+			_ref_new_status._scr_status =
+				scr_status_aura_calm_seas;
+
+			_ref_new_status._ref_host =
+				_ref_target;
+
+			_ref_new_status._str_status_type =
+				"AURA";
+
+			_ref_new_status._str_status_name =
+				"CALM_SEAS";
+
+			_ref_new_status._str_status_desc =
+				"ALLIES HEAL 3 EACH ROUND; LINEAR DAMAGE -2";
+
+			_ref_new_status._spr_status =
+				spr_status_aura_calm_seas;
+
+			_ref_new_status._ct_status_stacks =
+				1;
+
+			_ref_new_status._val_status_magnitude =
+				0;
+
+			_ref_new_status._val_aura_heal =
+				3;
+
+			_ref_new_status._val_aura_linear_reduction =
+				2;
+
+			_ref_new_status._str_trigger_region =
+				"END";
+
+			_ref_new_status._str_aura_scope =
+				"TEAM";
+
+			_ref_new_status._str_aura_trigger =
+				"ROUND_END";
+
+			//------------------------//
+			//REDUCE ALLIED DAMAGE//
+			//------------------------//
+			for (
+				var _it_beast = 0;
+				_it_beast < ds_list_size(_list_team);
+				_it_beast++
+			){
+
+				var _ref_beast =
+					ds_list_find_value(
+						_list_team,
+						_it_beast
+					);
+
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				_ref_beast._val_dmg_linear_reduction +=
+					_ref_new_status._val_aura_linear_reduction;
+			}
+
+			//----------------//
+			//REGISTER STATUS//
+			//----------------//
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
+
+			scr_status_reposition(_ref_target);
+
+			return _ref_new_status;
+
+		break;
+
+
+		//--------//
+		//REPEAT//
+		//--------//
+		case "REPEAT":
+
+			if (!instance_exists(_ref_status)){
+				return undefined;
+			}
+
+			var _ref_host =
+				_ref_status._ref_host;
+
+			if (!instance_exists(_ref_host)){
+
+				scr_status_destroy(_ref_status);
+
+				return undefined;
+			}
+
+			var _list_team =
+				(_ref_host._str_team == "PLAYER")
+				? obj_battle_player_controller._list_beasts
+				: obj_battle_enemy_controller._list_beasts;
+
+			//----------------//
+			//HEAL ALL ALLIES//
+			//----------------//
+			for (
+				var _it_beast = 0;
+				_it_beast < ds_list_size(_list_team);
+				_it_beast++
+			){
+
+				var _ref_beast =
+					ds_list_find_value(
+						_list_team,
+						_it_beast
+					);
+
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				if (_ref_beast._val_cur_hp <= 0){
+					continue;
+				}
+
+				scr_battle_heal_target(
+					_ref_status._val_aura_heal,
+					_ref_beast
+				);
+			}
+
+			scr_status_tick_lifetime(_ref_status);
+			scr_status_reposition(_ref_host);
+
+		break;
+
+
+		//-------//
+		//DEATH//
+		//-------//
+		case "DEATH":
+
+			if (!instance_exists(_ref_status)){
+				return undefined;
+			}
+
+			var _ref_host =
+				_ref_status._ref_host;
+
+			if (instance_exists(_ref_host)){
+
+				var _list_team =
+					(_ref_host._str_team == "PLAYER")
+						? obj_battle_player_controller._list_beasts
+						: obj_battle_enemy_controller._list_beasts;
+
+				//-------------------------//
+				//RESTORE ALLIED DAMAGE//
+				//-------------------------//
+				for (
+					var _it_beast = 0;
+					_it_beast < ds_list_size(_list_team);
+					_it_beast++
+				){
+
+					var _ref_beast =
+						ds_list_find_value(
+							_list_team,
+							_it_beast
+						);
+
+					if (!instance_exists(_ref_beast)){
+						continue;
+					}
+
+					_ref_beast._val_dmg_linear_reduction =
+						max(
+							0,
+							_ref_beast._val_dmg_linear_reduction -
+							_ref_status._val_aura_linear_reduction
+						);
+				}
+			}
+
+			scr_status_destroy(_ref_status);
+
+		break;
+	}
+
+	return undefined;
+}

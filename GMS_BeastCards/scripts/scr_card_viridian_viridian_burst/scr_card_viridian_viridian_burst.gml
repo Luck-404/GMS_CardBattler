@@ -20,9 +20,9 @@ function scr_card_viridian_viridian_burst(_stct_card,_ref_caster,_ref_target){
 	//GET AFFECTED TARGETS//
 	//--------------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_target),
+		scr_battle_get_left_target(_ref_target),
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//----------------------//
@@ -61,7 +61,7 @@ function scr_card_viridian_viridian_burst(_stct_card,_ref_caster,_ref_target){
 		//------------//
 		//DEAL DAMAGE//
 		//------------//
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_affected_target
 		);
@@ -70,12 +70,8 @@ function scr_card_viridian_viridian_burst(_stct_card,_ref_caster,_ref_target){
 		//APPLY POISON//
 		//--------------//
 		if (_ref_affected_target._val_cur_hp > 0){
-			scr_apply_dot_status("POISON");
+			scr_status_apply_dot("POISON");
 		}
-
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
 
 	//----------------------//
@@ -87,9 +83,4 @@ function scr_card_viridian_viridian_burst(_stct_card,_ref_caster,_ref_target){
 	else{
 		global.ref_target_beast = _ref_target;
 	}
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

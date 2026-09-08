@@ -29,8 +29,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"ECHO",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/ECHO.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

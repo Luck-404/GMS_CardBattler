@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_can_reposition",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_can_reposition",
+  "parent":{
+    "name":"FORMATION",
+    "path":"folders/BATTLE/COMBAT/FORMATION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_set_beast_level",
   "parent":{
-    "name":"BEAST GET",
-    "path":"folders/BEASTS/BEAST SETUP/BEAST GET.yy",
+    "name":"PROGRESSION",
+    "path":"folders/BEASTS/CORE/PROGRESSION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

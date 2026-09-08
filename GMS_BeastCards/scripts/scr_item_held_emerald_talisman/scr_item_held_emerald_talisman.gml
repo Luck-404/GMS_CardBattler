@@ -32,14 +32,12 @@ function scr_item_held_emerald_talisman(_str_state,_stct_item,_stct_target_unit)
 			var _it_minion = irandom(ds_list_size(global.list_pool_viridian_minions) - 1);
 			var _str_minion = ds_list_find_value(global.list_pool_viridian_minions,_it_minion);
 
-			scr_init_minion(
+			scr_minion_init(
 				_str_minion,
 				undefined,
 				_stct_target_unit,
 				_stct_target_unit
 			);
-
-			audio_play_sound(snd_buff,0,false);
 			
 			return true;
 

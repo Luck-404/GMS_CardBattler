@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"BATTLE CARDS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/CARD FLOW/CORE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

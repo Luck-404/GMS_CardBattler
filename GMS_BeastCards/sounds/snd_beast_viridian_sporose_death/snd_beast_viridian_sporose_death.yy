@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_sporose_death",
   "parent":{
     "name":"SPOROSE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/SPOROSE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/SPOROSE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

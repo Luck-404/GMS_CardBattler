@@ -28,8 +28,15 @@ function scr_trap_thin_ice(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_ca
 				return false;
 			}
 
-			_ref_trap._flag_triggered =
-				true;
+_ref_trap._flag_triggered =
+	true;
+
+//----------------//
+//TRAP TRIGGER VFX//
+//----------------//
+scr_trap_vfx_trigger(
+	_ref_trap
+);
 
 			//----------------//
 			//REVEAL TRAP//
@@ -55,7 +62,7 @@ function scr_trap_thin_ice(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_ca
 			//----------------//
 			repeat (_ref_trap._val_magnitude){
 
-				scr_apply_dot_status(
+				scr_status_apply_dot(
 					"FROSTBITE"
 				);
 			}
@@ -69,7 +76,7 @@ function scr_trap_thin_ice(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_ca
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(
+			scr_trap_destroy(
 				_ref_trap
 			);
 

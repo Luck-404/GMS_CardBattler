@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SOLEMOLD",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/SOLEMOLD.yy",
+    "path":"folders/BEASTS/VERMILION/SOLEMOLD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

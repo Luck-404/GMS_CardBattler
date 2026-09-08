@@ -24,14 +24,6 @@ function scr_card_cerulean_winters_bite(_stct_card,_ref_caster,_ref_target){
 	//------------//
 	//DEAL DAMAGE//
 	//------------//
-	scr_damage_target(_val_damage,_ref_target);
+	scr_battle_damage_target(_val_damage,_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"BEAST EMOJIS",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM/BEAST EMOJIS.yy",
+    "name":"DUMMY",
+    "path":"folders/BEASTS/RANCH/DUMMY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

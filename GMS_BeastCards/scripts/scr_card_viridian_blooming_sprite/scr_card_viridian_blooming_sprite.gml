@@ -11,23 +11,11 @@ function scr_card_viridian_blooming_sprite(_stct_card,_ref_caster,_ref_target){
 	//----------------------//
 	//SUMMON BLOOMING SPRITE//
 	//----------------------//
-	scr_init_minion(
+	scr_minion_init(
 		"BLOOMING_SPRITE",
 		_stct_card,
 		_ref_caster,
 		_ref_target
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_resolve_damage_redirect",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_resolve_damage_redirect",
+  "parent":{
+    "name":"REDIRECT",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REDIRECT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

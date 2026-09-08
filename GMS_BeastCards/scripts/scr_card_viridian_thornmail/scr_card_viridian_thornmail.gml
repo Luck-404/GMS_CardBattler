@@ -11,7 +11,7 @@ function scr_card_viridian_thornmail(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//GRANT ARMOR//
 	//-------------//
-	scr_armor_target(
+	scr_battle_armor_target(
 		_stct_card._val_card_magnitude,
 		_ref_caster
 	);
@@ -25,12 +25,4 @@ function scr_card_viridian_thornmail(_stct_card,_ref_caster,_ref_target){
 		3
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_armor,0,false);
 }

@@ -30,8 +30,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"TRIGGERS",
-    "path":"folders/CARDS/CARD VFX/TRIGGERS.yy",
+    "name":"ICEBREAKER",
+    "path":"folders/BATTLE/COLOR TRIGGERS/ICEBREAKER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -10,14 +10,5 @@ function scr_card_viridian_shimmering_spores(_stct_card,_ref_caster,_ref_target)
 	//-----------//
 	//APPLY BLIND//
 	//-----------//
-	scr_apply_cc_status("BLIND",3);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
+	scr_status_apply_cc("BLIND",3);
 }

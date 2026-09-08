@@ -11,14 +11,5 @@ function scr_card_viridian_emerald_slam(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//APPLY CC STATUS//
 	//----------------//
-	scr_apply_cc_status("STUN",1);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
+	scr_status_apply_cc("STUN",1);
 }

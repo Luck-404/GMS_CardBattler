@@ -17,7 +17,7 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET ALLIED TEAM LIST//
 	//--------------------//
-	var _list_allies = scr_get_target_team_list(_ref_caster);
+	var _list_allies = scr_battle_get_target_team_list(_ref_caster);
 
 	if (_list_allies == undefined){
 		return false;
@@ -43,7 +43,7 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		_ct_total_stacks += scr_cleanse_negative_stacks(_ref_ally);
+		_ct_total_stacks += scr_status_cleanse_negative_stacks(_ref_ally);
 	}
 
 	//----------------//
@@ -51,7 +51,6 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	if (_ct_total_stacks <= 0){
 
-		audio_play_sound(snd_buff,0,false);
 
 		return true;
 	}
@@ -80,7 +79,7 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//HEAL CASTER//
 	//-------------//
-	scr_heal_target(
+	scr_battle_heal_target(
 		_ct_total_stacks * 2,
 		_ref_caster
 	);
@@ -90,15 +89,6 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	global.ref_target_beast =
 		_ref_original_target;
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 
 	return true;
 }

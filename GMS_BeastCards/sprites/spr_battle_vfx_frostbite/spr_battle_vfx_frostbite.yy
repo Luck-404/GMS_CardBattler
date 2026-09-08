@@ -29,7 +29,7 @@
   "origin":4,
   "parent":{
     "name":"FROSTBITE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/FROSTBITE.yy",
+    "path":"folders/BATTLE/STATUSES/DOTs/FROSTBITE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

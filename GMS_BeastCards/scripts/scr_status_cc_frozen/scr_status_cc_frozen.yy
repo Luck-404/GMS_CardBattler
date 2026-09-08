@@ -6,7 +6,7 @@
   "name":"scr_status_cc_frozen",
   "parent":{
     "name":"FROZEN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/FROZEN.yy",
+    "path":"folders/BATTLE/STATUSES/CC/FROZEN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

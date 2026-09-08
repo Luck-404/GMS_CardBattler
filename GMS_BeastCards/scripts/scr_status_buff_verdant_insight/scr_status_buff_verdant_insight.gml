@@ -57,7 +57,7 @@ function scr_status_buff_verdant_insight(
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"VERDANT_INSIGHT",
 					_ref_target
 				);
@@ -146,7 +146,7 @@ function scr_status_buff_verdant_insight(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -169,7 +169,7 @@ function scr_status_buff_verdant_insight(
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 
@@ -183,7 +183,7 @@ function scr_status_buff_verdant_insight(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_host
 			);
 
@@ -232,7 +232,7 @@ function scr_status_buff_verdant_insight(
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

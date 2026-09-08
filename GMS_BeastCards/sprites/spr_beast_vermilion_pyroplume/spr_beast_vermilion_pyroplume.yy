@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"PYROPLUME",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/PYROPLUME.yy",
+    "path":"folders/BEASTS/VERMILION/PYROPLUME.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -60,8 +60,15 @@ function scr_trap_rotting_spores(
 				return false;
 			}
 
-			_ref_trap._flag_triggered =
-				true;
+_ref_trap._flag_triggered =
+	true;
+
+//----------------//
+//TRAP TRIGGER VFX//
+//----------------//
+scr_trap_vfx_trigger(
+	_ref_trap
+);
 
 			//----------------//
 			//REVEAL TRAP//
@@ -110,7 +117,7 @@ function scr_trap_rotting_spores(
 			//DEAL MAGIC DAMAGE//
 			//-------------------//
 			var _flag_damage =
-				scr_damage_target(
+				scr_battle_damage_target(
 					_ref_trap._val_magnitude,
 					_ref_target
 				);
@@ -132,7 +139,7 @@ function scr_trap_rotting_spores(
 					_ref_target;
 
 				var _ref_venom =
-					scr_apply_dot_status(
+					scr_status_apply_dot(
 						"VENOM"
 					);
 
@@ -163,7 +170,7 @@ function scr_trap_rotting_spores(
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(
+			scr_trap_destroy(
 				_ref_trap
 			);
 

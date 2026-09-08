@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BLIND",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/BLIND.yy",
+    "path":"folders/BATTLE/STATUSES/CC/BLIND.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

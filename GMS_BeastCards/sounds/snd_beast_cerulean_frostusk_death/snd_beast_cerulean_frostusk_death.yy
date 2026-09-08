@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_frostusk_death",
   "parent":{
     "name":"FROSTUSK",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/FROSTUSK.yy",
+    "path":"folders/BEASTS/CERULEAN/FROSTUSK.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

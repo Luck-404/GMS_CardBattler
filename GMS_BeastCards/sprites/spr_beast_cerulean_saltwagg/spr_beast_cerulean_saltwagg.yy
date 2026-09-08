@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SALTWAGG",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/SALTWAGG.yy",
+    "path":"folders/BEASTS/CERULEAN/SALTWAGG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

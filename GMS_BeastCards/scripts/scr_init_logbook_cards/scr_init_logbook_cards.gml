@@ -418,16 +418,50 @@ function scr_init_logbook_cards(){
 	// SUPPORT
 	//
 	//===============================================================================//	
+	hscr_add_card_entry("SEA_LEGS","CERULEAN");
+	hscr_add_card_entry("DROP_ANCHOR","CERULEAN");
 	hscr_add_card_entry("SAILORS_RESOLVE","CERULEAN");
 	hscr_add_card_entry("ARCTIC_FOCUS","CERULEAN");
 	hscr_add_card_entry("FROST_WEAPON","CERULEAN");
+	hscr_add_card_entry("FROZEN_PRECISION","CERULEAN");
+	hscr_add_card_entry("DEEP_MOMENTUM","CERULEAN");
+	hscr_add_card_entry("ICEBOUND_INSTINCT","CERULEAN");
+	hscr_add_card_entry("HYPOTHERMIA","CERULEAN");
+	hscr_add_card_entry("BRITTLE_CONSTITUTION","CERULEAN");
+	hscr_add_card_entry("WHITEOUT","CERULEAN");
+	hscr_add_card_entry("FROZEN_CURSE","CERULEAN");
+	hscr_add_card_entry("HYPOTHERMIA","CERULEAN");
+	hscr_add_card_entry("PERMAFROST","CERULEAN");
+	hscr_add_card_entry("CHILLING_WEAKNESS","CERULEAN");
+	hscr_add_card_entry("SOOTHING_CURRENT","CERULEAN");
+	hscr_add_card_entry("COOLING_MIST","CERULEAN");
+	hscr_add_card_entry("CRYOGENIC_RECOVERY","CERULEAN");
+	hscr_add_card_entry("TIDAL_RECOVERY","CERULEAN");
+	hscr_add_card_entry("OCEANS_BLESSING","CERULEAN");
+	hscr_add_card_entry("ICE_PRISON","CERULEAN");
+	hscr_add_card_entry("DENSE_FOG","CERULEAN");
+	hscr_add_card_entry("WHIRLPOOL","CERULEAN");
+	hscr_add_card_entry("CALM_SEAS","CERULEAN");
+	hscr_add_card_entry("ROUGH_SEAS","CERULEAN");
+	hscr_add_card_entry("FROSTFORM","CERULEAN");
+	hscr_add_card_entry("KRAKENS_CHOSEN","CERULEAN");
+	hscr_add_card_entry("MARINE_MEND","CERULEAN");
+
+	//===============================================================================//
+	//
+	// ARCHETYPE
+	//
+	//===============================================================================//	
+	hscr_add_card_entry("CALL_THE_DEEP","CERULEAN");
+	hscr_add_card_entry("ICE_AGE","CERULEAN");
+	hscr_add_card_entry("WINTERS_HOUR","CERULEAN");
+	hscr_add_card_entry("KRAKEN_AWAKENS","CERULEAN");
+	hscr_add_card_entry("CERULEAN_GODS_WRATH","CERULEAN");
+	hscr_add_card_entry("LEVIATHANS_BLESSING","CERULEAN");
+	hscr_add_card_entry("OCEANS_EMBRACE","CERULEAN");
+	hscr_add_card_entry("SHATTERSTORM","CERULEAN");
+	hscr_add_card_entry("THE_ABYSS_STARES_BACK","CERULEAN");
 	
-
-
-	
-	hscr_add_card_entry("SEA_LEGS","CERULEAN");
-	hscr_add_card_entry("DROP_ANCHOR","CERULEAN");
-
 	#endregion
 
 	//----------------//

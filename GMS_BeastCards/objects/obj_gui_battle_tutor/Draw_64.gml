@@ -185,7 +185,7 @@ for (
 		//-------------------//
 		//DRAW SELECTED CARD//
 		//-------------------//
-		if (scr_draw_specific_card(_ref_card)){
+		if (scr_battle_card_draw_specific(_ref_card)){
 
 			obj_battle_player_controller
 				._ct_utility_tutors_pending--;
@@ -199,7 +199,7 @@ for (
 			){
 
 				var _arr_next_candidates =
-					scr_get_tutor_candidates(
+					scr_battle_tutor_get_candidates(
 						"UTILITY"
 					);
 

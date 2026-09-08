@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_get_beast_max_hp",
   "parent":{
-    "name":"BEAST GET",
-    "path":"folders/BEASTS/BEAST SETUP/BEAST GET.yy",
+    "name":"DATA",
+    "path":"folders/BEASTS/CORE/DATA.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

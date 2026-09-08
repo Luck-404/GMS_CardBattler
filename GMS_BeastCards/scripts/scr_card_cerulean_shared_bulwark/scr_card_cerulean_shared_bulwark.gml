@@ -13,7 +13,7 @@ function scr_card_cerulean_shared_bulwark(_stct_card,_ref_caster,_ref_target){
 	//GET ALLIED TEAM LIST//
 	//--------------------//
 	var _list_allies =
-		scr_get_target_team_list(
+		scr_battle_get_target_team_list(
 			_ref_caster
 		);
 
@@ -117,16 +117,4 @@ function scr_card_cerulean_shared_bulwark(_stct_card,_ref_caster,_ref_target){
 			_val_share;
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_armor,
-		0,
-		false
-	);
 }

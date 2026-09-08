@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_whiteout",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_whiteout",
+  "parent":{
+    "name":"WHITEOUT",
+    "path":"folders/CARDS/CARD LIST/CERULEAN/WHITEOUT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

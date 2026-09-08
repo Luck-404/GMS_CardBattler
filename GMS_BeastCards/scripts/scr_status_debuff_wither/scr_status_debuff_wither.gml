@@ -35,7 +35,7 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status("WITHER",_ref_target);
+			var _ref_existing_status = scr_status_check("WITHER",_ref_target);
 
 			//------------------//
 			//REFRESH EXISTING//
@@ -167,7 +167,7 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -187,7 +187,7 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -197,7 +197,7 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -237,7 +237,7 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

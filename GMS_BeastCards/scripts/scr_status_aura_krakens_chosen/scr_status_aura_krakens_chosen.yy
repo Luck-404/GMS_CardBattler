@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_aura_krakens_chosen",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_aura_krakens_chosen",
+  "parent":{
+    "name":"KRAKENS_CHOSEN",
+    "path":"folders/BATTLE/STATUSES/AURA/CERULEAN/KRAKENS_CHOSEN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

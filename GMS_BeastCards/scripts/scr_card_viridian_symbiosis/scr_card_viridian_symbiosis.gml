@@ -15,12 +15,4 @@ function scr_card_viridian_symbiosis(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	scr_apply_buff_status("REDIRECT");
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

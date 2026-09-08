@@ -40,7 +40,7 @@ if (instance_exists(_ref_host)){
 		}
 		else{
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 		}

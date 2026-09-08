@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_flitsage_cry",
   "parent":{
     "name":"FLITSAGE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/FLITSAGE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/FLITSAGE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

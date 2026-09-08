@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_apply_anchor_stone_passive",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_apply_anchor_stone_passive",
+  "parent":{
+    "name":"ANCHOR_STONE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/ANCHOR_STONE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

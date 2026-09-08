@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_fightree_cry",
   "parent":{
     "name":"FIGHTREE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/FIGHTREE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/FIGHTREE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

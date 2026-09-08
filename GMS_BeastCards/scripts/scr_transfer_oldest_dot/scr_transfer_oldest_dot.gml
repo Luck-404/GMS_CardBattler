@@ -191,7 +191,7 @@ function scr_transfer_oldest_dot(_ref_source,_ref_target){
 	//CHECK MATCHING TARGET DOT//
 	//========================//
 	var _ref_target_dot =
-		scr_check_for_status(
+		scr_status_check(
 			_str_dot_name,
 			_ref_target
 		);
@@ -501,8 +501,8 @@ function scr_transfer_oldest_dot(_ref_source,_ref_target){
 	//-------------------//
 	//REFRESH STATUS ICONS//
 	//-------------------//
-	scr_reposition_statuses(_ref_source);
-	scr_reposition_statuses(_ref_target);
+	scr_status_reposition(_ref_source);
+	scr_status_reposition(_ref_target);
 
 	//----------//
 	//FEEDBACK//

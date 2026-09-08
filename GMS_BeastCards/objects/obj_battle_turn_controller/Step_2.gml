@@ -73,7 +73,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		// PLAYER TEAM DEAD
 		#region PLAYER TEAM DEAD
-		if (!scr_team_has_combatants("PLAYER")){
+		if (!scr_battle_team_has_combatants("PLAYER")){
 
 			if (!_flag_battle_ended){
 				_flag_battle_ended = true;
@@ -91,7 +91,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 		// ENEMY TEAM DEAD
 		#region ENEMY TEAM DEAD
-		if (!scr_team_has_combatants("ENEMY")){
+		if (!scr_battle_team_has_combatants("ENEMY")){
 
 			if (!_flag_battle_ended){
 				_flag_battle_ended = true;

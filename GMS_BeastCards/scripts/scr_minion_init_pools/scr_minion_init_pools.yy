@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_minion_init_pools",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_minion_init_pools",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/MINIONS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

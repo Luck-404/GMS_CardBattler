@@ -12,7 +12,7 @@ function scr_card_cerulean_deep_current(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DEAL DAMAGE//
 	//-----------//
-	scr_damage_target(
+	scr_battle_damage_target(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
@@ -20,14 +20,6 @@ function scr_card_cerulean_deep_current(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DRAW 1 CARD//
 	//-----------//
-	scr_draw_cards(1);
+	scr_battle_card_draw(1);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

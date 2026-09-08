@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"WYRMELTA",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/WYRMELTA.yy",
+    "path":"folders/BEASTS/VERMILION/WYRMELTA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

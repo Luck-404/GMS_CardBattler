@@ -12,7 +12,7 @@ function scr_card_viridian_verdant_embrace(_stct_card,_ref_caster,_ref_target){
 	//GET ALLIED TEAM LIST//
 	//--------------------//
 	var _list_targets =
-		scr_get_target_team_list(
+		scr_battle_get_target_team_list(
 			_ref_caster
 		);
 
@@ -49,7 +49,7 @@ function scr_card_viridian_verdant_embrace(_stct_card,_ref_caster,_ref_target){
 		//-------------//
 		//LINEAR HEAL//
 		//-------------//
-		scr_heal_target_linear(
+		scr_battle_heal_target_linear(
 			_stct_card._val_card_magnitude,
 			_ref_affected_target
 		);
@@ -59,12 +59,4 @@ function scr_card_viridian_verdant_embrace(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_heal,
-		0,
-		false
-	);
 }

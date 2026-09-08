@@ -11,7 +11,7 @@ function scr_card_viridian_pack_instinct(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//GET ALLIED TEAM//
 	//----------------//
-	var _list_allies = scr_get_target_team_list(_ref_caster);
+	var _list_allies = scr_battle_get_target_team_list(_ref_caster);
 
 	if (_list_allies == undefined){
 		return;
@@ -47,12 +47,4 @@ function scr_card_viridian_pack_instinct(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	global.ref_target_beast = _ref_original_target;
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

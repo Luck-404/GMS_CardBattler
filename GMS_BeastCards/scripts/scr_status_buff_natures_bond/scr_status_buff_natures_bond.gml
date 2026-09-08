@@ -47,7 +47,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"NATURES_BOND",
 					_ref_target
 				);
@@ -126,7 +126,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -163,7 +163,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 			//-------------//
 			//GRANT ARMOR//
 			//-------------//
-			scr_armor_target(
+			scr_battle_armor_target(
 				_val_armor_gain,
 				_ref_host
 			);
@@ -198,7 +198,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -209,7 +209,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

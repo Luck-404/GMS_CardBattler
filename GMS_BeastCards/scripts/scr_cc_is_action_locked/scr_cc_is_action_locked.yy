@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cc_is_action_locked",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cc_is_action_locked",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CC/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

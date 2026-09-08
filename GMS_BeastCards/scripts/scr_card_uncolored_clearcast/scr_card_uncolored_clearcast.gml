@@ -12,16 +12,7 @@ function scr_card_uncolored_clearcast(_stct_card,_ref_caster,_ref_target){
 	//---------------------//
 	//REMOVE ACTIVE WEATHER//
 	//---------------------//
-	scr_clear_weather();
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
+	scr_status_clear_weather();
 	
 	//-------------//
 	//SPAWN POPUP//

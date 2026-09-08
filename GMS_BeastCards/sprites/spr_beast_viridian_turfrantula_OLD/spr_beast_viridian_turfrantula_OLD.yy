@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"TURFRANTULA",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/TURFRANTULA.yy",
+    "path":"folders/BEASTS/VIRIDIAN/TURFRANTULA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

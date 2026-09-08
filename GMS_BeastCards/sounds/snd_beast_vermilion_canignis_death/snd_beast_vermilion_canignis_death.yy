@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_canignis_death",
   "parent":{
     "name":"CANIGNIS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/CANIGNIS.yy",
+    "path":"folders/BEASTS/VERMILION/CANIGNIS.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

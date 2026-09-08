@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"WORLD",
+    "path":"folders/BEASTS/RANCH/WORLD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

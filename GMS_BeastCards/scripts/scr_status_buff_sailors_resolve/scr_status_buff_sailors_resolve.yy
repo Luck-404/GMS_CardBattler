@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_sailors_resolve",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_sailors_resolve",
+  "parent":{
+    "name":"SAILORS_RESOLVE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/SAILORS_RESOLVE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

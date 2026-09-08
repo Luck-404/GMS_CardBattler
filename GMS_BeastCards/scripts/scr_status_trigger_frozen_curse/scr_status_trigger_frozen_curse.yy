@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_frozen_curse",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_frozen_curse",
+  "parent":{
+    "name":"FROZEN_CURSE",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/CERULEAN/FROZEN_CURSE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

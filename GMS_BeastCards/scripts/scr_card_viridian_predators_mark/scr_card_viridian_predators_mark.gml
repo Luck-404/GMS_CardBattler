@@ -18,9 +18,9 @@ function scr_card_viridian_predators_mark(_stct_card,_ref_caster,_ref_target){
 	//CHECK VIRIDIAN DOTS//
 	//----------------------//
 	var _flag_has_dot =
-		scr_check_for_status("BLEED",_ref_target) != -1 ||
-		scr_check_for_status("POISON",_ref_target) != -1 ||
-		scr_check_for_status("VENOM",_ref_target) != -1;
+		scr_status_check("BLEED",_ref_target) != -1 ||
+		scr_status_check("POISON",_ref_target) != -1 ||
+		scr_status_check("VENOM",_ref_target) != -1;
 
 	if (_flag_has_dot){
 		_val_vulnerable_lifetime++;
@@ -29,17 +29,8 @@ function scr_card_viridian_predators_mark(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//APPLY VULNERABLE//
 	//----------------//
-	scr_apply_debuff_status(
+	scr_status_apply_debuff(
 		"VULNERABLE",
 		_val_vulnerable_lifetime
 	);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
 }

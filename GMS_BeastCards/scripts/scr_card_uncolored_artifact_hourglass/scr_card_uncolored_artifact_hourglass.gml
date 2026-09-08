@@ -22,15 +22,6 @@ function scr_card_uncolored_artifact_hourglass(
 			._flag_extra_turn_pending = true;
 	}
 
-	//----------------//
-	// PLAY ANIMATION
-	//----------------//
-
-	//-----------//
-	// PLAY SOUND
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
-
 	//-------------//
 	// SPAWN POPUP
 	//-------------//

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ICE_MIRROR",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/CERULEAN/ICE_MIRROR.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/ICE_MIRROR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CANIGNIS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/CANIGNIS.yy",
+    "path":"folders/BEASTS/VERMILION/CANIGNIS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

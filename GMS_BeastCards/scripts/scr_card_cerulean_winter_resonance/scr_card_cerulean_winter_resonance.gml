@@ -13,14 +13,6 @@ function scr_card_cerulean_winter_resonance(_stct_card,_ref_caster,_ref_target){
 	//---------//
 	//SHATTER//
 	//---------//
-	scr_shatter_target(_ref_target);
+	scr_trigger_shatter(_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

@@ -28,17 +28,20 @@ function scr_status_cc_banish(_str_tag,_ref_status,_val_lifetime=undefined){
 				_val_lifetime = 1;
 			}
 
+			//----------------//
+			//CC LIFETIME//
+			//----------------//
 			_val_lifetime =
-				max(
-					1,
-					_val_lifetime
+				scr_get_cc_lifetime(
+					_val_lifetime,
+					1
 				);
 
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"BANISH",
 					_ref_target
 				);
@@ -116,9 +119,9 @@ function scr_status_cc_banish(_str_tag,_ref_status,_val_lifetime=undefined){
 			//--------------//
 			//BANISH BEAST//
 			//--------------//
-			if (!scr_banish_beast(_ref_target)){
+			if (!scr_cc_banish_beast(_ref_target)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_new_status
 				);
 
@@ -148,7 +151,7 @@ function scr_status_cc_banish(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//REMOVE BANISH//
 			//----------------//
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 
@@ -161,7 +164,7 @@ function scr_status_cc_banish(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_host._val_cur_hp > 0
 			){
 
-				scr_return_banished_beast(
+				scr_cc_return_banished_beast(
 					_ref_host,
 					_val_return_pos
 				);

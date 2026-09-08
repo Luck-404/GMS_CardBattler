@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_arbrawn_death",
   "parent":{
     "name":"ARBRAWN",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/ARBRAWN.yy",
+    "path":"folders/BEASTS/VIRIDIAN/ARBRAWN.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

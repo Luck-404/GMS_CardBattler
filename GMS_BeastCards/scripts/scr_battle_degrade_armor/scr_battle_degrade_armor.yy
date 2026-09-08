@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_degrade_armor",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_degrade_armor",
+  "parent":{
+    "name":"ARMOR",
+    "path":"folders/BATTLE/COMBAT/ARMOR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

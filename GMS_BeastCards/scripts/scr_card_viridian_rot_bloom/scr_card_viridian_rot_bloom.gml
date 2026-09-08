@@ -13,9 +13,9 @@ function scr_card_viridian_rot_bloom(_stct_card,_ref_caster,_ref_target){
 	//GET AOE-3 TARGETS//
 	//--------------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_target),
+		scr_battle_get_left_target(_ref_target),
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//----------------//
@@ -38,7 +38,7 @@ function scr_card_viridian_rot_bloom(_stct_card,_ref_caster,_ref_target){
 		//-------------------//
 		var _ct_poison_stacks = 0;
 
-		var _ref_poison = scr_check_for_status(
+		var _ref_poison = scr_status_check(
 			"POISON",
 			_ref_affected_target
 		);
@@ -57,18 +57,11 @@ function scr_card_viridian_rot_bloom(_stct_card,_ref_caster,_ref_target){
 		//------------//
 		//DEAL DAMAGE//
 		//------------//
-		scr_damage_target(
+		scr_battle_damage_target(
 			_val_damage,
 			_ref_affected_target
 		);
 
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

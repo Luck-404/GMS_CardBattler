@@ -49,7 +49,7 @@ function scr_status_buff_manavine(
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"MANAVINE",
 					global.list_statuses
 				);
@@ -125,7 +125,7 @@ function scr_status_buff_manavine(
 			//-------------------//
 			//GAIN CURRENT MANA//
 			//-------------------//
-			scr_gain_mana(
+			scr_battle_mana_gain(
 				_val_magnitude
 			);
 
@@ -137,7 +137,7 @@ function scr_status_buff_manavine(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -159,7 +159,7 @@ function scr_status_buff_manavine(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -200,12 +200,12 @@ function scr_status_buff_manavine(
 			//-------------------//
 			//REFRESH MANA HUD//
 			//-------------------//
-			scr_reposition_mana();
+			scr_battle_mana_reposition();
 
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

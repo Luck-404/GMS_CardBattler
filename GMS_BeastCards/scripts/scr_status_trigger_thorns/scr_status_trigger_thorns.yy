@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_thorns",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_thorns",
+  "parent":{
+    "name":"THORNS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/THORNS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

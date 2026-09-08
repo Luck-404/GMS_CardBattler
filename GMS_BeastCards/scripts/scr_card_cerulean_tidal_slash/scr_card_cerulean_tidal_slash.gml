@@ -14,7 +14,7 @@ function scr_card_cerulean_tidal_slash(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	var _val_damage = _stct_card._val_card_magnitude;
 
-	var _ref_rain = scr_check_for_status(
+	var _ref_rain = scr_status_check(
 		"WEATHER: RAIN",
 		global.list_statuses
 	);
@@ -26,14 +26,6 @@ function scr_card_cerulean_tidal_slash(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DEAL DAMAGE//
 	//-----------//
-	scr_damage_target(_val_damage,_ref_target);
+	scr_battle_damage_target(_val_damage,_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

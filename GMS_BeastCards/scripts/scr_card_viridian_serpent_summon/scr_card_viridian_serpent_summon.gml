@@ -12,15 +12,7 @@ function scr_card_viridian_serpent_summon(_stct_card,_ref_caster,_ref_target){
 	//SUMMON SERPENTS//
 	//----------------//
 	repeat (3){
-		scr_init_minion("SERPENT",_stct_card,_ref_caster,_ref_caster);
+		scr_minion_init("SERPENT",_stct_card,_ref_caster,_ref_caster);
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

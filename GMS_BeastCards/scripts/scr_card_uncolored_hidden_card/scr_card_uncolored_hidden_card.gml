@@ -11,16 +11,7 @@ function scr_card_uncolored_hidden_card(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DRAW CARDS//
 	//-----------//
-	scr_draw_cards(1);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_draw_card,0,false);
+	scr_battle_card_draw(1);
 
 	//-------------//
 	//SPAWN POPUP//

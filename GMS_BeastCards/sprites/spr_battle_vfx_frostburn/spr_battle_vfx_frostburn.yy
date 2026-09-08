@@ -30,7 +30,7 @@
   "origin":4,
   "parent":{
     "name":"FROSTBURN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/FROSTBURN.yy",
+    "path":"folders/BATTLE/STATUSES/DOTs/FROSTBURN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

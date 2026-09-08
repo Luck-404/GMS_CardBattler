@@ -11,17 +11,8 @@ function scr_card_viridian_crippling_vines(_stct_card,_ref_caster,_ref_target){
 	//-----------------------//
 	//APPLY CRIPPLING VINES//
 	//-----------------------//
-	scr_apply_debuff_status(
+	scr_status_apply_debuff(
 		"CRIPPLING_VINES",
 		3
-	);
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_debuff,
-		0,
-		false
 	);
 }

@@ -179,7 +179,7 @@ switch(_state_player){
 
 		ds_list_shuffle(_list_battle_deck);
 
-		scr_draw_cards(_ct_hand_size);
+		scr_battle_card_draw(_ct_hand_size);
 
 		_state_player = ENUM_PLAYER_STATE.WAIT;
 
@@ -232,7 +232,7 @@ switch(_state_player){
 		//--------------------------//
 		if (
 			ds_list_size(_list_beasts_alive) <= 0 &&
-			scr_team_has_combatants("PLAYER")
+			scr_battle_team_has_combatants("PLAYER")
 		){
 
 			_state_player =
@@ -261,7 +261,7 @@ switch(_state_player){
 
 				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
 
-				scr_degrade_shield(_ref_beast);
+				scr_battle_degrade_armor(_ref_beast);
 			}
 
 			// BUILD TURN START ITEM QUEUE
@@ -330,7 +330,7 @@ switch(_state_player){
 
 				ds_list_delete(_list_turn_start_items,0);
 
-				scr_init_battle_wait(60);
+				scr_init_battle_wait(90);
 			}
 			else{
 
@@ -381,7 +381,7 @@ switch(_state_player){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_init_battle_wait(10);
+					scr_init_battle_wait(20);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);
@@ -415,7 +415,7 @@ switch(_state_player){
 			//BUILD SPEED-ORDERED QUEUE//
 			//------------------------//
 			_list_casting_minions =
-				scr_build_minion_speed_queue(
+				scr_minion_build_speed_queue(
 					_list_beasts_alive
 				);
 		}
@@ -439,7 +439,7 @@ switch(_state_player){
 					0
 				);
 
-				scr_init_battle_wait(15);
+				scr_init_battle_wait(30);
 			}
 			else{
 
@@ -505,7 +505,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 			_flag_clicked = true;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
 			break;
@@ -517,7 +517,7 @@ switch(_state_player){
 		//
 		#region LEFT CLICK SELECTS CARD
 		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card) && mouse_check_button_pressed(mb_left) && !_flag_clicked){
-			audio_play_sound(snd_card_move,0,false);
+			audio_play_sound(snd_battle_card_move,0,false);
 			_flag_clicked = true;
 
 			var _ref_card = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card);
@@ -565,7 +565,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 			_flag_clicked = true;
 			_stct_selected_prism = undefined;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
@@ -632,7 +632,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 			_flag_clicked = true;
 			_stct_selected_prism = undefined;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
@@ -680,7 +680,7 @@ switch(_state_player){
 		//
 		#region END TURN
 		if (mouse_check_button_pressed(mb_left) && !_flag_clicked && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_end_turn_button)){
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 			_flag_clicked = true;
 			_state_player = ENUM_PLAYER_STATE.TURN_END;
 			break;
@@ -816,7 +816,7 @@ switch(_state_player){
 			_ref_hovered_beast._flag_beast_range_check
 		){
 
-			_arr_target_preview = scr_get_card_preview_targets(
+			_arr_target_preview = scr_battle_preview_get_card_targets(
 				global.ref_cast_card._ref_card,
 				_ref_hovered_beast
 			);
@@ -836,7 +836,7 @@ switch(_state_player){
 			)
 		){
 
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 
 			_flag_clicked = true;
 
@@ -966,7 +966,7 @@ switch(_state_player){
 			)
 		){
 
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 
 			_flag_clicked = true;
 
@@ -1141,7 +1141,7 @@ switch(_state_player){
 			)
 		){
 
-			audio_play_sound(snd_end_turn,0,false);
+			audio_play_sound(snd_battle_turn,0,false);
 
 			_flag_clicked = true;
 
@@ -1296,7 +1296,7 @@ switch(_state_player){
 	#region CARD EXECUTE
 	case ENUM_PLAYER_STATE.CARD_EXECUTE:
 
-		scr_cast_card();
+		scr_battle_card_cast();
 
 		//-------------------//
 		//CHECK TUTOR QUEUE//
@@ -1384,7 +1384,7 @@ switch(_state_player){
 			//----------------//
 			//HEAL MINIONS//
 			//----------------//
-			scr_heal_minions(
+			scr_minion_heal_all(
 				_list_beasts_alive
 			);
 
@@ -1456,7 +1456,7 @@ switch(_state_player){
 
 				ds_list_delete(_list_turn_end_items,0);
 
-				scr_init_battle_wait(60);
+				scr_init_battle_wait(90);
 			}
 			else{
 
@@ -1523,7 +1523,7 @@ switch(_state_player){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_init_battle_wait(10);
+					scr_init_battle_wait(20);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);
@@ -1544,7 +1544,7 @@ switch(_state_player){
 				else{
 
 					// DRAW NEW CARDS
-					scr_draw_cards(_ct_draw_amount);
+					scr_battle_card_draw(_ct_draw_amount);
 
 					hscr_check_battle_card_oom(_list_battle_hand);
 
@@ -1576,7 +1576,7 @@ switch(_state_player){
 				obj_popup_error
 			);
 
-			scr_reposition_cards();
+			scr_battle_card_reposition();
 
 			hscr_check_battle_card_oom(
 				_list_battle_hand
@@ -1615,14 +1615,14 @@ switch(_state_player){
 			){
 
 				audio_play_sound(
-					snd_card_move,
+					snd_battle_card_move,
 					0,
 					false
 				);
 
 				_flag_clicked = true;
 
-				scr_discard_card(
+				scr_battle_card_discard(
 					_ref_card
 				);
 
@@ -1650,7 +1650,7 @@ switch(_state_player){
 
 			instance_destroy(obj_popup_error);
 
-			scr_reposition_cards();
+			scr_battle_card_reposition();
 
 			hscr_finish_player_turn();
 
@@ -1662,13 +1662,13 @@ switch(_state_player){
 			if (mouse_check_button_pressed(mb_left)){
 
 				if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card)){
-				audio_play_sound(snd_card_move,0,false);
+				audio_play_sound(snd_battle_card_move,0,false);
 					_flag_clicked = true;
 
 					var _ref_card = instance_nearest(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_battle_card);
 
 					if (instance_exists(_ref_card)){
-						scr_discard_card(_ref_card);
+						scr_battle_card_discard(_ref_card);
 					}
 				}
 			}

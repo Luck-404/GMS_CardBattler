@@ -7,6 +7,19 @@
 //
 //===============================================================================//
 
+//========================//
+//PREVENT DUPLICATE BATTLE//
+//========================//
+if (instance_number(obj_battle_turn_controller) > 1){
+
+	show_debug_message(
+		"BATTLE WARNING | DUPLICATE TURN CONTROLLER DESTROYED"
+	);
+
+	instance_destroy();
+	exit;
+}
+
 //---------//
 //VARIABLES//
 //---------//
@@ -98,7 +111,7 @@ function hscr_build_entry_trigger_queue(){
 	//----------------//
 	//SORT BY SPEED//
 	//----------------//
-	scr_sort_beast_trigger_queue_by_speed(_list_entry_triggers);
+	scr_battle_sort_beast_trigger_queue_by_speed(_list_entry_triggers);
 
 	_flag_entry_triggers_init = true;
 }
@@ -114,12 +127,12 @@ function hscr_build_entry_trigger_queue(){
 function hscr_set_initial_turn_order(){
 
 	var _val_player_speed =
-		scr_get_team_average_speed(
+		scr_battle_get_team_average_speed(
 			_ref_player_controller._list_beasts_alive
 		);
 
 	var _val_enemy_speed =
-		scr_get_team_average_speed(
+		scr_battle_get_team_average_speed(
 			_ref_enemy_controller._list_beasts_alive
 		);
 
@@ -251,7 +264,7 @@ function hscr_pass_turn(){
 	//----------------//
 	//UPDATE BANISH//
 	//----------------//
-	scr_update_banished_beasts();
+	scr_cc_update_banished_beasts();
 
 	if (_val_turn_tracker == 0){
 		_val_turn_tracker++;

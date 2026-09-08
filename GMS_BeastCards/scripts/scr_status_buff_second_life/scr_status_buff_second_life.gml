@@ -34,7 +34,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"SECOND_LIFE",
 					_ref_target
 				);
@@ -96,7 +96,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -119,7 +119,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 
@@ -130,7 +130,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_host
 			);
 
@@ -171,13 +171,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 				_ref_host.y - 48
 			);
 
-			audio_play_sound(
-				snd_heal,
-				0,
-				false
-			);
-
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 
@@ -192,7 +186,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

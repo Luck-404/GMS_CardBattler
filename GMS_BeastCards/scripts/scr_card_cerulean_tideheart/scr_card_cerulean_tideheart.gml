@@ -12,7 +12,7 @@ function scr_card_cerulean_tideheart(_stct_card,_ref_caster,_ref_target){
 	//-------------------------//
 	//CLEANSE NEGATIVE STATUSES//
 	//-------------------------//
-	scr_cleanse_negative(
+	scr_status_cleanse_negative(
 		_ref_caster,
 		ds_list_size(_ref_caster._list_statuses)
 	);
@@ -20,5 +20,5 @@ function scr_card_cerulean_tideheart(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//GAIN ECHO//
 	//-----------//
-	scr_gain_echo(1);
+	scr_status_gain_echo(1);
 }

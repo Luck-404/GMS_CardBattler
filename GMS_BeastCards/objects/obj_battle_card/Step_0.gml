@@ -37,7 +37,7 @@ if (_flag_card_moving){
 			case "DRAW":
 
 				audio_play_sound(
-					snd_battle_sfx_draw_card,
+					snd_battle_card_draw,
 					0,
 					false
 				);

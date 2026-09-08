@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_endless_bloom",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_endless_bloom",
+  "parent":{
+    "name":"ENDLESS_BLOOM",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/ENDLESS_BLOOM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

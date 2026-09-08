@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cc_banish_beast",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cc_banish_beast",
+  "parent":{
+    "name":"BANISH",
+    "path":"folders/BATTLE/STATUSES/CC/BANISH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

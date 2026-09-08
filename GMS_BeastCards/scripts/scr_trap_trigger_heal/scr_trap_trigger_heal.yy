@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_trap_trigger_heal",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_trap_trigger_heal",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/TRAPS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

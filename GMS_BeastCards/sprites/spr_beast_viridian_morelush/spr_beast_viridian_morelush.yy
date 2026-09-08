@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"MORELUSH",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/MORELUSH.yy",
+    "path":"folders/BEASTS/VIRIDIAN/MORELUSH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

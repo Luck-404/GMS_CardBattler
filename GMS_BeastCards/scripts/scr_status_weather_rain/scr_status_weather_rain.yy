@@ -6,7 +6,7 @@
   "name":"scr_status_weather_rain",
   "parent":{
     "name":"RAIN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/WEATHER/RAIN.yy",
+    "path":"folders/BATTLE/STATUSES/WEATHER/RAIN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_get_target_team_list",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_get_target_team_list",
+  "parent":{
+    "name":"TARGETING",
+    "path":"folders/BATTLE/COMBAT/TARGETING.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

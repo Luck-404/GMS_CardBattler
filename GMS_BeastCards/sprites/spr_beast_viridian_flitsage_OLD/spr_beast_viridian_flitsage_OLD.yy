@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FLITSAGE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/FLITSAGE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/FLITSAGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

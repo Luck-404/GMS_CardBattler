@@ -34,7 +34,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"BURN",
 					_ref_target
 				);
@@ -55,7 +55,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 					32,
 					1,
 					0,
-					snd_battle_sfx_burn
+					snd_battle_burn
 				);
 
 				scr_status_refresh_lifetime(
@@ -119,7 +119,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -132,7 +132,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 					32,
 					1,
 					0,
-					snd_battle_sfx_burn
+					snd_battle_burn
 				);
 
 			return _ref_new_status;
@@ -180,7 +180,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 					32,
 					1,
 					0,
-					snd_battle_sfx_burn
+					snd_battle_burn
 				);
 
 				var _val_damage =
@@ -255,7 +255,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_host
 			);
 
@@ -268,7 +268,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

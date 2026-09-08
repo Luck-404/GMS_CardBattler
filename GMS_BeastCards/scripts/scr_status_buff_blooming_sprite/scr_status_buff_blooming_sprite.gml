@@ -158,7 +158,7 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 			//----------------//
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -204,7 +204,7 @@ function scr_status_buff_blooming_sprite(_str_tag,_ref_status,_ref_source_minion
 
 				instance_destroy(_ref_status);
 
-				scr_reposition_statuses(_ref_host);
+				scr_status_reposition(_ref_host);
 			}
 			else{
 

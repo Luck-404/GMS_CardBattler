@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CERULEAN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS/MINION SPRITES/CERULEAN.yy",
+    "path":"folders/BATTLE/MINIONS/CERULEAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

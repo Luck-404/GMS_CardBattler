@@ -36,7 +36,7 @@ function scr_status_buff_endless_bloom(
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"ENDLESS_BLOOM",
 					global.list_statuses
 				);
@@ -121,7 +121,7 @@ function scr_status_buff_endless_bloom(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -143,7 +143,7 @@ function scr_status_buff_endless_bloom(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -157,7 +157,7 @@ function scr_status_buff_endless_bloom(
 
 			if (instance_exists(_ref_status)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 			}

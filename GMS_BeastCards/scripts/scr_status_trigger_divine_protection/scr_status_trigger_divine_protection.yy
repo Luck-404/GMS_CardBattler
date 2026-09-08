@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_divine_protection",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_divine_protection",
+  "parent":{
+    "name":"DIVINE_PROTECTION",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/DIVINE_PROTECTION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

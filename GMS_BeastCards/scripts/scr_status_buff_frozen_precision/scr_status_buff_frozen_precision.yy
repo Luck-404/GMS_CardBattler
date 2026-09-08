@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_frozen_precision",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_frozen_precision",
+  "parent":{
+    "name":"FROZEN_PRECISION",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/FROZEN_PRECISION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_sanguinaut_cry",
   "parent":{
     "name":"SANGUINAUT",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/SANGUINAUT.yy",
+    "path":"folders/BEASTS/VERMILION/SANGUINAUT.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

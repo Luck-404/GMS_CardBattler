@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ISTIRAIN",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/ISTIRAIN.yy",
+    "path":"folders/BEASTS/CERULEAN/ISTIRAIN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

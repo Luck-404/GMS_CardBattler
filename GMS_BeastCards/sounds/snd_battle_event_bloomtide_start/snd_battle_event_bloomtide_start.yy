@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_battle_event_bloomtide_start",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.5964853,
+  "exportDir":"",
+  "name":"snd_battle_event_bloomtide_start",
+  "parent":{
+    "name":"BLOOMTIDE",
+    "path":"folders/BATTLE/STATUSES/EVENTS/BLOOMTIDE.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_battle_event_bloomtide_start.wav",
+  "volume":0.01,
+}

@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_argentbud_cry",
   "parent":{
     "name":"ARGENTBUD",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/ARGENTBUD.yy",
+    "path":"folders/BEASTS/VIRIDIAN/ARGENTBUD.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

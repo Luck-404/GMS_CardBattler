@@ -127,7 +127,7 @@
 	//—------------------------------------------------------------------------------//
 	// SETUP MINION POOLS
 	//—------------------------------------------------------------------------------//
-	scr_init_minion_pools();
+	scr_minion_init_pools();
 
 	//—------------------------------------------------------------------------------//
 	// SETUP LOGBOOK
@@ -200,7 +200,6 @@
 	//scr_add_card_to_deck(scr_get_card_info("THOUGHTSTEAL"));
 
 	#endregion
-
 
 	#region VIRIDIAN
 
@@ -408,21 +407,20 @@
 		//scr_add_card_to_deck(scr_get_card_info("SHARED_BULWARK"));
 		//scr_add_card_to_deck(scr_get_card_info("COLD_RESERVE"));
 
-		
-	//utility
+	//UTILITY
 		//scr_add_card_to_deck(scr_get_card_info("RAIN"));
-		//scr_add_card_to_deck(scr_get_card_info("SNOWFALL"));
+		scr_add_card_to_deck(scr_get_card_info("SNOWFALL"));
 		//scr_add_card_to_deck(scr_get_card_info("THUNDERSTORM"));
 		//scr_add_card_to_deck(scr_get_card_info("THIN_ICE"));
 		//scr_add_card_to_deck(scr_get_card_info("STORM_BEACON"));
 		//scr_add_card_to_deck(scr_get_card_info("PULLED_UNDER"));
-		scr_add_card_to_deck(scr_get_card_info("ICE_WALL"));
-		scr_add_card_to_deck(scr_get_card_info("RIMEFROST_ELEMENTAL"));
-		scr_add_card_to_deck(scr_get_card_info("STORM_WISP"));
-		scr_add_card_to_deck(scr_get_card_info("ABYSSAL_HARPOON"));
-		scr_add_card_to_deck(scr_get_card_info("CORAL_GUARDIAN"));
-		scr_add_card_to_deck(scr_get_card_info("ANCHOR_STONE"));
-		scr_add_card_to_deck(scr_get_card_info("DEEPFLOW_WHISPERSONG"));
+		//scr_add_card_to_deck(scr_get_card_info("ICE_WALL"));
+		//scr_add_card_to_deck(scr_get_card_info("RIMEFROST_ELEMENTAL"));
+		//scr_add_card_to_deck(scr_get_card_info("STORM_WISP"));
+		//scr_add_card_to_deck(scr_get_card_info("ABYSSAL_HARPOON"));
+		//scr_add_card_to_deck(scr_get_card_info("CORAL_GUARDIAN"));
+		//scr_add_card_to_deck(scr_get_card_info("ANCHOR_STONE"));
+		//scr_add_card_to_deck(scr_get_card_info("DEEPFLOW_WHISPERSONG"));
 		//scr_add_card_to_deck(scr_get_card_info("UNDERTOW"));
 		//scr_add_card_to_deck(scr_get_card_info("RIP_CURRENT"));
 		//scr_add_card_to_deck(scr_get_card_info("AQUA_STEP"));
@@ -436,16 +434,46 @@
 		//scr_add_card_to_deck(scr_get_card_info("TIDEHEART"));
 
 	//SUPPORT
+		//scr_add_card_to_deck(scr_get_card_info("SEA_LEGS"));
+		//scr_add_card_to_deck(scr_get_card_info("DROP_ANCHOR"));	
 		//scr_add_card_to_deck(scr_get_card_info("SAILORS_RESOLVE"));
 		//scr_add_card_to_deck(scr_get_card_info("ARCTIC_FOCUS"));
 		//scr_add_card_to_deck(scr_get_card_info("FROST_WEAPON"));
+		//scr_add_card_to_deck(scr_get_card_info("FROZEN_PRECISION"));
+		//scr_add_card_to_deck(scr_get_card_info("DEEP_MOMENTUM"));
+		//scr_add_card_to_deck(scr_get_card_info("ICEBOUND_INSTINCT"));
+		//scr_add_card_to_deck(scr_get_card_info("HYPOTHERMIA"));
+		//scr_add_card_to_deck(scr_get_card_info("BRITTLE_CONSTITUTION"));
+		//scr_add_card_to_deck(scr_get_card_info("WHITEOUT"));
+		//scr_add_card_to_deck(scr_get_card_info("FROZEN_CURSE"));
+		//scr_add_card_to_deck(scr_get_card_info("HYPOTHERMIA"));
+		//scr_add_card_to_deck(scr_get_card_info("PERMAFROST"));
+		//scr_add_card_to_deck(scr_get_card_info("CHILLING_WEAKNESS"));
+		//scr_add_card_to_deck(scr_get_card_info("SOOTHING_CURRENT"));
+		//scr_add_card_to_deck(scr_get_card_info("COOLING_MIST"));
+		//scr_add_card_to_deck(scr_get_card_info("CRYOGENIC_RECOVERY"));
+		//scr_add_card_to_deck(scr_get_card_info("TIDAL_RECOVERY"));
+		//scr_add_card_to_deck(scr_get_card_info("OCEANS_BLESSING"));
+		//scr_add_card_to_deck(scr_get_card_info("ICE_PRISON"));
+		//scr_add_card_to_deck(scr_get_card_info("DENSE_FOG"));
+		//scr_add_card_to_deck(scr_get_card_info("WHIRLPOOL"));
+		//scr_add_card_to_deck(scr_get_card_info("CALM_SEAS"));
+		//scr_add_card_to_deck(scr_get_card_info("ROUGH_SEAS"));
+		//scr_add_card_to_deck(scr_get_card_info("FROSTFORM"));
+		//scr_add_card_to_deck(scr_get_card_info("KRAKENS_CHOSEN"));
+		//scr_add_card_to_deck(scr_get_card_info("MARINE_MEND"));
+		//scr_add_card_to_deck(scr_get_card_info("CALL_THE_DEEP"));
+		//scr_add_card_to_deck(scr_get_card_info("ICE_AGE"));
+		//scr_add_card_to_deck(scr_get_card_info("KRAKEN_AWAKENS"));
+		//scr_add_card_to_deck(scr_get_card_info("WINTERS_HOUR"));
+		//scr_add_card_to_deck(scr_get_card_info("CERULEAN_GODS_WRATH"));
+		//scr_add_card_to_deck(scr_get_card_info("LEVIATHANS_BLESSING"));		
+		//scr_add_card_to_deck(scr_get_card_info("OCEANS_EMBRACE"));
+		//scr_add_card_to_deck(scr_get_card_info("SHATTERSTORM"));
+		//scr_add_card_to_deck(scr_get_card_info("THE_ABYSS_STARES_BACK"));
 		
-
-
-	
-	
-		//scr_add_card_to_deck(scr_get_card_info("SEA_LEGS"));
-		//scr_add_card_to_deck(scr_get_card_info("DROP_ANCHOR"));
+		
+		
 		
 	#endregion
 	

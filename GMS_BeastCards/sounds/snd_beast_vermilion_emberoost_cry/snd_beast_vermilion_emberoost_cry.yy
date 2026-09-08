@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_emberoost_cry",
   "parent":{
     "name":"EMBEROOST",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/EMBEROOST.yy",
+    "path":"folders/BEASTS/VERMILION/EMBEROOST.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

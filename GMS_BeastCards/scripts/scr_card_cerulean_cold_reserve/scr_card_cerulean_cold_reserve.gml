@@ -42,18 +42,10 @@ function scr_card_cerulean_cold_reserve(_stct_card,_ref_caster,_ref_target){
 		//-----------//
 		//HEAL CASTER//
 		//-----------//
-		scr_heal_target(
+		scr_battle_heal_target(
 			_val_armor_consumed,
 			_ref_caster
 		);
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_heal,
-		0,
-		false
-	);
 }

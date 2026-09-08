@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"IMMOVABLE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/IMMOVABLE.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/IMMOVABLE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

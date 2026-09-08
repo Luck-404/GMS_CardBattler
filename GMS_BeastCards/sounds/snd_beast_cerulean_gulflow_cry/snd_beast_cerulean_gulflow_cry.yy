@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_gulflow_cry",
   "parent":{
     "name":"GULFLOW",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/GULFLOW.yy",
+    "path":"folders/BEASTS/CERULEAN/GULFLOW.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

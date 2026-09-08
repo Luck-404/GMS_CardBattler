@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"HONEYED_SCENT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/AURA/VIRIDIAN/HONEYED_SCENT.yy",
+    "path":"folders/BATTLE/STATUSES/AURA/VIRIDIAN/HONEYED_SCENT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

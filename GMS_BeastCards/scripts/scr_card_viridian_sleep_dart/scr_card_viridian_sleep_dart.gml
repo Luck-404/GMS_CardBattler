@@ -10,17 +10,8 @@ function scr_card_viridian_sleep_dart(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//APPLY SLEEP//
 	//-----------//
-	scr_apply_cc_status(
+	scr_status_apply_cc(
 		"SLEEP",
 		3
 	);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
 }

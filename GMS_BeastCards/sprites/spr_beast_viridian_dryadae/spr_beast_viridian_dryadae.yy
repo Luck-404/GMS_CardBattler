@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"DRYADAE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/DRYADAE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/DRYADAE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

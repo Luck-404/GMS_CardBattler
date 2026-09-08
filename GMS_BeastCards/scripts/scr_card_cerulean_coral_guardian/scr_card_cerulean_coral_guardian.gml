@@ -11,23 +11,11 @@ function scr_card_cerulean_coral_guardian(_stct_card,_ref_caster,_ref_target){
 	//----------------------//
 	//SUMMON CORAL GUARDIAN//
 	//----------------------//
-	scr_init_minion(
+	scr_minion_init(
 		"CORAL_GUARDIAN",
 		_stct_card,
 		_ref_caster,
 		_ref_caster
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
 }

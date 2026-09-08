@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CEPHARIME",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CEPHARIME.yy",
+    "path":"folders/BEASTS/CERULEAN/CEPHARIME.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

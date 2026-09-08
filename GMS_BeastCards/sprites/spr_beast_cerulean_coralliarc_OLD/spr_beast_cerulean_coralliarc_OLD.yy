@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CORALLIARC",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CORALLIARC.yy",
+    "path":"folders/BEASTS/CERULEAN/CORALLIARC.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

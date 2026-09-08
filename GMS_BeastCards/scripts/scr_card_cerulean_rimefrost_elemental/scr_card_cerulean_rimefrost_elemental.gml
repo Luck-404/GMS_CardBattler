@@ -11,14 +11,6 @@ function scr_card_cerulean_rimefrost_elemental(_stct_card,_ref_caster,_ref_targe
 	//-----------------------------//
 	//SUMMON RIMEFROST ELEMENTAL//
 	//-----------------------------//
-	scr_init_minion("RIMEFROST_ELEMENTAL",_stct_card,_ref_caster,_ref_target);
+	scr_minion_init("RIMEFROST_ELEMENTAL",_stct_card,_ref_caster,_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

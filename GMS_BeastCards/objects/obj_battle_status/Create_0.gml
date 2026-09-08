@@ -25,7 +25,6 @@ _flag_status_infinite = false;
 
 _str_status_command = "WAIT";
 
-
 // SCRIPT
 _scr_status = undefined;
 
@@ -34,8 +33,22 @@ _ref_host = undefined;
 _ref_status_target = undefined;
 _ref_source_minion = undefined;
 
-// PERSISTENT VFX
+//----------------//
+//CC RESTRICTIONS//
+//----------------//
+_flag_status_cc_immunity = false;
+
+//----------------//
+//DODGE MODIFIERS//
+//----------------//
+_flag_status_ignore_dodge = false;
+
+//-----------------------//
+//PERSISTENT PRESENTATION//
+//-----------------------//
 _ref_persistent_vfx = undefined;
+
+_val_persistent_audio = -1;
 
 // STATUS DATA
 _str_status_type = "DEFAULT";

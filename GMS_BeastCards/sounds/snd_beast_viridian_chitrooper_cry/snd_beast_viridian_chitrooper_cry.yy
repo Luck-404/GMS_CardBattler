@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_chitrooper_cry",
   "parent":{
     "name":"CHITROOPER",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/CHITROOPER.yy",
+    "path":"folders/BEASTS/VIRIDIAN/CHITROOPER.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

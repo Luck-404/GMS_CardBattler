@@ -34,7 +34,7 @@ function scr_status_aura_honeyed_scent(_str_tag,_ref_status,_val_magnitude=undef
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status("HONEYED_SCENT",_ref_target);
+			var _ref_existing_status = scr_status_check("HONEYED_SCENT",_ref_target);
 
 			if (_ref_existing_status != -1){
 				return _ref_existing_status;
@@ -104,7 +104,7 @@ function scr_status_aura_honeyed_scent(_str_tag,_ref_status,_val_magnitude=undef
 			//----------------//
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -137,7 +137,7 @@ function scr_status_aura_honeyed_scent(_str_tag,_ref_status,_val_magnitude=undef
 			//------------------//
 			//SUMMON WASP DRONE//
 			//------------------//
-			var _ref_wasp = scr_init_minion(
+			var _ref_wasp = scr_minion_init(
 				"WASP_DRONE",
 				undefined,
 				_ref_trigger_caster,
@@ -185,7 +185,7 @@ function scr_status_aura_honeyed_scent(_str_tag,_ref_status,_val_magnitude=undef
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

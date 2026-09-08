@@ -101,7 +101,11 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"ICEBOUND_SEAL");
 		ds_list_add(global.list_pool_cards_rarity_I,"SAILORS_RESOLVE");
 		ds_list_add(global.list_pool_cards_rarity_I,"FROST_WEAPON");
+		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_PRECISION");
+		ds_list_add(global.list_pool_cards_rarity_I,"SOOTHING_CURRENT");
+		ds_list_add(global.list_pool_cards_rarity_I,"MARINE_MEND");
 		
+
 
 
 	#endregion
@@ -215,7 +219,18 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_II,"RIPPLING_POOL");
 		ds_list_add(global.list_pool_cards_rarity_II,"DEEP_REFLECTION");
 		ds_list_add(global.list_pool_cards_rarity_II,"ARCTIC_FOCUS");
-
+		ds_list_add(global.list_pool_cards_rarity_II,"HYPOTHERMIA");
+		ds_list_add(global.list_pool_cards_rarity_II,"BRITTLE_CONSTITUTION");
+		ds_list_add(global.list_pool_cards_rarity_II,"WHITEOUT");
+		ds_list_add(global.list_pool_cards_rarity_II,"HYPOTHERMIA");
+		ds_list_add(global.list_pool_cards_rarity_II,"PERMAFROST");
+		ds_list_add(global.list_pool_cards_rarity_II,"CHILLING_WEAKNESS");
+		ds_list_add(global.list_pool_cards_rarity_II,"COOLING_MIST");
+		ds_list_add(global.list_pool_cards_rarity_II,"CRYOGENIC_RECOVERY");
+		ds_list_add(global.list_pool_cards_rarity_II,"TIDAL_RECOVERY");
+		ds_list_add(global.list_pool_cards_rarity_II,"ICE_PRISON");
+		ds_list_add(global.list_pool_cards_rarity_II,"WHIRLPOOL");
+		
 	#endregion
 
 
@@ -284,7 +299,16 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_III,"RIMEFROST_ELEMENTAL");
 		ds_list_add(global.list_pool_cards_rarity_III,"DEEPFLOW_WHISPERSONG");
 		ds_list_add(global.list_pool_cards_rarity_III,"ANCIENT_CHARTS");
-	
+		ds_list_add(global.list_pool_cards_rarity_III,"DEEP_MOMENTUM");
+		ds_list_add(global.list_pool_cards_rarity_III,"ICEBOUND_INSTINCT");
+		ds_list_add(global.list_pool_cards_rarity_III,"FROZEN_CURSE");
+		ds_list_add(global.list_pool_cards_rarity_III,"OCEANS_BLESSING");
+		ds_list_add(global.list_pool_cards_rarity_III,"DENSE_FOG");
+		ds_list_add(global.list_pool_cards_rarity_III,"CALM_SEAS");
+		ds_list_add(global.list_pool_cards_rarity_III,"ROUGH_SEAS");
+		ds_list_add(global.list_pool_cards_rarity_III,"FROSTFORM");
+		ds_list_add(global.list_pool_cards_rarity_III,"KRAKENS_CHOSEN");
+
 	#endregion
 
 
@@ -307,9 +331,6 @@ function scr_init_card_pools(){
 		//--------//
 		ds_list_add(global.list_pool_cards_rarity_IV,"TRANQUILITY");
 
-		//----------//
-		//ARCHETYPES//
-		//----------//
 		ds_list_add(global.list_pool_cards_rarity_IV,"ANCIENT_GROVE");
 		ds_list_add(global.list_pool_cards_rarity_IV,"APEX_PREDATOR");
 		ds_list_add(global.list_pool_cards_rarity_IV,"CHANNEL_THE_SPIRITS");
@@ -319,7 +340,22 @@ function scr_init_card_pools(){
 		ds_list_add(global.list_pool_cards_rarity_IV,"HEART_OF_THE_FOREST");
 		ds_list_add(global.list_pool_cards_rarity_IV,"PLAGUE_GARDEN");
 		ds_list_add(global.list_pool_cards_rarity_IV,"PROLIFERATE");
-		ds_list_add(global.list_pool_cards_rarity_IV,"TIDEHEART");
+		
 
+		//--------//
+		//CERULEAN//
+		//--------//
+		ds_list_add(global.list_pool_cards_rarity_IV,"TIDEHEART");
+		
+		ds_list_add(global.list_pool_cards_rarity_IV,"CALL_THE_DEEP");
+		ds_list_add(global.list_pool_cards_rarity_IV,"ICE_AGE");
+		ds_list_add(global.list_pool_cards_rarity_IV,"KRAKEN_AWAKENS");
+		ds_list_add(global.list_pool_cards_rarity_IV,"WINTERS_HOUR");
+		ds_list_add(global.list_pool_cards_rarity_IV,"LEVIATHANS_BLESSING");
+		ds_list_add(global.list_pool_cards_rarity_IV,"CERULEAN_GODS_WRATH");
+		ds_list_add(global.list_pool_cards_rarity_IV,"OCEANS_EMBRACE");
+		ds_list_add(global.list_pool_cards_rarity_IV,"SHATTERSTORM");
+		ds_list_add(global.list_pool_cards_rarity_IV,"THE_ABYSS_STARES_BACK");
+		
 	#endregion
 }

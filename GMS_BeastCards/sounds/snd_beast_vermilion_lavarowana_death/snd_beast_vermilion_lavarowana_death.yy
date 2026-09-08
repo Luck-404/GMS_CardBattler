@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_lavarowana_death",
   "parent":{
     "name":"LAVAROWANA",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/LAVAROWANA.yy",
+    "path":"folders/BEASTS/VERMILION/LAVAROWANA.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

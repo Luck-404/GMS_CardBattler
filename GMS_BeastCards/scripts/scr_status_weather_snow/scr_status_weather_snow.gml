@@ -2,12 +2,10 @@
 //
 // SCRIPT: SCR_STATUS_WEATHER_SNOW
 // FUNCTION: Handles the Snow global Weather status.
-//           Unstackable Timed.
-//           Lifetime: 5 rounds.
-//           End of round:
-//           1. Apply 1 Frostbite to every living Beast without Armor.
-//           2. Any Beast with at least 3 Frostbite consumes 3 Frostbite
-//              and gains 1 Frostburn.
+//           At end of round, living Beasts without Armor gain 1 Frostbite.
+//           Living Beasts with at least 3 Frostbite consume 3 Frostbite
+//           and gain 1 Frostburn.
+//           Owns Snow start VFX, persistent VFX, and Weather ambience.
 //
 //===============================================================================//
 
@@ -21,7 +19,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 		case "APPLY":
 
 			//----------------//
-			//DEFAULT LENGTH//
+			//DEFAULT LIFETIME//
 			//----------------//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 5;
@@ -37,7 +35,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"WEATHER: SNOW",
 					global.list_statuses
 				);
@@ -55,11 +53,6 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				return _ref_existing_status;
 			}
 
-			//----------------------//
-			//CLEAR CURRENT WEATHER//
-			//----------------------//
-			scr_clear_weather();
-
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
@@ -71,6 +64,9 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 					obj_battle_status
 				);
 
+			//-------------//
+			//STATUS DATA//
+			//-------------//
 			_ref_new_status._scr_status =
 				scr_status_weather_snow;
 
@@ -95,9 +91,9 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			_ref_new_status._ct_status_stacks =
 				1;
 
-			//---------------------//
+			//-------------------//
 			//INITIALIZE LIFETIME//
-			//---------------------//
+			//-------------------//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
@@ -113,19 +109,46 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_new_status
 			);
 
-			//-------------------//
-			//CHANGE BACKGROUND//
-			//-------------------//
-
-			var _ref_layer =
-				layer_get_id("bly_weather");
-
-			layer_background_change(
-				_ref_layer,
-				spr_scene_fx_snow
+			//=================//
+			//SNOW START VFX//
+			//=================//
+			scr_battle_vfx(
+				undefined,
+				spr_battle_vfx_weather_snow_start,
+				room_width * 0.5,
+				room_height * 0.5,
+				0,
+				0,
+				1,
+				0,
+				snd_battle_weather_snow_start
 			);
 
-			scr_reposition_statuses(
+			//======================//
+			//PERSISTENT SNOW VFX//
+			//======================//
+			_ref_new_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent_loop(
+					spr_battle_vfx_weather_snow_persist,
+					room_width * 0.5,
+					room_height * 0.5,
+					1,
+					"ily_weather_fx"
+				);
+
+			//================//
+			//SNOW AMBIENCE//
+			//================//
+			scr_status_start_persistent_audio(
+				_ref_new_status,
+				bgm_battle_weather_snow,
+				0.25
+			);
+
+			//------------------//
+			//REPOSITION STATUS//
+			//------------------//
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -139,6 +162,9 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 		//--------//
 		case "REPEAT":
 
+			//-----------------//
+			//VALIDATE STATUS//
+			//-----------------//
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
@@ -207,10 +233,9 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			var _ref_original_target =
 				global.ref_target_beast;
 
-			//=============================//
+			//=========================//
 			//PASS 1: APPLY FROSTBITE//
-			//=============================//
-
+			//=========================//
 			for (
 				var _it_beast = 0;
 				_it_beast < ds_list_size(_list_beasts);
@@ -227,29 +252,37 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 					continue;
 				}
 
-				if (_ref_beast._val_cur_hp <= 0){
+				if (
+					_ref_beast._str_list != "ALIVE" ||
+					_ref_beast._val_cur_hp <= 0
+				){
 					continue;
 				}
 
-				//----------------//
-				//MUST HAVE NO ARMOR//
-				//----------------//
+				//-------------------//
+				//ARMOR BLOCKS SNOW//
+				//-------------------//
 				if (_ref_beast._val_armor > 0){
 					continue;
 				}
 
+				//----------------//
+				//TARGET BEAST//
+				//----------------//
 				global.ref_target_beast =
 					_ref_beast;
 
-				scr_apply_dot_status(
+				//----------------//
+				//APPLY FROSTBITE//
+				//----------------//
+				scr_status_apply_dot(
 					"FROSTBITE"
 				);
 			}
 
-			//================================//
-			//PASS 2: CONVERT TO FROSTBURN//
-			//================================//
-
+			//============================//
+			//PASS 2: CONVERT FROSTBITE//
+			//============================//
 			for (
 				var _it_beast = 0;
 				_it_beast < ds_list_size(_list_beasts);
@@ -266,12 +299,18 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 					continue;
 				}
 
-				if (_ref_beast._val_cur_hp <= 0){
+				if (
+					_ref_beast._str_list != "ALIVE" ||
+					_ref_beast._val_cur_hp <= 0
+				){
 					continue;
 				}
 
+				//----------------//
+				//GET FROSTBITE//
+				//----------------//
 				var _ref_frostbite =
-					scr_check_for_status(
+					scr_status_check(
 						"FROSTBITE",
 						_ref_beast
 					);
@@ -284,11 +323,11 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 					continue;
 				}
 
-				//--------------------//
+				//-------------------//
 				//CONSUME FROSTBITE//
-				//--------------------//
+				//-------------------//
 				var _ct_consumed =
-					scr_consume_frostbite(
+					scr_status_consume_frostbite(
 						_ref_beast,
 						3
 					);
@@ -298,12 +337,15 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				}
 
 				//----------------//
-				//APPLY FROSTBURN//
+				//TARGET BEAST//
 				//----------------//
 				global.ref_target_beast =
 					_ref_beast;
 
-				scr_apply_dot_status(
+				//----------------//
+				//APPLY FROSTBURN//
+				//----------------//
+				scr_status_apply_dot(
 					"FROSTBURN"
 				);
 			}
@@ -311,8 +353,16 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//RESTORE TARGET//
 			//----------------//
-			global.ref_target_beast =
-				_ref_original_target;
+			if (instance_exists(_ref_original_target)){
+
+				global.ref_target_beast =
+					_ref_original_target;
+			}
+			else{
+
+				global.ref_target_beast =
+					undefined;
+			}
 
 			//---------------//
 			//DESTROY LIST//
@@ -322,13 +372,16 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			);
 
 			//----------------//
-			//UPDATE LIFETIME//
+			//TICK LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			//------------------//
+			//REPOSITION STATUS//
+			//------------------//
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -340,25 +393,17 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 		//-------//
 		case "DEATH":
 
+			//-----------------//
+			//VALIDATE STATUS//
+			//-----------------//
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			//------------------//
-			//CLEAR BACKGROUND//
-			//------------------//
-			var _ref_layer =
-				layer_get_id("bly_weather");
-
-			layer_background_change(
-				_ref_layer,
-				spr_bg_blank
-			);
-
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

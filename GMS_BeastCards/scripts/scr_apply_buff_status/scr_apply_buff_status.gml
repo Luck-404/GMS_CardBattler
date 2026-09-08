@@ -14,7 +14,178 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 		//=======================================================================//
 		// CERULEAN
 		//=======================================================================//
+		//-------------//
+		//ABYSSAL FORM//
+		//-------------//
+		case "ABYSSAL_FORM":
 
+			var _ref_abyssal_form_status =
+				scr_status_buff_abyssal_form(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_abyssal_form_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ABYSSAL FORM",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//-------------//
+		//CALL THE DEEP//
+		//-------------//
+		case "CALL_THE_DEEP":
+
+			var _ref_call_the_deep_status =
+				scr_status_buff_call_the_deep(
+					"APPLY",
+					undefined,
+					_val_magnitude
+				);
+
+			if (_ref_call_the_deep_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"CALL THE DEEP",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		case "DEEP_MOMENTUM":
+
+			var _ref_deep_momentum_status =
+				scr_status_buff_deep_momentum(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_deep_momentum_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"DEEP MOMENTUM",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;	
+
+		case "ICEBOUND_INSTINCT":
+
+			var _ref_icebound_instinct_status =
+				scr_status_buff_icebound_instinct(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_icebound_instinct_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ICEBOUND INSTINCT",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+		
+		//----------------//
+		//FROZEN PRECISION//
+		//----------------//
+		case "FROZEN_PRECISION":
+
+			var _ref_frozen_precision_status =
+				scr_status_buff_frozen_precision(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime
+				);
+
+			if (_ref_frozen_precision_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"FROZEN PRECISION",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//------------//
+		//FROST WEAPON//
+		//------------//
+		case "FROST_WEAPON":
+
+			var _ref_frost_weapon_status =
+				scr_status_buff_frost_weapon("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_frost_weapon_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"FROST WEAPON",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+		
+		//------------//
+		//ARCTIC FOCUS//
+		//------------//
+		case "ARCTIC_FOCUS":
+
+			var _ref_arctic_focus_status =
+				scr_status_buff_arctic_focus("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_arctic_focus_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"ARCTIC FOCUS",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+		
 		//----------//
 		//IMMOVABLE//
 		//----------//
@@ -37,6 +208,27 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 
+		//-----------------//
+		//SAILOR'S RESOLVE//
+		//-----------------//
+		case "SAILORS_RESOLVE":
+
+			var _ref_sailors_resolve_status =
+				scr_status_buff_sailors_resolve("APPLY",undefined,_val_magnitude,_val_lifetime);
+
+			if (_ref_sailors_resolve_status != undefined){
+
+				scr_spawn_popup_scrolling(
+					"TEXT",
+					"SAILOR'S RESOLVE",
+					undefined,
+					c_aqua,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
 
 		//----------//
 		//ICE MIRROR//
@@ -693,4 +885,122 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 		break;
 	}
+
+	//========================//
+	//GET APPLIED BUFF STATUS//
+	//========================//
+	var _ref_applied_status =
+		undefined;
+
+	var _ref_target =
+		global.ref_target_beast;
+
+	//----------------//
+	//TARGETED BUFF//
+	//----------------//
+	if (instance_exists(_ref_target)){
+
+		var _ref_target_status =
+			scr_status_check(
+				_str_status_name,
+				_ref_target
+			);
+
+		if (_ref_target_status != -1){
+
+			_ref_applied_status =
+				_ref_target_status;
+		}
+	}
+
+	//-------------//
+	//GLOBAL BUFF//
+	//-------------//
+	if (
+		!instance_exists(_ref_applied_status) &&
+		variable_global_exists("list_statuses") &&
+		ds_exists(global.list_statuses,ds_type_list)
+	){
+
+		var _ref_global_status =
+			scr_status_check(
+				_str_status_name,
+				global.list_statuses
+			);
+
+		if (_ref_global_status != -1){
+
+			_ref_applied_status =
+				_ref_global_status;
+		}
+	}
+
+	//---------------------//
+	//VALIDATE APPLICATION//
+	//---------------------//
+	if (!instance_exists(_ref_applied_status)){
+		return undefined;
+	}
+
+	//----------------//
+	//SELECT BUFF SFX//
+	//----------------//
+	var _snd_sfx =
+		snd_battle_buff;
+
+	//------------------------//
+	//ONLY PLAY ONCE PER CAST//
+	//------------------------//
+	if (instance_exists(global.ref_cast_card)){
+
+		if (global.ref_cast_card._flag_buff_sfx_played){
+
+			_snd_sfx =
+				undefined;
+		}
+		else{
+
+			global.ref_cast_card._flag_buff_sfx_played =
+				true;
+		}
+	}
+
+	//=============//
+	//GLOBAL BUFF//
+	//=============//
+	if (_ref_applied_status._str_status_type == "GLOBAL"){
+
+		scr_battle_vfx(
+			_ref_applied_status,
+			spr_battle_vfx_global_buff,
+			undefined,
+			undefined,
+			0,
+			0,
+			1,
+			0,
+			_snd_sfx
+		);
+	}
+
+	//===============//
+	//TARGETED BUFF//
+	//===============//
+	else if (instance_exists(_ref_applied_status._ref_host)){
+
+		scr_battle_vfx(
+			_ref_applied_status._ref_host,
+			spr_battle_vfx_buff,
+			undefined,
+			undefined,
+			0,
+			0,
+			1,
+			0,
+			_snd_sfx
+		);
+	}
+
+	return _ref_applied_status;	
+	
 }

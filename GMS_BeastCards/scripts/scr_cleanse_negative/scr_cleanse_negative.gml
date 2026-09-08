@@ -1,13 +1,13 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_CLEANSE_NEGATIVE
+// SCRIPT: scr_status_cleanse_negative
 // FUNCTION: Randomly removes negative statuses from a target Beast.
 //           Negative statuses include DEBUFF, DOT, and CC.
 //           Removes the full selected status including all stacks.
 //
 //===============================================================================//
 
-function scr_cleanse_negative(_ref_target,_ct_amount){
+function scr_status_cleanse_negative(_ref_target,_ct_amount){
 
 	if (!instance_exists(_ref_target)){
 		return 0;
@@ -98,7 +98,7 @@ function scr_cleanse_negative(_ref_target,_ct_amount){
 		}
 		else{
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status_cleanse
 			);
 		}
@@ -114,6 +114,16 @@ function scr_cleanse_negative(_ref_target,_ct_amount){
 			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 	}
+	
+	//----------------------//
+	//CLEANSE PRESENTATION//
+	//----------------------//
+	if (_ct_removed > 0){
 
+		scr_battle_vfx_cleanse(
+			_ref_target
+		);
+	}
+	
 	return _ct_removed;
 }

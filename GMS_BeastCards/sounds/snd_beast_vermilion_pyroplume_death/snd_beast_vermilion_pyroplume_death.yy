@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_pyroplume_death",
   "parent":{
     "name":"PYROPLUME",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/PYROPLUME.yy",
+    "path":"folders/BEASTS/VERMILION/PYROPLUME.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

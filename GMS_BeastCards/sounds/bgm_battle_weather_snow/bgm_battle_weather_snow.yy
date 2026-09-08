@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"bgm_battle_weather_snow",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":51.2,
+  "exportDir":"",
+  "name":"bgm_battle_weather_snow",
+  "parent":{
+    "name":"SNOW",
+    "path":"folders/BATTLE/STATUSES/WEATHER/SNOW.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"bgm_battle_weather_snow.wav",
+  "volume":0.03,
+}

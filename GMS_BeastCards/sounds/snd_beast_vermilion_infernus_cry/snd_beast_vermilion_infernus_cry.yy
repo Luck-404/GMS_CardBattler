@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_infernus_cry",
   "parent":{
     "name":"INFERNUS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/INFERNUS.yy",
+    "path":"folders/BEASTS/VERMILION/INFERNUS.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

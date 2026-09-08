@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_apply_debuff",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_apply_debuff",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

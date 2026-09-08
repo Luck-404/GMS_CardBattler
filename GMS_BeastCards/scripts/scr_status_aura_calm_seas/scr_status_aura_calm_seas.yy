@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_aura_calm_seas",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_aura_calm_seas",
+  "parent":{
+    "name":"CALM_SEAS",
+    "path":"folders/BATTLE/STATUSES/AURA/CERULEAN/CALM_SEAS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

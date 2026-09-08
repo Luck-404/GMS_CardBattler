@@ -37,7 +37,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status("OVERHEALTH",_ref_target);
+			var _ref_existing_status = scr_status_check("OVERHEALTH",_ref_target);
 
 			//----------------//
 			//STACK EXISTING//
@@ -119,7 +119,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 			//----------------//
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -140,7 +140,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -206,7 +206,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -237,7 +237,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				);
 			}
 
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

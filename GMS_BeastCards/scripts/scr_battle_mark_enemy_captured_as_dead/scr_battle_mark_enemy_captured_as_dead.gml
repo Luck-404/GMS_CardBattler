@@ -80,8 +80,8 @@ function scr_battle_mark_enemy_captured_as_dead(_ref_enemy){
 		_ref_beast._val_pos = _it_beast;
 		_ref_beast.x = _ref_beast.hscr_get_battle_x(_ref_beast._str_team,_it_beast);
 
-		scr_reposition_minions(_ref_beast);
-		scr_reposition_statuses(_ref_beast);
+		scr_minion_reposition(_ref_beast);
+		scr_status_reposition(_ref_beast);
 	}
 
 	//—------------------------------------------------------------------------------//

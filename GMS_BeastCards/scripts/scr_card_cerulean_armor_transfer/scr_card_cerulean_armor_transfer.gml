@@ -35,12 +35,6 @@ function scr_card_cerulean_armor_transfer(_stct_card,_ref_caster,_ref_target){
 
 	if (_val_armor_transfer <= 0){
 
-		audio_play_sound(
-			snd_battle_sfx_armor,
-			0,
-			false
-		);
-
 		return;
 	}
 
@@ -55,16 +49,4 @@ function scr_card_cerulean_armor_transfer(_stct_card,_ref_caster,_ref_target){
 	_ref_target._val_armor +=
 		_val_armor_transfer;
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_armor,
-		0,
-		false
-	);
 }

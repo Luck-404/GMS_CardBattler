@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_cleanse_negative_stacks",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_cleanse_negative_stacks",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

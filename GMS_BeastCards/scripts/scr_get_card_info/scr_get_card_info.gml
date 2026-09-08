@@ -254,6 +254,40 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region ARCTIC_FOCUS
+			case "ARCTIC_FOCUS":
+
+				_stct_return_card = {
+					_str_card_name : "ARCTIC FOCUS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_arctic_focus,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_arctic_focus,
+
+					_str_card_description :
+						"ST. Ranged. The target allied Beast is immune to CC for 2 rounds."
+				};
+
+			break;
+			#endregion
+
 			#region ARCTIC_VOLLEY
 			case "ARCTIC_VOLLEY":
 
@@ -390,6 +424,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region BRITTLE_CONSTITUTION
+
+			case "BRITTLE_CONSTITUTION":
+
+				_stct_return_card = {
+					_str_card_name : "BRITTLE CONSTITUTION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_brittle_constitution,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_brittle_constitution,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Reduce the target's CON by 30 for 3 rounds. While active, its DoTs have a 25% chance to not lose duration when they trigger."
+				};
+
+			break;
+
+			#endregion
+
 			#region BUBBLE
 			case "BUBBLE":
 
@@ -457,6 +527,146 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion
+
+			#region CALL_THE_DEEP
+			case "CALL_THE_DEEP":
+
+				_stct_return_card = {
+					_str_card_name : "CALL THE DEEP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_call_the_deep,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_call_the_deep,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Ranged. Fill all available Minion slots on the selected team with Tentacles (3/1). Tentacles do not stack during this cast. Each Beast on the selected team gains an expendable Buff: its next direct damage deals 5 additional dmg."
+				};
+
+			break;
+			#endregion
+			
+			#region CALM_SEAS
+
+			case "CALM_SEAS":
+
+				_stct_return_card = {
+					_str_card_name : "CALM SEAS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_calm_seas,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_calm_seas,
+
+					_str_card_description :
+						"Teamwide. Ranged. Aura. (+) Allied Beasts heal 3 HP each round. (-) Allied Beasts deal 2 less [Linear] damage."
+				};
+
+			break;
+
+			#endregion
+			
+			#region CERULEAN_GODS_WRATH
+			case "CERULEAN_GODS_WRATH":
+
+				_stct_return_card = {
+					_str_card_name : "CERULEAN GOD'S WRATH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_gods_wrath,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "WEATHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_gods_wrath,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Activate an effect based on the current Cerulean Weather. Rain: Heal all allied Beasts for 8 HP. Snow: Grant 15 Armor to all allies. Storming: Deal 8 NEU dmg to all enemy Beasts. No Cerulean Weather: Grant 1 Divine Protection and summon 1 random Cerulean Minion on the caster."
+				};
+
+			break;
+			#endregion
+			
+			#region CHILLING_WEAKNESS
+
+			case "CHILLING_WEAKNESS":
+
+				_stct_return_card = {
+					_str_card_name : "CHILLING WEAKNESS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_chilling_weakness,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 25,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_chilling_weakness,
+
+					_str_card_description :
+						"ST. Ranged. Apply WEAKNESS for 3 rounds."
+				};
+
+			break;
+
+			#endregion			
 			
 			#region CHILLING_WORD
 			case "CHILLING_WORD":
@@ -560,6 +770,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion			
 			
+			#region COOLING_MIST
+
+			case "COOLING_MIST":
+
+				_stct_return_card = {
+					_str_card_name : "COOLING MIST",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_cooling_mist,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_cooling_mist,
+
+					_str_card_description :
+						"ST. Ranged. Heal the target allied Beast for 15 HP. Cleanse its oldest DoT."
+				};
+
+			break;
+
+			#endregion			
+			
 			#region CORAL_GUARDIAN
 			case "CORAL_GUARDIAN":
 
@@ -626,6 +872,42 @@ function scr_get_card_info(_str_card_name){
 				};
 
 			break;
+			#endregion			
+			
+			#region CRYOGENIC_RECOVERY
+
+			case "CRYOGENIC_RECOVERY":
+
+				_stct_return_card = {
+					_str_card_name : "CRYOGENIC RECOVERY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_cryogenic_recovery,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_cryogenic_recovery,
+
+					_str_card_description :
+						"ST. Ranged. Heal the target allied Beast for 15 HP. Cleanse 1 CC."
+				};
+
+			break;
+
 			#endregion			
 			
 			#region CRYSTAL_SHELL
@@ -696,6 +978,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region DEEP_MOMENTUM
+
+			case "DEEP_MOMENTUM":
+
+				_stct_return_card = {
+					_str_card_name : "DEEP MOMENTUM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_deep_momentum,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_deep_momentum,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. For 2 rounds, whenever the target allied Beast Attacks, generate 1 Mana."
+				};
+
+			break;
+
+			#endregion
+
 			#region DEEP_REFLECTION
 			case "DEEP_REFLECTION":
 
@@ -745,7 +1063,7 @@ function scr_get_card_info(_str_card_name){
 					_str_card_stat : "NEU",
 					_str_card_target_count : "TEAMWIDE",
 
-					_val_card_magnitude : 10,
+					_val_card_magnitude : 5,
 					_str_card_scalar : undefined,
 
 					_str_card_archetype_req : "TECHNICAL",
@@ -758,11 +1076,45 @@ function scr_get_card_info(_str_card_name){
 					_scr_card : scr_card_cerulean_deepflow_whispersong,
 
 					_str_card_description :
-						"EXHAUSTS. Teamwide. Randomly summon 10 Tentacles across the selected team's empty Minion slots. If a selected Beast has full Minion slots, instead give one of its Tentacles +1 HP and +1 Magnitude. TENTACLE: 3 HP. 1 Magnitude. Each round, deals 1 NEU dmg per Magnitude to a random enemy Beast."
+						"EXHAUSTS. Teamwide. Randomly summon 5 Tentacles across the selected team's empty Minion slots. If a selected Beast has full Minion slots, instead give one of its Tentacles +1 HP and +1 Magnitude. TENTACLE: 3 HP. 1 Magnitude. Each round, deals 1 NEU dmg per Magnitude to a random enemy Beast."
 				};
 
 			break;
 #endregion
+
+			#region DENSE_FOG
+			case "DENSE_FOG":
+
+				_stct_return_card = {
+					_str_card_name : "DENSE FOG",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_dense_fog,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_dense_fog,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Ranged. Blind every Beast on the selected team."
+				};
+
+			break;
+			#endregion
 
 			#region DEPTH_CHARGE
 			case "DEPTH_CHARGE":
@@ -865,6 +1217,40 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion
+
+			#region FROST_WEAPON
+			case "FROST_WEAPON":
+
+				_stct_return_card = {
+					_str_card_name : "FROST WEAPON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frost_weapon,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frost_weapon,
+
+					_str_card_description :
+						"ST. Self. For 2 rounds, the caster's Attacks apply 1 Frostbite."
+				};
+
+			break;
+			#endregion
 			
 			#region FROSTBOLT
 			case "FROSTBOLT":
@@ -932,6 +1318,42 @@ function scr_get_card_info(_str_card_name){
 				};
 
 			break;
+			#endregion
+
+			#region FROSTFORM
+
+			case "FROSTFORM":
+
+				_stct_return_card = {
+					_str_card_name : "FROSTFORM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frostform,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frostform,
+
+					_str_card_description :
+						"ST. Self. Aura. This Beast is considered Frozen but can still act. (+) Deal 50% increased damage and Attacks apply 1 Frostburn. (-) Take 50% increased damage and gain 1 Frostbite each round. ICEBREAKER triggers against this Beast."
+				};
+
+			break;
+
 			#endregion
 
 			#region FROZEN_ARMOR
@@ -1036,6 +1458,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
+			#region FROZEN_CURSE
+
+			case "FROZEN_CURSE":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN CURSE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_curse,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_curse,
+
+					_str_card_description :
+						"ST. Ranged. For 3 rounds, whenever this Beast is attacked while Frostbitten, Frostburned, or Frozen, take 5 additional [Linear] NEU damage."
+				};
+
+			break;
+
+			#endregion
+			
 			#region FROZEN_FANG
 			case "FROZEN_FANG":
 
@@ -1068,6 +1526,42 @@ function scr_get_card_info(_str_card_name){
 				};
 
 			break;
+			#endregion			
+			
+			#region FROZEN_PRECISION
+
+			case "FROZEN_PRECISION":
+
+				_stct_return_card = {
+					_str_card_name : "FROZEN PRECISION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_frozen_precision,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_frozen_precision,
+
+					_str_card_description :
+						"ST. Self. Ignore Dodge for 2 rounds."
+				};
+
+			break;
+
 			#endregion			
 			
 			#region FROZEN_SPEAR
@@ -1206,6 +1700,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
+			#region HYPOTHERMIA
+
+			case "HYPOTHERMIA":
+
+				_stct_return_card = {
+					_str_card_name : "HYPOTHERMIA",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_hypothermia,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_hypothermia,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Apply ANTIHEAL for 2 rounds."
+				};
+
+			break;
+
+			#endregion			
+			
 			#region ICE_ACCRETION
 			case "ICE_ACCRETION":
 
@@ -1239,6 +1769,40 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion			
+			
+			#region ICE_AGE
+			case "ICE_AGE":
+
+				_stct_return_card = {
+					_str_card_name : "ICE AGE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_age,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_ice_age,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Ranged. Freeze every Beast. Apply 2 Frostburn to each enemy Beast."
+				};
+
+			break;
+			#endregion
 			
 			#region ICE_LANCE
 			case "ICE_LANCE":
@@ -1342,6 +1906,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 			
+			#region ICE_PRISON
+
+			case "ICE_PRISON":
+
+				_stct_return_card = {
+					_str_card_name : "ICE PRISON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_ice_prison,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_ice_prison,
+
+					_str_card_description :
+						"ST. Ranged. Freeze the target."
+				};
+
+			break;
+
+			#endregion			
+			
 			#region ICE_WALL
 			case "ICE_WALL":
 
@@ -1375,6 +1975,42 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion
+
+			#region ICEBOUND_INSTINCT
+
+			case "ICEBOUND_INSTINCT":
+
+				_stct_return_card = {
+					_str_card_name : "ICEBOUND INSTINCT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_icebound_instinct,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_icebound_instinct,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Self. For 4 rounds, CC applied by the caster lasts 1 additional round."
+				};
+
+			break;
+
+			#endregion			
 			
 			#region ICEBOUND_SEAL
 			case "ICEBOUND_SEAL":
@@ -1409,6 +2045,76 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion			
+		
+			#region KRAKEN_AWAKENS
+			case "KRAKEN_AWAKENS":
+
+				_stct_return_card = {
+					_str_card_name : "KRAKEN AWAKENS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_kraken_awakens,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_kraken_awakens,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Deal [Linear] PHY dmg (base 15). Apply 2 Bleed and 2 Stormstruck."
+				};
+
+			break;
+			#endregion		
+		
+			#region KRAKENS_CHOSEN
+
+			case "KRAKENS_CHOSEN":
+
+				_stct_return_card = {
+					_str_card_name : "KRAKENS CHOSEN",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_krakens_chosen,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_krakens_chosen,
+
+					_str_card_description :
+						"ST. Ranged. Aura. (+) The target is immune to CC, summons a Tentacle each round, applies 2 Stormstruck with its Attacks, and its Attacks deal additional NEU damage to adjacent enemies. (-) The target loses 10% of its Maximum HP each round and gains WITHER each round."				
+				};
+
+			break;
+
+			#endregion			
 			
 			#region KRAKENSLAM
 			case "KRAKENSLAM":
@@ -1439,6 +2145,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"EXHAUSTS. ST. Ranged. Deal [Linear] PHY dmg (base 15). Apply Bleed and Stormstruck."
+				};
+
+			break;
+			#endregion
+
+			#region LEVIATHANS_BLESSING
+			case "LEVIATHANS_BLESSING":
+
+				_stct_return_card = {
+					_str_card_name : "LEVIATHAN'S BLESSING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_leviathans_blessing,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 5,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_leviathans_blessing,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Transform the target allied Beast into Abyssal Form for 5 rounds. Increase all stats by 40 and fill its available Minion slots with Tentacles. Whenever it Attacks, randomly either Stun the target for 1 round, Banish the target for 1 round, or apply Stormstruck."
 				};
 
 			break;
@@ -1476,6 +2216,146 @@ function scr_get_card_info(_str_card_name){
 				};
 
 			break;
+			#endregion
+
+			#region MARINE_MEND
+
+			case "MARINE_MEND":
+
+				_stct_return_card = {
+					_str_card_name : "MARINE MEND",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_marine_mend,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CLEANSE",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_marine_mend,
+
+					_str_card_description :
+						"ST. Ranged. Cleanse all Auras from the target."
+				};
+
+			break;
+
+			#endregion
+
+			#region OCEANS_BLESSING
+			case "OCEANS_BLESSING":
+
+				_stct_return_card = {
+					_str_card_name : "OCEAN'S BLESSING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_oceans_blessing,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : "PRIEST",
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_oceans_blessing,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Heal all allied Beasts for 15 HP."
+				};
+
+			break;
+			#endregion
+
+			#region OCEANS_EMBRACE
+			case "OCEANS_EMBRACE":
+
+				_stct_return_card = {
+					_str_card_name : "OCEAN'S EMBRACE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_oceans_embrace,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 50,
+					_str_card_scalar : "PERCENT",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_oceans_embrace,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Heal all allied Beasts for 50% of their Maximum HP. Remove all DoTs and Debuffs from them."
+				};
+
+			break;
+			#endregion
+
+			#region PERMAFROST
+
+			case "PERMAFROST":
+
+				_stct_return_card = {
+					_str_card_name : "PERMAFROST",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_permafrost,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 50,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_permafrost,
+
+					_str_card_description :
+						"EXHAUSTS. ST. Ranged. Apply ARMORBREAK for 3 rounds."
+				};
+
+			break;
+
 			#endregion
 
 			#region PRESSURE_CRUSH
@@ -1784,6 +2664,76 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region ROUGH_SEAS
+
+			case "ROUGH_SEAS":
+
+				_stct_return_card = {
+					_str_card_name : "ROUGH SEAS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_rough_seas,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_rough_seas,
+
+					_str_card_description :
+						"Teamwide. Ranged. Aura. (+) Whenever an enemy Beast takes damage, randomly move it forward or backward 1 position. (-) Allied Beasts take 10% increased damage."
+				};
+
+			break;
+
+			#endregion
+
+			#region SAILORS_RESOLVE
+			case "SAILORS_RESOLVE":
+
+				_stct_return_card = {
+					_str_card_name : "SAILOR'S RESOLVE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_sailors_resolve,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 33,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_sailors_resolve,
+
+					_str_card_description :
+						"ST. Ranged. Increase the target allied Beast's healing received by 33% for 3 rounds."
+				};
+
+			break;
+			#endregion
+
 			#region RIMEFROST_ELEMENTAL
 			case "RIMEFROST_ELEMENTAL":
 
@@ -1915,6 +2865,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"ST. Melee. Deal [Linear] PHY dmg (base 8). SHATTER the target."
+				};
+
+			break;
+			#endregion
+
+			#region SHATTERSTORM
+			case "SHATTERSTORM":
+
+				_stct_return_card = {
+					_str_card_name : "SHATTERSTORM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_shatterstorm,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_shatterstorm,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Ranged. Deal [Linear] PHY dmg to each enemy Beast (base 8). SHATTER each target, then apply 1 Bleed to each."
 				};
 
 			break;
@@ -2055,6 +3039,42 @@ function scr_get_card_info(_str_card_name){
 
 			break;
 			#endregion
+
+			#region SOOTHING_CURRENT
+
+			case "SOOTHING_CURRENT":
+
+				_stct_return_card = {
+					_str_card_name : "SOOTHING CURRENT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_soothing_current,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 12,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_soothing_current,
+
+					_str_card_description :
+						"ST. Self. Heal the caster for 12 HP."
+				};
+
+			break;
+
+			#endregion
 			
 			#region STATIC_BARRIER
 			case "STATIC_BARRIER":
@@ -2153,6 +3173,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"ST. Ranged. Summon a Storm Wisp (2/1). Each round, it deals 3 NEU dmg per Magnitude to a random enemy Beast."
+				};
+
+			break;
+			#endregion
+
+			#region THE_ABYSS_STARES_BACK
+			case "THE_ABYSS_STARES_BACK":
+
+				_stct_return_card = {
+					_str_card_name : "THE ABYSS STARES BACK",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_the_abyss_stares_back,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "GLOBAL",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_the_abyss_stares_back,
+
+					_str_card_description :
+						"EXHAUSTS. Global. Every Beast gains 1 random Cerulean Buff, 1 random Cerulean Debuff, and 1 random Cerulean Minion. Apply 1 random CC to a random allied Beast and a random enemy Beast."
 				};
 
 			break;
@@ -2294,6 +3348,42 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion			
 			
+			#region TIDAL_RECOVERY
+
+			case "TIDAL_RECOVERY":
+
+				_stct_return_card = {
+					_str_card_name : "TIDAL RECOVERY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_tidal_recovery,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_tidal_recovery,
+
+					_str_card_description :
+						"ST. Ranged. Apply Regeneration for 3 rounds. Heal the target for 10 HP each round."
+				};
+
+			break;
+
+			#endregion			
+			
 			#region TIDAL_SLASH
 			case "TIDAL_SLASH":
 
@@ -2430,6 +3520,78 @@ function scr_get_card_info(_str_card_name){
 			break;
 			#endregion
 
+			#region WHIRLPOOL
+
+			case "WHIRLPOOL":
+
+				_stct_return_card = {
+					_str_card_name : "WHIRLPOOL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_whirlpool,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_whirlpool,
+
+					_str_card_description :
+						"ST. Ranged. Banish the target for 1 round."
+				};
+
+			break;
+
+			#endregion
+
+			#region WHITEOUT
+
+			case "WHITEOUT":
+
+				_stct_return_card = {
+					_str_card_name : "WHITEOUT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_whiteout,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+
+					_val_card_magnitude : 50,
+					_str_card_scalar : undefined,
+
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+
+					_scr_card : scr_card_cerulean_whiteout,
+
+					_str_card_description :
+						"ST. Ranged. Reduce the target's Accuracy by 50% for 3 rounds."
+				};
+
+			break;
+
+			#endregion
+
 			#region WHITEWATER
 			case "WHITEWATER":
 
@@ -2527,6 +3689,40 @@ function scr_get_card_info(_str_card_name){
 
 					_str_card_description :
 						"EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 10). ICEBREAKER."
+				};
+
+			break;
+			#endregion
+
+			#region WINTERS_HOUR
+			case "WINTERS_HOUR":
+
+				_stct_return_card = {
+					_str_card_name : "WINTER'S HOUR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_winters_hour,
+					_arr_card_colors : ["CERULEAN",undefined],
+
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "WEATHER",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+
+					_val_card_magnitude : 15,
+					_str_card_scalar : "LINEAR",
+
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+
+					_scr_card : scr_card_cerulean_winters_hour,
+
+					_str_card_description :
+						"EXHAUSTS. Teamwide. Begin Snow Weather. Heal all allied Beasts and apply 1 Frostbite to each enemy Beast."
 				};
 
 			break;

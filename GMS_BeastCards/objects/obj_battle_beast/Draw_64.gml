@@ -59,6 +59,22 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	var _val_beast_draw_x = x + _val_vfx_offset_x;
 	var _val_beast_draw_y = y + _val_vfx_offset_y;
 
+	//------------------//
+	//REFRESH FORM DRAW//
+	//------------------//
+	scr_refresh_beast_form_draw(
+		self
+	);
+
+	//----------------//
+	//APPLY FORM SCALE//
+	//----------------//
+	_val_scale_x *=
+		_val_beast_draw_scale_multiplier;
+
+	_val_scale_y *=
+		_val_beast_draw_scale_multiplier;
+
 	//-----------------//
 	//CAPTURED DISPLAY//
 	//-----------------//
@@ -98,7 +114,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		){
 
 			draw_sprite(
-				spr_battle_target_hover_icon,
+				spr_battle_icon_target_hover,
 				0,
 				x,
 				y - 50
@@ -117,7 +133,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		){
 
 			var _val_tame_chance =
-				scr_get_prism_tame_chance(
+				scr_battle_get_prism_tame_chance(
 					obj_battle_player_controller
 						._stct_selected_prism
 						._str_item_id,
@@ -168,7 +184,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		if (_flag_valid_caster){
 
 			draw_sprite(
-				spr_battle_caster_hover_icon,
+				spr_battle_icon_caster_hover,
 				0,
 				x,
 				y - 50
@@ -185,7 +201,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		){
 
 			var _str_caster_preview =
-				scr_get_card_caster_preview(
+				scr_battle_preview_get_card_caster(
 					global.ref_cast_card._ref_card,
 					self
 				);
@@ -253,7 +269,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		){
 
 			var _str_target_preview =
-				scr_get_card_target_preview(
+				scr_battle_preview_get_card_target(
 					global.ref_cast_card._ref_card,
 					self
 				);
@@ -382,7 +398,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			_val_scale_x,
 			_val_scale_y,
 			_val_vfx_angle,
-			c_white,
+			_c_beast_draw_tint,
 			1
 		);
 	}
@@ -438,6 +454,33 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		_val_bar_y2,
 		false
 	);
+
+	//-------------//
+	//SECOND LIFE//
+	//-------------//
+	var _ref_second_life =
+		scr_status_check(
+			"SECOND_LIFE",
+			self
+		);
+
+	if (_ref_second_life != -1){
+
+		draw_set_font(fnt_small_gui);
+		draw_set_colour(c_black);
+
+		draw_set_halign(fa_center);
+		draw_set_valign(fa_middle);
+
+		draw_text(
+			_val_bar_x1 - 16,
+			_val_bar_y1 + (_val_bar_h * 0.5),
+			"X2"
+		);
+
+		draw_set_halign(fa_left);
+		draw_set_valign(fa_top);
+	}
 
 	//-------//
 	//HP FILL//
@@ -582,7 +625,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			_val_bar_y2 + 16;
 
 		draw_sprite(
-			spr_battle_armor_icon,
+			spr_battle_icon_armor,
 			0,
 			_val_icon_x,
 			_val_icon_y
@@ -613,7 +656,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		if (self == global.ref_caster_beast){
 
 			draw_sprite(
-				spr_battle_caster_hover_icon,
+				spr_battle_icon_caster_hover,
 				0,
 				x,
 				y - 50
@@ -679,7 +722,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			if (_arr_preview[_it_preview] == id){
 
 				draw_sprite(
-					spr_battle_target_hover_icon,
+					spr_battle_icon_target_hover,
 					0,
 					x,
 					y - 50
@@ -705,7 +748,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		//----------------//
 		//TRY SECOND LIFE//
 		//----------------//
-		if (scr_try_second_life(self)){
+		if (scr_status_try_second_life(self)){
 			exit;
 		}
 
@@ -715,9 +758,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		//-------------------//
 		//TRIGGER DEATH TRAPS//
 		//-------------------//
-		scr_trigger_death_traps(self);
-
-		audio_play_sound(_snd_death,0,false);
+		scr_trap_trigger_death(self);
 
 		_str_list = "DEAD";
 
@@ -831,7 +872,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				_ref_beast
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_beast
 			);
 		}
@@ -866,6 +907,30 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				);
 		}
 
+		//-------------------//
+		//DEATH PRESENTATION//
+		//-------------------//
+		if (!_flag_death_presented){
+
+			_flag_death_presented =
+				true;
+
+			scr_battle_vfx(
+				undefined,
+				spr_battle_vfx_beast_death,
+				x,
+				y,
+				0,
+				0,
+				1,
+				0,
+				_snd_death
+			);
+		}
+
+		//----------------//
+		//DRAW DEAD BEAST//
+		//----------------//
 		draw_sprite(
 			spr_battle_beast_dead,
 			0,
@@ -1002,7 +1067,7 @@ if (
 		"HP: " +
 		string(_val_hp) +
 		" (" +
-		scr_get_beast_grade_letter(_val_hp) +
+		scr_beast_get_grade_letter(_val_hp) +
 		" x" +
 		string(
 			scr_get_beast_grade_modifier(
@@ -1020,7 +1085,7 @@ if (
 		"CON: " +
 		string(_val_con) +
 		" (" +
-		scr_get_beast_grade_letter(_val_con) +
+		scr_beast_get_grade_letter(_val_con) +
 		" x" +
 		string(
 			scr_get_beast_grade_modifier(
@@ -1038,7 +1103,7 @@ if (
 		"PPOW: " +
 		string(_val_ppow) +
 		" (" +
-		scr_get_beast_grade_letter(_val_ppow) +
+		scr_beast_get_grade_letter(_val_ppow) +
 		" x" +
 		string(
 			scr_get_beast_grade_modifier(
@@ -1056,7 +1121,7 @@ if (
 		"MPOW: " +
 		string(_val_mpow) +
 		" (" +
-		scr_get_beast_grade_letter(_val_mpow) +
+		scr_beast_get_grade_letter(_val_mpow) +
 		" x" +
 		string(
 			scr_get_beast_grade_modifier(
@@ -1074,7 +1139,7 @@ if (
 		"PDEF: " +
 		string(_val_pdef) +
 		" (" +
-		scr_get_beast_grade_letter(_val_pdef) +
+		scr_beast_get_grade_letter(_val_pdef) +
 		" x" +
 		string(
 			scr_get_beast_grade_modifier(
@@ -1092,7 +1157,7 @@ if (
 		"MDEF: " +
 		string(_val_mdef) +
 		" (" +
-		scr_get_beast_grade_letter(_val_mdef) +
+		scr_beast_get_grade_letter(_val_mdef) +
 		" x" +
 		string(
 			scr_get_beast_grade_modifier(

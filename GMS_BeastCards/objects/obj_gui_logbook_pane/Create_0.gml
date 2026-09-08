@@ -454,19 +454,19 @@ hscr_draw_beast_details = function(_stct_entry){
 	// FULL CAPTURED DATA
 	draw_set_colour(c_white);
 
-	draw_text(_val_text_x,_val_text_y,"HP: " + string(_stct_beast._val_beast_hp_stat) + " (" + scr_get_beast_grade_letter(_stct_beast._val_beast_hp_stat) + ")");
+	draw_text(_val_text_x,_val_text_y,"HP: " + string(_stct_beast._val_beast_hp_stat) + " (" + scr_beast_get_grade_letter(_stct_beast._val_beast_hp_stat) + ")");
 	_val_text_y += _val_lh;
 
-	draw_text(_val_text_x,_val_text_y,"PPOW: " + string(_stct_beast._val_beast_ppow_stat) + " (" + scr_get_beast_grade_letter(_stct_beast._val_beast_ppow_stat) + ")");
+	draw_text(_val_text_x,_val_text_y,"PPOW: " + string(_stct_beast._val_beast_ppow_stat) + " (" + scr_beast_get_grade_letter(_stct_beast._val_beast_ppow_stat) + ")");
 	_val_text_y += _val_lh;
 
-	draw_text(_val_text_x,_val_text_y,"MPOW: " + string(_stct_beast._val_beast_mpow_stat) + " (" + scr_get_beast_grade_letter(_stct_beast._val_beast_mpow_stat) + ")");
+	draw_text(_val_text_x,_val_text_y,"MPOW: " + string(_stct_beast._val_beast_mpow_stat) + " (" + scr_beast_get_grade_letter(_stct_beast._val_beast_mpow_stat) + ")");
 	_val_text_y += _val_lh;
 
-	draw_text(_val_text_x,_val_text_y,"PDEF: " + string(_stct_beast._val_beast_pdef_stat) + " (" + scr_get_beast_grade_letter(_stct_beast._val_beast_pdef_stat) + ")");
+	draw_text(_val_text_x,_val_text_y,"PDEF: " + string(_stct_beast._val_beast_pdef_stat) + " (" + scr_beast_get_grade_letter(_stct_beast._val_beast_pdef_stat) + ")");
 	_val_text_y += _val_lh;
 
-	draw_text(_val_text_x,_val_text_y,"MDEF: " + string(_stct_beast._val_beast_mdef_stat) + " (" + scr_get_beast_grade_letter(_stct_beast._val_beast_mdef_stat) + ")");
+	draw_text(_val_text_x,_val_text_y,"MDEF: " + string(_stct_beast._val_beast_mdef_stat) + " (" + scr_beast_get_grade_letter(_stct_beast._val_beast_mdef_stat) + ")");
 	_val_text_y += _val_lh * 2;
 
 	draw_text_ext(_val_text_x,_val_text_y,_stct_beast._str_beast_role,-1,_val_detail_w);

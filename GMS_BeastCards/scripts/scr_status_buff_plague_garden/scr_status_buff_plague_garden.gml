@@ -115,7 +115,7 @@ function scr_status_buff_plague_garden(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -137,7 +137,7 @@ function scr_status_buff_plague_garden(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -151,7 +151,7 @@ function scr_status_buff_plague_garden(
 
 			if (instance_exists(_ref_status)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 			}

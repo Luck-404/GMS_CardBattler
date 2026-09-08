@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SPOROSE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/SPOROSE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/SPOROSE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

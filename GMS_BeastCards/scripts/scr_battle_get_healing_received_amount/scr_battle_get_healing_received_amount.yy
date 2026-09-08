@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_get_healing_received_amount",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_get_healing_received_amount",
+  "parent":{
+    "name":"HEALING",
+    "path":"folders/BATTLE/COMBAT/HEALING.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

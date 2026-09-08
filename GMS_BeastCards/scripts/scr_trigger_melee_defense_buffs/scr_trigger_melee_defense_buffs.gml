@@ -46,7 +46,7 @@ function scr_trigger_melee_defense_buffs(_ref_defender,_ref_attacker){
 	){
 
 		if (
-			scr_trigger_thorns(
+			scr_status_trigger_thorns(
 				_ref_defender,
 				_ref_attacker
 			)

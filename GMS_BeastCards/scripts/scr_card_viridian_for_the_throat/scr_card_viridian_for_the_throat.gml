@@ -36,7 +36,7 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 	//-------------------------//
 	//DEAL 30% MAX-HP PHY DMG//
 	//-------------------------//
-	scr_damage_target_percent(
+	scr_battle_damage_target_percent(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
@@ -62,7 +62,7 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 
 		repeat (5){
 
-			scr_apply_dot_status(
+			scr_status_apply_dot(
 				"BLEED"
 			);
 		}
@@ -80,7 +80,7 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 			_ref_caster;
 
 		// Guaranteed self-inflicted Stun.
-		scr_apply_cc_status(
+		scr_status_apply_cc(
 			"STUN",
 			2,
 			true
@@ -102,7 +102,7 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 				0.30
 			);
 
-		scr_heal_target(
+		scr_battle_heal_target(
 			_val_execute_healing,
 			_ref_caster
 		);
@@ -131,16 +131,4 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 			_ref_target;
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

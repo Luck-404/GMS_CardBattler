@@ -6,7 +6,7 @@
   "name":"scr_status_buff_regeneration",
   "parent":{
     "name":"REGENERATION",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/REGENERATION.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REGENERATION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

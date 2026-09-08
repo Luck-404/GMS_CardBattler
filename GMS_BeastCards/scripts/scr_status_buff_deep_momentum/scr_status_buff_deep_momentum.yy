@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_deep_momentum",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_deep_momentum",
+  "parent":{
+    "name":"DEEP_MOMENTUM",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/DEEP_MOMENTUM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

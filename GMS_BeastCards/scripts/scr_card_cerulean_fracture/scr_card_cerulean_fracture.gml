@@ -15,7 +15,7 @@ function scr_card_cerulean_fracture(_stct_card,_ref_caster,_ref_target){
 	//GET ENEMY TEAM//
 	//----------------//
 	var _list_targets =
-		scr_get_target_team_list(_ref_target);
+		scr_battle_get_target_team_list(_ref_target);
 
 	if (_list_targets == undefined){
 		return;
@@ -75,7 +75,7 @@ function scr_card_cerulean_fracture(_stct_card,_ref_caster,_ref_target){
 		//------------//
 		//DEAL DAMAGE//
 		//------------//
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_hit_target
 		);
@@ -90,7 +90,7 @@ function scr_card_cerulean_fracture(_stct_card,_ref_caster,_ref_target){
 		//---------//
 		//SHATTER//
 		//---------//
-		scr_shatter_target(
+		scr_trigger_shatter(
 			_ref_hit_target
 		);
 
@@ -107,7 +107,7 @@ function scr_card_cerulean_fracture(_stct_card,_ref_caster,_ref_target){
 		global.ref_target_beast =
 			_ref_hit_target;
 
-		scr_apply_dot_status(
+		scr_status_apply_dot(
 			"BLEED"
 		);
 	}
@@ -127,16 +127,8 @@ function scr_card_cerulean_fracture(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	//BEGIN SNOW WEATHER//
 	//------------------//
-	scr_apply_weather_status(
+	scr_status_apply_weather(
 		"SNOW"
 	);
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

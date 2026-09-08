@@ -23,17 +23,9 @@ function scr_card_viridian_natures_bond(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//HEAL CASTER//
 	//-----------//
-	scr_heal_target(
+	scr_battle_heal_target(
 		_stct_card._val_card_magnitude,
 		_ref_caster
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_heal,0,false);
 }

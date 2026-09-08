@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"EMBEROOST",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/EMBEROOST.yy",
+    "path":"folders/BEASTS/VERMILION/EMBEROOST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

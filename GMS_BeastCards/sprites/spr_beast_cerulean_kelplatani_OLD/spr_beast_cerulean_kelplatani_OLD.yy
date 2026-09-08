@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"KELPLATANI",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/KELPLATANI.yy",
+    "path":"folders/BEASTS/CERULEAN/KELPLATANI.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -16,9 +16,9 @@ function scr_card_viridian_sleeping_pollen(_stct_card,_ref_caster,_ref_target){
 	//GET AOE-3 TARGETS//
 	//-----------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_target),
+		scr_battle_get_left_target(_ref_target),
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//----------------------//
@@ -56,14 +56,11 @@ function scr_card_viridian_sleeping_pollen(_stct_card,_ref_caster,_ref_target){
 		//-------------//
 		//APPLY SLEEP//
 		//-------------//
-		scr_apply_cc_status(
+		scr_status_apply_cc(
 			"SLEEP",
 			2
 		);
 
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
 
 	//----------------//
@@ -71,9 +68,4 @@ function scr_card_viridian_sleeping_pollen(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	global.ref_target_beast =
 		_ref_original_target;
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
 }

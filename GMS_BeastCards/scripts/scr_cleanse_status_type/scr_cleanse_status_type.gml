@@ -1,13 +1,13 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_CLEANSE_STATUS_TYPE
+// SCRIPT: scr_status_cleanse_type
 // FUNCTION: Removes statuses of a supplied type from a target Beast.
 //           Randomly selects cleansable statuses until amount is satisfied.
 //           Cleansing a status removes the entire status and all of its stacks.
 //
 //===============================================================================//
 
-function scr_cleanse_status_type(_ref_target,_str_status_type,_ct_amount,_str_status_id=undefined){
+function scr_status_cleanse_type(_ref_target,_str_status_type,_ct_amount,_str_status_id=undefined){
 
 	//----------------//
 	//VALIDATE TARGET//
@@ -88,7 +88,7 @@ function scr_cleanse_status_type(_ref_target,_str_status_type,_ct_amount,_str_st
 			_ref_status_cleanse._scr_status("DEATH",_ref_status_cleanse);
 		}
 		else{
-			scr_destroy_status(_ref_status_cleanse);
+			scr_status_destroy(_ref_status_cleanse);
 		}
 
 		_ct_removed++;
@@ -103,6 +103,16 @@ function scr_cleanse_status_type(_ref_target,_str_status_type,_ct_amount,_str_st
 			c_green,
 			_ref_target.x + irandom_range(-32,32),
 			_ref_target.y - 24 + irandom_range(-32,32)
+		);
+	}
+
+	//----------------------//
+	//CLEANSE PRESENTATION//
+	//----------------------//
+	if (_ct_removed > 0){
+
+		scr_battle_vfx_cleanse(
+			_ref_target
 		);
 	}
 

@@ -11,7 +11,7 @@ function scr_card_cerulean_drop_anchor(_stct_card,_ref_caster,_ref_target){
 	//GET ALLIED TEAM//
 	//----------------//
 	var _list_targets =
-		scr_get_target_team_list(_ref_caster);
+		scr_battle_get_target_team_list(_ref_caster);
 
 	//----------------//
 	//APPLY IMMOVABLE//
@@ -35,12 +35,4 @@ function scr_card_cerulean_drop_anchor(_stct_card,_ref_caster,_ref_target){
 		);
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

@@ -13,9 +13,9 @@ function scr_card_viridian_overgrowth(_stct_card,_ref_caster,_ref_target){
 	//GET ADJACENT ALLIES//
 	//--------------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_caster),
+		scr_battle_get_left_target(_ref_caster),
 		_ref_caster,
-		scr_get_right_target(_ref_caster)
+		scr_battle_get_right_target(_ref_caster)
 	];
 
 	//----------------//
@@ -34,18 +34,11 @@ function scr_card_viridian_overgrowth(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_armor_target_linear(
+		scr_battle_armor_target_linear(
 			_stct_card._val_card_magnitude,
 			_ref_affected_target
 		);
 
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_armor,0,false);
 }

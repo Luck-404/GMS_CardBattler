@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_whiteout",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_whiteout",
+  "parent":{
+    "name":"WHITEOUT",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/CERULEAN/WHITEOUT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

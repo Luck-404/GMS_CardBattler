@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"BATTLE BEAST",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE BEAST.yy",
+    "name":"COMBATANTS",
+    "path":"folders/BATTLE/COMBATANTS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

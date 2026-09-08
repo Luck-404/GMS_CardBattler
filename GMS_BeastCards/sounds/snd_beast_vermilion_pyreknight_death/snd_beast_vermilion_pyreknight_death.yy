@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_pyreknight_death",
   "parent":{
     "name":"PYREKNIGHT",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/PYREKNIGHT.yy",
+    "path":"folders/BEASTS/VERMILION/PYREKNIGHT.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

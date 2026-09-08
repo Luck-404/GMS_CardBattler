@@ -23,7 +23,7 @@ function scr_status_buff_draw_2(_str_tag,_ref_status,_val_lifetime=undefined){
 				max(1,_val_lifetime);
 
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"DRAW_2",
 					global.list_statuses
 				);
@@ -90,7 +90,7 @@ function scr_status_buff_draw_2(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -112,7 +112,7 @@ function scr_status_buff_draw_2(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -135,7 +135,7 @@ function scr_status_buff_draw_2(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_status._val_status_magnitude
 				);
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

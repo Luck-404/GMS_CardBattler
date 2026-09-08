@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_cepharime_cry",
   "parent":{
     "name":"CEPHARIME",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CEPHARIME.yy",
+    "path":"folders/BEASTS/CERULEAN/CEPHARIME.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

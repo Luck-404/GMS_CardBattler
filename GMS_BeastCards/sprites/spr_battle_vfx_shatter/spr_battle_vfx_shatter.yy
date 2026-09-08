@@ -30,8 +30,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"TRIGGERS",
-    "path":"folders/CARDS/CARD VFX/TRIGGERS.yy",
+    "name":"SHATTER",
+    "path":"folders/BATTLE/COLOR TRIGGERS/SHATTER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

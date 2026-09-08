@@ -14,7 +14,7 @@ function scr_card_viridian_return_to_nature(_stct_card,_ref_caster,_ref_target){
 	//PAY SACRIFICE COST//
 	//-------------------//
 	var _flag_sacrificed =
-		scr_sacrifice_corpse(
+		scr_battle_sacrifice_corpse(
 			_ref_target
 		);
 
@@ -42,5 +42,5 @@ function scr_card_viridian_return_to_nature(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//GENERATE MANA//
 	//-------------//
-	scr_gain_mana(1);
+	scr_battle_mana_gain(1);
 }

@@ -14,12 +14,4 @@ function scr_card_cerulean_purify_waters(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	scr_transfer_oldest_dot(_ref_caster,_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

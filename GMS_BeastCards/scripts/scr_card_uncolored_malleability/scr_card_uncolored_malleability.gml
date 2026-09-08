@@ -14,12 +14,4 @@ function scr_card_uncolored_malleability(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	scr_apply_buff_status("MALLEABILITY");
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

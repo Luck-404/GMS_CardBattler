@@ -24,6 +24,13 @@ function scr_trap_pulled_under(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stc
 			_ref_trap._flag_triggered =
 				true;
 
+			//----------------//
+			//TRAP TRIGGER VFX//
+			//----------------//
+			scr_trap_vfx_trigger(
+				_ref_trap
+			);
+
 			//-------------//
 			//TRAP FEEDBACK//
 			//-------------//
@@ -46,7 +53,7 @@ function scr_trap_pulled_under(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stc
 			//--------------//
 			//APPLY BANISH//
 			//--------------//
-			scr_apply_cc_status(
+			scr_status_apply_cc(
 				"BANISH",
 				1
 			);
@@ -60,7 +67,7 @@ function scr_trap_pulled_under(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stc
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(
+			scr_trap_destroy(
 				_ref_trap
 			);
 

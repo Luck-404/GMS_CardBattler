@@ -9,8 +9,8 @@
   "name":"obj_ranch_interactable",
   "overriddenProperties":[],
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"WORLD",
+    "path":"folders/BEASTS/RANCH/WORLD.yy",
   },
   "parentObjectId":null,
   "persistent":false,

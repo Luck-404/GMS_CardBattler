@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_vfx_persistent",
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"VFX",
+    "path":"folders/BATTLE/VFX.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

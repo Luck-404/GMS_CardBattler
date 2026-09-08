@@ -1,13 +1,13 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_TRIGGER_RAZOR_SHELL
+// SCRIPT: scr_status_trigger_razor_shell
 // FUNCTION: Checks a defending Beast for Razor Shell.
 //           When successfully struck by an enemy Attack, deals fixed NEU
 //           damage to the attacker.
 //
 //===============================================================================//
 
-function scr_trigger_razor_shell(_ref_defender,_ref_attacker){
+function scr_status_trigger_razor_shell(_ref_defender,_ref_attacker){
 
 	if (!instance_exists(_ref_defender)){
 		return false;
@@ -32,7 +32,7 @@ function scr_trigger_razor_shell(_ref_defender,_ref_attacker){
 	//CHECK RAZOR SHELL//
 	//------------------//
 	var _ref_razor_shell =
-		scr_check_for_status(
+		scr_status_check(
 			"RAZOR_SHELL",
 			_ref_defender
 		);
@@ -56,7 +56,7 @@ function scr_trigger_razor_shell(_ref_defender,_ref_attacker){
 	//--------------------//
 	//DEAL RETALIATION//
 	//--------------------//
-	scr_damage_target_minion(
+	scr_minion_damage_target(
 		_ref_razor_shell._val_status_magnitude,
 		_ref_attacker
 	);

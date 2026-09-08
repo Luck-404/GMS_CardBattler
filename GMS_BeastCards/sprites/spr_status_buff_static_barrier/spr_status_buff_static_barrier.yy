@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"STATIC_BARRIER",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/CERULEAN/STATIC_BARRIER.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/STATIC_BARRIER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_status_event_bloomtide",
   "parent":{
     "name":"BLOOMTIDE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/EVENTS/BLOOMTIDE.yy",
+    "path":"folders/BATTLE/STATUSES/EVENTS/BLOOMTIDE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FURN",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/FURN.yy",
+    "path":"folders/BEASTS/VIRIDIAN/FURN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

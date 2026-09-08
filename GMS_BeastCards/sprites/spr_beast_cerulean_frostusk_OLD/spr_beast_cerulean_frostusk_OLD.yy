@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FROSTUSK",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/FROSTUSK.yy",
+    "path":"folders/BEASTS/CERULEAN/FROSTUSK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"DAIMONIS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/DAIMONIS.yy",
+    "path":"folders/BEASTS/VERMILION/DAIMONIS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

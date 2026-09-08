@@ -46,7 +46,7 @@ function scr_status_buff_heart_of_the_forest(
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_get_heart_of_forest_status(
+				scr_status_get_heart_of_the_forest(
 					_str_team
 				);
 
@@ -119,7 +119,7 @@ function scr_status_buff_heart_of_the_forest(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -141,7 +141,7 @@ function scr_status_buff_heart_of_the_forest(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -155,7 +155,7 @@ function scr_status_buff_heart_of_the_forest(
 
 			if (instance_exists(_ref_status)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 			}

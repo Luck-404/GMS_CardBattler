@@ -9,8 +9,8 @@
   "name":"obj_gui_end_battle_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"END BATTLE",
-    "path":"folders/BATTLE/END BATTLE.yy",
+    "name":"RESULTS",
+    "path":"folders/BATTLE/RESULTS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

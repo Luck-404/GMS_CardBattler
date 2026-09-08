@@ -6,7 +6,7 @@
   "name":"scr_status_buff_static_barrier",
   "parent":{
     "name":"STATIC_BARRIER",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/CERULEAN/STATIC_BARRIER.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/STATIC_BARRIER.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

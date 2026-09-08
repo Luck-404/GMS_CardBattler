@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"STUN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/STUN.yy",
+    "path":"folders/BATTLE/STATUSES/CC/STUN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

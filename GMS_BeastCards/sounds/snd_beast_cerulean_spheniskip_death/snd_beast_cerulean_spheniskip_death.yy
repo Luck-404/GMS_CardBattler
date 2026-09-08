@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_spheniskip_death",
   "parent":{
     "name":"SPHENISKIP",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/SPHENISKIP.yy",
+    "path":"folders/BEASTS/CERULEAN/SPHENISKIP.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

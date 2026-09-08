@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_CLEANSE_STATUS_STACKS
+// SCRIPT: scr_status_cleanse_stacks
 // FUNCTION: Removes a number of stacks from every cleansable status matching
 //           one of the supplied status types.
 //           Fully removes statuses reduced to zero stacks.
@@ -8,7 +8,7 @@
 //           so stack-based secondary effects remain synchronized.
 //
 //===============================================================================//
-function scr_cleanse_status_stacks(_ref_target,_arr_status_types,_ct_amount){
+function scr_status_cleanse_stacks(_ref_target,_arr_status_types,_ct_amount){
 
 	if (!instance_exists(_ref_target)){
 		return 0;
@@ -141,7 +141,7 @@ function scr_cleanse_status_stacks(_ref_target,_arr_status_types,_ct_amount){
 				_scr_status("DEATH",_ref_status);
 			}
 			else{
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 		}
 
@@ -230,7 +230,17 @@ function scr_cleanse_status_stacks(_ref_target,_arr_status_types,_ct_amount){
 		global.ref_target_beast = _ref_target;
 	}
 
-	scr_reposition_statuses(_ref_target);
+	scr_status_reposition(_ref_target);
+	
+	//----------------------//
+	//CLEANSE PRESENTATION//
+	//----------------------//
+	if (_ct_stacks_removed > 0){
 
+		scr_battle_vfx_cleanse(
+			_ref_target
+		);
+	}
+	
 	return _ct_stacks_removed;
 }

@@ -11,14 +11,6 @@ function scr_card_cerulean_aqua_step(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//SWAP POSITIONS//
 	//----------------//
-	scr_reposition_target(_stct_card,_ref_caster,_ref_target);
+	scr_battle_reposition_target(_stct_card,_ref_caster,_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_beast_summon,0,false);
 }

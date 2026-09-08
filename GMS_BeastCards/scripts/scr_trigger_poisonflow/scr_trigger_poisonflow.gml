@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_TRIGGER_POISONFLOW
+// SCRIPT: scr_trigger_poisonflow
 // FUNCTION: Consumes Poison stacks from the target Beast.
 //           Consumes all stacks when no amount is supplied.
 //           Removes the Poison status when no stacks remain.
@@ -19,7 +19,7 @@ function scr_trigger_poisonflow(_ref_target,_ct_amount=undefined){
 	//CHECK FOR POISON//
 	//----------------//
 	var _ref_poison =
-		scr_check_for_status(
+		scr_status_check(
 			"POISON",
 			_ref_target
 		);
@@ -65,7 +65,7 @@ var _ct_consumed = _ct_available;
 
 	if (_ref_poison._ct_status_stacks <= 0){
 
-		scr_destroy_status(
+		scr_status_destroy(
 			_ref_poison
 		);
 	}
@@ -82,7 +82,7 @@ var _ct_consumed = _ct_available;
 		0,
 		1,
 		0,
-		snd_battle_sfx_poisonflow
+		snd_battle_poisonflow
 	);
 
 	//----------//

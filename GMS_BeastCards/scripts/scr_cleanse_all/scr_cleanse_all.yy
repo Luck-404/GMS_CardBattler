@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_cleanse_all",
   "parent":{
-    "name":"STATUS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS.yy",
+    "name":"CLEANSE",
+    "path":"folders/BATTLE/STATUSES/CLEANSE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

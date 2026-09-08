@@ -32,7 +32,7 @@ function scr_trigger_toxic_hide(_ref_defender,_ref_attacker){
 	//CHECK TOXIC HIDE//
 	//------------------//
 	var _ref_toxic_hide =
-		scr_check_for_status(
+		scr_status_check(
 			"TOXIC_HIDE",
 			_ref_defender
 		);
@@ -88,7 +88,7 @@ function scr_trigger_toxic_hide(_ref_defender,_ref_attacker){
 			break;
 		}
 
-		scr_apply_dot_status(
+		scr_status_apply_dot(
 			"POISON"
 		);
 	}

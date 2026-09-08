@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SEEDFALL",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/WEATHER/SEEDFALL.yy",
+    "path":"folders/BATTLE/STATUSES/WEATHER/SEEDFALL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

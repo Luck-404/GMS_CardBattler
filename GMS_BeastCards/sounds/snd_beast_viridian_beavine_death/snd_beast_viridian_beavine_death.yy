@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_beavine_death",
   "parent":{
     "name":"BEAVINE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/BEAVINE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/BEAVINE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

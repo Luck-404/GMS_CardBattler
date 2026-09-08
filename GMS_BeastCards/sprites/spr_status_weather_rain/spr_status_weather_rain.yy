@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"RAIN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/WEATHER/RAIN.yy",
+    "path":"folders/BATTLE/STATUSES/WEATHER/RAIN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

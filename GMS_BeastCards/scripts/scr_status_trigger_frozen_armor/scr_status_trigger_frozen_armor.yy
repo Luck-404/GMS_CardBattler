@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_frozen_armor",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_frozen_armor",
+  "parent":{
+    "name":"FROZEN_ARMOR",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/FROZEN_ARMOR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

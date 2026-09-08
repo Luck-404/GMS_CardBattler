@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_kelplatani_cry",
   "parent":{
     "name":"KELPLATANI",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/KELPLATANI.yy",
+    "path":"folders/BEASTS/CERULEAN/KELPLATANI.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

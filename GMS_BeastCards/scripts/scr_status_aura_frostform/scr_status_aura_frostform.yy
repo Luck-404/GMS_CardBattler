@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_aura_frostform",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_aura_frostform",
+  "parent":{
+    "name":"FROSTFORM",
+    "path":"folders/BATTLE/STATUSES/AURA/CERULEAN/FROSTFORM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -12,7 +12,7 @@ function scr_card_cerulean_undertow(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	//REPOSITION FORWARD//
 	//-------------------//
-	scr_reposition_beast(
+	scr_battle_reposition_beast(
 		_ref_target,
 		-1
 	);

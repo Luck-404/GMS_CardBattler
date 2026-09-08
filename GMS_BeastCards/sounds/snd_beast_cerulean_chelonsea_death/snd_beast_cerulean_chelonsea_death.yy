@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_chelonsea_death",
   "parent":{
     "name":"CHELONSEA",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CHELONSEA.yy",
+    "path":"folders/BEASTS/CERULEAN/CHELONSEA.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

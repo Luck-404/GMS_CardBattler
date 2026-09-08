@@ -12,17 +12,8 @@ function scr_card_viridian_spike_pierce(_stct_card,_ref_caster,_ref_target){
 	//----------------------//
 	//DEAL PIERCING DAMAGE//
 	//----------------------//
-	scr_damage_target_armor_pierce(
+	scr_battle_damage_target_armor_pierce(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

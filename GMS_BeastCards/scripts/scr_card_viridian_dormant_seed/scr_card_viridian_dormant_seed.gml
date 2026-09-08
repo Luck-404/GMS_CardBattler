@@ -11,14 +11,6 @@ function scr_card_viridian_dormant_seed(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	//SUMMON DORMANT SEED//
 	//-------------------//
-	scr_init_minion("DORMANT_SEED",_stct_card,_ref_caster,_ref_target);
+	scr_minion_init("DORMANT_SEED",_stct_card,_ref_caster,_ref_target);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

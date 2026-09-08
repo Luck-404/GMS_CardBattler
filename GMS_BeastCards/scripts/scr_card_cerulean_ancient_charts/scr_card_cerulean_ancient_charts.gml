@@ -15,12 +15,4 @@ function scr_card_cerulean_ancient_charts(_stct_card,_ref_caster,_ref_target){
 		_stct_card._val_card_magnitude
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

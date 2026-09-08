@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BEAVINE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/BEAVINE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/BEAVINE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

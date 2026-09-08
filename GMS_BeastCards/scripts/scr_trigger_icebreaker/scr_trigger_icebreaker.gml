@@ -1,10 +1,10 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_TRIGGER_ICEBREAKER
+// SCRIPT: scr_trigger_icebreaker
 // FUNCTION: Resolves the Cerulean ICEBREAKER trigger.
-//           If the target is Frozen, consumes Frozen and returns 2.
-//           Otherwise returns 1.
-//           The returned value multiplies the triggering card's direct damage.
+//           Actual Frozen is consumed.
+//           Frostform also counts as Frozen but is not consumed.
+//           Returns 2 when triggered, otherwise 1.
 //
 //===============================================================================//
 
@@ -17,15 +17,34 @@ function scr_trigger_icebreaker(_ref_target){
 		return 1;
 	}
 
-	//-------------//
-	//CHECK FROZEN//
-	//-------------//
-	var _ref_frozen = scr_check_for_status("FROZEN",_ref_target);
+	//----------------------//
+	//CHECK FROZEN STATES//
+	//----------------------//
+	var _ref_frozen =
+		scr_status_check(
+			"FROZEN",
+			_ref_target
+		);
 
-	if (_ref_frozen == -1){
+	var _ref_frostform =
+		scr_status_check(
+			"FROSTFORM",
+			_ref_target
+		);
+
+	if (
+		_ref_frozen == -1 &&
+		_ref_frostform == -1
+	){
 		return 1;
 	}
-	
+
+	//--------------------------//
+	//STORE ICEBREAKER CONDITION//
+	//--------------------------//
+	global.ref_icebreaker_target =
+		_ref_target;
+
 	//------------------//
 	//ICEBREAKER VFX/SFX//
 	//------------------//
@@ -38,8 +57,8 @@ function scr_trigger_icebreaker(_ref_target){
 		0,
 		1,
 		0,
-		snd_battle_sfx_icebreaker
-	);	
+		snd_battle_icebreaker
+	);
 
 	//------------------//
 	//ICEBREAKER POPUP//
@@ -53,10 +72,16 @@ function scr_trigger_icebreaker(_ref_target){
 		_ref_target.y - 48
 	);
 
-	//---------------//
-	//CONSUME FROZEN//
-	//---------------//
-	scr_status_cc_frozen("DEATH",_ref_frozen);
+	//----------------------//
+	//CONSUME ACTUAL FROZEN//
+	//----------------------//
+	if (_ref_frozen != -1){
+
+		scr_status_cc_frozen(
+			"DEATH",
+			_ref_frozen
+		);
+	}
 
 	return 2;
 }

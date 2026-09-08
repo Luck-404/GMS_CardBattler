@@ -38,7 +38,7 @@ function scr_status_buff_inspiration(
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"INSPIRATION",
 					global.list_statuses
 				);
@@ -112,7 +112,7 @@ function scr_status_buff_inspiration(
 			//-------------------//
 			//GAIN CURRENT MANA//
 			//-------------------//
-			scr_gain_mana(
+			scr_battle_mana_gain(
 				_ref_new_status._val_status_magnitude
 			);
 
@@ -124,7 +124,7 @@ function scr_status_buff_inspiration(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -146,7 +146,7 @@ function scr_status_buff_inspiration(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -187,12 +187,12 @@ function scr_status_buff_inspiration(
 			//-------------------//
 			//REFRESH MANA HUD//
 			//-------------------//
-			scr_reposition_mana();
+			scr_battle_mana_reposition();
 
 			//---------------//
 			//DESTROY STATUS//
 			//---------------//
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

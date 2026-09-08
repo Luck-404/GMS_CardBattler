@@ -14,7 +14,7 @@ function scr_card_viridian_fungal_recycling(_stct_card,_ref_caster,_ref_target){
 	//PAY SACRIFICE COST//
 	//-------------------//
 	var _flag_sacrificed =
-		scr_sacrifice_corpse(_ref_target);
+		scr_battle_sacrifice_corpse(_ref_target);
 
 	if (!_flag_sacrificed){
 
@@ -33,7 +33,7 @@ function scr_card_viridian_fungal_recycling(_stct_card,_ref_caster,_ref_target){
 	//RECOVER VIRIDIAN CARD//
 	//----------------------//
 	var _ref_recovered =
-		scr_recover_random_exhausted_card(
+		scr_battle_card_recover_random_exhausted(
 			"VIRIDIAN"
 		);
 
@@ -65,12 +65,4 @@ function scr_card_viridian_fungal_recycling(_stct_card,_ref_caster,_ref_target){
 		);
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

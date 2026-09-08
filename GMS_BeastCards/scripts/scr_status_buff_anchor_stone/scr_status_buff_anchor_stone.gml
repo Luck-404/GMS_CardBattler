@@ -137,7 +137,7 @@ function scr_status_buff_anchor_stone(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -152,7 +152,7 @@ function scr_status_buff_anchor_stone(
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

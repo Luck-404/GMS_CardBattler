@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ASCHEMASS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/ASCHEMASS.yy",
+    "path":"folders/BEASTS/VERMILION/ASCHEMASS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

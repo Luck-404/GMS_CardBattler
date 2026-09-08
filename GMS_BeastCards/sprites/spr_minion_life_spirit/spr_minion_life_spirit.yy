@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VIRIDIAN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS/MINION SPRITES/VIRIDIAN.yy",
+    "path":"folders/BATTLE/MINIONS/VIRIDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

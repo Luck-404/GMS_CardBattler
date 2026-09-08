@@ -13,16 +13,6 @@ function scr_card_uncolored_spellbook_wildcard(_stct_card,_ref_caster,_ref_targe
 //---------------//
 repeat (5){
 	var _dot = choose("BLEED","BURN","POISON","VENOM","FROSTBURN","STORMSTRUCK","FROSTBITE");
-	scr_apply_dot_status(_dot);
+	scr_status_apply_dot(_dot);
 }
-
-//----------------//
-//PLAY ANIMATION//
-//----------------//
-
-//-----------//
-//PLAY SOUND//
-//-----------//
-audio_play_sound(snd_debuff,0,false);
-
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_hypothermia",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_hypothermia",
+  "parent":{
+    "name":"HYPOTHERMIA",
+    "path":"folders/CARDS/CARD LIST/CERULEAN/HYPOTHERMIA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

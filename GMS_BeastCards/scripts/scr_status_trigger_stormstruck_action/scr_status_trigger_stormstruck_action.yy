@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_stormstruck_action",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_stormstruck_action",
+  "parent":{
+    "name":"STORMSTRUCK",
+    "path":"folders/BATTLE/STATUSES/DOTs/STORMSTRUCK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

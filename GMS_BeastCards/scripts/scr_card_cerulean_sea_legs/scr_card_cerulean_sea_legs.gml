@@ -16,12 +16,4 @@ function scr_card_cerulean_sea_legs(_stct_card,_ref_caster,_ref_target){
 		2
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

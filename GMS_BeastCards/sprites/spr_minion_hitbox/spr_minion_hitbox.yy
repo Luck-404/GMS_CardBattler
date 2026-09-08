@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"MINIONS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/MINIONS/CORE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

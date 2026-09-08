@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"LEPOROOT",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/LEPOROOT.yy",
+    "path":"folders/BEASTS/VIRIDIAN/LEPOROOT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

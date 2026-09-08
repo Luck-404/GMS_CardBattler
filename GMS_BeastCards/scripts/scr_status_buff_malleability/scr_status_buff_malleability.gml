@@ -23,7 +23,7 @@ function scr_status_buff_malleability(_str_tag,_ref_status){
 			}
 
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"MALLEABILITY",
 					_ref_target
 				);
@@ -83,7 +83,7 @@ function scr_status_buff_malleability(_str_tag,_ref_status){
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -119,7 +119,7 @@ function scr_status_buff_malleability(_str_tag,_ref_status){
 				_ref_host._flag_ignore_caster_requirements = false;
 			}
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

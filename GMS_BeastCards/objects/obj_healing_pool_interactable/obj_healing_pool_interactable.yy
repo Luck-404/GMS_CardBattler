@@ -9,8 +9,8 @@
   "name":"obj_healing_pool_interactable",
   "overriddenProperties":[],
   "parent":{
-    "name":"BEAST STORAGES",
-    "path":"folders/BEASTS/BEAST STORAGES.yy",
+    "name":"WORLD",
+    "path":"folders/BEASTS/RANCH/WORLD.yy",
   },
   "parentObjectId":null,
   "persistent":false,

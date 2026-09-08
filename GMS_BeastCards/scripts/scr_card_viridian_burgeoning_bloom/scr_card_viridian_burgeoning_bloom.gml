@@ -12,17 +12,9 @@ function scr_card_viridian_burgeoning_bloom(_stct_card,_ref_caster,_ref_target){
 	//------------//
 	//APPLY AURA//
 	//------------//
-	scr_apply_aura_status(
+	scr_status_apply_aura(
 		"BURGEONING_BLOOM",
 		_stct_card._val_card_magnitude
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

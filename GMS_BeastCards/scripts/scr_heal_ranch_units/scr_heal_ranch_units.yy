@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_heal_ranch_units",
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"CORE",
+    "path":"folders/BEASTS/RANCH/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

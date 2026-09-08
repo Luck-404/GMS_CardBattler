@@ -12,161 +12,289 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 	switch(_str_tag){
 
 		//-------//
-		//APPLY//
-		//-------//
-		case "APPLY":
+//APPLY//
+//-------//
+case "APPLY":
 
-			if (_val_lifetime == undefined){
-				_val_lifetime = 3;
-			}
+	//----------------//
+	//DEFAULT LIFETIME//
+	//----------------//
+	if (_val_lifetime == undefined){
+		_val_lifetime = 3;
+	}
 
-			_val_lifetime = max(1,_val_lifetime);
+	_val_lifetime =
+		max(
+			1,
+			_val_lifetime
+		);
 
-			//----------------//
-			//CHECK EXISTING//
-			//----------------//
-			var _ref_existing_status = scr_check_for_status(
-				"EVENT: BLOOMTIDE",
-				global.list_statuses
-			);
+	//----------------//
+	//CHECK EXISTING//
+	//----------------//
+	var _ref_existing_status =
+		scr_status_check(
+			"EVENT: BLOOMTIDE",
+			global.list_statuses
+		);
 
-			if (_ref_existing_status != -1){
+	//----------------//
+	//REFRESH EXISTING//
+	//----------------//
+	if (_ref_existing_status != -1){
 
-				scr_status_refresh_lifetime(_ref_existing_status,_val_lifetime);
+		scr_status_refresh_lifetime(
+			_ref_existing_status,
+			_val_lifetime
+		);
 
-				return _ref_existing_status;
-			}
+		return _ref_existing_status;
+	}
 
-			//---------------//
-			//CREATE STATUS//
-			//---------------//
-			var _ref_new_status = instance_create_layer(
-				room_width * 0.5,
-				room_height * 0.5,
-				"ily_status",
-				obj_battle_status
-			);
+	//---------------//
+	//CREATE STATUS//
+	//---------------//
+	var _ref_new_status =
+		instance_create_layer(
+			room_width * 0.5,
+			room_height * 0.5,
+			"ily_status",
+			obj_battle_status
+		);
 
-			_ref_new_status._scr_status =
-				scr_status_event_bloomtide;
+	//-------------//
+	//STATUS DATA//
+	//-------------//
+	_ref_new_status._scr_status =
+		scr_status_event_bloomtide;
 
-			_ref_new_status._ref_host =
-				undefined;
+	_ref_new_status._ref_host =
+		undefined;
 
-			_ref_new_status._str_status_type =
-				"EVENT";
+	_ref_new_status._str_status_type =
+		"EVENT";
 
-			_ref_new_status._str_status_name =
-				"EVENT: BLOOMTIDE";
+	_ref_new_status._str_status_name =
+		"EVENT: BLOOMTIDE";
 
-			_ref_new_status._str_status_desc =
-				"HEALING BEYOND MAXIMUM HP BECOMES OVERHEALTH. END OF ROUND: HEAL ALL LIVING BEASTS 2.";
+	_ref_new_status._str_status_desc =
+		"HEALING BEYOND MAXIMUM HP BECOMES OVERHEALTH. END OF ROUND: HEAL ALL LIVING BEASTS 2.";
 
-			_ref_new_status._spr_status =
-				spr_status_event_bloomtide;
+	_ref_new_status._spr_status =
+		spr_status_event_bloomtide;
 
-			_ref_new_status._str_trigger_region =
-				"END";
+	_ref_new_status._str_trigger_region =
+		"END";
 
-			_ref_new_status._ct_status_stacks =
-				1;
+	_ref_new_status._ct_status_stacks =
+		1;
 
-			//-------------------//
-			//INITIALIZE LIFETIME//
-			//-------------------//
-			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
+	//-------------------//
+	//INITIALIZE LIFETIME//
+	//-------------------//
+	scr_status_init_lifetime(
+		_ref_new_status,
+		_val_lifetime,
+		false,
+		false
+	);
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
-			ds_list_add(global.list_statuses,_ref_new_status);
+	//----------------//
+	//REGISTER STATUS//
+	//----------------//
+	ds_list_add(
+		global.list_statuses,
+		_ref_new_status
+	);
 
-			//-------------------//
-			//CHANGE EVENT VISUAL//
-			//-------------------//
-			var _ref_layer = layer_get_id("bly_event");
+	//=====================//
+	//BLOOMTIDE START VFX//
+	//=====================//
+	scr_battle_vfx(
+		undefined,
+		spr_battle_vfx_event_bloomtide_start,
+		room_width * 0.5,
+		room_height * 0.5,
+		0,
+		0,
+		1,
+		0,
+		snd_battle_event_bloomtide_start
+	);
 
-			layer_background_change(_ref_layer,spr_scene_fx_bloomtide);
+	//==========================//
+	//PERSISTENT BLOOMTIDE VFX//
+	//==========================//
+	_ref_new_status._ref_persistent_vfx =
+		scr_battle_vfx_persistent_loop(
+			spr_battle_vfx_event_bloomtide_persist,
+			room_width * 0.5,
+			room_height * 0.5,
+			1
+		);
 
-			scr_reposition_statuses(global.list_statuses);
+	//======================//
+	//BLOOMTIDE AMBIENCE//
+	//======================//
+	scr_status_start_persistent_audio(
+		_ref_new_status,
+		bgm_battle_event_bloomtide,
+		0.25
+	);
 
-			return _ref_new_status;
+	//------------------//
+	//REPOSITION STATUS//
+	//------------------//
+	scr_status_reposition(
+		global.list_statuses
+	);
 
-		break;
+	return _ref_new_status;
+
+break;
 
 
-		//--------//
-		//REPEAT//
-		//--------//
-		case "REPEAT":
+//--------//
+//REPEAT//
+//--------//
+case "REPEAT":
 
-			if (!instance_exists(_ref_status)){
-				return undefined;
-			}
+	//-----------------//
+	//VALIDATE STATUS//
+	//-----------------//
+	if (!instance_exists(_ref_status)){
+		return undefined;
+	}
 
-			//-------------------//
-			//HEAL PLAYER BEASTS//
-			//-------------------//
-			for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_player_controller._list_beasts_alive); _it_beast++){
+	//====================//
+	//BLOOMTIDE TICK VFX//
+	//====================//
+	scr_battle_vfx(
+		undefined,
+		spr_battle_vfx_event_bloomtide_start,
+		room_width * 0.5,
+		room_height * 0.5,
+		0,
+		0,
+		1,
+		0,
+		undefined
+	);
 
-				var _ref_beast = ds_list_find_value(
-					obj_battle_player_controller._list_beasts_alive,
+	//----------------//
+	//GET TEAM LISTS//
+	//----------------//
+	var _arr_team_lists = [
+		obj_battle_player_controller._list_beasts_alive,
+		obj_battle_enemy_controller._list_beasts_alive
+	];
+
+	//=================//
+	//HEAL ALL BEASTS//
+	//=================//
+	for (
+		var _it_team = 0;
+		_it_team < array_length(_arr_team_lists);
+		_it_team++
+	){
+
+		var _list_beasts =
+			_arr_team_lists[_it_team];
+
+		if (
+			!ds_exists(
+				_list_beasts,
+				ds_type_list
+			)
+		){
+			continue;
+		}
+
+		for (
+			var _it_beast = 0;
+			_it_beast < ds_list_size(_list_beasts);
+			_it_beast++
+		){
+
+			var _ref_beast =
+				ds_list_find_value(
+					_list_beasts,
 					_it_beast
 				);
 
-				if (!instance_exists(_ref_beast)){
-					continue;
-				}
-
-				scr_heal_target(2,_ref_beast);
+			if (!instance_exists(_ref_beast)){
+				continue;
 			}
 
-			//------------------//
-			//HEAL ENEMY BEASTS//
-			//------------------//
-			for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_alive); _it_beast++){
-
-				var _ref_beast = ds_list_find_value(
-					obj_battle_enemy_controller._list_beasts_alive,
-					_it_beast
-				);
-
-				if (!instance_exists(_ref_beast)){
-					continue;
-				}
-
-				scr_heal_target(2,_ref_beast);
+			if (
+				_ref_beast._str_list != "ALIVE" ||
+				_ref_beast._val_cur_hp <= 0
+			){
+				continue;
 			}
 
 			//----------------//
-			//UPDATE LIFETIME//
+			//TARGET HEAL VFX//
 			//----------------//
-			scr_status_tick_lifetime(_ref_status);
+			scr_battle_vfx(
+				undefined,
+				spr_battle_vfx_event_bloomtide_tick,
+				_ref_beast.x,
+				_ref_beast.y - 48,
+				0,
+				0,
+				1,
+				0,
+				undefined
+			);
 
-			scr_reposition_statuses(global.list_statuses);
+			//-----------//
+			//HEAL BEAST//
+			//-----------//
+			scr_battle_heal_target(
+				2,
+				_ref_beast
+			);
+		}
+	}
 
-		break;
+	//----------------//
+	//TICK LIFETIME//
+	//----------------//
+	scr_status_tick_lifetime(
+		_ref_status
+	);
+
+	//------------------//
+	//REPOSITION STATUS//
+	//------------------//
+	scr_status_reposition(
+		global.list_statuses
+	);
+
+break;
 
 
-		//-------//
-		//DEATH//
-		//-------//
-		case "DEATH":
+//-------//
+//DEATH//
+//-------//
+case "DEATH":
 
-			if (!instance_exists(_ref_status)){
-				return undefined;
-			}
+	//-----------------//
+	//VALIDATE STATUS//
+	//-----------------//
+	if (!instance_exists(_ref_status)){
+		return undefined;
+	}
 
-			//------------------//
-			//CLEAR EVENT VISUAL//
-			//------------------//
-			var _ref_layer = layer_get_id("bly_event");
+	//---------------//
+	//DESTROY STATUS//
+	//---------------//
+	scr_status_destroy(
+		_ref_status
+	);
 
-			layer_background_change(_ref_layer,spr_bg_blank);
-
-			scr_destroy_status(_ref_status);
-
-		break;
+break;
 	}
 
 	return undefined;

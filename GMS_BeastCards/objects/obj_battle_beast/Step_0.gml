@@ -66,6 +66,43 @@ switch(_str_vfx_motion){
 
 	break;
 
+	case "REPOSITION":
+
+		//--------------------//
+		//REPOSITION PROGRESS//
+		//--------------------//
+		var _val_reposition_progress =
+			1 -
+			(
+				(_ct_vfx_motion - 1) /
+				max(
+					1,
+					_ct_vfx_motion_duration - 1
+				)
+			);
+
+		//----------------//
+		//SMOOTH EASING//
+		//----------------//
+		var _val_reposition_ease =
+			_val_reposition_progress *
+			_val_reposition_progress *
+			(
+				3 -
+				(2 * _val_reposition_progress)
+			);
+
+		//----------------//
+		//LERP TO NEW SLOT//
+		//----------------//
+		_val_vfx_offset_x =
+			lerp(
+				_val_vfx_motion_start_x,
+				0,
+				_val_reposition_ease
+			);
+
+	break;
 
 	case "RESIST":
 

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SPHENISKIP",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/SPHENISKIP.yy",
+    "path":"folders/BEASTS/CERULEAN/SPHENISKIP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

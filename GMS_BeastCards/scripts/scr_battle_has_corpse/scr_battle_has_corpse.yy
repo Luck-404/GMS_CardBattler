@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_has_corpse",
   "parent":{
-    "name":"BATTLE CARDS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS.yy",
+    "name":"COMBATANTS",
+    "path":"folders/BATTLE/COMBATANTS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

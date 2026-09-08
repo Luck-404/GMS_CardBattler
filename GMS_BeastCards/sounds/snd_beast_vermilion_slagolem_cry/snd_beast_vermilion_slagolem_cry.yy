@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_slagolem_cry",
   "parent":{
     "name":"SLAGOLEM",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/SLAGOLEM.yy",
+    "path":"folders/BEASTS/VERMILION/SLAGOLEM.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

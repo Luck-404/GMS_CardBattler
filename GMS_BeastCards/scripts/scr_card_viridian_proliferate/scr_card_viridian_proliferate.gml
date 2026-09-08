@@ -21,7 +21,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET SELECTED TEAM//
 	//--------------------//
-	var _list_targets = scr_get_target_team_list(_ref_target);
+	var _list_targets = scr_battle_get_target_team_list(_ref_target);
 
 	if (_list_targets == undefined){
 		return;
@@ -37,7 +37,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	if (_ct_targets <= 1){
 
-		audio_play_sound(snd_debuff,0,false);
+		audio_play_sound(snd_error,0,false);
 
 		return;
 	}
@@ -69,7 +69,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 		//-----------------//
 		//COPY CURRENT DOTS//
 		//-----------------//
-		var _ct_copied = scr_copy_dot_statuses(_ref_source,_ref_destination);
+		var _ct_copied = scr_status_copy_dots(_ref_source,_ref_destination);
 
 		if (_ct_copied > 0){
 
@@ -115,7 +115,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 		//-----------------//
 		//COPY CURRENT DOTS//
 		//-----------------//
-		var _ct_copied = scr_copy_dot_statuses(_ref_source,_ref_destination);
+		var _ct_copied = scr_status_copy_dots(_ref_source,_ref_destination);
 
 		if (_ct_copied > 0){
 
@@ -128,15 +128,5 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 				_ref_destination.y - 48
 			);
 		}
-
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
-
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
 }

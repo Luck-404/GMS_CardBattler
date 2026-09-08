@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_istirain_death",
   "parent":{
     "name":"ISTIRAIN",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/ISTIRAIN.yy",
+    "path":"folders/BEASTS/CERULEAN/ISTIRAIN.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

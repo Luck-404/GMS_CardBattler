@@ -21,9 +21,9 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 	//GET AOE-3 TARGETS//
 	//-----------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_target),
+		scr_battle_get_left_target(_ref_target),
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//------------//
@@ -49,7 +49,7 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_affected_target
 		);
@@ -69,7 +69,7 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 		global.ref_target_beast =
 			_ref_target;
 
-		scr_apply_cc_status(
+		scr_status_apply_cc(
 			"FROZEN"
 		);
 
@@ -77,16 +77,4 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 			_ref_original_target;
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

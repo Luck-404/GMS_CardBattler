@@ -6,7 +6,7 @@
   "name":"scr_status_cc_blind",
   "parent":{
     "name":"BLIND",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/BLIND.yy",
+    "path":"folders/BATTLE/STATUSES/CC/BLIND.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

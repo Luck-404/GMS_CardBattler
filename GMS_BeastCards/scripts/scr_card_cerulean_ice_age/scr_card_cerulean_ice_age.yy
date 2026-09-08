@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_ice_age",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_ice_age",
+  "parent":{
+    "name":"ICE_AGE",
+    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_AGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

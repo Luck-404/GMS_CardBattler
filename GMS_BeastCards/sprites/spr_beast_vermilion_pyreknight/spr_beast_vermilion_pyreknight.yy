@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"PYREKNIGHT",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/PYREKNIGHT.yy",
+    "path":"folders/BEASTS/VERMILION/PYREKNIGHT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

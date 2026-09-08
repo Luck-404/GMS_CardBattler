@@ -12,8 +12,8 @@
   "name":"obj_battle_beast",
   "overriddenProperties":[],
   "parent":{
-    "name":"BATTLE BEAST",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE BEAST.yy",
+    "name":"COMBATANTS",
+    "path":"folders/BATTLE/COMBATANTS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

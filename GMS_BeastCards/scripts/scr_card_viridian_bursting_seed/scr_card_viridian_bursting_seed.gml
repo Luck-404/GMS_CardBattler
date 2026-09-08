@@ -11,19 +11,10 @@ function scr_card_viridian_bursting_seed(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//APPLY ARMORBREAK//
 	//----------------//
-	scr_apply_debuff_status("ARMORBREAK",2);
+	scr_status_apply_debuff("ARMORBREAK",2);
 
 	//----------------//
 	//APPLY VULNERABLE//
 	//----------------//
-	scr_apply_debuff_status("VULNERABLE",1);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
+	scr_status_apply_debuff("VULNERABLE",1);
 }

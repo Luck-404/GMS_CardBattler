@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_glacimight_death",
   "parent":{
     "name":"GLACIMIGHT",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/GLACIMIGHT.yy",
+    "path":"folders/BEASTS/CERULEAN/GLACIMIGHT.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -54,7 +54,11 @@ global.ref_caster_beast = undefined;
 global.ref_target_beast = undefined;
 global.ref_target_card = undefined;
 global.flag_thorns_retaliating = false;
+global.flag_card_effect_resolving = false;
 global.ref_target_corpse = undefined;
+global.flag_frozen_curse_triggering = false;
+global.ref_icebreaker_target = undefined;
+
 
 // TARGET PREVIEW
 _arr_target_preview = [];
@@ -150,7 +154,7 @@ _val_cooldown = 10;
 //----------------//
 //POSITION MANA HUD//
 //----------------//
-scr_reposition_mana();
+scr_battle_mana_reposition();
 
 //-------//
 //METHODS//
@@ -175,7 +179,7 @@ hscr_open_utility_tutor = function(){
 	//GET UTILITY CARDS//
 	//-------------------//
 	var _arr_candidates =
-		scr_get_tutor_candidates("UTILITY");
+		scr_battle_tutor_get_candidates("UTILITY");
 
 	//-------------------------//
 	//NO UTILITY CARDS FOUND//
@@ -785,14 +789,14 @@ function hscr_check_battle_beast_range(_list_beast_check,_str_range){
 	//GET TAUNT TARGET//
 	//----------------//
 	var _ref_taunt_target =
-		scr_get_taunt_target(_list_enemy);
+		scr_status_get_taunt_target(_list_enemy);
 
 
 	//----------------//
 	//GET BLIND MODE//
 	//----------------//
 	var _str_blind_mode =
-		scr_get_blind_attack_target_mode(
+		scr_cc_get_blind_attack_target_mode(
 			global.ref_caster_beast,
 			_stct_card
 		);
@@ -962,10 +966,10 @@ function hscr_reroll_hand(){
 	while (ds_list_size(_list_battle_hand) > 0){
 
 		var _ref_card = ds_list_find_value(_list_battle_hand,0);
-		scr_discard_card(_ref_card);
+		scr_battle_card_discard(_ref_card);
 	}
 
-	scr_draw_cards(_ct_draw_amount);
+	scr_battle_card_draw(_ct_draw_amount);
 	hscr_check_battle_card_oom(_list_battle_hand);
 }
 
@@ -994,7 +998,7 @@ function hscr_check_battle_beast_able(_list_beast_check){
 		}
 
 		_ref_beast._flag_beast_able_check =
-			!scr_is_beast_action_locked(
+			!scr_cc_is_action_locked(
 				_ref_beast
 			);
 	}

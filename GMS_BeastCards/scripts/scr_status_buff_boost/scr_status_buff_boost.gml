@@ -48,7 +48,7 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"BOOST",
 					_ref_target
 				);
@@ -143,7 +143,7 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -164,7 +164,7 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -174,7 +174,7 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -201,7 +201,7 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 					_ref_status._ct_status_stacks;
 			}
 
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

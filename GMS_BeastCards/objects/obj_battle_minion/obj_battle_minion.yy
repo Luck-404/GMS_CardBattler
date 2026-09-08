@@ -11,8 +11,8 @@
   "name":"obj_battle_minion",
   "overriddenProperties":[],
   "parent":{
-    "name":"MINIONS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/MINIONS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/MINIONS/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

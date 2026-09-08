@@ -1,8 +1,9 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_THUNDERSTORM
-// FUNCTION: Resolves the Thunderstorm card effect.
+// FUNCTION: Resolves Thunderstorm.
 //           Begins Storming Weather.
+//           Weather presentation is owned by the Storming status.
 //
 //===============================================================================//
 
@@ -11,14 +12,7 @@ function scr_card_cerulean_thunderstorm(_stct_card,_ref_caster,_ref_target){
 	//----------------------//
 	//BEGIN STORMING WEATHER//
 	//----------------------//
-	scr_apply_weather_status("STORMING");
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
+	scr_status_apply_weather(
+		"STORMING"
+	);
 }

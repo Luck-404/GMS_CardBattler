@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ANCHOR_STONE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/CERULEAN/ANCHOR_STONE.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/ANCHOR_STONE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

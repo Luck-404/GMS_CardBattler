@@ -50,7 +50,7 @@ function scr_trigger_plague_garden(_ref_target,_str_dot_name){
 	//------------------//
 	//SUMMON SPORELING//
 	//------------------//
-	scr_init_minion(
+	scr_minion_init(
 		"SPORELING",
 		undefined,
 		undefined,

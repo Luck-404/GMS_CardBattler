@@ -10,21 +10,8 @@ function scr_card_viridian_wilt(_stct_card,_ref_caster,_ref_target){
 	//--------------//
 	//APPLY WITHER//
 	//--------------//
-	scr_apply_debuff_status(
+	scr_status_apply_debuff(
 		"WITHER",
 		3
-	);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_debuff,
-		0,
-		false
 	);
 }

@@ -59,7 +59,7 @@ function scr_status_dot_frostburn(
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"FROSTBURN",
 					_ref_target
 				);
@@ -80,7 +80,7 @@ function scr_status_dot_frostburn(
 					32,
 					1,
 					0,
-					snd_battle_sfx_frostburn
+					snd_battle_frostburn
 				);
 
 				_ref_existing_status._str_status_desc =
@@ -91,7 +91,7 @@ function scr_status_dot_frostburn(
 					) +
 					" NEU DMG EACH ROUND; REMOVES 1 BUFF";
 
-				scr_reposition_statuses(
+				scr_status_reposition(
 					_ref_target
 				);
 
@@ -157,7 +157,7 @@ function scr_status_dot_frostburn(
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -170,7 +170,7 @@ function scr_status_dot_frostburn(
 					32,
 					1,
 					0,
-					snd_battle_sfx_frostburn
+					snd_battle_frostburn
 				);
 				
 			return _ref_new_status;
@@ -292,7 +292,7 @@ function scr_status_dot_frostburn(
 				32,
 				1,
 				0,
-				snd_battle_sfx_frostburn
+				snd_battle_frostburn
 			);
 
 			//----------------//
@@ -302,7 +302,7 @@ function scr_status_dot_frostburn(
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_host
 			);
 
@@ -316,7 +316,7 @@ function scr_status_dot_frostburn(
 
 			if (instance_exists(_ref_status)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 			}

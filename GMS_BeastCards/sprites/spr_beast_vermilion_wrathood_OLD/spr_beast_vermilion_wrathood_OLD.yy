@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"WRATHOOD",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/WRATHOOD.yy",
+    "path":"folders/BEASTS/VERMILION/WRATHOOD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

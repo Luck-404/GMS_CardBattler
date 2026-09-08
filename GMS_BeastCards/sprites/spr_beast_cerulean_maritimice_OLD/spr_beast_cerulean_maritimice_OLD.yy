@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"MARITIMICE",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/MARITIMICE.yy",
+    "path":"folders/BEASTS/CERULEAN/MARITIMICE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -15,6 +15,12 @@
 _spr_beast = undefined;
 _uid_beast = -1;
 
+//--------------------//
+//FORM DRAW MODIFIERS//
+//--------------------//
+_c_beast_draw_tint = c_white;
+_val_beast_draw_scale_multiplier = 1;
+
 //------------------//
 //BATTLE VFX MOTION//
 //------------------//
@@ -24,6 +30,8 @@ _ct_vfx_motion = 0;
 _ct_vfx_motion_duration = 1;
 
 _val_vfx_motion_intensity = 0;
+
+_val_vfx_motion_start_x = 0;
 
 _val_vfx_offset_x = 0;
 _val_vfx_offset_y = 0;
@@ -43,6 +51,11 @@ _val_max_hp = 1;
 _val_overhealth = 0;
 _val_armor = 0;
 
+//-------------------//
+//DEATH PRESENTATION//
+//-------------------//
+_flag_death_presented = false;
+
 //--------------//
 //COMBAT STATS//
 //--------------//
@@ -52,6 +65,10 @@ _val_crit_damage = 25;
 _val_speed_base = 150;
 _val_speed_bonus = 0;
 
+//---------------------//
+//CC DURATION MODIFIERS//
+//---------------------//
+_val_cc_duration_bonus = 0;
 
 //------------------//
 //DAMAGE MODIFIERS//

@@ -1,13 +1,13 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_CLEANSE_ALL
+// SCRIPT: scr_status_cleanse_all
 // FUNCTION: Removes random cleansable statuses from a target Beast.
 //           Includes Buffs, Debuffs, Crowd Control, and DoTs.
 //           Does not affect global statuses, events, or weather.
 //
 //===============================================================================//
 
-function scr_cleanse_all(_ref_target,_ct_amount,_str_status_id=undefined){
+function scr_status_cleanse_all(_ref_target,_ct_amount,_str_status_id=undefined){
 
 	if (!instance_exists(_ref_target)){
 		return 0;
@@ -77,7 +77,7 @@ function scr_cleanse_all(_ref_target,_ct_amount,_str_status_id=undefined){
 			_ref_status_cleanse._scr_status("DEATH",_ref_status_cleanse);
 		}
 		else{
-			scr_destroy_status(_ref_status_cleanse);
+			scr_status_destroy(_ref_status_cleanse);
 		}
 
 		_ct_removed++;
@@ -91,6 +91,16 @@ function scr_cleanse_all(_ref_target,_ct_amount,_str_status_id=undefined){
 			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 	}
+	
+	//----------------------//
+	//CLEANSE PRESENTATION//
+	//----------------------//
+	if (_ct_removed > 0){
 
+		scr_battle_vfx_cleanse(
+			_ref_target
+		);
+	}
+	
 	return _ct_removed;
 }

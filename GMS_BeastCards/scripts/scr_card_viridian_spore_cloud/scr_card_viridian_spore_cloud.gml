@@ -12,17 +12,9 @@ function scr_card_viridian_spore_cloud(_stct_card,_ref_caster,_ref_target){
 	//--------------------------//
 	// DEAL MAXIMUM-HP DAMAGE   //
 	//--------------------------//
-	scr_damage_target_percent(
+	scr_battle_damage_target_percent(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
 
-	//----------------//
-	// PLAY ANIMATION //
-	//----------------//
-
-	//------------//
-	// PLAY SOUND //
-	//------------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

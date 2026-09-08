@@ -21,9 +21,7 @@ function scr_item_held_verdant_seed(_str_state,_stct_item,_stct_target_unit){
 
 		case "TRIGGER":
 
-			scr_apply_weather_status("SEEDFALL");
-
-			audio_play_sound(snd_buff,0,false);
+			scr_status_apply_weather("SEEDFALL");
 
 			return true;
 

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/FROZEN.yy",
+    "path":"folders/BATTLE/STATUSES/CC/FROZEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

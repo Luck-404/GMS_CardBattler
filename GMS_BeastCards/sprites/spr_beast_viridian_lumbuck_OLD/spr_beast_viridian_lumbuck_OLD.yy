@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"LUMBUCK",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/LUMBUCK.yy",
+    "path":"folders/BEASTS/VIRIDIAN/LUMBUCK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

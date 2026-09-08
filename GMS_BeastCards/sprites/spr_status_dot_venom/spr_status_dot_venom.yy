@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VENOM",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/VENOM.yy",
+    "path":"folders/BATTLE/STATUSES/DOTs/VENOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

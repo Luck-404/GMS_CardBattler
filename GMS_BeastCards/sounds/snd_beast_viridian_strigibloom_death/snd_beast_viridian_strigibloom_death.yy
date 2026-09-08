@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_strigibloom_death",
   "parent":{
     "name":"STRIGIBLOOM",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/STRIGIBLOOM.yy",
+    "path":"folders/BEASTS/VIRIDIAN/STRIGIBLOOM.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

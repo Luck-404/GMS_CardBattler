@@ -10,7 +10,7 @@ function scr_card_viridian_rotting_spores(_stct_card,_ref_caster,_ref_target){
 	//----------//
 	//SET TRAP//
 	//----------//
-	scr_init_trap("ROTTING_SPORES",_stct_card,_ref_caster,_ref_target);
+	scr_trap_init("ROTTING_SPORES",_stct_card,_ref_caster,_ref_target);
 
 	//-------------//
 	//SPAWN POPUP//
@@ -25,12 +25,4 @@ function scr_card_viridian_rotting_spores(_stct_card,_ref_caster,_ref_target){
 		}
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

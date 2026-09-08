@@ -8,8 +8,8 @@
   "name":"obj_battle_trap",
   "overriddenProperties":[],
   "parent":{
-    "name":"TRAPS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/TRAPS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/TRAPS/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

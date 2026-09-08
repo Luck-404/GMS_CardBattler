@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_imparch_death",
   "parent":{
     "name":"IMPARCH",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/IMPARCH.yy",
+    "path":"folders/BEASTS/VERMILION/IMPARCH.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

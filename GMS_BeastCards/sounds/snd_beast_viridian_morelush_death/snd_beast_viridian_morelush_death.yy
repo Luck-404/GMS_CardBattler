@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_morelush_death",
   "parent":{
     "name":"MORELUSH",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/MORELUSH.yy",
+    "path":"folders/BEASTS/VIRIDIAN/MORELUSH.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

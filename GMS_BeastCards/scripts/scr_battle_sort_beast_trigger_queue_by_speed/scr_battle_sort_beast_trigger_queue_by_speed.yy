@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_sort_beast_trigger_queue_by_speed",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_sort_beast_trigger_queue_by_speed",
+  "parent":{
+    "name":"TURN",
+    "path":"folders/BATTLE/CONTROLLERS/TURN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

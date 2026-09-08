@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_cc_lifetime",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_cc_lifetime",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CC/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

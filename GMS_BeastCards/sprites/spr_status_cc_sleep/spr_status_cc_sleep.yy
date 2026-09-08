@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SLEEP",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/SLEEP.yy",
+    "path":"folders/BATTLE/STATUSES/CC/SLEEP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

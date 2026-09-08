@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_antiheal",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_antiheal",
+  "parent":{
+    "name":"ANTIHEAL",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/GENERIC/ANTIHEAL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

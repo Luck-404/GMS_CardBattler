@@ -11,8 +11,8 @@
   "name":"obj_battle_card",
   "overriddenProperties":[],
   "parent":{
-    "name":"BATTLE CARDS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/CARD FLOW/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

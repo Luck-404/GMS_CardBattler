@@ -39,6 +39,18 @@ _val_scale_x = 0.3;
 _val_scale_y = 0.3;
 _val_preview_scale = 1.0;
 
+//-------------------//
+//BATTLE VFX TRACKING//
+//-------------------//
+_arr_vfx_hit_context = [];
+
+_flag_buff_sfx_played = false;
+_flag_debuff_sfx_played = false;
+_flag_cc_sfx_played = false;
+_flag_heal_sfx_played = false;
+_flag_cleanse_sfx_played = false;
+_flag_aura_sfx_played = false;
+
 //------//
 //CHECKS//
 //------//

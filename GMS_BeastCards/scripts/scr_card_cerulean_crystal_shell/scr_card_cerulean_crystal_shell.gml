@@ -38,16 +38,4 @@ function scr_card_cerulean_crystal_shell(_stct_card,_ref_caster,_ref_target){
 	global.ref_target_beast =
 		_ref_original_target;
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
 }

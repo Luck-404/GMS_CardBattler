@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_maritimice_cry",
   "parent":{
     "name":"MARITIMICE",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/MARITIMICE.yy",
+    "path":"folders/BEASTS/CERULEAN/MARITIMICE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

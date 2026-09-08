@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_frost_weapon",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_frost_weapon",
+  "parent":{
+    "name":"FROST_WEAPON",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/FROST_WEAPON.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

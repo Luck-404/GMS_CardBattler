@@ -32,8 +32,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"TRIGGERS",
-    "path":"folders/CARDS/CARD VFX/TRIGGERS.yy",
+    "name":"DISCHARGE",
+    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

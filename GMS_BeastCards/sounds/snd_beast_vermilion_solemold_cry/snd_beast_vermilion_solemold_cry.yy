@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_solemold_cry",
   "parent":{
     "name":"SOLEMOLD",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/SOLEMOLD.yy",
+    "path":"folders/BEASTS/VERMILION/SOLEMOLD.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

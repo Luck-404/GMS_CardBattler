@@ -12,5 +12,5 @@ function scr_card_cerulean_rip_current(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//REPOSITION BACKWARD//
 	//--------------------//
-	scr_reposition_beast(_ref_target,1);
+	scr_battle_reposition_beast(_ref_target,1);
 }

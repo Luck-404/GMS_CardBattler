@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_trigger_on_attack_buffs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_trigger_on_attack_buffs",
+  "parent":{
+    "name":"BUFFS",
+    "path":"folders/BATTLE/STATUSES/BUFFS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

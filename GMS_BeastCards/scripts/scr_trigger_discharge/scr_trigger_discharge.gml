@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_TRIGGER_DISCHARGE
+// SCRIPT: scr_trigger_discharge
 // FUNCTION: Checks a Beast for the Stormstruck DISCHARGE threshold.
 //           At 8+ stacks, deals 15 neutral damage to the host,
 //           reduces Stormstruck to 4 stacks, and applies
@@ -14,7 +14,7 @@ function scr_trigger_discharge(_ref_host){
 		return false;
 	}
 
-	var _ref_stormstruck = scr_check_for_status(
+	var _ref_stormstruck = scr_status_check(
 		"STORMSTRUCK",
 		_ref_host
 	);
@@ -39,7 +39,7 @@ function scr_trigger_discharge(_ref_host){
 		0,
 		1.5,
 		0,
-		snd_battle_sfx_discharge
+		snd_battle_discharge
 	);
 
 	//-----------//
@@ -96,8 +96,8 @@ function scr_trigger_discharge(_ref_host){
 	//GET ADJACENT BEASTS//
 	//---------------------//
 	var _arr_adjacent = [
-		scr_get_left_target(_ref_host),
-		scr_get_right_target(_ref_host)
+		scr_battle_get_left_target(_ref_host),
+		scr_battle_get_right_target(_ref_host)
 	];
 
 	//------------------------//
@@ -122,14 +122,14 @@ function scr_trigger_discharge(_ref_host){
 			_ref_target;
 
 		repeat (2){
-			scr_apply_dot_status("STORMSTRUCK");
+			scr_status_apply_dot("STORMSTRUCK");
 		}
 
 		global.ref_target_beast =
 			_ref_original_target;
 	}
 
-	scr_reposition_statuses(_ref_host);
+	scr_status_reposition(_ref_host);
 
 	return true;
 }

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"STRIGIBLOOM",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/STRIGIBLOOM.yy",
+    "path":"folders/BEASTS/VIRIDIAN/STRIGIBLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"TAUNT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/TAUNT.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/TAUNT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

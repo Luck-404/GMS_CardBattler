@@ -9,8 +9,8 @@
   "name":"obj_gui_party_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"PARTY SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/PARTY SYSTEM.yy",
+    "name":"GUI",
+    "path":"folders/BEASTS/PARTY/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -12,13 +12,13 @@ function scr_card_viridian_tranquility(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//GAIN ECHO//
 	//-----------//
-	scr_gain_echo(1);
+	scr_status_gain_echo(1);
 
 	//--------------------//
 	//GET CASTER TEAM LIST//
 	//--------------------//
 	var _list_targets =
-		scr_get_target_team_list(
+		scr_battle_get_target_team_list(
 			_ref_caster
 		);
 
@@ -45,7 +45,7 @@ function scr_card_viridian_tranquility(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_heal_target(
+		scr_battle_heal_target(
 			3,
 			_ref_affected_target
 		);

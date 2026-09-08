@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_caudaqua_death",
   "parent":{
     "name":"CAUDAQUA",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CAUDAQUA.yy",
+    "path":"folders/BEASTS/CERULEAN/CAUDAQUA.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

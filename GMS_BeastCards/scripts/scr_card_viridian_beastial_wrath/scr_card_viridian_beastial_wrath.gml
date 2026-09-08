@@ -12,7 +12,7 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET TARGET TEAM LIST//
 	//--------------------//
-	var _list_targets = scr_get_target_team_list(_ref_target);
+	var _list_targets = scr_battle_get_target_team_list(_ref_target);
 
 	if (_list_targets == undefined){
 		return;
@@ -47,7 +47,7 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	if (instance_exists(_ref_front_target)){
 
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_front_target
 		);
@@ -58,7 +58,7 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	if (instance_exists(_ref_second_target)){
 
-		scr_damage_target(
+		scr_battle_damage_target(
 			_stct_card._val_card_magnitude,
 			_ref_second_target
 		);
@@ -76,7 +76,7 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 
 		global.ref_target_beast = _ref_front_target;
 
-		scr_apply_cc_status("STUN");
+		scr_status_apply_cc("STUN");
 
 		if (instance_exists(_ref_original_target)){
 			global.ref_target_beast = _ref_original_target;
@@ -85,13 +85,4 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 			global.ref_target_beast = _ref_target;
 		}
 	}
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

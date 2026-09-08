@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_lumbuck_cry",
   "parent":{
     "name":"LUMBUCK",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/LUMBUCK.yy",
+    "path":"folders/BEASTS/VIRIDIAN/LUMBUCK.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

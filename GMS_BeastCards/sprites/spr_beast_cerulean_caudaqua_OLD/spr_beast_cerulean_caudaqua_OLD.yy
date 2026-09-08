@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CAUDAQUA",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CAUDAQUA.yy",
+    "path":"folders/BEASTS/CERULEAN/CAUDAQUA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

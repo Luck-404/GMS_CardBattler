@@ -36,7 +36,7 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status(
+			var _ref_existing_status = scr_status_check(
 				"APEX_PREDATOR",
 				_ref_target
 			);
@@ -148,7 +148,7 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -186,7 +186,7 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 					);
 			}
 
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

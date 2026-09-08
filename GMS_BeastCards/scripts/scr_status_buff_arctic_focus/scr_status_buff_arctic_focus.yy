@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_arctic_focus",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_arctic_focus",
+  "parent":{
+    "name":"ARCTIC_FOCUS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/ARCTIC_FOCUS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

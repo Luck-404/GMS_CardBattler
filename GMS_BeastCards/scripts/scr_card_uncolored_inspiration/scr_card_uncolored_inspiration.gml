@@ -13,12 +13,4 @@ function scr_card_uncolored_inspiration(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	scr_apply_buff_status("INSPIRATION",0,3);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

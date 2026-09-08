@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_ammomarsh_cry",
   "parent":{
     "name":"AMMOMARSH",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/AMMOMARSH.yy",
+    "path":"folders/BEASTS/CERULEAN/AMMOMARSH.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

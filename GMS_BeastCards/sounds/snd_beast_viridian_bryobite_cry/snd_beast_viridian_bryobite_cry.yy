@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_bryobite_cry",
   "parent":{
     "name":"BRYOBITE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/BRYOBITE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/BRYOBITE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

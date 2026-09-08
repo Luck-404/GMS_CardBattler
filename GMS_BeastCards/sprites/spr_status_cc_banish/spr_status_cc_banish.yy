@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BANISH",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/BANISH.yy",
+    "path":"folders/BATTLE/STATUSES/CC/BANISH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

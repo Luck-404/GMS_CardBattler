@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_add_beast_to_party",
   "parent":{
-    "name":"BEAST INIT",
-    "path":"folders/BEASTS/BEAST SETUP/BEAST INIT.yy",
+    "name":"CORE",
+    "path":"folders/BEASTS/PARTY/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

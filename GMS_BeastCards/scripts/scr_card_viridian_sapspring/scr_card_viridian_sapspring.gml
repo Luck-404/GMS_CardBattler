@@ -16,9 +16,9 @@ function scr_card_viridian_sapspring(_stct_card,_ref_caster,_ref_target){
 	//GET AOE-3 TARGETS//
 	//-----------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_target),
+		scr_battle_get_left_target(_ref_target),
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//--------------//
@@ -37,7 +37,7 @@ function scr_card_viridian_sapspring(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_heal_target_linear(
+		scr_battle_heal_target_linear(
 			_stct_card._val_card_magnitude,
 			_ref_affected_target
 		);
@@ -47,8 +47,4 @@ function scr_card_viridian_sapspring(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_heal,0,false);
 }

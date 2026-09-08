@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BURGEONING BLOOM",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/AURA/VIRIDIAN/BURGEONING BLOOM.yy",
+    "path":"folders/BATTLE/STATUSES/AURA/VIRIDIAN/BURGEONING BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

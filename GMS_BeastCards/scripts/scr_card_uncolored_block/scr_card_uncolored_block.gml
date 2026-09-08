@@ -11,14 +11,6 @@ function scr_card_uncolored_block(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//GRANT ARMOR//
 	//----------------//
-	scr_armor_target(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_armor_target(_stct_card._val_card_magnitude,_ref_caster);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//----------------//
-	//PLAY SOUND//
-	//----------------//
-	audio_play_sound(snd_battle_sfx_armor,0,false);
 }

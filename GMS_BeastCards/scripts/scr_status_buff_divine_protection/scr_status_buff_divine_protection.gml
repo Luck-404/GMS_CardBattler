@@ -30,7 +30,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 			//CHECK EXISTING STATUS//
 			//---------------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"DIVINE_PROTECTION",
 					_ref_target
 				);
@@ -52,7 +52,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 					0,
 					1,
 					0,
-					snd_battle_sfx_protection
+					snd_battle_protection
 				);
 
 				//------------------------//
@@ -70,7 +70,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 						);
 				}
 
-				scr_reposition_statuses(
+				scr_status_reposition(
 					_ref_target
 				);
 
@@ -126,7 +126,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 			
@@ -142,7 +142,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 				0,
 				1,
 				0,
-				snd_battle_sfx_protection
+				snd_battle_protection
 			);
 
 			//----------------//
@@ -183,7 +183,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 				return true;
 			}
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_status._ref_host
 			);
 
@@ -201,7 +201,7 @@ function scr_status_buff_divine_protection(_str_tag,_ref_status,_ct_stacks_added
 				return undefined;
 			}
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cc_has_immunity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cc_has_immunity",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CC/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

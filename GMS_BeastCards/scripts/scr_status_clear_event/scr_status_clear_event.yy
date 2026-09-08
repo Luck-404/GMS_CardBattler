@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_clear_event",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_clear_event",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/EVENTS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

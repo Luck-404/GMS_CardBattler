@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_check_cerulean_weather",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_check_cerulean_weather",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/WEATHER/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

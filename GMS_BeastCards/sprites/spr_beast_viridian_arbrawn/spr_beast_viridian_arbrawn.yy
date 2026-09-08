@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ARBRAWN",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/ARBRAWN.yy",
+    "path":"folders/BEASTS/VIRIDIAN/ARBRAWN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

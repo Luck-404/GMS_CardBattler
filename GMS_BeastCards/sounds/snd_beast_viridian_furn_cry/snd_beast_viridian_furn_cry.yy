@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_furn_cry",
   "parent":{
     "name":"FURN",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/FURN.yy",
+    "path":"folders/BEASTS/VIRIDIAN/FURN.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

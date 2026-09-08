@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"HELLSHROOM",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/HELLSHROOM.yy",
+    "path":"folders/BEASTS/VERMILION/HELLSHROOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

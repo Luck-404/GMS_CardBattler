@@ -17,7 +17,7 @@ function scr_card_cerulean_tidal_break(_stct_card,_ref_caster,_ref_target){
 	//------------//
 	//DEAL DAMAGE//
 	//------------//
-	scr_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
 
 	//-----------------//
 	//CHECK ARMOR BREAK//
@@ -33,16 +33,8 @@ function scr_card_cerulean_tidal_break(_stct_card,_ref_caster,_ref_target){
 		//APPLY STORMSTRUCK//
 		//-------------------//
 		repeat (2){
-			scr_apply_dot_status("STORMSTRUCK");
+			scr_status_apply_dot("STORMSTRUCK");
 		}
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"MAMBARK",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/MAMBARK.yy",
+    "path":"folders/BEASTS/VIRIDIAN/MAMBARK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"MANA_SPRING",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/CERULEAN/MANA_SPRING.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/MANA_SPRING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

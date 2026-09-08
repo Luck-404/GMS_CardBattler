@@ -11,19 +11,10 @@ function scr_card_viridian_draining_kiss(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//HEAL CASTER//
 	//-----------//
-	scr_heal_target(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_heal_target(_stct_card._val_card_magnitude,_ref_caster);
 
 	//--------------//
 	//APPLY DRAINED//
 	//--------------//
-	scr_apply_debuff_status("DRAINED",3);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
+	scr_status_apply_debuff("DRAINED",3);
 }

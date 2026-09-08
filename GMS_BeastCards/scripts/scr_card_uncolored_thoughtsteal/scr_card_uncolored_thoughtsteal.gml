@@ -47,7 +47,7 @@ function scr_card_uncolored_thoughtsteal(
 				._val_card_mana_cost
 		);
 
-	scr_gain_mana(
+	scr_battle_mana_gain(
 		_val_mana_stolen
 	);
 
@@ -57,13 +57,11 @@ function scr_card_uncolored_thoughtsteal(
 	_ref_target_card._flag_card_disabled =
 		true;
 
-	//-------------------//
-	//DISABLE FEEDBACK//
-	//-------------------//
-	audio_play_sound(
-		snd_debuff,
-		0,
-		false
+	//----------------//
+	//EXPEND FEEDBACK//
+	//----------------//
+	scr_battle_vfx_expend(
+		_ref_target_card
 	);
 
 	scr_spawn_popup_scrolling(

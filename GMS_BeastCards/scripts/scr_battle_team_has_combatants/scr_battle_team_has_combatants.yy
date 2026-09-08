@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_team_has_combatants",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_team_has_combatants",
+  "parent":{
+    "name":"COMBATANTS",
+    "path":"folders/BATTLE/COMBATANTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

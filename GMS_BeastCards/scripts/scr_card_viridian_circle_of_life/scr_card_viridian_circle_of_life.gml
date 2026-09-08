@@ -23,7 +23,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 	//GET ALLIED TEAM LIST//
 	//--------------------//
 	var _list_allies =
-		scr_get_target_team_list(
+		scr_battle_get_target_team_list(
 			_ref_caster
 		);
 
@@ -151,7 +151,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		//EXPEND CORPSE//
 		//----------------//
-		if (!scr_sacrifice_corpse(_ref_corpse)){
+		if (!scr_battle_sacrifice_corpse(_ref_corpse)){
 			continue;
 		}
 
@@ -160,7 +160,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 		//-------------//
 		//GENERATE MANA//
 		//-------------//
-		scr_gain_mana(1);
+		scr_battle_mana_gain(1);
 
 		//----------------//
 		//HEAL ALL ALLIES//
@@ -188,7 +188,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 				continue;
 			}
 
-			scr_heal_target(
+			scr_battle_heal_target(
 				5,
 				_ref_ally
 			);
@@ -223,7 +223,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 			}
 
 			if (
-				scr_has_open_minion_slot(
+				scr_minion_has_open_slot(
 					_ref_ally
 				)
 			){
@@ -246,7 +246,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 					)
 				];
 
-			scr_init_minion(
+			scr_minion_init(
 				"DORMANT_SEED",
 				_stct_card,
 				_ref_caster,
@@ -317,7 +317,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 						)
 					];
 
-				scr_grow_minion(
+				scr_minion_grow(
 					_ref_growth_target,
 					1
 				);
@@ -341,19 +341,6 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 			_ref_caster.y - 72
 		);
 	}
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
 
 	return true;
 }

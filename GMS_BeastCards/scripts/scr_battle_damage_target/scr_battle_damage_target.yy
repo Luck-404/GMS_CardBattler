@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_damage_target",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_damage_target",
+  "parent":{
+    "name":"DAMAGE",
+    "path":"folders/BATTLE/COMBAT/DAMAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

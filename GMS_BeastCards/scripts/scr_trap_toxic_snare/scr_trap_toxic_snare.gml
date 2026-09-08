@@ -66,6 +66,13 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				true;
 
 			//----------------//
+			//TRAP TRIGGER VFX//
+			//----------------//
+			scr_trap_vfx_trigger(
+				_ref_trap
+			);
+
+			//----------------//
 			//REVEAL TRAP//
 			//----------------//
 			scr_spawn_popup_trigger_banner(
@@ -76,10 +83,10 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//GET ADJACENT TARGETS//
 			//----------------------//
 			var _ref_left_target =
-				scr_get_left_target(_ref_target);
+				scr_battle_get_left_target(_ref_target);
 
 			var _ref_right_target =
-				scr_get_right_target(_ref_target);
+				scr_battle_get_right_target(_ref_target);
 
 			//----------------------//
 			//STORE CURRENT TARGET//
@@ -93,12 +100,12 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			global.ref_target_beast =
 				_ref_target;
 
-			scr_apply_cc_status("STUN",1);
+			scr_status_apply_cc("STUN",1);
 
 			//-------------------//
 			//DESTROY TRAP FIRST//
 			//-------------------//
-			scr_destroy_trap(
+			scr_trap_destroy(
 				_ref_trap
 			);
 
@@ -114,7 +121,7 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 					_ref_left_target;
 
 				repeat (2){
-					scr_apply_dot_status("POISON");
+					scr_status_apply_dot("POISON");
 				}
 			}
 
@@ -130,7 +137,7 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 					_ref_right_target;
 
 				repeat (2){
-					scr_apply_dot_status("POISON");
+					scr_status_apply_dot("POISON");
 				}
 			}
 

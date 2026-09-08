@@ -54,7 +54,7 @@ for (var _it_card = 0; _it_card < _ct_deck_visible; _it_card++){
 			hscr_draw_card_hover(_stct_card,_val_box_x,_val_box_y);
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked && _ct_deck > 1){
-				audio_play_sound(snd_card_move,0,false);
+				audio_play_sound(snd_battle_card_move,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
@@ -88,7 +88,7 @@ for (var _it_card = 0; _it_card < _ct_library_per_page; _it_card++){
 			hscr_draw_card_hover(_stct_card,_val_box_x,_val_box_y);
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked && _ct_deck < _ct_deck_max){
-				audio_play_sound(snd_card_move,0,false);
+				audio_play_sound(snd_battle_card_move,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 

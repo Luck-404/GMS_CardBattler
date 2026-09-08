@@ -48,7 +48,15 @@ function scr_trap_venom_bloom(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				return false;
 			}
 
-			_ref_trap._flag_triggered = true;
+_ref_trap._flag_triggered =
+	true;
+
+//----------------//
+//TRAP TRIGGER VFX//
+//----------------//
+scr_trap_vfx_trigger(
+	_ref_trap
+);
 
 			//----------------//
 			//REVEAL TRAP//
@@ -102,12 +110,12 @@ function scr_trap_venom_bloom(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				//--------------//
 				global.ref_target_beast = _ref_affected_target;
 
-				scr_apply_dot_status("POISON");
+				scr_status_apply_dot("POISON");
 
 				//------------------//
 				//SUMMON SPORELING//
 				//------------------//
-				scr_init_minion("SPORELING",undefined,_ref_trap._ref_owner,_ref_affected_target);
+				scr_minion_init("SPORELING",undefined,_ref_trap._ref_owner,_ref_affected_target);
 			}
 
 			//----------------//
@@ -118,7 +126,7 @@ function scr_trap_venom_bloom(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(_ref_trap);
+			scr_trap_destroy(_ref_trap);
 
 			return true;
 

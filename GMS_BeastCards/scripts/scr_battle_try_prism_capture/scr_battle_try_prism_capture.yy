@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_try_prism_capture",
   "parent":{
-    "name":"CAPTURING BEASTS",
-    "path":"folders/BATTLE/CAPTURING BEASTS.yy",
+    "name":"CAPTURE",
+    "path":"folders/BATTLE/CAPTURE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

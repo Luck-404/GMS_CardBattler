@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_trigger_poisonflow",
   "parent":{
-    "name":"CARD CAST LOGIC",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC.yy",
+    "name":"POISONFLOW",
+    "path":"folders/BATTLE/COLOR TRIGGERS/POISONFLOW.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

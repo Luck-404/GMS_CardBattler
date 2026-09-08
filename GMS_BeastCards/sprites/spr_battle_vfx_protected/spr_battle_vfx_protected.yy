@@ -30,7 +30,7 @@
   "origin":1,
   "parent":{
     "name":"DIVINE_PROTECTION",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/DIVINE_PROTECTION.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/DIVINE_PROTECTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

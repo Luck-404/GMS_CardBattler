@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"AMMOMARSH",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/AMMOMARSH.yy",
+    "path":"folders/BEASTS/CERULEAN/AMMOMARSH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

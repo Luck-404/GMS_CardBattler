@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_coralliarc_cry",
   "parent":{
     "name":"CORALLIARC",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CORALLIARC.yy",
+    "path":"folders/BEASTS/CERULEAN/CORALLIARC.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

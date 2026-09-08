@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"GLACIMIGHT",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/GLACIMIGHT.yy",
+    "path":"folders/BEASTS/CERULEAN/GLACIMIGHT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

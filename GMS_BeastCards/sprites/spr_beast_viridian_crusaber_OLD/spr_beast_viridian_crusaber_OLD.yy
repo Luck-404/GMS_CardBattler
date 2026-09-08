@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CRUSABER",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/CRUSABER.yy",
+    "path":"folders/BEASTS/VIRIDIAN/CRUSABER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

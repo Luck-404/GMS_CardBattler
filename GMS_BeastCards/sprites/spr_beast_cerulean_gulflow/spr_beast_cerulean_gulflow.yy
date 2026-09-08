@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"GULFLOW",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/GULFLOW.yy",
+    "path":"folders/BEASTS/CERULEAN/GULFLOW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

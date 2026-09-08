@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VULNERABLE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DEBUFF/UNCOLORED/VULNERABLE.yy",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/GENERIC/VULNERABLE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

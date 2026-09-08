@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BLIZZDRIFT",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/BLIZZDRIFT.yy",
+    "path":"folders/BEASTS/CERULEAN/BLIZZDRIFT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

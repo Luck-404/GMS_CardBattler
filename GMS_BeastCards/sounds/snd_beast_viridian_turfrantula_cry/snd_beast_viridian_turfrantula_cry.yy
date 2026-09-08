@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_turfrantula_cry",
   "parent":{
     "name":"TURFRANTULA",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/TURFRANTULA.yy",
+    "path":"folders/BEASTS/VIRIDIAN/TURFRANTULA.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

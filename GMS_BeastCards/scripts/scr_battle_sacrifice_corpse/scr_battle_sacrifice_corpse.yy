@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_sacrifice_corpse",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_sacrifice_corpse",
+  "parent":{
+    "name":"COMBATANTS",
+    "path":"folders/BATTLE/COMBATANTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

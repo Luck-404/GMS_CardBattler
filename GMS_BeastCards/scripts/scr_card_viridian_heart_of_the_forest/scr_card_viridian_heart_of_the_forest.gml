@@ -16,17 +16,4 @@ function scr_card_viridian_heart_of_the_forest(_stct_card,_ref_caster,_ref_targe
 		0,
 		5
 	);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
 }

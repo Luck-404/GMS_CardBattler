@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_abyssal_form",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_abyssal_form",
+  "parent":{
+    "name":"ABYSSAL_FORM",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/ABYSSAL_FORM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

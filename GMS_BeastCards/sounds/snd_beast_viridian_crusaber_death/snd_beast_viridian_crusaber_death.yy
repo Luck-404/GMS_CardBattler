@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_crusaber_death",
   "parent":{
     "name":"CRUSABER",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/CRUSABER.yy",
+    "path":"folders/BEASTS/VIRIDIAN/CRUSABER.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

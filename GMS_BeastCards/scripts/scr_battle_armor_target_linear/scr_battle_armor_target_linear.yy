@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_armor_target_linear",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_armor_target_linear",
+  "parent":{
+    "name":"ARMOR",
+    "path":"folders/BATTLE/COMBAT/ARMOR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

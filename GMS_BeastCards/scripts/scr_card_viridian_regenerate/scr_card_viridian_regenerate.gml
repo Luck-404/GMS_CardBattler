@@ -18,12 +18,4 @@ function scr_card_viridian_regenerate(_stct_card,_ref_caster,_ref_target){
 		5
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

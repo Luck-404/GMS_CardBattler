@@ -235,7 +235,7 @@ switch(_state_enemy){
 			var _stct_unit = _ref_beast._ref_unit;
 
 			// BUILD DECK
-			var _list_deck = scr_get_enemy_deck(
+			var _list_deck = scr_beast_get_deck(
 				_stct_unit._str_beast_name,
 				_stct_unit._str_beast_color_type
 			);
@@ -315,7 +315,7 @@ switch(_state_enemy){
 		//--------------------------//
 		if (
 			ds_list_size(_list_beasts_alive) <= 0 &&
-			scr_team_has_combatants("ENEMY")
+			scr_battle_team_has_combatants("ENEMY")
 		){
 
 			_state_enemy =
@@ -340,7 +340,7 @@ switch(_state_enemy){
 
 				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
 
-				scr_degrade_shield(_ref_beast);
+				scr_battle_degrade_armor(_ref_beast);
 			}
 
 			// BUILD TURN START ITEM QUEUE
@@ -409,7 +409,7 @@ switch(_state_enemy){
 
 				ds_list_delete(_list_turn_start_items,0);
 
-				scr_init_battle_wait(60);
+				scr_init_battle_wait(90);
 			}
 			else{
 
@@ -460,7 +460,7 @@ switch(_state_enemy){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_init_battle_wait(10);
+					scr_init_battle_wait(20);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);
@@ -494,7 +494,7 @@ switch(_state_enemy){
 			//BUILD SPEED-ORDERED QUEUE//
 			//------------------------//
 			_list_casting_minions =
-				scr_build_minion_speed_queue(
+				scr_minion_build_speed_queue(
 					_list_beasts_alive
 				);
 		}
@@ -518,7 +518,7 @@ switch(_state_enemy){
 					0
 				);
 
-				scr_init_battle_wait(15);
+				scr_init_battle_wait(30);
 			}
 			else{
 
@@ -580,7 +580,7 @@ switch(_state_enemy){
 						_ref_beast.y - 72
 					);
 
-					audio_play_sound(snd_debuff,0,false);
+					audio_play_sound(snd_battle_sfx_expend,0,false);
 
 					_ref_card.visible = false;
 
@@ -601,63 +601,79 @@ switch(_state_enemy){
 
 					switch(_str_card_type){
 
-						case "ATTACK":
-							var _list_enemy = obj_battle_player_controller._list_beasts_alive;
+					case "ATTACK":
 
-							if (ds_list_size(_list_enemy) > 0){
-								var _ref_taunt_target = scr_get_taunt_target(_list_enemy);
+						var _stct_card =
+							_ref_card._ref_card;
 
-								//----------------//
-								//TAUNT OVERRIDE//
-								//----------------//
-								if (instance_exists(_ref_taunt_target)){
+						//----------------------//
+						//INVALID ENEMY RANGE//
+						//----------------------//
+						if (
+							_stct_card._str_card_range == "BACK" ||
+							_stct_card._str_card_range == "FLANK"
+						){
 
-									_ref_target = _ref_taunt_target;
-								}
+							//----------------//
+							//NO VALID TARGET//
+							//----------------//
+							scr_spawn_popup_scrolling(
+								"TEXT",
+								"NO VALID TARGET",
+								undefined,
+								c_ltgray,
+								_ref_beast.x,
+								_ref_beast.y - 72
+							);
 
-								//-----------------//
-								//NORMAL TARGETING//
-								//-----------------//
-								else{
+							break;
+						}
 
-									switch(_ref_card._ref_card._str_card_range){
+						//----------------//
+						//GET PLAYER TEAM//
+						//----------------//
+						var _list_enemy =
+							obj_battle_player_controller._list_beasts_alive;
 
-										case "MELEE":
-											_ref_target = ds_list_find_value(_list_enemy,0);
-										break;
+						if (ds_list_size(_list_enemy) > 0){
 
-										case "BACK":
-											_ref_target = ds_list_find_value(
-												_list_enemy,
-												ds_list_size(_list_enemy) - 1
-											);
-										break;
+							//-------------------//
+							//GET FRONT PLAYER//
+							//-------------------//
+							_ref_target =
+								ds_list_find_value(
+									_list_enemy,
+									0
+								);
 
-										default:
-											_ref_target = ds_list_find_value(
-												_list_enemy,
-												irandom(ds_list_size(_list_enemy) - 1)
-											);
-										break;
-									}
-								}
+							//---------//
+							//CAST CARD//
+							//---------//
+							if (instance_exists(_ref_target)){
 
-								global.ref_cast_card = _ref_card;
-								global.ref_caster_beast = _ref_beast;
-								global.ref_target_beast = _ref_target;
+								global.ref_cast_card =
+									_ref_card;
 
-								scr_cast_card();
+								global.ref_caster_beast =
+									_ref_beast;
+
+								global.ref_target_beast =
+									_ref_target;
+
+								scr_battle_card_cast();
 							}
-						break;
+						}
+
+					break;
 
 						case "SUPPORT":
 
 							var _str_effect_type =
 								_ref_card._ref_card._str_card_effect_type;
 
-							//-------------------//
+							//---------------------//
 							//HOSTILE SUPPORT CARD//
-							//-------------------//
+							//---------------------//
 							if (
 								_str_effect_type == "CC" ||
 								_str_effect_type == "DEBUFF"
@@ -668,47 +684,14 @@ switch(_state_enemy){
 
 								if (ds_list_size(_list_enemy) > 0){
 
-									switch(_ref_card._ref_card._str_card_range){
-
-										//----------------//
-										//FRONTLINE TARGET//
-										//----------------//
-										case "MELEE":
-
-											_ref_target =
-												ds_list_find_value(
-													_list_enemy,
-													0
-												);
-
-										break;
-
-										//---------------//
-										//BACKLINE TARGET//
-										//---------------//
-										case "BACK":
-
-											_ref_target =
-												ds_list_find_value(
-													_list_enemy,
-													ds_list_size(_list_enemy) - 1
-												);
-
-										break;
-
-										//-------------//
-										//RANDOM TARGET//
-										//-------------//
-										default:
-
-											_ref_target =
-												ds_list_find_value(
-													_list_enemy,
-													irandom(ds_list_size(_list_enemy) - 1)
-												);
-
-										break;
-									}
+									//-------------------//
+									//GET FRONT PLAYER//
+									//-------------------//
+									_ref_target =
+										ds_list_find_value(
+											_list_enemy,
+											0
+										);
 								}
 							}
 
@@ -766,7 +749,7 @@ switch(_state_enemy){
 								global.ref_target_beast =
 									_ref_target;
 
-								scr_cast_card();
+								scr_battle_card_cast();
 							}
 
 						break;
@@ -793,49 +776,14 @@ switch(_state_enemy){
 
 								if (ds_list_size(_list_enemy) > 0){
 
-									switch(_ref_card._ref_card._str_card_range){
-
-										//----------------//
-										//FRONTLINE TARGET//
-										//----------------//
-										case "MELEE":
-
-											_ref_target =
-												ds_list_find_value(
-													_list_enemy,
-													0
-												);
-
-										break;
-
-
-										//---------------//
-										//BACKLINE TARGET//
-										//---------------//
-										case "BACK":
-
-											_ref_target =
-												ds_list_find_value(
-													_list_enemy,
-													ds_list_size(_list_enemy) - 1
-												);
-
-										break;
-
-
-										//-------------//
-										//RANDOM TARGET//
-										//-------------//
-										default:
-
-											_ref_target =
-												ds_list_find_value(
-													_list_enemy,
-													irandom(ds_list_size(_list_enemy) - 1)
-												);
-
-										break;
-									}
+									//-------------------//
+									//GET FRONT PLAYER//
+									//-------------------//
+									_ref_target =
+										ds_list_find_value(
+											_list_enemy,
+											0
+										);
 								}
 							}
 
@@ -893,7 +841,7 @@ switch(_state_enemy){
 								global.ref_target_beast =
 									_ref_target;
 
-								scr_cast_card();
+								scr_battle_card_cast();
 							}
 
 						break;
@@ -928,7 +876,7 @@ switch(_state_enemy){
 							global.ref_caster_beast = _ref_beast;
 							global.ref_target_beast = _ref_target;
 
-							scr_cast_card();
+							scr_battle_card_cast();
 
 						break;
 					}
@@ -1010,7 +958,7 @@ switch(_state_enemy){
 			//----------------//
 			//HEAL MINIONS//
 			//----------------//
-			scr_heal_minions(
+			scr_minion_heal_all(
 				_list_beasts_alive
 			);
 
@@ -1082,7 +1030,7 @@ switch(_state_enemy){
 
 			ds_list_delete(_list_turn_end_items,0);
 
-			scr_init_battle_wait(60);
+			scr_init_battle_wait(90);
 		}
 		else{
 
@@ -1127,7 +1075,7 @@ switch(_state_enemy){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_init_battle_wait(10);
+					scr_init_battle_wait(20);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);

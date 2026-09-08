@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_cleanse_cc",
   "parent":{
-    "name":"CC",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CC/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

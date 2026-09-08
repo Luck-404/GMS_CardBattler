@@ -17,7 +17,7 @@ function scr_card_cerulean_shatter_strike(
 	//------------//
 	//DEAL DAMAGE//
 	//------------//
-	scr_damage_target(
+	scr_battle_damage_target(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
@@ -30,21 +30,9 @@ function scr_card_cerulean_shatter_strike(
 		_ref_target._val_cur_hp > 0
 	){
 
-		scr_shatter_target(
+		scr_trigger_shatter(
 			_ref_target
 		);
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

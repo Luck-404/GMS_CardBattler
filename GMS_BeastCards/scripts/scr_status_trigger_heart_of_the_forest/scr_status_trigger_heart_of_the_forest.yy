@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_heart_of_the_forest",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_heart_of_the_forest",
+  "parent":{
+    "name":"HEART_OF_THE_FOREST",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/HEART_OF_THE_FOREST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

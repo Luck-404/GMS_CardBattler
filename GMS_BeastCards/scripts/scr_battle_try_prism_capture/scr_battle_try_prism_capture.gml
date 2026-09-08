@@ -57,11 +57,11 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	//—------------------------------------------------------------------------------//
 	// ROLL CAPTURE
 	//—------------------------------------------------------------------------------//
-	var _val_chance = scr_get_prism_tame_chance(_stct_prism_item._str_item_id,_ref_target_beast);
+	var _val_chance = scr_battle_get_prism_tame_chance(_stct_prism_item._str_item_id,_ref_target_beast);
 	var _val_roll = irandom_range(1,100);
 
 	if (_val_roll > _val_chance){
-		audio_play_sound(snd_tame_fail,0,false);
+		audio_play_sound(snd_battle_capture_fail,0,false);
 		scr_spawn_popup_error("BROKE FREE",60);
 
 		return false;
@@ -70,10 +70,10 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	//—------------------------------------------------------------------------------//
 	// CLONE BEAST BEFORE ENEMY IS MARKED DEAD
 	//—------------------------------------------------------------------------------//
-	var _stct_captured_beast = scr_clone_beast_for_capture(_ref_target_beast);
+	var _stct_captured_beast = scr_battle_clone_beast_for_capture(_ref_target_beast);
 
 	if (_stct_captured_beast == undefined){
-		audio_play_sound(snd_tame_fail,0,false);
+		audio_play_sound(snd_battle_capture_fail,0,false);
 		scr_spawn_popup_error("CAPTURE FAILED",60);
 		return false;
 	}
@@ -98,6 +98,6 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	);
 	
 	audio_play_sound(_ref_target_beast._ref_unit._snd_beast_cry,0,false);
-		audio_play_sound(snd_tame_success,0,false);
+		audio_play_sound(snd_battle_capture_success,0,false);
 	return true;
 }

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_init_beast_specific",
   "parent":{
-    "name":"BEAST INIT",
-    "path":"folders/BEASTS/BEAST SETUP/BEAST INIT.yy",
+    "name":"INITIALIZATION",
+    "path":"folders/BEASTS/CORE/INITIALIZATION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

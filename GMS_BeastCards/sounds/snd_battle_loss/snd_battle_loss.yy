@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_battle_loss",
   "parent":{
-    "name":"CONTROLLERS",
-    "path":"folders/BATTLE/CONTROLLERS.yy",
+    "name":"RESULTS",
+    "path":"folders/BATTLE/RESULTS.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

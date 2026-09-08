@@ -10,8 +10,8 @@
   "name":"obj_gui_party_left_arrow",
   "overriddenProperties":[],
   "parent":{
-    "name":"PARTY SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/PARTY SYSTEM.yy",
+    "name":"GUI",
+    "path":"folders/BEASTS/PARTY/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

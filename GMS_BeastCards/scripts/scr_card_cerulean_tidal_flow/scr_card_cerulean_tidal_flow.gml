@@ -11,21 +11,12 @@ function scr_card_cerulean_tidal_flow(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//GENERATE MANA//
 	//-------------//
-	scr_gain_mana(_stct_card._val_card_magnitude);
+	scr_battle_mana_gain(_stct_card._val_card_magnitude);
 
 	//-----------//
 	//DRAW CARD//
 	//-----------//
-	scr_draw_cards(1);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_draw_card,0,false);
+	scr_battle_card_draw(1);
 
 	//-------------//
 	//SPAWN POPUPS//

@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_lontriver_cry",
   "parent":{
     "name":"LONTRIVER",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/LONTRIVER.yy",
+    "path":"folders/BEASTS/CERULEAN/LONTRIVER.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -4,7 +4,7 @@
 // FUNCTION: Creates and manages the Stormstruck status.
 //           Stormstruck is stackable and lasts 3 rounds.
 //           Its normal round trigger only decrements lifetime.
-//           Action damage is resolved through scr_trigger_stormstruck_action.
+//           Action damage is resolved through scr_status_trigger_stormstruck_action.
 //
 //===============================================================================//
 
@@ -30,7 +30,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 			//-----------------------//
 			//CHECK EXISTING STATUS//
 			//-----------------------//
-			var _ref_existing_status = scr_check_for_status("STORMSTRUCK",_ref_target);
+			var _ref_existing_status = scr_status_check("STORMSTRUCK",_ref_target);
 
 			if (_ref_existing_status != -1){
 
@@ -45,7 +45,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 					32,
 					1,
 					0,
-					snd_battle_sfx_stormstruck
+					snd_battle_stormstruck
 				);
 
 				scr_status_refresh_lifetime(
@@ -53,7 +53,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 					_val_lifetime
 				);
 
-				scr_reposition_statuses(_ref_target);
+				scr_status_reposition(_ref_target);
 
 				//----------------//
 				//CHECK DISCHARGE//
@@ -104,7 +104,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 				scr_battle_vfx(
 					_ref_target,
@@ -115,7 +115,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 					32,
 					1,
 					0,
-					snd_battle_sfx_stormstruck
+					snd_battle_stormstruck
 				);
 			
 			return _ref_new_status;
@@ -146,7 +146,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 				return;
 			}
 
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_level_up_beast",
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"PROGRESSION",
+    "path":"folders/BEASTS/CORE/PROGRESSION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

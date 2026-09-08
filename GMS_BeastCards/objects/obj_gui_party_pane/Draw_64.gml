@@ -181,22 +181,22 @@ if (_stct_unit_selected != undefined){
 	var _val_pdef_stat = _stct_unit._val_beast_pdef_stat;
 	var _val_mdef_stat = _stct_unit._val_beast_mdef_stat;
 
-	draw_text(_val_x,_val_y,"HP: " + string(_val_hp_stat) + " | " + scr_get_beast_grade_letter(_val_hp_stat) + " | " + string(scr_get_beast_grade_modifier(_val_hp_stat)));
+	draw_text(_val_x,_val_y,"HP: " + string(_val_hp_stat) + " | " + scr_beast_get_grade_letter(_val_hp_stat) + " | " + string(scr_get_beast_grade_modifier(_val_hp_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"CON: " + string(_val_con_stat) + " | " + scr_get_beast_grade_letter(_val_con_stat) + " | " + string(scr_get_beast_grade_modifier(_val_con_stat)));
+	draw_text(_val_x,_val_y,"CON: " + string(_val_con_stat) + " | " + scr_beast_get_grade_letter(_val_con_stat) + " | " + string(scr_get_beast_grade_modifier(_val_con_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"PPOW: " + string(_val_ppow_stat) + " | " + scr_get_beast_grade_letter(_val_ppow_stat) + " | " + string(scr_get_beast_grade_modifier(_val_ppow_stat)));
+	draw_text(_val_x,_val_y,"PPOW: " + string(_val_ppow_stat) + " | " + scr_beast_get_grade_letter(_val_ppow_stat) + " | " + string(scr_get_beast_grade_modifier(_val_ppow_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"MPOW: " + string(_val_mpow_stat) + " | " + scr_get_beast_grade_letter(_val_mpow_stat) + " | " + string(scr_get_beast_grade_modifier(_val_mpow_stat)));
+	draw_text(_val_x,_val_y,"MPOW: " + string(_val_mpow_stat) + " | " + scr_beast_get_grade_letter(_val_mpow_stat) + " | " + string(scr_get_beast_grade_modifier(_val_mpow_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"PDEF: " + string(_val_pdef_stat) + " | " + scr_get_beast_grade_letter(_val_pdef_stat) + " | " + string(scr_get_beast_grade_modifier(_val_pdef_stat)));
+	draw_text(_val_x,_val_y,"PDEF: " + string(_val_pdef_stat) + " | " + scr_beast_get_grade_letter(_val_pdef_stat) + " | " + string(scr_get_beast_grade_modifier(_val_pdef_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"MDEF: " + string(_val_mdef_stat) + " | " + scr_get_beast_grade_letter(_val_mdef_stat) + " | " + string(scr_get_beast_grade_modifier(_val_mdef_stat)));
+	draw_text(_val_x,_val_y,"MDEF: " + string(_val_mdef_stat) + " | " + scr_beast_get_grade_letter(_val_mdef_stat) + " | " + string(scr_get_beast_grade_modifier(_val_mdef_stat)));
 	_val_y += _val_sg;
 
 	// SECONDARY

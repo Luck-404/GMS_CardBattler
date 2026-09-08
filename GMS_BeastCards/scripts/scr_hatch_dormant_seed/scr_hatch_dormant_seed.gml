@@ -72,7 +72,7 @@ function scr_hatch_dormant_seed(_ref_seed){
 	//SUMMON HATCH RESULT//
 	//--------------------//
 	var _ref_new_minion =
-		scr_init_minion(
+		scr_minion_init(
 			_str_minion,
 			undefined,
 			undefined,

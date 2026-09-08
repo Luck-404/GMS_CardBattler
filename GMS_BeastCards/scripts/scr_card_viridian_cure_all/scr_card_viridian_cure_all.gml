@@ -18,16 +18,7 @@ function scr_card_viridian_cure_all(_stct_card,_ref_caster,_ref_target){
 	//-------------------------//
 	//CLEANSE NEGATIVE STATUSES//
 	//-------------------------//
-	scr_cleanse_negative(_ref_target,ds_list_size(_ref_target._list_statuses));
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
+	scr_status_cleanse_negative(_ref_target,ds_list_size(_ref_target._list_statuses));
 
 	return true;
 }

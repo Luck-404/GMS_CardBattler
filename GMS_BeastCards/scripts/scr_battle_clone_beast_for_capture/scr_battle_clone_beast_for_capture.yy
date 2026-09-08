@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_clone_beast_for_capture",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_clone_beast_for_capture",
+  "parent":{
+    "name":"CAPTURE",
+    "path":"folders/BATTLE/CAPTURE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

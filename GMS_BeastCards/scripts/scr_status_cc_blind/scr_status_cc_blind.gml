@@ -24,21 +24,18 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			//----------------//
-			//DEFAULT LENGTH//
-			//----------------//
-			if (_val_lifetime == undefined){
-				_val_lifetime = 3;
-			}
-
+			//BLIND
 			_val_lifetime =
-				max(1,_val_lifetime);
+				scr_get_cc_lifetime(
+					_val_lifetime,
+					3
+				);
 
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"BLIND",
 					_ref_target
 				);
@@ -52,6 +49,27 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				//------------------------//
+				//ENSURE PERSISTENT VFX//
+				//------------------------//
+				if (
+					!instance_exists(
+						_ref_existing_status
+							._ref_persistent_vfx
+					)
+				){
+
+					_ref_existing_status
+						._ref_persistent_vfx =
+						scr_battle_vfx_persistent(
+							_ref_target,
+							spr_battle_vfx_blinded,
+							0,
+							-20,
+							1
+						);
+				}
 
 				return _ref_existing_status;
 			}
@@ -109,7 +127,19 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
+
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent(
+					_ref_target,
+					spr_battle_vfx_blinded,
+					0,
+					-20,
+					1
+				);
 
 			return _ref_new_status;
 
@@ -130,7 +160,7 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -140,7 +170,7 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -151,7 +181,7 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

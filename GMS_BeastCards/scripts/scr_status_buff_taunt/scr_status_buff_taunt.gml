@@ -29,11 +29,27 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime){
 			//----------------//
 			//CHECK OWN TAUNT//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status("TAUNT",_ref_target);
+			var _ref_existing_status = scr_status_check("TAUNT",_ref_target);
 
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_lifetime = _val_lifetime;
+				_ref_existing_status._val_status_lifetime =
+					_val_lifetime;
+
+				//------------------------//
+				//ENSURE PERSISTENT VFX//
+				//------------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx =
+						scr_battle_vfx_persistent(
+							_ref_target,
+							spr_battle_vfx_taunting,
+							0,
+							-110,
+							1
+						);
+				}
 
 				return _ref_existing_status;
 			}
@@ -41,7 +57,7 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime){
 			//------------------------//
 			//REMOVE OTHER TEAM TAUNT//
 			//------------------------//
-			var _list_team = scr_get_target_team_list(_ref_target);
+			var _list_team = scr_battle_get_target_team_list(_ref_target);
 
 			if (_list_team != undefined){
 
@@ -53,7 +69,7 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime){
 						continue;
 					}
 
-					var _ref_old_taunt = scr_check_for_status("TAUNT",_ref_beast);
+					var _ref_old_taunt = scr_status_check("TAUNT",_ref_beast);
 
 					if (_ref_old_taunt != -1){
 
@@ -90,7 +106,19 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime){
 
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
+
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent(
+					_ref_target,
+					spr_battle_vfx_taunting,
+					0,
+					-110,
+					1
+				);
 
 			return _ref_new_status;
 
@@ -110,7 +138,7 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime){
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -133,7 +161,7 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime){
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

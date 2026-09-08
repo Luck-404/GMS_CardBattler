@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_tidal_recovery",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_tidal_recovery",
+  "parent":{
+    "name":"TIDAL_RECOVERY",
+    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDAL_RECOVERY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"INFERNUS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/INFERNUS.yy",
+    "path":"folders/BEASTS/VERMILION/INFERNUS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

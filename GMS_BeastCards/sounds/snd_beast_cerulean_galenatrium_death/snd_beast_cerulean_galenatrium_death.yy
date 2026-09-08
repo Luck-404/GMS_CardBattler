@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_galenatrium_death",
   "parent":{
     "name":"GALENATRIUM",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/GALENATRIUM.yy",
+    "path":"folders/BEASTS/CERULEAN/GALENATRIUM.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

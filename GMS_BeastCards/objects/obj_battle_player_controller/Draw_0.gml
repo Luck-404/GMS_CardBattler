@@ -20,7 +20,7 @@
 		_val_max_mana
 	){
 
-		scr_reposition_mana();
+		scr_battle_mana_reposition();
 	}
 
 	//-------------------//
@@ -57,7 +57,7 @@
 		//DRAW ORB//
 		//---------//
 		draw_sprite_ext(
-			spr_mana_orb,
+			spr_battle_mana_orb,
 			_it_mana_frame,
 			_stct_mana_position._val_x,
 			_stct_mana_position._val_y,

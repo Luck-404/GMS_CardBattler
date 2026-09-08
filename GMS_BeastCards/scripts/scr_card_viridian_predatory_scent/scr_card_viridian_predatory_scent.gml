@@ -12,7 +12,7 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//APPLY FOCUS//
 	//-----------//
-	scr_apply_debuff_status("FOCUS",3);
+	scr_status_apply_debuff("FOCUS",3);
 
 	//------------//
 	//POISONFLOW//
@@ -23,7 +23,7 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 		ds_list_size(_ref_caster._list_minions) > 0
 	){
 
-		var _ref_poison = scr_check_for_status("POISON",_ref_target);
+		var _ref_poison = scr_status_check("POISON",_ref_target);
 
 		if (
 			_ref_poison != -1 &&
@@ -42,18 +42,9 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 						continue;
 					}
 
-					scr_grow_minion(_ref_minion,1);
+					scr_minion_grow(_ref_minion,1);
 				}
 			}
 		}
 	}
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
 }

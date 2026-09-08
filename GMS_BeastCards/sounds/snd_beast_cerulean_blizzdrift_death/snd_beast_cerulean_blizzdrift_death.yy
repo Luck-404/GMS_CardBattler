@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_blizzdrift_death",
   "parent":{
     "name":"BLIZZDRIFT",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/BLIZZDRIFT.yy",
+    "path":"folders/BEASTS/CERULEAN/BLIZZDRIFT.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

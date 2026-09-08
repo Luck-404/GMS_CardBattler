@@ -11,7 +11,7 @@ function scr_card_cerulean_frozen_bulwark(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//GAIN ARMOR//
 	//-----------//
-	scr_armor_target(
+	scr_battle_armor_target(
 		_stct_card._val_card_magnitude,
 		_ref_caster
 	);

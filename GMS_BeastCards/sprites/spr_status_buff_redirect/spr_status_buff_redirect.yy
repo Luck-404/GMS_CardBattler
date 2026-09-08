@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"REDIRECT",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/REDIRECT.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REDIRECT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

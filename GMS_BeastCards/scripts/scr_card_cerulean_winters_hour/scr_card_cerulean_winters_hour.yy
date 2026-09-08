@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_winters_hour",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_winters_hour",
+  "parent":{
+    "name":"WINTERS_HOUR",
+    "path":"folders/CARDS/CARD LIST/CERULEAN/WINTERS_HOUR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

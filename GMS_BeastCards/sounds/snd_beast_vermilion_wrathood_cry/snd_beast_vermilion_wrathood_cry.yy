@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_wrathood_cry",
   "parent":{
     "name":"WRATHOOD",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/WRATHOOD.yy",
+    "path":"folders/BEASTS/VERMILION/WRATHOOD.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

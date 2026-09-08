@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"LONTRIVER",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/LONTRIVER.yy",
+    "path":"folders/BEASTS/CERULEAN/LONTRIVER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

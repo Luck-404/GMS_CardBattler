@@ -22,19 +22,11 @@ function scr_card_viridian_honeyed_scent(_stct_card,_ref_caster,_ref_target){
 	//------------//
 	global.ref_target_beast = _ref_caster;
 
-	scr_apply_aura_status("HONEYED_SCENT",_stct_card._val_card_magnitude);
+	scr_status_apply_aura("HONEYED_SCENT",_stct_card._val_card_magnitude);
 
 	//----------------//
 	//RESTORE TARGET//
 	//----------------//
 	global.ref_target_beast = _ref_original_target;
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

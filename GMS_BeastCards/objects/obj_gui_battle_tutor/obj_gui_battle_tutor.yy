@@ -9,8 +9,8 @@
   "name":"obj_gui_battle_tutor",
   "overriddenProperties":[],
   "parent":{
-    "name":"COMBAT LOGIC",
-    "path":"folders/BATTLE/COMBAT LOGIC.yy",
+    "name":"TUTOR",
+    "path":"folders/BATTLE/CARD FLOW/TUTOR.yy",
   },
   "parentObjectId":null,
   "persistent":false,

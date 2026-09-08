@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_static_barrier",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_static_barrier",
+  "parent":{
+    "name":"STATIC_BARRIER",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/STATIC_BARRIER.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

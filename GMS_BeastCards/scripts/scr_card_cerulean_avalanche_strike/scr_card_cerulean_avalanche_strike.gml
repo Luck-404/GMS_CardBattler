@@ -12,7 +12,7 @@ function scr_card_cerulean_avalanche_strike(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET TARGET TEAM LIST//
 	//--------------------//
-	var _list_targets = scr_get_target_team_list(_ref_target);
+	var _list_targets = scr_battle_get_target_team_list(_ref_target);
 
 	if (_list_targets == undefined){
 		return;
@@ -40,22 +40,14 @@ function scr_card_cerulean_avalanche_strike(_stct_card,_ref_caster,_ref_target){
 	//DAMAGE FRONT TARGET//
 	//-------------------//
 	if (instance_exists(_ref_front_target)){
-		scr_damage_target(_stct_card._val_card_magnitude,_ref_front_target);
+		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_front_target);
 	}
 
 	//--------------------//
 	//DAMAGE SECOND TARGET//
 	//--------------------//
 	if (instance_exists(_ref_second_target)){
-		scr_damage_target(_stct_card._val_card_magnitude,_ref_second_target);
+		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_second_target);
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

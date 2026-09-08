@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_brittle_constitution",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_brittle_constitution",
+  "parent":{
+    "name":"BRITTLE_CONSTITUTION",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/CERULEAN/BRITTLE_CONSTITUTION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

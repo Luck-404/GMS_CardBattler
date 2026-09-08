@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"STORMSTRUCK",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/STORMSTRUCK.yy",
+    "path":"folders/BATTLE/STATUSES/DOTs/STORMSTRUCK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

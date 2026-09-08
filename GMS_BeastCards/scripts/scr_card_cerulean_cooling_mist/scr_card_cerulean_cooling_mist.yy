@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_cooling_mist",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_cooling_mist",
+  "parent":{
+    "name":"COOLING_MIST",
+    "path":"folders/CARDS/CARD LIST/CERULEAN/COOLING_MIST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

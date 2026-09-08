@@ -18,19 +18,10 @@ function scr_card_cerulean_bitter_chill(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//APPLY FROSTBITE//
 	//----------------//
-	scr_apply_dot_status("FROSTBITE");
+	scr_status_apply_dot("FROSTBITE");
 
 	//----------------//
 	//APPLY WEAKNESS//
 	//----------------//
-	scr_apply_debuff_status("WEAKNESS");
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
+	scr_status_apply_debuff("WEAKNESS");
 }

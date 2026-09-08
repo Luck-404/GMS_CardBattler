@@ -10,8 +10,8 @@
   "name":"obj_battle_status",
   "overriddenProperties":[],
   "parent":{
-    "name":"STATUS",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_battle_status",
-    "path":"sprites/spr_battle_status/spr_battle_status.yy",
+    "name":"spr_battle_status_hitbox",
+    "path":"sprites/spr_battle_status_hitbox/spr_battle_status_hitbox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

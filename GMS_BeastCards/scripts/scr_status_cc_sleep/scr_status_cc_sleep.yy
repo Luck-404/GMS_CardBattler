@@ -6,7 +6,7 @@
   "name":"scr_status_cc_sleep",
   "parent":{
     "name":"SLEEP",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/CC/SLEEP.yy",
+    "path":"folders/BATTLE/STATUSES/CC/SLEEP.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

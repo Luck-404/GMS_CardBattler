@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_leporoot_death",
   "parent":{
     "name":"LEPOROOT",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/LEPOROOT.yy",
+    "path":"folders/BEASTS/VIRIDIAN/LEPOROOT.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

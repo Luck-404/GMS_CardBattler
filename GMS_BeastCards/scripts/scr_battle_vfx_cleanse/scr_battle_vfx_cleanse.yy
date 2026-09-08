@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_vfx_cleanse",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_vfx_cleanse",
+  "parent":{
+    "name":"VFX",
+    "path":"folders/BATTLE/VFX.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

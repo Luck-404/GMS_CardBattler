@@ -14,5 +14,5 @@ function scr_cleanse_cc(_ref_target,_ct_amount,_str_status_id=undefined){
 	//------------------------//
 	// _str_status_id may later specify a particular CC status.
 
-	return scr_cleanse_status_type(_ref_target,"CC",_ct_amount,_str_status_id);
+	return scr_status_cleanse_type(_ref_target,"CC",_ct_amount,_str_status_id);
 }

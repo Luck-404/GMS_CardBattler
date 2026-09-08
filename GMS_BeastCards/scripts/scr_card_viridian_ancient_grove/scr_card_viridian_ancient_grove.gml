@@ -12,7 +12,7 @@ function scr_card_viridian_ancient_grove(_stct_card,_ref_caster,_ref_target){
 	//GET ALLIED TEAM LIST//
 	//--------------------//
 	var _list_allies =
-		scr_get_target_team_list(_ref_caster);
+		scr_battle_get_target_team_list(_ref_caster);
 
 	if (_list_allies == undefined){
 		return;
@@ -44,20 +44,13 @@ function scr_card_viridian_ancient_grove(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_init_minion(
+		scr_minion_init(
 			"GROVE_SPIRIT",
 			_stct_card,
 			_ref_caster,
 			_ref_ally
 		);
 
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

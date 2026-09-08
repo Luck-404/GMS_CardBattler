@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_cc_get_blind_attack_target_mode",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_cc_get_blind_attack_target_mode",
+  "parent":{
+    "name":"BLIND",
+    "path":"folders/BATTLE/STATUSES/CC/BLIND.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -117,11 +117,11 @@ function scr_transfer_oldest_buff(_ref_source,_ref_target){
 	/*
 		Do not create duplicate instances of one Buff ID.
 
-		Many existing helpers use scr_check_for_status() and assume
+		Many existing helpers use scr_status_check() and assume
 		one status instance per Buff name.
 	*/
 	var _ref_existing_buff =
-		scr_check_for_status(
+		scr_status_check(
 			_str_buff_name,
 			_ref_target
 		);
@@ -207,8 +207,8 @@ function scr_transfer_oldest_buff(_ref_source,_ref_target){
 	//-------------------//
 	//REFRESH STATUS ICONS//
 	//-------------------//
-	scr_reposition_statuses(_ref_source);
-	scr_reposition_statuses(_ref_target);
+	scr_status_reposition(_ref_source);
+	scr_status_reposition(_ref_target);
 
 	//----------//
 	//FEEDBACK//

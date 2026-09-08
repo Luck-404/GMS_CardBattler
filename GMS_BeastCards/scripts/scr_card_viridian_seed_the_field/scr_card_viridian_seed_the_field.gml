@@ -11,7 +11,7 @@ function scr_card_viridian_seed_the_field(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	//GET CASTER TEAM LIST//
 	//--------------------//
-	var _list_targets = scr_get_target_team_list(_ref_caster);
+	var _list_targets = scr_battle_get_target_team_list(_ref_caster);
 
 	if (_list_targets == undefined){
 		return;
@@ -41,7 +41,7 @@ function scr_card_viridian_seed_the_field(_stct_card,_ref_caster,_ref_target){
 
 		repeat (_ct_open_slots){
 
-			scr_init_minion(
+			scr_minion_init(
 				"DORMANT_SEED",
 				_stct_card,
 				_ref_caster,
@@ -71,8 +71,4 @@ function scr_card_viridian_seed_the_field(_stct_card,_ref_caster,_ref_target){
 		);
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

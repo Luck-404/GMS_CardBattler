@@ -34,7 +34,15 @@ function scr_trap_distracting_trap(
 				return false;
 			}
 
-			_ref_trap._flag_triggered = true;
+			_ref_trap._flag_triggered =
+				true;
+
+			//----------------//
+			//TRAP TRIGGER VFX//
+			//----------------//
+			scr_trap_vfx_trigger(
+				_ref_trap
+			);
 
 			//----------------//
 			//REVEAL TRAP//
@@ -45,13 +53,13 @@ function scr_trap_distracting_trap(
 			//DRAW CARD//
 			//-----------//
 			if (_ref_trap._str_owner_team == "PLAYER"){
-				scr_draw_cards(1);
+				scr_battle_card_draw(1);
 			}
 
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(_ref_trap);
+			scr_trap_destroy(_ref_trap);
 
 			//---------------//
 			//ATTACK MISSES//

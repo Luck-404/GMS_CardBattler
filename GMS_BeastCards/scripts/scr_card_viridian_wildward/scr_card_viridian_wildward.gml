@@ -12,7 +12,7 @@ function scr_card_viridian_wildward(_stct_card,_ref_caster,_ref_target){
 	//GET CASTER TEAM LIST//
 	//--------------------//
 	var _list_targets =
-		scr_get_target_team_list(_ref_caster);
+		scr_battle_get_target_team_list(_ref_caster);
 
 	if (_list_targets == undefined){
 		return;
@@ -37,18 +37,9 @@ function scr_card_viridian_wildward(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_armor_target_linear(
+		scr_battle_armor_target_linear(
 			_stct_card._val_card_magnitude,
 			_ref_affected_target
 		);
-
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_armor,0,false);
 }

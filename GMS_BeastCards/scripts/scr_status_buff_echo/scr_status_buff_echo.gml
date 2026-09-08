@@ -23,7 +23,7 @@ function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"ECHO",
 					global.list_statuses
 				);
@@ -36,7 +36,7 @@ function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
 				_ref_existing_status._ct_status_stacks +=
 					_ct_stacks_added;
 
-				scr_reposition_statuses(
+				scr_status_reposition(
 					global.list_statuses
 				);
 
@@ -122,7 +122,7 @@ function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				global.list_statuses
 			);
 
@@ -165,7 +165,7 @@ function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
 				return undefined;
 			}
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

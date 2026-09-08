@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_trigger_discharge",
   "parent":{
-    "name":"STORMSTRUCK",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/STORMSTRUCK.yy",
+    "name":"DISCHARGE",
+    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

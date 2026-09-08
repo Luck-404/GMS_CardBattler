@@ -18,7 +18,7 @@ function scr_card_viridian_pollinate(_stct_card,_ref_caster,_ref_target){
 	//--------------------//
 	var _arr_targets = [
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//----------------------//
@@ -69,7 +69,7 @@ function scr_card_viridian_pollinate(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		//IMMEDIATE HEAL//
 		//----------------//
-		scr_heal_target(
+		scr_battle_heal_target(
 			_val_healing,
 			_ref_affected_target
 		);
@@ -85,8 +85,4 @@ function scr_card_viridian_pollinate(_stct_card,_ref_caster,_ref_target){
 	global.ref_target_beast =
 		_ref_original_target;
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_heal,0,false);
 }

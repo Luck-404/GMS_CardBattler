@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"APEX_PREDATOR",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/VIRIDIAN/APEX_PREDATOR.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/APEX_PREDATOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -46,26 +46,17 @@ function scr_card_viridian_natural_cycle(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//SACRIFICE MINION//
 	//----------------//
-	scr_destroy_minion(_ref_minion,"SACRIFICE");
+	scr_minion_destroy(_ref_minion,"SACRIFICE");
 
 	//-----------//
 	//HEAL HOST//
 	//-----------//
-	scr_heal_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_heal_target(_stct_card._val_card_magnitude,_ref_target);
 
 	//-----------//
 	//DRAW CARDS//
 	//-----------//
-	scr_draw_cards(2);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_heal,0,false);
+	scr_battle_card_draw(2);
 
 	return true;
 }

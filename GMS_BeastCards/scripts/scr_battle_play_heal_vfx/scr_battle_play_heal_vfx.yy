@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_play_heal_vfx",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_play_heal_vfx",
+  "parent":{
+    "name":"HEALING",
+    "path":"folders/BATTLE/COMBAT/HEALING.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

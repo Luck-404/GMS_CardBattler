@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CHELONSEA",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/CHELONSEA.yy",
+    "path":"folders/BEASTS/CERULEAN/CHELONSEA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

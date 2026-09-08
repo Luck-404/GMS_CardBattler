@@ -42,7 +42,7 @@ function scr_status_buff_pack_instinct(_str_tag,_ref_status,_val_magnitude=undef
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_check_for_status("PACK_INSTINCT",_ref_target);
+			var _ref_existing_status = scr_status_check("PACK_INSTINCT",_ref_target);
 
 			//------------------//
 			//REFRESH EXISTING//
@@ -120,7 +120,7 @@ function scr_status_buff_pack_instinct(_str_tag,_ref_status,_val_magnitude=undef
 			//---------------------//
 			_ref_new_status._scr_status("TRIGGER",_ref_new_status);
 
-			scr_reposition_statuses(_ref_target);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
@@ -235,7 +235,7 @@ function scr_status_buff_pack_instinct(_str_tag,_ref_status,_val_magnitude=undef
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -250,7 +250,7 @@ function scr_status_buff_pack_instinct(_str_tag,_ref_status,_val_magnitude=undef
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -290,7 +290,7 @@ function scr_status_buff_pack_instinct(_str_tag,_ref_status,_val_magnitude=undef
 					);
 			}
 
-			scr_destroy_status(_ref_status);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

@@ -23,7 +23,7 @@ function scr_card_viridian_decaying_touch(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	//CHECK POISON//
 	//----------------//
-	var _ref_poison = scr_check_for_status("POISON",_ref_target);
+	var _ref_poison = scr_status_check("POISON",_ref_target);
 
 	if (_ref_poison != -1){
 		_val_wither_lifetime = 5;
@@ -32,14 +32,5 @@ function scr_card_viridian_decaying_touch(_stct_card,_ref_caster,_ref_target){
 	//--------------//
 	//APPLY WITHER//
 	//--------------//
-	scr_apply_debuff_status("WITHER",_val_wither_lifetime);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_debuff,0,false);
+	scr_status_apply_debuff("WITHER",_val_wither_lifetime);
 }

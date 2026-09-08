@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SECOND LIFE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/SECOND LIFE.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/SECOND LIFE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

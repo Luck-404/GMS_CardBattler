@@ -13,12 +13,4 @@ function scr_card_viridian_potent_fruit(_stct_card,_ref_caster,_ref_target){
 	//------------//
 	scr_apply_buff_status("BOOST",25,2);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

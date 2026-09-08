@@ -21,6 +21,6 @@ function scr_battle_vfx_blocked(_ref_target,_ct_start_delay=0){
 		0,
 		1,
 		_ct_start_delay,
-		snd_battle_vfx_blocked
+		snd_battle_sfx_blocked
 	);
 }

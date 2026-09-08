@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_consume_call_the_deep_damage",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_consume_call_the_deep_damage",
+  "parent":{
+    "name":"CALL_THE_DEEP",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/CALL_THE_DEEP.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

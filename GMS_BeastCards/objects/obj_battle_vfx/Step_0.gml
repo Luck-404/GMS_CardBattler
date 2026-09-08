@@ -1,9 +1,9 @@
 //===============================================================================//
 //
 // STEP: OBJ_BATTLE_VFX
-// FUNCTION: Handles delayed VFX and synchronized SFX playback.
-//           Updates optional anchor following.
-//           Destroys temporary VFX and holds persistent VFX on the final frame.
+// FUNCTION: Handles delayed VFX startup, synchronized SFX playback,
+//           and optional anchor following.
+//           Animation completion is handled by the Animation End event.
 //
 //===============================================================================//
 
@@ -18,11 +18,17 @@ if (_ct_start_delay > 0){
 		exit;
 	}
 
-	_ct_start_delay = 0;
+	_ct_start_delay =
+		0;
 
-	visible = true;
-	image_index = 0;
-	image_speed = 1;
+	visible =
+		true;
+
+	image_index =
+		0;
+
+	image_speed =
+		1;
 }
 
 //--------//
@@ -33,7 +39,10 @@ if (!_flag_sfx_played){
 	_flag_sfx_played = true;
 
 	if (_snd_sfx != undefined){
-		audio_play_sound(_snd_sfx,0,false);
+
+		scr_play_battle_sfx(
+			_snd_sfx
+		);
 	}
 }
 
@@ -56,23 +65,5 @@ if (_flag_follow_anchor){
 
 		instance_destroy();
 		exit;
-	}
-}
-
-//--------------------//
-//HANDLE ANIMATION END//
-//--------------------//
-if (image_index >= image_number - 1){
-
-	if (_flag_persistent){
-
-		image_index =
-			image_number - 1;
-
-		image_speed = 0;
-	}
-	else{
-
-		instance_destroy();
 	}
 }

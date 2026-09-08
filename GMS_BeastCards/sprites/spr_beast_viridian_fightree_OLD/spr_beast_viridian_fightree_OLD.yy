@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"FIGHTREE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/FIGHTREE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/FIGHTREE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

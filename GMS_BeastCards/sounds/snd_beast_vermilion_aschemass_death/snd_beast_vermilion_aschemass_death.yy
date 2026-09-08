@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_aschemass_death",
   "parent":{
     "name":"ASCHEMASS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/ASCHEMASS.yy",
+    "path":"folders/BEASTS/VERMILION/ASCHEMASS.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

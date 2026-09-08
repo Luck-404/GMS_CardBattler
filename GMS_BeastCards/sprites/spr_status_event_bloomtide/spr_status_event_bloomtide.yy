@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BLOOMTIDE",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/EVENTS/BLOOMTIDE.yy",
+    "path":"folders/BATTLE/STATUSES/EVENTS/BLOOMTIDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

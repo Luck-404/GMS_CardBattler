@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"REGENERATION",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/BUFFS/UNCOLORED/REGENERATION.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REGENERATION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -39,7 +39,7 @@ function scr_card_cerulean_deepflow_whispersong(
 	}
 
 	//====================//
-	//10 TENTACLE ATTEMPTS//
+	//5 TENTACLE ATTEMPTS//
 	//====================//
 	repeat (_stct_card._val_card_magnitude){
 
@@ -74,7 +74,7 @@ function scr_card_cerulean_deepflow_whispersong(
 			//----------------//
 			//HAS OPEN SLOT//
 			//----------------//
-			if (scr_has_open_minion_slot(_ref_beast)){
+			if (scr_minion_has_open_slot(_ref_beast)){
 
 				array_push(
 					_arr_valid_hosts,
@@ -88,7 +88,7 @@ function scr_card_cerulean_deepflow_whispersong(
 			//FULL — CHECK TENTACLE//
 			//----------------------//
 			var _ref_tentacle =
-				scr_get_oldest_minion_by_name(
+				scr_minion_get_oldest_by_name(
 					_ref_beast,
 					"TENTACLE"
 				);
@@ -122,9 +122,9 @@ function scr_card_cerulean_deepflow_whispersong(
 		//==================//
 		//OPEN SLOT — SUMMON//
 		//==================//
-		if (scr_has_open_minion_slot(_ref_host)){
+		if (scr_minion_has_open_slot(_ref_host)){
 
-			scr_init_minion(
+			scr_minion_init(
 				"TENTACLE",
 				_stct_card,
 				_ref_caster,
@@ -180,26 +180,13 @@ function scr_card_cerulean_deepflow_whispersong(
 						)
 					];
 
-				scr_grow_minion(
+				scr_minion_grow(
 					_ref_growth_target,
 					1
 				);
 			}
 		}
 	}
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_buff,
-		0,
-		false
-	);
 
 	return true;
 }

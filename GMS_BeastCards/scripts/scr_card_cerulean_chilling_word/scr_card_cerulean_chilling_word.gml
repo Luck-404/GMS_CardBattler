@@ -12,7 +12,7 @@ function scr_card_cerulean_chilling_word(_stct_card,_ref_caster,_ref_target){
 	//GET TARGET TEAM//
 	//----------------//
 	var _list_targets =
-		scr_get_target_team_list(
+		scr_battle_get_target_team_list(
 			_ref_target
 		);
 
@@ -52,7 +52,7 @@ function scr_card_cerulean_chilling_word(_stct_card,_ref_caster,_ref_target){
 		global.ref_target_beast =
 			_ref_affected_target;
 
-		scr_apply_dot_status(
+		scr_status_apply_dot(
 			"FROSTBURN"
 		);
 
@@ -60,16 +60,4 @@ function scr_card_cerulean_chilling_word(_stct_card,_ref_caster,_ref_target){
 			_ref_old_target;
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

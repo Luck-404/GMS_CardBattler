@@ -12,13 +12,4 @@ function scr_card_viridian_toxic_hide(_stct_card,_ref_caster,_ref_target){
 	//APPLY TOXIC HIDE//
 	//------------------//
 	scr_apply_buff_status("TOXIC_HIDE",1,3);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

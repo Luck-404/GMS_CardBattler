@@ -32,8 +32,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"TRIGGERS",
-    "path":"folders/CARDS/CARD VFX/TRIGGERS.yy",
+    "name":"POISONFLOW",
+    "path":"folders/BATTLE/COLOR TRIGGERS/POISONFLOW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

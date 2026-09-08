@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_wyrmelta_death",
   "parent":{
     "name":"WYRMELTA",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/WYRMELTA.yy",
+    "path":"folders/BEASTS/VERMILION/WYRMELTA.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

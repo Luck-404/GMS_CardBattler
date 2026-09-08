@@ -10,8 +10,8 @@
   "name":"obj_gui_ranch_left_arrow",
   "overriddenProperties":[],
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"GUI",
+    "path":"folders/BEASTS/RANCH/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

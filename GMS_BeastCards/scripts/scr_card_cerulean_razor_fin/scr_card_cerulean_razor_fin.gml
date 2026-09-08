@@ -12,7 +12,7 @@ function scr_card_cerulean_razor_fin(_stct_card,_ref_caster,_ref_target){
 	//------------//
 	//DEAL DAMAGE//
 	//------------//
-	scr_damage_target(
+	scr_battle_damage_target(
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
@@ -24,15 +24,7 @@ function scr_card_cerulean_razor_fin(_stct_card,_ref_caster,_ref_target){
 		instance_exists(_ref_target) &&
 		_ref_target._val_cur_hp > 0
 	){
-		scr_apply_dot_status("BLEED");
+		scr_status_apply_dot("BLEED");
 	}
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_sfx_neu_hit,0,false);
 }

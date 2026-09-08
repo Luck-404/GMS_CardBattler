@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SLAGOLEM",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/SLAGOLEM.yy",
+    "path":"folders/BEASTS/VERMILION/SLAGOLEM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

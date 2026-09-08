@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_vfx_beast_motion",
   "parent":{
-    "name":"BATTLE BEAST",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE BEAST.yy",
+    "name":"BEAST VFX MOVEMENT",
+    "path":"folders/BATTLE/VFX/BEAST VFX MOVEMENT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

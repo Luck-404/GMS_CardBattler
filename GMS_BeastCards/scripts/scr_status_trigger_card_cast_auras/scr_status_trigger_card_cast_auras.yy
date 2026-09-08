@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_card_cast_auras",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_card_cast_auras",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/AURA/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

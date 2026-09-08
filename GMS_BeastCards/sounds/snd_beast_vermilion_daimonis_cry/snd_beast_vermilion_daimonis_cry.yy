@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_daimonis_cry",
   "parent":{
     "name":"DAIMONIS",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/DAIMONIS.yy",
+    "path":"folders/BEASTS/VERMILION/DAIMONIS.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

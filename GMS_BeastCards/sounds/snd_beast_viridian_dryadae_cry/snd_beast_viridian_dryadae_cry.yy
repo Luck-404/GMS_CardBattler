@@ -15,7 +15,7 @@
   "name":"snd_beast_viridian_dryadae_cry",
   "parent":{
     "name":"DRYADAE",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/DRYADAE.yy",
+    "path":"folders/BEASTS/VIRIDIAN/DRYADAE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

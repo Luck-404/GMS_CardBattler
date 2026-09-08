@@ -27,17 +27,17 @@ function scr_battle_vfx_damage_hit(_ref_target,_str_damage_stat,_val_damage,_stc
 
 		case "PHY":
 			_spr_vfx = spr_battle_vfx_phy_hit;
-			_snd_sfx = snd_battle_sfx_phy_hit;
+			_snd_sfx = snd_battle_hit_phy;
 		break;
 
 		case "MAG":
 			_spr_vfx = spr_battle_vfx_mag_hit;
-			_snd_sfx = snd_battle_sfx_mag_hit;
+			_snd_sfx = snd_battle_hit_mag;
 		break;
 
 		case "NEU":
 			_spr_vfx = spr_battle_vfx_neu_hit;
-			_snd_sfx = snd_battle_sfx_neu_hit;
+			_snd_sfx = snd_battle_hit_neu;
 		break;
 	}
 

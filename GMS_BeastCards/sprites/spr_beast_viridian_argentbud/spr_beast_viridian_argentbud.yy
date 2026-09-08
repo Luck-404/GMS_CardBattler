@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ARGENTBUD",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/ARGENTBUD.yy",
+    "path":"folders/BEASTS/VIRIDIAN/ARGENTBUD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -15,7 +15,7 @@
   "name":"snd_beast_cerulean_saltwagg_death",
   "parent":{
     "name":"SALTWAGG",
-    "path":"folders/BEASTS/BEAST LIST/CERULEAN/SALTWAGG.yy",
+    "path":"folders/BEASTS/CERULEAN/SALTWAGG.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

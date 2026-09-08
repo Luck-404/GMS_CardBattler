@@ -39,7 +39,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"VENOM",
 					_ref_target
 				);
@@ -63,7 +63,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					16,
 					1,
 					0,
-					snd_battle_sfx_venom
+					snd_battle_venom
 				);
 
 				scr_status_refresh_lifetime(
@@ -279,7 +279,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -300,7 +300,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					16,
 					1,
 					0,
-					snd_battle_sfx_venom
+					snd_battle_venom
 				);
 
 			return _ref_new_status;
@@ -386,7 +386,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				16,
 				1,
 				0,
-				snd_battle_sfx_venom
+				snd_battle_venom
 			);
 
 			//----------------//
@@ -394,7 +394,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_reposition_statuses(_ref_host);
+			scr_status_reposition(_ref_host);
 
 		break;
 
@@ -432,7 +432,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					_ref_status._val_venom_mdef_reduction;
 			}
 
-			scr_destroy_status(
+			scr_status_destroy(
 				_ref_status
 			);
 

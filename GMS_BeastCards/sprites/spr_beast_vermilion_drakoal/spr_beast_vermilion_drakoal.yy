@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"DRAKOAL",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/DRAKOAL.yy",
+    "path":"folders/BEASTS/VERMILION/DRAKOAL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

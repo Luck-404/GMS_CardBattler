@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_dot_lifetime_hold_chance",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_dot_lifetime_hold_chance",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_get_prism_tame_chance",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_get_prism_tame_chance",
+  "parent":{
+    "name":"CAPTURE",
+    "path":"folders/BATTLE/CAPTURE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

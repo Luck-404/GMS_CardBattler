@@ -68,7 +68,7 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 			//CHECK EXISTING//
 			//----------------//
 			var _ref_existing_status =
-				scr_check_for_status(
+				scr_status_check(
 					"ARMORBREAK",
 					_ref_target
 				);
@@ -142,7 +142,7 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 				_ref_new_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_target
 			);
 
@@ -165,7 +165,7 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 
 			if (!instance_exists(_ref_host)){
 
-				scr_destroy_status(
+				scr_status_destroy(
 					_ref_status
 				);
 
@@ -179,7 +179,7 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 				_ref_status
 			);
 
-			scr_reposition_statuses(
+			scr_status_reposition(
 				_ref_host
 			);
 
@@ -192,7 +192,7 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-				scr_destroy_status(_ref_status);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

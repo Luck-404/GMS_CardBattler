@@ -21,8 +21,15 @@ function scr_trap_storm_beacon(_str_tag,_ref_trap,_ref_caster,_ref_target,_stct_
 				return false;
 			}
 
-			_ref_trap._flag_triggered =
-				true;
+_ref_trap._flag_triggered =
+	true;
+
+//----------------//
+//TRAP TRIGGER VFX//
+//----------------//
+scr_trap_vfx_trigger(
+	_ref_trap
+);
 
 			//----------------//
 			//REVEAL TRAP//
@@ -47,7 +54,7 @@ function scr_trap_storm_beacon(_str_tag,_ref_trap,_ref_caster,_ref_target,_stct_
 			//APPLY STORMSTRUCK//
 			//-------------------//
 			repeat (_ref_trap._val_magnitude){
-				scr_apply_dot_status("STORMSTRUCK");
+				scr_status_apply_dot("STORMSTRUCK");
 			}
 
 			//----------------//
@@ -59,7 +66,7 @@ function scr_trap_storm_beacon(_str_tag,_ref_trap,_ref_caster,_ref_target,_stct_
 			//-------------//
 			//DESTROY TRAP//
 			//-------------//
-			scr_destroy_trap(
+			scr_trap_destroy(
 				_ref_trap
 			);
 

@@ -21,9 +21,9 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 	//GET AOE-3 TARGETS//
 	//-----------------//
 	var _arr_targets = [
-		scr_get_left_target(_ref_target),
+		scr_battle_get_left_target(_ref_target),
 		_ref_target,
-		scr_get_right_target(_ref_target)
+		scr_battle_get_right_target(_ref_target)
 	];
 
 	//----------------------//
@@ -59,7 +59,7 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 		//CHECK FROZEN//
 		//----------------//
 		var _flag_frozen =
-			scr_check_for_status(
+			scr_status_check(
 				"FROZEN",
 				_ref_affected_target
 			) != -1;
@@ -73,7 +73,7 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 		//------------------//
 		//BASE FROSTBURN +1//
 		//------------------//
-		scr_apply_dot_status(
+		scr_status_apply_dot(
 			"FROSTBURN"
 		);
 
@@ -82,14 +82,11 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 		//-------------------------//
 		if (_flag_frozen){
 
-			scr_apply_dot_status(
+			scr_status_apply_dot(
 				"FROSTBURN"
 			);
 		}
 
-		//----------------//
-		//PLAY ANIMATION//
-		//----------------//
 	}
 
 	//----------------//
@@ -104,12 +101,4 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 			_ref_target;
 	}
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(
-		snd_battle_sfx_neu_hit,
-		0,
-		false
-	);
 }

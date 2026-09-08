@@ -10,8 +10,8 @@
   "name":"obj_ranch_beast_dummy",
   "overriddenProperties":[],
   "parent":{
-    "name":"RANCH SYSTEM",
-    "path":"folders/BEASTS/BEAST STORAGES/RANCH SYSTEM.yy",
+    "name":"DUMMY",
+    "path":"folders/BEASTS/RANCH/DUMMY.yy",
   },
   "parentObjectId":null,
   "persistent":false,

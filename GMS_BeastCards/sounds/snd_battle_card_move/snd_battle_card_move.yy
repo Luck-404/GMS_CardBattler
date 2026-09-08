@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_battle_card_move",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.27659863,
+  "exportDir":"",
+  "name":"snd_battle_card_move",
+  "parent":{
+    "name":"HAND AND DECK",
+    "path":"folders/BATTLE/CARD FLOW/HAND AND DECK.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_battle_card_move.wav",
+  "volume":0.4,
+}

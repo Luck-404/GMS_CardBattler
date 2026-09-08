@@ -15,7 +15,7 @@
   "name":"snd_beast_vermilion_drakoal_cry",
   "parent":{
     "name":"DRAKOAL",
-    "path":"folders/BEASTS/BEAST LIST/VERMILION/DRAKOAL.yy",
+    "path":"folders/BEASTS/VERMILION/DRAKOAL.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

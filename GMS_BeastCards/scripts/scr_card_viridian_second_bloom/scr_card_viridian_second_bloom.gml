@@ -17,12 +17,4 @@ function scr_card_viridian_second_bloom(_stct_card,_ref_caster,_ref_target){
 		4
 	);
 
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
 }

@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_beast_move",
   "parent":{
-    "name":"BEAST STORAGES",
-    "path":"folders/BEASTS/BEAST STORAGES.yy",
+    "name":"DUMMY",
+    "path":"folders/BEASTS/RANCH/DUMMY.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

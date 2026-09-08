@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BURN",
-    "path":"folders/BATTLE/COMBAT LOGIC/BATTLE CARDS/CARD CAST LOGIC/STATUS/DOTs/BURN.yy",
+    "path":"folders/BATTLE/STATUSES/DOTs/BURN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

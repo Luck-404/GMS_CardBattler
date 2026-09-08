@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_mark_enemy_captured_as_dead",
   "parent":{
-    "name":"CAPTURING BEASTS",
-    "path":"folders/BATTLE/CAPTURING BEASTS.yy",
+    "name":"CAPTURE",
+    "path":"folders/BATTLE/CAPTURE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

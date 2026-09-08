@@ -10,14 +10,5 @@ function scr_card_viridian_venom_bloom(_stct_card,_ref_caster,_ref_target){
 	//----------//
 	//SET TRAP//
 	//----------//
-	scr_init_trap("VENOM_BLOOM",_stct_card,_ref_caster,_ref_target);
-
-	//----------------//
-	//PLAY ANIMATION//
-	//----------------//
-
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_buff,0,false);
+	scr_trap_init("VENOM_BLOOM",_stct_card,_ref_caster,_ref_target);
 }

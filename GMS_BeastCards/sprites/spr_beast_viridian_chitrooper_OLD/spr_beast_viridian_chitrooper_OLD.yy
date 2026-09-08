@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"CHITROOPER",
-    "path":"folders/BEASTS/BEAST LIST/VIRIDIAN/CHITROOPER.yy",
+    "path":"folders/BEASTS/VIRIDIAN/CHITROOPER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
