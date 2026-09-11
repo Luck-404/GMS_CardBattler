@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FERAL FRENZY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/FERAL FRENZY.yy",
+    "path":"folders/CARDS/VIRIDIAN/FERAL FRENZY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

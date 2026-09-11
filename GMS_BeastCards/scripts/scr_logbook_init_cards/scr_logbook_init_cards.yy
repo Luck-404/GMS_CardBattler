@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_logbook_init_cards",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_logbook_init_cards",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/LOGBOOK/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

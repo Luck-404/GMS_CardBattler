@@ -154,14 +154,14 @@ _val_cooldown = 10;
 //----------------//
 //POSITION MANA HUD//
 //----------------//
-scr_battle_mana_reposition();
+scr_battle_reposition_mana();
 
 //-------//
 //METHODS//
 //-------//
 
 //—------------------------------------------------------------------------------//
-// hscr_open_utility_tutor
+// hscr_battle_open_utility_tutor
 // FUNCTION: Opens the battle Tutor GUI when Utility cards exist in the draw pile.
 //           Displays feedback and clears pending requests when none remain.
 //
@@ -169,7 +169,7 @@ scr_battle_mana_reposition();
 //          FALSE when there are no valid Utility cards.
 //
 //—------------------------------------------------------------------------------//
-hscr_open_utility_tutor = function(){
+hscr_battle_open_utility_tutor = function(){
 
 	if (_ct_utility_tutors_pending <= 0){
 		return false;
@@ -179,7 +179,7 @@ hscr_open_utility_tutor = function(){
 	//GET UTILITY CARDS//
 	//-------------------//
 	var _arr_candidates =
-		scr_battle_tutor_get_candidates("UTILITY");
+		scr_battle_get_tutor_candidates("UTILITY");
 
 	//-------------------------//
 	//NO UTILITY CARDS FOUND//
@@ -188,7 +188,7 @@ hscr_open_utility_tutor = function(){
 
 		_ct_utility_tutors_pending = 0;
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"NO UTILITY CARDS FOUND",
 			undefined,
@@ -217,11 +217,11 @@ hscr_open_utility_tutor = function(){
 };
 
 //—------------------------------------------------------------------------------//
-// hscr_request_utility_tutor
+// hscr_battle_request_utility_tutor
 // FUNCTION: Adds one or more pending Utility Tutor selections.
 //           Requests accumulate so Echoed Tutor cards resolve sequentially.
 //—------------------------------------------------------------------------------//
-hscr_request_utility_tutor = function(_ct_amount){
+hscr_battle_request_utility_tutor = function(_ct_amount){
 
 	if (_ct_amount <= 0){
 		return;
@@ -264,7 +264,7 @@ hscr_finish_player_turn = function(){
 		_flag_extra_turn_pending = false;
 		_flag_begin_extra_turn = true;
 
-		scr_spawn_popup_trigger_banner(
+		scr_gui_spawn_popup_trigger_banner(
 			"CHRONO: EXTRA TURN"
 		);
 
@@ -359,7 +359,7 @@ function hscr_draw_prism_button(){
 		_val_prism_button_y2
 	);
 
-	draw_set_font(fnt_medium_gui);
+	draw_set_font(fnt_gui_medium);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
 
@@ -387,7 +387,7 @@ function hscr_draw_prism_menu(){
 
 	var _arr_prisms = hscr_get_prism_stacks();
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_top);
 
@@ -435,7 +435,7 @@ function hscr_draw_prism_menu(){
 		draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 12,string(_stct_item._str_item_name));
 		draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 34,"x" + string(_stct_item._ct_item_amount));
 
-		var _stct_prism_info = scr_get_prism_info(_stct_item._str_item_id);
+		var _stct_prism_info = scr_inventory_get_prism_info(_stct_item._str_item_id);
 
 		if (_stct_prism_info != undefined){
 			draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 54,"+" + string(_stct_prism_info._val_tame_bonus) + "% | " + string(_stct_prism_info._val_mana_cost) + " MANA");
@@ -492,10 +492,10 @@ function hscr_handle_prism_menu_input(){
 }
 
 //—------------------------------------------------------------------------------//
-// hscr_check_battle_card_oom
+// hscr_battle_check_card_oom
 // FUNCTION: Flags cards as uncastable when their mana cost exceeds current mana.
 //—------------------------------------------------------------------------------//
-function hscr_check_battle_card_oom(_list_cards){
+function hscr_battle_check_card_oom(_list_cards){
 
 	for (var _it_card = 0; _it_card < ds_list_size(_list_cards); _it_card++){
 
@@ -966,11 +966,11 @@ function hscr_reroll_hand(){
 	while (ds_list_size(_list_battle_hand) > 0){
 
 		var _ref_card = ds_list_find_value(_list_battle_hand,0);
-		scr_battle_card_discard(_ref_card);
+		scr_battle_discard_card(_ref_card);
 	}
 
-	scr_battle_card_draw(_ct_draw_amount);
-	hscr_check_battle_card_oom(_list_battle_hand);
+	scr_battle_draw_cards(_ct_draw_amount);
+	hscr_battle_check_card_oom(_list_battle_hand);
 }
 
 //—------------------------------------------------------------------------------//

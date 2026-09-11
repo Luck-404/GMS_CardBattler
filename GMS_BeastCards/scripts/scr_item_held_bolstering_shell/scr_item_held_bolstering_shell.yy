@@ -6,7 +6,7 @@
   "name":"scr_item_held_bolstering_shell",
   "parent":{
     "name":"BOLSTERING SHELL",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/BOLSTERING SHELL.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/BOLSTERING SHELL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

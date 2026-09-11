@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PRESSURE_CRUSH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PRESSURE_CRUSH.yy",
+    "path":"folders/CARDS/CERULEAN/PRESSURE_CRUSH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

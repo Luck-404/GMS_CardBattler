@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_pollinate",
   "parent":{
     "name":"POLLINATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/POLLINATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/POLLINATE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

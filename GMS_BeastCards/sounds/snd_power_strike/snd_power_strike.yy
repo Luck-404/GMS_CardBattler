@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_power_strike",
   "parent":{
-    "name":"UNCOLORED",
-    "path":"folders/CARDS/CARD SFX/UNCOLORED.yy",
+    "name":"POWER_STRIKE",
+    "path":"folders/CARDS/UNCOLORED/POWER_STRIKE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

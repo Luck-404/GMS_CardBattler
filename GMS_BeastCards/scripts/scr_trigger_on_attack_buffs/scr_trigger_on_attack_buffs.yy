@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_trigger_on_attack_buffs",
   "parent":{
-    "name":"BUFFS",
-    "path":"folders/BATTLE/STATUSES/BUFFS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CRYOGENIC_RECOVERY",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CRYOGENIC_RECOVERY.yy",
+    "path":"folders/CARDS/CERULEAN/CRYOGENIC_RECOVERY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

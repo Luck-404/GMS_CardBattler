@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_toxic_snare",
   "parent":{
     "name":"TOXIC SNARE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/TOXIC SNARE.yy",
+    "path":"folders/CARDS/VIRIDIAN/TOXIC SNARE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

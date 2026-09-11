@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"COOLING_MIST",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/COOLING_MIST.yy",
+    "path":"folders/CARDS/CERULEAN/COOLING_MIST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

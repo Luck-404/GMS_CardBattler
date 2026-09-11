@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CALL_THE_DEEP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CALL_THE_DEEP.yy",
+    "path":"folders/CARDS/CERULEAN/CALL_THE_DEEP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

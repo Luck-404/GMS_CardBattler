@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_play_sfx",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_play_sfx",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/FX/SFX/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

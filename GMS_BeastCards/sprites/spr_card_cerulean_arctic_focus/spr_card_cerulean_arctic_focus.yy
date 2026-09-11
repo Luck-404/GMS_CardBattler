@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ARCTIC_FOCUS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ARCTIC_FOCUS.yy",
+    "path":"folders/CARDS/CERULEAN/ARCTIC_FOCUS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

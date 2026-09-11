@@ -88,8 +88,8 @@ if (!global.flag_pause){
 	//—------------------------------------------------------------------------------//
 	// HORIZONTAL COLLISION
 	//—------------------------------------------------------------------------------//
-	if (place_meeting(x + _val_hsp, y, obj_wall)){
-	    while (!place_meeting(x + sign(_val_hsp), y, obj_wall)){
+	if (place_meeting(x + _val_hsp, y, obj_overworld_wall)){
+	    while (!place_meeting(x + sign(_val_hsp), y, obj_overworld_wall)){
 	        x += sign(_val_hsp);
 	    }
 	    _val_hsp = 0;
@@ -101,8 +101,8 @@ if (!global.flag_pause){
 	//—------------------------------------------------------------------------------//
 	// VERTICAL COLLISION
 	//—------------------------------------------------------------------------------//
-	if (place_meeting(x, y + _val_vsp, obj_wall)){
-	    while (!place_meeting(x, y + sign(_val_vsp), obj_wall)){
+	if (place_meeting(x, y + _val_vsp, obj_overworld_wall)){
+	    while (!place_meeting(x, y + sign(_val_vsp), obj_overworld_wall)){
 	        y += sign(_val_vsp);
 	    }
 	    _val_vsp = 0;
@@ -117,7 +117,7 @@ if (!global.flag_pause){
 	if (_flag_player_moving){
 		if (_ct_player_step_particle_timer <= 0){
 			_ct_player_step_particle_timer = 15;
-			audio_play_sound(snd_ambiance_walking_grass,0,false);
+			audio_play_sound(snd_player_grass_step,0,false);
 			hscr_spawn_step_particles();
 		} else {
 			_ct_player_step_particle_timer--;

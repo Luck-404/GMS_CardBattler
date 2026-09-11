@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_fracture",
   "parent":{
     "name":"FRACTURE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FRACTURE.yy",
+    "path":"folders/CARDS/CERULEAN/FRACTURE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

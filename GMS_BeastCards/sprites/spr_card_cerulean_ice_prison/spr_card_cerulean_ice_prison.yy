@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICE_PRISON",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_PRISON.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_PRISON.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

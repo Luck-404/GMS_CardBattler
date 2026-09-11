@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_stalking_swipe",
   "parent":{
     "name":"STALKING SWIPE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/STALKING SWIPE.yy",
+    "path":"folders/CARDS/VIRIDIAN/STALKING SWIPE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

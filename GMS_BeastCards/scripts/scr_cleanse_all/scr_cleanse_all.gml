@@ -82,7 +82,7 @@ function scr_status_cleanse_all(_ref_target,_ct_amount,_str_status_id=undefined)
 
 		_ct_removed++;
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"CLEANSED " + _str_status_name,
 			undefined,

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_BASTION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_BASTION.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_BASTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

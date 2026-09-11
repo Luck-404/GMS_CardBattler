@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SHELL_SHIELD",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHELL_SHIELD.yy",
+    "path":"folders/CARDS/CERULEAN/SHELL_SHIELD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

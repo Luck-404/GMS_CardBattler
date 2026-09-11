@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_the_abyss_stares_back",
   "parent":{
     "name":"THE_ABYSS_STARES_BACK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/THE_ABYSS_STARES_BACK.yy",
+    "path":"folders/CARDS/CERULEAN/THE_ABYSS_STARES_BACK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

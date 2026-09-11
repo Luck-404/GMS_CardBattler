@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CRIPPLING VINES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CRIPPLING VINES.yy",
+    "path":"folders/CARDS/VIRIDIAN/CRIPPLING VINES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

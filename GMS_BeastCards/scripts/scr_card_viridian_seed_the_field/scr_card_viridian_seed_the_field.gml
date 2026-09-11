@@ -61,7 +61,7 @@ function scr_card_viridian_seed_the_field(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	if (_ct_seeds_spawned <= 0){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"NO OPEN MINION SLOTS",
 			undefined,

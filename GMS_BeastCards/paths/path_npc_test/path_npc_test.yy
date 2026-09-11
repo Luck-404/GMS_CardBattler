@@ -5,8 +5,8 @@
   "kind":0,
   "name":"path_npc_test",
   "parent":{
-    "name":"NPCS",
-    "path":"folders/NPCS.yy",
+    "name":"NPC_TEST",
+    "path":"folders/NPCS/NPC_TEST.yy",
   },
   "points":[
     {"speed":100.0,"x":0.49987793,"y":1.5,},

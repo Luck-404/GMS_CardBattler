@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_biobolt",
   "parent":{
     "name":"BIOBOLT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BIOBOLT.yy",
+    "path":"folders/CARDS/VIRIDIAN/BIOBOLT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

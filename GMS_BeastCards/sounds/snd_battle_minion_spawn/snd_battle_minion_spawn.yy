@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_battle_minion_spawn",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.15648526,
+  "exportDir":"",
+  "name":"snd_battle_minion_spawn",
+  "parent":{
+    "name":"MINION FX",
+    "path":"folders/BATTLE/MINIONS/CORE/MINION FX.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_battle_minion_spawn.wav",
+  "volume":1.0,
+}

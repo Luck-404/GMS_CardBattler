@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_glacial_eruption",
   "parent":{
     "name":"GLACIAL_ERUPTION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/GLACIAL_ERUPTION.yy",
+    "path":"folders/CARDS/CERULEAN/GLACIAL_ERUPTION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

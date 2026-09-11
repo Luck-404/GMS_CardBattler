@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_ice_prison",
   "parent":{
     "name":"ICE_PRISON",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_PRISON.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_PRISON.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

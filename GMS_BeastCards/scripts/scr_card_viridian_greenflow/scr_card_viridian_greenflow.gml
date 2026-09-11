@@ -19,7 +19,7 @@ function scr_card_viridian_greenflow(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	if (_ct_bolts <= 0){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"FAILED: NO MINIONS",
 			undefined,

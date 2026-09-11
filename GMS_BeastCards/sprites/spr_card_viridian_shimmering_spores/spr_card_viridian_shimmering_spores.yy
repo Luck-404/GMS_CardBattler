@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SHIMMERING_SPORES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SHIMMERING_SPORES.yy",
+    "path":"folders/CARDS/VIRIDIAN/SHIMMERING_SPORES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

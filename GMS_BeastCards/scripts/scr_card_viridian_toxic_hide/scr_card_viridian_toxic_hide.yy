@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_toxic_hide",
   "parent":{
     "name":"TOXIC_HIDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/TOXIC_HIDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/TOXIC_HIDE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

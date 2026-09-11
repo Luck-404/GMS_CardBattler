@@ -10,7 +10,7 @@
 //----//
 //SETUP//
 //----//
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 
 var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
@@ -51,7 +51,7 @@ draw_rectangle(
 //------//
 //HEADER//
 //------//
-draw_set_font(fnt_medium_gui);
+draw_set_font(fnt_gui_medium);
 draw_set_colour(c_white);
 
 draw_text(
@@ -60,7 +60,7 @@ draw_text(
 	"LOGBOOK"
 );
 
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 
 // TABS
 if (_str_logbook_mode == "BEAST"){

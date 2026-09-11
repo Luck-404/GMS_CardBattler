@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PROLIFERATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PROLIFERATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/PROLIFERATE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

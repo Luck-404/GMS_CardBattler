@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FUNGAL RECYCLING",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/FUNGAL RECYCLING.yy",
+    "path":"folders/CARDS/VIRIDIAN/FUNGAL RECYCLING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

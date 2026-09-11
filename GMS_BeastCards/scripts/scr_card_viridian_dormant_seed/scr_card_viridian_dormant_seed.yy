@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_dormant_seed",
   "parent":{
     "name":"DORMANT SEED",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DORMANT SEED.yy",
+    "path":"folders/CARDS/VIRIDIAN/DORMANT SEED.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

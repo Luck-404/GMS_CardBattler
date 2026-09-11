@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_hailstones",
   "parent":{
     "name":"HAILSTONES",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/HAILSTONES.yy",
+    "path":"folders/CARDS/CERULEAN/HAILSTONES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

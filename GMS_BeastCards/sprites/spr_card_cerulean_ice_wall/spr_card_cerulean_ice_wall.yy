@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICE_WALL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_WALL.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_WALL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

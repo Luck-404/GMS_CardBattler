@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"AQUA_STEP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/AQUA_STEP.yy",
+    "path":"folders/CARDS/CERULEAN/AQUA_STEP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

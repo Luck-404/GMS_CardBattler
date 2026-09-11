@@ -292,7 +292,7 @@ function scr_status_aura_krakens_chosen(
 			_ref_host._val_cur_hp -=
 				_val_actual_hp_loss;
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"-" + string(_val_actual_hp_loss),
 				undefined,

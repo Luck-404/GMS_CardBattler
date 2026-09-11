@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"VIRIDIAN",
-    "path":"folders/INVENTORY/ITEM LIST/EGG/VIRIDIAN.yy",
+    "name":"TEMPLATES",
+    "path":"folders/INVENTORY/ITEMS/EGGS/TEMPLATES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

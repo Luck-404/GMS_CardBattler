@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_second_bloom",
   "parent":{
     "name":"SECOND BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SECOND BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/SECOND BLOOM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

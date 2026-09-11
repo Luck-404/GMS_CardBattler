@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_tidal_recovery",
   "parent":{
     "name":"TIDAL_RECOVERY",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDAL_RECOVERY.yy",
+    "path":"folders/CARDS/CERULEAN/TIDAL_RECOVERY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

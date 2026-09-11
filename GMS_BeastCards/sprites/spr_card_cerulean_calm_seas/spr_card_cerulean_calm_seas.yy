@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CALM_SEAS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CALM_SEAS.yy",
+    "path":"folders/CARDS/CERULEAN/CALM_SEAS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DENSE_FOG",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DENSE_FOG.yy",
+    "path":"folders/CARDS/CERULEAN/DENSE_FOG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

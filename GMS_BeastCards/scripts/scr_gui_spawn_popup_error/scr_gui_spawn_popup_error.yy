@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_spawn_popup_error",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_spawn_popup_error",
+  "parent":{
+    "name":"ERRORS",
+    "path":"folders/GUI/POPUPS/ERRORS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

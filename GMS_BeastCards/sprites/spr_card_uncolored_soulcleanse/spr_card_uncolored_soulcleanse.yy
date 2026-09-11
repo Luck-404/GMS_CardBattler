@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SOULCLEANSE",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/SOULCLEANSE.yy",
+    "path":"folders/CARDS/UNCOLORED/SOULCLEANSE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

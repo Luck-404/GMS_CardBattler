@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_beast_get_speed_stat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_beast_get_speed_stat",
+  "parent":{
+    "name":"DATA",
+    "path":"folders/BEASTS/CORE/DATA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

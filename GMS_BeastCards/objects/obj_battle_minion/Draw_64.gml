@@ -16,7 +16,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	// BASIC SETUP
 	//
 	#region BASIC SETUP
-	draw_set_font(fnt_small_party_draw);
+	draw_set_font(fnt_gui_party_small);
 
 	
 	//--------------------//

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SAVAGE MAUL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SAVAGE MAUL.yy",
+    "path":"folders/CARDS/VIRIDIAN/SAVAGE MAUL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

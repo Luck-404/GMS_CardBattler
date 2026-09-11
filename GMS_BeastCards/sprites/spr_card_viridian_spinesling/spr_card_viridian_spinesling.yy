@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SPINESLING",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPINESLING.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPINESLING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

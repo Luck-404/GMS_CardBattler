@@ -34,7 +34,7 @@ function scr_trap_pulled_under(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stc
 			//-------------//
 			//TRAP FEEDBACK//
 			//-------------//
-			scr_spawn_popup_trigger_banner(
+			scr_gui_spawn_popup_trigger_banner(
 				"TRAP TRIGGERED: PULLED UNDER"
 			);
 

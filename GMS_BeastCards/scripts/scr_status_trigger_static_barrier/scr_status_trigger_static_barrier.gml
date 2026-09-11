@@ -56,7 +56,7 @@ function scr_status_trigger_static_barrier(_ref_defender,_ref_attacker){
 	//----------//
 	//FEEDBACK//
 	//----------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"STATIC BARRIER",
 		undefined,

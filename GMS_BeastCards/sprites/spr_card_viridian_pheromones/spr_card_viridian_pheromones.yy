@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PHEROMONES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PHEROMONES.yy",
+    "path":"folders/CARDS/VIRIDIAN/PHEROMONES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

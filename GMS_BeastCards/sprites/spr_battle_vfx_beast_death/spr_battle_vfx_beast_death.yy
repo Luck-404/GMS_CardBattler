@@ -31,8 +31,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"BEAST VFX",
+    "path":"folders/BATTLE/FX/VFX/BEAST VFX.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

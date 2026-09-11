@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FELL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/FELL.yy",
+    "path":"folders/CARDS/VIRIDIAN/FELL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

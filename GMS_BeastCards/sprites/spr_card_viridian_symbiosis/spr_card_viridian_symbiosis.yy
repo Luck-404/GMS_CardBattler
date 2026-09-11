@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SYMBIOSIS",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SYMBIOSIS.yy",
+    "path":"folders/CARDS/VIRIDIAN/SYMBIOSIS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

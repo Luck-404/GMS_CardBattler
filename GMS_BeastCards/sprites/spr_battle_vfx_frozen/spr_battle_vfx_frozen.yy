@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"FROZEN",
+    "path":"folders/BATTLE/STATUSES/CC/FROZEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -17,10 +17,10 @@ function scr_inventory_use_held_item(_stct_item,_ref_inventory_pane){
 		display_get_gui_width() * 0.5,
 		display_get_gui_height() * 0.5,
 		"ily_fx",
-		obj_gui_item_target_pane
+		obj_gui_inventory_item_target_pane
 	);
 
-	audio_play_sound(snd_use_item,0,false);
+	audio_play_sound(snd_inventory_use_item,0,false);
 
 	_ref_target_pane._ref_parent_gui = _ref_inventory_pane;
 	_ref_target_pane._stct_item = _stct_item;

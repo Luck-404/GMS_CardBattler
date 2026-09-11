@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_beast_init_random",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_beast_init_random",
+  "parent":{
+    "name":"INITIALIZATION",
+    "path":"folders/BEASTS/CORE/INITIALIZATION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

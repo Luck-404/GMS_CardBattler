@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"LIBRARY SYSTEM",
-    "path":"folders/CARDS/CARD STORAGES/LIBRARY SYSTEM.yy",
+    "name":"GUI",
+    "path":"folders/CARDS/LIBRARY/GUI.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

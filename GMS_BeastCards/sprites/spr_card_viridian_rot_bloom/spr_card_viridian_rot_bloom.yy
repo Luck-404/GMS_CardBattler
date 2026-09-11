@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ROT BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ROT BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/ROT BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

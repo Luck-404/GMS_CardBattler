@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SPIRIT FANG",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPIRIT FANG.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPIRIT FANG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

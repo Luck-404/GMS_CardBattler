@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"OCEANS_EMBRACE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/OCEANS_EMBRACE.yy",
+    "path":"folders/CARDS/CERULEAN/OCEANS_EMBRACE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

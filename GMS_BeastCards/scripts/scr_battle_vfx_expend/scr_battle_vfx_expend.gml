@@ -39,6 +39,6 @@ function scr_battle_vfx_expend(
 		0,
 		1,
 		_ct_start_delay,
-		snd_battle_sfx_expend
+		snd_battle_expend
 	);
 }

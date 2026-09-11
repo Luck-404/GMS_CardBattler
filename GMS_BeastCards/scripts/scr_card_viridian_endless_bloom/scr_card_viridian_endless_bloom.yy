@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_endless_bloom",
   "parent":{
     "name":"ENDLESS_BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ENDLESS_BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/ENDLESS_BLOOM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

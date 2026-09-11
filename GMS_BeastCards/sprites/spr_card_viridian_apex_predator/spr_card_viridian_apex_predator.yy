@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"APEX_PREDATOR",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/APEX_PREDATOR.yy",
+    "path":"folders/CARDS/VIRIDIAN/APEX_PREDATOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

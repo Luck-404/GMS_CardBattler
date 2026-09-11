@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ENTANGLE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ENTANGLE.yy",
+    "path":"folders/CARDS/VIRIDIAN/ENTANGLE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

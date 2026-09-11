@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PREDATORS_MARK",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PREDATORS_MARK.yy",
+    "path":"folders/CARDS/VIRIDIAN/PREDATORS_MARK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

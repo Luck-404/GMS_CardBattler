@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"IMPORTANT NOTEBOOK",
-    "path":"folders/INVENTORY/ITEM LIST/QUEST/IMPORTANT NOTEBOOK.yy",
+    "path":"folders/INVENTORY/ITEMS/QUEST/IMPORTANT NOTEBOOK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

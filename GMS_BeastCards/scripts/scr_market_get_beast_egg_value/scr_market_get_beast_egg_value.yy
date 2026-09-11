@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_market_get_beast_egg_value",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_market_get_beast_egg_value",
+  "parent":{
+    "name":"EGG",
+    "path":"folders/MARKETS/EGG.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

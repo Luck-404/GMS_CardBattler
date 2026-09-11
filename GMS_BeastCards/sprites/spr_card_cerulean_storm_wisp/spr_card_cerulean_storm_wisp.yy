@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STORM_WISP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/STORM_WISP.yy",
+    "path":"folders/CARDS/CERULEAN/STORM_WISP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

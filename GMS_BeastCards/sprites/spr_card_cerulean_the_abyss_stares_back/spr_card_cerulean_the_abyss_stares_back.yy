@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THE_ABYSS_STARES_BACK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/THE_ABYSS_STARES_BACK.yy",
+    "path":"folders/CARDS/CERULEAN/THE_ABYSS_STARES_BACK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

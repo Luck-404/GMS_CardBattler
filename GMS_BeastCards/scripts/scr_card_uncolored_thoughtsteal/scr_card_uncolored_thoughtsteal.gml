@@ -47,7 +47,7 @@ function scr_card_uncolored_thoughtsteal(
 				._val_card_mana_cost
 		);
 
-	scr_battle_mana_gain(
+	scr_battle_gain_mana(
 		_val_mana_stolen
 	);
 
@@ -64,7 +64,7 @@ function scr_card_uncolored_thoughtsteal(
 		_ref_target_card
 	);
 
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"CARD DISABLED",
 		undefined,

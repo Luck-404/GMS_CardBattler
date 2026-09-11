@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BLOOMTIDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BLOOMTIDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/BLOOMTIDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

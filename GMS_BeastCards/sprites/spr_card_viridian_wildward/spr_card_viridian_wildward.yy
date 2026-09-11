@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WILDWARD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILDWARD.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILDWARD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

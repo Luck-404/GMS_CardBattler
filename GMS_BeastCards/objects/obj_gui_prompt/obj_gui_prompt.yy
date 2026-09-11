@@ -10,8 +10,8 @@
   "name":"obj_gui_prompt",
   "overriddenProperties":[],
   "parent":{
-    "name":"PROMPTS AND TEXTBOXES",
-    "path":"folders/GUI/PROMPTS AND TEXTBOXES.yy",
+    "name":"PROMPTS",
+    "path":"folders/GUI/PROMPTS.yy",
   },
   "parentObjectId":null,
   "persistent":false,

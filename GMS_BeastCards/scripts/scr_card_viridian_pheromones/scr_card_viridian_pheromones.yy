@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_pheromones",
   "parent":{
     "name":"PHEROMONES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PHEROMONES.yy",
+    "path":"folders/CARDS/VIRIDIAN/PHEROMONES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

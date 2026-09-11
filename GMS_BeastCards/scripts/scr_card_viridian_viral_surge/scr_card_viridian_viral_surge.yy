@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_viral_surge",
   "parent":{
     "name":"VIRAL SURGE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VIRAL SURGE.yy",
+    "path":"folders/CARDS/VIRIDIAN/VIRAL SURGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

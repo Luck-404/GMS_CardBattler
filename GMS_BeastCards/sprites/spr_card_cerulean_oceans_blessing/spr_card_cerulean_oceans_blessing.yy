@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"OCEANS_BLESSING",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/OCEANS_BLESSING.yy",
+    "path":"folders/CARDS/CERULEAN/OCEANS_BLESSING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

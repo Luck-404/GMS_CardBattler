@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STAMPEDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/STAMPEDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/STAMPEDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_arctic_volley",
   "parent":{
     "name":"ARCTIC_VOLLEY",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ARCTIC_VOLLEY.yy",
+    "path":"folders/CARDS/CERULEAN/ARCTIC_VOLLEY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

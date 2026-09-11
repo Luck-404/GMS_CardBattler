@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RAZOR_FIN",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RAZOR_FIN.yy",
+    "path":"folders/CARDS/CERULEAN/RAZOR_FIN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

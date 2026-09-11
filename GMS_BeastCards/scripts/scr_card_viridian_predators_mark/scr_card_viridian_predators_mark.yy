@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_predators_mark",
   "parent":{
     "name":"PREDATORS_MARK",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PREDATORS_MARK.yy",
+    "path":"folders/CARDS/VIRIDIAN/PREDATORS_MARK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

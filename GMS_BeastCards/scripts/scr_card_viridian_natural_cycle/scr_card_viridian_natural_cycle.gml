@@ -21,8 +21,8 @@ function scr_card_viridian_natural_cycle(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	if (ds_list_size(_ref_target._list_minions) <= 0){
 
-		audio_play_sound(snd_error,0,false);
-		scr_spawn_popup_error("NO MINIONS",60);
+		audio_play_sound(snd_gui_error,0,false);
+		scr_gui_spawn_popup_error("NO MINIONS",60);
 
 		return false;
 	}
@@ -37,8 +37,8 @@ function scr_card_viridian_natural_cycle(_stct_card,_ref_caster,_ref_target){
 
 	if (!instance_exists(_ref_minion)){
 
-		audio_play_sound(snd_error,0,false);
-		scr_spawn_popup_error("NO MINIONS",60);
+		audio_play_sound(snd_gui_error,0,false);
+		scr_gui_spawn_popup_error("NO MINIONS",60);
 
 		return false;
 	}
@@ -56,7 +56,7 @@ function scr_card_viridian_natural_cycle(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DRAW CARDS//
 	//-----------//
-	scr_battle_card_draw(2);
+	scr_battle_draw_cards(2);
 
 	return true;
 }

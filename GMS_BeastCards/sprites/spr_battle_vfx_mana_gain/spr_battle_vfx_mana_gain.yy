@@ -29,8 +29,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"MANA",
-    "path":"folders/CARDS/CARD VFX/UNCOLORED/MANA.yy",
+    "name":"GENERIC",
+    "path":"folders/BATTLE/FX/VFX/GENERIC.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

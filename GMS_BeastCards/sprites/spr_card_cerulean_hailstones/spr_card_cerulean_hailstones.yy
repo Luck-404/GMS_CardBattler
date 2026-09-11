@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"HAILSTONES",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/HAILSTONES.yy",
+    "path":"folders/CARDS/CERULEAN/HAILSTONES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

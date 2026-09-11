@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"GREENFLOW",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GREENFLOW.yy",
+    "path":"folders/CARDS/VIRIDIAN/GREENFLOW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

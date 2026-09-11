@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_vfx_persistent_loop",
   "parent":{
-    "name":"VFX",
-    "path":"folders/BATTLE/VFX.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/FX/VFX/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

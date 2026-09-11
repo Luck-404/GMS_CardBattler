@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DROP_ANCHOR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DROP_ANCHOR.yy",
+    "path":"folders/CARDS/CERULEAN/DROP_ANCHOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

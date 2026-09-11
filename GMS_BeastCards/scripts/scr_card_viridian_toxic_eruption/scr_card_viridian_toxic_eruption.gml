@@ -44,7 +44,7 @@ function scr_card_viridian_toxic_eruption(_stct_card,_ref_caster,_ref_target){
 		//POISONFLOW//
 		//------------//
 		var _ct_poison_consumed =
-			scr_trigger_poisonflow(
+			scr_battle_trigger_poisonflow(
 				_ref_hit_target
 			);
 
@@ -53,7 +53,7 @@ function scr_card_viridian_toxic_eruption(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		if (_ct_poison_consumed <= 0){
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"0",
 				undefined,

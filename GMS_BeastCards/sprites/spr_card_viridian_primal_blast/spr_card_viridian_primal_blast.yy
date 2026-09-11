@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PRIMAL BLAST",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PRIMAL BLAST.yy",
+    "path":"folders/CARDS/VIRIDIAN/PRIMAL BLAST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"MANA_SPRING",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/MANA_SPRING.yy",
+    "path":"folders/CARDS/CERULEAN/MANA_SPRING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

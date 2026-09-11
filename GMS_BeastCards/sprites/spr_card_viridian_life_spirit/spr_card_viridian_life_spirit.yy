@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"LIFE SPIRIT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/LIFE SPIRIT.yy",
+    "path":"folders/CARDS/VIRIDIAN/LIFE SPIRIT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

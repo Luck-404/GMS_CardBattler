@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SNOWDRIFT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SNOWDRIFT.yy",
+    "path":"folders/CARDS/CERULEAN/SNOWDRIFT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

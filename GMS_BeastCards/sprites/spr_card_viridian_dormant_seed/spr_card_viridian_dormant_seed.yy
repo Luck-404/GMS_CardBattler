@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DORMANT SEED",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DORMANT SEED.yy",
+    "path":"folders/CARDS/VIRIDIAN/DORMANT SEED.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

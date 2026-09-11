@@ -9,8 +9,8 @@
   "name":"obj_gui_library_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"LIBRARY SYSTEM",
-    "path":"folders/CARDS/CARD STORAGES/LIBRARY SYSTEM.yy",
+    "name":"GUI",
+    "path":"folders/CARDS/LIBRARY/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

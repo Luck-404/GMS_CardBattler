@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_sea_legs",
   "parent":{
     "name":"SEA_LEGS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SEA_LEGS.yy",
+    "path":"folders/CARDS/CERULEAN/SEA_LEGS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VERMILLION",
-    "path":"folders/INVENTORY/ITEM LIST/EGG/VERMILLION.yy",
+    "path":"folders/INVENTORY/ITEMS/EGGS/VERMILLION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

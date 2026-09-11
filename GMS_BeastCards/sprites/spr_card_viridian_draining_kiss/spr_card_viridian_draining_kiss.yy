@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DRAINING KISS",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DRAINING KISS.yy",
+    "path":"folders/CARDS/VIRIDIAN/DRAINING KISS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

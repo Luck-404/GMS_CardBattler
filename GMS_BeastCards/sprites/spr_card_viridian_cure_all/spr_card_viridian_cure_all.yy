@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CURE ALL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CURE ALL.yy",
+    "path":"folders/CARDS/VIRIDIAN/CURE ALL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

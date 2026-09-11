@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_snowfort",
   "parent":{
     "name":"SNOWFORT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SNOWFORT.yy",
+    "path":"folders/CARDS/CERULEAN/SNOWFORT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

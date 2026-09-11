@@ -29,7 +29,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_abyssal_form_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ABYSSAL FORM",
 					undefined,
@@ -55,7 +55,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_call_the_deep_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"CALL THE DEEP",
 					undefined,
@@ -79,7 +79,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_deep_momentum_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"DEEP MOMENTUM",
 					undefined,
@@ -103,7 +103,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_icebound_instinct_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ICEBOUND INSTINCT",
 					undefined,
@@ -130,7 +130,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_frozen_precision_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"FROZEN PRECISION",
 					undefined,
@@ -152,7 +152,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_frost_weapon_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"FROST WEAPON",
 					undefined,
@@ -174,7 +174,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_arctic_focus_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ARCTIC FOCUS",
 					undefined,
@@ -196,7 +196,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_immovable_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"IMMOVABLE",
 					undefined,
@@ -218,7 +218,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_sailors_resolve_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"SAILOR'S RESOLVE",
 					undefined,
@@ -240,7 +240,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_ice_mirror_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ICE MIRROR",
 					undefined,
@@ -263,7 +263,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_mana_spring_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"MANA SPRING",
 					undefined,
@@ -286,7 +286,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_razor_shell_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"RAZOR SHELL",
 					undefined,
@@ -309,7 +309,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_static_barrier_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"STATIC BARRIER",
 					undefined,
@@ -332,7 +332,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_frozen_armor_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"FROZEN ARMOR",
 					undefined,
@@ -355,7 +355,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_divine_protection_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"DIVINE PROTECTION",
 					undefined,
@@ -382,7 +382,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_apex_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"APEX +" + string(_val_magnitude),
 					undefined,
@@ -405,7 +405,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_plague_garden_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"PLAGUE GARDEN",
 					undefined,
@@ -428,7 +428,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_heart_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"HEART OF THE FOREST",
 					undefined,
@@ -451,7 +451,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_endless_bloom_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ENDLESS BLOOM",
 					undefined,
@@ -478,7 +478,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_verdant_insight_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"VERDANT INSIGHT",
 					undefined,
@@ -501,7 +501,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_wild_vigor_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WILD VIGOR",
 					undefined,
@@ -524,7 +524,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_boost_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"BOOST",
 					undefined,
@@ -547,7 +547,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_regeneration_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"REGENERATION",
 					undefined,
@@ -570,7 +570,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_pack_instinct_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"PACK INSTINCT",
 					undefined,
@@ -593,7 +593,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_toxic_hide_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"TOXIC HIDE",
 					undefined,
@@ -616,7 +616,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_natures_bond_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"NATURE'S BOND",
 					undefined,
@@ -639,7 +639,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_manavine_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+" + string(_ref_manavine_status._val_status_magnitude) + " MANA",
 					undefined,
@@ -662,7 +662,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_thorns_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"THORNS",
 					undefined,
@@ -685,7 +685,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_bloom_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"BLOOM +" + string(_val_magnitude) + " OVERHEALTH",
 					undefined,
@@ -712,7 +712,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_taunt_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"TAUNT",
 					undefined,
@@ -735,7 +735,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_armor_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ARMOR OVER TIME",
 					undefined,
@@ -758,7 +758,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_redirect_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"REDIRECT",
 					undefined,
@@ -781,7 +781,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_second_life_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"SECOND LIFE",
 					undefined,
@@ -804,7 +804,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_inspiration_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+2 MANA",
 					undefined,
@@ -827,7 +827,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_overhealth_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+" + string(_val_magnitude) + " OVERHEALTH",
 					undefined,
@@ -850,7 +850,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_draw_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+2 CARD DRAW",
 					undefined,
@@ -873,7 +873,7 @@ function scr_apply_buff_status(_str_status_name,_val_magnitude=0,_val_lifetime=u
 
 			if (_ref_malleability_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"MALLEABILITY",
 					undefined,

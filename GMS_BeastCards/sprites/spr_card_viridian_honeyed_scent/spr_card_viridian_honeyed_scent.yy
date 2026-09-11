@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"HONEYED SCENT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/HONEYED SCENT.yy",
+    "path":"folders/CARDS/VIRIDIAN/HONEYED SCENT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

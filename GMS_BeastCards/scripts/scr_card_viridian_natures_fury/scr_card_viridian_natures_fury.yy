@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_natures_fury",
   "parent":{
     "name":"NATURES FURY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES FURY.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES FURY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

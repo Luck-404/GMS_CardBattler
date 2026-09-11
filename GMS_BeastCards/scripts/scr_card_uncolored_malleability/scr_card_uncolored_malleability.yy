@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_malleability",
   "parent":{
     "name":"MALLEABILITY",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/MALLEABILITY.yy",
+    "path":"folders/CARDS/UNCOLORED/MALLEABILITY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

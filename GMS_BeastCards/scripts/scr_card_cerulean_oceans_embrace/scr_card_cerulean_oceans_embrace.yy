@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_oceans_embrace",
   "parent":{
     "name":"OCEANS_EMBRACE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/OCEANS_EMBRACE.yy",
+    "path":"folders/CARDS/CERULEAN/OCEANS_EMBRACE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

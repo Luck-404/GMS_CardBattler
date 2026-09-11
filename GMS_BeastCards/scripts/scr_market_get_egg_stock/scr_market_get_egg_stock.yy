@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_market_get_egg_stock",
   "parent":{
-    "name":"EGG MARKET",
-    "path":"folders/GUI/MARKETS/EGG MARKET.yy",
+    "name":"EGG",
+    "path":"folders/MARKETS/EGG.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

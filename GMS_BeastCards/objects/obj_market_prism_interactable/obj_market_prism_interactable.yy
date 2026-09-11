@@ -9,8 +9,8 @@
   "name":"obj_market_prism_interactable",
   "overriddenProperties":[],
   "parent":{
-    "name":"PRISM MARKET",
-    "path":"folders/GUI/MARKETS/PRISM MARKET.yy",
+    "name":"PRISM",
+    "path":"folders/MARKETS/PRISM.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_market_market_interactable",
-    "path":"sprites/spr_market_market_interactable/spr_market_market_interactable.yy",
+    "name":"spr_market_prism_interactable",
+    "path":"sprites/spr_market_prism_interactable/spr_market_prism_interactable.yy",
   },
   "spriteMaskId":null,
   "visible":true,

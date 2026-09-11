@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_whitewater",
   "parent":{
     "name":"WHITEWATER",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WHITEWATER.yy",
+    "path":"folders/CARDS/CERULEAN/WHITEWATER.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"RAPID STRIKES",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/RAPID STRIKES.yy",
+    "name":"RAPID_STRIKES",
+    "path":"folders/CARDS/UNCOLORED/RAPID_STRIKES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

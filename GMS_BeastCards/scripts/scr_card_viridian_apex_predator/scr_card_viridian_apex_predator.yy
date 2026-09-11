@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_apex_predator",
   "parent":{
     "name":"APEX_PREDATOR",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/APEX_PREDATOR.yy",
+    "path":"folders/CARDS/VIRIDIAN/APEX_PREDATOR.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

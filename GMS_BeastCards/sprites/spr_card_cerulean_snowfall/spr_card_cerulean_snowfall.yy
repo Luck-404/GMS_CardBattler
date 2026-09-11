@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SNOWFALL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SNOWFALL.yy",
+    "path":"folders/CARDS/CERULEAN/SNOWFALL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

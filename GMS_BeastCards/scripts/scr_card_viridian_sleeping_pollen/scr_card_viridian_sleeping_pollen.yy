@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_sleeping_pollen",
   "parent":{
     "name":"SLEEPING_POLLEN",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SLEEPING_POLLEN.yy",
+    "path":"folders/CARDS/VIRIDIAN/SLEEPING_POLLEN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_trigger_card_cast_traps",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_trigger_card_cast_traps",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/TRAPS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

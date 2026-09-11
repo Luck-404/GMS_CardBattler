@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THORN NET",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/THORN NET.yy",
+    "path":"folders/CARDS/VIRIDIAN/THORN NET.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -34,7 +34,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ROUGH SEAS",
 					undefined,
@@ -60,7 +60,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"KRAKENS CHOSEN",
 					undefined,
@@ -86,7 +86,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"FROSTFORM",
 					undefined,
@@ -112,7 +112,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"CALM SEAS",
 					undefined,
@@ -133,7 +133,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"HONEYED SCENT",
 					undefined,
@@ -159,7 +159,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"BURGEONING BLOOM",
 					undefined,

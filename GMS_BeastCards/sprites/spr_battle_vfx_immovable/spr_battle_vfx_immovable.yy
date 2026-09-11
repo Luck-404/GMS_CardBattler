@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"IMMOVABLE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/IMMOVABLE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

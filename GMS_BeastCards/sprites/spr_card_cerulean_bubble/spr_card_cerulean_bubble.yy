@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BUBBLE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BUBBLE.yy",
+    "path":"folders/CARDS/CERULEAN/BUBBLE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

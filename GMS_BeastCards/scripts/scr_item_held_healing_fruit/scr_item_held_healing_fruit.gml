@@ -40,7 +40,7 @@ function scr_item_held_healing_fruit(_str_state,_stct_item,_ref_target){
 			_ref_target._val_cur_hp += _val_heal;
 			_ref_target._val_cur_hp = min(_ref_target._val_cur_hp,_ref_target._val_max_hp);
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"+" + string(_val_heal),
 				undefined,
@@ -49,7 +49,7 @@ function scr_item_held_healing_fruit(_str_state,_stct_item,_ref_target){
 				_ref_target.y - 24 + irandom_range(-32,32)
 			);
 
-			scr_spawn_popup_trigger_banner(_stct_item._str_item_name + " " + _stct_item._str_trigger_text);
+			scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name + " " + _stct_item._str_trigger_text);
 
 			return true;
 

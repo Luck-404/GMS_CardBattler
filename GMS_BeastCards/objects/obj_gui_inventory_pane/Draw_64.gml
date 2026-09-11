@@ -13,7 +13,7 @@
 //DRAW//
 //----//
 draw_sprite(spr_gui_inventory_pane,0,x,y);
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 
 //-----------//
 //STATE RESET//

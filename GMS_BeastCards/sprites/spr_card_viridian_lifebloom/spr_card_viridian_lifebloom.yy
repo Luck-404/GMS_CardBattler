@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"LIFEBLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/LIFEBLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/LIFEBLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

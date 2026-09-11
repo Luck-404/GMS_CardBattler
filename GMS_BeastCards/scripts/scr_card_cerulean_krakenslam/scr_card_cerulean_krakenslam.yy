@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_krakenslam",
   "parent":{
     "name":"KRAKENSLAM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/KRAKENSLAM.yy",
+    "path":"folders/CARDS/CERULEAN/KRAKENSLAM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

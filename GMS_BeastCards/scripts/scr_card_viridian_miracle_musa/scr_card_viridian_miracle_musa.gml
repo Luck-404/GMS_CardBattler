@@ -15,7 +15,7 @@ function scr_card_viridian_miracle_musa(_stct_card,_ref_caster,_ref_target){
 		_ref_caster._ref_unit._val_beast_mpow_stat;
 
 	var _val_mpow_mod =
-		scr_get_beast_grade_modifier(_val_mpow_stat);
+		scr_beast_get_grade_modifier(_val_mpow_stat);
 
 	var _val_overhealth =
 		ceil(

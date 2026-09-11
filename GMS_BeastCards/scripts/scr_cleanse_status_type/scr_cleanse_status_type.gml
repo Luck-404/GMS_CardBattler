@@ -96,7 +96,7 @@ function scr_status_cleanse_type(_ref_target,_str_status_type,_ct_amount,_str_st
 		//-------------//
 		//SPAWN POPUP//
 		//-------------//
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"CLEANSED " + _str_status_name,
 			undefined,

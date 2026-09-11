@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_snowfall",
   "parent":{
     "name":"SNOWFALL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SNOWFALL.yy",
+    "path":"folders/CARDS/CERULEAN/SNOWFALL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"THORNS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/THORNS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

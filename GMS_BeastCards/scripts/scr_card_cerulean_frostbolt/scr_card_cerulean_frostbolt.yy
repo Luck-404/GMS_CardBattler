@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_frostbolt",
   "parent":{
     "name":"FROSTBOLT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROSTBOLT.yy",
+    "path":"folders/CARDS/CERULEAN/FROSTBOLT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICE_MIRROR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_MIRROR.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_MIRROR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

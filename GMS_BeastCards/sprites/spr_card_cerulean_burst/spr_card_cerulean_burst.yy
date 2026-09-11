@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BURST",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BURST.yy",
+    "path":"folders/CARDS/CERULEAN/BURST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

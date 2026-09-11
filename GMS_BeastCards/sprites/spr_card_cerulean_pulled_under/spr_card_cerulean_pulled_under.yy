@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PULLED_UNDER",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PULLED_UNDER.yy",
+    "path":"folders/CARDS/CERULEAN/PULLED_UNDER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

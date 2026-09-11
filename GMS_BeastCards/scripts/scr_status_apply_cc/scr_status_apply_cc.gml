@@ -32,7 +32,7 @@ function scr_status_apply_cc(
 	//----------------//
 	if (scr_cc_has_immunity(_ref_target)){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"IMMUNE",
 			undefined,
@@ -76,7 +76,7 @@ function scr_status_apply_cc(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"BANISHED",
 					undefined,
@@ -102,7 +102,7 @@ function scr_status_apply_cc(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"FROZEN",
 					undefined,
@@ -128,7 +128,7 @@ function scr_status_apply_cc(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ASLEEP",
 					undefined,
@@ -151,7 +151,7 @@ case "BLIND":
 
 	if (_ref_status != undefined){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"BLINDED",
 			undefined,
@@ -174,7 +174,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"STUNNED",
 					undefined,

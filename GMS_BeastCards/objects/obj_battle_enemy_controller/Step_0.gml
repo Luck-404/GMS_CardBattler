@@ -58,7 +58,7 @@ switch(_state_enemy){
 				_val_enemy_level_max
 			);
 
-			if (!scr_set_beast_level(_stct_unit,_val_enemy_level,true)){
+			if (!scr_beast_set_level(_stct_unit,_val_enemy_level,true)){
 
 				show_debug_message(
 					"ENEMY BATTLE INIT ERROR | FAILED TO SET LEVEL | " +
@@ -377,7 +377,7 @@ switch(_state_enemy){
 		if (
 			_flag_turn_start_items_init &&
 			!_flag_turn_start_items_complete &&
-			!instance_exists(obj_wait)
+			!instance_exists(obj_battle_wait)
 		){
 
 			if (ds_list_size(_list_turn_start_items) > 0){
@@ -393,7 +393,7 @@ switch(_state_enemy){
 					_stct_item._scr_item != undefined
 				){
 
-					scr_spawn_popup_trigger_banner(_stct_item._str_item_name);
+					scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name);
 
 					var _flag_triggered = script_execute(
 						_stct_item._scr_item,
@@ -446,7 +446,7 @@ switch(_state_enemy){
 		//--------------------//
 		//EXECUTE STATUS QUEUE//
 		//--------------------//
-		if (_flag_statuses_init && !instance_exists(obj_wait)){
+		if (_flag_statuses_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_statuses) > 0){
 
@@ -499,7 +499,7 @@ switch(_state_enemy){
 				);
 		}
 
-		if (_flag_minions_init && !instance_exists(obj_wait)){
+		if (_flag_minions_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_casting_minions) > 0){
 
@@ -556,7 +556,7 @@ switch(_state_enemy){
 			}
 		}
 
-		if (_flag_cast_init && !instance_exists(obj_wait)){
+		if (_flag_cast_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_casting_units) > 0){
 
@@ -571,7 +571,7 @@ switch(_state_enemy){
 				//--------------------//
 				if (_ref_card._flag_card_disabled){
 
-					scr_spawn_popup_scrolling(
+					scr_gui_spawn_popup_scrolling(
 						"TEXT",
 						"CARD DISABLED",
 						undefined,
@@ -580,7 +580,7 @@ switch(_state_enemy){
 						_ref_beast.y - 72
 					);
 
-					audio_play_sound(snd_battle_sfx_expend,0,false);
+					audio_play_sound(snd_battle_expend,0,false);
 
 					_ref_card.visible = false;
 
@@ -617,7 +617,7 @@ switch(_state_enemy){
 							//----------------//
 							//NO VALID TARGET//
 							//----------------//
-							scr_spawn_popup_scrolling(
+							scr_gui_spawn_popup_scrolling(
 								"TEXT",
 								"NO VALID TARGET",
 								undefined,
@@ -660,7 +660,7 @@ switch(_state_enemy){
 								global.ref_target_beast =
 									_ref_target;
 
-								scr_battle_card_cast();
+								scr_battle_cast_card();
 							}
 						}
 
@@ -749,7 +749,7 @@ switch(_state_enemy){
 								global.ref_target_beast =
 									_ref_target;
 
-								scr_battle_card_cast();
+								scr_battle_cast_card();
 							}
 
 						break;
@@ -841,7 +841,7 @@ switch(_state_enemy){
 								global.ref_target_beast =
 									_ref_target;
 
-								scr_battle_card_cast();
+								scr_battle_cast_card();
 							}
 
 						break;
@@ -876,7 +876,7 @@ switch(_state_enemy){
 							global.ref_caster_beast = _ref_beast;
 							global.ref_target_beast = _ref_target;
 
-							scr_battle_card_cast();
+							scr_battle_cast_card();
 
 						break;
 					}
@@ -997,7 +997,7 @@ switch(_state_enemy){
 	if (
 		_flag_turn_end_items_init &&
 		!_flag_turn_end_items_complete &&
-		!instance_exists(obj_wait)
+		!instance_exists(obj_battle_wait)
 	){
 
 		if (ds_list_size(_list_turn_end_items) > 0){
@@ -1061,7 +1061,7 @@ switch(_state_enemy){
 			}
 		}
 
-		if (_flag_statuses_init && !instance_exists(obj_wait)){
+		if (_flag_statuses_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_statuses) > 0){
 

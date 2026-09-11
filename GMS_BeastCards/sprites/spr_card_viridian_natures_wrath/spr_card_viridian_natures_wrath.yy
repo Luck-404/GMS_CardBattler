@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURES WRATH",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES WRATH.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES WRATH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

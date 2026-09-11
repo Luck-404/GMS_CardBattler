@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BOLSTERING SHELL",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/BOLSTERING SHELL.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/BOLSTERING SHELL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

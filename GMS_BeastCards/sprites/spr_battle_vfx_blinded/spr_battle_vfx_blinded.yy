@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"BLIND",
+    "path":"folders/BATTLE/STATUSES/CC/BLIND.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

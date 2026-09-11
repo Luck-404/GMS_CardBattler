@@ -30,7 +30,7 @@ function scr_card_cerulean_shatter_strike(
 		_ref_target._val_cur_hp > 0
 	){
 
-		scr_trigger_shatter(
+		scr_battle_trigger_shatter(
 			_ref_target
 		);
 	}

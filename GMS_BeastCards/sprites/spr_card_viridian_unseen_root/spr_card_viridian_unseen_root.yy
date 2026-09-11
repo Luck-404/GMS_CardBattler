@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"UNSEEN ROOT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/UNSEEN ROOT.yy",
+    "path":"folders/CARDS/VIRIDIAN/UNSEEN ROOT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

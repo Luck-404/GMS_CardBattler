@@ -66,7 +66,7 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		_val_damage -=
 			_val_overhealth_damage;
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"-" + string(_val_overhealth_damage),
 			undefined,
@@ -92,7 +92,7 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 			_val_hp_damage
 		);
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"-" + string(_val_hp_damage),
 			undefined,

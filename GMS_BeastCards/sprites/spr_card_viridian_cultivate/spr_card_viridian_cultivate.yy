@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CULTIVATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CULTIVATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/CULTIVATE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

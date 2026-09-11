@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_rake",
   "parent":{
     "name":"RAKE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/RAKE.yy",
+    "path":"folders/CARDS/VIRIDIAN/RAKE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURAL CYCLE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURAL CYCLE.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURAL CYCLE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

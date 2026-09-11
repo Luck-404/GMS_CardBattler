@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"MANAVINE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/MANAVINE.yy",
+    "path":"folders/CARDS/VIRIDIAN/MANAVINE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

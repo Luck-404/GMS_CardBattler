@@ -160,7 +160,7 @@ function hscr_draw_selected_held_item(_stct_unit,_val_x,_val_y){
 	draw_set_colour(c_white);
 	draw_text(_val_box_x1 + 70,_val_box_y1 + 10,_stct_held_item._str_item_name);
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_ltgray);
 	draw_text(_val_box_x1 + 70,_val_box_y1 + 36,"RIGHT CLICK: UNEQUIP");
 
@@ -176,7 +176,7 @@ function hscr_draw_selected_held_item(_stct_unit,_val_x,_val_y){
 		);
 	}
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_black);
 
 	return _val_y + _val_box_h + 24;

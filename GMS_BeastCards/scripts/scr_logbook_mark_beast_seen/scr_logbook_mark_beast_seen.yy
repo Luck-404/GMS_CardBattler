@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_logbook_mark_beast_seen",
   "parent":{
-    "name":"LOGBOOK",
-    "path":"folders/GUI/LOGBOOK.yy",
+    "name":"BEASTS",
+    "path":"folders/LOGBOOK/BEASTS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

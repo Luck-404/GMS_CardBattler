@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"POTENT_FRUIT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/POTENT_FRUIT.yy",
+    "path":"folders/CARDS/VIRIDIAN/POTENT_FRUIT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

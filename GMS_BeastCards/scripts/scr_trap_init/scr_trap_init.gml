@@ -206,7 +206,7 @@ function scr_trap_init(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 	var _str_team_text =
 		_ref_caster._str_team;
 
-	scr_spawn_popup_trigger_banner(
+	scr_gui_spawn_popup_trigger_banner(
 		_str_team_text +
 		" HAS SET A TRAP"
 	);

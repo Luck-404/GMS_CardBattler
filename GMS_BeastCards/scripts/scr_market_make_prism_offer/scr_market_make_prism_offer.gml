@@ -9,8 +9,8 @@
 
 function scr_market_make_prism_offer(_str_item_id){
 
-	var _stct_prism_info = scr_get_prism_info(_str_item_id);
-	var _stct_item = scr_get_item_info(_str_item_id);
+	var _stct_prism_info = scr_inventory_get_prism_info(_str_item_id);
+	var _stct_item = scr_inventory_get_item_info(_str_item_id);
 
 	var _stct_offer = {
 		_str_offer_type : "PRISM",

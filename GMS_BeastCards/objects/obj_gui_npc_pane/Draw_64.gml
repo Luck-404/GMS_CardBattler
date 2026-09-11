@@ -71,7 +71,7 @@ draw_rectangle(
 //----------------//
 // NPC HEADER
 //----------------//
-draw_set_font(fnt_medium_gui);
+draw_set_font(fnt_gui_medium);
 draw_set_colour(c_white);
 
 draw_text(
@@ -80,7 +80,7 @@ draw_text(
 	string(_stct_npc._str_npc_name)
 );
 
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 draw_set_colour(c_ltgray);
 
 draw_text(
@@ -132,7 +132,7 @@ switch(_str_npc_gui_mode){
 //----------------//
 if (_str_npc_gui_mode == "MENU"){
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_ltgray);
 
 	draw_text(

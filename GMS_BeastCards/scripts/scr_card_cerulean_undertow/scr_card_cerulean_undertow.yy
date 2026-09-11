@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_undertow",
   "parent":{
     "name":"UNDERTOW",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/UNDERTOW.yy",
+    "path":"folders/CARDS/CERULEAN/UNDERTOW.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

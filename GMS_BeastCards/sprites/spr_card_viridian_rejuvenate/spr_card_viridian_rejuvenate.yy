@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"REJUVENATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/REJUVENATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/REJUVENATE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_deep_reflection",
   "parent":{
     "name":"DEEP_REFLECTION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DEEP_REFLECTION.yy",
+    "path":"folders/CARDS/CERULEAN/DEEP_REFLECTION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

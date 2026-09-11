@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SEA_LEGS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SEA_LEGS.yy",
+    "path":"folders/CARDS/CERULEAN/SEA_LEGS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_party_add_beast",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_party_add_beast",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BEASTS/PARTY/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

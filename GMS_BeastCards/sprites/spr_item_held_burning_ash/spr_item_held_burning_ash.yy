@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BURNING ASH",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/BURNING ASH.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/BURNING ASH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

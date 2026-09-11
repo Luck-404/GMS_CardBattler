@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CLAW",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CLAW.yy",
+    "path":"folders/CARDS/VIRIDIAN/CLAW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

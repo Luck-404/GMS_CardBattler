@@ -11,17 +11,17 @@ function scr_card_cerulean_tidal_flow(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//GENERATE MANA//
 	//-------------//
-	scr_battle_mana_gain(_stct_card._val_card_magnitude);
+	scr_battle_gain_mana(_stct_card._val_card_magnitude);
 
 	//-----------//
 	//DRAW CARD//
 	//-----------//
-	scr_battle_card_draw(1);
+	scr_battle_draw_cards(1);
 
 	//-------------//
 	//SPAWN POPUPS//
 	//-------------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"+" + string(_stct_card._val_card_magnitude) + " MANA",
 		undefined,
@@ -30,7 +30,7 @@ function scr_card_cerulean_tidal_flow(_stct_card,_ref_caster,_ref_target){
 		room_height / 2 - 24
 	);
 
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"+1 CARD",
 		undefined,

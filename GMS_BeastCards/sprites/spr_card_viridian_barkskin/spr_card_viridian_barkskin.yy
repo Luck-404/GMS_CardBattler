@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BARKSKIN",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BARKSKIN.yy",
+    "path":"folders/CARDS/VIRIDIAN/BARKSKIN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

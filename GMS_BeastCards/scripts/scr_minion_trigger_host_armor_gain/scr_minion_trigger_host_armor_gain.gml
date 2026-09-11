@@ -69,7 +69,7 @@ function scr_minion_trigger_host_armor_gain(_ref_host,_val_armor_gained){
 				//----------//
 				//FEEDBACK//
 				//----------//
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"GROWTH",
 					undefined,

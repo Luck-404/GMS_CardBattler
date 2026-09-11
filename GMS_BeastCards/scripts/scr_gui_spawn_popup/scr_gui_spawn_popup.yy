@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_spawn_popup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_spawn_popup",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/GUI/POPUPS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

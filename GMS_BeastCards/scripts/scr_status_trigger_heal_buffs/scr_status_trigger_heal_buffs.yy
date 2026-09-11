@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_heal_buffs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_heal_buffs",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

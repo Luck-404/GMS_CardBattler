@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_rippling_pool",
   "parent":{
     "name":"RIPPLING_POOL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RIPPLING_POOL.yy",
+    "path":"folders/CARDS/CERULEAN/RIPPLING_POOL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_chilling_weakness",
   "parent":{
     "name":"CHILLING_WEAKNESS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CHILLING_WEAKNESS.yy",
+    "path":"folders/CARDS/CERULEAN/CHILLING_WEAKNESS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

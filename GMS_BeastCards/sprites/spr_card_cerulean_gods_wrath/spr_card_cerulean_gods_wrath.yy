@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CERULEAN_GODS_WRATH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CERULEAN_GODS_WRATH.yy",
+    "path":"folders/CARDS/CERULEAN/CERULEAN_GODS_WRATH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

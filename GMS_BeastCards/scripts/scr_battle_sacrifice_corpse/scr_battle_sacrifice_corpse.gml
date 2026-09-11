@@ -41,7 +41,7 @@ function scr_battle_sacrifice_corpse(_ref_corpse){
 		_ref_corpse
 	);
 
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"CORPSE RECYCLED",
 		undefined,

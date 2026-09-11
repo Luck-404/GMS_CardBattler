@@ -80,7 +80,7 @@ function scr_status_cleanse_oldest_dot(_ref_target){
 	//-------------//
 	//SPAWN POPUP//
 	//-------------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"CLEANSED " + _str_status_name,
 		undefined,

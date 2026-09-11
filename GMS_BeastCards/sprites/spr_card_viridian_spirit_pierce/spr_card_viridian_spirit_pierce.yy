@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SPIRIT PIERCE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPIRIT PIERCE.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPIRIT PIERCE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

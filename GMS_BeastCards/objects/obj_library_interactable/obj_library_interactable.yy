@@ -9,8 +9,8 @@
   "name":"obj_library_interactable",
   "overriddenProperties":[],
   "parent":{
-    "name":"LIBRARY SYSTEM",
-    "path":"folders/CARDS/CARD STORAGES/LIBRARY SYSTEM.yy",
+    "name":"WORLD",
+    "path":"folders/CARDS/LIBRARY/WORLD.yy",
   },
   "parentObjectId":null,
   "persistent":false,

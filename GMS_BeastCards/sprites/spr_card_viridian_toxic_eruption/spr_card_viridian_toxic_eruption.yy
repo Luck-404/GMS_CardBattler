@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TOXIC ERUPTION",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/TOXIC ERUPTION.yy",
+    "path":"folders/CARDS/VIRIDIAN/TOXIC ERUPTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

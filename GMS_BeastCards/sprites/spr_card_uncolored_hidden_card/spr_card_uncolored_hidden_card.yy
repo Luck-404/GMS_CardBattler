@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"HIDDEN CARD",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/HIDDEN CARD.yy",
+    "name":"HIDDEN_CARD",
+    "path":"folders/CARDS/UNCOLORED/HIDDEN_CARD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

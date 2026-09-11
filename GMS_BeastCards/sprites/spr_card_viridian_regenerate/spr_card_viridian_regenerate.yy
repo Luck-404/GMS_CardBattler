@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"REGENERATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/REGENERATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/REGENERATE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

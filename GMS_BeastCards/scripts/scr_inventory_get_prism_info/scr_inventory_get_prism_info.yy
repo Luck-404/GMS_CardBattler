@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_get_prism_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_get_prism_info",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/INVENTORY/ITEMS/PRISM/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

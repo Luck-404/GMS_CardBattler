@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_cooling_mist",
   "parent":{
     "name":"COOLING_MIST",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/COOLING_MIST.yy",
+    "path":"folders/CARDS/CERULEAN/COOLING_MIST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

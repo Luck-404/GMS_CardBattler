@@ -136,7 +136,7 @@ function scr_status_buff_deep_momentum(_str_tag,_ref_status,_val_magnitude=undef
 				return false;
 			}
 
-			scr_battle_mana_gain(
+			scr_battle_gain_mana(
 				_ref_status._val_status_magnitude
 			);
 

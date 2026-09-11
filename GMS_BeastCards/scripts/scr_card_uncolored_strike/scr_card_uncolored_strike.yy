@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_strike",
   "parent":{
     "name":"STRIKE",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/STRIKE.yy",
+    "path":"folders/CARDS/UNCOLORED/STRIKE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

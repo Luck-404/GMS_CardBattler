@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_ice_accretion",
   "parent":{
     "name":"ICE_ACCRETION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_ACCRETION.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_ACCRETION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

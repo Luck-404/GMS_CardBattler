@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_lifebloom",
   "parent":{
     "name":"LIFEBLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/LIFEBLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/LIFEBLOOM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

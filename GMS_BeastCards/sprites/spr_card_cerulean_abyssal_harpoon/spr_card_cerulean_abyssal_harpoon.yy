@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ABYSSAL_HARPOON",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ABYSSAL_HARPOON.yy",
+    "path":"folders/CARDS/CERULEAN/ABYSSAL_HARPOON.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

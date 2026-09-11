@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WHITEOUT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WHITEOUT.yy",
+    "path":"folders/CARDS/CERULEAN/WHITEOUT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

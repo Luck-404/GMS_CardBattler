@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_shatterstorm",
   "parent":{
     "name":"SHATTERSTORM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHATTERSTORM.yy",
+    "path":"folders/CARDS/CERULEAN/SHATTERSTORM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

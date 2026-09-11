@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SNARLING BITE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SNARLING BITE.yy",
+    "path":"folders/CARDS/VIRIDIAN/SNARLING BITE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

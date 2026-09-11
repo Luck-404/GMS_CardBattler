@@ -44,7 +44,7 @@ function scr_status_trigger_razor_shell(_ref_defender,_ref_attacker){
 	//----------//
 	//FEEDBACK//
 	//----------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"RAZOR SHELL",
 		undefined,

@@ -61,7 +61,7 @@ function scr_minion_grow(_ref_minion,_val_amount){
 	//-------------//
 	//SPAWN POPUP//
 	//-------------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"+" +
 			string(_val_amount) +

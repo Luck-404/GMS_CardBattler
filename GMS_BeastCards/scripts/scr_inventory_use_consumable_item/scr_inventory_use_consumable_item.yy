@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_inventory_use_consumable_item",
   "parent":{
-    "name":"CONSUMABLES",
-    "path":"folders/INVENTORY/ITEM USAGE/CONSUMABLES.yy",
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/CONSUMABLES/USAGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

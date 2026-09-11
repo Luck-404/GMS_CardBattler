@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_brittle_constitution",
   "parent":{
     "name":"BRITTLE_CONSTITUTION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BRITTLE_CONSTITUTION.yy",
+    "path":"folders/CARDS/CERULEAN/BRITTLE_CONSTITUTION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

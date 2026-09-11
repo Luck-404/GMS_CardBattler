@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VIRAL SURGE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VIRAL SURGE.yy",
+    "path":"folders/CARDS/VIRIDIAN/VIRAL SURGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

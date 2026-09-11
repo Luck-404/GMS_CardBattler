@@ -107,7 +107,7 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 			_ref_caster
 		);
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"EXECUTE",
 			undefined,

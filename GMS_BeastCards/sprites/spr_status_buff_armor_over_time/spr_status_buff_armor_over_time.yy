@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ARMOR OVER TIME",
-    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/ARMOR OVER TIME.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/ARMOR OVER TIME.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

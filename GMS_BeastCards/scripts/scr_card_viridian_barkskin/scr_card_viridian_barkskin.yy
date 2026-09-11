@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_barkskin",
   "parent":{
     "name":"BARKSKIN",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BARKSKIN.yy",
+    "path":"folders/CARDS/VIRIDIAN/BARKSKIN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

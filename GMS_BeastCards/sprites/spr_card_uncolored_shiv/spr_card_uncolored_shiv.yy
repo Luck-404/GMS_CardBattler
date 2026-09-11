@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SHIV",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/SHIV.yy",
+    "path":"folders/CARDS/UNCOLORED/SHIV.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

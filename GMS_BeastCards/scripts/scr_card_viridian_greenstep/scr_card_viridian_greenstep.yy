@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_greenstep",
   "parent":{
     "name":"GREENSTEP",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GREENSTEP.yy",
+    "path":"folders/CARDS/VIRIDIAN/GREENSTEP.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

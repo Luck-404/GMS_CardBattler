@@ -25,7 +25,7 @@ function scr_card_uncolored_artifact_hourglass(
 	//-------------//
 	// SPAWN POPUP
 	//-------------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"+EXTRA TURN",
 		undefined,

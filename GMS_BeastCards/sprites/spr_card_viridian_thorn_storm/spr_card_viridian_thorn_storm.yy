@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THORN_STORM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/THORN_STORM.yy",
+    "path":"folders/CARDS/VIRIDIAN/THORN_STORM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

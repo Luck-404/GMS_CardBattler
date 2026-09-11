@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CIRCLE_OF_LIFE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CIRCLE_OF_LIFE.yy",
+    "path":"folders/CARDS/VIRIDIAN/CIRCLE_OF_LIFE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

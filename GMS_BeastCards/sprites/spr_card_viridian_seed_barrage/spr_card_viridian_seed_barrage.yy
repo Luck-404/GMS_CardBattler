@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SEED BARRAGE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SEED BARRAGE.yy",
+    "path":"folders/CARDS/VIRIDIAN/SEED BARRAGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

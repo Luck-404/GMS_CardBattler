@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_burst",
   "parent":{
     "name":"BURST",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BURST.yy",
+    "path":"folders/CARDS/CERULEAN/BURST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

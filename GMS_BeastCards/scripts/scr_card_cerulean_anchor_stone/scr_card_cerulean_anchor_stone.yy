@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_anchor_stone",
   "parent":{
     "name":"ANCHOR_STONE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ANCHOR_STONE.yy",
+    "path":"folders/CARDS/CERULEAN/ANCHOR_STONE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

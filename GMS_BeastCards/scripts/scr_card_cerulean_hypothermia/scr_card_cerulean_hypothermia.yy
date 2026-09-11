@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_hypothermia",
   "parent":{
     "name":"HYPOTHERMIA",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/HYPOTHERMIA.yy",
+    "path":"folders/CARDS/CERULEAN/HYPOTHERMIA.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

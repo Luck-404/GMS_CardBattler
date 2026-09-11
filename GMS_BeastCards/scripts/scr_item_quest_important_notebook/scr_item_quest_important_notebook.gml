@@ -22,7 +22,7 @@ function scr_item_quest_important_notebook(_stct_item,_ref_inventory_pane){
 	//SUCCESS//
 	//--------//
 	if (_flag_success){
-		audio_play_sound(snd_treasure_claim,0,false);
+		audio_play_sound(snd_overworld_treasure_claim,0,false);
 		var _arr_card_ids = [
 			"ECHO",
 			"EMERALD_WISDOM",
@@ -38,9 +38,9 @@ function scr_item_quest_important_notebook(_stct_item,_ref_inventory_pane){
 			var _ct_deck_before = ds_list_size(global.list_player_deck);
 			var _ct_library_before = ds_list_size(global.list_player_library);
 
-			var _stct_new_card = scr_get_card_info(_str_card_id);
+			var _stct_new_card = scr_card_get_info(_str_card_id);
 
-			scr_add_card_to_deck(_stct_new_card);
+			scr_deck_add_card(_stct_new_card);
 
 			var _ct_deck_after = ds_list_size(global.list_player_deck);
 			var _ct_library_after = ds_list_size(global.list_player_library);
@@ -56,7 +56,7 @@ function scr_item_quest_important_notebook(_stct_item,_ref_inventory_pane){
 		//----------------//
 		//CONSUME NOTEBOOK//
 		//----------------//
-		scr_remove_item_from_inventory(_stct_item,1);
+		scr_inventory_remove_item(_stct_item,1);
 
 		if (instance_exists(_ref_inventory_pane)){
 			_ref_inventory_pane.hscr_mark_inventory_dirty();
@@ -71,7 +71,7 @@ function scr_item_quest_important_notebook(_stct_item,_ref_inventory_pane){
 	//FAILURE//
 	//--------//
 	else{
-		audio_play_sound(snd_error,0,false);
+		audio_play_sound(snd_gui_error,0,false);
 		_str_text = "Nothing seems to happen.";
 	}
 

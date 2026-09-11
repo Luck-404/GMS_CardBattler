@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_uncolored_spellbook_wildcard",
   "parent":{
-    "name":"SPELLBOOK: WILDCARD",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/SPELLBOOK: WILDCARD.yy",
+    "name":"SPELLBOOK_WILDCARD",
+    "path":"folders/CARDS/UNCOLORED/SPELLBOOK_WILDCARD.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

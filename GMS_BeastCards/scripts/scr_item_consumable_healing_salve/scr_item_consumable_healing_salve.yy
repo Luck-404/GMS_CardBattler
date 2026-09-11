@@ -6,7 +6,7 @@
   "name":"scr_item_consumable_healing_salve",
   "parent":{
     "name":"HEALING SALVE",
-    "path":"folders/INVENTORY/ITEM LIST/CONSUMABLE/HEALING SALVE.yy",
+    "path":"folders/INVENTORY/ITEMS/CONSUMABLES/HEALING SALVE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

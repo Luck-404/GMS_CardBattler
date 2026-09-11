@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_thorn_net",
   "parent":{
     "name":"THORN NET",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/THORN NET.yy",
+    "path":"folders/CARDS/VIRIDIAN/THORN NET.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

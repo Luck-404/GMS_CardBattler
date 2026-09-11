@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_natures_bond",
   "parent":{
     "name":"NATURES_BOND",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES_BOND.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES_BOND.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

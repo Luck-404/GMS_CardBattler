@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_gui_press",
   "parent":{
-    "name":"GUI",
-    "path":"folders/GUI.yy",
+    "name":"CORE",
+    "path":"folders/GUI/CORE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

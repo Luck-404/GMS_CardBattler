@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_wait_start",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_wait_start",
+  "parent":{
+    "name":"WAIT",
+    "path":"folders/CORE/WAIT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

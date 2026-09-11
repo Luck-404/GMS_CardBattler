@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_rimefrost_elemental",
   "parent":{
     "name":"RIMEFROST_ELEMENTAL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RIMEFROST_ELEMENTAL.yy",
+    "path":"folders/CARDS/CERULEAN/RIMEFROST_ELEMENTAL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

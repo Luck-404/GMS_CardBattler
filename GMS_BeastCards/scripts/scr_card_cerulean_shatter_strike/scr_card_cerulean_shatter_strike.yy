@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_shatter_strike",
   "parent":{
     "name":"SHATTER_STRIKE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHATTER_STRIKE.yy",
+    "path":"folders/CARDS/CERULEAN/SHATTER_STRIKE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

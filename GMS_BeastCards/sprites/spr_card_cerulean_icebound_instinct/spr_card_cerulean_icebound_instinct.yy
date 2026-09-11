@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICEBOUND_INSTINCT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICEBOUND_INSTINCT.yy",
+    "path":"folders/CARDS/CERULEAN/ICEBOUND_INSTINCT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

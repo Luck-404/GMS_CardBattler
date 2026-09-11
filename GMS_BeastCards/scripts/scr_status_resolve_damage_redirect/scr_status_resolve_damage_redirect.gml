@@ -49,7 +49,7 @@ function scr_status_resolve_damage_redirect(_ref_target){
 	//----------------//
 	//TRIGGER FEEDBACK//
 	//----------------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"REDIRECT",
 		undefined,

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VIRIDIAN",
-    "path":"folders/INVENTORY/ITEM LIST/EGG/VIRIDIAN.yy",
+    "path":"folders/INVENTORY/ITEMS/EGGS/VIRIDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

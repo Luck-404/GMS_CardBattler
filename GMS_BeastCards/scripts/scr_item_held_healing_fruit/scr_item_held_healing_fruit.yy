@@ -6,7 +6,7 @@
   "name":"scr_item_held_healing_fruit",
   "parent":{
     "name":"HEALING FRUIT",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/HEALING FRUIT.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/HEALING FRUIT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

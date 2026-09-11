@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WHIRLPOOL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WHIRLPOOL.yy",
+    "path":"folders/CARDS/CERULEAN/WHIRLPOOL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

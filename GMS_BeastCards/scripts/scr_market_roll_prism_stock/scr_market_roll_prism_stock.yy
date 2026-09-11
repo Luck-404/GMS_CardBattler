@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_market_roll_prism_stock",
   "parent":{
-    "name":"PRISM MARKET",
-    "path":"folders/GUI/MARKETS/PRISM MARKET.yy",
+    "name":"PRISM",
+    "path":"folders/MARKETS/PRISM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

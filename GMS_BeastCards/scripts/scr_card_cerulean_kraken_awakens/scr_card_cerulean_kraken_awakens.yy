@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_kraken_awakens",
   "parent":{
     "name":"KRAKEN_AWAKENS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/KRAKEN_AWAKENS.yy",
+    "path":"folders/CARDS/CERULEAN/KRAKEN_AWAKENS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

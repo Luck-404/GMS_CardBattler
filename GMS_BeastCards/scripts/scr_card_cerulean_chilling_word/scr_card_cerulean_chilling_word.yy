@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_chilling_word",
   "parent":{
     "name":"CHILLING_WORD",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CHILLING_WORD.yy",
+    "path":"folders/CARDS/CERULEAN/CHILLING_WORD.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

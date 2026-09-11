@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"KRAKENSLAM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/KRAKENSLAM.yy",
+    "path":"folders/CARDS/CERULEAN/KRAKENSLAM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

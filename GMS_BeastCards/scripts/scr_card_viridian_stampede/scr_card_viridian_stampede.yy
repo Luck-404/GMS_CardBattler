@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_stampede",
   "parent":{
     "name":"STAMPEDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/STAMPEDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/STAMPEDE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -50,13 +50,13 @@ draw_sprite(spr_gui_market_pane,0,x,y);
 //--------//
 //HEADER//
 //--------//
-draw_set_font(fnt_medium_gui);
+draw_set_font(fnt_gui_medium);
 draw_set_colour(c_white);
 draw_set_halign(fa_center);
 
 draw_text(x,_val_pane_top + 28,_str_header_text);
 
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 draw_text(x,_val_pane_top + 58,"Gold: " + string(global.val_player_gold) + " gp | Right click to close");
 
 //--------//

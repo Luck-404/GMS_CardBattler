@@ -32,7 +32,7 @@ function scr_card_viridian_natures_wrath(_stct_card,_ref_caster,_ref_target){
 		instance_exists(_ref_target) &&
 		instance_exists(_ref_caster)
 	){
-		var _ct_poison_consumed = scr_trigger_poisonflow(_ref_target,2);
+		var _ct_poison_consumed = scr_battle_trigger_poisonflow(_ref_target,2);
 
 		if (_ct_poison_consumed > 0){
 			scr_battle_heal_target(_ct_poison_consumed * 2,_ref_caster);

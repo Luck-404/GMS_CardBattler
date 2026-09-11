@@ -54,7 +54,7 @@ function scr_status_apply_debuff(
 
 		if (_ref_status != undefined){
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"ANTIHEAL",
 				undefined,
@@ -80,7 +80,7 @@ case "FROZEN_CURSE":
 
 	if (_ref_status != undefined){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"FROZEN CURSE",
 			undefined,
@@ -108,7 +108,7 @@ break;
 
 		if (_ref_status != undefined){
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"WHITEOUT",
 				undefined,
@@ -134,7 +134,7 @@ break;
 
 		if (_ref_status != undefined){
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"BRITTLE CONSTITUTION",
 				undefined,
@@ -155,7 +155,7 @@ case "FOCUS":
 
 	if (_ref_status != undefined){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"FOCUS",
 			undefined,
@@ -175,7 +175,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"DRAINED",
 					undefined,
@@ -201,7 +201,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ARMORBREAK",
 					undefined,
@@ -227,7 +227,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"CRIPPLING VINES",
 					undefined,
@@ -253,7 +253,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEAKNESS",
 					undefined,
@@ -274,7 +274,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WITHER",
 					undefined,
@@ -300,7 +300,7 @@ break;
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"VULNERABLE",
 					undefined,

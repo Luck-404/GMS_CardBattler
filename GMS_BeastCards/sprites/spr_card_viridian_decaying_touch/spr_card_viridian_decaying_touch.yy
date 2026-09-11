@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DECAYING TOUCH",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DECAYING TOUCH.yy",
+    "path":"folders/CARDS/VIRIDIAN/DECAYING TOUCH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

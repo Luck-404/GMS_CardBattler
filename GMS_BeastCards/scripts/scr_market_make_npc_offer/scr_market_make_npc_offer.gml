@@ -26,7 +26,7 @@ function scr_market_make_npc_offer(_stct_stock_definition){
 		_stct_stock_definition._str_item_id;
 
 	var _stct_item =
-		scr_get_item_info(_str_item_id);
+		scr_inventory_get_item_info(_str_item_id);
 
 	if (_stct_item == undefined){
 

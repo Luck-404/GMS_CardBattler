@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_echo",
   "parent":{
     "name":"ECHO",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/ECHO.yy",
+    "path":"folders/CARDS/UNCOLORED/ECHO.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

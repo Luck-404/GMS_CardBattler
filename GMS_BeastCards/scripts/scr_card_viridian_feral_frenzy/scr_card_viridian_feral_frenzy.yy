@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_feral_frenzy",
   "parent":{
     "name":"FERAL FRENZY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/FERAL FRENZY.yy",
+    "path":"folders/CARDS/VIRIDIAN/FERAL FRENZY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

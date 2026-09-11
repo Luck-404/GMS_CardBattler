@@ -452,7 +452,7 @@ break;
 
 		ds_list_add(_ref_target._list_minions,_ref_new_minion);
 
-		scr_spawn_popup_scrolling("TEXT","+ MINION",undefined,c_black,_ref_target.x + irandom_range(-32,32),_ref_target.y - 24 + irandom_range(-32,32));
+		scr_gui_spawn_popup_scrolling("TEXT","+ MINION",undefined,c_black,_ref_target.x + irandom_range(-32,32),_ref_target.y - 24 + irandom_range(-32,32));
 	}
 	else{
 
@@ -471,7 +471,7 @@ break;
 			_ref_new_minion
 		);
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"+ MINION (REPLACED OLDEST)",
 			undefined,
@@ -532,14 +532,14 @@ break;
 
 		scr_battle_vfx(
 			_ref_new_minion,
-			spr_battle_vfx_summon_spawn,
+			spr_battle_vfx_minion_spawn,
 			undefined,
 			undefined,
 			0,
 			0,
 			1,
 			0,
-			snd_battle_sfx_summon_spawn
+			snd_battle_minion_spawn
 		);
 	}
 

@@ -344,11 +344,11 @@ function scr_minion_cast_effect(_ref_minion){
 			//-----------//
 			//DRAW CARDS//
 			//-----------//
-			scr_battle_card_draw(
+			scr_battle_draw_cards(
 				_ct_draw
 			);
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"+" +
 					string(_ct_draw) +

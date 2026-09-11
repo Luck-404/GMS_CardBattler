@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ENDLESS_BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ENDLESS_BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/ENDLESS_BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_bloomtide",
   "parent":{
     "name":"BLOOMTIDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BLOOMTIDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/BLOOMTIDE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

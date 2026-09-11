@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_transfer_oldest_dot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_transfer_oldest_dot",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/DOTs/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

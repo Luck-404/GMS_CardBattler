@@ -9,8 +9,8 @@
   "name":"obj_gui_logbook_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"LOGBOOK",
-    "path":"folders/GUI/LOGBOOK.yy",
+    "name":"GUI",
+    "path":"folders/LOGBOOK/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

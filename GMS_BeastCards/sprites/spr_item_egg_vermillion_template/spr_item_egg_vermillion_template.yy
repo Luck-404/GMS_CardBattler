@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"VERMILLION",
-    "path":"folders/INVENTORY/ITEM LIST/EGG/VERMILLION.yy",
+    "name":"TEMPLATES",
+    "path":"folders/INVENTORY/ITEMS/EGGS/TEMPLATES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

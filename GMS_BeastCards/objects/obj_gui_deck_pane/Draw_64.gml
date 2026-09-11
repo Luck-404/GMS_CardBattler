@@ -76,7 +76,7 @@ if (_ct_card > 0){
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
 	draw_set_colour(c_black);
-	draw_set_font(fnt_medium_gui);
+	draw_set_font(fnt_gui_medium);
 
 	draw_text(x,_val_pane_top + _val_pane_h + 24,"AVG COST: " + string_format(_val_avg_cost,1,1));
 	draw_set_valign(fa_top);

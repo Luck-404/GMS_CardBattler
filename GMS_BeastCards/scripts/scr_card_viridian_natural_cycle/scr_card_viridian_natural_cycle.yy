@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_natural_cycle",
   "parent":{
     "name":"NATURAL CYCLE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURAL CYCLE.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURAL CYCLE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"INTERLOCKING SCALES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/INTERLOCKING SCALES.yy",
+    "path":"folders/CARDS/VIRIDIAN/INTERLOCKING SCALES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

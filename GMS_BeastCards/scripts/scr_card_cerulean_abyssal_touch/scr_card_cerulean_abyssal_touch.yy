@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_abyssal_touch",
   "parent":{
     "name":"ABYSSAL_TOUCH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ABYSSAL_TOUCH.yy",
+    "path":"folders/CARDS/CERULEAN/ABYSSAL_TOUCH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

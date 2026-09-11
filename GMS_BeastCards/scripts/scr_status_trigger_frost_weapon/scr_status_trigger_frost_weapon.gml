@@ -35,7 +35,7 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 	//GET ATTACK TARGETS//
 	//--------------------//
 	var _arr_targets =
-		scr_battle_preview_get_card_targets(_stct_card,_ref_primary_target);
+		scr_battle_get_card_preview_targets(_stct_card,_ref_primary_target);
 
 	/*
 		Fallback for unusual ST Attack definitions whose target
@@ -106,7 +106,7 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 	//----------//
 	if (_flag_triggered){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"FROST WEAPON",
 			undefined,

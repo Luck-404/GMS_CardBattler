@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_decaying_touch",
   "parent":{
     "name":"DECAYING TOUCH",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DECAYING TOUCH.yy",
+    "path":"folders/CARDS/VIRIDIAN/DECAYING TOUCH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

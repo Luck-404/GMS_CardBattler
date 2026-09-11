@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURES_BOND",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES_BOND.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES_BOND.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

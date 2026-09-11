@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ANCHOR_STONE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ANCHOR_STONE.yy",
+    "path":"folders/CARDS/CERULEAN/ANCHOR_STONE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

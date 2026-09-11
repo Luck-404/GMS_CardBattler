@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VERDANT SWIPES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT SWIPES.yy",
+    "path":"folders/CARDS/VIRIDIAN/VERDANT SWIPES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

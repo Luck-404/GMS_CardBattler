@@ -11,10 +11,10 @@ function scr_card_uncolored_hidden_card(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DRAW CARDS//
 	//-----------//
-	scr_battle_card_draw(1);
+	scr_battle_draw_cards(1);
 
 	//-------------//
 	//SPAWN POPUP//
 	//-------------//
-	scr_spawn_popup_scrolling("TEXT","+1 CARD",undefined,c_black,room_width / 2 - 300,room_height / 2);
+	scr_gui_spawn_popup_scrolling("TEXT","+1 CARD",undefined,c_black,room_width / 2 - 300,room_height / 2);
 }

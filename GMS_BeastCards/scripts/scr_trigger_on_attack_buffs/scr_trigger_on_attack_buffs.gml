@@ -1,12 +1,12 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_TRIGGER_ON_ATTACK_BUFFS
+// SCRIPT: scr_status_trigger_on_attack_buffs
 // FUNCTION: Resolves Buffs and Auras that trigger when a Beast successfully
 //           performs an Attack card resolution.
 //
 //===============================================================================//
 
-function scr_trigger_on_attack_buffs(_ref_attacker,_ref_primary_target,_stct_card){
+function scr_status_trigger_on_attack_buffs(_ref_attacker,_ref_primary_target,_stct_card){
 
 	if (!instance_exists(_ref_attacker)){
 		return false;

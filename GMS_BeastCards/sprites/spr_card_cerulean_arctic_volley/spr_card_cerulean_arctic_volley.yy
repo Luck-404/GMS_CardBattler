@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ARCTIC_VOLLEY",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ARCTIC_VOLLEY.yy",
+    "path":"folders/CARDS/CERULEAN/ARCTIC_VOLLEY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

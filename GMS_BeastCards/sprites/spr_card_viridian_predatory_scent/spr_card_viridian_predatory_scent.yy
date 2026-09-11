@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PREDATORY_SCENT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PREDATORY_SCENT.yy",
+    "path":"folders/CARDS/VIRIDIAN/PREDATORY_SCENT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

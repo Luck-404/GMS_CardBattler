@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_fell",
   "parent":{
     "name":"FELL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/FELL.yy",
+    "path":"folders/CARDS/VIRIDIAN/FELL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

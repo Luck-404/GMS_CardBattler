@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_distracting_trap",
   "parent":{
     "name":"DISTRACTING TRAP",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DISTRACTING TRAP.yy",
+    "path":"folders/CARDS/VIRIDIAN/DISTRACTING TRAP.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

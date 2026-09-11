@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_player_set_movement_state",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_player_set_movement_state",
+  "parent":{
+    "name":"MOVEMENT",
+    "path":"folders/PLAYER/MOVEMENT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

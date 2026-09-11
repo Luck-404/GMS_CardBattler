@@ -9,8 +9,8 @@
   "name":"obj_transition",
   "overriddenProperties":[],
   "parent":{
-    "name":"TRANSITIONS",
-    "path":"folders/GUI/TRANSITIONS.yy",
+    "name":"CORE",
+    "path":"folders/CORE/TRANSITIONS/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

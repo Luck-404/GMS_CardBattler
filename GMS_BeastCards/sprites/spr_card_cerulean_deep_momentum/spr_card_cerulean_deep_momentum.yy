@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DEEP_MOMENTUM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DEEP_MOMENTUM.yy",
+    "path":"folders/CARDS/CERULEAN/DEEP_MOMENTUM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

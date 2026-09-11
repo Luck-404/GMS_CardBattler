@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_minion_hatch_dormant_seed",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_minion_hatch_dormant_seed",
+  "parent":{
+    "name":"VIRIDIAN",
+    "path":"folders/BATTLE/MINIONS/VIRIDIAN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

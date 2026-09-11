@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_rain",
   "parent":{
     "name":"RAIN",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RAIN.yy",
+    "path":"folders/CARDS/CERULEAN/RAIN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BRAMBLE ERUPTION",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BRAMBLE ERUPTION.yy",
+    "path":"folders/CARDS/VIRIDIAN/BRAMBLE ERUPTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

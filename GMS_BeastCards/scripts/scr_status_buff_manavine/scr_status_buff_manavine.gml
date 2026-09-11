@@ -125,7 +125,7 @@ function scr_status_buff_manavine(
 			//-------------------//
 			//GAIN CURRENT MANA//
 			//-------------------//
-			scr_battle_mana_gain(
+			scr_battle_gain_mana(
 				_val_magnitude
 			);
 
@@ -200,7 +200,7 @@ function scr_status_buff_manavine(
 			//-------------------//
 			//REFRESH MANA HUD//
 			//-------------------//
-			scr_battle_mana_reposition();
+			scr_battle_reposition_mana();
 
 			//---------------//
 			//DESTROY STATUS//

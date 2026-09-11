@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"TRANSITION TRIGGER",
-    "path":"folders/GUI/TRANSITIONS/TRANSITION TRIGGER.yy",
+    "name":"ZONE",
+    "path":"folders/CORE/TRANSITIONS/ZONE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

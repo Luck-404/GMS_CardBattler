@@ -12,7 +12,7 @@ function scr_card_cerulean_winters_bite(_stct_card,_ref_caster,_ref_target){
 	//-------------------//
 	//CHECK ICEBREAKER//
 	//-------------------//
-	var _val_icebreaker_multiplier = scr_trigger_icebreaker(_ref_target);
+	var _val_icebreaker_multiplier = scr_battle_trigger_icebreaker(_ref_target);
 
 	//----------------//
 	//CALCULATE DAMAGE//

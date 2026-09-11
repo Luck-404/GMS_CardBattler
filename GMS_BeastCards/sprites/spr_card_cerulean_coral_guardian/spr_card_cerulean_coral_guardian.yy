@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CORAL_GUARDIAN",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CORAL_GUARDIAN.yy",
+    "path":"folders/CARDS/CERULEAN/CORAL_GUARDIAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

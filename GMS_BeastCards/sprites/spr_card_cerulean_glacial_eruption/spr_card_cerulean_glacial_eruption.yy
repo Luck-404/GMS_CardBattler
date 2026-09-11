@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"GLACIAL_ERUPTION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/GLACIAL_ERUPTION.yy",
+    "path":"folders/CARDS/CERULEAN/GLACIAL_ERUPTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THOUGHTSTEAL",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/THOUGHTSTEAL.yy",
+    "path":"folders/CARDS/UNCOLORED/THOUGHTSTEAL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

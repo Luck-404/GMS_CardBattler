@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VIRIDIAN BURST",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VIRIDIAN BURST.yy",
+    "path":"folders/CARDS/VIRIDIAN/VIRIDIAN BURST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

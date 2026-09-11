@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BURGEONING BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BURGEONING BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/BURGEONING BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

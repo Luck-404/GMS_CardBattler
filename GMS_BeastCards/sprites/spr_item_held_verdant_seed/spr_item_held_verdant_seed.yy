@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"VERDANT SEED",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/VERDANT SEED.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/VERDANT SEED.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

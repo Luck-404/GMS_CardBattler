@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CRYSTAL_SHELL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CRYSTAL_SHELL.yy",
+    "path":"folders/CARDS/CERULEAN/CRYSTAL_SHELL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

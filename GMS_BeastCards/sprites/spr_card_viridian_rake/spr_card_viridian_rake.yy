@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RAKE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/RAKE.yy",
+    "path":"folders/CARDS/VIRIDIAN/RAKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

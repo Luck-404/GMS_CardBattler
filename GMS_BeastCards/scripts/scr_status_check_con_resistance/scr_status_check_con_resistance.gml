@@ -38,7 +38,7 @@ function scr_status_check_con_resistance(_ref_target,_flag_ignore_resistance=fal
 	//----------//
 	//FEEDBACK//
 	//----------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"RESISTED",
 		undefined,

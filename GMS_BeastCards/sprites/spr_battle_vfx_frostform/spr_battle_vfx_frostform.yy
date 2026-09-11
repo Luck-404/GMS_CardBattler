@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"FROSTFORM",
+    "path":"folders/BATTLE/STATUSES/AURA/CERULEAN/FROSTFORM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

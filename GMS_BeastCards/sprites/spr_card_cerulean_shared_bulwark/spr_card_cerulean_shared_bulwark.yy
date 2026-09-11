@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SHARED_BULWARK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHARED_BULWARK.yy",
+    "path":"folders/CARDS/CERULEAN/SHARED_BULWARK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CRASHING_WAVE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CRASHING_WAVE.yy",
+    "path":"folders/CARDS/CERULEAN/CRASHING_WAVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

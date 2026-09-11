@@ -20,7 +20,7 @@
 		_val_max_mana
 	){
 
-		scr_battle_mana_reposition();
+		scr_battle_reposition_mana();
 	}
 
 	//-------------------//
@@ -70,7 +70,7 @@
 	}
 
 	#region CARD PILE COUNTS
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 
 	draw_text(50,800,"DCK: " + string(ds_list_size(_list_battle_deck)));
 	draw_text(200,800,"HND: " + string(ds_list_size(_list_battle_hand)));
@@ -98,7 +98,7 @@
 
 		if (_str_card_range == "GLOBAL"){
 			draw_set_colour(c_black);
-			draw_set_font(fnt_small_gui);
+			draw_set_font(fnt_gui_small);
 			draw_set_halign(fa_left);
 			draw_set_valign(fa_top);
 
@@ -115,7 +115,7 @@
 		var _val_y1 = 750;
 		var _val_y2 = 850;
 
-		draw_set_font(fnt_small_gui);
+		draw_set_font(fnt_gui_small);
 
 		draw_set_colour(c_dkgray);
 		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);

@@ -54,7 +54,7 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 						_val_armor_break
 					);
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"-" + string(_val_armor_break) + " ARMOR",
 					undefined,

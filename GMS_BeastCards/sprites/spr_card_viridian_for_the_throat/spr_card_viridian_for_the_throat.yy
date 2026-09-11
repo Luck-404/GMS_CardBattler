@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FOR_THE_THROAT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/FOR_THE_THROAT.yy",
+    "path":"folders/CARDS/VIRIDIAN/FOR_THE_THROAT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

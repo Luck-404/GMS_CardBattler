@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_germinate",
   "parent":{
     "name":"GERMINATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GERMINATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/GERMINATE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

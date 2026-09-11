@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FRACTURE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FRACTURE.yy",
+    "path":"folders/CARDS/CERULEAN/FRACTURE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

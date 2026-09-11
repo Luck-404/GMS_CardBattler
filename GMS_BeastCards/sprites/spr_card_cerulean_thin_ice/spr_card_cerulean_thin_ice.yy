@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THIN_ICE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/THIN_ICE.yy",
+    "path":"folders/CARDS/CERULEAN/THIN_ICE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

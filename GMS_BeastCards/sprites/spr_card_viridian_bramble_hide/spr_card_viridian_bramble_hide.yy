@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BRAMBLE_HIDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BRAMBLE_HIDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/BRAMBLE_HIDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

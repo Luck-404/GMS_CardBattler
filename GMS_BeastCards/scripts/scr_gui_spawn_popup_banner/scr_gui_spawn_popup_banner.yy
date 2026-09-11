@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_spawn_popup_banner",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_spawn_popup_banner",
+  "parent":{
+    "name":"BANNERS",
+    "path":"folders/GUI/POPUPS/BANNERS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

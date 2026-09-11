@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"SPELLBOOK: WILDCARD",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/SPELLBOOK: WILDCARD.yy",
+    "name":"SPELLBOOK_WILDCARD",
+    "path":"folders/CARDS/UNCOLORED/SPELLBOOK_WILDCARD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

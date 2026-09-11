@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_krakens_chosen",
   "parent":{
     "name":"KRAKENS_CHOSEN",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/KRAKENS_CHOSEN.yy",
+    "path":"folders/CARDS/CERULEAN/KRAKENS_CHOSEN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -49,7 +49,7 @@ if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
 		_ct_cooldown = 8;
 
 		if (_scr_yes != undefined){
-			_scr_yes(_stct_item,_ref_parent_gui);
+			scr_inventory_use_prism_overworld(_stct_item,_ref_parent_gui);
 			_ref_parent_gui._ct_cooldown = 15;
 		}
 

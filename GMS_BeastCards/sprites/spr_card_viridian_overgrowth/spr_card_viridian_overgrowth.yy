@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"OVERGROWTH",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/OVERGROWTH.yy",
+    "path":"folders/CARDS/VIRIDIAN/OVERGROWTH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_frozen_spear",
   "parent":{
     "name":"FROZEN_SPEAR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_SPEAR.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_SPEAR.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

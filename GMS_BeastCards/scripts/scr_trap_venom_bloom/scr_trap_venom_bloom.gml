@@ -61,7 +61,7 @@ scr_trap_vfx_trigger(
 			//----------------//
 			//REVEAL TRAP//
 			//----------------//
-			scr_spawn_popup_trigger_banner("TRAP TRIGGERED: VENOM BLOOM");
+			scr_gui_spawn_popup_trigger_banner("TRAP TRIGGERED: VENOM BLOOM");
 
 			//----------------------//
 			//GET ADJACENT BEASTS//

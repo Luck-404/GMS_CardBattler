@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RIMEFROST_ELEMENTAL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RIMEFROST_ELEMENTAL.yy",
+    "path":"folders/CARDS/CERULEAN/RIMEFROST_ELEMENTAL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

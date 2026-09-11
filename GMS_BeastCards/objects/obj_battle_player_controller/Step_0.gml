@@ -179,7 +179,7 @@ switch(_state_player){
 
 		ds_list_shuffle(_list_battle_deck);
 
-		scr_battle_card_draw(_ct_hand_size);
+		scr_battle_draw_cards(_ct_hand_size);
 
 		_state_player = ENUM_PLAYER_STATE.WAIT;
 
@@ -209,7 +209,7 @@ switch(_state_player){
 		//-------------------------//
 		if (
 			_flag_begin_extra_turn &&
-			!instance_exists(obj_wait)
+			!instance_exists(obj_battle_wait)
 		){
 
 			_flag_begin_extra_turn = false;
@@ -298,7 +298,7 @@ switch(_state_player){
 		if (
 			_flag_turn_start_items_init &&
 			!_flag_turn_start_items_complete &&
-			!instance_exists(obj_wait)
+			!instance_exists(obj_battle_wait)
 		){
 
 			if (ds_list_size(_list_turn_start_items) > 0){
@@ -314,7 +314,7 @@ switch(_state_player){
 					_stct_item._scr_item != undefined
 				){
 
-					scr_spawn_popup_trigger_banner(_stct_item._str_item_name);
+					scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name);
 
 					var _flag_triggered = script_execute(
 						_stct_item._scr_item,
@@ -367,7 +367,7 @@ switch(_state_player){
 		//--------------------//
 		//EXECUTE STATUS QUEUE//
 		//--------------------//
-		if (_flag_statuses_init && !instance_exists(obj_wait)){
+		if (_flag_statuses_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_statuses) > 0){
 
@@ -420,7 +420,7 @@ switch(_state_player){
 				);
 		}
 
-		if (_flag_minions_init && !instance_exists(obj_wait)){
+		if (_flag_minions_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_casting_minions) > 0){
 
@@ -456,7 +456,7 @@ switch(_state_player){
 				_state_player =
 					ENUM_PLAYER_STATE.SELECT_CARD;
 
-				hscr_check_battle_card_oom(
+				hscr_battle_check_card_oom(
 					_list_battle_hand
 				);
 			}
@@ -487,7 +487,7 @@ switch(_state_player){
 				_flag_clicked = true;
 
 				if (array_length(hscr_get_prism_stacks()) <= 0){
-					audio_play_sound(snd_error,0,false);
+					audio_play_sound(snd_gui_error,0,false);
 					scr_spawn_popup_error("NO PRISMS",60);
 				}
 				else{
@@ -659,7 +659,7 @@ switch(_state_player){
 
 				_stct_selected_prism = undefined;
 
-				hscr_check_battle_card_oom(_list_battle_hand);
+				hscr_battle_check_card_oom(_list_battle_hand);
 
 				_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
 			}
@@ -698,7 +698,7 @@ switch(_state_player){
 			_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
 			global.ref_cast_card = undefined;
 
-			hscr_check_battle_card_oom(_list_battle_hand);
+			hscr_battle_check_card_oom(_list_battle_hand);
 
 			break;
 		}
@@ -756,7 +756,7 @@ switch(_state_player){
 				}
 				else{
 
-					audio_play_sound(snd_error,0,false);
+					audio_play_sound(snd_gui_error,0,false);
 
 					scr_spawn_popup_error(
 						"NO CORPSES",
@@ -816,7 +816,7 @@ switch(_state_player){
 			_ref_hovered_beast._flag_beast_range_check
 		){
 
-			_arr_target_preview = scr_battle_preview_get_card_targets(
+			_arr_target_preview = scr_battle_get_card_preview_targets(
 				global.ref_cast_card._ref_card,
 				_ref_hovered_beast
 			);
@@ -1107,7 +1107,7 @@ switch(_state_player){
 			//--------------//
 			else{
 
-				audio_play_sound(snd_error,0,false);
+				audio_play_sound(snd_gui_error,0,false);
 
 				scr_spawn_popup_error(
 			"INVALID CARD",
@@ -1223,7 +1223,7 @@ switch(_state_player){
 			}
 			else{
 
-				audio_play_sound(snd_error,0,false);
+				audio_play_sound(snd_gui_error,0,false);
 
 				scr_spawn_popup_error("INVALID CORPSE",60);
 			}
@@ -1303,7 +1303,7 @@ switch(_state_player){
 		//-------------------//
 		if (_ct_utility_tutors_pending > 0){
 
-			if (hscr_open_utility_tutor()){
+			if (hscr_battle_open_utility_tutor()){
 
 				_state_player =
 					ENUM_PLAYER_STATE.TUTOR_SELECT;
@@ -1346,7 +1346,7 @@ switch(_state_player){
 			_state_player =
 				ENUM_PLAYER_STATE.SELECT_CARD;
 
-			hscr_check_battle_card_oom(_list_battle_hand);
+			hscr_battle_check_card_oom(_list_battle_hand);
 		}
 
 	break;
@@ -1423,7 +1423,7 @@ switch(_state_player){
 		if (
 			_flag_turn_end_items_init &&
 			!_flag_turn_end_items_complete &&
-			!instance_exists(obj_wait)
+			!instance_exists(obj_battle_wait)
 		){
 
 			if (ds_list_size(_list_turn_end_items) > 0){
@@ -1509,7 +1509,7 @@ switch(_state_player){
 			}
 		}
 
-		if (_flag_statuses_init && !instance_exists(obj_wait)){
+		if (_flag_statuses_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_statuses) > 0){
 
@@ -1544,9 +1544,9 @@ switch(_state_player){
 				else{
 
 					// DRAW NEW CARDS
-					scr_battle_card_draw(_ct_draw_amount);
+					scr_battle_draw_cards(_ct_draw_amount);
 
-					hscr_check_battle_card_oom(_list_battle_hand);
+					hscr_battle_check_card_oom(_list_battle_hand);
 
 					hscr_finish_player_turn();
 				}
@@ -1573,12 +1573,12 @@ switch(_state_player){
 			_ct_effect_discards_pending = 0;
 
 			instance_destroy(
-				obj_popup_error
+				obj_gui_popup_error
 			);
 
-			scr_battle_card_reposition();
+			scr_battle_reposition_hand();
 
-			hscr_check_battle_card_oom(
+			hscr_battle_check_card_oom(
 				_list_battle_hand
 			);
 
@@ -1648,9 +1648,9 @@ switch(_state_player){
 
 		if (ds_list_size(_list_battle_hand) <= _ct_hand_size){
 
-			instance_destroy(obj_popup_error);
+			instance_destroy(obj_gui_popup_error);
 
-			scr_battle_card_reposition();
+			scr_battle_reposition_hand();
 
 			hscr_finish_player_turn();
 

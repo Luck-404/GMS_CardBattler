@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_SPEAR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_SPEAR.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_SPEAR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_verdant_embrace",
   "parent":{
     "name":"VERDANT_EMBRACE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT_EMBRACE.yy",
+    "path":"folders/CARDS/VIRIDIAN/VERDANT_EMBRACE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

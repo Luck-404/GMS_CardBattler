@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_crippling_vines",
   "parent":{
     "name":"CRIPPLING VINES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CRIPPLING VINES.yy",
+    "path":"folders/CARDS/VIRIDIAN/CRIPPLING VINES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

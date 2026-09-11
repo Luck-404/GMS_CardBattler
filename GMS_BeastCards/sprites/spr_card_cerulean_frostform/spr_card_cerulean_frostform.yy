@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROSTFORM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROSTFORM.yy",
+    "path":"folders/CARDS/CERULEAN/FROSTFORM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

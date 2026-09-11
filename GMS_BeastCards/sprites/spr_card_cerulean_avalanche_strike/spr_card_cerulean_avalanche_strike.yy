@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"AVALANCHE_STRIKE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/AVALANCHE_STRIKE.yy",
+    "path":"folders/CARDS/CERULEAN/AVALANCHE_STRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

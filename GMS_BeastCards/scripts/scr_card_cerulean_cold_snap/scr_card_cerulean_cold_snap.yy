@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_cold_snap",
   "parent":{
     "name":"COLD_SNAP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/COLD_SNAP.yy",
+    "path":"folders/CARDS/CERULEAN/COLD_SNAP.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"ARTIFACT: HOURGLASS",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/ARTIFACT: HOURGLASS.yy",
+    "name":"ARTIFACT_HOURGLASS",
+    "path":"folders/CARDS/UNCOLORED/ARTIFACT_HOURGLASS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

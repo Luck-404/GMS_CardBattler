@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_inventory_cancel_item_use",
   "parent":{
-    "name":"ITEM USAGE",
-    "path":"folders/INVENTORY/ITEM USAGE.yy",
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/CORE/USAGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

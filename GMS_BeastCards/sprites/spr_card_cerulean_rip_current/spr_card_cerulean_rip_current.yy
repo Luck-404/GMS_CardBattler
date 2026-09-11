@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RIP_CURRENT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RIP_CURRENT.yy",
+    "path":"folders/CARDS/CERULEAN/RIP_CURRENT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

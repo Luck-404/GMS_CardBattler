@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PERMAFROST",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PERMAFROST.yy",
+    "path":"folders/CARDS/CERULEAN/PERMAFROST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

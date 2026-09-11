@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_gods_wrath",
   "parent":{
     "name":"CERULEAN_GODS_WRATH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CERULEAN_GODS_WRATH.yy",
+    "path":"folders/CARDS/CERULEAN/CERULEAN_GODS_WRATH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

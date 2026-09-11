@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_ancient_grove",
   "parent":{
     "name":"ANCIENT_GROVE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ANCIENT_GROVE.yy",
+    "path":"folders/CARDS/VIRIDIAN/ANCIENT_GROVE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

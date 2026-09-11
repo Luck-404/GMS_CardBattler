@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SHATTER_STRIKE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHATTER_STRIKE.yy",
+    "path":"folders/CARDS/CERULEAN/SHATTER_STRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

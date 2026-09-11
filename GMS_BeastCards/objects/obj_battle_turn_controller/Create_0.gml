@@ -235,7 +235,7 @@ function hscr_execute_entry_trigger(_stct_trigger){
 			}
 
 			var _str_popup = _stct_item._str_item_name + " " + _stct_item._str_trigger_text;
-			scr_spawn_popup_trigger_banner(_str_popup);
+			scr_gui_spawn_popup_trigger_banner(_str_popup);
 
 			var _flag_triggered = _stct_item._scr_item(
 				"TRIGGER",

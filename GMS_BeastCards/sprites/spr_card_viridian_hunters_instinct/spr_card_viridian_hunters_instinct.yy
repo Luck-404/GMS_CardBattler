@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"HUNTERS INSTINCT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/HUNTERS INSTINCT.yy",
+    "path":"folders/CARDS/VIRIDIAN/HUNTERS INSTINCT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

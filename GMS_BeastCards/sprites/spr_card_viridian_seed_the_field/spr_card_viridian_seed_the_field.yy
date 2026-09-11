@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SEED THE FIELD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SEED THE FIELD.yy",
+    "path":"folders/CARDS/VIRIDIAN/SEED THE FIELD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

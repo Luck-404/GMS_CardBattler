@@ -130,12 +130,12 @@ hscr_open_trade = function(){
 		) <= 0
 	){
 		audio_play_sound(
-			snd_error,
+			snd_gui_error,
 			0,
 			false
 		);
 
-		scr_spawn_popup_error(
+		scr_gui_spawn_popup_error(
 			"NOTHING FOR SALE",
 			60
 		);
@@ -574,7 +574,7 @@ hscr_handle_dialogue_input = function(){
 //—------------------------------------------------------------------------------//
 hscr_draw_dialogue = function(){
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_white);
 
 	draw_text_ext(
@@ -818,7 +818,7 @@ hscr_draw_menu_option = function(
 	//-------------//
 	// OPTION TEXT
 	//-------------//
-	draw_set_font(fnt_medium_gui);
+	draw_set_font(fnt_gui_medium);
 	draw_set_colour(c_black);
 
 	draw_set_halign(fa_center);
@@ -923,7 +923,7 @@ hscr_draw_menu = function(
 	//—------------------------------------------------------------------------------//
 	if (array_length(_arr_options) <= 0){
 
-		draw_set_font(fnt_small_gui);
+		draw_set_font(fnt_gui_small);
 		draw_set_colour(c_ltgray);
 
 		draw_text(

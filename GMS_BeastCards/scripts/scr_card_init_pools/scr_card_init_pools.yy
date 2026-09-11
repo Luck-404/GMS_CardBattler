@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_init_pools",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_init_pools",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/CARDS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

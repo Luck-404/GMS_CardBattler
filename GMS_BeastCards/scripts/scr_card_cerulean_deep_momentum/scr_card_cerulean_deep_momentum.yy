@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_deep_momentum",
   "parent":{
     "name":"DEEP_MOMENTUM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DEEP_MOMENTUM.yy",
+    "path":"folders/CARDS/CERULEAN/DEEP_MOMENTUM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

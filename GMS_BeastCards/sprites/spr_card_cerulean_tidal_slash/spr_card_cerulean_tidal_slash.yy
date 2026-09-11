@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TIDAL_SLASH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDAL_SLASH.yy",
+    "path":"folders/CARDS/CERULEAN/TIDAL_SLASH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

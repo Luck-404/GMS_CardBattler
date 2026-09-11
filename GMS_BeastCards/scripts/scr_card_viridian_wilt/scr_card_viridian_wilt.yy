@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_wilt",
   "parent":{
     "name":"WILT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILT.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

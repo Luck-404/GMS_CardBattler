@@ -14,7 +14,7 @@ if (room != rm_battle){
 	//--------------//
 	if (global.flag_pause){
 		draw_set_colour(c_white);
-		draw_set_font(fnt_large_gui);
+		draw_set_font(fnt_gui_large);
 		draw_text((room_width / 2) - string_width("GAME PAUSED") / 2,room_height / 8 - 100,"GAME PAUSED");
 	}
 
@@ -73,7 +73,7 @@ if (room != rm_battle){
 			var _val_center_x = _val_box_x + (_val_slot_w * 0.5);
 			var _val_center_y = _val_box_y + (_val_slot_h * 0.5);
 
-			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+			var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 
 			draw_sprite_ext(_spr_shadow,0,_val_center_x,_val_center_y + 24,1,1,0,c_white,1);
 			draw_sprite_ext(_stct_unit._spr_beast,0,_val_center_x,_val_center_y,0.10,0.10,0,c_white,1);
@@ -103,7 +103,7 @@ if (room != rm_battle){
 	if (global.ref_active_gui == undefined){
 		var _str_gold_text = string(global.val_player_gold) + " gp";
 
-		draw_set_font(fnt_medium_gui);
+		draw_set_font(fnt_gui_medium);
 
 		var _val_pad_x = 12;
 		var _val_pad_y = 8;

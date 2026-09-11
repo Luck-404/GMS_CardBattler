@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_aqua_step",
   "parent":{
     "name":"AQUA_STEP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/AQUA_STEP.yy",
+    "path":"folders/CARDS/CERULEAN/AQUA_STEP.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

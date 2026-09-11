@@ -26,13 +26,13 @@ var _val_mouse_y = device_mouse_y_to_gui(0);
 // HEADER
 //
 #region HEADER
-draw_set_font(fnt_medium_gui);
+draw_set_font(fnt_gui_medium);
 draw_set_colour(c_white);
 
 draw_text(_val_pane_left + 135,_val_pane_top - 25,"DECK");
 draw_text(_val_pane_left + 575,_val_pane_top - 25,"LIBRARY");
 
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 #endregion
 
 //
@@ -97,7 +97,7 @@ for (var _it_card = 0; _it_card < _ct_library_per_page; _it_card++){
 			}
 
 			if (keyboard_check_pressed(vk_delete) && !_flag_clicked){
-				audio_play_sound(snd_destroy,0,false);
+				audio_play_sound(snd_gui_destroy,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICE_AGE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_AGE.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_AGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

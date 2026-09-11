@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_unequip_held_item",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_unequip_held_item",
+  "parent":{
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/HELD/USAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_entangle",
   "parent":{
     "name":"ENTANGLE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ENTANGLE.yy",
+    "path":"folders/CARDS/VIRIDIAN/ENTANGLE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_battle_buff",
   "parent":{
-    "name":"BUFFS",
-    "path":"folders/BATTLE/STATUSES/BUFFS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CORE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

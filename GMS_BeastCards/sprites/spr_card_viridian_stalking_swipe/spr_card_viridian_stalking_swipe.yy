@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STALKING SWIPE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/STALKING SWIPE.yy",
+    "path":"folders/CARDS/VIRIDIAN/STALKING SWIPE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

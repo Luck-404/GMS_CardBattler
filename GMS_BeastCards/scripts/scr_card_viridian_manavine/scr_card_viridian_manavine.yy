@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_manavine",
   "parent":{
     "name":"MANAVINE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/MANAVINE.yy",
+    "path":"folders/CARDS/VIRIDIAN/MANAVINE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

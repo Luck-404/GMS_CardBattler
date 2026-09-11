@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RAZOR_SHELL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RAZOR_SHELL.yy",
+    "path":"folders/CARDS/CERULEAN/RAZOR_SHELL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

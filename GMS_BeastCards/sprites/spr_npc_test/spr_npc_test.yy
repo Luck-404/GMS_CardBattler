@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"NPCS",
-    "path":"folders/NPCS.yy",
+    "name":"NPC_TEST",
+    "path":"folders/NPCS/NPC_TEST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

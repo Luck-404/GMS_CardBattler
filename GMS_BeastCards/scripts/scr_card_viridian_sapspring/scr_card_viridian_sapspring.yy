@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_sapspring",
   "parent":{
     "name":"SAPSPRING",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SAPSPRING.yy",
+    "path":"folders/CARDS/VIRIDIAN/SAPSPRING.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

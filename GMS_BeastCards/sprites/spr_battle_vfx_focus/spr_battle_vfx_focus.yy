@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"FOCUS",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/GENERIC/FOCUS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -43,7 +43,7 @@ function scr_item_held_burning_ash(_str_state,_stct_item,_ref_caster,_ref_target
 
 			scr_status_apply_dot("BURN");
 	
-			scr_spawn_popup_trigger_banner(_stct_item._str_item_name);
+			scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name);
 
 			return true;
 

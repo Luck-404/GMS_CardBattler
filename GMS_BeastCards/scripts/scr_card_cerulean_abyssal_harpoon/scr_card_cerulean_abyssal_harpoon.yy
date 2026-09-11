@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_abyssal_harpoon",
   "parent":{
     "name":"ABYSSAL_HARPOON",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ABYSSAL_HARPOON.yy",
+    "path":"folders/CARDS/CERULEAN/ABYSSAL_HARPOON.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

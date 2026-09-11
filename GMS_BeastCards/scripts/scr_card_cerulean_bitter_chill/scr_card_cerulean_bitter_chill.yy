@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_bitter_chill",
   "parent":{
     "name":"BITTER_CHILL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BITTER_CHILL.yy",
+    "path":"folders/CARDS/CERULEAN/BITTER_CHILL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_spirit_pierce",
   "parent":{
     "name":"SPIRIT PIERCE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPIRIT PIERCE.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPIRIT PIERCE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

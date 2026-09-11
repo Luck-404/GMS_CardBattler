@@ -118,7 +118,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	if (array_length(_arr_corpses) <= 0){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"NO CORPSES",
 			undefined,
@@ -160,7 +160,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 		//-------------//
 		//GENERATE MANA//
 		//-------------//
-		scr_battle_mana_gain(1);
+		scr_battle_gain_mana(1);
 
 		//----------------//
 		//HEAL ALL ALLIES//
@@ -330,7 +330,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 	//----------------//
 	if (_ct_corpses_expended > 0){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"+" +
 				string(_ct_corpses_expended) +

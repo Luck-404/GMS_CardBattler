@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"POLLINATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/POLLINATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/POLLINATE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

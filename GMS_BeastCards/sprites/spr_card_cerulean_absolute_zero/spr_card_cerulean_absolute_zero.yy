@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ABSOLUTE_ZERO",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ABSOLUTE_ZERO.yy",
+    "path":"folders/CARDS/CERULEAN/ABSOLUTE_ZERO.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

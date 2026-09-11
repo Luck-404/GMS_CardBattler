@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_winter_resonance",
   "parent":{
     "name":"WINTER_RESONANCE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WINTER_RESONANCE.yy",
+    "path":"folders/CARDS/CERULEAN/WINTER_RESONANCE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

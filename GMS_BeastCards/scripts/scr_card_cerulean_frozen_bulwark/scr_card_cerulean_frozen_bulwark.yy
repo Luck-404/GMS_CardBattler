@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_frozen_bulwark",
   "parent":{
     "name":"FROZEN_BULWARK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_BULWARK.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_BULWARK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

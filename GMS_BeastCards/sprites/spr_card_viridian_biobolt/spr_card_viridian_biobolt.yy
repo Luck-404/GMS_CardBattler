@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BIOBOLT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BIOBOLT.yy",
+    "path":"folders/CARDS/VIRIDIAN/BIOBOLT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

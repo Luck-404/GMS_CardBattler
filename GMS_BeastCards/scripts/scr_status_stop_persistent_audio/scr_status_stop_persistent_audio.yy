@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_status_stop_persistent_audio",
   "parent":{
-    "name":"CARD SFX",
-    "path":"folders/CARDS/CARD SFX.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/FX/SFX/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

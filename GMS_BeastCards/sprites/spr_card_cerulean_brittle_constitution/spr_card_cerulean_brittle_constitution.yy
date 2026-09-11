@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BRITTLE_CONSTITUTION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BRITTLE_CONSTITUTION.yy",
+    "path":"folders/CARDS/CERULEAN/BRITTLE_CONSTITUTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -10,8 +10,8 @@
   "name":"obj_gui_npc_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"NPCS",
-    "path":"folders/NPCS.yy",
+    "name":"GUI",
+    "path":"folders/NPCS/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

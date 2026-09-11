@@ -60,7 +60,7 @@ function scr_status_trigger_divine_protection(_ref_target){
 		_ref_target
 	);
 
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"BLOCKED",
 		undefined,

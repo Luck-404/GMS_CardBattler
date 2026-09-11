@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_shared_bulwark",
   "parent":{
     "name":"SHARED_BULWARK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHARED_BULWARK.yy",
+    "path":"folders/CARDS/CERULEAN/SHARED_BULWARK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

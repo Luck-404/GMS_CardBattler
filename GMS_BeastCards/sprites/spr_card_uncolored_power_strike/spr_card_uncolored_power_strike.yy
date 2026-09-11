@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"POWER STRIKE",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/POWER STRIKE.yy",
+    "name":"POWER_STRIKE",
+    "path":"folders/CARDS/UNCOLORED/POWER_STRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

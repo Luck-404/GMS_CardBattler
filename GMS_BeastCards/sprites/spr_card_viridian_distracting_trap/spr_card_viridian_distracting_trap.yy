@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DISTRACTING TRAP",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/DISTRACTING TRAP.yy",
+    "path":"folders/CARDS/VIRIDIAN/DISTRACTING TRAP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THUNDERSTORM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/THUNDERSTORM.yy",
+    "path":"folders/CARDS/CERULEAN/THUNDERSTORM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

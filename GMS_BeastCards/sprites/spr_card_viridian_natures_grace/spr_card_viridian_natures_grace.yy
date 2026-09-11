@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURES_GRACE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES_GRACE.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES_GRACE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

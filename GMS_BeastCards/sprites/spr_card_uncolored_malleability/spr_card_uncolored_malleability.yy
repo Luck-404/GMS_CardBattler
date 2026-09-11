@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"MALLEABILITY",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/MALLEABILITY.yy",
+    "path":"folders/CARDS/UNCOLORED/MALLEABILITY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

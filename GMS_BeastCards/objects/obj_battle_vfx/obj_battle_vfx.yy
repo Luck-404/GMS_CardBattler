@@ -11,8 +11,8 @@
   "name":"obj_battle_vfx",
   "overriddenProperties":[],
   "parent":{
-    "name":"VFX",
-    "path":"folders/BATTLE/VFX.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/FX/VFX/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

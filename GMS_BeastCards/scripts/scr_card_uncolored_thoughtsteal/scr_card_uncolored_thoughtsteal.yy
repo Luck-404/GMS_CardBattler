@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_thoughtsteal",
   "parent":{
     "name":"THOUGHTSTEAL",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/THOUGHTSTEAL.yy",
+    "path":"folders/CARDS/UNCOLORED/THOUGHTSTEAL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

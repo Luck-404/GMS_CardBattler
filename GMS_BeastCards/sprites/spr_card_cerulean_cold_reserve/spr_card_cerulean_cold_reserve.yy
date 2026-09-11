@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"COLD_RESERVE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/COLD_RESERVE.yy",
+    "path":"folders/CARDS/CERULEAN/COLD_RESERVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"BOOST",
-    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/BOOST.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/BOOST.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_ARMOR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_ARMOR.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_ARMOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

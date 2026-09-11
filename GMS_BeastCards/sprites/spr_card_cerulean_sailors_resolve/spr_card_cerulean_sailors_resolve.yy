@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SAILORS_RESOLVE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SAILORS_RESOLVE.yy",
+    "path":"folders/CARDS/CERULEAN/SAILORS_RESOLVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

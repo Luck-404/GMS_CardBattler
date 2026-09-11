@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"EMERALD TALISMAN",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/EMERALD TALISMAN.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/EMERALD TALISMAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

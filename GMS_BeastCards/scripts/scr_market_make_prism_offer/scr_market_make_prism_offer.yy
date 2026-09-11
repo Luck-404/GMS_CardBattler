@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_market_make_prism_offer",
   "parent":{
-    "name":"PRISM MARKET",
-    "path":"folders/GUI/MARKETS/PRISM MARKET.yy",
+    "name":"PRISM",
+    "path":"folders/MARKETS/PRISM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

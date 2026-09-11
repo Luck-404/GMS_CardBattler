@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_beast_set_level",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_beast_set_level",
+  "parent":{
+    "name":"PROGRESSION",
+    "path":"folders/BEASTS/CORE/PROGRESSION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

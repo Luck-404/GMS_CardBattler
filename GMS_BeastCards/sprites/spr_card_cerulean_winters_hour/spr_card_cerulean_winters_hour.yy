@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WINTERS_HOUR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WINTERS_HOUR.yy",
+    "path":"folders/CARDS/CERULEAN/WINTERS_HOUR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

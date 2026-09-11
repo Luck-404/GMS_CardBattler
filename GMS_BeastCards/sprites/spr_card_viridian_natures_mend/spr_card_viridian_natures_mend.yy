@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURES_MEND",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES_MEND.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES_MEND.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

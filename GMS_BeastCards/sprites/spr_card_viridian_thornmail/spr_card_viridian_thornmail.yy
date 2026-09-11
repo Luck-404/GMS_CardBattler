@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THORNMAIL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/THORNMAIL.yy",
+    "path":"folders/CARDS/VIRIDIAN/THORNMAIL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

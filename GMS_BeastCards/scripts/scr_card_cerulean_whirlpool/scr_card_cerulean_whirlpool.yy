@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_whirlpool",
   "parent":{
     "name":"WHIRLPOOL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WHIRLPOOL.yy",
+    "path":"folders/CARDS/CERULEAN/WHIRLPOOL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

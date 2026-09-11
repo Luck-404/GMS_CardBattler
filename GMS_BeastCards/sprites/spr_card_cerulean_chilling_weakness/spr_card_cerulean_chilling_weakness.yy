@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CHILLING_WEAKNESS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CHILLING_WEAKNESS.yy",
+    "path":"folders/CARDS/CERULEAN/CHILLING_WEAKNESS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

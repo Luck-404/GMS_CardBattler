@@ -6,7 +6,7 @@
   "name":"scr_item_held_emerald_talisman",
   "parent":{
     "name":"EMERALD TALISMAN",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/EMERALD TALISMAN.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/EMERALD TALISMAN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

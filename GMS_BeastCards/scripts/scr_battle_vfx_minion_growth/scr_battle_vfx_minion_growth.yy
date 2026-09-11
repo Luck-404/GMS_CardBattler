@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_vfx_minion_growth",
   "parent":{
-    "name":"MINION VFX MOVEMENT",
-    "path":"folders/BATTLE/VFX/MINION VFX MOVEMENT.yy",
+    "name":"MINION FX",
+    "path":"folders/BATTLE/MINIONS/CORE/MINION FX.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

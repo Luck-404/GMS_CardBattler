@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"BASIC PRISM",
-    "path":"folders/INVENTORY/ITEM LIST/PRISM/BASIC PRISM.yy",
+    "name":"CORE",
+    "path":"folders/INVENTORY/ITEMS/PRISM/CORE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

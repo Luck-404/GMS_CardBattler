@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WINTER_RESONANCE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WINTER_RESONANCE.yy",
+    "path":"folders/CARDS/CERULEAN/WINTER_RESONANCE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

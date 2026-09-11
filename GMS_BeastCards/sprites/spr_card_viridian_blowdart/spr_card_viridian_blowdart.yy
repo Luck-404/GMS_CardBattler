@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BLOWDART",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BLOWDART.yy",
+    "path":"folders/CARDS/VIRIDIAN/BLOWDART.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

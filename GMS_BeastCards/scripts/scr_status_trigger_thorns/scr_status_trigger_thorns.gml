@@ -1,110 +1,193 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_trigger_thorns
-// FUNCTION: Checks a defending Beast for Thorns.
-//           Deals the stored neutral retaliation damage to the melee attacker.
-//           Preserves and restores the active battle damage context.
+// SCRIPT: SCR_STATUS_BUFF_THORNS
+// FUNCTION: Handles the Thorns Buff.
+//           Causes melee attackers to receive stored neutral damage.
+//           Reapplication keeps the strongest damage magnitude
+//           and refreshes its unstackable timed duration.
 //
 //===============================================================================//
+function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
-function scr_status_trigger_thorns(_ref_defender,_ref_attacker){
+	switch(_str_tag){
 
-	if (!instance_exists(_ref_defender)){
-		return false;
+		//-------//
+		//APPLY//
+		//-------//
+		case "APPLY":
+
+			var _ref_target =
+				global.ref_target_beast;
+
+			if (!instance_exists(_ref_target)){
+				return undefined;
+			}
+
+			if (_val_magnitude == undefined){
+				_val_magnitude = 3;
+			}
+
+			if (_val_lifetime == undefined){
+				_val_lifetime = 3;
+			}
+
+			_val_magnitude =
+				max(0,_val_magnitude);
+
+			_val_lifetime =
+				max(1,_val_lifetime);
+
+			//----------------//
+			//CHECK EXISTING//
+			//----------------//
+			var _ref_existing_status =
+				scr_status_check(
+					"THORNS",
+					_ref_target
+				);
+
+			if (_ref_existing_status != -1){
+
+				//----------------//
+				//UPDATE DAMAGE//
+				//----------------//
+				_ref_existing_status._val_status_magnitude =
+					max(
+						_ref_existing_status._val_status_magnitude,
+						_val_magnitude
+					);
+
+				//----------------//
+				//REFRESH LIFE//
+				//----------------//
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
+
+				_ref_existing_status._str_status_desc =
+					"MELEE ATTACKERS TAKE " +
+					string(_ref_existing_status._val_status_magnitude) +
+					" NEUTRAL DAMAGE";
+
+				//------------------------//
+				//ENSURE PERSISTENT VFX//
+				//------------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx =
+						scr_battle_vfx_persistent(
+							_ref_target,
+							spr_battle_vfx_thorns,
+							0,
+							-65,
+							1
+						);
+				}
+
+				return _ref_existing_status;
+			}
+
+			//---------------//
+			//CREATE THORNS//
+			//---------------//
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
+
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
+
+			_ref_new_status._scr_status =
+				scr_status_buff_thorns;
+
+			_ref_new_status._ref_host =
+				_ref_target;
+
+			_ref_new_status._str_status_type =
+				"BUFF";
+
+			_ref_new_status._str_status_name =
+				"THORNS";
+
+			_ref_new_status._str_status_desc =
+				"MELEE ATTACKERS TAKE " +
+					string(_val_magnitude) +
+					" NEUTRAL DAMAGE";
+
+			_ref_new_status._spr_status =
+				spr_status_buff_thorns;
+
+			_ref_new_status._ct_status_stacks =
+				1;
+
+			_ref_new_status._val_status_magnitude =
+				_val_magnitude;
+
+			_ref_new_status._str_trigger_region =
+				"END";
+
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
+
+			scr_status_reposition(
+				_ref_target
+			);
+
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent(
+					_ref_target,
+					spr_battle_vfx_thorns,
+					0,
+					-65,
+					1
+				);
+
+			return _ref_new_status;
+
+		break;
+
+
+		//--------//
+		//REPEAT//
+		//--------//
+		case "REPEAT":
+
+			if (!instance_exists(_ref_status)){
+				return undefined;
+			}
+
+			scr_status_tick_lifetime(
+				_ref_status
+			);
+
+		break;
+
+
+		//-------//
+		//DEATH//
+		//-------//
+		case "DEATH":
+
+			if (instance_exists(_ref_status)){
+				scr_status_destroy(_ref_status);
+			}
+
+		break;
 	}
 
-	if (!instance_exists(_ref_attacker)){
-		return false;
-	}
-
-	if (_ref_attacker._val_cur_hp <= 0){
-		return false;
-	}
-
-	//-------------//
-	//CHECK THORNS//
-	//-------------//
-	var _ref_thorns =
-		scr_status_check(
-			"THORNS",
-			_ref_defender
-		);
-
-	if (_ref_thorns == -1){
-		return false;
-	}
-
-	var _val_thorns_damage =
-		_ref_thorns._val_status_magnitude;
-
-	if (_val_thorns_damage <= 0){
-		return false;
-	}
-
-	//----------------------//
-	//STORE CURRENT CONTEXT//
-	//----------------------//
-	var _ref_original_caster =
-		global.ref_caster_beast;
-
-	var _ref_original_target =
-		global.ref_target_beast;
-
-	var _stct_card =
-		global.ref_cast_card._ref_card;
-
-	var _str_original_stat =
-		_stct_card._str_card_stat;
-
-	//-----------------------//
-	//SET RETALIATION CONTEXT//
-	//-----------------------//
-	global.flag_thorns_retaliating =
-		true;
-
-	global.ref_caster_beast =
-		_ref_defender;
-
-	global.ref_target_beast =
-		_ref_attacker;
-
-	_stct_card._str_card_stat =
-		"NEU";
-
-	//-------------//
-	//FEEDBACK//
-	//-------------//
-	scr_spawn_popup_scrolling(
-		"TEXT",
-		"THORNS",
-		undefined,
-		c_green,
-		_ref_defender.x,
-		_ref_defender.y - 48
-	);
-
-	//------------------//
-	//RETALIATE//
-	//------------------//
-	scr_battle_damage_target(
-		_val_thorns_damage,
-		_ref_attacker
-	);
-
-	//----------------//
-	//RESTORE CONTEXT//
-	//----------------//
-	_stct_card._str_card_stat =
-		_str_original_stat;
-
-	global.ref_caster_beast =
-		_ref_original_caster;
-
-	global.ref_target_beast =
-		_ref_original_target;
-
-	global.flag_thorns_retaliating =
-		false;
-
-	return true;
+	return undefined;
 }

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SNOWFORT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SNOWFORT.yy",
+    "path":"folders/CARDS/CERULEAN/SNOWFORT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

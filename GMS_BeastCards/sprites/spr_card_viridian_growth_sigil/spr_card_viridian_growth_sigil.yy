@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"GROWTH SIGIL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GROWTH SIGIL.yy",
+    "path":"folders/CARDS/VIRIDIAN/GROWTH SIGIL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

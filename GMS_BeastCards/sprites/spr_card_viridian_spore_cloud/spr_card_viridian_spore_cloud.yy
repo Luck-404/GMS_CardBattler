@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SPORE CLOUD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPORE CLOUD.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPORE CLOUD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -57,7 +57,7 @@ function scr_trigger_plague_garden(_ref_target,_str_dot_name){
 		_ref_target
 	);
 
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"PLAGUE GARDEN",
 		undefined,

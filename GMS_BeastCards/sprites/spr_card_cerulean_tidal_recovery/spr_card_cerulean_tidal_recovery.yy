@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TIDAL_RECOVERY",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDAL_RECOVERY.yy",
+    "path":"folders/CARDS/CERULEAN/TIDAL_RECOVERY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

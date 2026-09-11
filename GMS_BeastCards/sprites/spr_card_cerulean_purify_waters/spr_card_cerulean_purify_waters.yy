@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PURIFY_WATERS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PURIFY_WATERS.yy",
+    "path":"folders/CARDS/CERULEAN/PURIFY_WATERS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_natures_grace",
   "parent":{
     "name":"NATURES_GRACE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES_GRACE.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES_GRACE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

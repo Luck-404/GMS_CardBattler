@@ -19,7 +19,7 @@ function scr_status_get_con_resist_chance(_ref_target){
 		_ref_target._ref_unit._val_beast_con_stat;
 
 	var _val_con_modifier =
-		scr_get_beast_grade_modifier(_val_con_stat);
+		scr_beast_get_grade_modifier(_val_con_stat);
 
 	var _val_resist_chance =
 		round(

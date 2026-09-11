@@ -20,6 +20,6 @@ function scr_card_cerulean_deep_current(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DRAW 1 CARD//
 	//-----------//
-	scr_battle_card_draw(1);
+	scr_battle_draw_cards(1);
 
 }

@@ -10,7 +10,7 @@
 
 if (!instance_exists(obj_gui_end_battle_pane)){
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 
 	if (_str_list == "DEAD"){
 		_val_cur_hp = 0;
@@ -140,7 +140,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 					self
 				);
 
-			draw_set_font(fnt_small_gui);
+			draw_set_font(fnt_gui_small);
 			draw_set_halign(fa_center);
 			draw_set_valign(fa_top);
 			draw_set_colour(c_black);
@@ -208,7 +208,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 			if (_str_caster_preview != ""){
 
-				draw_set_font(fnt_small_gui);
+				draw_set_font(fnt_gui_small);
 				draw_set_colour(c_black);
 				draw_set_halign(fa_center);
 				draw_set_valign(fa_top);
@@ -269,14 +269,14 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		){
 
 			var _str_target_preview =
-				scr_battle_preview_get_card_target(
+				scr_battle_get_card_target_preview(
 					global.ref_cast_card._ref_card,
 					self
 				);
 
 			if (_str_target_preview != ""){
 
-				draw_set_font(fnt_small_gui);
+				draw_set_font(fnt_gui_small);
 				draw_set_colour(c_black);
 				draw_set_halign(fa_center);
 				draw_set_valign(fa_top);
@@ -297,7 +297,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	//SHADOW//
 	//--------//
 	var _spr_shadow =
-		scr_get_beast_type_shadow(
+		scr_beast_get_type_shadow(
 			_ref_unit._str_beast_color_type
 		);
 
@@ -466,7 +466,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 	if (_ref_second_life != -1){
 
-		draw_set_font(fnt_small_gui);
+		draw_set_font(fnt_gui_small);
 		draw_set_colour(c_black);
 
 		draw_set_halign(fa_center);
@@ -580,7 +580,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	//-------//
 	//HP TEXT//
 	//-------//
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_black);
 
 	var _str_hp_text =
@@ -615,7 +615,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 	if (_val_armor > 0){
 
-		draw_set_font(fnt_small_gui);
+		draw_set_font(fnt_gui_small);
 		draw_set_colour(c_white);
 
 		var _val_icon_x =
@@ -962,7 +962,7 @@ if (
 	_ref_unit != undefined
 ){
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_black);
 
 	var _val_panel_w = 360;
@@ -1070,7 +1070,7 @@ if (
 		scr_beast_get_grade_letter(_val_hp) +
 		" x" +
 		string(
-			scr_get_beast_grade_modifier(
+			scr_beast_get_grade_modifier(
 				_val_hp
 			)
 		) +
@@ -1088,7 +1088,7 @@ if (
 		scr_beast_get_grade_letter(_val_con) +
 		" x" +
 		string(
-			scr_get_beast_grade_modifier(
+			scr_beast_get_grade_modifier(
 				_val_con
 			)
 		) +
@@ -1106,7 +1106,7 @@ if (
 		scr_beast_get_grade_letter(_val_ppow) +
 		" x" +
 		string(
-			scr_get_beast_grade_modifier(
+			scr_beast_get_grade_modifier(
 				_val_ppow
 			)
 		) +
@@ -1124,7 +1124,7 @@ if (
 		scr_beast_get_grade_letter(_val_mpow) +
 		" x" +
 		string(
-			scr_get_beast_grade_modifier(
+			scr_beast_get_grade_modifier(
 				_val_mpow
 			)
 		) +
@@ -1142,7 +1142,7 @@ if (
 		scr_beast_get_grade_letter(_val_pdef) +
 		" x" +
 		string(
-			scr_get_beast_grade_modifier(
+			scr_beast_get_grade_modifier(
 				_val_pdef
 			)
 		) +
@@ -1160,7 +1160,7 @@ if (
 		scr_beast_get_grade_letter(_val_mdef) +
 		" x" +
 		string(
-			scr_get_beast_grade_modifier(
+			scr_beast_get_grade_modifier(
 				_val_mdef
 			)
 		) +

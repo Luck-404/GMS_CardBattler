@@ -47,13 +47,13 @@ function scr_trap_distracting_trap(
 			//----------------//
 			//REVEAL TRAP//
 			//----------------//
-			scr_spawn_popup("TEXT","DISTRACTING TRAP TRIGGERED",undefined,c_red,room_width/2,room_height/2 - 325);
+			scr_gui_spawn_popup("TEXT","DISTRACTING TRAP TRIGGERED",undefined,c_red,room_width/2,room_height/2 - 325);
 
 			//-----------//
 			//DRAW CARD//
 			//-----------//
 			if (_ref_trap._str_owner_team == "PLAYER"){
-				scr_battle_card_draw(1);
+				scr_battle_draw_cards(1);
 			}
 
 			//-------------//

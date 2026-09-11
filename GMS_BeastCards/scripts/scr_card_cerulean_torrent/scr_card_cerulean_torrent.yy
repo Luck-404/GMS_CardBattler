@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_torrent",
   "parent":{
     "name":"TORRENT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TORRENT.yy",
+    "path":"folders/CARDS/CERULEAN/TORRENT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

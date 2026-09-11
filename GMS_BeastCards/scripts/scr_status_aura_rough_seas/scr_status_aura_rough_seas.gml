@@ -259,7 +259,7 @@ function scr_status_aura_rough_seas(
 			//----------//
 			//FEEDBACK//
 			//----------//
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"ROUGH SEAS",
 				undefined,

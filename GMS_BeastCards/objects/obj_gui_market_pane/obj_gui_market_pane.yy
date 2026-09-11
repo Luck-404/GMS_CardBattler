@@ -10,8 +10,8 @@
   "name":"obj_gui_market_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"MARKETS",
-    "path":"folders/GUI/MARKETS.yy",
+    "name":"GUI",
+    "path":"folders/MARKETS/GUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

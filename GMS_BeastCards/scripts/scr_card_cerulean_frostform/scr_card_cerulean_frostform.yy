@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_frostform",
   "parent":{
     "name":"FROSTFORM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROSTFORM.yy",
+    "path":"folders/CARDS/CERULEAN/FROSTFORM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

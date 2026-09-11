@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_uncolored_deft_strike",
   "parent":{
-    "name":"DEFT STRIKE",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/DEFT STRIKE.yy",
+    "name":"DEFT_STRIKE",
+    "path":"folders/CARDS/UNCOLORED/DEFT_STRIKE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

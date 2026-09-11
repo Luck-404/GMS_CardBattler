@@ -6,7 +6,7 @@
   "name":"scr_item_held_gold_fang",
   "parent":{
     "name":"GOLD FANG",
-    "path":"folders/INVENTORY/ITEM LIST/HELD/GOLD FANG.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/GOLD FANG.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

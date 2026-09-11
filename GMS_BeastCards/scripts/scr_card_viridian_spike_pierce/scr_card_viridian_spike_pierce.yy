@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_spike_pierce",
   "parent":{
     "name":"SPIKE PIERCE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPIKE PIERCE.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPIKE PIERCE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

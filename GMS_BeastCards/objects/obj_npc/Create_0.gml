@@ -60,7 +60,7 @@
 	//----------------//
 	// LOAD NPC DATA //
 	//----------------//
-	_stct_npc = scr_get_npc_info(_str_npc_id);
+	_stct_npc = scr_npc_get_info(_str_npc_id);
 
 	if (_stct_npc == undefined){
 
@@ -400,7 +400,7 @@ hscr_close_npc_interaction = function(){
 		global.flag_pause = false;
 
 		if (instance_exists(obj_player)){
-			scr_toggle_player_movement("START");
+			scr_player_set_movement_state("START");
 		}
 	}
 

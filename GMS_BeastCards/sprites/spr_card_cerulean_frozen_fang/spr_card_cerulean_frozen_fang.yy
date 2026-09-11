@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_FANG",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_FANG.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_FANG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

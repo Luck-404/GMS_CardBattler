@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_BULWARK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_BULWARK.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_BULWARK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

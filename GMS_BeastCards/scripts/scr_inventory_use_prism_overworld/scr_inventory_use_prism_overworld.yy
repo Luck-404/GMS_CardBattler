@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_use_prism_overworld",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_use_prism_overworld",
+  "parent":{
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/PRISM/USAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

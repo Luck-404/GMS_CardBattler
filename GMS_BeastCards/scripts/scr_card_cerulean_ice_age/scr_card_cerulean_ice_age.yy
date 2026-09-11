@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_ice_age",
   "parent":{
     "name":"ICE_AGE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_AGE.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_AGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

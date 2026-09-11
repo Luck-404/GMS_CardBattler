@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BLOOMING SHIELD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BLOOMING SHIELD.yy",
+    "path":"folders/CARDS/VIRIDIAN/BLOOMING SHIELD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

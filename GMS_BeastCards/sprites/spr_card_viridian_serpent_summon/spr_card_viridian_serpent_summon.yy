@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SERPENT SUMMON",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SERPENT SUMMON.yy",
+    "path":"folders/CARDS/VIRIDIAN/SERPENT SUMMON.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

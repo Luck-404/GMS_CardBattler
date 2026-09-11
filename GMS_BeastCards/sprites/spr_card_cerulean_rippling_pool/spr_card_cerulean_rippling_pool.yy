@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RIPPLING_POOL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RIPPLING_POOL.yy",
+    "path":"folders/CARDS/CERULEAN/RIPPLING_POOL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

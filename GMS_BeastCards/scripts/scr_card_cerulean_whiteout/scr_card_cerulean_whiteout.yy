@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_whiteout",
   "parent":{
     "name":"WHITEOUT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WHITEOUT.yy",
+    "path":"folders/CARDS/CERULEAN/WHITEOUT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

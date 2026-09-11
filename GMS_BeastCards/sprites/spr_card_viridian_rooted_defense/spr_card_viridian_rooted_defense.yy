@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ROOTED DEFENSE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ROOTED DEFENSE.yy",
+    "path":"folders/CARDS/VIRIDIAN/ROOTED DEFENSE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

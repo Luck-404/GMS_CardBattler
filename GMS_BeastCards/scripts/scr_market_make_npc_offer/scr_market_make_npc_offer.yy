@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_market_make_npc_offer",
   "parent":{
-    "name":"NPCS",
-    "path":"folders/NPCS.yy",
+    "name":"NPC",
+    "path":"folders/MARKETS/NPC.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

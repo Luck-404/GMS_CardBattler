@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SHATTERSTORM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SHATTERSTORM.yy",
+    "path":"folders/CARDS/CERULEAN/SHATTERSTORM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

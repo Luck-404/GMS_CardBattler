@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WINTERS_BITE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WINTERS_BITE.yy",
+    "path":"folders/CARDS/CERULEAN/WINTERS_BITE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

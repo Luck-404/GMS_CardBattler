@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"UNDERTOW",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/UNDERTOW.yy",
+    "path":"folders/CARDS/CERULEAN/UNDERTOW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

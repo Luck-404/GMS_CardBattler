@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_transition_get_room_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_transition_get_room_info",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/CORE/TRANSITIONS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

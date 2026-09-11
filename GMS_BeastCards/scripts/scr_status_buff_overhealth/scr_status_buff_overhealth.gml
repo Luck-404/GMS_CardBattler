@@ -191,7 +191,7 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				_ref_status._val_status_remaining +=
 					_val_regenerated;
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+" + string(_val_regenerated) + " OVERHEALTH",
 					undefined,

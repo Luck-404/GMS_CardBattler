@@ -10,8 +10,8 @@
   "name":"obj_gui_inventory_pane",
   "overriddenProperties":[],
   "parent":{
-    "name":"INVENTORY",
-    "path":"folders/INVENTORY.yy",
+    "name":"CORE",
+    "path":"folders/INVENTORY/GUI/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

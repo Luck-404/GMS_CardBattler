@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_greenflow",
   "parent":{
     "name":"GREENFLOW",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GREENFLOW.yy",
+    "path":"folders/CARDS/VIRIDIAN/GREENFLOW.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"THICK HIDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/THICK HIDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/THICK HIDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

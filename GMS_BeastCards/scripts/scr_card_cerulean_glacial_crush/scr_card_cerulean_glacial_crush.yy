@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_glacial_crush",
   "parent":{
     "name":"GLACIAL_CRUSH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/GLACIAL_CRUSH.yy",
+    "path":"folders/CARDS/CERULEAN/GLACIAL_CRUSH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

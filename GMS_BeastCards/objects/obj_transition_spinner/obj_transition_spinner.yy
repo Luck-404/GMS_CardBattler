@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"SPINNER",
-    "path":"folders/GUI/TRANSITIONS/SPINNER.yy",
+    "path":"folders/CORE/TRANSITIONS/SPINNER.yy",
   },
   "parentObjectId":null,
   "persistent":false,

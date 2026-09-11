@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SAPSPRING",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SAPSPRING.yy",
+    "path":"folders/CARDS/VIRIDIAN/SAPSPRING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

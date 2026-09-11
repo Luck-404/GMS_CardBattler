@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROSTBURN_NOVA",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROSTBURN_NOVA.yy",
+    "path":"folders/CARDS/CERULEAN/FROSTBURN_NOVA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_verdant_swipes",
   "parent":{
     "name":"VERDANT SWIPES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT SWIPES.yy",
+    "path":"folders/CARDS/VIRIDIAN/VERDANT SWIPES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

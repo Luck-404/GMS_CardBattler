@@ -31,7 +31,7 @@ if (
 		true
 	);
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_bottom);
 
@@ -52,7 +52,7 @@ if (
 	_stct_npc != undefined &&
 	_flag_triggered
 ){
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_white);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_bottom);

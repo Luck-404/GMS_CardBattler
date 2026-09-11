@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BITTER_CHILL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/BITTER_CHILL.yy",
+    "path":"folders/CARDS/CERULEAN/BITTER_CHILL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

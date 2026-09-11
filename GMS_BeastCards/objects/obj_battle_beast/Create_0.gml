@@ -138,10 +138,10 @@ _flag_ignore_caster_requirements = false;
 //-------//
 
 //—------------------------------------------------------------------------------//
-// hscr_get_battle_x
+// hscr_battle_get_active_x
 // FUNCTION: Returns the active battle x-position for a beast by team and position.
 //—------------------------------------------------------------------------------//
-function hscr_get_battle_x(_str_team_check,_val_pos_check){
+function hscr_battle_get_active_x(_str_team_check,_val_pos_check){
 
 	if (_str_team_check == "PLAYER"){
 		return room_width * 0.5 - 80 - (100 * _val_pos_check);
@@ -152,10 +152,10 @@ function hscr_get_battle_x(_str_team_check,_val_pos_check){
 }
 
 //—------------------------------------------------------------------------------//
-// hscr_get_dead_x
+// hscr_battle_get_graveyard_x
 // FUNCTION: Returns the graveyard x-position for a dead beast by team and position.
 //—------------------------------------------------------------------------------//
-function hscr_get_dead_x(_str_team_check,_ct_alive,_val_dead_pos){
+function hscr_battle_get_graveyard_x(_str_team_check,_ct_alive,_val_dead_pos){
 
 	if (_str_team_check == "PLAYER"){
 		return room_width * 0.5 - 80 - (100 * (_ct_alive + _val_dead_pos));

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BURSTING SEED",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BURSTING SEED.yy",
+    "path":"folders/CARDS/VIRIDIAN/BURSTING SEED.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_CURSE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_CURSE.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_CURSE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

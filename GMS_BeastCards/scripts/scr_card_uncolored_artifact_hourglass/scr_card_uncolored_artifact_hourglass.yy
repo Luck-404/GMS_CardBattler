@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_uncolored_artifact_hourglass",
   "parent":{
-    "name":"ARTIFACT: HOURGLASS",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/ARTIFACT: HOURGLASS.yy",
+    "name":"ARTIFACT_HOURGLASS",
+    "path":"folders/CARDS/UNCOLORED/ARTIFACT_HOURGLASS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_storm_wisp",
   "parent":{
     "name":"STORM_WISP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/STORM_WISP.yy",
+    "path":"folders/CARDS/CERULEAN/STORM_WISP.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

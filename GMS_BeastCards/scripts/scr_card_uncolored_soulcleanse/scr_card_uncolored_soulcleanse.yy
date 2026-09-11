@@ -6,7 +6,7 @@
   "name":"scr_card_uncolored_soulcleanse",
   "parent":{
     "name":"SOULCLEANSE",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/SOULCLEANSE.yy",
+    "path":"folders/CARDS/UNCOLORED/SOULCLEANSE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

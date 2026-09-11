@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROST_WEAPON",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROST_WEAPON.yy",
+    "path":"folders/CARDS/CERULEAN/FROST_WEAPON.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VERDANT BOLT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT BOLT.yy",
+    "path":"folders/CARDS/VIRIDIAN/VERDANT BOLT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

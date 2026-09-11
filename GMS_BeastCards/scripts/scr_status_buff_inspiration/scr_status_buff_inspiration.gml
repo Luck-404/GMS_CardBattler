@@ -112,7 +112,7 @@ function scr_status_buff_inspiration(
 			//-------------------//
 			//GAIN CURRENT MANA//
 			//-------------------//
-			scr_battle_mana_gain(
+			scr_battle_gain_mana(
 				_ref_new_status._val_status_magnitude
 			);
 
@@ -187,7 +187,7 @@ function scr_status_buff_inspiration(
 			//-------------------//
 			//REFRESH MANA HUD//
 			//-------------------//
-			scr_battle_mana_reposition();
+			scr_battle_reposition_mana();
 
 			//---------------//
 			//DESTROY STATUS//

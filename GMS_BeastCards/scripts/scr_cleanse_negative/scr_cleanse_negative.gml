@@ -105,7 +105,7 @@ function scr_status_cleanse_negative(_ref_target,_ct_amount){
 
 		_ct_removed++;
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"CLEANSED " + _str_status_name,
 			undefined,

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_blooming_shield",
   "parent":{
     "name":"BLOOMING SHIELD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BLOOMING SHIELD.yy",
+    "path":"folders/CARDS/VIRIDIAN/BLOOMING SHIELD.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

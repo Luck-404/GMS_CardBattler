@@ -210,7 +210,7 @@ function scr_status_cleanse_stacks(_ref_target,_arr_status_types,_ct_amount){
 		//-------------//
 		//CLEANSE TEXT//
 		//-------------//
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"-" + string(_ct_remove) + " " + _str_status_name,
 			undefined,

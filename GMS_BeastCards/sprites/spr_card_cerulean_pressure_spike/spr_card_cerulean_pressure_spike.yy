@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PRESSURE_SPIKE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PRESSURE_SPIKE.yy",
+    "path":"folders/CARDS/CERULEAN/PRESSURE_SPIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

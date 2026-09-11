@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_ancient_charts",
   "parent":{
     "name":"ANCIENT_CHARTS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ANCIENT_CHARTS.yy",
+    "path":"folders/CARDS/CERULEAN/ANCIENT_CHARTS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

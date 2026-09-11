@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICEBOUND_SEAL",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICEBOUND_SEAL.yy",
+    "path":"folders/CARDS/CERULEAN/ICEBOUND_SEAL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

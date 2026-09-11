@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_market_set_stock",
   "parent":{
-    "name":"MARKETS",
-    "path":"folders/GUI/MARKETS.yy",
+    "name":"CORE",
+    "path":"folders/MARKETS/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

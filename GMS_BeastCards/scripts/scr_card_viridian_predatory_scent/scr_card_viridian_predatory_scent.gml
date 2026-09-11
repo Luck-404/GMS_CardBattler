@@ -30,7 +30,7 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 			_ref_poison._ct_status_stacks >= 3
 		){
 
-			var _ct_poison_consumed = scr_trigger_poisonflow(_ref_target,3);
+			var _ct_poison_consumed = scr_battle_trigger_poisonflow(_ref_target,3);
 
 			if (_ct_poison_consumed == 3){
 

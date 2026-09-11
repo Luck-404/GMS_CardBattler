@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_inventory_use_quest_item",
   "parent":{
-    "name":"QUEST",
-    "path":"folders/INVENTORY/ITEM USAGE/QUEST.yy",
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/QUEST/USAGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

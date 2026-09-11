@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BIOSTORM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BIOSTORM.yy",
+    "path":"folders/CARDS/VIRIDIAN/BIOSTORM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

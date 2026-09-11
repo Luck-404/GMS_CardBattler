@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WILD_VIGOR",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILD_VIGOR.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILD_VIGOR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -41,7 +41,7 @@ scr_trap_vfx_trigger(
 			//----------------//
 			//REVEAL TRAP//
 			//----------------//
-			scr_spawn_popup_trigger_banner(
+			scr_gui_spawn_popup_trigger_banner(
 				"TRAP TRIGGERED: THIN ICE"
 			);
 

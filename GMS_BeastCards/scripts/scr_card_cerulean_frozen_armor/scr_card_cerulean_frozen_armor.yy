@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_frozen_armor",
   "parent":{
     "name":"FROZEN_ARMOR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_ARMOR.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_ARMOR.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

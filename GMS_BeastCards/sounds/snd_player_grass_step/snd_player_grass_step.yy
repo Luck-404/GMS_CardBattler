@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_player_grass_step",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.22725624,
+  "exportDir":"",
+  "name":"snd_player_grass_step",
+  "parent":{
+    "name":"MOVEMENT",
+    "path":"folders/PLAYER/MOVEMENT.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_player_grass_step.wav",
+  "volume":0.25,
+}

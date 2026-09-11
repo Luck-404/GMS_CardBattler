@@ -345,7 +345,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 
 				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"-" + string(_val_blocked),
 					undefined,
@@ -365,7 +365,7 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 
 				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"-" + string(_val_actual_damage),
 					undefined,

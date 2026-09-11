@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PACK_INSTINCT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PACK_INSTINCT.yy",
+    "path":"folders/CARDS/VIRIDIAN/PACK_INSTINCT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

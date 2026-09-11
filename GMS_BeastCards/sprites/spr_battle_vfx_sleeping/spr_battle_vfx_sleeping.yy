@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"SLEEP",
+    "path":"folders/BATTLE/STATUSES/CC/SLEEP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

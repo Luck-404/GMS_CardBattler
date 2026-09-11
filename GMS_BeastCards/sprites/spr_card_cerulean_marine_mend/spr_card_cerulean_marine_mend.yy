@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"MARINE_MEND",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/MARINE_MEND.yy",
+    "path":"folders/CARDS/CERULEAN/MARINE_MEND.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

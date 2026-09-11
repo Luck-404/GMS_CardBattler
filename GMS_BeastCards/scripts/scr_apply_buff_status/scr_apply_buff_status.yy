@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_apply_buff_status",
   "parent":{
-    "name":"BUFFS",
-    "path":"folders/BATTLE/STATUSES/BUFFS.yy",
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

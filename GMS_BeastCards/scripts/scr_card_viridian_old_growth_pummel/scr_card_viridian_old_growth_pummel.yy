@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_old_growth_pummel",
   "parent":{
     "name":"OLD GROWTH PUMMEL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/OLD GROWTH PUMMEL.yy",
+    "path":"folders/CARDS/VIRIDIAN/OLD GROWTH PUMMEL.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

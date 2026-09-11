@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BLOCK",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/BLOCK.yy",
+    "path":"folders/CARDS/UNCOLORED/BLOCK.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

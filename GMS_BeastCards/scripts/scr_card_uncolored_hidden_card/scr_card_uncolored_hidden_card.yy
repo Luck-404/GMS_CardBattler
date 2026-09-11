@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_uncolored_hidden_card",
   "parent":{
-    "name":"HIDDEN CARD",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/HIDDEN CARD.yy",
+    "name":"HIDDEN_CARD",
+    "path":"folders/CARDS/UNCOLORED/HIDDEN_CARD.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -237,7 +237,7 @@ function scr_status_dot_frostbite(
 				_ref_host._val_armor -=
 					_val_armor_destroyed;
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"-" + string(_val_armor_destroyed) + " ARMOR",
 					undefined,
@@ -267,7 +267,7 @@ function scr_status_dot_frostbite(
 						_val_damage
 					);
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"-" + string(_val_blocked),
 					undefined,
@@ -297,7 +297,7 @@ function scr_status_dot_frostbite(
 						_ref_host._val_cur_hp
 					);
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"-" + string(_val_actual_damage),
 					undefined,

@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_beast_hatch",
   "parent":{
-    "name":"EGGS",
-    "path":"folders/INVENTORY/ITEM USAGE/EGGS.yy",
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/EGGS/USAGE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

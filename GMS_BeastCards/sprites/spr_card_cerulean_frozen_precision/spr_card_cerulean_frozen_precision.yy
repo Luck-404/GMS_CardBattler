@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROZEN_PRECISION",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROZEN_PRECISION.yy",
+    "path":"folders/CARDS/CERULEAN/FROZEN_PRECISION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

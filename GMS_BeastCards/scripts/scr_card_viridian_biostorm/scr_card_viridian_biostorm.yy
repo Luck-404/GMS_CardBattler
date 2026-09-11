@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_biostorm",
   "parent":{
     "name":"BIOSTORM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BIOSTORM.yy",
+    "path":"folders/CARDS/VIRIDIAN/BIOSTORM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

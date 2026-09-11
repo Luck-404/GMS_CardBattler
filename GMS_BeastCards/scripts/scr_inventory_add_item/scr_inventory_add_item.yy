@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_add_item",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_add_item",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/INVENTORY/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

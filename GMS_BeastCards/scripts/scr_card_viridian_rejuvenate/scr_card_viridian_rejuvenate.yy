@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_rejuvenate",
   "parent":{
     "name":"REJUVENATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/REJUVENATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/REJUVENATE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

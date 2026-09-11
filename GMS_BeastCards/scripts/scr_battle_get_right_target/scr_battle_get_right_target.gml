@@ -1,13 +1,18 @@
 //===============================================================================//
 //
-// SCRIPT: scr_battle_get_right_target
+// SCRIPT: SCR_BATTLE_GET_RIGHT_TARGET
 // FUNCTION: Returns the living Beast immediately after the supplied target
-//           in its team's alive formation list.
-//           Returns undefined when no right target exists.
+//           in its team's active formation list.
+//           Returns undefined when no valid right target exists.
+//
+// INPUT:    _ref_target - Battle Beast whose right-adjacent Beast is requested.
+// USES:     Shared battle team-list lookup.
 //
 //===============================================================================//
 
 function scr_battle_get_right_target(_ref_target){
+
+	#region TEAM DATA
 
 	//--------------------//
 	//GET TARGET TEAM LIST//
@@ -21,14 +26,15 @@ function scr_battle_get_right_target(_ref_target){
 	//----------------//
 	//GET TARGET INDEX//
 	//----------------//
-	var _it_target = ds_list_find_index(
-		_list_targets,
-		_ref_target
-	);
+	var _it_target = ds_list_find_index(_list_targets,_ref_target);
 
 	if (_it_target == -1){
 		return undefined;
 	}
+
+	#endregion
+
+	#region RIGHT TARGET
 
 	//------------------//
 	//CHECK RIGHT INDEX//
@@ -43,14 +49,13 @@ function scr_battle_get_right_target(_ref_target){
 	//----------------//
 	//GET RIGHT TARGET//
 	//----------------//
-	var _ref_right_target = ds_list_find_value(
-		_list_targets,
-		_it_right_target
-	);
+	var _ref_right_target = ds_list_find_value(_list_targets,_it_right_target);
 
 	if (!instance_exists(_ref_right_target)){
 		return undefined;
 	}
+
+	#endregion
 
 	return _ref_right_target;
 }

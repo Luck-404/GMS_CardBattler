@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"KRAKEN_AWAKENS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/KRAKEN_AWAKENS.yy",
+    "path":"folders/CARDS/CERULEAN/KRAKEN_AWAKENS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

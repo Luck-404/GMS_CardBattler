@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SOOTHING_CURRENT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/SOOTHING_CURRENT.yy",
+    "path":"folders/CARDS/CERULEAN/SOOTHING_CURRENT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

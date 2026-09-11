@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_get_egg_beast_id",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_get_egg_beast_id",
+  "parent":{
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/EGGS/USAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

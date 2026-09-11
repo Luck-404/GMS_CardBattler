@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SPINNER",
-    "path":"folders/GUI/TRANSITIONS/SPINNER.yy",
+    "path":"folders/CORE/TRANSITIONS/SPINNER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

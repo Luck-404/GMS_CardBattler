@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_purify_waters",
   "parent":{
     "name":"PURIFY_WATERS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PURIFY_WATERS.yy",
+    "path":"folders/CARDS/CERULEAN/PURIFY_WATERS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

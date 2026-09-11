@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BLOOMING SPRITE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BLOOMING SPRITE.yy",
+    "path":"folders/CARDS/VIRIDIAN/BLOOMING SPRITE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -94,7 +94,7 @@ function scr_status_apply_weather(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEATHER: SEEDFALL",
 					undefined,
@@ -121,7 +121,7 @@ function scr_status_apply_weather(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEATHER: RAIN",
 					undefined,
@@ -148,7 +148,7 @@ function scr_status_apply_weather(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEATHER: SNOW",
 					undefined,
@@ -175,7 +175,7 @@ function scr_status_apply_weather(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEATHER: STORMING",
 					undefined,
@@ -203,7 +203,7 @@ function scr_status_apply_weather(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEATHER: HEATWAVE",
 					undefined,
@@ -230,7 +230,7 @@ function scr_status_apply_weather(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WEATHER: FIRESTORM",
 					undefined,

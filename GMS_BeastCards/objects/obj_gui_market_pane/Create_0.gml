@@ -226,12 +226,12 @@ function hscr_attempt_purchase(_it_offer){
 		_stct_offer._flag_sold
 	){
 		audio_play_sound(
-			snd_error,
+			snd_gui_error,
 			0,
 			false
 		);
 
-		scr_spawn_popup_error(
+		scr_gui_spawn_popup_error(
 			"SOLD OUT",
 			60
 		);
@@ -247,12 +247,12 @@ function hscr_attempt_purchase(_it_offer){
 		_stct_offer._val_gold_cost
 	){
 		audio_play_sound(
-			snd_error,
+			snd_gui_error,
 			0,
 			false
 		);
 
-		scr_spawn_popup_error(
+		scr_gui_spawn_popup_error(
 			"NOT ENOUGH GOLD",
 			60
 		);
@@ -325,12 +325,12 @@ function hscr_attempt_purchase(_it_offer){
 	// FEEDBACK //
 	//----------//
 	audio_play_sound(
-		snd_purchase,
+		snd_market_purchase,
 		0,
 		false
 	);
 
-	scr_spawn_popup(
+	scr_gui_spawn_popup(
 		"TEXT",
 		"+" +
 		string(
@@ -396,7 +396,7 @@ function hscr_draw_offer_panel(_it_offer,_val_panel_x,_val_panel_y,_val_mouse_x,
 	//------//
 	//TEXT//
 	//------//
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_black);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_top);
@@ -607,7 +607,7 @@ function hscr_release_npc_vendor(){
 			obj_gui_controller.hscr_toggle_gui_pause(false);
 		}
 		else if (instance_exists(obj_player)){
-			scr_toggle_player_movement("START");
+			scr_player_set_movement_state("START");
 		}
 	}
 }

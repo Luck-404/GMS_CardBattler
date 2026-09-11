@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"HYPOTHERMIA",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/HYPOTHERMIA.yy",
+    "path":"folders/CARDS/CERULEAN/HYPOTHERMIA.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

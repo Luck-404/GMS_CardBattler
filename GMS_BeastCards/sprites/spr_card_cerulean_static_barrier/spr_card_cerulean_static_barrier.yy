@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STATIC_BARRIER",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/STATIC_BARRIER.yy",
+    "path":"folders/CARDS/CERULEAN/STATIC_BARRIER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SINEWY VINES",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SINEWY VINES.yy",
+    "path":"folders/CARDS/VIRIDIAN/SINEWY VINES.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BEASTIAL WRATH",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/BEASTIAL WRATH.yy",
+    "path":"folders/CARDS/VIRIDIAN/BEASTIAL WRATH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

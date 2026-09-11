@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"REPOSITION",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/REPOSITION.yy",
+    "path":"folders/CARDS/UNCOLORED/REPOSITION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_wild_vigor",
   "parent":{
     "name":"WILD_VIGOR",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILD_VIGOR.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILD_VIGOR.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -105,7 +105,7 @@ function scr_card_cerulean_shatterstorm(_stct_card,_ref_caster,_ref_target){
 		//---------//
 		//SHATTER//
 		//---------//
-		scr_trigger_shatter(
+		scr_battle_trigger_shatter(
 			_ref_hit_target
 		);
 

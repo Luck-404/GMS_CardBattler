@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_circle_of_life",
   "parent":{
     "name":"CIRCLE_OF_LIFE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/CIRCLE_OF_LIFE.yy",
+    "path":"folders/CARDS/VIRIDIAN/CIRCLE_OF_LIFE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

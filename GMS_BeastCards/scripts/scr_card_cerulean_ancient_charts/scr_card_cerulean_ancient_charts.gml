@@ -11,7 +11,7 @@ function scr_card_cerulean_ancient_charts(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//REQUEST TUTOR//
 	//-------------//
-	obj_battle_player_controller.hscr_request_utility_tutor(
+	obj_battle_player_controller.hscr_battle_request_utility_tutor(
 		_stct_card._val_card_magnitude
 	);
 

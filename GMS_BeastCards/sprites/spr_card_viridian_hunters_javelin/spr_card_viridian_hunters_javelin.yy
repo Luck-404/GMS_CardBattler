@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"HUNTERS JAVELIN",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/HUNTERS JAVELIN.yy",
+    "path":"folders/CARDS/VIRIDIAN/HUNTERS JAVELIN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

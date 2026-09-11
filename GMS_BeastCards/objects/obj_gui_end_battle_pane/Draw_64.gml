@@ -15,7 +15,7 @@ switch(_str_condition){
 	#region LOSS
 	case "LOSS":
 
-		draw_set_font(fnt_large_gui);
+		draw_set_font(fnt_gui_large);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_set_colour(c_red);
@@ -86,13 +86,13 @@ switch(_str_condition){
 			var _val_unit_x = _val_box_x + (_val_slot_size * 0.5);
 			var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
-			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+			var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 
 			var _c_unit = _flag_dead ? c_ltgray : c_white;
 			draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
 
-			draw_set_font(fnt_small_gui);
+			draw_set_font(fnt_gui_small);
 			draw_set_halign(fa_left);
 			draw_set_valign(fa_top);
 			draw_set_colour(c_black);
@@ -116,17 +116,17 @@ switch(_str_condition){
 		#region CONFIRM
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 			audio_play_sound(snd_gui_press,0,false);
-			scr_market_register_battle_complete();
+			scr_market_register_battle_completion();
 	
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);
 			_ref_transition._rm_destination = rm_ow_ranch;
 
-			scr_spawn_popup_banner("RANCH ROOM");
+			scr_gui_spawn_popup_banner("RANCH ROOM");
 
 			obj_player.x = 530;
 			obj_player.y = 980;
 
-			scr_toggle_player_movement("START");
+			scr_player_set_movement_state("START");
 			obj_player.visible = true;
 		}
 		#endregion
@@ -140,7 +140,7 @@ switch(_str_condition){
 	#region WIN
 	case "WIN":
 
-		draw_set_font(fnt_large_gui);
+		draw_set_font(fnt_gui_large);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		draw_set_colour(c_black);
@@ -153,7 +153,7 @@ switch(_str_condition){
 
 			_flag_finished = true;
 
-			scr_heal_ranch_units(0.33);
+			scr_ranch_heal_beasts(0.33);
 
 			//-----------//
 			//GOLD REWARD//
@@ -227,9 +227,9 @@ switch(_str_condition){
 
 					var _val_card_roll = irandom_range(0,ds_list_size(_list_pool) - 1);
 					var _str_card_name = ds_list_find_value(_list_pool,_val_card_roll);
-					var _stct_new_card = scr_get_card_info(_str_card_name);
+					var _stct_new_card = scr_card_get_info(_str_card_name);
 
-					scr_add_card_to_deck(_stct_new_card);
+					scr_deck_add_card(_stct_new_card);
 
 					show_debug_message("RANDOM BATTLE REWARD + " + _str_card_name);
 
@@ -238,7 +238,7 @@ switch(_str_condition){
 				else{
 
 					var _str_new_item = scr_get_random_item(global.list_pool_items);
-					var _stct_fake_item = scr_get_item_info(_str_new_item);
+					var _stct_fake_item = scr_inventory_get_item_info(_str_new_item);
 
 					scr_add_item_to_inventory(_str_new_item,1);
 
@@ -286,7 +286,7 @@ switch(_str_condition){
 
 					while (_stct_unit._val_beast_exp >= 10){
 						_stct_unit._val_beast_exp -= 10;
-						scr_level_up_beast(_stct_unit);
+						scr_beast_level_up(_stct_unit);
 					}
 				}
 			}
@@ -296,7 +296,7 @@ switch(_str_condition){
 		#endregion
 
 		#region DRAW REWARDS
-		draw_set_font(fnt_small_gui);
+		draw_set_font(fnt_gui_small);
 		draw_set_colour(c_black);
 
 		var _val_reward_x = room_width * 0.5;
@@ -399,13 +399,13 @@ switch(_str_condition){
 			var _val_unit_x = _val_box_x + (_val_slot_size * 0.5);
 			var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
-			var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+			var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 			draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 
 			var _c_unit = _flag_dead ? c_ltgray : c_white;
 			draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,_c_unit,1);
 
-			draw_set_font(fnt_small_gui);
+			draw_set_font(fnt_gui_small);
 			draw_set_halign(fa_left);
 			draw_set_valign(fa_top);
 			draw_set_colour(c_black);
@@ -432,17 +432,17 @@ switch(_str_condition){
 		#region CONFIRM
 		if (mouse_check_button_pressed(mb_left) && position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),obj_gui_end_battle_confirm_button)){
 			audio_play_sound(snd_gui_press,0,false);
-			scr_market_register_battle_complete();
+			scr_market_register_battle_completion();
 			
 			var _ref_transition = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_transition);
 			_ref_transition._rm_destination = global.rm_last_player;
 
-			scr_spawn_popup_banner(global.str_last_player_banner);
+			scr_gui_spawn_popup_banner(global.str_last_player_banner);
 
 			obj_player.x = global.val_last_player_x;
 			obj_player.y = global.val_last_player_y;
 
-			scr_toggle_player_movement("START");
+			scr_player_set_movement_state("START");
 			obj_player.visible = true;
 		}
 		#endregion

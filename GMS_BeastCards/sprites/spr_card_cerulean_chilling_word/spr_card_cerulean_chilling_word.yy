@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"CHILLING_WORD",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CHILLING_WORD.yy",
+    "path":"folders/CARDS/CERULEAN/CHILLING_WORD.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

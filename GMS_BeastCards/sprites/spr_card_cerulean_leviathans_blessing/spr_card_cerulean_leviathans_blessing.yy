@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"LEVIATHANS_BLESSING",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/LEVIATHANS_BLESSING.yy",
+    "path":"folders/CARDS/CERULEAN/LEVIATHANS_BLESSING.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -222,7 +222,7 @@ if (!global.flag_pause){
 						x,
 						y + 30,
 						"ily_fx",
-						obj_scene_fx_step_particle
+						obj_overworld_vfx_step_particle
 					);
 
 					_ref_particle._owner = self;

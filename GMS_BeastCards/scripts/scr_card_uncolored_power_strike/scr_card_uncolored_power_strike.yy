@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_uncolored_power_strike",
   "parent":{
-    "name":"POWER STRIKE",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/POWER STRIKE.yy",
+    "name":"POWER_STRIKE",
+    "path":"folders/CARDS/UNCOLORED/POWER_STRIKE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

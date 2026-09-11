@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"KRAKENS_CHOSEN",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/KRAKENS_CHOSEN.yy",
+    "path":"folders/CARDS/CERULEAN/KRAKENS_CHOSEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ROTTING SPORE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ROTTING SPORE.yy",
+    "path":"folders/CARDS/VIRIDIAN/ROTTING SPORE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"GREENSTEP",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/GREENSTEP.yy",
+    "path":"folders/CARDS/VIRIDIAN/GREENSTEP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

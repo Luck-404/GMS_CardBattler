@@ -97,7 +97,7 @@ if (
 
 	if (_str_corpse_tooltip != ""){
 
-		draw_set_font(fnt_small_gui);
+		draw_set_font(fnt_gui_small);
 		draw_set_colour(c_black);
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_top);
@@ -127,7 +127,7 @@ if (_state_player == ENUM_PLAYER_STATE.SELECT_PRISM_TARGET && _stct_selected_pri
 	draw_set_colour(c_black);
 	draw_line(_val_button_center_x,_val_button_center_y,device_mouse_x_to_gui(0),device_mouse_y_to_gui(0));
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_top);
 

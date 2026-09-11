@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_deck_add_card",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_deck_add_card",
+  "parent":{
+    "name":"DECK",
+    "path":"folders/CARDS/DECK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -19,13 +19,13 @@ var _val_mouse_y = device_mouse_y_to_gui(0);
 // SIGNS
 //
 #region SIGNS
-draw_set_font(fnt_medium_gui);
+draw_set_font(fnt_gui_medium);
 draw_set_colour(c_white);
 
 draw_text(_val_pane_left + 100,_val_pane_top - 25,"PARTY");
 draw_text(_val_pane_left + 615,_val_pane_top - 25,"RANCH");
 
-draw_set_font(fnt_small_gui);
+draw_set_font(fnt_gui_small);
 #endregion
 
 //
@@ -59,7 +59,7 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 		var _val_unit_x = _val_box_x + 60;
 		var _val_unit_y = _val_box_y + 60;
 
-		var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+		var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 
 		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
@@ -78,7 +78,7 @@ for (var _it_unit = 0; _it_unit < 5; _it_unit++){
 			draw_sprite(spr_gui_ranch_highlight,0,_val_party_x + 185,_val_box_y + 65);
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-				audio_play_sound(snd_beast_move,0,false);
+				audio_play_sound(snd_beast_transfer,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
@@ -156,7 +156,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 		var _val_unit_x = _val_box_x + 60;
 		var _val_unit_y = _val_box_y + 60;
 
-		var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+		var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 
 		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 		draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.125,0.125,0,c_white,1);
@@ -175,7 +175,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 			draw_sprite(spr_gui_ranch_highlight,0,_val_ranch_x + 185,_val_box_y + 65);
 
 			if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
-				audio_play_sound(snd_beast_move,0,false);
+				audio_play_sound(snd_beast_transfer,0,false);
 				_flag_clicked = true;
 				_val_cooldown = 10;
 
@@ -191,7 +191,7 @@ for (var _it_unit = 0; _it_unit < _ct_ranch_per_page; _it_unit++){
 		}
 
 		if (keyboard_check_pressed(vk_delete) && !_flag_clicked){
-			audio_play_sound(snd_destroy,0,false);
+			audio_play_sound(snd_gui_destroy,0,false);
 			_flag_clicked = true;
 			_val_cooldown = 10;
 

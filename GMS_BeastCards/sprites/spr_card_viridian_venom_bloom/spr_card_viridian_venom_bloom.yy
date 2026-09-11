@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VENOM BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VENOM BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/VENOM BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

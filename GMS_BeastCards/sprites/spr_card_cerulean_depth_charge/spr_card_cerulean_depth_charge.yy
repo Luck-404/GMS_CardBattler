@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DEPTH_CHARGE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DEPTH_CHARGE.yy",
+    "path":"folders/CARDS/CERULEAN/DEPTH_CHARGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_inventory_use_egg_item",
   "parent":{
-    "name":"EGGS",
-    "path":"folders/INVENTORY/ITEM USAGE/EGGS.yy",
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/EGGS/USAGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

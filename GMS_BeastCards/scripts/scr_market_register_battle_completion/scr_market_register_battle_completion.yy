@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_market_register_battle_completion",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_market_register_battle_completion",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/MARKETS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

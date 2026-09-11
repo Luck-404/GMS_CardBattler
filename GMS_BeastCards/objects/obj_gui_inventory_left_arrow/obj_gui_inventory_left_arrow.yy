@@ -10,8 +10,8 @@
   "name":"obj_gui_inventory_left_arrow",
   "overriddenProperties":[],
   "parent":{
-    "name":"INVENTORY",
-    "path":"folders/INVENTORY.yy",
+    "name":"PAGES",
+    "path":"folders/INVENTORY/GUI/PAGES.yy",
   },
   "parentObjectId":null,
   "persistent":false,

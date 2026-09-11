@@ -177,7 +177,7 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_host._ref_unit._val_beast_con_stat;
 
 			var _val_con_mod =
-				scr_get_beast_grade_modifier(
+				scr_beast_get_grade_modifier(
 					_val_con_stat
 				);
 
@@ -203,7 +203,7 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			if (_val_wake_roll <= _val_wake_chance){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"WOKE UP",
 					undefined,

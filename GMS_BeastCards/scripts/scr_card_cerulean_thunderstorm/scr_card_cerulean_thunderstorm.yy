@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_thunderstorm",
   "parent":{
     "name":"THUNDERSTORM",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/THUNDERSTORM.yy",
+    "path":"folders/CARDS/CERULEAN/THUNDERSTORM.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

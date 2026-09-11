@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_card_uncolored_rapid_strikes",
   "parent":{
-    "name":"RAPID STRIKES",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/RAPID STRIKES.yy",
+    "name":"RAPID_STRIKES",
+    "path":"folders/CARDS/UNCOLORED/RAPID_STRIKES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

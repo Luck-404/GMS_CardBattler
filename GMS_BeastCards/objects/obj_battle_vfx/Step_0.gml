@@ -40,7 +40,7 @@ if (!_flag_sfx_played){
 
 	if (_snd_sfx != undefined){
 
-		scr_play_battle_sfx(
+		scr_battle_play_sfx(
 			_snd_sfx
 		);
 	}

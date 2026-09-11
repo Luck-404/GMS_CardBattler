@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_inventory_use_held_item",
   "parent":{
-    "name":"HELD",
-    "path":"folders/INVENTORY/ITEM USAGE/HELD.yy",
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/HELD/USAGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VERDANT_INSIGHT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT_INSIGHT.yy",
+    "path":"folders/CARDS/VIRIDIAN/VERDANT_INSIGHT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

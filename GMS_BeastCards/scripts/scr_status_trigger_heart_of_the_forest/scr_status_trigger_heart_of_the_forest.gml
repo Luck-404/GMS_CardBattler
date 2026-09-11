@@ -63,7 +63,7 @@ function scr_status_trigger_heart_of_the_forest(_ref_target,_val_healed){
 	//----------//
 	//FEEDBACK//
 	//----------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"HEART OF THE FOREST",
 		undefined,

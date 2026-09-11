@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_tidal_break",
   "parent":{
     "name":"TIDAL_BREAK",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDAL_BREAK.yy",
+    "path":"folders/CARDS/CERULEAN/TIDAL_BREAK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

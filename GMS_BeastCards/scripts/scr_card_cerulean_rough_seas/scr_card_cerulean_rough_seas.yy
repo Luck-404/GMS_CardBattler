@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_rough_seas",
   "parent":{
     "name":"ROUGH SEAS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ROUGH SEAS.yy",
+    "path":"folders/CARDS/CERULEAN/ROUGH SEAS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

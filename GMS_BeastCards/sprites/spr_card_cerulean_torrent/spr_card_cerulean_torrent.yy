@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TORRENT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TORRENT.yy",
+    "path":"folders/CARDS/CERULEAN/TORRENT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

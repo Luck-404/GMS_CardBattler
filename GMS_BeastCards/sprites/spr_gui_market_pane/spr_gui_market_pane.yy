@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"MARKETS",
-    "path":"folders/GUI/MARKETS.yy",
+    "name":"GUI",
+    "path":"folders/MARKETS/GUI.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

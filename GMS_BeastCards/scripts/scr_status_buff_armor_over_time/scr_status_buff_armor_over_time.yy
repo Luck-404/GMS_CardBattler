@@ -6,7 +6,7 @@
   "name":"scr_status_buff_armor_over_time",
   "parent":{
     "name":"ARMOR OVER TIME",
-    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/ARMOR OVER TIME.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/ARMOR OVER TIME.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

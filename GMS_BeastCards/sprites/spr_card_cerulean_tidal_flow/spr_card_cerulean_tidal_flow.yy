@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TIDAL_FLOW",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDAL_FLOW.yy",
+    "path":"folders/CARDS/CERULEAN/TIDAL_FLOW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

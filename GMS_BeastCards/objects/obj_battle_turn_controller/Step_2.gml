@@ -34,7 +34,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		//---------------------//
 		//EXECUTE TRIGGER QUEUE//
 		//---------------------//
-		if (_flag_entry_triggers_init && !instance_exists(obj_wait)){
+		if (_flag_entry_triggers_init && !instance_exists(obj_battle_wait)){
 
 			if (ds_list_size(_list_entry_triggers) > 0){
 

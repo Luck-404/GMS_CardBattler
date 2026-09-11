@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"CLEANSE",
+    "path":"folders/BATTLE/STATUSES/CLEANSE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

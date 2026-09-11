@@ -13,6 +13,6 @@ function scr_card_cerulean_winter_resonance(_stct_card,_ref_caster,_ref_target){
 	//---------//
 	//SHATTER//
 	//---------//
-	scr_trigger_shatter(_ref_target);
+	scr_battle_trigger_shatter(_ref_target);
 
 }

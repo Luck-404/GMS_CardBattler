@@ -30,8 +30,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CARD VFX",
-    "path":"folders/CARDS/CARD VFX.yy",
+    "name":"STUN",
+    "path":"folders/BATTLE/STATUSES/CC/STUN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STEELFUR",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/STEELFUR.yy",
+    "path":"folders/CARDS/VIRIDIAN/STEELFUR.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

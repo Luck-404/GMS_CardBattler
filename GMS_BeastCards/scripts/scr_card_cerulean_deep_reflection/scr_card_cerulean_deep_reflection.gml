@@ -12,7 +12,7 @@ function scr_card_cerulean_deep_reflection(_stct_card,_ref_caster,_ref_target){
 	//-----------//
 	//DRAW CARDS//
 	//-----------//
-	scr_battle_card_draw(_stct_card._val_card_magnitude);
+	scr_battle_draw_cards(_stct_card._val_card_magnitude);
 
 	//----------------//
 	//REQUEST DISCARD//

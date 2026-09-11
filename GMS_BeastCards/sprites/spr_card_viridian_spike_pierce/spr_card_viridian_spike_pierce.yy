@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SPIKE PIERCE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPIKE PIERCE.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPIKE PIERCE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

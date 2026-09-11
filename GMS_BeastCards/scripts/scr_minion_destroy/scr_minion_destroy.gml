@@ -51,14 +51,14 @@ function scr_minion_destroy(_ref_minion,_str_reason="REMOVE"){
 
 		scr_battle_vfx(
 			undefined,
-			spr_battle_vfx_summon_death,
+			spr_battle_vfx_minion_death,
 			_val_minion_x,
 			_val_minion_y,
 			0,
 			0,
 			1,
 			0,
-			snd_battle_sfx_summon_death
+			snd_battle_minion_death
 		);
 	}
 	
@@ -344,7 +344,7 @@ scr_status_remove_minion_sourced(
 			//----------//
 			//FEEDBACK//
 			//----------//
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"ENDLESS BLOOM",
 				undefined,

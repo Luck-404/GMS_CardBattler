@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_thin_ice",
   "parent":{
     "name":"THIN_ICE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/THIN_ICE.yy",
+    "path":"folders/CARDS/CERULEAN/THIN_ICE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

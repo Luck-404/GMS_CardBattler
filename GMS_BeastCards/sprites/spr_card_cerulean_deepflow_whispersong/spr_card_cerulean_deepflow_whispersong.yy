@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"DEEPFLOW_WHISPERSONG",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/DEEPFLOW_WHISPERSONG.yy",
+    "path":"folders/CARDS/CERULEAN/DEEPFLOW_WHISPERSONG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

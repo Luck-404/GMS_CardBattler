@@ -12,8 +12,8 @@
   "name":"obj_npc",
   "overriddenProperties":[],
   "parent":{
-    "name":"NPCS",
-    "path":"folders/NPCS.yy",
+    "name":"CORE",
+    "path":"folders/NPCS/CORE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

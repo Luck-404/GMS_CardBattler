@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_wake_sleep_on_damage",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_wake_sleep_on_damage",
+  "parent":{
+    "name":"SLEEP",
+    "path":"folders/BATTLE/STATUSES/CC/SLEEP.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

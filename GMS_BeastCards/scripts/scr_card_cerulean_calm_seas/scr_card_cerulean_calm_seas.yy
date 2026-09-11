@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_calm_seas",
   "parent":{
     "name":"CALM_SEAS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/CALM_SEAS.yy",
+    "path":"folders/CARDS/CERULEAN/CALM_SEAS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TOXIC SNARE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/TOXIC SNARE.yy",
+    "path":"folders/CARDS/VIRIDIAN/TOXIC SNARE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

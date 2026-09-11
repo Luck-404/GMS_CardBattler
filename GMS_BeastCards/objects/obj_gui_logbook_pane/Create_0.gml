@@ -395,10 +395,10 @@ hscr_draw_beast_details = function(_stct_entry){
 	var _val_lh = 22;
 
 	draw_set_colour(c_white);
-	draw_set_font(fnt_medium_gui);
+	draw_set_font(fnt_gui_medium);
 	draw_text(_val_text_x,_val_text_y,_stct_entry._str_beast_name);
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	_val_text_y += _val_lh * 2;
 
 	var _ct_owned = scr_logbook_get_beast_owned_count(_stct_entry._str_beast_id);
@@ -483,10 +483,10 @@ hscr_draw_card_details = function(_stct_entry){
 	var _val_lh = 22;
 
 	draw_set_colour(c_white);
-	draw_set_font(fnt_medium_gui);
+	draw_set_font(fnt_gui_medium);
 	draw_text(_val_text_x,_val_text_y,_stct_entry._str_card_name);
 
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	_val_text_y += _val_lh * 2;
 
 	var _ct_owned = scr_logbook_get_card_owned_count(_stct_entry._str_card_id);

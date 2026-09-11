@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"VERDANT_EMBRACE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VERDANT_EMBRACE.yy",
+    "path":"folders/CARDS/VIRIDIAN/VERDANT_EMBRACE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

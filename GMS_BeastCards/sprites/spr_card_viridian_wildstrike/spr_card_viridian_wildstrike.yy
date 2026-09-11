@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WILDSTRIKE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILDSTRIKE.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILDSTRIKE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ICE_LANCE",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ICE_LANCE.yy",
+    "path":"folders/CARDS/CERULEAN/ICE_LANCE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -169,7 +169,7 @@ function scr_status_cc_banish(_str_tag,_ref_status,_val_lifetime=undefined){
 					_val_return_pos
 				);
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"RETURNED",
 					undefined,

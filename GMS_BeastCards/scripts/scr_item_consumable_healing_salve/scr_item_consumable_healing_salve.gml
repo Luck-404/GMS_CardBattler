@@ -14,7 +14,7 @@ function scr_item_consumable_healing_salve(_stct_item,_stct_target_unit,_val_pop
 
 	if (_stct_target_unit._val_beast_hp_cur >= _stct_target_unit._val_beast_hp_max){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"FULL HP",
 			undefined,
@@ -36,7 +36,7 @@ function scr_item_consumable_healing_salve(_stct_item,_stct_target_unit,_val_pop
 
 	var _val_healed = _stct_target_unit._val_beast_hp_cur - _val_hp_before;
 
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"+" + string(_val_healed) + " HP",
 		undefined,

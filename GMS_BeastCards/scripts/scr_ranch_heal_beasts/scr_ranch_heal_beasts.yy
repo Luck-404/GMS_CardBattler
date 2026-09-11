@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_ranch_heal_beasts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_ranch_heal_beasts",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BEASTS/RANCH/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

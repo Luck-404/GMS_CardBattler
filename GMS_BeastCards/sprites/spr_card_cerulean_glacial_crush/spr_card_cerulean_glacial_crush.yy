@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"GLACIAL_CRUSH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/GLACIAL_CRUSH.yy",
+    "path":"folders/CARDS/CERULEAN/GLACIAL_CRUSH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

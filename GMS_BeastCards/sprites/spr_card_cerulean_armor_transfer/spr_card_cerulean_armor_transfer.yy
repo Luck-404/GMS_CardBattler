@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ARMOR_TRANSFER",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ARMOR_TRANSFER.yy",
+    "path":"folders/CARDS/CERULEAN/ARMOR_TRANSFER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

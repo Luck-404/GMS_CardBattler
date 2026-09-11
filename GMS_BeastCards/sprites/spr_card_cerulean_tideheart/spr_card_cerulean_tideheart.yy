@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TIDEHEART",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDEHEART.yy",
+    "path":"folders/CARDS/CERULEAN/TIDEHEART.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

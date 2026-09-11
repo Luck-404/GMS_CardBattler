@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"EGG MARKET",
-    "path":"folders/GUI/MARKETS/EGG MARKET.yy",
+    "name":"EGG",
+    "path":"folders/MARKETS/EGG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

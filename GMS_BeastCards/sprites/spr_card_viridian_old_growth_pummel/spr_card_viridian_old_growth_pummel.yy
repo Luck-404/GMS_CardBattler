@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"OLD GROWTH PUMMEL",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/OLD GROWTH PUMMEL.yy",
+    "path":"folders/CARDS/VIRIDIAN/OLD GROWTH PUMMEL.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

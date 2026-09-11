@@ -58,7 +58,7 @@ function scr_battle_vfx_minion_growth(
 	//PLAY SOUND//
 	//-----------//
 	audio_play_sound(
-		snd_battle_sfx_summon_growth,
+		snd_battle_minion_growth,
 		0,
 		false
 	);

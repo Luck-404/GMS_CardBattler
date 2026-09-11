@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_honeyed_scent",
   "parent":{
     "name":"HONEYED SCENT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/HONEYED SCENT.yy",
+    "path":"folders/CARDS/VIRIDIAN/HONEYED SCENT.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

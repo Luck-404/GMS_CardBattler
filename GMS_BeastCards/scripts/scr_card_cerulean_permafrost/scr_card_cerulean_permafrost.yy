@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_permafrost",
   "parent":{
     "name":"PERMAFROST",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PERMAFROST.yy",
+    "path":"folders/CARDS/CERULEAN/PERMAFROST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

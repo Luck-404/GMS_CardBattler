@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SLEEP_DART",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SLEEP_DART.yy",
+    "path":"folders/CARDS/VIRIDIAN/SLEEP_DART.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

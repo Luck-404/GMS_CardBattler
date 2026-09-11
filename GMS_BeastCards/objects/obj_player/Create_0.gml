@@ -67,7 +67,7 @@
 	global.list_player_inventory = ds_list_create();	
 	global.list_pool_items = ds_list_create();
 	global.ct_inventory_revision = 0;
-	scr_init_item_pool();
+	scr_inventory_init_item_pool();
 	#endregion
 	
 	#region PLAYER TRACKING
@@ -132,7 +132,7 @@
 	//—------------------------------------------------------------------------------//
 	// SETUP LOGBOOK
 	//—------------------------------------------------------------------------------//
-	scr_init_logbook_beasts();
+	scr_logbook_init_beasts();
 	scr_init_logbook_cards();		
 
 	//—------------------------------------------------------------------------------//
@@ -154,16 +154,16 @@
 	//scr_add_beast_to_party(scr_init_beast_random("TURFRANTULA"));
 	
 	//BLUE testing
-	scr_add_beast_to_party(scr_init_beast_random("SALTWAGG"));
-	scr_add_beast_to_party(scr_init_beast_random("FROSTUSK"));
-	scr_add_beast_to_party(scr_init_beast_random("GULFLOW"));
-	scr_add_beast_to_party(scr_init_beast_random("CHELONSEA"));	
+	scr_party_add_beast(scr_beast_init_random("SALTWAGG"));
+	scr_party_add_beast(scr_beast_init_random("FROSTUSK"));
+	scr_party_add_beast(scr_beast_init_random("GULFLOW"));
+	scr_party_add_beast(scr_beast_init_random("CHELONSEA"));	
 	
 
 	//—------------------------------------------------------------------------------//
 	// ADD TEST BEASTS TO RANCH
 	//—------------------------------------------------------------------------------//
-	var _stct_test_ranch_arbrawn = scr_init_beast_random("ARBRAWN");
+	var _stct_test_ranch_arbrawn = scr_beast_init_random("ARBRAWN");
 	ds_list_add(global.list_player_ranch,_stct_test_ranch_arbrawn);
 	scr_logbook_mark_beast_captured(_stct_test_ranch_arbrawn._str_beast_name);
 
@@ -409,7 +409,7 @@
 
 	//UTILITY
 		//scr_add_card_to_deck(scr_get_card_info("RAIN"));
-		scr_add_card_to_deck(scr_get_card_info("SNOWFALL"));
+		scr_deck_add_card(scr_card_get_info("SNOWFALL"));
 		//scr_add_card_to_deck(scr_get_card_info("THUNDERSTORM"));
 		//scr_add_card_to_deck(scr_get_card_info("THIN_ICE"));
 		//scr_add_card_to_deck(scr_get_card_info("STORM_BEACON"));
@@ -520,7 +520,7 @@
 		}
 		//SPAWN THE PARTICLES
 		for (var _it_particle = 0; _it_particle < _ct_random_particles; _it_particle++){
-			var _ref_particle = instance_create_layer(obj_player.x,obj_player.y,"ily_fx",obj_scene_fx_step_particle);	
+			var _ref_particle = instance_create_layer(obj_player.x,obj_player.y,"ily_fx",obj_overworld_vfx_step_particle);	
 		}	
 	}
 	#endregion

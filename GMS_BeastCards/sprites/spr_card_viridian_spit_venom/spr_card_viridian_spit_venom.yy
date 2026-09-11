@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SPIT_VENOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPIT_VENOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPIT_VENOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

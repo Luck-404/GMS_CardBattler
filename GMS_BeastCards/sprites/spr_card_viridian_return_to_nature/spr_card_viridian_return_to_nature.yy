@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RETURN TO NATURE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/RETURN TO NATURE.yy",
+    "path":"folders/CARDS/VIRIDIAN/RETURN TO NATURE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

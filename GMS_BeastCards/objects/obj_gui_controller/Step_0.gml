@@ -139,7 +139,7 @@ if (keyboard_check_pressed(ord("F"))){
 //ESC INPUT//
 //--------//
 if (keyboard_check_pressed(vk_escape) && global.ref_active_gui == undefined){
-	audio_play_sound(snd_error,0,false);
+	audio_play_sound(snd_gui_error,0,false);
 	show_debug_message("\n\n\n\n\n\nPLAYER PRESSED ESCAPE TO END GAME");
 	game_end();
 } else if (keyboard_check_pressed(vk_escape)){
@@ -183,7 +183,7 @@ if (room != rm_battle){
 	//TOGGLE COMPANION SUMMONING//
 	//---------------------------//
 	if (keyboard_check_pressed(ord("G")) && global.ref_active_gui == undefined){
-		audio_play_sound(snd_beast_summon,0,false);
+		audio_play_sound(snd_overworld_summon_companion_beast,0,false);
 		global.flag_companion_summoned = !global.flag_companion_summoned;
 
 		if (global.flag_companion_summoned){
@@ -192,7 +192,7 @@ if (room != rm_battle){
 			audio_play_sound(_ref_unit._snd_beast_cry,0,false);
 		}
 		else{
-			with (obj_beast_world){
+			with (obj_overworld_beast){
 				if (_str_team == "PLAYER"){
 					instance_destroy();
 				}

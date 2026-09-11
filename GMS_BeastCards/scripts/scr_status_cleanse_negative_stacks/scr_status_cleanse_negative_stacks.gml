@@ -125,7 +125,7 @@ function scr_status_cleanse_negative_stacks(_ref_target){
 		//----------//
 		//FEEDBACK//
 		//----------//
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"CLEANSED " + _str_status_name,
 			undefined,

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WHITEWATER",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WHITEWATER.yy",
+    "path":"folders/CARDS/CERULEAN/WHITEWATER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

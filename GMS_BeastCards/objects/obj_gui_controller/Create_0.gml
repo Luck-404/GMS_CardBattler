@@ -58,25 +58,25 @@ _ct_music_silence_timer = 0;
 //AMBIANCE//
 //--------//
 _arr_ambiance = [
-	snd_ambiance_beasts_1,
-	snd_ambiance_beasts_2,
-	snd_ambiance_beasts_3,
+	snd_overworld_ambiance_beasts_1,
+	snd_overworld_ambiance_beasts_2,
+	snd_overworld_ambiance_beasts_3,
 
-	snd_ambiance_insects_1,
-	snd_ambiance_insects_2,
-	snd_ambiance_insects_3,
+	snd_overworld_ambiance_insects_1,
+	snd_overworld_ambiance_insects_2,
+	snd_overworld_ambiance_insects_3,
 
-	snd_ambiance_nature_1,
-	snd_ambiance_nature_2,
-	snd_ambiance_nature_3,
+	snd_overworld_ambiance_nature_1,
+	snd_overworld_ambiance_nature_2,
+	snd_overworld_ambiance_nature_3,
 
-	snd_ambiance_water_1,
-	snd_ambiance_water_2,
-	snd_ambiance_water_3,
+	snd_overworld_ambiance_water_1,
+	snd_overworld_ambiance_water_2,
+	snd_overworld_ambiance_water_3,
 
-	snd_ambiance_wind_1,
-	snd_ambiance_wind_2,
-	snd_ambiance_wind_3
+	snd_overworld_ambiance_wind_1,
+	snd_overworld_ambiance_wind_2,
+	snd_overworld_ambiance_wind_3
 ];
 
 _val_ambiance_instance = -1;
@@ -195,11 +195,11 @@ function hscr_toggle_gui_pause(_flag_pause){
 
 	if (_flag_pause){
 
-		scr_toggle_player_movement("STOP");
+		scr_player_set_movement_state("STOP");
 	}
 	else{
 
-		scr_toggle_player_movement("START");
+		scr_player_set_movement_state("START");
 	}
 }
 

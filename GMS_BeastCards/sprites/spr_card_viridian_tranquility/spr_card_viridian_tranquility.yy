@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TRANQUILITY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/TRANQUILITY.yy",
+    "path":"folders/CARDS/VIRIDIAN/TRANQUILITY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

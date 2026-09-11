@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"FROSTBOLT",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/FROSTBOLT.yy",
+    "path":"folders/CARDS/CERULEAN/FROSTBOLT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

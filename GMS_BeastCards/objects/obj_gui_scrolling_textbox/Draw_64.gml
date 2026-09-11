@@ -7,7 +7,7 @@
 //
 //===============================================================================//
 
-draw_set_font(fnt_medium_gui);
+draw_set_font(fnt_gui_medium);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 
@@ -38,7 +38,7 @@ draw_text_ext(_val_box_x1 + 24,_val_box_y1 + 24,_str_visible_text,24,_val_box_w 
 //HINT//
 //----//
 if (_ct_char >= string_length(_str_text)){
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_ltgray);
 	draw_text(_val_box_x2 - 150,_val_box_y2 - 30,"LEFT CLICK");
 }

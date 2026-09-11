@@ -37,7 +37,7 @@ else{
 		global.flag_pause = false;
 
 		if (instance_exists(obj_player)){
-			scr_toggle_player_movement("START");
+			scr_player_set_movement_state("START");
 		}
 	}
 }

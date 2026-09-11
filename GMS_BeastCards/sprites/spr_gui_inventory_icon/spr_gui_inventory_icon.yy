@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"INVENTORY",
-    "path":"folders/INVENTORY.yy",
+    "name":"CORE",
+    "path":"folders/INVENTORY/GUI/CORE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"RAIN",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/RAIN.yy",
+    "path":"folders/CARDS/CERULEAN/RAIN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

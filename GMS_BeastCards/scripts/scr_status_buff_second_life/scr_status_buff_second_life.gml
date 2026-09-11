@@ -162,7 +162,7 @@ function scr_status_buff_second_life(_str_tag,_ref_status,_val_lifetime=undefine
 					)
 				);
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"SECOND LIFE",
 				undefined,

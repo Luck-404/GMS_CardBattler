@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_natural_recovery",
   "parent":{
     "name":"NATURAL RECOVERY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURAL RECOVERY.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURAL RECOVERY.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

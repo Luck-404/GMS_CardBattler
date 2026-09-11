@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURAL RECOVERY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURAL RECOVERY.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURAL RECOVERY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

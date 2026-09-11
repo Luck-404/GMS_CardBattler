@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_wildward",
   "parent":{
     "name":"WILDWARD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILDWARD.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILDWARD.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

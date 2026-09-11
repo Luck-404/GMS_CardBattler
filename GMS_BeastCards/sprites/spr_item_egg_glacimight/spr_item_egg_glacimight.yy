@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"CERULEAN",
-    "path":"folders/INVENTORY/ITEM LIST/EGG/CERULEAN.yy",
+    "path":"folders/INVENTORY/ITEMS/EGGS/CERULEAN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

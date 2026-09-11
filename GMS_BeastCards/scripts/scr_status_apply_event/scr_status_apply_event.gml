@@ -63,7 +63,7 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"EVENT: BLOOMTIDE",
 					undefined,

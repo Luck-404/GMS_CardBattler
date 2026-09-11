@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_winters_hour",
   "parent":{
     "name":"WINTERS_HOUR",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/WINTERS_HOUR.yy",
+    "path":"folders/CARDS/CERULEAN/WINTERS_HOUR.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

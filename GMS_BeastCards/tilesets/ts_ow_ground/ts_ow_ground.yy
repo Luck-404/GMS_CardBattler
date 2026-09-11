@@ -13,13 +13,13 @@
   "out_tilevborder":2,
   "parent":{
     "name":"TILESETS",
-    "path":"folders/OVERWORLD/TILESETS.yy",
+    "path":"folders/OVERWORLD/TILESETS/TILESETS.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"spr_ts_ground",
-    "path":"sprites/spr_ts_ground/spr_ts_ground.yy",
+    "name":"spr_ts_ow_ground",
+    "path":"sprites/spr_ts_ow_ground/spr_ts_ow_ground.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{

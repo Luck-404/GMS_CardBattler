@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"COLD_SNAP",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/COLD_SNAP.yy",
+    "path":"folders/CARDS/CERULEAN/COLD_SNAP.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

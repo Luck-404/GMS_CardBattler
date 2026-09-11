@@ -102,7 +102,7 @@ function scr_minion_damage_target(_val_damage,_ref_target){
 			_val_total_applied +=
 				_val_actual;
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"-" + string(_val_actual),
 				undefined,
@@ -148,7 +148,7 @@ function scr_minion_damage_target(_val_damage,_ref_target){
 		_val_damage_left -=
 			_val_armor_damage;
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"-" + string(_val_armor_damage),
 			undefined,
@@ -180,7 +180,7 @@ function scr_minion_damage_target(_val_damage,_ref_target){
 		_val_beast_damage +=
 			_val_overhealth_damage;
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"-" + string(_val_overhealth_damage),
 			undefined,
@@ -211,7 +211,7 @@ function scr_minion_damage_target(_val_damage,_ref_target){
 			_val_beast_damage +=
 				_val_hp_damage;
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"-" + string(_val_hp_damage),
 				undefined,
@@ -226,7 +226,7 @@ function scr_minion_damage_target(_val_damage,_ref_target){
 	//WAKE SLEEP//
 	//------------//
 	if (_val_beast_damage > 0){
-		scr_cc_wake_sleep_on_damage(_ref_target);
+		scr_status_wake_sleep_on_damage(_ref_target);
 	}
 
 	return true;

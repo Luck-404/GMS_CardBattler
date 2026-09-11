@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_plague_garden",
   "parent":{
     "name":"PLAGUE_GARDEN",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PLAGUE_GARDEN.yy",
+    "path":"folders/CARDS/VIRIDIAN/PLAGUE_GARDEN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

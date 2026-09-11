@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"PLAGUE_GARDEN",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PLAGUE_GARDEN.yy",
+    "path":"folders/CARDS/VIRIDIAN/PLAGUE_GARDEN.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

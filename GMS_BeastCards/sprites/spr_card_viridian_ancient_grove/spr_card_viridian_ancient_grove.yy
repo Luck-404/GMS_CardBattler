@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ANCIENT_GROVE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/ANCIENT_GROVE.yy",
+    "path":"folders/CARDS/VIRIDIAN/ANCIENT_GROVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

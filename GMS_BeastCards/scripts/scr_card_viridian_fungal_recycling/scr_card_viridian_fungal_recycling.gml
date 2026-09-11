@@ -26,20 +26,20 @@ function scr_card_viridian_fungal_recycling(_stct_card,_ref_caster,_ref_target){
 				_ref_caster._val_cur_hp
 			);
 
-		scr_spawn_popup_scrolling("TEXT","-10 HP",undefined,c_red,_ref_caster.x,_ref_caster.y - 48);
+		scr_gui_spawn_popup_scrolling("TEXT","-10 HP",undefined,c_red,_ref_caster.x,_ref_caster.y - 48);
 	}
 
 	//----------------------//
 	//RECOVER VIRIDIAN CARD//
 	//----------------------//
 	var _ref_recovered =
-		scr_battle_card_recover_random_exhausted(
+		scr_battle_recover_random_exhausted_card(
 			"VIRIDIAN"
 		);
 
 	if (instance_exists(_ref_recovered)){
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"RECOVERED: " +
 				string(
@@ -55,7 +55,7 @@ function scr_card_viridian_fungal_recycling(_stct_card,_ref_caster,_ref_target){
 	}
 	else{
 
-		scr_spawn_popup_scrolling(
+		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			"NO VIRIDIAN CARD TO RECOVER",
 			undefined,

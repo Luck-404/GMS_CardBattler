@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"POTENT SPORE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/POTENT SPORE.yy",
+    "path":"folders/CARDS/VIRIDIAN/POTENT SPORE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

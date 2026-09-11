@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"WILT",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/WILT.yy",
+    "path":"folders/CARDS/VIRIDIAN/WILT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_spore_cloud",
   "parent":{
     "name":"SPORE CLOUD",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SPORE CLOUD.yy",
+    "path":"folders/CARDS/VIRIDIAN/SPORE CLOUD.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

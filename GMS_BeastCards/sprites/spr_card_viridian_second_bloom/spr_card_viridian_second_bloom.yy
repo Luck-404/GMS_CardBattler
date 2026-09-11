@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"SECOND BLOOM",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/SECOND BLOOM.yy",
+    "path":"folders/CARDS/VIRIDIAN/SECOND BLOOM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

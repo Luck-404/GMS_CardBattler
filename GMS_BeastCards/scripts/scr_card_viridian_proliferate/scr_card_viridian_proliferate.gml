@@ -37,7 +37,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 	//------------------//
 	if (_ct_targets <= 1){
 
-		audio_play_sound(snd_error,0,false);
+		audio_play_sound(snd_gui_error,0,false);
 
 		return;
 	}
@@ -73,7 +73,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 
 		if (_ct_copied > 0){
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"PROLIFERATE",
 				undefined,
@@ -119,7 +119,7 @@ function scr_card_viridian_proliferate(_stct_card,_ref_caster,_ref_target){
 
 		if (_ct_copied > 0){
 
-			scr_spawn_popup_scrolling(
+			scr_gui_spawn_popup_scrolling(
 				"TEXT",
 				"PROLIFERATE",
 				undefined,

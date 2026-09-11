@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_get_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_get_info",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/CARDS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ANCIENT_CHARTS",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ANCIENT_CHARTS.yy",
+    "path":"folders/CARDS/CERULEAN/ANCIENT_CHARTS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

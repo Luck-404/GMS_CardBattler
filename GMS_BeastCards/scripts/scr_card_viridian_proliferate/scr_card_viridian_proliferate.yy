@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_proliferate",
   "parent":{
     "name":"PROLIFERATE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/PROLIFERATE.yy",
+    "path":"folders/CARDS/VIRIDIAN/PROLIFERATE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

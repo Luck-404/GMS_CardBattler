@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"INSPIRATION",
-    "path":"folders/CARDS/CARD LIST/UNCOLORED/INSPIRATION.yy",
+    "path":"folders/CARDS/UNCOLORED/INSPIRATION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

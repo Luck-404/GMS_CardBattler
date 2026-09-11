@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_pressure_crush",
   "parent":{
     "name":"PRESSURE_CRUSH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/PRESSURE_CRUSH.yy",
+    "path":"folders/CARDS/CERULEAN/PRESSURE_CRUSH.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

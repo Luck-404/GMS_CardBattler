@@ -6,7 +6,7 @@
   "name":"scr_status_buff_boost",
   "parent":{
     "name":"BOOST",
-    "path":"folders/BATTLE/STATUSES/BUFFS/VIRIDIAN/BOOST.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/BOOST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

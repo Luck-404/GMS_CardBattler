@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"STORM_BEACON",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/STORM_BEACON.yy",
+    "path":"folders/CARDS/CERULEAN/STORM_BEACON.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"NATURES FURY",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/NATURES FURY.yy",
+    "path":"folders/CARDS/VIRIDIAN/NATURES FURY.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

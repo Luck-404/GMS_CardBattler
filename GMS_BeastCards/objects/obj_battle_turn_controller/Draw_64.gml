@@ -14,7 +14,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		#region PLAYER TURN
 		case 0:
 			draw_set_colour(c_black);
-			draw_set_font(fnt_large_gui);
+			draw_set_font(fnt_gui_large);
 			draw_set_halign(fa_left);
 			draw_set_valign(fa_top);
 
@@ -31,7 +31,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		#region ENEMY TURN
 		case 1:
 			draw_set_colour(c_black);
-			draw_set_font(fnt_large_gui);
+			draw_set_font(fnt_gui_large);
 			draw_set_halign(fa_left);
 			draw_set_valign(fa_top);
 

@@ -46,7 +46,7 @@ for (var _it_unit = 0; _it_unit < _ct_unit; _it_unit++){
 	var _val_unit_y = _val_box_y + (_val_slot_size * 0.5);
 
 	// SHADOW
-	var _spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+	var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 	draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,1,1,0,c_white,1);
 
 	// UNIT
@@ -140,7 +140,7 @@ if (_stct_unit_selected != undefined){
 	var _val_sg = 32;
 
 	draw_set_colour(c_black);
-	draw_set_font(fnt_small_gui);
+	draw_set_font(fnt_gui_small);
 	draw_set_valign(fa_top);
 	draw_set_halign(fa_left);
 
@@ -181,22 +181,22 @@ if (_stct_unit_selected != undefined){
 	var _val_pdef_stat = _stct_unit._val_beast_pdef_stat;
 	var _val_mdef_stat = _stct_unit._val_beast_mdef_stat;
 
-	draw_text(_val_x,_val_y,"HP: " + string(_val_hp_stat) + " | " + scr_beast_get_grade_letter(_val_hp_stat) + " | " + string(scr_get_beast_grade_modifier(_val_hp_stat)));
+	draw_text(_val_x,_val_y,"HP: " + string(_val_hp_stat) + " | " + scr_beast_get_grade_letter(_val_hp_stat) + " | " + string(scr_beast_get_grade_modifier(_val_hp_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"CON: " + string(_val_con_stat) + " | " + scr_beast_get_grade_letter(_val_con_stat) + " | " + string(scr_get_beast_grade_modifier(_val_con_stat)));
+	draw_text(_val_x,_val_y,"CON: " + string(_val_con_stat) + " | " + scr_beast_get_grade_letter(_val_con_stat) + " | " + string(scr_beast_get_grade_modifier(_val_con_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"PPOW: " + string(_val_ppow_stat) + " | " + scr_beast_get_grade_letter(_val_ppow_stat) + " | " + string(scr_get_beast_grade_modifier(_val_ppow_stat)));
+	draw_text(_val_x,_val_y,"PPOW: " + string(_val_ppow_stat) + " | " + scr_beast_get_grade_letter(_val_ppow_stat) + " | " + string(scr_beast_get_grade_modifier(_val_ppow_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"MPOW: " + string(_val_mpow_stat) + " | " + scr_beast_get_grade_letter(_val_mpow_stat) + " | " + string(scr_get_beast_grade_modifier(_val_mpow_stat)));
+	draw_text(_val_x,_val_y,"MPOW: " + string(_val_mpow_stat) + " | " + scr_beast_get_grade_letter(_val_mpow_stat) + " | " + string(scr_beast_get_grade_modifier(_val_mpow_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"PDEF: " + string(_val_pdef_stat) + " | " + scr_beast_get_grade_letter(_val_pdef_stat) + " | " + string(scr_get_beast_grade_modifier(_val_pdef_stat)));
+	draw_text(_val_x,_val_y,"PDEF: " + string(_val_pdef_stat) + " | " + scr_beast_get_grade_letter(_val_pdef_stat) + " | " + string(scr_beast_get_grade_modifier(_val_pdef_stat)));
 	_val_y += _val_lh;
 
-	draw_text(_val_x,_val_y,"MDEF: " + string(_val_mdef_stat) + " | " + scr_beast_get_grade_letter(_val_mdef_stat) + " | " + string(scr_get_beast_grade_modifier(_val_mdef_stat)));
+	draw_text(_val_x,_val_y,"MDEF: " + string(_val_mdef_stat) + " | " + scr_beast_get_grade_letter(_val_mdef_stat) + " | " + string(scr_beast_get_grade_modifier(_val_mdef_stat)));
 	_val_y += _val_sg;
 
 	// SECONDARY

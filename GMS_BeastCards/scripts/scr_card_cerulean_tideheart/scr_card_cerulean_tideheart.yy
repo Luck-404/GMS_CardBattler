@@ -6,7 +6,7 @@
   "name":"scr_card_cerulean_tideheart",
   "parent":{
     "name":"TIDEHEART",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/TIDEHEART.yy",
+    "path":"folders/CARDS/CERULEAN/TIDEHEART.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

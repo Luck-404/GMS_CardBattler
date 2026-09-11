@@ -1,0 +1,20 @@
+//===============================================================================//
+//
+// DRAW: OBJ_SCENE_FX_PLANT_LITTER
+// FUNCTION: Draws a randomized piece of plant litter.
+//           Applies sprite variation, scaling,
+//           and rotational animation.
+//
+//===============================================================================//
+
+draw_sprite_ext(
+    spr_overworld_vfx_plant_litter,
+    _val_sprite_index,
+    x,
+    y,
+    _val_size,
+    _val_size,
+    _val_rot,
+    c_white,
+    1
+);

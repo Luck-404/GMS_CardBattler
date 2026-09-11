@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"ABYSSAL_TOUCH",
-    "path":"folders/CARDS/CARD LIST/CERULEAN/ABYSSAL_TOUCH.yy",
+    "path":"folders/CARDS/CERULEAN/ABYSSAL_TOUCH.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

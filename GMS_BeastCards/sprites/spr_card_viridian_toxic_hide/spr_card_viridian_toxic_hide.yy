@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"TOXIC_HIDE",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/TOXIC_HIDE.yy",
+    "path":"folders/CARDS/VIRIDIAN/TOXIC_HIDE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

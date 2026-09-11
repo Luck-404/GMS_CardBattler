@@ -58,7 +58,7 @@ function scr_status_dot_stormstruck(_str_command,_ref_status=undefined,_val_life
 				//----------------//
 				//CHECK DISCHARGE//
 				//----------------//
-				scr_trigger_discharge(_ref_target);
+				scr_battle_trigger_discharge(_ref_target);
 
 				return _ref_existing_status;
 			}

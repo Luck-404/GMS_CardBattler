@@ -17,7 +17,7 @@ function scr_card_uncolored_clearcast(_stct_card,_ref_caster,_ref_target){
 	//-------------//
 	//SPAWN POPUP//
 	//-------------//
-	scr_spawn_popup_scrolling(
+	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"WEATHER CLEARED",
 		undefined,

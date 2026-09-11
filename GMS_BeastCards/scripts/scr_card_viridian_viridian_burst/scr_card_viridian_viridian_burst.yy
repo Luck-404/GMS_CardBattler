@@ -6,7 +6,7 @@
   "name":"scr_card_viridian_viridian_burst",
   "parent":{
     "name":"VIRIDIAN BURST",
-    "path":"folders/CARDS/CARD LIST/VIRIDIAN/VIRIDIAN BURST.yy",
+    "path":"folders/CARDS/VIRIDIAN/VIRIDIAN BURST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -10,8 +10,8 @@
   "name":"obj_gui_scrolling_textbox",
   "overriddenProperties":[],
   "parent":{
-    "name":"PROMPTS AND TEXTBOXES",
-    "path":"folders/GUI/PROMPTS AND TEXTBOXES.yy",
+    "name":"TEXTBOXES",
+    "path":"folders/GUI/TEXTBOXES.yy",
   },
   "parentObjectId":null,
   "persistent":false,

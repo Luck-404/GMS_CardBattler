@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_logbook_mark_card_obtained",
   "parent":{
-    "name":"LOGBOOK",
-    "path":"folders/GUI/LOGBOOK.yy",
+    "name":"CARDS",
+    "path":"folders/LOGBOOK/CARDS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

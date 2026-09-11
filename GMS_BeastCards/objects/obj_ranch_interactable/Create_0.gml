@@ -40,7 +40,7 @@ function hscr_spawn_ranch_unit(_stct_unit){
 	var _ref_new_unit = instance_create_layer(room_width * 0.5 + _val_rand_x,room_height * 0.5 + _val_rand_y,"ily_player",obj_ranch_beast_dummy);
 
 	_ref_new_unit.sprite_index = _stct_unit._spr_beast;
-	_ref_new_unit._spr_shadow = scr_get_beast_type_shadow(_stct_unit._str_beast_color_type);
+	_ref_new_unit._spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 	_ref_new_unit._snd_death = _stct_unit._snd_beast_death;
 	_ref_new_unit._snd_cry = _stct_unit._snd_beast_cry;
 	_ref_new_unit._uid_dummy = _stct_unit._uid_beast;

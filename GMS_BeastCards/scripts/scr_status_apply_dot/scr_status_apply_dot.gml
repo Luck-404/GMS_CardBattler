@@ -54,7 +54,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 STORMSTRUCK",
 					undefined,
@@ -80,7 +80,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 FROSTBURN",
 					undefined,
@@ -106,7 +106,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 FROSTBITE",
 					undefined,
@@ -132,7 +132,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 BLEED",
 					undefined,
@@ -159,7 +159,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 BURN",
 					undefined,
@@ -187,7 +187,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 POISON",
 					undefined,
@@ -215,7 +215,7 @@ function scr_status_apply_dot(
 
 			if (_ref_status != undefined){
 
-				scr_spawn_popup_scrolling(
+				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"+1 VENOM",
 					undefined,
