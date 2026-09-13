@@ -3,19 +3,22 @@
 // SCRIPT: SCR_CARD_CERULEAN_TIDAL_RECOVERY
 // FUNCTION: Resolves Tidal Recovery.
 //           Applies Regeneration for 3 rounds.
-//           Heals the target for 10 HP each round.
+//           Heals the selected target each round.
+//
+// ARGUMENTS: _stct_card is the Tidal Recovery card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
 //
 //===============================================================================//
 
 function scr_card_cerulean_tidal_recovery(_stct_card,_ref_caster,_ref_target){
 
-	//--------------------//
+	//====================//
 	//APPLY REGENERATION//
-	//--------------------//
-	scr_apply_buff_status(
+	//====================//
+	scr_status_apply_buff(
 		"REGENERATION",
 		_stct_card._val_card_magnitude,
 		3
 	);
-
 }

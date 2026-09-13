@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_molten_edge",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_molten_edge",
+  "parent":{
+    "name":"MOLTEN_EDGE",
+    "path":"folders/CARDS/VERMILION/MOLTEN_EDGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

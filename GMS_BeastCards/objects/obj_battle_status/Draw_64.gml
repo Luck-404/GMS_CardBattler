@@ -1,9 +1,9 @@
 //===============================================================================//
 //
 // DRAW GUI: OBJ_BATTLE_STATUS
-// FUNCTION: Draws status icon, stack count, lifetime count, and tooltip.
-//           Executes queued status commands independently of status visuals.
-//           Supports repeat and death command callbacks.
+// FUNCTION: Draws the Status icon, stack count, lifetime count, and tooltip.
+//           Executes queued Status commands independently of Status visuals.
+//           Supports REPEAT and DEATH command callbacks.
 //
 //===============================================================================//
 
@@ -14,9 +14,9 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	//================//
 	if (_spr_status != undefined){
 
-		//----------//
+		//-------------//
 		//DRAW ICON//
-		//----------//
+		//-------------//
 		draw_sprite(_spr_status,0,x,y);
 
 		draw_set_font(fnt_gui_party_small);
@@ -33,9 +33,9 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			string(_ct_status_stacks)
 		);
 
-		//----------------//
+		//---------------//
 		//DRAW LIFETIME//
-		//----------------//
+		//---------------//
 		if (!_flag_status_infinite){
 
 			draw_text(
@@ -48,9 +48,9 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 
-		//-------------//
+		//================//
 		//DRAW TOOLTIP//
-		//-------------//
+		//================//
 		if (
 			keyboard_check(vk_lcontrol) &&
 			position_meeting(
@@ -60,68 +60,42 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 			)
 		){
 
-			//----------------//
+			//-----------------//
 			//TOOLTIP CONTENT//
-			//----------------//
-			var _str_line_1 =
-				string(_str_status_name) +
-				" | " +
-				string(_str_status_desc);
-
-			var _str_lifetime_text =
-				_flag_status_infinite
-				? "INFINITE"
-				: string(_val_status_lifetime);
-
-			var _str_line_2 =
-				"LIFE: " +
-				_str_lifetime_text +
-				" | STACKS: " +
-				string(_ct_status_stacks);
-
+			//-----------------//
+			var _str_line_1 = string(_str_status_name) + " | " + string(_str_status_desc);
+			var _str_lifetime_text = _flag_status_infinite ? "INFINITE" : string(_val_status_lifetime);
+			var _str_line_2 = "LIFE: " + _str_lifetime_text + " | STACKS: " + string(_ct_status_stacks);
 			var _str_line_3 = "";
 
 			if (
 				_str_trigger_region == undefined ||
 				_str_trigger_region == "undefined"
 			){
-
-				_str_line_3 =
-					"TRIGGERS AT: NEVER";
+				_str_line_3 = "TRIGGERS AT: NEVER";
 			}
 			else{
-
-				_str_line_3 =
-					"TRIGGERS AT: " +
-					string(_str_trigger_region);
+				_str_line_3 = "TRIGGERS AT: " + string(_str_trigger_region);
 			}
 
-			//----------------//
+			//------------------//
 			//PANEL DIMENSIONS//
-			//----------------//
-			var _val_panel_w =
+			//------------------//
+			var _val_panel_w = max(
+				string_width(_str_line_1),
 				max(
-					string_width(_str_line_1),
-					max(
-						string_width(_str_line_2),
-						string_width(_str_line_3)
-					)
-				) +
-				24;
+					string_width(_str_line_2),
+					string_width(_str_line_3)
+				)
+			) + 24;
 
-			var _val_panel_h =
-				70;
+			var _val_panel_h = 70;
+			var _val_panel_x = (display_get_gui_width() * 0.5) - (_val_panel_w * 0.5);
+			var _val_panel_y = 20;
 
-			var _val_panel_x =
-				room_width * 0.5 -
-				(_val_panel_w * 0.5);
-
-			var _val_panel_y =
-				20;
-
-			//----------------//
+			//--------------//
 			//DRAW PANEL//
-			//----------------//
+			//--------------//
 			draw_set_colour(c_dkgray);
 
 			draw_rectangle(
@@ -142,50 +116,36 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				true
 			);
 
-			//----------------//
+			//-----------------//
 			//DRAW PANEL TEXT//
-			//----------------//
+			//-----------------//
 			draw_set_colour(c_white);
 
 			draw_text(
-				_val_panel_x +
-					(
-						_val_panel_w -
-						string_width(_str_line_1)
-					) *
-					0.5,
+				_val_panel_x + ((_val_panel_w - string_width(_str_line_1)) * 0.5),
 				_val_panel_y + 8,
 				_str_line_1
 			);
 
 			draw_text(
-				_val_panel_x +
-					(
-						_val_panel_w -
-						string_width(_str_line_2)
-					) *
-					0.5,
+				_val_panel_x + ((_val_panel_w - string_width(_str_line_2)) * 0.5),
 				_val_panel_y + 26,
 				_str_line_2
 			);
 
 			draw_text(
-				_val_panel_x +
-					(
-						_val_panel_w -
-						string_width(_str_line_3)
-					) *
-					0.5,
+				_val_panel_x + ((_val_panel_w - string_width(_str_line_3)) * 0.5),
 				_val_panel_y + 44,
 				_str_line_3
 			);
-
-			//----------------//
-			//RESTORE DRAW STATE//
-			//----------------//
-			draw_set_halign(fa_left);
-			draw_set_valign(fa_top);
 		}
+
+		//--------------------//
+		//RESTORE DRAW STATE//
+		//--------------------//
+		draw_set_colour(c_white);
+		draw_set_halign(fa_left);
+		draw_set_valign(fa_top);
 	}
 
 	//================//
@@ -193,18 +153,17 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	//================//
 	if (_scr_status != undefined){
 
-		switch(_str_status_command){
+		switch (_str_status_command){
 
-			//----//
+			//========//
 			//WAIT//
-			//----//
+			//========//
 			case "WAIT":
 			break;
 
-
-			//------//
+			//========//
 			//REPEAT//
-			//------//
+			//========//
 			case "REPEAT":
 
 				_scr_status(
@@ -214,20 +173,18 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 			break;
 
-
-			//-----//
+			//=======//
 			//DEATH//
-			//-----//
+			//=======//
 			case "DEATH":
 
 				/*
-					Clear the queued command before calling
-					the Death callback so it cannot execute
-					repeatedly if the callback does not
-					immediately destroy this instance.
+					Clear the queued command before calling the DEATH
+					callback so it cannot execute repeatedly if the
+					callback does not immediately destroy this Status.
 				*/
-				_str_status_command =
-					"WAIT";
+
+				_str_status_command = "WAIT";
 
 				_scr_status(
 					"DEATH",
@@ -240,11 +197,10 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	else{
 
 		/*
-			A status without a callback cannot process
-			queued commands. Reset it rather than allowing
-			REPEAT/DEATH to remain queued forever.
+			A Status without a callback cannot process queued commands.
+			Reset the command rather than leaving REPEAT or DEATH queued.
 		*/
-		_str_status_command =
-			"WAIT";
+
+		_str_status_command = "WAIT";
 	}
 }

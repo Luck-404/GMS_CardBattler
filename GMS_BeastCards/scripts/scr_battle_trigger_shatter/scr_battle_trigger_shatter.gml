@@ -7,7 +7,8 @@
 //
 // INPUT:    _ref_target - Living Beast whose Frostbite will be SHATTERED.
 // USES:     Frostbite status lookup/removal, shared battle damage,
-//           Card cast context, and shared battle feedback.
+//           Card cast context, shared battle feedback,
+//           and battle-trigger debug logging.
 //
 //===============================================================================//
 
@@ -79,7 +80,10 @@ function scr_battle_trigger_shatter(_ref_target){
 	//------------------//
 	//CONSUME FROSTBITE//
 	//------------------//
-	scr_status_dot_frostbite("DEATH",_ref_frostbite);
+	scr_status_dot_frostbite(
+		"DEATH",
+		_ref_frostbite
+	);
 
 	#endregion
 
@@ -89,6 +93,18 @@ function scr_battle_trigger_shatter(_ref_target){
 	//CALCULATE DAMAGE//
 	//------------------//
 	var _val_shatter_damage = _ct_frostbite_stacks * 3;
+
+	//================//
+	//DEBUG TRIGGER//
+	//================//
+	scr_debug_log_battle_trigger(
+		"SHATTER",
+		global.ref_caster_beast,
+		_ref_target,
+		"FROSTBITE CONSUMED: " + string(_ct_frostbite_stacks) +
+		" | BASE NEU DAMAGE: " + string(_val_shatter_damage),
+		"SCR_BATTLE_TRIGGER_SHATTER"
+	);
 
 	//--------------------//
 	//GET CAST CARD STATE//
@@ -101,7 +117,10 @@ function scr_battle_trigger_shatter(_ref_target){
 	//----------------//
 	_stct_cast_card._str_card_stat = "NEU";
 
-	scr_battle_damage_target(_val_shatter_damage,_ref_target);
+	scr_battle_damage_target(
+		_val_shatter_damage,
+		_ref_target
+	);
 
 	//-----------------//
 	//RESTORE CARD STAT//

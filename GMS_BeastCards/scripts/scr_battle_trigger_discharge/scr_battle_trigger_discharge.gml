@@ -8,7 +8,8 @@
 //
 // INPUT:    _ref_host - Beast whose Stormstruck stacks are being checked.
 // USES:     Stormstruck status data, adjacent battle targeting, status
-//           application, status positioning, and shared battle feedback.
+//           application, status positioning, shared battle feedback,
+//           and battle-trigger debug logging.
 //
 //===============================================================================//
 
@@ -82,6 +83,12 @@ function scr_battle_trigger_discharge(_ref_host){
 
 	#region DAMAGE
 
+	//----------------------//
+	//TRACK DAMAGE RESULTS//
+	//----------------------//
+	var _val_overhealth_damage = 0;
+	var _val_hp_damage = 0;
+
 	//----------------//
 	//DEAL 15 DAMAGE//
 	//----------------//
@@ -92,7 +99,10 @@ function scr_battle_trigger_discharge(_ref_host){
 	//-----------------//
 	if (_ref_host._val_overhealth > 0){
 
-		var _val_overhealth_damage = min(_ref_host._val_overhealth,_val_damage_remaining);
+		_val_overhealth_damage = min(
+			_ref_host._val_overhealth,
+			_val_damage_remaining
+		);
 
 		_ref_host._val_overhealth -= _val_overhealth_damage;
 		_val_damage_remaining -= _val_overhealth_damage;
@@ -102,7 +112,16 @@ function scr_battle_trigger_discharge(_ref_host){
 	//DAMAGE HP//
 	//----------//
 	if (_val_damage_remaining > 0){
-		_ref_host._val_cur_hp = max(0,_ref_host._val_cur_hp - _val_damage_remaining);
+
+		_val_hp_damage = min(
+			_val_damage_remaining,
+			_ref_host._val_cur_hp
+		);
+
+		_ref_host._val_cur_hp = max(
+			0,
+			_ref_host._val_cur_hp - _val_hp_damage
+		);
 	}
 
 	#endregion
@@ -145,6 +164,25 @@ function scr_battle_trigger_discharge(_ref_host){
 	//RESTORE GLOBAL TARGET//
 	//-----------------------//
 	global.ref_target_beast = _ref_original_target;
+
+	#endregion
+
+	#region DEBUG TRIGGER
+
+	//------------------//
+	//LOG DISCHARGE//
+	//------------------//
+	scr_debug_log_battle_trigger(
+		"DISCHARGE",
+		_ref_host,
+		_ref_host,
+		"STORMSTRUCK: 8+ -> 4" +
+		" | NEU DAMAGE: " + string(_val_overhealth_damage + _val_hp_damage) +
+		" | OVERHEALTH: " + string(_val_overhealth_damage) +
+		" | HP: " + string(_val_hp_damage) +
+		" | ADJACENT STORMSTRUCK: +2",
+		"SCR_BATTLE_TRIGGER_DISCHARGE"
+	);
 
 	#endregion
 

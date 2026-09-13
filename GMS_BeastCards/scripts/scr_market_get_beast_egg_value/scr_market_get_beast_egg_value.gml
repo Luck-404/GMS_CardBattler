@@ -1,17 +1,27 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_GET_BEAST_EGG_MARKET_VALUE
-// FUNCTION: Determines the gold value of a beast egg offer.
-//           Uses beast stat totals, role traits, and simple rarity weighting.
-//           Returns the purchase cost shown in the beast egg market.
+// SCRIPT: SCR_MARKET_GET_BEAST_EGG_VALUE
+// FUNCTION: Determines the gold value of a Beast egg offer.
+//           Uses Beast stat totals, archetype traits, and secondary stats.
+//           Returns the purchase cost shown in the Beast egg market.
+//
+// ARGUMENTS: _stct_beast is the Beast information struct.
+// RETURNS: Calculated egg market value with a minimum cost of 100 gold.
 //
 //===============================================================================//
+
 function scr_market_get_beast_egg_value(_stct_beast){
 
+	//================//
+	//VALIDATE BEAST//
+	//================//
 	if (_stct_beast == undefined){
 		return 100;
 	}
 
+	//================//
+	//BASE STAT VALUE//
+	//================//
 	var _val_stat_total =
 		_stct_beast._val_beast_hp_stat +
 		_stct_beast._val_beast_con_stat +
@@ -22,11 +32,18 @@ function scr_market_get_beast_egg_value(_stct_beast){
 
 	var _val_cost = 75 + floor(_val_stat_total * 0.75);
 
+	//================//
+	//SECONDARY STATS//
+	//================//
 	_val_cost += _stct_beast._val_beast_min_stat * 15;
 	_val_cost += _stct_beast._val_beast_crit_stat * 4;
 	_val_cost += _stct_beast._val_beast_dod_stat * 4;
 
-	switch(_stct_beast._str_beast_archetype){
+	//================//
+	//ARCHETYPE VALUE//
+	//================//
+	switch (_stct_beast._str_beast_archetype){
+
 		case "MAGICAL":
 			_val_cost += 40;
 		break;
@@ -40,7 +57,9 @@ function scr_market_get_beast_egg_value(_stct_beast){
 		break;
 	}
 
-	// Round to nearest 25.
+	//================//
+	//FINALIZE VALUE//
+	//================//
 	_val_cost = ceil(_val_cost / 25) * 25;
 
 	return max(100,_val_cost);

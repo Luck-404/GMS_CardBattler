@@ -1,240 +1,200 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_apply_dot
-// FUNCTION: Attempts to apply a damage-over-time status to the current target.
-//           Checks target resistance from CON before applying.
-//           Accepts an optional lifetime override.
-//           Spawns feedback popup text for resisted or successful applications.
+// SCRIPT: SCR_STATUS_APPLY_DOT
+// FUNCTION: Attempts to apply a damage-over-time Status to the current target.
+//           Checks target CON resistance before applying.
+//           Handles shared application feedback, debug logging, and DoT Traps.
+//           Successful Burn applications also check Burn-to-Char conversion.
+//
+// ARGUMENTS: _str_status_name is the DoT ID.
+//            _val_lifetime optionally overrides duration.
+//            _flag_trigger_plague_garden controls Plague Garden.
+// RETURNS: The active DoT Status reference, or undefined if none remains.
 //
 //===============================================================================//
-function scr_status_apply_dot(
-	_str_status_name,
-	_val_lifetime=undefined,
-	_flag_trigger_plague_garden=true
-){
+
+function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_trigger_plague_garden=true){
 
 	//----------------//
 	//VALIDATE TARGET//
 	//----------------//
-	var _ref_target =
-		global.ref_target_beast;
+	var _ref_target = global.ref_target_beast;
 
 	if (!instance_exists(_ref_target)){
 		return undefined;
 	}
 
-	if (_ref_target._ref_unit == undefined){
+	if (!is_struct(_ref_target._ref_unit)){
 		return undefined;
 	}
 
-	//--------------//
+	//========================//
+	//SNAPSHOT EXISTING STATUS//
+	//========================//
+	var _ref_existing_status = scr_status_check(_str_status_name,_ref_target);
+
+	var _ct_previous_stacks = 0;
+	var _val_previous_lifetime = undefined;
+
+	if (_ref_existing_status != -1 && instance_exists(_ref_existing_status)){
+		_ct_previous_stacks = _ref_existing_status._ct_status_stacks;
+		_val_previous_lifetime = _ref_existing_status._val_status_lifetime;
+	}
+
+	//================//
 	//RESIST CHECK//
-	//--------------//
-	if (scr_status_check_con_resistance(_ref_target)){
+	//================//
+	if (scr_status_check_con_resistance(_ref_target,false,_str_status_name)){
 		return undefined;
 	}
 
-	//--------------//
+	//================//
 	//APPLY STATUS//
-	//--------------//
-	var _ref_status =
-		undefined;
+	//================//
+	var _ref_status = undefined;
+	var _str_popup = undefined;
+	var _c_popup = c_white;
 
-	switch(_str_status_name){
-		//------------//
+	switch (_str_status_name){
+
+		//==============//
 		//STORMSTRUCK//
-		//------------//
+		//==============//
 		case "STORMSTRUCK":
 
-			_ref_status = scr_status_dot_stormstruck(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_dot_stormstruck("APPLY",undefined,_val_lifetime);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 STORMSTRUCK",
-					undefined,
-					c_aqua,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 STORMSTRUCK";
+			_c_popup = c_aqua;
 
 		break;
 
-		//---------//
+		//===========//
 		//FROSTBURN//
-		//---------//
+		//===========//
 		case "FROSTBURN":
 
-			_ref_status =
-				scr_status_dot_frostburn(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+			_ref_status = scr_status_dot_frostburn("APPLY",undefined,_val_lifetime);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 FROSTBURN",
-					undefined,
-					c_aqua,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 FROSTBURN";
+			_c_popup = c_aqua;
 
 		break;
-		
-		//---------//
+
+		//===========//
 		//FROSTBITE//
-		//---------//
+		//===========//
 		case "FROSTBITE":
 
-			_ref_status =
-				scr_status_dot_frostbite(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+			_ref_status = scr_status_dot_frostbite("APPLY",undefined,_val_lifetime);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 FROSTBITE",
-					undefined,
-					c_aqua,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 FROSTBITE";
+			_c_popup = c_aqua;
 
 		break;
 
-		//-------//
+		//=======//
 		//BLEED//
-		//-------//
+		//=======//
 		case "BLEED":
 
-		_ref_status = scr_status_dot_bleed(
-		"APPLY",
-		undefined,
-		_val_lifetime,
-		_flag_trigger_plague_garden
-	);
+			_ref_status = scr_status_dot_bleed("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 BLEED",
-					undefined,
-					c_maroon,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 BLEED";
+			_c_popup = c_maroon;
 
 		break;
 
-
-		//------//
+		//======//
 		//BURN//
-		//------//
+		//======//
 		case "BURN":
 
-			_ref_status =
-				scr_status_dot_burn(
-					"APPLY",
-					undefined,
-					_val_lifetime
-				);
+			_ref_status = scr_status_dot_burn("APPLY",undefined,_val_lifetime);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 BURN",
-					undefined,
-					c_red,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 BURN";
+			_c_popup = c_red;
 
 		break;
 
-
-		//--------//
+		//========//
 		//POISON//
-		//--------//
+		//========//
 		case "POISON":
 
-			_ref_status =
-				scr_status_dot_poison(
-					"APPLY",
-					undefined,
-					_val_lifetime,
-					_flag_trigger_plague_garden
-				);
+			_ref_status = scr_status_dot_poison("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 POISON",
-					undefined,
-					c_lime,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 POISON";
+			_c_popup = c_lime;
 
 		break;
 
-
-		//-------//
+		//=======//
 		//VENOM//
-		//-------//
+		//=======//
 		case "VENOM":
 
-			_ref_status =
-				scr_status_dot_venom(
-					"APPLY",
-					undefined,
-					_val_lifetime,
-					_flag_trigger_plague_garden
-				);
+			_ref_status = scr_status_dot_venom("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
 
-			if (_ref_status != undefined){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"+1 VENOM",
-					undefined,
-					c_purple,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
+			_str_popup = "+1 VENOM";
+			_c_popup = c_purple;
 
 		break;
 	}
-	
 
-	//------------------//
+	//------------------------//
+	//VALIDATE APPLIED STATUS//
+	//------------------------//
+	if (!instance_exists(_ref_status)){
+		return undefined;
+	}
+
+	//================//
+	//DOT FEEDBACK//
+	//================//
+	if (_str_popup != undefined){
+
+		scr_gui_spawn_popup_scrolling(
+			"TEXT",
+			_str_popup,
+			undefined,
+			_c_popup,
+			_ref_target.x + irandom_range(-32,32),
+			_ref_target.y - 24 + irandom_range(-32,32)
+		);
+	}
+
+	//==================//
+	//DEBUG APPLICATION//
+	//==================//
+	scr_debug_log_status_application(
+		_ref_target,
+		_ref_status,
+		_ct_previous_stacks,
+		_val_previous_lifetime,
+		"SCR_STATUS_APPLY_DOT"
+	);
+
+	//===================//
 	//CHECK DOT TRAPS//
-	//------------------//
-	scr_trap_trigger_dot(
-		global.ref_target_beast
-	);		
+	//===================//
+	scr_battle_trigger_dot_traps(_ref_target);
+
+	//========================//
+	//CHECK CHAR CONVERSION//
+	//========================//
+	if (_str_status_name == "BURN"){
+
+		scr_status_trigger_char_conversion(_ref_target);
+
+		var _ref_current_burn = scr_status_check("BURN",_ref_target);
+
+		if (_ref_current_burn == -1 || !instance_exists(_ref_current_burn)){
+			return undefined;
+		}
+
+		return _ref_current_burn;
+	}
 
 	return _ref_status;
 }

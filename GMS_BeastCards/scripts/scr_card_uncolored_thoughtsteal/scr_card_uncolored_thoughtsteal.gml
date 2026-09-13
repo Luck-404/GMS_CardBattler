@@ -6,25 +6,22 @@
 //           Disables that card for its next attempted cast.
 //           Uses the shared Mana Gain system for resource presentation.
 //
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target_card is the selected enemy card instance.
+// RETURNS: True if Thoughtsteal resolves successfully, otherwise false.
+//
 //===============================================================================//
 
-function scr_card_uncolored_thoughtsteal(
-	_stct_card,
-	_ref_caster,
-	_ref_target_card
-){
+function scr_card_uncolored_thoughtsteal(_stct_card,_ref_caster,_ref_target_card){
 
-	//---------------//
+	//================//
 	//VALIDATE TARGET//
-	//---------------//
+	//================//
 	if (!instance_exists(_ref_target_card)){
 		return false;
 	}
 
-	if (
-		_ref_target_card._str_team != "ENEMY" ||
-		_ref_target_card._str_location != "HAND"
-	){
+	if (_ref_target_card._str_team != "ENEMY" || _ref_target_card._str_location != "HAND"){
 		return false;
 	}
 
@@ -36,33 +33,22 @@ function scr_card_uncolored_thoughtsteal(
 		return false;
 	}
 
-	//------------//
+	//================//
 	//STEAL MANA//
-	//------------//
-	var _val_mana_stolen =
-		max(
-			0,
-			_ref_target_card
-				._ref_card
-				._val_card_mana_cost
-		);
+	//================//
+	var _val_mana_stolen = max(0,_ref_target_card._ref_card._val_card_mana_cost);
 
-	scr_battle_gain_mana(
-		_val_mana_stolen
-	);
+	scr_battle_gain_mana(_val_mana_stolen);
 
-	//--------------//
+	//================//
 	//DISABLE CARD//
-	//--------------//
-	_ref_target_card._flag_card_disabled =
-		true;
+	//================//
+	_ref_target_card._flag_card_disabled = true;
 
-	//----------------//
+	//================//
 	//EXPEND FEEDBACK//
-	//----------------//
-	scr_battle_vfx_expend(
-		_ref_target_card
-	);
+	//================//
+	scr_battle_vfx_expend(_ref_target_card);
 
 	scr_gui_spawn_popup_scrolling(
 		"TEXT",

@@ -1,14 +1,23 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_gain_echo
+// SCRIPT: SCR_STATUS_GAIN_ECHO
 // FUNCTION: Adds Echo stacks to the global Echo Buff.
-//           Creates the Echo status when needed.
+//           Creates the Echo Status when needed.
 //           Plays the shared Echo Set VFX and SFX when Echo is gained.
-//           Returns the active Echo status reference.
+//           Returns the active Echo Status reference.
 //
 //===============================================================================//
 
-function scr_status_gain_echo(_ct_amount=1){
+function scr_status_gain_echo(_ct_amount=undefined){
+
+	//----------//
+	//DEFAULTS//
+	//----------//
+	if (_ct_amount == undefined){
+		_ct_amount = 1;
+	}
+
+	_ct_amount = floor(_ct_amount);
 
 	//----------------//
 	//VALIDATE AMOUNT//
@@ -17,23 +26,22 @@ function scr_status_gain_echo(_ct_amount=1){
 		return undefined;
 	}
 
-	//-----------//
+	//===========//
 	//GAIN ECHO//
-	//-----------//
-	var _ref_echo =
-		scr_status_buff_echo(
-			"APPLY",
-			undefined,
-			_ct_amount
-		);
+	//===========//
+	var _ref_echo = scr_status_buff_echo(
+		"APPLY",
+		undefined,
+		_ct_amount
+	);
 
 	if (!instance_exists(_ref_echo)){
 		return undefined;
 	}
 
-	//----------------//
+	//================//
 	//ECHO SET VFX/SFX//
-	//----------------//
+	//================//
 	scr_battle_vfx(
 		undefined,
 		spr_battle_vfx_echo_set,

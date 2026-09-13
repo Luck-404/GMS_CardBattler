@@ -1,48 +1,46 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_FROSTBURN_NOVA
-// FUNCTION: Resolves the Frostburn Nova card effect.
+// FUNCTION: Resolves Frostburn Nova.
 //           Applies 1 Frostburn to the selected enemy Beast
 //           and its adjacent living Beasts.
 //           Frozen targets receive 1 additional Frostburn.
+//
+// ARGUMENTS: _stct_card is the Frostburn Nova card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
 //
 //===============================================================================//
 
 function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
+	//================//
 	//VALIDATE TARGET//
-	//----------------//
+	//================//
 	if (!instance_exists(_ref_target)){
 		return;
 	}
 
-	//-----------------//
+	//=================//
 	//GET AOE-3 TARGETS//
-	//-----------------//
+	//=================//
 	var _arr_targets = [
 		scr_battle_get_left_target(_ref_target),
 		_ref_target,
 		scr_battle_get_right_target(_ref_target)
 	];
 
-	//----------------------//
-	//STORE ORIGINAL TARGET//
-	//----------------------//
-	var _ref_original_target =
-		global.ref_target_beast;
+	//================//
+	//STORE TARGET//
+	//================//
+	var _ref_original_target = global.ref_target_beast;
 
-	//-------------------//
+	//===================//
 	//APPLY FROSTBURN//
-	//-------------------//
-	for (
-		var _it_target = 0;
-		_it_target < array_length(_arr_targets);
-		_it_target++
-	){
+	//===================//
+	for (var _it_target = 0;_it_target < array_length(_arr_targets);_it_target++){
 
-		var _ref_affected_target =
-			_arr_targets[_it_target];
+		var _ref_affected_target = _arr_targets[_it_target];
 
 		if (!instance_exists(_ref_affected_target)){
 			continue;
@@ -58,47 +56,25 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		//CHECK FROZEN//
 		//----------------//
-		var _flag_frozen =
-			scr_status_check(
-				"FROZEN",
-				_ref_affected_target
-			) != -1;
+		var _flag_frozen = scr_status_check("FROZEN",_ref_affected_target) != -1;
 
 		//----------------//
-		//SET STATUS TARGET//
+		//TARGET BEAST//
 		//----------------//
-		global.ref_target_beast =
-			_ref_affected_target;
+		global.ref_target_beast = _ref_affected_target;
 
 		//------------------//
-		//BASE FROSTBURN +1//
+		//APPLY FROSTBURN//
 		//------------------//
-		scr_status_apply_dot(
-			"FROSTBURN"
-		);
+		scr_status_apply_dot("FROSTBURN");
 
-		//-------------------------//
-		//FROZEN BONUS FROSTBURN//
-		//-------------------------//
 		if (_flag_frozen){
-
-			scr_status_apply_dot(
-				"FROSTBURN"
-			);
+			scr_status_apply_dot("FROSTBURN");
 		}
-
 	}
 
-	//----------------//
+	//================//
 	//RESTORE TARGET//
-	//----------------//
-	if (instance_exists(_ref_original_target)){
-		global.ref_target_beast =
-			_ref_original_target;
-	}
-	else{
-		global.ref_target_beast =
-			_ref_target;
-	}
-
+	//================//
+	global.ref_target_beast = _ref_original_target;
 }

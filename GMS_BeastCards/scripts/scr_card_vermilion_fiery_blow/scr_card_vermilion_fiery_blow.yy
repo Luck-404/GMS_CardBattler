@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_fiery_blow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_fiery_blow",
+  "parent":{
+    "name":"FIERY_BLOW",
+    "path":"folders/CARDS/VERMILION/FIERY_BLOW.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

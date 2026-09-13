@@ -1,27 +1,31 @@
 //===============================================================================//
 //
 // CREATE: OBJ_RANCH_BEAST_DUMMY
-// FUNCTION: Initializes a ranch beast dummy.
-//           Handles wandering behavior, animations, emoji effects,
-//           and movement state variables.
+// FUNCTION: Initializes a Ranch Beast dummy.
+//           Stores Beast presentation data, wandering behavior, emoji effects,
+//           movement state, and shake-animation state.
 //
 //===============================================================================//
 
-//---------//
-//VARIABLES//
-//---------//
+//================//
+//DRAW SETTINGS//
+//================//
 depth = 1;
 
-// IDENTIFIERS
+//================//
+//IDENTIFIERS//
+//================//
 _uid_dummy = undefined;
+
 _spr_shadow = spr_player_shadow;
+
 _snd_cry = undefined;
 _snd_death = undefined;
 
-//---------//
-//STATES//
-//---------//
-enum ENUM_DUMMY_STATE{
+//================//
+//DUMMY STATES//
+//================//
+enum ENUM_RANCH_BEAST_DUMMY_STATE{
 	FIND_LOCATION,
 	IDLE,
 	MOVE,
@@ -30,14 +34,14 @@ enum ENUM_DUMMY_STATE{
 }
 
 _state_dummy = choose(
-	ENUM_DUMMY_STATE.FIND_LOCATION,
-	ENUM_DUMMY_STATE.IDLE,
-	ENUM_DUMMY_STATE.MOVE
+	ENUM_RANCH_BEAST_DUMMY_STATE.FIND_LOCATION,
+	ENUM_RANCH_BEAST_DUMMY_STATE.IDLE,
+	ENUM_RANCH_BEAST_DUMMY_STATE.MOVE
 );
 
-//---------//
-//EMOJIS//
-//---------//
+//================//
+//EMOJI STATE//
+//================//
 _spr_emoji = choose(
 	spr_ranch_beast_happy,
 	spr_ranch_beast_love,
@@ -46,22 +50,24 @@ _spr_emoji = choose(
 
 _ct_emoji_timer = 0;
 
-//---------//
-//MOVEMENT//
-//---------//
+//================//
+//MOVEMENT STATE//
+//================//
 _ct_idle_time = irandom_range(60,300);
 
-_val_target_x = room_width * 0.5 + irandom_range(-250,250);
-_val_target_y = room_height * 0.5 + irandom_range(-250,250);
+_val_target_x = (room_width * 0.5) + irandom_range(-250,250);
+_val_target_y = (room_height * 0.5) + irandom_range(-250,250);
 
 _val_move_speed = random_range(0.5,1.5);
 
-// STEP PARTICLES
+//----------------------//
+//STEP PARTICLE TIMING//
+//----------------------//
 _ct_step_particle_timer = 15;
 
-//---------//
-//SHAKING//
-//---------//
+//================//
+//SHAKE STATE//
+//================//
 _ct_bounce_counter = 0;
 _val_bounce_frame = 0;
 
@@ -73,11 +79,3 @@ _val_hop_height = 5;
 
 _val_draw_y_offset = 0;
 _val_draw_rotation = 0;
-
-//----//
-//INIT//
-//----//
-
-//-------//
-//METHODS//
-//-------//

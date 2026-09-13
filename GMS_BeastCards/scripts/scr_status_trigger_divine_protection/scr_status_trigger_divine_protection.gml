@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_trigger_divine_protection
+// SCRIPT: SCR_STATUS_TRIGGER_DIVINE_PROTECTION
 // FUNCTION: Blocks one damage instance from an Attack card.
 //           Consumes one Divine Protection stack when triggered.
 //           Returns true if the damage instance should be prevented.
@@ -16,11 +16,10 @@ function scr_status_trigger_divine_protection(_ref_target){
 		return false;
 	}
 
-	//----------------//
+	//---------------//
 	//VALIDATE CARD//
-	//----------------//
-	var _ref_cast_card =
-		global.ref_cast_card;
+	//---------------//
+	var _ref_cast_card = global.ref_cast_card;
 
 	if (!instance_exists(_ref_cast_card)){
 		return false;
@@ -30,8 +29,7 @@ function scr_status_trigger_divine_protection(_ref_target){
 		return false;
 	}
 
-	var _stct_card =
-		_ref_cast_card._ref_card;
+	var _stct_card = _ref_cast_card._ref_card;
 
 	//------------------//
 	//ATTACK DAMAGE ONLY//
@@ -40,25 +38,27 @@ function scr_status_trigger_divine_protection(_ref_target){
 		return false;
 	}
 
-	//--------------------------//
+	//-------------------------//
 	//CHECK DIVINE PROTECTION//
-	//--------------------------//
-	var _ref_divine_protection =
-		scr_status_check(
-			"DIVINE_PROTECTION",
-			_ref_target
-		);
+	//-------------------------//
+	var _ref_divine_protection = scr_status_check("DIVINE_PROTECTION",_ref_target);
 
 	if (_ref_divine_protection == -1){
 		return false;
 	}
 
-	//----------//
+	if (!instance_exists(_ref_divine_protection)){
+		return false;
+	}
+
+	if (_ref_divine_protection._ct_status_stacks <= 0){
+		return false;
+	}
+
+	//==========//
 	//FEEDBACK//
-	//----------//
-	scr_battle_vfx_blocked(
-		_ref_target
-	);
+	//==========//
+	scr_battle_vfx_blocked(_ref_target);
 
 	scr_gui_spawn_popup_scrolling(
 		"TEXT",
@@ -69,9 +69,9 @@ function scr_status_trigger_divine_protection(_ref_target){
 		_ref_target.y - 48
 	);
 
-	//--------------------//
+	//-------------------//
 	//CONSUME ONE STACK//
-	//--------------------//
+	//-------------------//
 	scr_status_buff_divine_protection(
 		"CONSUME",
 		_ref_divine_protection

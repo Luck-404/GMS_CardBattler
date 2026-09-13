@@ -6,28 +6,23 @@
 //           Otherwise causes the caster to lose 10 HP.
 //           Generates 1 Mana through the shared Mana system.
 //
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
 function scr_card_viridian_return_to_nature(_stct_card,_ref_caster,_ref_target){
 
-	//-------------------//
+	//===================//
 	//PAY SACRIFICE COST//
-	//-------------------//
-	var _flag_sacrificed =
-		scr_battle_sacrifice_corpse(
-			_ref_target
-		);
+	//===================//
+	var _flag_sacrificed = scr_battle_sacrifice_corpse(_ref_target);
 
 	if (!_flag_sacrificed){
 
-		_ref_caster._val_cur_hp -=
-			10;
-
-		_ref_caster._val_cur_hp =
-			max(
-				0,
-				_ref_caster._val_cur_hp
-			);
+		_ref_caster._val_cur_hp -= 10;
+		_ref_caster._val_cur_hp = max(0,_ref_caster._val_cur_hp);
 
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
@@ -39,8 +34,8 @@ function scr_card_viridian_return_to_nature(_stct_card,_ref_caster,_ref_target){
 		);
 	}
 
-	//-------------//
+	//================//
 	//GENERATE MANA//
-	//-------------//
+	//================//
 	scr_battle_gain_mana(1);
 }

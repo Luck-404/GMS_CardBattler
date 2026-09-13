@@ -1,10 +1,22 @@
 //===============================================================================//
 //
-// DRAW: OBJ_SCENE_FX_STEP_PARTICLE
+// DRAW: OBJ_OVERWORLD_VFX_STEP_PARTICLE
 // FUNCTION: Draws the footstep particle.
-//           Applies terrain-based color tinting.
-//           Rotates sprite using particle direction.
+//           Applies its terrain-based color and movement direction.
 //
 //===============================================================================//
 
-draw_sprite_ext(spr_overworld_vfx_step_particle,0,x,y,1,1,direction,_c_color,1);
+//================//
+//DRAW PARTICLE//
+//================//
+draw_sprite_ext(
+	spr_overworld_vfx_step_particle,
+	0,
+	x,
+	y,
+	1,
+	1,
+	direction,
+	_c_color,
+	1
+);

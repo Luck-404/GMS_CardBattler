@@ -4,13 +4,21 @@
 // FUNCTION: Resolves Storm Beacon.
 //           Places a card-cast-triggered Trap on the selected enemy Beast.
 //
+// ARGUMENTS: _stct_card is the Storm Beacon card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
 function scr_card_cerulean_storm_beacon(_stct_card,_ref_caster,_ref_target){
 
-	//----------//
+	//================//
 	//SET TRAP//
-	//----------//
-	scr_trap_init("STORM_BEACON",_stct_card,_ref_caster,_ref_target);
-
+	//================//
+	scr_trap_init(
+		"STORM_BEACON",
+		_stct_card,
+		_ref_caster,
+		_ref_target
+	);
 }

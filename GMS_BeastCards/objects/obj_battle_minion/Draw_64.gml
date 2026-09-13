@@ -1,66 +1,75 @@
 //===============================================================================//
 //
 // DRAW: OBJ_BATTLE_MINION
-// FUNCTION: Draws the battle minion.
-//           Displays sprite, HP, and an inspection tooltip while hovered.
+// FUNCTION: Draws the battle Minion.
+//           Displays its sprite, current HP, and inspection tooltip while
+//           hovered with Left Control held.
 //
 //===============================================================================//
 
-if (!instance_exists(obj_gui_end_battle_pane)){
+//------------------//
+//END BATTLE GUARD//
+//------------------//
+if (instance_exists(obj_gui_end_battle_pane)){
+	exit;
+}
 
-	if (!instance_exists(_ref_host)){
-		exit;
-	}
+//----------------//
+//VALIDATE HOST//
+//----------------//
+if (!instance_exists(_ref_host)){
+	exit;
+}
 
-	//
-	// BASIC SETUP
-	//
-	#region BASIC SETUP
-	draw_set_font(fnt_gui_party_small);
+#region BASIC SETUP
 
-	
-	//--------------------//
-	//BASE MINION SCALE//
-	//--------------------//
-	var _val_base_scale =
-		0.125;
+//-----------//
+//DRAW SETUP//
+//-----------//
+draw_set_font(fnt_gui_party_small);
 
-	//------------------------//
-	//MAGNITUDE SIZE INCREASE//
-	//------------------------//
-	var _ct_growth_tiers =
-		floor(
-			max(
-				0,
-				_val_magnitude
-			) /
-			5
-		);
+//------------------//
+//BASE MINION SCALE//
+//------------------//
+var _val_base_scale = 0.125;
 
-	var _val_magnitude_scale =
-		1 +
-		(
-			_ct_growth_tiers *
-			0.10
-		);
+//------------------------//
+//MAGNITUDE SIZE INCREASE//
+//------------------------//
+var _ct_growth_tiers =
+	floor(
+		max(0,_val_magnitude) /
+		5
+	);
 
-	//----------------//
-	//FINAL DRAW SCALE//
-	//----------------//
-	var _val_scale =
-		_val_base_scale *
-		_val_magnitude_scale *
-		_val_vfx_scale;
-	
-	
-	var _val_flip = (_str_team == "ENEMY") ? -1 : 1;
-	#endregion
+var _val_magnitude_scale =
+	1 +
+	(
+		_ct_growth_tiers *
+		0.10
+	);
 
-	//
-	// DRAW SPRITE
-	//
-	#region DRAW SPRITE
-	draw_sprite_ext(
+//----------------//
+//FINAL DRAW SCALE//
+//----------------//
+var _val_scale =
+	_val_base_scale *
+	_val_magnitude_scale *
+	_val_vfx_scale;
+
+var _val_flip =
+	(_str_team == "ENEMY")
+		? -1
+		: 1;
+
+#endregion
+
+#region DRAW SPRITE
+
+//-------------//
+//DRAW MINION//
+//-------------//
+draw_sprite_ext(
 	_spr_minion,
 	0,
 	x + _val_vfx_offset_x,
@@ -71,43 +80,58 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	c_white,
 	1
 );
-	#endregion
 
-	//
-	// DRAW HP
-	//
-	#region DRAW HP
-	draw_set_colour(c_white);
+#endregion
 
-	var _str_hp = string(_val_cur_hp) + "/" + string(_val_max_hp);
+#region DRAW HP
 
-	draw_text(x - string_width(_str_hp) * 0.5,y + 20,_str_hp);
-	#endregion
+//---------//
+//DRAW HP//
+//---------//
+draw_set_colour(c_white);
 
-//
-// DRAW TOOLTIP
-//
+var _str_hp =
+	string(_val_cur_hp) +
+	"/" +
+	string(_val_max_hp);
+
+draw_text(
+	x - string_width(_str_hp) * 0.5,
+	y + 20,
+	_str_hp
+);
+
+#endregion
+
 #region DRAW TOOLTIP
 
+//----------------//
+//CHECK INSPECTION//
+//----------------//
 if (
 	keyboard_check(vk_lcontrol) &&
 	position_meeting(
-		device_mouse_x_to_gui(0),
-		device_mouse_y_to_gui(0),
+		device_mouse_x(0),
+		device_mouse_y(0),
 		self
 	)
 ){
 
+	//-----------//
+	//HOST NAME//
+	//-----------//
 	var _str_host_name = "UNKNOWN";
 
 	if (
 		instance_exists(_ref_host) &&
 		_ref_host._ref_unit != undefined
 	){
-		_str_host_name =
-			string(_ref_host._ref_unit._str_beast_name);
+		_str_host_name = string(_ref_host._ref_unit._str_beast_name);
 	}
 
+	//---------------//
+	//TOOLTIP TITLE//
+	//---------------//
 	var _str_title =
 		_str_name +
 		" | " +
@@ -126,9 +150,11 @@ if (
 	//PANEL SIZE//
 	//------------//
 	var _val_panel_w =
-		string_width(_str_title) + 40;
+		string_width(_str_title) +
+		40;
 
 	if (_str_age != ""){
+
 		_val_panel_w =
 			max(
 				_val_panel_w,
@@ -137,7 +163,9 @@ if (
 	}
 
 	var _val_panel_h =
-		(_str_age != "") ? 60 : 40;
+		(_str_age != "")
+			? 60
+			: 40;
 
 	var _val_panel_x =
 		room_width * 0.5 -
@@ -175,8 +203,8 @@ if (
 
 	draw_text(
 		_val_panel_x +
-			(_val_panel_w * 0.5) -
-			(string_width(_str_title) * 0.5),
+		(_val_panel_w * 0.5) -
+		(string_width(_str_title) * 0.5),
 		_val_panel_y + 12,
 		_str_title
 	);
@@ -188,8 +216,8 @@ if (
 
 		draw_text(
 			_val_panel_x +
-				(_val_panel_w * 0.5) -
-				(string_width(_str_age) * 0.5),
+			(_val_panel_w * 0.5) -
+			(string_width(_str_age) * 0.5),
 			_val_panel_y + 32,
 			_str_age
 		);
@@ -197,4 +225,3 @@ if (
 }
 
 #endregion
-}

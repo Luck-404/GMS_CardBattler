@@ -5,17 +5,17 @@
 //           Supports either an instance anchor or explicit room coordinates.
 //           Used for discarded cards, disabled cards, and sacrificed resources.
 //
+// INPUTS:   _ref_anchor     - Optional instance used as the VFX anchor.
+//           _val_x          - Optional explicit room X position.
+//           _val_y          - Optional explicit room Y position.
+//           _ct_start_delay - Delay before the VFX and SFX begin.
+//
 //===============================================================================//
 
-function scr_battle_vfx_expend(
-	_ref_anchor=undefined,
-	_val_x=undefined,
-	_val_y=undefined,
-	_ct_start_delay=0
-){
+function scr_battle_vfx_expend(_ref_anchor=undefined,_val_x=undefined,_val_y=undefined,_ct_start_delay=0){
 
 	//----------------//
-	//VALIDATE TARGET//
+	//VALIDATE SPAWN//
 	//----------------//
 	if (
 		!instance_exists(_ref_anchor) &&

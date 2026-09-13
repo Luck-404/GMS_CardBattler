@@ -6,13 +6,16 @@
 //
 //===============================================================================//
 
+//================//
+//DRAW STATE//
+//================//
 draw_set_font(fnt_gui_medium);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 
-//------//
+//================//
 //LAYOUT//
-//------//
+//================//
 var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
 
@@ -31,44 +34,53 @@ var _val_no_y1 = y + 35;
 var _val_no_x2 = _val_no_x1 + _val_button_w;
 var _val_no_y2 = _val_no_y1 + _val_button_h;
 
-var _flag_yes_hover = _val_mouse_x > _val_yes_x1 && _val_mouse_x < _val_yes_x2 && _val_mouse_y > _val_yes_y1 && _val_mouse_y < _val_yes_y2;
-var _flag_no_hover = _val_mouse_x > _val_no_x1 && _val_mouse_x < _val_no_x2 && _val_mouse_y > _val_no_y1 && _val_mouse_y < _val_no_y2;
+var _flag_yes_hover =
+	_val_mouse_x > _val_yes_x1 &&
+	_val_mouse_x < _val_yes_x2 &&
+	_val_mouse_y > _val_yes_y1 &&
+	_val_mouse_y < _val_yes_y2;
 
-//----//
+var _flag_no_hover =
+	_val_mouse_x > _val_no_x1 &&
+	_val_mouse_x < _val_no_x2 &&
+	_val_mouse_y > _val_no_y1 &&
+	_val_mouse_y < _val_no_y2;
+
+//================//
 //PANE//
-//----//
+//================//
 draw_set_colour(c_black);
 draw_rectangle(_val_box_x1,_val_box_y1,_val_box_x2,_val_box_y2,false);
 
-draw_set_colour(c_dkgray);
+draw_set_colour(global.c_dk_gray);
 draw_rectangle(_val_box_x1 + 4,_val_box_y1 + 4,_val_box_x2 - 4,_val_box_y2 - 4,false);
 
-//----//
+//================//
 //TEXT//
-//----//
+//================//
 draw_set_colour(c_white);
 draw_text(x,y - 45,_str_prompt_text);
 
-//-----//
-//YES//
-//-----//
+//================//
+//YES BUTTON//
+//================//
 draw_set_colour(_flag_yes_hover ? c_white : global.c_dk_gray);
 draw_rectangle(_val_yes_x1,_val_yes_y1,_val_yes_x2,_val_yes_y2,false);
 
 draw_set_colour(c_black);
 draw_text((_val_yes_x1 + _val_yes_x2) * 0.5,(_val_yes_y1 + _val_yes_y2) * 0.5,_str_yes_text);
 
-//----//
-//NO//
-//----//
+//================//
+//NO BUTTON//
+//================//
 draw_set_colour(_flag_no_hover ? c_white : global.c_dk_gray);
 draw_rectangle(_val_no_x1,_val_no_y1,_val_no_x2,_val_no_y2,false);
 
 draw_set_colour(c_black);
 draw_text((_val_no_x1 + _val_no_x2) * 0.5,(_val_no_y1 + _val_no_y2) * 0.5,_str_no_text);
 
-//-------//
-//RESET//
-//-------//
+//================//
+//RESET DRAW STATE//
+//================//
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);

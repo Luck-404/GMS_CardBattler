@@ -7,59 +7,43 @@
 //
 //===============================================================================//
 
-//-------------------//
-// VALIDATE NPC DATA //
-//-------------------//
+//================//
+//VALIDATE NPC DATA//
+//================//
 if (_stct_npc == undefined){
 	exit;
 }
 
-//-------------------------//
-// STORE PREVIOUS POSITION //
-//-------------------------//
+//================//
+//STORE POSITION//
+//================//
 _val_previous_x = x;
 _val_previous_y = y;
 
-//-----------------------------//
-// UPDATE INTERACTION COOLDOWN //
-//-----------------------------//
-hscr_update_interaction_cooldown();
+//================//
+//UPDATE COOLDOWN//
+//================//
+hscr_npc_update_interaction_cooldown();
 
-//---------------------------//
-// MANAGE GLOBAL PAUSE STATE //
-//---------------------------//
+//================//
+//MANAGE PAUSE STATE//
+//================//
 if (global.flag_pause){
 
-	/*
-		The interacting NPC is already paused by
-		hscr_open_npc_interaction().
-
-		This additional check ensures NPCs also stop when another GUI
-		or system pauses the game.
-	*/
-	hscr_pause_npc_path();
+	hscr_npc_pause_path();
 }
-else{
+else if (!_flag_triggered){
 
-	/*
-		Do not resume this NPC if it still considers itself actively
-		engaged in interaction.
-	*/
-	if (!_flag_triggered){
-		hscr_resume_npc_path();
-	}
+	hscr_npc_resume_path();
 }
 
-//--------------------//
-// PLAYER RANGE CHECK //
-//--------------------//
+//================//
+//CHECK PLAYER RANGE//
+//================//
 _flag_player_nearby = false;
 
-if (
-	instance_exists(obj_player) &&
-	_stct_npc._flag_interactable &&
-	!global.flag_pause
-){
+if (instance_exists(obj_player) && _stct_npc._flag_interactable && !global.flag_pause){
+
 	var _val_distance_to_player = point_distance(
 		x,
 		y,
@@ -67,15 +51,12 @@ if (
 		obj_player.y
 	);
 
-	_flag_player_nearby = (
-		_val_distance_to_player <=
-		_val_interaction_distance
-	);
+	_flag_player_nearby = (_val_distance_to_player <= _val_interaction_distance);
 }
 
-//------------------//
-// OPEN INTERACTION //
-//------------------//
+//================//
+//OPEN INTERACTION//
+//================//
 if (
 	_flag_player_nearby &&
 	!_flag_triggered &&
@@ -83,20 +64,20 @@ if (
 	!global.flag_pause &&
 	keyboard_check_pressed(ord("E"))
 ){
-	hscr_open_npc_interaction();
+	hscr_npc_open_interaction();
 }
 
-//-----------------------//
-// UPDATE MOVEMENT STATE //
-//-----------------------//
+//================//
+//UPDATE MOVEMENT//
+//================//
 _flag_moving = (
 	abs(x - _val_previous_x) > 0.01 ||
 	abs(y - _val_previous_y) > 0.01
 );
 
-//--------------------//
-// UPDATE NPC FACING  //
-//--------------------//
+//================//
+//UPDATE FACING//
+//================//
 if (_flag_moving){
-	hscr_update_npc_facing();
+	hscr_npc_update_facing();
 }

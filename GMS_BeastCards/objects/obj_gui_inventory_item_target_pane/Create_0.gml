@@ -3,15 +3,13 @@
 // CREATE: OBJ_GUI_ITEM_TARGET_PANE
 // FUNCTION: Initializes item target selection pane.
 //           Displays party targets on the left and selected item data on the right.
-//           Used by consumable items that target party beasts.
+//           Defines helpers for item tracking, closing, and input cooldown.
 //
 //===============================================================================//
 
-//---------//
+//================//
 //VARIABLES//
-//---------//
-depth = -102;
-
+//================//
 _str_type = "ITEM_TARGET_PANE";
 
 _ref_parent_gui = undefined;
@@ -37,21 +35,26 @@ _val_start_y = _val_pane_top + 70;
 _flag_clicked = false;
 _ct_cooldown = 8;
 
-//----//
+//================//
 //INIT//
-//----//
+//================//
+depth = -102;
 
-//-------//
+//================//
 //METHODS//
-//-------//
+//================//
 #region METHODS
 
-//—------------------------------------------------------------------------------//
-// hscr_get_current_item_amount
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_ITEM_TARGET_GET_ITEM_AMOUNT
 // FUNCTION: Returns the current inventory amount for this pane's item.
-//           Uses item uid so the pane tracks the exact stack being used.
-//—------------------------------------------------------------------------------//
-function hscr_get_current_item_amount(){
+//           Uses item uid to track the exact stack being used.
+//
+// ARGUMENTS: None.
+// RETURNS: Current item amount, or 0 if the item is no longer present.
+//
+//-------------------------------------------------------------------------------//
+function hscr_gui_item_target_get_item_amount(){
 
 	if (_stct_item == undefined){
 		return 0;
@@ -73,13 +76,16 @@ function hscr_get_current_item_amount(){
 	return 0;
 }
 
-//—------------------------------------------------------------------------------//
-// hscr_get_current_item_ref
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_ITEM_TARGET_GET_ITEM_STRUCT
 // FUNCTION: Returns the current item stack struct from inventory.
 //           Prevents stale stack data after repeated item use.
 //
-//—------------------------------------------------------------------------------//
-function hscr_get_current_item_ref(){
+// ARGUMENTS: None.
+// RETURNS: Current item struct, or undefined if it is no longer present.
+//
+//-------------------------------------------------------------------------------//
+function hscr_gui_item_target_get_item_struct(){
 
 	if (_stct_item == undefined){
 		return undefined;
@@ -101,31 +107,42 @@ function hscr_get_current_item_ref(){
 	return undefined;
 }
 
-//—------------------------------------------------------------------------------//
-// hscr_close_target_pane
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_ITEM_TARGET_CLOSE
 // FUNCTION: Closes the item target pane.
 //           Reactivates the parent inventory pane.
 //           Starts input lockout to prevent click-through.
-//—------------------------------------------------------------------------------//
-function hscr_close_target_pane(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+function hscr_gui_item_target_close(){
 
 	if (instance_exists(_ref_parent_gui)){
+
 		_ref_parent_gui._flag_prompt_active = false;
-		_ref_parent_gui.hscr_mark_inventory_dirty();
-		_ref_parent_gui.hscr_start_input_lockout();
+
+		_ref_parent_gui.hscr_gui_inventory_mark_dirty();
+		_ref_parent_gui.hscr_gui_inventory_start_input_lockout();
 	}
 
 	instance_destroy();
 }
 
-//—------------------------------------------------------------------------------//
-// hscr_update_click_cooldown
-// FUNCTION: Updates pane click cooldown.
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_ITEM_TARGET_UPDATE_CLICK_COOLDOWN
+// FUNCTION: Updates the target pane click cooldown.
 //           Prevents repeated item uses from one mouse press.
-//—------------------------------------------------------------------------------//
-function hscr_update_click_cooldown(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+function hscr_gui_item_target_update_click_cooldown(){
 
 	if (_flag_clicked){
+
 		if (_ct_cooldown > 0){
 			_ct_cooldown--;
 		}

@@ -2,22 +2,17 @@
 //
 // STEP: OBJ_BATTLE_MINION
 // FUNCTION: Updates temporary Minion presentation motion.
-//           Supports casting lunges and growth pulses.
-//           Does not alter the Minion's actual battlefield position.
+//           Supports casting lunges and growth pulses without altering
+//           the Minion's actual battlefield position.
 //
 //===============================================================================//
 
 //--------------------//
 //RESET DRAW MODIFIERS//
 //--------------------//
-_val_vfx_offset_x =
-	0;
-
-_val_vfx_offset_y =
-	0;
-
-_val_vfx_scale =
-	1;
+_val_vfx_offset_x = 0;
+_val_vfx_offset_y = 0;
+_val_vfx_scale = 1;
 
 //----------------//
 //NO ACTIVE MOTION//
@@ -27,11 +22,8 @@ if (
 	_ct_vfx_motion <= 0
 ){
 
-	_str_vfx_motion =
-		"NONE";
-
-	_ct_vfx_motion =
-		0;
+	_str_vfx_motion = "NONE";
+	_ct_vfx_motion = 0;
 
 	exit;
 }
@@ -41,11 +33,8 @@ if (
 //------------------//
 if (_val_cur_hp <= 0){
 
-	_str_vfx_motion =
-		"NONE";
-
-	_ct_vfx_motion =
-		0;
+	_str_vfx_motion = "NONE";
+	_ct_vfx_motion = 0;
 
 	exit;
 }
@@ -57,16 +46,13 @@ var _val_progress =
 	1 -
 	(
 		_ct_vfx_motion /
-		max(
-			1,
-			_ct_vfx_motion_duration
-		)
+		max(1,_ct_vfx_motion_duration)
 	);
 
-//-------------//
+//---------------//
 //UPDATE MOTION//
-//-------------//
-switch(_str_vfx_motion){
+//---------------//
+switch (_str_vfx_motion){
 
 	//------------//
 	//ENEMY CAST//
@@ -79,14 +65,11 @@ switch(_str_vfx_motion){
 				: -1;
 
 		_val_vfx_offset_x =
-			sin(
-				_val_progress * pi
-			) *
+			sin(_val_progress * pi) *
 			_val_vfx_motion_intensity *
 			_val_direction;
 
 	break;
-
 
 	//-----------//
 	//HOST CAST//
@@ -94,16 +77,10 @@ switch(_str_vfx_motion){
 	case "CAST_HOST":
 
 		_val_vfx_offset_y =
-			-
-			(
-				sin(
-					_val_progress * pi
-				) *
-				_val_vfx_motion_intensity
-			);
+			-sin(_val_progress * pi) *
+			_val_vfx_motion_intensity;
 
 	break;
-
 
 	//--------//
 	//GROWTH//
@@ -113,9 +90,7 @@ switch(_str_vfx_motion){
 		_val_vfx_scale =
 			1 +
 			(
-				sin(
-					_val_progress * pi
-				) *
+				sin(_val_progress * pi) *
 				_val_vfx_motion_intensity
 			);
 

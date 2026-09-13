@@ -5,35 +5,20 @@
 //           For 3 rounds, successful enemy Attack damage against the caster
 //           applies 1 Stormstruck to the attacker.
 //
+// ARGUMENTS: _stct_card is the Static Barrier card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
 function scr_card_cerulean_static_barrier(_stct_card,_ref_caster,_ref_target){
 
-	//----------------------//
-	//STORE CURRENT TARGET//
-	//----------------------//
-	var _ref_original_target =
-		global.ref_target_beast;
-
-	//--------------//
-	//TARGET CASTER//
-	//--------------//
-	global.ref_target_beast =
-		_ref_caster;
-
-	//--------------------//
+	//====================//
 	//APPLY STATIC BARRIER//
-	//--------------------//
-	scr_apply_buff_status(
+	//====================//
+	scr_status_apply_buff(
 		"STATIC_BARRIER",
 		1,
 		3
 	);
-
-	//----------------//
-	//RESTORE TARGET//
-	//----------------//
-	global.ref_target_beast =
-		_ref_original_target;
-
 }

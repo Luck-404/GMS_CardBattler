@@ -1,14 +1,16 @@
 //===============================================================================//
 //
-// STEP: OBJ_SCENE_FX_STEP_PARTICLE
-// FUNCTION: Counts down particle lifetime.
-//           Destroys the particle when its life expires.
-//           Handles per-frame particle updates.
+// STEP: OBJ_OVERWORLD_VFX_STEP_PARTICLE
+// FUNCTION: Updates the footstep particle lifetime.
+//           Destroys the particle when its lifetime expires.
 //
 //===============================================================================//
 
-if (_ct_life <= 0){
-	instance_destroy();	
-} else {
-	_ct_life--;
+//================//
+//LIFETIME//
+//================//
+_ct_lifetime--;
+
+if (_ct_lifetime <= 0){
+	instance_destroy();
 }

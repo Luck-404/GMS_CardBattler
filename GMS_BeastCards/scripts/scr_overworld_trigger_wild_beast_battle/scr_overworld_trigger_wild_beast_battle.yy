@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_overworld_trigger_wild_beast_battle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_overworld_trigger_wild_beast_battle",
+  "parent":{
+    "name":"ENCOUNTERS",
+    "path":"folders/OVERWORLD/ENCOUNTERS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

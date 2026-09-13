@@ -1,18 +1,22 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_copy_dots
+// SCRIPT: SCR_STATUS_COPY_DOTS
 // FUNCTION: Copies every active DoT from one Beast onto another.
-//           Copies the source's current stack count.
-//           Uses each DoT's normal APPLY callback so stack-dependent side
-//           effects resolve correctly.
-//           Preserves current DoT duration rather than refreshing copied
-//           statuses to full duration.
-//           Returns the total number of DoT stacks copied.
+//           Copies each source DoT's current stack count through its normal
+//           APPLY callback and preserves the source's current duration.
+//           Existing destination DoTs retain the longer current/max duration.
+//
+// ARGUMENTS: _ref_source is the Beast supplying DoTs and _ref_target is the
+//            Beast receiving copies of those DoT stacks.
+// RETURNS: The total number of DoT stacks successfully copied.
 //
 //===============================================================================//
 
 function scr_status_copy_dots(_ref_source,_ref_target){
 
+	//-----------------//
+	//VALIDATE BEASTS//
+	//-----------------//
 	if (!instance_exists(_ref_source)){
 		return 0;
 	}
@@ -29,22 +33,22 @@ function scr_status_copy_dots(_ref_source,_ref_target){
 		return 0;
 	}
 
-	//====================//
+	if (!ds_exists(_ref_source._list_statuses,ds_type_list)){
+		return 0;
+	}
+
+	if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+		return 0;
+	}
+
+	//=====================//
 	//SNAPSHOT SOURCE DOTS//
-	//====================//
+	//=====================//
 	var _arr_dots = [];
 
-	for (
-		var _it_status = 0;
-		_it_status < ds_list_size(_ref_source._list_statuses);
-		_it_status++
-	){
+	for (var _it_status = 0;_it_status < ds_list_size(_ref_source._list_statuses);_it_status++){
 
-		var _ref_status =
-			ds_list_find_value(
-				_ref_source._list_statuses,
-				_it_status
-			);
+		var _ref_status = ds_list_find_value(_ref_source._list_statuses,_it_status);
 
 		if (!instance_exists(_ref_status)){
 			continue;
@@ -58,58 +62,25 @@ function scr_status_copy_dots(_ref_source,_ref_target){
 			continue;
 		}
 
-		//----------------//
-		//GET STACK COUNT//
-		//----------------//
-		var _ct_stacks =
-			max(
-				1,
-				_ref_status._ct_status_stacks
-			);
+		//---------------------//
+		//SNAPSHOT DOT VALUES//
+		//---------------------//
+		var _ct_stacks = max(1,_ref_status._ct_status_stacks);
+		var _val_lifetime_current = _ref_status._val_status_lifetime;
+		var _val_lifetime_max = _val_lifetime_current;
 
-		//------------------//
-		//GET CURRENT LIFE//
-		//------------------//
-		var _val_lifetime_current =
-			_ref_status._val_status_lifetime;
-
-		//----------------//
-		//GET MAXIMUM LIFE//
-		//----------------//
-		var _val_lifetime_max =
-			_ref_status._val_status_lifetime;
-
-		if (
-			variable_instance_exists(
-				_ref_status,
-				"_val_status_lifetime_max"
-			)
-		){
-
-			_val_lifetime_max =
-				_ref_status._val_status_lifetime_max;
+		if (variable_instance_exists(_ref_status,"_val_status_lifetime_max")){
+			_val_lifetime_max = _ref_status._val_status_lifetime_max;
 		}
 
-		//----------------//
-		//STORE SNAPSHOT//
-		//----------------//
 		array_push(
 			_arr_dots,
 			{
-				_str_status_name :
-					_ref_status._str_status_name,
-
-				_scr_status :
-					_ref_status._scr_status,
-
-				_ct_status_stacks :
-					_ct_stacks,
-
-				_val_status_lifetime :
-					_val_lifetime_current,
-
-				_val_status_lifetime_max :
-					_val_lifetime_max
+				_str_status_name: _ref_status._str_status_name,
+				_scr_status: _ref_status._scr_status,
+				_ct_status_stacks: _ct_stacks,
+				_val_status_lifetime: _val_lifetime_current,
+				_val_status_lifetime_max: _val_lifetime_max
 			}
 		);
 	}
@@ -118,148 +89,108 @@ function scr_status_copy_dots(_ref_source,_ref_target){
 		return 0;
 	}
 
-
-	//----------------------//
+	//=======================//
 	//STORE ORIGINAL TARGET//
-	//----------------------//
-	var _ref_original_target =
-		global.ref_target_beast;
+	//=======================//
+	var _ref_original_target = global.ref_target_beast;
 
-	global.ref_target_beast =
-		_ref_target;
+	global.ref_target_beast = _ref_target;
 
-	var _ct_total_copied =
-		0;
-
+	var _ct_total_copied = 0;
 
 	//================//
 	//COPY EACH DOT//
 	//================//
-	for (
-		var _it_dot = 0;
-		_it_dot < array_length(_arr_dots);
-		_it_dot++
-	){
+	for (var _it_dot = 0;_it_dot < array_length(_arr_dots);_it_dot++){
 
-		var _stct_dot =
-			_arr_dots[_it_dot];
+		var _stct_dot = _arr_dots[_it_dot];
 
-
-		//================================//
+		//-------------------------------//
 		//SNAPSHOT DESTINATION DURATION//
-		//================================//
-		var _ref_existing =
-			scr_status_check(
-				_stct_dot._str_status_name,
-				_ref_target
-			);
+		//-------------------------------//
+		var _ref_existing = scr_status_check(_stct_dot._str_status_name,_ref_target);
 
-		var _val_existing_lifetime =
-			0;
+		var _val_existing_lifetime = 0;
+		var _val_existing_lifetime_max = 0;
 
-		var _val_existing_lifetime_max =
-			0;
+		if (
+			_ref_existing != -1 &&
+			instance_exists(_ref_existing)
+		){
 
-		if (_ref_existing != -1){
+			_val_existing_lifetime = _ref_existing._val_status_lifetime;
+			_val_existing_lifetime_max = _val_existing_lifetime;
 
-			_val_existing_lifetime =
-				_ref_existing._val_status_lifetime;
-
-			if (
-				variable_instance_exists(
-					_ref_existing,
-					"_val_status_lifetime_max"
-				)
-			){
-
-				_val_existing_lifetime_max =
-					_ref_existing._val_status_lifetime_max;
-			}
-			else{
-
-				_val_existing_lifetime_max =
-					_ref_existing._val_status_lifetime;
+			if (variable_instance_exists(_ref_existing,"_val_status_lifetime_max")){
+				_val_existing_lifetime_max = _ref_existing._val_status_lifetime_max;
 			}
 		}
-
+		else{
+			_ref_existing = -1;
+		}
 
 		//==================//
 		//COPY EVERY STACK//
 		//==================//
 		repeat (_stct_dot._ct_status_stacks){
 
-			script_execute(
-				_stct_dot._scr_status,
+			var _ref_applied_status = _stct_dot._scr_status(
 				"APPLY",
 				undefined,
 				_stct_dot._val_status_lifetime_max
 			);
 
-			_ct_total_copied++;
+			if (instance_exists(_ref_applied_status)){
+				_ct_total_copied++;
+			}
 		}
-
 
 		//================================//
 		//PRESERVE CURRENT DOT DURATION//
 		//================================//
-		var _ref_copied_status =
-			scr_status_check(
-				_stct_dot._str_status_name,
-				_ref_target
+		var _ref_copied_status = scr_status_check(_stct_dot._str_status_name,_ref_target);
+
+		if (
+			_ref_copied_status == -1 ||
+			!instance_exists(_ref_copied_status)
+		){
+			continue;
+		}
+
+		//----------------------------//
+		//TARGET DID NOT HAVE THIS DOT//
+		//----------------------------//
+		if (_ref_existing == -1){
+
+			_ref_copied_status._val_status_lifetime = _stct_dot._val_status_lifetime;
+			_ref_copied_status._val_status_lifetime_max = _stct_dot._val_status_lifetime_max;
+		}
+
+		//-----------------------------//
+		//TARGET ALREADY HAD THIS DOT//
+		//-----------------------------//
+		else{
+
+			_ref_copied_status._val_status_lifetime = max(
+				_val_existing_lifetime,
+				_stct_dot._val_status_lifetime
 			);
 
-		if (_ref_copied_status != -1){
-
-			//-----------------------------//
-			//TARGET DID NOT HAVE THIS DOT//
-			//-----------------------------//
-			if (_ref_existing == -1){
-
-				_ref_copied_status._val_status_lifetime =
-					_stct_dot._val_status_lifetime;
-
-				_ref_copied_status._val_status_lifetime_max =
-					_stct_dot._val_status_lifetime_max;
-			}
-
-			//--------------------------------//
-			//TARGET ALREADY HAD THIS DOT//
-			//--------------------------------//
-			else{
-
-				_ref_copied_status._val_status_lifetime =
-					max(
-						_val_existing_lifetime,
-						_stct_dot._val_status_lifetime
-					);
-
-				_ref_copied_status._val_status_lifetime_max =
-					max(
-						_val_existing_lifetime_max,
-						_stct_dot._val_status_lifetime_max
-					);
-			}
+			_ref_copied_status._val_status_lifetime_max = max(
+				_val_existing_lifetime_max,
+				_stct_dot._val_status_lifetime_max
+			);
 		}
 	}
 
-
-	//----------------//
+	//================//
 	//RESTORE TARGET//
-	//----------------//
-	if (instance_exists(_ref_original_target)){
+	//================//
+	global.ref_target_beast = _ref_original_target;
 
-		global.ref_target_beast =
-			_ref_original_target;
+	if (instance_exists(_ref_target)){
+		scr_status_reposition(_ref_target);
 	}
-	else{
-
-		global.ref_target_beast =
-			_ref_target;
-	}
-
-	scr_status_reposition(
-		_ref_target
-	);
 
 	return _ct_total_copied;
 }

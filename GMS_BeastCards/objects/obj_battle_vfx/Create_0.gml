@@ -11,6 +11,7 @@
 //---------//
 //VARIABLES//
 //---------//
+#region VARIABLES
 
 //------//
 //ANCHOR//
@@ -39,11 +40,20 @@ _ct_start_delay = 0;
 _snd_sfx = undefined;
 _flag_sfx_played = false;
 
+#endregion
+
 //----//
 //INIT//
 //----//
+#region INIT
+
+//----------------//
+//RESET ANIMATION//
+//----------------//
 image_index = 0;
 image_speed = 1;
+
+#endregion
 
 //-------//
 //METHODS//

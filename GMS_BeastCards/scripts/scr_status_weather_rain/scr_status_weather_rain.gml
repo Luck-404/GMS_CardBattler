@@ -1,26 +1,37 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_WEATHER_RAIN
-// FUNCTION: Handles the Rain global Weather status.
+// FUNCTION: Handles the Rain global Weather Status.
 //           Increases Cerulean damage by 25% while active.
 //           At end of round, heals 1 random living Beast for 3 HP.
 //           Independently cleanses 1 Debuff from 1 random living Beast.
 //           Owns Rain start VFX, persistent VFX, and Weather ambience.
 //
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, and _val_lifetime optionally sets its duration.
+// RETURNS: The active Rain Status on APPLY; otherwise undefined.
+//
 //===============================================================================//
 
 function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			//----------------//
-			//DEFAULT LIFETIME//
-			//----------------//
+			//----------------------//
+			//VALIDATE GLOBAL LIST//
+			//----------------------//
+			if (!ds_exists(global.list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//==========//
+			//DEFAULTS//
+			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 5;
 			}
@@ -30,16 +41,19 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"WEATHER: RAIN",
-					global.list_statuses
-				);
+			var _ref_existing_status = scr_status_check(
+				"WEATHER: RAIN",
+				global.list_statuses
+			);
 
 			//------------------//
 			//REFRESH EXISTING//
 			//------------------//
 			if (_ref_existing_status != -1){
+
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -49,56 +63,43 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 				return _ref_existing_status;
 			}
 
-			//---------------//
+			//================//
 			//CREATE STATUS//
-			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
-					room_width * 0.5,
-					room_height * 0.5,
-					"ily_status",
-					obj_battle_status
-				);
+			//================//
+			var _ref_new_status = instance_create_layer(
+				room_width * 0.5,
+				room_height * 0.5,
+				"ily_status",
+				obj_battle_status
+			);
 
-			//-------------//
-			//STATUS DATA//
-			//-------------//
-			_ref_new_status._scr_status =
-				scr_status_weather_rain;
-
-			_ref_new_status._ref_host =
-				undefined;
-
-			_ref_new_status._str_status_type =
-				"WEATHER";
-
-			_ref_new_status._str_status_name =
-				"WEATHER: RAIN";
-
-			_ref_new_status._str_status_desc =
-				"CERULEAN DAMAGE +25%. END OF ROUND: HEAL 1 RANDOM LIVING BEAST FOR 3 HP AND CLEANSE 1 DEBUFF FROM 1 INDEPENDENTLY SELECTED RANDOM LIVING BEAST.";
-
-			_ref_new_status._spr_status =
-				spr_status_weather_rain;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._flag_status_stackable =
-				false;
-
-			_ref_new_status._str_trigger_region =
-				"END";
-
-			//-------------------//
+			//---------------------//
 			//INITIALIZE LIFETIME//
-			//-------------------//
+			//---------------------//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
 				false,
 				false
 			);
+
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_weather_rain;
+
+			_ref_new_status._ref_host = undefined;
+
+			_ref_new_status._str_status_type = "WEATHER";
+			_ref_new_status._str_status_name = "WEATHER: RAIN";
+			_ref_new_status._str_status_desc = "CERULEAN DAMAGE +25%. END OF ROUND: HEAL 1 RANDOM LIVING BEAST FOR 3 HP AND CLEANSE 1 DEBUFF FROM 1 INDEPENDENTLY SELECTED RANDOM LIVING BEAST.";
+
+			_ref_new_status._spr_status = spr_status_weather_rain;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._str_trigger_region = "END";
 
 			//----------------//
 			//REGISTER STATUS//
@@ -126,14 +127,13 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 			//======================//
 			//PERSISTENT RAIN VFX//
 			//======================//
-			_ref_new_status._ref_persistent_vfx =
-				scr_battle_vfx_persistent_loop(
-					spr_battle_vfx_weather_rain_persist,
-					room_width * 0.5,
-					room_height * 0.5,
-					1,
-					"ily_weather_fx"
-				);
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent_loop(
+				spr_battle_vfx_weather_rain_persist,
+				room_width * 0.5,
+				room_height * 0.5,
+				1,
+				"ily_weather_fx"
+			);
 
 			//================//
 			//RAIN AMBIENCE//
@@ -153,10 +153,9 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			//-----------------//
@@ -166,157 +165,135 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			//--------------------------------//
-//BUILD LIVING BEAST TARGET LIST//
-//--------------------------------//
-var _list_living =
-	ds_list_create();
+			//==========================//
+			//BUILD LIVING BEAST ARRAY//
+			//==========================//
+			var _arr_living = [];
 
-//--------------------//
-//GET PLAYER BEASTS//
-//--------------------//
-for (
-	var _it_beast = 0;
-	_it_beast < ds_list_size(
-		obj_battle_player_controller._list_beasts_alive
-	);
-	_it_beast++
-){
+			//--------------------//
+			//GET PLAYER BEASTS//
+			//--------------------//
+			if (instance_exists(obj_battle_player_controller)){
 
-	var _ref_beast =
-		ds_list_find_value(
-			obj_battle_player_controller._list_beasts_alive,
-			_it_beast
-		);
+				var _list_player_beasts = obj_battle_player_controller._list_beasts_alive;
 
-	if (!instance_exists(_ref_beast)){
-		continue;
-	}
+				if (ds_exists(_list_player_beasts,ds_type_list)){
 
-	if (
-		_ref_beast._str_list != "ALIVE" ||
-		_ref_beast._val_cur_hp <= 0
-	){
-		continue;
-	}
+					for (var _it_beast = 0;_it_beast < ds_list_size(_list_player_beasts);_it_beast++){
 
-	ds_list_add(
-		_list_living,
-		_ref_beast
-	);
-}
+						var _ref_beast = ds_list_find_value(_list_player_beasts,_it_beast);
+
+						if (!instance_exists(_ref_beast)){
+							continue;
+						}
+
+						if (
+							_ref_beast._str_list != "ALIVE" ||
+							_ref_beast._val_cur_hp <= 0
+						){
+							continue;
+						}
+
+						array_push(_arr_living,_ref_beast);
+					}
+				}
+			}
 
 			//-------------------//
 			//GET ENEMY BEASTS//
 			//-------------------//
-			for (
-				var _it_beast = 0;
-				_it_beast < ds_list_size(
-					obj_battle_enemy_controller._list_beasts_alive
-				);
-				_it_beast++
-			){
+			if (instance_exists(obj_battle_enemy_controller)){
 
-				var _ref_beast =
-					ds_list_find_value(
-						obj_battle_enemy_controller._list_beasts_alive,
-						_it_beast
-					);
+				var _list_enemy_beasts = obj_battle_enemy_controller._list_beasts_alive;
 
-				if (!instance_exists(_ref_beast)){
-					continue;
+				if (ds_exists(_list_enemy_beasts,ds_type_list)){
+
+					for (var _it_beast = 0;_it_beast < ds_list_size(_list_enemy_beasts);_it_beast++){
+
+						var _ref_beast = ds_list_find_value(_list_enemy_beasts,_it_beast);
+
+						if (!instance_exists(_ref_beast)){
+							continue;
+						}
+
+						if (
+							_ref_beast._str_list != "ALIVE" ||
+							_ref_beast._val_cur_hp <= 0
+						){
+							continue;
+						}
+
+						array_push(_arr_living,_ref_beast);
+					}
 				}
-
-				if (
-					_ref_beast._str_list != "ALIVE" ||
-					_ref_beast._val_cur_hp <= 0
-				){
-					continue;
-				}
-
-				ds_list_add(
-					_list_living,
-					_ref_beast
-				);
 			}
 
 			//===================//
 			//RANDOM BEAST HEAL//
 			//===================//
-			if (ds_list_size(_list_living) > 0){
+			if (array_length(_arr_living) > 0){
 
-				var _ref_heal_target =
-					ds_list_find_value(
-						_list_living,
-						irandom(
-							ds_list_size(_list_living) - 1
-						)
-					);
+				var _ref_heal_target = _arr_living[irandom(array_length(_arr_living) - 1)];
+				var _ref_original_target = global.ref_target_beast;
 
-				var _ref_original_target =
-					global.ref_target_beast;
+				global.ref_target_beast = _ref_heal_target;
 
-				global.ref_target_beast =
-					_ref_heal_target;
-
-				scr_battle_heal_target(3,
-					_ref_heal_target
+				//----------------//
+				//RAIN HEAL VFX//
+				//----------------//
+				scr_battle_vfx(
+					undefined,
+					spr_battle_vfx_event_bloomtide_tick,
+					_ref_heal_target.x,
+					_ref_heal_target.y - 48,
+					0,
+					0,
+					1,
+					0,
+					undefined
 				);
 
-				global.ref_target_beast =
-					_ref_original_target;
+				scr_battle_heal_target(3,_ref_heal_target);
+
+				global.ref_target_beast = _ref_original_target;
 			}
 
 			//======================//
 			//RANDOM DEBUFF CLEANSE//
 			//======================//
-			if (ds_list_size(_list_living) > 0){
+			if (array_length(_arr_living) > 0){
 
-				var _ref_cleanse_target =
-					ds_list_find_value(
-						_list_living,
-						irandom(
-							ds_list_size(_list_living) - 1
-						)
-					);
+				var _ref_cleanse_target = _arr_living[irandom(array_length(_arr_living) - 1)];
 
-				scr_status_cleanse_type(
+				scr_status_cleanse_debuff(
 					_ref_cleanse_target,
-					"DEBUFF",
 					1
 				);
 			}
 
-			//---------------//
-			//DESTROY LIST//
-			//---------------//
-			ds_list_destroy(_list_living);
-
 			//----------------//
-			//TICK LIFETIME//
+			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			//------------------//
-			//REPOSITION STATUS//
-			//------------------//
-			scr_status_reposition(global.list_statuses);
+			if (ds_exists(global.list_statuses,ds_type_list)){
+				scr_status_reposition(global.list_statuses);
+			}
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			//---------------//
+			//----------------//
 			//DESTROY STATUS//
-			//---------------//
+			//----------------//
 			scr_status_destroy(_ref_status);
 
 		break;

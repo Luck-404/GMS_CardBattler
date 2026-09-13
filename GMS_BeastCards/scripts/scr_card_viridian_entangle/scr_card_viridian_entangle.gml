@@ -1,14 +1,19 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_ENTANGLE
-// FUNCTION: Resolves the Entangle card effect.
-//           Applies Stun to the selected Beast for one round.
+// FUNCTION: Resolves Entangle.
+//           Applies Stun to the selected Beast for 1 round.
+//
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
 //
 //===============================================================================//
+
 function scr_card_viridian_entangle(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
+	//================//
 	//APPLY CC STATUS//
-	//----------------//
+	//================//
 	scr_status_apply_cc("STUN",1);
 }

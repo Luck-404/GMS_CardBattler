@@ -6,53 +6,51 @@
 //           Breaks 20% of current Armor whenever applied or refreshed.
 //           Reduces all Armor gained by the host by 50% while active.
 //
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, and _val_lifetime optionally sets its duration.
+// RETURNS: The active Armorbreak Status on APPLY; otherwise undefined.
+//
 //===============================================================================//
+
 function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			var _ref_target =
-				global.ref_target_beast;
+			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			//----------------//
-			//DEFAULT LENGTH//
-			//----------------//
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//==========//
+			//DEFAULTS//
+			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 2;
 			}
 
-			_val_lifetime =
-				max(
-					1,
-					_val_lifetime
-				);
+			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
+			//================//
 			//BREAK 20% ARMOR//
-			//----------------//
-			var _val_armor_break =
-				floor(
-					_ref_target._val_armor *
-					0.20
-				);
+			//================//
+			var _val_armor_break = floor(_ref_target._val_armor * 0.20);
 
 			if (_val_armor_break > 0){
 
-				_ref_target._val_armor =
-					max(
-						0,
-						_ref_target._val_armor -
-						_val_armor_break
-					);
+				_ref_target._val_armor = max(
+					0,
+					_ref_target._val_armor - _val_armor_break
+				);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -67,16 +65,16 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"ARMORBREAK",
-					_ref_target
-				);
+			var _ref_existing_status = scr_status_check("ARMORBREAK",_ref_target);
 
 			//------------------//
 			//REFRESH EXISTING//
 			//------------------//
 			if (_ref_existing_status != -1){
+
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -86,43 +84,15 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 				return _ref_existing_status;
 			}
 
-			//---------------//
+			//===============//
 			//CREATE STATUS//
-			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
-					_ref_target.x,
-					_ref_target.y,
-					"ily_status",
-					obj_battle_status
-				);
-
-			_ref_new_status._scr_status =
-				scr_status_debuff_armorbreak;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"DEBUFF";
-
-			_ref_new_status._str_status_name =
-				"ARMORBREAK";
-
-			_ref_new_status._str_status_desc =
-				"BREAKS 20% ARMOR ON APPLY; ARMOR GAIN -50%";
-
-			_ref_new_status._spr_status =
-				spr_status_debuff_armorbreak;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._val_status_magnitude =
-				50;
-
-			_ref_new_status._str_trigger_region =
-				"END";
+			//===============//
+			var _ref_new_status = instance_create_layer(
+				_ref_target.x,
+				_ref_target.y,
+				"ily_status",
+				obj_battle_status
+			);
 
 			//---------------------//
 			//INITIALIZE LIFETIME//
@@ -134,6 +104,30 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 				false
 			);
 
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_debuff_armorbreak;
+
+			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "DEBUFF";
+			_ref_new_status._str_status_name = "ARMORBREAK";
+
+			_ref_new_status._spr_status = spr_status_debuff_armorbreak;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._val_status_magnitude = 50;
+
+			_ref_new_status._str_status_desc =
+				"BREAKS 20% ARMOR ON APPLY; ARMOR GAIN -" +
+				string(_ref_new_status._val_status_magnitude) +
+				"%";
+
+			_ref_new_status._str_trigger_region = "END";
+
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
@@ -142,32 +136,26 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 				_ref_new_status
 			);
 
-			scr_status_reposition(
-				_ref_target
-			);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				scr_status_destroy(
-					_ref_status
-				);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
@@ -175,20 +163,14 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 			//----------------//
 			//UPDATE LIFETIME//
 			//----------------//
-			scr_status_tick_lifetime(
-				_ref_status
-			);
-
-			scr_status_reposition(
-				_ref_host
-			);
+			scr_status_tick_lifetime(_ref_status);
+			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

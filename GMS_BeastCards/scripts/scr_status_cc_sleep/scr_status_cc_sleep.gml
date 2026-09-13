@@ -1,75 +1,83 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_CC_SLEEP
-// FUNCTION: Handles the Sleep crowd-control status.
-//           Unstackable Timed.
+// FUNCTION: Handles Sleep.
+//           Unstackable Timed Crowd Control Status.
 //           Prevents the host from acting while active.
 //           Reapplication extends duration without shortening existing Sleep.
 //           Each lifetime tick has a 25% + CON-based chance to wake early.
-//           Taking damage also immediately removes Sleep.
+//           Taking damage removes Sleep through the damage-resolution system.
+//
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Sleep Status, and _val_lifetime optionally sets duration.
+// RETURNS: The active Sleep Status on APPLY, true on an early wake, otherwise
+//          undefined.
 //
 //===============================================================================//
+
 function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			var _ref_target =
-				global.ref_target_beast;
+			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			//SLEEP
-			_val_lifetime =
-				scr_get_cc_lifetime(
-					_val_lifetime,
-					3
-				);
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//---------------//
+			//CC LIFETIME//
+			//---------------//
+			_val_lifetime = scr_cc_get_lifetime(
+				_val_lifetime,
+				3
+			);
 
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"SLEEP",
-					_ref_target
-				);
+			var _ref_existing_status = scr_status_check("SLEEP",_ref_target);
 
-			//-----------------//
+			//------------------//
 			//REFRESH EXISTING//
-			//-----------------//
+			//------------------//
 			if (_ref_existing_status != -1){
 
-				scr_status_refresh_lifetime(
-					_ref_existing_status,
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
+				var _val_refresh_lifetime = max(
+					_ref_existing_status._val_status_lifetime,
 					_val_lifetime
 				);
 
-				//------------------------//
-				//ENSURE PERSISTENT VFX//
-				//------------------------//
-				if (
-					!instance_exists(
-						_ref_existing_status
-							._ref_persistent_vfx
-					)
-				){
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_refresh_lifetime
+				);
 
-					_ref_existing_status
-						._ref_persistent_vfx =
-						scr_battle_vfx_persistent(
-							_ref_target,
-							spr_battle_vfx_sleeping,
-							0,
-							-110,
-							1
-						);
+				//-----------------------//
+				//ENSURE PERSISTENT VFX//
+				//-----------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_sleeping,
+						0,
+						-110,
+						1
+					);
 				}
 
 				return _ref_existing_status;
@@ -78,37 +86,12 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
-					_ref_target.x,
-					_ref_target.y,
-					"ily_status",
-					obj_battle_status
-				);
-
-			_ref_new_status._scr_status =
-				scr_status_cc_sleep;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"CC";
-
-			_ref_new_status._str_status_name =
-				"SLEEP";
-
-			_ref_new_status._str_status_desc =
-				"ASLEEP; CANNOT ACT";
-
-			_ref_new_status._spr_status =
-				spr_status_cc_sleep;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._str_trigger_region =
-				"END";
+			var _ref_new_status = instance_create_layer(
+				_ref_target.x,
+				_ref_target.y,
+				"ily_status",
+				obj_battle_status
+			);
 
 			//---------------------//
 			//INITIALIZE LIFETIME//
@@ -120,6 +103,24 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 				false
 			);
 
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_cc_sleep;
+
+			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "CC";
+			_ref_new_status._str_status_name = "SLEEP";
+			_ref_new_status._str_status_desc = "ASLEEP; CANNOT ACT";
+
+			_ref_new_status._spr_status = spr_status_cc_sleep;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._str_trigger_region = "END";
+
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
@@ -128,79 +129,61 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_new_status
 			);
 
-			scr_status_reposition(
-				_ref_target
-			);
+			scr_status_reposition(_ref_target);
 
 			//----------------//
 			//PERSISTENT VFX//
 			//----------------//
-			_ref_new_status._ref_persistent_vfx =
-				scr_battle_vfx_persistent(
-					_ref_target,
-					spr_battle_vfx_sleeping,
-					0,
-					-110,
-					1
-				);
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_sleeping,
+				0,
+				-110,
+				1
+			);
 
 			return _ref_new_status;
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				scr_status_destroy(
-					_ref_status
-				);
+				scr_status_destroy(_ref_status);
 
 				return undefined;
 			}
 
-			//----------------//
+			//================//
 			//CALCULATE WAKE//
-			//----------------//
-			var _val_con_stat =
-				_ref_host._ref_unit._val_beast_con_stat;
+			//================//
+			var _val_con_mod = 0;
 
-			var _val_con_mod =
-				scr_beast_get_grade_modifier(
+			if (is_struct(_ref_host._ref_unit)){
+
+				var _val_con_stat = _ref_host._ref_unit._val_beast_con_stat;
+
+				_val_con_mod = scr_beast_get_grade_modifier(
 					_val_con_stat
 				);
+			}
 
-			var _val_wake_chance =
-				clamp(
-					25 +
-					floor(
-						5 *
-						_val_con_mod
-					),
-					0,
-					100
-				);
+			var _val_wake_chance = clamp(25 + floor(5 * _val_con_mod),0,100);
+			var _val_wake_roll = irandom_range(1,100);
 
-			//----------//
-			//WAKE ROLL//
-			//----------//
-			var _val_wake_roll =
-				irandom_range(
-					1,
-					100
-				);
-
+			//=============//
+			//EARLY WAKE//
+			//=============//
 			if (_val_wake_roll <= _val_wake_chance){
 
 				scr_gui_spawn_popup_scrolling(
@@ -212,8 +195,10 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				scr_status_destroy(
-					_ref_status
+				scr_status_cc_sleep(
+					"DEATH",
+					_ref_status,
+					undefined
 				);
 
 				return true;
@@ -222,20 +207,14 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//UPDATE LIFETIME//
 			//----------------//
-			scr_status_tick_lifetime(
-				_ref_status
-			);
-
-			scr_status_reposition(
-				_ref_host
-			);
+			scr_status_tick_lifetime(_ref_status);
+			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

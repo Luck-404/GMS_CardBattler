@@ -1,36 +1,38 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_PREDATORS_MARK
-// FUNCTION: Resolves the Predator's Mark card effect.
+// FUNCTION: Resolves Predator's Mark.
 //           Applies Vulnerable to the selected Beast.
 //           Extends the application by 1 round if the target has
 //           Bleed, Poison, or Venom.
 //
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
+//
 //===============================================================================//
+
 function scr_card_viridian_predators_mark(_stct_card,_ref_caster,_ref_target){
 
-	//-----------------------//
+	//=======================//
 	//SET VULNERABLE DURATION//
-	//-----------------------//
-	var _val_vulnerable_lifetime = 3;
+	//=======================//
+	var _ct_vulnerable_lifetime = 3;
 
-	//----------------------//
+	//====================//
 	//CHECK VIRIDIAN DOTS//
-	//----------------------//
+	//====================//
 	var _flag_has_dot =
 		scr_status_check("BLEED",_ref_target) != -1 ||
 		scr_status_check("POISON",_ref_target) != -1 ||
 		scr_status_check("VENOM",_ref_target) != -1;
 
 	if (_flag_has_dot){
-		_val_vulnerable_lifetime++;
+		_ct_vulnerable_lifetime++;
 	}
 
-	//----------------//
+	//================//
 	//APPLY VULNERABLE//
-	//----------------//
-	scr_status_apply_debuff(
-		"VULNERABLE",
-		_val_vulnerable_lifetime
-	);
+	//================//
+	scr_status_apply_debuff("VULNERABLE",_ct_vulnerable_lifetime);
 }

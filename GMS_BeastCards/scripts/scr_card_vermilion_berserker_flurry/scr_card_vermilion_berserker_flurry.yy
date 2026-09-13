@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_berserker_flurry",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_berserker_flurry",
+  "parent":{
+    "name":"BERSERKER_FLURRY",
+    "path":"folders/CARDS/VERMILION/BERSERKER_FLURRY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

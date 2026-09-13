@@ -41,7 +41,23 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 			_ref_beast.x,
 			_ref_beast.y - 48
 		);
-
+		
+		//--------------------------//
+		//DEBUG REPOSITION BLOCKED//
+		//--------------------------//
+		scr_debug_log(
+			"BATTLE",
+			"REPOSITION",
+			_ref_beast,
+			string_upper(_ref_beast._str_team) + " " +
+			string_upper(_ref_beast._ref_unit._str_beast_name) +
+			" COULD NOT REPOSITION" +
+			" | POSITION: " + string(_ref_beast._val_pos) +
+			" | REASON: REPOSITION LOCK",
+			"BATTLE",
+			"SCR_BATTLE_REPOSITION_BEAST"
+		);
+		
 		return false;
 	}
 
@@ -114,6 +130,23 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 			c_maroon,
 			_ref_swap_target.x,
 			_ref_swap_target.y - 48
+		);
+
+		//--------------------------//
+		//DEBUG REPOSITION BLOCKED//
+		//--------------------------//
+		scr_debug_log(
+			"BATTLE",
+			"REPOSITION",
+			_ref_beast,
+			string_upper(_ref_beast._str_team) + " " +
+			string_upper(_ref_beast._ref_unit._str_beast_name) +
+			" COULD NOT REPOSITION" +
+			" | BLOCKED BY: " +
+			string_upper(_ref_swap_target._ref_unit._str_beast_name) +
+			" | REASON: REPOSITION LOCK",
+			"BATTLE",
+			"SCR_BATTLE_REPOSITION_BEAST"
 		);
 
 		return false;
@@ -195,6 +228,52 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 		1,
 		0,
 		undefined
+	);
+
+	#endregion
+
+	#region DEBUG
+
+	//----------------//
+	//GET SOURCE//
+	//----------------//
+	var _str_source = "SYSTEM";
+
+	if (
+		instance_exists(global.ref_cast_card) &&
+		is_struct(global.ref_cast_card._ref_card)
+	){
+		_str_source = string_upper(global.ref_cast_card._ref_card._str_card_name);
+	}
+
+	//----------------//
+	//GET DIRECTION//
+	//----------------//
+	var _str_direction = "BACKWARD";
+
+	if (_val_new_pos < _val_current_pos){
+		_str_direction = "FORWARD";
+	}
+
+	//----------------------//
+	//LOG REPOSITION RESULT//
+	//----------------------//
+	scr_debug_log(
+		"BATTLE",
+		"REPOSITION",
+		_ref_beast,
+		string_upper(_ref_beast._str_team) + " " +
+		string_upper(_ref_beast._ref_unit._str_beast_name) +
+		" MOVED " + _str_direction +
+		" | POSITION: " +
+		string(_val_current_pos) +
+		" -> " +
+		string(_val_new_pos) +
+		" | SWAPPED WITH: " +
+		string_upper(_ref_swap_target._ref_unit._str_beast_name) +
+		" | SOURCE: " + _str_source,
+		"BATTLE",
+		"SCR_BATTLE_REPOSITION_BEAST"
 	);
 
 	#endregion

@@ -2,8 +2,8 @@
 //
 // SCRIPT: SCR_BATTLE_GAIN_MANA
 // FUNCTION: Grants Mana to the player and clamps it to Maximum Mana.
-//           Plays shared Mana Gain VFX/SFX when Mana is actually gained
-//           and refreshes Mana HUD positions afterward.
+//           Plays shared Mana Gain VFX/SFX, refreshes the Mana HUD,
+//           and logs the actual amount of Mana gained.
 //
 // INPUT:    _ct_amount - Amount of Mana requested.
 // USES:     Player battle controller current/maximum Mana values,
@@ -84,6 +84,26 @@ function scr_battle_gain_mana(_ct_amount=1){
 	//REFRESH MANA HUD//
 	//----------------//
 	scr_battle_reposition_mana();
+
+	#endregion
+
+	#region DEBUG
+
+	//---------------//
+	//LOG MANA GAIN//
+	//---------------//
+	scr_debug_log(
+		"BATTLE",
+		"MANA",
+		_ref_player_controller,
+		"PLAYER GAINED " + string(_ct_mana_gained) +
+		" MANA | " + string(_val_old_mana) +
+		"/" + string(_ref_player_controller._val_max_mana) +
+		" -> " + string(_ref_player_controller._val_cur_mana) +
+		"/" + string(_ref_player_controller._val_max_mana),
+		"BATTLE",
+		"SCR_BATTLE_GAIN_MANA"
+	);
 
 	#endregion
 

@@ -1,74 +1,72 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_CC_BLIND
-// FUNCTION: Handles the Blind Crowd Control status.
-//           Unstackable Timed.
+// FUNCTION: Handles Blind.
+//           Unstackable Timed Crowd Control Status.
 //           Restricts ordinary Attack targeting to the front enemy Beast.
-//           Prevents Flank/Backline Attacks.
+//           Prevents Flank and Backline Attacks.
 //           Teamwide and Global Attacks remain unaffected.
 //
 //===============================================================================//
+
 function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			var _ref_target =
-				global.ref_target_beast;
+			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			//BLIND
-			_val_lifetime =
-				scr_get_cc_lifetime(
-					_val_lifetime,
-					3
-				);
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//---------------//
+			//CC LIFETIME//
+			//---------------//
+			_val_lifetime = scr_cc_get_lifetime(
+				_val_lifetime,
+				3
+			);
 
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"BLIND",
-					_ref_target
-				);
+			var _ref_existing_status = scr_status_check("BLIND",_ref_target);
 
 			//------------------//
 			//REFRESH EXISTING//
 			//------------------//
 			if (_ref_existing_status != -1){
 
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
-				//------------------------//
+				//-----------------------//
 				//ENSURE PERSISTENT VFX//
-				//------------------------//
-				if (
-					!instance_exists(
-						_ref_existing_status
-							._ref_persistent_vfx
-					)
-				){
+				//-----------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
 
-					_ref_existing_status
-						._ref_persistent_vfx =
-						scr_battle_vfx_persistent(
-							_ref_target,
-							spr_battle_vfx_blinded,
-							0,
-							-20,
-							1
-						);
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_blinded,
+						0,
+						-20,
+						1
+					);
 				}
 
 				return _ref_existing_status;
@@ -77,37 +75,12 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
-					_ref_target.x,
-					_ref_target.y,
-					"ily_status",
-					obj_battle_status
-				);
-
-			_ref_new_status._scr_status =
-				scr_status_cc_blind;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"CC";
-
-			_ref_new_status._str_status_name =
-				"BLIND";
-
-			_ref_new_status._str_status_desc =
-				"ATTACKS MUST TARGET THE FRONT BEAST";
-
-			_ref_new_status._spr_status =
-				spr_status_cc_blind;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._str_trigger_region =
-				"END";
+			var _ref_new_status = instance_create_layer(
+				_ref_target.x,
+				_ref_target.y,
+				"ily_status",
+				obj_battle_status
+			);
 
 			//---------------------//
 			//INITIALIZE LIFETIME//
@@ -118,6 +91,24 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 				false,
 				false
 			);
+
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_cc_blind;
+
+			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "CC";
+			_ref_new_status._str_status_name = "BLIND";
+			_ref_new_status._str_status_desc = "ATTACKS MUST TARGET THE FRONT BEAST";
+
+			_ref_new_status._spr_status = spr_status_cc_blind;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._str_trigger_region = "END";
 
 			//----------------//
 			//REGISTER STATUS//
@@ -132,31 +123,28 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//PERSISTENT VFX//
 			//----------------//
-			_ref_new_status._ref_persistent_vfx =
-				scr_battle_vfx_persistent(
-					_ref_target,
-					spr_battle_vfx_blinded,
-					0,
-					-20,
-					1
-				);
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_blinded,
+				0,
+				-20,
+				1
+			);
 
 			return _ref_new_status;
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
@@ -169,15 +157,13 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
-
 			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

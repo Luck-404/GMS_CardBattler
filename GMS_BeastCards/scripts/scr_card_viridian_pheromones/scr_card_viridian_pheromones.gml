@@ -2,14 +2,18 @@
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_PHEROMONES
 // FUNCTION: Resolves Pheromones.
-//           Applies Taunt to the caster for two rounds.
+//           Applies Taunt to the caster for 2 rounds.
+//
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
 //
 //===============================================================================//
+
 function scr_card_viridian_pheromones(_stct_card,_ref_caster,_ref_target){
 
-	//-------------//
-	// APPLY TAUNT //
-	//-------------//
-	scr_apply_buff_status("TAUNT",0,2);
-
+	//================//
+	//APPLY TAUNT//
+	//================//
+	scr_status_apply_buff("TAUNT",0,2);
 }

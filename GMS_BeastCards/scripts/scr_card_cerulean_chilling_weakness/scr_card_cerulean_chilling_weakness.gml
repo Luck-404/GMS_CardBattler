@@ -4,12 +4,19 @@
 // FUNCTION: Resolves Chilling Weakness.
 //           Applies Weakness for 3 rounds.
 //
+// ARGUMENTS: _stct_card is the Chilling Weakness card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
 function scr_card_cerulean_chilling_weakness(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
+	//================//
 	//APPLY WEAKNESS//
-	//----------------//
-	scr_status_apply_debuff("WEAKNESS",3);
+	//================//
+	scr_status_apply_debuff(
+		"WEAKNESS",
+		3
+	);
 }

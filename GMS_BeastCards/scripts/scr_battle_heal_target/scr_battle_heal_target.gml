@@ -5,6 +5,7 @@
 //           Healing still resolves at Maximum HP, while actual HP restoration
 //           is capped at Maximum HP. Resolves healing modifiers, Antiheal,
 //           healing Traps, Bloomtide Overhealth, VFX/SFX, and heal triggers.
+//           Logs actual HP restored and any Overhealth generated.
 //
 // INPUTS:   _val_amount - Base healing amount before received-healing modifiers.
 //           _ref_target - Living battle Beast receiving the healing effect.
@@ -22,6 +23,10 @@ function scr_battle_heal_target(_val_amount,_ref_target,_flag_trigger_auras=true
 	//VALIDATE TARGET//
 	//-----------------//
 	if (!instance_exists(_ref_target)){
+		return false;
+	}
+
+	if (!is_struct(_ref_target._ref_unit)){
 		return false;
 	}
 
@@ -62,14 +67,20 @@ function scr_battle_heal_target(_val_amount,_ref_target,_flag_trigger_auras=true
 	//------------------------//
 	//MODIFY HEALING RECEIVED//
 	//------------------------//
-	var _val_healing = scr_battle_get_healing_received_amount(_val_amount,_ref_target);
+	var _val_healing_requested = _val_amount;
+
+	var _val_healing = scr_battle_get_healing_received_amount(
+		_val_amount,
+		_ref_target
+	);
 
 	//----------------//
 	//CHECK ANTIHEAL//
 	//----------------//
 	var _ref_antiheal = scr_status_check("ANTIHEAL",_ref_target);
+	var _flag_antiheal = (_ref_antiheal != -1);
 
-	if (_ref_antiheal != -1){
+	if (_flag_antiheal){
 		_val_healing = floor(_val_healing * 0.50);
 	}
 
@@ -77,11 +88,25 @@ function scr_battle_heal_target(_val_amount,_ref_target,_flag_trigger_auras=true
 
 	#region HEALING
 
+	//----------------//
+	//STORE OLD HP//
+	//----------------//
+	var _val_hp_before = _ref_target._val_cur_hp;
+	var _val_overhealth_before = _ref_target._val_overhealth;
+
 	//---------------------//
 	//CALCULATE HP RESTORED//
 	//---------------------//
-	var _val_missing_hp = max(0,_ref_target._val_max_hp - _ref_target._val_cur_hp);
-	var _val_healed = min(_val_healing,_val_missing_hp);
+	var _val_missing_hp = max(
+		0,
+		_ref_target._val_max_hp -
+		_ref_target._val_cur_hp
+	);
+
+	var _val_healed = min(
+		_val_healing,
+		_val_missing_hp
+	);
 
 	//------------------//
 	//CALCULATE OVERHEAL//
@@ -143,6 +168,80 @@ function scr_battle_heal_target(_val_amount,_ref_target,_flag_trigger_auras=true
 			_ref_target.y - 48 + irandom_range(-16,16)
 		);
 	}
+
+	#endregion
+
+	#region DEBUG
+
+	//----------------//
+	//GET HEAL SOURCE//
+	//----------------//
+	var _str_source = "SYSTEM";
+
+	if (
+		instance_exists(global.ref_cast_card) &&
+		is_struct(global.ref_cast_card._ref_card)
+	){
+		_str_source = string_upper(global.ref_cast_card._ref_card._str_card_name);
+	}
+
+	//----------------//
+	//BUILD MESSAGE//
+	//----------------//
+	var _str_message =
+		string_upper(_ref_target._str_team) + " " +
+		string_upper(_ref_target._ref_unit._str_beast_name) +
+		" HEALED " + string(_val_healed) +
+		" HP | " +
+		string(_val_hp_before) +
+		"/" + string(_ref_target._val_max_hp) +
+		" -> " +
+		string(_ref_target._val_cur_hp) +
+		"/" + string(_ref_target._val_max_hp) +
+		" | SOURCE: " + _str_source;
+
+	//----------------//
+	//HEAL MODIFIERS//
+	//----------------//
+	if (_val_healing != _val_healing_requested){
+
+		_str_message +=
+			" | HEALING: " +
+			string(_val_healing_requested) +
+			" -> " +
+			string(_val_healing);
+	}
+
+	if (_flag_antiheal){
+		_str_message += " | ANTIHEAL";
+	}
+
+	//----------------//
+	//BLOOMTIDE HEAL//
+	//----------------//
+	if (_val_overheal > 0){
+
+		_str_message +=
+			" | OVERHEALTH: +" +
+			string(_val_overheal) +
+			" (" +
+			string(_val_overhealth_before) +
+			" -> " +
+			string(_ref_target._val_overhealth) +
+			")";
+	}
+
+	//----------------//
+	//LOG HEAL RESULT//
+	//----------------//
+	scr_debug_log(
+		"BATTLE",
+		"HEAL",
+		_ref_target,
+		_str_message,
+		"BATTLE",
+		"SCR_BATTLE_HEAL_TARGET"
+	);
 
 	#endregion
 

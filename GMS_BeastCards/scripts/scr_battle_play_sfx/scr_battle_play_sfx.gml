@@ -1,9 +1,12 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_PLAY_BATTLE_SFX
+// SCRIPT: SCR_BATTLE_PLAY_SFX
 // FUNCTION: Plays a battle SFX while suppressing near-simultaneous duplicates.
 //           Prevents teamwide and mass effects from stacking identical sounds.
 //           Different sounds may still play simultaneously.
+//
+// INPUTS:   _snd_sfx                 - Sound asset to play.
+//           _val_duplicate_window_ms - Duplicate suppression window in ms.
 //
 //===============================================================================//
 
@@ -16,6 +19,9 @@ function scr_battle_play_sfx(_snd_sfx,_val_duplicate_window_ms=40){
 		return -1;
 	}
 
+	_val_duplicate_window_ms =
+		max(0,_val_duplicate_window_ms);
+
 	//----------------//
 	//RECENT SFX DATA//
 	//----------------//
@@ -25,18 +31,12 @@ function scr_battle_play_sfx(_snd_sfx,_val_duplicate_window_ms=40){
 		"SFX_" +
 		string(_snd_sfx);
 
-	var _val_time_now =
-		current_time;
+	var _val_time_now = current_time;
 
 	//----------------------//
 	//CHECK RECENT DUPLICATE//
 	//----------------------//
-	if (
-		variable_struct_exists(
-			_stct_recent_sfx,
-			_str_sfx_key
-		)
-	){
+	if (variable_struct_exists(_stct_recent_sfx,_str_sfx_key)){
 
 		var _val_last_time =
 			variable_struct_get(
@@ -44,11 +44,7 @@ function scr_battle_play_sfx(_snd_sfx,_val_duplicate_window_ms=40){
 				_str_sfx_key
 			);
 
-		if (
-			_val_time_now -
-			_val_last_time <
-			_val_duplicate_window_ms
-		){
+		if (_val_time_now - _val_last_time < _val_duplicate_window_ms){
 			return -1;
 		}
 	}

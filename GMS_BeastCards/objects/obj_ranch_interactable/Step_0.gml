@@ -1,49 +1,59 @@
 //===============================================================================//
 //
 // STEP: OBJ_RANCH_INTERACTABLE
-// FUNCTION: Spawns ranch dummy beasts once when the ranch loads.
-//           Opens the ranch GUI when the player interacts.
+// FUNCTION: Spawns Ranch Beast dummies once when the Ranch loads.
+//           Opens the Ranch GUI when the player interacts.
 //           Handles highlight state and interaction cooldown.
 //
 //===============================================================================//
 
-//
-// SPAWN RANCH UNITS ONCE
-//
-#region SPAWN UNITS ONCE
+//==========================//
+//SPAWN RANCH DUMMIES ONCE//
+//==========================//
 if (!_flag_spawned){
 
-	for (var _it_unit = 0; _it_unit < ds_list_size(global.list_player_ranch); _it_unit++){
+	if (
+		variable_global_exists("list_player_ranch") &&
+		ds_exists(global.list_player_ranch,ds_type_list)
+	){
 
-		var _stct_unit = ds_list_find_value(global.list_player_ranch,_it_unit);
+		for (var _it_unit = 0;_it_unit < ds_list_size(global.list_player_ranch);_it_unit++){
 
-		if (_stct_unit == undefined){
-			continue;
+			var _stct_unit = ds_list_find_value(global.list_player_ranch,_it_unit);
+
+			if (!is_struct(_stct_unit)){
+				continue;
+			}
+
+			hscr_ranch_spawn_beast_dummy(_stct_unit);
 		}
 
-		hscr_spawn_ranch_unit(_stct_unit);
+		_flag_spawned = true;
 	}
-
-	_flag_spawned = true;
 }
-#endregion
 
-//
-// HIGHLIGHT AND INTERACTION
-//
-#region HIGHLIGHT AND INTERACTION
+//====================//
+//HANDLE INTERACTION//
+//====================//
 if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 
 	image_index = 1;
 
-	if (!_flag_triggered && _val_cooldown == 0){
+	if (!_flag_triggered && _ct_cooldown == 0){
 
 		if (keyboard_check(ord("E"))){
-			audio_play_sound(snd_gui_open,0,false);
-			_flag_triggered = true;
-			_val_cooldown = 60;
 
-			var _ref_ranch_gui = instance_create_layer(room_width * 0.5,room_height * 0.5,"ily_fx",obj_gui_ranch_pane);
+			audio_play_sound(snd_gui_open,0,false);
+
+			_flag_triggered = true;
+			_ct_cooldown = 60;
+
+			var _ref_ranch_gui = instance_create_layer(
+				room_width * 0.5,
+				room_height * 0.5,
+				"ily_fx",
+				obj_gui_ranch_pane
+			);
 
 			obj_gui_controller.hscr_destroy_gui_open();
 			obj_gui_controller.hscr_toggle_gui_pause(true);
@@ -55,19 +65,16 @@ if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 else{
 	image_index = 0;
 }
-#endregion
 
-//
-// COOLDOWN
-//
-#region COOLDOWN
-if (_val_cooldown > 0){
+//================//
+//UPDATE COOLDOWN//
+//================//
+if (_ct_cooldown > 0){
 
-	_val_cooldown--;
+	_ct_cooldown--;
 
-	if (_val_cooldown <= 0){
-		_val_cooldown = 0;
+	if (_ct_cooldown <= 0){
+		_ct_cooldown = 0;
 		_flag_triggered = false;
 	}
 }
-#endregion

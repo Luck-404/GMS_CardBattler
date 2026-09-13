@@ -2,8 +2,8 @@
 //
 // SCRIPT: SCR_BATTLE_EXHAUST_CARD
 // FUNCTION: Moves a battle Card from the player's Hand into the Exhaust pile.
-//           Immediately repositions the remaining Hand and animates the
-//           exhausted Card from its previous position into the Exhaust pile.
+//           Repositions the remaining Hand, animates the exhausted Card,
+//           and logs the completed Card movement.
 //
 // INPUT:    _ref_card - Player battle Card instance being exhausted.
 // USES:     Player battle Hand and Exhaust lists, hand repositioning,
@@ -19,6 +19,10 @@ function scr_battle_exhaust_card(_ref_card){
 	//VALIDATE CARD//
 	//---------------//
 	if (!instance_exists(_ref_card)){
+		return false;
+	}
+
+	if (!is_struct(_ref_card._ref_card)){
 		return false;
 	}
 
@@ -94,6 +98,24 @@ function scr_battle_exhaust_card(_ref_card){
 	//EXPEND FEEDBACK//
 	//----------------//
 	scr_battle_vfx_expend(undefined,_val_exhaust_x,_val_exhaust_y,_ct_move_duration);
+
+	#endregion
+
+	#region DEBUG
+
+	//----------------//
+	//LOG EXHAUST//
+	//----------------//
+	scr_debug_log(
+		"CARDS",
+		"EXHAUST",
+		_ref_card._ref_card,
+		"PLAYER EXHAUSTED " + string_upper(_ref_card._ref_card._str_card_name) +
+		" | HAND: " + string(ds_list_size(_list_hand)) +
+		" | EXHAUST: " + string(ds_list_size(_list_exhaust)),
+		"BATTLE",
+		"SCR_BATTLE_EXHAUST_CARD"
+	);
 
 	#endregion
 

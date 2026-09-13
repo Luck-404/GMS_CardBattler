@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_char",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_char",
+  "parent":{
+    "name":"CHAR",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/CHAR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

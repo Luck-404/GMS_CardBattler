@@ -1,28 +1,24 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_THORNMAIL
-// FUNCTION: Resolves the Thornmail card effect.
-//           Grants Armor to the caster and applies Thorns for three turns.
+// FUNCTION: Resolves Thornmail.
+//           Grants Armor to the caster and applies Thorns for 3 rounds.
+//
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
 //
 //===============================================================================//
 
 function scr_card_viridian_thornmail(_stct_card,_ref_caster,_ref_target){
 
-	//-------------//
+	//================//
 	//GRANT ARMOR//
-	//-------------//
-	scr_battle_armor_target(
-		_stct_card._val_card_magnitude,
-		_ref_caster
-	);
+	//================//
+	scr_battle_armor_target(_stct_card._val_card_magnitude,_ref_caster);
 
-	//--------------//
+	//================//
 	//APPLY THORNS//
-	//--------------//
-	scr_apply_buff_status(
-		"THORNS",
-		3,
-		3
-	);
-
+	//================//
+	scr_status_apply_buff("THORNS",3,3);
 }

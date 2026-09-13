@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_berserker_charge",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_berserker_charge",
+  "parent":{
+    "name":"BERSERKER_CHARGE",
+    "path":"folders/CARDS/VERMILION/BERSERKER_CHARGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

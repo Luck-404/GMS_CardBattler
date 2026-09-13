@@ -1,55 +1,83 @@
 //===============================================================================//
 //
-// DRAW GUI: OBJ_GUI_ITEM_TARGET_PANE
-// FUNCTION: Draws item target selection pane.
-//           Shows party members on the left.
-//           Shows selected item sprite, name, amount, and close hint on the right.
+// STEP: OBJ_GUI_ITEM_TARGET_PANE
+// FUNCTION: Handles Inventory item target selection.
+//           Uses the selected Consumable or Held Item on clicked Party Beasts.
+//           Logs successful Consumable use and closes when the selected stack
+//           is depleted.
 //
 //===============================================================================//
 
-draw_set_font(fnt_gui_medium);
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
+//================//
+//COOLDOWN//
+//================//
+hscr_gui_item_target_update_click_cooldown();
 
-//------//
-//LAYOUT//
-//------//
+//================//
+//VALIDITY CHECK//
+//================//
+if (!instance_exists(_ref_parent_gui)){
+
+	instance_destroy();
+
+	exit;
+}
+
+if (_stct_item == undefined){
+
+	hscr_gui_item_target_close();
+
+	exit;
+}
+
+var _stct_current_item = hscr_gui_item_target_get_item_struct();
+
+if (_stct_current_item == undefined){
+
+	hscr_gui_item_target_close();
+
+	exit;
+}
+
+_stct_item = _stct_current_item;
+
+if (hscr_gui_item_target_get_item_amount() <= 0){
+
+	hscr_gui_item_target_close();
+
+	exit;
+}
+
+//================//
+//RIGHT CLICK//
+//================//
+if (mouse_check_button_pressed(mb_right)){
+
+	audio_play_sound(
+		snd_gui_close,
+		0,
+		false
+	);
+
+	hscr_gui_item_target_close();
+
+	exit;
+}
+
+//================//
+//TARGET CLICKS//
+//================//
 var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
 
-var _val_pane_right = _val_pane_left + _val_pane_w;
-var _val_pane_bottom = _val_pane_top + _val_pane_h;
-
-//----//
-//PANE//
-//----//
-draw_set_colour(c_black);
-draw_rectangle(_val_pane_left,_val_pane_top,_val_pane_right,_val_pane_bottom,false);
-
-draw_set_colour(c_dkgray);
-draw_rectangle(_val_pane_left + 4,_val_pane_top + 4,_val_pane_right - 4,_val_pane_bottom - 4,false);
-
-//-------//
-//HEADERS//
-//-------//
-draw_set_colour(c_white);
-var _str_header = "CHOOSE TARGET";
-
-if (_str_target_mode == "HELD"){
-	_str_header = "CHOOSE HOLDER";
-}
-
-draw_text(_val_left_x,_val_pane_top + 24,_str_header);
-draw_text(_val_right_x,_val_pane_top + 24,"ITEM");
-
-//-------//
-//TARGETS//
-//-------//
 var _ct_party = ds_list_size(global.list_player_party);
 
-for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
+for (var _it_unit = 0;_it_unit < _ct_party;_it_unit++){
 
-	var _stct_unit = ds_list_find_value(global.list_player_party,_it_unit);
+	var _stct_unit = ds_list_find_value(
+		global.list_player_party,
+		_it_unit
+	);
 
 	if (_stct_unit == undefined){
 		continue;
@@ -58,65 +86,173 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 	var _val_box_x = _val_left_x;
 	var _val_box_y = _val_start_y + (_it_unit * (_val_slot_h + _val_slot_spacing));
 
-	var _flag_hover = _val_mouse_x > _val_box_x && _val_mouse_x < _val_box_x + _val_slot_w && _val_mouse_y > _val_box_y && _val_mouse_y < _val_box_y + _val_slot_h;
+	var _flag_hover =
+		_val_mouse_x > _val_box_x &&
+		_val_mouse_x < _val_box_x + _val_slot_w &&
+		_val_mouse_y > _val_box_y &&
+		_val_mouse_y < _val_box_y + _val_slot_h;
 
-	draw_set_colour(_flag_hover ? c_white : global.c_dk_gray);
-	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,false);
-
-	draw_set_colour(c_black);
-	draw_rectangle(_val_box_x,_val_box_y,_val_box_x + _val_slot_w,_val_box_y + _val_slot_h,true);
-
-	var _val_unit_x = _val_box_x + 36;
-	var _val_unit_y = _val_box_y + (_val_slot_h * 0.5);
-
-	var _spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
-
-	if (_spr_shadow != undefined){
-		draw_sprite_ext(_spr_shadow,0,_val_unit_x,_val_unit_y + 24,0.55,0.55,0,c_white,1);
+	if (
+		!_flag_hover ||
+		!mouse_check_button_pressed(mb_left) ||
+		_flag_clicked
+	){
+		continue;
 	}
 
-	draw_sprite_ext(_stct_unit._spr_beast,0,_val_unit_x,_val_unit_y,0.075,0.075,0,c_white,1);
+	_flag_clicked = true;
+	_ct_cooldown = 8;
 
-	draw_set_colour(c_black);
-	draw_text(_val_box_x + 76,_val_box_y + 12,_stct_unit._str_beast_name);
+	//----------------//
+	//VALIDATE EFFECT//
+	//----------------//
+	if (_stct_item._scr_item == undefined){
 
-	var _str_hp = "HP: " + string(_stct_unit._val_beast_hp_cur) + "/" + string(_stct_unit._val_beast_hp_max);
-	draw_text(_val_box_x + 76,_val_box_y + 38,_str_hp);
+		scr_gui_spawn_popup_scrolling(
+			"TEXT",
+			"NOTHING",
+			undefined,
+			c_white,
+			_val_box_x + (_val_slot_w * 0.5),
+			_val_box_y
+		);
+
+		exit;
+	}
+
+	audio_play_sound(
+		snd_inventory_use_item,
+		0,
+		false
+	);
+
+	var _flag_used = false;
+
+	//================//
+	//USE ITEM//
+	//================//
+	switch (_stct_item._str_item_type){
+
+		//============//
+		//CONSUMABLE//
+		//============//
+		case "CONSUMABLE":
+
+			//----------------//
+			//STORE TARGET HP//
+			//----------------//
+			var _val_hp_before = _stct_unit._val_beast_hp_cur;
+
+			//----------------//
+			//RESOLVE EFFECT//
+			//----------------//
+			_flag_used = _stct_item._scr_item(
+				_stct_item,
+				_stct_unit,
+				_val_box_x + (_val_slot_w * 0.5),
+				_val_box_y
+			);
+
+			if (_flag_used){
+
+				var _val_hp_after = _stct_unit._val_beast_hp_cur;
+
+				//----------------//
+				//STORE ITEM DATA//
+				//----------------//
+				var _str_item_name = _stct_item._str_item_name;
+				var _str_item_id = _stct_item._str_item_id;
+				var _uid_item = _stct_item._uid_item;
+
+				//----------------//
+				//CONSUME ITEM//
+				//----------------//
+				var _flag_removed = scr_inventory_remove_item(
+					_stct_item,
+					1
+				);
+
+				//================//
+				//DEBUG USE//
+				//================//
+				scr_debug_log(
+					"INVENTORY",
+					"USE",
+					undefined,
+					"CONSUMABLE USED" +
+					" | ITEM: " +
+					string_upper(_str_item_name) +
+					" | ID: " +
+					string_upper(_str_item_id) +
+					" | UID: " +
+					string(_uid_item) +
+					" | TARGET: " +
+					string_upper(_stct_unit._str_beast_name) +
+					" | HP: " +
+					string(_val_hp_before) +
+					" -> " +
+					string(_val_hp_after) +
+					"/" +
+					string(_stct_unit._val_beast_hp_max) +
+					" | CONSUMED: " +
+					(_flag_removed ? "YES" : "NO"),
+					_flag_removed ? "INFO" : "ERROR",
+					"OBJ_GUI_ITEM_TARGET_PANE:STEP"
+				);
+
+				//----------------//
+				//REFRESH INVENTORY//
+				//----------------//
+				if (instance_exists(_ref_parent_gui)){
+
+					_ref_parent_gui.hscr_gui_inventory_mark_dirty();
+					_ref_parent_gui._ct_cooldown = 15;
+				}
+
+				_stct_current_item = hscr_gui_item_target_get_item_struct();
+
+				if (
+					_stct_current_item == undefined ||
+					hscr_gui_item_target_get_item_amount() <= 0
+				){
+
+					hscr_gui_item_target_close();
+
+					exit;
+				}
+
+				_stct_item = _stct_current_item;
+			}
+
+		break;
+
+		//======//
+		//HELD//
+		//======//
+		case "HELD":
+
+			_flag_used = scr_inventory_equip_held_item(
+				_stct_item,
+				_stct_unit,
+				_val_box_x + (_val_slot_w * 0.5),
+				_val_box_y
+			);
+
+			if (_flag_used){
+
+				if (instance_exists(_ref_parent_gui)){
+
+					_ref_parent_gui.hscr_gui_inventory_mark_dirty();
+					_ref_parent_gui._ct_cooldown = 15;
+				}
+
+				hscr_gui_item_target_close();
+
+				exit;
+			}
+
+		break;
+	}
+
+	exit;
 }
-
-//----//
-//ITEM//
-//----//
-if (_stct_item != undefined){
-
-	var _ct_amount = hscr_get_current_item_amount();
-
-	draw_sprite_ext(_stct_item._spr_item,0,_val_right_x + 72,_val_pane_top + 130,3,3,0,c_white,1);
-
-	draw_set_colour(c_white);
-	draw_text(_val_right_x,_val_pane_top + 220,_stct_item._str_item_name);
-
-	draw_set_font(fnt_gui_small);
-	draw_set_colour(c_ltgray);
-
-	var _str_amount = "AMOUNT: " + string(_ct_amount);
-
-	if (_stct_item._flag_stackable){
-		_str_amount = "AMOUNT: " + string(_ct_amount);
-	}
-	else{
-		_str_amount = "AMOUNT: 1";
-	}
-
-	draw_text(_val_right_x,_val_pane_top + 250,_str_amount);
-	draw_text_ext(_val_right_x,_val_pane_top + 280,_stct_item._str_item_desc,16,220);
-
-	draw_set_colour(c_white);
-	draw_text(_val_right_x,_val_pane_bottom - 44,"RIGHT CLICK: CLOSE");
-}
-
-//-------//
-//RESET//
-//-------//
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);

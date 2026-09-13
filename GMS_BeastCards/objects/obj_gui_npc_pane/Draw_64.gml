@@ -2,52 +2,47 @@
 //
 // DRAW GUI: OBJ_GUI_NPC_PANE
 // FUNCTION: Draws and manages the active NPC interaction pane.
-//           Displays NPC identity, available menu options, and placeholder modes.
-//           Handles keyboard navigation, mouse interaction, and pane closing.
+//           Displays NPC identity, available menu options, and dialogue.
+//           Handles navigation, interaction, and pane closure.
 //
 //===============================================================================//
 
-//----------------//
-// VALIDATE DATA
-//----------------//
-if (
-	!instance_exists(_ref_npc) ||
-	_stct_npc == undefined
-){
-	hscr_close_npc_pane();
+//================//
+//VALIDATE DATA//
+//================//
+if (!instance_exists(_ref_npc) || _stct_npc == undefined){
+	hscr_gui_npc_close();
 	exit;
 }
 
-//----------------//
-// SETUP
-//----------------//
+//================//
+//SETUP//
+//================//
 var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
 
-hscr_update_click_cooldown();
+hscr_gui_npc_update_click_cooldown();
 
-//----------------//
-// CLOSE / RETURN
-//----------------//
-if (
-	keyboard_check_pressed(vk_escape) &&
-	_ct_cooldown <= 0
-){
+//================//
+//CLOSE OR RETURN//
+//================//
+if (keyboard_check_pressed(vk_escape) && _ct_cooldown <= 0){
 
 	if (_str_npc_gui_mode == "MENU"){
-		hscr_close_npc_pane();
+		hscr_gui_npc_close();
 		exit;
 	}
 	else{
 		_str_npc_gui_mode = "MENU";
+
 		_ct_cooldown = 10;
 		_flag_clicked = true;
 	}
 }
 
-//----------------//
-// PANE
-//----------------//
+//================//
+//PANE//
+//================//
 draw_set_colour(c_black);
 
 draw_rectangle(
@@ -58,7 +53,7 @@ draw_rectangle(
 	false
 );
 
-draw_set_colour(c_dkgray);
+draw_set_colour(global.c_dk_gray);
 
 draw_rectangle(
 	_val_pane_left + 4,
@@ -68,9 +63,9 @@ draw_rectangle(
 	false
 );
 
-//----------------//
-// NPC HEADER
-//----------------//
+//================//
+//NPC HEADER//
+//================//
 draw_set_font(fnt_gui_medium);
 draw_set_colour(c_white);
 
@@ -89,9 +84,9 @@ draw_text(
 	string(_stct_npc._str_npc_title)
 );
 
-//----------------//
-// HEADER DIVIDER
-//----------------//
+//================//
+//HEADER DIVIDER//
+//================//
 draw_set_colour(c_black);
 
 draw_line(
@@ -101,35 +96,34 @@ draw_line(
 	_val_pane_top + 100
 );
 
-//----------------//
-// ACTIVE MODE
-//----------------//
-switch(_str_npc_gui_mode){
+//================//
+//ACTIVE MODE//
+//================//
+switch (_str_npc_gui_mode){
 
 	case "MENU":
 
-		hscr_handle_menu_keyboard_input();
+		hscr_gui_npc_handle_menu_input();
 
-		hscr_draw_menu(
+		hscr_gui_npc_draw_menu(
 			_val_mouse_x,
 			_val_mouse_y
 		);
 
 	break;
 
-
 	case "DIALOGUE":
 
-		hscr_update_dialogue();
-		hscr_handle_dialogue_input();
-		hscr_draw_dialogue();
+		hscr_gui_npc_update_dialogue();
+		hscr_gui_npc_handle_dialogue_input();
+		hscr_gui_npc_draw_dialogue();
 
 	break;
 }
 
-//----------------//
-// FOOTER
-//----------------//
+//================//
+//FOOTER//
+//================//
 if (_str_npc_gui_mode == "MENU"){
 
 	draw_set_font(fnt_gui_small);
@@ -141,3 +135,10 @@ if (_str_npc_gui_mode == "MENU"){
 		"UP/DOWN: SELECT   E/ENTER: CONFIRM   ESC: CLOSE"
 	);
 }
+
+//================//
+//RESET DRAW STATE//
+//================//
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+draw_set_alpha(1);

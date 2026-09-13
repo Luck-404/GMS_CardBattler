@@ -1,13 +1,21 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_trigger_heal_auras
+// SCRIPT: SCR_STATUS_TRIGGER_HEAL_AURAS
 // FUNCTION: Activates Auras when their host receives a healing effect.
 //           Passes the attempted healing amount before Maximum HP capping.
-//           Returns whether at least one Aura successfully triggered.
+//           Logs every Aura that successfully triggers.
+//
+// ARGUMENTS: _ref_target is the Beast receiving the healing effect.
+//            _val_heal_effect is the qualifying healing-effect amount.
+// RETURNS: True when at least one Aura successfully triggers; otherwise false.
 //
 //===============================================================================//
+
 function scr_status_trigger_heal_auras(_ref_target,_val_heal_effect){
 
+	//----------------//
+	//VALIDATE TARGET//
+	//----------------//
 	if (!instance_exists(_ref_target)){
 		return false;
 	}
@@ -16,16 +24,16 @@ function scr_status_trigger_heal_auras(_ref_target,_val_heal_effect){
 		return false;
 	}
 
+	if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+		return false;
+	}
+
 	var _flag_triggered = false;
 
-	//------------------------//
-	//CHECK HOSTED AURA LIST//
-	//------------------------//
-	for (
-		var _it_status = ds_list_size(_ref_target._list_statuses) - 1;
-		_it_status >= 0;
-		_it_status--
-	){
+	//==================//
+	//CHECK HOSTED AURAS//
+	//==================//
+	for (var _it_status = ds_list_size(_ref_target._list_statuses) - 1;_it_status >= 0;_it_status--){
 
 		var _ref_status = ds_list_find_value(_ref_target._list_statuses,_it_status);
 
@@ -45,6 +53,12 @@ function scr_status_trigger_heal_auras(_ref_target,_val_heal_effect){
 			continue;
 		}
 
+		//----------------//
+		//SNAPSHOT AURA//
+		//----------------//
+		var _str_status_name = _ref_status._str_status_name;
+		var _ref_status_host = _ref_status._ref_host;
+
 		//--------------//
 		//TRIGGER AURA//
 		//--------------//
@@ -56,7 +70,16 @@ function scr_status_trigger_heal_auras(_ref_target,_val_heal_effect){
 		);
 
 		if (_flag_aura_triggered){
+
 			_flag_triggered = true;
+
+			scr_debug_log_battle_trigger(
+				_str_status_name,
+				_ref_status_host,
+				_ref_target,
+				"HEALING EFFECT: " + string(_val_heal_effect),
+				"SCR_STATUS_TRIGGER_HEAL_AURAS"
+			);
 		}
 	}
 

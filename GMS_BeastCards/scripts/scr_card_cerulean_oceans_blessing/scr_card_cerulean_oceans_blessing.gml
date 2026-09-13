@@ -4,45 +4,29 @@
 // FUNCTION: Resolves Ocean's Blessing.
 //           Heals every living allied Beast.
 //
+// ARGUMENTS: _stct_card is the Ocean's Blessing card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
 function scr_card_cerulean_oceans_blessing(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
+	//================//
 	//GET ALLIED TEAM//
-	//----------------//
-	var _list_allies =
-		undefined;
+	//================//
+	var _list_allies = scr_battle_get_target_team_list(_ref_caster);
 
-	if (_ref_caster._str_team == "PLAYER"){
-
-		_list_allies =
-			obj_battle_player_controller._list_beasts_alive;
-	}
-	else if (_ref_caster._str_team == "ENEMY"){
-
-		_list_allies =
-			obj_battle_enemy_controller._list_beasts_alive;
-	}
-
-	if (_list_allies == undefined){
+	if (_list_allies == undefined || !ds_exists(_list_allies,ds_type_list)){
 		return;
 	}
 
-	//----------------//
+	//================//
 	//HEAL ALL ALLIES//
-	//----------------//
-	for (
-		var _it_beast = 0;
-		_it_beast < ds_list_size(_list_allies);
-		_it_beast++
-	){
+	//================//
+	for (var _it_beast = 0;_it_beast < ds_list_size(_list_allies);_it_beast++){
 
-		var _ref_beast =
-			ds_list_find_value(
-				_list_allies,
-				_it_beast
-			);
+		var _ref_beast = ds_list_find_value(_list_allies,_it_beast);
 
 		if (!instance_exists(_ref_beast)){
 			continue;
@@ -57,5 +41,4 @@ function scr_card_cerulean_oceans_blessing(_stct_card,_ref_caster,_ref_target){
 			_ref_beast
 		);
 	}
-
 }

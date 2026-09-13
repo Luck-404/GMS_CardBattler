@@ -70,6 +70,41 @@ function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=t
 			);
 		}
 
+		//--------------------------//
+		//DEBUG REPOSITION BLOCKED//
+		//--------------------------//
+		var _str_locked_beasts = "";
+
+		if (!_flag_beast_a_can_reposition){
+			_str_locked_beasts = string_upper(_ref_beast_a._ref_unit._str_beast_name);
+		}
+
+		if (!_flag_beast_b_can_reposition){
+
+			if (_str_locked_beasts != ""){
+				_str_locked_beasts += ", ";
+			}
+
+			_str_locked_beasts += string_upper(_ref_beast_b._ref_unit._str_beast_name);
+		}
+
+		scr_debug_log(
+			"BATTLE",
+			"REPOSITION",
+			_ref_beast_a,
+			string_upper(_ref_beast_a._str_team) +
+			" POSITION SWAP BLOCKED" +
+			" | " +
+			string_upper(_ref_beast_a._ref_unit._str_beast_name) +
+			" <-> " +
+			string_upper(_ref_beast_b._ref_unit._str_beast_name) +
+			" | LOCKED: " + _str_locked_beasts,
+			"BATTLE",
+			"SCR_BATTLE_REPOSITION_TARGET"
+		);
+
+		return false;
+
 		return false;
 	}
 
@@ -207,6 +242,47 @@ function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=t
 			_ref_beast_b.y - 24 + irandom_range(-32,32)
 		);
 	}
+
+	#endregion
+
+	#region DEBUG
+
+	//----------------//
+	//GET SOURCE//
+	//----------------//
+	var _str_source = "SYSTEM";
+
+	if (
+		instance_exists(global.ref_cast_card) &&
+		is_struct(global.ref_cast_card._ref_card)
+	){
+		_str_source = string_upper(global.ref_cast_card._ref_card._str_card_name);
+	}
+
+	//----------------//
+	//LOG POSITION SWAP//
+	//----------------//
+	scr_debug_log(
+		"BATTLE",
+		"REPOSITION",
+		_ref_beast_a,
+		string_upper(_ref_beast_a._str_team) +
+		" POSITION SWAP | " +
+		string_upper(_ref_beast_a._ref_unit._str_beast_name) +
+		": " +
+		string(_val_beast_a_pos) +
+		" -> " +
+		string(_ref_beast_a._val_pos) +
+		" | " +
+		string_upper(_ref_beast_b._ref_unit._str_beast_name) +
+		": " +
+		string(_val_beast_b_pos) +
+		" -> " +
+		string(_ref_beast_b._val_pos) +
+		" | SOURCE: " + _str_source,
+		"BATTLE",
+		"SCR_BATTLE_REPOSITION_TARGET"
+	);
 
 	#endregion
 

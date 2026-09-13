@@ -1,25 +1,42 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_ITEM_HELD_SORCEROUS_GEM
+// SCRIPT: SCR_INVENTORY_ITEM_HELD_SORCEROUS_GEM
 // FUNCTION: Applies or removes Sorcerous Gem held item effects.
-//           EQUIP adds magical power.
-//           UNEQUIP removes the magical power bonus.
+//           EQUIP adds 20 Magical Power.
+//           UNEQUIP removes the Magical Power bonus.
+//
+// ARGUMENTS: _str_state is the held-item behavior state.
+//            _stct_item is the item struct and _stct_target_unit is the holder.
+// RETURNS: True when the requested behavior succeeds, otherwise false.
 //
 //===============================================================================//
-function scr_item_held_sorcerous_gem(_str_state,_stct_item,_stct_target_unit){
+
+function scr_inventory_item_held_sorcerous_gem(_str_state,_stct_item,_stct_target_unit){
+
+	//================//
+	//VALIDATE ITEM//
+	//================//
+	if (_stct_item == undefined){
+		return false;
+	}
 
 	if (_stct_target_unit == undefined){
 		return false;
 	}
 
-	switch(_str_state){
+	//================//
+	//HANDLE STATE//
+	//================//
+	switch (_str_state){
 
 		case "EQUIP":
+
 			_stct_target_unit._val_beast_mpow_stat += 20;
+
 			return true;
-		break;
 
 		case "UNEQUIP":
+
 			_stct_target_unit._val_beast_mpow_stat -= 20;
 
 			if (_stct_target_unit._val_beast_mpow_stat < 0){
@@ -27,7 +44,6 @@ function scr_item_held_sorcerous_gem(_str_state,_stct_item,_stct_target_unit){
 			}
 
 			return true;
-		break;
 	}
 
 	return false;

@@ -2,8 +2,8 @@
 //
 // SCRIPT: SCR_BATTLE_RECOVER_RANDOM_EXHAUSTED_CARD
 // FUNCTION: Recovers one random exhausted Card matching the requested color.
-//           Moves the selected Card from the player's Exhaust pile back into
-//           the battle Deck and returns its instance reference.
+//           Moves the selected Card from Exhaust back into the battle Deck,
+//           logs the recovery, and returns its instance reference.
 //
 // INPUT:    _str_color - Card color required for the recovery.
 // USES:     Player battle Exhaust and Deck lists and each Card's backing
@@ -92,6 +92,26 @@ function scr_battle_recover_random_exhausted_card(_str_color){
 	ds_list_add(_list_deck,_ref_recovered_card);
 
 	_ref_recovered_card._str_location = "DECK";
+
+	#endregion
+
+	#region DEBUG
+
+	//------------------//
+	//LOG CARD RECOVERY//
+	//------------------//
+	scr_debug_log(
+		"CARDS",
+		"RECOVER",
+		_ref_recovered_card._ref_card,
+		"PLAYER RECOVERED " + string_upper(_ref_recovered_card._ref_card._str_card_name) +
+		" FROM EXHAUST TO DECK" +
+		" | COLOR: " + string_upper(_str_color) +
+		" | DECK: " + string(ds_list_size(_list_deck)) +
+		" | EXHAUST: " + string(ds_list_size(_list_exhaust)),
+		"BATTLE",
+		"SCR_BATTLE_RECOVER_RANDOM_EXHAUSTED_CARD"
+	);
 
 	#endregion
 

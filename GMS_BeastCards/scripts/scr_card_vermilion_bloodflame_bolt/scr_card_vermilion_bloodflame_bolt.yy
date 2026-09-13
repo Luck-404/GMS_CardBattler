@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodflame_bolt",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodflame_bolt",
+  "parent":{
+    "name":"BLOODFLAME_BOLT",
+    "path":"folders/CARDS/VERMILION/BLOODFLAME_BOLT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

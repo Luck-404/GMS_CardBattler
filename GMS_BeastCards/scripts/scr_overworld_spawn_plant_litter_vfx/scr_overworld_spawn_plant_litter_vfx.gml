@@ -1,16 +1,38 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_TRIGGER_SCENE_FX_PLANT_LITTER
+// SCRIPT: SCR_OVERWORLD_SPAWN_VFX_PLANT_LITTER
 // FUNCTION: Spawns a small burst of drifting plant litter.
-//           Creates several randomized litter particles
-//           around the player for ambient scene effects.
+//           Creates several randomized litter particles around the player.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
 //
 //===============================================================================//
-function scr_trigger_scene_fx_plant_litter(){
-	//TRIGGER A FEW LEAVES
-	var _val_random_leaves = irandom_range(2,4);
-	//SPAWN THE LEAVES
-	for (var _it_leaf = 0; _it_leaf < _val_random_leaves; _it_leaf++){
-		var _ref_leaf = instance_create_layer(obj_player.x,obj_player.y-8,"ily_fx",obj_overworld_vfx_plant_litter);	
+
+function scr_overworld_spawn_vfx_plant_litter(){
+
+	//================//
+	//VALIDATE PLAYER//
+	//================//
+	if (!instance_exists(obj_player)){
+		return;
+	}
+
+	//================//
+	//ROLL LITTER COUNT//
+	//================//
+	var _ct_leaves = irandom_range(2,4);
+
+	//================//
+	//SPAWN LITTER//
+	//================//
+	for (var _it_leaf = 0; _it_leaf < _ct_leaves; _it_leaf++){
+
+		instance_create_layer(
+			obj_player.x,
+			obj_player.y - 8,
+			"ily_fx",
+			obj_overworld_vfx_plant_litter
+		);
 	}
 }

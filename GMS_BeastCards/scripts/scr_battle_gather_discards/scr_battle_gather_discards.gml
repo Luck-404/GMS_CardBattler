@@ -2,8 +2,8 @@
 //
 // SCRIPT: SCR_BATTLE_GATHER_DISCARDS
 // FUNCTION: Moves all Cards from the player's Discard pile back into the Deck.
-//           Resets their battle locations and positions, then shuffles the
-//           refreshed Deck.
+//           Resets their battle locations and positions, shuffles the Deck,
+//           and logs the completed discard reshuffle.
 //
 // USES:     Player battle Deck and Discard lists and the battle Deck position.
 //           Plays the shared Card shuffle sound when gathering begins.
@@ -19,6 +19,8 @@ function scr_battle_gather_discards(){
 	//---------//
 	var _list_deck = obj_battle_player_controller._list_battle_deck;
 	var _list_discard = obj_battle_player_controller._list_battle_discard;
+
+	var _ct_cards_gathered = ds_list_size(_list_discard);
 
 	#endregion
 
@@ -49,6 +51,28 @@ function scr_battle_gather_discards(){
 	//SHUFFLE DECK//
 	//--------------//
 	ds_list_shuffle(_list_deck);
+
+	#endregion
+
+	#region DEBUG
+
+	//------------------//
+	//LOG DECK SHUFFLE//
+	//------------------//
+	if (_ct_cards_gathered > 0){
+
+		scr_debug_log(
+			"CARDS",
+			"SHUFFLE",
+			undefined,
+			"PLAYER SHUFFLED " + string(_ct_cards_gathered) +
+			(_ct_cards_gathered == 1 ? " DISCARD" : " DISCARDS") +
+			" INTO DECK | DECK: " + string(ds_list_size(_list_deck)) +
+			" | DISCARD: " + string(ds_list_size(_list_discard)),
+			"BATTLE",
+			"SCR_BATTLE_GATHER_DISCARDS"
+		);
+	}
 
 	#endregion
 }

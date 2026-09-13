@@ -7,7 +7,8 @@
 //
 // INPUT:    _ref_target - Beast being checked for an ICEBREAKER condition.
 // USES:     Frozen and Frostform status lookup, Frozen status removal,
-//           battle VFX, popup feedback, and ICEBREAKER target context.
+//           battle VFX, popup feedback, ICEBREAKER target context,
+//           and battle-trigger debug logging.
 //
 //===============================================================================//
 
@@ -76,12 +77,39 @@ function scr_battle_trigger_icebreaker(_ref_target){
 
 	#region CONSUME FROZEN
 
+	//-----------------------------//
+	//GET ICEBREAKER FROZEN RESULT//
+	//-----------------------------//
+	var _str_frozen_result = "FROSTFORM";
+
 	//----------------------//
 	//CONSUME ACTUAL FROZEN//
 	//----------------------//
 	if (_ref_frozen != -1){
-		scr_status_cc_frozen("DEATH",_ref_frozen);
+
+		_str_frozen_result = "FROZEN CONSUMED";
+
+		scr_status_cc_frozen(
+			"DEATH",
+			_ref_frozen
+		);
 	}
+
+	#endregion
+
+	#region DEBUG TRIGGER
+
+	//------------------//
+	//LOG ICEBREAKER//
+	//------------------//
+	scr_debug_log_battle_trigger(
+		"ICEBREAKER",
+		global.ref_caster_beast,
+		_ref_target,
+		_str_frozen_result +
+		" | DIRECT DAMAGE: 2X",
+		"SCR_BATTLE_TRIGGER_ICEBREAKER"
+	);
 
 	#endregion
 

@@ -1,42 +1,41 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_GLACIAL_ERUPTION
-// FUNCTION: Resolves the Glacial Eruption card effect.
+// FUNCTION: Resolves Glacial Eruption.
 //           Deals linear magical damage to the selected target
 //           and its adjacent enemies.
 //           Freezes the surviving center target.
+//
+// ARGUMENTS: _stct_card is the Glacial Eruption card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
 //
 //===============================================================================//
 
 function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
+	//================//
 	//VALIDATE TARGET//
-	//----------------//
+	//================//
 	if (!instance_exists(_ref_target)){
 		return;
 	}
 
-	//-----------------//
+	//=================//
 	//GET AOE-3 TARGETS//
-	//-----------------//
+	//=================//
 	var _arr_targets = [
 		scr_battle_get_left_target(_ref_target),
 		_ref_target,
 		scr_battle_get_right_target(_ref_target)
 	];
 
-	//------------//
+	//================//
 	//DEAL DAMAGE//
-	//------------//
-	for (
-		var _it_target = 0;
-		_it_target < array_length(_arr_targets);
-		_it_target++
-	){
+	//================//
+	for (var _it_target = 0;_it_target < array_length(_arr_targets);_it_target++){
 
-		var _ref_affected_target =
-			_arr_targets[_it_target];
+		var _ref_affected_target = _arr_targets[_it_target];
 
 		if (!instance_exists(_ref_affected_target)){
 			continue;
@@ -55,26 +54,18 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 		);
 	}
 
-	//--------------------//
+	//====================//
 	//FREEZE CENTER TARGET//
-	//--------------------//
+	//====================//
 	if (
 		instance_exists(_ref_target) &&
 		_ref_target._val_cur_hp > 0
 	){
+		var _ref_original_target = global.ref_target_beast;
+		global.ref_target_beast = _ref_target;
 
-		var _ref_original_target =
-			global.ref_target_beast;
+		scr_status_apply_cc("FROZEN");
 
-		global.ref_target_beast =
-			_ref_target;
-
-		scr_status_apply_cc(
-			"FROZEN"
-		);
-
-		global.ref_target_beast =
-			_ref_original_target;
+		global.ref_target_beast = _ref_original_target;
 	}
-
 }

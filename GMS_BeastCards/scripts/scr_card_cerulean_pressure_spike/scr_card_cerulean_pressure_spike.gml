@@ -1,45 +1,42 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_PRESSURE_SPIKE
-// FUNCTION: Resolves the Pressure Spike card effect.
+// FUNCTION: Resolves Pressure Spike.
 //           Deals linear magical damage to the selected target.
 //           Deals 25% additional damage if the target has no Armor.
 //
+// ARGUMENTS: _stct_card is the Pressure Spike card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
-function scr_card_cerulean_pressure_spike(
-	_stct_card,
-	_ref_caster,
-	_ref_target
-){
+function scr_card_cerulean_pressure_spike(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
+	//================//
 	//VALIDATE TARGET//
-	//----------------//
+	//================//
 	if (!instance_exists(_ref_target)){
 		return;
 	}
 
-	//----------------//
+	//================//
 	//GET BASE DAMAGE//
-	//----------------//
-	var _val_damage =
-		_stct_card._val_card_magnitude;
+	//================//
+	var _val_damage = _stct_card._val_card_magnitude;
 
-	//---------------------//
+	//=====================//
 	//CHECK TARGET'S ARMOR//
-	//---------------------//
+	//=====================//
 	if (_ref_target._val_armor <= 0){
-
 		_val_damage *= 1.25;
 	}
 
-	//------------//
+	//================//
 	//DEAL DAMAGE//
-	//------------//
+	//================//
 	scr_battle_damage_target(
 		_val_damage,
 		_ref_target
 	);
-
 }

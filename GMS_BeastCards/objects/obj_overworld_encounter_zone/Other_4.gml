@@ -1,9 +1,12 @@
 //===============================================================================//
 //
-// ROOM START: OBJ_BATTLE_ZONE
-// FUNCTION: Gives each battle zone a chance to spawn a visible wild beast.
-//           Wild beasts use this zone as their home leash and encounter pool.
+// ROOM START: OBJ_OVERWORLD_ENCOUNTER_ZONE
+// FUNCTION: Gives the encounter zone a chance to spawn a visible wild Beast.
+//           Uses this zone as the Beast's home leash and encounter pool.
 //
 //===============================================================================//
 
-scr_spawn_world_beast_from_zone(self);
+//================//
+//SPAWN WILD BEAST//
+//================//
+scr_overworld_spawn_wild_beast_from_zone(self);

@@ -1,24 +1,36 @@
 //===============================================================================//
 //
-// DRAW: OBJ_DECOR_PARENT
-// FUNCTION:	Draws a shared ground shadow beneath decor objects
-//				Fades decorations when overlapping the player
-//				Renders common decoration visuals for child objects
+// DRAW: OBJ_OVERWORLD_DECOR_PARENT
+// FUNCTION: Draws a shared ground shadow beneath decor objects.
+//           Fades decorations while overlapping the player.
+//           Preserves normal child decor drawing behavior.
 //
 //===============================================================================//
 
-//—------------------------------------------------------------------------------//
-// DRAW SHADOW
-//—------------------------------------------------------------------------------//
-draw_sprite_ext(spr_overworld_decor_shadow,image_index,x,y,_val_shadow_scalar,_val_shadow_scalar,0,c_white,1);
+//================//
+//DRAW SHADOW//
+//================//
+draw_sprite_ext(
+	spr_overworld_decor_shadow,
+	0,
+	x,
+	y,
+	_val_shadow_scale,
+	_val_shadow_scale,
+	0,
+	c_white,
+	1
+);
 
-//—------------------------------------------------------------------------------//
-// ADJUST OPACITY WHEN TOUCHING PLAYER
-//—------------------------------------------------------------------------------//
-if (instance_place(x,y-12,obj_player)){	//MAKE DULL WHEN TOUCHING PLAYER
-	draw_sprite_ext(sprite_index,0,x,y,1,1,0,c_white,0.75);
-}
-else { //ELSE DRAW NORMALLY
-	draw_self();	
-}
+//================//
+//DRAW DECOR//
+//================//
+if (instance_place(x,y - 12,obj_player) != noone){
 
+	draw_set_alpha(0.75);
+	draw_self();
+	draw_set_alpha(1);
+}
+else{
+	draw_self();
+}

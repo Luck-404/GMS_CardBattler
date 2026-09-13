@@ -2,15 +2,16 @@
 //
 // SCRIPT: SCR_BATTLE_DRAW_SPECIFIC_CARD
 // FUNCTION: Draws one specified battle Card instance from the player's draw pile.
-//           Moves that exact Card from Deck to Hand and refreshes hand layout.
+//           Moves that exact Card from Deck to Hand, refreshes hand layout,
+//           and logs the completed specific draw and its source.
 //
-// INPUT:    _ref_card - Specific battle Card instance requested from the Deck.
-// USES:     Player battle Deck and Hand lists and the shared hand-repositioning
-//           system.
+// INPUTS:   _ref_card - Specific battle Card instance requested from the Deck.
+//           _str_reason - Context that requested the specific draw.
+// USES:     Player battle Deck and Hand lists and shared hand repositioning.
 //
 //===============================================================================//
 
-function scr_battle_draw_specific_card(_ref_card){
+function scr_battle_draw_specific_card(_ref_card,_str_reason="SPECIFIC"){
 
 	#region VALIDATION
 
@@ -18,6 +19,10 @@ function scr_battle_draw_specific_card(_ref_card){
 	//VALIDATE CARD//
 	//---------------//
 	if (!instance_exists(_ref_card)){
+		return false;
+	}
+
+	if (!is_struct(_ref_card._ref_card)){
 		return false;
 	}
 
@@ -65,6 +70,39 @@ function scr_battle_draw_specific_card(_ref_card){
 	//PLAY SOUND//
 	//-----------//
 	audio_play_sound(snd_battle_card_draw,0,false);
+
+	#endregion
+
+	#region DEBUG
+
+	//----------------//
+	//LOG SPECIFIC DRAW//
+	//----------------//
+	_str_reason = string_upper(_str_reason);
+
+	var _str_draw_message =
+		"PLAYER DREW " +
+		string_upper(_ref_card._ref_card._str_card_name);
+
+	if (_str_reason == "TUTOR"){
+		_str_draw_message =
+			"PLAYER TUTORED " +
+			string_upper(_ref_card._ref_card._str_card_name) +
+			" FROM DECK";
+	}
+
+	_str_draw_message +=
+		" | HAND: " + string(ds_list_size(_list_hand)) +
+		" | DECK: " + string(ds_list_size(_list_deck));
+
+	scr_debug_log(
+		"CARDS",
+		"TUTOR",
+		_ref_card._ref_card,
+		_str_draw_message,
+		"BATTLE",
+		"SCR_BATTLE_DRAW_SPECIFIC_CARD"
+	);
 
 	#endregion
 

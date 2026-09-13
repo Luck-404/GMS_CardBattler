@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_char_threshold",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_char_threshold",
+  "parent":{
+    "name":"CHAR",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/CHAR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

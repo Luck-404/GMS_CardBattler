@@ -1,94 +1,89 @@
 //===============================================================================//
 //
 // CREATE: OBJ_BATTLE_STATUS
-// FUNCTION: Initializes a battle status instance.
-//           Stores lifetime, command state, script callback, host reference,
-//           display data, stack count, and trigger timing.
+// FUNCTION: Initializes a battle Status instance.
+//           Defines shared lifetime, ownership, callback, presentation,
+//           stacking, cleanse, restriction, and trigger defaults.
 //
 //===============================================================================//
 
-//---------//
-//VARIABLES//
-//---------//
+//================//
+//STATUS IDENTITY//
+//================//
+_str_status_type = "DEFAULT";
+_str_status_name = "NONE";
+_str_status_desc = "NONE";
 
-//-------------------//
-//SOURCE REQUIREMENTS//
-//-------------------//
-_flag_status_requires_live_source_minion = false;
-
-// STATE
-_val_status_lifetime = 3;
-_val_status_lifetime_max = 3;
-
-_flag_status_stackable = false;
-_flag_status_infinite = false;
-
-_str_status_command = "WAIT";
-
-// SCRIPT
+_spr_status = undefined;
 _scr_status = undefined;
 
-// HOST / LINK
+//================//
+//HOST / OWNERSHIP//
+//================//
 _ref_host = undefined;
 _ref_status_target = undefined;
 _ref_source_minion = undefined;
 
-//----------------//
-//CC RESTRICTIONS//
-//----------------//
-_flag_status_cc_immunity = false;
+_str_team = undefined;
 
-//----------------//
-//DODGE MODIFIERS//
-//----------------//
-_flag_status_ignore_dodge = false;
+_flag_status_requires_live_source_minion = false;
 
-//-----------------------//
-//PERSISTENT PRESENTATION//
-//-----------------------//
-_ref_persistent_vfx = undefined;
+//================//
+//STATUS LIFETIME//
+//================//
+_val_status_lifetime = 3;
+_val_status_lifetime_max = 3;
 
-_val_persistent_audio = -1;
+_flag_status_infinite = false;
+_str_status_command = "WAIT";
 
-// STATUS DATA
-_str_status_type = "DEFAULT";
-_str_status_name = "NONE";
-_str_status_desc = "NONE";
-_spr_status = undefined;
-
-//----------------------//
-//MOVEMENT RESTRICTIONS//
-//----------------------//
-_flag_status_prevent_reposition = false;
-
-//------//
-//AURA//
-//------//
-_str_aura_scope = undefined;   // SELF, TEAMWIDE, GLOBAL
-_str_aura_trigger = undefined; // HEALED, future trigger types
-
-//----------------//
-//STATUS CLEANSE//
-//----------------//
-_flag_status_uncleansable = false;
-
-//------------------//
-//STATUS MAGNITUDES//
-//------------------//
+//================//
+//STATUS STACKING//
+//================//
 _ct_status_stacks = 1;
 
+_flag_status_stackable = false;
+
+//===================//
+//STATUS MAGNITUDES//
+//===================//
 _val_status_magnitude = 0;
 _val_status_damage = 0;
 
-//---------//
-//TRIGGER//
-//---------//
+//================//
+//STATUS CLEANSE//
+//================//
+_flag_status_uncleansable = false;
+
+//================//
+//TRIGGER TIMING//
+//================//
 _str_trigger_region = "START"; // START, END, or undefined
+_str_buff_trigger = undefined;
 
-//----//
-//INIT//
-//----//
+//================//
+//AURA SETTINGS//
+//================//
+_str_aura_scope = undefined;   // SELF, TEAMWIDE, GLOBAL
+_str_aura_trigger = undefined; // HEALED, future trigger types
 
-//-------//
-//METHODS//
-//-------//
+//===================//
+//CC RESTRICTIONS//
+//===================//
+_flag_status_cc_immunity = false;
+
+//===================//
+//DODGE MODIFIERS//
+//===================//
+_flag_status_ignore_dodge = false;
+
+//=======================//
+//MOVEMENT RESTRICTIONS//
+//=======================//
+_flag_status_prevent_reposition = false;
+
+//=========================//
+//PERSISTENT PRESENTATION//
+//=========================//
+_ref_persistent_vfx = undefined;
+_val_persistent_audio = -1;

@@ -7,20 +7,21 @@
 //
 //===============================================================================//
 
-//----------//
-// DRAW NPC //
-//----------//
+//================//
+//DRAW NPC//
+//================//
 draw_self();
 
-//----------------------//
-// INTERACTION HIGHLIGHT//
-//----------------------//
+//================//
+//INTERACTION HIGHLIGHT//
+//================//
 if (
 	_stct_npc != undefined &&
 	_stct_npc._flag_interactable &&
 	_flag_player_nearby &&
 	!_flag_triggered
 ){
+
 	draw_set_colour(c_white);
 
 	draw_rectangle(
@@ -45,13 +46,11 @@ if (
 	draw_set_valign(fa_top);
 }
 
-//------------------//
-// INTERACTING NAME //
-//------------------//
-if (
-	_stct_npc != undefined &&
-	_flag_triggered
-){
+//================//
+//INTERACTING NAME//
+//================//
+if (_stct_npc != undefined && _flag_triggered){
+
 	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_white);
 	draw_set_halign(fa_center);

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_status_cleanse_negative_stacks",
   "parent":{
-    "name":"CORE",
-    "path":"folders/BATTLE/STATUSES/CORE.yy",
+    "name":"CLEANSE",
+    "path":"folders/BATTLE/STATUSES/CLEANSE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

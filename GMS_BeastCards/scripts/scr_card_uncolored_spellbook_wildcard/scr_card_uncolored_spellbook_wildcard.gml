@@ -1,18 +1,23 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_UNCOLORED_SPELLBOOK_WILDCARD
-// FUNCTION: Resolves the Spellbook Wildcard card effect.
-//           Applies five randomly selected Bleed or Burn damage-over-time effects.
-//           Plays the associated animation and sound effects.
+// FUNCTION: Resolves Spellbook Wildcard.
+//           Applies 5 randomly selected damage-over-time effects from the
+//           available DoT pool.
+//
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
 //
 //===============================================================================//
+
 function scr_card_uncolored_spellbook_wildcard(_stct_card,_ref_caster,_ref_target){
 
-//---------------//
-//DISH OUT 5 DOTS//
-//---------------//
-repeat (5){
-	var _dot = choose("BLEED","BURN","POISON","VENOM","FROSTBURN","STORMSTRUCK","FROSTBITE");
-	scr_status_apply_dot(_dot);
-}
+	//================//
+	//DISH OUT 5 DOTS//
+	//================//
+	repeat (5){
+		var _str_dot = choose("BLEED","BURN","POISON","VENOM","FROSTBURN","STORMSTRUCK","FROSTBITE");
+		scr_status_apply_dot(_str_dot);
+	}
 }

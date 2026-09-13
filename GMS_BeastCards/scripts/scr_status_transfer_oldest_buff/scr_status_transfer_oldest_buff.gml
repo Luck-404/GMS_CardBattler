@@ -1,10 +1,10 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_transfer_oldest_buff
+// SCRIPT: SCR_STATUS_TRANSFER_OLDEST_BUFF
 // FUNCTION: Transfers the oldest Buff from one Beast to another.
-//           Preserves the existing status instance, stacks, and lifetime.
+//           Preserves the existing Status instance, stacks, and lifetime.
 //           Rebinds host-dependent bonuses to the new Beast.
-//           Source-Min​​ion Buffs cannot be transferred.
+//           Source-Minion Buffs cannot be transferred.
 //
 //===============================================================================//
 
@@ -39,22 +39,22 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 		return false;
 	}
 
-	//==================//
+	if (!ds_exists(_ref_source._list_statuses,ds_type_list)){
+		return false;
+	}
+
+	if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+		return false;
+	}
+
+	//=================//
 	//GET OLDEST BUFF//
-	//==================//
+	//=================//
 	var _ref_buff = undefined;
 
-	for (
-		var _it_status = 0;
-		_it_status < ds_list_size(_ref_source._list_statuses);
-		_it_status++
-	){
+	for (var _it_status = 0;_it_status < ds_list_size(_ref_source._list_statuses);_it_status++){
 
-		var _ref_status =
-			ds_list_find_value(
-				_ref_source._list_statuses,
-				_it_status
-			);
+		var _ref_status = ds_list_find_value(_ref_source._list_statuses,_it_status);
 
 		if (!instance_exists(_ref_status)){
 			continue;
@@ -64,8 +64,7 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 			continue;
 		}
 
-		_ref_buff =
-			_ref_status;
+		_ref_buff = _ref_status;
 
 		break;
 	}
@@ -94,7 +93,10 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 		Anchor Stone, Blooming Sprite, and future Minion-sourced
 		Buffs cannot be separated from their source Minion.
 	*/
-	if (instance_exists(_ref_buff._ref_source_minion)){
+	if (
+		variable_instance_exists(_ref_buff,"_ref_source_minion") &&
+		instance_exists(_ref_buff._ref_source_minion)
+	){
 
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
@@ -108,8 +110,7 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 		return false;
 	}
 
-	var _str_buff_name =
-		_ref_buff._str_status_name;
+	var _str_buff_name = _ref_buff._str_status_name;
 
 	//========================//
 	//CHECK TARGET DUPLICATE//
@@ -118,13 +119,9 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 		Do not create duplicate instances of one Buff ID.
 
 		Many existing helpers use scr_status_check() and assume
-		one status instance per Buff name.
+		one Status instance per Buff name.
 	*/
-	var _ref_existing_buff =
-		scr_status_check(
-			_str_buff_name,
-			_ref_target
-		);
+	var _ref_existing_buff = scr_status_check(_str_buff_name,_ref_target);
 
 	if (_ref_existing_buff != -1){
 
@@ -140,29 +137,32 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 		return false;
 	}
 
-	//============================//
-	//REMOVE OLD HOST CONTRIBUTION//
-	//============================//
-	scr_status_transfer_buff_host_effects(
-		"REMOVE",
-		_ref_buff,
-		_ref_source,
-		_ref_target
-	);
-
-	//========================//
-	//REMOVE FROM SOURCE LIST//
-	//========================//
-	var _it_source_status =
-		ds_list_find_index(
-			_ref_source._list_statuses,
-			_ref_buff
-		);
+	//=====================//
+	//FIND SOURCE STATUS//
+	//=====================//
+	var _it_source_status = ds_list_find_index(_ref_source._list_statuses,_ref_buff);
 
 	if (_it_source_status == -1){
 		return false;
 	}
 
+	//=============================//
+	//REMOVE OLD HOST CONTRIBUTION//
+	//=============================//
+	if (
+		!scr_status_transfer_buff_host_effects(
+			"REMOVE",
+			_ref_buff,
+			_ref_source,
+			_ref_target
+		)
+	){
+		return false;
+	}
+
+	//========================//
+	//REMOVE FROM SOURCE LIST//
+	//========================//
 	ds_list_delete(
 		_ref_source._list_statuses,
 		_it_source_status
@@ -171,19 +171,14 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 	//================//
 	//CHANGE HOST//
 	//================//
-	_ref_buff._ref_host =
-		_ref_target;
+	_ref_buff._ref_host = _ref_target;
+	_ref_buff._str_status_command = "WAIT";
 
-	_ref_buff._str_status_command =
-		"WAIT";
-
-	//------------------//
+	//-------------------//
 	//MOVE PERSISTENT VFX//
-	//------------------//
+	//-------------------//
 	if (instance_exists(_ref_buff._ref_persistent_vfx)){
-
-		_ref_buff._ref_persistent_vfx._ref_anchor =
-			_ref_target;
+		_ref_buff._ref_persistent_vfx._ref_anchor = _ref_target;
 	}
 
 	//=====================//
@@ -194,19 +189,55 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 		_ref_buff
 	);
 
-	//==========================//
+	//============================//
 	//APPLY NEW HOST CONTRIBUTION//
-	//==========================//
-	scr_status_transfer_buff_host_effects(
+	//============================//
+	var _flag_applied = scr_status_transfer_buff_host_effects(
 		"APPLY",
 		_ref_buff,
 		_ref_source,
 		_ref_target
 	);
 
-	//-------------------//
+	//=================//
+	//ROLL BACK FAILURE//
+	//=================//
+	if (!_flag_applied){
+
+		var _it_target_status = ds_list_find_index(_ref_target._list_statuses,_ref_buff);
+
+		if (_it_target_status != -1){
+			ds_list_delete(_ref_target._list_statuses,_it_target_status);
+		}
+
+		_ref_buff._ref_host = _ref_source;
+
+		if (instance_exists(_ref_buff._ref_persistent_vfx)){
+			_ref_buff._ref_persistent_vfx._ref_anchor = _ref_source;
+		}
+
+		ds_list_insert(
+			_ref_source._list_statuses,
+			_it_source_status,
+			_ref_buff
+		);
+
+		scr_status_transfer_buff_host_effects(
+			"APPLY",
+			_ref_buff,
+			_ref_target,
+			_ref_source
+		);
+
+		scr_status_reposition(_ref_source);
+		scr_status_reposition(_ref_target);
+
+		return false;
+	}
+
+	//----------------------//
 	//REFRESH STATUS ICONS//
-	//-------------------//
+	//----------------------//
 	scr_status_reposition(_ref_source);
 	scr_status_reposition(_ref_target);
 

@@ -3,7 +3,8 @@
 // SCRIPT: SCR_BATTLE_CAST_CARD
 // FUNCTION: Resolves the currently selected battle Card.
 //           Handles Whiteout, casting statuses, Traps, Echo repetitions,
-//           successful-cast triggers, Mana cost, Card destination, and cleanup.
+//           Stormstruck action triggers, successful-cast triggers,
+//           Mana cost, Card destination, and cleanup.
 //
 // USES:     global.ref_cast_card, global.ref_caster_beast, selected target
 //           globals, Card metadata, Statuses, Traps, VFX, and player Mana.
@@ -21,12 +22,32 @@ function scr_battle_cast_card(){
 	var _ref_card = global.ref_cast_card;
 
 	if (!instance_exists(_ref_card)){
+
+		scr_debug_log(
+			"CARDS",
+			"CAST",
+			undefined,
+			"CARD CAST FAILED | INVALID CAST CARD INSTANCE",
+			"ERROR",
+			"SCR_BATTLE_CAST_CARD"
+		);
+
 		return;
 	}
 
 	var _stct_card = _ref_card._ref_card;
 
 	if (!is_struct(_stct_card)){
+
+		scr_debug_log(
+			"CARDS",
+			"CAST",
+			_ref_card,
+			"CARD CAST FAILED | INVALID CARD STRUCT",
+			"ERROR",
+			"SCR_BATTLE_CAST_CARD"
+		);
+
 		return;
 	}
 
@@ -37,6 +58,16 @@ function scr_battle_cast_card(){
 	var _ref_target = global.ref_target_beast;
 
 	if (!instance_exists(_ref_caster)){
+
+		scr_debug_log(
+			"CARDS",
+			"CAST",
+			_stct_card,
+			"CARD CAST FAILED | INVALID CASTER | CARD: " + string_upper(_stct_card._str_card_name),
+			"ERROR",
+			"SCR_BATTLE_CAST_CARD"
+		);
+
 		return;
 	}
 
@@ -50,6 +81,92 @@ function scr_battle_cast_card(){
 	if (_stct_card._str_card_range == "CORPSE" || _stct_card._str_card_range == "CORPSE_OPTIONAL"){
 		_ref_target = global.ref_target_corpse;
 	}
+
+	//================//
+	//DEBUG CARD CAST//
+	//================//
+	var _str_cast_team = string_upper(_ref_caster._str_team);
+	var _str_card_name = string_upper(_stct_card._str_card_name);
+
+	var _str_caster_name = "UNKNOWN";
+	var _val_caster_level = 0;
+
+	if (is_struct(_ref_caster._ref_unit)){
+
+		_str_caster_name = string_upper(_ref_caster._ref_unit._str_beast_name);
+		_val_caster_level = _ref_caster._ref_unit._val_beast_level;
+	}
+
+	var _str_target = "NONE";
+
+	//----------------//
+	//GLOBAL TARGET//
+	//----------------//
+	if (_ref_target == "GLOBAL"){
+		_str_target = "GLOBAL";
+	}
+
+	//----------------//
+	//BEAST TARGET//
+	//----------------//
+	else if (
+		instance_exists(_ref_target) &&
+		variable_instance_exists(_ref_target,"_ref_unit") &&
+		is_struct(_ref_target._ref_unit) &&
+		variable_struct_exists(_ref_target._ref_unit,"_str_beast_name")
+	){
+
+		var _str_target_team = string_upper(_ref_target._str_team);
+		var _str_target_name = string_upper(_ref_target._ref_unit._str_beast_name);
+		var _val_target_level = _ref_target._ref_unit._val_beast_level;
+
+		_str_target =
+			_str_target_team + " " +
+			_str_target_name +
+			" (LVL " + string(_val_target_level) + ")";
+
+		if (
+			_stct_card._str_card_range == "CORPSE" ||
+			_stct_card._str_card_range == "CORPSE_OPTIONAL"
+		){
+			_str_target += " [CORPSE]";
+		}
+	}
+
+	//----------------//
+	//CARD TARGET//
+	//----------------//
+	else if (
+		instance_exists(_ref_target) &&
+		variable_instance_exists(_ref_target,"_ref_card") &&
+		is_struct(_ref_target._ref_card) &&
+		variable_struct_exists(_ref_target._ref_card,"_str_card_name")
+	){
+
+		var _str_target_card_team = string_upper(_ref_target._str_team);
+		var _str_target_card_name = string_upper(_ref_target._ref_card._str_card_name);
+
+		_str_target =
+			_str_target_card_team +
+			" CARD " +
+			_str_target_card_name;
+	}
+
+	//----------------//
+	//CAST MESSAGE//
+	//----------------//
+	scr_debug_log(
+		"CARDS",
+		"CAST",
+		_ref_caster,
+		_str_cast_team + " " +
+		_str_caster_name +
+		" (LVL " + string(_val_caster_level) + ")" +
+		" CAST " + _str_card_name +
+		" | TARGET: " + _str_target,
+		"BATTLE",
+		"SCR_BATTLE_CAST_CARD"
+	);
 
 	//----------------//
 	//CARD RESOLUTION//
@@ -100,6 +217,20 @@ function scr_battle_cast_card(){
 
 			_flag_whiteout_failed = true;
 
+			scr_debug_log(
+				"CARDS",
+				"CAST",
+				_ref_caster,
+				_str_cast_team + " " +
+				_str_caster_name +
+				" (LVL " + string(_val_caster_level) + ")" +
+				" FAILED TO CAST " + _str_card_name +
+				" | WHITEOUT: " + string(_val_whiteout_roll) +
+				"/" + string(_val_whiteout_chance),
+				"BATTLE",
+				"SCR_BATTLE_CAST_CARD"
+			);
+
 			//-------//
 			//WHIFF//
 			//-------//
@@ -145,9 +276,9 @@ function scr_battle_cast_card(){
 			scr_battle_vfx_cast(_ref_caster);
 		}
 
-		//---------------//
+		//===============//
 		//CHECK FOR ECHO//
-		//---------------//
+		//===============//
 		var _ref_echo_status = scr_status_check("ECHO",global.list_statuses);
 
 		var _flag_echo_active = (
@@ -158,15 +289,18 @@ function scr_battle_cast_card(){
 			_stct_card._str_card_effect_type != "ECHO"
 		);
 
+		var _ct_echo_stacks = 0;
 		var _ct_card_resolutions = 1;
 
 		if (_flag_echo_active){
-			_ct_card_resolutions += _ref_echo_status._ct_status_stacks;
+
+			_ct_echo_stacks = _ref_echo_status._ct_status_stacks;
+			_ct_card_resolutions += _ct_echo_stacks;
 		}
 
-		//----------------//
+		//================//
 		//ECHO FEEDBACK//
-		//----------------//
+		//================//
 		if (!_flag_attack_cancelled && _flag_echo_active){
 
 			scr_battle_vfx(
@@ -182,7 +316,7 @@ function scr_battle_cast_card(){
 			);
 		}
 
-	#endregion
+		#endregion
 
 		#region CARD RESOLUTION
 
@@ -190,6 +324,8 @@ function scr_battle_cast_card(){
 		//RESOLVE CASTS//
 		//================//
 		if (!_flag_attack_cancelled){
+
+			var _flag_stormstruck_triggered = false;
 
 			for (var _it_cast = 0; _it_cast < _ct_card_resolutions; _it_cast++){
 
@@ -208,6 +344,19 @@ function scr_battle_cast_card(){
 
 				if (_flag_cast_cancelled){
 					continue;
+				}
+
+				//---------------------//
+				//TRIGGER STORMSTRUCK//
+				//---------------------//
+				if (!_flag_stormstruck_triggered){
+
+					scr_status_trigger_stormstruck_action(_ref_caster);
+					_flag_stormstruck_triggered = true;
+
+					if (!instance_exists(_ref_caster) || _ref_caster._val_cur_hp <= 0){
+						break;
+					}
 				}
 
 				//-------------------//
@@ -230,7 +379,7 @@ function scr_battle_cast_card(){
 				//TRIGGER ON ATTACK BUFFS//
 				//------------------------//
 				if (_stct_card._str_card_type == "ATTACK"){
-					scr_status_trigger_on_attack_buffs(_ref_caster,_ref_target,_stct_card);
+					scr_status_trigger_attack_statuses(_ref_caster,_ref_target,_stct_card);
 				}
 
 				global.ref_icebreaker_target = undefined;
@@ -238,11 +387,30 @@ function scr_battle_cast_card(){
 				_flag_card_resolved = true;
 			}
 
-			//--------------//
+			//================//
 			//CONSUME ECHO//
-			//--------------//
+			//================//
 			if (_flag_echo_active){
-				scr_status_buff_echo("CONSUME",_ref_echo_status);
+
+				var _flag_echo_consumed = scr_status_buff_echo(
+					"CONSUME",
+					_ref_echo_status
+				);
+
+				//------------------//
+				//DEBUG ECHO TRIGGER//
+				//------------------//
+				if (_flag_echo_consumed){
+
+					scr_debug_log_battle_trigger(
+						"ECHO",
+						_ref_caster,
+						_ref_target,
+						"STACKS CONSUMED: " + string(_ct_echo_stacks) +
+						" | CARD RESOLUTIONS: " + string(_ct_card_resolutions),
+						"SCR_BATTLE_CAST_CARD"
+					);
+				}
 			}
 		}
 
@@ -264,7 +432,6 @@ function scr_battle_cast_card(){
 
 		scr_battle_trigger_card_cast_traps(_ref_caster,_ref_target,_stct_card);
 		scr_status_trigger_card_cast_auras(_ref_caster,_stct_card);
-		scr_status_trigger_stormstruck_action(_ref_caster);
 	}
 
 	#endregion
@@ -275,7 +442,36 @@ function scr_battle_cast_card(){
 	//SPEND MANA//
 	//------------//
 	if (_ref_caster._str_team == "PLAYER"){
-		obj_battle_player_controller._val_cur_mana -= _val_mana_cost;
+
+		var _val_mana_before_cost = obj_battle_player_controller._val_cur_mana;
+
+		obj_battle_player_controller._val_cur_mana =
+			max(
+				0,
+				obj_battle_player_controller._val_cur_mana -
+				_val_mana_cost
+			);
+
+		//----------------//
+		//DEBUG MANA COST//
+		//----------------//
+		if (_val_mana_cost > 0){
+
+			scr_debug_log(
+				"BATTLE",
+				"MANA",
+				_stct_card,
+				"PLAYER SPENT " + string(_val_mana_cost) +
+				" MANA ON " + string_upper(_stct_card._str_card_name) +
+				" | " + string(_val_mana_before_cost) +
+				"/" + string(obj_battle_player_controller._val_max_mana) +
+				" -> " +
+				string(obj_battle_player_controller._val_cur_mana) +
+				"/" + string(obj_battle_player_controller._val_max_mana),
+				"BATTLE",
+				"SCR_BATTLE_CAST_CARD"
+			);
+		}
 	}
 
 	#endregion

@@ -1,43 +1,42 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_SLEEPING_POLLEN
-// FUNCTION: Resolves the Sleeping Pollen card effect.
+// FUNCTION: Resolves Sleeping Pollen.
 //           Applies Sleep for 2 rounds to the selected enemy Beast
 //           and its adjacent living Beasts.
 //
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
+//
 //===============================================================================//
+
 function scr_card_viridian_sleeping_pollen(_stct_card,_ref_caster,_ref_target){
 
 	if (!instance_exists(_ref_target)){
 		return;
 	}
 
-	//-----------------//
+	//=================//
 	//GET AOE-3 TARGETS//
-	//-----------------//
+	//=================//
 	var _arr_targets = [
 		scr_battle_get_left_target(_ref_target),
 		_ref_target,
 		scr_battle_get_right_target(_ref_target)
 	];
 
-	//----------------------//
+	//=====================//
 	//STORE ORIGINAL TARGET//
-	//----------------------//
-	var _ref_original_target =
-		global.ref_target_beast;
+	//=====================//
+	var _ref_original_target = global.ref_target_beast;
 
-	//--------------//
+	//================//
 	//APPLY SLEEP//
-	//--------------//
-	for (
-		var _it_target = 0;
-		_it_target < array_length(_arr_targets);
-		_it_target++
-	){
+	//================//
+	for (var _it_target = 0; _it_target < array_length(_arr_targets); _it_target++){
 
-		var _ref_affected_target =
-			_arr_targets[_it_target];
+		var _ref_affected_target = _arr_targets[_it_target];
 
 		if (!instance_exists(_ref_affected_target)){
 			continue;
@@ -47,25 +46,12 @@ function scr_card_viridian_sleeping_pollen(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//----------------//
-		//SWAP TARGET//
-		//----------------//
-		global.ref_target_beast =
-			_ref_affected_target;
-
-		//-------------//
-		//APPLY SLEEP//
-		//-------------//
-		scr_status_apply_cc(
-			"SLEEP",
-			2
-		);
-
+		global.ref_target_beast = _ref_affected_target;
+		scr_status_apply_cc("SLEEP",2);
 	}
 
-	//----------------//
+	//================//
 	//RESTORE TARGET//
-	//----------------//
-	global.ref_target_beast =
-		_ref_original_target;
+	//================//
+	global.ref_target_beast = _ref_original_target;
 }

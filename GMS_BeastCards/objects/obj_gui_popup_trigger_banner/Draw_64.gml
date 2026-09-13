@@ -1,25 +1,24 @@
 //===============================================================================//
 //
-// DRAW GUI: OBJ_POPUP_TRIGGER_BANNER
+// DRAW GUI: OBJ_GUI_POPUP_TRIGGER_BANNER
 // FUNCTION: Draws the trigger banner in the lower-right screen corner.
 //           Wraps trigger text inside the 150x50 banner area.
 //           Destroys the banner after its lifespan expires.
 //
 //===============================================================================//
 
-//----//
+//================//
 //DRAW//
-//----//
-draw_sprite(spr_gui_popup_trigger_banner,_val_image_index,x,y);
+//================//
+draw_sprite(spr_gui_popup_trigger_banner,_it_image_index,x,y);
 
-//----//
+//================//
 //TEXT//
-//----//
+//================//
 if (_str_text != "DEFAULT"){
 
 	var _val_text_x = x - 145;
 	var _val_text_y = y - 20;
-
 	var _val_text_w = 135;
 
 	draw_set_colour(c_white);
@@ -39,9 +38,9 @@ if (_str_text != "DEFAULT"){
 	draw_set_valign(fa_top);
 }
 
-//---------//
+//================//
 //LIFESPAN//
-//---------//
+//================//
 _ct_life--;
 
 if (_ct_life <= 0){

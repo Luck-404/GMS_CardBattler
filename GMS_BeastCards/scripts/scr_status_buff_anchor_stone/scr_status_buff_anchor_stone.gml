@@ -2,63 +2,66 @@
 //
 // SCRIPT: SCR_STATUS_BUFF_ANCHOR_STONE
 // FUNCTION: Handles one Anchor Stone's Immovable contribution.
-//           Each status belongs to one exact source Minion.
+//           Each Status belongs to one exact source Minion.
 //           Multiple Anchor Stones and other reposition locks coexist.
 //
 //===============================================================================//
 
-function scr_status_buff_anchor_stone(
-	_str_tag,
-	_ref_status,
-	_ref_source_minion=undefined,
-	_ref_target=undefined
-){
+function scr_status_buff_anchor_stone(_str_tag,_ref_status,_ref_source_minion=undefined,_ref_target=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
+			//----------------//
+			//VALIDATE SOURCE//
+			//----------------//
 			if (!instance_exists(_ref_source_minion)){
 				return undefined;
 			}
 
+			if (_ref_source_minion._val_cur_hp <= 0){
+				return undefined;
+			}
+
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
+				return undefined;
+			}
+
+			if (_ref_target._val_cur_hp <= 0){
+				return undefined;
+			}
+
+			if (_ref_target._str_team != _ref_source_minion._str_team){
+				return undefined;
+			}
+
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
 				return undefined;
 			}
 
 			//--------------------------------//
 			//CHECK THIS EXACT SOURCE MINION//
 			//--------------------------------//
-			for (
-				var _it_status = 0;
-				_it_status < ds_list_size(_ref_target._list_statuses);
-				_it_status++
-			){
+			for (var _it_status = 0;_it_status < ds_list_size(_ref_target._list_statuses);_it_status++){
 
-				var _ref_existing_status =
-					ds_list_find_value(
-						_ref_target._list_statuses,
-						_it_status
-					);
+				var _ref_existing_status = ds_list_find_value(_ref_target._list_statuses,_it_status);
 
 				if (!instance_exists(_ref_existing_status)){
 					continue;
 				}
 
-				if (
-					_ref_existing_status._str_status_name !=
-					"ANCHOR_STONE"
-				){
+				if (_ref_existing_status._str_status_name != "ANCHOR_STONE"){
 					continue;
 				}
 
-				if (
-					_ref_existing_status._ref_source_minion !=
-					_ref_source_minion
-				){
+				if (_ref_existing_status._ref_source_minion != _ref_source_minion){
 					continue;
 				}
 
@@ -68,17 +71,16 @@ function scr_status_buff_anchor_stone(
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
-					_ref_target.x,
-					_ref_target.y,
-					"ily_status",
-					obj_battle_status
-				);
+			var _ref_new_status = instance_create_layer(
+				_ref_target.x,
+				_ref_target.y,
+				"ily_status",
+				obj_battle_status
+			);
 
-			//---------------------//
+			//-------------------//
 			//INFINITE LIFETIME//
-			//---------------------//
+			//-------------------//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				-1,
@@ -89,45 +91,24 @@ function scr_status_buff_anchor_stone(
 			//-------------//
 			//STATUS DATA//
 			//-------------//
-			_ref_new_status._scr_status =
-				scr_status_buff_anchor_stone;
+			_ref_new_status._scr_status = scr_status_buff_anchor_stone;
 
-			_ref_new_status._ref_host =
-				_ref_target;
+			_ref_new_status._ref_host = _ref_target;
+			_ref_new_status._ref_source_minion = _ref_source_minion;
 
-			_ref_new_status._ref_source_minion =
-				_ref_source_minion;
+			_ref_new_status._str_status_type = "BUFF";
+			_ref_new_status._str_status_name = "ANCHOR_STONE";
+			_ref_new_status._str_status_desc = "IMMOVABLE WHILE SOURCE ANCHOR STONE LIVES";
 
-			_ref_new_status._str_status_type =
-				"BUFF";
+			_ref_new_status._spr_status = spr_status_buff_anchor_stone;
 
-			_ref_new_status._str_status_name =
-				"ANCHOR_STONE";
+			_ref_new_status._ct_status_stacks = 1;
 
-			_ref_new_status._str_status_desc =
-				"IMMOVABLE WHILE SOURCE ANCHOR STONE LIVES";
+			_ref_new_status._flag_status_uncleansable = true;
+			_ref_new_status._flag_status_prevent_reposition = true;
+			_ref_new_status._flag_status_requires_live_source_minion = true;
 
-			/*
-				Use the same sprite as your existing
-				generic Immovable Buff here.
-			*/
-			_ref_new_status._spr_status =
-				spr_status_buff_anchor_stone;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._flag_status_uncleansable =
-				true;
-
-			_ref_new_status._flag_status_prevent_reposition =
-				true;
-
-			_ref_new_status._flag_status_requires_live_source_minion =
-				true;
-
-			_ref_new_status._str_trigger_region =
-				undefined;
+			_ref_new_status._str_trigger_region = undefined;
 
 			//----------------//
 			//REGISTER STATUS//
@@ -137,18 +118,15 @@ function scr_status_buff_anchor_stone(
 				_ref_new_status
 			);
 
-			scr_status_reposition(
-				_ref_target
-			);
+			scr_status_reposition(_ref_target);
 
 			return _ref_new_status;
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

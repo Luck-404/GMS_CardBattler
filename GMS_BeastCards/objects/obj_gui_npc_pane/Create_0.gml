@@ -3,132 +3,135 @@
 // CREATE: OBJ_GUI_NPC_PANE
 // FUNCTION: Initializes the NPC interaction GUI.
 //           Stores NPC references, menu options, layout, and dialogue state.
-//           Defines menu navigation, dialogue scrolling, and closing helpers.
+//           Defines menu navigation, dialogue, trading, and closing helpers.
 //
 //===============================================================================//
 
-//---------//
+//================//
 //VARIABLES//
-//---------//
+//================//
 #region VARIABLES
 
-	//-----------//
-	// REFERENCES
-	//-----------//
-	_ref_npc = undefined;
-	_stct_npc = undefined;
-	
-	_flag_transfer_to_market = false;
-	
-	//----------//
-	// GUI STATE
-	//----------//
-	_str_npc_gui_mode = "MENU";
+//----------------//
+//REFERENCES//
+//----------------//
+_ref_npc = undefined;
+_stct_npc = undefined;
 
-	_arr_options = [];
+_flag_transfer_to_market = false;
 
-	_it_option_selected = 0;
-	_it_option_hovered = -1;
+//----------------//
+//GUI STATE//
+//----------------//
+_str_type = "NPC";
+_str_npc_gui_mode = "MENU";
 
-	//----------//
-	// DIALOGUE
-	//----------//
-	_arr_dialogue = [];
+_arr_options = [];
 
-	_it_dialogue_line = 0;
+_it_option_selected = 0;
+_it_option_hovered = -1;
 
-	_str_dialogue_full = "";
-	_str_dialogue_visible = "";
+//----------------//
+//DIALOGUE//
+//----------------//
+_arr_dialogue = [];
 
-	_ct_dialogue_char = 0;
-	_ct_dialogue_tick = 0;
+_it_dialogue_line = 0;
 
-	_val_dialogue_speed = 2;
-	_val_dialogue_tick_max = 1;
+_str_dialogue_full = "";
+_str_dialogue_visible = "";
 
-	_flag_dialogue_line_complete = false;
-	_flag_dialogue_finished = false;
+_it_dialogue_char = 0;
+_ct_dialogue_tick = 0;
 
-	//------------//
-	// PANE LAYOUT
-	//------------//
-	_val_pane_w = 420;
-	_val_pane_h = 420;
+_ct_dialogue_chars_per_tick = 2;
+_ct_dialogue_tick_max = 1;
 
-	_val_pane_left = x - (_val_pane_w * 0.5);
-	_val_pane_top = y - (_val_pane_h * 0.5);
+_flag_dialogue_line_complete = false;
+_flag_dialogue_finished = false;
 
-	_val_header_x = _val_pane_left + 24;
-	_val_header_y = _val_pane_top + 24;
+//----------------//
+//PANE LAYOUT//
+//----------------//
+_val_pane_w = 420;
+_val_pane_h = 420;
 
-	_val_option_x = _val_pane_left + 40;
-	_val_option_start_y = _val_pane_top + 130;
+_val_pane_left = x - (_val_pane_w * 0.5);
+_val_pane_top = y - (_val_pane_h * 0.5);
 
-	_val_option_w = _val_pane_w - 80;
-	_val_option_h = 48;
-	_val_option_gap = 12;
+_val_header_x = _val_pane_left + 24;
+_val_header_y = _val_pane_top + 24;
 
-	_val_dialogue_x = _val_pane_left + 32;
-	_val_dialogue_y = _val_pane_top + 130;
-	_val_dialogue_w = _val_pane_w - 64;
+_val_option_x = _val_pane_left + 40;
+_val_option_start_y = _val_pane_top + 130;
 
-	//------//
-	// INPUT
-	//------//
-	_flag_clicked = false;
-	_ct_cooldown = 10;
+_val_option_w = _val_pane_w - 80;
+_val_option_h = 48;
+_val_option_gap = 12;
 
-	//--------//
-	// DISPLAY
-	//--------//
-	depth = -10000;
+_val_dialogue_x = _val_pane_left + 32;
+_val_dialogue_y = _val_pane_top + 130;
+_val_dialogue_w = _val_pane_w - 64;
+
+//----------------//
+//INPUT//
+//----------------//
+_flag_clicked = false;
+_ct_cooldown = 10;
 
 #endregion
 
-//----//
+//================//
 //INIT//
-//----//
+//================//
 #region INIT
 
-	global.ref_active_gui = self;
+depth = -10000;
+
+global.ref_active_gui = self;
 
 #endregion
 
-//-------//
+//================//
 //METHODS//
-//-------//
+//================//
 #region METHODS
-//—------------------------------------------------------------------------------//
-// hscr_open_trade
-// FUNCTION: Closes the NPC menu pane and opens the generic market pane.
-//           Passes NPC stock, UID, and NPC instance into the market system.
-//—------------------------------------------------------------------------------//
-hscr_open_trade = function(){
 
-	if (_ref_npc == undefined){
-		return;
-	}
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_OPEN_TRADE
+// FUNCTION: Transfers the active NPC interaction into the generic Market pane.
+//           Passes vendor stock, NPC UID, and NPC reference.
+//           Keeps NPC interaction ownership active until Market cleanup.
+//
+// ARGUMENTS: None.
+// RETURNS: True when the Market opens; otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_open_trade = function(){
 
+	//================//
+	//VALIDATE NPC//
+	//================//
 	if (!instance_exists(_ref_npc)){
-		return;
+		return false;
 	}
 
 	if (_stct_npc == undefined){
-		return;
+		return false;
 	}
 
 	if (!_stct_npc._flag_can_trade){
-		return;
+		return false;
 	}
 
+	//================//
+	//VALIDATE STOCK//
+	//================//
 	if (
-		!is_array(
-			_stct_npc._arr_trade_stock
-		) ||
-		array_length(
-			_stct_npc._arr_trade_stock
-		) <= 0
+		!is_array(_stct_npc._arr_trade_stock) ||
+		array_length(_stct_npc._arr_trade_stock) <= 0
 	){
+
 		audio_play_sound(
 			snd_gui_error,
 			0,
@@ -140,92 +143,169 @@ hscr_open_trade = function(){
 			60
 		);
 
-		return;
-	}
-
-	//--------------------//
-	// CREATE MARKET GUI  //
-	//--------------------//
-	var _ref_market_gui =
-		instance_create_layer(
-			x,
-			y,
-			"ily_fx",
-			obj_gui_market_pane
+		scr_debug_log(
+			"NPC",
+			"TRADE",
+			_ref_npc,
+			"NPC TRADE BLOCKED" +
+			" | NPC: " +
+			string_upper(_stct_npc._str_npc_name) +
+			" | UID: " +
+			string(_ref_npc._uid_npc) +
+			" | REASON: NO TRADE STOCK",
+			"WARNING",
+			"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_OPEN_TRADE"
 		);
 
-	_ref_market_gui._str_market_type =
-		"NPC";
+		return false;
+	}
 
-	_ref_market_gui._str_market_uid =
+	//================//
+	//CREATE MARKET//
+	//================//
+	var _ref_market_gui = instance_create_layer(
+		display_get_gui_width() * 0.5,
+		display_get_gui_height() * 0.5,
+		"ily_fx",
+		obj_gui_market_pane
+	);
+
+	if (!instance_exists(_ref_market_gui)){
+
+		scr_debug_log(
+			"NPC",
+			"TRADE",
+			_ref_npc,
+			"NPC TRADE FAILED" +
+			" | NPC: " +
+			string_upper(_stct_npc._str_npc_name) +
+			" | UID: " +
+			string(_ref_npc._uid_npc) +
+			" | REASON: MARKET GUI CREATION FAILED",
+			"ERROR",
+			"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_OPEN_TRADE"
+		);
+
+		return false;
+	}
+
+	//================//
+	//CONFIGURE MARKET//
+	//================//
+	var _str_market_uid =
 		"NPC_VENDOR_" +
 		string(_ref_npc._uid_npc);
 
-	_ref_market_gui._ref_market_owner =
-		_ref_npc;
+	_ref_market_gui._str_market_type = "NPC";
+	_ref_market_gui._str_market_uid = _str_market_uid;
 
-	_ref_market_gui._ref_npc =
-		_ref_npc;
+	_ref_market_gui._ref_market_owner = _ref_npc;
+	_ref_market_gui._ref_npc = _ref_npc;
 
-	_ref_market_gui._arr_external_stock =
-		_stct_npc._arr_trade_stock;
+	_ref_market_gui._arr_external_stock = _stct_npc._arr_trade_stock;
+	_ref_market_gui._flag_return_to_npc = true;
 
-	_ref_market_gui._flag_return_to_npc =
-		true;
+	var _flag_market_initialized =
+		_ref_market_gui.hscr_gui_market_init();
 
-	_ref_market_gui.hscr_market_init();
+	if (!_flag_market_initialized){
+
+		instance_destroy(_ref_market_gui);
+
+		return false;
+	}
 
 	global.ref_active_gui = _ref_market_gui;
 
-	/*
-		The interaction is being transferred to the market pane.
-		The NPC pane Cleanup event must not close the interaction.
-	*/
-
-	show_debug_message(
-		"NPC TRADE TRANSFER | UID: " +
+	//================//
+	//DEBUG TRADE//
+	//================//
+	scr_debug_log(
+		"NPC",
+		"TRADE",
+		_ref_npc,
+		"NPC TRADE OPENED" +
+		" | NPC: " +
+		string_upper(_stct_npc._str_npc_name) +
+		" | UID: " +
 		string(_ref_npc._uid_npc) +
-		" | NPC REF: " +
-		string(_ref_npc) +
-		" | MARKET NPC REF: " +
-		string(_ref_market_gui._ref_npc)
+		" | MARKET UID: " +
+		string_upper(_str_market_uid) +
+		" | STOCK DEFINITIONS: " +
+		string(array_length(_stct_npc._arr_trade_stock)),
+		"INFO",
+		"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_OPEN_TRADE"
 	);
 
+	//================//
+	//TRANSFER CONTROL//
+	//================//
 	_flag_transfer_to_market = true;
 
 	instance_destroy();
+
+	return true;
 };
 
-//—------------------------------------------------------------------------------//
-// hscr_npc_init
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_INIT
 // FUNCTION: Initializes the NPC pane after receiving an NPC reference.
-//           Retrieves NPC data and builds the available interaction options.
-//—------------------------------------------------------------------------------//
-hscr_npc_init = function(){
+//           Retrieves NPC data and builds available interaction options.
+//
+// ARGUMENTS: None.
+// RETURNS: True when initialization succeeds; otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_init = function(){
 
+	//================//
+	//VALIDATE NPC//
+	//================//
 	if (!instance_exists(_ref_npc)){
 
-		show_debug_message(
-			"NPC GUI ERROR: INVALID NPC REFERENCE"
+		scr_debug_log(
+			"NPC",
+			"GUI",
+			self,
+			"NPC PANE INITIALIZATION FAILED" +
+			" | REASON: INVALID NPC REFERENCE",
+			"ERROR",
+			"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_INIT"
 		);
 
 		instance_destroy();
-		return;
+
+		return false;
 	}
 
+	//================//
+	//GET NPC DATA//
+	//================//
 	_stct_npc = _ref_npc._stct_npc;
 
 	if (_stct_npc == undefined){
 
-		show_debug_message(
-			"NPC GUI ERROR: NPC STRUCT IS UNDEFINED"
+		scr_debug_log(
+			"NPC",
+			"GUI",
+			_ref_npc,
+			"NPC PANE INITIALIZATION FAILED" +
+			" | UID: " +
+			string(_ref_npc._uid_npc) +
+			" | REASON: NPC DATA UNDEFINED",
+			"ERROR",
+			"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_INIT"
 		);
 
 		instance_destroy();
-		return;
+
+		return false;
 	}
 
-	hscr_build_option_array();
+	//================//
+	//BUILD MENU//
+	//================//
+	hscr_gui_npc_build_options();
 
 	if (array_length(_arr_options) > 0){
 		_it_option_selected = 0;
@@ -233,15 +313,20 @@ hscr_npc_init = function(){
 	else{
 		_it_option_selected = -1;
 	}
+
+	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_build_option_array
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_BUILD_OPTIONS
 // FUNCTION: Builds the NPC interaction menu from enabled interaction flags.
 //           Only includes interactions supported by the active NPC.
-//—------------------------------------------------------------------------------//
-hscr_build_option_array = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_build_options = function(){
 
 	_arr_options = [];
 
@@ -266,12 +351,15 @@ hscr_build_option_array = function(){
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_is_mouse_in_rect
-// FUNCTION: Returns whether the GUI mouse is inside a supplied rectangle.
-//—------------------------------------------------------------------------------//
-hscr_is_mouse_in_rect = function(
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_IS_MOUSE_IN_RECT
+// FUNCTION: Checks whether the GUI mouse position is inside a rectangle.
+//
+// ARGUMENTS: Mouse x/y and rectangle x1/y1/x2/y2 coordinates.
+// RETURNS: True when the mouse is inside the rectangle.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_is_mouse_in_rect = function(
 	_val_mouse_x,
 	_val_mouse_y,
 	_val_x1,
@@ -288,13 +376,16 @@ hscr_is_mouse_in_rect = function(
 	);
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_update_click_cooldown
-// FUNCTION: Updates the GUI click cooldown.
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_UPDATE_CLICK_COOLDOWN
+// FUNCTION: Updates the NPC GUI input cooldown.
 //           Prevents one input from triggering multiple GUI actions.
-//—------------------------------------------------------------------------------//
-hscr_update_click_cooldown = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_update_click_cooldown = function(){
 
 	if (_ct_cooldown > 0){
 		_ct_cooldown--;
@@ -306,13 +397,16 @@ hscr_update_click_cooldown = function(){
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_select_previous_option
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_SELECT_PREVIOUS_OPTION
 // FUNCTION: Moves selection to the previous NPC interaction option.
 //           Wraps to the final option when moving above the first.
-//—------------------------------------------------------------------------------//
-hscr_select_previous_option = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_select_previous_option = function(){
 
 	var _ct_options = array_length(_arr_options);
 
@@ -329,13 +423,16 @@ hscr_select_previous_option = function(){
 	audio_play_sound(snd_gui_press,0,false);
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_select_next_option
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_SELECT_NEXT_OPTION
 // FUNCTION: Moves selection to the next NPC interaction option.
-//           Wraps to the first option when moving beyond the final option.
-//—------------------------------------------------------------------------------//
-hscr_select_next_option = function(){
+//           Wraps to the first option after the final option.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_select_next_option = function(){
 
 	var _ct_options = array_length(_arr_options);
 
@@ -352,18 +449,28 @@ hscr_select_next_option = function(){
 	audio_play_sound(snd_gui_press,0,false);
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_start_dialogue
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_START_DIALOGUE
 // FUNCTION: Starts the active NPC's stored dialogue.
-//           Resets dialogue progress and loads the first dialogue line.
-//—------------------------------------------------------------------------------//
-hscr_start_dialogue = function(){
+//           Resets dialogue progress, loads the first line, and logs the
+//           conversation start.
+//
+// ARGUMENTS: None.
+// RETURNS: True when dialogue starts; otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_start_dialogue = function(){
 
+	//================//
+	//VALIDATE NPC//
+	//================//
 	if (_stct_npc == undefined){
-		return;
+		return false;
 	}
 
+	//================//
+	//LOAD DIALOGUE//
+	//================//
 	_arr_dialogue = _stct_npc._arr_npc_dialogue;
 
 	if (!is_array(_arr_dialogue)){
@@ -371,56 +478,75 @@ hscr_start_dialogue = function(){
 	}
 
 	if (array_length(_arr_dialogue) <= 0){
-
-		_arr_dialogue = [
-			"..."
-		];
+		_arr_dialogue = ["..."];
 	}
 
+	//================//
+	//START DIALOGUE//
+	//================//
 	_str_npc_gui_mode = "DIALOGUE";
 
 	_it_dialogue_line = 0;
-
 	_flag_dialogue_finished = false;
 
-	hscr_load_dialogue_line();
+	hscr_gui_npc_load_dialogue_line();
+
+	//================//
+	//DEBUG DIALOGUE//
+	//================//
+	scr_debug_log(
+		"NPC",
+		"DIALOGUE",
+		_ref_npc,
+		"DIALOGUE STARTED" +
+		" | NPC: " +
+		string_upper(_stct_npc._str_npc_name) +
+		" | UID: " +
+		string(_ref_npc._uid_npc) +
+		" | LINES: " +
+		string(array_length(_arr_dialogue)),
+		"INFO",
+		"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_START_DIALOGUE"
+	);
+
+	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_load_dialogue_line
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_LOAD_DIALOGUE_LINE
 // FUNCTION: Loads the current dialogue line.
 //           Resets visible text and character-scrolling progress.
-//—------------------------------------------------------------------------------//
-hscr_load_dialogue_line = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_load_dialogue_line = function(){
 
-	if (
-		_it_dialogue_line < 0 ||
-		_it_dialogue_line >= array_length(_arr_dialogue)
-	){
-		hscr_finish_dialogue();
+	if (_it_dialogue_line < 0 || _it_dialogue_line >= array_length(_arr_dialogue)){
+		hscr_gui_npc_finish_dialogue();
 		return;
 	}
 
-	_str_dialogue_full = string(
-		_arr_dialogue[_it_dialogue_line]
-	);
-
+	_str_dialogue_full = string(_arr_dialogue[_it_dialogue_line]);
 	_str_dialogue_visible = "";
 
-	_ct_dialogue_char = 0;
+	_it_dialogue_char = 0;
 	_ct_dialogue_tick = 0;
 
 	_flag_dialogue_line_complete = false;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_update_dialogue
-// FUNCTION: Reveals the current dialogue line one character at a time.
-//           Marks the line complete once the full text is visible.
-//—------------------------------------------------------------------------------//
-hscr_update_dialogue = function(){
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_UPDATE_DIALOGUE
+// FUNCTION: Reveals the current dialogue line over time.
+//           Marks the line complete when the full text is visible.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_update_dialogue = function(){
 
 	if (_str_npc_gui_mode != "DIALOGUE"){
 		return;
@@ -432,88 +558,116 @@ hscr_update_dialogue = function(){
 
 	_ct_dialogue_tick++;
 
-	if (_ct_dialogue_tick < _val_dialogue_tick_max){
+	if (_ct_dialogue_tick < _ct_dialogue_tick_max){
 		return;
 	}
 
 	_ct_dialogue_tick = 0;
 
-	_ct_dialogue_char += _val_dialogue_speed;
-
-	_ct_dialogue_char = min(
-		_ct_dialogue_char,
-		string_length(_str_dialogue_full)
-	);
+	_it_dialogue_char += _ct_dialogue_chars_per_tick;
+	_it_dialogue_char = min(_it_dialogue_char,string_length(_str_dialogue_full));
 
 	_str_dialogue_visible = string_copy(
 		_str_dialogue_full,
 		1,
-		_ct_dialogue_char
+		_it_dialogue_char
 	);
 
-	if (_ct_dialogue_char >= string_length(_str_dialogue_full)){
-
+	if (_it_dialogue_char >= string_length(_str_dialogue_full)){
 		_str_dialogue_visible = _str_dialogue_full;
 		_flag_dialogue_line_complete = true;
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_complete_dialogue_line
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_COMPLETE_DIALOGUE_LINE
 // FUNCTION: Immediately reveals the full current dialogue line.
-//           Used when the player advances while text is still scrolling.
-//—------------------------------------------------------------------------------//
-hscr_complete_dialogue_line = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_complete_dialogue_line = function(){
 
-	_ct_dialogue_char = string_length(
-		_str_dialogue_full
-	);
+	_it_dialogue_char = string_length(_str_dialogue_full);
 
 	_str_dialogue_visible = _str_dialogue_full;
-
 	_flag_dialogue_line_complete = true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_advance_dialogue
-// FUNCTION: Completes the current scrolling line or advances to the next line.
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_ADVANCE_DIALOGUE
+// FUNCTION: Completes the current scrolling line or advances to the next.
 //           Finishes dialogue after the final stored line.
-//—------------------------------------------------------------------------------//
-hscr_advance_dialogue = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_advance_dialogue = function(){
 
 	if (_str_npc_gui_mode != "DIALOGUE"){
 		return;
 	}
 
 	if (!_flag_dialogue_line_complete){
-
-		hscr_complete_dialogue_line();
-
+		hscr_gui_npc_complete_dialogue_line();
 		return;
 	}
 
 	_it_dialogue_line++;
 
 	if (_it_dialogue_line >= array_length(_arr_dialogue)){
-
-		hscr_finish_dialogue();
-
+		hscr_gui_npc_finish_dialogue();
 		return;
 	}
 
-	hscr_load_dialogue_line();
+	hscr_gui_npc_load_dialogue_line();
 };
 
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_FINISH_DIALOGUE
+// FUNCTION: Ends the conversation and returns to the NPC menu.
+//           Logs completion before clearing temporary dialogue state.
+//
+// ARGUMENTS: None.
+// RETURNS: True when dialogue finishes.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_finish_dialogue = function(){
 
-//—------------------------------------------------------------------------------//
-// hscr_finish_dialogue
-// FUNCTION: Ends the current conversation and returns to the NPC menu.
-//           Resets temporary dialogue state for the next conversation.
-//—------------------------------------------------------------------------------//
-hscr_finish_dialogue = function(){
+	//================//
+	//STORE DIALOGUE DATA//
+	//================//
+	var _ct_dialogue_lines = array_length(_arr_dialogue);
 
+	//================//
+	//DEBUG DIALOGUE//
+	//================//
+	if (
+		_stct_npc != undefined &&
+		instance_exists(_ref_npc)
+	){
+
+		scr_debug_log(
+			"NPC",
+			"DIALOGUE",
+			_ref_npc,
+			"DIALOGUE COMPLETED" +
+			" | NPC: " +
+			string_upper(_stct_npc._str_npc_name) +
+			" | UID: " +
+			string(_ref_npc._uid_npc) +
+			" | LINES: " +
+			string(_ct_dialogue_lines),
+			"INFO",
+			"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_FINISH_DIALOGUE"
+		);
+	}
+
+	//================//
+	//RESET DIALOGUE//
+	//================//
 	_flag_dialogue_finished = true;
 
 	_str_npc_gui_mode = "MENU";
@@ -525,22 +679,27 @@ hscr_finish_dialogue = function(){
 	_str_dialogue_full = "";
 	_str_dialogue_visible = "";
 
-	_ct_dialogue_char = 0;
+	_it_dialogue_char = 0;
 	_ct_dialogue_tick = 0;
 
 	_flag_dialogue_line_complete = false;
 
 	_flag_clicked = true;
 	_ct_cooldown = 10;
+
+	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_handle_dialogue_input
-// FUNCTION: Handles player input while dialogue is active.
-//           Allows mouse, E, Enter, or Space to complete or advance dialogue.
-//—------------------------------------------------------------------------------//
-hscr_handle_dialogue_input = function(){
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_HANDLE_DIALOGUE_INPUT
+// FUNCTION: Handles input while dialogue is active.
+//           Allows mouse, E, Enter, or Space to advance dialogue.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_handle_dialogue_input = function(){
 
 	if (_str_npc_gui_mode != "DIALOGUE"){
 		return;
@@ -550,29 +709,31 @@ hscr_handle_dialogue_input = function(){
 		return;
 	}
 
-	var _flag_advance = (
+	var _flag_advance =
 		mouse_check_button_pressed(mb_left) ||
 		keyboard_check_pressed(ord("E")) ||
 		keyboard_check_pressed(vk_enter) ||
-		keyboard_check_pressed(vk_space)
-	);
+		keyboard_check_pressed(vk_space);
 
 	if (_flag_advance){
 
 		_flag_clicked = true;
 		_ct_cooldown = 6;
 
-		hscr_advance_dialogue();
+		hscr_gui_npc_advance_dialogue();
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_draw_dialogue
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_DRAW_DIALOGUE
 // FUNCTION: Draws the active NPC dialogue line.
 //           Displays an advance indicator when the line is fully visible.
-//—------------------------------------------------------------------------------//
-hscr_draw_dialogue = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_draw_dialogue = function(){
 
 	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_white);
@@ -608,60 +769,125 @@ hscr_draw_dialogue = function(){
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_activate_option
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_ACTIVATE_OPTION
 // FUNCTION: Activates the selected NPC interaction option.
-//           Routes the pane into dialogue, quest, trade, or fight behavior.
-//—------------------------------------------------------------------------------//
-hscr_activate_option = function(_str_option){
+//           Routes into dialogue or trade.
+//           Reports Quest and Fight selections as currently unimplemented.
+//
+// ARGUMENTS: _str_option is the selected interaction option.
+// RETURNS: True when a supported option begins; otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_activate_option = function(_str_option){
 
+	//================//
+	//VALIDATE OPTION//
+	//================//
 	if (_str_option == undefined){
-		return;
+		return false;
 	}
 
-	audio_play_sound(snd_gui_press,0,false);
+	if (_stct_npc == undefined){
+		return false;
+	}
 
-	switch(_str_option){
+	audio_play_sound(
+		snd_gui_press,
+		0,
+		false
+	);
 
+	//================//
+	//ACTIVATE OPTION//
+	//================//
+	switch (_str_option){
+
+		//======//
+		//TALK//
+		//======//
 		case "TALK":
 
-			hscr_start_dialogue();
+			return hscr_gui_npc_start_dialogue();
 
-		break;
-
+		//=======//
+		//QUEST//
+		//=======//
 		case "QUEST":
 
-			show_debug_message(
-				"NPC GUI: QUEST NOT IMPLEMENTED | NPC: " +
-				string(_stct_npc._str_npc_name)
+			scr_debug_log(
+				"NPC",
+				"QUEST",
+				_ref_npc,
+				"NPC QUEST SELECTED" +
+				" | NPC: " +
+				string_upper(_stct_npc._str_npc_name) +
+				" | UID: " +
+				string(_ref_npc._uid_npc) +
+				" | STATUS: NOT IMPLEMENTED",
+				"WARNING",
+				"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_ACTIVATE_OPTION"
 			);
 
-		break;
+			return false;
 
+		//=======//
+		//TRADE//
+		//=======//
 		case "TRADE":
 
-			hscr_open_trade();
+			return hscr_gui_npc_open_trade();
 
-		break;
-
+		//=======//
+		//FIGHT//
+		//=======//
 		case "FIGHT":
 
-			show_debug_message(
-				"NPC GUI: FIGHT NOT IMPLEMENTED | NPC: " +
-				string(_stct_npc._str_npc_name)
+			scr_debug_log(
+				"NPC",
+				"FIGHT",
+				_ref_npc,
+				"NPC FIGHT SELECTED" +
+				" | NPC: " +
+				string_upper(_stct_npc._str_npc_name) +
+				" | UID: " +
+				string(_ref_npc._uid_npc) +
+				" | STATUS: NOT IMPLEMENTED",
+				"WARNING",
+				"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_ACTIVATE_OPTION"
 			);
 
-		break;
+			return false;
 	}
+
+	//================//
+	//UNKNOWN OPTION//
+	//================//
+	scr_debug_log(
+		"NPC",
+		"INTERACTION",
+		_ref_npc,
+		"UNKNOWN NPC OPTION" +
+		" | NPC: " +
+		string_upper(_stct_npc._str_npc_name) +
+		" | OPTION: " +
+		string_upper(_str_option),
+		"WARNING",
+		"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_ACTIVATE_OPTION"
+	);
+
+	return false;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_handle_menu_keyboard_input
-// FUNCTION: Handles keyboard navigation and selection while in menu mode.
-//—------------------------------------------------------------------------------//
-hscr_handle_menu_keyboard_input = function(){
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_HANDLE_MENU_INPUT
+// FUNCTION: Handles keyboard navigation and activation while in menu mode.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_handle_menu_input = function(){
 
 	if (_str_npc_gui_mode != "MENU"){
 		return;
@@ -672,24 +898,18 @@ hscr_handle_menu_keyboard_input = function(){
 	}
 
 	if (keyboard_check_pressed(vk_up)){
-		hscr_select_previous_option();
+		hscr_gui_npc_select_previous_option();
 	}
 
 	if (keyboard_check_pressed(vk_down)){
-		hscr_select_next_option();
+		hscr_gui_npc_select_next_option();
 	}
 
-	if (
-		keyboard_check_pressed(vk_enter) ||
-		keyboard_check_pressed(ord("E"))
-	){
-		if (
-			_it_option_selected >= 0 &&
-			_it_option_selected < array_length(_arr_options)
-		){
-			hscr_activate_option(
-				_arr_options[_it_option_selected]
-			);
+	if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("E"))){
+
+		if (_it_option_selected >= 0 && _it_option_selected < array_length(_arr_options)){
+
+			hscr_gui_npc_activate_option(_arr_options[_it_option_selected]);
 
 			_flag_clicked = true;
 			_ct_cooldown = 10;
@@ -697,90 +917,75 @@ hscr_handle_menu_keyboard_input = function(){
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_close_npc_pane
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_CLOSE
 // FUNCTION: Closes the NPC interaction pane.
 //           Unpauses gameplay, resumes NPC movement, and clears references.
-//—------------------------------------------------------------------------------//
-hscr_close_npc_pane = function(){
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_close = function(){
 
+	//----------------//
+	//RELEASE NPC//
+	//----------------//
 	if (instance_exists(_ref_npc)){
 
-		if (
-			variable_instance_exists(
-				_ref_npc,
-				"hscr_close_npc_interaction"
-			)
-		){
-			_ref_npc.hscr_close_npc_interaction();
+		if (variable_instance_exists(_ref_npc,"hscr_npc_close_interaction")){
+			_ref_npc.hscr_npc_close_interaction();
 		}
 		else{
 
 			_ref_npc._flag_triggered = false;
 
-			if (
-				_ref_npc._str_path_type == "PATH" &&
-				_ref_npc.path_index != -1
-			){
+			if (_ref_npc._str_path_type == "PATH" && _ref_npc.path_index != -1){
 				_ref_npc.path_speed = _ref_npc._val_move_speed;
 			}
 		}
 	}
 
+	//----------------//
+	//CLEAR STATE//
+	//----------------//
 	global.flag_pause = false;
 
-	if (
-		variable_global_exists("ref_interacting_npc") &&
-		global.ref_interacting_npc == _ref_npc
-	){
+	if (variable_global_exists("ref_interacting_npc") && global.ref_interacting_npc == _ref_npc){
 		global.ref_interacting_npc = undefined;
 	}
 
-	if (
-		variable_global_exists("ref_active_gui") &&
-		global.ref_active_gui == self
-	){
+	if (variable_global_exists("ref_active_gui") && global.ref_active_gui == self){
 		global.ref_active_gui = undefined;
 	}
 
 	instance_destroy();
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_draw_menu_option
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_DRAW_MENU_OPTION
 // FUNCTION: Draws one NPC interaction option.
-//           Displays mouse hover and keyboard selection consistently.
+//           Displays hover and keyboard selection consistently.
 //           Activates the exact option clicked by the player.
-//—------------------------------------------------------------------------------//
-hscr_draw_menu_option = function(
-	_str_option,
-	_it_option,
-	_val_mouse_x,
-	_val_mouse_y
-){
+//
+// ARGUMENTS: Option string, option index, and GUI mouse x/y.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_draw_menu_option = function(_str_option,_it_option,_val_mouse_x,_val_mouse_y){
 
 	var _val_box_x1 = _val_option_x;
-
-	var _val_box_y1 =
-		_val_option_start_y +
-		(_it_option * (_val_option_h + _val_option_gap));
+	var _val_box_y1 = _val_option_start_y + (_it_option * (_val_option_h + _val_option_gap));
 
 	var _val_box_x2 = _val_box_x1 + _val_option_w;
 	var _val_box_y2 = _val_box_y1 + _val_option_h;
 
-	var _flag_hover = (
-		_it_option_hovered == _it_option
-	);
+	var _flag_hover = (_it_option_hovered == _it_option);
+	var _flag_selected = (_it_option_selected == _it_option);
 
-	var _flag_selected = (
-		_it_option_selected == _it_option
-	);
-
-	//----------//
-	// OUTER BOX
-	//----------//
+	//----------------//
+	//OUTER BOX//
+	//----------------//
 	draw_set_colour(c_black);
 
 	draw_rectangle(
@@ -791,19 +996,16 @@ hscr_draw_menu_option = function(
 		false
 	);
 
-	//----------//
-	// INNER BOX
-	//----------//
+	//----------------//
+	//INNER BOX//
+	//----------------//
 	if (_flag_hover){
-
 		draw_set_colour(c_white);
 	}
 	else if (_flag_selected){
-
 		draw_set_colour(global.c_dk_gray);
 	}
 	else{
-
 		draw_set_colour(c_ltgray);
 	}
 
@@ -815,9 +1017,9 @@ hscr_draw_menu_option = function(
 		false
 	);
 
-	//-------------//
-	// OPTION TEXT
-	//-------------//
+	//----------------//
+	//OPTION TEXT//
+	//----------------//
 	draw_set_font(fnt_gui_medium);
 	draw_set_colour(c_black);
 
@@ -833,67 +1035,52 @@ hscr_draw_menu_option = function(
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 
-	//-------------//
-	// MOUSE CLICK
-	//-------------//
-	if (
-		_flag_hover &&
-		mouse_check_button_pressed(mb_left) &&
-		!_flag_clicked &&
-		_ct_cooldown <= 0
-	){
+	//----------------//
+	//MOUSE CLICK//
+	//----------------//
+	if (_flag_hover && mouse_check_button_pressed(mb_left) && !_flag_clicked && _ct_cooldown <= 0){
 
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 
 		_it_option_selected = _it_option;
 
-		hscr_activate_option(_str_option);
+		hscr_gui_npc_activate_option(_str_option);
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_draw_menu
+//-------------------------------------------------------------------------------//
+// HSCR_GUI_NPC_DRAW_MENU
 // FUNCTION: Determines the hovered NPC option before drawing the menu.
 //           Synchronizes mouse hover and keyboard selection.
-//           Draws all available NPC interaction options.
-//—------------------------------------------------------------------------------//
-hscr_draw_menu = function(
-	_val_mouse_x,
-	_val_mouse_y
-){
+//
+// ARGUMENTS: _val_mouse_x/_val_mouse_y are the GUI mouse coordinates.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_gui_npc_draw_menu = function(_val_mouse_x,_val_mouse_y){
 
 	_it_option_hovered = -1;
 
-	//—------------------------------------------------------------------------------//
-	// DETERMINE HOVERED OPTION BEFORE DRAWING
-	//—------------------------------------------------------------------------------//
-	for (
-		var _it_option = 0;
-		_it_option < array_length(_arr_options);
-		_it_option++
-	){
+	//----------------//
+	//DETERMINE HOVER//
+	//----------------//
+	for (var _it_option = 0; _it_option < array_length(_arr_options); _it_option++){
 
 		var _val_box_x1 = _val_option_x;
-
-		var _val_box_y1 =
-			_val_option_start_y +
-			(_it_option * (_val_option_h + _val_option_gap));
+		var _val_box_y1 = _val_option_start_y + (_it_option * (_val_option_h + _val_option_gap));
 
 		var _val_box_x2 = _val_box_x1 + _val_option_w;
 		var _val_box_y2 = _val_box_y1 + _val_option_h;
 
-		if (
-			hscr_is_mouse_in_rect(
-				_val_mouse_x,
-				_val_mouse_y,
-				_val_box_x1,
-				_val_box_y1,
-				_val_box_x2,
-				_val_box_y2
-			)
-		){
+		if (hscr_gui_npc_is_mouse_in_rect(
+			_val_mouse_x,
+			_val_mouse_y,
+			_val_box_x1,
+			_val_box_y1,
+			_val_box_x2,
+			_val_box_y2
+		)){
 			_it_option_hovered = _it_option;
 			_it_option_selected = _it_option;
 
@@ -901,16 +1088,12 @@ hscr_draw_menu = function(
 		}
 	}
 
-	//—------------------------------------------------------------------------------//
-	// DRAW OPTIONS
-	//—------------------------------------------------------------------------------//
-	for (
-		var _it_option = 0;
-		_it_option < array_length(_arr_options);
-		_it_option++
-	){
+	//----------------//
+	//DRAW OPTIONS//
+	//----------------//
+	for (var _it_option = 0; _it_option < array_length(_arr_options); _it_option++){
 
-		hscr_draw_menu_option(
+		hscr_gui_npc_draw_menu_option(
 			_arr_options[_it_option],
 			_it_option,
 			_val_mouse_x,
@@ -918,9 +1101,9 @@ hscr_draw_menu = function(
 		);
 	}
 
-	//—------------------------------------------------------------------------------//
-	// NO OPTIONS
-	//—------------------------------------------------------------------------------//
+	//----------------//
+	//NO OPTIONS//
+	//----------------//
 	if (array_length(_arr_options) <= 0){
 
 		draw_set_font(fnt_gui_small);

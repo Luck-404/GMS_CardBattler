@@ -1,151 +1,165 @@
 //===============================================================================//
 //
 // CREATE: OBJ_NPC
-// FUNCTION: Initializes an overworld NPC from its assigned NPC ID.
+// FUNCTION: Initializes an overworld NPC from its assigned NPC id.
 //           Loads NPC identity, visuals, interaction settings, and pathing data.
-//           Defines path start, pause, resume, and interaction helper scripts.
+//           Defines pathing and interaction helper methods.
 //
 //===============================================================================//
 
-//---------//
+//================//
 //VARIABLES//
-//---------//
+//================//
 #region VARIABLES
 
-	//----------//
-	// NPC DATA //
-	//----------//
-	_stct_npc = undefined;
+//----------------//
+//NPC DATA//
+//----------------//
+_stct_npc = undefined;
 
-	//---------//
-	// VISUALS //
-	//---------//
-	_spr_npc = undefined;
+//----------------//
+//VISUALS//
+//----------------//
+_spr_npc = undefined;
 
-	_flag_moving = false;
+_flag_moving = false;
 
-	_val_previous_x = x;
-	_val_previous_y = y;
+_val_previous_x = x;
+_val_previous_y = y;
 
-	//-------------//
-	// INTERACTION //
-	//-------------//
-	_flag_player_nearby = false;
-	_flag_triggered = false;
+//----------------//
+//INTERACTION//
+//----------------//
+_flag_player_nearby = false;
+_flag_triggered = false;
 
-	_ct_interaction_cooldown = 0;
+_ct_interaction_cooldown = 0;
 
-	_val_interaction_distance = 48;
+_val_interaction_distance = 48;
 
-	//---------//
-	// PATHING //
-	//---------//
-	_str_path_type = "NONE";
+//----------------//
+//PATHING//
+//----------------//
+_str_path_type = "NONE";
 
-	_path_npc = undefined;
+_path_npc = undefined;
 
-	_val_move_speed = 0;
-	_val_path_speed_stored = 0;
+_val_move_speed = 0;
+_val_path_speed_stored = 0;
 
-	_flag_path_started = false;
-	_flag_path_paused = false;
+_flag_path_started = false;
+_flag_path_paused = false;
 
 #endregion
 
-//----//
+//================//
 //INIT//
-//----//
+//================//
 #region INIT
 
-	//----------------//
-	// LOAD NPC DATA //
-	//----------------//
-	_stct_npc = scr_npc_get_info(_str_npc_id);
+//----------------//
+//LOAD NPC DATA//
+//----------------//
+_stct_npc = scr_npc_get_info(_str_npc_id);
 
-	if (_stct_npc == undefined){
+if (_stct_npc == undefined){
 
-		show_debug_message(
-			"NPC ERROR: NPC INFO NOT FOUND | ID: " +
-			string(_str_npc_id) +
-			" | UID: " +
-			string(_uid_npc)
-		);
+	scr_debug_log(
+		"NPC",
+		"INIT",
+		self,
+		"NPC info not found. ID: " +
+		string(_str_npc_id) +
+		" | UID: " +
+		string(_uid_npc)
+	);
 
-		instance_destroy();
-		exit;
-	}
+	instance_destroy();
+	exit;
+}
 
-	//-------------------//
-	// APPLY NPC SPRITE //
-	//-------------------//
-	_spr_npc = _stct_npc._spr_npc;
+//----------------//
+//APPLY NPC SPRITE//
+//----------------//
+_spr_npc = _stct_npc._spr_npc;
 
-	if (_spr_npc != undefined){
-		sprite_index = _spr_npc;
-	}
+if (_spr_npc != undefined){
+	sprite_index = _spr_npc;
+}
 
-	//--------------------//
-	// LOAD PATHING DATA //
-	//--------------------//
-	_str_path_type = _stct_npc._str_path_type;
-	_path_npc = _stct_npc._path_npc;
-	_val_move_speed = _stct_npc._val_move_speed;
+//----------------//
+//LOAD PATHING DATA//
+//----------------//
+_str_path_type = _stct_npc._str_path_type;
+_path_npc = _stct_npc._path_npc;
+_val_move_speed = _stct_npc._val_move_speed;
 
-	_val_path_speed_stored = _val_move_speed;
-
+_val_path_speed_stored = _val_move_speed;
 
 #endregion
 
-//-------//
+//================//
 //METHODS//
-//-------//
+//================//
 #region METHODS
 
-//—------------------------------------------------------------------------------//
-// hscr_start_npc_path
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_START_PATH
 // FUNCTION: Starts the NPC's assigned GameMaker path.
-//           Uses relative path positioning and reverses direction at each endpoint.
-//           Does nothing when the NPC has no valid path assignment.
-//—------------------------------------------------------------------------------//
-hscr_start_npc_path = function(){
+//           Uses relative positioning and reverses at each endpoint.
+//
+// ARGUMENTS: None.
+// RETURNS: True when path movement starts, otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_start_path = function(){
 
+	//----------------//
+	//VALIDATE PATH//
+	//----------------//
 	if (_str_path_type != "PATH"){
 		return false;
 	}
 
 	if (_path_npc == undefined){
-		show_debug_message(
-			"NPC PATH WARNING: PATH UNDEFINED | UID: " +
-			string(_uid_npc)
+
+		scr_debug_log(
+			"NPC",
+			"PATH",
+			self,
+			"Path is undefined. UID: " + string(_uid_npc)
 		);
 
 		return false;
 	}
 
 	if (!path_exists(_path_npc)){
-		show_debug_message(
-			"NPC PATH WARNING: PATH DOES NOT EXIST | UID: " +
-			string(_uid_npc)
+
+		scr_debug_log(
+			"NPC",
+			"PATH",
+			self,
+			"Assigned path does not exist. UID: " + string(_uid_npc)
 		);
 
 		return false;
 	}
 
 	if (_val_move_speed == 0){
-		show_debug_message(
-			"NPC PATH WARNING: MOVE SPEED IS 0 | UID: " +
-			string(_uid_npc)
+
+		scr_debug_log(
+			"NPC",
+			"PATH",
+			self,
+			"Move speed is 0. UID: " + string(_uid_npc)
 		);
 
 		return false;
 	}
 
-	/*
-		FALSE makes the path relative to the NPC's room position.
-
-		The path's first point effectively becomes anchored around where
-		the NPC instance was placed in the room.
-	*/
+	//----------------//
+	//START PATH//
+	//----------------//
 	path_start(
 		_path_npc,
 		_val_move_speed,
@@ -158,21 +172,19 @@ hscr_start_npc_path = function(){
 	_flag_path_started = true;
 	_flag_path_paused = false;
 
-	//show_debug_message(
-	//	"NPC PATH STARTED | UID: " +
-	//	string(_uid_npc)
-	//);
-
 	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_pause_npc_path
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_PAUSE_PATH
 // FUNCTION: Pauses active NPC path movement without ending the path.
-//           Preserves path position so movement can resume from the same location.
-//—------------------------------------------------------------------------------//
-hscr_pause_npc_path = function(){
+//           Preserves path position and movement speed for later resumption.
+//
+// ARGUMENTS: None.
+// RETURNS: True when the path is paused or already paused, otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_pause_path = function(){
 
 	if (!_flag_path_started){
 		return false;
@@ -198,64 +210,57 @@ hscr_pause_npc_path = function(){
 	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_resume_npc_path
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_RESUME_PATH
 // FUNCTION: Resumes the NPC's current path from its existing position.
-//           Repairs inconsistent paused-state flags when path_speed remains zero.
-//—------------------------------------------------------------------------------//
-hscr_resume_npc_path = function(){
+//           Restarts the path if its active assignment was unexpectedly lost.
+//
+// ARGUMENTS: None.
+// RETURNS: True when path movement resumes, otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_resume_path = function(){
 
 	if (_str_path_type != "PATH"){
 		return false;
 	}
 
-	/*
-		If the path was somehow removed, restart it.
-		This is a fallback rather than the normal resume behavior.
-	*/
+	//----------------//
+	//RESTART LOST PATH//
+	//----------------//
 	if (path_index == -1){
 
 		_flag_path_started = false;
 		_flag_path_paused = false;
 
-		return hscr_start_npc_path();
+		return hscr_npc_start_path();
 	}
 
+	//----------------//
+	//RESTORE SPEED//
+	//----------------//
 	if (_val_path_speed_stored == 0){
 		_val_path_speed_stored = _val_move_speed;
 	}
 
-	/*
-		Do not return early based only on _flag_path_paused.
-
-		The trade-pane transfer can leave path_speed at zero even if
-		the custom flag becomes inconsistent.
-	*/
 	path_speed = _val_path_speed_stored;
 
 	_flag_path_started = true;
 	_flag_path_paused = false;
 
-	//show_debug_message(
-	//	"NPC PATH RESUMED | UID: " +
-	//	string(_uid_npc) +
-	//	" | SPEED: " +
-	//	string(path_speed) +
-	//	" | POSITION: " +
-	//	string(path_position)
-	//);
-
 	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_stop_npc_path
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_STOP_PATH
 // FUNCTION: Completely ends NPC path movement.
-//           Unlike pausing, this removes the active path assignment.
-//—------------------------------------------------------------------------------//
-hscr_stop_npc_path = function(){
+//           Removes the active path assignment and clears pathing state.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_stop_path = function(){
 
 	if (path_index != -1){
 		path_end();
@@ -266,13 +271,16 @@ hscr_stop_npc_path = function(){
 	_flag_moving = false;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_update_npc_facing
-// FUNCTION: Updates NPC horizontal sprite facing from actual movement.
-//           Preserves current facing while the NPC is stationary.
-//—------------------------------------------------------------------------------//
-hscr_update_npc_facing = function(){
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_UPDATE_FACING
+// FUNCTION: Updates horizontal sprite facing from actual NPC movement.
+//           Preserves the current facing while stationary.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_update_facing = function(){
 
 	var _val_move_x = x - _val_previous_x;
 
@@ -284,101 +292,213 @@ hscr_update_npc_facing = function(){
 	}
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_open_npc_interaction
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_OPEN_INTERACTION
 // FUNCTION: Pauses NPC movement and opens the NPC interaction GUI.
-//           Passes this NPC instance to the GUI pane.
-//—------------------------------------------------------------------------------//
-hscr_open_npc_interaction = function(){
+//           Stores this NPC as the active interacting NPC and logs the
+//           interaction state.
+//
+// ARGUMENTS: None.
+// RETURNS: True when interaction opens; otherwise false.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_open_interaction = function(){
 
+	//================//
+	//VALIDATE NPC//
+	//================//
 	if (_stct_npc == undefined){
-		return;
+		return false;
 	}
 
 	if (!_stct_npc._flag_interactable){
-		return;
+		return false;
 	}
 
 	if (_flag_triggered){
-		return;
+		return false;
 	}
 
+	//================//
+	//INTERACTION STATE//
+	//================//
 	_flag_triggered = true;
 	_ct_interaction_cooldown = 10;
 
-	//-------------------//
-	// PAUSE NPC PATH   //
-	//-------------------//
-	hscr_pause_npc_path();
+	//================//
+	//PAUSE NPC//
+	//================//
+	hscr_npc_pause_path();
 
-	//-------------------//
-	// CLOSE ACTIVE GUI //
-	//-------------------//
+	//================//
+	//CLOSE ACTIVE GUI//
+	//================//
 	if (
 		instance_exists(obj_gui_controller) &&
 		global.ref_active_gui != undefined
 	){
-		obj_gui_controller.hscr_destroy_gui_open();
+		obj_gui_controller.hscr_gui_destroy_active();
 	}
 
-	//--------------//
-	// PAUSE GAME   //
-	//--------------//
+	//================//
+	//PAUSE GAME//
+	//================//
 	if (instance_exists(obj_gui_controller)){
-		obj_gui_controller.hscr_toggle_gui_pause(true);
+		obj_gui_controller.hscr_gui_set_pause(true);
 	}
 	else{
 		global.flag_pause = true;
 	}
 
-	//-----------------------//
-	// STORE ACTIVE NPC REF  //
-	//-----------------------//
+	//================//
+	//STORE ACTIVE NPC//
+	//================//
 	global.ref_interacting_npc = self;
 
-	//----------------//
-	// CREATE GUI     //
-	//----------------//
+	//================//
+	//CREATE NPC GUI//
+	//================//
 	var _ref_npc_gui = instance_create_layer(
-		room_width * 0.5,
-		room_height * 0.5,
+		display_get_gui_width() * 0.5,
+		display_get_gui_height() * 0.5,
 		"ily_fx",
 		obj_gui_npc_pane
 	);
 
+	if (!instance_exists(_ref_npc_gui)){
+
+		scr_debug_log(
+			"NPC",
+			"INTERACTION",
+			self,
+			"NPC INTERACTION FAILED" +
+			" | NPC: " +
+			string_upper(_stct_npc._str_npc_name) +
+			" | UID: " +
+			string(_uid_npc) +
+			" | REASON: NPC GUI CREATION FAILED",
+			"ERROR",
+			"OBJ_NPC:HSCR_NPC_OPEN_INTERACTION"
+		);
+
+		_flag_triggered = false;
+		global.ref_interacting_npc = undefined;
+
+		hscr_npc_resume_path();
+
+		return false;
+	}
+
 	_ref_npc_gui._ref_npc = self;
-	_ref_npc_gui.hscr_npc_init();
+
+	_ref_npc_gui.hscr_gui_npc_init();
 
 	global.ref_active_gui = _ref_npc_gui;
 
-	show_debug_message(
-		"NPC INTERACTION OPENED | ID: " +
-		string(_str_npc_id) +
+	//================//
+	//BUILD OPTION DATA//
+	//================//
+	var _str_options = "";
+
+	if (_stct_npc._flag_can_talk){
+		_str_options = "TALK";
+	}
+
+	if (_stct_npc._flag_can_quest){
+
+		if (_str_options != ""){
+			_str_options += ",";
+		}
+
+		_str_options += "QUEST";
+	}
+
+	if (_stct_npc._flag_can_trade){
+
+		if (_str_options != ""){
+			_str_options += ",";
+		}
+
+		_str_options += "TRADE";
+	}
+
+	if (_stct_npc._flag_can_fight){
+
+		if (_str_options != ""){
+			_str_options += ",";
+		}
+
+		_str_options += "FIGHT";
+	}
+
+	if (_str_options == ""){
+		_str_options = "NONE";
+	}
+
+	//================//
+	//DEBUG INTERACTION//
+	//================//
+	scr_debug_log(
+		"NPC",
+		"INTERACTION",
+		self,
+		"NPC INTERACTION OPENED" +
+		" | NPC: " +
+		string_upper(_stct_npc._str_npc_name) +
+		" | ID: " +
+		string_upper(_str_npc_id) +
 		" | UID: " +
-		string(_uid_npc)
+		string(_uid_npc) +
+		" | TYPE: " +
+		string_upper(_stct_npc._str_npc_type) +
+		" | OPTIONS: " +
+		_str_options +
+		" | ROOM: " +
+		room_get_name(room) +
+		" | POSITION: (" +
+		string(round(x)) +
+		"," +
+		string(round(y)) +
+		")",
+		"INFO",
+		"OBJ_NPC:HSCR_NPC_OPEN_INTERACTION"
 	);
+
+	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_close_npc_interaction
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_CLOSE_INTERACTION
 // FUNCTION: Fully releases the current NPC interaction.
-//           Restores player control and forces NPC path movement to resume.
-//—------------------------------------------------------------------------------//
-hscr_close_npc_interaction = function(){
+//           Restores player control, resumes NPC path movement, clears active
+//           references, and logs the completed interaction close.
+//
+// ARGUMENTS: None.
+// RETURNS: True when interaction state is released.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_close_interaction = function(){
 
-	//-------------------//
-	// INTERACTION STATE //
-	//-------------------//
+	//================//
+	//STORE NPC DATA//
+	//================//
+	var _str_npc_name = "UNKNOWN";
+
+	if (_stct_npc != undefined){
+		_str_npc_name = string_upper(_stct_npc._str_npc_name);
+	}
+
+	//================//
+	//INTERACTION STATE//
+	//================//
 	_flag_triggered = false;
 	_flag_player_nearby = false;
 
 	_ct_interaction_cooldown = 15;
 
-	//-------------------//
-	// GLOBAL REFERENCES //
-	//-------------------//
+	//================//
+	//GLOBAL REFERENCES//
+	//================//
 	if (
 		variable_global_exists("ref_interacting_npc") &&
 		global.ref_interacting_npc == self
@@ -388,12 +508,12 @@ hscr_close_npc_interaction = function(){
 
 	global.ref_active_gui = undefined;
 
-	//----------------//
-	// UNPAUSE PLAYER //
-	//----------------//
+	//================//
+	//UNPAUSE PLAYER//
+	//================//
 	if (instance_exists(obj_gui_controller)){
 
-		obj_gui_controller.hscr_toggle_gui_pause(false);
+		obj_gui_controller.hscr_gui_set_pause(false);
 	}
 	else{
 
@@ -404,36 +524,46 @@ hscr_close_npc_interaction = function(){
 		}
 	}
 
-	/*
-		Set this explicitly in case the GUI controller's helper does
-		not update the global before the path is resumed.
-	*/
 	global.flag_pause = false;
 
-	//-----------------//
-	// RESUME NPC PATH //
-	//-----------------//
-	hscr_resume_npc_path();
+	//================//
+	//RESUME NPC PATH//
+	//================//
+	var _flag_path_resumed = hscr_npc_resume_path();
 
-	show_debug_message(
-		"NPC INTERACTION CLOSED | UID: " +
+	//================//
+	//DEBUG INTERACTION//
+	//================//
+	scr_debug_log(
+		"NPC",
+		"INTERACTION",
+		self,
+		"NPC INTERACTION CLOSED" +
+		" | NPC: " +
+		_str_npc_name +
+		" | ID: " +
+		string_upper(_str_npc_id) +
+		" | UID: " +
 		string(_uid_npc) +
-		" | PATH INDEX: " +
-		string(path_index) +
-		" | PATH SPEED: " +
-		string(path_speed) +
-		" | PAUSED FLAG: " +
-		string(_flag_path_paused)
+		" | PATH RESUMED: " +
+		(_flag_path_resumed ? "YES" : "NO"),
+		"INFO",
+		"OBJ_NPC:HSCR_NPC_CLOSE_INTERACTION"
 	);
+
+	return true;
 };
 
-
-//—------------------------------------------------------------------------------//
-// hscr_update_interaction_cooldown
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_UPDATE_INTERACTION_COOLDOWN
 // FUNCTION: Updates the NPC interaction cooldown.
-//           Prevents the same input from immediately reopening the interaction.
-//—------------------------------------------------------------------------------//
-hscr_update_interaction_cooldown = function(){
+//           Prevents the same input from immediately reopening interaction.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+hscr_npc_update_interaction_cooldown = function(){
 
 	if (_ct_interaction_cooldown > 0){
 		_ct_interaction_cooldown--;
@@ -446,8 +576,7 @@ hscr_update_interaction_cooldown = function(){
 
 #endregion
 
-
-//----------------//
-// START PATHING //
-//----------------//
-hscr_start_npc_path();
+//================//
+//START PATHING//
+//================//
+hscr_npc_start_path();

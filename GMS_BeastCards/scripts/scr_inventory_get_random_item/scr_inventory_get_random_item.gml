@@ -1,21 +1,28 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_GET_RANDOM_ITEM
+// SCRIPT: SCR_INVENTORY_GET_RANDOM_ITEM
 // FUNCTION: Rolls a weighted random item id from the supplied item pool.
-//           Uses lower fractional weights for beast eggs.
+//           Uses individually assigned weights for each supported item.
 //           Returns the selected item id string.
+//
+// ARGUMENTS: _list_pool is the DS list containing eligible item ids.
+// RETURNS: The selected item id, or an empty string if the roll fails.
 //
 //===============================================================================//
 
-function scr_get_random_item(_list_pool){
+function scr_inventory_get_random_item(_list_pool){
 
+	//================//
+	//ITEM WEIGHTS//
+	//================//
 	var _stct_weights = {
 		QUEST_IMPORTANT_NOTEBOOK : 5,
 		HELD_POWERFUL_STONE : 10,
 		CONSUMABLE_HEALING_SALVE : 50,
-		PRISM_BASIC_PRISM : 50,
+		PRISM_COMMON : 50,
 
 		#region VIRIDIAN
+
 		EGG_ARBRAWN : 0.1,
 		EGG_ARGENTBUD : 2,
 		EGG_BEAVINE : 2,
@@ -33,9 +40,11 @@ function scr_get_random_item(_list_pool){
 		EGG_SPOROSE : 1,
 		EGG_STRIGIBLOOM : 1,
 		EGG_TURFRANTULA : 2,
+
 		#endregion
 
 		#region CERULEAN
+
 		EGG_AMMOMARSH : 0.5,
 		EGG_BLIZZDRIFT : 1,
 		EGG_CAUDAQUA : 2,
@@ -52,9 +61,11 @@ function scr_get_random_item(_list_pool){
 		EGG_MARITIMICE : 0.5,
 		EGG_SALTWAGG : 1,
 		EGG_SPHENISKIP : 1,
+
 		#endregion
 
 		#region VERMILION
+
 		EGG_ASCHEMASS : 2,
 		EGG_CANIGNIS : 2,
 		EGG_DAIMONIS : 1,
@@ -71,14 +82,15 @@ function scr_get_random_item(_list_pool){
 		EGG_SOLEMOLD : 2,
 		EGG_WRATHOOD : 2,
 		EGG_WYRMELTA : 0.5
+
 		#endregion
 	};
 
+	//======================//
+	//CALCULATE TOTAL WEIGHT//
+	//======================//
 	var _val_total_weight = 0;
 
-	//-----------------------//
-	// CALCULATE TOTAL WEIGHT //
-	//-----------------------//
 	for (var _it_item = 0; _it_item < ds_list_size(_list_pool); _it_item++){
 
 		var _str_item_id = ds_list_find_value(_list_pool,_it_item);
@@ -89,38 +101,41 @@ function scr_get_random_item(_list_pool){
 	}
 
 	if (_val_total_weight <= 0){
-		show_debug_message("ITEM ERROR: Random item pool has no valid weighted items.");
+		scr_debug_log("INVENTORY","RANDOM_ITEM",undefined,"Random item pool has no valid weighted items.");
 		return "";
 	}
 
-	//------//
-	// ROLL //
-	//------//
+	//================//
+	//ROLL ITEM//
+	//================//
 	var _val_roll = random(_val_total_weight);
-
-	//--------------//
-	// RESOLVE ROLL //
-	//--------------//
 	var _val_running_weight = 0;
 	var _str_return_item_id = "";
 
+	//================//
+	//RESOLVE ROLL//
+	//================//
 	for (var _it_item = 0; _it_item < ds_list_size(_list_pool); _it_item++){
 
 		var _str_item_id = ds_list_find_value(_list_pool,_it_item);
 
-		if (variable_struct_exists(_stct_weights,_str_item_id)){
+		if (!variable_struct_exists(_stct_weights,_str_item_id)){
+			continue;
+		}
 
-			_val_running_weight += variable_struct_get(_stct_weights,_str_item_id);
+		_val_running_weight += variable_struct_get(_stct_weights,_str_item_id);
 
-			if (_val_roll < _val_running_weight){
-				_str_return_item_id = _str_item_id;
-				break;
-			}
+		if (_val_roll < _val_running_weight){
+			_str_return_item_id = _str_item_id;
+			break;
 		}
 	}
 
+	//================//
+	//VALIDATE RESULT//
+	//================//
 	if (_str_return_item_id == ""){
-		show_debug_message("ITEM ERROR: Random item roll failed to select an item.");
+		scr_debug_log("INVENTORY","RANDOM_ITEM",undefined,"Random item roll failed to select an item.");
 	}
 
 	return _str_return_item_id;

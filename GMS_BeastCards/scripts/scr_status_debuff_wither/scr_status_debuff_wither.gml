@@ -5,16 +5,21 @@
 //           Unstackable Timed.
 //           Reduces current HP and Maximum HP by 25% when first applied.
 //           Reapplication refreshes duration without applying the HP loss again.
-//           Restores Maximum HP when removed, but does not restore lost current HP.
+//           Restores Maximum HP when removed, but not lost current HP.
+//
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, and _val_lifetime optionally sets its duration.
+// RETURNS: The active Wither Status on APPLY; otherwise undefined.
 //
 //===============================================================================//
+
 function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
 			var _ref_target = global.ref_target_beast;
@@ -23,9 +28,13 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			//----------------//
-			//DEFAULT LENGTH//
-			//----------------//
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//==========//
+			//DEFAULTS//
+			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 3;
 			}
@@ -42,56 +51,49 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 			//------------------//
 			if (_ref_existing_status != -1){
 
-				scr_status_refresh_lifetime(_ref_existing_status,_val_lifetime);
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
 
-			//-------------------------//
-			//CALCULATE MAX HP REDUCTION//
-			//-------------------------//
+			//==========================//
+			//CALCULATE HP REDUCTIONS//
+			//==========================//
 			var _val_max_hp_reduction = 0;
+			var _val_cur_hp_reduction = 0;
 
 			if (_ref_target._val_max_hp > 1){
 
-				_val_max_hp_reduction =
-					round(
-						_ref_target._val_max_hp *
-						0.25
-					);
+				_val_max_hp_reduction = round(_ref_target._val_max_hp * 0.25);
 
-				_val_max_hp_reduction =
-					clamp(
-						_val_max_hp_reduction,
-						1,
-						_ref_target._val_max_hp - 1
-					);
+				_val_max_hp_reduction = clamp(
+					_val_max_hp_reduction,
+					1,
+					_ref_target._val_max_hp - 1
+				);
 			}
-
-			//-----------------------------//
-			//CALCULATE CURRENT HP REDUCTION//
-			//-----------------------------//
-			var _val_cur_hp_reduction = 0;
 
 			if (_ref_target._val_cur_hp > 1){
 
-				_val_cur_hp_reduction =
-					round(
-						_ref_target._val_cur_hp *
-						0.25
-					);
+				_val_cur_hp_reduction = round(_ref_target._val_cur_hp * 0.25);
 
-				_val_cur_hp_reduction =
-					clamp(
-						_val_cur_hp_reduction,
-						0,
-						_ref_target._val_cur_hp - 1
-					);
+				_val_cur_hp_reduction = clamp(
+					_val_cur_hp_reduction,
+					0,
+					_ref_target._val_cur_hp - 1
+				);
 			}
 
-			//---------------//
+			//===============//
 			//CREATE STATUS//
-			//---------------//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_target.x,
 				_ref_target.y,
@@ -99,73 +101,68 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 				obj_battle_status
 			);
 
-			_ref_new_status._scr_status =
-				scr_status_debuff_wither;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"DEBUFF";
-
-			_ref_new_status._str_status_name =
-				"WITHER";
-
-			_ref_new_status._str_status_desc =
-				"CURRENT HP -25%; MAXIMUM HP -25%";
-
-			_ref_new_status._spr_status =
-				spr_status_debuff_wither;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._val_status_magnitude =
-				0.25;
-
-			_ref_new_status._val_wither_max_hp_reduction =
-				_val_max_hp_reduction;
-
-			_ref_new_status._val_wither_cur_hp_reduction =
-				_val_cur_hp_reduction;
-
-			_ref_new_status._str_trigger_region =
-				"END";
-
 			//---------------------//
 			//INITIALIZE LIFETIME//
 			//---------------------//
-			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
 
-			//------------------//
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_debuff_wither;
+
+			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "DEBUFF";
+			_ref_new_status._str_status_name = "WITHER";
+
+			_ref_new_status._spr_status = spr_status_debuff_wither;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._val_status_magnitude = 0.25;
+			_ref_new_status._val_wither_max_hp_reduction = _val_max_hp_reduction;
+			_ref_new_status._val_wither_cur_hp_reduction = _val_cur_hp_reduction;
+
+			_ref_new_status._str_status_desc =
+				"CURRENT HP -" +
+				string(round(_ref_new_status._val_status_magnitude * 100)) +
+				"%; MAXIMUM HP -" +
+				string(round(_ref_new_status._val_status_magnitude * 100)) +
+				"%";
+
+			_ref_new_status._str_trigger_region = "END";
+
+			//==================//
 			//REDUCE MAXIMUM HP//
-			//------------------//
-			_ref_target._val_max_hp -=
-				_val_max_hp_reduction;
+			//==================//
+			_ref_target._val_max_hp -= _val_max_hp_reduction;
+			_ref_target._val_max_hp = max(1,_ref_target._val_max_hp);
 
-			_ref_target._val_max_hp =
-				max(
-					1,
-					_ref_target._val_max_hp
-				);
-
-			//----------------//
+			//================//
 			//REDUCE CURRENT HP//
-			//----------------//
-			_ref_target._val_cur_hp -=
-				_val_cur_hp_reduction;
+			//================//
+			_ref_target._val_cur_hp -= _val_cur_hp_reduction;
 
-			_ref_target._val_cur_hp =
-				clamp(
-					_ref_target._val_cur_hp,
-					1,
-					_ref_target._val_max_hp
-				);
+			_ref_target._val_cur_hp = clamp(
+				_ref_target._val_cur_hp,
+				1,
+				_ref_target._val_max_hp
+			);
 
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(_ref_target._list_statuses,_ref_new_status);
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
 
 			scr_status_reposition(_ref_target);
 
@@ -173,10 +170,9 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
@@ -196,15 +192,13 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
-
 			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
@@ -213,30 +207,19 @@ function scr_status_debuff_wither(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			var _ref_host = _ref_status._ref_host;
 
-			//------------------//
+			//==================//
 			//RESTORE MAXIMUM HP//
-			//------------------//
+			//==================//
 			if (instance_exists(_ref_host)){
 
-				_ref_host._val_max_hp +=
-					_ref_status._val_wither_max_hp_reduction;
-
-				_ref_host._val_max_hp =
-					max(
-						1,
-						_ref_host._val_max_hp
-					);
-
-				_ref_host._val_cur_hp =
-					min(
-						_ref_host._val_cur_hp,
-						_ref_host._val_max_hp
-					);
+				_ref_host._val_max_hp += _ref_status._val_wither_max_hp_reduction;
+				_ref_host._val_max_hp = max(1,_ref_host._val_max_hp);
+				_ref_host._val_cur_hp = min(_ref_host._val_cur_hp,_ref_host._val_max_hp);
 			}
 
-			//---------------//
+			//----------------//
 			//DESTROY STATUS//
-			//---------------//
+			//----------------//
 			scr_status_destroy(_ref_status);
 
 		break;

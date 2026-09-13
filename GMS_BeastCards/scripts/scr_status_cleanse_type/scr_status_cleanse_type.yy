@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_cleanse_type",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_cleanse_type",
+  "parent":{
+    "name":"CLEANSE",
+    "path":"folders/BATTLE/STATUSES/CLEANSE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,8 +1,10 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_STOP_PERSISTENT_AUDIO
-// FUNCTION: Stops looping ambience owned by a battle status.
-//           Clears the stored audio instance reference.
+// FUNCTION: Stops looping ambience owned by a battle Status.
+//           Clears the stored persistent audio instance reference.
+//
+// INPUT:    _ref_status - Status instance that owns the persistent audio.
 //
 //===============================================================================//
 
@@ -16,7 +18,7 @@ function scr_status_stop_persistent_audio(_ref_status){
 	}
 
 	//------------------//
-	//NO ACTIVE AMBIENCE//
+	//NO ACTIVE AUDIO//
 	//------------------//
 	if (_ref_status._val_persistent_audio == -1){
 		return false;
@@ -25,12 +27,12 @@ function scr_status_stop_persistent_audio(_ref_status){
 	//-----------//
 	//STOP AUDIO//
 	//-----------//
-	audio_stop_sound(
-		_ref_status._val_persistent_audio
-	);
+	audio_stop_sound(_ref_status._val_persistent_audio);
 
-	_ref_status._val_persistent_audio =
-		-1;
+	//----------------//
+	//CLEAR OWNERSHIP//
+	//----------------//
+	_ref_status._val_persistent_audio = -1;
 
 	return true;
 }

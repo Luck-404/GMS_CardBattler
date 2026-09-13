@@ -1,96 +1,87 @@
 //===============================================================================//
 //
-// SCRIPT: scr_beast_get_speed_stat
-// FUNCTION: Returns the base Speed stat for a Beast species.
-//           Speed ranges from 0 to 300.
-//           Used for initiative and ordered battle-trigger resolution.
+// SCRIPT: SCR_BEAST_GET_SPEED_STAT
+// FUNCTION: Returns the base Speed stat assigned to a Beast species.
+//           Speed ranges from 0 to 300 and is used for initiative and ordered
+//           battle-trigger resolution.
+//
+// ARGUMENTS: _str_beast_name is the Beast species whose Speed should be returned.
+// RETURNS: The Beast's base Speed stat, or 150 if the Beast name is unknown.
 //
 //===============================================================================//
 
 function scr_beast_get_speed_stat(_str_beast_name){
 
-	switch(_str_beast_name){
+	//================//
+	//SPEED TABLE//
+	//================//
+	static _stct_beast_speeds = {
 
-		//========//
-		//VIRIDIAN//
-		//========//
 		#region VIRIDIAN
-
-		case "ARBRAWN":       return 55;
-		case "ARGENTBUD":     return 110;
-		case "BEAVINE":       return 145;
-		case "BRYOBITE":      return 35;
-		case "CHITROOPER":    return 170;
-		case "CRUSABER":      return 165;
-		case "DRYADAE":       return 130;
-		case "FIGHTREE":      return 25;
-		case "FLITSAGE":      return 260;
-		case "FURN":          return 245;
-		case "LEPOROOT":      return 220;
-		case "LUMBUCK":       return 115;
-		case "MAMBARK":       return 240;
-		case "MORELUSH":      return 90;
-		case "SPOROSE":       return 105;
-		case "STRIGIBLOOM":   return 230;
-		case "TURFRANTULA":   return 205;
-
+		ARBRAWN      : 55,
+		ARGENTBUD    : 110,
+		BEAVINE      : 145,
+		BRYOBITE     : 35,
+		CHITROOPER   : 170,
+		CRUSABER     : 165,
+		DRYADAE      : 130,
+		FIGHTREE     : 25,
+		FLITSAGE     : 260,
+		FURN         : 245,
+		LEPOROOT     : 220,
+		LUMBUCK      : 115,
+		MAMBARK      : 240,
+		MORELUSH     : 90,
+		SPOROSE      : 105,
+		STRIGIBLOOM  : 230,
+		TURFRANTULA  : 205,
 		#endregion
 
-
-		//========//
-		//CERULEAN//
-		//========//
 		#region CERULEAN
-
-		case "AMMOMARSH":     return 130;
-		case "BLIZZDRIFT":    return 225;
-		case "CAUDAQUA":      return 255;
-		case "CEPHARIME":     return 185;
-		case "CHELONSEA":     return 40;
-		case "CORALLIARC":    return 95;
-		case "FROSTUSK":      return 100;
-		case "GALENATRIUM":   return 220;
-		case "GLACIMIGHT":    return 110;
-		case "GULFLOW":       return 165;
-		case "ISTIRAIN":      return 225;
-		case "KELPLATANI":    return 110;
-		case "LONTRIVER":     return 175;
-		case "MARITIMICE":    return 105;
-		case "SALTWAGG":      return 150;
-		case "SPHENISKIP":    return 160;
-
+		AMMOMARSH    : 130,
+		BLIZZDRIFT   : 225,
+		CAUDAQUA     : 255,
+		CEPHARIME    : 185,
+		CHELONSEA    : 40,
+		CORALLIARC   : 95,
+		FROSTUSK     : 100,
+		GALENATRIUM  : 220,
+		GLACIMIGHT   : 110,
+		GULFLOW      : 165,
+		ISTIRAIN     : 225,
+		KELPLATANI   : 110,
+		LONTRIVER    : 175,
+		MARITIMICE   : 105,
+		SALTWAGG     : 150,
+		SPHENISKIP   : 160,
 		#endregion
 
-
-		//=========//
-		//VERMILION//
-		//=========//
 		#region VERMILION
-
-		case "ASCHEMASS":     return 55;
-		case "CANIGNIS":      return 205;
-		case "DAIMONIS":      return 125;
-		case "DRAKOAL":       return 180;
-		case "EMBEROOST":     return 190;
-		case "HELLSHROOM":    return 100;
-		case "IMPARCH":       return 275;
-		case "INFERNUS":      return 115;
-		case "LAVAROWANA":    return 160;
-		case "PYREKNIGHT":    return 80;
-		case "PYROPLUME":     return 220;
-		case "SANGUINAUT":    return 250;
-		case "SLAGOLEM":      return 25;
-		case "SOLEMOLD":      return 120;
-		case "WRATHOOD":      return 140;
-		case "WYRMELTA":      return 190;
-
+		ASCHEMASS    : 55,
+		CANIGNIS     : 205,
+		DAIMONIS     : 125,
+		DRAKOAL      : 180,
+		EMBEROOST    : 190,
+		HELLSHROOM   : 100,
+		IMPARCH      : 275,
+		INFERNUS     : 115,
+		LAVAROWANA   : 160,
+		PYREKNIGHT   : 80,
+		PYROPLUME    : 220,
+		SANGUINAUT   : 250,
+		SLAGOLEM     : 25,
+		SOLEMOLD     : 120,
+		WRATHOOD     : 140,
+		WYRMELTA     : 190
 		#endregion
-	}
+	};
 
-	show_debug_message(
-		"BEAST SPEED ERROR | UNKNOWN BEAST: " +
-		string(_str_beast_name)
-	);
+	//================//
+	//GET SPEED//
+	//================//
+	if (variable_struct_exists(_stct_beast_speeds,_str_beast_name)){
+		return variable_struct_get(_stct_beast_speeds,_str_beast_name);
+	}
 
 	return 150;
 }

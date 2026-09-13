@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_trigger_frost_weapon
+// SCRIPT: SCR_STATUS_TRIGGER_FROST_WEAPON
 // FUNCTION: Checks an attacking Beast for Frost Weapon.
 //           Applies the Buff's Frostbite magnitude once to every living Beast
 //           affected by the Attack resolution.
@@ -9,10 +9,16 @@
 
 function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct_card){
 
+	//-------------------//
+	//VALIDATE ATTACKER//
+	//-------------------//
 	if (!instance_exists(_ref_attacker)){
 		return false;
 	}
 
+	//--------------//
+	//VALIDATE CARD//
+	//--------------//
 	if (!is_struct(_stct_card)){
 		return false;
 	}
@@ -24,18 +30,26 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 	//-------------------//
 	//CHECK FROST WEAPON//
 	//-------------------//
-	var _ref_frost_weapon =
-		scr_status_check("FROST_WEAPON",_ref_attacker);
+	var _ref_frost_weapon = scr_status_check("FROST_WEAPON",_ref_attacker);
 
 	if (_ref_frost_weapon == -1){
+		return false;
+	}
+
+	if (!instance_exists(_ref_frost_weapon)){
+		return false;
+	}
+
+	var _ct_frostbite = max(0,_ref_frost_weapon._val_status_magnitude);
+
+	if (_ct_frostbite <= 0){
 		return false;
 	}
 
 	//--------------------//
 	//GET ATTACK TARGETS//
 	//--------------------//
-	var _arr_targets =
-		scr_battle_get_card_preview_targets(_stct_card,_ref_primary_target);
+	var _arr_targets = scr_battle_get_card_preview_targets(_stct_card,_ref_primary_target);
 
 	/*
 		Fallback for unusual ST Attack definitions whose target
@@ -55,19 +69,15 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 	//----------------------//
 	//STORE ORIGINAL TARGET//
 	//----------------------//
-	var _ref_original_target =
-		global.ref_target_beast;
+	var _ref_original_target = global.ref_target_beast;
+	var _flag_triggered = false;
 
-	var _flag_triggered =
-		false;
-
-	//----------------//
+	//================//
 	//APPLY FROSTBITE//
-	//----------------//
-	for (var _it_target = 0; _it_target < array_length(_arr_targets); _it_target++){
+	//================//
+	for (var _it_target = 0;_it_target < array_length(_arr_targets);_it_target++){
 
-		var _ref_target =
-			_arr_targets[_it_target];
+		var _ref_target = _arr_targets[_it_target];
 
 		if (!instance_exists(_ref_target)){
 			continue;
@@ -84,22 +94,25 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 			continue;
 		}
 
-		global.ref_target_beast =
-			_ref_target;
+		//--------------//
+		//TARGET ENEMY//
+		//--------------//
+		global.ref_target_beast = _ref_target;
 
-		repeat (_ref_frost_weapon._val_status_magnitude){
+		//-----------------//
+		//APPLY FROSTBITE//
+		//-----------------//
+		repeat (_ct_frostbite){
 			scr_status_apply_dot("FROSTBITE");
 		}
 
-		_flag_triggered =
-			true;
+		_flag_triggered = true;
 	}
 
 	//----------------//
 	//RESTORE TARGET//
 	//----------------//
-	global.ref_target_beast =
-		_ref_original_target;
+	global.ref_target_beast = _ref_original_target;
 
 	//----------//
 	//FEEDBACK//

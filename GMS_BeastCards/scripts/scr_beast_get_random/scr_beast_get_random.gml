@@ -1,15 +1,35 @@
 //===============================================================================//
 //
-// SCRIPT: scr_beast_get_random
-// FUNCTION: Performs a weighted roll from a supplied beast pool.
+// SCRIPT: SCR_BEAST_GET_RANDOM
+// FUNCTION: Performs a weighted roll from a supplied Beast pool.
 //           Uses stat-total rarity weights.
-//           Returns a newly initialized randomized beast.
+//           Returns a newly initialized randomized Beast.
+//
+// ARGUMENTS: _arr_beast_pool is an array of Beast names eligible for the roll.
+// RETURNS: A newly initialized random Beast, or undefined if no valid Beast
+//          can be selected.
 //
 //===============================================================================//
 
 function scr_beast_get_random(_arr_beast_pool){
 
-	var _stct_weights = {
+	//=====================//
+	//VALIDATE BEAST POOL//
+	//=====================//
+	if (!is_array(_arr_beast_pool)){
+		return undefined;
+	}
+
+	var _ct_beasts = array_length(_arr_beast_pool);
+
+	if (_ct_beasts <= 0){
+		return undefined;
+	}
+
+	//================//
+	//BEAST WEIGHTS//
+	//================//
+	static _stct_beast_weights = {
 
 		#region VIRIDIAN
 		ARBRAWN      : 1,
@@ -70,55 +90,47 @@ function scr_beast_get_random(_arr_beast_pool){
 		#endregion
 	};
 
+	//========================//
+	//CALCULATE TOTAL WEIGHT//
+	//========================//
 	var _val_total_weight = 0;
 
-	//-----------------------//
-	// CALCULATE TOTAL WEIGHT //
-	//-----------------------//
-	for (var _it_beast = 0; _it_beast < array_length(_arr_beast_pool); _it_beast++){
+	for (var _it_beast = 0;_it_beast < _ct_beasts;_it_beast++){
 
 		var _str_beast_name = _arr_beast_pool[_it_beast];
 
-		if (variable_struct_exists(_stct_weights,_str_beast_name)){
-			_val_total_weight += variable_struct_get(_stct_weights,_str_beast_name);
+		if (!variable_struct_exists(_stct_beast_weights,_str_beast_name)){
+			continue;
 		}
+
+		_val_total_weight += variable_struct_get(_stct_beast_weights,_str_beast_name);
 	}
 
 	if (_val_total_weight <= 0){
-		show_debug_message("BEAST ERROR: Random beast pool has no valid weighted beasts.");
 		return undefined;
 	}
 
-	//------//
-	// ROLL //
-	//------//
+	//================//
+	//ROLL BEAST//
+	//================//
 	var _val_roll = random(_val_total_weight);
-
-	//--------------//
-	// RESOLVE ROLL //
-	//--------------//
 	var _val_running_weight = 0;
-	var _str_selected_beast = "";
 
-	for (var _it_beast = 0; _it_beast < array_length(_arr_beast_pool); _it_beast++){
+	for (var _it_beast = 0;_it_beast < _ct_beasts;_it_beast++){
 
 		var _str_beast_name = _arr_beast_pool[_it_beast];
 
-		if (variable_struct_exists(_stct_weights,_str_beast_name)){
+		if (!variable_struct_exists(_stct_beast_weights,_str_beast_name)){
+			continue;
+		}
 
-			_val_running_weight += variable_struct_get(_stct_weights,_str_beast_name);
+		var _val_beast_weight = variable_struct_get(_stct_beast_weights,_str_beast_name);
+		_val_running_weight += _val_beast_weight;
 
-			if (_val_roll < _val_running_weight){
-				_str_selected_beast = _str_beast_name;
-				break;
-			}
+		if (_val_roll < _val_running_weight){
+			return scr_beast_init_random(_str_beast_name);
 		}
 	}
 
-	if (_str_selected_beast == ""){
-		show_debug_message("BEAST ERROR: Random beast roll failed to select a beast.");
-		return undefined;
-	}
-
-	return scr_beast_init_random(_str_selected_beast);
+	return undefined;
 }

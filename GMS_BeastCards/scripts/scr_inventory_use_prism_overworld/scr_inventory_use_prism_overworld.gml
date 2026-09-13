@@ -1,22 +1,42 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_INVENTORY_USE_PRISM_ITEM_OW
+// SCRIPT: SCR_INVENTORY_USE_PRISM_OVERWORLD
 // FUNCTION: Handles prism use from the overworld inventory.
 //           Opens a click-controlled scrolling textbox.
 //           Does not consume the prism or mutate inventory.
 //
+// ARGUMENTS: _stct_item is the selected prism item struct.
+//            _ref_inventory_pane is the owning inventory pane.
+// RETURNS: True if the informational textbox opens, otherwise false.
+//
 //===============================================================================//
+
 function scr_inventory_use_prism_overworld(_stct_item,_ref_inventory_pane){
 
+	//================//
+	//VALIDATE ITEM//
+	//================//
+	if (_stct_item == undefined){
+		scr_inventory_cancel_item_use(_ref_inventory_pane);
+		return false;
+	}
+
+	//================//
+	//OPEN TEXTBOX//
+	//================//
 	var _ref_textbox = instance_create_layer(
 		display_get_gui_width() * 0.5,
 		display_get_gui_height() * 0.5,
 		"ily_fx",
 		obj_gui_scrolling_textbox
 	);
-	
+
 	audio_play_sound(snd_inventory_use_item,0,false);
 
 	_ref_textbox._ref_parent_gui = _ref_inventory_pane;
-	_ref_textbox._str_text = string(_stct_item._str_item_desc) + "\n\nThis item does nothing outside of battle...";
+	_ref_textbox._str_text =
+		string(_stct_item._str_item_desc) +
+		"\n\nThis item does nothing outside of battle...";
+
+	return true;
 }

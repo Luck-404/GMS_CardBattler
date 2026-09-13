@@ -1,48 +1,55 @@
 //===============================================================================//
 //
 // CLEANUP: OBJ_BATTLE_MINION
-// FUNCTION: Cleans up effects linked to this minion.
-//           Triggers the death behavior of statuses sourced by this minion.
+// FUNCTION: Cleans up effects linked to this Minion.
+//           Triggers the death behavior of Statuses sourced by this Minion.
 //
 //===============================================================================//
 
-if (instance_exists(_ref_host)){
+//----------------//
+//VALIDATE HOST//
+//----------------//
+if (!instance_exists(_ref_host)){
+	exit;
+}
 
-	for (
-		var _it_status = ds_list_size(_ref_host._list_statuses) - 1;
-		_it_status >= 0;
-		_it_status--
-	){
+if (!ds_exists(_ref_host._list_statuses,ds_type_list)){
+	exit;
+}
 
-		var _ref_status =
-			ds_list_find_value(
-				_ref_host._list_statuses,
-				_it_status
-			);
+//-------------------------//
+//CLEAN SOURCE STATUSES//
+//-------------------------//
+for (var _it_status = ds_list_size(_ref_host._list_statuses) - 1;_it_status >= 0;_it_status--){
 
-		if (!instance_exists(_ref_status)){
-			continue;
-		}
+	var _ref_status = ds_list_find_value(
+		_ref_host._list_statuses,
+		_it_status
+	);
 
-		if (
-			_ref_status._ref_source_minion !=
-			self
-		){
-			continue;
-		}
-
-		if (_ref_status._scr_status != undefined){
-
-			_ref_status._scr_status(
-				"DEATH",
-				_ref_status
-			);
-		}
-		else{
-
-			scr_status_destroy(
-				_ref_status
-			);
-		}
+	if (!instance_exists(_ref_status)){
+		continue;
 	}
+
+	if (_ref_status._ref_source_minion != self){
+		continue;
+	}
+
+	//-----------------------//
+	//TRIGGER STATUS DEATH//
+	//-----------------------//
+	if (_ref_status._scr_status != undefined){
+
+		_ref_status._scr_status(
+			"DEATH",
+			_ref_status
+		);
+
+		continue;
+	}
+
+	//----------------//
+	//DESTROY STATUS//
+	//----------------//
+	scr_status_destroy(_ref_status);
 }

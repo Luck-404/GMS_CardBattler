@@ -1,37 +1,63 @@
 //===============================================================================//
 //
-// SCRIPT: scr_init_item_pool
-// FUNCTION: Initializes the global item pool.
-//           Adds every obtainable item ID to the master item pool.
-//           Used for random item generation and loot selection.
+// SCRIPT: SCR_INVENTORY_INIT_ITEM_POOL
+// FUNCTION: Initializes the global master item pool.
+//           Adds every obtainable item id to the pool.
+//           Rebuilds the pool cleanly to prevent duplicate entries.
+//
+// ARGUMENTS: None.
+// RETURNS: Nothing.
 //
 //===============================================================================//
+
 function scr_inventory_init_item_pool(){
 
+	//================//
+	//RESET ITEM POOL//
+	//================//
+	ds_list_clear(global.list_pool_items);
+
 	#region QUEST
+
 	ds_list_add(global.list_pool_items,"QUEST_IMPORTANT_NOTEBOOK");
+
 	#endregion
 
 	#region HELD
+
 	ds_list_add(global.list_pool_items,"HELD_POWERFUL_STONE");
+	ds_list_add(global.list_pool_items,"HELD_SORCEROUS_GEM");
+	ds_list_add(global.list_pool_items,"HELD_INSPIRING_CHIME");
+	ds_list_add(global.list_pool_items,"HELD_VERDANT_SEED");
+	ds_list_add(global.list_pool_items,"HELD_EMERALD_TALISMAN");
+	ds_list_add(global.list_pool_items,"HELD_BURNING_ASH");
+	ds_list_add(global.list_pool_items,"HELD_HEALING_FRUIT");
+	ds_list_add(global.list_pool_items,"HELD_BOLSTERING_SHELL");
+	ds_list_add(global.list_pool_items,"HELD_GOLD_FANG");
+
 	#endregion
 
 	#region CONSUMABLE
+
 	ds_list_add(global.list_pool_items,"CONSUMABLE_HEALING_SALVE");
+
 	#endregion
 
 	#region PRISM
+
 	ds_list_add(global.list_pool_items,"PRISM_COMMON");
 	ds_list_add(global.list_pool_items,"PRISM_UNCOMMON");
 	ds_list_add(global.list_pool_items,"PRISM_RARE");
 	ds_list_add(global.list_pool_items,"PRISM_EPIC");
 	ds_list_add(global.list_pool_items,"PRISM_LEGENDARY");
 	ds_list_add(global.list_pool_items,"PRISM_ARCWORK");
+
 	#endregion
-	
+
 	#region EGG
 
 		#region VIRIDIAN
+
 		ds_list_add(global.list_pool_items,"EGG_ARBRAWN");
 		ds_list_add(global.list_pool_items,"EGG_ARGENTBUD");
 		ds_list_add(global.list_pool_items,"EGG_BEAVINE");
@@ -49,9 +75,11 @@ function scr_inventory_init_item_pool(){
 		ds_list_add(global.list_pool_items,"EGG_SPOROSE");
 		ds_list_add(global.list_pool_items,"EGG_STRIGIBLOOM");
 		ds_list_add(global.list_pool_items,"EGG_TURFRANTULA");
+
 		#endregion
 
 		#region CERULEAN
+
 		ds_list_add(global.list_pool_items,"EGG_AMMOMARSH");
 		ds_list_add(global.list_pool_items,"EGG_BLIZZDRIFT");
 		ds_list_add(global.list_pool_items,"EGG_CAUDAQUA");
@@ -68,9 +96,11 @@ function scr_inventory_init_item_pool(){
 		ds_list_add(global.list_pool_items,"EGG_MARITIMICE");
 		ds_list_add(global.list_pool_items,"EGG_SALTWAGG");
 		ds_list_add(global.list_pool_items,"EGG_SPHENISKIP");
+
 		#endregion
 
 		#region VERMILION
+
 		ds_list_add(global.list_pool_items,"EGG_ASCHEMASS");
 		ds_list_add(global.list_pool_items,"EGG_CANIGNIS");
 		ds_list_add(global.list_pool_items,"EGG_DAIMONIS");
@@ -87,6 +117,7 @@ function scr_inventory_init_item_pool(){
 		ds_list_add(global.list_pool_items,"EGG_SOLEMOLD");
 		ds_list_add(global.list_pool_items,"EGG_WRATHOOD");
 		ds_list_add(global.list_pool_items,"EGG_WYRMELTA");
+
 		#endregion
 
 	#endregion

@@ -6,22 +6,18 @@
 //
 //===============================================================================//
 
-//--------------------//
-// TRANSFER TO MARKET //
-//--------------------//
+//================//
+//MARKET TRANSFER//
+//================//
 if (_flag_transfer_to_market){
 	exit;
 }
 
-//-----------------------//
-// NORMAL NPC PANE CLOSE //
-//-----------------------//
-if (
-	_ref_npc != undefined &&
-	instance_exists(_ref_npc)
-){
-
-	_ref_npc.hscr_close_npc_interaction();
+//================//
+//RELEASE NPC//
+//================//
+if (instance_exists(_ref_npc)){
+	_ref_npc.hscr_npc_close_interaction();
 }
 else{
 
@@ -29,8 +25,7 @@ else{
 	global.ref_active_gui = undefined;
 
 	if (instance_exists(obj_gui_controller)){
-
-		obj_gui_controller.hscr_toggle_gui_pause(false);
+		obj_gui_controller.hscr_gui_set_pause(false);
 	}
 	else{
 

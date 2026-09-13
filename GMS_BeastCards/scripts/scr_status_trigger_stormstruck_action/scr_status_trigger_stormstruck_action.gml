@@ -1,15 +1,21 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_trigger_stormstruck_action
+// SCRIPT: SCR_STATUS_TRIGGER_STORMSTRUCK_ACTION
 // FUNCTION: Triggers Stormstruck when a Beast successfully performs an action.
-//           Deals 2 neutral damage per current stack.
-//           Removes 1 Stormstruck stack.
-//           Refreshes the remaining status lifetime to 3 rounds.
+//           Deals stored NEU damage per current stack using the pre-consumption
+//           stack count, removes 1 stack, and refreshes remaining lifetime.
+//           Logs the resolved trigger and actual Overhealth / HP damage.
+//
+// ARGUMENTS: _ref_beast is the Beast whose successful action triggers Stormstruck.
+// RETURNS: True when Stormstruck successfully triggers; otherwise false.
 //
 //===============================================================================//
 
 function scr_status_trigger_stormstruck_action(_ref_beast){
 
+	//----------------//
+	//VALIDATE BEAST//
+	//----------------//
 	if (!instance_exists(_ref_beast)){
 		return false;
 	}
@@ -18,53 +24,55 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		return false;
 	}
 
-	//-------------------//
+	//===================//
 	//CHECK STORMSTRUCK//
-	//-------------------//
-	var _ref_stormstruck = scr_status_check(
-		"STORMSTRUCK",
-		_ref_beast
-	);
+	//===================//
+	var _ref_stormstruck = scr_status_check("STORMSTRUCK",_ref_beast);
 
 	if (_ref_stormstruck == -1){
 		return false;
 	}
 
-	//----------------//
+	if (!instance_exists(_ref_stormstruck)){
+		return false;
+	}
+
+	//================//
 	//GET STACK COUNT//
-	//----------------//
-	var _ct_stacks =
-		_ref_stormstruck._ct_status_stacks;
+	//================//
+	var _ct_stacks = _ref_stormstruck._ct_status_stacks;
 
 	if (_ct_stacks <= 0){
 		return false;
 	}
 
-	//----------------//
+	//================//
 	//DAMAGE AMOUNT//
-	//----------------//
-	var _val_damage =
+	//================//
+	var _val_damage_total =
 		_ct_stacks *
 		_ref_stormstruck._val_status_magnitude;
 
-	//----------------//
+	var _val_damage_remaining = _val_damage_total;
+
+	var _val_overhealth_damage = 0;
+	var _val_hp_damage = 0;
+
+	//===================//
 	//DAMAGE OVERHEALTH//
-	//----------------//
+	//===================//
 	if (
-		_val_damage > 0 &&
+		_val_damage_remaining > 0 &&
 		_ref_beast._val_overhealth > 0
 	){
 
-		var _val_overhealth_damage = min(
+		_val_overhealth_damage = min(
 			_ref_beast._val_overhealth,
-			_val_damage
+			_val_damage_remaining
 		);
 
-		_ref_beast._val_overhealth -=
-			_val_overhealth_damage;
-
-		_val_damage -=
-			_val_overhealth_damage;
+		_ref_beast._val_overhealth -= _val_overhealth_damage;
+		_val_damage_remaining -= _val_overhealth_damage;
 
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
@@ -76,20 +84,22 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		);
 	}
 
-	//----------//
+	//=============//
 	//DAMAGE HP//
-	//----------//
-	if (_val_damage > 0){
+	//=============//
+	if (
+		_val_damage_remaining > 0 &&
+		_ref_beast._val_cur_hp > 0
+	){
 
-		var _val_hp_damage = min(
-			_val_damage,
+		_val_hp_damage = min(
+			_val_damage_remaining,
 			_ref_beast._val_cur_hp
 		);
 
 		_ref_beast._val_cur_hp = max(
 			0,
-			_ref_beast._val_cur_hp -
-			_val_hp_damage
+			_ref_beast._val_cur_hp - _val_hp_damage
 		);
 
 		scr_gui_spawn_popup_scrolling(
@@ -102,6 +112,9 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		);
 	}
 
+	//==========//
+	//TICK VFX//
+	//==========//
 	scr_battle_vfx(
 		_ref_beast,
 		spr_battle_vfx_stormstruck_tick,
@@ -114,32 +127,59 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		snd_battle_stormstruck
 	);
 
-	//----------------//
+	//================//
+	//DEBUG TRIGGER//
+	//================//
+	var _ct_stacks_remaining = max(0,_ct_stacks - 1);
+
+	scr_debug_log_battle_trigger(
+		"STORMSTRUCK",
+		_ref_beast,
+		_ref_beast,
+		"STACKS: " + string(_ct_stacks) +
+		" -> " + string(_ct_stacks_remaining) +
+		" | NEU DAMAGE: " +
+		string(_val_overhealth_damage + _val_hp_damage) +
+		" | OVERHEALTH: " + string(_val_overhealth_damage) +
+		" | HP: " + string(_val_hp_damage),
+		"SCR_STATUS_TRIGGER_STORMSTRUCK_ACTION"
+	);
+
+	//================//
 	//REMOVE 1 STACK//
-	//----------------//
-	if (instance_exists(_ref_stormstruck)){
+	//================//
+	if (!instance_exists(_ref_stormstruck)){
+		return true;
+	}
 
-		_ref_stormstruck._ct_status_stacks--;
+	_ref_stormstruck._ct_status_stacks--;
 
-		if (_ref_stormstruck._ct_status_stacks <= 0){
+	//--------------------//
+	//REMOVE EMPTY STATUS//
+	//--------------------//
+	if (_ref_stormstruck._ct_status_stacks <= 0){
 
-			scr_status_dot_stormstruck(
-				"DEATH",
-				_ref_stormstruck
-			);
-		}
-		else{
+		scr_status_dot_stormstruck(
+			"DEATH",
+			_ref_stormstruck
+		);
 
-			//----------------//
-			//REFRESH LIFETIME//
-			//----------------//
-			scr_status_refresh_lifetime(
-				_ref_stormstruck,
-				3
-			);
+		return true;
+	}
 
-			scr_status_reposition(_ref_beast);
-		}
+	//==================//
+	//REFRESH LIFETIME//
+	//==================//
+	scr_status_refresh_lifetime(
+		_ref_stormstruck,
+		3
+	);
+
+	if (
+		instance_exists(_ref_beast) &&
+		_ref_beast._val_cur_hp > 0
+	){
+		scr_status_reposition(_ref_beast);
 	}
 
 	return true;

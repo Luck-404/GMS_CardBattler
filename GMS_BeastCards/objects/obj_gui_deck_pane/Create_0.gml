@@ -2,28 +2,35 @@
 //
 // CREATE: OBJ_GUI_DECK_PANE
 // FUNCTION: Initializes the deck GUI pane.
-// Stores deck display layout, grid spacing, and card preview values.
-// Displays the current player deck using card structs.
+//           Stores deck display layout, grid spacing, and card preview values.
+//           Displays the current player deck using card structs.
 //
 //===============================================================================//
 
-//
-// VARIABLES
-//
+//================//
+//VARIABLES//
+//================//
 #region VARIABLES
+
 depth = -1;
 
-// DECK REFERENCE
-_ct_card = ds_list_size(global.list_player_deck);
+//----------------//
+//DECK REFERENCE//
+//----------------//
+_ct_cards = ds_list_size(global.list_player_deck);
 _str_type = "DECK";
 
-// PANE SIZING
+//----------------//
+//PANE SIZING//
+//----------------//
 _val_pane_w = 800;
 _val_pane_h = 800;
 _val_pane_left = x - (_val_pane_w * 0.5);
 _val_pane_top = y - (_val_pane_h * 0.5);
 
-// GRID LAYOUT
+//----------------//
+//GRID LAYOUT//
+//----------------//
 _ct_cols = 6;
 _ct_rows = 5;
 
@@ -39,19 +46,24 @@ _val_grid_h = (_ct_rows * _val_slot_h) + ((_ct_rows - 1) * _val_spacing_y);
 _val_grid_start_x = x - (_val_grid_w * 0.5);
 _val_grid_start_y = y - (_val_grid_h * 0.5);
 
-// CARD DISPLAY
+//----------------//
+//CARD DISPLAY//
+//----------------//
 _val_card_scale = 0.23;
 _val_preview_scale = 1.0;
+
 #endregion
 
-//
-// INIT
-//
+//================//
+//INIT//
+//================//
 #region INIT
+
 #endregion
 
-//
-// METHODS
-//
+//================//
+//METHODS//
+//================//
 #region METHODS
+
 #endregion

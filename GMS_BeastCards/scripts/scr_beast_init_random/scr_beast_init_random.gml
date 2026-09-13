@@ -1,65 +1,98 @@
 //===============================================================================//
 //
-// SCRIPT: scr_beast_init_random
-// FUNCTION: Creates a randomized Beast struct from its base Beast data.
+// SCRIPT: SCR_BEAST_INIT_RANDOM
+// FUNCTION: Creates a randomized Beast struct from its base Beast definition.
 //           Randomizes its color subtype, ability, and breed.
-//           Calculates maximum HP and assigns a unique Beast UID.
+//           Initializes persistent runtime fields, HP, held item state,
+//           and assigns a unique Beast UID.
+//
+// ARGUMENTS: _str_beast_name is the Beast species to initialize.
+// RETURNS: A newly randomized Beast struct, or undefined if initialization fails.
 //
 //===============================================================================//
 
 function scr_beast_init_random(_str_beast_name){
 
-	//----------------//
+	//================//
 	//GET BASE BEAST//
-	//----------------//
+	//================//
 	var _stct_new_beast = scr_beast_get_info(_str_beast_name);
 
 	if (!is_struct(_stct_new_beast)){
 
-		show_debug_message(
-			"BEAST INIT ERROR | INVALID BEAST: " +
-			string(_str_beast_name)
+		scr_debug_log(
+			"BEAST",
+			"INIT",
+			undefined,
+			"INVALID BEAST DEFINITION: " + string_upper(string(_str_beast_name)),
+			"ERROR",
+			"SCR_BEAST_INIT_RANDOM"
 		);
 
 		return undefined;
 	}
 
-	//---------------------//
+	//======================//
+	//INITIALIZE HELD ITEM//
+	//======================//
+	_stct_new_beast._stct_beast_held_item = "EMPTY";
+
+	//======================//
 	//RANDOMIZE COLOR TYPE//
-	//---------------------//
-	#region COLOR TYPE
+	//======================//
+	var _arr_color_types = _stct_new_beast._arr_beast_color_types;
 
-	var _arr_color_types =
-		_stct_new_beast._str_beast_color_type;
+	if (
+		!is_array(_arr_color_types) ||
+		array_length(_arr_color_types) <= 0
+	){
 
-	_stct_new_beast._str_beast_color_type =
-		_arr_color_types[
-			irandom(array_length(_arr_color_types) - 1)
-		];
+		scr_debug_log(
+			"BEAST",
+			"INIT",
+			_stct_new_beast,
+			"INVALID COLOR TYPE ARRAY",
+			"ERROR",
+			"SCR_BEAST_INIT_RANDOM"
+		);
 
-	#endregion
+		return undefined;
+	}
 
-	//-----------------//
+	_stct_new_beast._str_beast_color_type = _arr_color_types[
+		irandom(array_length(_arr_color_types) - 1)
+	];
+
+	//==================//
 	//RANDOMIZE ABILITY//
-	//-----------------//
-	#region ABILITY
+	//==================//
+	var _arr_abilities = _stct_new_beast._arr_beast_abilities;
 
-	var _arr_abilities =
-		_stct_new_beast._str_beast_ability;
+	if (
+		!is_array(_arr_abilities) ||
+		array_length(_arr_abilities) <= 0
+	){
 
-	_stct_new_beast._str_beast_ability =
-		_arr_abilities[
-			irandom(array_length(_arr_abilities) - 1)
-		];
+		scr_debug_log(
+			"BEAST",
+			"INIT",
+			_stct_new_beast,
+			"INVALID ABILITY ARRAY",
+			"ERROR",
+			"SCR_BEAST_INIT_RANDOM"
+		);
 
-	#endregion
+		return undefined;
+	}
 
-	//---------------//
+	_stct_new_beast._str_beast_ability = _arr_abilities[
+		irandom(array_length(_arr_abilities) - 1)
+	];
+
+	//================//
 	//RANDOMIZE BREED//
-	//---------------//
-	#region BREED
-
-	var _arr_breeds = [
+	//================//
+	static _arr_breeds = [
 		"BULKY",
 		"HALE",
 		"STRONG",
@@ -68,52 +101,40 @@ function scr_beast_init_random(_str_beast_name){
 		"WARDED"
 	];
 
-	_stct_new_beast._str_beast_breed =
-		_arr_breeds[
-			irandom(array_length(_arr_breeds) - 1)
-		];
+	_stct_new_beast._str_beast_breed = _arr_breeds[
+		irandom(array_length(_arr_breeds) - 1)
+	];
 
-	#endregion
-
-	//-------------//
+	//================//
 	//INITIALIZE HP//
-	//-------------//
-	#region HP
-
+	//================//
 	var _val_max_hp = scr_beast_get_max_hp(
 		_stct_new_beast._val_beast_hp_stat,
 		_stct_new_beast._val_beast_level
 	);
 
-	_stct_new_beast._val_beast_hp_max =
-		_val_max_hp;
+	if (_val_max_hp <= 0){
 
-	_stct_new_beast._val_beast_hp_cur =
-		_val_max_hp;
-
-	if (_stct_new_beast._val_beast_hp_max <= 0){
-
-		show_debug_message(
-			"BEAST INIT ERROR | INVALID MAX HP | " +
-			_stct_new_beast._str_beast_name
+		scr_debug_log(
+			"BEAST",
+			"INIT",
+			_stct_new_beast,
+			"INVALID MAXIMUM HP: " + string(_val_max_hp),
+			"ERROR",
+			"SCR_BEAST_INIT_RANDOM"
 		);
 
 		return undefined;
 	}
 
-	#endregion
+	_stct_new_beast._val_beast_hp_max = _val_max_hp;
+	_stct_new_beast._val_beast_hp_cur = _val_max_hp;
 
-	//----------//
+	//================//
 	//ASSIGN UID//
-	//----------//
-	#region UID
-
-	_stct_new_beast._uid_beast =
-		global.uid_next_beast;
-
+	//================//
+	_stct_new_beast._uid_beast = global.uid_next_beast;
 	global.uid_next_beast++;
-
-	#endregion
 
 	return _stct_new_beast;
 }

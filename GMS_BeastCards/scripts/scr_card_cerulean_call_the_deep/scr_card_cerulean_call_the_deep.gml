@@ -2,46 +2,39 @@
 //
 // SCRIPT: SCR_CARD_CERULEAN_CALL_THE_DEEP
 // FUNCTION: Resolves Call the Deep.
-//           Fills every available Minion slot on the selected team
-//           with Tentacles.
+//           Fills every available Minion slot on the selected team with Tentacles.
 //           Each affected Beast gains an expendable +5 direct damage Buff.
+//
+// ARGUMENTS: _stct_card is the Call the Deep card struct.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
+// RETURNS: Nothing.
 //
 //===============================================================================//
 
 function scr_card_cerulean_call_the_deep(_stct_card,_ref_caster,_ref_target){
 
-	//--------------------//
+	//====================//
 	//GET SELECTED TEAM//
-	//--------------------//
-	var _list_targets =
-		scr_battle_get_target_team_list(
-			_ref_target
-		);
+	//====================//
+	var _list_targets = scr_battle_get_target_team_list(_ref_target);
 
-	if (_list_targets == undefined){
+	if (_list_targets == undefined || !ds_exists(_list_targets,ds_type_list)){
 		return;
 	}
 
-	//----------------//
+	var _ct_targets = ds_list_size(_list_targets);
+
+	//================//
 	//STORE TARGET//
-	//----------------//
-	var _ref_original_target =
-		global.ref_target_beast;
+	//================//
+	var _ref_original_target = global.ref_target_beast;
 
 	//==================//
 	//AFFECT EACH BEAST//
 	//==================//
-	for (
-		var _it_target = 0;
-		_it_target < ds_list_size(_list_targets);
-		_it_target++
-	){
+	for (var _it_target = 0;_it_target < _ct_targets;_it_target++){
 
-		var _ref_beast =
-			ds_list_find_value(
-				_list_targets,
-				_it_target
-			);
+		var _ref_beast = ds_list_find_value(_list_targets,_it_target);
 
 		if (!instance_exists(_ref_beast)){
 			continue;
@@ -74,21 +67,19 @@ function scr_card_cerulean_call_the_deep(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		//TARGET BEAST//
 		//----------------//
-		global.ref_target_beast =
-			_ref_beast;
+		global.ref_target_beast = _ref_beast;
 
 		//----------------------//
 		//GRANT DAMAGE CHARGE//
 		//----------------------//
-		scr_apply_buff_status(
+		scr_status_apply_buff(
 			"CALL_THE_DEEP",
 			5
 		);
 	}
 
-	//----------------//
+	//================//
 	//RESTORE TARGET//
-	//----------------//
-	global.ref_target_beast =
-		_ref_original_target;
+	//================//
+	global.ref_target_beast = _ref_original_target;
 }

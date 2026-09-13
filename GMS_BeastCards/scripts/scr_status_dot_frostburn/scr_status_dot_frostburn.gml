@@ -1,53 +1,52 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DOT_FROSTBURN
-// FUNCTION: Handles the Frostburn damage-over-time status.
+// FUNCTION: Handles the Frostburn damage-over-time Status.
 //           Stackable Infinite.
 //           Each application destroys 3 Armor immediately.
 //           Each round, deals 2 NEU damage per Frostburn stack.
 //           Each round, removes 1 positive Buff from the host.
 //
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, and _val_lifetime is retained for API consistency.
+// RETURNS: The active Frostburn Status on APPLY; otherwise undefined.
+//
 //===============================================================================//
 
-function scr_status_dot_frostburn(
-	_str_tag,
-	_ref_status,
-	_val_lifetime=undefined
-){
+function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			var _ref_target =
-				global.ref_target_beast;
+			var _ref_target = global.ref_target_beast;
 
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			//----------------//
-			//DESTROY 3 ARMOR//
-			//----------------//
-			var _val_armor_destroyed =
-				min(
-					3,
-					_ref_target._val_armor
-				);
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//================//
+			//DESTROY ARMOR//
+			//================//
+			var _val_armor_destroyed = min(3,_ref_target._val_armor);
 
 			if (_val_armor_destroyed > 0){
 
-				_ref_target._val_armor -=
-					_val_armor_destroyed;
+				_ref_target._val_armor -= _val_armor_destroyed;
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
-					"-" +
-					string(_val_armor_destroyed) +
-					" ARMOR",
+					"-" + string(_val_armor_destroyed) + " ARMOR",
 					undefined,
 					c_aqua,
 					_ref_target.x + irandom_range(-32,32),
@@ -58,166 +57,148 @@ function scr_status_dot_frostburn(
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"FROSTBURN",
-					_ref_target
-				);
+			var _ref_existing_status = scr_status_check("FROSTBURN",_ref_target);
+			var _ref_applied_status = undefined;
 
-			//----------------//
+			//================//
 			//STACK EXISTING//
-			//----------------//
+			//================//
 			if (_ref_existing_status != -1){
 
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
 				_ref_existing_status._ct_status_stacks++;
-				
-				scr_battle_vfx(
-					_ref_target,
-					spr_battle_vfx_frostburn,
-					undefined,
-					undefined,
-					32,
-					32,
-					1,
-					0,
-					snd_battle_frostburn
-				);
 
 				_ref_existing_status._str_status_desc =
 					"DEALS " +
 					string(
 						_ref_existing_status._ct_status_stacks *
-						2
+						_ref_existing_status._val_status_magnitude
 					) +
 					" NEU DMG EACH ROUND; REMOVES 1 BUFF";
 
-				scr_status_reposition(
-					_ref_target
-				);
+				scr_status_reposition(_ref_target);
 
-				return _ref_existing_status;
+				_ref_applied_status = _ref_existing_status;
 			}
 
-			//---------------//
+			//================//
 			//CREATE STATUS//
-			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
+			//================//
+			else{
+
+				var _ref_new_status = instance_create_layer(
 					_ref_target.x,
 					_ref_target.y,
 					"ily_status",
 					obj_battle_status
 				);
 
-			//--------------------//
-			//INFINITE + STACKABLE//
-			//--------------------//
-			scr_status_init_lifetime(
-				_ref_new_status,
-				-1,
-				true,
-				true
-			);
-
-			//-------------//
-			//STATUS DATA//
-			//-------------//
-			_ref_new_status._scr_status =
-				scr_status_dot_frostburn;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"DOT";
-
-			_ref_new_status._str_status_name =
-				"FROSTBURN";
-
-			_ref_new_status._str_status_desc =
-				"DEALS 2 NEU DMG EACH ROUND; REMOVES 1 BUFF";
-
-			_ref_new_status._spr_status =
-				spr_status_dot_frostburn;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._val_status_magnitude =
-				2;
-
-			_ref_new_status._str_trigger_region =
-				"START";
-
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
-			ds_list_add(
-				_ref_target._list_statuses,
-				_ref_new_status
-			);
-
-			scr_status_reposition(
-				_ref_target
-			);
-
-			scr_battle_vfx(
-					_ref_target,
-					spr_battle_vfx_frostburn,
-					undefined,
-					undefined,
-					32,
-					32,
-					1,
-					0,
-					snd_battle_frostburn
+				//---------------------//
+				//INITIALIZE LIFETIME//
+				//---------------------//
+				scr_status_init_lifetime(
+					_ref_new_status,
+					-1,
+					true,
+					true
 				);
-				
-			return _ref_new_status;
+
+				//-------------//
+				//STATUS DATA//
+				//-------------//
+				_ref_new_status._scr_status = scr_status_dot_frostburn;
+
+				_ref_new_status._ref_host = _ref_target;
+
+				_ref_new_status._str_status_type = "DOT";
+				_ref_new_status._str_status_name = "FROSTBURN";
+
+				_ref_new_status._spr_status = spr_status_dot_frostburn;
+
+				_ref_new_status._ct_status_stacks = 1;
+				_ref_new_status._flag_status_stackable = true;
+
+				_ref_new_status._val_status_magnitude = 2;
+
+				_ref_new_status._str_status_desc =
+					"DEALS " +
+					string(_ref_new_status._val_status_magnitude) +
+					" NEU DMG EACH ROUND; REMOVES 1 BUFF";
+
+				_ref_new_status._str_trigger_region = "START";
+
+				//----------------//
+				//REGISTER STATUS//
+				//----------------//
+				ds_list_add(
+					_ref_target._list_statuses,
+					_ref_new_status
+				);
+
+				scr_status_reposition(_ref_target);
+
+				_ref_applied_status = _ref_new_status;
+			}
+
+			//========================//
+			//APPLICATION PRESENTATION//
+			//========================//
+			scr_battle_vfx(
+				_ref_target,
+				spr_battle_vfx_frostburn,
+				undefined,
+				undefined,
+				32,
+				32,
+				1,
+				0,
+				snd_battle_frostburn
+			);
+
+			return _ref_applied_status;
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				_ref_status._str_status_command =
-					"DEATH";
+				scr_status_dot_frostburn(
+					"DEATH",
+					_ref_status
+				);
 
 				return undefined;
 			}
 
-			//----------------//
+			//==================//
 			//CALCULATE DAMAGE//
-			//----------------//
+			//==================//
 			var _val_damage =
 				_ref_status._ct_status_stacks *
 				_ref_status._val_status_magnitude;
 
-			//------------//
+			//============//
 			//OVERHEALTH//
-			//------------//
+			//============//
 			if (
 				_val_damage > 0 &&
 				_ref_host._val_overhealth > 0
 			){
 
-				var _val_blocked =
-					min(
-						_ref_host._val_overhealth,
-						_val_damage
-					);
+				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -228,26 +209,19 @@ function scr_status_dot_frostburn(
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_overhealth -=
-					_val_blocked;
-
-				_val_damage -=
-					_val_blocked;
+				_ref_host._val_overhealth -= _val_blocked;
+				_val_damage -= _val_blocked;
 			}
 
-			//---------//
+			//=========//
 			//HOST HP//
-			//---------//
+			//=========//
 			if (
 				_val_damage > 0 &&
 				_ref_host._val_cur_hp > 0
 			){
 
-				var _val_actual_damage =
-					min(
-						_val_damage,
-						_ref_host._val_cur_hp
-					);
+				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -258,31 +232,26 @@ function scr_status_dot_frostburn(
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_cur_hp =
-					max(
-						0,
-						_ref_host._val_cur_hp -
-						_val_actual_damage
-					);
+				_ref_host._val_cur_hp = max(
+					0,
+					_ref_host._val_cur_hp - _val_actual_damage
+				);
 			}
 
-			//------------------------//
-			//REMOVE 1 POSITIVE BUFF//
-			//------------------------//
-			if (
-				instance_exists(_ref_host) &&
-				_ref_host._val_cur_hp > 0
-			){
+			//======================//
+			//REMOVE POSITIVE BUFF//
+			//======================//
+			if (_ref_host._val_cur_hp > 0){
 
-				scr_cleanse_buff(
+				scr_status_cleanse_buff(
 					_ref_host,
 					1
 				);
 			}
 
-			//--------//
+			//==========//
 			//TICK VFX//
-			//--------//
+			//==========//
 			scr_battle_vfx(
 				_ref_host,
 				spr_battle_vfx_frostburn_tick,
@@ -296,29 +265,20 @@ function scr_status_dot_frostburn(
 			);
 
 			//----------------//
-			//TICK LIFETIME//
+			//UPDATE LIFETIME//
 			//----------------//
-			scr_status_tick_lifetime(
-				_ref_status
-			);
-
-			scr_status_reposition(
-				_ref_host
-			);
+			scr_status_tick_lifetime(_ref_status);
+			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){
-
-				scr_status_destroy(
-					_ref_status
-				);
+				scr_status_destroy(_ref_status);
 			}
 
 		break;

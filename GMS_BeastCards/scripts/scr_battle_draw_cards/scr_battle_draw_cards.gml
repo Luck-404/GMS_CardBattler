@@ -3,7 +3,7 @@
 // SCRIPT: SCR_BATTLE_DRAW_CARDS
 // FUNCTION: Draws a requested number of Cards from the player's battle deck.
 //           Refills the deck from discard when necessary, calculates the final
-//           hand layout, and animates each newly drawn Card into position.
+//           hand layout, animates each Card, and logs successful draws.
 //
 // INPUT:    _ct_amount - Number of Cards requested from the battle deck.
 // USES:     Player battle Deck, Hand, and Discard lists along with shared
@@ -35,9 +35,9 @@ function scr_battle_draw_cards(_ct_amount){
 	var _ct_draw_duration = 8;
 	var _ct_draw_stagger = 2;
 
-	//----------------//
+	//-----------------//
 	//BATTLE CARD LISTS//
-	//----------------//
+	//-----------------//
 	var _list_deck = obj_battle_player_controller._list_battle_deck;
 	var _list_hand = obj_battle_player_controller._list_battle_hand;
 	var _list_discard = obj_battle_player_controller._list_battle_discard;
@@ -135,6 +135,46 @@ function scr_battle_draw_cards(_ct_amount){
 			_val_end_y,
 			_ct_draw_duration,
 			_it_draw * _ct_draw_stagger
+		);
+	}
+
+	#endregion
+
+	#region DEBUG
+
+	//----------------//
+	//LOG CARDS DRAWN//
+	//----------------//
+	if (_ct_drawn > 0){
+
+		var _str_drawn_cards = "";
+
+		for (var _it_draw = 0; _it_draw < array_length(_arr_drawn_cards); _it_draw++){
+
+			var _ref_drawn_card = _arr_drawn_cards[_it_draw];
+
+			if (!instance_exists(_ref_drawn_card) || !is_struct(_ref_drawn_card._ref_card)){
+				continue;
+			}
+
+			if (_str_drawn_cards != ""){
+				_str_drawn_cards += ", ";
+			}
+
+			_str_drawn_cards += string_upper(_ref_drawn_card._ref_card._str_card_name);
+		}
+
+		scr_debug_log(
+			"CARDS",
+			"DRAW",
+			undefined,
+			"PLAYER DREW " + string(_ct_drawn) +
+			(_ct_drawn == 1 ? " CARD" : " CARDS") +
+			" | CARDS: " + _str_drawn_cards +
+			" | HAND: " + string(ds_list_size(_list_hand)) +
+			" | DECK: " + string(ds_list_size(_list_deck)),
+			"BATTLE",
+			"SCR_BATTLE_DRAW_CARDS"
 		);
 	}
 

@@ -1,14 +1,17 @@
 //===============================================================================//
 //
-// SCRIPT: scr_minion_get_tag
+// SCRIPT: SCR_MINION_GET_TAG
 // FUNCTION: Returns the gameplay tag assigned to a Minion ID.
 //           Minion tags are used by Talents and other tag-based effects.
+//           Returns NONE when the Minion has no assigned tag.
+//
+// INPUT:    _str_minion_id - Minion ID whose gameplay tag is requested.
 //
 //===============================================================================//
 
-function scr_minion_get_tag(_str_id){
+function scr_minion_get_tag(_str_minion_id){
 
-	switch(_str_id){
+	switch (_str_minion_id){
 
 		//=========//
 		//BEASTLING//
@@ -21,7 +24,6 @@ function scr_minion_get_tag(_str_id){
 		case "ASH_PHOENIX":
 
 			return "BEASTLING";
-
 
 		//=========//
 		//ELEMENTAL//
@@ -38,7 +40,6 @@ function scr_minion_get_tag(_str_id){
 
 			return "ELEMENTAL";
 
-
 		//=========//
 		//CONSTRUCT//
 		//=========//
@@ -49,17 +50,17 @@ function scr_minion_get_tag(_str_id){
 
 			return "CONSTRUCT";
 
-
 		//======//
 		//TURRET//
 		//======//
 		case "MAGMA_CANNON":
 		case "ABYSSAL_HARPOON":
+
 			return "TURRET";
 	}
 
-	//--------------------//
-	//NO TAG / FUTURE TAG//
-	//--------------------//
+	//--------//
+	//NO TAG//
+	//--------//
 	return "NONE";
 }

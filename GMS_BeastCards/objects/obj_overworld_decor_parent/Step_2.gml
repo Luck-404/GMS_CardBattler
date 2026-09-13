@@ -1,9 +1,12 @@
 //===============================================================================//
 //
-// END STEP: OBJ_DECOR_PARENT
-// FUNCTION:	Updates depth based on object position
-//				Supports Y-sorted rendering for world objects
-//				Ensures decor draws correctly relative to the player and scenery
+// END STEP: OBJ_OVERWORLD_DECOR_PARENT
+// FUNCTION: Updates decor depth from its vertical world position.
+//           Supports Y-sorted rendering with the player and scenery.
 //
 //===============================================================================//
+
+//================//
+//UPDATE DEPTH//
+//================//
 depth = -bbox_bottom;

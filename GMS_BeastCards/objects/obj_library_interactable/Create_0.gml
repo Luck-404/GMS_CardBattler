@@ -2,29 +2,33 @@
 //
 // CREATE: OBJ_LIBRARY_INTERACTABLE
 // FUNCTION: Initializes the library interactable.
-// Stores interaction cooldown state.
-// Opens the library GUI when activated by the player.
+//           Stores interaction cooldown state.
+//           Opens the library GUI when activated by the player.
 //
 //===============================================================================//
 
-//
-// VARIABLES
-//
+//================//
+//VARIABLES//
+//================//
 #region VARIABLES
+
 depth = 1;
 
 _flag_triggered = false;
-_val_cooldown = 10;
+_ct_cooldown = 10;
+
 #endregion
 
-//
-// INIT
-//
+//================//
+//INIT//
+//================//
 #region INIT
+
 #endregion
 
-//
-// METHODS
-//
+//================//
+//METHODS//
+//================//
 #region METHODS
+
 #endregion

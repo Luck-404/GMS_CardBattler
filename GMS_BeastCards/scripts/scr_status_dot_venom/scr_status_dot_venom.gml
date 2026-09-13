@@ -1,316 +1,216 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DOT_VENOM
-// FUNCTION: Handles the Venom damage-over-time status.
+// FUNCTION: Handles the Venom damage-over-time Status.
 //           Stackable Timed.
 //           Deals 1 damage below 4 stacks, then +4 damage every 4 stacks.
-//           Each stack reduces PPOW, MPOW, PDEF, and MDEF by 2 while active.
+//           Each stack reduces PPOW, MPOW, PDEF, and MDEF by up to 2.
 //           Reapplications add one stack and refresh to the stored maximum life.
+//           Restores the exact stat reductions when the Status ends.
+//
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, _val_lifetime optionally sets duration, and
+//            _flag_trigger_plague_garden controls Plague Garden reactions.
+// RETURNS: The active Venom Status on APPLY; otherwise undefined.
 //
 //===============================================================================//
+
 function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag_trigger_plague_garden=true){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			var _ref_target =
-				global.ref_target_beast;
+			var _ref_target = global.ref_target_beast;
 
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			if (_ref_target._ref_unit == undefined){
+			if (!is_struct(_ref_target._ref_unit)){
 				return undefined;
 			}
 
-			//----------------//
-			//DEFAULT LENGTH//
-			//----------------//
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//==========//
+			//DEFAULTS//
+			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 3;
 			}
 
+			_val_lifetime = max(1,_val_lifetime);
+
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"VENOM",
-					_ref_target
-				);
+			var _ref_existing_status = scr_status_check("VENOM",_ref_target);
+			var _ref_applied_status = undefined;
 
-			//----------------//
+			//================//
 			//STACK EXISTING//
-			//----------------//
+			//================//
 			if (_ref_existing_status != -1){
 
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
 				_ref_existing_status._ct_status_stacks++;
-				
-				//----------------//
-				//APPLICATION VFX//
-				//----------------//
-				scr_battle_vfx(
-					_ref_target,
-					spr_battle_vfx_venom,
-					undefined,
-					undefined,
-					16,
-					16,
-					1,
-					0,
-					snd_battle_venom
-				);
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
-
 				//--------------------//
 				//REDUCE TARGET STATS//
 				//--------------------//
-				var _val_old_ppow =
-					_ref_target._ref_unit._val_beast_ppow_stat;
+				var _val_old_ppow = _ref_target._ref_unit._val_beast_ppow_stat;
+				var _val_old_mpow = _ref_target._ref_unit._val_beast_mpow_stat;
+				var _val_old_pdef = _ref_target._ref_unit._val_beast_pdef_stat;
+				var _val_old_mdef = _ref_target._ref_unit._val_beast_mdef_stat;
 
-				var _val_old_mpow =
-					_ref_target._ref_unit._val_beast_mpow_stat;
-
-				var _val_old_pdef =
-					_ref_target._ref_unit._val_beast_pdef_stat;
-
-				var _val_old_mdef =
-					_ref_target._ref_unit._val_beast_mdef_stat;
-
-
-				_ref_target._ref_unit._val_beast_ppow_stat =
-					max(
-						0,
-						_ref_target._ref_unit._val_beast_ppow_stat -
-						2
-					);
-
-				_ref_target._ref_unit._val_beast_mpow_stat =
-					max(
-						0,
-						_ref_target._ref_unit._val_beast_mpow_stat -
-						2
-					);
-
-				_ref_target._ref_unit._val_beast_pdef_stat =
-					max(
-						0,
-						_ref_target._ref_unit._val_beast_pdef_stat -
-						2
-					);
-
-				_ref_target._ref_unit._val_beast_mdef_stat =
-					max(
-						0,
-						_ref_target._ref_unit._val_beast_mdef_stat -
-						2
-					);
-
+				_ref_target._ref_unit._val_beast_ppow_stat = max(0,_val_old_ppow - 2);
+				_ref_target._ref_unit._val_beast_mpow_stat = max(0,_val_old_mpow - 2);
+				_ref_target._ref_unit._val_beast_pdef_stat = max(0,_val_old_pdef - 2);
+				_ref_target._ref_unit._val_beast_mdef_stat = max(0,_val_old_mdef - 2);
 
 				//-------------------------//
 				//TRACK ACTUAL REDUCTIONS//
 				//-------------------------//
-				_ref_existing_status._val_venom_ppow_reduction +=
-					_val_old_ppow -
-					_ref_target._ref_unit._val_beast_ppow_stat;
+				_ref_existing_status._val_venom_ppow_reduction += _val_old_ppow - _ref_target._ref_unit._val_beast_ppow_stat;
+				_ref_existing_status._val_venom_mpow_reduction += _val_old_mpow - _ref_target._ref_unit._val_beast_mpow_stat;
+				_ref_existing_status._val_venom_pdef_reduction += _val_old_pdef - _ref_target._ref_unit._val_beast_pdef_stat;
+				_ref_existing_status._val_venom_mdef_reduction += _val_old_mdef - _ref_target._ref_unit._val_beast_mdef_stat;
 
-				_ref_existing_status._val_venom_mpow_reduction +=
-					_val_old_mpow -
-					_ref_target._ref_unit._val_beast_mpow_stat;
-
-				_ref_existing_status._val_venom_pdef_reduction +=
-					_val_old_pdef -
-					_ref_target._ref_unit._val_beast_pdef_stat;
-
-				_ref_existing_status._val_venom_mdef_reduction +=
-					_val_old_mdef -
-					_ref_target._ref_unit._val_beast_mdef_stat;
-				
-				if (_flag_trigger_plague_garden){
-
-					scr_trigger_plague_garden(
-						_ref_target,
-						"VENOM"
-					);
-				}
-
-
-				return _ref_existing_status;
+				_ref_applied_status = _ref_existing_status;
 			}
 
-			//---------------//
+			//================//
 			//CREATE STATUS//
-			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
+			//================//
+			else{
+
+				var _ref_new_status = instance_create_layer(
 					_ref_target.x,
 					_ref_target.y,
 					"ily_status",
 					obj_battle_status
 				);
 
-			_ref_new_status._scr_status =
-				scr_status_dot_venom;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"DOT";
-
-			_ref_new_status._str_status_name =
-				"VENOM";
-
-			_ref_new_status._str_status_desc =
-				"DAMAGE INCREASES EVERY 4 STACKS AND REDUCES COMBAT STATS";
-
-			_ref_new_status._spr_status =
-				spr_status_dot_venom;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._str_trigger_region =
-				"START";
-
-			//---------------------//
-			//INITIALIZE LIFETIME//
-			//---------------------//
-			scr_status_init_lifetime(
-				_ref_new_status,
-				_val_lifetime,
-				true,
-				false
-			);
-
-			//-----------------------//
-			//TRACK STAT REDUCTIONS//
-			//-----------------------//
-			_ref_new_status._val_venom_ppow_reduction =
-				0;
-
-			_ref_new_status._val_venom_mpow_reduction =
-				0;
-
-			_ref_new_status._val_venom_pdef_reduction =
-				0;
-
-			_ref_new_status._val_venom_mdef_reduction =
-				0;
-
-			//--------------------//
-			//REDUCE TARGET STATS//
-			//--------------------//
-			var _val_old_ppow =
-				_ref_target._ref_unit._val_beast_ppow_stat;
-
-			var _val_old_mpow =
-				_ref_target._ref_unit._val_beast_mpow_stat;
-
-			var _val_old_pdef =
-				_ref_target._ref_unit._val_beast_pdef_stat;
-
-			var _val_old_mdef =
-				_ref_target._ref_unit._val_beast_mdef_stat;
-
-
-			_ref_target._ref_unit._val_beast_ppow_stat =
-				max(
-					0,
-					_ref_target._ref_unit._val_beast_ppow_stat -
-					2
+				//---------------------//
+				//INITIALIZE LIFETIME//
+				//---------------------//
+				scr_status_init_lifetime(
+					_ref_new_status,
+					_val_lifetime,
+					true,
+					false
 				);
 
-			_ref_target._ref_unit._val_beast_mpow_stat =
-				max(
-					0,
-					_ref_target._ref_unit._val_beast_mpow_stat -
-					2
+				//-------------//
+				//STATUS DATA//
+				//-------------//
+				_ref_new_status._scr_status = scr_status_dot_venom;
+
+				_ref_new_status._ref_host = _ref_target;
+
+				_ref_new_status._str_status_type = "DOT";
+				_ref_new_status._str_status_name = "VENOM";
+				_ref_new_status._str_status_desc = "DAMAGE INCREASES EVERY 4 STACKS; EACH STACK REDUCES COMBAT STATS BY 2";
+
+				_ref_new_status._spr_status = spr_status_dot_venom;
+
+				_ref_new_status._ct_status_stacks = 1;
+				_ref_new_status._flag_status_stackable = true;
+
+				_ref_new_status._str_trigger_region = "START";
+
+				//-----------------------//
+				//TRACK STAT REDUCTIONS//
+				//-----------------------//
+				_ref_new_status._val_venom_ppow_reduction = 0;
+				_ref_new_status._val_venom_mpow_reduction = 0;
+				_ref_new_status._val_venom_pdef_reduction = 0;
+				_ref_new_status._val_venom_mdef_reduction = 0;
+
+				//--------------------//
+				//REDUCE TARGET STATS//
+				//--------------------//
+				var _val_old_ppow = _ref_target._ref_unit._val_beast_ppow_stat;
+				var _val_old_mpow = _ref_target._ref_unit._val_beast_mpow_stat;
+				var _val_old_pdef = _ref_target._ref_unit._val_beast_pdef_stat;
+				var _val_old_mdef = _ref_target._ref_unit._val_beast_mdef_stat;
+
+				_ref_target._ref_unit._val_beast_ppow_stat = max(0,_val_old_ppow - 2);
+				_ref_target._ref_unit._val_beast_mpow_stat = max(0,_val_old_mpow - 2);
+				_ref_target._ref_unit._val_beast_pdef_stat = max(0,_val_old_pdef - 2);
+				_ref_target._ref_unit._val_beast_mdef_stat = max(0,_val_old_mdef - 2);
+
+				//-------------------------//
+				//STORE ACTUAL REDUCTIONS//
+				//-------------------------//
+				_ref_new_status._val_venom_ppow_reduction = _val_old_ppow - _ref_target._ref_unit._val_beast_ppow_stat;
+				_ref_new_status._val_venom_mpow_reduction = _val_old_mpow - _ref_target._ref_unit._val_beast_mpow_stat;
+				_ref_new_status._val_venom_pdef_reduction = _val_old_pdef - _ref_target._ref_unit._val_beast_pdef_stat;
+				_ref_new_status._val_venom_mdef_reduction = _val_old_mdef - _ref_target._ref_unit._val_beast_mdef_stat;
+
+				//----------------//
+				//REGISTER STATUS//
+				//----------------//
+				ds_list_add(
+					_ref_target._list_statuses,
+					_ref_new_status
 				);
 
-			_ref_target._ref_unit._val_beast_pdef_stat =
-				max(
-					0,
-					_ref_target._ref_unit._val_beast_pdef_stat -
-					2
-				);
+				scr_status_reposition(_ref_target);
 
-			_ref_target._ref_unit._val_beast_mdef_stat =
-				max(
-					0,
-					_ref_target._ref_unit._val_beast_mdef_stat -
-					2
-				);
+				_ref_applied_status = _ref_new_status;
+			}
 
-			//-------------------------//
-			//STORE ACTUAL REDUCTIONS//
-			//-------------------------//
-			_ref_new_status._val_venom_ppow_reduction =
-				_val_old_ppow -
-				_ref_target._ref_unit._val_beast_ppow_stat;
-
-			_ref_new_status._val_venom_mpow_reduction =
-				_val_old_mpow -
-				_ref_target._ref_unit._val_beast_mpow_stat;
-
-			_ref_new_status._val_venom_pdef_reduction =
-				_val_old_pdef -
-				_ref_target._ref_unit._val_beast_pdef_stat;
-
-			_ref_new_status._val_venom_mdef_reduction =
-				_val_old_mdef -
-				_ref_target._ref_unit._val_beast_mdef_stat;
-
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
-			ds_list_add(
-				_ref_target._list_statuses,
-				_ref_new_status
-			);
-
-			scr_status_reposition(
-				_ref_target
-			);
-
+			//=================//
+			//PLAGUE GARDEN//
+			//=================//
 			if (_flag_trigger_plague_garden){
 
-				scr_trigger_plague_garden(
+				scr_status_trigger_plague_garden(
 					_ref_target,
 					"VENOM"
 				);
 			}
 
+			//========================//
+			//APPLICATION PRESENTATION//
+			//========================//
 			scr_battle_vfx(
-					_ref_target,
-					spr_battle_vfx_venom,
-					undefined,
-					undefined,
-					16,
-					16,
-					1,
-					0,
-					snd_battle_venom
-				);
+				_ref_target,
+				spr_battle_vfx_venom,
+				undefined,
+				undefined,
+				16,
+				16,
+				1,
+				0,
+				snd_battle_venom
+			);
 
-			return _ref_new_status;
+			return _ref_applied_status;
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
@@ -320,24 +220,28 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
-				_ref_status._str_status_command = "DEATH";
+
+				scr_status_dot_venom(
+					"DEATH",
+					_ref_status
+				);
+
 				return undefined;
 			}
 
-			//-----------------------//
+			//=======================//
 			//CALCULATE VENOM DAMAGE//
-			//-----------------------//
-			var _ct_venom_stacks = _ref_status._ct_status_stacks;
+			//=======================//
+			var _ct_venom_stacks = max(0,_ref_status._ct_status_stacks);
 
 			var _val_damage = max(
 				1,
 				floor(_ct_venom_stacks / 4) * 4
 			);
 
-
-			//------------//
+			//============//
 			//OVERHEALTH//
-			//------------//
+			//============//
 			if (
 				_val_damage > 0 &&
 				_ref_host._val_overhealth > 0
@@ -358,10 +262,13 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				_val_damage -= _val_blocked;
 			}
 
-			//---------//
+			//=========//
 			//HOST HP//
-			//---------//
-			if (_val_damage > 0){
+			//=========//
+			if (
+				_val_damage > 0 &&
+				_ref_host._val_cur_hp > 0
+			){
 
 				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
 
@@ -374,9 +281,15 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_cur_hp = max(0,_ref_host._val_cur_hp - _val_actual_damage);
+				_ref_host._val_cur_hp = max(
+					0,
+					_ref_host._val_cur_hp - _val_actual_damage
+				);
 			}
 
+			//==========//
+			//TICK VFX//
+			//==========//
 			scr_battle_vfx(
 				_ref_host,
 				spr_battle_vfx_venom_tick,
@@ -390,51 +303,42 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			);
 
 			//----------------//
-			//REDUCE LIFETIME//
+			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
-
 			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
-			//--------------------//
+			//====================//
 			//RESTORE VENOM STATS//
-			//--------------------//
+			//====================//
 			if (
 				instance_exists(_ref_host) &&
-				_ref_host._ref_unit != undefined
+				is_struct(_ref_host._ref_unit)
 			){
 
-				_ref_host._ref_unit._val_beast_ppow_stat +=
-					_ref_status._val_venom_ppow_reduction;
-
-				_ref_host._ref_unit._val_beast_mpow_stat +=
-					_ref_status._val_venom_mpow_reduction;
-
-				_ref_host._ref_unit._val_beast_pdef_stat +=
-					_ref_status._val_venom_pdef_reduction;
-
-				_ref_host._ref_unit._val_beast_mdef_stat +=
-					_ref_status._val_venom_mdef_reduction;
+				_ref_host._ref_unit._val_beast_ppow_stat += _ref_status._val_venom_ppow_reduction;
+				_ref_host._ref_unit._val_beast_mpow_stat += _ref_status._val_venom_mpow_reduction;
+				_ref_host._ref_unit._val_beast_pdef_stat += _ref_status._val_venom_pdef_reduction;
+				_ref_host._ref_unit._val_beast_mdef_stat += _ref_status._val_venom_mdef_reduction;
 			}
 
-			scr_status_destroy(
-				_ref_status
-			);
+			//----------------//
+			//DESTROY STATUS//
+			//----------------//
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

@@ -5,18 +5,22 @@
 //           Applies Focus to the selected enemy Beast for 3 rounds.
 //           POISONFLOW consumes 3 Poison to grow all Minions on the caster.
 //
+// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected target.
+// RETURNS: Nothing.
+//
 //===============================================================================//
 
 function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 
-	//-----------//
+	//================//
 	//APPLY FOCUS//
-	//-----------//
+	//================//
 	scr_status_apply_debuff("FOCUS",3);
 
-	//------------//
+	//================//
 	//POISONFLOW//
-	//------------//
+	//================//
 	if (
 		instance_exists(_ref_caster) &&
 		instance_exists(_ref_target) &&
@@ -25,10 +29,7 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 
 		var _ref_poison = scr_status_check("POISON",_ref_target);
 
-		if (
-			_ref_poison != -1 &&
-			_ref_poison._ct_status_stacks >= 3
-		){
+		if (_ref_poison != -1 && _ref_poison._ct_status_stacks >= 3){
 
 			var _ct_poison_consumed = scr_battle_trigger_poisonflow(_ref_target,3);
 

@@ -8,7 +8,8 @@
 //
 // INPUTS:   _ref_target - Beast whose Poison stacks are being consumed.
 //           _ct_poison_amount - Maximum Poison stacks to consume.
-// USES:     Poison status lookup/removal and shared battle feedback.
+// USES:     Poison status lookup/removal, shared battle feedback,
+//           and battle-trigger debug logging.
 //
 //===============================================================================//
 
@@ -58,6 +59,15 @@ function scr_battle_trigger_poisonflow(_ref_target,_ct_poison_amount=undefined){
 		return 0;
 	}
 
+	//------------------//
+	//GET STACKS REMAINING//
+	//------------------//
+	var _ct_poison_remaining = max(
+		0,
+		_ct_poison_available -
+		_ct_poison_consumed
+	);
+
 	//---------------//
 	//CONSUME POISON//
 	//---------------//
@@ -96,6 +106,22 @@ function scr_battle_trigger_poisonflow(_ref_target,_ct_poison_amount=undefined){
 		c_lime,
 		_ref_target.x,
 		_ref_target.y - 48
+	);
+
+	#endregion
+
+	#region DEBUG TRIGGER
+
+	//------------------//
+	//LOG POISONFLOW//
+	//------------------//
+	scr_debug_log_battle_trigger(
+		"POISONFLOW",
+		global.ref_caster_beast,
+		_ref_target,
+		"POISON CONSUMED: " + string(_ct_poison_consumed) +
+		" | REMAINING: " + string(_ct_poison_remaining),
+		"SCR_BATTLE_TRIGGER_POISONFLOW"
 	);
 
 	#endregion

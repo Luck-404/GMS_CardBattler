@@ -1,118 +1,103 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_ECHO
-// FUNCTION: Creates and manages the global Echo Buff.
-//           Each stack causes the next eligible card to repeat one additional time.
-//           Echo is infinite and remains until consumed.
+// FUNCTION: Handles Echo.
+//           Stackable Infinite Global Buff.
+//           Each stack causes the next eligible card to repeat one additional
+//           time.
+//           All accumulated Echo stacks are consumed when triggered.
 //
 //===============================================================================//
 
-function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
+function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-----//
+		//=======//
 		//APPLY//
-		//-----//
+		//=======//
 		case "APPLY":
 
-			_ct_stacks_added =
-				max(1,_ct_stacks_added);
+			//----------------//
+			//VALIDATE LIST//
+			//----------------//
+			if (!variable_global_exists("list_statuses")){
+				return undefined;
+			}
+
+			if (!ds_exists(global.list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//----------//
+			//DEFAULTS//
+			//----------//
+			if (_ct_stacks_added == undefined){
+				_ct_stacks_added = 1;
+			}
+
+			_ct_stacks_added = max(1,_ct_stacks_added);
 
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check(
-					"ECHO",
-					global.list_statuses
-				);
+			var _ref_existing_status = scr_status_check("ECHO",global.list_statuses);
 
 			//----------------//
 			//ADD TO EXISTING//
 			//----------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._ct_status_stacks +=
-					_ct_stacks_added;
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
 
-				scr_status_reposition(
-					global.list_statuses
-				);
+				_ref_existing_status._ct_status_stacks += _ct_stacks_added;
+
+				scr_status_reposition(global.list_statuses);
 
 				return _ref_existing_status;
 			}
 
-			//-------------//
+			//---------------//
 			//CREATE STATUS//
-			//-------------//
-			var _ref_new_status =
-				instance_create_layer(
-					room_width * 0.5,
-					room_height * 0.5,
-					"ily_status",
-					obj_battle_status
-				);
+			//---------------//
+			var _ref_new_status = instance_create_layer(
+				room_width * 0.5,
+				room_height * 0.5,
+				"ily_status",
+				obj_battle_status
+			);
 
-			//--------//
-			//SCRIPT//
-			//--------//
-			_ref_new_status._scr_status =
-				scr_status_buff_echo;
-
-			//------//
-			//HOST//
-			//------//
-			_ref_new_status._ref_host =
-				undefined;
+			//-------------------//
+			//INFINITE LIFETIME//
+			//-------------------//
+			scr_status_init_lifetime(
+				_ref_new_status,
+				-1,
+				false,
+				true
+			);
 
 			//-------------//
 			//STATUS DATA//
 			//-------------//
-			_ref_new_status._str_status_type =
-				"GLOBAL";
+			_ref_new_status._scr_status = scr_status_buff_echo;
 
-			_ref_new_status._str_status_name =
-				"ECHO";
+			_ref_new_status._ref_host = undefined;
 
-			_ref_new_status._str_status_desc =
-				"THE NEXT ELIGIBLE CARD REPEATS ONCE PER ECHO STACK.";
+			_ref_new_status._str_status_type = "GLOBAL";
+			_ref_new_status._str_status_name = "ECHO";
+			_ref_new_status._str_status_desc = "THE NEXT ELIGIBLE CARD REPEATS ONCE PER ECHO STACK";
 
-			_ref_new_status._spr_status =
-				spr_status_buff_echo;
+			_ref_new_status._spr_status = spr_status_buff_echo;
 
-			//--------//
-			//STACKS//
-			//--------//
-			_ref_new_status._ct_status_stacks =
-				_ct_stacks_added;
+			_ref_new_status._ct_status_stacks = _ct_stacks_added;
 
-			_ref_new_status._flag_status_stackable =
-				true;
+			_ref_new_status._flag_status_stackable = true;
+			_ref_new_status._flag_status_uncleansable = true;
 
-			//----------//
-			//INFINITE//
-			//----------//
-			_ref_new_status._flag_status_infinite =
-				true;
-
-			_ref_new_status._val_status_lifetime =
-				-1;
-
-			_ref_new_status._val_status_lifetime_max =
-				-1;
-
-			//----------------//
-			//NO ROUND TRIGGER//
-			//----------------//
-			_ref_new_status._str_trigger_region =
-				undefined;
-
-			//----------------//
-			//RESOURCE STATUS//
-			//----------------//
-			_ref_new_status._flag_status_uncleansable =
-				true;
+			_ref_new_status._str_trigger_region = undefined;
 
 			//----------------//
 			//REGISTER STATUS//
@@ -122,30 +107,29 @@ function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
 				_ref_new_status
 			);
 
-			scr_status_reposition(
-				global.list_statuses
-			);
+			scr_status_reposition(global.list_statuses);
 
 			return _ref_new_status;
 
 		break;
 
-
-		//-------//
+		//=========//
 		//CONSUME//
-		//-------//
+		//=========//
 		case "CONSUME":
 
 			if (!instance_exists(_ref_status)){
 				return false;
 			}
 
-			/*
-				Current Echo behavior consumes the entire
-				accumulated Echo resource when the next
-				eligible card triggers it.
-			*/
+			if (_ref_status._ct_status_stacks <= 0){
+				return false;
+			}
 
+			/*
+				The next eligible card uses every accumulated
+				Echo stack, then consumes the entire resource.
+			*/
 			scr_status_buff_echo(
 				"DEATH",
 				_ref_status
@@ -155,19 +139,16 @@ function scr_status_buff_echo(_str_tag,_ref_status,_ct_stacks_added=1){
 
 		break;
 
-
-		//-----//
+		//=======//
 		//DEATH//
-		//-----//
+		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			scr_status_destroy(
-				_ref_status
-			);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

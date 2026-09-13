@@ -1,18 +1,20 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_APEX_PREDATOR
-// FUNCTION: Handles the permanent Apex Predator damage Buff.
-//           Each stack grants +2 linear damage.
-//           Infinite, stackable, and uncleansable for the remainder of battle.
+// FUNCTION: Handles Apex Predator.
+//           Stackable Infinite Buff.
+//           Each stack grants +2 Linear Damage.
+//           Infinite and uncleansable for the remainder of battle.
 //
 //===============================================================================//
+
 function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
 			var _ref_target = global.ref_target_beast;
@@ -21,6 +23,13 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 				return undefined;
 			}
 
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//----------//
+			//DEFAULTS//
+			//----------//
 			if (_ct_stacks_added == undefined){
 				_ct_stacks_added = 1;
 			}
@@ -36,34 +45,30 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_status_check(
-				"APEX_PREDATOR",
-				_ref_target
-			);
+			var _ref_existing_status = scr_status_check("APEX_PREDATOR",_ref_target);
 
 			//----------------//
 			//STACK EXISTING//
 			//----------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._ct_status_stacks +=
-					_ct_stacks_added;
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
 
-				var _val_damage_added =
-					_ct_stacks_added *
-					_val_damage_per_stack;
+				var _val_damage_added = _ct_stacks_added * _ref_existing_status._val_status_magnitude;
 
-				_ref_target._val_dmg_linear_bonus +=
-					_val_damage_added;
+				_ref_existing_status._ct_status_stacks += _ct_stacks_added;
+				_ref_target._val_dmg_linear_bonus += _val_damage_added;
 
-				var _val_total_damage =
-					_ref_existing_status._ct_status_stacks *
-					_val_damage_per_stack;
+				var _val_total_damage = _ref_existing_status._ct_status_stacks * _ref_existing_status._val_status_magnitude;
 
 				_ref_existing_status._str_status_desc =
 					"+" +
 					string(_val_total_damage) +
-					" LINEAR DAMAGE | +2 PER STACK";
+					" LINEAR DAMAGE | +" +
+					string(_ref_existing_status._val_status_magnitude) +
+					" PER STACK";
 
 				return _ref_existing_status;
 			}
@@ -91,54 +96,36 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 			//-------------//
 			//STATUS DATA//
 			//-------------//
-			_ref_new_status._scr_status =
-				scr_status_buff_apex_predator;
+			_ref_new_status._scr_status = scr_status_buff_apex_predator;
 
-			_ref_new_status._ref_host =
-				_ref_target;
+			_ref_new_status._ref_host = _ref_target;
 
-			_ref_new_status._str_status_type =
-				"BUFF";
+			_ref_new_status._str_status_type = "BUFF";
+			_ref_new_status._str_status_name = "APEX_PREDATOR";
 
-			_ref_new_status._str_status_name =
-				"APEX_PREDATOR";
+			_ref_new_status._spr_status = spr_status_buff_apex_predator;
 
-			_ref_new_status._ct_status_stacks =
-				_ct_stacks_added;
+			_ref_new_status._ct_status_stacks = _ct_stacks_added;
+			_ref_new_status._val_status_magnitude = _val_damage_per_stack;
 
-			_ref_new_status._val_status_magnitude =
-				_val_damage_per_stack;
+			_ref_new_status._flag_status_stackable = true;
+			_ref_new_status._flag_status_uncleansable = true;
+
+			_ref_new_status._str_trigger_region = undefined;
+
+			var _val_total_damage = _ct_stacks_added * _val_damage_per_stack;
 
 			_ref_new_status._str_status_desc =
 				"+" +
-				string(
-					_ct_stacks_added *
-					_val_damage_per_stack
-				) +
-				" LINEAR DAMAGE | +2 PER STACK";
-
-			/*
-				Create a dedicated icon:
-				spr_status_buff_apex_predator
-			*/
-			_ref_new_status._spr_status =
-				spr_status_buff_apex_predator;
-
-			_ref_new_status._str_trigger_region =
-				undefined;
-
-			//----------------//
-			//UNCLEANSABLE//
-			//----------------//
-			_ref_new_status._flag_status_uncleansable =
-				true;
+					string(_val_total_damage) +
+					" LINEAR DAMAGE | +" +
+					string(_val_damage_per_stack) +
+					" PER STACK";
 
 			//--------------------//
 			//GRANT DAMAGE BONUS//
 			//--------------------//
-			_ref_target._val_dmg_linear_bonus +=
-				_ct_stacks_added *
-				_val_damage_per_stack;
+			_ref_target._val_dmg_linear_bonus += _val_total_damage;
 
 			//----------------//
 			//REGISTER STATUS//
@@ -154,38 +141,37 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			/*
-				This normally only happens when the Beast/status
-				is being removed from battle. The Buff itself
+				This normally occurs only when the Beast or Status
+				is being removed from battle. Apex Predator itself
 				cannot expire or be cleansed.
 			*/
 			if (instance_exists(_ref_host)){
 
-				var _val_total_bonus =
-					_ref_status._ct_status_stacks *
-					_ref_status._val_status_magnitude;
+				var _val_total_bonus = _ref_status._ct_status_stacks * _ref_status._val_status_magnitude;
 
 				_ref_host._val_dmg_linear_bonus =
 					max(
 						0,
 						_ref_host._val_dmg_linear_bonus -
-						_val_total_bonus
+							_val_total_bonus
 					);
 			}
 
+			//----------------//
+			//DESTROY STATUS//
+			//----------------//
 			scr_status_destroy(_ref_status);
 
 		break;

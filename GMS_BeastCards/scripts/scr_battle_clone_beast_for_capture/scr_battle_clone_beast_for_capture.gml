@@ -84,14 +84,14 @@ function scr_battle_clone_beast_for_capture(_ref_battle_beast){
 	//-------------------//
 	//PRESERVE MAXIMUM HP//
 	//-------------------//
-	var _val_captured_max_hp = max(1,_stct_source_beast._val_beast_hp_max);
+	var _val_captured_max_hp = max(1,_stct_source_beast._val_max_hp);
 
-	_stct_captured_beast._val_beast_hp_max = _val_captured_max_hp;
+	_stct_captured_beast._val_max_hp = _val_captured_max_hp;
 
 	//-------------------//
 	//PRESERVE CURRENT HP//
 	//-------------------//
-	_stct_captured_beast._val_beast_hp_cur = clamp(_ref_battle_beast._val_cur_hp,1,_val_captured_max_hp);
+	_stct_captured_beast._val_cur_hp = clamp(_ref_battle_beast._val_cur_hp,1,_val_captured_max_hp);
 
 	#endregion
 

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_razor_shell",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_razor_shell",
+  "parent":{
+    "name":"RAZOR_SHELL",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CERULEAN/RAZOR_SHELL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

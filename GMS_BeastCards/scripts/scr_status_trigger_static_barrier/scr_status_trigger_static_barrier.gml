@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// SCRIPT: scr_status_trigger_static_barrier
+// SCRIPT: SCR_STATUS_TRIGGER_STATIC_BARRIER
 // FUNCTION: Checks a defending Beast for Static Barrier.
 //           When successfully struck by an enemy Attack, applies 1 Stormstruck
 //           to the attacker.
@@ -9,10 +9,16 @@
 
 function scr_status_trigger_static_barrier(_ref_defender,_ref_attacker){
 
+	//-------------------//
+	//VALIDATE DEFENDER//
+	//-------------------//
 	if (!instance_exists(_ref_defender)){
 		return false;
 	}
 
+	//-------------------//
+	//VALIDATE ATTACKER//
+	//-------------------//
 	if (!instance_exists(_ref_attacker)){
 		return false;
 	}
@@ -21,9 +27,9 @@ function scr_status_trigger_static_barrier(_ref_defender,_ref_attacker){
 		return false;
 	}
 
-	//-------------------//
+	//------------------//
 	//MUST BE AN ENEMY//
-	//-------------------//
+	//------------------//
 	if (_ref_attacker._str_team == _ref_defender._str_team){
 		return false;
 	}
@@ -31,27 +37,25 @@ function scr_status_trigger_static_barrier(_ref_defender,_ref_attacker){
 	//----------------------//
 	//CHECK STATIC BARRIER//
 	//----------------------//
-	var _ref_static_barrier =
-		scr_status_check(
-			"STATIC_BARRIER",
-			_ref_defender
-		);
+	var _ref_static_barrier = scr_status_check("STATIC_BARRIER",_ref_defender);
 
 	if (_ref_static_barrier == -1){
 		return false;
 	}
 
+	if (!instance_exists(_ref_static_barrier)){
+		return false;
+	}
+
 	//----------------------//
-	//STORE CURRENT TARGET//
+	//STORE ORIGINAL TARGET//
 	//----------------------//
-	var _ref_original_target =
-		global.ref_target_beast;
+	var _ref_original_target = global.ref_target_beast;
 
 	//--------------------//
 	//TARGET THE ATTACKER//
 	//--------------------//
-	global.ref_target_beast =
-		_ref_attacker;
+	global.ref_target_beast = _ref_attacker;
 
 	//----------//
 	//FEEDBACK//
@@ -68,21 +72,12 @@ function scr_status_trigger_static_barrier(_ref_defender,_ref_attacker){
 	//-------------------//
 	//APPLY STORMSTRUCK//
 	//-------------------//
-	scr_status_apply_dot(
-		"STORMSTRUCK"
-	);
+	scr_status_apply_dot("STORMSTRUCK");
 
 	//----------------//
 	//RESTORE TARGET//
 	//----------------//
-	if (instance_exists(_ref_original_target)){
-		global.ref_target_beast =
-			_ref_original_target;
-	}
-	else{
-		global.ref_target_beast =
-			_ref_defender;
-	}
+	global.ref_target_beast = _ref_original_target;
 
 	return true;
 }

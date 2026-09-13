@@ -1,7 +1,7 @@
 //===============================================================================//
 //
 // END STEP: OBJ_RANCH_BEAST_DUMMY
-// FUNCTION: Updates depth so ranch beasts correctly sort by their feet.
+// FUNCTION: Updates depth so Ranch Beasts sort correctly by their feet.
 //
 //===============================================================================//
 

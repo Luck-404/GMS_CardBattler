@@ -1,10 +1,14 @@
 //===============================================================================//
 //
-// SCRIPT: scr_battle_trigger_heal_traps
+// SCRIPT: SCR_BATTLE_TRIGGER_HEAL_TRAPS
 // FUNCTION: Checks healing-triggered Traps for a target Beast.
 //           Supports hosted and teamwide HEALED Traps.
 //           BEFORE Traps may cancel the incoming healing.
 //           AFTER Traps resolve after the healing has completed.
+//
+// ARGUMENTS: _ref_target is the Beast being healed and _str_phase selects
+//            whether BEFORE or AFTER healing Traps are checked.
+// RETURNS: True when a triggered Trap cancels the heal; otherwise false.
 //
 //===============================================================================//
 
@@ -17,22 +21,24 @@ function scr_battle_trigger_heal_traps(_ref_target,_str_phase="BEFORE"){
 		return false;
 	}
 
+	if (
+		_str_phase != "BEFORE" &&
+		_str_phase != "AFTER"
+	){
+		return false;
+	}
+
 	//======================//
 	//CHECK HOSTED TRAPS//
 	//======================//
-	if (variable_instance_exists(_ref_target,"_list_traps")){
+	if (
+		variable_instance_exists(_ref_target,"_list_traps") &&
+		ds_exists(_ref_target._list_traps,ds_type_list)
+	){
 
-		for (
-			var _it_trap = 0;
-			_it_trap < ds_list_size(_ref_target._list_traps);
-			_it_trap++
-		){
+		for (var _it_trap = ds_list_size(_ref_target._list_traps) - 1;_it_trap >= 0;_it_trap--){
 
-			var _ref_trap =
-				ds_list_find_value(
-					_ref_target._list_traps,
-					_it_trap
-				);
+			var _ref_trap = ds_list_find_value(_ref_target._list_traps,_it_trap);
 
 			if (!instance_exists(_ref_trap)){
 				continue;
@@ -50,18 +56,20 @@ function scr_battle_trigger_heal_traps(_ref_target,_str_phase="BEFORE"){
 				continue;
 			}
 
-			if (_ref_trap._scr_trap == undefined){
+			if (_ref_trap._scr_trap_callback == undefined){
 				continue;
 			}
 
-			var _flag_cancel_heal =
-				_ref_trap._scr_trap(
-					"TRIGGER",
-					_ref_trap,
-					undefined,
-					_ref_target,
-					undefined
-				);
+			//================//
+			//TRIGGER TRAP//
+			//================//
+			var _flag_cancel_heal = _ref_trap._scr_trap_callback(
+				"TRIGGER",
+				_ref_trap,
+				undefined,
+				_ref_target,
+				undefined
+			);
 
 			if (_flag_cancel_heal){
 				return true;
@@ -69,25 +77,28 @@ function scr_battle_trigger_heal_traps(_ref_target,_str_phase="BEFORE"){
 		}
 	}
 
-	//====================//
+	//==================//
 	//CHECK TEAM TRAPS//
-	//====================//
-	for (
-		var _it_trap =
-			array_length(
-				obj_battle_turn_controller._arr_team_traps
-			) - 1;
-		_it_trap >= 0;
-		_it_trap--
-	){
+	//==================//
+	if (!instance_exists(obj_battle_turn_controller)){
+		return false;
+	}
 
-		var _ref_trap =
-			obj_battle_turn_controller
-				._arr_team_traps[_it_trap];
+	if (!variable_instance_exists(obj_battle_turn_controller,"_arr_team_traps")){
+		return false;
+	}
 
-		//------------------//
+	if (!is_array(obj_battle_turn_controller._arr_team_traps)){
+		return false;
+	}
+
+	for (var _it_trap = array_length(obj_battle_turn_controller._arr_team_traps) - 1;_it_trap >= 0;_it_trap--){
+
+		var _ref_trap = obj_battle_turn_controller._arr_team_traps[_it_trap];
+
+		//-------------------//
 		//CLEAN INVALID TRAP//
-		//------------------//
+		//-------------------//
 		if (!instance_exists(_ref_trap)){
 
 			array_delete(
@@ -119,18 +130,20 @@ function scr_battle_trigger_heal_traps(_ref_target,_str_phase="BEFORE"){
 			continue;
 		}
 
-		if (_ref_trap._scr_trap == undefined){
+		if (_ref_trap._scr_trap_callback == undefined){
 			continue;
 		}
 
-		var _flag_cancel_heal =
-			_ref_trap._scr_trap(
-				"TRIGGER",
-				_ref_trap,
-				undefined,
-				_ref_target,
-				undefined
-			);
+		//================//
+		//TRIGGER TRAP//
+		//================//
+		var _flag_cancel_heal = _ref_trap._scr_trap_callback(
+			"TRIGGER",
+			_ref_trap,
+			undefined,
+			_ref_target,
+			undefined
+		);
 
 		if (_flag_cancel_heal){
 			return true;

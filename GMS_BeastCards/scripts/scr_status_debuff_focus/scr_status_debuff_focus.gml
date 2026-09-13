@@ -6,14 +6,19 @@
 //           Causes opposing Minions to prioritize the affected Beast.
 //           Reapplication refreshes the existing duration.
 //
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, and _val_lifetime optionally sets its duration.
+// RETURNS: The active Focus Status on APPLY; otherwise undefined.
+//
 //===============================================================================//
+
 function scr_status_debuff_focus(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
 			var _ref_target = global.ref_target_beast;
@@ -22,9 +27,13 @@ function scr_status_debuff_focus(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			//----------------//
-			//DEFAULT LENGTH//
-			//----------------//
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//==========//
+			//DEFAULTS//
+			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 3;
 			}
@@ -41,38 +50,35 @@ function scr_status_debuff_focus(_str_tag,_ref_status,_val_lifetime=undefined){
 			//------------------//
 			if (_ref_existing_status != -1){
 
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
-				//------------------------//
+				//-----------------------//
 				//ENSURE PERSISTENT VFX//
-				//------------------------//
-				if (
-					!instance_exists(
-						_ref_existing_status
-							._ref_persistent_vfx
-					)
-				){
+				//-----------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
 
-					_ref_existing_status
-						._ref_persistent_vfx =
-						scr_battle_vfx_persistent(
-							_ref_target,
-							spr_battle_vfx_focus,
-							0,
-							0,
-							1
-						);
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_focus,
+						0,
+						0,
+						1
+					);
 				}
 
 				return _ref_existing_status;
 			}
 
-			//---------------//
+			//===============//
 			//CREATE STATUS//
-			//---------------//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_target.x,
 				_ref_target.y,
@@ -80,62 +86,62 @@ function scr_status_debuff_focus(_str_tag,_ref_status,_val_lifetime=undefined){
 				obj_battle_status
 			);
 
-			_ref_new_status._scr_status =
-				scr_status_debuff_focus;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"DEBUFF";
-
-			_ref_new_status._str_status_name =
-				"FOCUS";
-
-			_ref_new_status._str_status_desc =
-				"OPPOSING MINIONS PRIORITIZE THIS BEAST";
-
-			_ref_new_status._spr_status =
-				spr_status_debuff_focus;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._str_trigger_region =
-				"END";
-
 			//---------------------//
 			//INITIALIZE LIFETIME//
 			//---------------------//
-			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
+
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_debuff_focus;
+
+			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "DEBUFF";
+			_ref_new_status._str_status_name = "FOCUS";
+			_ref_new_status._str_status_desc = "OPPOSING MINIONS PRIORITIZE THIS BEAST";
+
+			_ref_new_status._spr_status = spr_status_debuff_focus;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._str_trigger_region = "END";
 
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(_ref_target._list_statuses,_ref_new_status);
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
 
 			scr_status_reposition(_ref_target);
 
 			//----------------//
 			//PERSISTENT VFX//
 			//----------------//
-			_ref_new_status._ref_persistent_vfx =
-				scr_battle_vfx_persistent(
-					_ref_target,
-					spr_battle_vfx_focus,
-					0,
-					0,
-					1
-				);
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_focus,
+				0,
+				0,
+				1
+			);
 
 			return _ref_new_status;
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
@@ -155,15 +161,13 @@ function scr_status_debuff_focus(_str_tag,_ref_status,_val_lifetime=undefined){
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
-
 			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

@@ -1,18 +1,29 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_ITEM_CONSUMABLE_HEALING_SALVE
-// FUNCTION: Applies healing salve to a target party beast.
-//           Restores up to 10 HP without exceeding max HP.
+// SCRIPT: SCR_INVENTORY_ITEM_CONSUMABLE_HEALING_SALVE
+// FUNCTION: Applies Healing Salve to a target party Beast.
+//           Restores up to 10 HP without exceeding Max HP.
 //           Spawns popup feedback and returns whether the item was used.
 //
+// ARGUMENTS: _stct_item is the item struct. _stct_target_unit is the target Beast.
+//            _val_popup_x and _val_popup_y are the popup GUI coordinates.
+// RETURNS: True if healing was applied, otherwise false.
+//
 //===============================================================================//
-function scr_item_consumable_healing_salve(_stct_item,_stct_target_unit,_val_popup_x,_val_popup_y){
 
+function scr_inventory_item_consumable_healing_salve(_stct_item,_stct_target_unit,_val_popup_x,_val_popup_y){
+
+	//================//
+	//VALIDATE TARGET//
+	//================//
 	if (_stct_target_unit == undefined){
 		return false;
 	}
 
-	if (_stct_target_unit._val_beast_hp_cur >= _stct_target_unit._val_beast_hp_max){
+	//================//
+	//CHECK FULL HP//
+	//================//
+	if (_stct_target_unit._val_cur_hp >= _stct_target_unit._val_max_hp){
 
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
@@ -26,16 +37,21 @@ function scr_item_consumable_healing_salve(_stct_item,_stct_target_unit,_val_pop
 		return false;
 	}
 
-	var _val_hp_before = _stct_target_unit._val_beast_hp_cur;
+	//================//
+	//HEAL TARGET//
+	//================//
+	var _val_hp_before = _stct_target_unit._val_cur_hp;
 
-	_stct_target_unit._val_beast_hp_cur += 10;
+	_stct_target_unit._val_cur_hp = min(
+		_stct_target_unit._val_cur_hp + 10,
+		_stct_target_unit._val_max_hp
+	);
 
-	if (_stct_target_unit._val_beast_hp_cur > _stct_target_unit._val_beast_hp_max){
-		_stct_target_unit._val_beast_hp_cur = _stct_target_unit._val_beast_hp_max;
-	}
+	var _val_healed = _stct_target_unit._val_cur_hp - _val_hp_before;
 
-	var _val_healed = _stct_target_unit._val_beast_hp_cur - _val_hp_before;
-
+	//================//
+	//SPAWN FEEDBACK//
+	//================//
 	scr_gui_spawn_popup_scrolling(
 		"TEXT",
 		"+" + string(_val_healed) + " HP",

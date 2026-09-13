@@ -1,13 +1,13 @@
 //===============================================================================//
 //
-// SCRIPT: SCR_HATCH_DORMANT_SEED
+// SCRIPT: scr_minion_hatch_dormant_seed
 // FUNCTION: Hatches a Dormant Seed into a random Viridian minion.
 //           Transfers the Seed's HP and Magnitude bonuses to the new minion.
 //           Preserves damage already taken by the Seed when transferring HP.
 //           Removes only the hatching Seed from its host.
 //
 //===============================================================================//
-function scr_hatch_dormant_seed(_ref_seed){
+function scr_minion_hatch_dormant_seed(_ref_seed){
 
 	if (!instance_exists(_ref_seed)){
 		return undefined;

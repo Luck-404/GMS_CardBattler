@@ -1,0 +1,73 @@
+//===============================================================================//
+//
+// SCRIPT: SCR_BATTLE_TRIGGER_DOT_TRAPS
+// FUNCTION: Checks Traps attached to a Beast after a DoT is successfully applied.
+//           Activates DOT_THRESHOLD Traps whose conditions are satisfied.
+//
+// ARGUMENTS: _ref_target is the Beast that successfully received the DoT.
+// RETURNS: True when a DOT_THRESHOLD Trap successfully triggers; otherwise false.
+//
+//===============================================================================//
+
+function scr_battle_trigger_dot_traps(_ref_target){
+
+	//----------------//
+	//VALIDATE TARGET//
+	//----------------//
+	if (!instance_exists(_ref_target)){
+		return false;
+	}
+
+	if (!variable_instance_exists(_ref_target,"_list_traps")){
+		return false;
+	}
+
+	if (!ds_exists(_ref_target._list_traps,ds_type_list)){
+		return false;
+	}
+
+	//======================//
+	//CHECK ATTACHED TRAPS//
+	//======================//
+	for (var _it_trap = ds_list_size(_ref_target._list_traps) - 1;_it_trap >= 0;_it_trap--){
+
+		var _ref_trap = ds_list_find_value(_ref_target._list_traps,_it_trap);
+
+		if (!instance_exists(_ref_trap)){
+			continue;
+		}
+
+		if (_ref_trap._flag_triggered){
+			continue;
+		}
+
+		if (_ref_trap._str_trigger_type != "DOT_THRESHOLD"){
+			continue;
+		}
+
+		if (_ref_trap._str_trigger_phase != "AFTER"){
+			continue;
+		}
+
+		if (_ref_trap._scr_trap_callback == undefined){
+			continue;
+		}
+
+		//================//
+		//TRIGGER TRAP//
+		//================//
+		var _flag_triggered = _ref_trap._scr_trap_callback(
+			"TRIGGER",
+			_ref_trap,
+			undefined,
+			_ref_target,
+			undefined
+		);
+
+		if (_flag_triggered){
+			return true;
+		}
+	}
+
+	return false;
+}

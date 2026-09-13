@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_minion_trigger_count_buffs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_minion_trigger_count_buffs",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

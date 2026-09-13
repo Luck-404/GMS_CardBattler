@@ -1,24 +1,22 @@
 //===============================================================================//
 //
 // CREATE: OBJ_GUI_PARTY_RIGHT_ARROW
-// FUNCTION: Initializes the right navigation arrow for the party GUI.
+// FUNCTION: Initializes the right navigation arrow for the Party GUI.
 //
 //===============================================================================//
 
-//---------//
-//VARIABLES//
-//---------//
+//================//
+//DRAW SETTINGS//
+//================//
 depth = -2;
 
+//================//
+//REFERENCES//
+//================//
 _ref_gui_pane = obj_gui_party_pane;
 
+//================//
+//INPUT STATE//
+//================//
 _flag_clicked = false;
-_val_cooldown = 0;
-
-//----//
-//INIT//
-//----//
-
-//-------//
-//METHODS//
-//-------//
+_ct_cooldown = 0;

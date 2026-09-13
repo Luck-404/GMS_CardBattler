@@ -3,33 +3,45 @@
 // SCRIPT: SCR_STATUS_DEBUFF_DRAINED
 // FUNCTION: Handles the Drained Debuff.
 //           Unstackable Timed.
-//           Reduces MAGPOW and MAGDEF by 20.
+//           Reduces MAGPOW and MAGDEF by up to 20.
 //           Reapplication refreshes duration without reducing stats again.
 //           Restores the exact removed stat amounts when the Debuff ends.
 //
+// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
+//            existing Status, and _val_lifetime optionally sets its duration.
+// RETURNS: The active Drained Status on APPLY; otherwise undefined.
+//
 //===============================================================================//
+
 function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
 			var _ref_target = global.ref_target_beast;
 
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
 
-			if (_ref_target._ref_unit == undefined){
+			if (!is_struct(_ref_target._ref_unit)){
 				return undefined;
 			}
 
-			//----------------//
-			//DEFAULT LENGTH//
-			//----------------//
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+				return undefined;
+			}
+
+			//==========//
+			//DEFAULTS//
+			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 3;
 			}
@@ -46,46 +58,45 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 			//------------------//
 			if (_ref_existing_status != -1){
 
-				scr_status_refresh_lifetime(_ref_existing_status,_val_lifetime);
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
+
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
 
-			//-----------------------//
+			//======================//
 			//REDUCE MAGICAL POWER//
-			//-----------------------//
-			var _val_mpow_before =
-				_ref_target._ref_unit._val_beast_mpow_stat;
+			//======================//
+			var _val_mpow_before = _ref_target._ref_unit._val_beast_mpow_stat;
 
-			_ref_target._ref_unit._val_beast_mpow_stat =
-				max(
-					0,
-					_ref_target._ref_unit._val_beast_mpow_stat - 20
-				);
+			_ref_target._ref_unit._val_beast_mpow_stat = max(
+				0,
+				_val_mpow_before - 20
+			);
 
-			var _val_mpow_reduction =
-				_val_mpow_before -
-				_ref_target._ref_unit._val_beast_mpow_stat;
+			var _val_mpow_reduction = _val_mpow_before - _ref_target._ref_unit._val_beast_mpow_stat;
 
-			//-------------------------//
+			//========================//
 			//REDUCE MAGICAL DEFENSE//
-			//-------------------------//
-			var _val_mdef_before =
-				_ref_target._ref_unit._val_beast_mdef_stat;
+			//========================//
+			var _val_mdef_before = _ref_target._ref_unit._val_beast_mdef_stat;
 
-			_ref_target._ref_unit._val_beast_mdef_stat =
-				max(
-					0,
-					_ref_target._ref_unit._val_beast_mdef_stat - 20
-				);
+			_ref_target._ref_unit._val_beast_mdef_stat = max(
+				0,
+				_val_mdef_before - 20
+			);
 
-			var _val_mdef_reduction =
-				_val_mdef_before -
-				_ref_target._ref_unit._val_beast_mdef_stat;
+			var _val_mdef_reduction = _val_mdef_before - _ref_target._ref_unit._val_beast_mdef_stat;
 
-			//---------------//
+			//===============//
 			//CREATE STATUS//
-			//---------------//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_target.x,
 				_ref_target.y,
@@ -93,49 +104,51 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 				obj_battle_status
 			);
 
-			_ref_new_status._scr_status =
-				scr_status_debuff_drained;
-
-			_ref_new_status._ref_host =
-				_ref_target;
-
-			_ref_new_status._str_status_type =
-				"DEBUFF";
-
-			_ref_new_status._str_status_name =
-				"DRAINED";
-
-			_ref_new_status._str_status_desc =
-				"MPOW -20; MDEF -20";
-
-			_ref_new_status._spr_status =
-				spr_status_debuff_drained;
-
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._val_status_magnitude =
-				20;
-
-			// Stores the exact amounts actually removed.
-			_ref_new_status._val_drained_mpow_reduction =
-				_val_mpow_reduction;
-
-			_ref_new_status._val_drained_mdef_reduction =
-				_val_mdef_reduction;
-
-			_ref_new_status._str_trigger_region =
-				"END";
-
 			//---------------------//
 			//INITIALIZE LIFETIME//
 			//---------------------//
-			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
+
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_debuff_drained;
+
+			_ref_new_status._ref_host = _ref_target;
+
+			_ref_new_status._str_status_type = "DEBUFF";
+			_ref_new_status._str_status_name = "DRAINED";
+
+			_ref_new_status._spr_status = spr_status_debuff_drained;
+
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = false;
+
+			_ref_new_status._val_status_magnitude = 20;
+
+			_ref_new_status._val_drained_mpow_reduction = _val_mpow_reduction;
+			_ref_new_status._val_drained_mdef_reduction = _val_mdef_reduction;
+
+			_ref_new_status._str_status_desc =
+				"MPOW -" +
+				string(_val_mpow_reduction) +
+				"; MDEF -" +
+				string(_val_mdef_reduction);
+
+			_ref_new_status._str_trigger_region = "END";
 
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(_ref_target._list_statuses,_ref_new_status);
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
 
 			scr_status_reposition(_ref_target);
 
@@ -143,10 +156,9 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
@@ -166,15 +178,13 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
-
 			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
@@ -183,27 +193,21 @@ function scr_status_debuff_drained(_str_tag,_ref_status,_val_lifetime=undefined)
 
 			var _ref_host = _ref_status._ref_host;
 
+			//========================//
+			//RESTORE MAGICAL STATS//
+			//========================//
 			if (
 				instance_exists(_ref_host) &&
-				_ref_host._ref_unit != undefined
+				is_struct(_ref_host._ref_unit)
 			){
 
-				//----------------------//
-				//RESTORE MAGICAL POWER//
-				//----------------------//
-				_ref_host._ref_unit._val_beast_mpow_stat +=
-					_ref_status._val_drained_mpow_reduction;
-
-				//------------------------//
-				//RESTORE MAGICAL DEFENSE//
-				//------------------------//
-				_ref_host._ref_unit._val_beast_mdef_stat +=
-					_ref_status._val_drained_mdef_reduction;
+				_ref_host._ref_unit._val_beast_mpow_stat += _ref_status._val_drained_mpow_reduction;
+				_ref_host._ref_unit._val_beast_mdef_stat += _ref_status._val_drained_mdef_reduction;
 			}
 
-			//---------------//
+			//----------------//
 			//DESTROY STATUS//
-			//---------------//
+			//----------------//
 			scr_status_destroy(_ref_status);
 
 		break;

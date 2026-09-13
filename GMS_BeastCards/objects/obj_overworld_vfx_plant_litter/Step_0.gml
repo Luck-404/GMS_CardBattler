@@ -1,41 +1,37 @@
 //===============================================================================//
 //
-// STEP: OBJ_SCENE_FX_PLANT_LITTER
-// FUNCTION: Updates drifting litter movement.
-//           Applies wind flutter, gravity, rotation,
-//           velocity damping, and lifetime handling.
+// STEP: OBJ_OVERWORLD_VFX_PLANT_LITTER
+// FUNCTION: Updates drifting plant-litter movement.
+//           Applies wind flutter, gravity, rotation, damping, and lifetime.
 //
 //===============================================================================//
 
-//—------------------------------------------------------------------------------//
-// ROTATION
-//—------------------------------------------------------------------------------//
-_val_rot += _val_rot_spd;
+//================//
+//ROTATION//
+//================//
+_val_rotation += _val_rotation_speed;
 
-//—------------------------------------------------------------------------------//
-// FLUTTER
-//—------------------------------------------------------------------------------//
-_val_hsp += random_range(-_val_wind_strength, _val_wind_strength);
+//================//
+//FLUTTER//
+//================//
+_val_velocity_x += random_range(-_val_wind_strength,_val_wind_strength);
 
+_val_velocity_y += _val_gravity;
+_val_velocity_y = clamp(_val_velocity_y,-10,2);
 
-_val_vsp += _val_gravity; // fall downward
+//================//
+//MOVEMENT//
+//================//
+x += _val_velocity_x;
+y += _val_velocity_y;
 
- 
-_val_vsp = clamp(_val_vsp, -10, 2); // cap fall speed
+_val_velocity_x *= 0.98;
 
-// movement
-x += _val_hsp;
-y += _val_vsp;
+//================//
+//LIFETIME//
+//================//
+_ct_lifetime--;
 
-
-_val_hsp *= 0.98; // slowly damp horizontal motion
-
-//—------------------------------------------------------------------------------//
-// LIFE
-//—------------------------------------------------------------------------------//
-_ct_life--;
-
-if (_ct_life <= 0)
-{
-    instance_destroy();
+if (_ct_lifetime <= 0){
+	instance_destroy();
 }

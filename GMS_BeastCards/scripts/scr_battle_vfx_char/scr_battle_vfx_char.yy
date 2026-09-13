@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_vfx_char",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_vfx_char",
+  "parent":{
+    "name":"CHAR",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/CHAR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

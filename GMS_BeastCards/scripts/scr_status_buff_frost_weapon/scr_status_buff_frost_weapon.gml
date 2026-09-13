@@ -4,23 +4,27 @@
 // FUNCTION: Handles Frost Weapon.
 //           Unstackable Timed Buff.
 //           Causes each Attack performed by the host to apply Frostbite.
+//           Attack resolution is handled by scr_status_trigger_frost_weapon.
 //           Reapplication refreshes duration.
 //
 //===============================================================================//
 
 function scr_status_buff_frost_weapon(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
 
-	switch(_str_tag){
+	switch (_str_tag){
 
-		//-------//
+		//=======//
 		//APPLY//
-		//-------//
+		//=======//
 		case "APPLY":
 
-			var _ref_target =
-				global.ref_target_beast;
+			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
+				return undefined;
+			}
+
+			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
 				return undefined;
 			}
 
@@ -35,32 +39,26 @@ function scr_status_buff_frost_weapon(_str_tag,_ref_status,_val_magnitude=undefi
 				_val_lifetime = 2;
 			}
 
-			_val_magnitude =
-				max(1,_val_magnitude);
-
-			_val_lifetime =
-				max(1,_val_lifetime);
+			_val_magnitude = max(1,_val_magnitude);
+			_val_lifetime = max(1,_val_lifetime);
 
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status =
-				scr_status_check("FROST_WEAPON",_ref_target);
+			var _ref_existing_status = scr_status_check("FROST_WEAPON",_ref_target);
 
 			//------------------//
 			//REFRESH EXISTING//
 			//------------------//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_magnitude =
-					_val_magnitude;
+				_ref_existing_status._val_status_magnitude = _val_magnitude;
+				_ref_existing_status._str_status_desc = "ATTACKS APPLY " + string(_val_magnitude) + " FROSTBITE";
 
-				_ref_existing_status._str_status_desc =
-					"ATTACKS APPLY " +
-					string(_val_magnitude) +
-					" FROSTBITE";
-
-				scr_status_refresh_lifetime(_ref_existing_status,_val_lifetime);
+				scr_status_refresh_lifetime(
+					_ref_existing_status,
+					_val_lifetime
+				);
 
 				return _ref_existing_status;
 			}
@@ -68,52 +66,47 @@ function scr_status_buff_frost_weapon(_str_tag,_ref_status,_val_magnitude=undefi
 			//---------------//
 			//CREATE STATUS//
 			//---------------//
-			var _ref_new_status =
-				instance_create_layer(
-					_ref_target.x,
-					_ref_target.y,
-					"ily_status",
-					obj_battle_status
-				);
+			var _ref_new_status = instance_create_layer(
+				_ref_target.x,
+				_ref_target.y,
+				"ily_status",
+				obj_battle_status
+			);
 
-			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
+			scr_status_init_lifetime(
+				_ref_new_status,
+				_val_lifetime,
+				false,
+				false
+			);
 
-			_ref_new_status._scr_status =
-				scr_status_buff_frost_weapon;
+			//-------------//
+			//STATUS DATA//
+			//-------------//
+			_ref_new_status._scr_status = scr_status_buff_frost_weapon;
 
-			_ref_new_status._ref_host =
-				_ref_target;
+			_ref_new_status._ref_host = _ref_target;
 
-			_ref_new_status._str_status_type =
-				"BUFF";
+			_ref_new_status._str_status_type = "BUFF";
+			_ref_new_status._str_status_name = "FROST_WEAPON";
+			_ref_new_status._str_status_desc = "ATTACKS APPLY " + string(_val_magnitude) + " FROSTBITE";
 
-			_ref_new_status._str_status_name =
-				"FROST_WEAPON";
+			_ref_new_status._spr_status = spr_status_buff_frost_weapon;
 
-			_ref_new_status._str_status_desc =
-				"ATTACKS APPLY " +
-				string(_val_magnitude) +
-				" FROSTBITE";
+			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._val_status_magnitude = _val_magnitude;
 
-			_ref_new_status._spr_status =
-				spr_status_buff_frost_weapon;
+			_ref_new_status._flag_status_stackable = false;
 
-			_ref_new_status._ct_status_stacks =
-				1;
-
-			_ref_new_status._val_status_magnitude =
-				_val_magnitude;
-
-			_ref_new_status._flag_status_stackable =
-				false;
-
-			_ref_new_status._str_trigger_region =
-				"END";
+			_ref_new_status._str_trigger_region = "END";
 
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(_ref_target._list_statuses,_ref_new_status);
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
 
 			scr_status_reposition(_ref_target);
 
@@ -121,18 +114,16 @@ function scr_status_buff_frost_weapon(_str_tag,_ref_status,_val_magnitude=undefi
 
 		break;
 
-
-		//--------//
+		//========//
 		//REPEAT//
-		//--------//
+		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _ref_host =
-				_ref_status._ref_host;
+			var _ref_host = _ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
@@ -142,15 +133,13 @@ function scr_status_buff_frost_weapon(_str_tag,_ref_status,_val_magnitude=undefi
 			}
 
 			scr_status_tick_lifetime(_ref_status);
-
 			scr_status_reposition(_ref_host);
 
 		break;
 
-
-		//-------//
+		//=======//
 		//DEATH//
-		//-------//
+		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

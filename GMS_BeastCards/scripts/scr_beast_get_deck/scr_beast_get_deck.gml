@@ -1,3 +1,16 @@
+//===============================================================================//
+//
+// SCRIPT: SCR_BEAST_GET_DECK
+// FUNCTION: Builds and returns the card deck assigned to a Beast.
+//           Adds shared cards for the Beast and subtype-specific cards based
+//           on its active subtype.
+//
+// ARGUMENTS: _str_beast_name identifies the Beast and _str_beast_type identifies
+//            its active subtype.
+// RETURNS: A newly created DS list containing the Beast's assigned card structs.
+//
+//===============================================================================//
+
 function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 
 	var _list_return_deck = ds_list_create();
@@ -9,18 +22,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region AMMOMARSH
 			case "AMMOMARSH":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
 				ds_list_add(_list_return_deck,scr_card_get_info("OCEANS_BLESSING"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("ICE_WALL"));
@@ -45,17 +58,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region BLIZZDRIFT
 			case "BLIZZDRIFT":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("HAILSTONES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BARRIER"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
@@ -80,17 +93,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region CAUDAQUA
 			case "CAUDAQUA":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_LANCE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_RECOVERY"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("PURIFY_WATERS"));
@@ -115,17 +128,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region CEPHARIME
 			case "CEPHARIME":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_MIRROR"));
 				ds_list_add(_list_return_deck,scr_card_get_info("WHITEOUT"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("CHILLING_WEAKNESS"));
@@ -150,17 +163,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region CHELONSEA
 			case "CHELONSEA":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("BURST"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
 				ds_list_add(_list_return_deck,scr_card_get_info("CORAL_GUARDIAN"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("ICE_WALL"));
@@ -185,18 +198,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region CORALLIARC
 			case "CORALLIARC":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("STORM_WISP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_HARPOON"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("ANCHOR_STONE"));
@@ -221,18 +234,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region FROSTUSK
 			case "FROSTUSK":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_FANG"));
 				ds_list_add(_list_return_deck,scr_card_get_info("COOLING_MIST"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SEA_LEGS"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("CHILLING_WEAKNESS"));
@@ -257,17 +270,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region GALENATRIUM
 			case "GALENATRIUM":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
@@ -292,18 +305,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region GLACIMIGHT
 			case "GLACIMIGHT":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
@@ -328,18 +341,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region GULFLOW
 			case "GULFLOW":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BULWARK"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SAILORS_RESOLVE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SOOTHING_CURRENT"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("HYPOTHERMIA"));
@@ -364,17 +377,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region ISTIRAIN
 			case "ISTIRAIN":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_SPEAR"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_FOCUS"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
@@ -399,17 +412,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region KELPLATANI
 			case "KELPLATANI":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("STORM_WISP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BULWARK"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SAILORS_RESOLVE"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("SHARED_BULWARK"));
@@ -434,17 +447,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region LONTRIVER
 			case "LONTRIVER":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_SLASH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SNOWDRIFT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
@@ -469,17 +482,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region MARITIMICE
 			case "MARITIMICE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("AVALANCHE_STRIKE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SNOWDRIFT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BASTION"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_VOLLEY"));
@@ -504,17 +517,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region SALTWAGG
 			case "SALTWAGG":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_CRUSH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
 				ds_list_add(_list_return_deck,scr_card_get_info("COLD_RESERVE"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_BREAK"));
@@ -539,17 +552,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region SPHENISKIP
 			case "SPHENISKIP":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_MIRROR"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "ABYSS":
 						ds_list_add(_list_return_deck,scr_card_get_info("PURIFY_WATERS"));
@@ -572,7 +585,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 
 		#endregion
 
+
 		#region VERMILION
+
 			#region ASCHEMASS
 			case "ASCHEMASS":
 				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
@@ -668,25 +683,27 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
 			break;
 			#endregion
+
 		#endregion
+
 
 		#region VIRIDIAN
 
 			#region ARBRAWN
 			case "ARBRAWN":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BARKSKIN"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BEASTIAL_WRATH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SAVAGE_MAUL"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
@@ -711,18 +728,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region ARGENTBUD
 			case "ARGENTBUD":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
 				ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BLOWDART"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SHIELD"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
@@ -747,17 +764,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region BEAVINE
 			case "BEAVINE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("SPINESLING"));
 				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
 				ds_list_add(_list_return_deck,scr_card_get_info("CRIPPLING_VINES"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
@@ -782,17 +799,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region BRYOBITE
 			case "BRYOBITE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BARKSKIN"));
 				ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("THORNMAIL"));
@@ -817,17 +834,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region CHITROOPER
 			case "CHITROOPER":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("FERAL_FRENZY"));
 				ds_list_add(_list_return_deck,scr_card_get_info("INTERLOCKING_SCALES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PHEROMONES"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("OVERGROWTH"));
@@ -852,17 +869,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region CRUSABER
 			case "CRUSABER":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("STALKING_SWIPE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("THICK_HIDE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SYMBIOSIS"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("SINEWY_VINES"));
@@ -887,18 +904,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region DRYADAE
 			case "DRYADAE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_BOLT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SHIMMERING_SPORES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SLEEPING_POLLEN"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
@@ -923,18 +940,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region FIGHTREE
 			case "FIGHTREE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("FELL"));
 				ds_list_add(_list_return_deck,scr_card_get_info("STEELFUR"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PHEROMONES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("OLD_GROWTH_PUMMEL"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("OVERGROWTH"));
@@ -959,18 +976,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region FLITSAGE
 			case "FLITSAGE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PRIMAL_BLAST"));
 				ds_list_add(_list_return_deck,scr_card_get_info("MIRACLE_MUSA"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_PIERCE"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_ERUPTION"));
@@ -995,18 +1012,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region FURN
 			case "FURN":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("RAKE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("HUNTERS_INSTINCT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PREDATORS_MARK"));
 				ds_list_add(_list_return_deck,scr_card_get_info("HUNTERS_JAVELIN"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("THORN_NET"));
@@ -1031,17 +1048,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region LEPOROOT
 			case "LEPOROOT":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("SPIKE_PIERCE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("GREENSTEP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("POTENT_FRUIT"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
@@ -1066,19 +1083,19 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region LUMBUCK
 			case "LUMBUCK":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_SWIPES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_INSIGHT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SECOND_BLOOM"));
 				ds_list_add(_list_return_deck,scr_card_get_info("WILDSTRIKE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SHIELD"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
@@ -1103,18 +1120,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region MAMBARK
 			case "MAMBARK":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("UNSEEN_ROOT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PREDATORS_MARK"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SHIMMERING_SPORES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("NATURES_FURY"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
@@ -1139,18 +1156,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region MORELUSH
 			case "MORELUSH":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("SPORE_CLOUD"));
 				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SYMBIOSIS"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
@@ -1175,17 +1192,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region SPOROSE
 			case "SPOROSE":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_INSIGHT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("NATURAL_RECOVERY"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("BURGEONING_BLOOM"));
@@ -1210,17 +1227,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region STRIGIBLOOM
 			case "STRIGIBLOOM":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("UNSEEN_ROOT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SLEEP_DART"));
 				ds_list_add(_list_return_deck,scr_card_get_info("THORN_NET"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
@@ -1245,18 +1262,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 			#region TURFRANTULA
 			case "TURFRANTULA":
 
-				//--------//
-				// SHARED //
-				//--------//
+				//========//
+				//SHARED//
+				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("SPORE_CLOUD"));
 				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
 				ds_list_add(_list_return_deck,scr_card_get_info("GROWTH_SIGIL"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PACK_INSTINCT"));
 
-				//---------//
-				// SUBTYPE //
-				//---------//
-				switch(_str_beast_type){
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
@@ -1280,6 +1297,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 		#endregion
 	}
 
+	//================//
+	//FALLBACK DECK//
+	//================//
 	if (ds_list_size(_list_return_deck) <= 0){
 		ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
 	}

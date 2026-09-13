@@ -7,11 +7,10 @@
 //           Power scaling, Defense mitigation, Minions, Armor, Overhealth, HP,
 //           held items, reactive statuses, and post-damage triggers.
 //
-// INPUTS:   _val_damage_percent - Percentage of target Maximum HP used as damage.
-//           _ref_target - Battle Beast initially targeted by the damage.
-//           _stct_presentation - Optional hit-presentation override.
-// USES:     Current caster/Card context, Beast stats, Status/Minion systems,
-//           held items, battle VFX, and GUI combat feedback.
+// ARGUMENTS: _val_damage_percent is the percentage of target Maximum HP used.
+//            _ref_target is the initially targeted battle Beast.
+//            _stct_presentation is an optional hit-presentation override.
+// RETURNS: True when the damage instance resolves, otherwise false.
 //
 //===============================================================================//
 
@@ -113,6 +112,26 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 			_ref_target.y - 24 + irandom_range(-32,32)
 		);
 
+		//----------------//
+		//DEBUG DODGE//
+		//----------------//
+		scr_debug_log(
+			"BATTLE",
+			"DODGE",
+			_ref_target,
+			string_upper(_ref_target._str_team) + " " +
+			string_upper(_ref_target._ref_unit._str_beast_name) +
+			" DODGED " +
+			string_upper(_ref_caster._str_team) + " " +
+			string_upper(_ref_caster._ref_unit._str_beast_name) +
+			"'S " +
+			string_upper(_stct_card._str_card_name) +
+			" | ROLL: " + string(_val_dodge_roll) +
+			"/" + string(_val_dodge),
+			"BATTLE",
+			"SCR_BATTLE_DAMAGE_TARGET_PERCENT"
+		);
+
 		return false;
 	}
 
@@ -120,6 +139,26 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 	//DIVINE PROTECTION//
 	//-------------------//
 	if (scr_status_trigger_divine_protection(_ref_target)){
+
+		//----------------//
+		//DEBUG BLOCK//
+		//----------------//
+		scr_debug_log(
+			"BATTLE",
+			"BLOCK",
+			_ref_target,
+			string_upper(_ref_target._str_team) + " " +
+			string_upper(_ref_target._ref_unit._str_beast_name) +
+			" BLOCKED " +
+			string_upper(_ref_caster._str_team) + " " +
+			string_upper(_ref_caster._ref_unit._str_beast_name) +
+			"'S " +
+			string_upper(_stct_card._str_card_name) +
+			" | DIVINE PROTECTION",
+			"BATTLE",
+			"SCR_BATTLE_DAMAGE_TARGET_PERCENT"
+		);
+
 		return false;
 	}
 
@@ -324,6 +363,11 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 		return false;
 	}
 
+	//--------------------//
+	//STORE FINAL DAMAGE//
+	//--------------------//
+	var _val_final_damage = _val_damage_left;
+
 	#endregion
 
 	#region HIT PRESENTATION
@@ -387,12 +431,12 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 	//MINION ABSORPTION//
 	//-------------------//
 	var _ct_minions = ds_list_size(_list_minions);
+	var _val_minion_damage_applied = 0;
 
 	if (_ct_minions > 0 && _val_damage_left > 0){
 
 		var _val_damage_per_minion = _val_damage_left div _ct_minions;
 		var _val_minion_damage_remainder = _val_damage_left mod _ct_minions;
-		var _val_minion_damage_applied = 0;
 
 		for (var _it_minion = _ct_minions - 1; _it_minion >= 0; _it_minion--){
 
@@ -462,6 +506,8 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 	//TRACK BEAST DAMAGE//
 	//-------------------//
 	var _val_beast_damage = 0;
+	var _val_armor_blocked = 0;
+	var _val_overhealth_blocked = 0;
 
 	//-------//
 	//ARMOR//
@@ -476,7 +522,7 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 		//-----------------------//
 		//CALCULATE ARMOR BLOCKED//
 		//-----------------------//
-		var _val_armor_blocked = min(_ref_target._val_armor,_val_damage_left);
+		_val_armor_blocked = min(_ref_target._val_armor,_val_damage_left);
 
 		//----------//
 		//FEEDBACK//
@@ -527,7 +573,7 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 	//------------//
 	if (_val_damage_left > 0 && _ref_target._val_overhealth > 0){
 
-		var _val_overhealth_blocked = min(_ref_target._val_overhealth,_val_damage_left);
+		_val_overhealth_blocked = min(_ref_target._val_overhealth,_val_damage_left);
 
 		//----------//
 		//FEEDBACK//
@@ -579,6 +625,27 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 			_val_beast_damage += _val_hp_damage;
 		}
 	}
+
+	#endregion
+
+	#region DEBUG DAMAGE
+
+	//------------------//
+	//LOG DAMAGE RESULT//
+	//------------------//
+	scr_debug_log_damage_result(
+		_ref_caster,
+		_ref_target,
+		_stct_card,
+		_val_final_damage,
+		_val_minion_damage_applied,
+		_val_armor_blocked,
+		_val_overhealth_blocked,
+		_val_hp_damage,
+		_flag_critical,
+		"MAX HP " + string(_val_damage_percent) + "%",
+		"SCR_BATTLE_DAMAGE_TARGET_PERCENT"
+	);
 
 	#endregion
 
