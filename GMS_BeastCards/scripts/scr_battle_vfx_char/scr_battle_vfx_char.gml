@@ -2,9 +2,9 @@
 //
 // SCRIPT: SCR_BATTLE_VFX_CHAR
 // FUNCTION: Plays the Char trigger VFX/SFX on a battle Beast.
-//           Used when Burn reaches its Char threshold and converts into Char.
+//           Used whenever a Char stack is successfully triggered.
 //
-// INPUT:    _ref_target - Beast triggering Char.
+// INPUT:    _ref_target - Beast receiving Char.
 // RETURNS: The created VFX instance, or undefined if the target is invalid.
 //
 //===============================================================================//

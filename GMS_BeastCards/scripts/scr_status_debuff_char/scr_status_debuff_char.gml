@@ -3,8 +3,9 @@
 // SCRIPT: SCR_STATUS_DEBUFF_CHAR
 // FUNCTION: Handles the Char Debuff.
 //           Stackable Infinite and uncleansable.
-//           Each stack reduces outgoing linear damage by 1.
-//           Owns the persistent Char VFX.
+//           Each stack reduces outgoing linear damage by 2.
+//           Uses a dedicated Status icon.
+//           Trigger VFX/SFX are handled separately by scr_battle_vfx_char.
 //
 // ARGUMENTS: _str_tag selects the Status action.
 //            _ref_status references an existing Char Status.
@@ -58,13 +59,6 @@ function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
 					string(_ref_existing_status._ct_status_stacks * _ref_existing_status._val_status_magnitude) +
 					" OUTGOING DAMAGE. PERMANENT.";
 
-				//-----------------------//
-				//ENSURE PERSISTENT VFX//
-				//-----------------------//
-				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
-					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(_ref_target,spr_battle_vfx_char,0,0,1);
-				}
-
 				scr_status_reposition(_ref_target);
 
 				return _ref_existing_status;
@@ -83,7 +77,12 @@ function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
 			//---------------------//
 			//INITIALIZE LIFETIME//
 			//---------------------//
-			scr_status_init_lifetime(_ref_new_status,-1,true,true);
+			scr_status_init_lifetime(
+				_ref_new_status,
+				-1,
+				true,
+				true
+			);
 
 			//-------------//
 			//STATUS DATA//
@@ -94,15 +93,15 @@ function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			_ref_new_status._str_status_type = "DEBUFF";
 			_ref_new_status._str_status_name = "CHAR";
-			_ref_new_status._str_status_desc = "-1 OUTGOING DAMAGE PER STACK. PERMANENT.";
+			_ref_new_status._str_status_desc = "-2 OUTGOING DAMAGE PER STACK. PERMANENT.";
 
-			_ref_new_status._spr_status = spr_battle_vfx_char;
+			_ref_new_status._spr_status = spr_status_debuff_char;
 
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = true;
 			_ref_new_status._flag_status_uncleansable = true;
 
-			_ref_new_status._val_status_magnitude = 1;
+			_ref_new_status._val_status_magnitude = 2;
 
 			_ref_new_status._str_trigger_region = undefined;
 
@@ -114,14 +113,12 @@ function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(_ref_target._list_statuses,_ref_new_status);
+			ds_list_add(
+				_ref_target._list_statuses,
+				_ref_new_status
+			);
 
 			scr_status_reposition(_ref_target);
-
-			//================//
-			//PERSISTENT VFX//
-			//================//
-			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(_ref_target,spr_battle_vfx_char,0,0,1);
 
 			return _ref_new_status;
 
@@ -147,7 +144,10 @@ function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_status._val_status_magnitude *
 					_ref_status._ct_status_stacks;
 
-				_ref_host._val_dmg_linear_reduction -= _val_total_reduction;
+				_ref_host._val_dmg_linear_reduction = max(
+					0,
+					_ref_host._val_dmg_linear_reduction - _val_total_reduction
+				);
 			}
 
 			scr_status_destroy(_ref_status);

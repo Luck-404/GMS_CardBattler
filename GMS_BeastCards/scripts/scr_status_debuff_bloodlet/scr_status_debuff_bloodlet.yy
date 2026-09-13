@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_bloodlet",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_bloodlet",
+  "parent":{
+    "name":"BLOODLET",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/BLOODLET.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -141,7 +141,22 @@ function scr_logbook_init_cards(){
 	hscr_logbook_add_card_entry("EMBER_BARRAGE","VERMILION");
 	hscr_logbook_add_card_entry("MOLTEN_EDGE","VERMILION");
 	hscr_logbook_add_card_entry("SEARING_RAY","VERMILION");
-
+	hscr_logbook_add_card_entry("RAGING_BLOW","VERMILION");
+	hscr_logbook_add_card_entry("PYROCLAST","VERMILION");
+	hscr_logbook_add_card_entry("BURNING_CLEAVE","VERMILION");
+	hscr_logbook_add_card_entry("FLAME_SPOUT","VERMILION");
+	hscr_logbook_add_card_entry("BLOODLETTING","VERMILION");
+	hscr_logbook_add_card_entry("COMBUSTION","VERMILION");
+	hscr_logbook_add_card_entry("EMBER_SHOT","VERMILION");
+	hscr_logbook_add_card_entry("SCORCHING_CLAW","VERMILION");
+	hscr_logbook_add_card_entry("BARBED_BOLT","VERMILION");
+	hscr_logbook_add_card_entry("RENDING_BLOW","VERMILION");
+	hscr_logbook_add_card_entry("FORWARD_MARCH","VERMILION");
+	hscr_logbook_add_card_entry("FURIOUS_SLICE","VERMILION");
+	hscr_logbook_add_card_entry("RAGING_SPARK","VERMILION");
+	hscr_logbook_add_card_entry("BLOODFLAME_NEEDLE","VERMILION");
+	hscr_logbook_add_card_entry("FLASHPOINT","VERMILION");
+	 
 	//===============================================================================//
 	//
 	// DEFENSE

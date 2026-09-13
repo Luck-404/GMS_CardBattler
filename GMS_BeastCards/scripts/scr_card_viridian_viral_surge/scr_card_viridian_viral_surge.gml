@@ -6,10 +6,9 @@
 //           Uses each DoT's existing APPLY logic so stack-based side effects
 //           are also applied correctly.
 //           Preserves both current and maximum Status lifetime.
-//           Checks Burn-to-Char conversion after all DoTs finish stacking.
+//           Increasing Burn stacks does not directly trigger Char.
 //
-// ARGUMENTS: _stct_card is the Card struct.
-//            _ref_caster is the casting Beast.
+// ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
 // RETURNS: Nothing.
 //
@@ -30,8 +29,6 @@ function scr_card_viridian_viral_surge(_stct_card,_ref_caster,_ref_target){
 	var _ref_original_target = global.ref_target_beast;
 
 	global.ref_target_beast = _ref_target;
-
-	var _flag_burn_modified = false;
 
 	//================//
 	//DOUBLE ALL DOTS//
@@ -59,13 +56,9 @@ function scr_card_viridian_viral_surge(_stct_card,_ref_caster,_ref_target){
 		var _val_lifetime_original = _ref_status._val_status_lifetime;
 		var _val_lifetime_max_original = _ref_status._val_status_lifetime_max;
 
-		if (_ref_status._str_status_name == "BURN"){
-			_flag_burn_modified = true;
-		}
-
-		//-----------------//
+		//------------------//
 		//ADD SAME # STACKS//
-		//-----------------//
+		//------------------//
 		repeat (_ct_stacks_original){
 			script_execute(_ref_status._scr_status,"APPLY",undefined,_val_lifetime_max_original);
 		}
@@ -77,13 +70,6 @@ function scr_card_viridian_viral_surge(_stct_card,_ref_caster,_ref_target){
 			_ref_status._val_status_lifetime = _val_lifetime_original;
 			_ref_status._val_status_lifetime_max = _val_lifetime_max_original;
 		}
-	}
-
-	//========================//
-	//CHECK CHAR CONVERSION//
-	//========================//
-	if (_flag_burn_modified){
-		scr_status_trigger_char_conversion(_ref_target);
 	}
 
 	//=======================//

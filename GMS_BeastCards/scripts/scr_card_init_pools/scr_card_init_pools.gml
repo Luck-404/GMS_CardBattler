@@ -131,6 +131,15 @@ function scr_card_init_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"FLAME_LANCE");
 		ds_list_add(global.list_pool_cards_rarity_I,"MOLTEN_EDGE");
 		ds_list_add(global.list_pool_cards_rarity_I,"SEARING_RAY");
+		ds_list_add(global.list_pool_cards_rarity_I,"EMBER_SHOT");
+		ds_list_add(global.list_pool_cards_rarity_I,"SCORCHING_CLAW");
+		ds_list_add(global.list_pool_cards_rarity_I,"BARBED_BOLT");
+		ds_list_add(global.list_pool_cards_rarity_I,"RENDING_BLOW");
+		ds_list_add(global.list_pool_cards_rarity_I,"FORWARD_MARCH");
+		ds_list_add(global.list_pool_cards_rarity_I,"FURIOUS_SLICE");
+		ds_list_add(global.list_pool_cards_rarity_I,"RAGING_SPARK");
+		ds_list_add(global.list_pool_cards_rarity_I,"BLOODFLAME_NEEDLE");
+		ds_list_add(global.list_pool_cards_rarity_I,"FLASHPOINT");
 		
 	#endregion
 
@@ -263,7 +272,13 @@ function scr_card_init_pools(){
 		//================//
 		ds_list_add(global.list_pool_cards_rarity_II,"BERSERKER_FLURRY");
 		ds_list_add(global.list_pool_cards_rarity_II,"EMBER_BARRAGE");
-		
+		ds_list_add(global.list_pool_cards_rarity_II,"RAGING_BLOW");
+		ds_list_add(global.list_pool_cards_rarity_II,"PYROCLAST");
+		ds_list_add(global.list_pool_cards_rarity_II,"BURNING_CLEAVE");
+		ds_list_add(global.list_pool_cards_rarity_II,"FLAME_SPOUT");
+		ds_list_add(global.list_pool_cards_rarity_II,"BLOODLETTING");
+		ds_list_add(global.list_pool_cards_rarity_II,"COMBUSTION");
+
 	#endregion
 
 	//===============================================================================//

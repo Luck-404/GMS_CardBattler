@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_dot_rage",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_dot_rage",
+  "parent":{
+    "name":"RAGE",
+    "path":"folders/BATTLE/STATUSES/DOTs/RAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

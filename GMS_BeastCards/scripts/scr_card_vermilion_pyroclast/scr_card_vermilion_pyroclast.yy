@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_pyroclast",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_pyroclast",
+  "parent":{
+    "name":"PYROCLAST",
+    "path":"folders/CARDS/VERMILION/PYROCLAST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

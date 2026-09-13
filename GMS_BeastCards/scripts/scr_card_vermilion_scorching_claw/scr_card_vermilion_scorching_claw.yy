@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_scorching_claw",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_scorching_claw",
+  "parent":{
+    "name":"SCORCHING_CLAW",
+    "path":"folders/CARDS/VERMILION/SCORCHING_CLAW.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

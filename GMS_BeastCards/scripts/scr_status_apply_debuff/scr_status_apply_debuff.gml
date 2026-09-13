@@ -57,6 +57,18 @@ function scr_status_apply_debuff(_str_status_name,_val_lifetime=undefined,_val_m
 
 	switch (_str_status_name){
 
+		//==========//
+		//BLOODLET//
+		//==========//
+		case "BLOODLET":
+
+			_ref_status = scr_status_debuff_bloodlet("APPLY",undefined,_val_lifetime);
+
+			_str_popup = "+1 BLOODLET";
+			_c_popup = c_maroon;
+
+		break;
+
 		//======//
 		//CHAR//
 		//======//

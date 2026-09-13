@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_ember_shot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_ember_shot",
+  "parent":{
+    "name":"EMBER_SHOT",
+    "path":"folders/CARDS/VERMILION/EMBER_SHOT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

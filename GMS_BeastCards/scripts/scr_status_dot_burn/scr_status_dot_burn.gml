@@ -4,7 +4,8 @@
 // FUNCTION: Handles the Burn damage-over-time Status.
 //           Stackable Timed.
 //           Deals one separate 1-damage hit per Burn stack.
-//           Reapplications add one stack and refresh to the stored maximum life.
+//           After Burn damage resolves, checks the current Char threshold.
+//           Burn is not consumed when Char triggers.
 //
 // ARGUMENTS: _str_tag selects the Status action, _ref_status references an
 //            existing Status, and _val_lifetime optionally sets its duration.
@@ -238,11 +239,27 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 				}
 			}
 
+			//================//
+			//CHECK FOR CHAR//
+			//================//
+			if (_ref_host._val_cur_hp > 0){
+
+				var _ct_char_vfx_delay = sprite_get_number(spr_battle_vfx_burn_tick);
+
+				scr_status_trigger_char_conversion(
+					_ref_host,
+					_ct_char_vfx_delay
+				);
+			}
+
 			//----------------//
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
-			scr_status_reposition(_ref_host);
+
+			if (instance_exists(_ref_host)){
+				scr_status_reposition(_ref_host);
+			}
 
 		break;
 

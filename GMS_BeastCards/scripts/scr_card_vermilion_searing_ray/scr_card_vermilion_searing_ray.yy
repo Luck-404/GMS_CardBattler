@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_searing_ray",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_searing_ray",
+  "parent":{
+    "name":"SEARING_RAY",
+    "path":"folders/CARDS/VERMILION/SEARING_RAY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

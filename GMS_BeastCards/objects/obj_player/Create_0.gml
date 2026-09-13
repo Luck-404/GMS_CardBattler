@@ -641,15 +641,28 @@ scr_logbook_mark_beast_captured(
 //scr_deck_add_card(scr_card_get_info("CINDER_SPEAR"));
 //scr_deck_add_card(scr_card_get_info("BLOODFLAME_BOLT"));
 //scr_deck_add_card(scr_card_get_info("BERSERKER_CHARGE"));
-scr_deck_add_card(scr_card_get_info("FLAME_LANCE"));
-scr_deck_add_card(scr_card_get_info("BERSERKER_FLURRY"));
-scr_deck_add_card(scr_card_get_info("EMBER_BARRAGE"));
-scr_deck_add_card(scr_card_get_info("MOLTEN_EDGE"));
-scr_deck_add_card(scr_card_get_info("SEARING_RAY"));
-
+//scr_deck_add_card(scr_card_get_info("FLAME_LANCE"));
+//scr_deck_add_card(scr_card_get_info("BERSERKER_FLURRY"));
+//scr_deck_add_card(scr_card_get_info("EMBER_BARRAGE"));
+//scr_deck_add_card(scr_card_get_info("MOLTEN_EDGE"));
+//scr_deck_add_card(scr_card_get_info("SEARING_RAY"));
+//scr_deck_add_card(scr_card_get_info("RAGING_BLOW"));
+//scr_deck_add_card(scr_card_get_info("PYROCLAST"));
+//scr_deck_add_card(scr_card_get_info("BURNING_CLEAVE"));
+//scr_deck_add_card(scr_card_get_info("FLAME_SPOUT"));
+//scr_deck_add_card(scr_card_get_info("BLOODLETTING"));
+//scr_deck_add_card(scr_card_get_info("COMBUSTION"));
+//scr_deck_add_card(scr_card_get_info("EMBER_SHOT"));
+//scr_deck_add_card(scr_card_get_info("SCORCHING_CLAW"));
+//scr_deck_add_card(scr_card_get_info("BARBED_BOLT"));
+//scr_deck_add_card(scr_card_get_info("RENDING_BLOW"));
+scr_deck_add_card(scr_card_get_info("FORWARD_MARCH"));
+scr_deck_add_card(scr_card_get_info("FURIOUS_SLICE"));
+scr_deck_add_card(scr_card_get_info("RAGING_SPARK"));
+scr_deck_add_card(scr_card_get_info("BLOODFLAME_NEEDLE"));
+scr_deck_add_card(scr_card_get_info("FLASHPOINT"));
+ 
 #endregion
-
-
 
 //----------------//
 //TEST INVENTORY//

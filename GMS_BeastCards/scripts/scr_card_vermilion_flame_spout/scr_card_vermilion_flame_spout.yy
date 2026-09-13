@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_flame_spout",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_flame_spout",
+  "parent":{
+    "name":"FLAME_SPOUT",
+    "path":"folders/CARDS/VERMILION/FLAME_SPOUT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

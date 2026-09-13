@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_burning_cleave",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_burning_cleave",
+  "parent":{
+    "name":"BURNING_CLEAVE",
+    "path":"folders/CARDS/VERMILION/BURNING_CLEAVE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

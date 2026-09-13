@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_barbed_bolt",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_barbed_bolt",
+  "parent":{
+    "name":"BARBED_BOLT",
+    "path":"folders/CARDS/VERMILION/BARBED_BOLT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

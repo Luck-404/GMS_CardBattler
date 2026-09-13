@@ -87,16 +87,24 @@ switch(_state_enemy){
 				continue;
 			}
 
+			//=====================//
+			//CALCULATE EXPECTED HP//
+			//=====================//
+			var _val_expected_max_hp = scr_beast_get_max_hp(
+				_stct_enemy_unit._val_beast_hp_stat,
+				_stct_enemy_unit._val_beast_level
+			);
+
 			//---------------------//
 			//VALIDATE MAXIMUM HP//
 			//---------------------//
-			if (_stct_enemy_unit._val_beast_hp_max <= 0){
+			if (_val_expected_max_hp <= 0){
 
 				scr_debug_log(
 					"BATTLE",
 					"ENEMY",
 					_stct_enemy_unit,
-					"ENEMY BATTLE INIT FAILED | INVALID MAX HP: " + string(_stct_enemy_unit._val_beast_hp_max),
+					"ENEMY BATTLE INIT FAILED | INVALID EXPECTED MAX HP: " + string(_val_expected_max_hp),
 					"ERROR",
 					"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
 				);
@@ -104,31 +112,30 @@ switch(_state_enemy){
 				continue;
 			}
 
-			//----------------//
-			//CLAMP CURRENT HP//
-			//----------------//
-			_stct_enemy_unit._val_beast_hp_cur = clamp(
-				_stct_enemy_unit._val_beast_hp_cur,
-				0,
-				_stct_enemy_unit._val_beast_hp_max
-			);
-
-			//--------------------------------//
-			//ENEMIES MUST ENTER BATTLE ALIVE//
-			//--------------------------------//
-			if (_stct_enemy_unit._val_beast_hp_cur <= 0){
+			//==================//
+			//VERIFY LEVEL HP//
+			//==================//
+			if (_stct_enemy_unit._val_beast_hp_max != _val_expected_max_hp){
 
 				scr_debug_log(
-					"BATTLE",
-					"ENEMY",
+					"BEAST",
+					"LEVEL",
 					_stct_enemy_unit,
-					"ENEMY BATTLE INIT FAILED | BEAST ENTERED WITH 0 HP",
-					"ERROR",
+					"ENEMY HP MISMATCH CORRECTED" +
+					" | BEAST: " + string_upper(_stct_enemy_unit._str_beast_name) +
+					" | LEVEL: " + string(_stct_enemy_unit._val_beast_level) +
+					" | EXISTING MAX HP: " + string(_stct_enemy_unit._val_beast_hp_max) +
+					" | EXPECTED MAX HP: " + string(_val_expected_max_hp),
+					"WARNING",
 					"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
 				);
-
-				continue;
 			}
+
+			//================//
+			//SET ENEMY HP//
+			//================//
+			_stct_enemy_unit._val_beast_hp_max = _val_expected_max_hp;
+			_stct_enemy_unit._val_beast_hp_cur = _val_expected_max_hp;
 
 			//---------------//
 			//UPDATE LOGBOOK//

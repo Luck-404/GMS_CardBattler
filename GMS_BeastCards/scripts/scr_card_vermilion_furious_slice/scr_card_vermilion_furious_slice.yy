@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_furious_slice",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_furious_slice",
+  "parent":{
+    "name":"FURIOUS_SLICE",
+    "path":"folders/CARDS/VERMILION/FURIOUS_SLICE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_battle_hemorrhage",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.1414966,
+  "exportDir":"",
+  "name":"snd_battle_hemorrhage",
+  "parent":{
+    "name":"HEMORRHAGE",
+    "path":"folders/BATTLE/COLOR TRIGGERS/HEMORRHAGE.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_battle_hemorrhage.wav",
+  "volume":0.86,
+}

@@ -4,7 +4,8 @@
 // FUNCTION: Handles the Bleed damage-over-time Status.
 //           Stackable Timed.
 //           Deals one hit equal to the current Bleed stack count.
-//           Reapplications add one stack and refresh to the stored maximum life.
+//           Reapplications add Bleed and refresh to the stored maximum life.
+//           Bloodlet doubles the amount of Bleed added per application.
 //
 // ARGUMENTS: _str_tag selects the Status action, _ref_status references an
 //            existing Status, _val_lifetime optionally sets duration, and
@@ -44,6 +45,16 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 
 			_val_lifetime = max(1,_val_lifetime);
 
+			//================//
+			//BLEED AMOUNT//
+			//================//
+			var _ct_bleed_added = 1;
+			var _ref_bloodlet = scr_status_check("BLOODLET",_ref_target);
+
+			if (_ref_bloodlet != -1 && instance_exists(_ref_bloodlet)){
+				_ct_bleed_added *= 2;
+			}
+
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
@@ -59,7 +70,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					return undefined;
 				}
 
-				_ref_existing_status._ct_status_stacks++;
+				_ref_existing_status._ct_status_stacks += _ct_bleed_added;
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -84,12 +95,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				//---------------------//
 				//INITIALIZE LIFETIME//
 				//---------------------//
-				scr_status_init_lifetime(
-					_ref_new_status,
-					_val_lifetime,
-					true,
-					false
-				);
+				scr_status_init_lifetime(_ref_new_status,_val_lifetime,true,false);
 
 				//-------------//
 				//STATUS DATA//
@@ -104,7 +110,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 
 				_ref_new_status._spr_status = spr_status_dot_bleed;
 
-				_ref_new_status._ct_status_stacks = 1;
+				_ref_new_status._ct_status_stacks = _ct_bleed_added;
 				_ref_new_status._flag_status_stackable = true;
 
 				_ref_new_status._str_trigger_region = "START";
@@ -112,10 +118,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				//----------------//
 				//REGISTER STATUS//
 				//----------------//
-				ds_list_add(
-					_ref_target._list_statuses,
-					_ref_new_status
-				);
+				ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
 				scr_status_reposition(_ref_target);
 
@@ -126,11 +129,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			//PLAGUE GARDEN//
 			//=================//
 			if (_flag_trigger_plague_garden){
-
-				scr_status_trigger_plague_garden(
-					_ref_target,
-					"BLEED"
-				);
+				scr_status_trigger_plague_garden(_ref_target,"BLEED");
 			}
 
 			//========================//
@@ -165,10 +164,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 
 			if (!instance_exists(_ref_host)){
 
-				scr_status_dot_bleed(
-					"DEATH",
-					_ref_status
-				);
+				scr_status_dot_bleed("DEATH",_ref_status);
 
 				return undefined;
 			}
@@ -181,10 +177,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			//============//
 			//OVERHEALTH//
 			//============//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_overhealth > 0
-			){
+			if (_val_damage > 0 && _ref_host._val_overhealth > 0){
 
 				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
 
@@ -217,10 +210,7 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 					_ref_host.y - 24 + irandom_range(-32,32)
 				);
 
-				_ref_host._val_cur_hp = max(
-					0,
-					_ref_host._val_cur_hp - _val_actual_damage
-				);
+				_ref_host._val_cur_hp = max(0,_ref_host._val_cur_hp - _val_actual_damage);
 			}
 
 			//==========//

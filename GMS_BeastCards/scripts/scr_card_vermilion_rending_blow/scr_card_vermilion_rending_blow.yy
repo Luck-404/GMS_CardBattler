@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_rending_blow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_rending_blow",
+  "parent":{
+    "name":"RENDING_BLOW",
+    "path":"folders/CARDS/VERMILION/RENDING_BLOW.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

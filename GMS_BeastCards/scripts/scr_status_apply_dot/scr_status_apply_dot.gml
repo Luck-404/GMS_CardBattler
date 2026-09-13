@@ -4,12 +4,11 @@
 // FUNCTION: Attempts to apply a damage-over-time Status to the current target.
 //           Checks target CON resistance before applying.
 //           Handles shared application feedback, debug logging, and DoT Traps.
-//           Successful Burn applications also check Burn-to-Char conversion.
 //
 // ARGUMENTS: _str_status_name is the DoT ID.
 //            _val_lifetime optionally overrides duration.
 //            _flag_trigger_plague_garden controls Plague Garden.
-// RETURNS: The active DoT Status reference, or undefined if none remains.
+// RETURNS: The applied DoT Status reference, or undefined if application fails.
 //
 //===============================================================================//
 
@@ -100,7 +99,16 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 
 			_ref_status = scr_status_dot_bleed("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
 
-			_str_popup = "+1 BLEED";
+			if (instance_exists(_ref_status)){
+
+				var _ct_bleed_added = max(
+					1,
+					_ref_status._ct_status_stacks - _ct_previous_stacks
+				);
+
+				_str_popup = "+" + string(_ct_bleed_added) + " BLEED";
+			}
+
 			_c_popup = c_maroon;
 
 		break;
@@ -179,22 +187,6 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 	//CHECK DOT TRAPS//
 	//===================//
 	scr_battle_trigger_dot_traps(_ref_target);
-
-	//========================//
-	//CHECK CHAR CONVERSION//
-	//========================//
-	if (_str_status_name == "BURN"){
-
-		scr_status_trigger_char_conversion(_ref_target);
-
-		var _ref_current_burn = scr_status_check("BURN",_ref_target);
-
-		if (_ref_current_burn == -1 || !instance_exists(_ref_current_burn)){
-			return undefined;
-		}
-
-		return _ref_current_burn;
-	}
 
 	return _ref_status;
 }

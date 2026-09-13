@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_forward_march",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_forward_march",
+  "parent":{
+    "name":"FORWARD_MARCH",
+    "path":"folders/CARDS/VERMILION/FORWARD_MARCH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

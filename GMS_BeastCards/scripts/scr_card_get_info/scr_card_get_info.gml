@@ -5962,6 +5962,30 @@ function scr_card_get_info(_str_card_name){
 		#endregion
 
 		#region VERMILION
+			#region BARBED_BOLT
+			case "BARBED_BOLT":
+				_stct_return_card = {
+					_str_card_name : "BARBED BOLT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_barbed_bolt,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_barbed_bolt,
+					_str_card_description : "ST. Ranged. Deal [Linear] PHY dmg (base 4). Apply 1 Bleed."
+				};
+			break;
+			#endregion	
 	
 			#region BERSERKER_CHARGE
 			case "BERSERKER_CHARGE":
@@ -6038,6 +6062,56 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion		
 		
+			#region BLOODLETTING
+			case "BLOODLETTING":
+				_stct_return_card = {
+					_str_card_name : "BLOODLETTING",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_bloodletting,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 18,
+					_str_card_scalar : "PERCENT",
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_bloodletting,
+					_str_card_description : "EXHAUSTS. ST. Melee. Deal [%] PHY dmg (base 18% of target's maximum HP). HEMORRHAGE."
+				};
+			break;
+			#endregion		
+		
+			#region BURNING_CLEAVE
+			case "BURNING_CLEAVE":
+				_stct_return_card = {
+					_str_card_name : "BURNING CLEAVE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_burning_cleave,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "FRONT2",
+					_val_card_magnitude : 8,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_burning_cleave,
+					_str_card_description : "AoE-2. Melee. Deal [Linear] PHY dmg to the front target and the Beast behind it (base 8)."
+				};
+			break;
+			#endregion		
+		
 			#region CINDER_SPEAR
 			case "CINDER_SPEAR":
 				_stct_return_card = {
@@ -6063,6 +6137,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion		
 		
+			#region COMBUSTION
+			case "COMBUSTION":
+				_stct_return_card = {
+					_str_card_name : "COMBUSTION",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_combustion,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 15,
+					_str_card_scalar : "PERCENT",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_combustion,
+					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [%] MAG dmg (base 15% of target's maximum HP)."
+				};
+			break;
+			#endregion		
+		
 			#region EMBER_BARRAGE
 			case "EMBER_BARRAGE":
 				_stct_return_card = {
@@ -6084,6 +6183,31 @@ function scr_card_get_info(_str_card_name){
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_vermilion_ember_barrage,
 					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg 3 times (base 3 per hit)."
+				};
+			break;
+			#endregion		
+		
+			#region EMBER_SHOT
+			case "EMBER_SHOT":
+				_stct_return_card = {
+					_str_card_name : "EMBER SHOT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_ember_shot,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_ember_shot,
+					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg. Apply 1 Burn (base 4)."
 				};
 			break;
 			#endregion		
@@ -6137,6 +6261,81 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region FLAME_SPOUT
+			case "FLAME_SPOUT":
+				_stct_return_card = {
+					_str_card_name : "FLAME SPOUT",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_flame_spout,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ADJACENT",
+					_val_card_magnitude : 9,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_flame_spout,
+					_str_card_description : "AoE-3. Ranged. Deal [Linear] MAG dmg to up to 3 selected Beasts (base 9)."
+				};
+			break;
+			#endregion
+		
+			#region FORWARD_MARCH
+			case "FORWARD_MARCH":
+				_stct_return_card = {
+					_str_card_name : "FORWARD MARCH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_forward_march,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SOLDIER",
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_forward_march,
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg (base 5). If the caster is the front allied Beast, gain 1 Rage."
+				};
+			break;
+			#endregion		
+		
+			#region FURIOUS_SLICE
+			case "FURIOUS_SLICE":
+				_stct_return_card = {
+					_str_card_name : "FURIOUS SLICE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_furious_slice,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_furious_slice,
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg (base 5). Consume 1 Rage to deal 4 additional dmg."
+				};
+			break;
+			#endregion		
 		
 			#region HELLFIRE_STRIKE
 			case "HELLFIRE_STRIKE":
@@ -6184,6 +6383,106 @@ function scr_card_get_info(_str_card_name){
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_vermilion_molten_edge,
 					_str_card_description : "EXHAUSTS. ST. Melee. Pierce Armor and deal [Linear] PHY dmg directly to Overhealth and HP (base 4)."
+				};
+			break;
+			#endregion		
+		
+			#region PYROCLAST
+			case "PYROCLAST":
+				_stct_return_card = {
+					_str_card_name : "PYROCLAST",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_pyroclast,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 13,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_pyroclast,
+					_str_card_description : "EXHAUSTS. ST. Ranged. Deal [Linear] MAG dmg (base 13)."
+				};
+			break;
+			#endregion		
+		
+			#region RAGING_BLOW
+			case "RAGING_BLOW":
+				_stct_return_card = {
+					_str_card_name : "RAGING BLOW",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_raging_blow,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 14,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_raging_blow,
+					_str_card_description : "EXHAUSTS. ST. Melee. Deal [Linear] PHY dmg (base 14)."
+				};
+			break;
+			#endregion		
+		
+			#region RENDING_BLOW
+			case "RENDING_BLOW":
+				_stct_return_card = {
+					_str_card_name : "RENDING BLOW",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_rending_blow,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_rending_blow,
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg (base 4). If the target is already Bleeding, apply 1 Bleed."
+				};
+			break;
+			#endregion		
+		
+			#region SCORCHING_CLAW
+			case "SCORCHING_CLAW":
+				_stct_return_card = {
+					_str_card_name : "SCORCHING CLAW",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_scorching_claw,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "MELEE",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "PHY",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 5,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_scorching_claw,
+					_str_card_description : "ST. Melee. Deal [Linear] PHY dmg. Apply 1 Burn (base 5)."
 				};
 			break;
 			#endregion		
