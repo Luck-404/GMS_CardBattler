@@ -1,23 +1,97 @@
 //===============================================================================//
 //
 // DRAW GUI: OBJ_GUI_POPUP_ERROR
-// FUNCTION: Draws a centered GUI error message.
-//           Counts down its lifespan.
-//           Destroys itself when its timer expires.
+// FUNCTION: Draws a bottom-center GUI error/instruction banner.
+//           Uses a dark gray background with centered red text.
+//           Counts down its lifespan and destroys itself when expired.
 //
 //===============================================================================//
 
 //================//
-//TEXT//
+//BANNER//
 //================//
 if (_str_text != "DEFAULT"){
 
+	//----------------//
+	//BANNER POSITION//
+	//----------------//
 	var _val_gui_width = display_get_gui_width();
-	var _val_gui_height = display_get_gui_height();
 
-	draw_set_colour(c_red);
+	var _val_banner_center_x = _val_gui_width * 0.5;
+	var _val_banner_bottom = 736;
+
+	var _val_banner_height = 40;
+	var _val_banner_padding_x = 20;
+
+	//----------------//
+	//TEXT SETTINGS//
+	//----------------//
 	draw_set_font(fnt_gui_medium);
-	draw_text((_val_gui_width / 2) - (string_width(_str_text) / 2),_val_gui_height / 2,_str_text);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+
+	var _val_text_width = string_width(_str_text);
+
+	var _val_banner_width = max(
+		220,
+		_val_text_width + (_val_banner_padding_x * 2)
+	);
+
+	var _val_banner_left =
+		_val_banner_center_x -
+		(_val_banner_width * 0.5);
+
+	var _val_banner_right =
+		_val_banner_center_x +
+		(_val_banner_width * 0.5);
+
+	var _val_banner_top =
+		_val_banner_bottom -
+		_val_banner_height;
+
+	//================//
+	//BACKGROUND//
+	//================//
+	draw_set_colour(global.c_dk_gray);
+
+	draw_rectangle(
+		_val_banner_left,
+		_val_banner_top,
+		_val_banner_right,
+		_val_banner_bottom,
+		false
+	);
+
+	//================//
+	//BORDER//
+	//================//
+	draw_set_colour(c_black);
+
+	draw_rectangle(
+		_val_banner_left,
+		_val_banner_top,
+		_val_banner_right,
+		_val_banner_bottom,
+		true
+	);
+
+	//================//
+	//TEXT//
+	//================//
+	draw_set_colour(c_red);
+
+	draw_text(
+		_val_banner_center_x,
+		_val_banner_top + (_val_banner_height * 0.5),
+		_str_text
+	);
+
+	//----------------//
+	//RESET DRAW STATE//
+	//----------------//
+	draw_set_colour(c_white);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
 }
 
 //================//

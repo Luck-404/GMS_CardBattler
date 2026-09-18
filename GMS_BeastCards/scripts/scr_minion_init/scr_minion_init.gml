@@ -56,6 +56,86 @@ function scr_minion_init(_str_minion_id,_ref_card,_ref_caster,_ref_target){
 	//================//
 	switch (_str_minion_id){
 
+		//----------//
+		//CINDERLING//
+		//----------//
+		case "CINDERLING":
+
+			_ref_new_minion._str_name = "CINDERLING";
+
+			_ref_new_minion._val_cur_hp = 2;
+			_ref_new_minion._val_max_hp = 2;
+
+			_ref_new_minion._val_magnitude = 1;
+
+			_ref_new_minion._spr_minion = spr_minion_cinderling;
+
+		break;
+
+		//-------------//
+		//EMBER TURRET//
+		//-------------//
+		case "EMBER_TURRET":
+
+			_ref_new_minion._str_name = "EMBER TURRET";
+
+			_ref_new_minion._val_cur_hp = 3;
+			_ref_new_minion._val_max_hp = 3;
+
+			_ref_new_minion._val_magnitude = 1;
+
+			_ref_new_minion._spr_minion = spr_minion_ember_turret;
+
+		break;
+
+		//------------//
+		//MAGMA CANNON//
+		//------------//
+		case "MAGMA_CANNON":
+
+			_ref_new_minion._str_name = "MAGMA CANNON";
+
+			_ref_new_minion._val_cur_hp = 3;
+			_ref_new_minion._val_max_hp = 3;
+
+			_ref_new_minion._val_magnitude = 3;
+
+			_ref_new_minion._spr_minion = spr_minion_magma_cannon;
+
+		break;
+
+		//----------//
+		//FLAMEGUARD//
+		//----------//
+		case "FLAMEGUARD":
+
+			_ref_new_minion._str_name = "FLAMEGUARD";
+
+			_ref_new_minion._val_cur_hp = 7;
+			_ref_new_minion._val_max_hp = 7;
+
+			_ref_new_minion._val_magnitude = 0;
+
+			_ref_new_minion._spr_minion = spr_minion_flameguard;
+
+		break;
+
+		//-------------//
+		//LIVING FLAME//
+		//-------------//
+		case "LIVING_FLAME":
+
+			_ref_new_minion._str_name = "LIVING FLAME";
+
+			_ref_new_minion._val_cur_hp = 3;
+			_ref_new_minion._val_max_hp = 3;
+
+			_ref_new_minion._val_magnitude = 1;
+
+			_ref_new_minion._spr_minion = spr_minion_living_flame;
+
+		break;
+
 		//------------//
 		//ANCHOR STONE//
 		//------------//
@@ -399,6 +479,18 @@ function scr_minion_init(_str_minion_id,_ref_card,_ref_caster,_ref_target){
 	//======================//
 	//APPLY PASSIVE EFFECTS//
 	//======================//
+
+	//==========//
+	//FLAMEGUARD//
+	//==========//
+	if (_ref_new_minion._str_name == "FLAMEGUARD"){
+
+		scr_status_buff_flameguard_taunt(
+			"APPLY",
+			undefined,
+			_ref_new_minion
+		);
+	}
 
 	//----------------//
 	//BLOOMING SPRITE//

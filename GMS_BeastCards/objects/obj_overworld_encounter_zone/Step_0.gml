@@ -21,7 +21,11 @@ if (!place_meeting(x,y,obj_player) || !obj_player._flag_player_moving){
 //================//
 //ENCOUNTER ATTEMPT//
 //================//
-if (_ct_encounter_attempt_cooldown <= 0 && !instance_exists(obj_battle_wait)){
+if (
+	_ct_encounter_attempt_cooldown <= 0 &&
+	!instance_exists(obj_battle_wait) &&
+	!instance_exists(obj_battle_wait)
+){
 
 	var _val_encounter_roll = irandom_range(1,100);
 

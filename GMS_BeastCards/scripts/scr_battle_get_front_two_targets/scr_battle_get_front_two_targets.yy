@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_get_front_two_targets",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_get_front_two_targets",
+  "parent":{
+    "name":"TAUNT",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/TAUNT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

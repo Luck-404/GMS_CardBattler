@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_fireball",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_fireball",
+  "parent":{
+    "name":"FIREBALL",
+    "path":"folders/CARDS/VERMILION/FIREBALL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

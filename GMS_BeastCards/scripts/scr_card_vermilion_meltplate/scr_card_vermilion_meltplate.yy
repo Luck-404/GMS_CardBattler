@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_meltplate",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_meltplate",
+  "parent":{
+    "name":"MELTPLATE",
+    "path":"folders/CARDS/VERMILION/MELTPLATE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

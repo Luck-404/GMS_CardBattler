@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_blood_price",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_blood_price",
+  "parent":{
+    "name":"BLOOD_PRICE",
+    "path":"folders/CARDS/VERMILION/BLOOD_PRICE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

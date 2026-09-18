@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_redirect_guard",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_redirect_guard",
+  "parent":{
+    "name":"REDIRECT_GUARD",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REDIRECT_GUARD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

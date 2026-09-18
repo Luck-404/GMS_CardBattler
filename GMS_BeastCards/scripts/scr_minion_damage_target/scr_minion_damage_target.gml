@@ -124,7 +124,7 @@ function scr_minion_damage_target(_val_damage,_ref_target,_ref_source_minion=und
 					_ref_minion.x + irandom_range(-16,16),
 					_ref_minion.y - 16 + irandom_range(-16,16)
 				);
-
+				
 				//---------------//
 				//DESTROY MINION//
 				//---------------//
@@ -134,7 +134,8 @@ function scr_minion_damage_target(_val_damage,_ref_target,_ref_source_minion=und
 
 					scr_minion_destroy(
 						_ref_minion,
-						"DEATH"
+						"DEATH",
+						_ref_source_minion
 					);
 				}
 			}
@@ -262,6 +263,16 @@ function scr_minion_damage_target(_val_damage,_ref_target,_ref_source_minion=und
 			string(_ref_target._val_max_hp),
 			"BATTLE",
 			"SCR_MINION_DAMAGE_TARGET"
+		);
+	}
+
+	//================//
+	//DAMAGE TRAPS//
+	//================//
+	if (_val_armor_damage + _val_beast_damage > 0){
+		scr_battle_trigger_damage_traps(
+			_ref_target,
+			_val_armor_damage + _val_beast_damage
 		);
 	}
 

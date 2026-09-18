@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_harden_blood",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_harden_blood",
+  "parent":{
+    "name":"HARDEN_BLOOD",
+    "path":"folders/CARDS/VERMILION/HARDEN_BLOOD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

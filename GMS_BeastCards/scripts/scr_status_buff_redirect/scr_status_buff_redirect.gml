@@ -3,9 +3,14 @@
 // SCRIPT: SCR_STATUS_BUFF_REDIRECT
 // FUNCTION: Handles Redirect.
 //           Unstackable Infinite Buff.
-//           Stores a linked Beast that receives the host's next incoming
+//           Stores the linked Beast that receives the host's next incoming
 //           damage instance.
+//           Creates a linked Redirect Guard Buff on that Beast.
 //           Redirect is consumed when successfully triggered.
+//
+// ARGUMENTS: _str_tag selects the Status action.
+//            _ref_status references an existing Redirect Status.
+// RETURNS: The active Redirect Status on APPLY; otherwise undefined.
 //
 //===============================================================================//
 
@@ -59,23 +64,19 @@ function scr_status_buff_redirect(_str_tag,_ref_status){
 			//----------------//
 			var _ref_existing_status = scr_status_check("REDIRECT",_ref_target);
 
-			//------------------//
-			//UPDATE EXISTING//
-			//------------------//
-			if (_ref_existing_status != -1){
-
-				if (!instance_exists(_ref_existing_status)){
-					return undefined;
-				}
-
-				_ref_existing_status._ref_status_target = _ref_redirect_target;
-
-				return _ref_existing_status;
+			//======================//
+			//REPLACE EXISTING LINK//
+			//======================//
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
+				scr_status_buff_redirect("DEATH",_ref_existing_status);
 			}
 
-			//---------------//
-			//CREATE STATUS//
-			//---------------//
+			//===============//
+			//CREATE REDIRECT//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_target.x,
 				_ref_target.y,
@@ -86,12 +87,7 @@ function scr_status_buff_redirect(_str_tag,_ref_status){
 			//-------------------//
 			//INFINITE LIFETIME//
 			//-------------------//
-			scr_status_init_lifetime(
-				_ref_new_status,
-				-1,
-				false,
-				true
-			);
+			scr_status_init_lifetime(_ref_new_status,-1,false,true);
 
 			//-------------//
 			//STATUS DATA//
@@ -110,17 +106,28 @@ function scr_status_buff_redirect(_str_tag,_ref_status){
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = false;
 
+			_ref_new_status._ct_redirect_rage_gain = 0;
+			_ref_new_status._ref_redirect_guard_status = undefined;
+
 			_ref_new_status._str_trigger_region = undefined;
 
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(
-				_ref_target._list_statuses,
+			ds_list_add(_ref_target._list_statuses,_ref_new_status);
+
+			scr_status_reposition(_ref_target);
+
+			//=====================//
+			//CREATE GUARD STATUS//
+			//=====================//
+			var _ref_guard_status = scr_status_buff_redirect_guard(
+				"APPLY",
+				undefined,
 				_ref_new_status
 			);
 
-			scr_status_reposition(_ref_target);
+			_ref_new_status._ref_redirect_guard_status = _ref_guard_status;
 
 			return _ref_new_status;
 
@@ -141,9 +148,30 @@ function scr_status_buff_redirect(_str_tag,_ref_status){
 		//=======//
 		case "DEATH":
 
-			if (instance_exists(_ref_status)){
-				scr_status_destroy(_ref_status);
+			if (!instance_exists(_ref_status)){
+				return undefined;
 			}
+
+			//=====================//
+			//REMOVE GUARD STATUS//
+			//=====================//
+			if (
+				variable_instance_exists(_ref_status,"_ref_redirect_guard_status") &&
+				instance_exists(_ref_status._ref_redirect_guard_status)
+			){
+
+				var _ref_guard_status = _ref_status._ref_redirect_guard_status;
+
+				_ref_status._ref_redirect_guard_status = undefined;
+				_ref_guard_status._ref_redirect_status = undefined;
+
+				scr_status_buff_redirect_guard("DEATH",_ref_guard_status);
+			}
+
+			//================//
+			//REMOVE REDIRECT//
+			//================//
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

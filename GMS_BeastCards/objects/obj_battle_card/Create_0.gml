@@ -62,6 +62,14 @@ _val_scale_x = 0.3;
 _val_scale_y = 0.3;
 _val_preview_scale = 1.0;
 
+//-----------------------//
+//HAND HOVER / DEPTH DATA//
+//-----------------------//
+_val_card_hand_target_x = 528;
+_val_card_hand_target_y = 956;
+_val_card_rest_depth = depth;
+_val_card_base_depth = depth;
+
 //-------------------//
 //BATTLE VFX TRACKING//
 //-------------------//
@@ -102,11 +110,23 @@ _val_card_move_start_y = 0;
 _val_card_move_end_x = 0;
 _val_card_move_end_y = 0;
 
+//--------------------------//
+//MOVEMENT SCALE / FLIP DATA//
+//--------------------------//
+_val_card_move_progress = 0;
+_val_card_move_scale_start = 0.08;
+_val_card_move_scale_end = 0.30;
+_flag_card_move_flip = false;
+_arr_card_move_queue = [];
+
 #endregion
 
 //----//
 //INIT//
 //----//
+// The obj_battle_card asset already uses spr_battle_card_hitbox as its sprite.
+// Do not replace sprite_index, assign mask_index, or rescale image_xscale/y.
+// The associated Card artwork remains in _spr_card and is drawn separately.
 
 //-------//
 //METHODS//

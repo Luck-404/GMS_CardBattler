@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodflame_needle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodflame_needle",
+  "parent":{
+    "name":"BLOODFLAME_NEEDLE",
+    "path":"folders/CARDS/VERMILION/BLOODFLAME_NEEDLE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

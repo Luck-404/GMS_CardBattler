@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_magma_cannon",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_magma_cannon",
+  "parent":{
+    "name":"MAGMA_CANNON",
+    "path":"folders/CARDS/VERMILION/MAGMA_CANNON.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

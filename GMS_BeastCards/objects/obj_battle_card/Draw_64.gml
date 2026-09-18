@@ -1,12 +1,9 @@
 //===============================================================================//
 //
 // DRAW GUI: OBJ_BATTLE_CARD
-// FUNCTION: Draws player and enemy battle Cards.
-//           Handles movement flips, pile visuals, hover scaling, disabled and
-//           unavailable states, and enlarged Card inspection previews.
-//
-// USES:     Card team, owner, location, movement state, Card sprite, player
-//           controller state, turn state, and Ctrl-key inspection input.
+// FUNCTION: Draws animated player Cards using the existing movement system.
+//           Restores native sprite-based Hand hover and Ctrl preview,
+//           while preserving enemy Card rendering and the HUD layout.
 //
 //===============================================================================//
 
@@ -14,80 +11,47 @@
 //BATTLE END HIDDEN//
 //-----------------//
 if (instance_exists(obj_gui_end_battle_pane)){
-	exit;
+    exit;
+}
+
+// A previously inspected Card cannot retain a preview while moving.
+if (_str_team == "PLAYER"){
+    _spr_preview_card = undefined;
 }
 
 #region CARD MOVEMENT
 
-//=======================//
-//CARD MOVEMENT ANIMATION//
-//=======================//
 if (_str_team == "PLAYER" && _flag_card_moving){
 
-	//-----------------//
-	//HIDE DURING DELAY//
-	//-----------------//
-	if (_ct_card_move_delay > 0){
-		exit;
-	}
+    if (_ct_card_move_delay > 0){
+        exit;
+    }
 
-	//-------------------//
-	//GET ANIMATION FRAME//
-	//-------------------//
-	var _ct_card_move_frame = clamp(_ct_card_move_timer - 1,0,7);
-	var _flag_flip_first_half = (_ct_card_move_frame <= 3);
+    // Retain the existing two-phase face flip, now over a variable card scale.
+    var _val_progress = clamp(_val_card_move_progress,0,1);
+    var _val_eased = 1 - power(1 - _val_progress,3);
+    var _val_scale = lerp(_val_card_move_scale_start,_val_card_move_scale_end,_val_eased);
+    var _val_flip_x = 1;
+    var _spr_move_card = spr_card_back;
 
-	//-----------------------//
-	//CALCULATE FLIP PROGRESS//
-	//-----------------------//
-	var _val_flip_progress = 0;
-	var _val_flip_scale_x = 0.3;
+    if (_flag_card_move_flip){
 
-	if (_flag_flip_first_half){
-		_val_flip_progress = _ct_card_move_frame / 3;
-		_val_flip_scale_x = lerp(0.30,0.04,_val_flip_progress);
-	}
-	else{
-		_val_flip_progress = (_ct_card_move_frame - 4) / 3;
-		_val_flip_scale_x = lerp(0.04,0.30,_val_flip_progress);
-	}
+        var _flag_first_half = (_val_progress < 0.5);
+        _val_flip_x = max(0.12,abs(1 - (2 * _val_progress)));
 
-	//------------------//
-	//SELECT FLIP SPRITE//
-	//------------------//
-	var _spr_move_card = _spr_card;
+        if (_str_card_move_type == "DRAW"){
+            _spr_move_card = _flag_first_half ? spr_card_back : _spr_card;
+        }
+        else{
+            _spr_move_card = _flag_first_half ? _spr_card : spr_card_back;
+        }
+    }
 
-	if (_str_card_move_type == "DRAW"){
-		_spr_move_card = _flag_flip_first_half ? spr_card_back : _spr_card;
-	}
-	else{
-		_spr_move_card = _flag_flip_first_half ? _spr_card : spr_card_back;
-	}
-
-	//----------------//
-	//DRAW MOVING CARD//
-	//----------------//
-	draw_sprite_ext(
-		_spr_move_card,
-		0,
-		x,
-		y,
-		_val_flip_scale_x,
-		0.30,
-		0,
-		c_white,
-		1
-	);
-
-	exit;
+    draw_sprite_ext(_spr_move_card,0,x,y,_val_scale * _val_flip_x,_val_scale,0,c_white,1);
+    exit;
 }
 
 #endregion
-
-//----------------//
-//NORMAL SELF DRAW//
-//----------------//
-draw_self();
 
 #region PLAYER CARD
 
@@ -96,101 +60,66 @@ draw_self();
 //============//
 if (_str_team == "PLAYER"){
 
-	//--------------------//
-	//RESET PRESENTATION//
-	//--------------------//
-	_spr_preview_card = undefined;
+    //--------------------//
+    //RESET PRESENTATION//
+    //--------------------//
+    _spr_preview_card = undefined;
+    _val_scale_x = 0.30;
+    _val_scale_y = 0.30;
+    _val_preview_scale = 1.0;
 
-	_val_scale_x = 0.3;
-	_val_scale_y = 0.3;
-	_val_preview_scale = 1.0;
+    // Pile icons replace the old stack of Card backs.
+    if (_str_location != "HAND"){
+        exit;
+    }
 
-	//-----------------//
-	//NON-HAND LOCATION//
-	//-----------------//
-	if (_str_location != "HAND"){
+    //--------//
+    //HOVER//
+    //--------//
+    // Original enemy-Card method: the native object sprite is the hitbox.
+    // Do not substitute artwork, a mask, cached focus, or visual rectangles.
+    var _val_draw_x = x;
 
-		var _c_card_back = c_white;
+    if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 
-		switch(_str_location){
+        // Original scaling behavior, with the hand-area-safe hover scale.
+        _val_scale_x = 0.33;
+        _val_scale_y = 0.33;
+        _val_draw_x = clamp(x,162,894);
 
-			case "DISCARD":
-				_c_card_back = c_red;
-			break;
+        if (keyboard_check(vk_lcontrol)){
+            _spr_preview_card = _spr_card;
+        }
+    }
 
-			case "EXHAUST":
-				_c_card_back = global.c_dk_gray;
-			break;
-		}
+    //----------------//
+    //GET CARD TINT//
+    //----------------//
+    var _c_card_tint = c_white;
 
-		draw_sprite_ext(
-			spr_card_back,
-			0,
-			x,
-			y,
-			_val_scale_x,
-			_val_scale_y,
-			0,
-			_c_card_back,
-			1
-		);
-	}
+    if (
+        obj_battle_player_controller._state_player == ENUM_PLAYER_STATE.SELECT_CARD &&
+        _flag_card_oom_check
+    ){
+        _c_card_tint = c_ltgray;
+    }
+    else if (obj_battle_turn_controller._val_turn_tracker == 1){
+        _c_card_tint = c_ltgray;
+    }
 
-	//----------//
-	//HAND CARD//
-	//----------//
-	else{
+    //-------------------//
+    //DRAW CARD ARTWORK//
+    //-------------------//
+    draw_sprite_ext(_spr_card,0,_val_draw_x,y,_val_scale_x,_val_scale_y,0,_c_card_tint,1);
 
-		//-----//
-		//HOVER//
-		//-----//
-		if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+    //----------------//
+    //CLEAR OOM CHECK//
+    //----------------//
+    if (obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.SELECT_CARD){
+        _flag_card_oom_check = false;
+    }
 
-			_val_scale_x *= 1.15;
-			_val_scale_y *= 1.15;
-
-			if (keyboard_check(vk_lcontrol)){
-				_spr_preview_card = _spr_card;
-			}
-		}
-
-		//----------------//
-		//GET CARD TINT//
-		//----------------//
-		var _c_card_tint = c_white;
-
-		if (
-			obj_battle_player_controller._state_player == ENUM_PLAYER_STATE.SELECT_CARD &&
-			_flag_card_oom_check
-		){
-			_c_card_tint = c_ltgray;
-		}
-		else if (obj_battle_turn_controller._val_turn_tracker == 1){
-			_c_card_tint = c_ltgray;
-		}
-
-		//----------//
-		//DRAW CARD//
-		//----------//
-		draw_sprite_ext(
-			_spr_card,
-			0,
-			x,
-			y,
-			_val_scale_x,
-			_val_scale_y,
-			0,
-			_c_card_tint,
-			1
-		);
-	}
-
-	//----------------//
-	//CLEAR OOM CHECK//
-	//----------------//
-	if (obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.SELECT_CARD){
-		_flag_card_oom_check = false;
-	}
+    exit;
 }
 
 #endregion
@@ -200,7 +129,9 @@ if (_str_team == "PLAYER"){
 //===========//
 //ENEMY CARD//
 //===========//
-else{
+if (_str_team != "PLAYER"){
+
+	draw_self();
 
 	//----------------//
 	//VALIDATE OWNER//
@@ -304,28 +235,6 @@ else{
 			}
 		}
 	}
-}
-
-#endregion
-
-#region CARD PREVIEW
-
-//------------//
-//CARD PREVIEW//
-//------------//
-if (_spr_preview_card != undefined){
-
-	draw_sprite_ext(
-		_spr_preview_card,
-		0,
-		room_width * 0.5,
-		room_height * 0.5,
-		_val_preview_scale,
-		_val_preview_scale,
-		0,
-		c_white,
-		1
-	);
 }
 
 #endregion

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_gathering_storm",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_gathering_storm",
+  "parent":{
+    "name":"GATHERING_STORM",
+    "path":"folders/CARDS/CERULEAN/GATHERING_STORM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

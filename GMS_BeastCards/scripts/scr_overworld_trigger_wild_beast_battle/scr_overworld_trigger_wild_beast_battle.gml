@@ -27,6 +27,17 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 		return;
 	}
 
+	//======================//
+	//ROOM ENTRY BATTLE LOCK//
+	//======================//
+
+	if (
+		instance_exists(obj_battle_wait) ||
+		instance_exists(obj_battle_wait)
+	){
+		return;
+	}
+
 	//================//
 	//GET ENCOUNTER POOL//
 	//================//

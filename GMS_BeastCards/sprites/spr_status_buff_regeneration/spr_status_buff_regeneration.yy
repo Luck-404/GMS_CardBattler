@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"REGENERATION",
-    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REGENERATION.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REDIRECT_GUARD/REGENERATION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

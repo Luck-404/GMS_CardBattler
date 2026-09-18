@@ -1,32 +1,29 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_GUI_SPAWN_POPUP_TRIGGER_BANNER
-// FUNCTION: Creates a trigger popup banner.
-//           Assigns the supplied trigger text.
-//           Positions the banner against the lower-right side of the GUI.
+// FUNCTION: Creates a GUI trigger banner and supplies its display text.
 //
-// ARGUMENTS: _str_text is the trigger text displayed by the banner.
-// RETURNS: Nothing.
+// ARGUMENTS: _str_text - Text displayed inside the banner.
+// RETURNS: Created banner instance.
 //
 //===============================================================================//
 
 function scr_gui_spawn_popup_trigger_banner(_str_text){
 
-	//================//
-	//CREATE BANNER//
-	//================//
-	var _val_gui_width = display_get_gui_width();
-	var _val_gui_height = display_get_gui_height();
+    //================//
+    //CREATE BANNER//
+    //================//
+    var _ref_banner = instance_create_layer(
+        0,
+        0,
+        "ily_fx",
+        obj_gui_popup_trigger_banner
+    );
 
-	var _ref_banner = instance_create_layer(
-		_val_gui_width,
-		_val_gui_height - 75,
-		"ily_fx",
-		obj_gui_popup_trigger_banner
-	);
+    //================//
+    //ASSIGN TEXT//
+    //================//
+    _ref_banner._str_text = _str_text;
 
-	//================//
-	//SET BANNER TEXT//
-	//================//
-	_ref_banner._str_text = _str_text;
+    return _ref_banner;
 }

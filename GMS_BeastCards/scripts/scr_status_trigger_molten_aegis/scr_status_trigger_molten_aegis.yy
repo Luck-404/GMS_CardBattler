@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_molten_aegis",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_molten_aegis",
+  "parent":{
+    "name":"MOLTEN_AEGIS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/MOLTEN_AEGIS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -9,9 +9,9 @@
 //================//
 //COUNTDOWN//
 //================//
-if (_ct_life > 0){
-	_ct_life--;
-}
-else{
+
+_ct_life--;
+
+if (_ct_life <= 0){
 	instance_destroy();
 }

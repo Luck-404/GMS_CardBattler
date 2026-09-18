@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_furnace_heart",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_furnace_heart",
+  "parent":{
+    "name":"FURNACE_HEART",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/FURNACE_HEART.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

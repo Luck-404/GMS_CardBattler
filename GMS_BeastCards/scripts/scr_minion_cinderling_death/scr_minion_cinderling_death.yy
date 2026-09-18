@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_minion_cinderling_death",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_minion_cinderling_death",
+  "parent":{
+    "name":"VERMILION",
+    "path":"folders/BATTLE/MINIONS/VERMILION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

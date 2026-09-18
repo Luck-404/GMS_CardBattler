@@ -1,9 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_TRIGGER_DIVINE_PROTECTION
-// FUNCTION: Blocks one damage instance from an Attack card.
-//           Consumes one Divine Protection stack when triggered.
-//           Returns true if the damage instance should be prevented.
+// FUNCTION: Checks protection-style Buffs before Attack damage resolves.
+//           Burning Parry blocks the next qualifying Melee Attack.
+//           Divine Protection otherwise blocks one Attack damage instance.
+//           Furnace Heart resolves later after final damage calculation.
+//
+// ARGUMENTS: _ref_target is the Beast receiving the incoming Attack.
+// RETURNS: True if the damage instance should be prevented.
 //
 //===============================================================================//
 
@@ -38,9 +42,32 @@ function scr_status_trigger_divine_protection(_ref_target){
 		return false;
 	}
 
-	//-------------------------//
-	//CHECK DIVINE PROTECTION//
-	//-------------------------//
+	//================//
+	//BURNING PARRY//
+	//================//
+	if (_stct_card._str_card_range == "MELEE"){
+
+		var _ref_burning_parry = scr_status_check("BURNING_PARRY",_ref_target);
+
+		if (
+			_ref_burning_parry != -1 &&
+			instance_exists(_ref_burning_parry)
+		){
+
+			if (
+				scr_status_buff_burning_parry(
+					"TRIGGER",
+					_ref_burning_parry
+				)
+			){
+				return true;
+			}
+		}
+	}
+
+	//===================//
+	//DIVINE PROTECTION//
+	//===================//
 	var _ref_divine_protection = scr_status_check("DIVINE_PROTECTION",_ref_target);
 
 	if (_ref_divine_protection == -1){
@@ -69,9 +96,9 @@ function scr_status_trigger_divine_protection(_ref_target){
 		_ref_target.y - 48
 	);
 
-	//-------------------//
+	//===================//
 	//CONSUME ONE STACK//
-	//-------------------//
+	//===================//
 	scr_status_buff_divine_protection(
 		"CONSUME",
 		_ref_divine_protection

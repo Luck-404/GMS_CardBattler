@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_finishing_blow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_finishing_blow",
+  "parent":{
+    "name":"FINISHING_BLOW",
+    "path":"folders/CARDS/VERMILION/FINISHING_BLOW.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

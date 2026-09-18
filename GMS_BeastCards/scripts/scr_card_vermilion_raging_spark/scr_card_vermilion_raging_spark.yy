@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_raging_spark",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_raging_spark",
+  "parent":{
+    "name":"RAGING_SPARK",
+    "path":"folders/CARDS/VERMILION/RAGING_SPARK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -8,6 +8,16 @@
 //
 //===============================================================================//
 
+//--------------------------//
+//PRISM BUTTON: CURRENT HUD//
+//--------------------------//
+// Original Create coordinates point to the old layout. Keep hit detection
+// and the existing Draw GUI End prism helper in the same HUD rectangle.
+_val_prism_button_x1 = 0;
+_val_prism_button_y1 = 744;
+_val_prism_button_x2 = 100;
+_val_prism_button_y2 = 793;
+
 //----------------------//
 //CLEAR TARGET PREVIEW//
 //----------------------//
@@ -252,7 +262,7 @@ switch(_state_player){
 		//-----------------//
 		//DRAW OPENING HAND//
 		//-----------------//
-		var _ct_opening_draw = scr_battle_draw_cards(_ct_hand_size);
+		var _ct_opening_draw = scr_battle_draw_cards(_ct_opening_draw_amount);
 
 		//--------------------//
 		//DEBUG CARD SUMMARY//
@@ -481,7 +491,7 @@ switch(_state_player){
 
 				ds_list_delete(_list_turn_start_items,0);
 
-				scr_battle_init_wait(90);
+				scr_battle_init_wait(5);
 			}
 			else{
 
@@ -535,7 +545,7 @@ switch(_state_player){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_battle_init_wait(20);
+					scr_battle_init_wait(15);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);
@@ -587,7 +597,7 @@ switch(_state_player){
 
 				ds_list_delete(_list_casting_minions,0);
 
-				scr_battle_init_wait(30);
+				scr_battle_init_wait(20);
 			}
 			else{
 
@@ -639,7 +649,7 @@ switch(_state_player){
 
 					audio_play_sound(snd_gui_error,0,false);
 
-					scr_gui_spawn_popup_error("NO PRISMS",60);
+					scr_gui_spawn_popup_error("NO PRISMS AVAILABLE",60);
 				}
 				else{
 
@@ -677,11 +687,7 @@ switch(_state_player){
 		//SELECT HAND CARD//
 		//------------------//
 		if (
-			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			) &&
+			instance_exists(_ref_hover_card) &&
 			mouse_check_button_pressed(mb_left) &&
 			!_flag_clicked
 		){
@@ -690,11 +696,7 @@ switch(_state_player){
 
 			_flag_clicked = true;
 
-			var _ref_card = instance_nearest(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			);
+			var _ref_card = _ref_hover_card;
 
 			if (
 				instance_exists(_ref_card) &&
@@ -1305,6 +1307,65 @@ switch(_state_player){
 	#region SELECT CORPSE
 	case ENUM_PLAYER_STATE.SELECT_CORPSE:
 
+		//----------------//
+		//GET MOUSE//
+		//----------------//
+		var _val_mouse_x = device_mouse_x_to_gui(0);
+		var _val_mouse_y = device_mouse_y_to_gui(0);
+
+		//----------------//
+		//VALIDATE CARD//
+		//----------------//
+		if (
+			!instance_exists(global.ref_cast_card) ||
+			!is_struct(global.ref_cast_card._ref_card)
+		){
+
+			global.ref_target_corpse = undefined;
+			global.ref_caster_beast = undefined;
+			global.ref_cast_card = undefined;
+
+			_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
+
+			break;
+		}
+
+		var _stct_corpse_card = global.ref_cast_card._ref_card;
+
+		//=======================//
+		//OPTIONAL TARGET RULES//
+		//=======================//
+		var _flag_allow_empty_target =
+			!scr_battle_has_corpse();
+
+		if (
+			variable_struct_exists(
+				_stct_corpse_card,
+				"_flag_allow_empty_corpse_target"
+			)
+		){
+
+			_flag_allow_empty_target =
+				_flag_allow_empty_target ||
+				_stct_corpse_card._flag_allow_empty_corpse_target;
+		}
+
+		//=====================//
+		//CANCEL DESTINATION//
+		//=====================//
+		var _flag_cancel_to_card_select = false;
+
+		if (
+			variable_struct_exists(
+				_stct_corpse_card,
+				"_flag_corpse_cancel_to_card_select"
+			)
+		){
+
+			_flag_cancel_to_card_select =
+				_stct_corpse_card._flag_corpse_cancel_to_card_select;
+		}
+
 		//----------//
 		//END TURN//
 		//----------//
@@ -1312,8 +1373,8 @@ switch(_state_player){
 			mouse_check_button_pressed(mb_left) &&
 			!_flag_clicked &&
 			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
+				_val_mouse_x,
+				_val_mouse_y,
 				obj_battle_end_turn_button
 			)
 		){
@@ -1342,6 +1403,25 @@ switch(_state_player){
 			global.ref_target_corpse = undefined;
 			global.ref_caster_beast = undefined;
 
+			//=======================//
+			//RETURN TO CARD SELECT//
+			//=======================//
+			if (_flag_cancel_to_card_select){
+
+				global.ref_cast_card = undefined;
+
+				_state_player = ENUM_PLAYER_STATE.SELECT_CARD;
+
+				hscr_battle_check_card_oom(
+					_list_battle_hand
+				);
+
+				break;
+			}
+
+			//=========================//
+			//RETURN TO CASTER SELECT//
+			//=========================//
 			_state_player = ENUM_PLAYER_STATE.SELECT_CASTER;
 
 			hscr_battle_check_beast_able(_list_beasts_alive);
@@ -1352,98 +1432,81 @@ switch(_state_player){
 			break;
 		}
 
-		//---------------//
-		//SELECT CORPSE//
-		//---------------//
+		//================//
+		//LEFT CLICK//
+		//================//
 		if (
-			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_beast
-			) &&
 			mouse_check_button_pressed(mb_left) &&
 			!_flag_clicked
 		){
 
-			var _ref_corpse = instance_nearest(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
+			//====================//
+			//GET CLICKED BEAST//
+			//====================//
+			var _ref_clicked_beast = instance_position(
+				_val_mouse_x,
+				_val_mouse_y,
 				obj_battle_beast
 			);
 
+			//====================//
+			//CHECK VALID CORPSE//
+			//====================//
+			var _flag_valid_corpse = (
+				instance_exists(_ref_clicked_beast) &&
+				_ref_clicked_beast._str_list == "DEAD" &&
+				_ref_clicked_beast._val_cur_hp <= 0 &&
+				!_ref_clicked_beast._flag_captured &&
+				!_ref_clicked_beast._flag_corpse_consumed
+			);
+
+			//==================//
+			//SACRIFICE CORPSE//
+			//==================//
+			if (_flag_valid_corpse){
+
+				audio_play_sound(snd_gui_press,0,false);
+
+				_flag_clicked = true;
+
+				global.ref_target_corpse = _ref_clicked_beast;
+
+				_state_player = ENUM_PLAYER_STATE.CARD_EXECUTE;
+
+				break;
+			}
+
+			//================//
+			//SACRIFICE HP//
+			//================//
 			if (
-				instance_exists(_ref_corpse) &&
-				_ref_corpse._str_list == "DEAD" &&
-				_ref_corpse._val_cur_hp <= 0 &&
-				!_ref_corpse._flag_captured &&
-				!_ref_corpse._flag_corpse_consumed
+				_stct_corpse_card._str_card_range == "CORPSE_OPTIONAL" &&
+				_flag_allow_empty_target
 			){
 
 				audio_play_sound(snd_gui_press,0,false);
 
 				_flag_clicked = true;
 
-				global.ref_target_corpse = _ref_corpse;
+				global.ref_target_corpse = undefined;
 
 				_state_player = ENUM_PLAYER_STATE.CARD_EXECUTE;
+
+				break;
 			}
-			else{
+
+			//================//
+			//INVALID CORPSE//
+			//================//
+			if (instance_exists(_ref_clicked_beast)){
 
 				audio_play_sound(snd_gui_error,0,false);
 
-				scr_gui_spawn_popup_error("INVALID CORPSE",60);
+				scr_gui_spawn_popup_error(
+					"INVALID CORPSE",
+					60
+				);
 			}
-		}
-
-		//----------------------//
-		//OPTIONAL EMPTY TARGET//
-		//----------------------//
-		var _stct_corpse_card = global.ref_cast_card._ref_card;
-
-		var _flag_allow_empty_target =
-			!scr_battle_has_corpse();
-
-		if (
-			variable_struct_exists(
-				_stct_corpse_card,
-				"_flag_allow_empty_corpse_target"
-			)
-		){
-
-			_flag_allow_empty_target =
-				_flag_allow_empty_target ||
-				_stct_corpse_card._flag_allow_empty_corpse_target;
-		}
-
-		if (
-			_stct_corpse_card._str_card_range == "CORPSE_OPTIONAL" &&
-			_flag_allow_empty_target &&
-			mouse_check_button_pressed(mb_left) &&
-			!_flag_clicked &&
-			!position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_beast
-			) &&
-			!position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			) &&
-			!position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_end_turn_button
-			)
-		){
-
-			audio_play_sound(snd_gui_press,0,false);
-
-			_flag_clicked = true;
-
-			global.ref_target_corpse = undefined;
-
-			_state_player = ENUM_PLAYER_STATE.CARD_EXECUTE;
 		}
 
 	break;
@@ -1456,6 +1519,55 @@ switch(_state_player){
 	case ENUM_PLAYER_STATE.CARD_EXECUTE:
 
 		scr_battle_cast_card();
+
+		//======================//
+		//CHECK REKINDLE QUEUE//
+		//======================//
+		if (_ct_rekindle_pending > 0){
+
+			var _arr_rekindle_candidates = scr_battle_get_exhausted_color_candidates(
+				"VERMILION",
+				_ref_rekindle_source_card
+			);
+
+			//================//
+			//OPEN SELECTION//
+			//================//
+			if (array_length(_arr_rekindle_candidates) > 0){
+
+				var _ref_rekindle_gui = instance_create_layer(
+					room_width * 0.5,
+					room_height * 0.5,
+					"ily_fx",
+					obj_gui_battle_exhaust_select
+				);
+
+				_ref_rekindle_gui.hscr_gui_init_exhaust_select(
+					_arr_rekindle_candidates,
+					"VERMILION",
+					_ref_rekindle_source_card
+				);
+
+				_state_player = ENUM_PLAYER_STATE.TUTOR_SELECT;
+
+				break;
+			}
+
+			//----------------//
+			//NO VALID CARDS//
+			//----------------//
+			_ct_rekindle_pending = 0;
+			_ref_rekindle_source_card = undefined;
+
+			scr_gui_spawn_popup_scrolling(
+				"TEXT",
+				"NO EXHAUSTED VERMILION CARDS",
+				undefined,
+				c_ltgray,
+				room_width * 0.5,
+				room_height * 0.5
+			);
+		}
 
 		//------------------//
 		//CHECK TUTOR QUEUE//
@@ -1609,7 +1721,7 @@ switch(_state_player){
 
 				ds_list_delete(_list_turn_end_items,0);
 
-				scr_battle_init_wait(90);
+				scr_battle_init_wait(15);
 			}
 			else{
 
@@ -1687,7 +1799,7 @@ switch(_state_player){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_battle_init_wait(20);
+					scr_battle_init_wait(15);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);
@@ -1706,7 +1818,7 @@ switch(_state_player){
 				if (ds_list_size(_list_battle_hand) > _ct_hand_size){
 
 					scr_gui_spawn_popup_error(
-						"DISCARD DOWN TO 5 CARDS",
+						"DISCARD DOWN TO " + string(_ct_hand_size) + " CARDS",
 						1000000000
 					);
 
@@ -1762,18 +1874,10 @@ switch(_state_player){
 		if (
 			mouse_check_button_pressed(mb_left) &&
 			!_flag_clicked &&
-			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			)
+			instance_exists(_ref_hover_card)
 		){
 
-			var _ref_card = instance_nearest(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			);
+			var _ref_card = _ref_hover_card;
 
 			if (
 				instance_exists(_ref_card) &&
@@ -1801,68 +1905,67 @@ switch(_state_player){
 	break;
 	#endregion
 
-	//
-	// DISCARD DOWN
-	//
-	#region DISCARD DOWN
-	case ENUM_PLAYER_STATE.DISCARD_DOWN:
+//
+// DISCARD DOWN
+//
+#region DISCARD DOWN
+case ENUM_PLAYER_STATE.DISCARD_DOWN:
 
-		//-----------------//
-		//DISCARD COMPLETE//
-		//-----------------//
-		if (ds_list_size(_list_battle_hand) <= _ct_hand_size){
+	//-----------------//
+	//DISCARD COMPLETE//
+	//-----------------//
+	if (ds_list_size(_list_battle_hand) <= _ct_hand_size){
 
-			instance_destroy(obj_gui_popup_error);
+		instance_destroy(obj_gui_popup_error);
 
-			scr_battle_reposition_hand();
+		scr_battle_reposition_hand();
 
-			hscr_battle_finish_player_turn();
+		//---------------//
+		//DRAW NEW CARDS//
+		//---------------//
+		scr_battle_draw_cards(_ct_draw_amount);
 
-			break;
-		}
+		hscr_battle_check_card_oom(_list_battle_hand);
 
-		//----------------//
-		//SELECT DISCARD//
-		//----------------//
+		hscr_battle_finish_player_turn();
+
+		break;
+	}
+
+	//----------------//
+	//SELECT DISCARD//
+	//----------------//
+	if (
+		!_flag_clicked &&
+		mouse_check_button_pressed(mb_left) &&
+		instance_exists(_ref_hover_card)
+	){
+
+		var _ref_card = _ref_hover_card;
+
 		if (
-			!_flag_clicked &&
-			mouse_check_button_pressed(mb_left) &&
-			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			)
+			instance_exists(_ref_card) &&
+			_ref_card._str_team == "PLAYER" &&
+			_ref_card._str_location == "HAND"
 		){
 
-			var _ref_card = instance_nearest(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_battle_card
-			);
+			audio_play_sound(snd_battle_card_move,0,false);
 
-			if (
-				instance_exists(_ref_card) &&
-				_ref_card._str_team == "PLAYER" &&
-				_ref_card._str_location == "HAND"
-			){
+			_flag_clicked = true;
 
-				audio_play_sound(snd_battle_card_move,0,false);
-
-				_flag_clicked = true;
-
-				scr_battle_discard_card(_ref_card);
-			}
+			scr_battle_discard_card(_ref_card);
 		}
+	}
 
-		//------------------//
-		//RELEASE CLICK LOCK//
-		//------------------//
-		if (mouse_check_button_released(mb_left)){
-			_flag_clicked = false;
-		}
+	//------------------//
+	//RELEASE CLICK LOCK//
+	//------------------//
+	if (mouse_check_button_released(mb_left)){
+		_flag_clicked = false;
+	}
 
-	break;
-	#endregion
+break;
+#endregion
 }
 
 #region CLICK COOLDOWN
@@ -1882,3 +1985,263 @@ if (_val_cooldown > 0){
 }
 
 #endregion
+
+//—------------------------------------------------------------------------------//
+// HSCR_BATTLE_HANDLE_DEATH
+// FUNCTION: Resolves this Beast's death once HP reaches 0.
+//           Allows Second Life to prevent death before finalizing.
+//           Removes the exact Beast instance from the active formation,
+//           moves it to the graveyard, closes formation gaps, and cleans
+//           attached Minions and Statuses.
+//—------------------------------------------------------------------------------//
+hscr_battle_handle_death = function(){
+
+	//------------------//
+	//CHECK DEATH STATE//
+	//------------------//
+	if (_val_cur_hp > 0 || _flag_death_handled){
+		return false;
+	}
+
+	//================//
+	//GET INSTANCE REF//
+	//================//
+	var _ref_dead_beast = id;
+
+	//----------------//
+	//TRY SECOND LIFE//
+	//----------------//
+	if (scr_status_try_second_life(_ref_dead_beast)){
+		return false;
+	}
+
+	//================//
+	//STORE DEATH DATA//
+	//================//
+	var _val_death_position = _val_pos;
+
+	var _str_beast_name = "UNKNOWN";
+	var _val_beast_level = 0;
+
+	if (is_struct(_ref_unit)){
+
+		if (variable_struct_exists(_ref_unit,"_str_beast_name")){
+			_str_beast_name = string_upper(_ref_unit._str_beast_name);
+		}
+
+		if (variable_struct_exists(_ref_unit,"_val_beast_level")){
+			_val_beast_level = _ref_unit._val_beast_level;
+		}
+	}
+
+	var _ct_minions_removed = 0;
+
+	if (ds_exists(_list_minions,ds_type_list)){
+		_ct_minions_removed = ds_list_size(_list_minions);
+	}
+
+	//================//
+	//FINALIZE DEATH//
+	//================//
+	_flag_death_handled = true;
+	_val_cur_hp = 0;
+
+	//-------------------//
+	//TRIGGER DEATH TRAPS//
+	//-------------------//
+	scr_battle_trigger_death_traps(_ref_dead_beast);
+
+	//----------------//
+	//MARK AS DEAD//
+	//----------------//
+	_str_list = "DEAD";
+
+	//================//
+	//DESTROY MINIONS//
+	//================//
+	if (ds_exists(_list_minions,ds_type_list)){
+
+		for (var _it_minion = ds_list_size(_list_minions) - 1;_it_minion >= 0;_it_minion--){
+
+			var _ref_minion = ds_list_find_value(
+				_list_minions,
+				_it_minion
+			);
+
+			if (instance_exists(_ref_minion)){
+				instance_destroy(_ref_minion);
+			}
+		}
+	}
+
+	//================//
+	//TRIGGER STATUSES//
+	//================//
+	if (ds_exists(_list_statuses,ds_type_list)){
+
+		for (var _it_status = ds_list_size(_list_statuses) - 1;_it_status >= 0;_it_status--){
+
+			var _ref_status = ds_list_find_value(
+				_list_statuses,
+				_it_status
+			);
+
+			if (instance_exists(_ref_status)){
+				_ref_status._str_status_command = "DEATH";
+			}
+		}
+	}
+
+	//================//
+	//GET TEAM LISTS//
+	//================//
+	var _list_alive = undefined;
+	var _list_dead = undefined;
+
+	if (_str_team == "PLAYER"){
+
+		_list_alive = obj_battle_player_controller._list_beasts_alive;
+		_list_dead = obj_battle_player_controller._list_beasts_graveyard;
+	}
+	else{
+
+		_list_alive = obj_battle_enemy_controller._list_beasts_alive;
+		_list_dead = obj_battle_enemy_controller._list_beasts_graveyard;
+	}
+
+	//================//
+	//VALIDATE LISTS//
+	//================//
+	if (
+		!ds_exists(_list_alive,ds_type_list) ||
+		!ds_exists(_list_dead,ds_type_list)
+	){
+
+		scr_debug_log(
+			"BATTLE",
+			"DEATH",
+			_ref_dead_beast,
+			"DEATH LIST UPDATE FAILED" +
+			" | BEAST: " + _str_beast_name +
+			" | TEAM: " + string_upper(_str_team),
+			"ERROR",
+			"OBJ_BATTLE_BEAST:HSCR_BATTLE_HANDLE_DEATH"
+		);
+
+		return false;
+	}
+
+	//===================//
+	//REMOVE FROM ACTIVE//
+	//===================//
+	var _it_alive = ds_list_find_index(
+		_list_alive,
+		_ref_dead_beast
+	);
+
+	if (_it_alive != -1){
+
+		ds_list_delete(
+			_list_alive,
+			_it_alive
+		);
+	}
+	else{
+
+		scr_debug_log(
+			"BATTLE",
+			"DEATH",
+			_ref_dead_beast,
+			"DEAD BEAST WAS NOT FOUND IN ACTIVE LIST" +
+			" | BEAST: " + _str_beast_name +
+			" | TEAM: " + string_upper(_str_team),
+			"ERROR",
+			"OBJ_BATTLE_BEAST:HSCR_BATTLE_HANDLE_DEATH"
+		);
+	}
+
+	//================//
+	//ADD TO GRAVEYARD//
+	//================//
+	if (ds_list_find_index(_list_dead,_ref_dead_beast) == -1){
+
+		ds_list_add(
+			_list_dead,
+			_ref_dead_beast
+		);
+	}
+
+	//========================//
+	//REFRESH ACTIVE FORMATION//
+	//========================//
+	scr_battle_refresh_formation(_str_team);
+
+	//=======================//
+	//REPOSITION DEAD BEASTS//
+	//=======================//
+	var _ct_alive = ds_list_size(_list_alive);
+	var _ct_dead = ds_list_size(_list_dead);
+
+	for (var _it_beast = 0;_it_beast < _ct_dead;_it_beast++){
+
+		var _ref_grave_beast = ds_list_find_value(
+			_list_dead,
+			_it_beast
+		);
+
+		if (!instance_exists(_ref_grave_beast)){
+			continue;
+		}
+
+		_ref_grave_beast._val_pos =
+			_ct_alive +
+			_it_beast;
+
+		_ref_grave_beast.x = _ref_grave_beast.hscr_battle_get_graveyard_x(
+			_ref_grave_beast._str_team,
+			_ct_alive,
+			_it_beast
+		);
+	}
+
+	//================//
+	//DEBUG DEATH//
+	//================//
+	scr_debug_log(
+		"BATTLE",
+		"DEATH",
+		_ref_dead_beast,
+		string_upper(_str_team) + " " +
+		_str_beast_name +
+		" (LVL " + string(_val_beast_level) + ")" +
+		" DIED" +
+		" | POSITION: " + string(_val_death_position) +
+		" | TEAM ALIVE: " + string(_ct_alive) +
+		" | GRAVEYARD: " + string(_ct_dead) +
+		" | MINIONS REMOVED: " + string(_ct_minions_removed),
+		"BATTLE",
+		"OBJ_BATTLE_BEAST:HSCR_BATTLE_HANDLE_DEATH"
+	);
+
+	//===================//
+	//DEATH PRESENTATION//
+	//===================//
+	if (!_flag_death_presented){
+
+		_flag_death_presented = true;
+
+		scr_battle_vfx(
+			undefined,
+			spr_battle_vfx_beast_death,
+			x,
+			y,
+			0,
+			0,
+			1,
+			0,
+			_snd_death
+		);
+	}
+
+	return true;
+};

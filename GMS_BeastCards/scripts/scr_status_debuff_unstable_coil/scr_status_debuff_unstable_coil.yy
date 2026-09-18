@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_unstable_coil",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_unstable_coil",
+  "parent":{
+    "name":"UNSTABLE_COIL",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/CERULEAN/UNSTABLE_COIL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

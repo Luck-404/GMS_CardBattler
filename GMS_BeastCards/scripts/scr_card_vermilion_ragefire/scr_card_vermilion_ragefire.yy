@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_ragefire",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_ragefire",
+  "parent":{
+    "name":"RAGEFIRE",
+    "path":"folders/CARDS/VERMILION/RAGEFIRE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

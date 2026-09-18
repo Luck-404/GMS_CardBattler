@@ -66,6 +66,30 @@ function scr_inventory_get_item_info(_str_item_id){
 
 		#endregion
 
+		case "HELD_ARCHMAGES_FOCUS":
+			_stct_item._str_item_name = "ARCHMAGE'S FOCUS";
+			_stct_item._spr_item = spr_item_held_archmages_focus;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE";
+			_stct_item._scr_item = scr_inventory_item_held_archmages_focus;
+			_stct_item._str_item_desc = "Unique. Draw 1 additional Card at the beginning of each player turn.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_FORGOTTEN_MANUSCRIPT":
+			_stct_item._str_item_name = "FORGOTTEN MANUSCRIPT";
+			_stct_item._spr_item = spr_item_held_forgotten_manuscript;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE";
+			_stct_item._scr_item = scr_inventory_item_held_forgotten_manuscript;
+			_stct_item._str_item_desc = "Unique. Increases maximum hand size by 1.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
 		#region PRISM
 
 		case "PRISM_COMMON":

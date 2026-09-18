@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_blood_oath",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_blood_oath",
+  "parent":{
+    "name":"BLOOD_OATH",
+    "path":"folders/CARDS/VERMILION/BLOOD_OATH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

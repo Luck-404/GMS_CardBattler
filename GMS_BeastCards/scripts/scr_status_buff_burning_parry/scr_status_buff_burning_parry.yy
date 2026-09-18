@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_burning_parry",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_burning_parry",
+  "parent":{
+    "name":"BURNING_PARRY",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/BURNING_PARRY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

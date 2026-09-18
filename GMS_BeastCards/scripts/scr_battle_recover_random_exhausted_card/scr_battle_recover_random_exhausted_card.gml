@@ -92,6 +92,7 @@ function scr_battle_recover_random_exhausted_card(_str_color){
 	ds_list_add(_list_deck,_ref_recovered_card);
 
 	_ref_recovered_card._str_location = "DECK";
+	scr_battle_move_card_between_piles(_ref_recovered_card,"EXHAUST","DECK",10);
 
 	#endregion
 

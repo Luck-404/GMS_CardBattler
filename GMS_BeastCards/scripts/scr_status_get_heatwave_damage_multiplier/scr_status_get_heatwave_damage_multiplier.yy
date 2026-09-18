@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_heatwave_damage_multiplier",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_heatwave_damage_multiplier",
+  "parent":{
+    "name":"DAMAGE",
+    "path":"folders/BATTLE/COMBAT/DAMAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

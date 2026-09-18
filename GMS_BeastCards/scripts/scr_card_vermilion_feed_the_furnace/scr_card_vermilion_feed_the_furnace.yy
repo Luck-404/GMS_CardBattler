@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_feed_the_furnace",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_feed_the_furnace",
+  "parent":{
+    "name":"FEED_THE_FURNACE",
+    "path":"folders/CARDS/VERMILION/FEED_THE_FURNACE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

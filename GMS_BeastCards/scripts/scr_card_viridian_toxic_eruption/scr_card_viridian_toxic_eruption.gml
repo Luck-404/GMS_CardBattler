@@ -3,7 +3,7 @@
 // SCRIPT: SCR_CARD_VIRIDIAN_TOXIC_ERUPTION
 // FUNCTION: Resolves Toxic Eruption.
 //           Consumes all Poison from each Beast on the selected team through
-//           POISONFLOW and deals neutral damage per stack consumed.
+//           METABOLIZE and deals neutral damage per stack consumed.
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
@@ -34,9 +34,9 @@ function scr_card_viridian_toxic_eruption(_stct_card,_ref_caster,_ref_target){
 		}
 
 		//------------//
-		//POISONFLOW//
+		//METABOLIZE//
 		//------------//
-		var _ct_poison_consumed = scr_battle_trigger_poisonflow(_ref_hit_target);
+		var _ct_poison_consumed = scr_battle_trigger_metabolize(_ref_hit_target);
 
 		//----------------//
 		//NO POISON STACKS//

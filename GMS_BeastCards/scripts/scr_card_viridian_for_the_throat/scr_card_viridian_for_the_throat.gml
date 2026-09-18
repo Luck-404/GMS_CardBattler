@@ -6,10 +6,9 @@
 //           Maximum HP before normal PHY scaling and mitigation.
 //           Applies 5 Bleed if the target survives.
 //           Stuns the caster for 2 rounds without a resistance check.
-//           EXECUTE: If the direct attack defeats the target, heals the caster
-//           for 30% of its Maximum HP.
+//           EXECUTE heals the caster for 30% of its Maximum HP.
 //
-// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
+// ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
 // RETURNS: Nothing.
 //
@@ -17,9 +16,9 @@
 
 function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 
-	//================//
+	//----------------//
 	//VALIDATE BEASTS//
-	//================//
+	//----------------//
 	if (!instance_exists(_ref_caster)){
 		return;
 	}
@@ -42,15 +41,13 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 		_ref_target
 	);
 
-	//================//
-	//CHECK EXECUTE//
-	//================//
-	var _flag_execute = _flag_target_alive && instance_exists(_ref_target) && _ref_target._val_cur_hp <= 0;
-
 	//===============================//
 	//TARGET SURVIVED — APPLY 5 BLEED//
 	//===============================//
-	if (instance_exists(_ref_target) && _ref_target._val_cur_hp > 0){
+	if (
+		instance_exists(_ref_target) &&
+		_ref_target._val_cur_hp > 0
+	){
 
 		global.ref_target_beast = _ref_target;
 
@@ -62,11 +59,13 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//STUN THE CASTER//
 	//================//
-	if (instance_exists(_ref_caster) && _ref_caster._val_cur_hp > 0){
+	if (
+		instance_exists(_ref_caster) &&
+		_ref_caster._val_cur_hp > 0
+	){
 
 		global.ref_target_beast = _ref_caster;
 
-		// Guaranteed self-inflicted Stun.
 		scr_status_apply_cc(
 			"STUN",
 			2,
@@ -75,21 +74,22 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 	}
 
 	//================//
-	//EXECUTE — HEAL//
+	//EXECUTE//
 	//================//
-	if (_flag_execute && instance_exists(_ref_caster) && _ref_caster._val_cur_hp > 0){
+	if (
+		scr_battle_trigger_execute(
+			_ref_caster,
+			_ref_target,
+			_flag_target_alive
+		)
+	){
 
-		var _val_execute_healing = ceil(_ref_caster._val_max_hp * 0.30);
+		var _val_execute_healing =
+			ceil(_ref_caster._val_max_hp * 0.30);
 
-		scr_battle_heal_target(_val_execute_healing,_ref_caster);
-
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"EXECUTE",
-			undefined,
-			c_green,
-			_ref_caster.x,
-			_ref_caster.y - 48
+		scr_battle_heal_target(
+			_val_execute_healing,
+			_ref_caster
 		);
 	}
 

@@ -31,6 +31,8 @@ _flag_status_requires_live_source_minion = false;
 //================//
 //STATUS LIFETIME//
 //================//
+_flag_status_permanent = false;
+
 _val_status_lifetime = 3;
 _val_status_lifetime_max = 3;
 

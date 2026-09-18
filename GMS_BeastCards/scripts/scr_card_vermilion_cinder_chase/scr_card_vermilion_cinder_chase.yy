@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_cinder_chase",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_cinder_chase",
+  "parent":{
+    "name":"CINDER_CHASE",
+    "path":"folders/CARDS/VERMILION/CINDER_CHASE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

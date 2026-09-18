@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_cinderguard",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_cinderguard",
+  "parent":{
+    "name":"CINDERGUARD",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/CINDERGUARD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

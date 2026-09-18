@@ -37,13 +37,25 @@ _val_mana_orb_scale = 1;
 //-----------//
 //CARD FLOW//
 //-----------//
-_ct_hand_size = 5;
+_ct_opening_draw_amount = 4;
 _ct_draw_amount = 2;
+_ct_hand_size = 4;
+
+_flag_skip_initial_turn_draw = true;
 
 //----------//
 //TUTOR FLOW//
 //----------//
 _ct_utility_tutors_pending = 0;
+
+_str_tutor_card_type = "UTILITY";
+_str_tutor_title = "ANCIENT CHARTS";
+
+//================//
+//REKINDLE FLOW//
+//================//
+_ct_rekindle_pending = 0;
+_ref_rekindle_source_card = undefined;
 
 //--------------------//
 //CARD EFFECT DISCARD//
@@ -106,11 +118,11 @@ _stct_selected_prism = undefined;
 //--------------------//
 //PRISM BUTTON LAYOUT//
 //--------------------//
-_val_prism_button_x1 = 20;
-_val_prism_button_x2 = 160;
+_val_prism_button_x1 = 0;
+_val_prism_button_x2 = 100;
 
-_val_prism_button_y2 = room_height - 300;
-_val_prism_button_y1 = _val_prism_button_y2 - 40;
+_val_prism_button_y2 = 744;
+_val_prism_button_y1 = 793;
 
 //------------------//
 //TURN START ITEMS//
@@ -177,17 +189,24 @@ _state_player = ENUM_PLAYER_STATE.INIT_BEASTS;
 //-----------------//
 scr_battle_reposition_mana();
 
-//----------------//
-//DEBUG INITIALIZE//
-//----------------//
+//================//
+//CARD FLOW RULES//
+//================//
+var _stct_card_flow_rules = scr_battle_get_player_card_flow_rules();
+
+_ct_opening_draw_amount = _stct_card_flow_rules._ct_opening_draw;
+_ct_draw_amount = _stct_card_flow_rules._ct_turn_draw;
+_ct_hand_size = _stct_card_flow_rules._ct_hand_size;
+
 scr_debug_log(
 	"BATTLE",
 	"PLAYER",
 	self,
-	"PLAYER BATTLE CONTROLLER INITIALIZED | MANA: " + string(_val_cur_mana) +
-	"/" + string(_val_max_mana) +
-	" | HAND SIZE: " + string(_ct_hand_size) +
-	" | TURN DRAW: " + string(_ct_draw_amount),
+	"PLAYER BATTLE CONTROLLER INITIALIZED" +
+	" | MANA: " + string(_val_cur_mana) + "/" + string(_val_max_mana) +
+	" | OPENING DRAW: " + string(_ct_opening_draw_amount) +
+	" | TURN DRAW: " + string(_ct_draw_amount) +
+	" | MAX HAND: " + string(_ct_hand_size),
 	"INIT",
 	"OBJ_BATTLE_PLAYER_CONTROLLER:CREATE"
 );
@@ -201,42 +220,48 @@ scr_debug_log(
 
 //—------------------------------------------------------------------------------//
 // hscr_battle_open_utility_tutor
-// FUNCTION: Opens the battle Tutor GUI when Utility Cards remain in the deck.
-//           Clears pending Tutor requests and displays feedback when none remain.
+// FUNCTION: Opens the Tutor GUI using the requested primary Card Type.
+//           Defaults to the existing Ancient Charts behavior.
 //—------------------------------------------------------------------------------//
 hscr_battle_open_utility_tutor = function(){
 
+	//----------------//
+	//VALIDATE QUEUE//
+	//----------------//
 	if (_ct_utility_tutors_pending <= 0){
 		return false;
 	}
 
-	//------------------//
-	//GET UTILITY CARDS//
-	//------------------//
-	var _arr_candidates = scr_battle_get_tutor_candidates("UTILITY");
+	//================//
+	//GET CANDIDATES//
+	//================//
+	var _arr_candidates = scr_battle_get_tutor_candidates(_str_tutor_card_type);
 
-	//------------------------//
-	//NO UTILITY CARDS FOUND//
-	//------------------------//
+	//----------------//
+	//NO CARDS FOUND//
+	//----------------//
 	if (array_length(_arr_candidates) <= 0){
 
 		_ct_utility_tutors_pending = 0;
 
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
-			"NO UTILITY CARDS FOUND",
+			"NO " + _str_tutor_card_type + " CARDS FOUND",
 			undefined,
 			c_aqua,
 			room_width * 0.5,
 			room_height * 0.5
 		);
 
+		_str_tutor_card_type = "UTILITY";
+		_str_tutor_title = "ANCIENT CHARTS";
+
 		return false;
 	}
 
-	//---------------//
+	//================//
 	//OPEN TUTOR GUI//
-	//---------------//
+	//================//
 	var _ref_tutor = instance_create_layer(
 		room_width * 0.5,
 		room_height * 0.5,
@@ -244,22 +269,69 @@ hscr_battle_open_utility_tutor = function(){
 		obj_gui_battle_tutor
 	);
 
-	_ref_tutor.hscr_gui_init_tutor(_arr_candidates);
+	_ref_tutor.hscr_gui_init_tutor(
+		_arr_candidates,
+		_str_tutor_card_type,
+		_str_tutor_title
+	);
 
 	return true;
 };
 
 //—------------------------------------------------------------------------------//
 // hscr_battle_request_utility_tutor
-// FUNCTION: Adds one or more pending Utility Tutor selections.
+// FUNCTION: Queues Tutor selections for a specified primary Card Type.
+//           Defaults preserve Ancient Charts.
 //—------------------------------------------------------------------------------//
-hscr_battle_request_utility_tutor = function(_ct_amount){
+hscr_battle_request_utility_tutor = function(_ct_amount,_str_primary_card_type="UTILITY",_str_title="ANCIENT CHARTS"){
+
+	//----------------//
+	//VALIDATE AMOUNT//
+	//----------------//
+	_ct_amount = max(0,floor(_ct_amount));
 
 	if (_ct_amount <= 0){
 		return;
 	}
 
-	_ct_utility_tutors_pending += floor(_ct_amount);
+	//================//
+	//SET TUTOR CONFIG//
+	//================//
+	_str_tutor_card_type = _str_primary_card_type;
+	_str_tutor_title = _str_title;
+
+	//================//
+	//QUEUE SELECTIONS//
+	//================//
+	_ct_utility_tutors_pending += _ct_amount;
+};
+
+//—------------------------------------------------------------------------------//
+// hscr_battle_request_utility_tutor
+// FUNCTION: Queues Tutor selections for a specified primary Card Type.
+//           Defaults preserve Ancient Charts.
+//—------------------------------------------------------------------------------//
+hscr_battle_request_utility_tutor = function(_ct_amount,_str_primary_card_type="UTILITY",_str_title="ANCIENT CHARTS"){
+
+	//----------------//
+	//VALIDATE AMOUNT//
+	//----------------//
+	_ct_amount = max(0,floor(_ct_amount));
+
+	if (_ct_amount <= 0){
+		return;
+	}
+
+	//================//
+	//SET TUTOR CONFIG//
+	//================//
+	_str_tutor_card_type = _str_primary_card_type;
+	_str_tutor_title = _str_title;
+
+	//================//
+	//QUEUE SELECTIONS//
+	//================//
+	_ct_utility_tutors_pending += _ct_amount;
 };
 
 //—------------------------------------------------------------------------------//
@@ -816,100 +888,58 @@ hscr_battle_check_beast_class = function(_list_beasts_check){
 
 //—------------------------------------------------------------------------------//
 // hscr_battle_check_beast_range
-// FUNCTION: Checks valid targets for the selected Card range.
-//           Updates player/enemy target flags and applies Taunt/Blind targeting
-//           overrides for hostile attacks.
+// FUNCTION: Determines valid Beast targets for the selected player Card.
+//
+// FRIENDLY TARGETING:
+// - SELF: Caster only.
+// - Every other standard Beast range: Any living teammate, including caster.
+// - Friendly targeting ignores range, Taunt, and Blind.
+//
+// ENEMY TARGETING:
+// - MELEE: Front living enemy.
+// - BACK/FLANK: Rear living enemy.
+// - RANGED/ENEMY: Any living enemy.
+// - SELF/TEAM: No enemy targets.
+//
+// HOSTILE TARGET PRIORITY:
+// 1. Taunt overrides enemy range and Blind.
+// 2. Blind restricts enemy targeting when no Taunt exists.
+// 3. Normal range applies otherwise.
+//
+// Teamwide and Global effects are not redirected by Taunt.
 //—------------------------------------------------------------------------------//
 hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
+	#region VALIDATION
+
 	//----------------//
-	//PLAYER TEAM//
+	//VALIDATE LISTS//
 	//----------------//
-	for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_check); _it_beast++){
-
-		var _ref_player_beast = ds_list_find_value(_list_beasts_check,_it_beast);
-
-		if (!instance_exists(_ref_player_beast)){
-			continue;
-		}
-
-		switch(_str_range){
-
-			case "SELF":
-				_ref_player_beast._flag_beast_range_check =
-					(_ref_player_beast == global.ref_caster_beast);
-			break;
-
-			case "MELEE":
-			case "RANGED":
-			case "BACK":
-				_ref_player_beast._flag_beast_range_check = true;
-			break;
-
-			case "TEAM":
-				_ref_player_beast._flag_beast_range_check =
-					(_ref_player_beast != global.ref_caster_beast);
-			break;
-
-			case "ENEMY":
-				_ref_player_beast._flag_beast_range_check = false;
-			break;
-
-			default:
-				_ref_player_beast._flag_beast_range_check = false;
-			break;
-		}
+	if (!ds_exists(_list_beasts_check,ds_type_list)){
+		return;
 	}
 
-	//--------------//
-	//ENEMY TEAM//
-	//--------------//
+	if (!instance_exists(obj_battle_enemy_controller)){
+		return;
+	}
+
 	var _list_enemies = obj_battle_enemy_controller._list_beasts_alive;
-	var _ct_enemies = ds_list_size(_list_enemies);
 
-	for (var _it_enemy = 0; _it_enemy < _ct_enemies; _it_enemy++){
-
-		var _ref_enemy_beast = ds_list_find_value(_list_enemies,_it_enemy);
-
-		if (!instance_exists(_ref_enemy_beast)){
-			continue;
-		}
-
-		switch(_str_range){
-
-			case "SELF":
-			case "TEAM":
-				_ref_enemy_beast._flag_beast_range_check = false;
-			break;
-
-			case "MELEE":
-				_ref_enemy_beast._flag_beast_range_check =
-					(_it_enemy == 0);
-			break;
-
-			case "RANGED":
-			case "ENEMY":
-				_ref_enemy_beast._flag_beast_range_check = true;
-			break;
-
-			case "BACK":
-				_ref_enemy_beast._flag_beast_range_check =
-					(_it_enemy == _ct_enemies - 1);
-			break;
-
-			default:
-				_ref_enemy_beast._flag_beast_range_check = false;
-			break;
-		}
+	if (!ds_exists(_list_enemies,ds_type_list)){
+		return;
 	}
 
-	//----------------------//
-	//GET ACTIVE CARD DATA//
-	//----------------------//
-	if (
-		!instance_exists(global.ref_cast_card) ||
-		!instance_exists(global.ref_caster_beast)
-	){
+	//----------------//
+	//VALIDATE CASTER//
+	//----------------//
+	if (!instance_exists(global.ref_caster_beast)){
+		return;
+	}
+
+	//---------------//
+	//VALIDATE CARD//
+	//---------------//
+	if (!instance_exists(global.ref_cast_card)){
 		return;
 	}
 
@@ -919,46 +949,252 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 		return;
 	}
 
-	//--------------------//
-	//CHECK HOSTILE ATTACK//
-	//--------------------//
-	var _flag_hostile_attack = (
-		_stct_card._str_card_type == "ATTACK" ||
-		_stct_card._str_card_effect_type == "DOT"
-	);
+	#endregion
 
-	if (!_flag_hostile_attack){
+	#region FORMATION
+
+	//==========================//
+	//GET LIVING ENEMY FORMATION//
+	//==========================//
+	var _ct_enemies = ds_list_size(_list_enemies);
+
+	var _ref_front_enemy = undefined;
+	var _ref_back_enemy = undefined;
+
+	for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+
+		var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
+
+		if (!instance_exists(_ref_enemy)){
+			continue;
+		}
+
+		if (
+			_ref_enemy._str_list != "ALIVE" ||
+			_ref_enemy._val_cur_hp <= 0
+		){
+			continue;
+		}
+
+		//----------------//
+		//FRONT ENEMY//
+		//----------------//
+		if (!instance_exists(_ref_front_enemy)){
+			_ref_front_enemy = _ref_enemy;
+		}
+
+		//--------------//
+		//REAR ENEMY//
+		//--------------//
+		_ref_back_enemy = _ref_enemy;
+	}
+
+	#endregion
+
+	#region FRIENDLY TARGETING
+
+	//=========================//
+	//INITIAL PLAYER TEAM FLAGS//
+	//=========================//
+	for (var _it_beast = 0;_it_beast < ds_list_size(_list_beasts_check);_it_beast++){
+
+		var _ref_player_beast = ds_list_find_value(_list_beasts_check,_it_beast);
+
+		if (!instance_exists(_ref_player_beast)){
+			continue;
+		}
+
+		//----------------//
+		//VALIDATE LIVING//
+		//----------------//
+		if (
+			_ref_player_beast._str_list != "ALIVE" ||
+			_ref_player_beast._val_cur_hp <= 0
+		){
+
+			_ref_player_beast._flag_beast_range_check = false;
+
+			continue;
+		}
+
+		//================//
+		//CHECK CARD RANGE//
+		//================//
+		switch(_str_range){
+
+			//================//
+			//SELF EXCEPTION//
+			//================//
+			case "SELF":
+
+				_ref_player_beast._flag_beast_range_check =
+					(_ref_player_beast == global.ref_caster_beast);
+
+			break;
+
+			//========================//
+			//UNRESTRICTED FRIENDLIES//
+			//========================//
+			case "MELEE":
+			case "RANGED":
+			case "BACK":
+			case "FLANK":
+			case "TEAM":
+			case "ENEMY":
+
+				_ref_player_beast._flag_beast_range_check = true;
+
+			break;
+
+			//===================//
+			//SPECIAL CARD RANGES//
+			//===================//
+			default:
+
+				_ref_player_beast._flag_beast_range_check = false;
+
+			break;
+		}
+	}
+
+	#endregion
+
+	#region ENEMY TARGETING
+
+	//========================//
+	//INITIAL ENEMY TEAM FLAGS//
+	//========================//
+	for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+
+		var _ref_enemy_beast = ds_list_find_value(_list_enemies,_it_enemy);
+
+		if (!instance_exists(_ref_enemy_beast)){
+			continue;
+		}
+
+		//----------------//
+		//VALIDATE LIVING//
+		//----------------//
+		if (
+			_ref_enemy_beast._str_list != "ALIVE" ||
+			_ref_enemy_beast._val_cur_hp <= 0
+		){
+
+			_ref_enemy_beast._flag_beast_range_check = false;
+
+			continue;
+		}
+
+		//================//
+		//CHECK CARD RANGE//
+		//================//
+		switch(_str_range){
+
+			//================//
+			//FRIENDLY RANGES//
+			//================//
+			case "SELF":
+			case "TEAM":
+
+				_ref_enemy_beast._flag_beast_range_check = false;
+
+			break;
+
+			//=======//
+			//MELEE//
+			//=======//
+			case "MELEE":
+
+				_ref_enemy_beast._flag_beast_range_check =
+					(_ref_enemy_beast == _ref_front_enemy);
+
+			break;
+
+			//========//
+			//RANGED//
+			//========//
+			case "RANGED":
+			case "ENEMY":
+
+				_ref_enemy_beast._flag_beast_range_check = true;
+
+			break;
+
+			//===========//
+			//BACK/FLANK//
+			//===========//
+			case "BACK":
+			case "FLANK":
+
+				_ref_enemy_beast._flag_beast_range_check =
+					(_ref_enemy_beast == _ref_back_enemy);
+
+			break;
+
+			//===============//
+			//INVALID RANGE//
+			//===============//
+			default:
+
+				_ref_enemy_beast._flag_beast_range_check = false;
+
+			break;
+		}
+	}
+
+	#endregion
+
+	#region HOSTILE OVERRIDES
+
+	//=======================//
+	//CHECK HOSTILE TARGETING//
+	//=======================//
+	if (!scr_battle_is_hostile_card_target(_stct_card)){
 		return;
 	}
 
-	//----------------//
-	//GET TAUNT TARGET//
-	//----------------//
+	//================//
+	//TAUNT OVERRIDE//
+	//================//
 	var _ref_taunt_target = scr_status_get_taunt_target(_list_enemies);
 
-	//----------------//
-	//GET BLIND MODE//
-	//----------------//
+	if (instance_exists(_ref_taunt_target)){
+
+		//--------------------------//
+		//RESTRICT ENEMY TEAM ONLY//
+		//--------------------------//
+		for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+
+			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
+
+			if (!instance_exists(_ref_enemy)){
+				continue;
+			}
+
+			_ref_enemy._flag_beast_range_check =
+				(_ref_enemy == _ref_taunt_target);
+		}
+
+		return;
+	}
+
+	//================//
+	//BLIND OVERRIDE//
+	//================//
 	var _str_blind_mode = scr_cc_get_blind_attack_target_mode(
 		global.ref_caster_beast,
 		_stct_card
 	);
 
-	//-------------//
+	//=============//
 	//BLIND BLOCK//
-	//-------------//
+	//=============//
 	if (_str_blind_mode == "BLOCK"){
 
-		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_check); _it_beast++){
-
-			var _ref_beast = ds_list_find_value(_list_beasts_check,_it_beast);
-
-			if (instance_exists(_ref_beast)){
-				_ref_beast._flag_beast_range_check = false;
-			}
-		}
-
-		for (var _it_enemy = 0; _it_enemy < _ct_enemies; _it_enemy++){
+		//--------------------------//
+		//RESTRICT ENEMY TEAM ONLY//
+		//--------------------------//
+		for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
 
 			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
 
@@ -970,27 +1206,15 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 		return;
 	}
 
-	//-------------//
+	//=============//
 	//BLIND FRONT//
-	//-------------//
+	//=============//
 	if (_str_blind_mode == "FRONT"){
 
-		for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_check); _it_beast++){
-
-			var _ref_beast = ds_list_find_value(_list_beasts_check,_it_beast);
-
-			if (instance_exists(_ref_beast)){
-				_ref_beast._flag_beast_range_check = false;
-			}
-		}
-
-		var _ref_front_enemy = undefined;
-
-		if (_ct_enemies > 0){
-			_ref_front_enemy = ds_list_find_value(_list_enemies,0);
-		}
-
-		for (var _it_enemy = 0; _it_enemy < _ct_enemies; _it_enemy++){
+		//--------------------------//
+		//RESTRICT ENEMY TEAM ONLY//
+		//--------------------------//
+		for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
 
 			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
 
@@ -1005,23 +1229,13 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 		return;
 	}
 
-	//--------------//
-	//NORMAL TAUNT//
-	//--------------//
-	if (instance_exists(_ref_taunt_target)){
+	#endregion
 
-		for (var _it_enemy = 0; _it_enemy < _ct_enemies; _it_enemy++){
-
-			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
-
-			if (!instance_exists(_ref_enemy)){
-				continue;
-			}
-
-			_ref_enemy._flag_beast_range_check =
-				(_ref_enemy == _ref_taunt_target);
-		}
-	}
+	//================//
+	//NORMAL TARGETING//
+	//================//
+	// No Taunt or Blind override.
+	// Retain both teams' previously assigned range flags.
 };
 
 //—------------------------------------------------------------------------------//

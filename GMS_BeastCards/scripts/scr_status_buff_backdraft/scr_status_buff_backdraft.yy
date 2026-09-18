@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_backdraft",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_backdraft",
+  "parent":{
+    "name":"BACKDRAFT",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/BACKDRAFT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

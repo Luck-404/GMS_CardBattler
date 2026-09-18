@@ -45,17 +45,6 @@ function scr_battle_exhaust_card(_ref_card){
 
 	#region EXHAUST CARD
 
-	//----------------//
-	//STORE MOVEMENT//
-	//----------------//
-	var _val_move_start_x = _ref_card.x;
-	var _val_move_start_y = _ref_card.y;
-
-	var _val_exhaust_x = room_width - 70;
-	var _val_exhaust_y = room_height - 100;
-
-	var _ct_move_duration = 8;
-
 	//-----------------//
 	//REMOVE FROM HAND//
 	//-----------------//
@@ -83,21 +72,7 @@ function scr_battle_exhaust_card(_ref_card){
 	//----------------//
 	//START MOVEMENT//
 	//----------------//
-	scr_battle_start_card_move_animation(
-		_ref_card,
-		"EXHAUST",
-		_val_move_start_x,
-		_val_move_start_y,
-		_val_exhaust_x,
-		_val_exhaust_y,
-		_ct_move_duration,
-		0
-	);
-
-	//----------------//
-	//EXPEND FEEDBACK//
-	//----------------//
-	scr_battle_vfx_expend(undefined,_val_exhaust_x,_val_exhaust_y,_ct_move_duration);
+	scr_battle_move_card_between_piles(_ref_card,"HAND","EXHAUST",8);
 
 	#endregion
 

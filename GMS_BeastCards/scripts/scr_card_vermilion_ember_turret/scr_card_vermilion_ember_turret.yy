@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_ember_turret",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_ember_turret",
+  "parent":{
+    "name":"EMBER_TURRET",
+    "path":"folders/CARDS/VERMILION/EMBER_TURRET.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

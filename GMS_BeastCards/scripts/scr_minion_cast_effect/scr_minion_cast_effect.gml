@@ -86,6 +86,326 @@ function scr_minion_cast_effect(_ref_minion){
 	//================//
 	switch (_str_minion_name){
 
+		//------------//
+		//MAGMA CANNON//
+		//------------//
+		case "MAGMA CANNON":
+
+			//----------------//
+			//CHECK ENEMY TEAM//
+			//----------------//
+			if (ds_list_size(_list_enemy) <= 0){
+				break;
+			}
+
+			//================//
+			//GET RANDOM ENEMY//
+			//================//
+			var _ref_target = scr_minion_get_target(_list_enemy);
+
+			if (!instance_exists(_ref_target)){
+				break;
+			}
+
+			//================//
+			//MINION CAST VFX//
+			//================//
+			scr_battle_vfx_minion_cast(_ref_minion,"ENEMY");
+
+			//================//
+			//CALCULATE DAMAGE//
+			//================//
+			var _val_damage = _ref_minion._val_magnitude;
+
+			//================//
+			//CHECK BURN//
+			//================//
+			var _ref_burn = scr_status_check("BURN",_ref_target);
+
+			var _flag_burning = (
+				_ref_burn != -1 &&
+				instance_exists(_ref_burn) &&
+				_ref_burn._ct_status_stacks > 0
+			);
+
+			//==================//
+			//BURN DAMAGE BONUS//
+			//==================//
+			if (_flag_burning){
+				_val_damage += 2;
+			}
+
+			//================//
+			//DEBUG ACTION//
+			//================//
+			scr_debug_log_minion_action(
+				_ref_minion,
+				"ATTACKED",
+				_ref_target,
+				"NEU DAMAGE: " + string(_val_damage) +
+				" | TARGET BURNING: " + (_flag_burning ? "YES" : "NO"),
+				"SCR_MINION_CAST_EFFECT"
+			);
+
+			//================//
+			//DEAL NEU DAMAGE//
+			//================//
+			scr_minion_damage_target(_val_damage,_ref_target,_ref_minion);
+
+		break;
+
+//-------------//
+//LIVING FLAME//
+//-------------//
+case "LIVING FLAME":
+
+	//----------------//
+	//CHECK ENEMY TEAM//
+	//----------------//
+	if (ds_list_size(_list_enemy) <= 0){
+		break;
+	}
+
+	//================//
+	//GET RANDOM ENEMY//
+	//================//
+	var _ref_target = scr_minion_get_target(
+		_list_enemy
+	);
+
+	if (!instance_exists(_ref_target)){
+		break;
+	}
+
+	//----------------//
+	//MINION CAST VFX//
+	//----------------//
+	scr_battle_vfx_minion_cast(
+		_ref_minion,
+		"ENEMY"
+	);
+
+	//================//
+	//CALCULATE DAMAGE//
+	//================//
+	var _val_magnitude = max(
+		0,
+		_ref_minion._val_magnitude
+	);
+
+	var _val_damage = _val_magnitude;
+	var _val_bonus_damage = 0;
+
+	//====================//
+	//CHECK TARGET ARMOR//
+	//====================//
+	var _flag_target_armored = (
+		_ref_target._val_armor > 0
+	);
+
+	if (_flag_target_armored){
+
+		_val_bonus_damage = ceil(
+			_val_magnitude / 2
+		);
+
+		_val_damage += _val_bonus_damage;
+	}
+
+	//================//
+	//DEBUG ACTION//
+	//================//
+	scr_debug_log_minion_action(
+		_ref_minion,
+		"ATTACKED",
+		_ref_target,
+		"NEU DAMAGE: " + string(_val_damage) +
+		" | MAGNITUDE: " + string(_val_magnitude) +
+		" | TARGET ARMORED: " + (_flag_target_armored ? "YES" : "NO") +
+		" | ARMOR BONUS: " + string(_val_bonus_damage),
+		"SCR_MINION_CAST_EFFECT"
+	);
+
+	//================//
+	//DEAL NEU DAMAGE//
+	//================//
+	scr_minion_damage_target(
+		_val_damage,
+		_ref_target,
+		_ref_minion
+	);
+
+break;
+
+		//----------//
+		//CINDERLING//
+		//----------//
+		case "CINDERLING":
+
+			//----------------//
+			//CHECK ENEMY TEAM//
+			//----------------//
+			if (ds_list_size(_list_enemy) <= 0){
+				break;
+			}
+
+			//----------------//
+			//GET ENEMY TARGET//
+			//----------------//
+			var _ref_target = scr_minion_get_target(
+				_list_enemy
+			);
+
+			if (!instance_exists(_ref_target)){
+				break;
+			}
+
+			//----------------//
+			//MINION CAST VFX//
+			//----------------//
+			scr_battle_vfx_minion_cast(
+				_ref_minion,
+				"ENEMY"
+			);
+
+			//================//
+			//CALCULATE DAMAGE//
+			//================//
+			var _val_damage = _ref_minion._val_magnitude;
+
+			//----------------//
+			//DEBUG ACTION//
+			//----------------//
+			scr_debug_log_minion_action(
+				_ref_minion,
+				"ATTACKED",
+				_ref_target,
+				"NEU DAMAGE: " + string(_val_damage),
+				"SCR_MINION_CAST_EFFECT"
+			);
+
+			//================//
+			//DEAL NEU DAMAGE//
+			//================//
+			scr_minion_damage_target(
+				_val_damage,
+				_ref_target,
+				_ref_minion
+			);
+
+		break;
+
+		//-------------//
+		//EMBER TURRET//
+		//-------------//
+		case "EMBER TURRET":
+
+			if (ds_list_size(_list_enemy) <= 0){
+				break;
+			}
+
+			//----------------//
+			//GET ENEMY TARGET//
+			//----------------//
+			var _ref_target = scr_minion_get_target(
+				_list_enemy
+			);
+
+			if (!instance_exists(_ref_target)){
+				break;
+			}
+
+			//----------------//
+			//MINION CAST VFX//
+			//----------------//
+			scr_battle_vfx_minion_cast(
+				_ref_minion,
+				"ENEMY"
+			);
+
+			//================//
+			//CHECK BURN//
+			//================//
+			var _ref_burn = scr_status_check(
+				"BURN",
+				_ref_target
+			);
+
+			var _flag_burning = (
+				_ref_burn != -1 &&
+				instance_exists(_ref_burn) &&
+				_ref_burn._ct_status_stacks > 0
+			);
+
+			//======================//
+			//BURNING — DEAL DAMAGE//
+			//======================//
+			if (_flag_burning){
+
+				var _val_damage =
+					_ref_minion._val_magnitude *
+					2;
+
+				//----------------//
+				//DEBUG ACTION//
+				//----------------//
+				scr_debug_log_minion_action(
+					_ref_minion,
+					"ATTACKED",
+					_ref_target,
+					"NEU DAMAGE: " + string(_val_damage) +
+					" | TARGET BURNING: YES",
+					"SCR_MINION_CAST_EFFECT"
+				);
+
+				//------------//
+				//DEAL DAMAGE//
+				//------------//
+				scr_minion_damage_target(
+					_val_damage,
+					_ref_target,
+					_ref_minion
+				);
+			}
+
+			//=======================//
+			//NOT BURNING — APPLY 1//
+			//=======================//
+			else{
+
+				//----------------------//
+				//STORE CURRENT TARGET//
+				//----------------------//
+				var _ref_original_target = global.ref_target_beast;
+
+				global.ref_target_beast = _ref_target;
+
+				//----------------//
+				//APPLY 1 BURN//
+				//----------------//
+				scr_status_apply_dot(
+					"BURN"
+				);
+
+				//----------------//
+				//RESTORE TARGET//
+				//----------------//
+				global.ref_target_beast = _ref_original_target;
+
+				//----------------//
+				//DEBUG ACTION//
+				//----------------//
+				scr_debug_log_minion_action(
+					_ref_minion,
+					"APPLIED BURN",
+					_ref_target,
+					"BURN: +1 | TARGET BURNING: NO",
+					"SCR_MINION_CAST_EFFECT"
+				);
+			}
+
+		break;
+
 		//--------//
 		//TENTACLE//
 		//--------//
@@ -365,6 +685,109 @@ function scr_minion_cast_effect(_ref_minion){
 				_ref_target,
 				_ref_minion
 			);
+
+			//============================//
+			//FIND HIGHEST STORMSTRUCK//
+			//============================//
+			var _ct_highest_stormstruck = -1;
+			var _arr_stormstruck_targets = [];
+
+			for (var _it_enemy = 0;_it_enemy < ds_list_size(_list_enemy);_it_enemy++){
+
+				var _ref_enemy = ds_list_find_value(
+					_list_enemy,
+					_it_enemy
+				);
+
+				if (!instance_exists(_ref_enemy)){
+					continue;
+				}
+
+				if (
+					_ref_enemy._str_list != "ALIVE" ||
+					_ref_enemy._val_cur_hp <= 0
+				){
+					continue;
+				}
+
+				//----------------//
+				//GET STORMSTRUCK//
+				//----------------//
+				var _ct_stormstruck = 0;
+				var _ref_stormstruck = scr_status_check(
+					"STORMSTRUCK",
+					_ref_enemy
+				);
+
+				if (
+					_ref_stormstruck != -1 &&
+					instance_exists(_ref_stormstruck)
+				){
+					_ct_stormstruck = _ref_stormstruck._ct_status_stacks;
+				}
+
+				//----------------//
+				//NEW HIGHEST//
+				//----------------//
+				if (_ct_stormstruck > _ct_highest_stormstruck){
+
+					_ct_highest_stormstruck = _ct_stormstruck;
+					_arr_stormstruck_targets = [_ref_enemy];
+
+					continue;
+				}
+
+				//----------------//
+				//TIED HIGHEST//
+				//----------------//
+				if (_ct_stormstruck == _ct_highest_stormstruck){
+					array_push(_arr_stormstruck_targets,_ref_enemy);
+				}
+			}
+
+			//===================//
+			//APPLY STORMSTRUCK//
+			//===================//
+			if (array_length(_arr_stormstruck_targets) > 0){
+
+				var _ref_stormstruck_target =
+					_arr_stormstruck_targets[
+						irandom(array_length(_arr_stormstruck_targets) - 1)
+					];
+
+				//----------------------//
+				//STORE CURRENT TARGET//
+				//----------------------//
+				var _ref_original_target = global.ref_target_beast;
+
+				global.ref_target_beast = _ref_stormstruck_target;
+
+				//----------------//
+				//APPLY 1 STACK//
+				//----------------//
+				var _ref_applied_stormstruck =
+					scr_status_apply_dot("STORMSTRUCK");
+
+				//----------------//
+				//RESTORE TARGET//
+				//----------------//
+				global.ref_target_beast = _ref_original_target;
+
+				//----------------//
+				//DEBUG ACTION//
+				//----------------//
+				if (instance_exists(_ref_applied_stormstruck)){
+
+					scr_debug_log_minion_action(
+						_ref_minion,
+						"APPLIED STORMSTRUCK",
+						_ref_stormstruck_target,
+						"HIGHEST EXISTING STORMSTRUCK: " +
+						string(_ct_highest_stormstruck),
+						"SCR_MINION_CAST_EFFECT"
+					);
+				}
+			}
 
 		break;
 

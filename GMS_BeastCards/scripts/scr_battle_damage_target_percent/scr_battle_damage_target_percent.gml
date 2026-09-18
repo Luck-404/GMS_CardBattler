@@ -166,6 +166,23 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 
 	#region DAMAGE BONUSES
 
+	//========================//
+	//HEATWAVE DAMAGE BONUS//
+	//========================//
+	_val_damage_left *= scr_status_get_heatwave_damage_multiplier(
+		_stct_card
+	);
+
+	//================//
+	//RAIN DAMAGE BONUS//
+	//================//
+	if (
+		scr_status_check("WEATHER: RAIN",global.list_statuses) != -1 &&
+		array_contains(_stct_card._arr_card_colors,"CERULEAN")
+	){
+		_val_damage_left *= 1.25;
+	}
+
 	//----------------------//
 	//SEEDFALL COLOR BONUS//
 	//----------------------//
@@ -361,6 +378,32 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 
 	if (_val_damage_left <= 0){
 		return false;
+	}
+
+
+	//================//
+	//FURNACE HEART//
+	//================//
+	if (
+		scr_status_trigger_furnace_heart(
+			_ref_target,
+			_val_damage_left
+		)
+	){
+		return false;
+	}
+
+	//===================//
+	//TRIGGER BACKDRAFT//
+	//===================//
+	_val_damage_left = scr_status_trigger_backdraft(
+		_ref_target,
+		_ref_caster,
+		_val_damage_left
+	);
+
+	if (_val_damage_left <= 0){
+		return true;
 	}
 
 	//--------------------//
@@ -650,6 +693,16 @@ function scr_battle_damage_target_percent(_val_damage_percent,_ref_target,_stct_
 	#endregion
 
 	#region DAMAGE TRIGGERS
+
+	//================//
+	//DAMAGE TRAPS//
+	//================//
+	if (_val_armor_blocked + _val_beast_damage > 0){
+		scr_battle_trigger_damage_traps(
+			_ref_target,
+			_val_armor_blocked + _val_beast_damage
+		);
+	}
 
 	//------------//
 	//WAKE SLEEP//

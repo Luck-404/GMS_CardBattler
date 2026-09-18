@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_weather_firestorm",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_weather_firestorm",
+  "parent":{
+    "name":"FIRESTORM",
+    "path":"folders/BATTLE/STATUSES/WEATHER/FIRESTORM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

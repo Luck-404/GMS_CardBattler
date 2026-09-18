@@ -25,7 +25,7 @@ function scr_battle_vfx_trap_trigger(_ref_trap){
 	//================//
 	var _spr_vfx = spr_battle_trap_vfx_trigger_enemy;
 
-	if (_ref_trap._str_owner_team == "PLAYER"){
+	if (_ref_trap._str_trap_name = "DISTRACTING TRAP"){
 		_spr_vfx = spr_battle_trap_vfx_trigger_friendly;
 	}
 

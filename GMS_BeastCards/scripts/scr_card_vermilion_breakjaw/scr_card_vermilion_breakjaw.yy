@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_breakjaw",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_breakjaw",
+  "parent":{
+    "name":"BREAKJAW",
+    "path":"folders/CARDS/VERMILION/BREAKJAW.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -8,6 +8,35 @@
 //
 //===============================================================================//
 
+
+//===============================================================================//
+// PRE-BATTLE SAFETY
+// FUNCTION: Allows initialization but prevents enemy turns before
+//           the player confirms Start Battle.
+//===============================================================================//
+
+if (
+	instance_exists(obj_battle_turn_controller) &&
+	!obj_battle_turn_controller._flag_started_game
+){
+
+	//======================//
+	//ALLOW INITIALIZATION//
+	//======================//
+	if (
+		_state_enemy != ENUM_ENEMY_STATE.INIT_BEASTS &&
+		_state_enemy != ENUM_ENEMY_STATE.INIT_CARDS
+	){
+
+		//================//
+		//HOLD ENEMY TURN//
+		//================//
+		_state_enemy = ENUM_ENEMY_STATE.WAIT;
+
+		exit;
+	}
+}
+
 switch(_state_enemy){
 
 	//
@@ -568,7 +597,7 @@ switch(_state_enemy){
 
 				ds_list_delete(_list_turn_start_items,0);
 
-				scr_battle_init_wait(90);
+				scr_battle_init_wait(5);
 			}
 			else{
 
@@ -622,7 +651,7 @@ switch(_state_enemy){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_battle_init_wait(20);
+					scr_battle_init_wait(15);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);
@@ -673,7 +702,7 @@ switch(_state_enemy){
 
 				ds_list_delete(_list_casting_minions,0);
 
-				scr_battle_init_wait(30);
+				scr_battle_init_wait(20);
 			}
 			else{
 
@@ -756,6 +785,7 @@ switch(_state_enemy){
 				if (!is_struct(_ref_card._ref_card)){
 
 					_ref_card.visible = false;
+
 					ds_list_delete(_list_casting_beasts,0);
 
 					break;
@@ -793,8 +823,12 @@ switch(_state_enemy){
 
 					var _stct_card = _ref_card._ref_card;
 					var _str_card_type = _stct_card._str_card_type;
+					var _str_effect_type = _stct_card._str_card_effect_type;
 					var _ref_target = undefined;
 
+					//================//
+					//SELECT TARGET//
+					//================//
 					switch(_str_card_type){
 
 						//--------//
@@ -802,47 +836,10 @@ switch(_state_enemy){
 						//--------//
 						case "ATTACK":
 
-							//--------------------//
-							//INVALID ENEMY RANGE//
-							//--------------------//
-							if (
-								_stct_card._str_card_range == "BACK" ||
-								_stct_card._str_card_range == "FLANK"
-							){
-
-								scr_gui_spawn_popup_scrolling(
-									"TEXT",
-									"NO VALID TARGET",
-									undefined,
-									c_ltgray,
-									_ref_beast.x,
-									_ref_beast.y - 72
-								);
-
-								break;
-							}
-
-							//----------------//
-							//GET PLAYER TEAM//
-							//----------------//
-							var _list_enemy = obj_battle_player_controller._list_beasts_alive;
-
-							if (ds_list_size(_list_enemy) > 0){
-
-								_ref_target = ds_list_find_value(_list_enemy,0);
-
-								//---------//
-								//CAST CARD//
-								//---------//
-								if (instance_exists(_ref_target)){
-
-									global.ref_cast_card = _ref_card;
-									global.ref_caster_beast = _ref_beast;
-									global.ref_target_beast = _ref_target;
-
-									scr_battle_cast_card();
-								}
-							}
+							_ref_target = hscr_battle_enemy_get_hostile_target(
+								_ref_beast,
+								_stct_card
+							);
 
 						break;
 
@@ -851,64 +848,40 @@ switch(_state_enemy){
 						//---------//
 						case "SUPPORT":
 
-							var _str_effect_type = _stct_card._str_card_effect_type;
+							//------//
+							//HEAL//
+							//------//
+							if (_str_effect_type == "HEAL"){
 
-							//---------------------//
-							//HOSTILE SUPPORT CARD//
-							//---------------------//
-							if (
-								_str_effect_type == "CC" ||
-								_str_effect_type == "DEBUFF"
+								_ref_target = hscr_battle_enemy_get_heal_target(
+									_ref_beast,
+									_stct_card
+								);
+							}
+
+							//------------//
+							//DEBUFF / CC//
+							//------------//
+							else if (
+								_str_effect_type == "DEBUFF" ||
+								_str_effect_type == "CC"
 							){
 
-								var _list_enemy = obj_battle_player_controller._list_beasts_alive;
-
-								if (ds_list_size(_list_enemy) > 0){
-									_ref_target = ds_list_find_value(_list_enemy,0);
-								}
+								_ref_target = hscr_battle_enemy_get_hostile_target(
+									_ref_beast,
+									_stct_card
+								);
 							}
 
-							//----------------------//
-							//FRIENDLY SUPPORT CARD//
-							//----------------------//
+							//----------------//
+							//BUFF / FRIENDLY//
+							//----------------//
 							else{
 
-								_ref_target = _ref_beast;
-
-								if (_stct_card._str_card_range == "RANGED" && random(1) < 0.25){
-
-									var _ct_allies = ds_list_size(_list_beasts_alive);
-
-									if (_ct_allies > 1){
-
-										repeat(10){
-
-											var _ref_candidate = ds_list_find_value(
-												_list_beasts_alive,
-												irandom(_ct_allies - 1)
-											);
-
-											if (_ref_candidate != _ref_beast){
-
-												_ref_target = _ref_candidate;
-
-												break;
-											}
-										}
-									}
-								}
-							}
-
-							//---------//
-							//CAST CARD//
-							//---------//
-							if (instance_exists(_ref_target)){
-
-								global.ref_cast_card = _ref_card;
-								global.ref_caster_beast = _ref_beast;
-								global.ref_target_beast = _ref_target;
-
-								scr_battle_cast_card();
+								_ref_target = hscr_battle_enemy_get_friendly_target(
+									_ref_beast,
+									_stct_card
+								);
 							}
 
 						break;
@@ -918,65 +891,40 @@ switch(_state_enemy){
 						//---------//
 						case "UTILITY":
 
-							var _str_effect_type = _stct_card._str_card_effect_type;
-							var _str_card_id = _stct_card._str_card_id;
-
 							//----------------//
 							//HOSTILE TRAP//
 							//----------------//
 							if (
 								_str_effect_type == "TRAP" &&
-								_str_card_id != "DISTRACTING_TRAP"
+								_stct_card._str_card_id != "DISTRACTING_TRAP"
 							){
 
-								var _list_enemy = obj_battle_player_controller._list_beasts_alive;
-
-								if (ds_list_size(_list_enemy) > 0){
-									_ref_target = ds_list_find_value(_list_enemy,0);
-								}
+								_ref_target = hscr_battle_enemy_get_hostile_target(
+									_ref_beast,
+									_stct_card
+								);
 							}
 
-							//------------------//
-							//FRIENDLY UTILITY//
-							//------------------//
+							//------//
+							//HEAL//
+							//------//
+							else if (_str_effect_type == "HEAL"){
+
+								_ref_target = hscr_battle_enemy_get_heal_target(
+									_ref_beast,
+									_stct_card
+								);
+							}
+
+							//---------------------------//
+							//UTILITY / MINION / FRIENDLY//
+							//---------------------------//
 							else{
 
-								_ref_target = _ref_beast;
-
-								if (_stct_card._str_card_range == "RANGED" && random(1) < 0.25){
-
-									var _ct_allies = ds_list_size(_list_beasts_alive);
-
-									if (_ct_allies > 1){
-
-										repeat(10){
-
-											var _ref_candidate = ds_list_find_value(
-												_list_beasts_alive,
-												irandom(_ct_allies - 1)
-											);
-
-											if (_ref_candidate != _ref_beast){
-
-												_ref_target = _ref_candidate;
-
-												break;
-											}
-										}
-									}
-								}
-							}
-
-							//---------//
-							//CAST CARD//
-							//---------//
-							if (instance_exists(_ref_target)){
-
-								global.ref_cast_card = _ref_card;
-								global.ref_caster_beast = _ref_beast;
-								global.ref_target_beast = _ref_target;
-
-								scr_battle_cast_card();
+								_ref_target = hscr_battle_enemy_get_friendly_target(
+									_ref_beast,
+									_stct_card
+								);
 							}
 
 						break;
@@ -986,43 +934,57 @@ switch(_state_enemy){
 						//---------//
 						case "DEFENSE":
 
-							_ref_target = _ref_beast;
-
-							if (_stct_card._str_card_range == "RANGED" && random(1) < 0.25){
-
-								var _ct_allies = ds_list_size(_list_beasts_alive);
-
-								if (_ct_allies > 1){
-
-									repeat(10){
-
-										var _ref_candidate = ds_list_find_value(
-											_list_beasts_alive,
-											irandom(_ct_allies - 1)
-										);
-
-										if (_ref_candidate != _ref_beast){
-
-											_ref_target = _ref_candidate;
-
-											break;
-										}
-									}
-								}
-							}
-
-							global.ref_cast_card = _ref_card;
-							global.ref_caster_beast = _ref_beast;
-							global.ref_target_beast = _ref_target;
-
-							scr_battle_cast_card();
+							_ref_target = hscr_battle_enemy_get_friendly_target(
+								_ref_beast,
+								_stct_card,
+								true
+							);
 
 						break;
 					}
 
+					//================//
+					//VALIDATE TARGET//
+					//================//
+					var _flag_valid_target = false;
+
+					if (_ref_target == "GLOBAL"){
+						_flag_valid_target = true;
+					}
+					else if (instance_exists(_ref_target)){
+						_flag_valid_target = true;
+					}
+
+					//---------//
+					//CAST CARD//
+					//---------//
+					if (_flag_valid_target){
+
+						global.ref_cast_card = _ref_card;
+						global.ref_caster_beast = _ref_beast;
+						global.ref_target_beast = _ref_target;
+
+						scr_battle_cast_card();
+					}
+
 					//----------------//
+					//NO VALID TARGET//
+					//----------------//
+					else{
+
+						scr_gui_spawn_popup_scrolling(
+							"TEXT",
+							"NO VALID TARGET",
+							undefined,
+							c_ltgray,
+							_ref_beast.x,
+							_ref_beast.y - 72
+						);
+					}
+
+					//-----------------//
 					//FINISH BEAST CAST//
-					//----------------//
+					//-----------------//
 					ds_list_delete(_list_casting_beasts,0);
 
 					_ref_card.visible = false;
@@ -1214,7 +1176,7 @@ switch(_state_enemy){
 
 				ds_list_delete(_list_turn_end_items,0);
 
-				scr_battle_init_wait(90);
+				scr_battle_init_wait(5);
 			}
 			else{
 
@@ -1268,7 +1230,7 @@ switch(_state_enemy){
 
 					ds_list_delete(_list_statuses,0);
 
-					scr_battle_init_wait(20);
+					scr_battle_init_wait(15);
 				}
 				else{
 					ds_list_delete(_list_statuses,0);

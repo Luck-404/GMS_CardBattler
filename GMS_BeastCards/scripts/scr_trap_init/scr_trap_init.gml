@@ -36,6 +36,61 @@ function scr_trap_init(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 
 	switch (_str_trap_id){
 
+		//==============//
+		//VOLATILE BRAND//
+		//==============//
+		case "VOLATILE_BRAND":
+
+			if (!is_struct(_stct_card)){
+				return undefined;
+			}
+
+			_str_trap_name = "VOLATILE BRAND";
+
+			_str_trigger_type = "DEATH";
+			_str_trigger_phase = "BEFORE";
+
+			_scr_trap_callback = scr_trap_volatile_brand;
+			_val_magnitude = _stct_card._val_card_magnitude;
+
+		break;
+
+		//==========//
+		//POWDER KEG//
+		//==========//
+		case "POWDER_KEG":
+
+			if (!is_struct(_stct_card)){
+				return undefined;
+			}
+
+			_str_trap_name = "POWDER KEG";
+
+			_str_trigger_type = "DAMAGED";
+			_str_trigger_phase = "AFTER";
+
+			_scr_trap_callback = scr_trap_powder_keg;
+			_val_magnitude = _stct_card._val_card_magnitude;
+
+		break;
+
+		//=============//
+		//DRAGON MINE//
+		//=============//
+		case "DRAGON_MINE":
+
+			if (!is_struct(_stct_card)){
+				return undefined;
+			}
+
+			_str_trap_name = "DRAGON MINE";
+			_str_trigger_type = "ATTACKING";
+
+			_scr_trap_callback = scr_trap_dragon_mine;
+			_val_magnitude = _stct_card._val_card_magnitude;
+
+		break;
+
 		//=============//
 		//PULLED UNDER//
 		//=============//

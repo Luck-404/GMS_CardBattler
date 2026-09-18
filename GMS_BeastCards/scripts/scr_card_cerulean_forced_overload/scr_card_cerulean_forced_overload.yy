@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_forced_overload",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_forced_overload",
+  "parent":{
+    "name":"FORCED_OVERLOAD",
+    "path":"folders/CARDS/CERULEAN/FORCED_OVERLOAD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -6,19 +6,16 @@
 //           Applying a different Weather removes all current Weather first.
 //           Logs successful Weather starts and refreshes.
 //
-//           ACTIVE WEATHER:
-//           - SEEDFALL
-//           - RAIN
-//           - SNOW
-//           - STORMING
+// ACTIVE WEATHER:
+// - SEEDFALL
+// - RAIN
+// - SNOW
+// - STORMING
+// - FIRESTORM
 //
-//           PLANNED:
-//           - HEATWAVE
-//           - FIRESTORM
-//
-// ARGUMENTS: _str_weather_name is the Weather ID to apply and _val_lifetime
-//            optionally overrides that Weather's default duration.
-// RETURNS: The applied Weather Status reference, or undefined if application fails.
+// ARGUMENTS: _str_weather_name is the Weather ID.
+//            _val_lifetime optionally overrides its default duration.
+// RETURNS: Applied Weather Status, or undefined on failure.
 //
 //===============================================================================//
 
@@ -40,14 +37,18 @@ function scr_status_apply_weather(_str_weather_name,_val_lifetime=undefined){
 		case "RAIN":
 		case "SNOW":
 		case "STORMING":
+		case "FIRESTORM":
+		case "HEATWAVE":
 		break;
-
+		
 		default:
 			return undefined;
 	}
 
 	var _ref_status = undefined;
+
 	var _str_requested_weather = "WEATHER: " + _str_weather_name;
+
 	var _c_popup = c_aqua;
 
 	//=======================//
@@ -55,9 +56,16 @@ function scr_status_apply_weather(_str_weather_name,_val_lifetime=undefined){
 	//=======================//
 	var _flag_same_weather_active = false;
 
-	for (var _it_status = 0;_it_status < ds_list_size(global.list_statuses);_it_status++){
+	for (
+		var _it_status = 0;
+		_it_status < ds_list_size(global.list_statuses);
+		_it_status++
+	){
 
-		var _ref_check_status = ds_list_find_value(global.list_statuses,_it_status);
+		var _ref_check_status = ds_list_find_value(
+			global.list_statuses,
+			_it_status
+		);
 
 		if (!instance_exists(_ref_check_status)){
 			continue;
@@ -79,6 +87,7 @@ function scr_status_apply_weather(_str_weather_name,_val_lifetime=undefined){
 	//REPLACE DIFFERENT WEATHER//
 	//===========================//
 	if (!_flag_same_weather_active){
+
 		scr_status_clear_weather();
 	}
 
@@ -86,6 +95,21 @@ function scr_status_apply_weather(_str_weather_name,_val_lifetime=undefined){
 	//APPLY WEATHER//
 	//================//
 	switch (_str_weather_name){
+
+		//==========//
+		//HEATWAVE//
+		//==========//
+		case "HEATWAVE":
+
+			_ref_status = scr_status_weather_heatwave(
+				"APPLY",
+				undefined,
+				_val_lifetime
+			);
+
+			_c_popup = c_red;
+
+		break;
 
 		//==========//
 		//SEEDFALL//
@@ -138,6 +162,21 @@ function scr_status_apply_weather(_str_weather_name,_val_lifetime=undefined){
 				undefined,
 				_val_lifetime
 			);
+
+		break;
+
+		//==========//
+		//FIRESTORM//
+		//==========//
+		case "FIRESTORM":
+
+			_ref_status = scr_status_weather_firestorm(
+				"APPLY",
+				undefined,
+				_val_lifetime
+			);
+
+			_c_popup = c_red;
 
 		break;
 	}

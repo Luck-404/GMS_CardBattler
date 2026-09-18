@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_chain_combustion",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_chain_combustion",
+  "parent":{
+    "name":"CHAIN_COMBUSTION",
+    "path":"folders/CARDS/VERMILION/CHAIN_COMBUSTION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

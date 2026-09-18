@@ -45,17 +45,6 @@ function scr_battle_discard_card(_ref_card){
 
 	#region DISCARD CARD
 
-	//----------------//
-	//STORE MOVEMENT//
-	//----------------//
-	var _val_move_start_x = _ref_card.x;
-	var _val_move_start_y = _ref_card.y;
-
-	var _val_discard_x = room_width - 150;
-	var _val_discard_y = room_height - 100;
-
-	var _ct_move_duration = 8;
-
 	//-----------------//
 	//REMOVE FROM HAND//
 	//-----------------//
@@ -83,21 +72,7 @@ function scr_battle_discard_card(_ref_card){
 	//----------------//
 	//START MOVEMENT//
 	//----------------//
-	scr_battle_start_card_move_animation(
-		_ref_card,
-		"DISCARD",
-		_val_move_start_x,
-		_val_move_start_y,
-		_val_discard_x,
-		_val_discard_y,
-		_ct_move_duration,
-		0
-	);
-
-	//----------------//
-	//EXPEND FEEDBACK//
-	//----------------//
-	scr_battle_vfx_expend(undefined,_val_discard_x,_val_discard_y,_ct_move_duration);
+	scr_battle_move_card_between_piles(_ref_card,"HAND","DISCARD",8);
 
 	#endregion
 

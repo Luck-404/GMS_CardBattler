@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_flameguard_taunt",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_flameguard_taunt",
+  "parent":{
+    "name":"FLAMEGUARD_TAUNT",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/FLAMEGUARD_TAUNT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

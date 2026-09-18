@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bursting_meteor",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bursting_meteor",
+  "parent":{
+    "name":"BURSTING_METEOR",
+    "path":"folders/CARDS/VERMILION/BURSTING_METEOR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

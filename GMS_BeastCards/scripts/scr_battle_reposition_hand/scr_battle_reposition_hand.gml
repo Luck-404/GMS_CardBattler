@@ -1,92 +1,76 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_REPOSITION_HAND
-// FUNCTION: Repositions all Cards currently in the player's Hand.
-//           Centers the Hand at the bottom of the battle screen and updates
-//           active Draw-animation destinations without teleporting those Cards.
-//
-// USES:     Player battle Hand list and each Card's movement state.
-//           Active Draw animations receive updated destination coordinates.
+// FUNCTION: Clamps the complete player Hand within X96-960, Y857-1055.
+//           Reflows in-flight and queued draws without teleporting Cards.
 //
 //===============================================================================//
 
 function scr_battle_reposition_hand(){
 
-	#region HAND LAYOUT
+    if (!instance_exists(obj_battle_player_controller)){
+        return;
+    }
 
-	//-------------//
-	//HAND LAYOUT//
-	//-------------//
-	var _val_hand_center_x = 548;
-	var _val_card_spacing = 15;
-	var _val_card_width = 120;
-	var _val_hand_y = room_height - 100;
+    var _list_hand = obj_battle_player_controller._list_battle_hand;
+    var _ct_hand = ds_list_size(_list_hand);
 
-	#endregion
+    if (_ct_hand <= 0){
+        return;
+    }
 
-	#region HAND DATA
+    // 400x600 sprites at 0.30 occupy 120x180 pixels.
+    // Card centers must remain inside the card area at idle scale.
+    var _val_min_x = 96 + 60;
+    var _val_max_x = 960 - 60;
+    var _val_center_x = (96 + 960) * 0.5;
+    var _val_center_y = (857 + 1055) * 0.5;
 
-	//--------//
-	//GET HAND//
-	//--------//
-	var _list_hand = obj_battle_player_controller._list_battle_hand;
-	var _ct_hand = ds_list_size(_list_hand);
+    // Up to six Cards use familiar spacing. Larger Hands overlap progressively.
+    var _val_step = 135;
 
-	if (_ct_hand <= 0){
-		return;
-	}
+    if (_ct_hand > 1){
+        _val_step = min(135,(_val_max_x - _val_min_x) / (_ct_hand - 1));
+    }
 
-	#endregion
+    var _val_start_x = _val_center_x - ((_ct_hand - 1) * _val_step * 0.5);
 
-	#region HAND POSITIONING
+    for (var _it_card = 0; _it_card < _ct_hand; _it_card++){
 
-	//----------------//
-	//CALCULATE WIDTH//
-	//----------------//
-	var _val_total_width =
-		(_ct_hand * _val_card_width) +
-		((_ct_hand - 1) * _val_card_spacing);
+        var _ref_card = ds_list_find_value(_list_hand,_it_card);
 
-	var _val_start_x =
-		_val_hand_center_x -
-		(_val_total_width * 0.5) +
-		(_val_card_width * 0.5);
+        if (!instance_exists(_ref_card)){
+            continue;
+        }
 
-	//----------------//
-	//POSITION CARDS//
-	//----------------//
-	for (var _it_card = 0; _it_card < _ct_hand; _it_card++){
+        var _val_target_x = clamp(_val_start_x + (_it_card * _val_step),_val_min_x,_val_max_x);
+        var _val_target_y = _val_center_y;
 
-		var _ref_card = ds_list_find_value(_list_hand,_it_card);
+        _ref_card._val_card_hand_target_x = _val_target_x;
+        _ref_card._val_card_hand_target_y = _val_target_y;
+        _ref_card._val_card_rest_depth = -1000 - _it_card;
 
-		if (!instance_exists(_ref_card)){
-			continue;
-		}
+        if (_ref_card._flag_card_moving){
 
-		var _val_target_x =
-			_val_start_x +
-			(_it_card * (_val_card_width + _val_card_spacing));
+            // An active draw may already be travelling toward a previous slot.
+            if (_ref_card._str_card_move_type == "DRAW"){
+                _ref_card._val_card_move_end_x = _val_target_x;
+                _ref_card._val_card_move_end_y = _val_target_y;
+            }
 
-		var _val_target_y = _val_hand_y;
+            // A gathered Card can have its next draw queued already.
+            for (var _it_move = 0; _it_move < array_length(_ref_card._arr_card_move_queue); _it_move++){
 
-		//-----------------------//
-		//UPDATE DRAW DESTINATION//
-		//-----------------------//
-		if (_ref_card._flag_card_moving && _ref_card._str_card_move_type == "DRAW"){
-
-			_ref_card._val_card_move_end_x = _val_target_x;
-			_ref_card._val_card_move_end_y = _val_target_y;
-		}
-
-		//---------------//
-		//NORMAL POSITION//
-		//---------------//
-		else{
-
-			_ref_card.x = _val_target_x;
-			_ref_card.y = _val_target_y;
-		}
-	}
-
-	#endregion
+                if (_ref_card._arr_card_move_queue[_it_move]._str_type == "DRAW"){
+                    _ref_card._arr_card_move_queue[_it_move]._val_end_x = _val_target_x;
+                    _ref_card._arr_card_move_queue[_it_move]._val_end_y = _val_target_y;
+                }
+            }
+        }
+        else{
+            _ref_card.x = _val_target_x;
+            _ref_card.y = _val_target_y;
+            _ref_card.depth = _ref_card._val_card_rest_depth;
+        }
+    }
 }

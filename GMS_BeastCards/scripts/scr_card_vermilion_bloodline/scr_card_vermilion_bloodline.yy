@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodline",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodline",
+  "parent":{
+    "name":"BLOODLINE",
+    "path":"folders/CARDS/VERMILION/BLOODLINE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

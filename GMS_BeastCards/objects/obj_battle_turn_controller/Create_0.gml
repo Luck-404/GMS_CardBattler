@@ -36,6 +36,11 @@ if (instance_number(obj_battle_turn_controller) > 1){
 //------------//
 _arr_team_traps = [];
 
+//-------------------//
+//TURN DEBUG DISPLAY//
+//-------------------//
+_flag_show_turn_debug = true;
+
 //-------------//
 //CONTROLLERS//
 //-------------//
@@ -54,8 +59,8 @@ _ref_enemy_controller = instance_create_layer(
 );
 
 _ref_end_turn_button = instance_create_layer(
-	928,
-	700,
+	1055,
+	793,
 	"ily_fx",
 	obj_battle_end_turn_button
 );
@@ -87,6 +92,22 @@ _flag_entry_triggers_complete = false;
 _flag_game_start = false;
 _flag_started_game = false;
 _flag_battle_ended = false;
+
+//-------------------//
+//START CONFIRMATION//
+//-------------------//
+_flag_start_confirmation_created = false;
+_flag_start_confirmation_accepted = false;
+
+_ref_start_battle_pane = undefined;
+
+//------------------//
+//OPENING INITIATIVE//
+//------------------//
+_val_player_opening_speed = 0;
+_val_enemy_opening_speed = 0;
+
+_str_opening_team = "";
 
 #endregion
 
@@ -185,69 +206,62 @@ function hscr_battle_build_entry_trigger_queue(){
 }
 
 //—------------------------------------------------------------------------------//
-// HSCR_BATTLE_SET_INITIAL_TURN_ORDER
-// FUNCTION: Calculates each team's average current Speed.
-//           Gives the opening turn to the team with the higher average Speed.
-//           Resolves an exact team-average tie with a 50/50 coin flip.
-//           Initializes Round 1 and sets the normal alternating turn flow.
-//
-// ARGUMENTS: None.
-// RETURNS: Nothing.
-//
+// hscr_battle_set_initial_turn_order
+// FUNCTION: Calculates opening initiative without starting gameplay.
 //—------------------------------------------------------------------------------//
 function hscr_battle_set_initial_turn_order(){
 
-	//------------------------//
+	//========================//
 	//GET TEAM AVERAGE SPEEDS//
-	//------------------------//
-	var _val_player_speed = scr_battle_get_team_average_speed(
-		_ref_player_controller._list_beasts_alive
-	);
+	//========================//
+	_val_player_opening_speed =
+		scr_battle_get_team_average_speed(
+			_ref_player_controller._list_beasts_alive
+		);
 
-	var _val_enemy_speed = scr_battle_get_team_average_speed(
-		_ref_enemy_controller._list_beasts_alive
-	);
+	_val_enemy_opening_speed =
+		scr_battle_get_team_average_speed(
+			_ref_enemy_controller._list_beasts_alive
+		);
 
-	var _flag_player_first;
-	var _str_initiative_reason = "";
-
-	//----------------//
+	//================//
 	//PLAYER FASTER//
-	//----------------//
-	if (_val_player_speed > _val_enemy_speed){
+	//================//
+	if (_val_player_opening_speed > _val_enemy_opening_speed){
 
-		_flag_player_first = true;
-		_str_initiative_reason = "PLAYER FASTER";
+		_str_opening_team = "PLAYER";
+		return;
 	}
 
-	//---------------//
+	//================//
 	//ENEMY FASTER//
-	//---------------//
-	else if (_val_enemy_speed > _val_player_speed){
+	//================//
+	if (_val_enemy_opening_speed > _val_player_opening_speed){
 
-		_flag_player_first = false;
-		_str_initiative_reason = "ENEMY FASTER";
+		_str_opening_team = "ENEMY";
+		return;
 	}
 
-	//----------------//
+	//================//
 	//EXACT SPEED TIE//
-	//----------------//
-	else{
+	//================//
+	_str_opening_team =
+		(irandom(1) == 0)
+		? "PLAYER"
+		: "ENEMY";
+}
+//—------------------------------------------------------------------------------//
+// hscr_battle_begin_initial_turn
+// FUNCTION: Begins the opening turn using the initiative result already stored
+//           for the pre-battle confirmation pane.
+//—------------------------------------------------------------------------------//
+function hscr_battle_begin_initial_turn(){
 
-		_flag_player_first = (irandom(1) == 0);
-		_str_initiative_reason = "SPEED TIE - COIN FLIP";
-	}
+	//================//
+//PLAYER FIRST//
+//================//
 
-	//----------------//
-	//INITIALIZE ROUND//
-	//----------------//
-	_ct_round = 1;
-	_ct_normal_turns_completed = 0;
-
-	//-------------------//
-	//START PLAYER TURN//
-	//-------------------//
-	if (_flag_player_first){
+	if (_str_opening_team == "PLAYER"){
 
 		_val_turn_tracker = 0;
 
@@ -258,20 +272,22 @@ function hscr_battle_set_initial_turn_order(){
 			"BATTLE",
 			"INITIATIVE",
 			self,
-			"ROUND 1 START | PLAYER FIRST" +
-			" | PLAYER AVG SPEED: " + string(_val_player_speed) +
-			" | ENEMY AVG SPEED: " + string(_val_enemy_speed) +
-			" | " + _str_initiative_reason,
+			"PLAYER FIRST" +
+			" | PLAYER AVG SPEED: " +
+			string(_val_player_opening_speed) +
+			" | ENEMY AVG SPEED: " +
+			string(_val_enemy_opening_speed),
 			"BATTLE",
-			"OBJ_BATTLE_TURN_CONTROLLER:HSCR_BATTLE_SET_INITIAL_TURN_ORDER"
+			"OBJ_BATTLE_TURN_CONTROLLER"
 		);
 
 		return;
 	}
 
-	//------------------//
-	//START ENEMY TURN//
-	//------------------//
+	//================//
+//ENEMY FIRST//
+//================//
+
 	_val_turn_tracker = 1;
 
 	_ref_enemy_controller._state_enemy =
@@ -281,12 +297,13 @@ function hscr_battle_set_initial_turn_order(){
 		"BATTLE",
 		"INITIATIVE",
 		self,
-		"ROUND 1 START | ENEMY FIRST" +
-		" | PLAYER AVG SPEED: " + string(_val_player_speed) +
-		" | ENEMY AVG SPEED: " + string(_val_enemy_speed) +
-		" | " + _str_initiative_reason,
+		"ENEMY FIRST" +
+		" | PLAYER AVG SPEED: " +
+		string(_val_player_opening_speed) +
+		" | ENEMY AVG SPEED: " +
+		string(_val_enemy_opening_speed),
 		"BATTLE",
-		"OBJ_BATTLE_TURN_CONTROLLER:HSCR_BATTLE_SET_INITIAL_TURN_ORDER"
+		"OBJ_BATTLE_TURN_CONTROLLER"
 	);
 }
 

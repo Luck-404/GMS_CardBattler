@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_battle_eruption",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.5434241,
+  "exportDir":"",
+  "name":"snd_battle_eruption",
+  "parent":{
+    "name":"ERUPTION",
+    "path":"folders/BATTLE/COLOR TRIGGERS/ERUPTION.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_battle_eruption.wav",
+  "volume":0.3,
+}

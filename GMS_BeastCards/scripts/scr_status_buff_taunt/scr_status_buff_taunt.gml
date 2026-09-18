@@ -136,7 +136,7 @@ function scr_status_buff_taunt(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			_ref_new_status._str_status_type = "BUFF";
 			_ref_new_status._str_status_name = "TAUNT";
-			_ref_new_status._str_status_desc = "ONLY AVAILABLE TARGET FOR HOSTILE ATTACKS";
+			_ref_new_status._str_status_desc = "ONLY VALID PRIMARY TARGET FOR HOSTILE CARDS. IGNORES RANGE AND BLIND. DOES NOT PREVENT AOE.";
 
 			_ref_new_status._spr_status = spr_status_buff_taunt;
 

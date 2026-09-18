@@ -56,19 +56,36 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 	#endregion
 
-	#region CARD PILE COUNTS
+	#region CARD PILE ICONS AND COUNTS
 
-	//------------------//
-	//DRAW PILE COUNTS//
-	//------------------//
-	draw_set_font(fnt_gui_small);
+    //----------------//
+    //DRAW 75x75 ICONS//
+    //----------------//
+    // All four sprites must be 75x75 with their origin at top left.
+    draw_sprite(spr_battle_gui_icon_deck,0,10,969);
+    draw_sprite(spr_battle_gui_icon_discard,0,971,857);
+    draw_sprite(spr_battle_gui_icon_exhaust,0,971,969);
+    draw_sprite(spr_battle_gui_icon_inventory,0,10,857);
 
-	draw_text(50,800,"DCK: " + string(ds_list_size(_list_battle_deck)));
-	draw_text(200,800,"HND: " + string(ds_list_size(_list_battle_hand)));
-	draw_text(880,800,"DIS: " + string(ds_list_size(_list_battle_discard)));
-	draw_text(950,800,"EXH: " + string(ds_list_size(_list_battle_exhaust)));
+    //-------------------------//
+    //CENTER COUNT IN EACH BOX//
+    //-------------------------//
+    draw_set_colour(c_white);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
 
-	#endregion
+    draw_set_font(fnt_gui_small);
+    draw_text((523 + 572) * 0.5,(794 + 831) * 0.5,string(ds_list_size(_list_battle_hand)));
+
+    draw_set_font(fnt_gui_party_small);
+    draw_text((4 + 24) * 0.5,(953 + 968) * 0.5,string(ds_list_size(_list_battle_deck)));
+    draw_text((1031 + 1051) * 0.5,(841 + 856) * 0.5,string(ds_list_size(_list_battle_discard)));
+    draw_text((1031 + 1051) * 0.5,(953 + 968) * 0.5,string(ds_list_size(_list_battle_exhaust)));
+
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+
+    #endregion
 
 	#region CARD TO MOUSE
 
@@ -141,7 +158,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 				_val_mouse_y - 15,
 				_str_global_prompt
 			);
-		}
+		}		
 	}
 
 	#endregion

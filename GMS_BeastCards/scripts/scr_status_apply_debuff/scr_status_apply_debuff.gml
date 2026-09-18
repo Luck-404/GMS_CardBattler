@@ -57,6 +57,18 @@ function scr_status_apply_debuff(_str_status_name,_val_lifetime=undefined,_val_m
 
 	switch (_str_status_name){
 
+		//================//
+		//UNSTABLE COIL//
+		//================//
+		case "UNSTABLE_COIL":
+
+			_ref_status = scr_status_debuff_unstable_coil("APPLY",undefined,_val_lifetime);
+
+			_str_popup = "UNSTABLE COIL";
+			_c_popup = c_aqua;
+
+		break;
+
 		//==========//
 		//BLOODLET//
 		//==========//
@@ -122,6 +134,22 @@ function scr_status_apply_debuff(_str_status_name,_val_lifetime=undefined,_val_m
 			_ref_status = scr_status_debuff_brittle_constitution("APPLY",undefined,_val_lifetime);
 
 			_str_popup = "BRITTLE CONSTITUTION";
+
+		break;
+
+		//==================//
+		//STATIC RESONANCE//
+		//==================//
+		case "STATIC_RESONANCE":
+
+			_ref_status = scr_status_debuff_static_resonance(
+				"APPLY",
+				undefined,
+				_val_lifetime
+			);
+
+			_str_popup = "STATIC RESONANCE";
+			_c_popup = c_aqua;
 
 		break;
 

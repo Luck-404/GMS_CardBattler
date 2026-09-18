@@ -2,14 +2,20 @@
 //
 // CREATE: OBJ_GUI_ITEM_TARGET_PANE
 // FUNCTION: Initializes item target selection pane.
-//           Displays party targets on the left and selected item data on the right.
-//           Defines helpers for item tracking, closing, and input cooldown.
+//           Displays Party targets on the left and selected Item data on the right.
+//           Defines helpers for Item tracking, closing, and input cooldown.
+//           Starts with input locked to prevent confirmation-click passthrough.
 //
 //===============================================================================//
 
-//================//
+//---------//
 //VARIABLES//
-//================//
+//---------//
+#region VARIABLES
+
+//----------------//
+//PANE STATE//
+//----------------//
 _str_type = "ITEM_TARGET_PANE";
 
 _ref_parent_gui = undefined;
@@ -17,6 +23,9 @@ _stct_item = undefined;
 
 _str_target_mode = "PARTY";
 
+//--------//
+//LAYOUT//
+//--------//
 _val_pane_w = 700;
 _val_pane_h = 500;
 
@@ -32,26 +41,35 @@ _val_right_x = _val_pane_left + 430;
 
 _val_start_y = _val_pane_top + 70;
 
-_flag_clicked = false;
+//----------------//
+//CLICK COOLDOWN//
+//----------------//
+_flag_clicked = true;
 _ct_cooldown = 8;
 
-//================//
+#endregion
+
+//----//
 //INIT//
-//================//
+//----//
+#region INIT
+
 depth = -102;
 
-//================//
+#endregion
+
+//-------//
 //METHODS//
-//================//
+//-------//
 #region METHODS
 
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_ITEM_TARGET_GET_ITEM_AMOUNT
-// FUNCTION: Returns the current inventory amount for this pane's item.
-//           Uses item uid to track the exact stack being used.
+// FUNCTION: Returns the current Inventory amount for this pane's Item.
+//           Uses Item UID to track the exact stack being used.
 //
 // ARGUMENTS: None.
-// RETURNS: Current item amount, or 0 if the item is no longer present.
+// RETURNS: Current Item amount, or 0 if the Item is no longer present.
 //
 //-------------------------------------------------------------------------------//
 function hscr_gui_item_target_get_item_amount(){
@@ -76,13 +94,14 @@ function hscr_gui_item_target_get_item_amount(){
 	return 0;
 }
 
+
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_ITEM_TARGET_GET_ITEM_STRUCT
-// FUNCTION: Returns the current item stack struct from inventory.
-//           Prevents stale stack data after repeated item use.
+// FUNCTION: Returns the current Item stack struct from Inventory.
+//           Prevents stale stack data after repeated Item use.
 //
 // ARGUMENTS: None.
-// RETURNS: Current item struct, or undefined if it is no longer present.
+// RETURNS: Current Item struct, or undefined if it is no longer present.
 //
 //-------------------------------------------------------------------------------//
 function hscr_gui_item_target_get_item_struct(){
@@ -107,10 +126,11 @@ function hscr_gui_item_target_get_item_struct(){
 	return undefined;
 }
 
+
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_ITEM_TARGET_CLOSE
-// FUNCTION: Closes the item target pane.
-//           Reactivates the parent inventory pane.
+// FUNCTION: Closes the Item target pane.
+//           Reactivates the parent Inventory pane.
 //           Starts input lockout to prevent click-through.
 //
 // ARGUMENTS: None.
@@ -130,10 +150,12 @@ function hscr_gui_item_target_close(){
 	instance_destroy();
 }
 
+
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_ITEM_TARGET_UPDATE_CLICK_COOLDOWN
-// FUNCTION: Updates the target pane click cooldown.
-//           Prevents repeated item uses from one mouse press.
+// FUNCTION: Updates the target-pane click cooldown.
+//           Prevents the confirmation click that opened this pane from
+//           immediately selecting a Party Beast.
 //
 // ARGUMENTS: None.
 // RETURNS: Nothing.

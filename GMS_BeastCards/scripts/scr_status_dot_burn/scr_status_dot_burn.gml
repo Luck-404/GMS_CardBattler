@@ -163,7 +163,19 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 			}
 
 			var _ct_burn = max(0,_ref_status._ct_status_stacks);
+			
+			//================//
+			//HEATWAVE BONUS//
+			//================//
+			var _val_burn_hit = 1;
 
+			if (
+				ds_exists(global.list_statuses,ds_type_list) &&
+				scr_status_check("WEATHER: HEATWAVE",global.list_statuses) != -1
+			){
+				_val_burn_hit++;
+			}
+			
 			//=========================//
 			//ONE HIT FOR EACH STACK//
 			//=========================//
@@ -188,7 +200,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 					snd_battle_burn
 				);
 
-				var _val_damage = 1;
+				var _val_damage = _val_burn_hit;
 
 				//============//
 				//OVERHEALTH//

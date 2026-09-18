@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_rekindle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_rekindle",
+  "parent":{
+    "name":"REKINDLE",
+    "path":"folders/CARDS/VERMILION/REKINDLE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

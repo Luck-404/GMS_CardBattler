@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_viridian_toxic_reclaimation",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_viridian_toxic_reclaimation",
+  "parent":{
+    "name":"TOXIC_RECLAIMATION",
+    "path":"folders/CARDS/VIRIDIAN/TOXIC_RECLAIMATION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

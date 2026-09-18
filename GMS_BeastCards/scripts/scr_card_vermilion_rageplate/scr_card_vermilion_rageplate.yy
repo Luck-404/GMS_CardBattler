@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_rageplate",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_rageplate",
+  "parent":{
+    "name":"RAGEPLATE",
+    "path":"folders/CARDS/VERMILION/RAGEPLATE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

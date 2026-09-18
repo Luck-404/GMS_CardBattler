@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodlust_lunge",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodlust_lunge",
+  "parent":{
+    "name":"BLOODLUST_LUNGE",
+    "path":"folders/CARDS/VERMILION/BLOODLUST_LUNGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

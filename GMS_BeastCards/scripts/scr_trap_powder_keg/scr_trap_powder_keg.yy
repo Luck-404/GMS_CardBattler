@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_trap_powder_keg",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_trap_powder_keg",
+  "parent":{
+    "name":"POWDER_KEG",
+    "path":"folders/BATTLE/TRAPS/POWDER_KEG.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

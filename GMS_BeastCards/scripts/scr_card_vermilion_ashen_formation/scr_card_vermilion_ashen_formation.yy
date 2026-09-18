@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_ashen_formation",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_ashen_formation",
+  "parent":{
+    "name":"ASHEN_FORMATION",
+    "path":"folders/CARDS/VERMILION/ASHEN_FORMATION.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_heatwave",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_heatwave",
+  "parent":{
+    "name":"HEATWAVE",
+    "path":"folders/CARDS/VERMILION/HEATWAVE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

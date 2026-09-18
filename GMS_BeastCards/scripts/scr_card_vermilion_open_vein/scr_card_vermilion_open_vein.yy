@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_open_vein",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_open_vein",
+  "parent":{
+    "name":"OPEN_VEIN",
+    "path":"folders/CARDS/VERMILION/OPEN_VEIN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

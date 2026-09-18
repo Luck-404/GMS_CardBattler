@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_battle_trance",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_battle_trance",
+  "parent":{
+    "name":"BATTLE_TRANCE",
+    "path":"folders/CARDS/VERMILION/BATTLE_TRANCE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

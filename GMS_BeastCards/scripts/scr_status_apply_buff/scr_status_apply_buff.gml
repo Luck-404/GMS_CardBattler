@@ -41,6 +41,189 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 	switch (_str_status_name){
 
 		//=======================================================================//
+		// VERMILION
+		//=======================================================================//
+		//--------------//
+		//MOLTEN AEGIS//
+		//--------------//
+		case "MOLTEN_AEGIS":
+
+			_ref_applied_status = scr_status_buff_molten_aegis(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"MOLTEN AEGIS",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;		
+		
+		//------------//
+		//LAST STAND//
+		//------------//
+		case "LAST_STAND":
+
+			_ref_applied_status = scr_status_buff_last_stand(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"LAST STAND",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//---------------//
+		//FURNACE HEART//
+		//---------------//
+		case "FURNACE_HEART":
+
+			_ref_applied_status = scr_status_buff_furnace_heart(
+				"APPLY",
+				undefined
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"FURNACE HEART",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//-------------//
+		//CINDERGUARD//
+		//-------------//
+		case "CINDERGUARD":
+
+			_ref_applied_status = scr_status_buff_cinderguard(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"CINDERGUARD",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;		
+		
+		//----------------//
+		//BURNING PARRY//
+		//----------------//
+		case "BURNING_PARRY":
+
+			_ref_applied_status = scr_status_buff_burning_parry(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"BURNING PARRY",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+		
+		//-----------//
+		//BACKDRAFT//
+		//-----------//
+		case "BACKDRAFT":
+
+			_ref_applied_status = scr_status_buff_backdraft(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"BACKDRAFT",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//----------------//
+		//BURNING THORNS//
+		//----------------//
+		case "BURNING_THORNS":
+
+			_ref_applied_status = scr_status_buff_burning_thorns(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"BURNING THORNS",
+					undefined,
+					c_red,
+					global.ref_target_beast.x,
+					global.ref_target_beast.y - 48
+				);
+			}
+
+		break;
+
+		//=======================================================================//
 		// CERULEAN
 		//=======================================================================//
 

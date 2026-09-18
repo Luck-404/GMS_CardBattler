@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_cinderguard",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_cinderguard",
+  "parent":{
+    "name":"CINDERGUARD",
+    "path":"folders/CARDS/VERMILION/CINDERGUARD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_arterial_burst",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_arterial_burst",
+  "parent":{
+    "name":"ARTERIAL_BURST",
+    "path":"folders/CARDS/VERMILION/ARTERIAL_BURST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

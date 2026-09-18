@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_powder_keg",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_powder_keg",
+  "parent":{
+    "name":"POWDER_KEG",
+    "path":"folders/CARDS/VERMILION/POWDER_KEG.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

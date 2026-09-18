@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_is_hostile_card_target",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_is_hostile_card_target",
+  "parent":{
+    "name":"TAUNT",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/TAUNT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

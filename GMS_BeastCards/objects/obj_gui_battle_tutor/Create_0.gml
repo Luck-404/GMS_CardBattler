@@ -2,11 +2,7 @@
 //
 // CREATE: OBJ_GUI_BATTLE_TUTOR
 // FUNCTION: Initializes the battle Tutor selection pane.
-//           Stores Tutor candidate Cards, pane/list layout, and input state.
-//           Defines the object-local Tutor initialization helper.
-//
-// USES:     Candidate battle-Card instances supplied after creation by the
-//           player battle controller.
+//           Supports configurable Card Types and Tutor titles.
 //
 //===============================================================================//
 
@@ -24,6 +20,9 @@ depth = -10000;
 //TUTOR CARDS//
 //-------------//
 _arr_tutor_cards = [];
+
+_str_tutor_card_type = "UTILITY";
+_str_tutor_title = "ANCIENT CHARTS";
 
 //------//
 //PANE//
@@ -58,6 +57,8 @@ _flag_clicked = false;
 //----//
 //INIT//
 //----//
+#region INIT
+#endregion
 
 //-------//
 //METHODS//
@@ -66,12 +67,14 @@ _flag_clicked = false;
 
 //—------------------------------------------------------------------------------//
 // hscr_gui_init_tutor
-// FUNCTION: Assigns the battle-Card instances currently available for selection.
-// INPUT:    _arr_candidates - Candidate Card-instance array supplied by battle.
+// FUNCTION: Assigns the eligible Card instances and Tutor configuration.
 //—------------------------------------------------------------------------------//
-hscr_gui_init_tutor = function(_arr_candidates){
+hscr_gui_init_tutor = function(_arr_candidates,_str_primary_card_type="UTILITY",_str_title="ANCIENT CHARTS"){
 
 	_arr_tutor_cards = _arr_candidates;
+
+	_str_tutor_card_type = _str_primary_card_type;
+	_str_tutor_title = _str_title;
 };
 
 #endregion

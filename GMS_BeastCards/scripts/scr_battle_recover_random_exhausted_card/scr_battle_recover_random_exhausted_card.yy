@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_battle_recover_random_exhausted_card",
   "parent":{
-    "name":"HAND AND DECK",
-    "path":"folders/BATTLE/CARD FLOW/HAND AND DECK.yy",
+    "name":"RECOVER_EXHAUST",
+    "path":"folders/BATTLE/CARD FLOW/RECOVER_EXHAUST.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

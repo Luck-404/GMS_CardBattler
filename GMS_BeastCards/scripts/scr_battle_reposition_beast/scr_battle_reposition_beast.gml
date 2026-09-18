@@ -188,6 +188,24 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 
 	#endregion
 
+	#region REPOSITION STATUS TRIGGERS
+
+	//-------------------------//
+	//TRIGGER MOVED BEAST//
+	//-------------------------//
+	scr_status_trigger_reposition_effects(
+		_ref_beast
+	);
+
+	//-------------------------//
+	//TRIGGER SWAPPED BEAST//
+	//-------------------------//
+	scr_status_trigger_reposition_effects(
+		_ref_swap_target
+	);
+
+	#endregion
+
 	#region ATTACHMENTS
 
 	//----------------------//

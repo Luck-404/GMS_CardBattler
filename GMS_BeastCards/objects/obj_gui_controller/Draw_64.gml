@@ -401,9 +401,10 @@ if (room != rm_battle){
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_colour(c_white);
+draw_set_font(fnt_gui_party_small);
 var _val_fps = clamp(fps_real,0,240);
 draw_text(
-	_val_gui_width - 50,
-	_val_gui_height - 50,
+	1015,
+	0,
 	"FPS: " + string(_val_fps)
 );

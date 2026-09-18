@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_trap_dragon_mine",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_trap_dragon_mine",
+  "parent":{
+    "name":"DRAGON_MINE",
+    "path":"folders/BATTLE/TRAPS/DRAGON_MINE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

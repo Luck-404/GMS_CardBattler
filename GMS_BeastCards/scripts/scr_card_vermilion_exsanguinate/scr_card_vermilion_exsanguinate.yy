@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_exsanguinate",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_exsanguinate",
+  "parent":{
+    "name":"EXSANGUINATE",
+    "path":"folders/CARDS/VERMILION/EXSANGUINATE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

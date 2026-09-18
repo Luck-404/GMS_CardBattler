@@ -2,7 +2,8 @@
 //
 // STEP: OBJ_BATTLE_BEAST
 // FUNCTION: Resolves pending Beast death state and updates temporary visual
-//           motion effects used for casting, dodging, repositioning, and resist.
+//           motion effects used for normal casting, Minion-row casting,
+//           dodging, repositioning, and resist.
 //           Visual motion does not alter the Beast's battlefield slot.
 //
 //===============================================================================//
@@ -59,6 +60,9 @@ var _val_motion_progress = 1 - (_ct_vfx_motion / max(1,_ct_vfx_motion_duration))
 //-------------//
 switch(_str_vfx_motion){
 
+	//-----------//
+	//NORMAL CAST//
+	//-----------//
 	case "CAST":
 
 		//----------------//
@@ -73,6 +77,20 @@ switch(_str_vfx_motion){
 
 	break;
 
+	//----------------//
+	//MINION-ROW CAST//
+	//----------------//
+	case "CAST_MINION":
+
+		_val_vfx_offset_y =
+			sin(_val_motion_progress * pi) *
+			_val_vfx_motion_intensity;
+
+	break;
+
+	//-------//
+	//DODGE//
+	//-------//
 	case "DODGE":
 
 		//--------------//
@@ -84,6 +102,9 @@ switch(_str_vfx_motion){
 
 	break;
 
+	//----------//
+	//REPOSITION//
+	//----------//
 	case "REPOSITION":
 
 		//--------------------//
@@ -111,6 +132,9 @@ switch(_str_vfx_motion){
 
 	break;
 
+	//------//
+	//RESIST//
+	//------//
 	case "RESIST":
 
 		//---------------//

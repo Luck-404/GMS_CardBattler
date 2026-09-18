@@ -17,7 +17,7 @@
 //
 //===============================================================================//
 
-function scr_minion_destroy(_ref_minion,_str_reason="REMOVE"){
+function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=undefined){
 
 	//-----------------//
 	//VALIDATE MINION//
@@ -313,6 +313,20 @@ function scr_minion_destroy(_ref_minion,_str_reason="REMOVE"){
 		"SCR_MINION_DESTROY"
 	);
 
+	//======================//
+	//CINDERLING DEATH BURN//
+	//======================//
+	if (
+		_ref_minion._str_name == "CINDERLING" &&
+		_str_reason == "DEATH"
+	){
+
+		scr_minion_cinderling_death(
+			_ref_minion,
+			_ref_killer_minion
+		);
+	}
+	
 	//---------------//
 	//DESTROY MINION//
 	//---------------//

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_blood_furnace",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_blood_furnace",
+  "parent":{
+    "name":"BLOOD_FURNACE",
+    "path":"folders/CARDS/VERMILION/BLOOD_FURNACE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

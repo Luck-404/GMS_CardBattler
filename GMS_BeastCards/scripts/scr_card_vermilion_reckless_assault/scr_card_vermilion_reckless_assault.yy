@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_reckless_assault",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_reckless_assault",
+  "parent":{
+    "name":"RECKLESS_ASSAULT",
+    "path":"folders/CARDS/VERMILION/RECKLESS_ASSAULT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

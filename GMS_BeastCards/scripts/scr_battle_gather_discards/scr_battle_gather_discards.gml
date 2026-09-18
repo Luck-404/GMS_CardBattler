@@ -41,10 +41,10 @@ function scr_battle_gather_discards(){
 		ds_list_delete(_list_discard,0);
 		ds_list_add(_list_deck,_ref_card);
 
-		_ref_card.x = 70;
-		_ref_card.y = room_height - 100;
-
-		_ref_card._str_location = "DECK";
+		if (instance_exists(_ref_card)){
+			_ref_card._str_location = "DECK";
+			scr_battle_move_card_between_piles(_ref_card,"DISCARD","DECK",10);
+		}
 	}
 
 	//--------------//

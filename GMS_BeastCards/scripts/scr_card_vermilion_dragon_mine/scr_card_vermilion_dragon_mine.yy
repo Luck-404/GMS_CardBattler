@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_dragon_mine",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_dragon_mine",
+  "parent":{
+    "name":"DRAGON_MINE",
+    "path":"folders/CARDS/VERMILION/DRAGON_MINE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

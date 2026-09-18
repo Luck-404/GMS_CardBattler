@@ -187,6 +187,24 @@ function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=t
 
 	#endregion
 
+	#region REPOSITION STATUS TRIGGERS
+
+	//----------------//
+	//TRIGGER BEAST A//
+	//----------------//
+	scr_status_trigger_reposition_effects(
+		_ref_beast_a
+	);
+
+	//----------------//
+	//TRIGGER BEAST B//
+	//----------------//
+	scr_status_trigger_reposition_effects(
+		_ref_beast_b
+	);
+
+	#endregion
+
 	#region FEEDBACK
 
 	//----------------//

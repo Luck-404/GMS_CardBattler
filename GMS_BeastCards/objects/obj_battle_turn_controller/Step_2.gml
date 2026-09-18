@@ -7,6 +7,13 @@
 //
 //===============================================================================//
 
+//=========================//
+//TOGGLE TURN DEBUG DISPLAY//
+//=========================//
+if (keyboard_check_pressed(ord("T"))){
+	_flag_show_turn_debug = !_flag_show_turn_debug;
+}
+
 if (!instance_exists(obj_gui_end_battle_pane)){
 
 	#region BATTLE ENTRY TRIGGERS
@@ -50,7 +57,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 				ds_list_delete(_list_entry_triggers,0);
 
-				scr_battle_init_wait(60);
+				scr_battle_init_wait(5);
 			}
 			else{
 
@@ -65,26 +72,152 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 
 	#endregion
 
-	#region BATTLE START
 
-	//----------------//
-	//START BATTLE//
-	//----------------//
-	if (_flag_game_start && !_flag_started_game){
+#region BATTLE START
+
+//================//
+//FIND ENTRY FADER//
+//================//
+
+var _ref_entry_fader = noone;
+
+if (instance_exists(obj_transition_fader)){
+
+	_ref_entry_fader = instance_find(
+		obj_transition_fader,
+		0
+	);
+}
+
+//============================//
+//CHECK START PANE READINESS//
+//============================//
+
+var _flag_entry_visual_ready = true;
+
+if (instance_exists(_ref_entry_fader)){
+
+	if (_ref_entry_fader._flag_wait_for_battle_pane){
+
+		_flag_entry_visual_ready =
+			_ref_entry_fader._flag_battle_pane_ready;
+	}
+}
+
+//=========================//
+//CREATE START CONFIRMATION//
+//=========================//
+
+if (
+	_flag_game_start &&
+	!_flag_started_game &&
+	!_flag_start_confirmation_created &&
+	_flag_entry_visual_ready
+){
+
+	//---------------------//
+	//CALCULATE INITIATIVE//
+	//---------------------//
+
+	hscr_battle_set_initial_turn_order();
+
+	//-------------------//
+	//CREATE START PANE//
+	//-------------------//
+
+	_ref_start_battle_pane = instance_create_layer(
+		display_get_gui_width() * 0.5,
+		display_get_gui_height() * 0.5,
+		"ily_fx",
+		obj_gui_battle_start_pane
+	);
+
+	_ref_start_battle_pane._ref_turn_controller = self;
+
+	_ref_start_battle_pane._ref_player_controller =
+		_ref_player_controller;
+
+	_ref_start_battle_pane._ref_enemy_controller =
+		_ref_enemy_controller;
+
+	_ref_start_battle_pane._val_player_avg_speed =
+		_val_player_opening_speed;
+
+	_ref_start_battle_pane._val_enemy_avg_speed =
+		_val_enemy_opening_speed;
+
+	_ref_start_battle_pane._str_first_team =
+		_str_opening_team;
+
+	//------------------------//
+	//MARK PANE AS INITIALIZED//
+	//------------------------//
+
+	_flag_start_confirmation_created = true;
+
+	//-------------------------//
+	//REMOVE SPINNER AND REVEAL//
+	//-------------------------//
+
+	if (instance_exists(_ref_entry_fader)){
+
+		if (_ref_entry_fader._flag_wait_for_battle_pane){
+
+			_ref_entry_fader._flag_battle_pane_spawned = true;
+		}
+	}
+}
+
+//================//
+//START CONFIRMED//
+//================//
+
+if (
+	_flag_game_start &&
+	!_flag_started_game &&
+	_flag_start_confirmation_accepted
+){
+
+	var _flag_final_fade_complete = true;
+
+	//----------------------//
+	//REQUEST FINAL FADE OUT//
+	//----------------------//
+
+	if (instance_exists(_ref_entry_fader)){
+
+		if (_ref_entry_fader._flag_wait_for_battle_pane){
+
+			_ref_entry_fader._flag_battle_finish = true;
+
+			_flag_final_fade_complete = false;
+		}
+	}
+
+	//------------------------------//
+	//BEGIN ONLY AFTER FADE FINISHES//
+	//------------------------------//
+
+	if (_flag_final_fade_complete){
 
 		_flag_started_game = true;
 
-		hscr_battle_set_initial_turn_order();
-	}
+		if (instance_exists(_ref_start_battle_pane)){
+			instance_destroy(_ref_start_battle_pane);
+		}
 
-	#endregion
+		hscr_battle_begin_initial_turn();
+	}
+}
+
+#endregion
 
 	#region BATTLE END
 
 	//----------------//
 	//CHECK BATTLE END//
 	//----------------//
-	if (_flag_game_start && !_flag_battle_ended){
+	if (_flag_started_game && !_flag_battle_ended){
 
 		//----------------//
 		//PLAYER TEAM DEAD//

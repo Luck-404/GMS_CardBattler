@@ -8,9 +8,9 @@
 
 function scr_status_get_taunt_target(_list_team){
 
-	//---------------//
+	//===============//
 	//VALIDATE TEAM//
-	//---------------//
+	//===============//
 	if (!ds_exists(_list_team,ds_type_list)){
 		return undefined;
 	}

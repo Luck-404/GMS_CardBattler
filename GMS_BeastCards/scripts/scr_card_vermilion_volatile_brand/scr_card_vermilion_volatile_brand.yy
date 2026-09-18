@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_volatile_brand",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_volatile_brand",
+  "parent":{
+    "name":"VOLATILE_BRAND",
+    "path":"folders/CARDS/VERMILION/VOLATILE_BRAND.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

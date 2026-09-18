@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_flamespawn",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_flamespawn",
+  "parent":{
+    "name":"FLAMESPAWN",
+    "path":"folders/CARDS/VERMILION/FLAMESPAWN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

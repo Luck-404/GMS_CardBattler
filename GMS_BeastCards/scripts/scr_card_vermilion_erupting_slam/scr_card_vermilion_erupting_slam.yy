@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_erupting_slam",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_erupting_slam",
+  "parent":{
+    "name":"ERUPTING_SLAM",
+    "path":"folders/CARDS/VERMILION/ERUPTING_SLAM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

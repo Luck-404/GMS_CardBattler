@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_burning_parry",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_burning_parry",
+  "parent":{
+    "name":"BURNING_PARRY",
+    "path":"folders/CARDS/VERMILION/BURNING_PARRY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

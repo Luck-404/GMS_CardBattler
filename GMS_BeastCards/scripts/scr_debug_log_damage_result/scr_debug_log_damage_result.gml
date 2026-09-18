@@ -1,9 +1,11 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_DEBUG_LOG_DAMAGE_RESULT
-// FUNCTION: Logs one completed direct-damage resolution.
+// FUNCTION: Records and logs one completed direct-damage resolution.
 //           Reports final damage after combat calculations and how that damage
 //           was distributed across Minions, Armor, Overhealth, and HP.
+//           Stores the result on the active Card for mechanics that need to
+//           reference the resolved damage of a specific hit.
 //
 // ARGUMENTS: _ref_caster and _ref_target are the battle Beasts.
 //            _stct_card is the resolving Card struct.
@@ -39,6 +41,56 @@ function scr_debug_log_damage_result(_ref_caster,_ref_target,_stct_card,_val_fin
 
 	if (!is_struct(_stct_card)){
 		return;
+	}
+
+	//=====================//
+	//GET APPLIED DAMAGE//
+	//=====================//
+	var _val_damage_applied =
+		_val_minion_damage +
+		_val_armor_damage +
+		_val_overhealth_damage +
+		_val_hp_damage;
+
+	//================//
+	//BUILD RESULT//
+	//================//
+	var _stct_damage_result = {
+		_ref_caster : _ref_caster,
+		_ref_target : _ref_target,
+		_val_final_damage : _val_final_damage,
+		_val_damage_applied : _val_damage_applied,
+		_val_minion_damage : _val_minion_damage,
+		_val_armor_damage : _val_armor_damage,
+		_val_overhealth_damage : _val_overhealth_damage,
+		_val_hp_damage : _val_hp_damage,
+		_flag_critical : _flag_critical,
+		_str_mode : _str_mode,
+		_str_origin : _str_origin
+	};
+
+	//===================//
+	//STORE LAST RESULT//
+	//===================//
+	if (instance_exists(global.ref_cast_card)){
+
+		global.ref_cast_card._stct_last_damage_result =
+			_stct_damage_result;
+
+		if (
+			!variable_instance_exists(
+				global.ref_cast_card,
+				"_arr_damage_results"
+			) ||
+			!is_array(global.ref_cast_card._arr_damage_results)
+		){
+			global.ref_cast_card._arr_damage_results = [];
+		}
+
+		array_push(
+			global.ref_cast_card._arr_damage_results,
+			_stct_damage_result
+		);
 	}
 
 	//================//

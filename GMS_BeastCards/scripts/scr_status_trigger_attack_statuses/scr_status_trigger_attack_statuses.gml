@@ -1,14 +1,12 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_TRIGGER_ATTACK_STATUSES
-// FUNCTION: Resolves Buffs and Auras that trigger when a Beast successfully
-//           performs an Attack card resolution.
-//           Logs each reactive Status that successfully triggers.
+// FUNCTION: Resolves Buffs and Auras triggered when a Beast resolves an Attack.
 //
-// ARGUMENTS: _ref_attacker is the attacking Beast.
-//            _ref_primary_target is the Attack's primary target.
-//            _stct_card is the resolving Attack card.
-// RETURNS: True when at least one reactive Status triggers; otherwise false.
+// ARGUMENTS: _ref_attacker is the Beast that resolved the Attack.
+//            _ref_primary_target is the Attack's selected primary target.
+//            _stct_card is the resolved Attack Card struct.
+// RETURNS: True when at least one Status successfully triggers.
 //
 //===============================================================================//
 
@@ -34,6 +32,29 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 
 	var _flag_triggered = false;
 
+	//================//
+	//FURNACE HEART//
+	//================//
+	var _ref_furnace_heart = scr_status_check("FURNACE_HEART",_ref_attacker);
+
+	if (
+		_ref_furnace_heart != -1 &&
+		instance_exists(_ref_furnace_heart) &&
+		_ref_furnace_heart._flag_furnace_heart_charged
+	){
+
+		if (
+			scr_status_buff_furnace_heart(
+				"TRIGGER",
+				_ref_furnace_heart,
+				undefined,
+				_ref_primary_target
+			)
+		){
+			_flag_triggered = true;
+		}
+	}
+
 	//===============//
 	//ABYSSAL FORM//
 	//===============//
@@ -53,16 +74,7 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 				_ref_primary_target
 			)
 		){
-
 			_flag_triggered = true;
-
-			scr_debug_log_battle_trigger(
-				"ABYSSAL FORM",
-				_ref_attacker,
-				_ref_primary_target,
-				"",
-				"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
-			);
 		}
 	}
 
@@ -76,16 +88,20 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 			_stct_card
 		)
 	){
-
 		_flag_triggered = true;
+	}
 
-		scr_debug_log_battle_trigger(
-			"FROST WEAPON",
+	//==============//
+	//MOLTEN AEGIS//
+	//==============//
+	if (
+		scr_status_trigger_molten_aegis(
 			_ref_attacker,
 			_ref_primary_target,
-			"",
-			"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
-		);
+			_stct_card
+		)
+	){
+		_flag_triggered = true;
 	}
 
 	//=================//
@@ -106,16 +122,7 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 				_ref_primary_target
 			)
 		){
-
 			_flag_triggered = true;
-
-			scr_debug_log_battle_trigger(
-				"KRAKENS CHOSEN",
-				_ref_attacker,
-				_ref_primary_target,
-				"",
-				"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
-			);
 		}
 	}
 
@@ -137,16 +144,7 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 				_ref_primary_target
 			)
 		){
-
 			_flag_triggered = true;
-
-			scr_debug_log_battle_trigger(
-				"FROSTFORM",
-				_ref_attacker,
-				_ref_primary_target,
-				"",
-				"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
-			);
 		}
 	}
 
@@ -166,16 +164,7 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 				_ref_deep_momentum
 			)
 		){
-
 			_flag_triggered = true;
-
-			scr_debug_log_battle_trigger(
-				"DEEP MOMENTUM",
-				_ref_attacker,
-				_ref_attacker,
-				"",
-				"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
-			);
 		}
 	}
 

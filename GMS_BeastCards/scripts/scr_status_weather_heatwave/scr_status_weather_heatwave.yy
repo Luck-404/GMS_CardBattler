@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_weather_heatwave",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_weather_heatwave",
+  "parent":{
+    "name":"HEATWAVE",
+    "path":"folders/BATTLE/STATUSES/WEATHER/HEATWAVE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

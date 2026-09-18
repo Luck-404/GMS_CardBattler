@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_apply_bloodmist_blind",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_apply_bloodmist_blind",
+  "parent":{
+    "name":"BLOODMIST",
+    "path":"folders/BATTLE/STATUSES/EVENTS/BLOODMIST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

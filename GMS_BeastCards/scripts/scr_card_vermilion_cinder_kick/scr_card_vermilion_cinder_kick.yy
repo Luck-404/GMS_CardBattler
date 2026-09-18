@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_cinder_kick",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_cinder_kick",
+  "parent":{
+    "name":"CINDER_KICK",
+    "path":"folders/CARDS/VERMILION/CINDER_KICK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

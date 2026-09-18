@@ -5,6 +5,7 @@
 //           Handles Whiteout, casting statuses, Traps, Echo repetitions,
 //           Stormstruck action triggers, successful-cast triggers,
 //           Mana cost, Card destination, and cleanup.
+//           Selects the Beast cast-motion presentation from optional Card data.
 //
 // USES:     global.ref_cast_card, global.ref_caster_beast, selected target
 //           globals, Card metadata, Statuses, Traps, VFX, and player Mana.
@@ -50,6 +51,11 @@ function scr_battle_cast_card(){
 
 		return;
 	}
+
+	//-------------------//
+	//RESET PENDING MANA//
+	//-------------------//
+	_ref_card._ct_pending_mana_gain = 0;
 
 	//-------------------//
 	//GET CASTER / TARGET//
@@ -269,11 +275,33 @@ function scr_battle_cast_card(){
 			_flag_attack_cancelled = scr_battle_trigger_attack_traps(_ref_caster,_ref_target,_stct_card);
 		}
 
-		//--------------------//
+		//====================//
 		//PLAY CAST ANIMATION//
-		//--------------------//
+		//====================//
 		if (!_flag_attack_cancelled){
-			scr_battle_vfx_cast(_ref_caster);
+
+			var _str_card_cast_motion = "NORMAL";
+
+			if (variable_struct_exists(_stct_card,"_str_card_cast_motion")){
+				_str_card_cast_motion = string_upper(string(_stct_card._str_card_cast_motion));
+			}
+
+			switch(_str_card_cast_motion){
+
+				//----------------//
+				//MINION-ROW CAST//
+				//----------------//
+				case "MINION":
+					scr_battle_vfx_cast_minion(_ref_caster);
+				break;
+
+				//-----------//
+				//NORMAL CAST//
+				//-----------//
+				default:
+					scr_battle_vfx_cast(_ref_caster);
+				break;
+			}
 		}
 
 		//===============//
@@ -369,6 +397,17 @@ function scr_battle_cast_card(){
 				//RESOLVE CARD//
 				//-------------//
 				_scr_card_effect(_stct_card,_ref_caster,_ref_target);
+
+				//========================//
+				//BLOODMIST HEMORRHAGE//
+				//========================//
+				if (_stct_card._str_card_type == "ATTACK"){
+
+					scr_status_trigger_bloodmist_attack(
+						_ref_card,
+						_ref_target
+					);
+				}
 
 				//---------------------//
 				//CLEAR EFFECT CONTEXT//
@@ -472,6 +511,27 @@ function scr_battle_cast_card(){
 				"SCR_BATTLE_CAST_CARD"
 			);
 		}
+	}
+
+	#endregion
+
+	#region GENERATED MANA
+
+	//----------------//
+	//GET QUEUED MANA//
+	//----------------//
+	var _ct_pending_mana_gain = max(
+		0,
+		_ref_card._ct_pending_mana_gain
+	);
+
+	_ref_card._ct_pending_mana_gain = 0;
+
+	//-------------------//
+	//GAIN QUEUED MANA//
+	//-------------------//
+	if (_ct_pending_mana_gain > 0){
+		scr_battle_gain_mana(_ct_pending_mana_gain);
 	}
 
 	#endregion

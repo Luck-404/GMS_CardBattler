@@ -6,9 +6,13 @@
 //           Applying a different Event removes all current Events first.
 //           Does not affect active Weather.
 //
-// ARGUMENTS: _str_event_name is the Event ID to apply and _val_lifetime
-//            optionally overrides that Event's default duration.
-// RETURNS: The applied Event Status reference, or undefined if application fails.
+//           ACTIVE EVENTS:
+//           - BLOODMIST
+//           - BLOOMTIDE
+//
+// ARGUMENTS: _str_event_name is the Event ID to apply.
+//            _val_lifetime optionally overrides its default duration.
+// RETURNS: Applied Event Status, or undefined if application fails.
 //
 //===============================================================================//
 
@@ -26,6 +30,7 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 	//========================//
 	switch (_str_event_name){
 
+		case "BLOODMIST":
 		case "BLOOMTIDE":
 		break;
 
@@ -74,6 +79,19 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 	switch (_str_event_name){
 
 		//==========//
+		//BLOODMIST//
+		//==========//
+		case "BLOODMIST":
+
+			_ref_status = scr_status_event_bloodmist(
+				"APPLY",
+				undefined,
+				_val_lifetime
+			);
+
+		break;
+
+		//==========//
 		//BLOOMTIDE//
 		//==========//
 		case "BLOOMTIDE":
@@ -87,16 +105,22 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 		break;
 	}
 
-	//==================//
+	//================//
 	//EVENT FEEDBACK//
-	//==================//
+	//================//
 	if (instance_exists(_ref_status)){
+
+		var _c_event = c_green;
+
+		if (_str_event_name == "BLOODMIST"){
+			_c_event = c_red;
+		}
 
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
 			_str_requested_event,
 			undefined,
-			c_green,
+			_c_event,
 			room_width * 0.5,
 			room_height * 0.5
 		);

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_blood_offering",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_blood_offering",
+  "parent":{
+    "name":"BLOOD_OFFERING",
+    "path":"folders/CARDS/VERMILION/BLOOD_OFFERING.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

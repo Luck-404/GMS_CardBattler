@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_ragehook",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_ragehook",
+  "parent":{
+    "name":"RAGEHOOK",
+    "path":"folders/CARDS/VERMILION/RAGEHOOK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

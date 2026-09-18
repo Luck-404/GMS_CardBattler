@@ -66,10 +66,10 @@ function scr_battle_draw_specific_card(_ref_card,_str_reason="SPECIFIC"){
 	//----------------//
 	scr_battle_reposition_hand();
 
-	//-----------//
-	//PLAY SOUND//
-	//-----------//
-	audio_play_sound(snd_battle_card_draw,0,false);
+	//-----------------------//
+	//FLY FROM DECK TO HAND//
+	//-----------------------//
+	scr_battle_move_card_between_piles(_ref_card,"DECK","HAND",8);
 
 	#endregion
 

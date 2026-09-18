@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_thunderclap",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_thunderclap",
+  "parent":{
+    "name":"THUNDERCLAP",
+    "path":"folders/CARDS/CERULEAN/THUNDERCLAP.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

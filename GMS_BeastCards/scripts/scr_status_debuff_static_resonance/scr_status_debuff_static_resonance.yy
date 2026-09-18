@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_static_resonance",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_static_resonance",
+  "parent":{
+    "name":"STATIC_RESONANCE",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/CERULEAN/STATIC_RESONANCE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

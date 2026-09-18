@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloody_swipe",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloody_swipe",
+  "parent":{
+    "name":"BLOODY_SWIPE",
+    "path":"folders/CARDS/VERMILION/BLOODLUST_LUNGE/BLOODY_SWIPE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

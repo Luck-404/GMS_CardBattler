@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_firestorm",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_firestorm",
+  "parent":{
+    "name":"FIRESTORM",
+    "path":"folders/CARDS/VERMILION/FIRESTORM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

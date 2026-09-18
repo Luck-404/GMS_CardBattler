@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloody_shield",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloody_shield",
+  "parent":{
+    "name":"BLOODY_SHIELD",
+    "path":"folders/CARDS/VERMILION/BLOODY_SHIELD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

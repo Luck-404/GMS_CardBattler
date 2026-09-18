@@ -2,8 +2,9 @@
 //
 // SCRIPT: SCR_BATTLE_DRAW_CARDS
 // FUNCTION: Draws a requested number of Cards from the player's battle deck.
-//           Refills the deck from discard when necessary, calculates the final
-//           hand layout, animates each Card, and logs successful draws.
+//           Draws from the top of the shuffled Deck.
+//           Refills and reshuffles from Discard when the Deck becomes empty.
+//           Calculates final Hand layout, animates draws, and logs them.
 //
 // INPUT:    _ct_amount - Number of Cards requested from the battle deck.
 // USES:     Player battle Deck, Hand, and Discard lists along with shared
@@ -29,9 +30,6 @@ function scr_battle_draw_cards(_ct_amount){
 	//--------------//
 	//DRAW SETTINGS//
 	//--------------//
-	var _val_deck_x = 70;
-	var _val_deck_y = room_height - 100;
-
 	var _ct_draw_duration = 8;
 	var _ct_draw_stagger = 2;
 
@@ -70,10 +68,10 @@ function scr_battle_draw_cards(_ct_amount){
 			}
 		}
 
-		//------------------//
-		//SELECT RANDOM CARD//
-		//------------------//
-		var _it_card = irandom(ds_list_size(_list_deck) - 1);
+		//---------------//
+		//DRAW TOP CARD//
+		//---------------//
+		var _it_card = 0;
 		var _ref_card = ds_list_find_value(_list_deck,_it_card);
 
 		if (!instance_exists(_ref_card)){
@@ -84,8 +82,8 @@ function scr_battle_draw_cards(_ct_amount){
 		//-------------//
 		//MOVE TO HAND//
 		//-------------//
-		ds_list_add(_list_hand,_ref_card);
 		ds_list_delete(_list_deck,_it_card);
+		ds_list_add(_list_hand,_ref_card);
 
 		_ref_card._str_location = "HAND";
 
@@ -117,22 +115,13 @@ function scr_battle_draw_cards(_ct_amount){
 			continue;
 		}
 
-		//------------------//
-		//STORE DESTINATION//
-		//------------------//
-		var _val_end_x = _ref_drawn_card.x;
-		var _val_end_y = _ref_drawn_card.y;
-
 		//----------------//
 		//START MOVEMENT//
 		//----------------//
-		scr_battle_start_card_move_animation(
+		scr_battle_move_card_between_piles(
 			_ref_drawn_card,
-			"DRAW",
-			_val_deck_x,
-			_val_deck_y,
-			_val_end_x,
-			_val_end_y,
+			"DECK",
+			"HAND",
 			_ct_draw_duration,
 			_it_draw * _ct_draw_stagger
 		);

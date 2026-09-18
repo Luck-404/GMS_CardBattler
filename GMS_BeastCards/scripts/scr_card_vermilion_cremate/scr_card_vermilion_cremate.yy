@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_cremate",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_cremate",
+  "parent":{
+    "name":"CREMATE",
+    "path":"folders/CARDS/VERMILION/CREMATE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

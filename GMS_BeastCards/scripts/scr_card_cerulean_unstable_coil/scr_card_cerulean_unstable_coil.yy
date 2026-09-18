@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_unstable_coil",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_unstable_coil",
+  "parent":{
+    "name":"UNSTABLE_COIL",
+    "path":"folders/CARDS/CERULEAN/UNSTABLE_COIL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

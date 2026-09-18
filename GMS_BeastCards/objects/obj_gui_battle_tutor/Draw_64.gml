@@ -1,12 +1,9 @@
 //===============================================================================//
 //
 // DRAW GUI: OBJ_GUI_BATTLE_TUTOR
-// FUNCTION: Draws Tutor candidates available in the player's battle Deck.
+// FUNCTION: Draws Tutor candidates matching the requested primary Card Type.
 //           Handles hover and Card selection, resolves chained Tutor requests,
 //           and returns control to normal Card selection when finished.
-//
-// USES:     Tutor Card candidates, player Tutor queue, battle draw helpers,
-//           Tutor candidate lookup, and player Card availability checks.
 //
 //===============================================================================//
 
@@ -63,11 +60,20 @@ draw_set_colour(c_white);
 draw_set_halign(fa_center);
 draw_set_valign(fa_top);
 
-draw_text(x,_val_pane_top + 20,"ANCIENT CHARTS");
+draw_text(x,_val_pane_top + 20,_str_tutor_title);
 
 draw_set_font(fnt_gui_small);
 
-draw_text(x,_val_pane_top + 48,"SELECT A UTILITY CARD");
+//----------------//
+//SELECTION PROMPT//
+//----------------//
+var _str_selection_prompt = "SELECT A " + _str_tutor_card_type + " CARD";
+
+if (_str_tutor_card_type == "ATTACK"){
+	_str_selection_prompt = "SELECT AN ATTACK CARD";
+}
+
+draw_text(x,_val_pane_top + 48,_str_selection_prompt);
 
 draw_set_halign(fa_left);
 
@@ -88,10 +94,13 @@ var _val_mouse_y = device_mouse_y_to_gui(0);
 //------------//
 //DRAW CARDS//
 //------------//
-for (var _it_card = 0; _it_card < array_length(_arr_tutor_cards); _it_card++){
+for (var _it_card = 0;_it_card < array_length(_arr_tutor_cards);_it_card++){
 
 	var _ref_card = _arr_tutor_cards[_it_card];
 
+	//----------------//
+	//VALIDATE CARD//
+	//----------------//
 	if (!instance_exists(_ref_card)){
 		continue;
 	}
@@ -104,19 +113,21 @@ for (var _it_card = 0; _it_card < array_length(_arr_tutor_cards); _it_card++){
 		continue;
 	}
 
+	//----------------//
+	//VALIDATE TYPE//
+	//----------------//
+	if (_ref_card._ref_card._str_card_type != _str_tutor_card_type){
+		continue;
+	}
+
 	//-------------------//
 	//CALCULATE LIST SLOT//
 	//-------------------//
 	var _it_column = _it_card div _ct_rows_per_column;
 	var _it_row = _it_card mod _ct_rows_per_column;
 
-	var _val_box_x =
-		_val_list_x +
-		(_it_column * (_val_slot_w + _val_slot_gap_x));
-
-	var _val_box_y =
-		_val_list_y +
-		(_it_row * (_val_slot_h + _val_slot_gap_y));
+	var _val_box_x = _val_list_x + (_it_column * (_val_slot_w + _val_slot_gap_x));
+	var _val_box_y = _val_list_y + (_it_row * (_val_slot_h + _val_slot_gap_y));
 
 	//------------//
 	//CHECK HOVER//
@@ -175,7 +186,7 @@ for (var _it_card = 0; _it_card < array_length(_arr_tutor_cards); _it_card++){
 		//-------------------//
 		//DRAW SELECTED CARD//
 		//-------------------//
-		if (scr_battle_draw_specific_card(_ref_card)){
+		if (scr_battle_draw_specific_card(_ref_card,"TUTOR")){
 
 			obj_battle_player_controller._ct_utility_tutors_pending--;
 
@@ -184,7 +195,9 @@ for (var _it_card = 0; _it_card < array_length(_arr_tutor_cards); _it_card++){
 			//--------------------------------//
 			if (obj_battle_player_controller._ct_utility_tutors_pending > 0){
 
-				var _arr_next_candidates = scr_battle_get_tutor_candidates("UTILITY");
+				var _arr_next_candidates = scr_battle_get_tutor_candidates(
+					_str_tutor_card_type
+				);
 
 				//--------------------//
 				//MORE CARDS AVAILABLE//
@@ -197,20 +210,26 @@ for (var _it_card = 0; _it_card < array_length(_arr_tutor_cards); _it_card++){
 					exit;
 				}
 
-				//-----------------------//
-				//NO UTILITY CARDS REMAIN//
-				//-----------------------//
+				//----------------//
+				//NO CARDS REMAIN//
+				//----------------//
 				obj_battle_player_controller._ct_utility_tutors_pending = 0;
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
-					"NO UTILITY CARDS FOUND",
+					"NO " + _str_tutor_card_type + " CARDS FOUND",
 					undefined,
 					c_aqua,
 					room_width * 0.5,
 					room_height * 0.5
 				);
 			}
+
+			//===================//
+			//RESET TUTOR CONFIG//
+			//===================//
+			obj_battle_player_controller._str_tutor_card_type = "UTILITY";
+			obj_battle_player_controller._str_tutor_title = "ANCIENT CHARTS";
 
 			//----------------//
 			//RETURN TO BATTLE//

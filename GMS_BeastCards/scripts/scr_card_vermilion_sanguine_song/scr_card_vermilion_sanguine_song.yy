@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_sanguine_song",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_sanguine_song",
+  "parent":{
+    "name":"SANGUINE_SONG",
+    "path":"folders/CARDS/VERMILION/SANGUINE_SONG.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

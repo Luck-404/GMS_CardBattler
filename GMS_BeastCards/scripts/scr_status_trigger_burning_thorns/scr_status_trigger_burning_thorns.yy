@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_burning_thorns",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_burning_thorns",
+  "parent":{
+    "name":"BURNING_THORNS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/BURNING_THORNS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

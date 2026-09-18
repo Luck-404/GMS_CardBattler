@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_flameforged",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_flameforged",
+  "parent":{
+    "name":"FLAMEFORGED",
+    "path":"folders/CARDS/VERMILION/FLAMEFORGED.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

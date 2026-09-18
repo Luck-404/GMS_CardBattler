@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_headsmans_due",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_headsmans_due",
+  "parent":{
+    "name":"HEADSMANS_DUE",
+    "path":"folders/CARDS/VERMILION/HEADSMANS_DUE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

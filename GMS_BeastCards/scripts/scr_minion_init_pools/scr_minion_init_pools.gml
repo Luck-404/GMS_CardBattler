@@ -43,14 +43,12 @@ function scr_minion_init_pools(){
 	//VERMILION//
 	//===========//
 	#region VERMILION
-
-	// PLANNED — ENABLE AS EACH MINION IS IMPLEMENTED.
-	//ds_list_add(global.list_pool_vermilion_minions,"FLAMEGUARD");
-	//ds_list_add(global.list_pool_vermilion_minions,"LIVING_FLAME");
-	//ds_list_add(global.list_pool_vermilion_minions,"CINDERLING");
-	//ds_list_add(global.list_pool_vermilion_minions,"MAGMA_CANNON");
-	//ds_list_add(global.list_pool_vermilion_minions,"EMBER_TURRET");
-	//ds_list_add(global.list_pool_vermilion_minions,"ASH_PHOENIX");
+	ds_list_add(global.list_pool_vermilion_minions,"FLAMEGUARD");
+	ds_list_add(global.list_pool_vermilion_minions,"LIVING_FLAME");
+	ds_list_add(global.list_pool_vermilion_minions,"CINDERLING");
+	ds_list_add(global.list_pool_vermilion_minions,"MAGMA_CANNON");
+	ds_list_add(global.list_pool_vermilion_minions,"EMBER_TURRET");
+	ds_list_add(global.list_pool_vermilion_minions,"ASH_PHOENIX");
 
 	#endregion
 }

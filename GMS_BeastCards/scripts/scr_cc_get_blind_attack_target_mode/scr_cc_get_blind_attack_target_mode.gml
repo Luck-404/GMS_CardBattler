@@ -11,9 +11,9 @@
 
 function scr_cc_get_blind_attack_target_mode(_ref_caster,_stct_card){
 
-	//-----------------//
+	//----------------//
 	//VALIDATE CASTER//
-	//-----------------//
+	//----------------//
 	if (!instance_exists(_ref_caster)){
 		return "NONE";
 	}
@@ -25,16 +25,15 @@ function scr_cc_get_blind_attack_target_mode(_ref_caster,_stct_card){
 		return "NONE";
 	}
 
-	//===============//
+	//================//
 	//CHECK BLIND//
-	//===============//
+	//================//
 	var _ref_blind = scr_status_check("BLIND",_ref_caster);
 
-	if (_ref_blind == -1){
-		return "NONE";
-	}
-
-	if (!instance_exists(_ref_blind)){
+	if (
+		_ref_blind == -1 ||
+		!instance_exists(_ref_blind)
+	){
 		return "NONE";
 	}
 

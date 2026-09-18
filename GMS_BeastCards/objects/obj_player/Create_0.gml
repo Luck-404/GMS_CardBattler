@@ -315,6 +315,13 @@ scr_party_add_beast(scr_beast_init_random("PYREKNIGHT"));
 scr_party_add_beast(scr_beast_init_random("DRAKOAL"));
 scr_party_add_beast(scr_beast_init_random("PYROPLUME"));
 scr_party_add_beast(scr_beast_init_random("LAVAROWANA"));
+scr_party_add_beast(scr_beast_init_random("IMPARCH"));
+
+//================//
+//SET PARTY LEVEL//
+//================//
+scr_party_set_level(5);
+
 
 //----------------//
 //TEST RANCH//
@@ -336,337 +343,596 @@ scr_logbook_mark_beast_captured(
 
 #region UNCOLORED
 
-//scr_deck_add_card(scr_card_get_info("ARTIFACT_HOURGLASS"));
-//scr_deck_add_card(scr_card_get_info("BLOCK"));
-//scr_deck_add_card(scr_card_get_info("BULWARK"));
-//scr_deck_add_card(scr_card_get_info("CLEARCAST"));
-//scr_deck_add_card(scr_card_get_info("DEFT_STRIKE"));
-//scr_deck_add_card(scr_card_get_info("ECHO"));
-//scr_deck_add_card(scr_card_get_info("HIDDEN_CARD"));
-//scr_deck_add_card(scr_card_get_info("INSPIRATION"));
-//scr_deck_add_card(scr_card_get_info("MALLEABILITY"));
-//scr_deck_add_card(scr_card_get_info("POWER_STRIKE"));
-//scr_deck_add_card(scr_card_get_info("RAPID_STRIKES"));
-//scr_deck_add_card(scr_card_get_info("REPOSITION"));
-//scr_deck_add_card(scr_card_get_info("SHIV"));
-//scr_deck_add_card(scr_card_get_info("SOULCLEANSE"));
-//scr_deck_add_card(scr_card_get_info("SPELLBOOK_WILDCARD"));
-//scr_deck_add_card(scr_card_get_info("STRIKE"));
-//scr_deck_add_card(scr_card_get_info("THOUGHTSTEAL"));
+	//----------------//
+	//ATTACK - BASIC//
+	//----------------//
+	#region ATTACK_BASIC
+
+	//scr_deck_add_card(scr_card_get_info("POWER_STRIKE"));
+	//scr_deck_add_card(scr_card_get_info("RAPID_STRIKES"));
+	//scr_deck_add_card(scr_card_get_info("STRIKE"));
+
+	#endregion
+
+	//----------------//
+	//ATTACK - DOT//
+	//----------------//
+	#region ATTACK_DOT
+
+	//scr_deck_add_card(scr_card_get_info("DEFT_STRIKE"));
+	//scr_deck_add_card(scr_card_get_info("SPELLBOOK_WILDCARD"));
+
+	#endregion
+
+	//----------------//
+	//ATTACK - SPECIAL//
+	//----------------//
+	#region ATTACK_SPECIAL
+
+	//scr_deck_add_card(scr_card_get_info("SHIV"));
+
+	#endregion
+
+	//----------------//
+	//DEFENSE//
+	//----------------//
+	#region DEFENSE
+
+	//scr_deck_add_card(scr_card_get_info("BLOCK"));
+	//scr_deck_add_card(scr_card_get_info("BULWARK"));
+
+	#endregion
+
+	//----------------//
+	//UTILITY//
+	//----------------//
+	#region UTILITY
+
+	//scr_deck_add_card(scr_card_get_info("ARTIFACT_HOURGLASS"));
+	//scr_deck_add_card(scr_card_get_info("CLEARCAST"));
+	//scr_deck_add_card(scr_card_get_info("ECHO"));
+	//scr_deck_add_card(scr_card_get_info("HIDDEN_CARD"));
+	//scr_deck_add_card(scr_card_get_info("INSPIRATION"));
+	//scr_deck_add_card(scr_card_get_info("MALLEABILITY"));
+	//scr_deck_add_card(scr_card_get_info("REPOSITION"));
+	//scr_deck_add_card(scr_card_get_info("THOUGHTSTEAL"));
+
+	#endregion
+
+	//----------------//
+	//SUPPORT//
+	//----------------//
+	#region SUPPORT
+
+	//scr_deck_add_card(scr_card_get_info("SOULCLEANSE"));
+
+	#endregion
 
 #endregion
 
 #region VIRIDIAN
 
-//----------------//
-//ATTACK: DIRECT//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("BIOBOLT"));
-//scr_deck_add_card(scr_card_get_info("BIOSTORM"));
-//scr_deck_add_card(scr_card_get_info("BRAMBLE_ERUPTION"));
-//scr_deck_add_card(scr_card_get_info("CLAW"));
-//scr_deck_add_card(scr_card_get_info("FELL"));
-//scr_deck_add_card(scr_card_get_info("FERAL_FRENZY"));
-//scr_deck_add_card(scr_card_get_info("HUNTERS_JAVELIN"));
-//scr_deck_add_card(scr_card_get_info("NATURES_FURY"));
-//scr_deck_add_card(scr_card_get_info("PRIMAL_BLAST"));
-//scr_deck_add_card(scr_card_get_info("SAVAGE_MAUL"));
-//scr_deck_add_card(scr_card_get_info("SPIKE_PIERCE"));
-//scr_deck_add_card(scr_card_get_info("SPINESLING"));
-//scr_deck_add_card(scr_card_get_info("SPIRIT_PIERCE"));
-//scr_deck_add_card(scr_card_get_info("SPORE_CLOUD"));
-//scr_deck_add_card(scr_card_get_info("STALKING_SWIPE"));
-//scr_deck_add_card(scr_card_get_info("STAMPEDE"));
-//scr_deck_add_card(scr_card_get_info("UNSEEN_ROOT"));
-//scr_deck_add_card(scr_card_get_info("VERDANT_SWIPES"));
-//scr_deck_add_card(scr_card_get_info("WILDSTRIKE"));
+	//----------------//
+	//ATTACK - BASIC//
+	//----------------//
+	#region ATTACK_BASIC
 
-//----------------//
-//ATTACK: SPECIALTY//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("BEASTIAL_WRATH"));
-//scr_deck_add_card(scr_card_get_info("GREENFLOW"));
-//scr_deck_add_card(scr_card_get_info("HUNTERS_INSTINCT"));
-//scr_deck_add_card(scr_card_get_info("NATURES_WRATH"));
-//scr_deck_add_card(scr_card_get_info("OLD_GROWTH_PUMMEL"));
-//scr_deck_add_card(scr_card_get_info("ROT_BLOOM"));
-//scr_deck_add_card(scr_card_get_info("SEED_BARRAGE"));
-//scr_deck_add_card(scr_card_get_info("SNARLING_BITE"));
-//scr_deck_add_card(scr_card_get_info("THORN_STORM"));
-//scr_deck_add_card(scr_card_get_info("TOXIC_ERUPTION"));
-//scr_deck_add_card(scr_card_get_info("VERDANT_BOLT"));
-//scr_deck_add_card(scr_card_get_info("VIRIDIAN_BURST"));
+	//scr_deck_add_card(scr_card_get_info("BIOBOLT"));
+	//scr_deck_add_card(scr_card_get_info("CLAW"));
+	//scr_deck_add_card(scr_card_get_info("FELL"));
+	//scr_deck_add_card(scr_card_get_info("FERAL_FRENZY"));
+	//scr_deck_add_card(scr_card_get_info("HUNTERS_JAVELIN"));
+	//scr_deck_add_card(scr_card_get_info("NATURES_FURY"));
+	//scr_deck_add_card(scr_card_get_info("PRIMAL_BLAST"));
+	//scr_deck_add_card(scr_card_get_info("SAVAGE_MAUL"));
+	//scr_deck_add_card(scr_card_get_info("SPINESLING"));
+	//scr_deck_add_card(scr_card_get_info("SPORE_CLOUD"));
+	//scr_deck_add_card(scr_card_get_info("STALKING_SWIPE"));
+	//scr_deck_add_card(scr_card_get_info("UNSEEN_ROOT"));
+	//scr_deck_add_card(scr_card_get_info("VERDANT_SWIPES"));
+	//scr_deck_add_card(scr_card_get_info("WILDSTRIKE"));
 
-//----------------//
-//ATTACK: DOT//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("BLOWDART"));
-//scr_deck_add_card(scr_card_get_info("POTENT_SPORE"));
-//scr_deck_add_card(scr_card_get_info("RAKE"));
-//scr_deck_add_card(scr_card_get_info("SPIRIT_FANG"));
-//scr_deck_add_card(scr_card_get_info("SPIT_VENOM"));
-//scr_deck_add_card(scr_card_get_info("VIRAL_SURGE"));
+	#endregion
 
-//----------------//
-//DEFENSE//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("BARKSKIN"));
-//scr_deck_add_card(scr_card_get_info("BLOOMING_SHIELD"));
-//scr_deck_add_card(scr_card_get_info("INTERLOCKING_SCALES"));
-//scr_deck_add_card(scr_card_get_info("NATURAL_RECOVERY"));
-//scr_deck_add_card(scr_card_get_info("NATURES_GRACE"));
-//scr_deck_add_card(scr_card_get_info("OVERGROWTH"));
-//scr_deck_add_card(scr_card_get_info("REGENERATE"));
-//scr_deck_add_card(scr_card_get_info("ROOTED_DEFENSE"));
-//scr_deck_add_card(scr_card_get_info("SECOND_BLOOM"));
-//scr_deck_add_card(scr_card_get_info("SINEWY_VINES"));
-//scr_deck_add_card(scr_card_get_info("STEELFUR"));
-//scr_deck_add_card(scr_card_get_info("SYMBIOSIS"));
-//scr_deck_add_card(scr_card_get_info("THICK_HIDE"));
-//scr_deck_add_card(scr_card_get_info("THORNMAIL"));
-//scr_deck_add_card(scr_card_get_info("WILDWARD"));
+	//----------------//
+	//ATTACK - DOT//
+	//----------------//
+	#region ATTACK_DOT
 
-//----------------//
-//UTILITY//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("BLOOMING_SPRITE"));
-//scr_deck_add_card(scr_card_get_info("BLOOMTIDE"));
-//scr_deck_add_card(scr_card_get_info("DISTRACTING_TRAP"));
-//scr_deck_add_card(scr_card_get_info("DORMANT_SEED"));
-//scr_deck_add_card(scr_card_get_info("EMERALD_WISDOM"));
-//scr_deck_add_card(scr_card_get_info("FUNGAL_RECYCLING"));
-//scr_deck_add_card(scr_card_get_info("GERMINATE"));
-//scr_deck_add_card(scr_card_get_info("GREENSTEP"));
-//scr_deck_add_card(scr_card_get_info("GROWTH_SIGIL"));
-//scr_deck_add_card(scr_card_get_info("LIFE_SPIRIT"));
-//scr_deck_add_card(scr_card_get_info("MANAVINE"));
-//scr_deck_add_card(scr_card_get_info("NATURAL_CYCLE"));
-//scr_deck_add_card(scr_card_get_info("PHEROMONES"));
-//scr_deck_add_card(scr_card_get_info("RETURN_TO_NATURE"));
-//scr_deck_add_card(scr_card_get_info("ROTTING_SPORES"));
-//scr_deck_add_card(scr_card_get_info("SEED_THE_FIELD"));
-//scr_deck_add_card(scr_card_get_info("SERPENT_SUMMON"));
-//scr_deck_add_card(scr_card_get_info("THORN_NET"));
-//scr_deck_add_card(scr_card_get_info("TOXIC_SNARE"));
-//scr_deck_add_card(scr_card_get_info("TRANQUILITY"));
-//scr_deck_add_card(scr_card_get_info("VENOM_BLOOM"));
+	//scr_deck_add_card(scr_card_get_info("BLOWDART"));
+	//scr_deck_add_card(scr_card_get_info("POTENT_SPORE"));
+	//scr_deck_add_card(scr_card_get_info("RAKE"));
+	//scr_deck_add_card(scr_card_get_info("SPIRIT_FANG"));
+	//scr_deck_add_card(scr_card_get_info("SPIT_VENOM"));
+	//scr_deck_add_card(scr_card_get_info("VERDANT_BOLT"));
+	//scr_deck_add_card(scr_card_get_info("VIRAL_SURGE"));
+	//scr_deck_add_card(scr_card_get_info("VIRIDIAN_BURST"));
 
-//----------------//
-//SUPPORT//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("BRAMBLE_HIDE"));
-//scr_deck_add_card(scr_card_get_info("BURGEONING_BLOOM"));
-//scr_deck_add_card(scr_card_get_info("BURSTING_SEED"));
-//scr_deck_add_card(scr_card_get_info("CRIPPLING_VINES"));
-//scr_deck_add_card(scr_card_get_info("CULTIVATE"));
-//scr_deck_add_card(scr_card_get_info("CURE_ALL"));
-//scr_deck_add_card(scr_card_get_info("DECAYING_TOUCH"));
-//scr_deck_add_card(scr_card_get_info("DISEASE"));
-//scr_deck_add_card(scr_card_get_info("DRAINING_KISS"));
-//scr_deck_add_card(scr_card_get_info("EMERALD_SLAM"));
-//scr_deck_add_card(scr_card_get_info("ENTANGLE"));
-//scr_deck_add_card(scr_card_get_info("HONEYED_SCENT"));
-//scr_deck_add_card(scr_card_get_info("LIFEBLOOM"));
-//scr_deck_add_card(scr_card_get_info("MIRACLE_MUSA"));
-//scr_deck_add_card(scr_card_get_info("NATURES_BOND"));
-//scr_deck_add_card(scr_card_get_info("NATURES_MEND"));
-//scr_deck_add_card(scr_card_get_info("PACK_INSTINCT"));
-//scr_deck_add_card(scr_card_get_info("POLLINATE"));
-//scr_deck_add_card(scr_card_get_info("POTENT_FRUIT"));
-//scr_deck_add_card(scr_card_get_info("PREDATORS_MARK"));
-//scr_deck_add_card(scr_card_get_info("PREDATORY_SCENT"));
-//scr_deck_add_card(scr_card_get_info("REJUVENATE"));
-//scr_deck_add_card(scr_card_get_info("SAPSPRING"));
-//scr_deck_add_card(scr_card_get_info("SHIMMERING_SPORES"));
-//scr_deck_add_card(scr_card_get_info("SLEEP_DART"));
-//scr_deck_add_card(scr_card_get_info("SLEEPING_POLLEN"));
-//scr_deck_add_card(scr_card_get_info("TOXIC_HIDE"));
-//scr_deck_add_card(scr_card_get_info("VERDANT_EMBRACE"));
-//scr_deck_add_card(scr_card_get_info("VERDANT_INSIGHT"));
-//scr_deck_add_card(scr_card_get_info("WILD_VIGOR"));
-//scr_deck_add_card(scr_card_get_info("WILT"));
+	#endregion
 
-//----------------//
-//ARCHETYPE//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("ANCIENT_GROVE"));
-//scr_deck_add_card(scr_card_get_info("APEX_PREDATOR"));
-//scr_deck_add_card(scr_card_get_info("CHANNEL_THE_SPIRITS"));
-//scr_deck_add_card(scr_card_get_info("CIRCLE_OF_LIFE"));
-//scr_deck_add_card(scr_card_get_info("ENDLESS_BLOOM"));
-//scr_deck_add_card(scr_card_get_info("FOR_THE_THROAT"));
-//scr_deck_add_card(scr_card_get_info("HEART_OF_THE_FOREST"));
-//scr_deck_add_card(scr_card_get_info("PLAGUE_GARDEN"));
-//scr_deck_add_card(scr_card_get_info("PROLIFERATE"));
+	//----------------//
+	//ATTACK - SPECIAL//
+	//----------------//
+	#region ATTACK_SPECIAL
+
+	//scr_deck_add_card(scr_card_get_info("BEASTIAL_WRATH"));
+	//scr_deck_add_card(scr_card_get_info("BIOSTORM"));
+	//scr_deck_add_card(scr_card_get_info("BRAMBLE_ERUPTION"));
+	//scr_deck_add_card(scr_card_get_info("GREENFLOW"));
+	//scr_deck_add_card(scr_card_get_info("HUNTERS_INSTINCT"));
+	//scr_deck_add_card(scr_card_get_info("NATURES_WRATH"));
+	//scr_deck_add_card(scr_card_get_info("OLD_GROWTH_PUMMEL"));
+	//scr_deck_add_card(scr_card_get_info("ROT_BLOOM"));
+	//scr_deck_add_card(scr_card_get_info("SEED_BARRAGE"));
+	//scr_deck_add_card(scr_card_get_info("SNARLING_BITE"));
+	//scr_deck_add_card(scr_card_get_info("SPIKE_PIERCE"));
+	//scr_deck_add_card(scr_card_get_info("SPIRIT_PIERCE"));
+	//scr_deck_add_card(scr_card_get_info("STAMPEDE"));
+	//scr_deck_add_card(scr_card_get_info("THORN_STORM"));
+	//scr_deck_add_card(scr_card_get_info("TOXIC_ERUPTION"));
+
+	#endregion
+
+	//----------------//
+	//DEFENSE//
+	//----------------//
+	#region DEFENSE
+
+	//scr_deck_add_card(scr_card_get_info("BARKSKIN"));
+	//scr_deck_add_card(scr_card_get_info("BLOOMING_SHIELD"));
+	//scr_deck_add_card(scr_card_get_info("INTERLOCKING_SCALES"));
+	//scr_deck_add_card(scr_card_get_info("NATURAL_RECOVERY"));
+	//scr_deck_add_card(scr_card_get_info("NATURES_GRACE"));
+	//scr_deck_add_card(scr_card_get_info("OVERGROWTH"));
+	//scr_deck_add_card(scr_card_get_info("REGENERATE"));
+	//scr_deck_add_card(scr_card_get_info("ROOTED_DEFENSE"));
+	//scr_deck_add_card(scr_card_get_info("SECOND_BLOOM"));
+	//scr_deck_add_card(scr_card_get_info("SINEWY_VINES"));
+	//scr_deck_add_card(scr_card_get_info("STEELFUR"));
+	//scr_deck_add_card(scr_card_get_info("SYMBIOSIS"));
+	//scr_deck_add_card(scr_card_get_info("THICK_HIDE"));
+	//scr_deck_add_card(scr_card_get_info("THORNMAIL"));
+	//scr_deck_add_card(scr_card_get_info("WILDWARD"));
+
+	#endregion
+
+	//----------------//
+	//UTILITY//
+	//----------------//
+	#region UTILITY
+
+	//scr_deck_add_card(scr_card_get_info("BLOOMING_SPRITE"));
+	//scr_deck_add_card(scr_card_get_info("BLOOMTIDE"));
+	//scr_deck_add_card(scr_card_get_info("DISTRACTING_TRAP"));
+	//scr_deck_add_card(scr_card_get_info("DORMANT_SEED"));
+	//scr_deck_add_card(scr_card_get_info("EMERALD_WISDOM"));
+	//scr_deck_add_card(scr_card_get_info("FUNGAL_RECYCLING"));
+	//scr_deck_add_card(scr_card_get_info("GERMINATE"));
+	//scr_deck_add_card(scr_card_get_info("GREENSTEP"));
+	//scr_deck_add_card(scr_card_get_info("GROWTH_SIGIL"));
+	//scr_deck_add_card(scr_card_get_info("LIFE_SPIRIT"));
+	//scr_deck_add_card(scr_card_get_info("MANAVINE"));
+	//scr_deck_add_card(scr_card_get_info("NATURAL_CYCLE"));
+	//scr_deck_add_card(scr_card_get_info("PHEROMONES"));
+	//scr_deck_add_card(scr_card_get_info("RETURN_TO_NATURE"));
+	//scr_deck_add_card(scr_card_get_info("ROTTING_SPORES"));
+	//scr_deck_add_card(scr_card_get_info("SEED_THE_FIELD"));
+	//scr_deck_add_card(scr_card_get_info("SERPENT_SUMMON"));
+	//scr_deck_add_card(scr_card_get_info("THORN_NET"));
+	//scr_deck_add_card(scr_card_get_info("TOXIC_RECLAIMATION"));
+	//scr_deck_add_card(scr_card_get_info("TOXIC_SNARE"));
+	//scr_deck_add_card(scr_card_get_info("TRANQUILITY"));
+	//scr_deck_add_card(scr_card_get_info("VENOM_BLOOM"));
+
+	#endregion
+
+	//----------------//
+	//SUPPORT//
+	//----------------//
+	#region SUPPORT
+
+	//scr_deck_add_card(scr_card_get_info("BRAMBLE_HIDE"));
+	//scr_deck_add_card(scr_card_get_info("BURGEONING_BLOOM"));
+	//scr_deck_add_card(scr_card_get_info("BURSTING_SEED"));
+	//scr_deck_add_card(scr_card_get_info("CRIPPLING_VINES"));
+	//scr_deck_add_card(scr_card_get_info("CULTIVATE"));
+	//scr_deck_add_card(scr_card_get_info("CURE_ALL"));
+	//scr_deck_add_card(scr_card_get_info("DECAYING_TOUCH"));
+	//scr_deck_add_card(scr_card_get_info("DISEASE"));
+	//scr_deck_add_card(scr_card_get_info("DRAINING_KISS"));
+	//scr_deck_add_card(scr_card_get_info("EMERALD_SLAM"));
+	//scr_deck_add_card(scr_card_get_info("ENTANGLE"));
+	//scr_deck_add_card(scr_card_get_info("HONEYED_SCENT"));
+	//scr_deck_add_card(scr_card_get_info("LIFEBLOOM"));
+	//scr_deck_add_card(scr_card_get_info("MIRACLE_MUSA"));
+	//scr_deck_add_card(scr_card_get_info("NATURES_BOND"));
+	//scr_deck_add_card(scr_card_get_info("NATURES_MEND"));
+	//scr_deck_add_card(scr_card_get_info("PACK_INSTINCT"));
+	//scr_deck_add_card(scr_card_get_info("POLLINATE"));
+	//scr_deck_add_card(scr_card_get_info("POTENT_FRUIT"));
+	//scr_deck_add_card(scr_card_get_info("PREDATORS_MARK"));
+	//scr_deck_add_card(scr_card_get_info("PREDATORY_SCENT"));
+	//scr_deck_add_card(scr_card_get_info("REJUVENATE"));
+	//scr_deck_add_card(scr_card_get_info("SAPSPRING"));
+	//scr_deck_add_card(scr_card_get_info("SHIMMERING_SPORES"));
+	//scr_deck_add_card(scr_card_get_info("SLEEP_DART"));
+	//scr_deck_add_card(scr_card_get_info("SLEEPING_POLLEN"));
+	//scr_deck_add_card(scr_card_get_info("TOXIC_HIDE"));
+	//scr_deck_add_card(scr_card_get_info("VERDANT_EMBRACE"));
+	//scr_deck_add_card(scr_card_get_info("VERDANT_INSIGHT"));
+	//scr_deck_add_card(scr_card_get_info("WILD_VIGOR"));
+	//scr_deck_add_card(scr_card_get_info("WILT"));
+
+	#endregion
+
+	//----------------//
+	//ARCHETYPE//
+	//----------------//
+	#region ARCHETYPE
+
+	//scr_deck_add_card(scr_card_get_info("ANCIENT_GROVE"));
+	//scr_deck_add_card(scr_card_get_info("APEX_PREDATOR"));
+	//scr_deck_add_card(scr_card_get_info("CHANNEL_THE_SPIRITS"));
+	//scr_deck_add_card(scr_card_get_info("CIRCLE_OF_LIFE"));
+	//scr_deck_add_card(scr_card_get_info("ENDLESS_BLOOM"));
+	//scr_deck_add_card(scr_card_get_info("FOR_THE_THROAT"));
+	//scr_deck_add_card(scr_card_get_info("HEART_OF_THE_FOREST"));
+	//scr_deck_add_card(scr_card_get_info("PLAGUE_GARDEN"));
+	//scr_deck_add_card(scr_card_get_info("PROLIFERATE"));
+
+#endregion
 
 #endregion
 
 #region CERULEAN
 
-//----------------//
-//ATTACK//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("HAILSTONES"));
-//scr_deck_add_card(scr_card_get_info("AVALANCHE_STRIKE"));
-//scr_deck_add_card(scr_card_get_info("ICE_LANCE"));
-//scr_deck_add_card(scr_card_get_info("TORRENT"));
-//scr_deck_add_card(scr_card_get_info("BURST"));
-//scr_deck_add_card(scr_card_get_info("TIDAL_SLASH"));
-//scr_deck_add_card(scr_card_get_info("GLACIAL_CRUSH"));
-//scr_deck_add_card(scr_card_get_info("RAZOR_FIN"));
-//scr_deck_add_card(scr_card_get_info("ABYSSAL_TOUCH"));
-//scr_deck_add_card(scr_card_get_info("DEEP_CURRENT"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_FANG"));
-//scr_deck_add_card(scr_card_get_info("FROSTBOLT"));
-//scr_deck_add_card(scr_card_get_info("CHILLING_WORD"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_SPEAR"));
-//scr_deck_add_card(scr_card_get_info("ARCTIC_VOLLEY"));
-//scr_deck_add_card(scr_card_get_info("CRASHING_WAVE"));
-//scr_deck_add_card(scr_card_get_info("WHITEWATER"));
+	//----------------//
+	//ATTACK - BASIC//
+	//----------------//
+	#region ATTACK_BASIC
 
-//----------------//
-//ATTACK: SPECIALTY//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("SHATTER_STRIKE"));
-//scr_deck_add_card(scr_card_get_info("PRESSURE_SPIKE"));
-//scr_deck_add_card(scr_card_get_info("COLD_SNAP"));
-//scr_deck_add_card(scr_card_get_info("TIDAL_BREAK"));
-//scr_deck_add_card(scr_card_get_info("DEPTH_CHARGE"));
-//scr_deck_add_card(scr_card_get_info("WINTERS_BITE"));
-//scr_deck_add_card(scr_card_get_info("WINTER_RESONANCE"));
-//scr_deck_add_card(scr_card_get_info("ABSOLUTE_ZERO"));
-//scr_deck_add_card(scr_card_get_info("BITTER_CHILL"));
-//scr_deck_add_card(scr_card_get_info("PRESSURE_CRUSH"));
-//scr_deck_add_card(scr_card_get_info("KRAKENSLAM"));
-//scr_deck_add_card(scr_card_get_info("FROSTBURN_NOVA"));
-//scr_deck_add_card(scr_card_get_info("GLACIAL_ERUPTION"));
-//scr_deck_add_card(scr_card_get_info("FRACTURE"));
+	//scr_deck_add_card(scr_card_get_info("ABYSSAL_TOUCH"));
+	//scr_deck_add_card(scr_card_get_info("ARCTIC_VOLLEY"));
+	//scr_deck_add_card(scr_card_get_info("BURST"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_SPEAR"));
+	//scr_deck_add_card(scr_card_get_info("GLACIAL_CRUSH"));
+	//scr_deck_add_card(scr_card_get_info("TORRENT"));
 
-//----------------//
-//DEFENSE//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("SHELL_SHIELD"));
-//scr_deck_add_card(scr_card_get_info("ICE_PLATING"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_BULWARK"));
-//scr_deck_add_card(scr_card_get_info("SNOWFORT"));
-//scr_deck_add_card(scr_card_get_info("SNOWDRIFT"));
-//scr_deck_add_card(scr_card_get_info("ICE_ACCRETION"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_BASTION"));
-//scr_deck_add_card(scr_card_get_info("BUBBLE"));
-//scr_deck_add_card(scr_card_get_info("CRYSTAL_SHELL"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_ARMOR"));
-//scr_deck_add_card(scr_card_get_info("STATIC_BARRIER"));
-//scr_deck_add_card(scr_card_get_info("RAZOR_SHELL"));
-//scr_deck_add_card(scr_card_get_info("ICE_MIRROR"));
-//scr_deck_add_card(scr_card_get_info("ARMOR_TRANSFER"));
-//scr_deck_add_card(scr_card_get_info("SHARED_BULWARK"));
-//scr_deck_add_card(scr_card_get_info("COLD_RESERVE"));
+	#endregion
 
-//----------------//
-//UTILITY//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("RAIN"));
-//scr_deck_add_card(scr_card_get_info("SNOWFALL"));
-//scr_deck_add_card(scr_card_get_info("THUNDERSTORM"));
-//scr_deck_add_card(scr_card_get_info("THIN_ICE"));
-//scr_deck_add_card(scr_card_get_info("STORM_BEACON"));
-//scr_deck_add_card(scr_card_get_info("PULLED_UNDER"));
-//scr_deck_add_card(scr_card_get_info("ICE_WALL"));
-//scr_deck_add_card(scr_card_get_info("RIMEFROST_ELEMENTAL"));
-//scr_deck_add_card(scr_card_get_info("STORM_WISP"));
-//scr_deck_add_card(scr_card_get_info("ABYSSAL_HARPOON"));
-//scr_deck_add_card(scr_card_get_info("CORAL_GUARDIAN"));
-//scr_deck_add_card(scr_card_get_info("ANCHOR_STONE"));
-//scr_deck_add_card(scr_card_get_info("DEEPFLOW_WHISPERSONG"));
-//scr_deck_add_card(scr_card_get_info("UNDERTOW"));
-//scr_deck_add_card(scr_card_get_info("RIP_CURRENT"));
-//scr_deck_add_card(scr_card_get_info("AQUA_STEP"));
-//scr_deck_add_card(scr_card_get_info("RIPPLING_POOL"));
-//scr_deck_add_card(scr_card_get_info("DEEP_REFLECTION"));
-//scr_deck_add_card(scr_card_get_info("ANCIENT_CHARTS"));
-//scr_deck_add_card(scr_card_get_info("TIDAL_FLOW"));
-//scr_deck_add_card(scr_card_get_info("MANA_SPRING"));
-//scr_deck_add_card(scr_card_get_info("PURIFY_WATERS"));
-//scr_deck_add_card(scr_card_get_info("ICEBOUND_SEAL"));
-//scr_deck_add_card(scr_card_get_info("TIDEHEART"));
+	//----------------//
+	//ATTACK - DOT//
+	//----------------//
+	#region ATTACK_DOT
 
-//----------------//
-//SUPPORT//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("SEA_LEGS"));
-//scr_deck_add_card(scr_card_get_info("DROP_ANCHOR"));
-//scr_deck_add_card(scr_card_get_info("SAILORS_RESOLVE"));
-//scr_deck_add_card(scr_card_get_info("ARCTIC_FOCUS"));
-//scr_deck_add_card(scr_card_get_info("FROST_WEAPON"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_PRECISION"));
-//scr_deck_add_card(scr_card_get_info("DEEP_MOMENTUM"));
-//scr_deck_add_card(scr_card_get_info("ICEBOUND_INSTINCT"));
-//scr_deck_add_card(scr_card_get_info("HYPOTHERMIA"));
-//scr_deck_add_card(scr_card_get_info("BRITTLE_CONSTITUTION"));
-//scr_deck_add_card(scr_card_get_info("WHITEOUT"));
-//scr_deck_add_card(scr_card_get_info("FROZEN_CURSE"));
-//scr_deck_add_card(scr_card_get_info("PERMAFROST"));
-//scr_deck_add_card(scr_card_get_info("CHILLING_WEAKNESS"));
-//scr_deck_add_card(scr_card_get_info("SOOTHING_CURRENT"));
-//scr_deck_add_card(scr_card_get_info("COOLING_MIST"));
-//scr_deck_add_card(scr_card_get_info("CRYOGENIC_RECOVERY"));
-//scr_deck_add_card(scr_card_get_info("TIDAL_RECOVERY"));
-//scr_deck_add_card(scr_card_get_info("OCEANS_BLESSING"));
-//scr_deck_add_card(scr_card_get_info("ICE_PRISON"));
-//scr_deck_add_card(scr_card_get_info("DENSE_FOG"));
-//scr_deck_add_card(scr_card_get_info("WHIRLPOOL"));
-//scr_deck_add_card(scr_card_get_info("CALM_SEAS"));
-//scr_deck_add_card(scr_card_get_info("ROUGH_SEAS"));
-//scr_deck_add_card(scr_card_get_info("FROSTFORM"));
-//scr_deck_add_card(scr_card_get_info("KRAKENS_CHOSEN"));
-//scr_deck_add_card(scr_card_get_info("MARINE_MEND"));
-//scr_deck_add_card(scr_card_get_info("CALL_THE_DEEP"));
-//scr_deck_add_card(scr_card_get_info("ICE_AGE"));
-//scr_deck_add_card(scr_card_get_info("KRAKEN_AWAKENS"));
-//scr_deck_add_card(scr_card_get_info("WINTERS_HOUR"));
-//scr_deck_add_card(scr_card_get_info("CERULEAN_GODS_WRATH"));
-//scr_deck_add_card(scr_card_get_info("LEVIATHANS_BLESSING"));
-//scr_deck_add_card(scr_card_get_info("OCEANS_EMBRACE"));
-//scr_deck_add_card(scr_card_get_info("SHATTERSTORM"));
-//scr_deck_add_card(scr_card_get_info("THE_ABYSS_STARES_BACK"));
+	//scr_deck_add_card(scr_card_get_info("BITTER_CHILL"));
+	//scr_deck_add_card(scr_card_get_info("CHILLING_WORD"));
+	//scr_deck_add_card(scr_card_get_info("FROSTBURN_NOVA"));
+
+	#endregion
+
+	//----------------//
+	//ATTACK - SPECIAL//
+	//----------------//
+	#region ATTACK_SPECIAL
+
+	//scr_deck_add_card(scr_card_get_info("ABSOLUTE_ZERO"));
+	//scr_deck_add_card(scr_card_get_info("AVALANCHE_STRIKE"));
+	//scr_deck_add_card(scr_card_get_info("COLD_SNAP"));
+	//scr_deck_add_card(scr_card_get_info("CRASHING_WAVE"));
+	//scr_deck_add_card(scr_card_get_info("DEEP_CURRENT"));
+	//scr_deck_add_card(scr_card_get_info("DEPTH_CHARGE"));
+	//scr_deck_add_card(scr_card_get_info("FORCED_OVERLOAD"));
+	//scr_deck_add_card(scr_card_get_info("FRACTURE"));
+	//scr_deck_add_card(scr_card_get_info("FROSTBOLT"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_FANG"));
+	//scr_deck_add_card(scr_card_get_info("GLACIAL_ERUPTION"));
+	//scr_deck_add_card(scr_card_get_info("HAILSTONES"));
+	//scr_deck_add_card(scr_card_get_info("ICE_LANCE"));
+	//scr_deck_add_card(scr_card_get_info("KRAKENSLAM"));
+	//scr_deck_add_card(scr_card_get_info("PRESSURE_CRUSH"));
+	//scr_deck_add_card(scr_card_get_info("PRESSURE_SPIKE"));
+	//scr_deck_add_card(scr_card_get_info("RAZOR_FIN"));
+	//scr_deck_add_card(scr_card_get_info("SHATTER_STRIKE"));
+	//scr_deck_add_card(scr_card_get_info("TIDAL_BREAK"));
+	//scr_deck_add_card(scr_card_get_info("TIDAL_SLASH"));
+	//scr_deck_add_card(scr_card_get_info("THUNDERCLAP"));
+	//scr_deck_add_card(scr_card_get_info("WHITEWATER"));
+	//scr_deck_add_card(scr_card_get_info("WINTER_RESONANCE"));
+	//scr_deck_add_card(scr_card_get_info("WINTERS_BITE"));
+
+	#endregion
+
+	//----------------//
+	//DEFENSE//
+	//----------------//
+	#region DEFENSE
+
+	//scr_deck_add_card(scr_card_get_info("ARMOR_TRANSFER"));
+	//scr_deck_add_card(scr_card_get_info("BUBBLE"));
+	//scr_deck_add_card(scr_card_get_info("COLD_RESERVE"));
+	//scr_deck_add_card(scr_card_get_info("CRYSTAL_SHELL"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_BASTION"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_BULWARK"));
+	//scr_deck_add_card(scr_card_get_info("ICE_ACCRETION"));
+	//scr_deck_add_card(scr_card_get_info("ICE_PLATING"));
+	//scr_deck_add_card(scr_card_get_info("SHARED_BULWARK"));
+	//scr_deck_add_card(scr_card_get_info("SHELL_SHIELD"));
+	//scr_deck_add_card(scr_card_get_info("SNOWDRIFT"));
+	//scr_deck_add_card(scr_card_get_info("SNOWFORT"));
+
+	#endregion
+
+	//----------------//
+	//UTILITY//
+	//----------------//
+	#region UTILITY
+
+	//scr_deck_add_card(scr_card_get_info("ABYSSAL_HARPOON"));
+	//scr_deck_add_card(scr_card_get_info("ANCHOR_STONE"));
+	//scr_deck_add_card(scr_card_get_info("ANCIENT_CHARTS"));
+	//scr_deck_add_card(scr_card_get_info("AQUA_STEP"));
+	//scr_deck_add_card(scr_card_get_info("CORAL_GUARDIAN"));
+	//scr_deck_add_card(scr_card_get_info("DEEP_REFLECTION"));
+	//scr_deck_add_card(scr_card_get_info("DEEPFLOW_WHISPERSONG"));
+	//scr_deck_add_card(scr_card_get_info("GATHERING_STORM"));
+	//scr_deck_add_card(scr_card_get_info("ICE_WALL"));
+	//scr_deck_add_card(scr_card_get_info("ICEBOUND_SEAL"));
+	//scr_deck_add_card(scr_card_get_info("MANA_SPRING"));
+	//scr_deck_add_card(scr_card_get_info("PULLED_UNDER"));
+	//scr_deck_add_card(scr_card_get_info("PURIFY_WATERS"));
+	//scr_deck_add_card(scr_card_get_info("RAIN"));
+	//scr_deck_add_card(scr_card_get_info("RIMEFROST_ELEMENTAL"));
+	//scr_deck_add_card(scr_card_get_info("RIP_CURRENT"));
+	//scr_deck_add_card(scr_card_get_info("RIPPLING_POOL"));
+	//scr_deck_add_card(scr_card_get_info("SNOWFALL"));
+	//scr_deck_add_card(scr_card_get_info("STORM_BEACON"));
+	//scr_deck_add_card(scr_card_get_info("STORM_WISP"));
+	//scr_deck_add_card(scr_card_get_info("THIN_ICE"));
+	//scr_deck_add_card(scr_card_get_info("THUNDERSTORM"));
+	//scr_deck_add_card(scr_card_get_info("TIDAL_FLOW"));
+	//scr_deck_add_card(scr_card_get_info("TIDEHEART"));
+	//scr_deck_add_card(scr_card_get_info("UNDERTOW"));
+
+	#endregion
+
+	//----------------//
+	//SUPPORT//
+	//----------------//
+	#region SUPPORT
+
+	//scr_deck_add_card(scr_card_get_info("ARCTIC_FOCUS"));
+	//scr_deck_add_card(scr_card_get_info("BRITTLE_CONSTITUTION"));
+	//scr_deck_add_card(scr_card_get_info("CALM_SEAS"));
+	//scr_deck_add_card(scr_card_get_info("CHILLING_WEAKNESS"));
+	//scr_deck_add_card(scr_card_get_info("COOLING_MIST"));
+	//scr_deck_add_card(scr_card_get_info("CRYOGENIC_RECOVERY"));
+	//scr_deck_add_card(scr_card_get_info("DEEP_MOMENTUM"));
+	//scr_deck_add_card(scr_card_get_info("DENSE_FOG"));
+	//scr_deck_add_card(scr_card_get_info("DROP_ANCHOR"));
+	//scr_deck_add_card(scr_card_get_info("FROST_WEAPON"));
+	//scr_deck_add_card(scr_card_get_info("FROSTFORM"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_ARMOR"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_CURSE"));
+	//scr_deck_add_card(scr_card_get_info("FROZEN_PRECISION"));
+	//scr_deck_add_card(scr_card_get_info("HYPOTHERMIA"));
+	//scr_deck_add_card(scr_card_get_info("ICE_MIRROR"));
+	//scr_deck_add_card(scr_card_get_info("ICE_PRISON"));
+	//scr_deck_add_card(scr_card_get_info("ICEBOUND_INSTINCT"));
+	//scr_deck_add_card(scr_card_get_info("KRAKENS_CHOSEN"));
+	//scr_deck_add_card(scr_card_get_info("MARINE_MEND"));
+	//scr_deck_add_card(scr_card_get_info("OCEANS_BLESSING"));
+	//scr_deck_add_card(scr_card_get_info("PERMAFROST"));
+	//scr_deck_add_card(scr_card_get_info("RAZOR_SHELL"));
+	//scr_deck_add_card(scr_card_get_info("ROUGH_SEAS"));
+	//scr_deck_add_card(scr_card_get_info("SAILORS_RESOLVE"));
+	//scr_deck_add_card(scr_card_get_info("SEA_LEGS"));
+	//scr_deck_add_card(scr_card_get_info("SOOTHING_CURRENT"));
+	//scr_deck_add_card(scr_card_get_info("STATIC_BARRIER"));
+	//scr_deck_add_card(scr_card_get_info("STATIC_RESONANCE"));
+	//scr_deck_add_card(scr_card_get_info("TIDAL_RECOVERY"));
+	//scr_deck_add_card(scr_card_get_info("UNSTABLE_COIL"));
+	//scr_deck_add_card(scr_card_get_info("WHIRLPOOL"));
+	//scr_deck_add_card(scr_card_get_info("WHITEOUT"));
+
+	#endregion
+
+	//----------------//
+	//ARCHETYPE//
+	//----------------//
+	#region ARCHETYPE
+
+	//scr_deck_add_card(scr_card_get_info("CALL_THE_DEEP"));
+	//scr_deck_add_card(scr_card_get_info("CERULEAN_GODS_WRATH"));
+	//scr_deck_add_card(scr_card_get_info("ICE_AGE"));
+	//scr_deck_add_card(scr_card_get_info("KRAKEN_AWAKENS"));
+	//scr_deck_add_card(scr_card_get_info("LEVIATHANS_BLESSING"));
+	//scr_deck_add_card(scr_card_get_info("OCEANS_EMBRACE"));
+	//scr_deck_add_card(scr_card_get_info("SHATTERSTORM"));
+	//scr_deck_add_card(scr_card_get_info("THE_ABYSS_STARES_BACK"));
+	//scr_deck_add_card(scr_card_get_info("WINTERS_HOUR"));
+	
+#endregion
 
 #endregion
 
 #region VERMILION
-//----------------//
-//ATTACK//
-//----------------//
-//scr_deck_add_card(scr_card_get_info("FIERY_BLOW"));
-//scr_deck_add_card(scr_card_get_info("HELLFIRE_STRIKE"));
-//scr_deck_add_card(scr_card_get_info("CINDER_SPEAR"));
-//scr_deck_add_card(scr_card_get_info("BLOODFLAME_BOLT"));
-//scr_deck_add_card(scr_card_get_info("BERSERKER_CHARGE"));
-//scr_deck_add_card(scr_card_get_info("FLAME_LANCE"));
-//scr_deck_add_card(scr_card_get_info("BERSERKER_FLURRY"));
-//scr_deck_add_card(scr_card_get_info("EMBER_BARRAGE"));
-//scr_deck_add_card(scr_card_get_info("MOLTEN_EDGE"));
-//scr_deck_add_card(scr_card_get_info("SEARING_RAY"));
-//scr_deck_add_card(scr_card_get_info("RAGING_BLOW"));
-//scr_deck_add_card(scr_card_get_info("PYROCLAST"));
-//scr_deck_add_card(scr_card_get_info("BURNING_CLEAVE"));
-//scr_deck_add_card(scr_card_get_info("FLAME_SPOUT"));
-//scr_deck_add_card(scr_card_get_info("BLOODLETTING"));
-//scr_deck_add_card(scr_card_get_info("COMBUSTION"));
-//scr_deck_add_card(scr_card_get_info("EMBER_SHOT"));
-//scr_deck_add_card(scr_card_get_info("SCORCHING_CLAW"));
-//scr_deck_add_card(scr_card_get_info("BARBED_BOLT"));
-//scr_deck_add_card(scr_card_get_info("RENDING_BLOW"));
-scr_deck_add_card(scr_card_get_info("FORWARD_MARCH"));
-scr_deck_add_card(scr_card_get_info("FURIOUS_SLICE"));
-scr_deck_add_card(scr_card_get_info("RAGING_SPARK"));
-scr_deck_add_card(scr_card_get_info("BLOODFLAME_NEEDLE"));
-scr_deck_add_card(scr_card_get_info("FLASHPOINT"));
- 
+
+	//----------------//
+	//ATTACK - BASIC//
+	//----------------//
+	#region ATTACK_BASIC
+
+	//scr_deck_add_card(scr_card_get_info("BERSERKER_CHARGE"));
+	//scr_deck_add_card(scr_card_get_info("BERSERKER_FLURRY"));
+	//scr_deck_add_card(scr_card_get_info("BLOODFLAME_BOLT"));
+	//scr_deck_add_card(scr_card_get_info("CINDER_SPEAR"));
+	//scr_deck_add_card(scr_card_get_info("COMBUSTION"));
+	//scr_deck_add_card(scr_card_get_info("EMBER_BARRAGE"));
+	//scr_deck_add_card(scr_card_get_info("FIERY_BLOW"));
+	//scr_deck_add_card(scr_card_get_info("FLAME_LANCE"));
+	//scr_deck_add_card(scr_card_get_info("HELLFIRE_STRIKE"));
+	//scr_deck_add_card(scr_card_get_info("PYROCLAST"));
+	//scr_deck_add_card(scr_card_get_info("RAGING_BLOW"));
+
+	#endregion
+
+	//----------------//
+	//ATTACK - DOT//
+	//----------------//
+	#region ATTACK_DOT
+
+	//scr_deck_add_card(scr_card_get_info("BARBED_BOLT"));
+	//scr_deck_add_card(scr_card_get_info("BLOODFLAME_NEEDLE"));
+	scr_deck_add_card(scr_card_get_info("EMBER_SHOT"));
+	//scr_deck_add_card(scr_card_get_info("RAGING_SPARK"));
+	//scr_deck_add_card(scr_card_get_info("RENDING_BLOW"));
+	scr_deck_add_card(scr_card_get_info("SCORCHING_CLAW"));
+
+	#endregion
+
+	//----------------//
+	//ATTACK - SPECIAL//
+	//----------------//
+	#region ATTACK_SPECIAL
+
+	//scr_deck_add_card(scr_card_get_info("ARTERIAL_BURST"));
+	//scr_deck_add_card(scr_card_get_info("BLOOD_FURNACE"));
+	//scr_deck_add_card(scr_card_get_info("BLOOD_PRICE"));
+	//scr_deck_add_card(scr_card_get_info("BLOODLETTING"));
+	//scr_deck_add_card(scr_card_get_info("BLOODLUST_LUNGE"));
+	//scr_deck_add_card(scr_card_get_info("BLOODY_SWIPE"));
+	//scr_deck_add_card(scr_card_get_info("BREAKJAW"));
+	//scr_deck_add_card(scr_card_get_info("BURNING_CLEAVE"));
+	//scr_deck_add_card(scr_card_get_info("BURNING_MISSILES"));
+	//scr_deck_add_card(scr_card_get_info("BURSTING_METEOR"));
+	//scr_deck_add_card(scr_card_get_info("CHAIN_COMBUSTION"));
+	//scr_deck_add_card(scr_card_get_info("CINDER_CHASE"));
+	//scr_deck_add_card(scr_card_get_info("CINDER_KICK"));
+	//scr_deck_add_card(scr_card_get_info("ERUPTING_SLAM"));
+	//scr_deck_add_card(scr_card_get_info("EXSANGUINATE"));
+	//scr_deck_add_card(scr_card_get_info("FEED_THE_FLAME"));
+	//scr_deck_add_card(scr_card_get_info("FINISHING_BLOW"));
+	//scr_deck_add_card(scr_card_get_info("FIREBALL"));
+	//scr_deck_add_card(scr_card_get_info("FLAME_SPOUT"));
+	//scr_deck_add_card(scr_card_get_info("FLASHPOINT"));
+	//scr_deck_add_card(scr_card_get_info("FORWARD_MARCH"));
+	//scr_deck_add_card(scr_card_get_info("FURIOUS_SLICE"));
+	//scr_deck_add_card(scr_card_get_info("HEADSMANS_DUE"));
+	//scr_deck_add_card(scr_card_get_info("MELTPLATE"));
+	//scr_deck_add_card(scr_card_get_info("MOLTEN_EDGE"));
+	//scr_deck_add_card(scr_card_get_info("OPEN_VEIN"));
+	//scr_deck_add_card(scr_card_get_info("OVERHEAT"));
+	//scr_deck_add_card(scr_card_get_info("RAGEFIRE"));
+	//scr_deck_add_card(scr_card_get_info("RAGEHOOK"));
+	//scr_deck_add_card(scr_card_get_info("RECKLESS_ASSAULT"));
+	//scr_deck_add_card(scr_card_get_info("SEARING_RAY"));
+
+	#endregion
+
+	//----------------//
+	//DEFENSE//
+	//----------------//
+	#region DEFENSE
+
+	//scr_deck_add_card(scr_card_get_info("ASHEN_FORMATION"));
+	//scr_deck_add_card(scr_card_get_info("BACKDRAFT"));
+	//scr_deck_add_card(scr_card_get_info("BLOOD_OATH"));
+	//scr_deck_add_card(scr_card_get_info("BLOODY_SHIELD"));
+	//scr_deck_add_card(scr_card_get_info("BURNING_PARRY"));
+	//scr_deck_add_card(scr_card_get_info("CINDERGUARD"));
+	//scr_deck_add_card(scr_card_get_info("FURNACE_HEART"));
+	//scr_deck_add_card(scr_card_get_info("HARDEN_BLOOD"));
+	//scr_deck_add_card(scr_card_get_info("LAST_STAND"));
+	//scr_deck_add_card(scr_card_get_info("MOLTEN_AEGIS"));
+	//scr_deck_add_card(scr_card_get_info("RAGEPLATE"));
+
+	#endregion
+
+	//----------------//
+	//UTILITY//
+	//----------------//
+	#region UTILITY
+
+	//scr_deck_add_card(scr_card_get_info("BATTLE_TRANCE"));
+	//scr_deck_add_card(scr_card_get_info("BLOOD_OFFERING"));
+	//scr_deck_add_card(scr_card_get_info("BLOOD_RUSH"));
+	//scr_deck_add_card(scr_card_get_info("BLOODLINE"));
+	//scr_deck_add_card(scr_card_get_info("BLOODMIST"));
+	//scr_deck_add_card(scr_card_get_info("BLOODSTEP"));
+	//scr_deck_add_card(scr_card_get_info("CREMATE"));
+	//scr_deck_add_card(scr_card_get_info("DRAGON_MINE"));
+	//scr_deck_add_card(scr_card_get_info("EMBER_TURRET"));
+	//scr_deck_add_card(scr_card_get_info("FEED_THE_FURNACE"));
+	//scr_deck_add_card(scr_card_get_info("FIRESTORM"));
+	//scr_deck_add_card(scr_card_get_info("FLAMEFORGED"));
+	//scr_deck_add_card(scr_card_get_info("FLAMESPAWN"));
+	//scr_deck_add_card(scr_card_get_info("FUEL_THE_FIRE"));
+	//scr_deck_add_card(scr_card_get_info("HEATWAVE"));
+	//scr_deck_add_card(scr_card_get_info("LIVING_FLAME"));
+	//scr_deck_add_card(scr_card_get_info("MAGMA_CANNON"));
+	//scr_deck_add_card(scr_card_get_info("POWDER_KEG"));
+	//scr_deck_add_card(scr_card_get_info("REKINDLE"));
+	//scr_deck_add_card(scr_card_get_info("SANGUINE_SONG"));
+	//scr_deck_add_card(scr_card_get_info("VOLATILE_BRAND"));
+
+	#endregion
+
+	//----------------//
+	//SUPPORT//
+	//----------------//
+	#region SUPPORT
+
+	//scr_deck_add_card(scr_card_get_info("3RD_DEGREE"));
+	//scr_deck_add_card(scr_card_get_info("ANEMIA"));
+	//scr_deck_add_card(scr_card_get_info("BATTLE_FRENZY"));
+	//scr_deck_add_card(scr_card_get_info("BLOODCOATED"));
+	//scr_deck_add_card(scr_card_get_info("BLOODHUNGER"));
+	//scr_deck_add_card(scr_card_get_info("CAUTERIZED_WOUND"));
+	//scr_deck_add_card(scr_card_get_info("CRIMSON_FOCUS"));
+	//scr_deck_add_card(scr_card_get_info("DANCING_FLAME"));
+	//scr_deck_add_card(scr_card_get_info("FLAMING_LASHES"));
+	//scr_deck_add_card(scr_card_get_info("FRONTLINE_ORDER"));
+	//scr_deck_add_card(scr_card_get_info("HEAT_UP"));
+	//scr_deck_add_card(scr_card_get_info("HEMOPHILIA"));
+	//scr_deck_add_card(scr_card_get_info("HUNGERING_FLAMES"));
+	//scr_deck_add_card(scr_card_get_info("INNER_FLAME"));
+	//scr_deck_add_card(scr_card_get_info("MELTING_ARMAMENTS"));
+	//scr_deck_add_card(scr_card_get_info("MENACING_ROAR"));
+	//scr_deck_add_card(scr_card_get_info("MOLTEN_BRAND"));
+	//scr_deck_add_card(scr_card_get_info("PAIN_RESPONSE"));
+	//scr_deck_add_card(scr_card_get_info("PYRE_WEAPON"));
+	//scr_deck_add_card(scr_card_get_info("RAGING_HOWL"));
+	//scr_deck_add_card(scr_card_get_info("RELENTLESS"));
+	//scr_deck_add_card(scr_card_get_info("SECOND_WIND"));
+	//scr_deck_add_card(scr_card_get_info("WAR_CRY"));
+
+	#endregion
+
+	//----------------//
+	//ARCHETYPE//
+	//----------------//
+	#region ARCHETYPE
+
+	//scr_deck_add_card(scr_card_get_info("BLOOD_MOON"));
+	//scr_deck_add_card(scr_card_get_info("CATACLYSM"));
+	//scr_deck_add_card(scr_card_get_info("DRAGONSTORM"));
+	//scr_deck_add_card(scr_card_get_info("ENDLESS_RAGE"));
+	//scr_deck_add_card(scr_card_get_info("INFERNO_ETERNAL"));
+	//scr_deck_add_card(scr_card_get_info("MOLTEN_RUIN"));
+	//scr_deck_add_card(scr_card_get_info("PHOENIX_REBIRTH"));
+	//scr_deck_add_card(scr_card_get_info("SACRIFICIAL_PYRE"));
+	//scr_deck_add_card(scr_card_get_info("THE_RED_FEAST"));
+
+	#endregion
+
 #endregion
 
 //----------------//
 //TEST INVENTORY//
 //----------------//
+scr_inventory_add_item("HELD_ARCHMAGES_FOCUS",1);
+scr_inventory_add_item("HELD_FORGOTTEN_MANUSCRIPT",1);
 //scr_inventory_add_item("QUEST_IMPORTANT_NOTEBOOK",1);
 //scr_inventory_add_item("CONSUMABLE_HEALING_SALVE",3);
 //scr_inventory_add_item("PRISM_COMMON",7);

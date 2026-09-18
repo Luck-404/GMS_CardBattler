@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodmist",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodmist",
+  "parent":{
+    "name":"BLOODMIST",
+    "path":"folders/CARDS/VERMILION/BLOODMIST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

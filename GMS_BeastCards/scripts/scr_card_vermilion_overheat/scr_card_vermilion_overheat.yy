@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_overheat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_overheat",
+  "parent":{
+    "name":"OVERHEAT",
+    "path":"folders/CARDS/VERMILION/OVERHEAT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

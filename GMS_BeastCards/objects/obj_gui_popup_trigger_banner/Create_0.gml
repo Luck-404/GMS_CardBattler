@@ -1,27 +1,42 @@
 //===============================================================================//
 //
 // CREATE: OBJ_GUI_POPUP_TRIGGER_BANNER
-// FUNCTION: Initializes trigger popup banner state.
-//           Stores trigger text, animation frame, and lifespan.
-//           Displays brief ability or effect information.
+// FUNCTION: Initializes the dynamic GUI trigger banner.
+//           Stores text, padding, border, and lifespan settings.
 //
 //===============================================================================//
 
-//================//
-//VARIABLES//
-//================//
+#region VARIABLES
+
+//------//
+//TEXT//
+//------//
 _str_text = "DEFAULT";
 
-_flag_opened = false;
+_font_banner = fnt_gui_party_small;
 
+//--------//
+//LAYOUT//
+//--------//
+_val_anchor_y = 740;
+
+_val_border = 3;
+
+_val_padding_x = 12;
+_val_padding_y = 8;
+
+//----------//
+//LIFESPAN//
+//----------//
 _ct_life = 120;
 
-_it_image_index = 0;
+#endregion
 
-//================//
-//INIT//
-//================//
+#region INIT
 
-//================//
-//METHODS//
-//================//
+//----------------//
+//DISABLE SPRITE//
+//----------------//
+sprite_index = -1;
+
+#endregion

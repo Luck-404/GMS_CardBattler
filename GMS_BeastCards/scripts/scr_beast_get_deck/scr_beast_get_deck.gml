@@ -25,10 +25,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
-				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
-				ds_list_add(_list_return_deck,scr_card_get_info("OCEANS_BLESSING"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BITTER_CHILL"));
+				ds_list_add(_list_return_deck,scr_card_get_info("COLD_SNAP"));
+				ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ICE_ACCRETION"));
 
 				//=========//
 				//SUBTYPE//
@@ -36,18 +36,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("ICE_WALL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CORAL_GUARDIAN"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ICE_PRISON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BULWARK"));
+						ds_list_add(_list_return_deck,scr_card_get_info("COOLING_MIST"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
-						ds_list_add(_list_return_deck,scr_card_get_info("CRYSTAL_SHELL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SOOTHING_CURRENT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_RECOVERY"));
 					break;
 				}
 
@@ -61,9 +61,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("HAILSTONES"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BARRIER"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ABSOLUTE_ZERO"));
+				ds_list_add(_list_return_deck,scr_card_get_info("WINTER_RESONANCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_ERUPTION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PRISON"));
 
 				//=========//
 				//SUBTYPE//
@@ -71,18 +72,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
+						ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
 						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("COLD_SNAP"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("BITTER_CHILL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WINTER_RESONANCE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_CURSE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HYPOTHERMIA"));
 					break;
 
 					case "WAVE":
 						ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SNOWFALL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STORM_BEACON"));
 					break;
 				}
 
@@ -97,8 +98,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("ICE_LANCE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
-				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_RECOVERY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BRITTLE_CONSTITUTION"));
 
 				//=========//
 				//SUBTYPE//
@@ -106,17 +108,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("PURIFY_WATERS"));
-						ds_list_add(_list_return_deck,scr_card_get_info("PERMAFROST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DEEPFLOW_WHISPERSONG"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BRITTLE_CONSTITUTION"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RIMEFROST_ELEMENTAL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("THIN_ICE"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RIP_CURRENT"));
 						ds_list_add(_list_return_deck,scr_card_get_info("UNDERTOW"));
 					break;
 				}
@@ -131,9 +133,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("ICE_MIRROR"));
-				ds_list_add(_list_return_deck,scr_card_get_info("WHITEOUT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_VOLLEY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SHATTER_STRIKE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
 
 				//=========//
 				//SUBTYPE//
@@ -141,18 +144,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("CHILLING_WEAKNESS"));
-						ds_list_add(_list_return_deck,scr_card_get_info("CORAL_GUARDIAN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("BITTER_CHILL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ICE_PRISON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ICEBOUND_INSTINCT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_ARMOR"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("UNDERTOW"));
-						ds_list_add(_list_return_deck,scr_card_get_info("RIP_CURRENT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PURIFY_WATERS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("COLD_RESERVE"));
 					break;
 				}
 
@@ -166,9 +169,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CRASHING_WAVE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BURST"));
-				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
-				ds_list_add(_list_return_deck,scr_card_get_info("CORAL_GUARDIAN"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ANCHOR_STONE"));
 
 				//=========//
 				//SUBTYPE//
@@ -176,18 +180,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("ICE_WALL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SHARED_BULWARK"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_HARPOON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CORAL_GUARDIAN"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("RIMEFROST_ELEMENTAL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("THIN_ICE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ICE_WALL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
 					break;
 
 					case "WAVE":
 						ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_HARPOON"));
-						ds_list_add(_list_return_deck,scr_card_get_info("STORM_BEACON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STORM_WISP"));
 					break;
 				}
 
@@ -201,10 +205,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("ICE_LANCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("STORM_WISP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_HARPOON"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
 
 				//=========//
 				//SUBTYPE//
@@ -212,18 +216,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("ANCHOR_STONE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ARMOR_TRANSFER"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DEEPFLOW_WHISPERSONG"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("RIMEFROST_ELEMENTAL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SNOWFORT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BRITTLE_CONSTITUTION"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ICEBOUND_SEAL"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("STORM_BEACON"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SEA_LEGS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ANCHOR_STONE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
 					break;
 				}
 
@@ -238,9 +242,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_FANG"));
-				ds_list_add(_list_return_deck,scr_card_get_info("COOLING_MIST"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SEA_LEGS"));
-				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
+				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_SLASH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BURST"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CRYOGENIC_RECOVERY"));
 
 				//=========//
 				//SUBTYPE//
@@ -248,18 +252,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("CHILLING_WEAKNESS"));
-						ds_list_add(_list_return_deck,scr_card_get_info("HYPOTHERMIA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
 					break;
 
 					case "FROST":
 						ds_list_add(_list_return_deck,scr_card_get_info("ICE_ACCRETION"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROST_WEAPON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_FOCUS"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("CRASHING_WAVE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SNOWFALL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MARINE_MEND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SAILORS_RESOLVE"));
 					break;
 				}
 
@@ -273,9 +277,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("HAILSTONES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_ERUPTION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
 
 				//=========//
 				//SUBTYPE//
@@ -283,18 +288,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROSTBURN_NOVA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ICE_MIRROR"));
 					break;
 
 					case "FROST":
 						ds_list_add(_list_return_deck,scr_card_get_info("ABSOLUTE_ZERO"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ICE_PRISON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WINTER_RESONANCE"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
-						ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STORM_BEACON"));
 					break;
 				}
 
@@ -308,10 +313,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
-				ds_list_add(_list_return_deck,scr_card_get_info("ICE_PLATING"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_VOLLEY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("AVALANCHE_STRIKE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("WINTERS_BITE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SNOWFALL"));
 
 				//=========//
 				//SUBTYPE//
@@ -319,18 +324,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_ARMOR"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
 					break;
 
 					case "FROST":
+						ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_CRUSH"));
 						ds_list_add(_list_return_deck,scr_card_get_info("SHATTER_STRIKE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ICE_PRISON"));
 					break;
 
 					case "WAVE":
+						ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_BREAK"));
 						ds_list_add(_list_return_deck,scr_card_get_info("THUNDERSTORM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("STATIC_BARRIER"));
 					break;
 				}
 
@@ -344,10 +349,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BULWARK"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SAILORS_RESOLVE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SOOTHING_CURRENT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BITTER_CHILL"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_SPEAR"));
+				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_RECOVERY"));
 
 				//=========//
 				//SUBTYPE//
@@ -355,17 +360,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("HYPOTHERMIA"));
-						ds_list_add(_list_return_deck,scr_card_get_info("MARINE_MEND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DEEPFLOW_WHISPERSONG"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("CRYOGENIC_RECOVERY"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ICE_LANCE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("CALM_SEAS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
 						ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
 					break;
 				}
@@ -380,9 +385,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_SPEAR"));
-				ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_FOCUS"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CRASHING_WAVE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
 
 				//=========//
 				//SUBTYPE//
@@ -390,18 +396,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
-						ds_list_add(_list_return_deck,scr_card_get_info("PERMAFROST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_FANG"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROST_WEAPON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PERMAFROST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WHITEOUT"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
 						ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_SLASH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RIP_CURRENT"));
 					break;
 				}
 
@@ -415,9 +421,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("STORM_WISP"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BULWARK"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SAILORS_RESOLVE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_SPEAR"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
+				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_SLASH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("MARINE_MEND"));
 
 				//=========//
 				//SUBTYPE//
@@ -425,18 +432,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("SHARED_BULWARK"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ICEBOUND_SEAL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DEEPFLOW_WHISPERSONG"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ARMOR_TRANSFER"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROST_WEAPON"));
-						ds_list_add(_list_return_deck,scr_card_get_info("THIN_ICE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BASTION"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CHILLING_WEAKNESS"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
 						ds_list_add(_list_return_deck,scr_card_get_info("UNDERTOW"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
 					break;
 				}
 
@@ -450,9 +457,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_SLASH"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SNOWDRIFT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("HAILSTONES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("WINTER_RESONANCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("COLD_SNAP"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROST_WEAPON"));
 
 				//=========//
 				//SUBTYPE//
@@ -460,18 +468,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_FOCUS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ABYSSAL_TOUCH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
 					break;
 
 					case "FROST":
 						ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_ERUPTION"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_CURSE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("RIP_CURRENT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ROUGH_SEAS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SOOTHING_CURRENT"));
 					break;
 				}
 
@@ -486,8 +494,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("AVALANCHE_STRIKE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SNOWDRIFT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_BASTION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_CRUSH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("WINTERS_BITE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_ARMOR"));
 
 				//=========//
 				//SUBTYPE//
@@ -495,18 +504,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_VOLLEY"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_FOCUS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SHELL_SHIELD"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_ARMOR"));
-						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_CURSE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ARCTIC_VOLLEY"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SNOWFORT"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("RIP_CURRENT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ROUGH_SEAS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CRASHING_WAVE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STATIC_BARRIER"));
 					break;
 				}
 
@@ -520,9 +529,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_BREAK"));
+				ds_list_add(_list_return_deck,scr_card_get_info("WHITEWATER"));
 				ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_CRUSH"));
-				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
-				ds_list_add(_list_return_deck,scr_card_get_info("COLD_RESERVE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("THUNDERSTORM"));
 
 				//=========//
 				//SUBTYPE//
@@ -530,18 +540,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("TIDAL_BREAK"));
-						ds_list_add(_list_return_deck,scr_card_get_info("CHILLING_WEAKNESS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_SHELL"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_FANG"));
 						ds_list_add(_list_return_deck,scr_card_get_info("WINTERS_BITE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SNOWDRIFT"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("KRAKENSLAM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WHITEWATER"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SEA_LEGS"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
 					break;
 				}
 
@@ -555,9 +565,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("AQUA_STEP"));
-				ds_list_add(_list_return_deck,scr_card_get_info("ICE_MIRROR"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_FANG"));
+				ds_list_add(_list_return_deck,scr_card_get_info("TORRENT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("STATIC_BARRIER"));
 
 				//=========//
 				//SUBTYPE//
@@ -565,18 +576,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "ABYSS":
-						ds_list_add(_list_return_deck,scr_card_get_info("PURIFY_WATERS"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_SPIKE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SHARED_BULWARK"));
 					break;
 
 					case "FROST":
-						ds_list_add(_list_return_deck,scr_card_get_info("FROSTBOLT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ICEBOUND_INSTINCT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("AVALANCHE_STRIKE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_SPEAR"));
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("DROP_ANCHOR"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SNOWFORT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WHITEWATER"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SEA_LEGS"));
 					break;
 				}
 
@@ -695,10 +706,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BARKSKIN"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BEASTIAL_WRATH"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SAVAGE_MAUL"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BEASTIAL_WRATH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("THICK_HIDE"));
 
 				//=========//
 				//SUBTYPE//
@@ -706,18 +717,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
-						ds_list_add(_list_return_deck,scr_card_get_info("THORNMAIL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("OLD_GROWTH_PUMMEL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SINEWY_VINES"));
 					break;
 
 					case "NATURAL":
+						ds_list_add(_list_return_deck,scr_card_get_info("SYMBIOSIS"));
 						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_BOND"));
-						ds_list_add(_list_return_deck,scr_card_get_info("REGENERATE"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("RAKE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SPIT_VENOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PHEROMONES"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STEELFUR"));
 					break;
 				}
 
@@ -731,10 +742,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
-				ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("BLOWDART"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SHIELD"));
+				ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
 
 				//=========//
 				//SUBTYPE//
@@ -742,18 +753,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_HIDE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SHIELD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BURSTING_SEED"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("LIFEBLOOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("NATURAL_RECOVERY"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SPIT_VENOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("VIRAL_SURGE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ROTTING_SPORES"));
+						ds_list_add(_list_return_deck,scr_card_get_info("TOXIC_SNARE"));
 					break;
 				}
 
@@ -767,9 +778,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("FELL"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SPINESLING"));
-				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
-				ds_list_add(_list_return_deck,scr_card_get_info("CRIPPLING_VINES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("VIRIDIAN_BURST"));
+				ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
 
 				//=========//
 				//SUBTYPE//
@@ -777,18 +789,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ENTANGLE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("OVERGROWTH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("LIFEBLOOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("REGENERATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("GREENSTEP"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("VIRIDIAN_BURST"));
-						ds_list_add(_list_return_deck,scr_card_get_info("TOXIC_HIDE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SAVAGE_MAUL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WILD_VIGOR"));
 					break;
 				}
 
@@ -802,9 +814,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BARKSKIN"));
-				ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOWDART"));
+				ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPIT_VENOM"));
+				ds_list_add(_list_return_deck,scr_card_get_info("NATURAL_RECOVERY"));
 
 				//=========//
 				//SUBTYPE//
@@ -812,18 +825,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("THORNMAIL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_HIDE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ROT_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ROTTING_SPORES"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_GRACE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ROOTED_DEFENSE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("REGENERATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_BOND"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("BLOWDART"));
-						ds_list_add(_list_return_deck,scr_card_get_info("VIRAL_SURGE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PREDATORS_MARK"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DISEASE"));
 					break;
 				}
 
@@ -838,8 +851,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("FERAL_FRENZY"));
-				ds_list_add(_list_return_deck,scr_card_get_info("INTERLOCKING_SCALES"));
-				ds_list_add(_list_return_deck,scr_card_get_info("PHEROMONES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RAKE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SAVAGE_MAUL"));
+				ds_list_add(_list_return_deck,scr_card_get_info("WILD_VIGOR"));
 
 				//=========//
 				//SUBTYPE//
@@ -847,18 +861,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("OVERGROWTH"));
-						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
+						ds_list_add(_list_return_deck,scr_card_get_info("THORNMAIL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_HIDE"));
 					break;
 
 					case "NATURAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_GRACE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CURE_ALL"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SNARLING_BITE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("DISEASE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STALKING_SWIPE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("TOXIC_HIDE"));
 					break;
 				}
 
@@ -873,8 +887,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("STALKING_SWIPE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("THICK_HIDE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SYMBIOSIS"));
+				ds_list_add(_list_return_deck,scr_card_get_info("NATURES_FURY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_PIERCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("EMERALD_SLAM"));
 
 				//=========//
 				//SUBTYPE//
@@ -882,18 +897,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("SINEWY_VINES"));
-						ds_list_add(_list_return_deck,scr_card_get_info("EMERALD_SLAM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ENTANGLE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CRIPPLING_VINES"));
 					break;
 
 					case "NATURAL":
+						ds_list_add(_list_return_deck,scr_card_get_info("SYMBIOSIS"));
 						ds_list_add(_list_return_deck,scr_card_get_info("GREENSTEP"));
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("WILD_VIGOR"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SNARLING_BITE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BEASTIAL_WRATH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FERAL_FRENZY"));
 					break;
 				}
 
@@ -907,10 +922,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("UNSEEN_ROOT"));
 				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_BOLT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SHIMMERING_SPORES"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SLEEPING_POLLEN"));
+				ds_list_add(_list_return_deck,scr_card_get_info("PRIMAL_BLAST"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SERPENT_SUMMON"));
 
 				//=========//
 				//SUBTYPE//
@@ -918,18 +933,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
-						ds_list_add(_list_return_deck,scr_card_get_info("GREENFLOW"));
+						ds_list_add(_list_return_deck,scr_card_get_info("GROWTH_SIGIL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("BURGEONING_BLOOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SAPSPRING"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_PIERCE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_WRATH"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("DECAYING_TOUCH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ROT_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOWDART"));
 					break;
 				}
 
@@ -944,9 +959,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("FELL"));
-				ds_list_add(_list_return_deck,scr_card_get_info("STEELFUR"));
-				ds_list_add(_list_return_deck,scr_card_get_info("PHEROMONES"));
 				ds_list_add(_list_return_deck,scr_card_get_info("OLD_GROWTH_PUMMEL"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BEASTIAL_WRATH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("OVERGROWTH"));
 
 				//=========//
 				//SUBTYPE//
@@ -954,18 +969,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("OVERGROWTH"));
-						ds_list_add(_list_return_deck,scr_card_get_info("EMERALD_SLAM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BARKSKIN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ROOTED_DEFENSE"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("CURE_ALL"));
-						ds_list_add(_list_return_deck,scr_card_get_info("LIFEBLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("REGENERATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("NATURAL_RECOVERY"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("TOXIC_HIDE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WILDSTRIKE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("THICK_HIDE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("INTERLOCKING_SCALES"));
 					break;
 				}
 
@@ -979,10 +994,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_ERUPTION"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PRIMAL_BLAST"));
-				ds_list_add(_list_return_deck,scr_card_get_info("MIRACLE_MUSA"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_PIERCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_SWIPES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_INSIGHT"));
 
 				//=========//
 				//SUBTYPE//
@@ -990,18 +1005,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_ERUPTION"));
 						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
-					break;
-
-					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("REJUVENATE"));
 						ds_list_add(_list_return_deck,scr_card_get_info("POLLINATE"));
 					break;
 
+					case "NATURAL":
+						ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SAPSPRING"));
+					break;
+
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_FANG"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WILT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_BOLT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WILDSTRIKE"));
 					break;
 				}
 
@@ -1015,10 +1030,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("RAKE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("HUNTERS_INSTINCT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("PREDATORS_MARK"));
 				ds_list_add(_list_return_deck,scr_card_get_info("HUNTERS_JAVELIN"));
+				ds_list_add(_list_return_deck,scr_card_get_info("HUNTERS_INSTINCT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SNARLING_BITE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("PREDATORY_SCENT"));
 
 				//=========//
 				//SUBTYPE//
@@ -1027,17 +1042,17 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 
 					case "BOTANICAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("THORN_NET"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BURSTING_SEED"));
+						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_FRUIT"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("GREENSTEP"));
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURAL_RECOVERY"));
+						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CURE_ALL"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SPIT_VENOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("TOXIC_SNARE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAKE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SPIKE_PIERCE"));
 					break;
 				}
 
@@ -1052,7 +1067,8 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//SHARED//
 				//========//
 				ds_list_add(_list_return_deck,scr_card_get_info("SPIKE_PIERCE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("GREENSTEP"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPINESLING"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FERAL_FRENZY"));
 				ds_list_add(_list_return_deck,scr_card_get_info("POTENT_FRUIT"));
 
 				//=========//
@@ -1061,18 +1077,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
-						ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("UNSEEN_ROOT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("DRAINING_KISS"));
-						ds_list_add(_list_return_deck,scr_card_get_info("CURE_ALL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("GREENSTEP"));
+						ds_list_add(_list_return_deck,scr_card_get_info("REJUVENATE"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("ROTTING_SPORES"));
-						ds_list_add(_list_return_deck,scr_card_get_info("VENOM_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("THORN_NET"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SLEEP_DART"));
 					break;
 				}
 
@@ -1086,11 +1102,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_SWIPES"));
-				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_INSIGHT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SECOND_BLOOM"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_ERUPTION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("NATURES_FURY"));
 				ds_list_add(_list_return_deck,scr_card_get_info("WILDSTRIKE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SHIELD"));
+				ds_list_add(_list_return_deck,scr_card_get_info("POLLINATE"));
 
 				//=========//
 				//SUBTYPE//
@@ -1098,18 +1113,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SINEWY_VINES"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MIRACLE_MUSA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SAPSPRING"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("BURGEONING_BLOOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMTIDE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIFEBLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SECOND_BLOOM"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_FANG"));
-						ds_list_add(_list_return_deck,scr_card_get_info("DISEASE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("VIRIDIAN_BURST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SPIT_VENOM"));
 					break;
 				}
 
@@ -1123,10 +1138,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("UNSEEN_ROOT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_FANG"));
+				ds_list_add(_list_return_deck,scr_card_get_info("NATURES_WRATH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_PIERCE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("PREDATORS_MARK"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SHIMMERING_SPORES"));
-				ds_list_add(_list_return_deck,scr_card_get_info("NATURES_FURY"));
 
 				//=========//
 				//SUBTYPE//
@@ -1134,18 +1149,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BURSTING_SEED"));
+						ds_list_add(_list_return_deck,scr_card_get_info("VENOM_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("WILT"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_BOND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_FURY"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_WRATH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PREDATORY_SCENT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HUNTERS_INSTINCT"));
 					break;
 				}
 
@@ -1159,10 +1174,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("GREENFLOW"));
 				ds_list_add(_list_return_deck,scr_card_get_info("SPORE_CLOUD"));
-				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
-				ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SYMBIOSIS"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ROT_BLOOM"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CULTIVATE"));
 
 				//=========//
 				//SUBTYPE//
@@ -1170,18 +1185,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("GREENFLOW"));
+						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BURGEONING_BLOOM"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DRAINING_KISS"));
 						ds_list_add(_list_return_deck,scr_card_get_info("REJUVENATE"));
 					break;
 
 					case "WILD":
 						ds_list_add(_list_return_deck,scr_card_get_info("SERPENT_SUMMON"));
-						ds_list_add(_list_return_deck,scr_card_get_info("VENOM_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
 					break;
 				}
 
@@ -1195,9 +1210,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("BIOBOLT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_INSIGHT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("NATURAL_RECOVERY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPORE_CLOUD"));
+				ds_list_add(_list_return_deck,scr_card_get_info("VERDANT_BOLT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("NATURES_WRATH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("DECAYING_TOUCH"));
 
 				//=========//
 				//SUBTYPE//
@@ -1205,18 +1221,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("BURGEONING_BLOOM"));
-						ds_list_add(_list_return_deck,scr_card_get_info("MIRACLE_MUSA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BRAMBLE_ERUPTION"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SHIMMERING_SPORES"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("DRAINING_KISS"));
-						ds_list_add(_list_return_deck,scr_card_get_info("CURE_ALL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_FANG"));
+						ds_list_add(_list_return_deck,scr_card_get_info("POLLINATE"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_SPORE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("DECAYING_TOUCH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("PRIMAL_BLAST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
 					break;
 				}
 
@@ -1230,8 +1246,9 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("UNSEEN_ROOT"));
-				ds_list_add(_list_return_deck,scr_card_get_info("SLEEP_DART"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPIKE_PIERCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("VIRIDIAN_BURST"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CLAW"));
 				ds_list_add(_list_return_deck,scr_card_get_info("THORN_NET"));
 
 				//=========//
@@ -1240,18 +1257,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
-						ds_list_add(_list_return_deck,scr_card_get_info("POTENT_FRUIT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SLEEPING_POLLEN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMTIDE"));
 					break;
 
 					case "NATURAL":
 						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
-						ds_list_add(_list_return_deck,scr_card_get_info("SECOND_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CURE_ALL"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SPIRIT_FANG"));
-						ds_list_add(_list_return_deck,scr_card_get_info("ROTTING_SPORES"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SNARLING_BITE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SPINESLING"));
 					break;
 				}
 
@@ -1265,10 +1282,10 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("SPORE_CLOUD"));
-				ds_list_add(_list_return_deck,scr_card_get_info("DORMANT_SEED"));
+				ds_list_add(_list_return_deck,scr_card_get_info("GREENFLOW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SPIT_VENOM"));
+				ds_list_add(_list_return_deck,scr_card_get_info("ROT_BLOOM"));
 				ds_list_add(_list_return_deck,scr_card_get_info("GROWTH_SIGIL"));
-				ds_list_add(_list_return_deck,scr_card_get_info("PACK_INSTINCT"));
 
 				//=========//
 				//SUBTYPE//
@@ -1276,18 +1293,18 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				switch (_str_beast_type){
 
 					case "BOTANICAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("GERMINATE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("BLOOMING_SPRITE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SPORE_CLOUD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIFEBLOOM"));
 					break;
 
 					case "NATURAL":
-						ds_list_add(_list_return_deck,scr_card_get_info("POLLINATE"));
-						ds_list_add(_list_return_deck,scr_card_get_info("NATURES_MEND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BURGEONING_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIFE_SPIRIT"));
 					break;
 
 					case "WILD":
-						ds_list_add(_list_return_deck,scr_card_get_info("SERPENT_SUMMON"));
 						ds_list_add(_list_return_deck,scr_card_get_info("VENOM_BLOOM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DECAYING_TOUCH"));
 					break;
 				}
 
