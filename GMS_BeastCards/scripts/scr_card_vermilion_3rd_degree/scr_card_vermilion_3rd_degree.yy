@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_3rd_degree",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_3rd_degree",
+  "parent":{
+    "name":"3RD_DEGREE",
+    "path":"folders/CARDS/VERMILION/3RD_DEGREE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

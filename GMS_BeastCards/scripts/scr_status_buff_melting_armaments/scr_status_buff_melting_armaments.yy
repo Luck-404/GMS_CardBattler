@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_melting_armaments",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_melting_armaments",
+  "parent":{
+    "name":"MELTING_ARMAMENTS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/MELTING_ARMAMENTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

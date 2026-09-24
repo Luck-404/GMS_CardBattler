@@ -1,47 +1,24 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VERMILION_BLOOD_RUSH
-// FUNCTION: Resolves Blood Rush.
-//           Sacrifices up to 8 HP directly from the caster.
-//           Draws 2 cards for the player using the shared draw system.
+// FUNCTION: Sacrifices 8 caster HP, then draws the card's magnitude for a
+//           player caster using the shared draw system.
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the caster for this Self-target Card.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
-
 function scr_card_vermilion_blood_rush(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
 
 	if (_ref_caster._val_cur_hp <= 0){
 		return;
 	}
 
 	//================//
-	//LOSE 8 HP//
+	//SACRIFICE 8 HP//
 	//================//
-	var _val_hp_loss = min(8,_ref_caster._val_cur_hp);
-
-	_ref_caster._val_cur_hp = max(0,_ref_caster._val_cur_hp - _val_hp_loss);
-
-	//==========//
-	//FEEDBACK//
-	//==========//
-	scr_gui_spawn_popup_scrolling(
-		"TEXT",
-		"-" + string(_val_hp_loss) + " HP",
-		undefined,
-		c_red,
-		_ref_caster.x,
-		_ref_caster.y - 48
-	);
+	scr_battle_sacrifice("HOST_HEALTH",_ref_caster,8);
 
 	//================//
 	//DRAW 2 CARDS//

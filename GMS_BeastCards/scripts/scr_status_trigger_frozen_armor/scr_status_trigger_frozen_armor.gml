@@ -5,6 +5,9 @@
 //           When successfully struck by an enemy Attack, applies 1 Frostbite
 //           to the attacker.
 //
+// ARGUMENTS: _ref_defender, _ref_attacker.
+// RETURNS: True when the Frozen Armor effect triggers; false otherwise.
+//
 //===============================================================================//
 
 function scr_status_trigger_frozen_armor(_ref_defender,_ref_attacker){
@@ -47,16 +50,6 @@ function scr_status_trigger_frozen_armor(_ref_defender,_ref_attacker){
 		return false;
 	}
 
-	//----------------------//
-	//STORE ORIGINAL TARGET//
-	//----------------------//
-	var _ref_original_target = global.ref_target_beast;
-
-	//--------------------//
-	//TARGET THE ATTACKER//
-	//--------------------//
-	global.ref_target_beast = _ref_attacker;
-
 	//----------//
 	//FEEDBACK//
 	//----------//
@@ -72,12 +65,8 @@ function scr_status_trigger_frozen_armor(_ref_defender,_ref_attacker){
 	//----------------//
 	//APPLY FROSTBITE//
 	//----------------//
-	scr_status_apply_dot("FROSTBITE");
+	scr_status_apply_dot("FROSTBITE", _ref_attacker);
 
-	//----------------//
-	//RESTORE TARGET//
-	//----------------//
-	global.ref_target_beast = _ref_original_target;
 
 	return true;
 }

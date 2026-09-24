@@ -15,7 +15,9 @@ function scr_card_cerulean_marine_mend(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//CLEANSE AURAS//
 	//================//
-	scr_status_cleanse_aura(
-		_ref_target
+	scr_status_cleanse(
+		_ref_target,
+		"AURA",
+		"ALL"
 	);
 }

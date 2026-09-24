@@ -13,13 +13,6 @@
 
 function scr_card_viridian_channel_the_spirits(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	//===================//
 	//GET OPPOSING TEAM//
 	//===================//
@@ -76,6 +69,12 @@ function scr_card_viridian_channel_the_spirits(_stct_card,_ref_caster,_ref_targe
 		//----------------//
 		//DEAL DAMAGE//
 		//----------------//
-		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_hit_target);
+		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_hit_target,
+			_stct_card._val_card_magnitude,
+			{card: _stct_card, card_instance: global.ref_cast_card}
+		);
 	}
 }

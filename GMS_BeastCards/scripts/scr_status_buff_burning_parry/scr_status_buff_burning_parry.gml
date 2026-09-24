@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_BURNING_PARRY
@@ -7,15 +8,16 @@
 //           When triggered, the host retaliates against the attacker with
 //           linear Physical damage using the original Burning Parry Card.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Burning Parry Status.
-//            _val_magnitude is the retaliation's base Physical damage.
-//            _val_lifetime optionally sets the Buff duration.
-// RETURNS: Status reference on APPLY, true/false on TRIGGER, otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -23,8 +25,6 @@ function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undef
 		//APPLY//
 		//=======//
 		case "APPLY":
-
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -89,7 +89,7 @@ function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undef
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
-				true,
+				false,
 				false
 			);
 
@@ -108,11 +108,10 @@ function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undef
 			_ref_new_status._spr_status = spr_status_buff_burning_parry;
 
 			_ref_new_status._ct_status_stacks = 1;
-			_ref_new_status._flag_status_stackable = false;
 
 			_ref_new_status._val_status_magnitude = _val_magnitude;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region = "START";
 
 			//================//
 			//REGISTER STATUS//
@@ -149,6 +148,10 @@ function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undef
 			}
 
 			if (_ref_attacker._val_cur_hp <= 0){
+				return false;
+			}
+
+			if (_ref_attacker._str_team == _ref_defender._str_team){
 				return false;
 			}
 
@@ -218,21 +221,22 @@ function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undef
 			//=======================//
 			var _ref_original_card = global.ref_cast_card;
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 
 			//======================//
 			//SET RETALIATION CONTEXT//
 			//======================//
 			global.ref_cast_card = _ref_parry_card;
 			global.ref_caster_beast = _ref_defender;
-			global.ref_target_beast = _ref_attacker;
 
 			//=====================//
 			//RETALIATE WITH PHY//
 			//=====================//
 			scr_battle_damage_target(
+				"LINEAR",
+				_ref_defender,
+				_ref_attacker,
 				_val_retaliation_damage,
-				_ref_attacker
+				{card: _ref_parry_card._ref_card, card_instance: _ref_parry_card}
 			);
 
 			//========================//
@@ -240,7 +244,6 @@ function scr_status_buff_burning_parry(_str_tag,_ref_status,_val_magnitude=undef
 			//========================//
 			global.ref_cast_card = _ref_original_card;
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 
 			//================//
 			//DEBUG TRIGGER//

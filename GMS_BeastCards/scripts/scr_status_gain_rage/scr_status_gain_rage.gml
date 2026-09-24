@@ -3,7 +3,7 @@
 // SCRIPT: SCR_STATUS_GAIN_RAGE
 // FUNCTION: Grants Rage directly to a living battle Beast.
 //           Uses Rage's normal APPLY callback without a CON resistance check.
-//           Preserves and restores the current global target.
+//           Uses the supplied Beast reference without changing battle selection.
 //
 // ARGUMENTS: _ref_target is the Beast gaining Rage.
 //            _ct_amount is the number of Rage stacks to gain.
@@ -30,26 +30,15 @@ function scr_status_gain_rage(_ref_target,_ct_amount=1){
 		return undefined;
 	}
 
-	//=====================//
-	//STORE ORIGINAL TARGET//
-	//=====================//
-	var _ref_original_target = global.ref_target_beast;
-
-	global.ref_target_beast = _ref_target;
-
 	//================//
 	//GAIN RAGE//
 	//================//
 	var _ref_rage = undefined;
 
 	repeat (_ct_amount){
-		_ref_rage = scr_status_dot_rage("APPLY",undefined);
+		_ref_rage = scr_status_dot_rage("APPLY", undefined, undefined, _ref_target);
 	}
 
-	//=======================//
-	//RESTORE ORIGINAL TARGET//
-	//=======================//
-	global.ref_target_beast = _ref_original_target;
 
 	return _ref_rage;
 }

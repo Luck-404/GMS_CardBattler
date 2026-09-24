@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_consume_bleed",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_consume_bleed",
+  "parent":{
+    "name":"BLEED",
+    "path":"folders/BATTLE/STATUSES/DOTs/BLEED.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

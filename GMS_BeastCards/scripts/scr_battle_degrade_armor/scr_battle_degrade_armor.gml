@@ -1,11 +1,11 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_DEGRADE_ARMOR
-// FUNCTION: Reduces a battle Beast's current Armor at the start of its turn.
-//           Removes 10% of current Armor, rounded down.
+// FUNCTION: Degrades current Armor at its existing turn phase.
+//           Preserves floor(current Armor * 0.90) and original boolean result.
 //
-// INPUT:    _ref_beast - Battle Beast whose Armor is being degraded.
-// USES:     The battle Beast's current Armor value.
+// ARGUMENTS: _ref_beast - battle Beast whose Armor degrades.
+// RETURNS: True if Armor was positive on entry, otherwise false.
 //
 //===============================================================================//
 
@@ -31,7 +31,9 @@ function scr_battle_degrade_armor(_ref_beast){
 	//---------------//
 	//DEGRADE ARMOR//
 	//---------------//
-	_ref_beast._val_armor = floor(_ref_beast._val_armor * 0.90);
+	var _val_armor_before = _ref_beast._val_armor;
+	var _val_armor_after = floor(_val_armor_before * 0.90);
+	scr_battle_destroy_armor(_ref_beast,_val_armor_before - _val_armor_after);
 
 	#endregion
 

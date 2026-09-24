@@ -15,5 +15,10 @@ function scr_card_viridian_sinewy_vines(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GRANT ARMOR//
 	//================//
-	scr_battle_armor_target_linear(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_armor_target(
+		"LINEAR",
+		_stct_card._val_card_magnitude,
+		_ref_caster
+	);
+
 }

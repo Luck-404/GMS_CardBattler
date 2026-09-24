@@ -8,18 +8,11 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is unused.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_vermilion_ashen_formation(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
 
 	//====================//
 	//GET ALLIED TEAM LIST//
@@ -33,10 +26,6 @@ function scr_card_vermilion_ashen_formation(_stct_card,_ref_caster,_ref_target){
 		return;
 	}
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//================//
 	//BUFF ALL ALLIES//
@@ -63,24 +52,17 @@ function scr_card_vermilion_ashen_formation(_stct_card,_ref_caster,_ref_target){
 		//GAIN 5 ARMOR//
 		//================//
 		scr_battle_armor_target(
+			"FIXED",
 			5,
 			_ref_ally
 		);
 
+
 		//======================//
 		//GAIN BURNING THORNS//
 		//======================//
-		global.ref_target_beast = _ref_ally;
 
-		scr_status_apply_buff(
-			"BURNING_THORNS",
-			0,
-			3
-		);
+		scr_status_apply_buff("BURNING_THORNS", _ref_ally, 0, 3);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

@@ -9,6 +9,9 @@
 //           Under Taunt, the selected Taunter becomes the primary target,
 //           and an adjacent Beast remains the secondary target.
 //
+// ARGUMENTS: _stct_card, _ref_caster, _ref_target.
+// RETURNS: No value.
+//
 //===============================================================================//
 
 function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
@@ -30,8 +33,11 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 	if (instance_exists(_ref_front_target)){
 
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_front_target,
 			_stct_card._val_card_magnitude,
-			_ref_front_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 	}
 
@@ -41,8 +47,11 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 	if (instance_exists(_ref_second_target)){
 
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_second_target,
 			_stct_card._val_card_magnitude,
-			_ref_second_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 	}
 
@@ -55,12 +64,7 @@ function scr_card_viridian_beastial_wrath(_stct_card,_ref_caster,_ref_target){
 		_ref_front_target._val_cur_hp > 0
 	){
 
-		var _ref_original_target = global.ref_target_beast;
+		scr_status_apply_cc("STUN", _ref_front_target);
 
-		global.ref_target_beast = _ref_front_target;
-
-		scr_status_apply_cc("STUN");
-
-		global.ref_target_beast = _ref_original_target;
 	}
 }

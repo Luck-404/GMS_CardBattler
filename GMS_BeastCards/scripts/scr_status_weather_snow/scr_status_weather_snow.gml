@@ -92,7 +92,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			_ref_new_status._str_status_type = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: SNOW";
-			_ref_new_status._str_status_desc = "END OF ROUND: BEASTS WITHOUT ARMOR GAIN 1 FROSTBITE. 3 FROSTBITE BECOMES 1 FROSTBURN.";
+			_ref_new_status._str_status_desc = "Weather. At the end of each round, apply 1 Frostbite to each Beast without Armor. Then, for each Beast with at least 3 Frostbite, consume 3 Frostbite and apply 1 Frostburn. Lifetime: 5 rounds.";
 
 			_ref_new_status._spr_status = spr_status_weather_snow;
 
@@ -225,10 +225,6 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				}
 			}
 
-			//----------------------//
-			//STORE ORIGINAL TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
 
 			//=========================//
 			//PASS 1: APPLY FROSTBITE//
@@ -255,9 +251,8 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				//----------------//
 				//APPLY FROSTBITE//
 				//----------------//
-				global.ref_target_beast = _ref_beast;
 
-				scr_status_apply_dot("FROSTBITE");
+				scr_status_apply_dot("FROSTBITE", _ref_beast);
 			}
 
 			//============================//
@@ -294,9 +289,8 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				//----------------//
 				//APPLY FROSTBURN//
 				//----------------//
-				global.ref_target_beast = _ref_beast;
 
-				var _ref_frostburn = scr_status_apply_dot("FROSTBURN");
+				var _ref_frostburn = scr_status_apply_dot("FROSTBURN", _ref_beast);
 
 				if (!instance_exists(_ref_frostburn)){
 					continue;
@@ -311,10 +305,6 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 				);
 			}
 
-			//================//
-			//RESTORE TARGET//
-			//================//
-			global.ref_target_beast = _ref_original_target;
 
 			//----------------//
 			//UPDATE LIFETIME//

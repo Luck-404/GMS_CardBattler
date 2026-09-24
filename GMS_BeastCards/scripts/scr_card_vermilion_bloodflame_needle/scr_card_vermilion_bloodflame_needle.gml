@@ -6,6 +6,9 @@
 //           Applies 1 Bleed.
 //           Applies 1 additional Bleed if the target is Burning.
 //
+// ARGUMENTS: _stct_card, _ref_caster, _ref_target.
+// RETURNS: No value.
+//
 //===============================================================================//
 
 function scr_card_vermilion_bloodflame_needle(_stct_card,_ref_caster,_ref_target){
@@ -27,7 +30,13 @@ function scr_card_vermilion_bloodflame_needle(_stct_card,_ref_caster,_ref_target
 	//================//
 	//DEAL DAMAGE//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
 	//----------------//
 	//VALIDATE TARGET//
@@ -43,15 +52,12 @@ function scr_card_vermilion_bloodflame_needle(_stct_card,_ref_caster,_ref_target
 	//================//
 	//APPLY BLEED//
 	//================//
-	var _ref_original_target = global.ref_target_beast;
 
-	global.ref_target_beast = _ref_target;
 
-	scr_status_apply_dot("BLEED");
+	scr_status_apply_dot("BLEED", _ref_target);
 
 	if (_flag_target_burning){
-		scr_status_apply_dot("BLEED");
+		scr_status_apply_dot("BLEED", _ref_target);
 	}
 
-	global.ref_target_beast = _ref_original_target;
 }

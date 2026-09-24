@@ -15,5 +15,9 @@ function scr_card_viridian_lifebloom(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//HEAL TARGET//
 	//================//
-	scr_battle_heal_target_linear(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_heal_target(
+		"LINEAR",
+		_stct_card._val_card_magnitude,
+		_ref_target
+	);
 }

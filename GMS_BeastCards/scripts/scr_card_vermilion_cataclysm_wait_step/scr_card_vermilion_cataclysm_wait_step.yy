@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_cataclysm_wait_step",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_cataclysm_wait_step",
+  "parent":{
+    "name":"CATACLYSM",
+    "path":"folders/CARDS/VERMILION/CATACLYSM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

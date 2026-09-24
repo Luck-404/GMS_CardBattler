@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_CC_BLIND
@@ -5,11 +6,19 @@
 //           Unstackable Timed Crowd Control Status.
 //           Restricts ordinary Attack targeting to the front enemy Beast.
 //           Prevents Flank and Backline Attacks.
-//           Teamwide and Global Attacks remain unaffected.
+//           Self, Teamwide, and Global Attacks remain unaffected.
+//           Reapplication refreshes duration.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,8 +26,6 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 		//APPLY//
 		//=======//
 		case "APPLY":
-
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -54,6 +61,14 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				//--------------------//
+				//UPDATE DESCRIPTION//
+				//--------------------//
+				_ref_existing_status._str_status_desc =
+					"ORDINARY ATTACKS MUST TARGET THE FRONT ENEMY. " +
+					"FLANK/BACKLINE ATTACKS ARE BLOCKED. " +
+					"SELF, TEAMWIDE, AND GLOBAL ATTACKS ARE UNAFFECTED.";
 
 				//-----------------------//
 				//ENSURE PERSISTENT VFX//
@@ -101,7 +116,11 @@ function scr_status_cc_blind(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			_ref_new_status._str_status_type = "CC";
 			_ref_new_status._str_status_name = "BLIND";
-			_ref_new_status._str_status_desc = "ATTACKS MUST TARGET THE FRONT BEAST";
+
+			_ref_new_status._str_status_desc =
+				"ORDINARY ATTACKS MUST TARGET THE FRONT ENEMY. " +
+				"FLANK/BACKLINE ATTACKS ARE BLOCKED. " +
+				"SELF, TEAMWIDE, AND GLOBAL ATTACKS ARE UNAFFECTED.";
 
 			_ref_new_status._spr_status = spr_status_cc_blind;
 

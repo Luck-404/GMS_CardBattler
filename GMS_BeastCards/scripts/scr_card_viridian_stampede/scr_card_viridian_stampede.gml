@@ -37,6 +37,12 @@ function scr_card_viridian_stampede(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_battle_damage_target_percent(_stct_card._val_card_magnitude,_ref_hit_target);
+		scr_battle_damage_target(
+			"PERCENT",
+			_ref_caster,
+			_ref_hit_target,
+			_stct_card._val_card_magnitude,
+			{card: _stct_card, card_instance: global.ref_cast_card}
+		);
 	}
 }

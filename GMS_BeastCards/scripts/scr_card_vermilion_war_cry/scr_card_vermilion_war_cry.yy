@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_war_cry",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_war_cry",
+  "parent":{
+    "name":"WAR_CRY",
+    "path":"folders/CARDS/VERMILION/WAR_CRY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

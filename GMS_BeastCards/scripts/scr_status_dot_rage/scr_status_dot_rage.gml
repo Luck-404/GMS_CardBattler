@@ -8,14 +8,16 @@
 //           At the start of the host's turn, Rage deals 1 NEU damage per stack.
 //           Rage stacks may also be consumed as a resource by other effects.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Rage Status.
-//            _val_lifetime optionally overrides the default lifetime of 5.
-// RETURNS: The active Rage Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -24,7 +26,6 @@ function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -216,10 +217,32 @@ function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
+			//================//
+			//BASE RAGE DAMAGE//
+			//================//
 			var _val_damage = max(
 				0,
 				_ref_status._ct_status_stacks
 			);
+
+			//================//
+			//CHECK ENDLESS RAGE//
+			//================//
+			var _ref_endless_rage = scr_status_check(
+				"ENDLESS_RAGE",
+				_ref_host
+			);
+
+			//================//
+			//DOUBLE SELF-DAMAGE//
+			//================//
+			if (
+				_ref_endless_rage != -1 &&
+				instance_exists(_ref_endless_rage)
+			){
+
+				_val_damage *= 2;
+			}
 
 			//================//
 			//TICK VFX / SFX//
@@ -293,7 +316,19 @@ function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined){
 			//================//
 			//UPDATE LIFETIME//
 			//================//
-			scr_status_tick_lifetime(_ref_status);
+			if (
+				_ref_endless_rage != -1 &&
+				instance_exists(_ref_endless_rage)
+			){
+
+				// Rage cannot expire while Endless Rage is active.
+				_ref_status._str_status_command = "WAIT";
+			}
+			else{
+
+				scr_status_tick_lifetime(_ref_status);
+			}
+
 			scr_status_reposition(_ref_host);
 
 		break;

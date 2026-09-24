@@ -8,7 +8,7 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -26,10 +26,6 @@ function scr_card_viridian_pollinate(_stct_card,_ref_caster,_ref_target){
 		scr_battle_get_right_target(_ref_target)
 	];
 
-	//=====================//
-	//STORE ORIGINAL TARGET//
-	//=====================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//====================//
 	//APPLY REGENERATION//
@@ -54,17 +50,16 @@ function scr_card_viridian_pollinate(_stct_card,_ref_caster,_ref_target){
 		//-------------------//
 		//APPLY REGENERATION//
 		//-------------------//
-		global.ref_target_beast = _ref_affected_target;
-		scr_status_apply_buff("REGENERATION",_val_healing,3);
+		scr_status_apply_buff("REGENERATION", _ref_affected_target, _val_healing, 3);
 
 		//----------------//
 		//IMMEDIATE HEAL//
 		//----------------//
-		scr_battle_heal_target(_val_healing,_ref_affected_target);
+		scr_battle_heal_target(
+			"FIXED",
+			_val_healing,
+			_ref_affected_target
+		);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

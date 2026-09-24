@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_menacing_roar",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_menacing_roar",
+  "parent":{
+    "name":"MENACING_ROAR",
+    "path":"folders/CARDS/VERMILION/MENACING_ROAR.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

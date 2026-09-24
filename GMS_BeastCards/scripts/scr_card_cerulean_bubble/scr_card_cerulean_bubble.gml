@@ -6,28 +6,16 @@
 //
 // ARGUMENTS: _stct_card is the Bubble card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_bubble(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//TARGET CASTER//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
-	global.ref_target_beast = _ref_caster;
 
 	//========================//
 	//GAIN DIVINE PROTECTION//
 	//========================//
-	scr_status_apply_buff(
-		"DIVINE_PROTECTION",
-		1
-	);
+	scr_status_apply_buff("DIVINE_PROTECTION", _ref_caster, 1);
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

@@ -6,9 +6,16 @@
 //           Each stack grants +2 Linear Damage.
 //           Infinite and uncleansable for the remainder of battle.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _ct_stacks_added=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=undefined){
+function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,7 +24,6 @@ function scr_status_buff_apex_predator(_str_tag,_ref_status,_ct_stacks_added=und
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;

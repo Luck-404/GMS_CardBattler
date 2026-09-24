@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_flaming_lashes",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_flaming_lashes",
+  "parent":{
+    "name":"FLAMING_LASHES",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/FLAMING_LASHES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -7,13 +7,16 @@
 //           After Burn damage resolves, checks the current Char threshold.
 //           Burn is not consumed when Char triggers.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime optionally sets its duration.
-// RETURNS: The active Burn Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined, _flag_forced_tick=false.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined,_flag_forced_tick=false,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -22,7 +25,6 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -264,10 +266,13 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined){
 				);
 			}
 
-			//----------------//
-			//UPDATE LIFETIME//
-			//----------------//
-			scr_status_tick_lifetime(_ref_status);
+			//================//
+			//NORMAL TICK: UPDATE LIFETIME//
+			//================//
+			if (!_flag_forced_tick){
+
+				scr_status_tick_lifetime(_ref_status);
+			}
 
 			if (instance_exists(_ref_host)){
 				scr_status_reposition(_ref_host);

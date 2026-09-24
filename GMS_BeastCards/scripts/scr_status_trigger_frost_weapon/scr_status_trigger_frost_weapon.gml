@@ -5,6 +5,9 @@
 //           Applies the Buff's Frostbite magnitude once to every living Beast
 //           affected by the Attack resolution.
 //
+// ARGUMENTS: _ref_attacker, _ref_primary_target, _stct_card.
+// RETURNS: True when the Frost Weapon effect triggers; false otherwise.
+//
 //===============================================================================//
 
 function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct_card){
@@ -66,10 +69,6 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 		return false;
 	}
 
-	//----------------------//
-	//STORE ORIGINAL TARGET//
-	//----------------------//
-	var _ref_original_target = global.ref_target_beast;
 	var _flag_triggered = false;
 
 	//================//
@@ -94,25 +93,17 @@ function scr_status_trigger_frost_weapon(_ref_attacker,_ref_primary_target,_stct
 			continue;
 		}
 
-		//--------------//
-		//TARGET ENEMY//
-		//--------------//
-		global.ref_target_beast = _ref_target;
 
 		//-----------------//
 		//APPLY FROSTBITE//
 		//-----------------//
 		repeat (_ct_frostbite){
-			scr_status_apply_dot("FROSTBITE");
+			scr_status_apply_dot("FROSTBITE", _ref_target);
 		}
 
 		_flag_triggered = true;
 	}
 
-	//----------------//
-	//RESTORE TARGET//
-	//----------------//
-	global.ref_target_beast = _ref_original_target;
 
 	//----------//
 	//FEEDBACK//

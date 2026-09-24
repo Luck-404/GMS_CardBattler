@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,10 +15,15 @@ function scr_card_viridian_thornmail(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GRANT ARMOR//
 	//================//
-	scr_battle_armor_target(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_armor_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_caster
+	);
+
 
 	//================//
 	//APPLY THORNS//
 	//================//
-	scr_status_apply_buff("THORNS",3,3);
+	scr_status_apply_buff("THORNS", _ref_target, 3, 3);
 }

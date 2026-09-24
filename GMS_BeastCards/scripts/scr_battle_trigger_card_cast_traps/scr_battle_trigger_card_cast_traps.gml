@@ -42,7 +42,7 @@ function scr_battle_trigger_card_cast_traps(_ref_caster,_ref_target,_stct_card){
 			continue;
 		}
 
-		if (_ref_trap._flag_triggered){
+		if (_ref_trap._ref_host != _ref_caster || _ref_trap._flag_triggered){
 			continue;
 		}
 
@@ -61,7 +61,7 @@ function scr_battle_trigger_card_cast_traps(_ref_caster,_ref_target,_stct_card){
 			continue;
 		}
 
-		if (_ref_trap._scr_trap_callback == undefined){
+		if (!is_callable(_ref_trap._scr_trap_callback)){
 			continue;
 		}
 

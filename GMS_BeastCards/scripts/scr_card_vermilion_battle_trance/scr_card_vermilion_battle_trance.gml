@@ -12,13 +12,6 @@
 
 function scr_card_vermilion_battle_trance(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	//================//
 	//DRAW 1 CARD//
 	//================//

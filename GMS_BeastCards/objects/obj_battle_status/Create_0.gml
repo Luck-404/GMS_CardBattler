@@ -39,6 +39,8 @@ _val_status_lifetime_max = 3;
 _flag_status_infinite = false;
 _str_status_command = "WAIT";
 
+_flag_second_wind_active = false;
+
 //================//
 //STATUS STACKING//
 //================//

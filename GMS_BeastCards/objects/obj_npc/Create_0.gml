@@ -252,26 +252,6 @@ hscr_npc_resume_path = function(){
 };
 
 //-------------------------------------------------------------------------------//
-// HSCR_NPC_STOP_PATH
-// FUNCTION: Completely ends NPC path movement.
-//           Removes the active path assignment and clears pathing state.
-//
-// ARGUMENTS: None.
-// RETURNS: Nothing.
-//
-//-------------------------------------------------------------------------------//
-hscr_npc_stop_path = function(){
-
-	if (path_index != -1){
-		path_end();
-	}
-
-	_flag_path_started = false;
-	_flag_path_paused = false;
-	_flag_moving = false;
-};
-
-//-------------------------------------------------------------------------------//
 // HSCR_NPC_UPDATE_FACING
 // FUNCTION: Updates horizontal sprite facing from actual NPC movement.
 //           Preserves the current facing while stationary.

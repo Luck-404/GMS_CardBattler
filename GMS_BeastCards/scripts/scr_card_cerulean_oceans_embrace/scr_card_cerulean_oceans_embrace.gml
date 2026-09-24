@@ -43,30 +43,19 @@ function scr_card_cerulean_oceans_embrace(_stct_card,_ref_caster,_ref_target){
 		var _val_heal = ceil(_ref_beast._val_max_hp * (_stct_card._val_card_magnitude / 100));
 
 		scr_battle_heal_target(
+			"FIXED",
 			_val_heal,
 			_ref_beast
 		);
 
-		//----------------//
-		//REMOVE ALL DOTS//
-		//----------------//
-		var _ct_statuses = ds_list_size(_ref_beast._list_statuses);
 
-		scr_status_cleanse_type(
+		//----------------------------//
+		//REMOVE ALL DOTS AND DEBUFFS //
+		//----------------------------//
+		scr_status_cleanse(
 			_ref_beast,
-			"DOT",
-			_ct_statuses
-		);
-
-		//-------------------//
-		//REMOVE ALL DEBUFFS//
-		//-------------------//
-		_ct_statuses = ds_list_size(_ref_beast._list_statuses);
-
-		scr_status_cleanse_type(
-			_ref_beast,
-			"DEBUFF",
-			_ct_statuses
+			["DOT","DEBUFF"],
+			"ALL"
 		);
 	}
 }

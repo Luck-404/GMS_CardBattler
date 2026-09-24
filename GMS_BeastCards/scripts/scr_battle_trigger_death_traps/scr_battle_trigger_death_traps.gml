@@ -20,6 +20,11 @@ function scr_battle_trigger_death_traps(_ref_host){
 		return 0;
 	}
 
+	// Death Traps resolve after HP reaches zero but before the DEAD list transition.
+	if (_ref_host._val_cur_hp > 0){
+		return 0;
+	}
+
 	if (!variable_instance_exists(_ref_host,"_list_traps")){
 		return 0;
 	}
@@ -41,7 +46,7 @@ function scr_battle_trigger_death_traps(_ref_host){
 			continue;
 		}
 
-		if (_ref_trap._flag_triggered){
+		if (_ref_trap._ref_host != _ref_host || _ref_trap._flag_triggered){
 			continue;
 		}
 
@@ -53,7 +58,7 @@ function scr_battle_trigger_death_traps(_ref_host){
 			continue;
 		}
 
-		if (_ref_trap._scr_trap_callback == undefined){
+		if (!is_callable(_ref_trap._scr_trap_callback)){
 			continue;
 		}
 

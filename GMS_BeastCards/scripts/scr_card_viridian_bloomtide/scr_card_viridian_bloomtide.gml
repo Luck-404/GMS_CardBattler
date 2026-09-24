@@ -16,5 +16,7 @@ function scr_card_viridian_bloomtide(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY BLOOMTIDE//
 	//================//
-	scr_status_apply_event("BLOOMTIDE");
+	scr_status_apply_event(
+		"BLOOMTIDE"
+	);
 }

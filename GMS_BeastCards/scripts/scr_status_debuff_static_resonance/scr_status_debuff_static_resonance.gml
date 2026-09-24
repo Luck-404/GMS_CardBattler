@@ -6,9 +6,16 @@
 //           Whenever the host is successfully repositioned,
 //           it gains 1 Stormstruck.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_debuff_static_resonance(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_static_resonance(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,7 +24,6 @@ function scr_status_debuff_static_resonance(_str_tag,_ref_status,_val_lifetime=u
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -96,7 +102,7 @@ function scr_status_debuff_static_resonance(_str_tag,_ref_status,_val_lifetime=u
 			_ref_new_status._str_status_name = "STATIC_RESONANCE";
 			_ref_new_status._str_status_desc = "GAIN 1 STORMSTRUCK WHEN REPOSITIONED";
 
-			_ref_new_status._spr_status = undefined;
+			_ref_new_status._spr_status = spr_status_debuff_static_resonance;
 
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = false;

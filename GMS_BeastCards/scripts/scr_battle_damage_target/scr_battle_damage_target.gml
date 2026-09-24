@@ -1,26 +1,29 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_DAMAGE_TARGET
-// FUNCTION: Deals standard direct damage to a target battle Beast.
-//           Resolves Dodge, protection, color/critical bonuses, damage modifiers,
-//           Power scaling, Defense mitigation, Minions, Armor, Overhealth, HP,
-//           held items, reactive statuses, and post-damage triggers.
+// FUNCTION: Resolves direct Card damage using LINEAR or target-Max-HP PERCENT
+//           bases, or card-independent FIXED damage.
+//           FIXED preserves the former dedicated fixed-damage pipeline.
+//           Armor piercing applies only to Card damage.
 //
-// ARGUMENTS: _val_damage is base damage before combat modifiers.
-//            _ref_target is the initially targeted battle Beast.
-//            _stct_presentation is an optional hit-presentation override.
-// RETURNS: True when the damage instance resolves, otherwise false.
+// ARGUMENTS: _str_mode - LINEAR, PERCENT, or FIXED.
+//            _ref_caster - attacking Beast for LINEAR/PERCENT; optional source
+//            Minion for FIXED.
+//            _ref_target - selected battle Beast.
+//            _val_amount - base amount or PERCENT value.
+//            _stct_options - Card/options struct for LINEAR/PERCENT.
+// RETURNS: True when the damage instance resolves; otherwise false.
 //
 //===============================================================================//
 
-function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=undefined){
+function scr_battle_damage_target(_str_mode,_ref_caster,_ref_target,_val_amount,_stct_options=undefined){
 
 	#region VALIDATION
 
 	//----------------//
 	//VALIDATE TARGET//
 	//----------------//
-	if (!instance_exists(_ref_target)){
+	if (_ref_target == -1 || !instance_exists(_ref_target)){
 		return false;
 	}
 
@@ -28,41 +31,434 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		return false;
 	}
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	var _ref_caster = global.ref_caster_beast;
-
-	if (!instance_exists(_ref_caster)){
+	//=======================//
+	//VALIDATE DAMAGE MODE//
+	//=======================//
+	if (
+		_str_mode != "LINEAR" &&
+		_str_mode != "PERCENT" &&
+		_str_mode != "FIXED"
+	){
 		return false;
 	}
 
-	if (!is_struct(_ref_caster._ref_unit)){
+	if (!is_real(_val_amount) || _val_amount <= 0){
+		return false;
+	}
+
+	#region FIXED DAMAGE
+
+	//==================//
+	//FIXED DAMAGE MODE//
+	//==================//
+	if (_str_mode == "FIXED"){
+
+		/*
+			FIXED preserves the former dedicated fixed-damage pipeline.
+
+			It does not require a Card struct or battle Beast caster and does not
+			resolve Dodge, Critical Hits, Power scaling, Defense mitigation,
+			Weather/Card damage bonuses, or direct-Attack triggers.
+
+			When _ref_caster is an obj_battle_minion, it is retained as the
+			killing Minion for Minion-death mechanics such as Cinderling.
+		*/
+
+		//================//
+		//SOURCE MINION//
+		//================//
+		var _ref_fixed_source_minion = undefined;
+
+		if (
+			instance_exists(_ref_caster) &&
+			_ref_caster.object_index == obj_battle_minion
+		){
+			_ref_fixed_source_minion = _ref_caster;
+		}
+
+		//================//
+		//BASE DAMAGE//
+		//================//
+		var _val_fixed_damage_left = max(
+			0,
+			_val_amount
+		);
+
+		if (_val_fixed_damage_left <= 0){
+			return false;
+		}
+
+		var _val_fixed_final_damage =
+			_val_fixed_damage_left;
+
+		//================//
+		//DAMAGE REDIRECT//
+		//================//
+		_ref_target = scr_status_resolve_damage_redirect(
+			_ref_target
+		);
+
+		if (!instance_exists(_ref_target)){
+			return false;
+		}
+
+		//===================//
+		//MINION ABSORPTION//
+		//===================//
+		var _val_fixed_minion_damage = 0;
+
+		if (ds_exists(_ref_target._list_minions,ds_type_list)){
+
+			var _list_fixed_minions =
+				_ref_target._list_minions;
+
+			//-----------------------//
+			//REMOVE INVALID MINIONS//
+			//-----------------------//
+			for (
+				var _it_fixed_minion =
+					ds_list_size(_list_fixed_minions) - 1;
+				_it_fixed_minion >= 0;
+				_it_fixed_minion--
+			){
+
+				var _ref_fixed_minion = ds_list_find_value(
+					_list_fixed_minions,
+					_it_fixed_minion
+				);
+
+				if (!instance_exists(_ref_fixed_minion)){
+
+					ds_list_delete(
+						_list_fixed_minions,
+						_it_fixed_minion
+					);
+				}
+			}
+
+			var _ct_fixed_minions =
+				ds_list_size(_list_fixed_minions);
+
+			if (
+				_ct_fixed_minions > 0 &&
+				_val_fixed_damage_left > 0
+			){
+
+				var _val_fixed_damage_per_minion =
+					_val_fixed_damage_left div
+					_ct_fixed_minions;
+
+				var _val_fixed_remainder =
+					_val_fixed_damage_left mod
+					_ct_fixed_minions;
+
+				//-----------------------//
+				//DISTRIBUTE MINION HIT//
+				//-----------------------//
+				for (
+					var _it_fixed_minion =
+						_ct_fixed_minions - 1;
+					_it_fixed_minion >= 0;
+					_it_fixed_minion--
+				){
+
+					var _ref_fixed_minion =
+						ds_list_find_value(
+							_list_fixed_minions,
+							_it_fixed_minion
+						);
+
+					if (!instance_exists(_ref_fixed_minion)){
+						continue;
+					}
+
+					var _val_fixed_take =
+						_val_fixed_damage_per_minion;
+
+					if (_val_fixed_remainder > 0){
+
+						_val_fixed_take++;
+						_val_fixed_remainder--;
+					}
+
+					var _val_fixed_actual = min(
+						_val_fixed_take,
+						_ref_fixed_minion._val_cur_hp
+					);
+
+					if (_val_fixed_actual <= 0){
+						continue;
+					}
+
+					_ref_fixed_minion._val_cur_hp -=
+						_val_fixed_actual;
+
+					_val_fixed_minion_damage +=
+						_val_fixed_actual;
+
+					scr_gui_spawn_popup_scrolling(
+						"TEXT",
+						"-" + string(_val_fixed_actual),
+						undefined,
+						c_maroon,
+						_ref_fixed_minion.x +
+							irandom_range(-16,16),
+						_ref_fixed_minion.y -
+							16 +
+							irandom_range(-16,16)
+					);
+
+					//===============//
+					//DESTROY MINION//
+					//===============//
+					if (_ref_fixed_minion._val_cur_hp <= 0){
+
+						_ref_fixed_minion._val_cur_hp = 0;
+
+						scr_minion_destroy(
+							_ref_fixed_minion,
+							"DEATH",
+							_ref_fixed_source_minion
+						);
+					}
+				}
+
+				_val_fixed_damage_left -=
+					_val_fixed_minion_damage;
+			}
+		}
+
+		//================//
+		//BEAST DAMAGE//
+		//================//
+		var _val_fixed_beast_damage = 0;
+
+		var _val_fixed_armor_damage = 0;
+		var _val_fixed_overhealth_damage = 0;
+		var _val_fixed_hp_damage = 0;
+
+		//-------//
+		//ARMOR//
+		//-------//
+		if (
+			_val_fixed_damage_left > 0 &&
+			_ref_target._val_armor > 0
+		){
+
+			_val_fixed_armor_damage = min(
+				_ref_target._val_armor,
+				_val_fixed_damage_left
+			);
+
+			var _stct_fixed_armor_result =
+				scr_battle_destroy_armor(
+					_ref_target,
+					_val_fixed_armor_damage
+				);
+
+			_val_fixed_armor_damage =
+				_stct_fixed_armor_result._val_armor_removed;
+
+			_val_fixed_damage_left -=
+				_val_fixed_armor_damage;
+
+			scr_gui_spawn_popup_scrolling(
+				"TEXT",
+				"-" + string(_val_fixed_armor_damage),
+				undefined,
+				c_blue,
+				_ref_target.x +
+					irandom_range(-32,32),
+				_ref_target.y -
+					24 +
+					irandom_range(-32,32)
+			);
+		}
+
+		//------------//
+		//OVERHEALTH//
+		//------------//
+		if (
+			_val_fixed_damage_left > 0 &&
+			_ref_target._val_overhealth > 0
+		){
+
+			_val_fixed_overhealth_damage = min(
+				_ref_target._val_overhealth,
+				_val_fixed_damage_left
+			);
+
+			_ref_target._val_overhealth -=
+				_val_fixed_overhealth_damage;
+
+			_val_fixed_damage_left -=
+				_val_fixed_overhealth_damage;
+
+			_val_fixed_beast_damage +=
+				_val_fixed_overhealth_damage;
+
+			scr_gui_spawn_popup_scrolling(
+				"TEXT",
+				"-" +
+					string(_val_fixed_overhealth_damage),
+				undefined,
+				c_green,
+				_ref_target.x +
+					irandom_range(-32,32),
+				_ref_target.y -
+					24 +
+					irandom_range(-32,32)
+			);
+		}
+
+		//---------//
+		//BEAST HP//
+		//---------//
+		if (_val_fixed_damage_left > 0){
+
+			_val_fixed_hp_damage = min(
+				_val_fixed_damage_left,
+				_ref_target._val_cur_hp
+			);
+
+			if (_val_fixed_hp_damage > 0){
+
+				_ref_target._val_cur_hp = max(
+					0,
+					_ref_target._val_cur_hp -
+						_val_fixed_hp_damage
+				);
+
+				_val_fixed_beast_damage +=
+					_val_fixed_hp_damage;
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"-" + string(_val_fixed_hp_damage),
+					undefined,
+					c_maroon,
+					_ref_target.x +
+						irandom_range(-32,32),
+					_ref_target.y -
+						24 +
+						irandom_range(-32,32)
+				);
+			}
+		}
+
+		//================//
+		//DEBUG DAMAGE//
+		//================//
+		if (instance_exists(_ref_fixed_source_minion)){
+
+			scr_debug_log(
+				"BATTLE",
+				"DAMAGE",
+				_ref_fixed_source_minion,
+				string_upper(
+					_ref_fixed_source_minion._str_team
+				) + " " +
+				string_upper(
+					_ref_fixed_source_minion._str_name
+				) +
+				" DEALT " +
+				string(_val_fixed_final_damage) +
+				" FIXED DAMAGE TO " +
+				string_upper(_ref_target._str_team) +
+				" " +
+				string_upper(
+					_ref_target._ref_unit._str_beast_name
+				) +
+				" | MINIONS: " +
+				string(_val_fixed_minion_damage) +
+				" | ARMOR: " +
+				string(_val_fixed_armor_damage) +
+				" | OVERHEALTH: " +
+				string(_val_fixed_overhealth_damage) +
+				" | HP: " +
+				string(_val_fixed_hp_damage) +
+				" | TARGET HP: " +
+				string(_ref_target._val_cur_hp) +
+				"/" +
+				string(_ref_target._val_max_hp),
+				"BATTLE",
+				"SCR_BATTLE_DAMAGE_TARGET"
+			);
+		}
+
+		//================//
+		//DAMAGE TRAPS//
+		//================//
+		if (
+			_val_fixed_armor_damage +
+			_val_fixed_beast_damage >
+			0
+		){
+
+			scr_battle_trigger_damage_traps(
+				_ref_target,
+				_val_fixed_armor_damage +
+					_val_fixed_beast_damage
+			);
+		}
+
+		//============//
+		//WAKE SLEEP//
+		//============//
+		if (_val_fixed_beast_damage > 0){
+
+			scr_status_wake_sleep_on_damage(
+				_ref_target
+			);
+		}
+
+		return true;
+	}
+
+	#endregion
+
+	//=========================//
+	//VALIDATE CASTER AND CARD//
+	//=========================//
+	if (_ref_caster == -1 || !instance_exists(_ref_caster) || !variable_instance_exists(_ref_caster,"_ref_unit") || !is_struct(_ref_caster._ref_unit)){
+		return false;
+	}
+
+	if (!is_struct(_stct_options) || !variable_struct_exists(_stct_options,"card") || !is_struct(_stct_options.card)){
 		return false;
 	}
 
 	var _stct_caster_unit = _ref_caster._ref_unit;
-
-	//--------------//
-	//VALIDATE CARD//
-	//--------------//
-	var _ref_cast_card = global.ref_cast_card;
-
-	if (!instance_exists(_ref_cast_card)){
-		return false;
-	}
-
-	if (!is_struct(_ref_cast_card._ref_card)){
-		return false;
-	}
-
-	var _stct_card = _ref_cast_card._ref_card;
+	var _stct_card = _stct_options.card;
 	var _str_card_stat = _stct_card._str_card_stat;
 
-	//-------------//
-	//BASE DAMAGE//
-	//-------------//
-	var _val_damage_left = max(0,_val_damage);
+	//============================//
+	//RESOLVE EXPLICIT OPTIONS//
+	//============================//
+	var _flag_pierce_armor = false;
+	var _stct_presentation = undefined;
+	var _ref_source_card = undefined;
+
+	if (variable_struct_exists(_stct_options,"pierce_armor")){
+		_flag_pierce_armor = (_stct_options.pierce_armor == true);
+	}
+
+	if (variable_struct_exists(_stct_options,"presentation")){
+		_stct_presentation = _stct_options.presentation;
+	}
+
+	if (variable_struct_exists(_stct_options,"card_instance")){
+		_ref_source_card = _stct_options.card_instance;
+	}
+
+	//===========================//
+	//CALCULATE MODE BASE DAMAGE//
+	//===========================//
+	var _val_damage_left = max(0,_val_amount);
+
+	if (_str_mode == "PERCENT"){
+		_val_damage_left = _ref_target._val_max_hp * (_val_amount / 100);
+	}
 
 	if (_val_damage_left <= 0){
 		return false;
@@ -225,6 +621,22 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 
 	#endregion
 
+
+	//=================================//
+	//PREVIEW FINAL DAMAGE RECIPIENT//
+	//=================================//
+	// Do not consume Redirect yet.
+	// The damage floor is checked later in this function.
+
+	var _ref_damage_recipient = scr_status_resolve_damage_redirect(
+		_ref_target,
+		false
+	);
+
+	if (!instance_exists(_ref_damage_recipient)){
+		return false;
+	}
+
 	#region DAMAGE MODIFIERS
 
 	//--------------------------//
@@ -236,12 +648,13 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 
 	_val_damage_left += _val_outgoing_linear_modifier;
 
+
 	//--------------------------//
 	//INCOMING LINEAR MODIFIERS//
 	//--------------------------//
 	var _val_incoming_linear_modifier =
-		_ref_target._val_dmg_taken_linear_bonus -
-		_ref_target._val_dmg_taken_linear_reduction;
+		_ref_damage_recipient._val_dmg_taken_linear_bonus -
+		_ref_damage_recipient._val_dmg_taken_linear_reduction;
 
 	_val_damage_left += _val_incoming_linear_modifier;
 
@@ -257,14 +670,27 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		1 + (_val_outgoing_scalar_modifier / 100)
 	);
 
-	_val_damage_left *= _val_outgoing_scalar_multiplier;
+_val_damage_left *= _val_outgoing_scalar_multiplier;
+
+//============================//
+//SECOND WIND DIRECT DAMAGE//
+//============================//
+var _val_second_wind_bonus = scr_status_get_second_wind_direct_bonus(
+	_ref_caster,
+	_stct_card
+);
+
+if (_val_second_wind_bonus > 0){
+
+	_val_damage_left *= 1 + (_val_second_wind_bonus / 100);
+}
 
 	//--------------------------//
 	//INCOMING SCALAR MODIFIERS//
 	//--------------------------//
 	var _val_incoming_scalar_modifier =
-		_ref_target._val_dmg_taken_scalar_bonus -
-		_ref_target._val_dmg_taken_scalar_reduction;
+		_ref_damage_recipient._val_dmg_taken_scalar_bonus -
+		_ref_damage_recipient._val_dmg_taken_scalar_reduction;
 
 	var _val_incoming_scalar_multiplier = max(
 		0,
@@ -361,6 +787,19 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		_val_damage_left /= _val_mdef_modifier;
 	}
 
+	//============================//
+	//MOLTEN BRAND DAMAGE BONUS//
+	//============================//
+	var _val_molten_brand_bonus = scr_status_get_molten_brand_damage_bonus(
+		_ref_target,
+		_stct_card
+	);
+
+	if (_val_molten_brand_bonus > 0){
+
+		_val_damage_left *= 1 + (_val_molten_brand_bonus / 100);
+	}
+
 	//----------------//
 	//FINALIZE DAMAGE//
 	//----------------//
@@ -400,6 +839,15 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 	//--------------------//
 	var _val_final_damage = _val_damage_left;
 
+	//===========================//
+	//MELTING ARMAMENTS: PRE-HIT//
+	//===========================//
+	scr_status_trigger_melting_armaments(
+		_ref_caster,
+		_ref_target,
+		_stct_card
+	);
+
 	#endregion
 
 	#region HIT PRESENTATION
@@ -411,7 +859,8 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		_ref_target,
 		_str_card_stat,
 		_val_damage_left,
-		_stct_presentation
+		_stct_presentation,
+		_ref_source_card
 	);
 
 	var _ct_hit_vfx_delay = 0;
@@ -544,12 +993,7 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 	//-------//
 	//ARMOR//
 	//-------//
-	if (_val_damage_left > 0 && _ref_target._val_armor > 0){
-
-		//------------------//
-		//STORE ARMOR BEFORE//
-		//------------------//
-		var _val_armor_before = _ref_target._val_armor;
+	if (!_flag_pierce_armor && _val_damage_left > 0 && _ref_target._val_armor > 0){
 
 		//-----------------------//
 		//CALCULATE ARMOR BLOCKED//
@@ -571,7 +1015,8 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		//-------------//
 		//DAMAGE ARMOR//
 		//-------------//
-		_ref_target._val_armor -= _val_armor_blocked;
+		var _stct_armor_result = scr_battle_destroy_armor(_ref_target,_val_armor_blocked);
+		_val_armor_blocked = _stct_armor_result._val_armor_removed;
 		_val_damage_left -= _val_armor_blocked;
 
 		//----------------//
@@ -584,7 +1029,7 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		//----------------//
 		//ARMOR BREAK VFX//
 		//----------------//
-		if (_val_armor_before > 0 && _ref_target._val_armor <= 0){
+		if (_stct_armor_result._flag_armor_broken){
 
 			scr_battle_vfx(
 				_ref_target,
@@ -657,10 +1102,23 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 			_val_beast_damage += _val_hp_damage;
 		}
 	}
-
+	
 	#endregion
 
 	#region DEBUG DAMAGE
+
+	//--------------------//
+	//MODE-SPECIFIC LABEL//
+	//--------------------//
+	var _str_damage_label = "STANDARD";
+
+	if (_str_mode == "PERCENT"){
+		_str_damage_label = "MAX HP " + string(_val_amount) + "%";
+	}
+
+	if (_flag_pierce_armor){
+		_str_damage_label = (_str_mode == "PERCENT") ? _str_damage_label + " | ARMOR PIERCE" : "ARMOR PIERCE";
+	}
 
 	//------------------//
 	//LOG DAMAGE RESULT//
@@ -675,11 +1133,25 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		_val_overhealth_blocked,
 		_val_hp_damage,
 		_flag_critical,
-		"STANDARD",
-		"SCR_BATTLE_DAMAGE_TARGET"
+		_str_damage_label,
+		"SCR_BATTLE_DAMAGE_TARGET",
+		_ref_source_card
 	);
 
 	#endregion
+
+	//=======================//
+	//RECORD BATTLE FRENZY//
+	//=======================//
+	scr_battle_record_battle_frenzy_hit(
+		_ref_caster,
+		_ref_target,
+		_val_minion_damage_applied +
+		_val_armor_blocked +
+		_val_overhealth_blocked +
+		_val_hp_damage,
+		_ref_source_card
+	);
 
 	#region DAMAGE TRIGGERS
 
@@ -690,6 +1162,17 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		scr_battle_trigger_damage_traps(
 			_ref_target,
 			_val_armor_blocked + _val_beast_damage
+		);
+	}
+
+	//================//
+	//PAIN RESPONSE//
+	//================//
+	if (_val_hp_damage > 0){
+
+		scr_status_trigger_pain_response(
+			_ref_target,
+			_val_hp_damage
 		);
 	}
 
@@ -774,17 +1257,6 @@ function scr_battle_damage_target(_val_damage,_ref_target,_stct_presentation=und
 		_ref_target._val_cur_hp > 0
 	){
 		scr_status_trigger_frozen_curse(_ref_target,_ref_caster);
-	}
-
-	//----------------------//
-	//MELEE DEFENSE TRIGGERS//
-	//----------------------//
-	if (
-		!global.flag_thorns_retaliating &&
-		_stct_card._str_card_type == "ATTACK" &&
-		_stct_card._str_card_range == "MELEE"
-	){
-		scr_status_trigger_melee_defense_buffs(_ref_target,_ref_caster);
 	}
 
 	#endregion

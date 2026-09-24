@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_pain_response",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_pain_response",
+  "parent":{
+    "name":"PAIN_RESPONSE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/PAIN_RESPONSE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,5 +1,4 @@
 //===============================================================================//
-//
 // DRAW GUI: OBJ_GUI_RANCH_PANE
 // FUNCTION: Draws Party and Ranch Beast slots.
 //           Handles moving Beasts between Party and Ranch.

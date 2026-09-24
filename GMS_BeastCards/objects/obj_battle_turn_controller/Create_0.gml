@@ -30,6 +30,7 @@ if (instance_number(obj_battle_turn_controller) > 1){
 //VARIABLES//
 //---------//
 #region VARIABLES
+_ct_turn_serial = 0;
 
 //------------//
 //TEAM TRAPS//
@@ -400,7 +401,7 @@ function hscr_battle_execute_entry_trigger(_stct_trigger){
 //
 //—------------------------------------------------------------------------------//
 function hscr_battle_pass_turn(){
-
+	_ct_turn_serial++;
 	//----------------//
 	//GET ENDING TEAM//
 	//----------------//
@@ -423,9 +424,18 @@ function hscr_battle_pass_turn(){
 	var _flag_round_complete =
 		(_ct_normal_turns_completed mod 2 == 0);
 
-	var _ct_completed_round = _ct_round;
+		var _ct_completed_round = _ct_round;
 
+	//========================//
+	//RESOLVE END-OF-ROUND AURA//
+	//========================//
 	if (_flag_round_complete){
+
+		scr_status_trigger_hungering_flames_round_end();
+
+		//================//
+		//ADVANCE ROUND//
+		//================//
 		_ct_round++;
 	}
 

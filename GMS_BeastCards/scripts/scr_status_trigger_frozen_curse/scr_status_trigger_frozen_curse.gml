@@ -1,14 +1,16 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_TRIGGER_FROZEN_CURSE
 // FUNCTION: Checks a defending Beast for Frozen Curse.
 //           If the defender is Frostbitten, Frostburned, Frozen, or was the
-//           current ICEBREAKER target, deals stored additional NEU damage.
+//           current ICEBREAKER target, deals additional NEU damage.
+//           Bonus damage = stored magnitude * active stacks.
 //           Preserves combat context and logs the successful trigger.
 //
-// ARGUMENTS: _ref_defender is the Beast struck and _ref_attacker is the Beast
-//            responsible for the triggering Attack.
-// RETURNS: True when Frozen Curse successfully triggers; otherwise false.
+// ARGUMENTS: _ref_defender is the Beast struck.
+//            _ref_attacker is the Beast responsible for the Attack.
+// RETURNS: True when Frozen Curse triggers; otherwise false.
 //
 //===============================================================================//
 
@@ -35,7 +37,10 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 	//================//
 	//CHECK CURSE//
 	//================//
-	var _ref_frozen_curse = scr_status_check("FROZEN_CURSE",_ref_defender);
+	var _ref_frozen_curse = scr_status_check(
+		"FROZEN_CURSE",
+		_ref_defender
+	);
 
 	if (_ref_frozen_curse == -1){
 		return false;
@@ -48,9 +53,20 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 	//=======================//
 	//CHECK FROST CONDITION//
 	//=======================//
-	var _ref_frostbite = scr_status_check("FROSTBITE",_ref_defender);
-	var _ref_frostburn = scr_status_check("FROSTBURN",_ref_defender);
-	var _ref_frozen = scr_status_check("FROZEN",_ref_defender);
+	var _ref_frostbite = scr_status_check(
+		"FROSTBITE",
+		_ref_defender
+	);
+
+	var _ref_frostburn = scr_status_check(
+		"FROSTBURN",
+		_ref_defender
+	);
+
+	var _ref_frozen = scr_status_check(
+		"FROZEN",
+		_ref_defender
+	);
 
 	if (
 		_ref_frostbite == -1 &&
@@ -61,10 +77,12 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 		return false;
 	}
 
-	//------------------//
-	//GET BONUS DAMAGE//
-	//------------------//
-	var _val_bonus_damage = _ref_frozen_curse._val_status_magnitude;
+	//============================//
+	//CALCULATE TOTAL BONUS DAMAGE//
+	//============================//
+	var _val_bonus_damage =
+		_ref_frozen_curse._val_status_magnitude *
+		_ref_frozen_curse._ct_status_stacks;
 
 	if (_val_bonus_damage <= 0){
 		return false;
@@ -87,7 +105,6 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 	//STORE CURRENT CONTEXT//
 	//=======================//
 	var _ref_original_caster = global.ref_caster_beast;
-	var _ref_original_target = global.ref_target_beast;
 	var _str_original_stat = _stct_card._str_card_stat;
 	var _flag_original_triggering = global.flag_frozen_curse_triggering;
 
@@ -96,7 +113,6 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 	//======================//
 	global.flag_frozen_curse_triggering = true;
 	global.ref_caster_beast = _ref_attacker;
-	global.ref_target_beast = _ref_defender;
 
 	_stct_card._str_card_stat = "NEU";
 
@@ -110,6 +126,8 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 		"ATTACKER: " +
 		string_upper(_ref_attacker._str_team) + " " +
 		string_upper(_ref_attacker._ref_unit._str_beast_name) +
+		" | STACKS: " +
+		string(_ref_frozen_curse._ct_status_stacks) +
 		" | BONUS NEU DAMAGE: " +
 		string(_val_bonus_damage),
 		"SCR_STATUS_TRIGGER_FROZEN_CURSE"
@@ -119,8 +137,14 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 	//DEAL BONUS DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_attacker,
+		_ref_defender,
 		_val_bonus_damage,
-		_ref_defender
+		{
+			card: _stct_card,
+			card_instance: global.ref_cast_card
+		}
 	);
 
 	//========================//
@@ -129,7 +153,6 @@ function scr_status_trigger_frozen_curse(_ref_defender,_ref_attacker){
 	_stct_card._str_card_stat = _str_original_stat;
 
 	global.ref_caster_beast = _ref_original_caster;
-	global.ref_target_beast = _ref_original_target;
 	global.flag_frozen_curse_triggering = _flag_original_triggering;
 
 	return true;

@@ -7,14 +7,16 @@
 //           Uses a dedicated Status icon.
 //           Trigger VFX/SFX are handled separately by scr_battle_vfx_char.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Char Status.
-//            _val_lifetime is retained for dispatcher compatibility.
-// RETURNS: The active Char Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -23,7 +25,6 @@ function scr_status_debuff_char(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//

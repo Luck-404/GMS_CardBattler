@@ -118,8 +118,11 @@ function scr_battle_trigger_shatter(_ref_target){
 	_stct_cast_card._str_card_stat = "NEU";
 
 	scr_battle_damage_target(
+		"LINEAR",
+		global.ref_caster_beast,
+		_ref_target,
 		_val_shatter_damage,
-		_ref_target
+		{card: _stct_cast_card, card_instance: global.ref_cast_card}
 	);
 
 	//-----------------//

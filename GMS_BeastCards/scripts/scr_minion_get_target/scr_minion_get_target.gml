@@ -1,14 +1,15 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_MINION_GET_TARGET
-// FUNCTION: Selects an enemy target for a battle Minion.
+// FUNCTION: Selects a living, valid enemy target for a battle Minion.
 //           Prioritizes living Beasts affected by Focus.
 //           Supports optional positional targeting preferences.
 //           Falls back to a random living enemy.
 //
-// INPUTS:   _list_enemy      - Enemy team's living Beast list.
-//           _ref_exclude     - Optional Beast to exclude from selection.
-//           _str_preference  - Optional positional targeting preference.
+// ARGUMENTS: _list_enemy      - Enemy team's living Beast list.
+//            _ref_exclude     - Optional Beast to exclude from selection.
+//            _str_preference  - Optional positional targeting preference.
+// RETURNS: Eligible Beast instance or undefined when none exist.
 //
 //===============================================================================//
 
@@ -21,7 +22,8 @@ function scr_minion_get_target(_list_enemy,_ref_exclude=undefined,_str_preferenc
 		return undefined;
 	}
 
-	if (ds_list_size(_list_enemy) <= 0){
+	var _ct_enemy_candidates = ds_list_size(_list_enemy);
+	if (_ct_enemy_candidates <= 0){
 		return undefined;
 	}
 
@@ -34,7 +36,7 @@ function scr_minion_get_target(_list_enemy,_ref_exclude=undefined,_str_preferenc
 	//-----------------------//
 	//BUILD ELIGIBLE TARGETS//
 	//-----------------------//
-	for (var _it_enemy = 0;_it_enemy < ds_list_size(_list_enemy);_it_enemy++){
+	for (var _it_enemy = 0;_it_enemy < _ct_enemy_candidates;_it_enemy++){
 
 		var _ref_enemy = ds_list_find_value(
 			_list_enemy,
@@ -42,6 +44,10 @@ function scr_minion_get_target(_list_enemy,_ref_exclude=undefined,_str_preferenc
 		);
 
 		if (!instance_exists(_ref_enemy)){
+			continue;
+		}
+
+		if (!variable_instance_exists(_ref_enemy,"_ref_unit") || !is_struct(_ref_enemy._ref_unit)){
 			continue;
 		}
 

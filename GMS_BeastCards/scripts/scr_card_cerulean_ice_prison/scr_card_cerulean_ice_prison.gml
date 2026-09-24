@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Ice Prison card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,8 +15,5 @@ function scr_card_cerulean_ice_prison(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY FROZEN//
 	//================//
-	scr_status_apply_cc(
-		"FROZEN",
-		_stct_card._val_card_magnitude
-	);
+	scr_status_apply_cc("FROZEN", _ref_target, _stct_card._val_card_magnitude);
 }

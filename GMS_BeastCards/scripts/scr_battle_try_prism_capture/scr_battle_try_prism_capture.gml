@@ -366,9 +366,9 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		" | UID: " +
 		string(_stct_captured_beast._uid_beast) +
 		" | HP: " +
-		string(_stct_captured_beast._val_beast_hp_cur) +
+		string(_stct_captured_beast._val_cur_hp) +
 		"/" +
-		string(_stct_captured_beast._val_beast_hp_max) +
+		string(_stct_captured_beast._val_max_hp) +
 		" | DESTINATION: " +
 		_str_destination,
 		"BATTLE",

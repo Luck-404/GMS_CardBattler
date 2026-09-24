@@ -6,9 +6,15 @@
 //           Allows the host's next card to ignore caster requirements.
 //           Remains active until consumed by a successful card cast.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_buff_malleability(_str_tag,_ref_status){
+function scr_status_buff_malleability(_str_tag,_ref_status,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,7 +23,6 @@ function scr_status_buff_malleability(_str_tag,_ref_status){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;

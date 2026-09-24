@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -16,10 +16,14 @@ function scr_card_viridian_natures_bond(_stct_card,_ref_caster,_ref_target){
 	//===================//
 	//APPLY NATURE'S BOND//
 	//===================//
-	scr_status_apply_buff("NATURES_BOND",2,5);
+	scr_status_apply_buff("NATURES_BOND", _ref_target, 2, 5);
 
 	//================//
 	//HEAL CASTER//
 	//================//
-	scr_battle_heal_target(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_heal_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_caster
+	);
 }

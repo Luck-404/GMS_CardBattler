@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_frontline_order",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_frontline_order",
+  "parent":{
+    "name":"FRONTLINE_ORDER",
+    "path":"folders/CARDS/VERMILION/FRONTLINE_ORDER.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

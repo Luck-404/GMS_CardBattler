@@ -1,20 +1,25 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DOT_FROSTBITE
-// FUNCTION: Handles the Frostbite damage-over-time Status.
-//           Stackable Timed.
-//           Each stack reduces the host's Maximum HP by 1 while active.
-//           Each round, destroys 1 Armor and deals 1 NEU damage per stack.
-//           Reapplications add one stack and refresh to the stored maximum life.
-//           Restores all Maximum HP removed by Frostbite when the Status ends.
+// FUNCTION: Handles stackable timed Frostbite.
+//           Each stack temporarily reduces:
+//             - Maximum HP by 1 (minimum 1)
+//             - PHYDEF by 1 (minimum 0)
+//             - MAGDEF by 1 (minimum 0)
+//           At START, deals 1 NEU damage per stack.
+//           Does NOT destroy Armor.
+//           Reapplication adds 1 stack and refreshes duration.
+//           Restores exact stat reductions when removed.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime optionally sets its duration.
-// RETURNS: The active Frostbite Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag - APPLY, REPEAT or DEATH.
+//            _ref_status - stored status for non-APPLY commands.
+//            _val_lifetime - optional lifetime.
+//            _ref_target - explicit APPLY host.
+// RETURNS: APPLY returns the applied status; otherwise undefined.
 //
 //===============================================================================//
 
-function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -23,12 +28,14 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
-			//----------------//
+			//================//
 			//VALIDATE TARGET//
-			//----------------//
+			//================//
 			if (!instance_exists(_ref_target)){
+				return undefined;
+			}
+
+			if (!is_struct(_ref_target._ref_unit)){
 				return undefined;
 			}
 
@@ -45,48 +52,38 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
+			//================//
 			//CHECK EXISTING//
-			//----------------//
-			var _ref_existing_status = scr_status_check("FROSTBITE",_ref_target);
+			//================//
+			var _ref_existing_status = scr_status_check(
+				"FROSTBITE",
+				_ref_target
+			);
+
 			var _ref_applied_status = undefined;
 
 			//================//
 			//STACK EXISTING//
 			//================//
-			if (_ref_existing_status != -1){
-
-				if (!instance_exists(_ref_existing_status)){
-					return undefined;
-				}
-
-				_ref_existing_status._ct_status_stacks++;
-
-				//------------------//
-				//REDUCE MAXIMUM HP//
-				//------------------//
-				if (_ref_target._val_max_hp > 1){
-
-					_ref_target._val_max_hp--;
-					_ref_existing_status._val_frostbite_max_hp_reduction++;
-
-					_ref_target._val_cur_hp = min(
-						_ref_target._val_cur_hp,
-						_ref_target._val_max_hp
-					);
-				}
-
-				//----------------//
-				//REFRESH LENGTH//
-				//----------------//
-				scr_status_refresh_lifetime(
-					_ref_existing_status,
-					_val_lifetime
-				);
-
-				scr_status_reposition(_ref_target);
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
 
 				_ref_applied_status = _ref_existing_status;
+
+				//----------------//
+				//ADD 1 STACK//
+				//----------------//
+				_ref_applied_status._ct_status_stacks++;
+
+				//----------------//
+				//REFRESH LIFETIME//
+				//----------------//
+				scr_status_refresh_lifetime(
+					_ref_applied_status,
+					_val_lifetime
+				);
 			}
 
 			//================//
@@ -94,7 +91,7 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 			//================//
 			else{
 
-				var _ref_new_status = instance_create_layer(
+				_ref_applied_status = instance_create_layer(
 					_ref_target.x,
 					_ref_target.y,
 					"ily_status",
@@ -105,7 +102,7 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 				//INITIALIZE LIFETIME//
 				//---------------------//
 				scr_status_init_lifetime(
-					_ref_new_status,
+					_ref_applied_status,
 					_val_lifetime,
 					true,
 					false
@@ -114,52 +111,99 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 				//-------------//
 				//STATUS DATA//
 				//-------------//
-				_ref_new_status._scr_status = scr_status_dot_frostbite;
+				_ref_applied_status._scr_status = scr_status_dot_frostbite;
 
-				_ref_new_status._ref_host = _ref_target;
+				_ref_applied_status._ref_host = _ref_target;
 
-				_ref_new_status._str_status_type = "DOT";
-				_ref_new_status._str_status_name = "FROSTBITE";
-				_ref_new_status._str_status_desc = "-1 MAX HP PER STACK; EACH ROUND: DESTROY 1 ARMOR AND DEAL 1 NEU DAMAGE PER STACK";
+				_ref_applied_status._str_status_type = "DOT";
+				_ref_applied_status._str_status_name = "FROSTBITE";
 
-				_ref_new_status._spr_status = spr_status_dot_frostbite;
+				_ref_applied_status._spr_status = spr_status_dot_frostbite;
 
-				_ref_new_status._ct_status_stacks = 1;
-				_ref_new_status._flag_status_stackable = true;
+				_ref_applied_status._ct_status_stacks = 1;
+				_ref_applied_status._flag_status_stackable = true;
 
-				_ref_new_status._str_trigger_region = "START";
+				_ref_applied_status._str_trigger_region = "START";
 
-				//-------------------------//
-				//TRACK MAX HP REDUCTION//
-				//-------------------------//
-				_ref_new_status._val_frostbite_max_hp_reduction = 0;
-
-				//------------------//
-				//REDUCE MAXIMUM HP//
-				//------------------//
-				if (_ref_target._val_max_hp > 1){
-
-					_ref_target._val_max_hp--;
-					_ref_new_status._val_frostbite_max_hp_reduction++;
-
-					_ref_target._val_cur_hp = min(
-						_ref_target._val_cur_hp,
-						_ref_target._val_max_hp
-					);
-				}
+				//-----------------------//
+				//TRACK ACTUAL REDUCTIONS//
+				//-----------------------//
+				_ref_applied_status._val_frostbite_max_hp_reduction = 0;
+				_ref_applied_status._val_frostbite_pdef_reduction = 0;
+				_ref_applied_status._val_frostbite_mdef_reduction = 0;
 
 				//----------------//
 				//REGISTER STATUS//
 				//----------------//
 				ds_list_add(
 					_ref_target._list_statuses,
-					_ref_new_status
+					_ref_applied_status
 				);
-
-				scr_status_reposition(_ref_target);
-
-				_ref_applied_status = _ref_new_status;
 			}
+
+			//================//
+			//STATUS DESCRIPTION//
+			//================//
+			_ref_applied_status._str_status_desc =
+				"PER STACK: -1 MAX HP, PHYDEF, AND MAGDEF. " +
+				"START: 1 NEU DAMAGE PER STACK. " +
+				"STAT REDUCTIONS RESTORE ON REMOVAL.";
+
+			//==================//
+			//REDUCE MAXIMUM HP//
+			//==================//
+			if (_ref_target._val_max_hp > 1){
+
+				_ref_target._val_max_hp--;
+
+				_ref_applied_status._val_frostbite_max_hp_reduction++;
+
+				_ref_target._val_cur_hp = min(
+					_ref_target._val_cur_hp,
+					_ref_target._val_max_hp
+				);
+			}
+
+			//================//
+			//REDUCE PHYDEF//
+			//================//
+			var _val_pdef_before =
+				_ref_target._ref_unit._val_beast_pdef_stat;
+
+			_ref_target._ref_unit._val_beast_pdef_stat = max(
+				0,
+				_val_pdef_before - 1
+			);
+
+			//-----------------------//
+			//TRACK ACTUAL REDUCTION//
+			//-----------------------//
+			_ref_applied_status._val_frostbite_pdef_reduction +=
+				_val_pdef_before -
+				_ref_target._ref_unit._val_beast_pdef_stat;
+
+			//================//
+			//REDUCE MAGDEF//
+			//================//
+			var _val_mdef_before =
+				_ref_target._ref_unit._val_beast_mdef_stat;
+
+			_ref_target._ref_unit._val_beast_mdef_stat = max(
+				0,
+				_val_mdef_before - 1
+			);
+
+			//-----------------------//
+			//TRACK ACTUAL REDUCTION//
+			//-----------------------//
+			_ref_applied_status._val_frostbite_mdef_reduction +=
+				_val_mdef_before -
+				_ref_target._ref_unit._val_beast_mdef_stat;
+
+			//================//
+			//REPOSITION STATUS//
+			//================//
+			scr_status_reposition(_ref_target);
 
 			//========================//
 			//APPLICATION PRESENTATION//
@@ -201,30 +245,17 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			var _ct_frostbite = max(0,_ref_status._ct_status_stacks);
-
-			//================//
-			//DESTROY ARMOR//
-			//================//
-			var _val_armor_destroyed = min(_ref_host._val_armor,_ct_frostbite);
-
-			if (_val_armor_destroyed > 0){
-
-				_ref_host._val_armor -= _val_armor_destroyed;
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_armor_destroyed) + " ARMOR",
-					undefined,
-					c_blue,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-			}
+			var _ct_frostbite = max(
+				0,
+				_ref_status._ct_status_stacks
+			);
 
 			//==================//
 			//FROSTBITE DAMAGE//
 			//==================//
+			// Linear scaling: 1 NEU per stack.
+			// Armor is NOT destroyed.
+
 			var _val_damage = _ct_frostbite;
 
 			//============//
@@ -235,7 +266,10 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_host._val_overhealth > 0
 			){
 
-				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
+				var _val_blocked = min(
+					_ref_host._val_overhealth,
+					_val_damage
+				);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -258,7 +292,10 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_host._val_cur_hp > 0
 			){
 
-				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
+				var _val_actual_damage = min(
+					_val_damage,
+					_ref_host._val_cur_hp
+				);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -294,6 +331,7 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
+
 			scr_status_reposition(_ref_host);
 
 		break;
@@ -309,14 +347,35 @@ function scr_status_dot_frostbite(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			var _ref_host = _ref_status._ref_host;
 
-			//==================//
-			//RESTORE MAXIMUM HP//
-			//==================//
 			if (instance_exists(_ref_host)){
 
-				_ref_host._val_max_hp += _ref_status._val_frostbite_max_hp_reduction;
-				_ref_host._val_max_hp = max(1,_ref_host._val_max_hp);
-				_ref_host._val_cur_hp = min(_ref_host._val_cur_hp,_ref_host._val_max_hp);
+				//==================//
+				//RESTORE MAXIMUM HP//
+				//==================//
+				_ref_host._val_max_hp +=
+					_ref_status._val_frostbite_max_hp_reduction;
+
+				_ref_host._val_max_hp = max(
+					1,
+					_ref_host._val_max_hp
+				);
+
+				_ref_host._val_cur_hp = min(
+					_ref_host._val_cur_hp,
+					_ref_host._val_max_hp
+				);
+
+				//======================//
+				//RESTORE DEFENSE STATS//
+				//======================//
+				if (is_struct(_ref_host._ref_unit)){
+
+					_ref_host._ref_unit._val_beast_pdef_stat +=
+						_ref_status._val_frostbite_pdef_reduction;
+
+					_ref_host._ref_unit._val_beast_mdef_stat +=
+						_ref_status._val_frostbite_mdef_reduction;
+				}
 			}
 
 			//----------------//

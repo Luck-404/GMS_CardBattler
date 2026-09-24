@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_event_blood_moon",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_event_blood_moon",
+  "parent":{
+    "name":"BLOOD_MOON",
+    "path":"folders/BATTLE/STATUSES/EVENTS/BLOOD_MOON.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

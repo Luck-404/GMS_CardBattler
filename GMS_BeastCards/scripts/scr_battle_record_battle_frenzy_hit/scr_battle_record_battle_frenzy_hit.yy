@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_record_battle_frenzy_hit",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_record_battle_frenzy_hit",
+  "parent":{
+    "name":"BATTLE_FRENZY",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/BATTLE_FRENZY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -84,7 +84,12 @@ function scr_status_trigger_backdraft(_ref_defender,_ref_source,_val_incoming_da
 	//REFLECT DAMAGE//
 	//================//
 	if (_val_reflected_damage > 0){
-		scr_minion_damage_target(_val_reflected_damage,_ref_source);
+		scr_battle_damage_target(
+			"FIXED",
+			undefined,
+			_ref_source,
+			_val_reflected_damage
+		);
 	}
 
 	//================//

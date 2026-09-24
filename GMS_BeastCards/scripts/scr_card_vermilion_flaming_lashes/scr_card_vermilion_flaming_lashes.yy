@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_flaming_lashes",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_flaming_lashes",
+  "parent":{
+    "name":"FLAMING_LASHES",
+    "path":"folders/CARDS/VERMILION/FLAMING_LASHES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

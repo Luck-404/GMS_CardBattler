@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_anemia",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_anemia",
+  "parent":{
+    "name":"ANEMIA",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/ANEMIA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

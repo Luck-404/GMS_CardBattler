@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_sync_overhealth_ownership",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_sync_overhealth_ownership",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

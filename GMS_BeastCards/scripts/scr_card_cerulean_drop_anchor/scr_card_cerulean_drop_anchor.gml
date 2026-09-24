@@ -6,18 +6,11 @@
 //
 // ARGUMENTS: _stct_card is the Drop Anchor card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_drop_anchor(_stct_card,_ref_caster,_ref_target){
-
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
 
 	//================//
 	//GET ALLIED TEAM//
@@ -29,7 +22,6 @@ function scr_card_cerulean_drop_anchor(_stct_card,_ref_caster,_ref_target){
 	}
 
 	var _ct_targets = ds_list_size(_list_targets);
-	var _ref_original_target = global.ref_target_beast;
 
 	//================//
 	//APPLY IMMOVABLE//
@@ -46,17 +38,8 @@ function scr_card_cerulean_drop_anchor(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_affected_target;
 
-		scr_status_apply_buff(
-			"IMMOVABLE",
-			0,
-			2
-		);
+		scr_status_apply_buff("IMMOVABLE", _ref_affected_target, 0, 2);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

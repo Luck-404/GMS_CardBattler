@@ -4,7 +4,10 @@
 // FUNCTION: Checks a defending Beast for Toxic Hide.
 //           Applies Poison to an enemy Melee attacker based on the Buff's
 //           active stacks and stored Magnitude.
-//           Preserves and restores the exact battle target context.
+//           Uses explicit effect-target references without changing battle selection.
+//
+// ARGUMENTS: _ref_defender, _ref_attacker.
+// RETURNS: True when Toxic Hide triggers; false otherwise.
 //
 //===============================================================================//
 
@@ -54,16 +57,6 @@ function scr_status_trigger_toxic_hide(_ref_defender,_ref_attacker){
 		return false;
 	}
 
-	//======================//
-	//STORE CURRENT TARGET//
-	//======================//
-	var _ref_original_target = global.ref_target_beast;
-
-	//====================//
-	//TARGET THE ATTACKER//
-	//====================//
-	global.ref_target_beast = _ref_attacker;
-
 	//==========//
 	//FEEDBACK//
 	//==========//
@@ -88,13 +81,9 @@ function scr_status_trigger_toxic_hide(_ref_defender,_ref_attacker){
 			break;
 		}
 
-		scr_status_apply_dot("POISON");
+		scr_status_apply_dot("POISON", _ref_attacker);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 
 	return true;
 }

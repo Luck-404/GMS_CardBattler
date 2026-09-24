@@ -50,8 +50,11 @@ function scr_card_vermilion_headsmans_due(_stct_card,_ref_caster,_ref_target){
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//================//

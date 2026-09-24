@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -21,7 +21,13 @@ function scr_card_viridian_snarling_bite(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//DEAL DAMAGE//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
 	//=============================//
 	//APPLY VULNERABLE IF HP WAS HIT//
@@ -29,6 +35,6 @@ function scr_card_viridian_snarling_bite(_stct_card,_ref_caster,_ref_target){
 	var _val_hp_after = _ref_target._val_cur_hp;
 
 	if (_val_hp_after < _val_hp_before){
-		scr_status_apply_debuff("VULNERABLE");
+		scr_status_apply_debuff("VULNERABLE", _ref_target);
 	}
 }

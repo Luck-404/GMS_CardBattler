@@ -8,18 +8,11 @@
 //
 // ARGUMENTS: _stct_card is the Frostburn Nova card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
-
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//=================//
 	//GET AOE-3 TARGETS//
@@ -30,10 +23,6 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 		scr_battle_get_right_target(_ref_target)
 	];
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//===================//
 	//APPLY FROSTBURN//
@@ -58,23 +47,15 @@ function scr_card_cerulean_frostburn_nova(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		var _flag_frozen = scr_status_check("FROZEN",_ref_affected_target) != -1;
 
-		//----------------//
-		//TARGET BEAST//
-		//----------------//
-		global.ref_target_beast = _ref_affected_target;
 
 		//------------------//
 		//APPLY FROSTBURN//
 		//------------------//
-		scr_status_apply_dot("FROSTBURN");
+		scr_status_apply_dot("FROSTBURN", _ref_affected_target);
 
 		if (_flag_frozen){
-			scr_status_apply_dot("FROSTBURN");
+			scr_status_apply_dot("FROSTBURN", _ref_affected_target);
 		}
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

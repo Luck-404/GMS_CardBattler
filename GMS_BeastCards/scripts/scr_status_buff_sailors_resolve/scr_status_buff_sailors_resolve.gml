@@ -1,14 +1,22 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_SAILORS_RESOLVE
 // FUNCTION: Handles Sailor's Resolve.
 //           Unstackable Timed Buff.
 //           Increases healing received by the host.
-//           Reapplication refreshes duration and magnitude.
+//           Reapplication refreshes duration without replacing magnitude.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged:
+//            _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,8 +25,9 @@ function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=und
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -27,9 +36,9 @@ function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=und
 				return undefined;
 			}
 
-			//----------//
+			//==========//
 			//DEFAULTS//
-			//----------//
+			//==========//
 			if (_val_magnitude == undefined){
 				_val_magnitude = 33;
 			}
@@ -44,16 +53,30 @@ function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=und
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_status_check("SAILORS_RESOLVE",_ref_target);
+			var _ref_existing_status = scr_status_check(
+				"SAILORS_RESOLVE",
+				_ref_target
+			);
 
-			//------------------//
+			//================//
 			//REFRESH EXISTING//
-			//------------------//
-			if (_ref_existing_status != -1){
+			//================//
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
 
-				_ref_existing_status._val_status_magnitude = _val_magnitude;
-				_ref_existing_status._str_status_desc = "HEALING RECEIVED +" + string(_val_magnitude) + "%";
+				//-----------------------------//
+				//PRESERVE ORIGINAL MAGNITUDE//
+				//-----------------------------//
+				_ref_existing_status._str_status_desc =
+					"HEALING RECEIVED +" +
+					string(_ref_existing_status._val_status_magnitude) +
+					"%";
 
+				//------------------//
+				//REFRESH LIFETIME//
+				//------------------//
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
@@ -72,6 +95,9 @@ function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=und
 				obj_battle_status
 			);
 
+			//---------------------//
+			//INITIALIZE LIFETIME//
+			//---------------------//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
@@ -88,7 +114,11 @@ function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=und
 
 			_ref_new_status._str_status_type = "BUFF";
 			_ref_new_status._str_status_name = "SAILORS_RESOLVE";
-			_ref_new_status._str_status_desc = "HEALING RECEIVED +" + string(_val_magnitude) + "%";
+
+			_ref_new_status._str_status_desc =
+				"HEALING RECEIVED +" +
+				string(_val_magnitude) +
+				"%";
 
 			_ref_new_status._spr_status = spr_status_buff_sailors_resolve;
 
@@ -131,7 +161,11 @@ function scr_status_buff_sailors_resolve(_str_tag,_ref_status,_val_magnitude=und
 				return undefined;
 			}
 
+			//----------------//
+			//UPDATE LIFETIME//
+			//----------------//
 			scr_status_tick_lifetime(_ref_status);
+
 			scr_status_reposition(_ref_host);
 
 		break;

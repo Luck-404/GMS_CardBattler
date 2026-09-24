@@ -4,19 +4,19 @@
 // FUNCTION: Handles Furnace Heart.
 //           Infinite unstackable Buff.
 //           Initially waits to absorb the next MAG Attack.
-//           After all normal damage scaling and Defense mitigation,
-//           prevents that damage and stores 50% of the resolved amount.
-//           The host's next Attack expends the stored amount as fixed NEU dmg.
+//           After absorbing, stores 50% of the absorbed magnitude as stacks.
+//           The host's next Attack expends those stacks as fixed NEU damage.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Furnace Heart Status.
-//            _val_absorbed_damage is the resolved MAG damage prevented.
-//            _ref_attack_target is the target of the host's next Attack.
-// RETURNS: Status reference on APPLY; true/false on ABSORB/TRIGGER.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_absorbed_damage=undefined, _ref_attack_target=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage=undefined,_ref_attack_target=undefined){
+function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage=undefined,_ref_attack_target=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -25,7 +25,6 @@ function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -88,7 +87,6 @@ function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage
 
 			_ref_new_status._ct_status_stacks = 0;
 			_ref_new_status._flag_status_stackable = false;
-			_ref_new_status._flag_status_permanent = false;
 
 			_ref_new_status._flag_furnace_heart_charged = false;
 			_ref_new_status._val_furnace_heart_absorbed = 0;
@@ -123,14 +121,10 @@ function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage
 			}
 
 			if (_val_absorbed_damage == undefined){
-				return false;
+				_val_absorbed_damage = 0;
 			}
 
 			_val_absorbed_damage = max(0,ceil(_val_absorbed_damage));
-
-			if (_val_absorbed_damage <= 0){
-				return false;
-			}
 
 			//=======================//
 			//STORE ABSORBED DAMAGE//
@@ -219,9 +213,11 @@ function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage
 			//================//
 			//DEAL BONUS NEU//
 			//================//
-			scr_minion_damage_target(
-				_val_bonus_damage,
-				_ref_attack_target
+			scr_battle_damage_target(
+				"FIXED",
+				undefined,
+				_ref_attack_target,
+				_val_bonus_damage
 			);
 
 			//================//

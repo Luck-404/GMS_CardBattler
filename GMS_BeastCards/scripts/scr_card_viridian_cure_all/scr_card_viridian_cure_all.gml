@@ -13,19 +13,13 @@
 
 function scr_card_viridian_cure_all(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return false;
-	}
-
 	//=========================//
 	//CLEANSE NEGATIVE STATUSES//
 	//=========================//
-	scr_status_cleanse_negative(
+	scr_status_cleanse(
 		_ref_target,
-		ds_list_size(_ref_target._list_statuses)
+		"NEGATIVE",
+		"ALL"
 	);
 
 	return true;

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_leech",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_leech",
+  "parent":{
+    "name":"LEECH",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/LEECH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -36,7 +36,7 @@ function scr_card_get_info(_str_card_name){
 	// DESC          - string
 
 	//================//
-	//DEFAULT CARD//
+	//STRUCT FOR CARD//
 	//================//
 	var _stct_return_card = {
 		_str_card_name : "DEFAULT",
@@ -197,7 +197,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_id : _str_card_name,
 					_spr_card : spr_card_cerulean_aqua_step,
 					_arr_card_colors : ["CERULEAN",undefined],
-					_str_card_range : "RANGED",
+					_str_card_range : "TEAM",
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "REPOSITION",
 					_str_card_stat : "NEU",
@@ -327,7 +327,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DOT",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 7,
+					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -352,7 +352,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 1,
+					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
@@ -427,7 +427,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "SUMMON",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 10,
+					_val_card_magnitude : 5,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
@@ -827,7 +827,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "CC",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 1,
+					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
@@ -1665,6 +1665,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 
+			#region LURKING_VISIONS
+			case "LURKING_VISIONS":
+				_stct_return_card = {
+					_str_card_name : "LURKING VISIONS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_lurking_visions,
+					_arr_card_colors : ["CERULEAN",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_cerulean_lurking_visions,
+					_str_card_description : "ST. Ranged. Apply Focus for 3 rounds. Summon 1 random Cerulean Minion on the caster."
+				};
+			break;
+			#endregion
+
 			#region MANA_SPRING
 			case "MANA_SPRING":
 				_stct_return_card = {
@@ -2460,7 +2485,32 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_cerulean_thin_ice,
-					_str_card_description : "EXHAUSTS. ST. Ranged. Set a Trap on an enemy Beast. The next time that Beast Attacks, apply 1 Frostbite to it."
+					_str_card_description : "EXHAUSTS. ST. Ranged. Set a Trap on an enemy Beast. The next time that Beast Attacks, apply 2 Frostbite to it."
+				};
+			break;
+			#endregion
+
+			#region THUNDERCLAP
+			case "THUNDERCLAP":
+				_stct_return_card = {
+					_str_card_name : "THUNDERCLAP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_cerulean_thunderclap,
+					_arr_card_colors : ["CERULEAN",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ATTACK",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "ADJACENT",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_cerulean_thunderclap,
+					_str_card_description : "AoE-3. Ranged. Deal [Linear] MAG dmg to up to 3 selected Beasts (base 4). Then immediately trigger each struck Beast's normal Stormstruck action reaction as though it had acted."
 				};
 			break;
 			#endregion
@@ -2715,6 +2765,7 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 
+
 			#region WHITEOUT
 			case "WHITEOUT":
 				_stct_return_card = {
@@ -2727,7 +2778,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 50,
+					_val_card_magnitude : 33,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -2735,7 +2786,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 2,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_cerulean_whiteout,
-					_str_card_description : "ST. Ranged. Reduce the target's Accuracy by 50% for 3 rounds."
+					_str_card_description : "ST. Ranged. Target has a 33% chance to whiff card casts, making the cast fail. Lasts 3 rounds."
 				};
 			break;
 			#endregion
@@ -2777,12 +2828,12 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "SHATTER",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 10,
+					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "III",
-					_val_card_mana_cost : 3,
+					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_cerulean_winter_resonance,
 					_str_card_description : "ST. Ranged. SHATTER the target."
@@ -3374,7 +3425,7 @@ function scr_card_get_info(_str_card_name){
 					_spr_card : spr_card_viridian_disease,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "RANGED",
-					_str_card_type : "ATTACK",
+					_str_card_type : "SUPPORT",
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
@@ -3509,7 +3560,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_emerald_wisdom,
-					_str_card_description : "EXHAUSTS. Global. Draw 2 additional cards per turn for 3 rounds."
+					_str_card_description : "EXHAUSTS. Global. For the next 3 draw events, draw 2 additional cards per event."
 				};
 			break;
 			#endregion
@@ -3534,7 +3585,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_viridian_endless_bloom,
-					_str_card_description : "EXHAUSTS. Teamwide. For 6 rounds, whenever an allied Minion dies, replace it with a Dormant Seed (1/0). The Dormant Seed inherits the defeated Minion’s HP and Magnitude bonuses."
+					_str_card_description : "EXHAUSTS. Teamwide. For 5 rounds, whenever an allied Minion dies or is sacrificed, replace it with a Dormant Seed (1/0). The Dormant Seed inherits that Minion's HP and Magnitude bonuses."
 				};
 			break;
 			#endregion
@@ -3627,6 +3678,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_stat : "PHY",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 2,
+					_str_card_scalar : "LINEAR",
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "I",
@@ -3737,7 +3789,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_class_req : "SUMMONER",
 					_str_card_rarity : "II",
 					_val_card_mana_cost : 2,
-					_flag_card_exhausts : true,
+					_flag_card_exhausts : false,
 					_scr_card : scr_card_viridian_greenflow,
 					_str_card_description : "ST. Ranged. Deal 5 NEU dmg X times, where X equals the number of Minions controlled by the caster. EXECUTE: Cultivate all Minions on the caster by 1."
 				};
@@ -4656,7 +4708,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
-					_str_card_archetype_req : undefined,
+					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "I",
 					_val_card_mana_cost : 1,
@@ -4825,7 +4877,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_range : "SELF",
 					_str_card_type : "DEFENSE",
 					_str_card_effect_type : "ARMOR",
-					_str_card_stat : "MAG",
+					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
 					_val_card_magnitude : 3,
 					_str_card_scalar : "LINEAR",
@@ -5313,7 +5365,7 @@ function scr_card_get_info(_str_card_name){
 				_stct_return_card = {
 					_str_card_name : "TOXIC RECLAIMATION",
 					_str_card_id : _str_card_name,
-					_spr_card : spr_card_viridian_toxic_reclaimation,
+					_spr_card : scr_card_viridian_toxic_reclaimation,
 					_arr_card_colors : ["VIRIDIAN",undefined],
 					_str_card_range : "RANGED",
 					_str_card_type : "UTILITY",
@@ -5444,7 +5496,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DIRECT",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 4,
+					_val_card_magnitude : 3,
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
@@ -5698,7 +5750,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "IV",
-					_val_card_mana_cost : 3,
+					_val_card_mana_cost : 1,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_artifact_hourglass,
 					_str_card_description : "EXHAUSTS. Global. After this turn ends, take another full turn."
@@ -5881,8 +5933,8 @@ function scr_card_get_info(_str_card_name){
 					_str_card_id : _str_card_name,
 					_spr_card : spr_card_uncolored_malleability,
 					_arr_card_colors : ["UNCOLORED",undefined],
-					_str_card_range : "RANGED",
-					_str_card_type : "SUPPORT",
+					_str_card_range : "SELF",
+					_str_card_type : "UTILITY",
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
@@ -5897,7 +5949,32 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion
-
+			
+			#region MARKING_RUNE
+			case "MARKING_RUNE":
+				_stct_return_card = {
+					_str_card_name : "MARKING RUNE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_uncolored_marking_rune,
+					_arr_card_colors : ["UNCOLORED",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_uncolored_marking_rune,
+					_str_card_description : "ST. Ranged. Apply Focus for 3 rounds. Summon 1 random Minion from the combined Viridian, Cerulean, and Vermilion Minion pools on the caster."
+				};
+			break;
+			#endregion			
+			
 			#region POWER_STRIKE
 			case "POWER_STRIKE":
 				_stct_return_card = {
@@ -6084,7 +6161,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_class_req : undefined,
 					_str_card_rarity : "IV",
 					_val_card_mana_cost : 0,
-					_flag_card_exhausts : false,
+					_flag_card_exhausts : true,
 					_scr_card : scr_card_uncolored_thoughtsteal,
 					_str_card_description : "EXHAUSTS. ST. Card. Select a revealed enemy card. Gain Mana equal to its Mana cost and disable it for its next cast."
 				};
@@ -6094,6 +6171,56 @@ function scr_card_get_info(_str_card_name){
 		#endregion
 
 		#region VERMILION
+			#region 3RD_DEGREE
+			case "3RD_DEGREE":
+				_stct_return_card = {
+					_str_card_name : "3RD DEGREE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_3rd_degree,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ADJACENT",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_3rd_degree,
+					_str_card_description : "EXHAUSTS. AoE-3. Ranged. Aura. (+) The target Beast and adjacent allied Beasts deal 25% increased damage. (-) Affected Beasts take 15% increased damage."
+				};
+			break;
+			#endregion
+
+			#region ANEMIA
+			case "ANEMIA":
+				_stct_return_card = {
+					_str_card_name : "ANEMIA",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_anemia,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_anemia,
+					_str_card_description : "ST. Ranged. Reduce the target's PHYPOW by 30 for 3 rounds."
+				};
+			break;
+			#endregion
+		
 			#region ARTERIAL_BURST
 			case "ARTERIAL_BURST":
 				_stct_return_card = {
@@ -6194,6 +6321,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion	
 	
+			#region BATTLE_FRENZY
+			case "BATTLE_FRENZY":
+				_stct_return_card = {
+					_str_card_name : "BATTLE FRENZY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_battle_frenzy,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SOLDIER",
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_battle_frenzy,
+					_str_card_description : "EXHAUSTS. ST. Self. Gain Battle Frenzy. After the caster's next Attack resolves, repeat its damage at 25% effectiveness as NEU dmg. Does not repeat statuses or secondary effects. Stackable."
+				};
+			break;
+#endregion	
+	
 			#region BATTLE_TRANCE
 			case "BATTLE_TRANCE":
 				_stct_return_card = {
@@ -6268,6 +6420,31 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion	
+
+			#region BLOOD_FEUD
+			case "BLOOD_FEUD":
+				_stct_return_card = {
+					_str_card_name : "BLOOD FEUD",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_blood_feud,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 0,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_blood_feud,
+					_str_card_description : "ST. Ranged. Apply Focus for 3 rounds. Summon 1 random Vermilion Minion on the caster."
+				};
+			break;
+			#endregion
 	
 			#region BLOOD_FURNACE
 			case "BLOOD_FURNACE":
@@ -6290,6 +6467,31 @@ function scr_card_get_info(_str_card_name){
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_vermilion_blood_furnace,
 					_str_card_description : "ST. Ranged. Deal [Linear] MAG dmg (base 7), plus 2 additional dmg per Char on the target. ERUPTION 3: Apply 1 Char."
+				};
+			break;
+			#endregion	
+	
+			#region BLOOD_MOON
+			case "BLOOD_MOON":
+				_stct_return_card = {
+					_str_card_name : "BLOOD MOON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_blood_moon,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "GLOBAL",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "EVENT",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_blood_moon,
+					_str_card_description : "EXHAUSTS. Global. Begin the Blood Moon Event."
 				};
 			break;
 			#endregion	
@@ -6394,6 +6596,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 	
+			#region BLOODCOATED
+			case "BLOODCOATED":
+				_stct_return_card = {
+					_str_card_name : "BLOODCOATED",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_bloodcoated,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "HEAL",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_bloodcoated,
+					_str_card_description : "ST. Self. Cleanse all Bleed from the caster and heal 2 HP per Bleed removed. If the caster has at least 1 Rage, gain Bloodcoated for 3 rounds. While active, the caster's Attacks apply 1 Bleed."
+				};
+			break;
+			#endregion	
+	
 			#region BLOODFLAME_BOLT
 			case "BLOODFLAME_BOLT":
 				_stct_return_card = {
@@ -6443,7 +6670,32 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
-		
+	
+			#region BLOODHUNGER
+			case "BLOODHUNGER":
+				_stct_return_card = {
+					_str_card_name : "BLOODHUNGER",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_bloodhunger,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_bloodhunger,
+					_str_card_description : "ST. Ranged. Gain Leech for 3 rounds, this status heals the host for 25% of the HP damage dealt by its Attacks."
+				};
+			break;
+			#endregion	
+	
 			#region BLOODLETTING
 			case "BLOODLETTING":
 				_stct_return_card = {
@@ -6540,7 +6792,7 @@ function scr_card_get_info(_str_card_name){
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_vermilion_bloodmist,
 					_str_card_description : "EXHAUSTS. Global. Begin the Bloodmist Event."
-				};
+					};
 			break;
 			#endregion
 
@@ -6551,7 +6803,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_id : _str_card_name,
 					_spr_card : spr_card_vermilion_bloodstep,
 					_arr_card_colors : ["VERMILION",undefined],
-					_str_card_range : "RANGED",
+					_str_card_range : "TEAM",
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "REPOSITION",
 					_str_card_stat : "NEU",
@@ -6743,6 +6995,56 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region CATACLYSM
+			case "CATACLYSM":
+				_stct_return_card = {
+					_str_card_name : "CATACLYSM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_cataclysm,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 8,
+					_str_card_scalar : "PERCENT",
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_cataclysm,
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Caster dies. Deal [%] MAG dmg to each Beast (base 8% of each target's maximum HP). Trigger eligible ERUPTIONS in order: ERUPTION 3: Trigger Burn twice. ERUPTION 5: Deal 5 damage to adjacent Beasts. ERUPTION 8: Begin Firestorm and strike all enemies for 8 damage. ERUPTION 10: Deal 20 damage, apply 5 Char, and Stun."
+				};
+			break;
+			#endregion
+
+			#region CAUTERIZED_WOUND
+			case "CAUTERIZED_WOUND":
+				_stct_return_card = {
+					_str_card_name : "CAUTERIZED WOUND",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_cauterized_wound,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_cauterized_wound,
+					_str_card_description : "ST. Ranged. Apply Antiheal for 2 rounds. If the target is Burning, Antiheal lasts 3 rounds instead."
+				};
+			break;
+			#endregion
 		
 			#region CHAIN_COMBUSTION
 			case "CHAIN_COMBUSTION":
@@ -6864,7 +7166,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_vermilion_cinderguard,
-					_str_card_description : "ST. Self. Gain 5 Armor. The next enemy that directly damages the caster gains 1 Burn."
+					_str_card_description : "ST. Self. Gain 5 Armor. The next enemy that directly damages the caster gains 1 Burn. 2 charges."
 				};
 			break;
 			#endregion		
@@ -6921,6 +7223,56 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 
+			#region CRIMSON_FOCUS
+			case "CRIMSON_FOCUS":
+				_stct_return_card = {
+					_str_card_name : "CRIMSON FOCUS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_crimson_focus,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 15,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_crimson_focus,
+					_str_card_description : "ST. Self. Increase the caster's Critical Hit chance by 15% for 3 rounds."
+				};
+			break;
+			#endregion
+
+			#region DANCING_FLAME
+			case "DANCING_FLAME":
+				_stct_return_card = {
+					_str_card_name : "DANCING FLAME",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_dancing_flame,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_dancing_flame,
+					_str_card_description : "ST. Ranged. Confuse the target for 1 round. Its Attacks, DoTs, CC, and Debuffs targeting enemies have a 66% chance to target a random Beast instead."
+				};
+			break;
+			#endregion
+
 			#region DRAGON_MINE
 			case "DRAGON_MINE":
 				_stct_return_card = {
@@ -6945,6 +7297,31 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion
+		
+			#region DRAGONSTORM
+			case "DRAGONSTORM":
+				_stct_return_card = {
+					_str_card_name : "DRAGONSTORM",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_dragonstorm,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 20,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_dragonstorm,
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal 2 NEU dmg 20 times to random Beasts on the selected team. If a target is not Burning, apply 1 Burn. If it is already Burning, apply 1 Char."
+				};
+			break;
+			#endregion		
 		
 			#region EMBER_BARRAGE
 			case "EMBER_BARRAGE":
@@ -7021,6 +7398,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion		
 		
+			#region ENDLESS_RAGE
+			case "ENDLESS_RAGE":
+				_stct_return_card = {
+					_str_card_name : "ENDLESS RAGE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_endless_rage,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 5,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SOLDIER",
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_endless_rage,
+					_str_card_description : "EXHAUSTS. ST. Ranged. For 3 rounds, set the target Beast to 5 Rage and increase its damage dealt and Critical Hit chance by 25%. Rage deals double damage to the host, cannot be removed, and may be spent without reducing its Rage. Remove all Rage when the effect ends."
+				};
+			break;
+			#endregion		
+		
 			#region ERUPTING_SLAM
 			case "ERUPTING_SLAM":
 				_stct_return_card = {
@@ -7056,7 +7458,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_range : "MELEE",
 					_str_card_type : "ATTACK",
 					_str_card_effect_type : "HEMORRHAGE",
-					_str_card_stat : "MAG",
+					_str_card_stat : "PHY",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 0,
 					_str_card_scalar : "LINEAR",
@@ -7324,6 +7726,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 
+			#region FLAMING_LASHES
+			case "FLAMING_LASHES":
+				_stct_return_card = {
+					_str_card_name : "FLAMING LASHES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_flaming_lashes,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 20,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_flaming_lashes,
+					_str_card_description : "EXHAUSTS. ST. Ranged. For 3 rounds, the target's Attacks deal 20% of their damage to an adjacent enemy."
+				};
+			break;
+			#endregion
+
 			#region FLASHPOINT
 			case "FLASHPOINT":
 				_stct_return_card = {
@@ -7334,7 +7761,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_range : "RANGED",
 					_str_card_type : "ATTACK",
 					_str_card_effect_type : "DIRECT",
-					_str_card_stat : "MAG",
+					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
 					_val_card_magnitude : 4,
 					_str_card_scalar : "LINEAR",
@@ -7373,6 +7800,31 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
+	
+			#region FRONTLINE_ORDER
+			case "FRONTLINE_ORDER":
+				_stct_return_card = {
+					_str_card_name : "FRONTLINE ORDER",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_frontline_order,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 4,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SOLDIER",
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_frontline_order,
+					_str_card_description : "ST. Ranged. Target Beast gains 1 Rage and 4 Armor."
+				};
+			break;
+			#endregion
 	
 			#region FUEL_THE_FIRE
 			case "FUEL_THE_FIRE":
@@ -7436,7 +7888,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
-					_val_card_magnitude : 10,
+					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
@@ -7498,6 +7950,31 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region HEAT_UP
+			case "HEAT_UP":
+				_stct_return_card = {
+					_str_card_name : "HEAT UP",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_heat_up,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_heat_up,
+					_str_card_description : "ST. Ranged. Target Beast gains 2 Rage."
+				};
+			break;
+			#endregion
 		
 			#region HEATWAVE
 			case "HEATWAVE":
@@ -7548,6 +8025,106 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region HEMOPHILIA
+			case "HEMOPHILIA":
+				_stct_return_card = {
+					_str_card_name : "HEMOPHILIA",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_hemophilia,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_hemophilia,
+					_str_card_description : "ST. Ranged. For 3 rounds, whenever the target Beast is attacked, apply 1 Bleed to it."
+				};
+			break;
+			#endregion
+
+			#region HUNGERING_FLAMES
+			case "HUNGERING_FLAMES":
+				_stct_return_card = {
+					_str_card_name : "HUNGERING FLAMES",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_hungering_flames,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "AURA",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_hungering_flames,
+					_str_card_description : "EXHAUSTS. Teamwide. Aura. (+) At the end of each round, heal allied Beast for 2 HP for each Burning Beast on the enemy team. (-) Allied beasts have have 20% reduced maximum HP."
+				};
+			break;
+			#endregion
+
+			#region INFERNO_ETERNAL
+			case "INFERNO_ETERNAL":
+				_stct_return_card = {
+					_str_card_name : "INFERNO ETERNAL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_inferno_eternal,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "GLOBAL",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "GLOBAL",
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_inferno_eternal,
+					_str_card_description : "EXHAUSTS. Global. For 5 rounds, reduce all ERUPTION thresholds by 2, to a minimum of 1. Begin Heat Wave Weather."
+				};
+			break;
+			#endregion
+
+			#region INNER_FLAME
+			case "INNER_FLAME":
+				_stct_return_card = {
+					_str_card_name : "INNER FLAME",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_inner_flame,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_inner_flame,
+					_str_card_description : "EXHAUSTS. ST. Self. Remove all DoTs and Debuffs from the caster. The caster's next Attack deals 2 additional dmg for each status removed."
+				};
+			break;
+			#endregion
 
 			#region LAST_STAND
 			case "LAST_STAND":
@@ -7625,6 +8202,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 
+			#region MELTING_ARMAMENTS
+			case "MELTING_ARMAMENTS":
+				_stct_return_card = {
+					_str_card_name : "MELTING ARMAMENTS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_melting_armaments,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "TECHNICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_melting_armaments,
+					_str_card_description : "ST. Ranged. For 3 rounds, the target's Attacks deal 4 additional damage to Armor before dealing their normal damage."
+				};
+			break;
+			#endregion
+
 			#region MELTPLATE
 			case "MELTPLATE":
 				_stct_return_card = {
@@ -7646,6 +8248,31 @@ function scr_card_get_info(_str_card_name){
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_vermilion_meltplate,
 					_str_card_description : "EXHAUSTS. ST. Ranged. Destroy 10 Armor, then deal [Linear] MAG dmg (base 7). If any Armor was destroyed, apply 1 Burn."
+				};
+			break;
+			#endregion
+
+			#region MENACING_ROAR
+			case "MENACING_ROAR":
+				_stct_return_card = {
+					_str_card_name : "MENACING ROAR",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_menacing_roar,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ADJACENT",
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_menacing_roar,
+					_str_card_description : "AoE-3. Ranged. Apply Weakness for 2 rounds to up to 3 selected targets. If the caster has at least 4 Rage, also apply Vulnerable for 1 round and 1 Bleed to each target."
 				};
 			break;
 			#endregion
@@ -7675,6 +8302,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 
+			#region MOLTEN_BRAND
+			case "MOLTEN_BRAND":
+				_stct_return_card = {
+					_str_card_name : "MOLTEN BRAND",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_molten_brand,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "DEBUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "II",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_molten_brand,
+					_str_card_description : "ST. Ranged. For 2 rounds, the target takes 25% increased damage from Vermilion Cards."
+				};
+			break;
+			#endregion
+
 			#region MOLTEN_EDGE
 			case "MOLTEN_EDGE":
 				_stct_return_card = {
@@ -7699,7 +8351,32 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
-		
+	
+			#region MOLTEN_RUIN
+			case "MOLTEN_RUIN":
+				_stct_return_card = {
+					_str_card_name : "MOLTEN RUIN",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_molten_ruin,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 20,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_molten_ruin,
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. Deal [Linear] MAG dmg to the Armor of each Beast on the selected team (base 20). Apply 2 Char. Excess Armor damage does not spill into Overhealth or HP. Each Armor break summons a random Vermilion Minion on the caster."
+				};
+			break;
+			#endregion	
+	
 			#region OPEN_VEIN
 			case "OPEN_VEIN":
 				_stct_return_card = {
@@ -7750,6 +8427,56 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion
 		
+			#region PAIN_RESPONSE
+			case "PAIN_RESPONSE":
+				_stct_return_card = {
+					_str_card_name : "PAIN RESPONSE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_pain_response,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_pain_response,
+					_str_card_description : "ST. Self. For 2 rounds, the first time each round the caster takes HP damage, gain 1 Rage."
+				};
+			break;
+			#endregion		
+		
+			#region PHOENIX_REBIRTH
+			case "PHOENIX_REBIRTH":
+				_stct_return_card = {
+					_str_card_name : "PHOENIX REBIRTH",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_phoenix_rebirth,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 40,
+					_str_card_scalar : "PERCENT",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_phoenix_rebirth,
+					_str_card_description : "EXHAUSTS. ST. Ranged. Grant Phoenix Rebirth for the remainder of battle. The next time the target would be defeated, revive it at 40% maximum HP, remove all negative statuses, and heal all other allied Beasts for 20% of their maximum HP. Then expend Phoenix Rebirth."
+				};
+			break;
+			#endregion		
+		
 			#region POWDER_KEG
 			case "POWDER_KEG":
 				_stct_return_card = {
@@ -7771,6 +8498,31 @@ function scr_card_get_info(_str_card_name){
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_vermilion_powder_keg,
 					_str_card_description : "EXHAUSTS. ST. Ranged. Set a Trap on a Beast. The next time that Beast takes direct damage, deal [Linear] PHY dmg to it and adjacent Beasts (base 5)."
+				};
+			break;
+			#endregion		
+
+			#region PYRE_WEAPON
+			case "PYRE_WEAPON":
+				_stct_return_card = {
+					_str_card_name : "PYRE WEAPON",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_pyre_weapon,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 0,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MAGICAL",
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_pyre_weapon,
+					_str_card_description : "EXHAUSTS. ST. Ranged. For 2 rounds, the target's Attacks apply 1 Burn."
 				};
 			break;
 			#endregion		
@@ -7899,6 +8651,31 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion		
+
+			#region RAGING_HOWL
+			case "RAGING_HOWL":
+				_stct_return_card = {
+					_str_card_name : "RAGING HOWL",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_raging_howl,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "CC",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ADJACENT",
+					_val_card_magnitude : 1,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_raging_howl,
+					_str_card_description : "EXHAUSTS. AoE-3. Ranged. Stun up to 3 selected targets for 1 round."
+				};
+			break;
+			#endregion
 	
 			#region RAGING_SPARK
 			case "RAGING_SPARK":
@@ -7961,7 +8738,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_type : "UTILITY",
 					_str_card_effect_type : "CARD_MANIPULATION",
 					_str_card_stat : "NEU",
-					_str_card_target_count : "ST",
+					_str_card_target_count : "GLOBAL",
 					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MAGICAL",
@@ -7974,6 +8751,31 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion
+	
+			#region RELENTLESS
+			case "RELENTLESS":
+				_stct_return_card = {
+					_str_card_name : "RELENTLESS",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_relentless,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 10,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 2,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_relentless,
+					_str_card_description : "EXHAUSTS. ST. Self. Heal the caster for 10 HP. Spend 5 Rage: For 2 rounds, cards cast through the caster do not Exhaust. Gain Boost for 3 rounds."
+				};
+			break;
+			#endregion	
 	
 			#region RENDING_BLOW
 			case "RENDING_BLOW":
@@ -8000,6 +8802,31 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion		
 
+			#region SACRIFICIAL_PYRE
+			case "SACRIFICIAL_PYRE":
+				_stct_return_card = {
+					_str_card_name : "SACRIFICIAL PYRE",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_sacrificial_pyre,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "SUMMON",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 4,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_sacrificial_pyre,
+					_str_card_description : "EXHAUSTS. ST. Self. Sacrifice all allied Minions and summon an Ash Phoenix (4/4) on the caster. It gains +1 maximum HP and +1 Magnitude for each Minion sacrificed. Each round, it deals 3 NEU dmg per Magnitude and applies Weakness for 1 round. While it lives, the caster gains 15% Dodge."
+				};
+			break;
+			#endregion
+
 			#region SANGUINE_SONG
 			case "SANGUINE_SONG":
 				_stct_return_card = {
@@ -8020,7 +8847,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 0,
 					_flag_card_exhausts : true,
 					_scr_card : scr_card_vermilion_sanguine_song,
-					_str_card_description : "EXHAUSTS. Global. Add 1 Rage to the caster. Sacrifice 10% of the caster's maximum HP. Gain 1 Echo."
+					_str_card_description : "EXHAUSTS. Global. Add 1 rage to caster. Sacrifice 10% of caster's hp. Add 1 to echo counter."
 				};
 			break;
 			#endregion
@@ -8075,6 +8902,56 @@ function scr_card_get_info(_str_card_name){
 			break;
 			#endregion		
 			
+			#region SECOND_WIND
+			case "SECOND_WIND":
+				_stct_return_card = {
+					_str_card_name : "SECOND WIND",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_second_wind,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "ST",
+					_val_card_magnitude : 15,
+					_str_card_scalar : "PERCENT",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_second_wind,
+					_str_card_description : "EXHAUSTS. ST. Self. Remove all CC from the caster and heal 15% of its maximum HP. The caster's next Attack deals 50% additional direct damage."
+				};
+			break;
+			#endregion			
+			
+			#region THE_RED_FEAST
+			case "THE_RED_FEAST":
+				_stct_return_card = {
+					_str_card_name : "THE RED FEAST",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_the_red_feast,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "ARCHETYPE",
+					_str_card_effect_type : "DIRECT",
+					_str_card_stat : "MAG",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 4,
+					_str_card_scalar : "LINEAR",
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "IV",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : true,
+					_scr_card : scr_card_vermilion_the_red_feast,
+					_str_card_description : "EXHAUSTS. Teamwide. Ranged. For each Beast on the selected team, consume up to 3 Bleed and deal [Linear] MAG dmg per Bleed consumed (base 4). Heal the caster for 100% of the total HP damage dealt. The caster gains Boost for 2 rounds."
+				};
+			break;
+			#endregion			
+			
 			#region VOLATILE_BRAND
 			case "VOLATILE_BRAND":
 				_stct_return_card = {
@@ -8099,6 +8976,55 @@ function scr_card_get_info(_str_card_name){
 				};
 			break;
 			#endregion			
+
+			#region WAR_CRY
+			case "WAR_CRY":
+				_stct_return_card = {
+					_str_card_name : "WAR CRY",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_vermilion_war_cry,
+					_arr_card_colors : ["VERMILION",undefined],
+					_str_card_range : "RANGED",
+					_str_card_type : "SUPPORT",
+					_str_card_effect_type : "BUFF",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "TEAMWIDE",
+					_val_card_magnitude : 2,
+					_str_card_scalar : undefined,
+					_str_card_archetype_req : "MARTIAL",
+					_str_card_class_req : "SOLDIER",
+					_str_card_rarity : "III",
+					_val_card_mana_cost : 3,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_vermilion_war_cry,
+					_str_card_description : "Teamwide. All Beasts on the selected team gain 2 Rage."
+				};
+			break;
+			#endregion
+		#endregion
+
+		#region DEFAULT - CARD NOT FOUND YET
+			default:
+				_stct_return_card = {
+					_str_card_name : "BLOCK",
+					_str_card_id : _str_card_name,
+					_spr_card : spr_card_uncolored_block,
+					_arr_card_colors : ["UNCOLORED",undefined],
+					_str_card_range : "SELF",
+					_str_card_type : "DEFENSE",
+					_str_card_effect_type : "ARMOR",
+					_str_card_stat : "NEU",
+					_str_card_target_count : "SELF",
+					_val_card_magnitude : 6,
+					_str_card_archetype_req : undefined,
+					_str_card_class_req : undefined,
+					_str_card_rarity : "I",
+					_val_card_mana_cost : 1,
+					_flag_card_exhausts : false,
+					_scr_card : scr_card_uncolored_block,
+					_str_card_description : "ST. Self. Gain 6 Armor."
+				};
+			break;
 		#endregion
 	}
 

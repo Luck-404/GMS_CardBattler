@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_heat_up",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_heat_up",
+  "parent":{
+    "name":"HEAT_UP",
+    "path":"folders/CARDS/VERMILION/HEAT_UP.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

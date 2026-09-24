@@ -7,10 +7,18 @@
 //           Reapplication adds one stack and refreshes duration.
 //           Regenerates up to one stack worth whenever its lifetime ticks.
 //           Removes remaining Status-owned Overhealth on expiration.
+//           Temporary Overhealth is consumed before Persistent Overhealth.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
+//            _ref_status is the existing Status for non-APPLY commands.
+//            _val_magnitude is Overhealth granted per stack.
+//            _val_lifetime is the temporary lifetime.
+//            _ref_target is the explicit host on APPLY.
+// RETURNS: Applied/existing Status on APPLY; otherwise undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -18,8 +26,6 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 		//APPLY//
 		//=======//
 		case "APPLY":
-
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -29,9 +35,9 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				return undefined;
 			}
 
-			//----------//
+			//==========//
 			//DEFAULTS//
-			//----------//
+			//==========//
 			if (_val_magnitude == undefined){
 				_val_magnitude = 0;
 			}
@@ -43,14 +49,24 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 			_val_magnitude = max(0,_val_magnitude);
 			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
-			//CHECK EXISTING//
-			//----------------//
-			var _ref_existing_status = scr_status_check("OVERHEALTH",_ref_target);
+			//================//
+			//SYNC OWNERSHIP//
+			//================//
+			scr_status_sync_overhealth_ownership(
+				_ref_target
+			);
 
-			//----------------//
+			//================//
+			//CHECK EXISTING//
+			//================//
+			var _ref_existing_status = scr_status_check(
+				"OVERHEALTH",
+				_ref_target
+			);
+
+			//================//
 			//STACK EXISTING//
-			//----------------//
+			//================//
 			if (_ref_existing_status != -1){
 
 				if (!instance_exists(_ref_existing_status)){
@@ -58,14 +74,20 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				}
 
 				/*
-					An existing Overhealth Status owns one common
-					per-stack Magnitude. New stacks use that same
-					stored Magnitude rather than replacing it.
-				*/
-				var _val_stack_amount = _ref_existing_status._val_status_magnitude;
+					Existing temporary Overhealth owns one common
+					per-stack Magnitude.
 
-				_ref_target._val_overhealth += _val_stack_amount;
-				_ref_existing_status._val_status_remaining += _val_stack_amount;
+					New stacks use that stored Magnitude.
+				*/
+				var _val_stack_amount =
+					_ref_existing_status._val_status_magnitude;
+
+				_ref_target._val_overhealth +=
+					_val_stack_amount;
+
+				_ref_existing_status._val_status_remaining +=
+					_val_stack_amount;
+
 				_ref_existing_status._ct_status_stacks++;
 
 				scr_status_refresh_lifetime(
@@ -76,9 +98,9 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				return _ref_existing_status;
 			}
 
-			//---------------//
+			//===============//
 			//CREATE STATUS//
-			//---------------//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_target.x,
 				_ref_target.y,
@@ -93,41 +115,56 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				false
 			);
 
-			//-------------//
+			//=============//
 			//STATUS DATA//
-			//-------------//
-			_ref_new_status._scr_status = scr_status_buff_overhealth;
+			//=============//
+			_ref_new_status._scr_status =
+				scr_status_buff_overhealth;
 
-			_ref_new_status._ref_host = _ref_target;
+			_ref_new_status._ref_host =
+				_ref_target;
 
-			_ref_new_status._str_status_type = "BUFF";
-			_ref_new_status._str_status_name = "OVERHEALTH";
-			_ref_new_status._str_status_desc = "RECHARGEABLE TEMPORARY OVERHEALTH";
+			_ref_new_status._str_status_type =
+				"BUFF";
 
-			_ref_new_status._spr_status = spr_status_buff_overhealth;
+			_ref_new_status._str_status_name =
+				"OVERHEALTH";
+
+			_ref_new_status._str_status_desc =
+				"RECHARGEABLE TEMPORARY OVERHEALTH";
+
+			_ref_new_status._spr_status =
+				spr_status_buff_overhealth;
 
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = true;
 
-			_ref_new_status._val_status_magnitude = _val_magnitude;
-			_ref_new_status._val_status_remaining = _val_magnitude;
+			_ref_new_status._val_status_magnitude =
+				_val_magnitude;
 
-			_ref_new_status._str_trigger_region = "START";
+			_ref_new_status._val_status_remaining =
+				_val_magnitude;
 
-			//----------------//
+			_ref_new_status._str_trigger_region =
+				"START";
+
+			//================//
 			//GRANT OVERHEALTH//
-			//----------------//
-			_ref_target._val_overhealth += _val_magnitude;
+			//================//
+			_ref_target._val_overhealth +=
+				_val_magnitude;
 
-			//----------------//
+			//================//
 			//REGISTER STATUS//
-			//----------------//
+			//================//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
 			);
 
-			scr_status_reposition(_ref_target);
+			scr_status_reposition(
+				_ref_target
+			);
 
 			return _ref_new_status;
 
@@ -142,48 +179,56 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				scr_status_destroy(_ref_status);
+				scr_status_destroy(
+					_ref_status
+				);
 
 				return undefined;
 			}
 
-			//----------------------------//
-			//TRACK REMAINING OVERHEALTH//
-			//----------------------------//
-			/*
-				Damage reduces the Beast's total Overhealth directly.
-
-				Clamp this Status's tracked remaining amount to the
-				Beast's current Overhealth before regeneration.
-			*/
-			_ref_status._val_status_remaining = min(
-				_ref_status._val_status_remaining,
-				_ref_host._val_overhealth
+			//================//
+			//SYNC OWNERSHIP//
+			//================//
+			scr_status_sync_overhealth_ownership(
+				_ref_host
 			);
 
-			//------------------------//
+			//========================//
 			//CALCULATE MAX OVERHEALTH//
-			//------------------------//
-			var _val_overhealth_max = _ref_status._val_status_magnitude * _ref_status._ct_status_stacks;
+			//========================//
+			var _val_overhealth_max =
+				_ref_status._val_status_magnitude *
+				_ref_status._ct_status_stacks;
 
-			//----------------------------//
+			//============================//
 			//CALCULATE MISSING OVERHEALTH//
-			//----------------------------//
-			var _val_overhealth_missing = max(0,_val_overhealth_max - _ref_status._val_status_remaining);
+			//============================//
+			var _val_overhealth_missing = max(
+				0,
+				_val_overhealth_max -
+				_ref_status._val_status_remaining
+			);
 
-			//-----------------------//
+			//=======================//
 			//REGENERATE ONE STACK//
-			//-----------------------//
-			var _val_regenerated = min(_ref_status._val_status_magnitude,_val_overhealth_missing);
+			//=======================//
+			var _val_regenerated = min(
+				_ref_status._val_status_magnitude,
+				_val_overhealth_missing
+			);
 
 			if (_val_regenerated > 0){
 
-				_ref_host._val_overhealth += _val_regenerated;
-				_ref_status._val_status_remaining += _val_regenerated;
+				_ref_host._val_overhealth +=
+					_val_regenerated;
+
+				_ref_status._val_status_remaining +=
+					_val_regenerated;
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -195,11 +240,16 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				);
 			}
 
-			//----------------//
+			//================//
 			//UPDATE LIFETIME//
-			//----------------//
-			scr_status_tick_lifetime(_ref_status);
-			scr_status_reposition(_ref_host);
+			//================//
+			scr_status_tick_lifetime(
+				_ref_status
+			);
+
+			scr_status_reposition(
+				_ref_host
+			);
 
 		break;
 
@@ -212,30 +262,46 @@ function scr_status_buff_overhealth(_str_tag,_ref_status,_val_magnitude=undefine
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (instance_exists(_ref_host)){
 
-				//---------------------------//
+				//================//
+				//SYNC OWNERSHIP//
+				//================//
+				scr_status_sync_overhealth_ownership(
+					_ref_host
+				);
+
+				//==========================//
 				//REMOVE OWNED OVERHEALTH//
-				//---------------------------//
-				_ref_status._val_status_remaining = min(
-					_ref_status._val_status_remaining,
-					_ref_host._val_overhealth
+				//==========================//
+				var _val_owned_overhealth = max(
+					0,
+					_ref_status._val_status_remaining
 				);
 
 				_ref_host._val_overhealth =
 					max(
 						0,
 						_ref_host._val_overhealth -
-							_ref_status._val_status_remaining
+						_val_owned_overhealth
 					);
+
+				_ref_status._val_status_remaining = 0;
+
+				scr_status_sync_overhealth_ownership(
+					_ref_host
+				);
 			}
 
-			//----------------//
+			//================//
 			//DESTROY STATUS//
-			//----------------//
-			scr_status_destroy(_ref_status);
+			//================//
+			scr_status_destroy(
+				_ref_status
+			);
 
 		break;
 	}

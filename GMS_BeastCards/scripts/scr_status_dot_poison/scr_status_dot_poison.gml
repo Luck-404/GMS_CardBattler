@@ -3,17 +3,19 @@
 // SCRIPT: SCR_STATUS_DOT_POISON
 // FUNCTION: Handles the Poison damage-over-time Status.
 //           Stackable Timed.
-//           Damage increases as Poison ages through its maximum duration.
-//           Reapplications add one stack and refresh to the stored maximum life.
+//           Damage scales linearly through 5 stacks, then quadratically.
+//           Damage increases as Poison ages, with a minimum of 1 per tick.
+//           Reapplications add one stack and refresh to maximum lifetime.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, _val_lifetime optionally sets duration, and
-//            _flag_trigger_plague_garden controls Plague Garden reactions.
-// RETURNS: The active Poison Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
+//            _ref_status is the existing Status for non-APPLY commands.
+//            _val_lifetime optionally overrides duration.
+//            _flag_trigger_plague_garden controls Plague Garden.
+//            _ref_target is the explicit host for APPLY.
+// RETURNS: Applied Status instance or undefined.
 //
 //===============================================================================//
-
-function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_flag_trigger_plague_garden=true){
+function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_flag_trigger_plague_garden=true,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -22,11 +24,9 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
-			//----------------//
+			//================//
 			//VALIDATE TARGET//
-			//----------------//
+			//================//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -44,9 +44,9 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 
 			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
+			//================//
 			//CHECK EXISTING//
-			//----------------//
+			//================//
 			var _ref_existing_status = scr_status_check("POISON",_ref_target);
 			var _ref_applied_status = undefined;
 
@@ -81,9 +81,9 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 					obj_battle_status
 				);
 
-				//---------------------//
-				//INITIALIZE LIFETIME//
-				//---------------------//
+				//================//
+				//INIT LIFETIME//
+				//================//
 				scr_status_init_lifetime(
 					_ref_new_status,
 					_val_lifetime,
@@ -91,16 +91,18 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 					false
 				);
 
-				//-------------//
+				//=============//
 				//STATUS DATA//
-				//-------------//
+				//=============//
 				_ref_new_status._scr_status = scr_status_dot_poison;
 
 				_ref_new_status._ref_host = _ref_target;
 
 				_ref_new_status._str_status_type = "DOT";
 				_ref_new_status._str_status_name = "POISON";
-				_ref_new_status._str_status_desc = "DAMAGE INCREASES AS POISON AGES";
+
+				_ref_new_status._str_status_desc =
+					"MIN 1 DAMAGE; SCALING ACCELERATES ABOVE 5 STACKS; RAMPS WITH AGE";
 
 				_ref_new_status._spr_status = spr_status_dot_poison;
 
@@ -109,9 +111,9 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 
 				_ref_new_status._str_trigger_region = "START";
 
-				//----------------//
+				//================//
 				//REGISTER STATUS//
-				//----------------//
+				//================//
 				ds_list_add(
 					_ref_target._list_statuses,
 					_ref_new_status
@@ -176,24 +178,24 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 			//================//
 			//ADVANCE POISON//
 			//================//
-			/*
-				Poison ages before calculating damage for the current
-				trigger. A 5-round Poison therefore progresses through
-				20%, 40%, 60%, 80%, and 100% damage.
-			*/
-
+			// Age before damage. The final tick reaches maximum damage.
 			scr_status_tick_lifetime(_ref_status);
 
-			//=================//
-			//POISON DAMAGE//
-			//=================//
+			//========================//
+			//CALCULATE MAXIMUM DAMAGE//
+			//========================//
 			var _ct_poison_stacks = max(0,_ref_status._ct_status_stacks);
-			var _val_poison_max = max(1,_ref_status._val_status_lifetime_max);
-			var _val_poison_age = _val_poison_max - _ref_status._val_status_lifetime;
 
-			//----------------------//
+			// First 5 stacks are linear.
+			// Each additional stack adds an increasing bonus.
+			var _ct_bonus_stacks = max(0,_ct_poison_stacks - 5);
+
+			var _val_max_damage = _ct_poison_stacks +
+				((_ct_bonus_stacks * (_ct_bonus_stacks + 1)) / 2);
+
+			//=======================//
 			//POISON BUILDUP SPEED//
-			//----------------------//
+			//=======================//
 			var _val_poison_buildup = 5;
 
 			if (_ct_poison_stacks >= 15){
@@ -209,13 +211,36 @@ function scr_status_dot_poison(_str_tag,_ref_status,_val_lifetime=undefined,_fla
 				_val_poison_buildup = 4;
 			}
 
+			//================//
+			//CALCULATE AGE//
+			//================//
+			var _val_poison_max = max(1,_ref_status._val_status_lifetime_max);
+
+			var _val_poison_age = max(
+			    1,
+			    _val_poison_max - _ref_status._val_status_lifetime
+			);
+
 			var _val_poison_progress = clamp(
 				_val_poison_age / _val_poison_buildup,
 				0,
 				1
 			);
 
-			var _val_damage = ceil(_ct_poison_stacks * _val_poison_progress);
+			//================//
+			//FINAL DAMAGE//
+			//================//
+			var _val_damage = 0;
+
+			// Active Poison always deals at least 1 damage.
+			// A zero-stack Status cannot generate damage.
+			if (_ct_poison_stacks > 0){
+
+				_val_damage = max(
+					1,
+					ceil(_val_max_damage * _val_poison_progress)
+				);
+			}
 
 			//==========//
 			//TICK VFX//

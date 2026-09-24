@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_pyre_weapon",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_pyre_weapon",
+  "parent":{
+    "name":"PYRE_WEAPON",
+    "path":"folders/CARDS/VERMILION/PYRE_WEAPON.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

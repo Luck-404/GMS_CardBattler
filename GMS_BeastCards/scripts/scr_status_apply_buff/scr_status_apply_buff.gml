@@ -6,18 +6,31 @@
 //           Infinite Buffs ignore supplied Lifetime.
 //           Handles shared Buff VFX, SFX, and application logging.
 //
+// ARGUMENTS: _str_status_name is the Buff ID; _ref_target is the recipient Beast, or existing global marker for global-hosted buffs; _val_magnitude and _val_lifetime preserve original optional values.
+//
+// RETURNS: Applied Status instance, or undefined if the application fails.
+//
 //===============================================================================//
 
-function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_apply_buff(_str_status_name,_ref_target,_val_magnitude=undefined,_val_lifetime=undefined){
 
 	//========================//
 	//SNAPSHOT EXISTING STATUS//
 	//========================//
-	var _ref_target = global.ref_target_beast;
 	var _ref_existing_status = -1;
 
-	if (instance_exists(_ref_target)){
-		_ref_existing_status = scr_status_check(_str_status_name,_ref_target);
+	//========================//
+	//CHECK VALID BEAST TARGET//
+	//========================//
+	if (is_real(_ref_target)){
+
+		if (instance_exists(_ref_target)){
+
+			_ref_existing_status = scr_status_check(
+				_str_status_name,
+				_ref_target
+			);
+		}
 	}
 
 	if (
@@ -40,9 +53,269 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 
 	switch (_str_status_name){
 
+		//=======================//
+		//PERSISTENT OVERHEALTH//
+		//=======================//
+		case "PERSISTENT_OVERHEALTH":
+
+			_ref_applied_status = scr_status_buff_persistent_overhealth(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				undefined,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"+" + string(max(0,_val_magnitude)) +
+						" PERSISTENT OVERHEALTH",
+					undefined,
+					c_green,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+		break;
+
 		//=======================================================================//
 		// VERMILION
 		//=======================================================================//
+			//================//
+			//INFERNO ETERNAL//
+			//================//
+			case "INFERNO_ETERNAL":
+
+				_ref_applied_status = scr_status_buff_inferno_eternal(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime,
+					_ref_target
+				);
+
+				if (instance_exists(_ref_applied_status)){
+
+					scr_gui_spawn_popup_scrolling(
+						"TEXT",
+						"INFERNO ETERNAL",
+						undefined,
+						c_red,
+						room_width * 0.5,
+						room_height * 0.5
+					);
+				}
+
+			break;		
+	
+			//=================//
+			//PHOENIX REBIRTH//
+			//=================//
+			case "PHOENIX_REBIRTH":
+
+				_ref_applied_status = scr_status_buff_phoenix_rebirth("APPLY", undefined, _val_magnitude, _ref_target);
+
+				if (instance_exists(_ref_applied_status)){
+
+					scr_gui_spawn_popup_scrolling(
+						"TEXT",
+						"PHOENIX REBIRTH",
+						undefined,
+						c_red,
+						_ref_target.x,
+						_ref_target.y - 48
+					);
+				}
+
+			break;	
+	
+			//=============//
+			//ENDLESS RAGE//
+			//=============//
+			case "ENDLESS_RAGE":
+
+				_ref_applied_status = scr_status_buff_endless_rage(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					_val_lifetime,
+					_ref_target
+				);
+
+				if (instance_exists(_ref_applied_status)){
+
+					scr_gui_spawn_popup_scrolling(
+						"TEXT",
+						"ENDLESS RAGE",
+						undefined,
+						c_red,
+						_ref_target.x,
+						_ref_target.y - 48
+					);
+				}
+
+			break;
+
+		//===========//
+		//PYRE WEAPON//
+		//===========//
+		case "PYRE_WEAPON":
+
+			_ref_applied_status = scr_status_buff_pyre_weapon(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"PYRE WEAPON",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;
+
+		//=============//
+		//PAIN RESPONSE//
+		//=============//
+		case "PAIN_RESPONSE":
+
+			_ref_applied_status = scr_status_buff_pain_response(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime,
+				undefined,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"PAIN RESPONSE",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;
+
+		//===========//
+		//RELENTLESS//
+		//===========//
+		case "RELENTLESS":
+
+			_ref_applied_status = scr_status_buff_relentless(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"RELENTLESS",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;
+
+		//===================//
+		//MELTING ARMAMENTS//
+		//===================//
+		case "MELTING_ARMAMENTS":
+
+			_ref_applied_status = scr_status_buff_melting_armaments(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"MELTING ARMAMENTS",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;	
+	
+		//============//
+		//INNER FLAME//
+		//============//
+		case "INNER_FLAME":
+
+			_ref_applied_status = scr_status_buff_inner_flame("APPLY", undefined, _val_magnitude, _ref_target);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"INNER FLAME",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;
+
+		//----------------//
+		//FLAMING LASHES//
+		//----------------//
+		case "FLAMING_LASHES":
+
+			_ref_applied_status = scr_status_buff_flaming_lashes(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_val_lifetime,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"FLAMING LASHES",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;
+
 		//--------------//
 		//MOLTEN AEGIS//
 		//--------------//
@@ -52,7 +325,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -62,8 +336,35 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"MOLTEN AEGIS",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;		
+		
+		//=============//
+		//BATTLE FRENZY//
+		//=============//
+		case "BATTLE_FRENZY":
+
+			_ref_applied_status = scr_status_buff_battle_frenzy(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				undefined,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_applied_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"BATTLE FRENZY",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -78,7 +379,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -88,8 +390,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"LAST STAND",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -102,7 +404,10 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 
 			_ref_applied_status = scr_status_buff_furnace_heart(
 				"APPLY",
-				undefined
+				undefined,
+				undefined,
+				undefined,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -112,8 +417,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"FURNACE HEART",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -128,7 +433,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -138,8 +444,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"CINDERGUARD",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -154,7 +460,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -164,8 +471,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"BURNING PARRY",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -180,7 +487,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -190,8 +498,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"BACKDRAFT",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -206,7 +514,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -216,8 +525,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"BURNING THORNS",
 					undefined,
 					c_red,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -236,7 +545,9 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				undefined,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -246,8 +557,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"ABYSSAL FORM",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -258,11 +569,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//---------------//
 		case "CALL_THE_DEEP":
 
-			_ref_applied_status = scr_status_buff_call_the_deep(
-				"APPLY",
-				undefined,
-				_val_magnitude
-			);
+			_ref_applied_status = scr_status_buff_call_the_deep("APPLY", undefined, _val_magnitude, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -271,8 +578,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"CALL THE DEEP",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -287,7 +594,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -297,12 +605,41 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"DEEP MOMENTUM",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
 		break;
+
+	//---------------//
+	//CRIMSON FOCUS//
+	//---------------//
+	case "CRIMSON_FOCUS":
+
+		_ref_applied_status = scr_status_buff_crimson_focus(
+			"APPLY",
+			undefined,
+			_val_magnitude,
+			_val_lifetime,
+			_ref_target
+		);
+
+		if (instance_exists(_ref_applied_status)){
+
+			scr_gui_spawn_popup_scrolling(
+				"TEXT",
+				"CRIT CHANCE +" +
+					string(_ref_applied_status._val_status_magnitude) +
+					"%",
+				undefined,
+				c_red,
+				_ref_target.x,
+				_ref_target.y - 48
+			);
+		}
+
+	break;
 
 		//------------------//
 		//ICEBOUND INSTINCT//
@@ -313,7 +650,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -323,8 +661,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"ICEBOUND INSTINCT",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -339,7 +677,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -349,8 +688,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"FROZEN PRECISION",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -365,7 +704,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -375,8 +715,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"FROST WEAPON",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -391,7 +731,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -401,8 +742,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"ARCTIC FOCUS",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -417,7 +758,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -427,8 +769,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"IMMOVABLE",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -443,7 +785,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -453,8 +796,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"SAILOR'S RESOLVE",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -469,7 +812,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -479,8 +823,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"ICE MIRROR",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -495,7 +839,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -521,7 +866,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -531,12 +877,33 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"RAZOR SHELL",
 					undefined,
 					c_white,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
 		break;
+
+	//===========//
+	//SECOND WIND//
+	//===========//
+	case "SECOND_WIND":
+
+		_ref_applied_status = scr_status_buff_second_wind("APPLY", undefined, _val_magnitude, _ref_target);
+
+		if (instance_exists(_ref_applied_status)){
+
+			scr_gui_spawn_popup_scrolling(
+				"TEXT",
+				"SECOND WIND",
+				undefined,
+				c_red,
+				_ref_target.x,
+				_ref_target.y - 48
+			);
+		}
+
+	break;
 
 		//----------------//
 		//STATIC BARRIER//
@@ -547,7 +914,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -557,8 +925,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"STATIC BARRIER",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -573,7 +941,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -583,8 +952,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"FROZEN ARMOR",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -595,11 +964,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//-------------------//
 		case "DIVINE_PROTECTION":
 
-			_ref_applied_status = scr_status_buff_divine_protection(
-				"APPLY",
-				undefined,
-				_val_magnitude
-			);
+			_ref_applied_status = scr_status_buff_divine_protection("APPLY", undefined, _val_magnitude, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -608,8 +973,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"DIVINE PROTECTION",
 					undefined,
 					c_aqua,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -624,11 +989,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//---------------//
 		case "APEX_PREDATOR":
 
-			_ref_applied_status = scr_status_buff_apex_predator(
-				"APPLY",
-				undefined,
-				_val_magnitude
-			);
+			_ref_applied_status = scr_status_buff_apex_predator("APPLY", undefined, _val_magnitude, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -637,8 +998,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"APEX +" + string(_val_magnitude),
 					undefined,
 					c_green,
-					global.ref_target_beast.x,
-					global.ref_target_beast.y - 48
+					_ref_target.x,
+					_ref_target.y - 48
 				);
 			}
 
@@ -653,7 +1014,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -679,7 +1041,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -705,7 +1068,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -735,7 +1099,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -745,8 +1110,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"VERDANT INSIGHT",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -761,7 +1126,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -771,8 +1137,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"WILD VIGOR",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -787,7 +1153,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -797,8 +1164,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"BOOST",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -813,7 +1180,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -823,8 +1191,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"REGENERATION",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -839,7 +1207,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -849,8 +1218,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"PACK INSTINCT",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -865,7 +1234,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -875,8 +1245,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"TOXIC HIDE",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -891,7 +1261,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -901,8 +1272,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"NATURE'S BOND",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -917,7 +1288,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -943,7 +1315,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -953,34 +1326,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"THORNS",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
-				);
-			}
-
-		break;
-
-		//-------//
-		//BLOOM//
-		//-------//
-		case "BLOOM":
-
-			_ref_applied_status = scr_status_buff_bloom(
-				"APPLY",
-				undefined,
-				_val_magnitude,
-				_val_lifetime
-			);
-
-			if (instance_exists(_ref_applied_status)){
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"BLOOM +" + string(_ref_applied_status._val_status_magnitude) + " OVERHEALTH",
-					undefined,
-					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -995,11 +1342,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//-------//
 		case "TAUNT":
 
-			_ref_applied_status = scr_status_buff_taunt(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_applied_status = scr_status_buff_taunt("APPLY", undefined, _val_lifetime, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -1008,8 +1351,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"TAUNT",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -1024,7 +1367,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -1034,8 +1378,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"ARMOR OVER TIME",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -1046,10 +1390,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//----------//
 		case "REDIRECT":
 
-			_ref_applied_status = scr_status_buff_redirect(
-				"APPLY",
-				undefined
-			);
+			_ref_applied_status = scr_status_buff_redirect("APPLY", undefined, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -1058,8 +1399,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"REDIRECT",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -1070,11 +1411,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//-------------//
 		case "SECOND_LIFE":
 
-			_ref_applied_status = scr_status_buff_second_life(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_applied_status = scr_status_buff_second_life("APPLY", undefined, _val_lifetime, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -1083,8 +1420,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"SECOND LIFE",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -1095,11 +1432,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//-------------//
 		case "INSPIRATION":
 
-			_ref_applied_status = scr_status_buff_inspiration(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_applied_status = scr_status_buff_inspiration("APPLY", undefined, _val_lifetime, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -1124,7 +1457,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 				"APPLY",
 				undefined,
 				_val_magnitude,
-				_val_lifetime
+				_val_lifetime,
+				_ref_target
 			);
 
 			if (instance_exists(_ref_applied_status)){
@@ -1134,8 +1468,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"+" + string(_ref_applied_status._val_status_magnitude) + " OVERHEALTH",
 					undefined,
 					c_green,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 
@@ -1146,11 +1480,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//--------//
 		case "DRAW_2":
 
-			_ref_applied_status = scr_status_buff_draw_2(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_applied_status = scr_status_buff_draw_2("APPLY", undefined, _val_lifetime, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -1171,10 +1501,7 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 		//---------------//
 		case "MALLEABILITY":
 
-			_ref_applied_status = scr_status_buff_malleability(
-				"APPLY",
-				undefined
-			);
+			_ref_applied_status = scr_status_buff_malleability("APPLY", undefined, _ref_target);
 
 			if (instance_exists(_ref_applied_status)){
 
@@ -1183,8 +1510,8 @@ function scr_status_apply_buff(_str_status_name,_val_magnitude=undefined,_val_li
 					"MALLEABILITY",
 					undefined,
 					c_white,
-					global.ref_target_beast.x + irandom_range(-32,32),
-					global.ref_target_beast.y - 24 + irandom_range(-32,32)
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
 			}
 

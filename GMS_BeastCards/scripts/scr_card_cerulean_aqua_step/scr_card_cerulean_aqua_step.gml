@@ -16,7 +16,6 @@ function scr_card_cerulean_aqua_step(_stct_card,_ref_caster,_ref_target){
 	//SWAP POSITIONS//
 	//================//
 	scr_battle_reposition_target(
-		_stct_card,
 		_ref_caster,
 		_ref_target
 	);

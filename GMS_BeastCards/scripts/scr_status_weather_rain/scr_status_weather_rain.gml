@@ -92,7 +92,7 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 
 			_ref_new_status._str_status_type = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: RAIN";
-			_ref_new_status._str_status_desc = "CERULEAN DAMAGE +25%. END OF ROUND: HEAL 1 RANDOM LIVING BEAST FOR 3 HP AND CLEANSE 1 DEBUFF FROM 1 INDEPENDENTLY SELECTED RANDOM LIVING BEAST.";
+			_ref_new_status._str_status_desc = "Weather. Cerulean damage is increased by 25%. At the end of each round, heal 1 random living Beast for 3 HP and cleanse 1 Debuff from 1 independently selected random living Beast. Lifetime: 5 rounds.";
 
 			_ref_new_status._spr_status = spr_status_weather_rain;
 
@@ -234,9 +234,7 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 			if (array_length(_arr_living) > 0){
 
 				var _ref_heal_target = _arr_living[irandom(array_length(_arr_living) - 1)];
-				var _ref_original_target = global.ref_target_beast;
 
-				global.ref_target_beast = _ref_heal_target;
 
 				//----------------//
 				//RAIN HEAL VFX//
@@ -253,9 +251,12 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 					undefined
 				);
 
-				scr_battle_heal_target(3,_ref_heal_target);
+				scr_battle_heal_target(
+					"FIXED",
+					3,
+					_ref_heal_target
+				);
 
-				global.ref_target_beast = _ref_original_target;
 			}
 
 			//======================//
@@ -265,8 +266,9 @@ function scr_status_weather_rain(_str_tag,_ref_status,_val_lifetime=undefined){
 
 				var _ref_cleanse_target = _arr_living[irandom(array_length(_arr_living) - 1)];
 
-				scr_status_cleanse_debuff(
+				scr_status_cleanse(
 					_ref_cleanse_target,
+					"DEBUFF",
 					1
 				);
 			}

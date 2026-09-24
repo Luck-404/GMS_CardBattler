@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_pain_response",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_pain_response",
+  "parent":{
+    "name":"PAIN_RESPONSE",
+    "path":"folders/CARDS/VERMILION/PAIN_RESPONSE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

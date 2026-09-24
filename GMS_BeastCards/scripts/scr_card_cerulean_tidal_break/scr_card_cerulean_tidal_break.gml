@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the Tidal Break card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -22,8 +22,11 @@ function scr_card_cerulean_tidal_break(_stct_card,_ref_caster,_ref_target){
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//=================//
@@ -40,7 +43,7 @@ function scr_card_cerulean_tidal_break(_stct_card,_ref_caster,_ref_target){
 		//APPLY STORMSTRUCK//
 		//------------------//
 		repeat (2){
-			scr_status_apply_dot("STORMSTRUCK");
+			scr_status_apply_dot("STORMSTRUCK", _ref_target);
 		}
 	}
 }

@@ -15,13 +15,6 @@
 
 function scr_card_vermilion_flamespawn(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	if (_ref_caster._val_cur_hp <= 0){
 		return;
 	}

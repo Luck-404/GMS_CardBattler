@@ -9,10 +9,12 @@
 //           _str_damage_stat   - Damage STAT: PHY, MAG, or NEU.
 //           _val_damage        - Final damage dealt.
 //           _stct_presentation - Optional presentation override struct.
+//           _ref_source_card - Explicit hit-sequencing Card instance.
+// RETURNS: Impact VFX instance or undefined when unavailable.
 //
 //===============================================================================//
 
-function scr_battle_vfx_damage_hit(_ref_target,_str_damage_stat,_val_damage,_stct_presentation=undefined){
+function scr_battle_vfx_damage_hit(_ref_target,_str_damage_stat,_val_damage,_stct_presentation=undefined,_ref_source_card=undefined){
 
 	//-----------------//
 	//VALIDATE TARGET//
@@ -81,9 +83,12 @@ function scr_battle_vfx_damage_hit(_ref_target,_str_damage_stat,_val_damage,_stc
 	//------------------------//
 	//GET CURRENT CASTING CARD//
 	//------------------------//
-	var _ref_card = global.ref_cast_card;
+	var _ref_card = _ref_source_card;
+	if (_ref_card == undefined){
+		_ref_card = global.ref_cast_card;
+	}
 
-	if (instance_exists(_ref_card)){
+	if (_ref_card != -1 && instance_exists(_ref_card)){
 
 		if (!is_array(_ref_card._arr_vfx_hit_context)){
 			_ref_card._arr_vfx_hit_context = [];

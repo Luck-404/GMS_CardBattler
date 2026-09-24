@@ -1741,7 +1741,7 @@ function scr_beast_get_info(_str_beast_name){
 	}
 
 	//=======================//
-	//APPLY RUNTIME DEFAULTS//
+	//APPLY PERSISTENT DEFAULTS//
 	//=======================//
 	if (is_struct(_stct_return_beast)){
 
@@ -1755,8 +1755,8 @@ function scr_beast_get_info(_str_beast_name){
 		_stct_return_beast._arr_beast_markings = undefined;
 		_stct_return_beast._arr_beast_scars = undefined;
 
-		_stct_return_beast._val_cur_hp = 0;
-		_stct_return_beast._val_max_hp = 0;
+		_stct_return_beast._val_beast_hp_cur = 0;
+		_stct_return_beast._val_beast_hp_max = 0;
 		_stct_return_beast._val_beast_exp = 0;
 
 		//-------------------//

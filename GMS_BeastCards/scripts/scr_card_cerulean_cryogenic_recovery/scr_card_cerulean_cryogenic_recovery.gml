@@ -14,16 +14,10 @@
 function scr_card_cerulean_cryogenic_recovery(_stct_card,_ref_caster,_ref_target){
 
 	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
-	//================//
 	//HEAL TARGET//
 	//================//
 	scr_battle_heal_target(
+		"FIXED",
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
@@ -31,8 +25,9 @@ function scr_card_cerulean_cryogenic_recovery(_stct_card,_ref_caster,_ref_target
 	//================//
 	//CLEANSE CC//
 	//================//
-	scr_status_cleanse_cc(
-		_ref_target,
-		1
-	);
+	scr_status_cleanse(
+	_ref_target,
+	"CC",
+	1
+	);	
 }

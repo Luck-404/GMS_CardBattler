@@ -9,27 +9,16 @@
 //
 // ARGUMENTS: _stct_card is the Leviathan's Blessing card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_leviathans_blessing(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//===================//
 	//APPLY ABYSSAL FORM//
 	//===================//
-	scr_status_apply_buff(
-		"ABYSSAL_FORM",
-		40,
-		_stct_card._val_card_magnitude
-	);
+	scr_status_apply_buff("ABYSSAL_FORM", _ref_target, 40, _stct_card._val_card_magnitude);
 
 	//================//
 	//FILL OPEN SLOTS//

@@ -384,34 +384,4 @@ function hscr_gui_set_pause(_flag_pause,_str_source="SYSTEM"){
 	return true;
 }
 
-//-------------------------------------------------------------------------------//
-// HSCR_GUI_TRIGGER_END_BATTLE
-// FUNCTION: Ends battle flow and removes the current GUI.
-//           Pauses gameplay, creates the end-battle GUI, and assigns its result.
-//
-// ARGUMENTS: _str_win_type is the battle result condition.
-// RETURNS: Nothing.
-//
-//-------------------------------------------------------------------------------//
-function hscr_gui_trigger_end_battle(_str_win_type){
-
-	//----------------//
-	//CLOSE ACTIVE GUI//
-	//----------------//
-	hscr_gui_destroy_active();
-	hscr_gui_set_pause(true);
-
-	//---------------------//
-	//OPEN END-BATTLE GUI//
-	//---------------------//
-	global.ref_active_gui = instance_create_layer(
-		room_width / 2,
-		room_height / 2,
-		"ily_fx",
-		obj_gui_end_battle_pane
-	);
-
-	global.ref_active_gui._str_condition = _str_win_type;
-}
-
 #endregion

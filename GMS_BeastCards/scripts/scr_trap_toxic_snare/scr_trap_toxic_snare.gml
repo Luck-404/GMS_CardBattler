@@ -9,7 +9,7 @@
 // ARGUMENTS: _str_tag selects the Trap action, _ref_trap is the Trap instance,
 //            _ref_target is the trapped Beast whose DoTs reached the threshold,
 //            while _ref_attacker and _stct_card are unused.
-// RETURNS: True when Toxic Snare successfully triggers; otherwise false.
+// RETURNS: True when the trap successfully triggers; false otherwise.
 //
 //===============================================================================//
 
@@ -120,18 +120,13 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//STORE GLOBAL CONTEXT//
 			//======================//
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 			var _ref_original_card = global.ref_cast_card;
 
 			//================//
 			//STUN HOST//
 			//================//
-			global.ref_target_beast = _ref_target;
 
-			scr_status_apply_cc(
-				"STUN",
-				1
-			);
+			scr_status_apply_cc("STUN", _ref_target, 1);
 
 			//================//
 			//DESTROY TRAP//
@@ -158,10 +153,9 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				_ref_left_target._val_cur_hp > 0
 			){
 
-				global.ref_target_beast = _ref_left_target;
 
 				repeat (2){
-					scr_status_apply_dot("POISON");
+					scr_status_apply_dot("POISON", _ref_left_target);
 				}
 			}
 
@@ -174,10 +168,9 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				_ref_right_target._val_cur_hp > 0
 			){
 
-				global.ref_target_beast = _ref_right_target;
 
 				repeat (2){
-					scr_status_apply_dot("POISON");
+					scr_status_apply_dot("POISON", _ref_right_target);
 				}
 			}
 
@@ -185,7 +178,6 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//RESTORE GLOBAL CONTEXT//
 			//========================//
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 			global.ref_cast_card = _ref_original_card;
 
 			return true;

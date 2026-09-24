@@ -1,26 +1,16 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_CIRCLE_OF_LIFE
-// FUNCTION: Resolves Circle of Life.
-//           Expends every valid corpse on both teams.
-//           For each corpse, generates 1 Mana, heals all living allied Beasts
-//           for 5 HP, and summons a Dormant Seed into a random available allied
-//           Minion slot. If no slot remains, grows 1 random allied Minion.
+// FUNCTION: Expends every valid corpse on both teams through the standardized
+//           sacrifice owner. For each corpse, generates 1 Mana, heals allies,
+//           and summons or grows a Viridian Minion as established.
 //
-// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
-//            _ref_target is the selected target.
+// ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
+//            _ref_target is unused for this Global Card.
 // RETURNS: True if the card resolves, otherwise false.
 //
 //===============================================================================//
-
 function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
-
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return false;
-	}
 
 	//======================//
 	//GET ALLIED TEAM LIST//
@@ -120,7 +110,7 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		//EXPEND CORPSE//
 		//----------------//
-		if (!scr_battle_sacrifice_corpse(_ref_corpse)){
+		if (!scr_battle_sacrifice("CORPSE",_ref_corpse)._flag_success){
 			continue;
 		}
 
@@ -146,7 +136,11 @@ function scr_card_viridian_circle_of_life(_stct_card,_ref_caster,_ref_target){
 				continue;
 			}
 
-			scr_battle_heal_target(5,_ref_ally);
+			scr_battle_heal_target(
+				"FIXED",
+				5,
+				_ref_ally
+			);
 		}
 
 		//----------------------------//

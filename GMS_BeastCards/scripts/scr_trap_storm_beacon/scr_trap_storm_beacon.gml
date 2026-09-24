@@ -8,7 +8,7 @@
 // ARGUMENTS: _str_tag selects the Trap action, _ref_trap is the Trap instance,
 //            _ref_caster is the trapped Beast that successfully cast,
 //            while _ref_target and _stct_card are unused.
-// RETURNS: True when Storm Beacon successfully triggers; otherwise false.
+// RETURNS: True when the trap successfully triggers; false otherwise.
 //
 //===============================================================================//
 
@@ -56,24 +56,13 @@ function scr_trap_storm_beacon(_str_tag,_ref_trap,_ref_caster,_ref_target,_stct_
 				"TRAP TRIGGERED: STORM BEACON"
 			);
 
-			//======================//
-			//STORE GLOBAL TARGET//
-			//======================//
-			var _ref_original_target = global.ref_target_beast;
-
-			global.ref_target_beast = _ref_caster;
-
 			//===================//
 			//APPLY STORMSTRUCK//
 			//===================//
 			repeat (_ct_stormstruck){
-				scr_status_apply_dot("STORMSTRUCK");
+				scr_status_apply_dot("STORMSTRUCK", _ref_caster);
 			}
 
-			//================//
-			//RESTORE TARGET//
-			//================//
-			global.ref_target_beast = _ref_original_target;
 
 			//================//
 			//DESTROY TRAP//

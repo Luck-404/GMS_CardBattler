@@ -1,16 +1,24 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_RAZOR_SHELL
 // FUNCTION: Handles Razor Shell.
 //           Unstackable Timed Buff.
+//           Lifetime decrements at START.
 //           Successful enemy Attack damage to the host deals fixed NEU
 //           retaliation damage to the attacker.
 //           Trigger resolution is handled by scr_status_trigger_razor_shell.
-//           Reapplication refreshes duration and magnitude.
+//           Reapplication refreshes duration without replacing magnitude.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY.
+// RETURNS: Command-specific Status reference or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -19,8 +27,9 @@ function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefin
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -46,20 +55,48 @@ function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefin
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_status_check("RAZOR_SHELL",_ref_target);
+			var _ref_existing_status = scr_status_check(
+				"RAZOR_SHELL",
+				_ref_target
+			);
 
 			//------------------//
 			//REFRESH EXISTING//
 			//------------------//
-			if (_ref_existing_status != -1){
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
 
-				_ref_existing_status._val_status_magnitude = _val_magnitude;
-				_ref_existing_status._str_status_desc = "WHEN STRUCK, DEAL " + string(_val_magnitude) + " NEU DAMAGE TO THE ATTACKER";
+				//-----------------------------//
+				//PRESERVE ORIGINAL MAGNITUDE//
+				//-----------------------------//
+				_ref_existing_status._str_status_desc =
+					"WHEN STRUCK, DEAL " +
+					string(_ref_existing_status._val_status_magnitude) +
+					" NEU DAMAGE TO THE ATTACKER";
 
+				//------------------//
+				//REFRESH LIFETIME//
+				//------------------//
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				//-----------------------//
+				//ENSURE PERSISTENT VFX//
+				//-----------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_thorns,
+						0,
+						-65,
+						1
+					);
+				}
 
 				return _ref_existing_status;
 			}
@@ -80,7 +117,7 @@ function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefin
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
-				true,
+				false,
 				false
 			);
 
@@ -93,7 +130,11 @@ function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefin
 
 			_ref_new_status._str_status_type = "BUFF";
 			_ref_new_status._str_status_name = "RAZOR_SHELL";
-			_ref_new_status._str_status_desc = "WHEN STRUCK, DEAL " + string(_val_magnitude) + " NEU DAMAGE TO THE ATTACKER";
+
+			_ref_new_status._str_status_desc =
+				"WHEN STRUCK, DEAL " +
+				string(_val_magnitude) +
+				" NEU DAMAGE TO THE ATTACKER";
 
 			_ref_new_status._spr_status = spr_status_buff_razor_shell;
 
@@ -102,7 +143,10 @@ function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefin
 
 			_ref_new_status._flag_status_stackable = false;
 
-			_ref_new_status._str_trigger_region = "END";
+			//------------------//
+			//START DECREMENT//
+			//------------------//
+			_ref_new_status._str_trigger_region = "START";
 
 			//----------------//
 			//REGISTER STATUS//
@@ -113,6 +157,17 @@ function scr_status_buff_razor_shell(_str_tag,_ref_status,_val_magnitude=undefin
 			);
 
 			scr_status_reposition(_ref_target);
+
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_thorns,
+				0,
+				-65,
+				1
+			);
 
 			return _ref_new_status;
 

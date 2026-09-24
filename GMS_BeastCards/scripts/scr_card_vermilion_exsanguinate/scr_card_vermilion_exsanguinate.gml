@@ -7,18 +7,11 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_vermilion_exsanguinate(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//================//
 	//HEMORRHAGE//
@@ -39,13 +32,10 @@ function scr_card_vermilion_exsanguinate(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY 3 BLEED//
 	//================//
-	var _ref_original_target = global.ref_target_beast;
 
-	global.ref_target_beast = _ref_target;
 
 	repeat (3){
-		scr_status_apply_dot("BLEED");
+		scr_status_apply_dot("BLEED", _ref_target);
 	}
 
-	global.ref_target_beast = _ref_original_target;
 }

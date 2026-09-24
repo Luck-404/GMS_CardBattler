@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_battle_frenzy",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_battle_frenzy",
+  "parent":{
+    "name":"BATTLE_FRENZY",
+    "path":"folders/CARDS/VERMILION/BATTLE_FRENZY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

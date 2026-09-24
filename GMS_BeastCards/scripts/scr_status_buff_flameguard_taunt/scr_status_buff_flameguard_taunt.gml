@@ -1,15 +1,18 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_FLAMEGUARD_TAUNT
 // FUNCTION: Handles Flameguard's source-bound Taunt passive.
-//           Makes the Flameguard's host the sole eligible hostile Attack target.
+//           Participates in newest-Taunt targeting priority.
+//           An older Flameguard Taunt is suppressed while a newer Taunt
+//           controls hostile targeting, but is not destroyed.
 //           Remains active until its exact source Minion is removed.
 //           Cannot be cleansed.
 //           Uses the existing Taunt icon and persistent VFX.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Flameguard Taunt Status.
-//            _ref_source_minion is the Flameguard providing the passive.
+// ARGUMENTS: _str_tag selects APPLY or DEATH.
+//            _ref_status references an existing Flameguard Taunt.
+//            _ref_source_minion is the source Flameguard.
 // RETURNS: Applied Status on APPLY; otherwise undefined.
 //
 //===============================================================================//
@@ -85,9 +88,9 @@ function scr_status_buff_flameguard_taunt(_str_tag,_ref_status,_ref_source_minio
 				}
 			}
 
-			//================//
+			//===============//
 			//CREATE STATUS//
-			//================//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_host.x,
 				_ref_host.y,
@@ -105,9 +108,9 @@ function scr_status_buff_flameguard_taunt(_str_tag,_ref_status,_ref_source_minio
 				true
 			);
 
-			//-------------//
+			//=============//
 			//STATUS DATA//
-			//-------------//
+			//=============//
 			_ref_new_status._scr_status = scr_status_buff_flameguard_taunt;
 
 			_ref_new_status._ref_host = _ref_host;
@@ -117,7 +120,10 @@ function scr_status_buff_flameguard_taunt(_str_tag,_ref_status,_ref_source_minio
 			_ref_new_status._str_status_name = "FLAMEGUARD_TAUNT";
 
 			_ref_new_status._str_status_desc =
-				"TAUNT: ONLY AVAILABLE PRIMARY TARGET FOR HOSTILE CARDS. IGNORES RANGE AND BLIND. DOES NOT PREVENT AOE. EXISTS AS LONG AS FLAMEGUARD LIVES.";
+				"FLAMEGUARD TAUNT: CONTROLS HOSTILE PRIMARY TARGETING " +
+				"ONLY WHILE NEWEST. SUPPRESSED BY NEWER TAUNT. " +
+				"IGNORES RANGE AND BLIND. DOES NOT PREVENT AOE. " +
+				"LASTS WHILE SOURCE FLAMEGUARD LIVES.";
 
 			_ref_new_status._spr_status = spr_status_buff_taunt;
 
@@ -126,6 +132,18 @@ function scr_status_buff_flameguard_taunt(_str_tag,_ref_status,_ref_source_minio
 			_ref_new_status._flag_status_stackable = false;
 			_ref_new_status._flag_status_uncleansable = true;
 			_ref_new_status._flag_status_requires_live_source_minion = true;
+
+			//================//
+			//NEWEST PRIORITY//
+			//================//
+			if (!variable_global_exists("_ct_taunt_sequence")){
+				global._ct_taunt_sequence = 0;
+			}
+
+			global._ct_taunt_sequence++;
+
+			_ref_new_status._val_taunt_priority =
+				global._ct_taunt_sequence;
 
 			_ref_new_status._str_trigger_region = undefined;
 
@@ -137,9 +155,9 @@ function scr_status_buff_flameguard_taunt(_str_tag,_ref_status,_ref_source_minio
 				_ref_new_status
 			);
 
-			//================//
+			//----------------//
 			//PERSISTENT VFX//
-			//================//
+			//----------------//
 			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
 				_ref_host,
 				spr_battle_vfx_taunting,
@@ -162,19 +180,11 @@ function scr_status_buff_flameguard_taunt(_str_tag,_ref_status,_ref_source_minio
 		//=======//
 		case "DEATH":
 
-			//-----------------//
-			//VALIDATE STATUS//
-			//-----------------//
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			//================//
-			//DESTROY STATUS//
-			//================//
-			scr_status_destroy(
-				_ref_status
-			);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

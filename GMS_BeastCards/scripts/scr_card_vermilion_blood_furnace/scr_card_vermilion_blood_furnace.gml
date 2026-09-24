@@ -8,18 +8,11 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_vermilion_blood_furnace(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//================//
 	//GET CHAR STACKS//
@@ -48,8 +41,11 @@ function scr_card_vermilion_blood_furnace(_stct_card,_ref_caster,_ref_target){
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//----------------//
@@ -73,14 +69,8 @@ function scr_card_vermilion_blood_furnace(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY CHAR//
 	//================//
-	var _ref_original_target = global.ref_target_beast;
 
-	global.ref_target_beast = _ref_target;
 
-	scr_status_debuff_char(
-		"APPLY",
-		undefined
-	);
+	scr_status_debuff_char("APPLY", undefined, undefined, _ref_target);
 
-	global.ref_target_beast = _ref_original_target;
 }

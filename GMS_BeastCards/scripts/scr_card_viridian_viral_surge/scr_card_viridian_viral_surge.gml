@@ -10,25 +10,11 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_viridian_viral_surge(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
-	//=====================//
-	//STORE ORIGINAL TARGET//
-	//=====================//
-	var _ref_original_target = global.ref_target_beast;
-
-	global.ref_target_beast = _ref_target;
 
 	//================//
 	//DOUBLE ALL DOTS//
@@ -72,8 +58,4 @@ function scr_card_viridian_viral_surge(_stct_card,_ref_caster,_ref_target){
 		}
 	}
 
-	//=======================//
-	//RESTORE ORIGINAL TARGET//
-	//=======================//
-	global.ref_target_beast = _ref_original_target;
 }

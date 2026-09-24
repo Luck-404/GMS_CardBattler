@@ -25,8 +25,8 @@ _list_beasts_graveyard = ds_list_create();
 //-------------------//
 //ENEMY LEVEL SCALING//
 //-------------------//
-_val_enemy_level_min = 3;
-_val_enemy_level_max = 5;
+_val_enemy_level_min = 5;
+_val_enemy_level_max = 10;
 
 //-------------//
 //TURN QUEUES//

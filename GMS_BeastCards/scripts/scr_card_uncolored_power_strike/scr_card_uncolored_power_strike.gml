@@ -17,15 +17,17 @@ function scr_card_uncolored_power_strike(_stct_card,_ref_caster,_ref_target){
 	//=======================//
 	var _stct_presentation = {
 		_spr_vfx_override : spr_battle_vfx_power_strike,
-		_snd_sfx_override : spr_battle_vfx_power_strike
+		_snd_sfx_override : snd_battle_power_strike
 	};
 
 	//================//
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
-		_stct_card._val_card_magnitude,
+		"LINEAR",
+		_ref_caster,
 		_ref_target,
-		_stct_presentation
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, presentation: _stct_presentation, card_instance: global.ref_cast_card}
 	);
 }

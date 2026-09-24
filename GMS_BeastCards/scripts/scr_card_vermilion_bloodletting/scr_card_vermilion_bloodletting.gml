@@ -16,7 +16,13 @@ function scr_card_vermilion_bloodletting(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//DEAL DAMAGE//
 	//================//
-	scr_battle_damage_target_percent(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"PERCENT",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
 	//================//
 	//HEMORRHAGE//

@@ -17,12 +17,16 @@ function scr_card_cerulean_cooling_mist(_stct_card,_ref_caster,_ref_target){
 	//HEAL TARGET//
 	//================//
 	scr_battle_heal_target(
+		"FIXED",
 		_stct_card._val_card_magnitude,
 		_ref_target
 	);
-
 	//==================//
 	//CLEANSE OLDEST DOT//
 	//==================//
-	scr_status_cleanse_oldest_dot(_ref_target);
+	scr_status_cleanse(
+		_ref_target,
+		"DOT",
+		"OLDEST"
+	);
 }

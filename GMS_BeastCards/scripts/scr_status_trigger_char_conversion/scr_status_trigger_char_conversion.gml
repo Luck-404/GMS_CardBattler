@@ -6,7 +6,7 @@
 //           Burn is not consumed.
 //           Char threshold applications bypass a second CON resistance check.
 //
-// INPUTS:   _ref_target - Beast whose Burn is checked.
+// ARGUMENTS:   _ref_target - Beast whose Burn is checked.
 //           _ct_vfx_delay - Optional delay before Char trigger presentation.
 // RETURNS: True if Char triggered; otherwise false.
 //
@@ -43,26 +43,11 @@ function scr_status_trigger_char_conversion(_ref_target,_ct_vfx_delay=0){
 		return false;
 	}
 
-	//=====================//
-	//STORE ORIGINAL TARGET//
-	//=====================//
-	var _ref_original_target = global.ref_target_beast;
-
-	global.ref_target_beast = _ref_target;
-
 	//================//
 	//APPLY CHAR//
 	//================//
-	var _ref_char = scr_status_debuff_char(
-		"APPLY",
-		undefined,
-		undefined
-	);
+	var _ref_char = scr_status_debuff_char("APPLY", undefined, undefined, _ref_target);
 
-	//=======================//
-	//RESTORE ORIGINAL TARGET//
-	//=======================//
-	global.ref_target_beast = _ref_original_target;
 
 	if (!instance_exists(_ref_char)){
 		return false;

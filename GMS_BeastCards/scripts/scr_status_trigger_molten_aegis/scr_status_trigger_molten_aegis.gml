@@ -1,14 +1,16 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_TRIGGER_MOLTEN_AEGIS
 // FUNCTION: Checks an attacking Beast for Molten Aegis.
-//           Consumes the Buff on the host's next successfully resolved Attack
-//           and applies its Burn magnitude to each living Beast affected.
+//           Consumes exactly 1 charge on each successfully resolved Attack.
+//           Applies 1 Burn to each living Beast affected by that Attack.
+//           Remaining charges persist for subsequent Attacks.
 //
 // ARGUMENTS: _ref_attacker is the attacking Beast.
 //            _ref_primary_target is the Attack's selected primary target.
 //            _stct_card is the resolving Attack Card.
-// RETURNS: True when Molten Aegis is consumed.
+// RETURNS: True when a charge is consumed; false otherwise.
 //
 //===============================================================================//
 
@@ -35,7 +37,10 @@ function scr_status_trigger_molten_aegis(_ref_attacker,_ref_primary_target,_stct
 	//===================//
 	//CHECK MOLTEN AEGIS//
 	//===================//
-	var _ref_molten_aegis = scr_status_check("MOLTEN_AEGIS",_ref_attacker);
+	var _ref_molten_aegis = scr_status_check(
+		"MOLTEN_AEGIS",
+		_ref_attacker
+	);
 
 	if (
 		_ref_molten_aegis == -1 ||
@@ -44,7 +49,9 @@ function scr_status_trigger_molten_aegis(_ref_attacker,_ref_primary_target,_stct
 		return false;
 	}
 
-	var _ct_burn = max(1,floor(_ref_molten_aegis._val_status_magnitude));
+	if (_ref_molten_aegis._ct_status_stacks <= 0){
+		return false;
+	}
 
 	//====================//
 	//GET ATTACK TARGETS//
@@ -62,17 +69,19 @@ function scr_status_trigger_molten_aegis(_ref_attacker,_ref_primary_target,_stct
 	}
 
 	//================//
-	//CONSUME BUFF//
+	//CONSUME 1 CHARGE//
 	//================//
-	scr_status_buff_molten_aegis("DEATH",_ref_molten_aegis);
+	if (
+		!scr_status_buff_molten_aegis(
+			"CONSUME",
+			_ref_molten_aegis
+		)
+	){
+		return false;
+	}
 
 	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
-
-	//================//
-	//APPLY BURN//
+	//APPLY 1 BURN//
 	//================//
 	for (var _it_target = 0;_it_target < array_length(_arr_targets);_it_target++){
 
@@ -89,17 +98,14 @@ function scr_status_trigger_molten_aegis(_ref_attacker,_ref_primary_target,_stct
 			continue;
 		}
 
-		global.ref_target_beast = _ref_target;
-
-		repeat (_ct_burn){
-			scr_status_apply_dot("BURN");
-		}
+		//----------------//
+		//APPLY BURN//
+		//----------------//
+		scr_status_apply_dot(
+			"BURN",
+			_ref_target
+		);
 	}
-
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 
 	return true;
 }

@@ -2,7 +2,7 @@
 //
 // SCRIPT: SCR_STATUS_EVENT_BLOOMTIDE
 // FUNCTION: Handles the Bloomtide global Event.
-//           Converts excess healing into Overhealth while active.
+//           While active, excess healing becomes Persistent Overhealth.
 //           Heals every living Beast by 2 at the end of each round.
 //
 // ARGUMENTS: _str_tag selects the Status action, _ref_status references an
@@ -36,17 +36,17 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 
 			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
+			//================//
 			//CHECK EXISTING//
-			//----------------//
+			//================//
 			var _ref_existing_status = scr_status_check(
 				"EVENT: BLOOMTIDE",
 				global.list_statuses
 			);
 
-			//------------------//
+			//==================//
 			//REFRESH EXISTING//
-			//------------------//
+			//==================//
 			if (_ref_existing_status != -1){
 
 				if (!instance_exists(_ref_existing_status)){
@@ -71,9 +71,9 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				obj_battle_status
 			);
 
-			//---------------------//
+			//=====================//
 			//INITIALIZE LIFETIME//
-			//---------------------//
+			//=====================//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
@@ -81,27 +81,36 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				false
 			);
 
-			//-------------//
+			//=============//
 			//STATUS DATA//
-			//-------------//
-			_ref_new_status._scr_status = scr_status_event_bloomtide;
+			//=============//
+			_ref_new_status._scr_status =
+				scr_status_event_bloomtide;
 
-			_ref_new_status._ref_host = undefined;
+			_ref_new_status._ref_host =
+				undefined;
 
-			_ref_new_status._str_status_type = "EVENT";
-			_ref_new_status._str_status_name = "EVENT: BLOOMTIDE";
-			_ref_new_status._str_status_desc = "HEALING BEYOND MAXIMUM HP BECOMES OVERHEALTH. END OF ROUND: HEAL ALL LIVING BEASTS 2.";
+			_ref_new_status._str_status_type =
+				"EVENT";
 
-			_ref_new_status._spr_status = spr_status_event_bloomtide;
+			_ref_new_status._str_status_name =
+				"EVENT: BLOOMTIDE";
+
+			_ref_new_status._str_status_desc =
+				"Event. At the end of each round, heal every living Beast for 2 HP. While Bloomtide is active, healing beyond maximum HP is converted 1:1 into Persistent Overhealth. Persistent Overhealth does not expire or regenerate and remains until consumed by damage. Lifetime: 3 rounds.";
+
+			_ref_new_status._spr_status =
+				spr_status_event_bloomtide;
 
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = false;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region =
+				"END";
 
-			//----------------//
+			//================//
 			//REGISTER STATUS//
-			//----------------//
+			//================//
 			ds_list_add(
 				global.list_statuses,
 				_ref_new_status
@@ -125,12 +134,13 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			//==========================//
 			//PERSISTENT BLOOMTIDE VFX//
 			//==========================//
-			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent_loop(
-				spr_battle_vfx_event_bloomtide_persist,
-				room_width * 0.5,
-				room_height * 0.5,
-				1
-			);
+			_ref_new_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent_loop(
+					spr_battle_vfx_event_bloomtide_persist,
+					room_width * 0.5,
+					room_height * 0.5,
+					1
+				);
 
 			//====================//
 			//BLOOMTIDE AMBIENCE//
@@ -141,10 +151,12 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				0.25
 			);
 
-			//------------------//
+			//==================//
 			//REPOSITION STATUS//
-			//------------------//
-			scr_status_reposition(global.list_statuses);
+			//==================//
+			scr_status_reposition(
+				global.list_statuses
+			);
 
 			return _ref_new_status;
 
@@ -178,17 +190,25 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			);
 
 			//=================//
-			//HEAL ALL BEASTS//
+			//HEAL PLAYER TEAM//
 			//=================//
 			if (instance_exists(obj_battle_player_controller)){
 
-				var _list_player_beasts = obj_battle_player_controller._list_beasts_alive;
+				var _list_player_beasts =
+					obj_battle_player_controller._list_beasts_alive;
 
 				if (ds_exists(_list_player_beasts,ds_type_list)){
 
-					for (var _it_beast = 0;_it_beast < ds_list_size(_list_player_beasts);_it_beast++){
+					for (
+						var _it_beast = 0;
+						_it_beast < ds_list_size(_list_player_beasts);
+						_it_beast++
+					){
 
-						var _ref_beast = ds_list_find_value(_list_player_beasts,_it_beast);
+						var _ref_beast = ds_list_find_value(
+							_list_player_beasts,
+							_it_beast
+						);
 
 						if (!instance_exists(_ref_beast)){
 							continue;
@@ -201,9 +221,9 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 							continue;
 						}
 
-						//----------------//
+						//================//
 						//TARGET HEAL VFX//
-						//----------------//
+						//================//
 						scr_battle_vfx(
 							undefined,
 							spr_battle_vfx_event_bloomtide_tick,
@@ -216,23 +236,38 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 							undefined
 						);
 
-						//-----------//
+						//===========//
 						//HEAL BEAST//
-						//-----------//
-						scr_battle_heal_target(2,_ref_beast);
+						//===========//
+						scr_battle_heal_target(
+							"FIXED",
+							2,
+							_ref_beast
+						);
 					}
 				}
 			}
 
+			//================//
+			//HEAL ENEMY TEAM//
+			//================//
 			if (instance_exists(obj_battle_enemy_controller)){
 
-				var _list_enemy_beasts = obj_battle_enemy_controller._list_beasts_alive;
+				var _list_enemy_beasts =
+					obj_battle_enemy_controller._list_beasts_alive;
 
 				if (ds_exists(_list_enemy_beasts,ds_type_list)){
 
-					for (var _it_beast = 0;_it_beast < ds_list_size(_list_enemy_beasts);_it_beast++){
+					for (
+						var _it_beast = 0;
+						_it_beast < ds_list_size(_list_enemy_beasts);
+						_it_beast++
+					){
 
-						var _ref_beast = ds_list_find_value(_list_enemy_beasts,_it_beast);
+						var _ref_beast = ds_list_find_value(
+							_list_enemy_beasts,
+							_it_beast
+						);
 
 						if (!instance_exists(_ref_beast)){
 							continue;
@@ -245,9 +280,9 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 							continue;
 						}
 
-						//----------------//
+						//================//
 						//TARGET HEAL VFX//
-						//----------------//
+						//================//
 						scr_battle_vfx(
 							undefined,
 							spr_battle_vfx_event_bloomtide_tick,
@@ -260,21 +295,31 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 							undefined
 						);
 
-						//-----------//
+						//===========//
 						//HEAL BEAST//
-						//-----------//
-						scr_battle_heal_target(2,_ref_beast);
+						//===========//
+						scr_battle_heal_target(
+							"FIXED",
+							2,
+							_ref_beast
+						);
+
 					}
 				}
 			}
 
-			//----------------//
+			//================//
 			//UPDATE LIFETIME//
-			//----------------//
-			scr_status_tick_lifetime(_ref_status);
+			//================//
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
 			if (ds_exists(global.list_statuses,ds_type_list)){
-				scr_status_reposition(global.list_statuses);
+
+				scr_status_reposition(
+					global.list_statuses
+				);
 			}
 
 		break;
@@ -288,10 +333,12 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				return undefined;
 			}
 
-			//----------------//
+			//================//
 			//DESTROY STATUS//
-			//----------------//
-			scr_status_destroy(_ref_status);
+			//================//
+			scr_status_destroy(
+				_ref_status
+			);
 
 		break;
 	}

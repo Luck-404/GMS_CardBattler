@@ -9,25 +9,21 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_forced_overload(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//================//
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//----------------//
@@ -117,8 +113,6 @@ function scr_card_cerulean_forced_overload(_stct_card,_ref_caster,_ref_target){
 		scr_battle_get_right_target(_ref_target)
 	];
 
-	var _ref_original_target =
-		global.ref_target_beast;
 
 	//================//
 	//SPREAD STACKS//
@@ -139,18 +133,12 @@ function scr_card_cerulean_forced_overload(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_adjacent;
 
 		repeat (_ct_spread){
-			scr_status_apply_dot("STORMSTRUCK");
+			scr_status_apply_dot("STORMSTRUCK", _ref_adjacent);
 		}
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast =
-		_ref_original_target;
 
 	//================//
 	//DEBUG TRIGGER//

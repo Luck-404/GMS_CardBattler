@@ -1,85 +1,87 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_MINION_CAST_EFFECT
-// FUNCTION: Casts the active effect of a battle Minion.
-//           Determines the opposing Beast list from the Minion's team.
-//           Plays HOST or ENEMY Minion cast motion based on effect direction.
-//           Executes and logs the Minion's recurring behavior.
+// FUNCTION: Validates Minion/Host ownership and independent action eligibility.
+//           Resolves the original per-Minion behaviors in their original order.
+//           Individual enemy-target effects use scr_minion_get_target.
 //
-// INPUT:    _ref_minion - Battle Minion resolving its recurring effect.
+// ARGUMENTS: _ref_minion - Battle Minion acting during its team's Minion phase.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_minion_cast_effect(_ref_minion){
 
-	//-----------------//
+	#region PREFLIGHT
+
+	//================//
 	//VALIDATE MINION//
-	//-----------------//
-	if (!instance_exists(_ref_minion)){
+	//================//
+	if (!instance_exists(_ref_minion) || _ref_minion._val_cur_hp <= 0){
 		return;
 	}
 
-	if (_ref_minion._val_cur_hp <= 0){
-		return;
-	}
-
-	//---------------//
+	//================//
 	//VALIDATE HOST//
-	//---------------//
-	if (!instance_exists(_ref_minion._ref_host)){
+	//================//
+	var _ref_host = _ref_minion._ref_host;
+	if (!instance_exists(_ref_host) || _ref_host._str_list != "ALIVE" || _ref_host._val_cur_hp <= 0){
 		return;
 	}
 
-	if (
-		_ref_minion._ref_host._str_list != "ALIVE" ||
-		_ref_minion._ref_host._val_cur_hp <= 0
-	){
+	if (!variable_instance_exists(_ref_host,"_list_minions") || !ds_exists(_ref_host._list_minions,ds_type_list)){
 		return;
 	}
 
-	//--------------------//
-	//VALIDATE CONTROLLERS//
-	//--------------------//
-	if (
-		!instance_exists(obj_battle_player_controller) ||
-		!instance_exists(obj_battle_enemy_controller)
-	){
+	if (ds_list_find_index(_ref_host._list_minions,_ref_minion) == -1 || _ref_host._str_team != _ref_minion._str_team){
 		return;
 	}
 
-	//---------------//
-	//GET MINION DATA//
-	//---------------//
-	var _str_minion_name = _ref_minion._str_name;
+	//========================//
+	//VALIDATE ACTIVATION PHASE//
+	//========================//
+	if (!instance_exists(obj_battle_player_controller) || !instance_exists(obj_battle_enemy_controller) || !instance_exists(obj_battle_turn_controller)){
+		return;
+	}
+
+	var _ref_turn = obj_battle_turn_controller;
+	if (!_ref_turn._flag_started_game || _ref_turn._flag_battle_ended){
+		return;
+	}
+
+	// Minions act in their own phase; the host's Stun/Sleep/Frozen must not suppress them.
 	var _str_minion_team = _ref_minion._str_team;
-
+	var _list_host_team = undefined;
 	var _list_enemy = undefined;
 
-	//---------------//
-	//GET ENEMY LIST//
-	//---------------//
 	switch (_str_minion_team){
-
 		case "PLAYER":
-
+			if (_ref_turn._val_turn_tracker != 0 || obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.TRIGGER_MINIONS){
+				return;
+			}
+			_list_host_team = obj_battle_player_controller._list_beasts_alive;
 			_list_enemy = obj_battle_enemy_controller._list_beasts_alive;
-
 		break;
 
 		case "ENEMY":
-
+			if (_ref_turn._val_turn_tracker != 1 || obj_battle_enemy_controller._state_enemy != ENUM_ENEMY_STATE.TRIGGER_MINIONS){
+				return;
+			}
+			_list_host_team = obj_battle_enemy_controller._list_beasts_alive;
 			_list_enemy = obj_battle_player_controller._list_beasts_alive;
-
 		break;
 
 		default:
-
 			return;
 	}
 
-	if (!ds_exists(_list_enemy,ds_type_list)){
+	if (!ds_exists(_list_host_team,ds_type_list) || !ds_exists(_list_enemy,ds_type_list) || ds_list_find_index(_list_host_team,_ref_host) == -1){
 		return;
 	}
+
+	var _str_minion_name = _ref_minion._str_name;
+
+	#endregion
 
 	//================//
 	//MINION EFFECTS//
@@ -90,13 +92,6 @@ function scr_minion_cast_effect(_ref_minion){
 		//MAGMA CANNON//
 		//------------//
 		case "MAGMA CANNON":
-
-			//----------------//
-			//CHECK ENEMY TEAM//
-			//----------------//
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//================//
 			//GET RANDOM ENEMY//
@@ -150,21 +145,95 @@ function scr_minion_cast_effect(_ref_minion){
 			//================//
 			//DEAL NEU DAMAGE//
 			//================//
-			scr_minion_damage_target(_val_damage,_ref_target,_ref_minion);
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
+				_ref_target,
+				_val_damage
+			);
 
 		break;
+
+//============//
+//ASH PHOENIX//
+//============//
+case "ASH PHOENIX":
+
+	//================//
+	//SELECT TARGET//
+	//================//
+	var _ref_target = scr_minion_get_target(
+		_list_enemy
+	);
+
+	if (!instance_exists(_ref_target)){
+		break;
+	}
+
+	//================//
+	//CAST VFX//
+	//================//
+	scr_battle_vfx_minion_cast(
+		_ref_minion,
+		"ENEMY"
+	);
+
+	//================//
+	//CALCULATE DAMAGE//
+	//================//
+	var _val_damage = max(
+		0,
+		_ref_minion._val_magnitude * 3
+	);
+
+	//================//
+	//DEBUG ACTION//
+	//================//
+	scr_debug_log_minion_action(
+		_ref_minion,
+		"ATTACKED",
+		_ref_target,
+		"NEU DAMAGE: " + string(_val_damage) +
+		" | WEAKNESS: 1 ROUND",
+		"SCR_MINION_CAST_EFFECT"
+	);
+
+	//================//
+	//DEAL NEU DAMAGE//
+	//================//
+	scr_battle_damage_target(
+		"FIXED",
+		_ref_minion,
+		_ref_target,
+		_val_damage
+	);
+
+	//================//
+	//CHECK TARGET//
+	//================//
+	if (!instance_exists(_ref_target)){
+		break;
+	}
+
+	if (
+		_ref_target._str_list != "ALIVE" ||
+		_ref_target._val_cur_hp <= 0
+	){
+		break;
+	}
+
+	//================//
+	//APPLY WEAKNESS//
+	//================//
+	scr_status_apply_debuff("WEAKNESS", _ref_target, 1);
+
+
+break;
 
 //-------------//
 //LIVING FLAME//
 //-------------//
 case "LIVING FLAME":
-
-	//----------------//
-	//CHECK ENEMY TEAM//
-	//----------------//
-	if (ds_list_size(_list_enemy) <= 0){
-		break;
-	}
 
 	//================//
 	//GET RANDOM ENEMY//
@@ -229,10 +298,11 @@ case "LIVING FLAME":
 	//================//
 	//DEAL NEU DAMAGE//
 	//================//
-	scr_minion_damage_target(
-		_val_damage,
+	scr_battle_damage_target(
+		"FIXED",
+		_ref_minion,
 		_ref_target,
-		_ref_minion
+		_val_damage
 	);
 
 break;
@@ -241,13 +311,6 @@ break;
 		//CINDERLING//
 		//----------//
 		case "CINDERLING":
-
-			//----------------//
-			//CHECK ENEMY TEAM//
-			//----------------//
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------//
 			//GET ENEMY TARGET//
@@ -287,10 +350,11 @@ break;
 			//================//
 			//DEAL NEU DAMAGE//
 			//================//
-			scr_minion_damage_target(
-				_val_damage,
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
 				_ref_target,
-				_ref_minion
+				_val_damage
 			);
 
 		break;
@@ -299,10 +363,6 @@ break;
 		//EMBER TURRET//
 		//-------------//
 		case "EMBER TURRET":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------//
 			//GET ENEMY TARGET//
@@ -361,10 +421,11 @@ break;
 				//------------//
 				//DEAL DAMAGE//
 				//------------//
-				scr_minion_damage_target(
-					_val_damage,
+				scr_battle_damage_target(
+					"FIXED",
+					_ref_minion,
 					_ref_target,
-					_ref_minion
+					_val_damage
 				);
 			}
 
@@ -373,24 +434,11 @@ break;
 			//=======================//
 			else{
 
-				//----------------------//
-				//STORE CURRENT TARGET//
-				//----------------------//
-				var _ref_original_target = global.ref_target_beast;
-
-				global.ref_target_beast = _ref_target;
-
 				//----------------//
 				//APPLY 1 BURN//
 				//----------------//
-				scr_status_apply_dot(
-					"BURN"
-				);
+				scr_status_apply_dot("BURN", _ref_target);
 
-				//----------------//
-				//RESTORE TARGET//
-				//----------------//
-				global.ref_target_beast = _ref_original_target;
 
 				//----------------//
 				//DEBUG ACTION//
@@ -410,10 +458,6 @@ break;
 		//TENTACLE//
 		//--------//
 		case "TENTACLE":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------//
 			//GET RANDOM ENEMY//
@@ -451,10 +495,11 @@ break;
 			//------------//
 			//DEAL DAMAGE//
 			//------------//
-			scr_minion_damage_target(
-				_val_damage,
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
 				_ref_target,
-				_ref_minion
+				_val_damage
 			);
 
 		break;
@@ -463,10 +508,6 @@ break;
 		//ABYSSAL HARPOON//
 		//----------------//
 		case "ABYSSAL HARPOON":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------------//
 			//GET PREFERRED TARGET//
@@ -511,10 +552,11 @@ break;
 			//------------//
 			//DEAL DAMAGE//
 			//------------//
-			scr_minion_damage_target(
-				_val_damage,
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
 				_ref_target,
-				_ref_minion
+				_val_damage
 			);
 
 			//----------------//
@@ -569,9 +611,11 @@ break;
 			//GRANT ARMOR//
 			//-----------//
 			scr_battle_armor_target(
+				"FIXED",
 				_val_armor,
 				_ref_minion._ref_host
 			);
+
 
 		break;
 
@@ -579,10 +623,6 @@ break;
 		//RIMEFROST ELEMENTAL//
 		//----------------------//
 		case "RIMEFROST ELEMENTAL":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//------------------//
 			//GET RANDOM ENEMY//
@@ -612,24 +652,13 @@ break;
 				"SCR_MINION_CAST_EFFECT"
 			);
 
-			//----------------------//
-			//STORE ORIGINAL TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
-
-			global.ref_target_beast = _ref_frostbite_target;
-
 			//----------------//
 			//APPLY FROSTBITE//
 			//----------------//
 			repeat (_ref_minion._val_magnitude){
-				scr_status_apply_dot("FROSTBITE");
+				scr_status_apply_dot("FROSTBITE", _ref_frostbite_target);
 			}
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 		break;
 
@@ -637,10 +666,6 @@ break;
 		//STORM WISP//
 		//----------//
 		case "STORM WISP":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------//
 			//GET RANDOM ENEMY//
@@ -680,10 +705,11 @@ break;
 			//------------//
 			//DEAL DAMAGE//
 			//------------//
-			scr_minion_damage_target(
-				_val_damage,
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
 				_ref_target,
-				_ref_minion
+				_val_damage
 			);
 
 			//============================//
@@ -755,23 +781,12 @@ break;
 						irandom(array_length(_arr_stormstruck_targets) - 1)
 					];
 
-				//----------------------//
-				//STORE CURRENT TARGET//
-				//----------------------//
-				var _ref_original_target = global.ref_target_beast;
-
-				global.ref_target_beast = _ref_stormstruck_target;
-
 				//----------------//
 				//APPLY 1 STACK//
 				//----------------//
 				var _ref_applied_stormstruck =
-					scr_status_apply_dot("STORMSTRUCK");
+					scr_status_apply_dot("STORMSTRUCK", _ref_stormstruck_target);
 
-				//----------------//
-				//RESTORE TARGET//
-				//----------------//
-				global.ref_target_beast = _ref_original_target;
 
 				//----------------//
 				//DEBUG ACTION//
@@ -902,6 +917,7 @@ break;
 			//HEAL HOST//
 			//---------//
 			scr_battle_heal_target(
+				"FIXED",
 				_val_healing,
 				_ref_minion._ref_host
 			);
@@ -933,10 +949,11 @@ break;
 					//------------//
 					var _val_damage = _ref_minion._val_magnitude;
 
-					scr_minion_damage_target(
-						_val_damage,
-						_ref_attack_target,
-						_ref_minion
+					scr_battle_damage_target(
+						"FIXED",
+						_ref_minion,
+						_ref_target,
+						_val_damage
 					);
 
 					//============================//
@@ -948,25 +965,11 @@ break;
 						_ref_attack_target._val_cur_hp > 0
 					){
 
-						//----------------------//
-						//STORE CURRENT TARGET//
-						//----------------------//
-						var _ref_original_target = global.ref_target_beast;
-
-						global.ref_target_beast = _ref_attack_target;
-
 						//-----------//
 						//APPLY STUN//
 						//-----------//
-						scr_status_apply_cc(
-							"STUN",
-							1
-						);
+						scr_status_apply_cc("STUN", _ref_attack_target, 1);
 
-						//----------------//
-						//RESTORE TARGET//
-						//----------------//
-						global.ref_target_beast = _ref_original_target;
 					}
 				}
 			}
@@ -977,10 +980,6 @@ break;
 		//WASP DRONE//
 		//------------//
 		case "WASP DRONE":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//-------------------//
 			//GET DAMAGE TARGET//
@@ -1007,10 +1006,11 @@ break;
 			//------------//
 			//DEAL DAMAGE//
 			//------------//
-			scr_minion_damage_target(
-				_val_damage,
-				_ref_damage_target,
-				_ref_minion
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
+				_ref_target,
+				_val_damage
 			);
 
 			//----------------------//
@@ -1064,16 +1064,8 @@ break;
 			//----------------//
 			if (instance_exists(_ref_weakness_target)){
 
-				var _ref_original_target = global.ref_target_beast;
+				scr_status_apply_debuff("WEAKNESS", _ref_weakness_target, 1);
 
-				global.ref_target_beast = _ref_weakness_target;
-
-				scr_status_apply_debuff(
-					"WEAKNESS",
-					1
-				);
-
-				global.ref_target_beast = _ref_original_target;
 			}
 
 		break;
@@ -1102,24 +1094,15 @@ break;
 				"SCR_MINION_CAST_EFFECT"
 			);
 
-			//----------------------//
-			//STORE CURRENT TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
 
 			//--------------//
 			//POISON HOST//
 			//--------------//
-			global.ref_target_beast = _ref_minion._ref_host;
 
 			repeat (_ref_minion._val_magnitude){
-				scr_status_apply_dot("POISON");
+				scr_status_apply_dot("POISON", _ref_minion._ref_host);
 			}
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 		break;
 
@@ -1127,10 +1110,6 @@ break;
 		//SERPENT//
 		//--------//
 		case "SERPENT":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------//
 			//GET ENEMY TARGET//
@@ -1160,24 +1139,15 @@ break;
 				"SCR_MINION_CAST_EFFECT"
 			);
 
-			//----------------------//
-			//STORE CURRENT TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
 
 			//-------------//
 			//APPLY VENOM//
 			//-------------//
-			global.ref_target_beast = _ref_target;
 
 			repeat (_ref_minion._val_magnitude){
-				scr_status_apply_dot("VENOM");
+				scr_status_apply_dot("VENOM", _ref_target);
 			}
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 		break;
 
@@ -1213,10 +1183,6 @@ break;
 		//THORNLING//
 		//----------//
 		case "THORNLING":
-
-			if (ds_list_size(_list_enemy) <= 0){
-				break;
-			}
 
 			//----------------//
 			//GET ENEMY TARGET//
@@ -1256,12 +1222,12 @@ break;
 			//------------//
 			//DEAL DAMAGE//
 			//------------//
-			scr_minion_damage_target(
-				_val_damage,
+			scr_battle_damage_target(
+				"FIXED",
+				_ref_minion,
 				_ref_target,
-				_ref_minion
+				_val_damage
 			);
-
 		break;
 
 		//-------------//
@@ -1299,6 +1265,7 @@ break;
 			//HEAL HOST//
 			//---------//
 			scr_battle_heal_target(
+				"FIXED",
 				_val_healing,
 				_ref_minion._ref_host
 			);

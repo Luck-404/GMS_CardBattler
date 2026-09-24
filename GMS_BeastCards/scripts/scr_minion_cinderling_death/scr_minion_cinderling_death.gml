@@ -14,7 +14,7 @@
 // ARGUMENTS: _ref_minion is the dying Cinderling.
 //            _ref_killer_minion is the Minion that dealt the killing blow,
 //            when applicable.
-// RETURNS: True if Burn was applied; otherwise false.
+// RETURNS: True when its Burn effect is present after the death reaction; false if the reaction cannot run.
 //
 //===============================================================================//
 
@@ -117,24 +117,13 @@ function scr_minion_cinderling_death(_ref_minion,_ref_killer_minion=undefined){
 		return false;
 	}
 
-	//----------------//
-	//STORE TARGET//
-	//----------------//
-	var _ref_original_target = global.ref_target_beast;
 
 	//================//
 	//APPLY 1 BURN//
 	//================//
-	global.ref_target_beast = _ref_target;
 
-	var _ref_burn = scr_status_apply_dot(
-		"BURN"
-	);
+	var _ref_burn = scr_status_apply_dot("BURN", _ref_target);
 
-	//----------------//
-	//RESTORE TARGET//
-	//----------------//
-	global.ref_target_beast = _ref_original_target;
 
 	return instance_exists(_ref_burn);
 }

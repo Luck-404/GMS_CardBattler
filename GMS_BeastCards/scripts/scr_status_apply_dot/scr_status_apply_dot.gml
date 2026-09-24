@@ -1,23 +1,21 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_DOT
-// FUNCTION: Attempts to apply a damage-over-time Status to the current target.
+// FUNCTION: Attempts to apply a damage-over-time Status to the supplied target.
 //           Checks target CON resistance before applying.
 //           Handles shared application feedback, debug logging, and DoT Traps.
 //
-// ARGUMENTS: _str_status_name is the DoT ID.
-//            _val_lifetime optionally overrides duration.
-//            _flag_trigger_plague_garden controls Plague Garden.
-// RETURNS: The applied DoT Status reference, or undefined if application fails.
+// ARGUMENTS: _str_status_name is the DoT ID; _ref_target is the affected Beast; _val_lifetime and _flag_trigger_plague_garden retain their original order.
+//
+// RETURNS: Applied Status instance, or undefined if the application fails.
 //
 //===============================================================================//
 
-function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_trigger_plague_garden=true){
+function scr_status_apply_dot(_str_status_name,_ref_target,_val_lifetime=undefined,_flag_trigger_plague_garden=true){
 
 	//----------------//
 	//VALIDATE TARGET//
 	//----------------//
-	var _ref_target = global.ref_target_beast;
 
 	if (!instance_exists(_ref_target)){
 		return undefined;
@@ -61,7 +59,7 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//==============//
 		case "STORMSTRUCK":
 
-			_ref_status = scr_status_dot_stormstruck("APPLY",undefined,_val_lifetime);
+			_ref_status = scr_status_dot_stormstruck("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "+1 STORMSTRUCK";
 			_c_popup = c_aqua;
@@ -73,7 +71,7 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//===========//
 		case "FROSTBURN":
 
-			_ref_status = scr_status_dot_frostburn("APPLY",undefined,_val_lifetime);
+			_ref_status = scr_status_dot_frostburn("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "+1 FROSTBURN";
 			_c_popup = c_aqua;
@@ -85,7 +83,7 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//===========//
 		case "FROSTBITE":
 
-			_ref_status = scr_status_dot_frostbite("APPLY",undefined,_val_lifetime);
+			_ref_status = scr_status_dot_frostbite("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "+1 FROSTBITE";
 			_c_popup = c_aqua;
@@ -97,7 +95,13 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//=======//
 		case "BLEED":
 
-			_ref_status = scr_status_dot_bleed("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
+			_ref_status = scr_status_dot_bleed(
+				"APPLY",
+				undefined,
+				_val_lifetime,
+				_flag_trigger_plague_garden,
+				_ref_target
+			);
 
 			if (instance_exists(_ref_status)){
 
@@ -118,7 +122,13 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//======//
 		case "BURN":
 
-			_ref_status = scr_status_dot_burn("APPLY",undefined,_val_lifetime);
+			_ref_status = scr_status_dot_burn(
+				"APPLY",
+				undefined,
+				_val_lifetime,
+				undefined,
+				_ref_target
+			);
 
 			_str_popup = "+1 BURN";
 			_c_popup = c_red;
@@ -130,7 +140,13 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//========//
 		case "POISON":
 
-			_ref_status = scr_status_dot_poison("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
+			_ref_status = scr_status_dot_poison(
+				"APPLY",
+				undefined,
+				_val_lifetime,
+				_flag_trigger_plague_garden,
+				_ref_target
+			);
 
 			_str_popup = "+1 POISON";
 			_c_popup = c_lime;
@@ -142,7 +158,13 @@ function scr_status_apply_dot(_str_status_name,_val_lifetime=undefined,_flag_tri
 		//=======//
 		case "VENOM":
 
-			_ref_status = scr_status_dot_venom("APPLY",undefined,_val_lifetime,_flag_trigger_plague_garden);
+			_ref_status = scr_status_dot_venom(
+				"APPLY",
+				undefined,
+				_val_lifetime,
+				_flag_trigger_plague_garden,
+				_ref_target
+			);
 
 			_str_popup = "+1 VENOM";
 			_c_popup = c_purple;

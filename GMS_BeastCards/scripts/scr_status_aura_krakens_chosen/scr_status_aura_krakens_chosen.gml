@@ -10,9 +10,17 @@
 //           Host loses HP equal to 10% of Maximum HP each round.
 //           Host gains 3 Wither each round.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _ref_attack_target=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+//            _stct_attack_card is the originating Card struct for TRIGGER.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_aura_krakens_chosen(_str_tag,_ref_status,_val_magnitude=undefined,_ref_attack_target=undefined){
+function scr_status_aura_krakens_chosen(_str_tag,_ref_status,_val_magnitude=undefined,_ref_attack_target=undefined,_ref_target=undefined,_stct_attack_card=undefined){
 
 	switch (_str_tag){
 
@@ -21,7 +29,6 @@ function scr_status_aura_krakens_chosen(_str_tag,_ref_status,_val_magnitude=unde
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -123,21 +130,11 @@ function scr_status_aura_krakens_chosen(_str_tag,_ref_status,_val_magnitude=unde
 				return false;
 			}
 
-			//----------------------//
-			//STORE ORIGINAL TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
-
-			//--------------//
-			//TARGET ENEMY//
-			//--------------//
-			global.ref_target_beast = _ref_attack_target;
-
 			//-------------------//
 			//APPLY STORMSTRUCK//
 			//-------------------//
 			repeat (2){
-				scr_status_apply_dot("STORMSTRUCK");
+				scr_status_apply_dot("STORMSTRUCK", _ref_attack_target);
 			}
 
 			//---------------------//
@@ -169,19 +166,17 @@ function scr_status_aura_krakens_chosen(_str_tag,_ref_status,_val_magnitude=unde
 						continue;
 					}
 
-					global.ref_target_beast = _ref_adjacent_target;
 
 					scr_battle_damage_target(
+						"LINEAR",
+						_ref_host,
+						_ref_adjacent_target,
 						_ref_status._val_adjacent_damage,
-						_ref_adjacent_target
+						{card: _stct_attack_card, card_instance: global.ref_cast_card}
 					);
 				}
 			}
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 			return true;
 
@@ -254,28 +249,11 @@ function scr_status_aura_krakens_chosen(_str_tag,_ref_status,_val_magnitude=unde
 				return undefined;
 			}
 
-			//----------------------//
-			//STORE ORIGINAL TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
-
-			//--------------//
-			//TARGET HOST//
-			//--------------//
-			global.ref_target_beast = _ref_host;
-
 			//--------------//
 			//APPLY WITHER//
 			//--------------//
-			scr_status_apply_debuff(
-				"WITHER",
-				3
-			);
+			scr_status_apply_debuff("WITHER", _ref_host, 3);
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 			scr_status_tick_lifetime(_ref_status);
 			scr_status_reposition(_ref_host);

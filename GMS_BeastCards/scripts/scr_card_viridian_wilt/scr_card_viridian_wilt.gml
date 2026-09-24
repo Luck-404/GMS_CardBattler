@@ -8,18 +8,11 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_viridian_wilt(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//================//
 	//SET LIFETIME//
@@ -56,8 +49,5 @@ function scr_card_viridian_wilt(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY WITHER//
 	//================//
-	scr_status_apply_debuff(
-		"WITHER",
-		_val_wither_lifetime
-	);
+	scr_status_apply_debuff("WITHER", _ref_target, _val_wither_lifetime);
 }

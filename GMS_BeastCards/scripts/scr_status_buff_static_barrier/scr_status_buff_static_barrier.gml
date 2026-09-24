@@ -8,9 +8,16 @@
 //           Trigger resolution is handled by scr_status_trigger_static_barrier.
 //           Reapplication refreshes duration.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_buff_static_barrier(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_static_barrier(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -19,7 +26,6 @@ function scr_status_buff_static_barrier(_str_tag,_ref_status,_val_magnitude=unde
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -52,7 +58,21 @@ function scr_status_buff_static_barrier(_str_tag,_ref_status,_val_magnitude=unde
 					_ref_existing_status,
 					_val_lifetime
 				);
+				
+				//-----------------------//
+				//ENSURE PERSISTENT VFX//
+				//-----------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
 
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_thorns,
+						0,
+						-65,
+						1
+					);
+				}
+				
 				return _ref_existing_status;
 			}
 
@@ -92,7 +112,7 @@ function scr_status_buff_static_barrier(_str_tag,_ref_status,_val_magnitude=unde
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = false;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region = "START";
 
 			//----------------//
 			//REGISTER STATUS//
@@ -103,7 +123,18 @@ function scr_status_buff_static_barrier(_str_tag,_ref_status,_val_magnitude=unde
 			);
 
 			scr_status_reposition(_ref_target);
-
+			
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_thorns,
+				0,
+				-65,
+				1
+			);
+			
 			return _ref_new_status;
 
 		break;

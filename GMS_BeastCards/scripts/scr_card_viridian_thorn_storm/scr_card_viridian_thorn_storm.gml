@@ -46,7 +46,13 @@ function scr_card_viridian_thorn_storm(_stct_card,_ref_caster,_ref_target){
 				break;
 			}
 
-			scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_hit_target);
+			scr_battle_damage_target(
+				"LINEAR",
+				_ref_caster,
+				_ref_hit_target,
+				_stct_card._val_card_magnitude,
+				{card: _stct_card, card_instance: global.ref_cast_card}
+			);
 		}
 	}
 }

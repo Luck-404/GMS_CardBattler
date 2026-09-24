@@ -24,7 +24,10 @@ function scr_card_cerulean_absolute_zero(_stct_card,_ref_caster,_ref_target){
 	var _val_damage = _stct_card._val_card_magnitude * _val_icebreaker_multiplier;
 
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 }

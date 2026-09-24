@@ -7,15 +7,16 @@
 //           Leaves the host at 5 HP, removes all other nonpermanent Statuses,
 //           grants Rage, and consumes itself.
 //
-// ARGUMENTS: _str_tag selects APPLY, REPEAT, TRIGGER, or DEATH.
-//            _ref_status references an existing Last Stand Status.
-//            _val_magnitude is the Rage granted when triggered.
-//            _val_lifetime optionally sets the duration.
-// RETURNS: Status reference on APPLY, true/false on TRIGGER.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_last_stand(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_last_stand(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -24,7 +25,6 @@ function scr_status_buff_last_stand(_str_tag,_ref_status,_val_magnitude=undefine
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -108,7 +108,7 @@ function scr_status_buff_last_stand(_str_tag,_ref_status,_val_magnitude=undefine
 
 			_ref_new_status._val_status_magnitude = _val_magnitude;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region = "START";
 
 			//================//
 			//REGISTER STATUS//

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodhunger",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodhunger",
+  "parent":{
+    "name":"BLOODHUNGER",
+    "path":"folders/CARDS/VERMILION/BLOODHUNGER.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

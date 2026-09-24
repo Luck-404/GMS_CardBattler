@@ -7,13 +7,16 @@
 //           Prevents the host from being repositioned while active.
 //           Reapplication refreshes duration without reducing Power again.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime optionally sets its duration.
-// RETURNS: The active Crippling Vines Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_debuff_crippling_vines(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_crippling_vines(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -22,7 +25,6 @@ function scr_status_debuff_crippling_vines(_str_tag,_ref_status,_val_lifetime=un
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//

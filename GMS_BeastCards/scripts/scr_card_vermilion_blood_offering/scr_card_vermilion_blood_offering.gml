@@ -1,26 +1,15 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VERMILION_BLOOD_OFFERING
-// FUNCTION: Resolves Blood Offering.
-//           Sacrifices up to 10 HP directly from the caster.
-//           Generates 1 Mana through the shared queued-Mana system.
-//           Summons 1 random Vermilion Minion from the global pool.
-//           Safely skips summoning if the pool is empty or caster is defeated.
+// FUNCTION: Sacrifices 10 caster HP, queues 1 Mana, then summons one random
+//           Vermilion Minion if the caster survives and the pool is available.
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the caster for this Self-target Card.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
-
 function scr_card_vermilion_blood_offering(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
 
 	if (_ref_caster._val_cur_hp <= 0){
 		return;
@@ -29,21 +18,7 @@ function scr_card_vermilion_blood_offering(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//SACRIFICE 10 HP//
 	//================//
-	var _val_hp_loss = min(10,_ref_caster._val_cur_hp);
-
-	_ref_caster._val_cur_hp = max(0,_ref_caster._val_cur_hp - _val_hp_loss);
-
-	//==========//
-	//FEEDBACK//
-	//==========//
-	scr_gui_spawn_popup_scrolling(
-		"TEXT",
-		"-" + string(_val_hp_loss) + " HP",
-		undefined,
-		c_red,
-		_ref_caster.x,
-		_ref_caster.y - 48
-	);
+	scr_battle_sacrifice("HOST_HEALTH",_ref_caster,10);
 
 	//================//
 	//GENERATE 1 MANA//

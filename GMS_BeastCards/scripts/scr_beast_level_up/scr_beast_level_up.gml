@@ -22,7 +22,7 @@ function scr_beast_level_up(_stct_beast){
 	//========================//
 	//CHECK BEAST IS LIVING//
 	//========================//
-	if (_stct_beast._val_cur_hp <= 0){
+	if (_stct_beast._val_beast_hp_cur <= 0){
 		return false;
 	}
 

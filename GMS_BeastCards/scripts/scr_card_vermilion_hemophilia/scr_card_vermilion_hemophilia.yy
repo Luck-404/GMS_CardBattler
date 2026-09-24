@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_hemophilia",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_hemophilia",
+  "parent":{
+    "name":"HEMOPHILIA",
+    "path":"folders/CARDS/VERMILION/HEMOPHILIA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

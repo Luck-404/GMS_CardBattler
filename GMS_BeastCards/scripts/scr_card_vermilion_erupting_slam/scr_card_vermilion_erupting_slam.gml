@@ -10,18 +10,11 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_vermilion_erupting_slam(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//======================//
 	//SNAPSHOT ADJACENT TARGETS//
@@ -42,8 +35,11 @@ function scr_card_vermilion_erupting_slam(_stct_card,_ref_caster,_ref_target){
 	//PRIMARY HIT//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//====================//
@@ -69,13 +65,10 @@ function scr_card_vermilion_erupting_slam(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY 1 BURN//
 	//================//
-	var _ref_original_target = global.ref_target_beast;
 
-	global.ref_target_beast = _ref_target;
 
-	scr_status_apply_dot("BURN");
+	scr_status_apply_dot("BURN", _ref_target);
 
-	global.ref_target_beast = _ref_original_target;
 
 	//================//
 	//ERUPTION 5//
@@ -101,7 +94,6 @@ function scr_card_vermilion_erupting_slam(_stct_card,_ref_caster,_ref_target){
 	//=======================//
 	var _str_original_stat = _stct_card._str_card_stat;
 
-	_ref_original_target = global.ref_target_beast;
 
 	//================//
 	//SET NEU DAMAGE//
@@ -126,11 +118,13 @@ function scr_card_vermilion_erupting_slam(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_affected_target;
 
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_affected_target,
 			_val_eruption_damage,
-			_ref_affected_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 	}
 
@@ -138,5 +132,4 @@ function scr_card_vermilion_erupting_slam(_stct_card,_ref_caster,_ref_target){
 	//RESTORE DAMAGE CONTEXT//
 	//========================//
 	_stct_card._str_card_stat = _str_original_stat;
-	global.ref_target_beast = _ref_original_target;
 }

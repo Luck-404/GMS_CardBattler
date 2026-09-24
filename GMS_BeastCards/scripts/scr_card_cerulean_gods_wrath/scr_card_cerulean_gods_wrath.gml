@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Cerulean God's Wrath card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -50,8 +50,9 @@ function scr_card_cerulean_gods_wrath(_stct_card,_ref_caster,_ref_target){
 			if (_ref_beast._val_cur_hp <= 0){
 				continue;
 			}
-
+			
 			scr_battle_heal_target(
+				"FIXED",
 				8,
 				_ref_beast
 			);
@@ -78,6 +79,7 @@ function scr_card_cerulean_gods_wrath(_stct_card,_ref_caster,_ref_target){
 			}
 
 			scr_battle_armor_target(
+				"FIXED",
 				15,
 				_ref_beast
 			);
@@ -104,8 +106,11 @@ function scr_card_cerulean_gods_wrath(_stct_card,_ref_caster,_ref_target){
 			}
 
 			scr_battle_damage_target(
+				"LINEAR",
+				_ref_caster,
+				_ref_beast,
 				8,
-				_ref_beast
+				{card: _stct_card, card_instance: global.ref_cast_card}
 			);
 
 			scr_battle_vfx(
@@ -127,16 +132,11 @@ function scr_card_cerulean_gods_wrath(_stct_card,_ref_caster,_ref_target){
 	//=====================//
 	//NO CERULEAN WEATHER//
 	//=====================//
-	var _ref_original_target = global.ref_target_beast;
-	global.ref_target_beast = _ref_caster;
 
 	//----------------------//
 	//DIVINE PROTECTION +1//
 	//----------------------//
-	scr_status_apply_buff(
-		"DIVINE_PROTECTION",
-		1
-	);
+	scr_status_apply_buff("DIVINE_PROTECTION", _ref_caster, 1);
 
 	//-----------------------//
 	//RANDOM CERULEAN MINION//
@@ -158,8 +158,4 @@ function scr_card_cerulean_gods_wrath(_stct_card,_ref_caster,_ref_target){
 		);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

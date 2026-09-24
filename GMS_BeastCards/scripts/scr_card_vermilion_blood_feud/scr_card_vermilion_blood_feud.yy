@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_blood_feud",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_blood_feud",
+  "parent":{
+    "name":"BLOOD_FEUD",
+    "path":"folders/CARDS/VERMILION/BLOOD_FEUD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,15 +1,23 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_MANAVINE
 // FUNCTION: Handles Manavine.
 //           Unstackable Timed Global Buff.
-//           Grants temporary Maximum Mana and immediately gains equal Mana.
-//           Reapplication refreshes duration without granting Mana again.
+//           Grants temporary Maximum Mana on first application.
+//           Grants equal Current Mana on every application.
+//           Reapplication refreshes duration without stacking Maximum Mana.
 //           Expiration removes only the temporary Maximum Mana contribution.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is retained for APPLY caller compatibility.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -61,17 +69,38 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 					return undefined;
 				}
 
+				//------------------//
+				//REFRESH LIFETIME//
+				//------------------//
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
+				//-------------------//
+				//GAIN CURRENT MANA//
+				//-------------------//
+				// Use the original magnitude.
+				// Do not increase Maximum Mana again.
+				// Current Mana is capped by scr_battle_gain_mana.
+
+				scr_battle_gain_mana(
+					_ref_existing_status._val_status_magnitude
+				);
+
+				//--------------------//
+				//UPDATE DESCRIPTION//
+				//--------------------//
 				_ref_existing_status._str_status_desc =
 					"+" +
 					string(_ref_existing_status._val_status_magnitude) +
-					" MAXIMUM/CURRENT MANA FOR " +
-					string(_val_lifetime) +
-					" ROUNDS";
+					" MAXIMUM MANA. GAIN " +
+					string(_ref_existing_status._val_status_magnitude) +
+					" CURRENT MANA ON APPLY. " +
+					string(_ref_existing_status._val_status_lifetime) +
+					" ROUNDS REMAINING.";
+
+				scr_status_reposition(global.list_statuses);
 
 				return _ref_existing_status;
 			}
@@ -109,9 +138,11 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			_ref_new_status._str_status_desc =
 				"+" +
 				string(_val_magnitude) +
-				" MAXIMUM/CURRENT MANA FOR " +
+				" MAXIMUM MANA. GAIN " +
+				string(_val_magnitude) +
+				" CURRENT MANA ON APPLY. " +
 				string(_val_lifetime) +
-				" ROUNDS";
+				" ROUNDS REMAINING.";
 
 			_ref_new_status._spr_status = spr_status_buff_manavine;
 
@@ -125,15 +156,17 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			//----------------------//
 			//INCREASE MAXIMUM MANA//
 			//----------------------//
+			// First application only.
+
 			scr_battle_change_max_mana(
-				_val_magnitude
+				_ref_new_status._val_status_magnitude
 			);
 
 			//-------------------//
 			//GAIN CURRENT MANA//
 			//-------------------//
 			scr_battle_gain_mana(
-				_val_magnitude
+				_ref_new_status._val_status_magnitude
 			);
 
 			//----------------//
@@ -173,6 +206,7 @@ function scr_status_buff_manavine(_str_tag,_ref_status,_val_magnitude=undefined,
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
+
 			scr_status_reposition(global.list_statuses);
 
 		break;

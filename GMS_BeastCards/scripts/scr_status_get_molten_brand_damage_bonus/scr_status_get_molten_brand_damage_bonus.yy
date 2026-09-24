@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_molten_brand_damage_bonus",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_molten_brand_damage_bonus",
+  "parent":{
+    "name":"DAMAGE",
+    "path":"folders/BATTLE/COMBAT/DAMAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

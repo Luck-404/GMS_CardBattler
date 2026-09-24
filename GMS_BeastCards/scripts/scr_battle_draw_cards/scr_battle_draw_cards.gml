@@ -1,14 +1,15 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_DRAW_CARDS
 // FUNCTION: Draws a requested number of Cards from the player's battle deck.
 //           Draws from the top of the shuffled Deck.
 //           Refills and reshuffles from Discard when the Deck becomes empty.
+//           DRAW_2 adds 2 cards and spends one charge per successful draw event.
 //           Calculates final Hand layout, animates draws, and logs them.
 //
 // INPUT:    _ct_amount - Number of Cards requested from the battle deck.
-// USES:     Player battle Deck, Hand, and Discard lists along with shared
-//           hand-repositioning, discard-gathering, and Card movement systems.
+// RETURNS:  Number of Cards actually drawn.
 //
 //===============================================================================//
 
@@ -45,6 +46,36 @@ function scr_battle_draw_cards(_ct_amount){
 	//----------------//
 	var _arr_drawn_cards = [];
 	var _ct_drawn = 0;
+
+	//====================//
+	//CHECK DRAW 2 BONUS//
+	//====================//
+	var _ref_draw_2 = -1;
+	var _ct_draw_2_bonus = 0;
+
+	if (
+		variable_global_exists("list_statuses") &&
+		ds_exists(global.list_statuses,ds_type_list)
+	){
+
+		_ref_draw_2 = scr_status_check(
+			"DRAW_2",
+			global.list_statuses
+		);
+
+		if (
+			_ref_draw_2 != -1 &&
+			instance_exists(_ref_draw_2)
+		){
+
+			if (_ref_draw_2._ct_status_stacks > 0){
+
+				_ct_draw_2_bonus = _ref_draw_2._val_status_magnitude;
+
+				_ct_amount += _ct_draw_2_bonus;
+			}
+		}
+	}
 
 	#endregion
 
@@ -93,6 +124,27 @@ function scr_battle_draw_cards(_ct_amount){
 		array_push(_arr_drawn_cards,_ref_card);
 
 		_ct_drawn++;
+	}
+
+	#endregion
+
+	#region DRAW 2 CHARGE
+
+	//================//
+	//CONSUME ONE CHARGE//
+	//================//
+	// One function call is one draw event, even when multiple
+	// cards are drawn. Empty draw attempts spend no charges.
+	if (
+		_ct_drawn > 0 &&
+		_ct_draw_2_bonus > 0 &&
+		instance_exists(_ref_draw_2)
+	){
+
+		scr_status_buff_draw_2(
+			"CONSUME",
+			_ref_draw_2
+		);
 	}
 
 	#endregion

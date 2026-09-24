@@ -14,11 +14,12 @@
 //            _flag_critical marks a Critical Hit.
 //            _str_mode identifies Standard, Armor Pierce, or Percent damage.
 //            _str_origin identifies the damage helper that resolved the hit.
+//            _ref_source_card is the explicit Card instance owning hit records.
 // RETURNS: Nothing.
 //
 //===============================================================================//
 
-function scr_debug_log_damage_result(_ref_caster,_ref_target,_stct_card,_val_final_damage,_val_minion_damage,_val_armor_damage,_val_overhealth_damage,_val_hp_damage,_flag_critical,_str_mode,_str_origin){
+function scr_debug_log_damage_result(_ref_caster,_ref_target,_stct_card,_val_final_damage,_val_minion_damage,_val_armor_damage,_val_overhealth_damage,_val_hp_damage,_flag_critical,_str_mode,_str_origin,_ref_source_card=undefined){
 
 	//================//
 	//VALIDATE DATA//
@@ -72,23 +73,23 @@ function scr_debug_log_damage_result(_ref_caster,_ref_target,_stct_card,_val_fin
 	//===================//
 	//STORE LAST RESULT//
 	//===================//
-	if (instance_exists(global.ref_cast_card)){
+	if (_ref_source_card != -1 && instance_exists(_ref_source_card)){
 
-		global.ref_cast_card._stct_last_damage_result =
+		_ref_source_card._stct_last_damage_result =
 			_stct_damage_result;
 
 		if (
 			!variable_instance_exists(
-				global.ref_cast_card,
+				_ref_source_card,
 				"_arr_damage_results"
 			) ||
-			!is_array(global.ref_cast_card._arr_damage_results)
+			!is_array(_ref_source_card._arr_damage_results)
 		){
-			global.ref_cast_card._arr_damage_results = [];
+			_ref_source_card._arr_damage_results = [];
 		}
 
 		array_push(
-			global.ref_cast_card._arr_damage_results,
+			_ref_source_card._arr_damage_results,
 			_stct_damage_result
 		);
 	}

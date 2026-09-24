@@ -35,6 +35,7 @@ function scr_card_init_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"BLOCK");
 		ds_list_add(global.list_pool_cards_rarity_I,"CLEARCAST");
 		ds_list_add(global.list_pool_cards_rarity_I,"HIDDEN_CARD");
+		ds_list_add(global.list_pool_cards_rarity_I,"MARKING_RUNE");
 		ds_list_add(global.list_pool_cards_rarity_I,"REPOSITION");
 		ds_list_add(global.list_pool_cards_rarity_I,"SOULCLEANSE");
 		ds_list_add(global.list_pool_cards_rarity_I,"STRIKE");
@@ -101,6 +102,7 @@ function scr_card_init_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_PRECISION");
 		ds_list_add(global.list_pool_cards_rarity_I,"FROZEN_SPEAR");
 		ds_list_add(global.list_pool_cards_rarity_I,"ICEBOUND_SEAL");
+		ds_list_add(global.list_pool_cards_rarity_I,"LURKING_VISIONS");
 		ds_list_add(global.list_pool_cards_rarity_I,"ICE_LANCE");
 		ds_list_add(global.list_pool_cards_rarity_I,"ICE_PLATING");
 		ds_list_add(global.list_pool_cards_rarity_I,"MARINE_MEND");
@@ -130,6 +132,7 @@ function scr_card_init_pools(){
 		ds_list_add(global.list_pool_cards_rarity_I,"BARBED_BOLT");
 		ds_list_add(global.list_pool_cards_rarity_I,"BATTLE_TRANCE");
 		ds_list_add(global.list_pool_cards_rarity_I,"BERSERKER_CHARGE");
+		ds_list_add(global.list_pool_cards_rarity_I,"BLOOD_FEUD");
 		ds_list_add(global.list_pool_cards_rarity_I,"BLOODFLAME_BOLT");
 		ds_list_add(global.list_pool_cards_rarity_I,"BLOODFLAME_NEEDLE");
 		ds_list_add(global.list_pool_cards_rarity_I,"BLOODSTEP");

@@ -56,6 +56,22 @@ function scr_minion_init(_str_minion_id,_ref_card,_ref_caster,_ref_target){
 	//================//
 	switch (_str_minion_id){
 
+		//============//
+		//ASH PHOENIX//
+		//============//
+		case "ASH_PHOENIX":
+
+			_ref_new_minion._str_name = "ASH PHOENIX";
+
+			_ref_new_minion._val_cur_hp = 4;
+			_ref_new_minion._val_max_hp = 4;
+
+			_ref_new_minion._val_magnitude = 4;
+
+			_ref_new_minion._spr_minion = spr_minion_ash_phoenix;
+
+		break;
+
 		//----------//
 		//CINDERLING//
 		//----------//
@@ -480,6 +496,18 @@ function scr_minion_init(_str_minion_id,_ref_card,_ref_caster,_ref_target){
 	//APPLY PASSIVE EFFECTS//
 	//======================//
 
+	//============//
+	//ASH PHOENIX//
+	//============//
+	if (_ref_new_minion._str_name == "ASH PHOENIX"){
+
+		scr_status_buff_ash_phoenix(
+			"APPLY",
+			undefined,
+			_ref_new_minion
+		);
+	}
+
 	//==========//
 	//FLAMEGUARD//
 	//==========//
@@ -491,6 +519,7 @@ function scr_minion_init(_str_minion_id,_ref_card,_ref_caster,_ref_target){
 			_ref_new_minion
 		);
 	}
+
 
 	//----------------//
 	//BLOOMING SPRITE//

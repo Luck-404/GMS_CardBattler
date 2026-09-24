@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_aura_3rd_degree",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_aura_3rd_degree",
+  "parent":{
+    "name":"3RD_DEGREE",
+    "path":"folders/BATTLE/STATUSES/AURA/VERMILION/3RD_DEGREE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

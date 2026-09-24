@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Rough Seas card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,8 +15,5 @@ function scr_card_cerulean_rough_seas(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY ROUGH SEAS//
 	//================//
-	scr_status_apply_aura(
-		"ROUGH_SEAS",
-		0
-	);
+	scr_status_apply_aura("ROUGH_SEAS", _ref_target, 0);
 }

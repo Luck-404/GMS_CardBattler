@@ -14,17 +14,6 @@
 
 function scr_card_vermilion_ragehook(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE BEASTS//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//================//
 	//CHECK 2 RAGE//
 	//================//
@@ -42,11 +31,14 @@ function scr_card_vermilion_ragehook(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//DEAL DAMAGE//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
 	if (!instance_exists(_ref_target)){
 		return;
 	}

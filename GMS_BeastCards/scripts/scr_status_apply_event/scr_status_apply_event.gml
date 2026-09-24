@@ -1,22 +1,26 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_EVENT
-// FUNCTION: Applies or refreshes a global Event Status.
-//           Reapplying the same Event refreshes its lifetime.
+// FUNCTION: Applies a global Event Status.
+//           Reapplying the same Event delegates its refresh/overwrite behavior
+//           to that Event's Status script.
 //           Applying a different Event removes all current Events first.
+//           BLOODMIST stores the casting team's ownership for END timing.
 //           Does not affect active Weather.
 //
 //           ACTIVE EVENTS:
 //           - BLOODMIST
+//           - BLOOD_MOON
 //           - BLOOMTIDE
 //
-// ARGUMENTS: _str_event_name is the Event ID to apply.
-//            _val_lifetime optionally overrides its default duration.
-// RETURNS: Applied Event Status, or undefined if application fails.
+// ARGUMENTS: _str_event_name selects the Event.
+//            _val_lifetime optionally overrides its duration.
+//            _str_owner_team optionally identifies PLAYER or ENEMY ownership.
+// RETURNS: Active Event Status, or undefined if the request is invalid.
 //
 //===============================================================================//
 
-function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
+function scr_status_apply_event(_str_event_name,_val_lifetime=undefined,_str_owner_team=undefined){
 
 	//----------------------//
 	//VALIDATE GLOBAL LIST//
@@ -31,11 +35,23 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 	switch (_str_event_name){
 
 		case "BLOODMIST":
+		case "BLOOD_MOON":
 		case "BLOOMTIDE":
 		break;
 
 		default:
 			return undefined;
+	}
+
+	//===========================//
+	//VALIDATE BLOODMIST OWNERSHIP//
+	//===========================//
+	if (
+		_str_event_name == "BLOODMIST" &&
+		_str_owner_team != "PLAYER" &&
+		_str_owner_team != "ENEMY"
+	){
+		return undefined;
 	}
 
 	var _ref_status = undefined;
@@ -83,11 +99,16 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 		//==========//
 		case "BLOODMIST":
 
-			_ref_status = scr_status_event_bloodmist(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_event_bloodmist("APPLY",undefined,_val_lifetime,_str_owner_team);
+
+		break;
+
+		//============//
+		//BLOOD_MOON//
+		//============//
+		case "BLOOD_MOON":
+
+			_ref_status = scr_status_event_blood_moon("APPLY",undefined,_val_lifetime);
 
 		break;
 
@@ -96,11 +117,7 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 		//==========//
 		case "BLOOMTIDE":
 
-			_ref_status = scr_status_event_bloomtide(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_event_bloomtide("APPLY",undefined,_val_lifetime);
 
 		break;
 	}
@@ -112,7 +129,10 @@ function scr_status_apply_event(_str_event_name,_val_lifetime=undefined){
 
 		var _c_event = c_green;
 
-		if (_str_event_name == "BLOODMIST"){
+		if (
+			_str_event_name == "BLOODMIST" ||
+			_str_event_name == "BLOOD_MOON"
+		){
 			_c_event = c_red;
 		}
 

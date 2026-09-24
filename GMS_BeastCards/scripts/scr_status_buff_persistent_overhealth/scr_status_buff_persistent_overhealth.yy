@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_persistent_overhealth",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_persistent_overhealth",
+  "parent":{
+    "name":"PERSISTENT_OVERHEALTH",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/PERSISTENT_OVERHEALTH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

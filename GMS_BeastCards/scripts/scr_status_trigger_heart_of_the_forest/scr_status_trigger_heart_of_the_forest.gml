@@ -39,10 +39,10 @@ function scr_status_trigger_heart_of_the_forest(_ref_target,_val_healed){
 	//GRANT EQUAL ARMOR//
 	//==================//
 	scr_battle_armor_target(
+		"FIXED",
 		_val_healed,
 		_ref_target
 	);
-
 	//=====================//
 	//GROW HOSTED MINIONS//
 	//=====================//

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_cerulean_lurking_visions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_cerulean_lurking_visions",
+  "parent":{
+    "name":"LURKING_VISIONS",
+    "path":"folders/CARDS/CERULEAN/LURKING_VISIONS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

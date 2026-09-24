@@ -16,19 +16,36 @@ function scr_card_viridian_natural_recovery(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GRANT ARMOR//
 	//================//
-	scr_battle_armor_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_armor_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_target
+	);
 
 	//================//
 	//CLEANSE STATUS//
 	//================//
-	var _ct_cleansed = scr_status_cleanse_cc(_ref_target,1);
+	var _stct_cleanse = scr_status_cleanse(
+		_ref_target,
+		"CC",
+		1
+	);
 
-	if (_ct_cleansed <= 0){
-		scr_status_cleanse_dot(_ref_target,1);
+	if (_stct_cleanse._ct_statuses_removed <= 0){
+
+		scr_status_cleanse(
+			_ref_target,
+			"DOT",
+			1
+		);
 	}
 
 	//================//
 	//HEAL TARGET//
 	//================//
-	scr_battle_heal_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_heal_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_target
+	);
 }

@@ -1,15 +1,26 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_BURNING_THORNS
 // FUNCTION: Handles Burning Thorns.
 //           Unstackable timed Buff lasting 3 rounds by default.
-//           The next enemy Attack that directly damages the host gains 1 Burn.
+//           The next enemy Attack that directly damages the host
+//           applies 1 Burn to the attacker.
 //           The Buff is consumed after triggering.
 //           Reapplication refreshes its lifetime.
+//           Lifetime decrements at START.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged:
+//            _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY.
+//            Other commands use the stored Status host.
+// RETURNS: Command-specific Status reference or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_burning_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_burning_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -18,8 +29,9 @@ function scr_status_buff_burning_thorns(_str_tag,_ref_status,_val_magnitude=unde
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -107,15 +119,15 @@ function scr_status_buff_burning_thorns(_str_tag,_ref_status,_val_magnitude=unde
 
 			_ref_new_status._str_status_type = "BUFF";
 			_ref_new_status._str_status_name = "BURNING_THORNS";
-			_ref_new_status._str_status_desc = "THE NEXT ENEMY THAT DIRECTLY DAMAGES THIS BEAST GAINS 1 BURN";
+			_ref_new_status._str_status_desc =
+				"THE NEXT ENEMY THAT DIRECTLY DAMAGES THIS BEAST GAINS 1 BURN";
 
 			_ref_new_status._spr_status =
 				spr_status_buff_thorns;
 
 			_ref_new_status._ct_status_stacks = 1;
-			_ref_new_status._flag_status_stackable = false;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region = "START";
 
 			//================//
 			//REGISTER STATUS//

@@ -8,7 +8,7 @@
 //
 // ARGUMENTS: _stct_card is the Winter's Hour card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -51,16 +51,13 @@ function scr_card_cerulean_winters_hour(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_battle_heal_target(
-			_stct_card._val_card_magnitude,
-			_ref_beast
-		);
+	scr_battle_heal_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_beast
+	);
 	}
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//=======================//
 	//FROSTBITE ALL ENEMIES//
@@ -77,15 +74,8 @@ function scr_card_cerulean_winters_hour(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_beast;
 
-		scr_status_apply_dot(
-			"FROSTBITE"
-		);
+		scr_status_apply_dot("FROSTBITE", _ref_beast);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

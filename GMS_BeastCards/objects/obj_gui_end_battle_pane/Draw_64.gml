@@ -1,5 +1,4 @@
 //===============================================================================//
-//
 // DRAW GUI: OBJ_GUI_END_BATTLE_PANE
 // FUNCTION: Draws battle result text, rewards, and party outcome.
 //           Applies win/loss results once.

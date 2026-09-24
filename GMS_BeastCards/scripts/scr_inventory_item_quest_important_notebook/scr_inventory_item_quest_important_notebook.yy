@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_important_notebook",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_important_notebook",
+  "parent":{
+    "name":"IMPORTANT NOTEBOOK",
+    "path":"folders/INVENTORY/ITEMS/QUEST/IMPORTANT NOTEBOOK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -226,7 +226,7 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 					break;
 
 					case "WAVE":
-						ds_list_add(_list_return_deck,scr_card_get_info("ANCHOR_STONE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("GATHERING_STORM"));
 						ds_list_add(_list_return_deck,scr_card_get_info("BUBBLE"));
 					break;
 				}
@@ -277,7 +277,7 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("HAILSTONES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("THUNDERCLAP"));
 				ds_list_add(_list_return_deck,scr_card_get_info("DEPTH_CHARGE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("GLACIAL_ERUPTION"));
 				ds_list_add(_list_return_deck,scr_card_get_info("RAIN"));
@@ -385,7 +385,7 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 				//========//
 				//SHARED//
 				//========//
-				ds_list_add(_list_return_deck,scr_card_get_info("PRESSURE_CRUSH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FORCED_OVERLOAD"));
 				ds_list_add(_list_return_deck,scr_card_get_info("RAZOR_FIN"));
 				ds_list_add(_list_return_deck,scr_card_get_info("CRASHING_WAVE"));
 				ds_list_add(_list_return_deck,scr_card_get_info("FROZEN_PRECISION"));
@@ -443,7 +443,7 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 
 					case "WAVE":
 						ds_list_add(_list_return_deck,scr_card_get_info("UNDERTOW"));
-						ds_list_add(_list_return_deck,scr_card_get_info("WHIRLPOOL"));
+						ds_list_add(_list_return_deck,scr_card_get_info("STATIC_RESONANCE"));
 					break;
 				}
 
@@ -601,99 +601,595 @@ function scr_beast_get_deck(_str_beast_name,_str_beast_type){
 
 			#region ASCHEMASS
 			case "ASCHEMASS":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("COMBUSTION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_FURNACE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_BOLT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FIRESTORM"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_OATH"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HARDEN_BLOOD"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("CINDERGUARD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_BRAND"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("HEATWAVE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("3RD_DEGREE"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region CANIGNIS
 			case "CANIGNIS":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("CINDER_SPEAR"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BARBED_BOLT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_EDGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOODHUNGER"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODY_SWIPE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODSTEP"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("POWDER_KEG"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ERUPTING_SLAM"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("SCORCHING_CLAW"));
+						ds_list_add(_list_return_deck,scr_card_get_info("VOLATILE_BRAND"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region DAIMONIS
 			case "DAIMONIS":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("FEED_THE_FLAME"));
+				ds_list_add(_list_return_deck,scr_card_get_info("PYROCLAST"));
+				ds_list_add(_list_return_deck,scr_card_get_info("EMBER_SHOT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FLAMESPAWN"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODMIST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_BOLT"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_FURNACE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("EMBER_TURRET"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("FIRESTORM"));
+						ds_list_add(_list_return_deck,scr_card_get_info("3RD_DEGREE"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region DRAKOAL
 			case "DRAKOAL":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("SEARING_RAY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BURNING_MISSILES"));
+				ds_list_add(_list_return_deck,scr_card_get_info("OVERHEAT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_AEGIS"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("ANEMIA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CRIMSON_FOCUS"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("BACKDRAFT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIVING_FLAME"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_BOLT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DANCING_FLAME"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region EMBEROOST
 			case "EMBEROOST":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("RAGEHOOK"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RECKLESS_ASSAULT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FLAME_LANCE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("LAST_STAND"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODY_SHIELD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODCOATED"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("RAGEPLATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BURNING_MISSILES"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("HEAT_UP"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FLAMING_LASHES"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region HELLSHROOM
 			case "HELLSHROOM":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("FLAME_SPOUT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("EMBER_BARRAGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_NEEDLE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("EMBER_TURRET"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("HEMOPHILIA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ARTERIAL_BURST"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("FLAMESPAWN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FEED_THE_FLAME"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("HEATWAVE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HUNGERING_FLAMES"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region IMPARCH
 			case "IMPARCH":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("MELTPLATE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CINDER_KICK"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RAGING_SPARK"));
+				ds_list_add(_list_return_deck,scr_card_get_info("HEAT_UP"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODSTEP"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ANEMIA"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("MAGMA_CANNON"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FURNACE_HEART"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("EMBER_TURRET"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DANCING_FLAME"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region INFERNUS
 			case "INFERNUS":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("FORWARD_MARCH"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BREAKJAW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RECKLESS_ASSAULT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BATTLE_FRENZY"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BATTLE_TRANCE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MENACING_ROAR"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("CINDERGUARD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BURNING_MISSILES"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("EMBER_SHOT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HEAT_UP"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region LAVAROWANA
 			case "LAVAROWANA":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("FIERY_BLOW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RENDING_BLOW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_PRICE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SECOND_WIND"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BARBED_BOLT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_OATH"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("FLAMESPAWN"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ERUPTING_SLAM"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("SCORCHING_CLAW"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HEATWAVE"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region PYREKNIGHT
 			case "PYREKNIGHT":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("RAGING_BLOW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BURNING_CLEAVE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOODLUST_LUNGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("PAIN_RESPONSE"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("FRONTLINE_ORDER"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BATTLE_TRANCE"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("CINDERGUARD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAGEHOOK"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("BURNING_PARRY"));
+						ds_list_add(_list_return_deck,scr_card_get_info("SCORCHING_CLAW"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region PYROPLUME
 			case "PYROPLUME":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("FLASHPOINT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("HELLFIRE_STRIKE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("COMBUSTION"));
+				ds_list_add(_list_return_deck,scr_card_get_info("PYRE_WEAPON"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_NEEDLE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ARTERIAL_BURST"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("PYROCLAST"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_FURNACE"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("INNER_FLAME"));
+						ds_list_add(_list_return_deck,scr_card_get_info("3RD_DEGREE"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region SANGUINAUT
 			case "SANGUINAUT":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("OPEN_VEIN"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RAGEHOOK"));
+				ds_list_add(_list_return_deck,scr_card_get_info("RECKLESS_ASSAULT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOODCOATED"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODHUNGER"));
+						ds_list_add(_list_return_deck,scr_card_get_info("ARTERIAL_BURST"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("BURNING_CLEAVE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_AEGIS"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_NEEDLE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("FLAME_LANCE"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region SLAGOLEM
 			case "SLAGOLEM":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("BERSERKER_FLURRY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FURIOUS_SLICE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BERSERKER_CHARGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FRONTLINE_ORDER"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("HARDEN_BLOOD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOOD_OATH"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("CINDERGUARD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RAGEPLATE"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("BURNING_PARRY"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_AEGIS"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region SOLEMOLD
 			case "SOLEMOLD":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("ERUPTING_SLAM"));
+				ds_list_add(_list_return_deck,scr_card_get_info("SCORCHING_CLAW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_EDGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("DRAGON_MINE"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODY_SHIELD"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODSTEP"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("FLAMEFORGED"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MELTING_ARMAMENTS"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("VOLATILE_BRAND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("CINDER_SPEAR"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 			#region WRATHOOD
 			case "WRATHOOD":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("ARTERIAL_BURST"));
+				ds_list_add(_list_return_deck,scr_card_get_info("BLOODY_SWIPE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("FINISHING_BLOW"));
+				ds_list_add(_list_return_deck,scr_card_get_info("HEMOPHILIA"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("ANEMIA"));
+						ds_list_add(_list_return_deck,scr_card_get_info("RENDING_BLOW"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("CINDER_KICK"));
+						ds_list_add(_list_return_deck,scr_card_get_info("MOLTEN_BRAND"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("CAUTERIZED_WOUND"));
+						ds_list_add(_list_return_deck,scr_card_get_info("DANCING_FLAME"));
+					break;
+
+				}
+
 			break;
 			#endregion
 
+
 			#region WYRMELTA
 			case "WYRMELTA":
-				ds_list_add(_list_return_deck,scr_card_get_info("STRIKE"));
+
+				//========//
+				//SHARED//
+				//========//
+				ds_list_add(_list_return_deck,scr_card_get_info("SEARING_RAY"));
+				ds_list_add(_list_return_deck,scr_card_get_info("EMBER_BARRAGE"));
+				ds_list_add(_list_return_deck,scr_card_get_info("OVERHEAT"));
+				ds_list_add(_list_return_deck,scr_card_get_info("CRIMSON_FOCUS"));
+
+				//=========//
+				//SUBTYPE//
+				//=========//
+				switch (_str_beast_type){
+
+					case "ASH":
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODFLAME_BOLT"));
+						ds_list_add(_list_return_deck,scr_card_get_info("BLOODHUNGER"));
+					break;
+
+					case "MAGMA":
+						ds_list_add(_list_return_deck,scr_card_get_info("MELTPLATE"));
+						ds_list_add(_list_return_deck,scr_card_get_info("LIVING_FLAME"));
+					break;
+
+					case "PYRE":
+						ds_list_add(_list_return_deck,scr_card_get_info("BURNING_MISSILES"));
+						ds_list_add(_list_return_deck,scr_card_get_info("HEAT_UP"));
+					break;
+
+				}
+
 			break;
 			#endregion
+
 
 		#endregion
 

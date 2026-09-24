@@ -93,7 +93,7 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 
 			_ref_new_status._str_status_type = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: SEEDFALL";
-			_ref_new_status._str_status_desc = "VIRIDIAN DAMAGE +25%. END OF ROUND: SUMMON UP TO 3 DORMANT SEEDS INTO RANDOM OPEN MINION SLOTS, THEN HATCH 1 RANDOM DORMANT SEED.";
+			_ref_new_status._str_status_desc = "Weather. Viridian damage is increased by 25%. At the end of each round, summon up to 3 Dormant Seeds into random available Minion slots across the battlefield, then hatch 1 random Dormant Seed into a random Minion from the Viridian hatch pool. Lifetime: 5 rounds.";
 
 			_ref_new_status._spr_status = spr_status_weather_seedfall;
 

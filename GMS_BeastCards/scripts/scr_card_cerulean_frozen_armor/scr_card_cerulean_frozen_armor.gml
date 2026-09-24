@@ -7,36 +7,16 @@
 //
 // ARGUMENTS: _stct_card is the Frozen Armor card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_frozen_armor(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
-	//================//
-	//TARGET CASTER//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
-	global.ref_target_beast = _ref_caster;
 
 	//===================//
 	//APPLY FROZEN ARMOR//
 	//===================//
-	scr_status_apply_buff(
-		"FROZEN_ARMOR",
-		1,
-		3
-	);
+	scr_status_apply_buff("FROZEN_ARMOR", _ref_caster, 1, 3);
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

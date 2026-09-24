@@ -16,5 +16,9 @@ function scr_card_viridian_interlocking_scales(_stct_card,_ref_caster,_ref_targe
 	//================//
 	//GRANT ARMOR//
 	//================//
-	scr_battle_armor_target_linear(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_armor_target(
+		"LINEAR",
+		_stct_card._val_card_magnitude,
+		_ref_caster
+	);
 }

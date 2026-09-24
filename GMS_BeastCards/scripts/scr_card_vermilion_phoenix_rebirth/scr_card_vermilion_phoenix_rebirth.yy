@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_phoenix_rebirth",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_phoenix_rebirth",
+  "parent":{
+    "name":"PHOENIX_REBIRTH",
+    "path":"folders/CARDS/VERMILION/PHOENIX_REBIRTH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

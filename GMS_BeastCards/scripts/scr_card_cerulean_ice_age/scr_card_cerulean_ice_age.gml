@@ -7,16 +7,12 @@
 //
 // ARGUMENTS: _stct_card is the Ice Age card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_ice_age(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//===================//
 	//FREEZE PLAYER TEAM//
@@ -35,12 +31,8 @@ function scr_card_cerulean_ice_age(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_beast;
 
-		scr_status_apply_cc(
-			"FROZEN",
-			_stct_card._val_card_magnitude
-		);
+		scr_status_apply_cc("FROZEN", _ref_beast, _stct_card._val_card_magnitude);
 	}
 
 	//==================//
@@ -60,12 +52,8 @@ function scr_card_cerulean_ice_age(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_beast;
 
-		scr_status_apply_cc(
-			"FROZEN",
-			_stct_card._val_card_magnitude
-		);
+		scr_status_apply_cc("FROZEN", _ref_beast, _stct_card._val_card_magnitude);
 	}
 
 	//=======================//
@@ -87,14 +75,9 @@ function scr_card_cerulean_ice_age(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_beast;
 
-		scr_status_apply_dot("FROSTBURN");
-		scr_status_apply_dot("FROSTBURN");
+		scr_status_apply_dot("FROSTBURN", _ref_beast);
+		scr_status_apply_dot("FROSTBURN", _ref_beast);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

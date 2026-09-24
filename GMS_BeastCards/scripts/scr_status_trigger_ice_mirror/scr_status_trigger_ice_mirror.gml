@@ -66,9 +66,11 @@ function scr_status_trigger_ice_mirror(_ref_defender,_ref_attacker){
 	//GAIN ARMOR//
 	//-----------//
 	scr_battle_armor_target(
+		"FIXED",
 		_val_armor,
 		_ref_defender
 	);
+
 
 	return true;
 }

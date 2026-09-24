@@ -15,7 +15,7 @@
 // ARGUMENTS: _str_tag selects the Status action.
 //            _ref_status references the existing Firestorm Status.
 //            _val_lifetime optionally overrides its duration.
-// RETURNS: Active Firestorm Status on APPLY; otherwise undefined.
+// RETURNS: Applied or existing Weather Status on APPLY; undefined on other paths.
 //
 //===============================================================================//
 
@@ -99,10 +99,7 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 			_ref_new_status._str_status_type = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: FIRESTORM";
 
-			_ref_new_status._str_status_desc =
-				"END OF ROUND: APPLY 1 BURN TO EVERY LIVING BEAST. " +
-				"ERUPTION 10: CONSUME 10 BURN, DEAL 20 NEU DAMAGE " +
-				"AND APPLY 3 CHAR. LIFETIME: 5 ROUNDS.";
+			_ref_new_status._str_status_desc = "Weather. At the end of each round, apply 1 Burn to every living Beast. ERUPTION 10: Consume all Burn from that Beast, deal 20 NEU dmg to it, and apply 3 Char. Lifetime: 5 rounds.";
 
 			//----------------//
 			//STATUS SPRITE//
@@ -239,10 +236,6 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 				}
 			}
 
-			//-----------------------//
-			//STORE ORIGINAL TARGET//
-			//-----------------------//
-			var _ref_original_target = global.ref_target_beast;
 
 			//================//
 			//TICK SOUND FLAG//
@@ -288,11 +281,8 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 				//================//
 				//APPLY 1 BURN//
 				//================//
-				global.ref_target_beast = _ref_beast;
 
-				scr_status_apply_dot(
-					"BURN"
-				);
+				scr_status_apply_dot("BURN", _ref_beast);
 
 				//------------------------//
 				//CHECK BEAST AFTER BURN//
@@ -305,10 +295,16 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 					continue;
 				}
 
-				//================//
-				//ERUPTION 10//
-				//================//
-				if (!scr_battle_trigger_eruption(_ref_beast,10)){
+				//========================//
+				//CHECK ERUPTION 10 BURN//
+				//========================//
+				var _ref_burn = scr_status_check("BURN",_ref_beast);
+
+				if (_ref_burn == -1 || !instance_exists(_ref_burn)){
+					continue;
+				}
+
+				if (_ref_burn._ct_status_stacks < 10){
 					continue;
 				}
 
@@ -316,7 +312,6 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 				//CONSUME 10 BURN//
 				//==================//
 				// Any Burn above 10 remains on the Beast.
-
 				var _ct_burn_consumed = scr_status_consume_burn(
 					_ref_beast,
 					10
@@ -417,16 +412,12 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 				//================//
 				//APPLY 3 CHAR//
 				//================//
-				global.ref_target_beast = _ref_beast;
 
 				var _ct_char_applied = 0;
 
 				repeat (3){
 
-					var _ref_char = scr_status_debuff_char(
-						"APPLY",
-						undefined
-					);
+					var _ref_char = scr_status_debuff_char("APPLY", undefined, undefined, _ref_beast);
 
 					if (instance_exists(_ref_char)){
 						_ct_char_applied++;
@@ -453,10 +444,6 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 				}
 			}
 
-			//================//
-			//RESTORE TARGET//
-			//================//
-			global.ref_target_beast = _ref_original_target;
 
 			//----------------//
 			//UPDATE LIFETIME//

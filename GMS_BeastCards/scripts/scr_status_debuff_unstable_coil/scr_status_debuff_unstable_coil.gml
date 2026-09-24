@@ -6,14 +6,16 @@
 //           While active, the host's DISCHARGE spreads Stormstruck to every
 //           other living allied Beast instead of only adjacent allies.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Unstable Coil Status.
-//            _val_lifetime optionally sets its duration.
-// RETURNS: The active Unstable Coil Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_debuff_unstable_coil(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_unstable_coil(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -22,7 +24,6 @@ function scr_status_debuff_unstable_coil(_str_tag,_ref_status,_val_lifetime=unde
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -89,7 +90,7 @@ function scr_status_debuff_unstable_coil(_str_tag,_ref_status,_val_lifetime=unde
 			_ref_new_status._str_status_name = "UNSTABLE_COIL";
 			_ref_new_status._str_status_desc = "DISCHARGE SPREADS STORMSTRUCK TO ALL OTHER ALLIED BEASTS";
 
-			_ref_new_status._spr_status = undefined;
+			_ref_new_status._spr_status = spr_status_debuff_unstable_coil;
 
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = false;

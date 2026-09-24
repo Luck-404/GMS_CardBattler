@@ -10,7 +10,7 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -27,18 +27,17 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 		return;
 	}
 
-	//======================//
-	//STORE ORIGINAL TARGET//
-	//======================//
-	var _ref_original_target = global.ref_target_beast;
 	var _flag_target_alive = _ref_target._val_cur_hp > 0;
 
 	//=========================//
 	//DEAL 30% MAX-HP PHY DMG//
 	//=========================//
-	scr_battle_damage_target_percent(
+	scr_battle_damage_target(
+		"PERCENT",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//===============================//
@@ -49,10 +48,9 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 		_ref_target._val_cur_hp > 0
 	){
 
-		global.ref_target_beast = _ref_target;
 
 		repeat (5){
-			scr_status_apply_dot("BLEED");
+			scr_status_apply_dot("BLEED", _ref_target);
 		}
 	}
 
@@ -64,13 +62,8 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 		_ref_caster._val_cur_hp > 0
 	){
 
-		global.ref_target_beast = _ref_caster;
 
-		scr_status_apply_cc(
-			"STUN",
-			2,
-			true
-		);
+		scr_status_apply_cc("STUN", _ref_caster, 2, true);
 	}
 
 	//================//
@@ -88,13 +81,11 @@ function scr_card_viridian_for_the_throat(_stct_card,_ref_caster,_ref_target){
 			ceil(_ref_caster._val_max_hp * 0.30);
 
 		scr_battle_heal_target(
+			"FIXED",
 			_val_execute_healing,
 			_ref_caster
 		);
+
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

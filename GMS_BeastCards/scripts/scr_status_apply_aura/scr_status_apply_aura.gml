@@ -1,19 +1,22 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_AURA
-// FUNCTION: Applies an Aura Status to the current target Beast.
+// FUNCTION: Applies an Aura Status to the supplied target Beast.
 //           Auras are host-bound persistent Statuses.
 //           Passes card-controlled Magnitude into the Aura callback.
 //           Handles shared Aura popup, VFX, SFX, and application logging.
 //
+// ARGUMENTS: _str_status_name is the Aura ID; _ref_target is the host Beast; _val_magnitude is the optional strength.
+//
+// RETURNS: Applied Status instance, or undefined if the application fails.
+//
 //===============================================================================//
 
-function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
+function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 
 	//-----------------//
 	//VALIDATE TARGET//
 	//-----------------//
-	var _ref_target = global.ref_target_beast;
 
 	if (!instance_exists(_ref_target)){
 		return undefined;
@@ -68,7 +71,53 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 	//APPLY AURA//
 	//================//
 	switch (_str_status_name){
+			//==================//
+			//HUNGERING FLAMES//
+			//==================//
+			case "HUNGERING_FLAMES":
 
+				_ref_status = scr_status_aura_hungering_flames(
+					"APPLY",
+					undefined,
+					_val_magnitude,
+					undefined,
+					_ref_target
+				);
+
+				if (instance_exists(_ref_status)){
+
+					scr_gui_spawn_popup_scrolling(
+						"TEXT",
+						"HUNGERING FLAMES",
+						undefined,
+						c_red,
+						_ref_target.x + irandom_range(-32,32),
+						_ref_target.y - 24 + irandom_range(-32,32)
+					);
+				}
+
+			break;		
+		
+		//==========//
+		//3RD DEGREE//
+		//==========//
+		case "3RD_DEGREE":
+
+			_ref_status = scr_status_aura_3rd_degree("APPLY", undefined, _val_magnitude, _ref_target);
+
+			if (instance_exists(_ref_status)){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"3RD DEGREE",
+					undefined,
+					c_red,
+					_ref_target.x,
+					_ref_target.y - 48
+				);
+			}
+
+		break;
 		//----------//
 		//ROUGH SEAS//
 		//----------//
@@ -77,7 +126,9 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 			_ref_status = scr_status_aura_rough_seas(
 				"APPLY",
 				undefined,
-				_val_magnitude
+				_val_magnitude,
+				undefined,
+				_ref_target
 			);
 
 			if (_ref_status != undefined){
@@ -102,7 +153,9 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 			_ref_status = scr_status_aura_krakens_chosen(
 				"APPLY",
 				undefined,
-				_val_magnitude
+				_val_magnitude,
+				undefined,
+				_ref_target
 			);
 
 			if (_ref_status != undefined){
@@ -127,7 +180,9 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 			_ref_status = scr_status_aura_frostform(
 				"APPLY",
 				undefined,
-				_val_magnitude
+				_val_magnitude,
+				undefined,
+				_ref_target
 			);
 
 			if (_ref_status != undefined){
@@ -149,11 +204,7 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 		//----------//
 		case "CALM_SEAS":
 
-			_ref_status = scr_status_aura_calm_seas(
-				"APPLY",
-				undefined,
-				_val_magnitude
-			);
+			_ref_status = scr_status_aura_calm_seas("APPLY", undefined, _val_magnitude, _ref_target);
 
 			if (_ref_status != undefined){
 
@@ -177,7 +228,9 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 			_ref_status = scr_status_aura_honeyed_scent(
 				"APPLY",
 				undefined,
-				_val_magnitude
+				_val_magnitude,
+				undefined,
+				_ref_target
 			);
 
 			if (_ref_status != undefined){
@@ -202,7 +255,9 @@ function scr_status_apply_aura(_str_status_name,_val_magnitude=0){
 			_ref_status = scr_status_aura_burgeoning_bloom(
 				"APPLY",
 				undefined,
-				_val_magnitude
+				_val_magnitude,
+				undefined,
+				_ref_target
 			);
 
 			if (_ref_status != undefined){

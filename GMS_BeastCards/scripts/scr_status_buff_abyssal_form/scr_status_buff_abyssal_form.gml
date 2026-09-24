@@ -8,9 +8,16 @@
 //           Banish, or Stormstruck to the Attack target.
 //           Generic form drawing handles the Abyssal Form transformation.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined, _ref_attack_target=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_attack_target=undefined){
+function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_attack_target=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -19,7 +26,6 @@ function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefi
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -146,13 +152,6 @@ function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefi
 				return false;
 			}
 
-			//----------------------//
-			//STORE CURRENT TARGET//
-			//----------------------//
-			var _ref_original_target = global.ref_target_beast;
-
-			global.ref_target_beast = _ref_attack_target;
-
 			//--------------------//
 			//ROLL ABYSSAL EFFECT//
 			//--------------------//
@@ -165,10 +164,7 @@ function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefi
 				//------//
 				case 0:
 
-					scr_status_apply_cc(
-						"STUN",
-						1
-					);
+					scr_status_apply_cc("STUN", _ref_attack_target, 1);
 
 				break;
 
@@ -177,10 +173,7 @@ function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefi
 				//--------//
 				case 1:
 
-					scr_status_apply_cc(
-						"BANISH",
-						1
-					);
+					scr_status_apply_cc("BANISH", _ref_attack_target, 1);
 
 				break;
 
@@ -189,15 +182,11 @@ function scr_status_buff_abyssal_form(_str_tag,_ref_status,_val_magnitude=undefi
 				//-------------//
 				case 2:
 
-					scr_status_apply_dot("STORMSTRUCK");
+					scr_status_apply_dot("STORMSTRUCK", _ref_attack_target);
 
 				break;
 			}
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 			return true;
 

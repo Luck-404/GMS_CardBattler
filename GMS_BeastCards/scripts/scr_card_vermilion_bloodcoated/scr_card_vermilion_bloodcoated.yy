@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_bloodcoated",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_bloodcoated",
+  "parent":{
+    "name":"BLOODCOATED",
+    "path":"folders/CARDS/VERMILION/BLOODCOATED.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

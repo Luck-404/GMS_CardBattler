@@ -13,13 +13,6 @@
 
 function scr_card_cerulean_pressure_crush(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//=======================//
 	//CALCULATE ARMOR DAMAGE//
 	//=======================//
@@ -32,8 +25,11 @@ function scr_card_cerulean_pressure_crush(_stct_card,_ref_caster,_ref_target){
 	//======================//
 	//DEAL PIERCING DAMAGE//
 	//======================//
-	scr_battle_damage_target_armor_pierce(
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, pierce_armor: true, card_instance: global.ref_cast_card}
 	);
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_sacrificial_pyre",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_sacrificial_pyre",
+  "parent":{
+    "name":"SACRIFICIAL_PYRE",
+    "path":"folders/CARDS/VERMILION/SACRIFICIAL_PYRE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_dancing_flame",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_dancing_flame",
+  "parent":{
+    "name":"DANCING_FLAME",
+    "path":"folders/CARDS/VERMILION/DANCING_FLAME.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

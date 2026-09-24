@@ -15,25 +15,6 @@
 function scr_card_uncolored_thoughtsteal(_stct_card,_ref_caster,_ref_target_card){
 
 	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target_card)){
-		return false;
-	}
-
-	if (_ref_target_card._str_team != "ENEMY" || _ref_target_card._str_location != "HAND"){
-		return false;
-	}
-
-	if (_ref_target_card._flag_card_disabled){
-		return false;
-	}
-
-	if (_ref_target_card._ref_card == undefined){
-		return false;
-	}
-
-	//================//
 	//STEAL MANA//
 	//================//
 	var _val_mana_stolen = max(0,_ref_target_card._ref_card._val_card_mana_cost);

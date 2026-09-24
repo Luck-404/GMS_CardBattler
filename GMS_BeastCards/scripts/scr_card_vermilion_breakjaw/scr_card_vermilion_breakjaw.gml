@@ -8,22 +8,11 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_vermilion_breakjaw(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE BEASTS//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//================//
 	//CHECK 3 RAGE//
@@ -42,11 +31,14 @@ function scr_card_vermilion_breakjaw(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//DEAL DAMAGE//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
 	if (!instance_exists(_ref_target)){
 		return;
 	}
@@ -60,12 +52,7 @@ function scr_card_vermilion_breakjaw(_stct_card,_ref_caster,_ref_target){
 	//================//
 	if (_flag_rage_threshold){
 
-		var _ref_original_target = global.ref_target_beast;
+		scr_status_apply_cc("STUN", _ref_target, 1);
 
-		global.ref_target_beast = _ref_target;
-
-		scr_status_apply_cc("STUN",1);
-
-		global.ref_target_beast = _ref_original_target;
 	}
 }

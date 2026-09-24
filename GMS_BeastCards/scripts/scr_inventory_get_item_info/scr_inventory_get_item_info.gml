@@ -42,7 +42,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_name = "IMPORTANT NOTEBOOK";
 			_stct_item._spr_item = spr_item_quest_important_notebook;
 			_stct_item._str_item_type = "QUEST";
-			_stct_item._scr_item = scr_item_quest_important_notebook;
+			_stct_item._scr_item = scr_inventory_item_quest_important_notebook;
 			_stct_item._str_item_desc = "An important notebook used for completing a quest.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -57,7 +57,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_name = "HEALING SALVE";
 			_stct_item._spr_item = spr_item_consumable_healing_salve;
 			_stct_item._str_item_type = "CONSUMABLE";
-			_stct_item._scr_item = scr_item_consumable_healing_salve;
+			_stct_item._scr_item = scr_inventory_item_consumable_healing_salve;
 			_stct_item._str_item_desc = "A healing balm that can be used to heal beasts.";
 			_stct_item._flag_stackable = true;
 			_stct_item._ct_item_amount = 1;
@@ -123,7 +123,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_powerful_stone;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "STATS";
-			_stct_item._scr_item = scr_item_held_powerful_stone;
+			_stct_item._scr_item = scr_inventory_item_held_powerful_stone;
 			_stct_item._str_item_desc = "Can be given to a beast to increase their physical power.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -135,7 +135,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_sorcerous_gem;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "STATS";
-			_stct_item._scr_item = scr_item_held_sorcerous_gem;
+			_stct_item._scr_item = scr_inventory_item_held_sorcerous_gem;
 			_stct_item._str_item_desc = "Can be given to a beast to increase their magic power.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -147,7 +147,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_inspiring_chime;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "PLAYER";
-			_stct_item._scr_item = scr_item_held_inspiring_chime;
+			_stct_item._scr_item = scr_inventory_item_held_inspiring_chime;
 			_stct_item._str_item_desc = "Can be given to a beast to increase the move speed of a player by 15%. Stacks.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -160,7 +160,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_trigger_text = "STARTED EVENT: SEEDFALL";
 			_stct_item._str_item_trigger_type = "ENTRY";
-			_stct_item._scr_item = scr_item_held_verdant_seed;
+			_stct_item._scr_item = scr_inventory_item_held_verdant_seed;
 			_stct_item._str_item_desc = "Can be given to a beast to trigger a SEEDFALL event upon battle entry.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -173,7 +173,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_trigger_text = "SPAWNED VIRIDIAN MINION";
 			_stct_item._str_item_trigger_type = "TURN_START";
-			_stct_item._scr_item = scr_item_held_emerald_talisman;
+			_stct_item._scr_item = scr_inventory_item_held_emerald_talisman;
 			_stct_item._str_item_desc = "Can be given to a beast to spawn a random Viridian minion upon turn start.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -185,7 +185,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_burning_ash;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "ON_HIT";
-			_stct_item._scr_item = scr_item_held_burning_ash;
+			_stct_item._scr_item = scr_inventory_item_held_burning_ash;
 			_stct_item._str_item_desc = "Physical attacks have a 25% chance to apply Burn.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -198,7 +198,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "ON_TARGET";
 			_stct_item._str_trigger_text = "HEALED FOR 50% HP";
-			_stct_item._scr_item = scr_item_held_healing_fruit;
+			_stct_item._scr_item = scr_inventory_item_held_healing_fruit;
 			_stct_item._str_item_desc = "When damaged below 50% HP, restores 50% of maximum HP.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
@@ -210,7 +210,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_bolstering_shell;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "TURN_END";
-			_stct_item._scr_item = scr_item_held_bolstering_shell;
+			_stct_item._scr_item = scr_inventory_item_held_bolstering_shell;
 			_stct_item._str_item_desc = "Grants 3 Armor to its holder at the end of every turn.";
 			_stct_item._flag_consumed_on_trigger = false;
 			_stct_item._flag_stackable = false;
@@ -223,7 +223,7 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_gold_fang;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "BATTLE_EXIT";
-			_stct_item._scr_item = scr_item_held_gold_fang;
+			_stct_item._scr_item = scr_inventory_item_held_gold_fang;
 			_stct_item._str_item_desc = "Increases gold gained from victorious battles by 10%.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;

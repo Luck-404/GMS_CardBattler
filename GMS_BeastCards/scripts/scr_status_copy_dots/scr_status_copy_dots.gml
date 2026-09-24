@@ -89,13 +89,6 @@ function scr_status_copy_dots(_ref_source,_ref_target){
 		return 0;
 	}
 
-	//=======================//
-	//STORE ORIGINAL TARGET//
-	//=======================//
-	var _ref_original_target = global.ref_target_beast;
-
-	global.ref_target_beast = _ref_target;
-
 	var _ct_total_copied = 0;
 
 	//================//
@@ -134,11 +127,39 @@ function scr_status_copy_dots(_ref_source,_ref_target){
 		//==================//
 		repeat (_stct_dot._ct_status_stacks){
 
-			var _ref_applied_status = _stct_dot._scr_status(
-				"APPLY",
-				undefined,
-				_stct_dot._val_status_lifetime_max
-			);
+			var _ref_applied_status = undefined;
+
+			// Preserve each DoT constructor's original optional argument positions.
+			if (
+				_stct_dot._str_status_name == "BLEED" ||
+				_stct_dot._str_status_name == "POISON" ||
+				_stct_dot._str_status_name == "VENOM"
+			){
+				_ref_applied_status = _stct_dot._scr_status(
+					"APPLY",
+					undefined,
+					_stct_dot._val_status_lifetime_max,
+					true,
+					_ref_target
+				);
+			}
+			else if (_stct_dot._str_status_name == "BURN"){
+				_ref_applied_status = _stct_dot._scr_status(
+					"APPLY",
+					undefined,
+					_stct_dot._val_status_lifetime_max,
+					false,
+					_ref_target
+				);
+			}
+			else{
+				_ref_applied_status = _stct_dot._scr_status(
+					"APPLY",
+					undefined,
+					_stct_dot._val_status_lifetime_max,
+					_ref_target
+				);
+			}
 
 			if (instance_exists(_ref_applied_status)){
 				_ct_total_copied++;
@@ -183,10 +204,6 @@ function scr_status_copy_dots(_ref_source,_ref_target){
 		}
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 
 	if (instance_exists(_ref_target)){
 		scr_status_reposition(_ref_target);

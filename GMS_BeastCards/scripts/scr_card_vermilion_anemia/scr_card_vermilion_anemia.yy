@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_anemia",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_anemia",
+  "parent":{
+    "name":"ANEMIA",
+    "path":"folders/CARDS/VERMILION/ANEMIA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

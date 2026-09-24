@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Bitter Chill card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,10 +15,10 @@ function scr_card_cerulean_bitter_chill(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY FROSTBITE//
 	//================//
-	scr_status_apply_dot("FROSTBITE");
+	scr_status_apply_dot("FROSTBITE", _ref_target);
 
 	//================//
 	//APPLY WEAKNESS//
 	//================//
-	scr_status_apply_debuff("WEAKNESS");
+	scr_status_apply_debuff("WEAKNESS", _ref_target);
 }

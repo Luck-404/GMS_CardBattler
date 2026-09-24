@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_trigger_hungering_flames_round_end",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_trigger_hungering_flames_round_end",
+  "parent":{
+    "name":"HUNGERING_FLAMES",
+    "path":"folders/BATTLE/STATUSES/AURA/VERMILION/HUNGERING_FLAMES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

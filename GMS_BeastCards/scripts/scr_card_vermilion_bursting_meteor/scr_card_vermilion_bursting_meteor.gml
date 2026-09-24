@@ -8,7 +8,7 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -18,8 +18,11 @@ function scr_card_vermilion_bursting_meteor(_stct_card,_ref_caster,_ref_target){
 	//PRIMARY HIT//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//----------------//
@@ -67,8 +70,11 @@ function scr_card_vermilion_bursting_meteor(_stct_card,_ref_caster,_ref_target){
 		//DEAL MAG DAMAGE//
 		//================//
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_affected_target,
 			5,
-			_ref_affected_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 
 		//----------------//
@@ -85,14 +91,11 @@ function scr_card_vermilion_bursting_meteor(_stct_card,_ref_caster,_ref_target){
 		//================//
 		//APPLY 2 BURN//
 		//================//
-		var _ref_original_target = global.ref_target_beast;
 
-		global.ref_target_beast = _ref_affected_target;
 
 		repeat (2){
-			scr_status_apply_dot("BURN");
+			scr_status_apply_dot("BURN", _ref_affected_target);
 		}
 
-		global.ref_target_beast = _ref_original_target;
 	}
 }

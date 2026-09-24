@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_cc_confused",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_cc_confused",
+  "parent":{
+    "name":"CONFUSE",
+    "path":"folders/BATTLE/STATUSES/CC/CONFUSE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -645,9 +645,6 @@ switch(_state_enemy){
 
 				if (instance_exists(_ref_status)){
 
-					if (_ref_status._str_trigger_region == "START"){
-						_ref_status._str_status_command = "REPEAT";
-					}
 
 					ds_list_delete(_list_statuses,0);
 
@@ -903,6 +900,42 @@ switch(_state_enemy){
 									_ref_beast,
 									_stct_card
 								);
+							}
+
+							//================//
+							//REPOSITION//
+							//================//
+							else if (_str_effect_type == "REPOSITION"){
+
+								if (scr_battle_can_reposition(_ref_beast)){
+
+									var _arr_swap_targets = [];
+
+									for (var _it_ally = 0;_it_ally < ds_list_size(_list_beasts_alive);_it_ally++){
+
+										var _ref_ally = ds_list_find_value(
+											_list_beasts_alive,
+											_it_ally
+										);
+
+										if (_ref_ally == _ref_beast){
+											continue;
+										}
+
+										if (!scr_battle_can_reposition(_ref_ally)){
+											continue;
+										}
+
+										array_push(_arr_swap_targets,_ref_ally);
+									}
+
+									if (array_length(_arr_swap_targets) > 0){
+
+										_ref_target = _arr_swap_targets[
+											irandom(array_length(_arr_swap_targets) - 1)
+										];
+									}
+								}
 							}
 
 							//------//
@@ -1195,6 +1228,9 @@ switch(_state_enemy){
 			_flag_statuses_init = true;
 			_list_statuses = ds_list_create();
 
+			//---------------//
+			//BEAST STATUSES//
+			//---------------//
 			for (var _it_beast = 0; _it_beast < ds_list_size(_list_beasts_alive); _it_beast++){
 
 				var _ref_beast = ds_list_find_value(_list_beasts_alive,_it_beast);
@@ -1209,6 +1245,39 @@ switch(_state_enemy){
 						_list_statuses,
 						ds_list_find_value(_ref_beast._list_statuses,_it_status)
 					);
+				}
+			}
+
+			//=======================//
+			//OWNED GLOBAL END EVENTS//
+			//=======================//
+			if (ds_exists(global.list_statuses,ds_type_list)){
+
+				for (var _it_global_status = 0;_it_global_status < ds_list_size(global.list_statuses);_it_global_status++){
+
+					var _ref_global_status = ds_list_find_value(global.list_statuses,_it_global_status);
+
+					if (!instance_exists(_ref_global_status)){
+						continue;
+					}
+
+					if (_ref_global_status._str_status_type != "EVENT"){
+						continue;
+					}
+
+					if (_ref_global_status._str_trigger_region != "END"){
+						continue;
+					}
+
+					if (!variable_instance_exists(_ref_global_status,"_str_event_owner_team")){
+						continue;
+					}
+
+					if (_ref_global_status._str_event_owner_team != "ENEMY"){
+						continue;
+					}
+
+					ds_list_add(_list_statuses,_ref_global_status);
 				}
 			}
 		}

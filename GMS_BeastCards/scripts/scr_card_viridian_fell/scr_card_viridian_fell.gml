@@ -16,8 +16,11 @@ function scr_card_viridian_fell(_stct_card,_ref_caster,_ref_target){
 	//==========================//
 	//DEAL MAXIMUM-HP DAMAGE//
 	//==========================//
-	scr_battle_damage_target_percent(
+	scr_battle_damage_target(
+		"PERCENT",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 }

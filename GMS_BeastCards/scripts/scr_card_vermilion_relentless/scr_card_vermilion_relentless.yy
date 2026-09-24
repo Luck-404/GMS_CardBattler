@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_relentless",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_relentless",
+  "parent":{
+    "name":"RELENTLESS",
+    "path":"folders/CARDS/VERMILION/RELENTLESS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

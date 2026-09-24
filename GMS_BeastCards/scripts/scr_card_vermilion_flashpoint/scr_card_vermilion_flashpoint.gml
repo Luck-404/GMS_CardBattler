@@ -9,13 +9,6 @@
 
 function scr_card_vermilion_flashpoint(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//================//
 	//SET NEU DAMAGE//
 	//================//
@@ -27,8 +20,11 @@ function scr_card_vermilion_flashpoint(_stct_card,_ref_caster,_ref_target){
 	//DEAL BASE DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_stct_card._val_card_magnitude,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//================//
@@ -41,8 +37,11 @@ function scr_card_vermilion_flashpoint(_stct_card,_ref_caster,_ref_target){
 	){
 
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_target,
 			3,
-			_ref_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 	}
 

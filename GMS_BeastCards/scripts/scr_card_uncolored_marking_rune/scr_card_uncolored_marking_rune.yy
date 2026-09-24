@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_uncolored_marking_rune",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_uncolored_marking_rune",
+  "parent":{
+    "name":"MARKING_RUNE",
+    "path":"folders/CARDS/UNCOLORED/MARKING_RUNE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

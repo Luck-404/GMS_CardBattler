@@ -12,7 +12,7 @@
 //
 // ARGUMENTS: _stct_card is The Abyss Stares Back card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -107,10 +107,6 @@ function scr_card_cerulean_the_abyss_stares_back(_stct_card,_ref_caster,_ref_tar
 		"BANISH"
 	];
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//===================//
 	//AFFECT ALL BEASTS//
@@ -139,28 +135,20 @@ function scr_card_cerulean_the_abyss_stares_back(_stct_card,_ref_caster,_ref_tar
 				continue;
 			}
 
-			global.ref_target_beast = _ref_beast;
 
 			//----------------//
 			//RANDOM BUFF//
 			//----------------//
 			var _stct_buff = _arr_buffs[irandom(array_length(_arr_buffs) - 1)];
 
-			scr_status_apply_buff(
-				_stct_buff.id,
-				_stct_buff.mag,
-				_stct_buff.life
-			);
+			scr_status_apply_buff(_stct_buff.id, _ref_beast, _stct_buff.mag, _stct_buff.life);
 
 			//----------------//
 			//RANDOM DEBUFF//
 			//----------------//
 			var _stct_debuff = _arr_debuffs[irandom(array_length(_arr_debuffs) - 1)];
 
-			scr_status_apply_debuff(
-				_stct_debuff.id,
-				_stct_debuff.life
-			);
+			scr_status_apply_debuff(_stct_debuff.id, _ref_beast, _stct_debuff.life);
 
 			//------------------------//
 			//RANDOM CERULEAN MINION//
@@ -226,11 +214,8 @@ function scr_card_cerulean_the_abyss_stares_back(_stct_card,_ref_caster,_ref_tar
 		var _ref_cc_target = _arr_valid_allies[irandom(array_length(_arr_valid_allies) - 1)];
 		var _str_cc = _arr_cc[irandom(array_length(_arr_cc) - 1)];
 
-		global.ref_target_beast = _ref_cc_target;
 
-		scr_status_apply_cc(
-			_str_cc
-		);
+		scr_status_apply_cc(_str_cc, _ref_cc_target);
 	}
 
 	//=================//
@@ -261,15 +246,8 @@ function scr_card_cerulean_the_abyss_stares_back(_stct_card,_ref_caster,_ref_tar
 		var _ref_cc_target = _arr_valid_enemies[irandom(array_length(_arr_valid_enemies) - 1)];
 		var _str_cc = _arr_cc[irandom(array_length(_arr_cc) - 1)];
 
-		global.ref_target_beast = _ref_cc_target;
 
-		scr_status_apply_cc(
-			_str_cc
-		);
+		scr_status_apply_cc(_str_cc, _ref_cc_target);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

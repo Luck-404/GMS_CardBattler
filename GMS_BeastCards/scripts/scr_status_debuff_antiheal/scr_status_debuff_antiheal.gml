@@ -2,16 +2,19 @@
 //
 // SCRIPT: SCR_STATUS_DEBUFF_ANTIHEAL
 // FUNCTION: Handles the generic Antiheal Debuff.
-//           Reduces healing received by 50% while active.
-//           Reapplication refreshes duration without replacing magnitude.
+//           Prevents all healing while active.
+//           Reapplication refreshes duration.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime optionally sets its duration.
-// RETURNS: The active Antiheal Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_debuff_antiheal(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_antiheal(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -20,7 +23,6 @@ function scr_status_debuff_antiheal(_str_tag,_ref_status,_val_lifetime=undefined
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -49,6 +51,9 @@ function scr_status_debuff_antiheal(_str_tag,_ref_status,_val_lifetime=undefined
 				if (!instance_exists(_ref_existing_status)){
 					return undefined;
 				}
+
+				_ref_existing_status._val_status_magnitude = 1.00;
+				_ref_existing_status._str_status_desc = "PREVENTS ALL HEALING.";
 
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
@@ -93,12 +98,8 @@ function scr_status_debuff_antiheal(_str_tag,_ref_status,_val_lifetime=undefined
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._flag_status_stackable = false;
 
-			_ref_new_status._val_status_magnitude = 0.50;
-
-			_ref_new_status._str_status_desc =
-				"HEALING RECEIVED -" +
-				string(round(_ref_new_status._val_status_magnitude * 100)) +
-				"%";
+			_ref_new_status._val_status_magnitude = 1.00;
+			_ref_new_status._str_status_desc = "PREVENTS ALL HEALING.";
 
 			_ref_new_status._str_trigger_region = "END";
 

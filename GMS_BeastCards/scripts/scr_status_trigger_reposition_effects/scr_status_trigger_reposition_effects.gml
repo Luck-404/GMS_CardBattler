@@ -37,17 +37,9 @@ function scr_status_trigger_reposition_effects(_ref_beast){
 		instance_exists(_ref_static_resonance)
 	){
 
-		var _ref_original_target =
-			global.ref_target_beast;
-
-		global.ref_target_beast =
-			_ref_beast;
-
 		var _ref_stormstruck =
-			scr_status_apply_dot("STORMSTRUCK");
+			scr_status_apply_dot("STORMSTRUCK", _ref_beast);
 
-		global.ref_target_beast =
-			_ref_original_target;
 
 		if (instance_exists(_ref_stormstruck)){
 

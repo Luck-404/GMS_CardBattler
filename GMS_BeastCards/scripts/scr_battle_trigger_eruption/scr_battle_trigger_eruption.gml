@@ -21,9 +21,11 @@ function scr_battle_trigger_eruption(_ref_target,_ct_threshold){
 		return false;
 	}
 
-	_ct_threshold = max(
-		1,
-		floor(_ct_threshold)
+	//====================//
+	//EFFECTIVE THRESHOLD//
+	//====================//
+	_ct_threshold = scr_battle_get_eruption_threshold(
+		_ct_threshold
 	);
 
 	//================//

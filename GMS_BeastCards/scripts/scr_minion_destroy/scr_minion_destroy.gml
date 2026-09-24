@@ -1,23 +1,19 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_MINION_DESTROY
-// FUNCTION: Removes a battle Minion.
-//           Distinguishes combat death from sacrifice, replacement, and other
-//           forms of removal.
-//           Plays Minion Death presentation on true combat death.
-//           Removes Statuses sourced by the exact Minion.
-//           Endless Bloom converts defeated or sacrificed allied Minions into
-//           Dormant Seeds while preserving accumulated HP and Magnitude bonuses.
-//           Logs the final Minion removal reason before destruction.
+// FUNCTION: Removes a battle Minion for combat death, sacrifice, replacement,
+//           or generic removal. Sacrifice remains a distinct removal reason.
+//           Optional suppression prevents Endless Bloom replacement when a
+//           caller intentionally needs the sacrificed slots to remain empty.
 //
-// REASONS:  "DEATH"     - Minion was defeated by damage.
-//           "SACRIFICE" - Minion was intentionally sacrificed.
-//           "REPLACE"   - Minion was removed because its slot was replaced.
-//           "REMOVE"    - Generic removal.
+// ARGUMENTS: _ref_minion - Minion being removed.
+//            _str_reason - DEATH, SACRIFICE, REPLACE, or REMOVE.
+//            _ref_killer_minion - optional Minion credited for combat death.
+//            _flag_suppress_endless_bloom - skip Endless Bloom replacement.
+// RETURNS: True when the Minion is destroyed; otherwise false.
 //
 //===============================================================================//
-
-function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=undefined){
+function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=undefined,_flag_suppress_endless_bloom=false){
 
 	//-----------------//
 	//VALIDATE MINION//
@@ -101,6 +97,7 @@ function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=
 	var _val_magnitude_bonus = 0;
 
 	if (
+		!_flag_suppress_endless_bloom &&
 		(
 			_str_reason == "DEATH" ||
 			_str_reason == "SACRIFICE"
@@ -189,16 +186,6 @@ function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=
 		_ref_host._val_cur_hp > 0
 	){
 
-		//----------------------//
-		//STORE CURRENT TARGET//
-		//----------------------//
-		var _ref_original_target = global.ref_target_beast;
-
-		//-------------//
-		//TARGET HOST//
-		//-------------//
-		global.ref_target_beast = _ref_host;
-
 		//----------------//
 		//APPLY 1 POISON//
 		//----------------//
@@ -213,22 +200,10 @@ function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=
 			→ replace Sporeling
 			→ Poison...
 		*/
-		scr_status_apply_dot(
-			"POISON",
-			undefined,
-			false
-		);
+		scr_status_apply_dot("POISON", _ref_host, undefined, false);
 
-		//----------------//
-		//RESTORE TARGET//
-		//----------------//
-		if (instance_exists(_ref_original_target)){
-			global.ref_target_beast = _ref_original_target;
-		}
-		else{
-			global.ref_target_beast = _ref_host;
-		}
-	}
+
+}
 
 	//------------------//
 	//FUNGI DEATH SLEEP//
@@ -240,29 +215,11 @@ function scr_minion_destroy(_ref_minion,_str_reason="REMOVE",_ref_killer_minion=
 		_ref_host._val_cur_hp > 0
 	){
 
-		//----------------------//
-		//STORE CURRENT TARGET//
-		//----------------------//
-		var _ref_original_target = global.ref_target_beast;
-
-		//-------------//
-		//TARGET HOST//
-		//-------------//
-		global.ref_target_beast = _ref_host;
-
 		//-------------//
 		//APPLY SLEEP//
 		//-------------//
-		scr_status_apply_cc(
-			"SLEEP",
-			3,
-			true
-		);
+		scr_status_apply_cc("SLEEP", _ref_host, 3, true);
 
-		//----------------//
-		//RESTORE TARGET//
-		//----------------//
-		global.ref_target_beast = _ref_original_target;
 	}
 
 	//================//

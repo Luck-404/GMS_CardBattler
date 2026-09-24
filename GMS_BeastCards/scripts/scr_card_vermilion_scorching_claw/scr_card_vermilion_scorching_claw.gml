@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -16,19 +16,20 @@ function scr_card_vermilion_scorching_claw(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//DEAL DAMAGE//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
 	//================//
 	//APPLY BURN//
 	//================//
 	if (instance_exists(_ref_target) && _ref_target._val_cur_hp > 0){
 
-		var _ref_original_target = global.ref_target_beast;
+		scr_status_apply_dot("BURN", _ref_target);
 
-		global.ref_target_beast = _ref_target;
-
-		scr_status_apply_dot("BURN");
-
-		global.ref_target_beast = _ref_original_target;
 	}
 }

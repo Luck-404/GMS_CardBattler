@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the Call the Deep card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -24,10 +24,6 @@ function scr_card_cerulean_call_the_deep(_stct_card,_ref_caster,_ref_target){
 
 	var _ct_targets = ds_list_size(_list_targets);
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//==================//
 	//AFFECT EACH BEAST//
@@ -64,22 +60,11 @@ function scr_card_cerulean_call_the_deep(_stct_card,_ref_caster,_ref_target){
 			);
 		}
 
-		//----------------//
-		//TARGET BEAST//
-		//----------------//
-		global.ref_target_beast = _ref_beast;
 
 		//----------------------//
 		//GRANT DAMAGE CHARGE//
 		//----------------------//
-		scr_status_apply_buff(
-			"CALL_THE_DEEP",
-			5
-		);
+		scr_status_apply_buff("CALL_THE_DEEP", _ref_beast, 5);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Permafrost card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,8 +15,5 @@ function scr_card_cerulean_permafrost(_stct_card,_ref_caster,_ref_target){
 	//==================//
 	//APPLY ARMORBREAK//
 	//==================//
-	scr_status_apply_debuff(
-		"ARMORBREAK",
-		3
-	);
+	scr_status_apply_debuff("ARMORBREAK", _ref_target, 3);
 }

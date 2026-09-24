@@ -72,8 +72,11 @@ function scr_card_vermilion_bloodlust_lunge(_stct_card,_ref_caster,_ref_target){
 		12;
 
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//================//
@@ -87,6 +90,7 @@ function scr_card_vermilion_bloodlust_lunge(_stct_card,_ref_caster,_ref_target){
 		)
 	){
 		scr_battle_heal_target(
+			"FIXED",
 			5,
 			_ref_caster
 		);

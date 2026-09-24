@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_second_wind",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_second_wind",
+  "parent":{
+    "name":"SECOND_WIND",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/SECOND_WIND.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

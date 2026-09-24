@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_hemophilia",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_hemophilia",
+  "parent":{
+    "name":"HEMOPHILIA",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/HEMOPHILIA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

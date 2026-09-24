@@ -50,6 +50,12 @@ function scr_card_viridian_seed_barrage(_stct_card,_ref_caster,_ref_target){
 
 		var _ref_hit_target = _arr_living_targets[irandom(array_length(_arr_living_targets) - 1)];
 
-		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_hit_target);
+		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_hit_target,
+			_stct_card._val_card_magnitude,
+			{card: _stct_card, card_instance: global.ref_cast_card}
+		);
 	}
 }

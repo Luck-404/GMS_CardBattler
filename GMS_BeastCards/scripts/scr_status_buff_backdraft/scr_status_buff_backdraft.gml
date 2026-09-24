@@ -6,15 +6,16 @@
 //           The next direct damage instance is split according to the stored
 //           reflection percentage and the Buff is then consumed.
 //
-// ARGUMENTS: _str_tag selects the Status action.
-//            _ref_status references an existing Backdraft Status.
-//            _val_magnitude is the percentage of damage reflected.
-//            _val_lifetime is unused because Backdraft is infinite.
-// RETURNS: The active Backdraft Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_backdraft(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_backdraft(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -23,7 +24,6 @@ function scr_status_buff_backdraft(_str_tag,_ref_status,_val_magnitude=undefined
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			//----------------//
 			//VALIDATE TARGET//
@@ -61,7 +61,21 @@ function scr_status_buff_backdraft(_str_tag,_ref_status,_val_magnitude=undefined
 
 				_ref_existing_status._val_status_magnitude = _val_magnitude;
 				_ref_existing_status._ct_status_stacks = 1;
+				
+				//-----------------------//
+				//ENSURE PERSISTENT VFX//
+				//-----------------------//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
 
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_thorns,
+						0,
+						-65,
+						1
+					);
+				}
+				
 				return _ref_existing_status;
 			}
 
@@ -106,7 +120,18 @@ function scr_status_buff_backdraft(_str_tag,_ref_status,_val_magnitude=undefined
 			ds_list_add(_ref_target._list_statuses,_ref_new_status);
 
 			scr_status_reposition(_ref_target);
-
+			
+			//----------------//
+			//PERSISTENT VFX//
+			//----------------//
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_thorns,
+				0,
+				-65,
+				1
+			);
+			
 			return _ref_new_status;
 
 		break;

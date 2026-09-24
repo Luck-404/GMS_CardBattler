@@ -3,24 +3,27 @@
 // SCRIPT: SCR_STATUS_EVENT_BLOODMIST
 // FUNCTION: Handles the Bloodmist global Event.
 //           While active, every living Beast has Infinite generic Blind.
-//           At the end of each round, every living Beast heals 5 HP and gains
-//           1 Bleed.
+//           Once per round, at the END of the owning team's turn, every living
+//           Beast heals 5 HP and gains 1 Bleed.
 //           While Bloodmist is active, all Attacks trigger HEMORRHAGE.
-//           Lasts 3 rounds by default.
+//           Lasts 3 owner-team END triggers by default.
+//
+//           Reapplication overwrites Bloodmist ownership and resets its lifetime
+//           to the incoming duration without removing/reapplying Bloodmist Blind.
+//           A different Event still removes Bloodmist through normal Event cleanup.
 //
 //           Bloodmist Blind uses the normal BLIND Crowd Control Status.
 //           Attack HEMORRHAGE is resolved by the shared Attack-resolution hook.
 //
-//           Uses start and persistent VFX only.
-//
 // ARGUMENTS: _str_tag selects the Status action.
 //            _ref_status references an existing Bloodmist Status.
 //            _val_lifetime optionally overrides its duration.
-// RETURNS: Active Bloodmist Status on APPLY; otherwise undefined.
+//            _str_owner_team is PLAYER or ENEMY on APPLY.
+// RETURNS: Applied or existing Event Status on APPLY; undefined on other paths.
 //
 //===============================================================================//
 
-function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined,_str_owner_team=undefined){
 
 	switch (_str_tag){
 
@@ -36,6 +39,13 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 				return undefined;
 			}
 
+			//================//
+			//VALIDATE OWNER//
+			//================//
+			if (_str_owner_team != "PLAYER" && _str_owner_team != "ENEMY"){
+				return undefined;
+			}
+
 			//==========//
 			//DEFAULTS//
 			//==========//
@@ -48,28 +58,29 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 			//================//
 			//CHECK EXISTING//
 			//================//
-			var _ref_existing_status = scr_status_check(
-				"EVENT: BLOODMIST",
-				global.list_statuses
-			);
+			var _ref_existing_status = scr_status_check("EVENT: BLOODMIST",global.list_statuses);
 
-			//==================//
-			//REFRESH EXISTING//
-			//==================//
+			//=====================//
+			//OVERWRITE BLOODMIST//
+			//=====================//
 			if (
 				_ref_existing_status != -1 &&
 				instance_exists(_ref_existing_status)
 			){
 
-				scr_status_refresh_lifetime(
-					_ref_existing_status,
-					_val_lifetime
-				);
+				_ref_existing_status._str_event_owner_team = _str_owner_team;
+
+				_ref_existing_status._val_status_lifetime = _val_lifetime;
+				_ref_existing_status._val_status_lifetime_max = _val_lifetime;
+
+				_ref_existing_status._str_status_command = "WAIT";
 
 				//======================//
 				//ENSURE BLIND ON ALL//
 				//======================//
 				scr_status_apply_bloodmist_blind();
+
+				scr_status_reposition(global.list_statuses);
 
 				return _ref_existing_status;
 			}
@@ -87,12 +98,7 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 			//=====================//
 			//INITIALIZE LIFETIME//
 			//=====================//
-			scr_status_init_lifetime(
-				_ref_new_status,
-				_val_lifetime,
-				false,
-				false
-			);
+			scr_status_init_lifetime(_ref_new_status,_val_lifetime,false,false);
 
 			//=============//
 			//STATUS DATA//
@@ -103,7 +109,7 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 
 			_ref_new_status._str_status_type = "EVENT";
 			_ref_new_status._str_status_name = "EVENT: BLOODMIST";
-			_ref_new_status._str_status_desc = "END OF ROUND: HEAL ALL LIVING BEASTS 5 HP AND APPLY 1 BLEED. WHILE ACTIVE: ALL BEASTS ARE BLIND AND ALL ATTACKS HEMORRHAGE.";
+			_ref_new_status._str_status_desc = "Event. At the end of each round, each living Beast heals 5 HP and gains 1 Bleed. While Bloodmist is active, all Beasts are Blind. All Attacks HEMORRHAGE. Lifetime: 3 rounds.";
 
 			_ref_new_status._spr_status = spr_status_event_bloodmist;
 
@@ -111,15 +117,13 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 			_ref_new_status._flag_status_stackable = false;
 			_ref_new_status._flag_status_permanent = false;
 
+			_ref_new_status._str_event_owner_team = _str_owner_team;
 			_ref_new_status._str_trigger_region = "END";
 
 			//================//
 			//REGISTER STATUS//
 			//================//
-			ds_list_add(
-				global.list_statuses,
-				_ref_new_status
-			);
+			ds_list_add(global.list_statuses,_ref_new_status);
 
 			//================//
 			//BLOODMIST START//
@@ -151,12 +155,7 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 			//======================//
 			scr_status_apply_bloodmist_blind();
 
-			//================//
-			//REPOSITION EVENT//
-			//================//
-			scr_status_reposition(
-				global.list_statuses
-			);
+			scr_status_reposition(global.list_statuses);
 
 			return _ref_new_status;
 
@@ -186,19 +185,11 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 			var _arr_targets = [];
 
 			if (instance_exists(obj_battle_player_controller)){
-
-				array_push(
-					_arr_beast_lists,
-					obj_battle_player_controller._list_beasts_alive
-				);
+				array_push(_arr_beast_lists,obj_battle_player_controller._list_beasts_alive);
 			}
 
 			if (instance_exists(obj_battle_enemy_controller)){
-
-				array_push(
-					_arr_beast_lists,
-					obj_battle_enemy_controller._list_beasts_alive
-				);
+				array_push(_arr_beast_lists,obj_battle_enemy_controller._list_beasts_alive);
 			}
 
 			//=====================//
@@ -214,10 +205,7 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 
 				for (var _it_beast = 0;_it_beast < ds_list_size(_list_beasts);_it_beast++){
 
-					var _ref_beast = ds_list_find_value(
-						_list_beasts,
-						_it_beast
-					);
+					var _ref_beast = ds_list_find_value(_list_beasts,_it_beast);
 
 					if (!instance_exists(_ref_beast)){
 						continue;
@@ -230,17 +218,9 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 						continue;
 					}
 
-					array_push(
-						_arr_targets,
-						_ref_beast
-					);
+					array_push(_arr_targets,_ref_beast);
 				}
 			}
-
-			//================//
-			//STORE TARGET//
-			//================//
-			var _ref_original_target = global.ref_target_beast;
 
 			//=========================//
 			//HEAL + BLEED ALL BEASTS//
@@ -264,6 +244,7 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 				//HEAL 5 HP//
 				//================//
 				scr_battle_heal_target(
+					"FIXED",
 					5,
 					_ref_target
 				);
@@ -285,17 +266,8 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 				//================//
 				//APPLY 1 BLEED//
 				//================//
-				global.ref_target_beast = _ref_target;
-
-				scr_status_apply_dot(
-					"BLEED"
-				);
+				scr_status_apply_dot("BLEED",_ref_target);
 			}
-
-			//================//
-			//RESTORE TARGET//
-			//================//
-			global.ref_target_beast = _ref_original_target;
 
 			//================//
 			//UPDATE LIFETIME//
@@ -304,14 +276,8 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 				scr_status_tick_lifetime(_ref_status);
 			}
 
-			//================//
-			//REPOSITION EVENT//
-			//================//
 			if (ds_exists(global.list_statuses,ds_type_list)){
-
-				scr_status_reposition(
-					global.list_statuses
-				);
+				scr_status_reposition(global.list_statuses);
 			}
 
 		break;
@@ -333,23 +299,10 @@ function scr_status_event_bloodmist(_str_tag,_ref_status,_val_lifetime=undefined
 			//================//
 			scr_status_remove_bloodmist_blind();
 
-			//===========================//
-			//CLEAR ATTACK TARGET CACHE//
-			//===========================//
-			if (
-				variable_global_exists(
-					"arr_bloodmist_attack_targets"
-				)
-			){
-				global.arr_bloodmist_attack_targets = [];
-			}
-
 			//================//
 			//DESTROY EVENT//
 			//================//
-			scr_status_destroy(
-				_ref_status
-			);
+			scr_status_destroy(_ref_status);
 
 		break;
 	}

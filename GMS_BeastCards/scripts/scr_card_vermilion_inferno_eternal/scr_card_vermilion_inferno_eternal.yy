@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_inferno_eternal",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_inferno_eternal",
+  "parent":{
+    "name":"INFERNO_ETERNAL",
+    "path":"folders/CARDS/VERMILION/INFERNO_ETERNAL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

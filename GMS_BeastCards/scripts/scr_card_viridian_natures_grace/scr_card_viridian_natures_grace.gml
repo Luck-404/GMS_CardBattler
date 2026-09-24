@@ -15,5 +15,9 @@ function scr_card_viridian_natures_grace(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GRANT ARMOR//
 	//================//
-	scr_battle_armor_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_armor_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_target
+	);
 }

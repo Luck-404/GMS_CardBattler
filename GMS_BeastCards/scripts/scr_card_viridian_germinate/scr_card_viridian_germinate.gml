@@ -13,13 +13,6 @@
 
 function scr_card_viridian_germinate(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//=====================//
 	//HATCH EXISTING SEEDS//
 	//=====================//

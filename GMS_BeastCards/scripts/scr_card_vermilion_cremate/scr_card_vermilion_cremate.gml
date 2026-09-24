@@ -1,27 +1,15 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VERMILION_CREMATE
-// FUNCTION: Resolves Cremate.
-//           If a valid corpse was selected, sacrifices that corpse.
-//           Otherwise the caster loses 10 HP.
-//           Draws 2 cards and grants the caster 2 Rage.
+// FUNCTION: Sacrifices the selected corpse when valid; otherwise sacrifices
+//           10 caster HP. Then draws 2 cards and grants 2 Rage.
 //
-// ARGUMENTS: _stct_card is the Cremate Card struct.
-//            _ref_caster is the casting Beast.
-//            _ref_target is the selected corpse, or undefined when the player
-//            chooses to sacrifice HP.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected corpse or undefined.
+// RETURNS: No value.
 //
 //===============================================================================//
-
 function scr_card_vermilion_cremate(_stct_card,_ref_caster,_ref_target){
-
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
 
 	if (_ref_caster._val_cur_hp <= 0){
 		return;
@@ -30,33 +18,10 @@ function scr_card_vermilion_cremate(_stct_card,_ref_caster,_ref_target){
 	//===================//
 	//PAY SACRIFICE COST//
 	//===================//
-	var _flag_sacrificed = scr_battle_sacrifice_corpse(
-		_ref_target
-	);
+	var _stct_sacrifice = scr_battle_sacrifice("CORPSE",_ref_target);
 
-	//==================//
-	//SACRIFICE 10 HP//
-	//==================//
-	if (!_flag_sacrificed){
-
-		var _val_hp_loss = min(
-			10,
-			_ref_caster._val_cur_hp
-		);
-
-		_ref_caster._val_cur_hp = max(
-			0,
-			_ref_caster._val_cur_hp - _val_hp_loss
-		);
-
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"-" + string(_val_hp_loss) + " HP",
-			undefined,
-			c_red,
-			_ref_caster.x,
-			_ref_caster.y - 48
-		);
+	if (!_stct_sacrifice._flag_success){
+		scr_battle_sacrifice("HOST_HEALTH",_ref_caster,10);
 	}
 
 	//================//

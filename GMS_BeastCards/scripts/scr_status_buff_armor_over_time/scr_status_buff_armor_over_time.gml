@@ -1,166 +1,245 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_ARMOR_OVER_TIME
-// FUNCTION: Handles the generic Armor Over Time Buff.
-//           Stores configurable Armor Magnitude and Lifetime.
-//           Reapplication updates Magnitude and refreshes duration.
-//           Grants stored Armor at the end of each turn.
+// FUNCTION: Grants Armor immediately on application and again at each host END.
+//
+//           Unstackable timed Buff.
+//           Reapplication preserves the highest applied Armor magnitude and
+//           highest maximum lifetime independently, then resets current
+//           lifetime to that maximum.
+//
+//           Each application immediately grants its own incoming magnitude.
+//           All Armor gains use the existing Armor-gain helper.
 //
 //===============================================================================//
 
-function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_armor_over_time(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
-	switch (_str_tag){
+    switch (_str_tag){
 
-		//=======//
-		//APPLY//
-		//=======//
-		case "APPLY":
+        //=======//
+        //APPLY//
+        //=======//
+        case "APPLY":{
 
-			var _ref_target = global.ref_target_beast;
+            //================//
+            //VALIDATE TARGET//
+            //================//
+            if (!instance_exists(_ref_target)){
+                return undefined;
+            }
 
-			if (!instance_exists(_ref_target)){
-				return undefined;
-			}
+            if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
+                return undefined;
+            }
 
-			if (!ds_exists(_ref_target._list_statuses,ds_type_list)){
-				return undefined;
-			}
+            //==========//
+            //DEFAULTS//
+            //==========//
+            if (_val_magnitude == undefined){
+                _val_magnitude = 0;
+            }
 
-			//----------//
-			//DEFAULTS//
-			//----------//
-			if (_val_magnitude == undefined){
-				_val_magnitude = 0;
-			}
+            if (_val_lifetime == undefined){
+                _val_lifetime = 1;
+            }
 
-			if (_val_lifetime == undefined){
-				_val_lifetime = 1;
-			}
+            _val_magnitude = max(0,_val_magnitude);
+            _val_lifetime = max(1,_val_lifetime);
 
-			_val_magnitude = max(0,_val_magnitude);
-			_val_lifetime = max(1,_val_lifetime);
+            //================//
+            //CHECK EXISTING//
+            //================//
+            var _ref_existing_status = scr_status_check(
+                "ARMOR_OVER_TIME",
+                _ref_target
+            );
 
-			//----------------//
-			//CHECK EXISTING//
-			//----------------//
-			var _ref_existing_status = scr_status_check("ARMOR_OVER_TIME",_ref_target);
+            //==================//
+            //REFRESH EXISTING//
+            //==================//
+            if (
+                _ref_existing_status != -1 &&
+                instance_exists(_ref_existing_status)
+            ){
 
-			//------------------//
-			//REFRESH EXISTING//
-			//------------------//
-			if (_ref_existing_status != -1){
+                //------------------------//
+                //PRESERVE HIGHER MAGNITUDE//
+                //------------------------//
+                _ref_existing_status._val_status_magnitude = max(
+                    _ref_existing_status._val_status_magnitude,
+                    _val_magnitude
+                );
 
-				_ref_existing_status._val_status_magnitude = _val_magnitude;
-				_ref_existing_status._str_status_desc = "+" + string(_val_magnitude) + " ARMOR AT TURN END";
+                //---------------------//
+                //PRESERVE MAX LIFETIME//
+                //---------------------//
+                scr_status_refresh_lifetime(
+                    _ref_existing_status,
+                    _val_lifetime
+                );
 
-				scr_status_refresh_lifetime(
-					_ref_existing_status,
-					_val_lifetime
-				);
+                //------------------------//
+                //RESET TO MAXIMUM LIFETIME//
+                //------------------------//
+                _ref_existing_status._val_status_lifetime =
+                    _ref_existing_status._val_status_lifetime_max;
 
-				return _ref_existing_status;
-			}
+                //================//
+                //UPDATE TOOLTIP//
+                //================//
+                _ref_existing_status._str_status_desc =
+                    "GAIN APPLIED ARMOR IMMEDIATELY; +" +
+                    string(_ref_existing_status._val_status_magnitude) +
+                    " ARMOR AT TURN END";
 
-			//---------------//
-			//CREATE STATUS//
-			//---------------//
-			var _ref_new_status = instance_create_layer(
-				_ref_target.x,
-				_ref_target.y,
-				"ily_status",
-				obj_battle_status
-			);
+                //======================//
+                //GRANT IMMEDIATE ARMOR//
+                //======================//
+                // The current application grants its incoming amount.
+                // A weaker application does not lower the stored magnitude.
+                if (_val_magnitude > 0){
 
-			scr_status_init_lifetime(
-				_ref_new_status,
-				_val_lifetime,
-				false,
-				false
-			);
+					scr_battle_armor_target(
+						"FIXED",
+						_val_magnitude,
+						_ref_target
+					);
+                }
 
-			//-------------//
-			//STATUS DATA//
-			//-------------//
-			_ref_new_status._scr_status = scr_status_buff_armor_over_time;
+                scr_status_reposition(_ref_target);
 
-			_ref_new_status._ref_host = _ref_target;
+                return _ref_existing_status;
+            }
 
-			_ref_new_status._str_status_type = "BUFF";
-			_ref_new_status._str_status_name = "ARMOR_OVER_TIME";
-			_ref_new_status._str_status_desc = "+" + string(_val_magnitude) + " ARMOR AT TURN END";
+            //================//
+            //CREATE STATUS//
+            //================//
+            var _ref_new_status = instance_create_layer(
+                _ref_target.x,
+                _ref_target.y,
+                "ily_status",
+                obj_battle_status
+            );
 
-			_ref_new_status._spr_status = spr_status_buff_armor_over_time;
+            //================//
+            //INIT LIFETIME//
+            //================//
+            scr_status_init_lifetime(
+                _ref_new_status,
+                _val_lifetime,
+                false,
+                false
+            );
 
-			_ref_new_status._ct_status_stacks = 1;
-			_ref_new_status._val_status_magnitude = _val_magnitude;
+            //================//
+            //STATUS DATA//
+            //================//
+            _ref_new_status._scr_status =
+                scr_status_buff_armor_over_time;
 
-			_ref_new_status._flag_status_stackable = false;
+            _ref_new_status._ref_host = _ref_target;
 
-			_ref_new_status._str_trigger_region = "END";
+            _ref_new_status._str_status_type = "BUFF";
+            _ref_new_status._str_status_name = "ARMOR_OVER_TIME";
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
-			ds_list_add(
-				_ref_target._list_statuses,
-				_ref_new_status
-			);
+            _ref_new_status._str_status_desc =
+                "GAIN APPLIED ARMOR IMMEDIATELY; +" +
+                string(_val_magnitude) +
+                " ARMOR AT TURN END";
 
-			scr_status_reposition(_ref_target);
+            _ref_new_status._spr_status =
+                spr_status_buff_armor_over_time;
 
-			return _ref_new_status;
+            _ref_new_status._ct_status_stacks = 1;
+            _ref_new_status._flag_status_stackable = false;
 
-		break;
+            _ref_new_status._val_status_magnitude = _val_magnitude;
 
-		//========//
-		//REPEAT//
-		//========//
-		case "REPEAT":
+            //================//
+            //END DECREMENT//
+            //================//
+            _ref_new_status._str_trigger_region = "END";
 
-			if (!instance_exists(_ref_status)){
-				return undefined;
-			}
+            //================//
+            //REGISTER STATUS//
+            //================//
+            ds_list_add(
+                _ref_target._list_statuses,
+                _ref_new_status
+            );
 
-			var _ref_host = _ref_status._ref_host;
-
-			if (!instance_exists(_ref_host)){
-
-				scr_status_destroy(_ref_status);
-
-				return undefined;
-			}
-
-			//-------------//
-			//GRANT ARMOR//
-			//-------------//
-			if (_ref_status._val_status_magnitude > 0){
+            //======================//
+            //GRANT IMMEDIATE ARMOR//
+            //======================//
+            if (_val_magnitude > 0){
 
 				scr_battle_armor_target(
+					"FIXED",
+					_val_magnitude,
+					_ref_target
+				);
+
+            }
+
+            scr_status_reposition(_ref_target);
+
+            return _ref_new_status;
+        }
+
+        //========//
+        //REPEAT//
+        //========//
+        case "REPEAT":{
+
+            if (!instance_exists(_ref_status)){
+                return undefined;
+            }
+
+            var _ref_host = _ref_status._ref_host;
+
+            if (!instance_exists(_ref_host)){
+
+                scr_status_destroy(_ref_status);
+
+                return undefined;
+            }
+
+            //================//
+            //GRANT END ARMOR//
+            //================//
+            if (_ref_status._val_status_magnitude > 0){
+
+				scr_battle_armor_target(
+					"FIXED",
 					_ref_status._val_status_magnitude,
 					_ref_host
 				);
-			}
+            }
 
-			//----------------//
-			//UPDATE LIFETIME//
-			//----------------//
-			scr_status_tick_lifetime(_ref_status);
-			scr_status_reposition(_ref_host);
+            //================//
+            //UPDATE LIFETIME//
+            //================//
+            scr_status_tick_lifetime(_ref_status);
 
-		break;
+            scr_status_reposition(_ref_host);
 
-		//=======//
-		//DEATH//
-		//=======//
-		case "DEATH":
+            return undefined;
+        }
 
-			if (instance_exists(_ref_status)){
-				scr_status_destroy(_ref_status);
-			}
+        //=======//
+        //DEATH//
+        //=======//
+        case "DEATH":{
 
-		break;
-	}
+            if (instance_exists(_ref_status)){
+                scr_status_destroy(_ref_status);
+            }
 
-	return undefined;
+            return undefined;
+        }
+    }
+
+    return undefined;
 }

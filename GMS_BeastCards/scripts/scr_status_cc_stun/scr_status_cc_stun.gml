@@ -6,13 +6,16 @@
 //           Prevents the host from acting while active.
 //           Reapplication extends duration without shortening an existing Stun.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Stun Status, and _val_lifetime optionally sets duration.
-// RETURNS: The active Stun Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_cc_stun(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_cc_stun(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -21,7 +24,6 @@ function scr_status_cc_stun(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;

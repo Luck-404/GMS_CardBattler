@@ -10,6 +10,7 @@
 //           If the Beast was already Blind before Bloodmist, its previous
 //           lifetime data is stored so it can be restored when Bloodmist ends.
 //
+// ARGUMENTS: No arguments.
 // RETURNS: Number of living Beasts currently affected by Bloodmist Blind.
 //
 //===============================================================================//
@@ -35,10 +36,6 @@ function scr_status_apply_bloodmist_blind(){
 		);
 	}
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	var _ct_blinded = 0;
 
@@ -87,13 +84,8 @@ function scr_status_apply_bloodmist_blind(){
 				!instance_exists(_ref_blind)
 			){
 
-				global.ref_target_beast = _ref_beast;
 
-				_ref_blind = scr_status_cc_blind(
-					"APPLY",
-					undefined,
-					1
-				);
+				_ref_blind = scr_status_cc_blind("APPLY", undefined, 1, _ref_beast);
 
 				if (!instance_exists(_ref_blind)){
 					continue;
@@ -147,10 +139,6 @@ function scr_status_apply_bloodmist_blind(){
 		}
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 
 	return _ct_blinded;
 }

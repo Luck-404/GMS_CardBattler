@@ -13,13 +13,6 @@
 
 function scr_card_vermilion_bloody_shield(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	//================//
 	//CONSUME RAGE//
 	//================//
@@ -33,5 +26,10 @@ function scr_card_vermilion_bloody_shield(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GAIN ARMOR//
 	//================//
-	scr_battle_armor_target(_val_armor,_ref_caster);
+	scr_battle_armor_target(
+		"FIXED",
+		_val_armor,
+		_ref_caster
+	);
+
 }

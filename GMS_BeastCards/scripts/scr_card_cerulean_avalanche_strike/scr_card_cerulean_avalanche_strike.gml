@@ -29,8 +29,11 @@ function scr_card_cerulean_avalanche_strike(_stct_card,_ref_caster,_ref_target){
 	if (instance_exists(_ref_front_target)){
 
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_front_target,
 			_stct_card._val_card_magnitude,
-			_ref_front_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 	}
 
@@ -40,8 +43,11 @@ function scr_card_cerulean_avalanche_strike(_stct_card,_ref_caster,_ref_target){
 	if (instance_exists(_ref_second_target)){
 
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_second_target,
 			_stct_card._val_card_magnitude,
-			_ref_second_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 	}
 }

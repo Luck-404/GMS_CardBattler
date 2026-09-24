@@ -14,13 +14,6 @@
 
 function scr_card_vermilion_arterial_burst(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//================//
 	//CHECK BLEED//
 	//================//
@@ -46,8 +39,11 @@ function scr_card_vermilion_arterial_burst(_stct_card,_ref_caster,_ref_target){
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//----------------//

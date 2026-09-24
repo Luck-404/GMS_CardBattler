@@ -33,6 +33,10 @@ function scr_card_viridian_overgrowth(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_battle_armor_target_linear(_stct_card._val_card_magnitude,_ref_affected_target);
+	scr_battle_armor_target(
+		"LINEAR",
+		_stct_card._val_card_magnitude,
+		_ref_affected_target
+	);
 	}
 }

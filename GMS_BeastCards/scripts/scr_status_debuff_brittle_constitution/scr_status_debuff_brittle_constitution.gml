@@ -5,13 +5,16 @@
 //           Reduces CON by up to 30 for 3 rounds.
 //           Gives hosted DoTs a 25% chance to preserve duration.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime optionally sets its duration.
-// RETURNS: The active Brittle Constitution Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_debuff_brittle_constitution(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_brittle_constitution(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -20,7 +23,6 @@ function scr_status_debuff_brittle_constitution(_str_tag,_ref_status,_val_lifeti
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;

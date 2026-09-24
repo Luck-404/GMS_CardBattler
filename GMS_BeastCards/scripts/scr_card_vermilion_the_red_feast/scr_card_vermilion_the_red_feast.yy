@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_the_red_feast",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_the_red_feast",
+  "parent":{
+    "name":"THE_RED_FEAST",
+    "path":"folders/CARDS/VERMILION/THE_RED_FEAST.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

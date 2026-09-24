@@ -13,7 +13,7 @@
 //            _ref_attacker is unused.
 //            _ref_target is the dying Beast.
 //            _stct_card is unused.
-// RETURNS: True when the Trap activates; otherwise false.
+// RETURNS: True when the trap successfully triggers; false otherwise.
 //
 //===============================================================================//
 
@@ -106,7 +106,6 @@ function scr_trap_volatile_brand(_str_tag,_ref_trap,_ref_attacker,_ref_target,_s
 			//STORE GLOBAL CONTEXT//
 			//======================//
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 			var _ref_original_card = global.ref_cast_card;
 
 			var _str_original_stat = _stct_source_card._str_card_stat;
@@ -158,11 +157,13 @@ function scr_trap_volatile_brand(_str_tag,_ref_trap,_ref_attacker,_ref_target,_s
 				//================//
 				//DEAL MAG DAMAGE//
 				//================//
-				global.ref_target_beast = _ref_adjacent;
 
 				scr_battle_damage_target(
+					"LINEAR",
+					_ref_trap_owner,
+					_ref_adjacent,
 					_val_magnitude,
-					_ref_adjacent
+					{card: _stct_source_card, card_instance: _ref_source_card}
 				);
 
 				//================//
@@ -179,10 +180,9 @@ function scr_trap_volatile_brand(_str_tag,_ref_trap,_ref_attacker,_ref_target,_s
 				//================//
 				//APPLY 2 BURN//
 				//================//
-				global.ref_target_beast = _ref_adjacent;
 
 				repeat (2){
-					scr_status_apply_dot("BURN");
+					scr_status_apply_dot("BURN", _ref_adjacent);
 				}
 			}
 
@@ -195,7 +195,6 @@ function scr_trap_volatile_brand(_str_tag,_ref_trap,_ref_attacker,_ref_target,_s
 			//RESTORE GLOBAL CONTEXT//
 			//========================//
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 			global.ref_cast_card = _ref_original_card;
 
 			return true;

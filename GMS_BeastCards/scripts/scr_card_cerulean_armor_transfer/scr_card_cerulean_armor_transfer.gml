@@ -1,13 +1,12 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_ARMOR_TRANSFER
-// FUNCTION: Resolves Armor Transfer.
-//           Transfers all current Armor from the caster to the selected
-//           allied Beast.
+// FUNCTION: Transfers all existing caster Armor to a different allied Beast.
+//           Bypasses Armor-gain modifiers, triggers and feedback.
 //
-// ARGUMENTS: _stct_card is the Armor Transfer card struct.
-//            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card - Armor Transfer card struct (unused for quantity).
+//            _ref_caster - source Beast; _ref_target - recipient Beast.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -36,6 +35,5 @@ function scr_card_cerulean_armor_transfer(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//TRANSFER ARMOR//
 	//================//
-	_ref_caster._val_armor = 0;
-	_ref_target._val_armor += _val_armor_transfer;
+	scr_battle_transfer_armor(_ref_caster,_ref_target,_val_armor_transfer);
 }

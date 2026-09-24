@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -22,10 +22,6 @@ function scr_card_viridian_pack_instinct(_stct_card,_ref_caster,_ref_target){
 		return;
 	}
 
-	//====================//
-	//STORE CURRENT TARGET//
-	//====================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//=======================//
 	//APPLY TO ALLIED BEASTS//
@@ -42,12 +38,7 @@ function scr_card_viridian_pack_instinct(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		global.ref_target_beast = _ref_ally;
-		scr_status_apply_buff("PACK_INSTINCT",2,4);
+		scr_status_apply_buff("PACK_INSTINCT", _ref_ally, 2, 4);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

@@ -68,7 +68,7 @@ function hscr_ranch_spawn_beast_dummy(_stct_unit){
 	//----------------//
 	//SET DEAD STATE//
 	//----------------//
-	if (_stct_unit._val_cur_hp <= 0){
+	if (_stct_unit._val_beast_hp_cur <= 0){
 		_ref_new_unit._state_dummy = ENUM_RANCH_BEAST_DUMMY_STATE.REST;
 	}
 

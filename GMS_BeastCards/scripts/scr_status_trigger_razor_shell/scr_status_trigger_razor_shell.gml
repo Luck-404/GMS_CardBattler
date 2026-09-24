@@ -68,9 +68,11 @@ function scr_status_trigger_razor_shell(_ref_defender,_ref_attacker){
 	//--------------------//
 	//DEAL RETALIATION//
 	//--------------------//
-	scr_minion_damage_target(
-		_val_damage,
-		_ref_attacker
+	scr_battle_damage_target(
+		"FIXED",
+		undefined,
+		_ref_attacker,
+		_val_damage
 	);
 
 	return true;

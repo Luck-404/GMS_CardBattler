@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_summon_focus_minion",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_summon_focus_minion",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/MINIONS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

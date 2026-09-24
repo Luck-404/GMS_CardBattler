@@ -64,6 +64,19 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 			continue;
 		}
 
+		//==========================//
+		//SKIP LINKED REDIRECT BUFFS//
+		//==========================//
+		// These cannot be transferred independently because
+		// each Status is paired with a Status on another Beast.
+
+		if (
+			_ref_status._str_status_name == "REDIRECT" ||
+			_ref_status._str_status_name == "REDIRECT_GUARD"
+		){
+			continue;
+		}
+
 		_ref_buff = _ref_status;
 
 		break;

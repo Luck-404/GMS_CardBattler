@@ -115,7 +115,6 @@ function scr_trap_venom_bloom(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//STORE GLOBAL CONTEXT//
 			//======================//
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 			var _ref_original_card = global.ref_cast_card;
 
 			var _ct_affected_targets = 0;
@@ -179,9 +178,8 @@ function scr_trap_venom_bloom(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				//----------------//
 				//APPLY POISON//
 				//----------------//
-				global.ref_target_beast = _ref_affected_target;
 
-				scr_status_apply_dot("POISON");
+				scr_status_apply_dot("POISON", _ref_affected_target);
 
 				//------------------//
 				//SUMMON SPORELING//
@@ -198,7 +196,6 @@ function scr_trap_venom_bloom(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//RESTORE GLOBAL CONTEXT//
 			//========================//
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 			global.ref_cast_card = _ref_original_card;
 
 			return true;

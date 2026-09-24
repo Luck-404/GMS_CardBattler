@@ -15,10 +15,14 @@ if (room != rm_battle){
 
 	scr_overworld_spawn_companion_beast();
 
+	if (global.flag_game_just_started == true){
+		global.flag_game_just_started = false;
+		exit;	
+	}
+
 	//======================//
 	//ROOM ENTRY BATTLE LOCK//
 	//======================//
-
 	if (!instance_exists(obj_battle_wait)){
 
 		var _ref_encounter_wait = instance_create_layer(

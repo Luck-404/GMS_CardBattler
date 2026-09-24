@@ -47,6 +47,28 @@ function scr_status_consume_rage(_ref_target,_ct_amount=1){
 	}
 
 	//================//
+	//CHECK ENDLESS RAGE//
+	//================//
+	var _ref_endless_rage = scr_status_check(
+		"ENDLESS_RAGE",
+		_ref_target
+	);
+
+	//========================//
+	//SPEND WITHOUT CONSUMING//
+	//========================//
+	if (
+		_ref_endless_rage != -1 &&
+		instance_exists(_ref_endless_rage)
+	){
+
+		// Return the amount spent for cards such as Ragefire
+		// and Rageplate, but leave Rage and its damage bonus intact.
+
+		return _ct_rage_consumed;
+	}
+
+	//================//
 	//CONSUME RAGE//
 	//================//
 	_ref_rage._ct_status_stacks -= _ct_rage_consumed;

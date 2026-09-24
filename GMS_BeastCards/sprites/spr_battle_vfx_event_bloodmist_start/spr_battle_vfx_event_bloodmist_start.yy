@@ -3,9 +3,9 @@
   "%Name":"spr_battle_vfx_event_bloodmist_start",
   "bboxMode":0,
   "bbox_bottom":1079,
-  "bbox_left":0,
+  "bbox_left":1,
   "bbox_right":1919,
-  "bbox_top":896,
+  "bbox_top":894,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
@@ -13,10 +13,6 @@
   "For3D":false,
   "frames":[
     {"$GMSpriteFrame":"v1","%Name":"dc83eb94-4c76-48a4-9a3b-f592b0731dba","name":"dc83eb94-4c76-48a4-9a3b-f592b0731dba","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"b578c953-d5b7-4dd5-bbc1-090a0f7693af","name":"b578c953-d5b7-4dd5-bbc1-090a0f7693af","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"ead3a61a-7c1c-4baa-9e97-1721b9a706ba","name":"ead3a61a-7c1c-4baa-9e97-1721b9a706ba","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"bbb09415-6085-4202-826c-daa4612d23dc","name":"bbb09415-6085-4202-826c-daa4612d23dc","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"be30a617-d79d-420d-8b87-767b7875d0c6","name":"be30a617-d79d-420d-8b87-767b7875d0c6","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -53,7 +49,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":5.0,
+    "length":1.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -63,7 +59,7 @@
     },
     "name":"spr_battle_vfx_event_bloodmist_start",
     "playback":1,
-    "playbackSpeed":15.0,
+    "playbackSpeed":10.0,
     "playbackSpeedType":0,
     "resourceType":"GMSequence",
     "resourceVersion":"2.0",
@@ -75,18 +71,6 @@
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
                 "0":{"$SpriteFrameKeyframe":"","Id":{"name":"dc83eb94-4c76-48a4-9a3b-f592b0731dba","path":"sprites/spr_battle_vfx_event_bloodmist_start/spr_battle_vfx_event_bloodmist_start.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"4dc2fb46-e1bd-4eef-aa0a-cfdf3a0a8118","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"b578c953-d5b7-4dd5-bbc1-090a0f7693af","path":"sprites/spr_battle_vfx_event_bloodmist_start/spr_battle_vfx_event_bloodmist_start.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"1d63e2b9-6d45-4a1e-bc78-36f10aca96c7","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ead3a61a-7c1c-4baa-9e97-1721b9a706ba","path":"sprites/spr_battle_vfx_event_bloodmist_start/spr_battle_vfx_event_bloodmist_start.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"d6292cc3-5c78-48b1-994c-5b66da881cde","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"bbb09415-6085-4202-826c-daa4612d23dc","path":"sprites/spr_battle_vfx_event_bloodmist_start/spr_battle_vfx_event_bloodmist_start.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"4c52f535-fb80-4068-911a-181482e31f27","IsCreationKey":false,"Key":3.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"be30a617-d79d-420d-8b87-767b7875d0c6","path":"sprites/spr_battle_vfx_event_bloodmist_start/spr_battle_vfx_event_bloodmist_start.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"5e83b019-2724-46f3-97bd-1980d89b995b","IsCreationKey":false,"Key":4.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

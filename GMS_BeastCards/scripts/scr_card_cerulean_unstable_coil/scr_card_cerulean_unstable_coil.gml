@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Unstable Coil Card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,5 +15,5 @@ function scr_card_cerulean_unstable_coil(_stct_card,_ref_caster,_ref_target){
 	//=====================//
 	//APPLY UNSTABLE COIL//
 	//=====================//
-	scr_status_apply_debuff("UNSTABLE_COIL",3);
+	scr_status_apply_debuff("UNSTABLE_COIL", _ref_target, 3);
 }

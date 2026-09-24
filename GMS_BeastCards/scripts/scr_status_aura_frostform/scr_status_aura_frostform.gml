@@ -10,14 +10,16 @@
 //           Host gains 1 Frostbite each round.
 //           Owns the persistent Frostform VFX.
 //
-// ARGUMENTS: _str_tag controls the status callback behavior.
-//            _ref_status is the Frostform status and _ref_attack_target is the
-//            Beast struck by the host when resolving the Attack trigger.
-// RETURNS: Status reference on APPLY, true/false on TRIGGER, otherwise undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _ref_attack_target=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_aura_frostform(_str_tag,_ref_status,_val_magnitude=undefined,_ref_attack_target=undefined){
+function scr_status_aura_frostform(_str_tag,_ref_status,_val_magnitude=undefined,_ref_attack_target=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -26,7 +28,6 @@ function scr_status_aura_frostform(_str_tag,_ref_status,_val_magnitude=undefined
 		//================//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -140,21 +141,12 @@ function scr_status_aura_frostform(_str_tag,_ref_status,_val_magnitude=undefined
 				return false;
 			}
 
-			//----------------//
-			//TARGET ENEMY//
-			//----------------//
-			var _ref_original_target = global.ref_target_beast;
-			global.ref_target_beast = _ref_attack_target;
 
 			//----------------//
 			//APPLY FROSTBURN//
 			//----------------//
-			scr_status_apply_dot("FROSTBURN");
+			scr_status_apply_dot("FROSTBURN", _ref_attack_target);
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 			return true;
 
@@ -176,24 +168,12 @@ function scr_status_aura_frostform(_str_tag,_ref_status,_val_magnitude=undefined
 				return undefined;
 			}
 
-			//----------------//
-			//TARGET HOST//
-			//----------------//
-			var _ref_original_target = global.ref_target_beast;
-			global.ref_target_beast = _ref_host;
 
 			//----------------//
 			//GAIN FROSTBITE//
 			//----------------//
-			scr_status_dot_frostbite(
-				"APPLY",
-				undefined
-			);
+			scr_status_dot_frostbite("APPLY", undefined, undefined, _ref_host);
 
-			//----------------//
-			//RESTORE TARGET//
-			//----------------//
-			global.ref_target_beast = _ref_original_target;
 
 			scr_status_tick_lifetime(_ref_status);
 			scr_status_reposition(_ref_host);

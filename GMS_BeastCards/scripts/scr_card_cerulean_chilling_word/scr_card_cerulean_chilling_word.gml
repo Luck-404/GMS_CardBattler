@@ -6,10 +6,9 @@
 //
 // ARGUMENTS: _stct_card is the Chilling Word card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
-
 function scr_card_cerulean_chilling_word(_stct_card,_ref_caster,_ref_target){
 
 	//================//
@@ -22,7 +21,6 @@ function scr_card_cerulean_chilling_word(_stct_card,_ref_caster,_ref_target){
 	}
 
 	var _ct_targets = ds_list_size(_list_targets);
-	var _ref_original_target = global.ref_target_beast;
 
 	//================//
 	//APPLY FROSTBURN//
@@ -39,18 +37,8 @@ function scr_card_cerulean_chilling_word(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//----------------//
-		//TARGET BEAST//
-		//----------------//
-		global.ref_target_beast = _ref_affected_target;
 
-		scr_status_apply_dot(
-			"FROSTBURN"
-		);
+		scr_status_apply_dot("FROSTBURN", _ref_affected_target);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

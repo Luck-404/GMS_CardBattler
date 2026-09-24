@@ -1,6 +1,5 @@
 //===============================================================================//
-//
-// STEP: OBJ_HEALING_POOL_INTERACTABLE
+// STEP: OBJ_RANCH_HEALING_POOL_INTERACTABLE
 // FUNCTION: Fully heals all Party Beasts when the player interacts with the
 //           Healing Pool.
 //           Logs the number of Beasts healed and actual HP restored.
@@ -30,7 +29,7 @@ if (
 		_flag_triggered = true;
 		_ct_cooldown = 60;
 
-		scr_gui_spawn_popup_text_bubble(
+		scr_overworld_spawn_text_bubble(
 			x,
 			y - 50,
 			"HEALED PARTY"

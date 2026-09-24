@@ -6,7 +6,7 @@
 //
 // ARGUMENTS: _stct_card is the Arctic Focus card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -15,9 +15,5 @@ function scr_card_cerulean_arctic_focus(_stct_card,_ref_caster,_ref_target){
 	//==================//
 	//APPLY ARCTIC FOCUS//
 	//==================//
-	scr_status_apply_buff(
-		"ARCTIC_FOCUS",
-		0,
-		2
-	);
+	scr_status_apply_buff("ARCTIC_FOCUS", _ref_target, 0, 2);
 }

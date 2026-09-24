@@ -1239,25 +1239,6 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 };
 
 //—------------------------------------------------------------------------------//
-// hscr_battle_reroll_hand
-// FUNCTION: Discards the current player hand, draws replacement Cards,
-//           and refreshes Mana availability checks.
-//—------------------------------------------------------------------------------//
-hscr_battle_reroll_hand = function(){
-
-	while (ds_list_size(_list_battle_hand) > 0){
-
-		var _ref_card = ds_list_find_value(_list_battle_hand,0);
-
-		scr_battle_discard_card(_ref_card);
-	}
-
-	scr_battle_draw_cards(_ct_draw_amount);
-
-	hscr_battle_check_card_oom(_list_battle_hand);
-};
-
-//—------------------------------------------------------------------------------//
 // hscr_battle_check_beast_able
 // FUNCTION: Updates whether each Beast can currently perform actions.
 //           Action-locking CC such as Stun, Sleep, and Frozen prevents acting.

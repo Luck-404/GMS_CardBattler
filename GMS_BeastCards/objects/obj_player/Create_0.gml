@@ -29,6 +29,7 @@ scr_debug_log(
 	//PLAYER VARIABLES//
 	//----------------//
 	#region PLAYER VARIABLES
+	global.flag_game_just_started = true;
 
 	global.val_bonus_speed_scalar = 1;
 
@@ -394,6 +395,7 @@ scr_logbook_mark_beast_captured(
 	//scr_deck_add_card(scr_card_get_info("HIDDEN_CARD"));
 	//scr_deck_add_card(scr_card_get_info("INSPIRATION"));
 	//scr_deck_add_card(scr_card_get_info("MALLEABILITY"));
+	//scr_deck_add_card(scr_card_get_info("MARKING_RUNE"));
 	//scr_deck_add_card(scr_card_get_info("REPOSITION"));
 	//scr_deck_add_card(scr_card_get_info("THOUGHTSTEAL"));
 
@@ -678,6 +680,7 @@ scr_logbook_mark_beast_captured(
 	//scr_deck_add_card(scr_card_get_info("GATHERING_STORM"));
 	//scr_deck_add_card(scr_card_get_info("ICE_WALL"));
 	//scr_deck_add_card(scr_card_get_info("ICEBOUND_SEAL"));
+	//scr_deck_add_card(scr_card_get_info("LURKING_VISIONS"));
 	//scr_deck_add_card(scr_card_get_info("MANA_SPRING"));
 	//scr_deck_add_card(scr_card_get_info("PULLED_UNDER"));
 	//scr_deck_add_card(scr_card_get_info("PURIFY_WATERS"));
@@ -784,10 +787,10 @@ scr_logbook_mark_beast_captured(
 
 	//scr_deck_add_card(scr_card_get_info("BARBED_BOLT"));
 	//scr_deck_add_card(scr_card_get_info("BLOODFLAME_NEEDLE"));
-	scr_deck_add_card(scr_card_get_info("EMBER_SHOT"));
+	//scr_deck_add_card(scr_card_get_info("EMBER_SHOT"));
 	//scr_deck_add_card(scr_card_get_info("RAGING_SPARK"));
 	//scr_deck_add_card(scr_card_get_info("RENDING_BLOW"));
-	scr_deck_add_card(scr_card_get_info("SCORCHING_CLAW"));
+	//scr_deck_add_card(scr_card_get_info("SCORCHING_CLAW"));
 
 	#endregion
 
@@ -855,6 +858,7 @@ scr_logbook_mark_beast_captured(
 	#region UTILITY
 
 	//scr_deck_add_card(scr_card_get_info("BATTLE_TRANCE"));
+	//scr_deck_add_card(scr_card_get_info("BLOOD_FEUD"));
 	//scr_deck_add_card(scr_card_get_info("BLOOD_OFFERING"));
 	//scr_deck_add_card(scr_card_get_info("BLOOD_RUSH"));
 	//scr_deck_add_card(scr_card_get_info("BLOODLINE"));
@@ -906,7 +910,6 @@ scr_logbook_mark_beast_captured(
 	//scr_deck_add_card(scr_card_get_info("RELENTLESS"));
 	//scr_deck_add_card(scr_card_get_info("SECOND_WIND"));
 	//scr_deck_add_card(scr_card_get_info("WAR_CRY"));
-
 	#endregion
 
 	//----------------//

@@ -33,6 +33,29 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 	var _flag_triggered = false;
 
 	//================//
+	//FLAMING LASHES//
+	//================//
+	var _ref_flaming_lashes = scr_status_check(
+		"FLAMING_LASHES",
+		_ref_attacker
+	);
+
+	if (
+		_ref_flaming_lashes != -1 &&
+		instance_exists(_ref_flaming_lashes)
+	){
+
+		if (
+			scr_status_buff_flaming_lashes(
+				"TRIGGER",
+				_ref_flaming_lashes
+			)
+		){
+			_flag_triggered = true;
+		}
+	}
+
+	//================//
 	//FURNACE HEART//
 	//================//
 	var _ref_furnace_heart = scr_status_check("FURNACE_HEART",_ref_attacker);
@@ -104,6 +127,39 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 		_flag_triggered = true;
 	}
 
+	//=============//
+	//BLOODCOATED//
+	//=============//
+	var _ref_bloodcoated = scr_status_check("BLOODCOATED",_ref_attacker);
+
+	if (
+		_ref_bloodcoated != -1 &&
+		instance_exists(_ref_bloodcoated)
+	){
+
+		if (
+			scr_status_buff_bloodcoated(
+				"TRIGGER",
+				_ref_bloodcoated,
+				undefined,
+				undefined,
+				_ref_primary_target,
+				_stct_card
+			)
+		){
+
+			_flag_triggered = true;
+
+			scr_debug_log_battle_trigger(
+				"BLOODCOATED",
+				_ref_attacker,
+				_ref_primary_target,
+				"ATTACK APPLIED BLEED",
+				"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
+			);
+		}
+	}
+
 	//=================//
 	//KRAKENS CHOSEN//
 	//=================//
@@ -119,7 +175,9 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 				"TRIGGER",
 				_ref_krakens_chosen,
 				undefined,
-				_ref_primary_target
+				_ref_primary_target,
+				undefined,
+				_stct_card
 			)
 		){
 			_flag_triggered = true;
@@ -168,10 +226,50 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 		}
 	}
 
-	//==============//
+	//=======//
+	//LEECH//
+	//=======//
+	/*
+		This callback runs after every Attack resolution, even when
+		Leech is inactive, to advance the damage-result cursor.
+	*/
+
+	var _ref_leech = scr_status_check("LEECH",_ref_attacker);
+
+	if (
+		scr_status_buff_leech(
+			"TRIGGER",
+			_ref_leech,
+			undefined,
+			undefined,
+			_ref_attacker,
+			_stct_card
+		)
+	){
+
+		_flag_triggered = true;
+
+		scr_debug_log_battle_trigger(
+			"LEECH",
+			_ref_attacker,
+			_ref_attacker,
+			"ATTACK HP DAMAGE CONVERTED TO HEALING",
+			"SCR_STATUS_TRIGGER_ATTACK_STATUSES"
+		);
+	}
+
+	//===========//
 	//PYRE WEAPON//
-	//==============//
-	// Future Vermilion equivalent.
+	//===========//
+	if (
+		scr_status_trigger_pyre_weapon(
+			_ref_attacker,
+			_ref_primary_target,
+			_stct_card
+		)
+	){
+		_flag_triggered = true;
+	}
 
 	return _flag_triggered;
 }

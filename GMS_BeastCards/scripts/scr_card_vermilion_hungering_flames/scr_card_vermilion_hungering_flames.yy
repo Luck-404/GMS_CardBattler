@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_hungering_flames",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_hungering_flames",
+  "parent":{
+    "name":"HUNGERING_FLAMES",
+    "path":"folders/CARDS/VERMILION/HUNGERING_FLAMES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

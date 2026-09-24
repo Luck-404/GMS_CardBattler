@@ -6,7 +6,7 @@
   "name":"scr_card_vermilion_bloody_swipe",
   "parent":{
     "name":"BLOODY_SWIPE",
-    "path":"folders/CARDS/VERMILION/BLOODLUST_LUNGE/BLOODY_SWIPE.yy",
+    "path":"folders/CARDS/VERMILION/BLOODY_SWIPE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

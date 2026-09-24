@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the Static Barrier card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -16,9 +16,5 @@ function scr_card_cerulean_static_barrier(_stct_card,_ref_caster,_ref_target){
 	//====================//
 	//APPLY STATIC BARRIER//
 	//====================//
-	scr_status_apply_buff(
-		"STATIC_BARRIER",
-		1,
-		3
-	);
+	scr_status_apply_buff("STATIC_BARRIER", _ref_target, 1, 3);
 }

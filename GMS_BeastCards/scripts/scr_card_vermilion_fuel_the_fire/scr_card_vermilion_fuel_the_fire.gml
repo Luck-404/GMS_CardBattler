@@ -16,13 +16,6 @@
 
 function scr_card_vermilion_fuel_the_fire(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	if (
 		_ref_caster._str_list != "ALIVE" ||
 		_ref_caster._val_cur_hp <= 0
@@ -72,6 +65,7 @@ function scr_card_vermilion_fuel_the_fire(_stct_card,_ref_caster,_ref_target){
 	//HEAL CASTER//
 	//================//
 	scr_battle_heal_target(
+		"FIXED",
 		_stct_card._val_card_magnitude,
 		_ref_caster
 	);

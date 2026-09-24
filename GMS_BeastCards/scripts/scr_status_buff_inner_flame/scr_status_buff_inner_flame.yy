@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_inner_flame",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_inner_flame",
+  "parent":{
+    "name":"INNER_FLAME",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/INNER_FLAME.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -15,5 +15,9 @@ function scr_card_viridian_barkskin(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GRANT ARMOR//
 	//================//
-	scr_battle_armor_target(_stct_card._val_card_magnitude,_ref_caster);
+	scr_battle_armor_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_caster
+	);
 }

@@ -586,11 +586,14 @@ hscr_gui_logbook_draw_beast_details = function(_stct_entry){
 
 	_val_text_y += _val_line_height;
 
+	//================//
+	//BEAST SUBTYPES//
+	//================//
 	draw_text(
 		_val_text_x,
 		_val_text_y,
 		"TYPES: " + hscr_gui_logbook_array_to_text(
-			_stct_beast._str_beast_color_type,
+			_stct_beast._arr_beast_color_types,
 			" / "
 		)
 	);

@@ -8,7 +8,7 @@
 //
 // ARGUMENTS: _stct_card is the Shatterstorm card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -37,10 +37,6 @@ function scr_card_cerulean_shatterstorm(_stct_card,_ref_caster,_ref_target){
 		}
 	}
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
 
 	//================//
 	//RESOLVE TARGETS//
@@ -56,17 +52,16 @@ function scr_card_cerulean_shatterstorm(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		//----------------//
-		//TARGET BEAST//
-		//----------------//
-		global.ref_target_beast = _ref_hit_target;
 
 		//----------------//
 		//DEAL DAMAGE//
 		//----------------//
 		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_hit_target,
 			_stct_card._val_card_magnitude,
-			_ref_hit_target
+			{card: _stct_card, card_instance: global.ref_cast_card}
 		);
 
 		if (
@@ -93,11 +88,7 @@ function scr_card_cerulean_shatterstorm(_stct_card,_ref_caster,_ref_target){
 		//----------------//
 		//APPLY BLEED//
 		//----------------//
-		scr_status_apply_dot("BLEED");
+		scr_status_apply_dot("BLEED", _ref_hit_target);
 	}
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 }

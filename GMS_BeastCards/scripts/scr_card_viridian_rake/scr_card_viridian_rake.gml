@@ -1,27 +1,31 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_RAKE
-// FUNCTION: Resolves Rake.
-//           Deals linear physical damage to the selected target.
-//           Applies 1 Bleed stack if the target survives.
+// FUNCTION: Deals Linear PHY damage to a single target.
+//           Applies 1 Bleed to the surviving target.
 //
-// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
-//            _ref_target is the selected target.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card, _ref_caster, _ref_target.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_viridian_rake(_stct_card,_ref_caster,_ref_target){
 
 	//================//
-	//DEAL DAMAGE//
+	//DAMAGE TARGET//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
 	//================//
 	//APPLY BLEED//
 	//================//
 	if (instance_exists(_ref_target) && _ref_target._val_cur_hp > 0){
-		scr_status_apply_dot("BLEED");
+		scr_status_dot_bleed("APPLY",_ref_target,1);
 	}
 }

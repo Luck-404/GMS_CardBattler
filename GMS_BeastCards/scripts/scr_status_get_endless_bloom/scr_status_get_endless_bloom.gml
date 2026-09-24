@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_GET_ENDLESS_BLOOM
@@ -9,9 +10,9 @@
 
 function scr_status_get_endless_bloom(_str_team){
 
-	//----------------------//
+	//======================//
 	//VALIDATE GLOBAL LIST//
-	//----------------------//
+	//======================//
 	if (!variable_global_exists("list_statuses")){
 		return -1;
 	}
@@ -23,7 +24,10 @@ function scr_status_get_endless_bloom(_str_team){
 	//=====================//
 	//GET ENDLESS BLOOM//
 	//=====================//
-	var _ref_status = scr_status_check("ENDLESS_BLOOM",global.list_statuses);
+	var _ref_status = scr_status_check(
+		"ENDLESS_BLOOM",
+		global.list_statuses
+	);
 
 	if (_ref_status == -1){
 		return -1;
@@ -33,14 +37,14 @@ function scr_status_get_endless_bloom(_str_team){
 		return -1;
 	}
 
-	//----------------//
+	//================//
 	//VALIDATE TEAM//
-	//----------------//
-	if (!variable_instance_exists(_ref_status,"_str_status_team")){
+	//================//
+	if (!variable_instance_exists(_ref_status,"_str_team")){
 		return -1;
 	}
 
-	if (_ref_status._str_status_team != _str_team){
+	if (_ref_status._str_team != _str_team){
 		return -1;
 	}
 

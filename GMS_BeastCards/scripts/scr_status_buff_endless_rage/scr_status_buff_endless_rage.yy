@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_endless_rage",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_endless_rage",
+  "parent":{
+    "name":"ENDLESS_RAGE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/ENDLESS_RAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

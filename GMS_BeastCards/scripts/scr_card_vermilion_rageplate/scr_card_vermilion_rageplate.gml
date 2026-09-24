@@ -13,13 +13,6 @@
 
 function scr_card_vermilion_rageplate(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	//================//
 	//GET RAGE//
 	//================//
@@ -50,5 +43,9 @@ function scr_card_vermilion_rageplate(_stct_card,_ref_caster,_ref_target){
 	//================//
 	var _val_armor = _ct_rage * _stct_card._val_card_magnitude;
 
-	scr_battle_armor_target(_val_armor,_ref_caster);
+	scr_battle_armor_target(
+		"FIXED",
+		_val_armor,
+		_ref_caster
+	);
 }

@@ -16,8 +16,7 @@
 //            _ref_attacker is the trapped Beast performing the Attack.
 //            _ref_target is the target of the triggering Attack.
 //            _stct_card is the triggering Attack Card.
-// RETURNS: True if Dragon Mine defeats the attacker and therefore cancels the
-//          Attack; otherwise false.
+// RETURNS: True when the trap cancels the attack; false otherwise.
 //
 //===============================================================================//
 
@@ -103,7 +102,6 @@ function scr_trap_dragon_mine(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//STORE GLOBAL CONTEXT//
 			//======================//
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 			var _ref_original_card = global.ref_cast_card;
 
 			var _str_original_stat = _stct_source_card._str_card_stat;
@@ -112,7 +110,6 @@ function scr_trap_dragon_mine(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//SET TRAP CONTEXT//
 			//==================//
 			global.ref_caster_beast = _ref_trap_owner;
-			global.ref_target_beast = _ref_attacker;
 			global.ref_cast_card = _ref_source_card;
 
 			// Dragon Mine's Card STAT remains NEU in its data,
@@ -123,8 +120,11 @@ function scr_trap_dragon_mine(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//DEAL MAGICAL DAMAGE//
 			//===================//
 			scr_battle_damage_target(
+				"LINEAR",
+				_ref_trap_owner,
+				_ref_attacker,
 				_val_magnitude,
-				_ref_attacker
+				{card: _stct_source_card, card_instance: _ref_source_card}
 			);
 
 			//================//
@@ -136,10 +136,9 @@ function scr_trap_dragon_mine(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 				_ref_attacker._val_cur_hp > 0
 			){
 
-				global.ref_target_beast = _ref_attacker;
 
 				repeat (3){
-					scr_status_apply_dot("BURN");
+					scr_status_apply_dot("BURN", _ref_attacker);
 				}
 			}
 
@@ -161,7 +160,6 @@ function scr_trap_dragon_mine(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//RESTORE GLOBAL CONTEXT//
 			//========================//
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 			global.ref_cast_card = _ref_original_card;
 
 			//================//

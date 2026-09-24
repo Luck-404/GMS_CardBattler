@@ -13,13 +13,6 @@
 
 function scr_card_vermilion_living_flame(_stct_card,_ref_caster,_ref_target){
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	if (
 		_ref_target._str_list != "ALIVE" ||
 		_ref_target._val_cur_hp <= 0

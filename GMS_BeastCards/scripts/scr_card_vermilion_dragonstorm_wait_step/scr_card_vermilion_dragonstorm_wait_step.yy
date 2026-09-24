@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_dragonstorm_wait_step",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_dragonstorm_wait_step",
+  "parent":{
+    "name":"DRAGONSTORM",
+    "path":"folders/CARDS/VERMILION/DRAGONSTORM.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

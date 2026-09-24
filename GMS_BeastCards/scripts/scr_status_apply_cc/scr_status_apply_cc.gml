@@ -1,22 +1,21 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_CC
-// FUNCTION: Attempts to apply a Crowd Control Status to the current target.
+// FUNCTION: Attempts to apply a Crowd Control Status to the supplied target.
 //           Checks CC immunity and CON resistance before applying.
 //           Plays shared CC feedback and logs successful applications.
 //
-// ARGUMENTS: _str_status_name is the CC ID, _val_lifetime optionally overrides
-//            its duration, and _flag_ignore_resistance bypasses CON resistance.
-// RETURNS: The applied CC Status reference, or undefined if application fails.
+// ARGUMENTS: _str_status_name is the CC ID; _ref_target is the affected Beast; _val_lifetime and _flag_ignore_resistance retain their existing purposes.
+//
+// RETURNS: Applied Status instance, or undefined if the application fails.
 //
 //===============================================================================//
 
-function scr_status_apply_cc(_str_status_name,_val_lifetime=undefined,_flag_ignore_resistance=false){
+function scr_status_apply_cc(_str_status_name,_ref_target,_val_lifetime=undefined,_flag_ignore_resistance=false){
 
 	//----------------//
 	//VALIDATE TARGET//
 	//----------------//
-	var _ref_target = global.ref_target_beast;
 
 	if (!instance_exists(_ref_target)){
 		return undefined;
@@ -90,16 +89,24 @@ function scr_status_apply_cc(_str_status_name,_val_lifetime=undefined,_flag_igno
 
 	switch (_str_status_name){
 
+	//==========//
+	//CONFUSED//
+	//==========//
+	case "CONFUSED":
+
+		_ref_status = scr_status_cc_confused("APPLY", undefined, _val_lifetime, _ref_target);
+
+		_str_popup = "CONFUSED";
+		_c_popup = c_maroon;
+
+	break;
+
 		//========//
 		//BANISH//
 		//========//
 		case "BANISH":
 
-			_ref_status = scr_status_cc_banish(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_cc_banish("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "BANISHED";
 			_c_popup = c_aqua;
@@ -111,11 +118,7 @@ function scr_status_apply_cc(_str_status_name,_val_lifetime=undefined,_flag_igno
 		//==========//
 		case "FROZEN":
 
-			_ref_status = scr_status_cc_frozen(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_cc_frozen("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "FROZEN";
 			_c_popup = c_aqua;
@@ -127,11 +130,7 @@ function scr_status_apply_cc(_str_status_name,_val_lifetime=undefined,_flag_igno
 		//=========//
 		case "SLEEP":
 
-			_ref_status = scr_status_cc_sleep(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_cc_sleep("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "ASLEEP";
 
@@ -142,11 +141,7 @@ function scr_status_apply_cc(_str_status_name,_val_lifetime=undefined,_flag_igno
 		//=========//
 		case "BLIND":
 
-			_ref_status = scr_status_cc_blind(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_cc_blind("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "BLINDED";
 
@@ -157,11 +152,7 @@ function scr_status_apply_cc(_str_status_name,_val_lifetime=undefined,_flag_igno
 		//========//
 		case "STUN":
 
-			_ref_status = scr_status_cc_stun(
-				"APPLY",
-				undefined,
-				_val_lifetime
-			);
+			_ref_status = scr_status_cc_stun("APPLY", undefined, _val_lifetime, _ref_target);
 
 			_str_popup = "STUNNED";
 

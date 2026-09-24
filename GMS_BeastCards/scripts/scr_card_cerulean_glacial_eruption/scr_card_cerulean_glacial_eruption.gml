@@ -8,18 +8,11 @@
 //
 // ARGUMENTS: _stct_card is the Glacial Eruption card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
-
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//=================//
 	//GET AOE-3 TARGETS//
@@ -61,11 +54,8 @@ function scr_card_cerulean_glacial_eruption(_stct_card,_ref_caster,_ref_target){
 		instance_exists(_ref_target) &&
 		_ref_target._val_cur_hp > 0
 	){
-		var _ref_original_target = global.ref_target_beast;
-		global.ref_target_beast = _ref_target;
 
-		scr_status_apply_cc("FROZEN");
+		scr_status_apply_cc("FROZEN", _ref_target);
 
-		global.ref_target_beast = _ref_original_target;
 	}
 }

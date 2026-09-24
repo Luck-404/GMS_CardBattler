@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_crimson_focus",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_crimson_focus",
+  "parent":{
+    "name":"CRIMSON_FOCUS",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/CRIMSON_FOCUS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

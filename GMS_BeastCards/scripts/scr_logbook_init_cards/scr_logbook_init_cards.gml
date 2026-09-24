@@ -145,6 +145,7 @@ function scr_logbook_init_cards(){
 	hscr_logbook_add_card_entry("HIDDEN_CARD","UNCOLORED");
 	hscr_logbook_add_card_entry("INSPIRATION","UNCOLORED");
 	hscr_logbook_add_card_entry("MALLEABILITY","UNCOLORED");
+	hscr_logbook_add_card_entry("MARKING_RUNE","UNCOLORED");
 	hscr_logbook_add_card_entry("REPOSITION","UNCOLORED");
 	hscr_logbook_add_card_entry("THOUGHTSTEAL","UNCOLORED");
 
@@ -429,6 +430,7 @@ function scr_logbook_init_cards(){
 	hscr_logbook_add_card_entry("GATHERING_STORM","CERULEAN");
 	hscr_logbook_add_card_entry("ICE_WALL","CERULEAN");
 	hscr_logbook_add_card_entry("ICEBOUND_SEAL","CERULEAN");
+	hscr_logbook_add_card_entry("LURKING_VISIONS","CERULEAN");
 	hscr_logbook_add_card_entry("MANA_SPRING","CERULEAN");
 	hscr_logbook_add_card_entry("PULLED_UNDER","CERULEAN");
 	hscr_logbook_add_card_entry("PURIFY_WATERS","CERULEAN");
@@ -606,6 +608,7 @@ function scr_logbook_init_cards(){
 	#region UTILITY
 
 	hscr_logbook_add_card_entry("BATTLE_TRANCE","VERMILION");
+	hscr_logbook_add_card_entry("BLOOD_FEUD","VERMILION");
 	hscr_logbook_add_card_entry("BLOOD_OFFERING","VERMILION");
 	hscr_logbook_add_card_entry("BLOOD_RUSH","VERMILION");
 	hscr_logbook_add_card_entry("BLOODLINE","VERMILION");

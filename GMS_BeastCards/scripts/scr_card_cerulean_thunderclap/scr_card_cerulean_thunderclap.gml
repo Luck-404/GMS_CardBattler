@@ -14,13 +14,6 @@
 
 function scr_card_cerulean_thunderclap(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
-
 	//=================//
 	//GET AOE-3 TARGETS//
 	//=================//
@@ -48,7 +41,13 @@ function scr_card_cerulean_thunderclap(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_affected_target);
+		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_affected_target,
+			_stct_card._val_card_magnitude,
+			{card: _stct_card, card_instance: global.ref_cast_card}
+		);
 	}
 
 	//=====================//

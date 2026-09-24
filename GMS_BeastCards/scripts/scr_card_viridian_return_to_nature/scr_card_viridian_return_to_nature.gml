@@ -1,37 +1,23 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_RETURN_TO_NATURE
-// FUNCTION: Resolves Return to Nature.
-//           Sacrifices the selected corpse when available.
-//           Otherwise causes the caster to lose 10 HP.
-//           Generates 1 Mana through the shared Mana system.
+// FUNCTION: Sacrifices the selected corpse when valid; otherwise sacrifices
+//           10 caster HP. Then generates 1 Mana.
 //
-// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
-//            _ref_target is the selected target.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected corpse or undefined.
+// RETURNS: No value.
 //
 //===============================================================================//
-
 function scr_card_viridian_return_to_nature(_stct_card,_ref_caster,_ref_target){
 
 	//===================//
 	//PAY SACRIFICE COST//
 	//===================//
-	var _flag_sacrificed = scr_battle_sacrifice_corpse(_ref_target);
+	var _stct_sacrifice = scr_battle_sacrifice("CORPSE",_ref_target);
 
-	if (!_flag_sacrificed){
-
-		_ref_caster._val_cur_hp -= 10;
-		_ref_caster._val_cur_hp = max(0,_ref_caster._val_cur_hp);
-
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"-10 HP",
-			undefined,
-			c_red,
-			_ref_caster.x,
-			_ref_caster.y - 48
-		);
+	if (!_stct_sacrifice._flag_success){
+		scr_battle_sacrifice("HOST_HEALTH",_ref_caster,10);
 	}
 
 	//================//

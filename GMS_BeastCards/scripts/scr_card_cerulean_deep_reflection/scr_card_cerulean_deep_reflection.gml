@@ -23,5 +23,5 @@ function scr_card_cerulean_deep_reflection(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//REQUEST DISCARD//
 	//================//
-	obj_battle_player_controller.hscr_request_card_discard(1);
+	obj_battle_player_controller.hscr_battle_request_card_discard(1);
 }

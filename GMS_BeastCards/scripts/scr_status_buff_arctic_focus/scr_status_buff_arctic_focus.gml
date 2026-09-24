@@ -6,9 +6,16 @@
 //           Makes the host immune to Crowd Control while active.
 //           Reapplication refreshes duration.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_buff_arctic_focus(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_arctic_focus(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,7 +24,6 @@ function scr_status_buff_arctic_focus(_str_tag,_ref_status,_val_magnitude=undefi
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -87,7 +93,7 @@ function scr_status_buff_arctic_focus(_str_tag,_ref_status,_val_magnitude=undefi
 			_ref_new_status._flag_status_stackable = false;
 			_ref_new_status._flag_status_cc_immunity = true;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region = "START";
 
 			//----------------//
 			//REGISTER STATUS//

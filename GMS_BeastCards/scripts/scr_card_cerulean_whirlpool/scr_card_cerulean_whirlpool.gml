@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the Whirlpool card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -16,8 +16,5 @@ function scr_card_cerulean_whirlpool(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY BANISH//
 	//================//
-	scr_status_apply_cc(
-		"BANISH",
-		_stct_card._val_card_magnitude
-	);
+	scr_status_apply_cc("BANISH", _ref_target, _stct_card._val_card_magnitude);
 }

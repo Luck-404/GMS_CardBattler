@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_aura_hungering_flames",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_aura_hungering_flames",
+  "parent":{
+    "name":"HUNGERING_FLAMES",
+    "path":"folders/BATTLE/STATUSES/AURA/VERMILION/HUNGERING_FLAMES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

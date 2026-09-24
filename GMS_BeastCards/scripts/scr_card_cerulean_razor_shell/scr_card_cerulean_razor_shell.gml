@@ -7,7 +7,7 @@
 //
 // ARGUMENTS: _stct_card is the Razor Shell card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -16,9 +16,5 @@ function scr_card_cerulean_razor_shell(_stct_card,_ref_caster,_ref_target){
 	//=================//
 	//APPLY RAZOR SHELL//
 	//=================//
-	scr_status_apply_buff(
-		"RAZOR_SHELL",
-		_stct_card._val_card_magnitude,
-		3
-	);
+	scr_status_apply_buff("RAZOR_SHELL", _ref_target, _stct_card._val_card_magnitude, 3);
 }

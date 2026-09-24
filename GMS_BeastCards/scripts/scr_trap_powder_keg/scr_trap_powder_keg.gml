@@ -12,7 +12,7 @@
 //            _ref_attacker is unused.
 //            _ref_target is the trapped Beast.
 //            _stct_card is unused.
-// RETURNS: True when the Trap activates; otherwise false.
+// RETURNS: True when the trap successfully triggers; false otherwise.
 //
 //===============================================================================//
 
@@ -103,7 +103,6 @@ function scr_trap_powder_keg(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_
 			//STORE GLOBAL CONTEXT//
 			//======================//
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 			var _ref_original_card = global.ref_cast_card;
 
 			var _str_original_stat = _stct_source_card._str_card_stat;
@@ -143,9 +142,14 @@ function scr_trap_powder_keg(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_
 				//================//
 				//DEAL PHY DAMAGE//
 				//================//
-				global.ref_target_beast = _ref_hit_target;
 
-				scr_battle_damage_target(_val_magnitude,_ref_hit_target);
+				scr_battle_damage_target(
+					"LINEAR",
+					_ref_trap_owner,
+					_ref_hit_target,
+					_val_magnitude,
+					{card: _stct_source_card, card_instance: _ref_source_card}
+				);
 			}
 
 			//====================//
@@ -157,7 +161,6 @@ function scr_trap_powder_keg(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_
 			//RESTORE GLOBAL CONTEXT//
 			//========================//
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 			global.ref_cast_card = _ref_original_card;
 
 			return true;

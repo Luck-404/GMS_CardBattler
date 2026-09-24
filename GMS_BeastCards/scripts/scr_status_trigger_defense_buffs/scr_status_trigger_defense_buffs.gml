@@ -4,13 +4,21 @@
 // FUNCTION: Resolves reactive Buff effects after a Beast is successfully
 //           struck by an enemy Attack damage instance.
 //
-// ARGUMENTS: _ref_defender is the Beast struck, _ref_attacker is the attacking
-//            Beast, and _stct_card is the Attack card that caused the hit.
-// RETURNS: True when at least one defensive Buff successfully triggers.
+//           Toxic Hide triggers against Melee Attacks only.
+//           Thorns triggers against ANY Attack, regardless of range.
+//           Toxic Hide resolves before Thorns.
+//
+// ARGUMENTS: _ref_defender is the Beast struck.
+//            _ref_attacker is the attacking Beast.
+//            _stct_card is the Attack Card that caused the hit.
+//
+// RETURNS: True when at least one defensive effect triggers.
 //
 //===============================================================================//
 
 function scr_status_trigger_defense_buffs(_ref_defender,_ref_attacker,_stct_card){
+
+	#region VALIDATION
 
 	//-------------------//
 	//VALIDATE DEFENDER//
@@ -50,11 +58,41 @@ function scr_status_trigger_defense_buffs(_ref_defender,_ref_attacker,_stct_card
 	//--------------------------//
 	//IGNORE REACTIVE REENTRY//
 	//--------------------------//
-	if (global.flag_frozen_curse_triggering){
+	if (
+		global.flag_frozen_curse_triggering ||
+		global.flag_thorns_retaliating
+	){
 		return false;
 	}
 
 	var _flag_triggered = false;
+
+	#endregion
+
+	#region EXISTING DEFENSE EFFECTS
+
+	//============//
+	//HEMOPHILIA//
+	//============//
+	var _ref_hemophilia = scr_status_check(
+		"HEMOPHILIA",
+		_ref_defender
+	);
+
+	if (
+		_ref_hemophilia != -1 &&
+		instance_exists(_ref_hemophilia)
+	){
+
+		if (
+			scr_status_debuff_hemophilia(
+				"TRIGGER",
+				_ref_hemophilia
+			)
+		){
+			_flag_triggered = true;
+		}
+	}
 
 	//================//
 	//FROZEN ARMOR//
@@ -97,6 +135,50 @@ function scr_status_trigger_defense_buffs(_ref_defender,_ref_attacker,_stct_card
 	if (scr_status_trigger_ice_mirror(_ref_defender,_ref_attacker)){
 		_flag_triggered = true;
 	}
+
+	//========//
+	//THORNS//
+	//========//
+	if (
+		scr_status_trigger_thorns(
+			_ref_defender,
+			_ref_attacker
+		)
+	){
+
+		_flag_triggered = true;
+
+		scr_debug_log_battle_trigger(
+			"THORNS",
+			_ref_defender,
+			_ref_attacker,
+			"",
+			"SCR_STATUS_TRIGGER_DEFENSE_BUFFS"
+		);
+	}
+		
+	//============//
+	//TOXIC HIDE//
+	//============//
+	if (
+		scr_status_trigger_toxic_hide(
+			_ref_defender,
+			_ref_attacker
+		)
+	){
+
+		_flag_triggered = true;
+
+		scr_debug_log_battle_trigger(
+			"TOXIC HIDE",
+			_ref_defender,
+			_ref_attacker,
+			"",
+			"SCR_STATUS_TRIGGER_DEFENSE_BUFFS"
+		);
+	}	
+
+	#endregion
 
 	return _flag_triggered;
 }

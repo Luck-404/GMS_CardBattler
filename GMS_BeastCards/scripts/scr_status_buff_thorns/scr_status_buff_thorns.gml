@@ -1,16 +1,24 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_THORNS
 // FUNCTION: Handles Thorns.
-//           Unstackable Timed Buff.
+//           Stackable Timed Buff with START decrement.
 //           Melee attackers receive stored neutral damage.
-//           Reapplication keeps the strongest damage Magnitude
-//           and refreshes duration.
+//           Each reapplication adds 1 stack and adds its magnitude to
+//           the existing total damage, then refreshes duration.
 //           Retaliation is resolved by scr_status_trigger_thorns().
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged:
+//            _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -19,8 +27,9 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
+			//----------------//
+			//VALIDATE TARGET//
+			//----------------//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -46,25 +55,32 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_status_check("THORNS",_ref_target);
+			var _ref_existing_status = scr_status_check(
+				"THORNS",
+				_ref_target
+			);
 
-			//------------------//
-			//REFRESH EXISTING//
-			//------------------//
-			if (_ref_existing_status != -1){
-
-				if (!instance_exists(_ref_existing_status)){
-					return undefined;
-				}
+			//================//
+			//STACK EXISTING//
+			//================//
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
 
 				//----------------//
-				//UPDATE DAMAGE//
+				//ADD 1 STACK//
 				//----------------//
-				_ref_existing_status._val_status_magnitude =
-					max(
-						_ref_existing_status._val_status_magnitude,
-						_val_magnitude
-					);
+				_ref_existing_status._ct_status_stacks++;
+
+				//----------------------//
+				//ADD DAMAGE MAGNITUDE//
+				//----------------------//
+				// Magnitudes are additive, not replaced or multiplied
+				// by the stack count.
+
+				_ref_existing_status._val_status_magnitude +=
+					_val_magnitude;
 
 				//----------------//
 				//REFRESH LIFE//
@@ -74,6 +90,9 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 					_val_lifetime
 				);
 
+				//--------------------//
+				//UPDATE DESCRIPTION//
+				//--------------------//
 				_ref_existing_status._str_status_desc =
 					"MELEE ATTACKERS TAKE " +
 					string(_ref_existing_status._val_status_magnitude) +
@@ -92,6 +111,8 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 						1
 					);
 				}
+
+				scr_status_reposition(_ref_target);
 
 				return _ref_existing_status;
 			}
@@ -112,7 +133,7 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
-				false,
+				true,
 				false
 			);
 
@@ -125,16 +146,27 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 
 			_ref_new_status._str_status_type = "BUFF";
 			_ref_new_status._str_status_name = "THORNS";
-			_ref_new_status._str_status_desc = "MELEE ATTACKERS TAKE " + string(_val_magnitude) + " NEUTRAL DAMAGE";
+
+			_ref_new_status._str_status_desc =
+				"MELEE ATTACKERS TAKE " +
+				string(_val_magnitude) +
+				" NEUTRAL DAMAGE";
 
 			_ref_new_status._spr_status = spr_status_buff_thorns;
 
+			//----------------//
+			//STACK DATA//
+			//----------------//
 			_ref_new_status._ct_status_stacks = 1;
+			_ref_new_status._flag_status_stackable = true;
+
+			// Total retaliation damage across all applications.
 			_ref_new_status._val_status_magnitude = _val_magnitude;
 
-			_ref_new_status._flag_status_stackable = false;
-
-			_ref_new_status._str_trigger_region = "END";
+			//------------------//
+			//START DECREMENT//
+			//------------------//
+			_ref_new_status._str_trigger_region = "START";
 
 			//----------------//
 			//REGISTER STATUS//
@@ -183,6 +215,7 @@ function scr_status_buff_thorns(_str_tag,_ref_status,_val_magnitude=undefined,_v
 			//UPDATE LIFETIME//
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
+
 			scr_status_reposition(_ref_host);
 
 		break;

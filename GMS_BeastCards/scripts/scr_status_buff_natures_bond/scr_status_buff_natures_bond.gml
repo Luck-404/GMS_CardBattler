@@ -6,9 +6,16 @@
 //           Whenever the host receives healing, grants stored Armor per stack.
 //           Reapplication adds one stack and refreshes duration.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -17,7 +24,6 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -113,7 +119,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 			_ref_new_status._flag_status_stackable = true;
 
 			_ref_new_status._str_buff_trigger = "HEALED";
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region = "START";
 
 			//----------------//
 			//REGISTER STATUS//
@@ -157,6 +163,7 @@ function scr_status_buff_natures_bond(_str_tag,_ref_status,_val_magnitude=undefi
 			//GRANT ARMOR//
 			//-------------//
 			scr_battle_armor_target(
+				"FIXED",
 				_val_armor_gain,
 				_ref_host
 			);

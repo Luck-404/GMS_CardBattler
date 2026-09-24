@@ -28,8 +28,11 @@ function scr_card_viridian_natures_wrath(_stct_card,_ref_caster,_ref_target){
 	//DEAL DAMAGE//
 	//================//
 	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
 		_val_damage,
-		_ref_target
+		{card: _stct_card, card_instance: global.ref_cast_card}
 	);
 
 	//================//
@@ -48,6 +51,7 @@ function scr_card_viridian_natures_wrath(_stct_card,_ref_caster,_ref_target){
 		if (_ct_poison_consumed > 0){
 
 			scr_battle_heal_target(
+				"FIXED",
 				_ct_poison_consumed * 3,
 				_ref_caster
 			);

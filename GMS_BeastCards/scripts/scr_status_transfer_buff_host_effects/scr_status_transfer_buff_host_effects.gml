@@ -179,14 +179,25 @@ function scr_status_transfer_buff_host_effects(_str_action,_ref_status,_ref_sour
 
 		break;
 
-		//============//
-		//OVERHEALTH//
-		//============//
+		//==========================================//
+		//OVERHEALTH / PERSISTENT OVERHEALTH//
+		//==========================================//
 		case "OVERHEALTH":
+		case "PERSISTENT_OVERHEALTH":
 
+			//===========================//
+			//REMOVE FROM ORIGINAL HOST//
+			//===========================//
 			if (_str_action == "REMOVE"){
 
-				var _val_owned_overhealth = min(_ref_status._val_status_remaining,_ref_source._val_overhealth);
+				scr_status_sync_overhealth_ownership(
+					_ref_source
+				);
+
+				var _val_owned_overhealth = max(
+					0,
+					_ref_status._val_status_remaining
+				);
 
 				_ref_source._val_overhealth =
 					max(
@@ -195,36 +206,44 @@ function scr_status_transfer_buff_host_effects(_str_action,_ref_status,_ref_sour
 						_val_owned_overhealth
 					);
 
-				_ref_status._val_status_remaining = _val_owned_overhealth;
+				scr_status_sync_overhealth_ownership(
+					_ref_source
+				);
 			}
+
+			//======================//
+			//APPLY TO NEW HOST//
+			//======================//
 			else{
 
-				_ref_target._val_overhealth += _ref_status._val_status_remaining;
-			}
+				/*
+					The transferred Status is already registered on
+					the new host when this callback runs.
 
-		break;
+					Temporarily hide its contribution so the target's
+					pre-existing Overhealth ownership can synchronize
+					before the transferred amount is added.
+				*/
+				var _val_transferred_overhealth = max(
+					0,
+					_ref_status._val_status_remaining
+				);
 
-		//=======//
-		//BLOOM//
-		//=======//
-		case "BLOOM":
+				_ref_status._val_status_remaining = 0;
 
-			if (_str_action == "REMOVE"){
+				scr_status_sync_overhealth_ownership(
+					_ref_target
+				);
 
-				var _val_owned_overhealth = min(_ref_status._val_status_remaining,_ref_source._val_overhealth);
+				_ref_status._val_status_remaining =
+					_val_transferred_overhealth;
 
-				_ref_source._val_overhealth =
-					max(
-						0,
-						_ref_source._val_overhealth -
-						_val_owned_overhealth
-					);
+				_ref_target._val_overhealth +=
+					_val_transferred_overhealth;
 
-				_ref_status._val_status_remaining = _val_owned_overhealth;
-			}
-			else{
-
-				_ref_target._val_overhealth += _ref_status._val_status_remaining;
+				scr_status_sync_overhealth_ownership(
+					_ref_target
+				);
 			}
 
 		break;

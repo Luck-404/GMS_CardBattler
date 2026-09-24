@@ -15,13 +15,6 @@
 
 function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return false;
-	}
-
 	//======================//
 	//GET ALLIED TEAM LIST//
 	//======================//
@@ -47,8 +40,14 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 		if (_ref_ally._str_list != "ALIVE" || _ref_ally._val_cur_hp <= 0){
 			continue;
 		}
+	
+		var _stct_cleanse = scr_status_cleanse(
+			_ref_ally,
+			"NEGATIVE",
+			"ALL"
+		);
 
-		_ct_total_stacks += scr_status_cleanse_negative_stacks(_ref_ally);
+		_ct_total_stacks += _stct_cleanse._ct_stacks_removed;
 	}
 
 	//================//
@@ -61,31 +60,22 @@ function scr_card_viridian_apex_predator(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//STORE OLD TARGET//
 	//================//
-	var _ref_original_target = global.ref_target_beast;
 
-	//================//
-	//TARGET CASTER//
-	//================//
-	global.ref_target_beast = _ref_caster;
 
 	//================//
 	//GAIN APEX STACKS//
 	//================//
-	scr_status_apply_buff(
-		"APEX_PREDATOR",
-		_ct_total_stacks,
-		-1
-	);
+	scr_status_apply_buff("APEX_PREDATOR", _ref_caster, _ct_total_stacks, -1);
 
 	//================//
 	//HEAL CASTER//
 	//================//
-	scr_battle_heal_target(_ct_total_stacks * 2,_ref_caster);
+	scr_battle_heal_target(
+		"FIXED",
+		_ct_total_stacks * 2,
+		_ref_caster
+	);
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 
 	return true;
 }

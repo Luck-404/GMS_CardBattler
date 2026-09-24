@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_phoenix_rebirth",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_phoenix_rebirth",
+  "parent":{
+    "name":"PHOENIX_REBIRTH",
+    "path":"folders/BATTLE/STATUSES/BUFFS/VERMILION/PHOENIX_REBIRTH.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

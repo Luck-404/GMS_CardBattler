@@ -23,18 +23,36 @@ function scr_card_viridian_bramble_eruption(_stct_card,_ref_caster,_ref_target){
 	//HIT LEFT ADJACENT//
 	//==================//
 	if (_ref_left_target != undefined){
-		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_left_target);
+		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_left_target,
+			_stct_card._val_card_magnitude,
+			{card: _stct_card, card_instance: global.ref_cast_card}
+		);
 	}
 
 	//================//
 	//HIT MAIN TARGET//
 	//================//
-	scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_target);
+	scr_battle_damage_target(
+		"LINEAR",
+		_ref_caster,
+		_ref_target,
+		_stct_card._val_card_magnitude,
+		{card: _stct_card, card_instance: global.ref_cast_card}
+	);
 
 	//===================//
 	//HIT RIGHT ADJACENT//
 	//===================//
 	if (_ref_right_target != undefined){
-		scr_battle_damage_target(_stct_card._val_card_magnitude,_ref_right_target);
+		scr_battle_damage_target(
+			"LINEAR",
+			_ref_caster,
+			_ref_right_target,
+			_stct_card._val_card_magnitude,
+			{card: _stct_card, card_instance: global.ref_cast_card}
+		);
 	}
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_second_wind",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_second_wind",
+  "parent":{
+    "name":"SECOND_WIND",
+    "path":"folders/CARDS/VERMILION/SECOND_WIND.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -20,7 +20,7 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		return false;
 	}
 
-	if (_ref_beast._val_cur_hp <= 0){
+	if (_ref_beast._str_list != "ALIVE" || _ref_beast._val_cur_hp <= 0){
 		return false;
 	}
 

@@ -23,8 +23,8 @@ function scr_beast_set_level(_stct_beast,_val_level,_flag_full_heal=false){
 	//========================//
 	//STORE CURRENT HP RATIO//
 	//========================//
-	var _val_old_max_hp = max(1,_stct_beast._val_max_hp);
-	var _val_hp_ratio = clamp(_stct_beast._val_cur_hp / _val_old_max_hp,0,1);
+	var _val_old_max_hp = max(1,_stct_beast._val_beast_hp_max);
+	var _val_hp_ratio = clamp(_stct_beast._val_beast_hp_cur / _val_old_max_hp,0,1);
 
 	//================//
 	//SET LEVEL//
@@ -34,7 +34,7 @@ function scr_beast_set_level(_stct_beast,_val_level,_flag_full_heal=false){
 	//========================//
 	//RECALCULATE MAXIMUM HP//
 	//========================//
-	_stct_beast._val_max_hp = scr_beast_get_max_hp(
+	_stct_beast._val_beast_hp_max = scr_beast_get_max_hp(
 		_stct_beast._val_beast_hp_stat,
 		_stct_beast._val_beast_level
 	);
@@ -43,11 +43,11 @@ function scr_beast_set_level(_stct_beast,_val_level,_flag_full_heal=false){
 	//UPDATE HP//
 	//================//
 	if (_flag_full_heal){
-		_stct_beast._val_cur_hp = _stct_beast._val_max_hp;
+		_stct_beast._val_beast_hp_cur = _stct_beast._val_beast_hp_max;
 	}
 	else{
-		_stct_beast._val_cur_hp = ceil(_stct_beast._val_max_hp * _val_hp_ratio);
-		_stct_beast._val_cur_hp = clamp(_stct_beast._val_cur_hp,0,_stct_beast._val_max_hp);
+		_stct_beast._val_beast_hp_cur = ceil(_stct_beast._val_beast_hp_max * _val_hp_ratio);
+		_stct_beast._val_beast_hp_cur = clamp(_stct_beast._val_beast_hp_cur,0,_stct_beast._val_beast_hp_max);
 	}
 
 	return true;

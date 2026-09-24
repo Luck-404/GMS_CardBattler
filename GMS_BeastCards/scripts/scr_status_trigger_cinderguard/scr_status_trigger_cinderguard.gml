@@ -54,16 +54,6 @@ function scr_status_trigger_cinderguard(_ref_defender,_ref_attacker){
 		return false;
 	}
 
-	//================//
-	//STORE TARGET//
-	//================//
-	var _ref_original_target = global.ref_target_beast;
-
-	//====================//
-	//TARGET THE ATTACKER//
-	//====================//
-	global.ref_target_beast = _ref_attacker;
-
 	//==========//
 	//FEEDBACK//
 	//==========//
@@ -79,12 +69,8 @@ function scr_status_trigger_cinderguard(_ref_defender,_ref_attacker){
 	//================//
 	//APPLY 1 BURN//
 	//================//
-	scr_status_apply_dot("BURN");
+	scr_status_apply_dot("BURN", _ref_attacker);
 
-	//================//
-	//RESTORE TARGET//
-	//================//
-	global.ref_target_beast = _ref_original_target;
 
 	//================//
 	//CONSUME CHARGE//

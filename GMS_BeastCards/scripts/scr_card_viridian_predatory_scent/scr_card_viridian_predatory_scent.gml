@@ -4,32 +4,46 @@
 // FUNCTION: Resolves Predatory Scent.
 //           Applies Focus to the selected enemy Beast for 3 rounds.
 //           Allied Minions prioritize the Focused target.
+//           Summons 1 random Viridian Minion on the caster.
 //           METABOLIZE 3 consumes exactly 3 Poison to Cultivate every
-//           Minion on the caster by 1.
+//           Minion on the caster by 1, including the new summon.
 //
-// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
-//            _ref_target is the selected target.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card, _ref_caster, _ref_target.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 
+	#region FOCUS
+
 	//================//
 	//APPLY FOCUS//
 	//================//
-	scr_status_apply_debuff(
-		"FOCUS",
-		3
+	scr_status_apply_debuff("FOCUS", _ref_target, 3);
+
+
+	#endregion
+
+	#region SUMMON
+
+	//=======================//
+	//SUMMON VIRIDIAN MINION//
+	//=======================//
+	scr_card_summon_focus_minion(
+		_stct_card,
+		_ref_caster,
+		"VIRIDIAN"
 	);
 
-	//----------------//
-	//VALIDATE BEASTS//
-	//----------------//
-	if (
-		!instance_exists(_ref_caster) ||
-		!instance_exists(_ref_target)
-	){
+	#endregion
+
+	#region METABOLIZE
+
+	//================//
+	//VALIDATE CASTER//
+	//================//
+	if (!instance_exists(_ref_caster)){
 		return;
 	}
 
@@ -69,10 +83,18 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 		return;
 	}
 
+	#endregion
+
+	#region CULTIVATE
+
 	//================//
 	//CULTIVATE MINIONS//
 	//================//
-	for (var _it_minion = 0;_it_minion < ds_list_size(_ref_caster._list_minions);_it_minion++){
+	for (
+		var _it_minion = 0;
+		_it_minion < ds_list_size(_ref_caster._list_minions);
+		_it_minion++
+	){
 
 		var _ref_minion = ds_list_find_value(
 			_ref_caster._list_minions,
@@ -88,4 +110,6 @@ function scr_card_viridian_predatory_scent(_stct_card,_ref_caster,_ref_target){
 			1
 		);
 	}
+
+	#endregion
 }

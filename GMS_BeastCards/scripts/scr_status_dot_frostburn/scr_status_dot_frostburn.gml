@@ -1,19 +1,25 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DOT_FROSTBURN
-// FUNCTION: Handles the Frostburn damage-over-time Status.
-//           Stackable Infinite.
-//           Each application destroys 3 Armor immediately.
-//           Each round, deals 2 NEU damage per Frostburn stack.
-//           Each round, removes 1 positive Buff from the host.
+// FUNCTION: Handles stackable infinite Frostburn.
+//           Application adds 1 stack without destroying Armor.
+//           At START, resolves in this order:
+//             1. Destroy up to 3 Armor (total, not per stack).
+//             2. Deal 3 NEU damage per stack.
+//             3. Remove the oldest cleansable positive Buff or Aura
+//                if the host is still alive.
+//           Uses normal status DEATH cleanup for the removed effect.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime is retained for API consistency.
-// RETURNS: The active Frostburn Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag - APPLY, REPEAT or DEATH.
+//            _ref_status - stored status for non-APPLY commands.
+//            _val_lifetime - retained for compatibility.
+//            _ref_target - explicit APPLY host.
+// RETURNS: APPLY returns the applied status; otherwise undefined.
 //
 //===============================================================================//
 
-function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -22,11 +28,9 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
-			//----------------//
+			//================//
 			//VALIDATE TARGET//
-			//----------------//
+			//================//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -35,49 +39,42 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			//================//
-			//DESTROY ARMOR//
-			//================//
-			var _val_armor_destroyed = min(3,_ref_target._val_armor);
-
-			if (_val_armor_destroyed > 0){
-
-				_ref_target._val_armor -= _val_armor_destroyed;
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_armor_destroyed) + " ARMOR",
-					undefined,
-					c_aqua,
-					_ref_target.x + irandom_range(-32,32),
-					_ref_target.y - 24 + irandom_range(-32,32)
-				);
-			}
-
 			//----------------//
 			//CHECK EXISTING//
 			//----------------//
-			var _ref_existing_status = scr_status_check("FROSTBURN",_ref_target);
+			var _ref_existing_status = scr_status_check(
+				"FROSTBURN",
+				_ref_target
+			);
+
 			var _ref_applied_status = undefined;
 
 			//================//
 			//STACK EXISTING//
 			//================//
-			if (_ref_existing_status != -1){
-
-				if (!instance_exists(_ref_existing_status)){
-					return undefined;
-				}
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
 
 				_ref_existing_status._ct_status_stacks++;
 
+				//------------------//
+				//SET DAMAGE PER STACK//
+				//------------------//
+				_ref_existing_status._val_status_magnitude = 3;
+
+				//--------------------//
+				//UPDATE DESCRIPTION//
+				//--------------------//
 				_ref_existing_status._str_status_desc =
-					"DEALS " +
+					"START: DESTROY UP TO 3 ARMOR, DEAL " +
 					string(
 						_ref_existing_status._ct_status_stacks *
 						_ref_existing_status._val_status_magnitude
 					) +
-					" NEU DMG EACH ROUND; REMOVES 1 BUFF";
+					" NEU DAMAGE, THEN REMOVE THE OLDEST " +
+					"CLEANSABLE POSITIVE EFFECT";
 
 				scr_status_reposition(_ref_target);
 
@@ -121,12 +118,16 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_new_status._ct_status_stacks = 1;
 				_ref_new_status._flag_status_stackable = true;
 
-				_ref_new_status._val_status_magnitude = 2;
+				//------------------//
+				//DAMAGE PER STACK//
+				//------------------//
+				_ref_new_status._val_status_magnitude = 3;
 
 				_ref_new_status._str_status_desc =
-					"DEALS " +
+					"START: DESTROY UP TO 3 ARMOR, DEAL " +
 					string(_ref_new_status._val_status_magnitude) +
-					" NEU DMG EACH ROUND; REMOVES 1 BUFF";
+					" NEU DAMAGE, THEN REMOVE THE OLDEST " +
+					"CLEANSABLE POSITIVE EFFECT";
 
 				_ref_new_status._str_trigger_region = "START";
 
@@ -146,6 +147,8 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 			//========================//
 			//APPLICATION PRESENTATION//
 			//========================//
+			// No Armor destruction on application.
+
 			scr_battle_vfx(
 				_ref_target,
 				spr_battle_vfx_frostburn,
@@ -183,9 +186,34 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 				return undefined;
 			}
 
-			//==================//
-			//CALCULATE DAMAGE//
-			//==================//
+			//================//
+			//1. DESTROY ARMOR//
+			//================//
+			// Destroy up to 3 Armor per tick, regardless of stacks.
+
+			var _stct_armor_result = scr_battle_destroy_armor(
+				_ref_host,
+				3
+			);
+
+			var _val_armor_destroyed =
+				_stct_armor_result._val_armor_removed;
+
+			if (_val_armor_destroyed > 0){
+
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"-" + string(_val_armor_destroyed) + " ARMOR",
+					undefined,
+					c_aqua,
+					_ref_host.x + irandom_range(-32,32),
+					_ref_host.y - 24 + irandom_range(-32,32)
+				);
+			}
+
+			//================//
+			//2. CALCULATE DAMAGE//
+			//================//
 			var _val_damage =
 				_ref_status._ct_status_stacks *
 				_ref_status._val_status_magnitude;
@@ -198,7 +226,10 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_host._val_overhealth > 0
 			){
 
-				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
+				var _val_blocked = min(
+					_ref_host._val_overhealth,
+					_val_damage
+				);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -221,7 +252,10 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 				_ref_host._val_cur_hp > 0
 			){
 
-				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
+				var _val_actual_damage = min(
+					_val_damage,
+					_ref_host._val_cur_hp
+				);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
@@ -238,37 +272,47 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined){
 				);
 			}
 
-			//======================//
-			//REMOVE POSITIVE BUFF//
-			//======================//
+			//================================//
+			//3. REMOVE OLDEST POSITIVE EFFECT//
+			//================================//
 			if (_ref_host._val_cur_hp > 0){
 
-				scr_status_cleanse_buff(
+				scr_status_cleanse(
 					_ref_host,
-					1
+					"POSITIVE",
+					"OLDEST"
 				);
 			}
 
 			//==========//
 			//TICK VFX//
 			//==========//
-			scr_battle_vfx(
-				_ref_host,
-				spr_battle_vfx_frostburn_tick,
-				undefined,
-				undefined,
-				32,
-				32,
-				1,
-				0,
-				snd_battle_frostburn
-			);
+			if (instance_exists(_ref_host)){
+
+				scr_battle_vfx(
+					_ref_host,
+					spr_battle_vfx_frostburn_tick,
+					undefined,
+					undefined,
+					32,
+					32,
+					1,
+					0,
+					snd_battle_frostburn
+				);
+			}
 
 			//----------------//
 			//UPDATE LIFETIME//
 			//----------------//
-			scr_status_tick_lifetime(_ref_status);
-			scr_status_reposition(_ref_host);
+			if (instance_exists(_ref_status)){
+
+				scr_status_tick_lifetime(_ref_status);
+
+				if (instance_exists(_ref_host)){
+					scr_status_reposition(_ref_host);
+				}
+			}
 
 		break;
 

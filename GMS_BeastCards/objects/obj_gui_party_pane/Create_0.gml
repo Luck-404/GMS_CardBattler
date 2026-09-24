@@ -210,7 +210,7 @@ function hscr_gui_party_draw_selected_held_item(_stct_unit,_val_x,_val_y){
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 
-		scr_unequip_held_item_to_inventory(
+		scr_inventory_unequip_held_item(
 			_stct_unit,
 			_val_box_x1 + (_val_box_w * 0.5),
 			_val_box_y1

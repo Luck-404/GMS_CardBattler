@@ -40,11 +40,7 @@ function scr_battle_trigger_damage_traps(_ref_target,_val_damage_received){
 			continue;
 		}
 
-		if (_ref_trap._flag_triggered){
-			continue;
-		}
-
-		if (_ref_trap._ref_host != _ref_target){
+		if (_ref_trap._ref_host != _ref_target || _ref_trap._flag_triggered){
 			continue;
 		}
 
@@ -56,7 +52,7 @@ function scr_battle_trigger_damage_traps(_ref_target,_val_damage_received){
 			continue;
 		}
 
-		if (_ref_trap._scr_trap_callback == undefined){
+		if (!is_callable(_ref_trap._scr_trap_callback)){
 			continue;
 		}
 

@@ -50,7 +50,7 @@ if (mouse_check_button_pressed(mb_left)){
 	//----------------//
 	if (instance_exists(_ref_parent_gui)){
 		_ref_parent_gui._flag_prompt_active = false;
-		_ref_parent_gui.hscr_start_input_lockout();
+		_ref_parent_gui.hscr_gui_inventory_start_input_lockout();
 	}
 
 	instance_destroy();

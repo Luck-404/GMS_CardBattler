@@ -1,18 +1,18 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DEBUFF_ARMORBREAK
-// FUNCTION: Handles the Armorbreak Debuff.
-//           Unstackable Timed.
-//           Breaks 20% of current Armor whenever applied or refreshed.
-//           Reduces all Armor gained by the host by 50% while active.
+// FUNCTION: Applies or refreshes the unstackable timed Armorbreak Debuff.
+//           Destroys floor(20% current Armor) on application and halves
+//           subsequent Armor gains; preserves status lifetime and feedback.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Status, and _val_lifetime optionally sets its duration.
-// RETURNS: The active Armorbreak Status on APPLY; otherwise undefined.
+// ARGUMENTS: _str_tag - APPLY, REPEAT or DEATH.
+//            _ref_status - stored status for non-APPLY commands.
+//            _val_lifetime - optional existing lifetime; _ref_target - APPLY host.
+// RETURNS: APPLY returns status reference or undefined; other tags no value.
 //
 //===============================================================================//
 
-function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -21,7 +21,6 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -44,13 +43,10 @@ function scr_status_debuff_armorbreak(_str_tag,_ref_status,_val_lifetime=undefin
 			//BREAK 20% ARMOR//
 			//================//
 			var _val_armor_break = floor(_ref_target._val_armor * 0.20);
+			var _stct_armor_result = scr_battle_destroy_armor(_ref_target,_val_armor_break);
+			_val_armor_break = _stct_armor_result._val_armor_removed;
 
 			if (_val_armor_break > 0){
-
-				_ref_target._val_armor = max(
-					0,
-					_ref_target._val_armor - _val_armor_break
-				);
 
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",

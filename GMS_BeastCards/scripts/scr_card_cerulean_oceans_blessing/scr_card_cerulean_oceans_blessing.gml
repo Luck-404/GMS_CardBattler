@@ -36,9 +36,10 @@ function scr_card_cerulean_oceans_blessing(_stct_card,_ref_caster,_ref_target){
 			continue;
 		}
 
-		scr_battle_heal_target(
-			_stct_card._val_card_magnitude,
-			_ref_beast
-		);
+	scr_battle_heal_target(
+		"FIXED",
+		_stct_card._val_card_magnitude,
+		_ref_beast
+	);
 	}
 }

@@ -7,18 +7,12 @@
 //
 // ARGUMENTS: _stct_card is the Deepflow Whispersong card struct.
 //            _ref_caster and _ref_target are the casting and targeted Beasts.
+//            _ref_caster and _ref_target are the casting and targeted Beasts.
 // RETURNS: True if resolution completes; false if the target/team is invalid.
 //
 //===============================================================================//
 
 function scr_card_cerulean_deepflow_whispersong(_stct_card,_ref_caster,_ref_target){
-
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return false;
-	}
 
 	//===================//
 	//GET SELECTED TEAM//

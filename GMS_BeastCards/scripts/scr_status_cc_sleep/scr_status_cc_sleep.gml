@@ -8,14 +8,16 @@
 //           Each lifetime tick has a 25% + CON-based chance to wake early.
 //           Taking damage removes Sleep through the damage-resolution system.
 //
-// ARGUMENTS: _str_tag selects the Status action, _ref_status references an
-//            existing Sleep Status, and _val_lifetime optionally sets duration.
-// RETURNS: The active Sleep Status on APPLY, true on an early wake, otherwise
-//          undefined.
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_lifetime=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -24,7 +26,6 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;

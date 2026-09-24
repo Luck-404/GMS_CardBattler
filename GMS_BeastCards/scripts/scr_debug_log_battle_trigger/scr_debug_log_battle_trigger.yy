@@ -6,7 +6,7 @@
   "name":"scr_debug_log_battle_trigger",
   "parent":{
     "name":"TERMINAL AND LOGFILES",
-    "path":"folders/CORE/TERMINAL AND LOGFILES.yy",
+    "path":"folders/NPCS/TERMINAL AND LOGFILES.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

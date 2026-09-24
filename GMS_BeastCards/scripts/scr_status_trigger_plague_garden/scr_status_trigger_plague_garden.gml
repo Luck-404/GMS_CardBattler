@@ -61,15 +61,20 @@ function scr_status_trigger_plague_garden(_ref_target,_str_dot_name){
 		return false;
 	}
 
+
 	//==================//
 	//SUMMON SPORELING//
 	//==================//
-	scr_minion_init(
+	var _ref_sporeling = scr_minion_init(
 		"SPORELING",
 		undefined,
 		undefined,
 		_ref_target
 	);
+
+	if (!instance_exists(_ref_sporeling)){
+		return false;
+	}
 
 	//==========//
 	//FEEDBACK//

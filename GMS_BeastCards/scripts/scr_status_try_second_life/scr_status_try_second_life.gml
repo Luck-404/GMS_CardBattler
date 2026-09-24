@@ -2,7 +2,11 @@
 //
 // SCRIPT: SCR_STATUS_TRY_SECOND_LIFE
 // FUNCTION: Checks whether a defeated Beast has an active death-prevention Buff.
-//           Last Stand takes priority over Second Life.
+//           Priority:
+//           1. Last Stand
+//           2. Phoenix Rebirth
+//           3. Second Life
+//
 //           Returns whether normal death handling should be cancelled.
 //
 //===============================================================================//
@@ -19,7 +23,10 @@ function scr_status_try_second_life(_ref_beast){
 	//================//
 	//TRY LAST STAND//
 	//================//
-	var _ref_last_stand = scr_status_check("LAST_STAND",_ref_beast);
+	var _ref_last_stand = scr_status_check(
+		"LAST_STAND",
+		_ref_beast
+	);
 
 	if (
 		_ref_last_stand != -1 &&
@@ -32,10 +39,32 @@ function scr_status_try_second_life(_ref_beast){
 		);
 	}
 
+	//=====================//
+	//TRY PHOENIX REBIRTH//
+	//=====================//
+	var _ref_phoenix_rebirth = scr_status_check(
+		"PHOENIX_REBIRTH",
+		_ref_beast
+	);
+
+	if (
+		_ref_phoenix_rebirth != -1 &&
+		instance_exists(_ref_phoenix_rebirth)
+	){
+
+		return scr_status_buff_phoenix_rebirth(
+			"TRIGGER",
+			_ref_phoenix_rebirth
+		);
+	}
+
 	//===================//
 	//TRY SECOND LIFE//
 	//===================//
-	var _ref_second_life = scr_status_check("SECOND_LIFE",_ref_beast);
+	var _ref_second_life = scr_status_check(
+		"SECOND_LIFE",
+		_ref_beast
+	);
 
 	if (
 		_ref_second_life == -1 ||

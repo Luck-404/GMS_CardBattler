@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_card_vermilion_cauterized_wound",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_card_vermilion_cauterized_wound",
+  "parent":{
+    "name":"CAUTERIZED_WOUND",
+    "path":"folders/CARDS/VERMILION/CAUTERIZED_WOUND.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

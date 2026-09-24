@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_debuff_molten_brand",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_debuff_molten_brand",
+  "parent":{
+    "name":"MOLTEN_BRAND",
+    "path":"folders/BATTLE/STATUSES/DEBUFF/VERMILION/MOLTEN_BRAND.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -98,11 +98,7 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 			_ref_new_status._str_status_type = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: HEATWAVE";
 
-			_ref_new_status._str_status_desc =
-				"VERMILION DAMAGE +25%. " +
-				"BURN DEALS 1 ADDITIONAL DAMAGE PER STACK. " +
-				"CHAR THRESHOLD -1. " +
-				"LIFETIME: 5 ROUNDS.";
+			_ref_new_status._str_status_desc = "Weather. Vermilion damage is increased by 25%. Burn deals 1 additional damage per stack. Reduce the Char threshold by 1. Lifetime: 5 rounds.";
 
 			_ref_new_status._spr_status = spr_status_weather_heatwave;
 

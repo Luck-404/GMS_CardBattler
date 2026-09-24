@@ -55,8 +55,8 @@ if (distance_to_object(obj_player) < 48 && !global.flag_pause){
 				obj_gui_ranch_pane
 			);
 
-			obj_gui_controller.hscr_destroy_gui_open();
-			obj_gui_controller.hscr_toggle_gui_pause(true);
+			obj_gui_controller.hscr_gui_destroy_active();
+			obj_gui_controller.hscr_gui_set_pause(true,"RANCH");
 
 			global.ref_active_gui = _ref_ranch_gui;
 		}

@@ -6,7 +6,7 @@
   "name":"scr_status_buff_regeneration",
   "parent":{
     "name":"REGENERATION",
-    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REDIRECT_GUARD/REGENERATION.yy",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/REGENERATION.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

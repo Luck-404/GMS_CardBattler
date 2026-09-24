@@ -120,18 +120,46 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 	//================================//
 	switch (_str_dot_name){
 
+
 		//===========//
 		//FROSTBITE//
 		//===========//
 		case "FROSTBITE":
 
-			var _val_hp_restore = max(0,_ref_dot._val_frostbite_max_hp_reduction);
+			//------------------//
+			//RESTORE MAXIMUM HP//
+			//------------------//
+			var _val_hp_restore = max(
+				0,
+				_ref_dot._val_frostbite_max_hp_reduction
+			);
 
 			_ref_source._val_max_hp += _val_hp_restore;
 			_ref_source._val_max_hp = max(1,_ref_source._val_max_hp);
-			_ref_source._val_cur_hp = min(_ref_source._val_cur_hp,_ref_source._val_max_hp);
 
+			_ref_source._val_cur_hp = min(
+				_ref_source._val_cur_hp,
+				_ref_source._val_max_hp
+			);
+
+			//----------------------//
+			//RESTORE DEFENSE STATS//
+			//----------------------//
+			if (is_struct(_ref_source._ref_unit)){
+
+				_ref_source._ref_unit._val_beast_pdef_stat +=
+					_ref_dot._val_frostbite_pdef_reduction;
+
+				_ref_source._ref_unit._val_beast_mdef_stat +=
+					_ref_dot._val_frostbite_mdef_reduction;
+			}
+
+			//------------------//
+			//CLEAR REDUCTIONS//
+			//------------------//
 			_ref_dot._val_frostbite_max_hp_reduction = 0;
+			_ref_dot._val_frostbite_pdef_reduction = 0;
+			_ref_dot._val_frostbite_mdef_reduction = 0;
 
 		break;
 
@@ -195,11 +223,15 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 		//================================//
 		switch (_str_dot_name){
 
+
 			//===========//
 			//FROSTBITE//
 			//===========//
 			case "FROSTBITE":
 
+				//------------------//
+				//REDUCE MAXIMUM HP//
+				//------------------//
 				var _val_hp_reduction = min(
 					_ct_stacks,
 					max(0,_ref_target._val_max_hp - 1)
@@ -208,12 +240,47 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 				if (_val_hp_reduction > 0){
 
 					_ref_target._val_max_hp -= _val_hp_reduction;
-					_ref_target_dot._val_frostbite_max_hp_reduction += _val_hp_reduction;
+
+					_ref_target_dot._val_frostbite_max_hp_reduction +=
+						_val_hp_reduction;
 
 					_ref_target._val_cur_hp = min(
 						_ref_target._val_cur_hp,
 						_ref_target._val_max_hp
 					);
+				}
+
+				//----------------------//
+				//REDUCE DEFENSE STATS//
+				//----------------------//
+				if (is_struct(_ref_target._ref_unit)){
+
+					var _val_frostbite_old_pdef =
+						_ref_target._ref_unit._val_beast_pdef_stat;
+
+					var _val_frostbite_old_mdef =
+						_ref_target._ref_unit._val_beast_mdef_stat;
+
+					_ref_target._ref_unit._val_beast_pdef_stat = max(
+						0,
+						_val_frostbite_old_pdef - _ct_stacks
+					);
+
+					_ref_target._ref_unit._val_beast_mdef_stat = max(
+						0,
+						_val_frostbite_old_mdef - _ct_stacks
+					);
+
+					//-------------------------//
+					//TRACK ACTUAL REDUCTIONS//
+					//-------------------------//
+					_ref_target_dot._val_frostbite_pdef_reduction +=
+						_val_frostbite_old_pdef -
+						_ref_target._ref_unit._val_beast_pdef_stat;
+
+					_ref_target_dot._val_frostbite_mdef_reduction +=
+						_val_frostbite_old_mdef -
+						_ref_target._ref_unit._val_beast_mdef_stat;
 				}
 
 			break;
@@ -225,7 +292,7 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 
 				if (is_struct(_ref_target._ref_unit)){
 
-					var _val_stat_reduction = _ct_stacks * 2;
+					var _val_stat_reduction = _ct_stacks * 4;
 
 					var _val_old_ppow = _ref_target._ref_unit._val_beast_ppow_stat;
 					var _val_old_mpow = _ref_target._ref_unit._val_beast_mpow_stat;
@@ -251,9 +318,13 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 			case "FROSTBURN":
 
 				_ref_target_dot._str_status_desc =
-					"DEALS " +
-					string(_ref_target_dot._ct_status_stacks * 2) +
-					" NEU DMG EACH ROUND; REMOVES 1 BUFF";
+					"START: DESTROY UP TO 3 ARMOR, DEAL " +
+					string(
+						_ref_target_dot._ct_status_stacks *
+						_ref_target_dot._val_status_magnitude
+					) +
+					" NEU DAMAGE, THEN REMOVE THE OLDEST " +
+					"CLEANSABLE POSITIVE EFFECT";
 
 			break;
 		}
@@ -281,11 +352,15 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 		//================================//
 		switch (_str_dot_name){
 
+
 			//===========//
 			//FROSTBITE//
 			//===========//
 			case "FROSTBITE":
 
+				//------------------//
+				//REDUCE MAXIMUM HP//
+				//------------------//
 				var _val_hp_reduction = min(
 					_ct_stacks,
 					max(0,_ref_target._val_max_hp - 1)
@@ -293,9 +368,50 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 
 				_ref_target._val_max_hp -= _val_hp_reduction;
 				_ref_target._val_max_hp = max(1,_ref_target._val_max_hp);
-				_ref_target._val_cur_hp = min(_ref_target._val_cur_hp,_ref_target._val_max_hp);
 
-				_ref_dot._val_frostbite_max_hp_reduction = _val_hp_reduction;
+				_ref_target._val_cur_hp = min(
+					_ref_target._val_cur_hp,
+					_ref_target._val_max_hp
+				);
+
+				_ref_dot._val_frostbite_max_hp_reduction =
+					_val_hp_reduction;
+
+				//----------------------//
+				//REDUCE DEFENSE STATS//
+				//----------------------//
+				_ref_dot._val_frostbite_pdef_reduction = 0;
+				_ref_dot._val_frostbite_mdef_reduction = 0;
+
+				if (is_struct(_ref_target._ref_unit)){
+
+					var _val_frostbite_old_pdef =
+						_ref_target._ref_unit._val_beast_pdef_stat;
+
+					var _val_frostbite_old_mdef =
+						_ref_target._ref_unit._val_beast_mdef_stat;
+
+					_ref_target._ref_unit._val_beast_pdef_stat = max(
+						0,
+						_val_frostbite_old_pdef - _ct_stacks
+					);
+
+					_ref_target._ref_unit._val_beast_mdef_stat = max(
+						0,
+						_val_frostbite_old_mdef - _ct_stacks
+					);
+
+					//-------------------------//
+					//TRACK ACTUAL REDUCTIONS//
+					//-------------------------//
+					_ref_dot._val_frostbite_pdef_reduction =
+						_val_frostbite_old_pdef -
+						_ref_target._ref_unit._val_beast_pdef_stat;
+
+					_ref_dot._val_frostbite_mdef_reduction =
+						_val_frostbite_old_mdef -
+						_ref_target._ref_unit._val_beast_mdef_stat;
+				}
 
 			break;
 
@@ -306,7 +422,7 @@ function scr_status_transfer_oldest_dot(_ref_source,_ref_target){
 
 				if (is_struct(_ref_target._ref_unit)){
 
-					var _val_stat_reduction = _ct_stacks * 2;
+					var _val_stat_reduction = _ct_stacks * 4;
 
 					var _val_old_ppow = _ref_target._ref_unit._val_beast_ppow_stat;
 					var _val_old_mpow = _ref_target._ref_unit._val_beast_mpow_stat;

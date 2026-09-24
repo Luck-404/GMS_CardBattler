@@ -9,7 +9,7 @@
 // ARGUMENTS: _str_tag selects the Trap action, _ref_trap is the Trap instance,
 //            _ref_attacker is the trapped Beast performing the Attack,
 //            _ref_target is unused, and _stct_card is the triggering Attack.
-// RETURNS: True when Thorn Net triggers and cancels the Attack; otherwise false.
+// RETURNS: True when the trap successfully triggers; false otherwise.
 //
 //===============================================================================//
 
@@ -101,7 +101,6 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//STORE GLOBAL CONTEXT//
 			//======================//
 			var _ref_original_caster = global.ref_caster_beast;
-			var _ref_original_target = global.ref_target_beast;
 			var _ref_original_card = global.ref_cast_card;
 			var _str_original_stat = _stct_source_card._str_card_stat;
 
@@ -109,7 +108,6 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//SET TRAP CONTEXT//
 			//==================//
 			global.ref_caster_beast = _ref_trap_owner;
-			global.ref_target_beast = _ref_attacker;
 			global.ref_cast_card = _ref_source_card;
 
 			_stct_source_card._str_card_stat = "NEU";
@@ -118,8 +116,11 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//DEAL DAMAGE//
 			//================//
 			scr_battle_damage_target(
+				"LINEAR",
+				_ref_trap_owner,
+				_ref_attacker,
 				_val_magnitude,
-				_ref_attacker
+				{card: _stct_source_card, card_instance: _ref_source_card}
 			);
 
 			//==================//
@@ -131,9 +132,8 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 				_ref_attacker._val_cur_hp > 0
 			){
 
-				global.ref_target_beast = _ref_attacker;
 
-				scr_status_apply_debuff("VULNERABLE");
+				scr_status_apply_debuff("VULNERABLE", _ref_attacker);
 			}
 
 			//====================//
@@ -145,7 +145,6 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//RESTORE GLOBAL CONTEXT//
 			//========================//
 			global.ref_caster_beast = _ref_original_caster;
-			global.ref_target_beast = _ref_original_target;
 			global.ref_cast_card = _ref_original_card;
 
 			//================//

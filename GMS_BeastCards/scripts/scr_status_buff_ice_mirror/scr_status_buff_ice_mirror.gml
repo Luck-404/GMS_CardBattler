@@ -1,15 +1,23 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_ICE_MIRROR
 // FUNCTION: Handles Ice Mirror.
-//           Unstackable Timed Buff.
+//           Unstackable Timed Buff with exactly 1 Status stack.
+//           Lifetime decrements at START.
 //           Successful enemy Attack damage to the host grants Armor.
 //           Trigger resolution is handled by scr_status_trigger_ice_mirror.
-//           Reapplication refreshes duration and magnitude.
+//           Reapplication refreshes duration and magnitude without stacking.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            _val_magnitude and _val_lifetime retain their original positions.
+//            _ref_target is the explicit host ONLY for APPLY.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
 
-function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined){
+function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefined,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -18,8 +26,9 @@ function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefine
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
-
+			//================//
+			//VALIDATE TARGET//
+			//================//
 			if (!instance_exists(_ref_target)){
 				return undefined;
 			}
@@ -28,9 +37,9 @@ function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefine
 				return undefined;
 			}
 
-			//----------//
+			//==========//
 			//DEFAULTS//
-			//----------//
+			//==========//
 			if (_val_magnitude == undefined){
 				_val_magnitude = 2;
 			}
@@ -42,30 +51,68 @@ function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefine
 			_val_magnitude = max(0,_val_magnitude);
 			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
+			//================//
 			//CHECK EXISTING//
-			//----------------//
-			var _ref_existing_status = scr_status_check("ICE_MIRROR",_ref_target);
+			//================//
+			var _ref_existing_status = scr_status_check(
+				"ICE_MIRROR",
+				_ref_target
+			);
 
-			//------------------//
+			//==================//
 			//REFRESH EXISTING//
-			//------------------//
+			//==================//
 			if (_ref_existing_status != -1){
 
-				_ref_existing_status._val_status_magnitude = _val_magnitude;
-				_ref_existing_status._str_status_desc = "WHEN STRUCK, GAIN " + string(_val_magnitude) + " ARMOR";
+				if (!instance_exists(_ref_existing_status)){
+					return undefined;
+				}
 
+				//==================//
+				//MAINTAIN ONE STACK//
+				//==================//
+				_ref_existing_status._ct_status_stacks = 1;
+
+				//================//
+				//UPDATE MAGNITUDE//
+				//================//
+				_ref_existing_status._val_status_magnitude = _val_magnitude;
+
+				_ref_existing_status._str_status_desc =
+					"WHEN STRUCK, GAIN " +
+					string(_val_magnitude) +
+					" ARMOR";
+
+				//================//
+				//REFRESH LIFETIME//
+				//================//
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
+				//=======================//
+				//ENSURE PERSISTENT VFX//
+				//=======================//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+						_ref_target,
+						spr_battle_vfx_thorns,
+						0,
+						-65,
+						1
+					);
+				}
+
+				scr_status_reposition(_ref_target);
+
 				return _ref_existing_status;
 			}
 
-			//---------------//
+			//===============//
 			//CREATE STATUS//
-			//---------------//
+			//===============//
 			var _ref_new_status = instance_create_layer(
 				_ref_target.x,
 				_ref_target.y,
@@ -73,45 +120,65 @@ function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefine
 				obj_battle_status
 			);
 
-			//---------------------//
-			//INITIALIZE LIFETIME//
-			//---------------------//
+			//================================//
+			//UNSTACKABLE TIMED INITIALIZATION//
+			//================================//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
-				true,
+				false,
 				false
 			);
 
-			//-------------//
+			//=============//
 			//STATUS DATA//
-			//-------------//
+			//=============//
 			_ref_new_status._scr_status = scr_status_buff_ice_mirror;
 
 			_ref_new_status._ref_host = _ref_target;
 
 			_ref_new_status._str_status_type = "BUFF";
 			_ref_new_status._str_status_name = "ICE_MIRROR";
-			_ref_new_status._str_status_desc = "WHEN STRUCK, GAIN " + string(_val_magnitude) + " ARMOR";
+
+			_ref_new_status._str_status_desc =
+				"WHEN STRUCK, GAIN " +
+				string(_val_magnitude) +
+				" ARMOR";
 
 			_ref_new_status._spr_status = spr_status_buff_ice_mirror;
 
+			//==================//
+			//ONE STATUS STACK//
+			//==================//
 			_ref_new_status._ct_status_stacks = 1;
+
 			_ref_new_status._val_status_magnitude = _val_magnitude;
 
-			_ref_new_status._flag_status_stackable = false;
+			//================//
+			//START DECREMENT//
+			//================//
+			_ref_new_status._str_trigger_region = "START";
 
-			_ref_new_status._str_trigger_region = "END";
-
-			//----------------//
+			//================//
 			//REGISTER STATUS//
-			//----------------//
+			//================//
 			ds_list_add(
 				_ref_target._list_statuses,
 				_ref_new_status
 			);
 
 			scr_status_reposition(_ref_target);
+
+			//================//
+			//PERSISTENT VFX//
+			//================//
+			_ref_new_status._ref_persistent_vfx = scr_battle_vfx_persistent(
+				_ref_target,
+				spr_battle_vfx_thorns,
+				0,
+				-65,
+				1
+			);
 
 			return _ref_new_status;
 
@@ -135,7 +202,11 @@ function scr_status_buff_ice_mirror(_str_tag,_ref_status,_val_magnitude=undefine
 				return undefined;
 			}
 
+			//================//
+			//UPDATE LIFETIME//
+			//================//
 			scr_status_tick_lifetime(_ref_status);
+
 			scr_status_reposition(_ref_host);
 
 		break;

@@ -1,13 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_SHARED_BULWARK
-// FUNCTION: Resolves Shared Bulwark.
-//           Redistributes the caster's current Armor evenly among all living
-//           allied Beasts while preserving the exact transferred Armor total.
+// FUNCTION: Redistributes the caster's existing Armor among the original
+//           living-allied-team snapshot. Preserves integer shares, list order,
+//           remainder assignment and caster participation without grant triggers.
 //
-// ARGUMENTS: _stct_card is the Shared Bulwark card struct.
-//            _ref_caster and _ref_target are the casting and targeted Beasts.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card - Shared Bulwark card struct (unused for quantity).
+//            _ref_caster - source Beast; _ref_target - unused team selection.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -60,11 +60,6 @@ function scr_card_cerulean_shared_bulwark(_stct_card,_ref_caster,_ref_target){
 		return;
 	}
 
-	//======================//
-	//REMOVE CASTER'S ARMOR//
-	//======================//
-	_ref_caster._val_armor = 0;
-
 	//===================//
 	//CALCULATE SHARES//
 	//===================//
@@ -83,6 +78,9 @@ function scr_card_cerulean_shared_bulwark(_stct_card,_ref_caster,_ref_target){
 			_val_share++;
 		}
 
-		_ref_ally._val_armor += _val_share;
+		// Retain the caster's own share; each other share is an actual transfer.
+		if (_ref_ally != _ref_caster && _val_share > 0){
+			scr_battle_transfer_armor(_ref_caster,_ref_ally,_val_share);
+		}
 	}
 }

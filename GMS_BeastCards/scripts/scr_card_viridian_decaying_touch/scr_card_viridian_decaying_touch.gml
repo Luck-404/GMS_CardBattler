@@ -7,18 +7,11 @@
 //
 // ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
 //            _ref_target is the selected target.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
 function scr_card_viridian_decaying_touch(_stct_card,_ref_caster,_ref_target){
-
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return;
-	}
 
 	//================//
 	//BASE DURATION//
@@ -37,5 +30,5 @@ function scr_card_viridian_decaying_touch(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY WITHER//
 	//================//
-	scr_status_apply_debuff("WITHER",_ct_wither_lifetime);
+	scr_status_apply_debuff("WITHER", _ref_target, _ct_wither_lifetime);
 }

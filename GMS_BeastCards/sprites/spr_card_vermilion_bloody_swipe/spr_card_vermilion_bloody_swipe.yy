@@ -28,7 +28,7 @@
   "origin":4,
   "parent":{
     "name":"BLOODY_SWIPE",
-    "path":"folders/CARDS/VERMILION/BLOODLUST_LUNGE/BLOODY_SWIPE.yy",
+    "path":"folders/CARDS/VERMILION/BLOODY_SWIPE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

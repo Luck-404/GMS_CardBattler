@@ -13,13 +13,6 @@
 
 function scr_card_viridian_cultivate(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE TARGET//
-	//================//
-	if (!instance_exists(_ref_target)){
-		return false;
-	}
-
 	if (!ds_exists(_ref_target._list_minions,ds_type_list)){
 		return false;
 	}

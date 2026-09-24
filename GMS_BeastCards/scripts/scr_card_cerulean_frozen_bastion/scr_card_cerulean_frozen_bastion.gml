@@ -12,13 +12,6 @@
 
 function scr_card_cerulean_frozen_bastion(_stct_card,_ref_caster,_ref_target){
 
-	//================//
-	//VALIDATE CASTER//
-	//================//
-	if (!instance_exists(_ref_caster)){
-		return;
-	}
-
 	//=================//
 	//GET CURRENT ARMOR//
 	//=================//
@@ -32,6 +25,7 @@ function scr_card_cerulean_frozen_bastion(_stct_card,_ref_caster,_ref_target){
 	//DOUBLE ARMOR//
 	//================//
 	scr_battle_armor_target(
+		"FIXED",
 		_val_armor_gain,
 		_ref_caster
 	);

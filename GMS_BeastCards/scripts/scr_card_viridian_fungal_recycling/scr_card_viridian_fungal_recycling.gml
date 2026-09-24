@@ -1,37 +1,23 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_VIRIDIAN_FUNGAL_RECYCLING
-// FUNCTION: Resolves Fungal Recycling.
-//           Sacrifices the selected corpse when available.
-//           Otherwise causes the caster to lose 10 HP.
-//           Returns a random exhausted Viridian card to the draw pile.
+// FUNCTION: Sacrifices the selected corpse when valid; otherwise sacrifices
+//           10 caster HP. Then recovers a random exhausted Viridian Card.
 //
-// ARGUMENTS: _stct_card is the card struct. _ref_caster is the casting Beast.
-//            _ref_target is the selected corpse.
-// RETURNS: Nothing.
+// ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
+//            _ref_target is the selected corpse or undefined.
+// RETURNS: No value.
 //
 //===============================================================================//
-
 function scr_card_viridian_fungal_recycling(_stct_card,_ref_caster,_ref_target){
 
 	//===================//
 	//PAY SACRIFICE COST//
 	//===================//
-	var _flag_sacrificed = scr_battle_sacrifice_corpse(_ref_target);
+	var _stct_sacrifice = scr_battle_sacrifice("CORPSE",_ref_target);
 
-	if (!_flag_sacrificed){
-
-		_ref_caster._val_cur_hp -= 10;
-		_ref_caster._val_cur_hp = max(0,_ref_caster._val_cur_hp);
-
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"-10 HP",
-			undefined,
-			c_red,
-			_ref_caster.x,
-			_ref_caster.y - 48
-		);
+	if (!_stct_sacrifice._flag_success){
+		scr_battle_sacrifice("HOST_HEALTH",_ref_caster,10);
 	}
 
 	//======================//

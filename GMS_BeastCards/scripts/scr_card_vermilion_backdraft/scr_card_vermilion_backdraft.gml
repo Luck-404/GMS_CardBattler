@@ -8,7 +8,7 @@
 //
 // ARGUMENTS: _stct_card is the Card struct. _ref_caster is the casting Beast.
 //            _ref_target is the caster for this Self-target Card.
-// RETURNS: Nothing.
+// RETURNS: No value.
 //
 //===============================================================================//
 
@@ -17,5 +17,5 @@ function scr_card_vermilion_backdraft(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GAIN BACKDRAFT//
 	//================//
-	scr_status_apply_buff("BACKDRAFT",_stct_card._val_card_magnitude);
+	scr_status_apply_buff("BACKDRAFT", _ref_target, _stct_card._val_card_magnitude);
 }

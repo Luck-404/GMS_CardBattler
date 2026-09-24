@@ -7,9 +7,16 @@
 //           Healing effects splash 25% of their attempted healing amount
 //           to adjacent allied Beasts without retriggering healing Auras.
 //
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
+//            _ref_status is the existing Status instance for non-APPLY commands.
+//            Original optional args, unchanged: _val_magnitude=undefined, _val_trigger_amount=undefined.
+//            _ref_target is the explicit host ONLY for APPLY. Other commands
+//            use their existing arguments and the stored Status host.
+// RETURNS: Command-specific Status reference, trigger result or undefined.
+//
 //===============================================================================//
 
-function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=undefined,_val_trigger_amount=undefined){
+function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=undefined,_val_trigger_amount=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -18,7 +25,6 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 		//=======//
 		case "APPLY":
 
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;
@@ -174,6 +180,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 
 				if (
 					scr_battle_heal_target(
+						"FIXED",
 						_val_splash_heal,
 						_ref_left_target,
 						false
@@ -194,6 +201,7 @@ function scr_status_aura_burgeoning_bloom(_str_tag,_ref_status,_val_magnitude=un
 
 				if (
 					scr_battle_heal_target(
+						"FIXED",
 						_val_splash_heal,
 						_ref_right_target,
 						false
