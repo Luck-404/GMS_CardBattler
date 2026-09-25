@@ -23,15 +23,19 @@ if (room != rm_battle){
 	//================//
 	if (global.flag_pause){
 
-		draw_set_colour(c_white);
-		draw_set_font(fnt_gui_large);
+	    draw_set_colour(c_white);
+	    draw_set_font(fnt_gui_large);
+	    draw_set_halign(fa_right);
+	    draw_set_valign(fa_bottom);
 
-		draw_text(
-			(_val_gui_width * 0.5) -
-				(string_width("GAME PAUSED") * 0.5),
-			(_val_gui_height * 0.125) - 100,
-			"GAME PAUSED"
-		);
+	    draw_text(
+	        _val_gui_width - 15,
+	        _val_gui_height - 15,
+	        "GAME PAUSED"
+	    );
+
+	    draw_set_halign(fa_left);
+	    draw_set_valign(fa_top);
 	}
 
 	//================//

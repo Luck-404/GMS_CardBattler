@@ -9,4 +9,4 @@
 //================//
 //UPDATE DEPTH//
 //================//
-depth = -bbox_bottom + 10;
+depth = -bbox_bottom;

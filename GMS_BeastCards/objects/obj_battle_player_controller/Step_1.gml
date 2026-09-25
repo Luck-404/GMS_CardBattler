@@ -6,12 +6,29 @@
 //
 //===============================================================================//
 
-if (!variable_instance_exists(id,"_ref_hover_card")){
-    _ref_hover_card = undefined;
-}
+//================//
+//CHEATS GUI LOCK//
+//================//
+if (
+    instance_exists(global.ref_active_gui) &&
+    variable_instance_exists(global.ref_active_gui,"_str_type") &&
+    global.ref_active_gui._str_type == "CHEATS"
+){
 
-if (instance_exists(obj_gui_end_battle_pane)){
-    _ref_hover_card = undefined;
+    if (
+        global.ref_active_gui._str_state == "TOOL" &&
+        (
+            global.ref_active_gui._str_tool == "DISCARD_CARD" ||
+            global.ref_active_gui._str_tool == "EXHAUST_CARD"
+        )
+    ){
+        _ref_hover_card =
+            scr_battle_get_hovered_hand_card();
+    }
+    else{
+        _ref_hover_card = undefined;
+    }
+
     exit;
 }
 

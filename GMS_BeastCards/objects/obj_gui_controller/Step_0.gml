@@ -164,6 +164,146 @@ if (keyboard_check_pressed(ord("F"))){
 #endregion
 
 //================//
+//CHEATS INPUT//
+//================//
+#region CHEATS INPUT
+
+//----------------//
+//INPUT STATE//
+//----------------//
+var _flag_cheats_open = false;
+
+if (
+    instance_exists(global.ref_active_gui) &&
+    variable_instance_exists(global.ref_active_gui,"_str_type")
+){
+    _flag_cheats_open =
+        global.ref_active_gui._str_type == "CHEATS";
+}
+
+//----------------//
+//HOTKEYS//
+//----------------//
+var _flag_cheats_tilde =
+    keyboard_check_pressed(192);
+
+var _flag_cheats_bypass =
+    keyboard_check(vk_control) &&
+    _flag_cheats_tilde;
+
+var _flag_cheats_normal =
+    _flag_cheats_tilde &&
+    !keyboard_check(vk_control);
+
+//================//
+//CLOSE CHEATS//
+//================//
+if (
+    _flag_cheats_open &&
+    (_flag_cheats_tilde || _flag_cheats_bypass)
+){
+
+    audio_play_sound(
+        snd_gui_close,
+        0,
+        false
+    );
+
+    hscr_gui_destroy_active("CHEATS HOTKEY");
+    hscr_gui_set_pause(false,"CHEATS HOTKEY");
+
+    scr_debug_log(
+        "GUI",
+        "CHEATS",
+        self,
+        "CHEATS MENU CLOSED" +
+        " | SOURCE: " +
+        (_flag_cheats_bypass ? "CTRL+C" : "TILDE"),
+        "INFO",
+        "OBJ_GUI_CONTROLLER:STEP"
+    );
+
+    exit;
+}
+
+//================//
+//OPEN CHEATS//
+//================//
+if (
+    !_flag_cheats_open &&
+    (_flag_cheats_normal || _flag_cheats_bypass)
+){
+
+//----------------//
+//CLOSE OTHER GUI//
+//----------------//
+    if (instance_exists(global.ref_active_gui)){
+
+        hscr_gui_destroy_active(
+            _flag_cheats_bypass
+                ? "CTRL+C"
+                : "TILDE"
+        );
+    }
+
+//----------------//
+//PAUSE GAME//
+//----------------//
+    hscr_gui_set_pause(
+        true,
+        _flag_cheats_bypass
+            ? "CTRL+C"
+            : "TILDE"
+    );
+
+//----------------//
+//CREATE CHEATS//
+//----------------//
+    global.ref_active_gui = instance_create_layer(
+        display_get_gui_width() * 0.5,
+        display_get_gui_height() * 0.5,
+        "ily_fx",
+        obj_gui_cheats_pane
+    );
+
+//----------------//
+//BYPASS AUTH//
+//----------------//
+    if (
+        _flag_cheats_bypass &&
+        instance_exists(global.ref_active_gui)
+    ){
+        global.ref_active_gui._flag_authenticated = true;
+        global.ref_active_gui._flag_password_entry = false;
+        global.ref_active_gui._flag_open_authenticated = true;
+
+        keyboard_string = "";
+    }
+
+//----------------//
+//DEBUG OPEN//
+//----------------//
+    scr_debug_log(
+        "GUI",
+        "CHEATS",
+        self,
+        "CHEATS MENU OPENED" +
+        " | MODE: " +
+        ((room == rm_battle) ? "BATTLE" : "OVERWORLD") +
+        " | SOURCE: " +
+        (_flag_cheats_bypass ? "CTRL+TILDE" : "TILDE") +
+        " | AUTHENTICATION: " +
+        (_flag_cheats_bypass ? "BYPASSED" : "REQUIRED"),
+        "INFO",
+        "OBJ_GUI_CONTROLLER:STEP"
+    );
+
+    exit;
+}
+
+#endregion
+
+//================//
 //ESC INPUT//
 //================//
 #region ESC INPUT
@@ -675,94 +815,175 @@ if (room != rm_battle){
 		}
 	}
 
-	//=====================//
-	//RANCH CLICK TO SHAKE//
-	//=====================//
-	if (room == rm_ow_ranch){
+//=====================//
+//RANCH CLICK TO SHAKE//
+//=====================//
+// Ranch Beasts must not accept world interaction while any GUI is active.
+// This specifically prevents click-through while using the Cheats menu.
+if (
+    room == rm_ow_ranch &&
+    !instance_exists(
+        global.ref_active_gui
+    )
+){
 
-		if (
-			position_meeting(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_ranch_beast_dummy
-			) &&
-			mouse_check_button_pressed(mb_left)
-		){
+    if (
+        position_meeting(
+            device_mouse_x_to_gui(0),
+            device_mouse_y_to_gui(0),
+            obj_ranch_beast_dummy
+        ) &&
+        mouse_check_button_pressed(
+            mb_left
+        )
+    ){
 
-			var _ref_beast = instance_nearest(
-				device_mouse_x_to_gui(0),
-				device_mouse_y_to_gui(0),
-				obj_ranch_beast_dummy
-			);
+        var _ref_beast =
+            instance_nearest(
+                device_mouse_x_to_gui(0),
+                device_mouse_y_to_gui(0),
+                obj_ranch_beast_dummy
+            );
 
-			if (
-				instance_exists(_ref_beast) &&
-				_ref_beast._state_dummy != ENUM_RANCH_BEAST_DUMMY_STATE.REST
-			){
+        if (
+            instance_exists(
+                _ref_beast
+            ) &&
+            _ref_beast._state_dummy !=
+                ENUM_RANCH_BEAST_DUMMY_STATE.REST
+        ){
 
-				audio_play_sound(
-					_ref_beast._snd_cry,
-					0,
-					false
-				);
+            audio_play_sound(
+                _ref_beast._snd_cry,
+                0,
+                false
+            );
 
-				_ref_beast._spr_emoji = choose(
-					spr_ranch_beast_happy,
-					spr_ranch_beast_love,
-					spr_ranch_beast_excited
-				);
+            _ref_beast._spr_emoji =
+                choose(
+                    spr_ranch_beast_happy,
+                    spr_ranch_beast_love,
+                    spr_ranch_beast_excited
+                );
 
-				_ref_beast._ct_emoji_timer = irandom_range(
-					60,
-					120
-				);
+            _ref_beast._ct_emoji_timer =
+                irandom_range(
+                    60,
+                    120
+                );
 
-				_ref_beast._state_dummy =
-					ENUM_RANCH_BEAST_DUMMY_STATE.SHAKE;
-			}
-		}
+            _ref_beast._state_dummy =
+                ENUM_RANCH_BEAST_DUMMY_STATE.SHAKE;
+        }
+    }
+}
+
+//==================//
+//CAMERA ZOOM TARGET//
+//==================//
+#region CAMERA ZOOM TARGET
+
+if (
+    global.ref_camera != undefined &&
+    room != rm_ow_ranch
+){
+
+//================//
+//CHEATS CAMERA LOCK//
+//================//
+    var _flag_cheats_camera_lock =
+        false;
+
+    if (
+        instance_exists(
+            global.ref_active_gui
+        ) &&
+        variable_instance_exists(
+            global.ref_active_gui,
+            "_str_type"
+        ) &&
+        global.ref_active_gui._str_type
+            == "CHEATS"
+    ){
+
+        _flag_cheats_camera_lock =
+            true;
+
+//----------------//
+//WORLD POSITION TOOL//
+//----------------//
+// World-position tools temporarily restore camera zoom so the tester can
+// position the camera before choosing the world location.
+        if (
+            variable_instance_exists(
+                global.ref_active_gui,
+                "_str_state"
+            ) &&
+            variable_instance_exists(
+                global.ref_active_gui,
+                "_str_tool_target_type"
+            ) &&
+            global.ref_active_gui._str_state
+                == "TOOL" &&
+            global.ref_active_gui
+                ._str_tool_target_type
+                == "WORLD_POSITION"
+        ){
+            _flag_cheats_camera_lock =
+                false;
+        }
+    }
+
+//================//
+//CAMERA INPUT//
+//================//
+    if (!_flag_cheats_camera_lock){
+
+        var _val_zoom_step = 128;
+
+//----------------//
+//ZOOM IN//
+//----------------//
+        if (mouse_wheel_up()){
+
+            global.val_cam_target_width =
+                max(
+                    global.val_cam_min_size,
+                    global.val_cam_target_width -
+                    _val_zoom_step
+                );
+
+            global.val_cam_target_height =
+                max(
+                    global.val_cam_min_size,
+                    global.val_cam_target_height -
+                    _val_zoom_step
+                );
+        }
+
+	//----------------//
+	//ZOOM OUT//
+	//----------------//
+	        if (mouse_wheel_down()){
+
+	            global.val_cam_target_width =
+	                min(
+	                    global.val_cam_max_size,
+	                    global.val_cam_target_width +
+	                    _val_zoom_step
+	                );
+
+	            global.val_cam_target_height =
+	                min(
+	                    global.val_cam_max_size,
+	                    global.val_cam_target_height +
+	                    _val_zoom_step
+	                );
+	        }
+	    }
 	}
 
-	//==================//
-	//CAMERA ZOOM TARGET//
-	//==================//
-	if (
-		global.ref_camera != undefined &&
-		room != rm_ow_ranch
-	){
-
-		var _val_zoom_step = 128;
-
-		if (mouse_wheel_up()){
-
-			global.val_cam_target_width = max(
-				global.val_cam_min_size,
-				global.val_cam_target_width -
-					_val_zoom_step
-			);
-
-			global.val_cam_target_height = max(
-				global.val_cam_min_size,
-				global.val_cam_target_height -
-					_val_zoom_step
-			);
-		}
-
-		if (mouse_wheel_down()){
-
-			global.val_cam_target_width = min(
-				global.val_cam_max_size,
-				global.val_cam_target_width +
-					_val_zoom_step
-			);
-
-			global.val_cam_target_height = min(
-				global.val_cam_max_size,
-				global.val_cam_target_height +
-					_val_zoom_step
-			);
-		}
-	}
+	#endregion
 }
 
 #endregion

@@ -24,6 +24,13 @@ _spr_shadow = undefined;
 _ref_home = noone;
 
 //----------------//
+//ENCOUNTER POOL//
+//----------------//
+// Optional per-Beast encounter pool override.
+// Used by cheat-spawned visible wild Beasts.
+_arr_encounter_pool = [];
+
+//----------------//
 //WILD BEHAVIOR//
 //----------------//
 _str_disposition = "CHILL";

@@ -842,14 +842,12 @@ function scr_battle_cast_card(){
 				//CONSUME SECOND WIND BUFF//
 				//===========================//
 				if (
-					_stct_card._str_card_type == "ATTACK" &&
-					instance_exists(_ref_second_wind)
+				    _stct_card._str_card_type == "ATTACK" &&
+				    _ref_second_wind != -1 &&
+				    instance_exists(_ref_second_wind)
 				){
 
-					scr_status_buff_second_wind(
-						"CONSUME",
-						_ref_second_wind
-					);
+				    scr_status_buff_second_wind("CONSUME",_ref_second_wind);
 				}
 
 				//=====================//

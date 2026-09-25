@@ -42,15 +42,78 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 	//GET ENCOUNTER POOL//
 	//================//
 	var _arr_pool = [];
+	var _str_pool_source = "SELF";
 
+	//----------------//
+	//BEAST POOL OVERRIDE//
+	//----------------//
+	// Cheat-spawned visible wild Beasts can carry their own
+	// encounter pool without changing their home/leash object.
 	if (
-		instance_exists(_ref_world_beast._ref_home) &&
-		variable_instance_exists(_ref_world_beast._ref_home,"_arr_encounter_beasts")
+	    variable_instance_exists(
+	        _ref_world_beast,
+	        "_arr_encounter_pool"
+	    ) &&
+	    is_array(
+	        _ref_world_beast._arr_encounter_pool
+	    ) &&
+	    array_length(
+	        _ref_world_beast._arr_encounter_pool
+	    ) > 0
 	){
-		_arr_pool = _ref_world_beast._ref_home._arr_encounter_beasts;
+
+	    _arr_pool =
+	        _ref_world_beast._arr_encounter_pool;
+
+	    _str_pool_source =
+	        "BEAST OVERRIDE";
 	}
+
+	//----------------//
+	//HOME ZONE POOL//
+	//----------------//
+	else if (
+	    instance_exists(
+	        _ref_world_beast._ref_home
+	    ) &&
+	    variable_instance_exists(
+	        _ref_world_beast._ref_home,
+	        "_arr_encounter_beasts"
+	    ) &&
+	    is_array(
+	        _ref_world_beast
+	            ._ref_home
+	            ._arr_encounter_beasts
+	    ) &&
+	    array_length(
+	        _ref_world_beast
+	            ._ref_home
+	            ._arr_encounter_beasts
+	    ) > 0
+	){
+
+	    _arr_pool =
+	        _ref_world_beast
+	            ._ref_home
+	            ._arr_encounter_beasts;
+
+	    _str_pool_source =
+	        "HOME ZONE";
+	}
+
+	//----------------//
+	//SELF FALLBACK//
+	//----------------//
 	else{
-		_arr_pool = [_ref_world_beast._stct_unit._str_beast_name];
+
+	    _arr_pool = [
+	        _ref_world_beast
+	            ._stct_unit
+	            ._str_beast_name
+	    ];
+
+	    _str_pool_source =
+	        "SELF";
 	}
 
 	//================//
@@ -84,8 +147,19 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 		"PLAYER ENTERED BATTLE FROM " + _str_source_room +
 		" (" + string(_val_source_x) + "," + string(_val_source_y) + ")" +
 		" | TRIGGER: VISIBLE WILD" +
-		" | FORCED ENEMY: " + _str_beast_name +
-		" (LVL " + string(_val_beast_level) + ")",
+		" | FORCED ENEMY: " +
+		_str_beast_name +
+		" (LVL " +
+		string(_val_beast_level) +
+		")" +
+		" | POOL SOURCE: " +
+		_str_pool_source +
+		" | POOL SIZE: " +
+		string(
+		    array_length(
+		        _arr_pool
+		    )
+		),
 		"TRANSITION",
 		"SCR_OVERWORLD_TRIGGER_WILD_BEAST_BATTLE"
 	);

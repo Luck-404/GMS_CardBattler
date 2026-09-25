@@ -6,6 +6,16 @@
 //           Logs the final result and opens the end-battle pane.
 //
 //===============================================================================//
+//================//
+//CHEATS GUI LOCK//
+//================//
+if (
+    instance_exists(global.ref_active_gui) &&
+    variable_instance_exists(global.ref_active_gui,"_str_type") &&
+    global.ref_active_gui._str_type == "CHEATS"
+){
+    exit;
+}
 
 //=========================//
 //TOGGLE TURN DEBUG DISPLAY//

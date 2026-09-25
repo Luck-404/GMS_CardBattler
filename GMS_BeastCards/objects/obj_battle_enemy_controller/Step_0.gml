@@ -8,6 +8,16 @@
 //
 //===============================================================================//
 
+//================//
+//CHEATS GUI LOCK//
+//================//
+if (
+    instance_exists(global.ref_active_gui) &&
+    variable_instance_exists(global.ref_active_gui,"_str_type") &&
+    global.ref_active_gui._str_type == "CHEATS"
+){
+    exit;
+}
 
 //===============================================================================//
 // PRE-BATTLE SAFETY

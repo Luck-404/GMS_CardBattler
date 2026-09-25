@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_debug_log_damage_result",
   "parent":{
-    "name":"TERMINAL AND LOGFILES",
-    "path":"folders/NPCS/TERMINAL AND LOGFILES.yy",
+    "name":"LOGGING",
+    "path":"folders/TERMINAL AND LOGFILES/LOGGING.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
