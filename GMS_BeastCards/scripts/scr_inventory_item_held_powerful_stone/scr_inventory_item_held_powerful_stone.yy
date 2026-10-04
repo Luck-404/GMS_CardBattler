@@ -6,7 +6,7 @@
   "name":"scr_inventory_item_held_powerful_stone",
   "parent":{
     "name":"POWERFUL STONE",
-    "path":"folders/INVENTORY/ITEMS/HELD/POWERFUL STONE.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/STAT BOOSTERS/POWERFUL STONE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -52,9 +52,11 @@ function scr_trap_storm_beacon(_str_tag,_ref_trap,_ref_caster,_ref_target,_stct_
 			//================//
 			//REVEAL TRAP//
 			//================//
-			scr_gui_spawn_popup_trigger_banner(
-				"TRAP TRIGGERED: STORM BEACON"
-			);
+scr_gui_spawn_popup_trigger_banner(
+	"TRAP TRIGGERED: STORM BEACON",
+	_ref_trap._ref_owner,
+	_ref_caster
+);
 
 			//===================//
 			//APPLY STORMSTRUCK//

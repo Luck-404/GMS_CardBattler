@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"SORCEROUS GEM",
-    "path":"folders/INVENTORY/ITEMS/HELD/SORCEROUS GEM.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/STAT BOOSTERS/SORCEROUS GEM.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

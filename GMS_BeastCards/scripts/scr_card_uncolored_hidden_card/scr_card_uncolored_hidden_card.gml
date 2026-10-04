@@ -15,7 +15,7 @@ function scr_card_uncolored_hidden_card(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//DRAW CARDS//
 	//================//
-	scr_battle_draw_cards(1);
+	scr_battle_draw_cards(_stct_card._val_card_magnitude);
 
 	//================//
 	//SPAWN POPUP//

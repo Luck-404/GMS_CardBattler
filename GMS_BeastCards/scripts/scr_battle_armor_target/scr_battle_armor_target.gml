@@ -111,7 +111,7 @@ function scr_battle_armor_target(_str_mode,_val_amount,_ref_target){
 			//===============//
 			if (_str_card_stat == "PHY"){
 
-				var _val_ppow_modifier = scr_beast_get_grade_modifier(
+				var _val_ppow_modifier = scr_beast_get_power_multiplier(
 					_stct_caster_unit._val_beast_ppow_stat
 				);
 
@@ -126,7 +126,7 @@ function scr_battle_armor_target(_str_mode,_val_amount,_ref_target){
 			//===============//
 			else if (_str_card_stat == "MAG"){
 
-				var _val_mpow_modifier = scr_beast_get_grade_modifier(
+				var _val_mpow_modifier = scr_beast_get_power_multiplier(
 					_stct_caster_unit._val_beast_mpow_stat
 				);
 

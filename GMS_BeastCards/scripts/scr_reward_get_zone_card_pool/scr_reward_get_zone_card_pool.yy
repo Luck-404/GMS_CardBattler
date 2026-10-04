@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reward_get_zone_card_pool",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reward_get_zone_card_pool",
+  "parent":{
+    "name":"REWARDS",
+    "path":"folders/BATTLE/RESULTS/REWARDS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

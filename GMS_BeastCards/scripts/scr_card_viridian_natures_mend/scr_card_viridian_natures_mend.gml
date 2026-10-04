@@ -19,7 +19,7 @@ function scr_card_viridian_natures_mend(_stct_card,_ref_caster,_ref_target){
 	scr_status_cleanse(
 		_ref_target,
 		["DOT","DEBUFF"],
-		1,
+		_stct_card._val_card_magnitude,
 		{
 			_str_mode: "STACKS"
 		}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reward_get_global_bonus_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reward_get_global_bonus_info",
+  "parent":{
+    "name":"ENCOUNTERS",
+    "path":"folders/OVERWORLD/ENCOUNTERS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

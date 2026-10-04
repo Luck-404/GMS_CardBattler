@@ -1,28 +1,67 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BEAST_GET_MAX_HP
-// FUNCTION: Calculates a Beast's maximum HP from its HP stat and level.
-//           Uses the Beast's grade modifier to determine HP gained per level.
-//           Clamps level between 1 and the maximum level of 30.
+// FUNCTION: Calculates a Beast's maximum HP from its HP Stat and Level.
 //
-// ARGUMENTS: _val_hp_stat is the Beast's HP stat and _val_level is its level.
-// RETURNS: The calculated maximum HP, with a minimum value of 1.
+//           Every Beast gains a guaranteed 10 HP per Level.
+//           The HP Stat modifies an additional 5 HP per Level.
+//
+//           HP Stat 0   = 10 HP per Level.
+//           HP Stat 100 = 15 HP per Level.
+//           HP Stat 200 = 20 HP per Level.
+//           HP Stat 300 = 25 HP per Level.
+//
+// ARGUMENTS: _val_hp_stat - Beast HP Stat.
+//            _val_level - Beast Level.
+// RETURNS: Calculated maximum HP.
 //
 //===============================================================================//
 
 function scr_beast_get_max_hp(_val_hp_stat,_val_level){
 
-	//================//
-	//VALIDATE LEVEL//
-	//================//
-	_val_level = clamp(_val_level,1,30);
+	#region VALIDATION
 
-	//===================//
-	//CALCULATE HP GROWTH//
-	//===================//
-	var _val_hp_modifier = scr_beast_get_grade_modifier(_val_hp_stat);
-	var _val_hp_per_level = 5 + (5 * _val_hp_modifier);
-	var _val_max_hp = ceil(10 + (_val_hp_per_level * _val_level));
+	//================//
+//SANITIZE HP STAT//
+//================//
+	_val_hp_stat = max(
+		0,
+		_val_hp_stat
+	);
 
-	return max(1,_val_max_hp);
+	//================//
+	//SANITIZE LEVEL//
+	//================//
+	_val_level = max(
+		1,
+		floor(_val_level)
+	);
+
+	#endregion
+
+	#region MAXIMUM HP
+
+	//================//
+	//LEVEL HP GROWTH//
+	//================//
+	var _val_hp_growth =
+		scr_beast_get_hp_level_growth(
+			_val_hp_stat
+		);
+
+	//================//
+	//CALCULATE HP//
+	//================//
+	var _val_max_hp =
+		10 +
+		(
+			_val_hp_growth *
+			_val_level
+		);
+
+	return ceil(
+		_val_max_hp
+	);
+
+	#endregion
 }

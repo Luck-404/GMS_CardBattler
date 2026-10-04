@@ -4,7 +4,7 @@
 // SCRIPT: SCR_STATUS_BUFF_SECOND_WIND
 // FUNCTION: Stackable Infinite Buff lasting until the host's next Attack.
 //           Each application adds 1 stack.
-//           Each stack grants 50% additional direct Attack damage by default.
+//           Each stack grants 25% additional direct Attack damage by default.
 //           Reapplication preserves the original per-stack magnitude.
 //           All stacks apply to the same Attack and are consumed together
 //           after that Attack's Card effect finishes resolving.
@@ -42,7 +42,7 @@ function scr_status_buff_second_wind(_str_tag,_ref_status,_val_magnitude=undefin
 			//DEFAULTS//
 			//==========//
 			if (_val_magnitude == undefined){
-				_val_magnitude = 50;
+				_val_magnitude = 25;
 			}
 
 			_val_magnitude = max(0,_val_magnitude);

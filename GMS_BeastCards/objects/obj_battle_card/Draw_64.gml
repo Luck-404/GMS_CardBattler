@@ -1,54 +1,142 @@
 //===============================================================================//
 //
 // DRAW GUI: OBJ_BATTLE_CARD
-// FUNCTION: Draws animated player Cards using the existing movement system.
-//           Restores native sprite-based Hand hover and Ctrl preview,
-//           while preserving enemy Card rendering and the HUD layout.
+// FUNCTION: Draws animated player/enemy Cards using the existing movement system.
+//           Uses native Card-object hitboxes for hover.
+//
+//           NORMAL HOVER:
+//               - Slightly enlarges the Card.
+//               - Displays the shared Card-name hover tooltip.
+//
+//           CTRL + HOVER:
+//               - Slightly enlarges the Card.
+//               - Draws the large centered Card preview in Draw GUI End.
+//               - Registers the Card with the fixed battle inspection pane.
 //
 //===============================================================================//
 
 //-----------------//
 //BATTLE END HIDDEN//
 //-----------------//
-if (instance_exists(obj_gui_end_battle_pane)){
-    exit;
+if (
+	instance_exists(
+		obj_gui_end_battle_pane
+	)
+){
+	exit;
 }
 
-// A previously inspected Card cannot retain a preview while moving.
+//================//
+//CHEATS GUARD//
+//================//
+if (
+	scr_gui_check_cheats_active()
+){
+
+	_spr_preview_card =
+		undefined;
+}
+
+// A previously inspected player Card cannot retain a preview while moving
+// or when it is no longer hovered.
 if (_str_team == "PLAYER"){
-    _spr_preview_card = undefined;
+
+	_spr_preview_card =
+		undefined;
 }
 
 #region CARD MOVEMENT
 
-if (_str_team == "PLAYER" && _flag_card_moving){
+if (
+	_str_team == "PLAYER" &&
+	_flag_card_moving
+){
 
-    if (_ct_card_move_delay > 0){
-        exit;
-    }
+	if (_ct_card_move_delay > 0){
+		exit;
+	}
 
-    // Retain the existing two-phase face flip, now over a variable card scale.
-    var _val_progress = clamp(_val_card_move_progress,0,1);
-    var _val_eased = 1 - power(1 - _val_progress,3);
-    var _val_scale = lerp(_val_card_move_scale_start,_val_card_move_scale_end,_val_eased);
-    var _val_flip_x = 1;
-    var _spr_move_card = spr_card_back;
+	var _val_progress =
+		clamp(
+			_val_card_move_progress,
+			0,
+			1
+		);
 
-    if (_flag_card_move_flip){
+	var _val_eased =
+		1 -
+		power(
+			1 -
+				_val_progress,
+			3
+		);
 
-        var _flag_first_half = (_val_progress < 0.5);
-        _val_flip_x = max(0.12,abs(1 - (2 * _val_progress)));
+	var _val_scale =
+		lerp(
+			_val_card_move_scale_start,
+			_val_card_move_scale_end,
+			_val_eased
+		);
 
-        if (_str_card_move_type == "DRAW"){
-            _spr_move_card = _flag_first_half ? spr_card_back : _spr_card;
-        }
-        else{
-            _spr_move_card = _flag_first_half ? _spr_card : spr_card_back;
-        }
-    }
+	var _val_flip_x =
+		1;
 
-    draw_sprite_ext(_spr_move_card,0,x,y,_val_scale * _val_flip_x,_val_scale,0,c_white,1);
-    exit;
+	var _spr_move_card =
+		spr_card_back;
+
+	if (_flag_card_move_flip){
+
+		var _flag_first_half =
+			(
+				_val_progress <
+				0.5
+			);
+
+		_val_flip_x =
+			max(
+				0.12,
+				abs(
+					1 -
+					(
+						2 *
+						_val_progress
+					)
+				)
+			);
+
+		if (
+			_str_card_move_type ==
+			"DRAW"
+		){
+
+			_spr_move_card =
+				_flag_first_half
+					? spr_card_back
+					: _spr_card;
+		}
+		else{
+
+			_spr_move_card =
+				_flag_first_half
+					? _spr_card
+					: spr_card_back;
+		}
+	}
+
+	draw_sprite_ext(
+		_spr_move_card,
+		0,
+		x,
+		y,
+		_val_scale *
+			_val_flip_x,
+		_val_scale,
+		0,
+		c_white,
+		1
+	);
+
+	exit;
 }
 
 #endregion
@@ -60,66 +148,165 @@ if (_str_team == "PLAYER" && _flag_card_moving){
 //============//
 if (_str_team == "PLAYER"){
 
-    //--------------------//
-    //RESET PRESENTATION//
-    //--------------------//
-    _spr_preview_card = undefined;
-    _val_scale_x = 0.30;
-    _val_scale_y = 0.30;
-    _val_preview_scale = 1.0;
+	//--------------------//
+	//RESET PRESENTATION//
+	//--------------------//
+	_spr_preview_card =
+		undefined;
 
-    // Pile icons replace the old stack of Card backs.
-    if (_str_location != "HAND"){
-        exit;
-    }
+	_val_scale_x =
+		0.30;
 
-    //--------//
-    //HOVER//
-    //--------//
-    // Original enemy-Card method: the native object sprite is the hitbox.
-    // Do not substitute artwork, a mask, cached focus, or visual rectangles.
-    var _val_draw_x = x;
+	_val_scale_y =
+		0.30;
 
-    if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+	_val_preview_scale =
+		1.0;
 
-        // Original scaling behavior, with the hand-area-safe hover scale.
-        _val_scale_x = 0.33;
-        _val_scale_y = 0.33;
-        _val_draw_x = clamp(x,162,894);
+	// Pile icons replace the old stack of Card backs.
+	if (
+		_str_location !=
+		"HAND"
+	){
+		exit;
+	}
 
-        if (keyboard_check(vk_lcontrol)){
-            _spr_preview_card = _spr_card;
-        }
-    }
+	//--------//
+	//HOVER//
+	//--------//
+	/*
+		obj_battle_card continues using spr_battle_card_hitbox
+		as its native sprite/collision.
 
-    //----------------//
-    //GET CARD TINT//
-    //----------------//
-    var _c_card_tint = c_white;
+		The Card artwork itself is only drawn through _spr_card.
+	*/
 
-    if (
-        obj_battle_player_controller._state_player == ENUM_PLAYER_STATE.SELECT_CARD &&
-        _flag_card_oom_check
-    ){
-        _c_card_tint = c_ltgray;
-    }
-    else if (obj_battle_turn_controller._val_turn_tracker == 1){
-        _c_card_tint = c_ltgray;
-    }
+	var _val_draw_x =
+		x;
 
-    //-------------------//
-    //DRAW CARD ARTWORK//
-    //-------------------//
-    draw_sprite_ext(_spr_card,0,_val_draw_x,y,_val_scale_x,_val_scale_y,0,_c_card_tint,1);
+	var _flag_card_hover =
+		position_meeting(
+			device_mouse_x_to_gui(0),
+			device_mouse_y_to_gui(0),
+			self
+		);
 
-    //----------------//
-    //CLEAR OOM CHECK//
-    //----------------//
-    if (obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.SELECT_CARD){
-        _flag_card_oom_check = false;
-    }
+	if (_flag_card_hover){
 
-    exit;
+		//================//
+		//HOVER SCALE//
+		//================//
+		_val_scale_x =
+			0.33;
+
+		_val_scale_y =
+			0.33;
+
+		_val_draw_x =
+			clamp(
+				x,
+				162,
+				894
+			);
+
+		//================//
+		//CTRL INSPECTION//
+		//================//
+		if (
+			!scr_gui_check_cheats_active() &&
+			keyboard_check(vk_lcontrol)
+		){
+
+			//--------------------//
+			//LARGE CARD PREVIEW//
+			//--------------------//
+			_spr_preview_card =
+				_spr_card;
+
+			//---------------------//
+			//INSPECTION PANE DATA//
+			//---------------------//
+			if (is_struct(_ref_card)){
+
+				scr_gui_request_battle_inspection(
+					"CARD",
+					self,
+					30
+				);
+			}
+		}
+
+		//================//
+		//NORMAL TOOLTIP//
+		//================//
+		else if (
+			!scr_gui_check_cheats_active() &&
+			is_struct(_ref_card)
+		){
+
+			scr_gui_set_hover_tooltip(
+				_ref_card._str_card_name,
+				"",
+				30
+			);
+		}
+	}
+
+	//----------------//
+	//GET CARD TINT//
+	//----------------//
+	var _c_card_tint =
+		c_white;
+
+	if (
+		obj_battle_player_controller
+			._state_player ==
+			ENUM_PLAYER_STATE.SELECT_CARD &&
+		_flag_card_oom_check
+	){
+
+		_c_card_tint =
+			c_ltgray;
+	}
+	else if (
+		obj_battle_turn_controller
+			._val_turn_tracker ==
+			1
+	){
+
+		_c_card_tint =
+			c_ltgray;
+	}
+
+	//-------------------//
+	//DRAW CARD ARTWORK//
+	//-------------------//
+	draw_sprite_ext(
+		_spr_card,
+		0,
+		_val_draw_x,
+		y,
+		_val_scale_x,
+		_val_scale_y,
+		0,
+		_c_card_tint,
+		1
+	);
+
+	//----------------//
+	//CLEAR OOM CHECK//
+	//----------------//
+	if (
+		obj_battle_player_controller
+			._state_player !=
+			ENUM_PLAYER_STATE.SELECT_CARD
+	){
+
+		_flag_card_oom_check =
+			false;
+	}
+
+	exit;
 }
 
 #endregion
@@ -136,18 +323,31 @@ if (_str_team != "PLAYER"){
 	//----------------//
 	//VALIDATE OWNER//
 	//----------------//
-	if (!instance_exists(_ref_unit)){
-		visible = false;
+	if (
+		!instance_exists(
+			_ref_unit
+		)
+	){
+
+		visible =
+			false;
+
 		exit;
 	}
 
-	x = _ref_unit.x;
+	x =
+		_ref_unit.x;
 
 	//-----------------//
 	//DEFEATED OWNER//
 	//-----------------//
-	if (_ref_unit._val_cur_hp <= 0){
-		visible = false;
+	if (
+		_ref_unit._val_cur_hp <=
+		0
+	){
+
+		visible =
+			false;
 	}
 
 	//----------------//
@@ -155,17 +355,31 @@ if (_str_team != "PLAYER"){
 	//----------------//
 	else{
 
-		_spr_preview_card = undefined;
+		//--------------------//
+		//RESET PRESENTATION//
+		//--------------------//
+		_spr_preview_card =
+			undefined;
 
-		_val_scale_x = 0.15;
-		_val_scale_y = 0.15;
-		_val_preview_scale = 1.0;
+		_val_scale_x =
+			0.15;
+
+		_val_scale_y =
+			0.15;
+
+		_val_preview_scale =
+			1.0;
 
 		//----------//
 		//DECK CARD//
 		//----------//
-		if (_str_location == "DECK"){
-			visible = false;
+		if (
+			_str_location ==
+			"DECK"
+		){
+
+			visible =
+				false;
 		}
 
 		//--------------//
@@ -173,18 +387,71 @@ if (_str_team != "PLAYER"){
 		//--------------//
 		else{
 
-			visible = true;
+			visible =
+				true;
 
 			//-----//
 			//HOVER//
 			//-----//
-			if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+			var _flag_enemy_card_hover =
+				position_meeting(
+					device_mouse_x_to_gui(0),
+					device_mouse_y_to_gui(0),
+					self
+				);
 
-				_val_scale_x *= 1.15;
-				_val_scale_y *= 1.15;
+			if (_flag_enemy_card_hover){
 
-				if (keyboard_check(vk_lcontrol)){
-					_spr_preview_card = _spr_card;
+				//================//
+				//HOVER SCALE//
+				//================//
+				_val_scale_x *=
+					1.15;
+
+				_val_scale_y *=
+					1.15;
+
+				//================//
+				//CTRL INSPECTION//
+				//================//
+				if (
+					!scr_gui_check_cheats_active() &&
+					keyboard_check(vk_lcontrol)
+				){
+
+					//--------------------//
+					//LARGE CARD PREVIEW//
+					//--------------------//
+					_spr_preview_card =
+						_spr_card;
+
+					//---------------------//
+					//INSPECTION PANE DATA//
+					//---------------------//
+					if (is_struct(_ref_card)){
+
+						scr_gui_request_battle_inspection(
+							"CARD",
+							self,
+							30
+						);
+					}
+				}
+
+				//================//
+				//NORMAL TOOLTIP//
+				//================//
+				else if (
+					!scr_gui_check_cheats_active() &&
+					is_struct(_ref_card)
+				){
+
+					scr_gui_set_hover_tooltip(
+						_ref_card
+							._str_card_name,
+						"",
+						30
+					);
 				}
 			}
 
@@ -205,15 +472,35 @@ if (_str_team != "PLAYER"){
 					1
 				);
 
-				draw_set_font(fnt_gui_small);
-				draw_set_colour(c_black);
-				draw_set_halign(fa_center);
-				draw_set_valign(fa_middle);
+				draw_set_font(
+					fnt_gui_small
+				);
 
-				draw_text(x,y - 60,"DISABLED");
+				draw_set_colour(
+					c_black
+				);
 
-				draw_set_halign(fa_left);
-				draw_set_valign(fa_top);
+				draw_set_halign(
+					fa_center
+				);
+
+				draw_set_valign(
+					fa_middle
+				);
+
+				draw_text(
+					x,
+					y - 60,
+					"DISABLED"
+				);
+
+				draw_set_halign(
+					fa_left
+				);
+
+				draw_set_valign(
+					fa_top
+				);
 			}
 
 			//----------------//

@@ -1,36 +1,25 @@
 //===============================================================================//
 //
 // CREATE: OBJ_GUI_LIBRARY_RIGHT_ARROW
-// FUNCTION: Initializes the library right page arrow.
-//           Stores the parent library pane reference.
-//           Initializes click cooldown state.
+// FUNCTION: Initializes a next-page arrow for either the DECK or LIBRARY
+//           column of OBJ_GUI_LIBRARY_PANE.
 //
 //===============================================================================//
 
-//================//
-//VARIABLES//
-//================//
 #region VARIABLES
 
 depth = -2;
 
 _ref_gui_pane = obj_gui_library_pane;
+_str_page_target = "LIBRARY";
 
 _flag_clicked = false;
 _ct_cooldown = 0;
 
 #endregion
 
-//================//
-//INIT//
-//================//
 #region INIT
-
 #endregion
 
-//================//
-//METHODS//
-//================//
 #region METHODS
-
 #endregion

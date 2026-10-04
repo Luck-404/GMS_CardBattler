@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_add_amplifying_bell_stack",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_add_amplifying_bell_stack",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/BUFFS/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -352,7 +352,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 30,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
@@ -377,7 +377,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 1,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -827,7 +827,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "CC",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 1,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
@@ -1002,7 +1002,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DOT",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ADJACENT",
-					_val_card_magnitude : 8,
+					_val_card_magnitude : 1,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
@@ -1135,7 +1135,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 3,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_cerulean_frozen_curse,
-					_str_card_description : "ST. Ranged. For 3 rounds, whenever this Beast is attacked while Frostbitten, Frostburned, or Frozen, take 5 additional [Linear] NEU damage."
+					_str_card_description : "ST. Ranged. For 3 rounds, whenever this Beast is attacked while Frostbitten, Frostburned, or Frozen, take 5 additional NEU damage."
 				};
 			break;
 			#endregion
@@ -1777,7 +1777,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "HEAL",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 50,
+					_val_card_magnitude : 35,
 					_str_card_scalar : "PERCENT",
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
@@ -1802,7 +1802,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 50,
+					_val_card_magnitude : 0,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -3030,7 +3030,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DIRECT",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 10,
+					_val_card_magnitude : 8,
 					_str_card_scalar : "PERCENT",
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
@@ -3194,26 +3194,26 @@ function scr_card_get_info(_str_card_name){
 
 			#region BURGEONING_BLOOM
 			case "BURGEONING_BLOOM":
-				_stct_return_card = {
-					_str_card_name : "BURGEONING BLOOM",
-					_str_card_id : _str_card_name,
-					_spr_card : spr_card_viridian_burgeoning_bloom,
-					_arr_card_colors : ["VIRIDIAN",undefined],
-					_str_card_range : "SELF",
-					_str_card_type : "SUPPORT",
-					_str_card_effect_type : "AURA",
-					_str_card_stat : "NEU",
-					_str_card_target_count : "SELF",
-					_val_card_magnitude : 0.25,
-					_str_card_scalar : "PERCENT",
-					_str_card_archetype_req : "MAGICAL",
-					_str_card_class_req : undefined,
-					_str_card_rarity : "II",
-					_val_card_mana_cost : 2,
-					_flag_card_exhausts : false,
-					_scr_card : scr_card_viridian_burgeoning_bloom,
-					_str_card_description : "Self Aura. (+) When this Beast receives a healing effect, adjacent allied Beasts heal for 25% of that effect. (-) This Beast's Maximum HP is reduced by 15%."
-				};
+			    _stct_return_card = {
+			        _str_card_name : "BURGEONING BLOOM",
+			        _str_card_id : _str_card_name,
+			        _spr_card : spr_card_viridian_burgeoning_bloom,
+			        _arr_card_colors : ["VIRIDIAN",undefined],
+			        _str_card_range : "SELF",
+			        _str_card_type : "SUPPORT",
+			        _str_card_effect_type : "AURA",
+			        _str_card_stat : "NEU",
+			        _str_card_target_count : "SELF",
+			        _val_card_magnitude : 25,
+			        _str_card_scalar : "PERCENT",
+			        _str_card_archetype_req : "MAGICAL",
+			        _str_card_class_req : undefined,
+			        _str_card_rarity : "II",
+			        _val_card_mana_cost : 2,
+			        _flag_card_exhausts : false,
+			        _scr_card : scr_card_viridian_burgeoning_bloom,
+			        _str_card_description : "Self Aura. (+) When this Beast receives a healing effect, adjacent allied Beasts heal for 25% of that effect. (-) This Beast's Maximum HP is reduced by 15%."
+			    };
 			break;
 			#endregion
 
@@ -3328,7 +3328,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 20,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -4230,7 +4230,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "CLEANSE",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 1,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -4305,7 +4305,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 2,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -4345,26 +4345,26 @@ function scr_card_get_info(_str_card_name){
 
 			#region POLLINATE
 			case "POLLINATE":
-				_stct_return_card = {
-					_str_card_name : "POLLINATE",
-					_str_card_id : _str_card_name,
-					_spr_card : spr_card_viridian_pollinate,
-					_arr_card_colors : ["VIRIDIAN",undefined],
-					_str_card_range : "RANGED",
-					_str_card_type : "SUPPORT",
-					_str_card_effect_type : "HEAL",
-					_str_card_stat : "MAG",
-					_str_card_target_count : "TARGET_BEHIND",
-					_val_card_magnitude : 0.05,
-					_str_card_scalar : "PERCENT",
-					_str_card_archetype_req : "MAGICAL",
-					_str_card_class_req : undefined,
-					_str_card_rarity : "II",
-					_val_card_mana_cost : 2,
-					_flag_card_exhausts : false,
-					_scr_card : scr_card_viridian_pollinate,
-					_str_card_description : "AoE-2. Ranged. Apply Regeneration to the target and the allied Beast behind it for 3 rounds. Heal [Scalar] HP immediately and each round."
-				};
+			    _stct_return_card = {
+			        _str_card_name : "POLLINATE",
+			        _str_card_id : _str_card_name,
+			        _spr_card : spr_card_viridian_pollinate,
+			        _arr_card_colors : ["VIRIDIAN",undefined],
+			        _str_card_range : "RANGED",
+			        _str_card_type : "SUPPORT",
+			        _str_card_effect_type : "HEAL",
+			        _str_card_stat : "MAG",
+			        _str_card_target_count : "TARGET_BEHIND",
+			        _val_card_magnitude : 5,
+			        _str_card_scalar : "PERCENT",
+			        _str_card_archetype_req : "MAGICAL",
+			        _str_card_class_req : undefined,
+			        _str_card_rarity : "II",
+			        _val_card_mana_cost : 2,
+			        _flag_card_exhausts : false,
+			        _scr_card : scr_card_viridian_pollinate,
+			        _str_card_description : "AoE-2. Ranged. Apply Regeneration to the target and the allied Beast behind it for 3 rounds. Heal [Scalar] HP immediately and each round (base 5%)."
+			    };
 			break;
 			#endregion
 
@@ -4405,7 +4405,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DOT",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 3,
 					_str_card_scalar : "LINEAR",
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -4430,7 +4430,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 10,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,
@@ -5149,7 +5149,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DIRECT",
 					_str_card_stat : "PHY",
 					_str_card_target_count : "TEAMWIDE",
-					_val_card_magnitude : 15,
+					_val_card_magnitude : 10,
 					_str_card_scalar : "PERCENT",
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : "ADVENTURER",
@@ -5347,7 +5347,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 1,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
@@ -5545,7 +5545,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 20,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
@@ -5644,7 +5644,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "PHY",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 20,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
@@ -5746,7 +5746,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "TURN",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "GLOBAL",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 1,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "IV",
@@ -5849,7 +5849,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_deft_strike,
-					_str_card_description : "ST. Backline. Deal [Linear] NEU dmg (base 3). Apply 1 Bleed."
+					_str_card_description : "ST. Backline. Deal 3 NEU dmg. Apply 1 Bleed."
 				};
 			break;
 			#endregion
@@ -5914,7 +5914,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "MANA",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "GLOBAL",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 2,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
 					_str_card_rarity : "II",
@@ -5962,7 +5962,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DEBUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 1,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : undefined,
 					_str_card_class_req : undefined,
@@ -5994,7 +5994,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_power_strike,
-					_str_card_description : "ST. Melee. Deal [Linear] NEU dmg (base 8)."
+					_str_card_description : "ST. Melee. Deal 8 NEU dmg."
 				};
 			break;
 			#endregion
@@ -6018,7 +6018,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_rapid_strikes,
-					_str_card_description : "ST. Ranged. Deal [Linear] NEU dmg 3 times (base 2 per hit)."
+					_str_card_description : "ST. Ranged. Deal 2 NEU dmg 3 times."
 				};
 			break;
 			#endregion
@@ -6108,7 +6108,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DOT",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 5,
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
 					_str_card_rarity : "III",
@@ -6139,7 +6139,7 @@ function scr_card_get_info(_str_card_name){
 					_val_card_mana_cost : 1,
 					_flag_card_exhausts : false,
 					_scr_card : scr_card_uncolored_strike,
-					_str_card_description : "ST. Melee. Deal [Linear] NEU dmg (base 5)."
+					_str_card_description : "ST. Melee. Deal 5 NEU dmg."
 				};
 			break;
 			#endregion
@@ -6673,28 +6673,28 @@ function scr_card_get_info(_str_card_name){
 	
 			#region BLOODHUNGER
 			case "BLOODHUNGER":
-				_stct_return_card = {
-					_str_card_name : "BLOODHUNGER",
-					_str_card_id : _str_card_name,
-					_spr_card : spr_card_vermilion_bloodhunger,
-					_arr_card_colors : ["VERMILION",undefined],
-					_str_card_range : "RANGED",
-					_str_card_type : "SUPPORT",
-					_str_card_effect_type : "BUFF",
-					_str_card_stat : "NEU",
-					_str_card_target_count : "ST",
-					_val_card_magnitude : 0,
-					_str_card_scalar : undefined,
-					_str_card_archetype_req : undefined,
-					_str_card_class_req : undefined,
-					_str_card_rarity : "II",
-					_val_card_mana_cost : 2,
-					_flag_card_exhausts : false,
-					_scr_card : scr_card_vermilion_bloodhunger,
-					_str_card_description : "ST. Ranged. Gain Leech for 3 rounds, this status heals the host for 25% of the HP damage dealt by its Attacks."
-				};
+			    _stct_return_card = {
+			        _str_card_name : "BLOODHUNGER",
+			        _str_card_id : _str_card_name,
+			        _spr_card : spr_card_vermilion_bloodhunger,
+			        _arr_card_colors : ["VERMILION",undefined],
+			        _str_card_range : "RANGED",
+			        _str_card_type : "SUPPORT",
+			        _str_card_effect_type : "BUFF",
+			        _str_card_stat : "NEU",
+			        _str_card_target_count : "ST",
+			        _val_card_magnitude : 25,
+			        _str_card_scalar : "PERCENT",
+			        _str_card_archetype_req : undefined,
+			        _str_card_class_req : undefined,
+			        _str_card_rarity : "II",
+			        _val_card_mana_cost : 2,
+			        _flag_card_exhausts : false,
+			        _scr_card : scr_card_vermilion_bloodhunger,
+			        _str_card_description : "ST. Ranged. Gain Leech for 3 rounds, this status heals the host for 25% of the HP damage dealt by its Attacks."
+			    };
 			break;
-			#endregion	
+			#endregion
 	
 			#region BLOODLETTING
 			case "BLOODLETTING":
@@ -6708,7 +6708,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DIRECT",
 					_str_card_stat : "PHY",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 18,
+					_val_card_magnitude : 12,
 					_str_card_scalar : "PERCENT",
 					_str_card_archetype_req : "MARTIAL",
 					_str_card_class_req : undefined,
@@ -7183,7 +7183,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "DIRECT",
 					_str_card_stat : "MAG",
 					_str_card_target_count : "ST",
-					_val_card_magnitude : 15,
+					_val_card_magnitude : 12,
 					_str_card_scalar : "PERCENT",
 					_str_card_archetype_req : "MAGICAL",
 					_str_card_class_req : undefined,
@@ -7888,7 +7888,7 @@ function scr_card_get_info(_str_card_name){
 					_str_card_effect_type : "BUFF",
 					_str_card_stat : "NEU",
 					_str_card_target_count : "SELF",
-					_val_card_magnitude : 0,
+					_val_card_magnitude : 30,
 					_str_card_scalar : undefined,
 					_str_card_archetype_req : "TECHNICAL",
 					_str_card_class_req : undefined,

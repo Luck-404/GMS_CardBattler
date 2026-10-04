@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_player_teardown_session",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_player_teardown_session",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/PLAYER/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

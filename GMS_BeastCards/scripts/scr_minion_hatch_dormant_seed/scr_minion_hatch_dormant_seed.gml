@@ -20,7 +20,11 @@ function scr_minion_hatch_dormant_seed(_ref_seed){
 		return undefined;
 	}
 
-	if (ds_list_size(global.list_pool_viridian_minions) <= 0){
+	if (
+		!variable_global_exists("arr_pool_viridian_minions") ||
+		!is_array(global.arr_pool_viridian_minions) ||
+		array_length(global.arr_pool_viridian_minions) <= 0
+	){
 		return undefined;
 	}
 
@@ -41,14 +45,15 @@ function scr_minion_hatch_dormant_seed(_ref_seed){
 	//--------------------//
 	var _it_minion =
 		irandom(
-			ds_list_size(global.list_pool_viridian_minions) - 1
+			array_length(
+				global.arr_pool_viridian_minions
+			) - 1
 		);
 
 	var _str_minion =
-		ds_list_find_value(
-			global.list_pool_viridian_minions,
+		global.arr_pool_viridian_minions[
 			_it_minion
-		);
+		];
 
 	//----------------------//
 	//REMOVE SEED FROM HOST//

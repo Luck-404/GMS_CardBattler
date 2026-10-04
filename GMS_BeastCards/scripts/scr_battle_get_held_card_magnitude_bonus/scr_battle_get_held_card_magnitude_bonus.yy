@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_get_held_card_magnitude_bonus",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_get_held_card_magnitude_bonus",
+  "parent":{
+    "name":"DAMAGE",
+    "path":"folders/BATTLE/COMBAT/DAMAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

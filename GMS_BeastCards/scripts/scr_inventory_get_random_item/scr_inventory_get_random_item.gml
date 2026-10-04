@@ -1,20 +1,28 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_INVENTORY_GET_RANDOM_ITEM
-// FUNCTION: Rolls a weighted random item id from the supplied item pool.
-//           Uses individually assigned weights for each supported item.
-//           Returns the selected item id string.
+// FUNCTION: Rolls a weighted random Item ID from the supplied Item array.
 //
-// ARGUMENTS: _list_pool is the DS list containing eligible item ids.
-// RETURNS: The selected item id, or an empty string if the roll fails.
+// ARGUMENTS: _arr_pool - Array containing eligible Item IDs.
+// RETURNS: Selected Item ID, or an empty string if the roll fails.
 //
 //===============================================================================//
 
-function scr_inventory_get_random_item(_list_pool){
+function scr_inventory_get_random_item(_arr_pool){
 
-	//================//
-	//ITEM WEIGHTS//
-	//================//
+//================//
+//VALIDATE POOL//
+//================//
+	if (
+		!is_array(_arr_pool) ||
+		array_length(_arr_pool) <= 0
+	){
+		return "";
+	}
+
+//================//
+//ITEM WEIGHTS//
+//================//
 	var _stct_weights = {
 		QUEST_IMPORTANT_NOTEBOOK : 5,
 		HELD_POWERFUL_STONE : 10,
@@ -86,56 +94,102 @@ function scr_inventory_get_random_item(_list_pool){
 		#endregion
 	};
 
-	//======================//
-	//CALCULATE TOTAL WEIGHT//
-	//======================//
+//======================//
+//CALCULATE TOTAL WEIGHT//
+//======================//
 	var _val_total_weight = 0;
 
-	for (var _it_item = 0; _it_item < ds_list_size(_list_pool); _it_item++){
+	for (
+		var _it_item = 0;
+		_it_item < array_length(_arr_pool);
+		_it_item++
+	){
 
-		var _str_item_id = ds_list_find_value(_list_pool,_it_item);
+		var _str_item_id =
+			_arr_pool[_it_item];
 
-		if (variable_struct_exists(_stct_weights,_str_item_id)){
-			_val_total_weight += variable_struct_get(_stct_weights,_str_item_id);
+		if (
+			variable_struct_exists(
+				_stct_weights,
+				_str_item_id
+			)
+		){
+			_val_total_weight +=
+				variable_struct_get(
+					_stct_weights,
+					_str_item_id
+				);
 		}
 	}
 
 	if (_val_total_weight <= 0){
-		scr_debug_log("INVENTORY","RANDOM_ITEM",undefined,"Random item pool has no valid weighted items.");
+
+		scr_debug_log(
+			"INVENTORY",
+			"RANDOM_ITEM",
+			undefined,
+			"Random item pool has no valid weighted items."
+		);
+
 		return "";
 	}
 
-	//================//
-	//ROLL ITEM//
-	//================//
-	var _val_roll = random(_val_total_weight);
+//================//
+//ROLL ITEM//
+//================//
+	var _val_roll =
+		random(_val_total_weight);
+
 	var _val_running_weight = 0;
 	var _str_return_item_id = "";
 
-	//================//
-	//RESOLVE ROLL//
-	//================//
-	for (var _it_item = 0; _it_item < ds_list_size(_list_pool); _it_item++){
+//================//
+//RESOLVE ROLL//
+//================//
+	for (
+		var _it_item = 0;
+		_it_item < array_length(_arr_pool);
+		_it_item++
+	){
 
-		var _str_item_id = ds_list_find_value(_list_pool,_it_item);
+		var _str_item_id =
+			_arr_pool[_it_item];
 
-		if (!variable_struct_exists(_stct_weights,_str_item_id)){
+		if (
+			!variable_struct_exists(
+				_stct_weights,
+				_str_item_id
+			)
+		){
 			continue;
 		}
 
-		_val_running_weight += variable_struct_get(_stct_weights,_str_item_id);
+		_val_running_weight +=
+			variable_struct_get(
+				_stct_weights,
+				_str_item_id
+			);
 
 		if (_val_roll < _val_running_weight){
-			_str_return_item_id = _str_item_id;
+
+			_str_return_item_id =
+				_str_item_id;
+
 			break;
 		}
 	}
 
-	//================//
-	//VALIDATE RESULT//
-	//================//
+//================//
+//VALIDATE RESULT//
+//================//
 	if (_str_return_item_id == ""){
-		scr_debug_log("INVENTORY","RANDOM_ITEM",undefined,"Random item roll failed to select an item.");
+
+		scr_debug_log(
+			"INVENTORY",
+			"RANDOM_ITEM",
+			undefined,
+			"Random item roll failed to select an item."
+		);
 	}
 
 	return _str_return_item_id;

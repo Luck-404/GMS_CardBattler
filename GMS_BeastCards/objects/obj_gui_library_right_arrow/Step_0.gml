@@ -1,34 +1,81 @@
 //===============================================================================//
 //
 // STEP: OBJ_GUI_LIBRARY_RIGHT_ARROW
-// FUNCTION: Handles page navigation to the next library page.
-//           Destroys itself when the library pane closes.
-//           Updates click cooldown and hover highlighting.
+// FUNCTION: Moves the assigned Deck/Library page forward.
 //
 //===============================================================================//
 
-//================//
-//DESTROY SELF//
-//================//
-#region DESTROY SELF
-
-if (!instance_exists(obj_gui_library_pane)){
+if (!instance_exists(_ref_gui_pane)){
 	instance_destroy();
 	exit;
 }
 
-#endregion
+var _str_target =
+	string_upper(
+		string(
+			_str_page_target
+		)
+	);
 
-//================//
-//HOVER AND CLICK//
-//================//
-#region HOVER AND CLICK
+var _ct_total_pages = 1;
 
-if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
+switch (_str_target){
+
+	case "DECK":
+
+		_ct_total_pages =
+			max(
+				1,
+				ceil(
+					ds_list_size(
+						global.list_player_deck
+					) /
+					_ref_gui_pane._ct_deck_per_page
+				)
+			);
+
+	break;
+
+	default:
+
+		_str_target = "LIBRARY";
+
+		_ct_total_pages =
+			max(
+				1,
+				ceil(
+					ds_list_size(
+						global.list_player_library
+					) /
+					_ref_gui_pane._ct_library_per_page
+				)
+			);
+
+	break;
+}
+
+visible =
+	_ct_total_pages > 1;
+
+if (!visible){
+	image_index = 0;
+	exit;
+}
+
+if (
+	position_meeting(
+		device_mouse_x_to_gui(0),
+		device_mouse_y_to_gui(0),
+		self
+	)
+){
 
 	image_index = 1;
 
-	if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+	if (
+		mouse_check_button_pressed(mb_left) &&
+		!_flag_clicked
+	){
 
 		audio_play_sound(
 			snd_gui_press,
@@ -39,26 +86,29 @@ if (position_meeting(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),self)){
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 
-		var _ct_total_pages = max(
-			1,
-			ceil(ds_list_size(global.list_player_library) / _ref_gui_pane._ct_library_per_page)
-		);
+		if (_str_target == "DECK"){
 
-		if (_ref_gui_pane._it_library_page < _ct_total_pages - 1){
-			_ref_gui_pane._it_library_page++;
+			_ref_gui_pane._it_deck_page =
+				min(
+					_ct_total_pages - 1,
+					_ref_gui_pane._it_deck_page +
+					1
+				);
+		}
+		else{
+
+			_ref_gui_pane._it_library_page =
+				min(
+					_ct_total_pages - 1,
+					_ref_gui_pane._it_library_page +
+					1
+				);
 		}
 	}
 }
 else{
 	image_index = 0;
 }
-
-#endregion
-
-//================//
-//CLICK COOLDOWN//
-//================//
-#region CLICK COOLDOWN
 
 if (_flag_clicked){
 
@@ -70,5 +120,3 @@ if (_flag_clicked){
 		_flag_clicked = false;
 	}
 }
-
-#endregion

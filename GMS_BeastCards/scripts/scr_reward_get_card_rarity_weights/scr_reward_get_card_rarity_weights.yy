@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reward_get_card_rarity_weights",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reward_get_card_rarity_weights",
+  "parent":{
+    "name":"ENCOUNTERS",
+    "path":"folders/OVERWORLD/ENCOUNTERS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

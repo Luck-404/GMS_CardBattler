@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_set_hover_tooltip",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_set_hover_tooltip",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/GUI/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

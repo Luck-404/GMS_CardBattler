@@ -13,6 +13,8 @@
 
 function scr_beast_set_level(_stct_beast,_val_level,_flag_full_heal=false){
 
+	#region VALIDATION
+
 	//================//
 	//VALIDATE BEAST//
 	//================//
@@ -20,35 +22,86 @@ function scr_beast_set_level(_stct_beast,_val_level,_flag_full_heal=false){
 		return false;
 	}
 
+	#endregion
+
+	#region CURRENT HP
+
 	//========================//
 	//STORE CURRENT HP RATIO//
 	//========================//
-	var _val_old_max_hp = max(1,_stct_beast._val_beast_hp_max);
-	var _val_hp_ratio = clamp(_stct_beast._val_beast_hp_cur / _val_old_max_hp,0,1);
+	var _val_old_max_hp = max(
+		1,
+		_stct_beast._val_beast_hp_max
+	);
+
+	var _val_hp_ratio = clamp(
+		_stct_beast._val_beast_hp_cur /
+			_val_old_max_hp,
+		0,
+		1
+	);
+
+	#endregion
+
+	#region LEVEL
 
 	//================//
 	//SET LEVEL//
 	//================//
-	_stct_beast._val_beast_level = clamp(floor(_val_level),1,30);
+	_stct_beast._val_beast_level = clamp(
+		floor(_val_level),
+		1,
+		30
+	);
+
+	#endregion
+
+	#region MAXIMUM HP
+
+	//================//
+	//SANITIZE HP STAT//
+	//================//
+	_stct_beast._val_beast_hp_stat = max(
+		0,
+		_stct_beast._val_beast_hp_stat
+	);
 
 	//========================//
 	//RECALCULATE MAXIMUM HP//
 	//========================//
-	_stct_beast._val_beast_hp_max = scr_beast_get_max_hp(
-		_stct_beast._val_beast_hp_stat,
-		_stct_beast._val_beast_level
-	);
+	_stct_beast._val_beast_hp_max =
+		scr_beast_get_max_hp(
+			_stct_beast._val_beast_hp_stat,
+			_stct_beast._val_beast_level
+		);
+
+	#endregion
+
+	#region CURRENT HP UPDATE
 
 	//================//
 	//UPDATE HP//
 	//================//
 	if (_flag_full_heal){
-		_stct_beast._val_beast_hp_cur = _stct_beast._val_beast_hp_max;
+
+		_stct_beast._val_beast_hp_cur =
+			_stct_beast._val_beast_hp_max;
 	}
 	else{
-		_stct_beast._val_beast_hp_cur = ceil(_stct_beast._val_beast_hp_max * _val_hp_ratio);
-		_stct_beast._val_beast_hp_cur = clamp(_stct_beast._val_beast_hp_cur,0,_stct_beast._val_beast_hp_max);
+
+		_stct_beast._val_beast_hp_cur = ceil(
+			_stct_beast._val_beast_hp_max *
+				_val_hp_ratio
+		);
+
+		_stct_beast._val_beast_hp_cur = clamp(
+			_stct_beast._val_beast_hp_cur,
+			0,
+			_stct_beast._val_beast_hp_max
+		);
 	}
+
+	#endregion
 
 	return true;
 }

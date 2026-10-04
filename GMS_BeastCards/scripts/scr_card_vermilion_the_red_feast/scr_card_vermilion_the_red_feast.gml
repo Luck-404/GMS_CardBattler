@@ -282,7 +282,7 @@ function scr_card_vermilion_the_red_feast(_stct_card,_ref_caster,_ref_target){
 		//================//
 		//GRANT BOOST//
 		//================//
-		scr_status_apply_buff("BOOST", _ref_caster, 25, 2);
+		scr_status_apply_buff("BOOST", _ref_caster, 10, 2);
 	}
 
 	#endregion

@@ -16,5 +16,5 @@ function scr_card_viridian_toxic_hide(_stct_card,_ref_caster,_ref_target){
 	//==================//
 	//APPLY TOXIC HIDE//
 	//==================//
-	scr_status_apply_buff("TOXIC_HIDE", _ref_target, 1, 3);
+	scr_status_apply_buff("TOXIC_HIDE", _ref_target, _stct_card._val_card_magnitude, 3);
 }

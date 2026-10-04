@@ -98,9 +98,11 @@ function scr_trap_volatile_brand(_str_tag,_ref_trap,_ref_attacker,_ref_target,_s
 			//================//
 			//REVEAL TRAP//
 			//================//
-			scr_gui_spawn_popup_trigger_banner(
-				"TRAP TRIGGERED: VOLATILE BRAND"
-			);
+scr_gui_spawn_popup_trigger_banner(
+	"TRAP TRIGGERED: VOLATILE BRAND",
+	_ref_trap._ref_owner,
+	_ref_host
+);
 
 			//======================//
 			//STORE GLOBAL CONTEXT//

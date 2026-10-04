@@ -1,12 +1,15 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_INVENTORY_GET_ITEM_INFO
-// FUNCTION: Creates a new item struct from an item id.
-//           Populates item display, behavior, trigger, and stack data.
-//           Assigns a unique item uid before returning the item.
+// FUNCTION: Builds and returns the authoritative Item struct for a requested
+//           Item ID.
 //
-// ARGUMENTS: _str_item_id is the item id used to build the item struct.
-// RETURNS: A newly created item struct.
+//           Defines Item display data, sprite, Item Type, trigger type,
+//           behavior script, description, team-Unique metadata, stack behavior,
+//           quantity limits, and Item UID assignment.
+//
+// ARGUMENTS: _str_item_id - Item ID to resolve.
+// RETURNS: Complete Item struct for the requested Item ID.
 //
 //===============================================================================//
 
@@ -25,6 +28,7 @@ function scr_inventory_get_item_info(_str_item_id){
 		_scr_item : undefined,
 		_str_item_desc : "DEFAULT",
 		_flag_consumed_on_trigger : false,
+		_flag_unique_team : false,
 		_flag_stackable : false,
 		_ct_item_amount : 1,
 		_ct_item_max_amount : 1,
@@ -66,13 +70,29 @@ function scr_inventory_get_item_info(_str_item_id){
 
 		#endregion
 
+
+		case "HELD_ARCANE_CAPACITOR":
+			_stct_item._str_item_name = "ARCANE CAPACITOR";
+			_stct_item._spr_item = spr_item_held_arcane_capacitor;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "TEAM_RULE";
+			_stct_item._scr_item = scr_inventory_item_held_arcane_capacitor;
+			_stct_item._str_item_desc = "Unique (1 per team). Increases the player's maximum Mana by 1.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_unique_team = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
 		case "HELD_ARCHMAGES_FOCUS":
 			_stct_item._str_item_name = "ARCHMAGE'S FOCUS";
 			_stct_item._spr_item = spr_item_held_archmages_focus;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "PASSIVE";
 			_stct_item._scr_item = scr_inventory_item_held_archmages_focus;
-			_stct_item._str_item_desc = "Unique. Draw 1 additional Card at the beginning of each player turn.";
+			_stct_item._str_item_desc = "Unique (1 per team). Draw 1 additional Card at the beginning of each player turn.";
+			_stct_item._flag_unique_team = true;
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;
@@ -84,12 +104,55 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "PASSIVE";
 			_stct_item._scr_item = scr_inventory_item_held_forgotten_manuscript;
-			_stct_item._str_item_desc = "Unique. Increases maximum hand size by 1.";
+			_stct_item._str_item_desc = "Unique (1 per team). Increases maximum hand size by 1.";
+			_stct_item._flag_unique_team = true;
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;
 		break;
 
+		#region MATERIAL
+
+		case "MATERIAL_BLADE_GRASS":
+		case "MATERIAL_CRIMSITE":
+		case "MATERIAL_DARKWOOD":
+		case "MATERIAL_DAZZLING_HIDE":
+		case "MATERIAL_HARDSTONE":
+		case "MATERIAL_IRON":
+		case "MATERIAL_LEAF_LITTER":
+		case "MATERIAL_LIFEPETAL":
+		case "MATERIAL_LIGHTWOOD":
+		case "MATERIAL_LINEN":
+		case "MATERIAL_ROUGH_BONE":
+		case "MATERIAL_SILK":
+		case "MATERIAL_SIMPLE_HIDE":
+		case "MATERIAL_SOFTSTONE":
+		case "MATERIAL_VINES":
+
+			var _stct_material_info = scr_inventory_get_material_info(_str_item_id);
+
+			if (_stct_material_info != undefined){
+
+				_stct_item._str_item_id = _stct_material_info._str_item_id;
+				_stct_item._str_item_name = _stct_material_info._str_item_name;
+
+				_stct_item._spr_item = _stct_material_info._spr_item;
+
+				_stct_item._str_item_type = "MATERIAL";
+
+				_stct_item._scr_item = scr_inventory_use_material_item;
+
+				_stct_item._str_item_desc = _stct_material_info._str_item_desc;
+
+				_stct_item._flag_stackable = true;
+
+				_stct_item._ct_item_amount = 1;
+				_stct_item._ct_item_max_amount = 100;
+			}
+
+		break;
+
+		#endregion
 		#region PRISM
 
 		case "PRISM_COMMON":
@@ -117,6 +180,205 @@ function scr_inventory_get_item_info(_str_item_id){
 		#endregion
 
 		#region HELD
+
+
+
+		case "HELD_BATTLE_STANDARD":
+			_stct_item._str_item_name = "BATTLE STANDARD";
+			_stct_item._spr_item = spr_item_held_battle_standard;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "GAINED BOOST";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_battle_standard;
+			_stct_item._str_item_desc = "On battle entry, the holder gains 1 stack of BOOST (+10% damage) for 3 turns.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_BLOOD_MOON_TALISMAN":
+			_stct_item._str_item_name = "BLOOD MOON TALISMAN";
+			_stct_item._spr_item = spr_item_held_blood_moon_talisman;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED EVENT: BLOOD MOON";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_blood_moon_talisman;
+			_stct_item._str_item_desc = "Begin battle with BLOOD MOON.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_BLOODSTAINED_IDOL":
+			_stct_item._str_item_name = "BLOODSTAINED IDOL";
+			_stct_item._spr_item = spr_item_held_bloodstained_idol;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED EVENT: BLOODMIST";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_bloodstained_idol;
+			_stct_item._str_item_desc = "Begin battle with BLOODMIST.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_BLOOMTIDE_CHALICE":
+			_stct_item._str_item_name = "BLOOMTIDE CHALICE";
+			_stct_item._spr_item = spr_item_held_bloomtide_chalice;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED EVENT: BLOOMTIDE";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_bloomtide_chalice;
+			_stct_item._str_item_desc = "Begin battle with BLOOMTIDE.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_CINDER_CORE":
+			_stct_item._str_item_name = "CINDER CORE";
+			_stct_item._spr_item = spr_item_held_cinder_core;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED WEATHER: HEATWAVE";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_cinder_core;
+			_stct_item._str_item_desc = "Begin battle with HEATWAVE.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_EXPANDED_GRIMOIRE":
+			_stct_item._str_item_name = "EXPANDED GRIMOIRE";
+			_stct_item._spr_item = spr_item_held_expanded_grimoire;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "TEAM_RULE";
+			_stct_item._scr_item = scr_inventory_item_held_expanded_grimoire;
+			_stct_item._str_item_desc = "Unique (1 per team). Increases maximum Deck Size by 5.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_unique_team = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_FIRESTORM_LANTERN":
+			_stct_item._str_item_name = "FIRESTORM LANTERN";
+			_stct_item._spr_item = spr_item_held_firestorm_lantern;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED WEATHER: FIRESTORM";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_firestorm_lantern;
+			_stct_item._str_item_desc = "Begin battle with FIRESTORM.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_RAINCALLER_SHELL":
+			_stct_item._str_item_name = "RAINCALLER SHELL";
+			_stct_item._spr_item = spr_item_held_raincaller_shell;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED WEATHER: RAIN";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_raincaller_shell;
+			_stct_item._str_item_desc = "Begin battle with RAIN.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_SEERS_LENS":
+			_stct_item._str_item_name = "SEER'S LENS";
+			_stct_item._spr_item = spr_item_held_seers_lens;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "TEAM_RULE";
+			_stct_item._scr_item = scr_inventory_item_held_seers_lens;
+			_stct_item._str_item_desc = "Draw 2 additional Cards in the opening hand.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_unique_team = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_SNOW_GLOBE":
+			_stct_item._str_item_name = "SNOW GLOBE";
+			_stct_item._spr_item = spr_item_held_snow_globe;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED WEATHER: SNOW";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_snow_globe;
+			_stct_item._str_item_desc = "Begin battle with SNOW.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_STORMGLASS":
+			_stct_item._str_item_name = "STORMGLASS";
+			_stct_item._spr_item = spr_item_held_stormglass;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "STARTED WEATHER: STORMING";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_stormglass;
+			_stct_item._str_item_desc = "Begin battle with STORMING.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_AMPLIFYING_BELL":
+			_stct_item._str_item_name = "AMPLIFYING BELL";
+			_stct_item._spr_item = spr_item_held_amplifying_bell;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE_MODIFIER";
+			_stct_item._scr_item = scr_inventory_item_held_amplifying_bell;
+			_stct_item._str_item_desc = "Unique (1 per team). When the holder creates a stackable Buff, it gains 1 additional stack.";
+			_stct_item._flag_unique_team = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_BLIGHT_VIAL":
+			_stct_item._str_item_name = "BLIGHT VIAL";
+			_stct_item._spr_item = spr_item_held_blight_vial;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE_MODIFIER";
+			_stct_item._scr_item = scr_inventory_item_held_blight_vial;
+			_stct_item._str_item_desc = "Unique (1 per team). When the holder creates a stackable DoT, it gains 1 additional stack.";
+			_stct_item._flag_unique_team = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_POCKET_HIVE":
+			_stct_item._str_item_name = "POCKET HIVE";
+			_stct_item._spr_item = spr_item_held_pocket_hive;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "SPAWNED WASP DRONES";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_pocket_hive;
+			_stct_item._str_item_desc = "On battle entry, summon up to 3 Wasp Drones on the holder, stopping when its Minion slots are full.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
 
 		case "HELD_POWERFUL_STONE":
 			_stct_item._str_item_name = "POWERFUL STONE";
@@ -158,10 +420,11 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_name = "VERDANT SEED";
 			_stct_item._spr_item = spr_item_held_verdant_seed;
 			_stct_item._str_item_type = "HELD";
-			_stct_item._str_trigger_text = "STARTED EVENT: SEEDFALL";
+			_stct_item._str_trigger_text = "STARTED WEATHER: SEEDFALL";
 			_stct_item._str_item_trigger_type = "ENTRY";
 			_stct_item._scr_item = scr_inventory_item_held_verdant_seed;
-			_stct_item._str_item_desc = "Can be given to a beast to trigger a SEEDFALL event upon battle entry.";
+			_stct_item._str_item_desc = "Begin battle with SEEDFALL.";
+			_stct_item._flag_consumed_on_trigger = false;
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;
@@ -197,9 +460,10 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._spr_item = spr_item_held_healing_fruit;
 			_stct_item._str_item_type = "HELD";
 			_stct_item._str_item_trigger_type = "ON_TARGET";
-			_stct_item._str_trigger_text = "HEALED FOR 50% HP";
+			_stct_item._str_trigger_text = "HEALED FOR 25% HP";
 			_stct_item._scr_item = scr_inventory_item_held_healing_fruit;
-			_stct_item._str_item_desc = "When damaged below 50% HP, restores 50% of maximum HP.";
+			_stct_item._str_item_desc = "After taking direct HP damage, if the holder is below 50% HP, restore 25% of maximum HP. Consumed.";
+			_stct_item._flag_consumed_on_trigger = true;
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;
@@ -225,6 +489,378 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_trigger_type = "BATTLE_EXIT";
 			_stct_item._scr_item = scr_inventory_item_held_gold_fang;
 			_stct_item._str_item_desc = "Increases gold gained from victorious battles by 10%.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_BROOD_TOTEM":
+			_stct_item._str_item_name = "BROOD TOTEM";
+			_stct_item._spr_item = spr_item_held_brood_totem;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_brood_totem;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their Minion Slots by 1.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_CERULEAN_INCENSE":
+			_stct_item._str_item_name = "CERULEAN INCENSE";
+			_stct_item._spr_item = spr_item_held_cerulean_incense;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ENCOUNTER";
+			_stct_item._scr_item = scr_inventory_item_held_cerulean_incense;
+			_stct_item._str_item_desc = "Doubles the encounter weight of Cerulean Beasts already present in local encounter pools. Does not stack.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_COLLECTORS_SEAL":
+			_stct_item._str_item_name = "COLLECTOR'S SEAL";
+			_stct_item._spr_item = spr_item_held_collectors_seal;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "RESOURCE";
+			_stct_item._scr_item = scr_inventory_item_held_collectors_seal;
+			_stct_item._str_item_desc = "Increases normal Beast and Zone Item reward chance from victorious battles by 10 percentage points. Stacks.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_CURSED_IDOL":
+			_stct_item._str_item_name = "CURSED IDOL";
+			_stct_item._spr_item = spr_item_held_cursed_idol;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "APPLIED WITHER x3";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_cursed_idol;
+			_stct_item._str_item_desc = "On battle entry, attempt to apply WITHER x3 for 3 turns to a random living enemy.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_DORMANT_POD":
+			_stct_item._str_item_name = "DORMANT POD";
+			_stct_item._spr_item = spr_item_held_dormant_pod;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "SPAWNED DORMANT SEEDS";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_dormant_pod;
+			_stct_item._str_item_desc = "On battle entry, summon up to 2 Dormant Seeds on the holder, stopping when its Minion slots are full.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_EMBER_LENS":
+			_stct_item._str_item_name = "EMBER LENS";
+			_stct_item._spr_item = spr_item_held_ember_lens;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE_MODIFIER";
+			_stct_item._scr_item = scr_inventory_item_held_ember_lens;
+			_stct_item._str_item_desc = "Holder's Vermilion Attack Cards gain +2 base damage magnitude.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_FLEET_FEATHER":
+			_stct_item._str_item_name = "FLEET FEATHER";
+			_stct_item._spr_item = spr_item_held_fleet_feather;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_fleet_feather;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their Speed by 20.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_HAWKEYE_LENS":
+			_stct_item._str_item_name = "HAWKEYE LENS";
+			_stct_item._spr_item = spr_item_held_hawkeye_lens;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_hawkeye_lens;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their Critical Hit Chance by 5%.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_IRON_SHELL":
+			_stct_item._str_item_name = "IRON SHELL";
+			_stct_item._spr_item = spr_item_held_iron_shell;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_iron_shell;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their physical defense.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_LUCKY_COIN":
+			_stct_item._str_item_name = "LUCKY COIN";
+			_stct_item._spr_item = spr_item_held_lucky_coin;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "RESOURCE";
+			_stct_item._scr_item = scr_inventory_item_held_lucky_coin;
+			_stct_item._str_item_desc = "Increases all normal optional battle reward chances by 5 percentage points. Stacks.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_MENDING_MOSS":
+			_stct_item._str_item_name = "MENDING MOSS";
+			_stct_item._spr_item = spr_item_held_mending_moss;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "HEALED 5";
+			_stct_item._str_item_trigger_type = "TURN_END";
+			_stct_item._scr_item = scr_inventory_item_held_mending_moss;
+			_stct_item._str_item_desc = "At Turn End, heal the holder for 5 HP.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_NEUTRAL_LENS":
+			_stct_item._str_item_name = "NEUTRAL LENS";
+			_stct_item._spr_item = spr_item_held_neutral_lens;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE_MODIFIER";
+			_stct_item._scr_item = scr_inventory_item_held_neutral_lens;
+			_stct_item._str_item_desc = "Holder's Uncolored Attack Cards gain +2 base damage magnitude.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_PHOENIX_EMBER":
+			_stct_item._str_item_name = "PHOENIX EMBER";
+			_stct_item._spr_item = spr_item_held_phoenix_ember;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ON_FATAL";
+			_stct_item._str_trigger_text = "DEATH PREVENTED";
+			_stct_item._scr_item = scr_inventory_item_held_phoenix_ember;
+			_stct_item._str_item_desc = "Prevents defeat once. Restore 5% of maximum HP and remove all other Status effects except OUTLEVELED and other resurrection effects. Consumed.";
+			_stct_item._flag_consumed_on_trigger = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_PURIFYING_BELL":
+			_stct_item._str_item_name = "PURIFYING BELL";
+			_stct_item._spr_item = spr_item_held_purifying_bell;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "CLEANSE";
+			_stct_item._str_item_trigger_type = "TURN_START";
+			_stct_item._scr_item = scr_inventory_item_held_purifying_bell;
+			_stct_item._str_item_desc = "At Turn Start, cleanse 1 stack from one random cleansable negative Status on the holder.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_QUICKSILK_RIBBON":
+			_stct_item._str_item_name = "QUICKSILK RIBBON";
+			_stct_item._spr_item = spr_item_held_quicksilk_ribbon;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_quicksilk_ribbon;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their Dodge Chance by 5%.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_RAZOR_FANG":
+			_stct_item._str_item_name = "RAZOR FANG";
+			_stct_item._spr_item = spr_item_held_razor_fang;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_razor_fang;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their Critical Hit Damage by 10%.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_REGROWTH_CHARM":
+			_stct_item._str_item_name = "REGROWTH CHARM";
+			_stct_item._spr_item = spr_item_held_regrowth_charm;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "RESTORED 3% MAX HP";
+			_stct_item._str_item_trigger_type = "TURN_END";
+			_stct_item._scr_item = scr_inventory_item_held_regrowth_charm;
+			_stct_item._str_item_desc = "Unique (1 per team). At Turn End, heal the holder for 3% of its maximum HP.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_unique_team = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_RESOLUTE_CHARM":
+			_stct_item._str_item_name = "RESOLUTE CHARM";
+			_stct_item._spr_item = spr_item_held_resolute_charm;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_resolute_charm;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their Constitution by 20.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_SALVAGERS_MAGNET":
+			_stct_item._str_item_name = "SALVAGER'S MAGNET";
+			_stct_item._spr_item = spr_item_held_salvagers_magnet;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "RESOURCE";
+			_stct_item._scr_item = scr_inventory_item_held_salvagers_magnet;
+			_stct_item._str_item_desc = "Guarantees 1 additional Material reward after victorious battles. Stacks with other Salvager's Magnets.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_SCHOLARS_RIBBON":
+			_stct_item._str_item_name = "SCHOLAR'S RIBBON";
+			_stct_item._spr_item = spr_item_held_scholars_ribbon;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "RESOURCE";
+			_stct_item._scr_item = scr_inventory_item_held_scholars_ribbon;
+			_stct_item._str_item_desc = "Holder gains 2 additional EXP after victorious battles if they survive.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_SCRIBES_QUILL":
+			_stct_item._str_item_name = "SCRIBE'S QUILL";
+			_stct_item._spr_item = spr_item_held_scribes_quill;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "RESOURCE";
+			_stct_item._scr_item = scr_inventory_item_held_scribes_quill;
+			_stct_item._str_item_desc = "Increases Beast and Zone Card reward chances from victorious battles by 10 percentage points. Stacks.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_THORNPLATE":
+			_stct_item._str_item_name = "THORNPLATE";
+			_stct_item._spr_item = spr_item_held_thornplate;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ON_DIRECT_DAMAGE";
+			_stct_item._str_trigger_text = "RETALIATED";
+			_stct_item._scr_item = scr_inventory_item_held_thornplate;
+			_stct_item._str_item_desc = "When struck by direct Card damage, retaliate for 3 fixed Neutral damage.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_TIDAL_LENS":
+			_stct_item._str_item_name = "TIDAL LENS";
+			_stct_item._spr_item = spr_item_held_tidal_lens;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE_MODIFIER";
+			_stct_item._scr_item = scr_inventory_item_held_tidal_lens;
+			_stct_item._str_item_desc = "Holder's Cerulean Attack Cards gain +2 base damage magnitude.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+
+		case "HELD_TRAVELERS_BUCKLER":
+			_stct_item._str_item_name = "TRAVELER'S BUCKLER";
+			_stct_item._spr_item = spr_item_held_travelers_buckler;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_trigger_text = "GAINED 20 ARMOR";
+			_stct_item._str_item_trigger_type = "ENTRY";
+			_stct_item._scr_item = scr_inventory_item_held_travelers_buckler;
+			_stct_item._str_item_desc = "On battle entry, the holder gains 20 Armor.";
+			_stct_item._flag_consumed_on_trigger = false;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_VERDANT_LENS":
+			_stct_item._str_item_name = "VERDANT LENS";
+			_stct_item._spr_item = spr_item_held_verdant_lens;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "PASSIVE_MODIFIER";
+			_stct_item._scr_item = scr_inventory_item_held_verdant_lens;
+			_stct_item._str_item_desc = "Holder's Viridian Attack Cards gain +2 base damage magnitude.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_VERMILION_INCENSE":
+			_stct_item._str_item_name = "VERMILION INCENSE";
+			_stct_item._spr_item = spr_item_held_vermilion_incense;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ENCOUNTER";
+			_stct_item._scr_item = scr_inventory_item_held_vermilion_incense;
+			_stct_item._str_item_desc = "Doubles the encounter weight of Vermilion Beasts already present in local encounter pools. Does not stack.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_VIRIDIAN_INCENSE":
+			_stct_item._str_item_name = "VIRIDIAN INCENSE";
+			_stct_item._spr_item = spr_item_held_viridian_incense;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ENCOUNTER";
+			_stct_item._scr_item = scr_inventory_item_held_viridian_incense;
+			_stct_item._str_item_desc = "Doubles the encounter weight of Viridian Beasts already present in local encounter pools. Does not stack.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_VITALITY_ROOT":
+			_stct_item._str_item_name = "VITALITY ROOT";
+			_stct_item._spr_item = spr_item_held_vitality_root;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_vitality_root;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their HP Stat by 20.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_WARDING_CRYSTAL":
+			_stct_item._str_item_name = "WARDING CRYSTAL";
+			_stct_item._spr_item = spr_item_held_warding_crystal;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "STATS";
+			_stct_item._scr_item = scr_inventory_item_held_warding_crystal;
+			_stct_item._str_item_desc = "Can be given to a beast to increase their magical defense.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;

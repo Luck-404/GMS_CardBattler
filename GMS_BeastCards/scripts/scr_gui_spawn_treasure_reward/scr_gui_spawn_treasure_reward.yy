@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_spawn_treasure_reward",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_spawn_treasure_reward",
+  "parent":{
+    "name":"TREASURE",
+    "path":"folders/GUI/POPUPS/TREASURE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

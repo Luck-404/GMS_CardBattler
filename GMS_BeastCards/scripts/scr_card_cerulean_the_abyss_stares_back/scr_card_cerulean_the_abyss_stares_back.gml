@@ -154,12 +154,22 @@ function scr_card_cerulean_the_abyss_stares_back(_stct_card,_ref_caster,_ref_tar
 			//RANDOM CERULEAN MINION//
 			//------------------------//
 			if (
-				variable_global_exists("list_pool_cerulean_minions") &&
-				ds_exists(global.list_pool_cerulean_minions,ds_type_list) &&
-				ds_list_size(global.list_pool_cerulean_minions) > 0
+				variable_global_exists("arr_pool_cerulean_minions") &&
+				is_array(global.arr_pool_cerulean_minions) &&
+				array_length(global.arr_pool_cerulean_minions) > 0
 			){
-				var _it_minion = irandom(ds_list_size(global.list_pool_cerulean_minions) - 1);
-				var _str_minion = ds_list_find_value(global.list_pool_cerulean_minions,_it_minion);
+
+				var _it_minion =
+					irandom(
+						array_length(
+							global.arr_pool_cerulean_minions
+						) - 1
+					);
+
+				var _str_minion =
+					global.arr_pool_cerulean_minions[
+						_it_minion
+					];
 
 				scr_minion_init(
 					_str_minion,

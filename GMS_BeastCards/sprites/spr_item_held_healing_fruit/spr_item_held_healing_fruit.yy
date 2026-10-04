@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"HEALING FRUIT",
-    "path":"folders/INVENTORY/ITEMS/HELD/HEALING FRUIT.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/REACTIVE/HEALING FRUIT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

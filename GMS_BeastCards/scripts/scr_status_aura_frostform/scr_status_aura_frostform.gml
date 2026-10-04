@@ -4,8 +4,8 @@
 // FUNCTION: Handles Frostform.
 //           Infinite Self Aura.
 //           Host is considered Frozen while still able to act.
-//           Damage dealt +50%.
-//           Damage taken +50%.
+//           Damage dealt +30%.
+//           Damage taken +15%.
 //           Attacks apply 1 Frostburn.
 //           Host gains 1 Frostbite each round.
 //           Owns the persistent Frostform VFX.
@@ -65,14 +65,19 @@ function scr_status_aura_frostform(_str_tag,_ref_status,_val_magnitude=undefined
 
 			_ref_new_status._str_status_type = "AURA";
 			_ref_new_status._str_status_name = "FROSTFORM";
-			_ref_new_status._str_status_desc = "CONSIDERED FROZEN; DAMAGE +50%; DAMAGE TAKEN +50%; ATTACKS APPLY FROSTBURN";
-
+			_ref_new_status._str_status_desc =
+			    "CONSIDERED FROZEN; DAMAGE +" +
+			    string(_ref_new_status._val_damage_bonus) +
+			    "%; DAMAGE TAKEN +" +
+			    string(_ref_new_status._val_damage_taken_bonus) +
+			    "%; ATTACKS APPLY FROSTBURN";
+				
 			_ref_new_status._spr_status = spr_status_aura_frostform;
 
 			_ref_new_status._ct_status_stacks = 1;
 
-			_ref_new_status._val_damage_bonus = 50;
-			_ref_new_status._val_damage_taken_bonus = 50;
+			_ref_new_status._val_damage_bonus = 30;
+			_ref_new_status._val_damage_taken_bonus = 15;
 
 			_ref_new_status._str_aura_scope = "SELF";
 			_ref_new_status._str_aura_trigger = "ATTACK";

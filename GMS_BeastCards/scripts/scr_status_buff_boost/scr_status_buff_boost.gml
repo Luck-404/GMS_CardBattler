@@ -1,10 +1,9 @@
-
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_BOOST
 // FUNCTION: Handles Boost.
 //           Stackable Timed Buff.
-//           Each stack increases outgoing damage by 25%.
+//           Each stack increases outgoing damage by 10%.
 //           Reapplication adds one stack and refreshes to the highest
 //           lifetime ever applied.
 //           Removes its full scalar contribution when the Buff expires.
@@ -41,20 +40,33 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//DEFAULTS//
 			//==========//
 			if (_val_magnitude == undefined){
-				_val_magnitude = 25;
+				_val_magnitude = 10;
 			}
 
 			if (_val_lifetime == undefined){
 				_val_lifetime = 2;
 			}
 
-			_val_magnitude = max(0,_val_magnitude);
-			_val_lifetime = max(1,_val_lifetime);
+			_val_magnitude =
+				max(
+					0,
+					_val_magnitude
+				);
+
+			_val_lifetime =
+				max(
+					1,
+					_val_lifetime
+				);
 
 			//================//
 			//CHECK EXISTING//
 			//================//
-			var _ref_existing_status = scr_status_check("BOOST",_ref_target);
+			var _ref_existing_status =
+				scr_status_check(
+					"BOOST",
+					_ref_target
+				);
 
 			//================//
 			//STACK EXISTING//
@@ -64,31 +76,38 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 				instance_exists(_ref_existing_status)
 			){
 
-				//----------------//
+				//================//
 				//ADD ONE STACK//
-				//----------------//
-				_ref_existing_status._ct_status_stacks++;
+				//================//
+				_ref_existing_status
+					._ct_status_stacks++;
 
 				_ref_target._val_dmg_scalar_bonus +=
-					_ref_existing_status._val_status_magnitude;
+					_ref_existing_status
+						._val_status_magnitude;
 
-				//----------------//
+				//================//
 				//REFRESH LIFETIME//
-				//----------------//
+				//================//
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
-				//----------------//
+				//================//
 				//UPDATE DESCRIPTION//
-				//----------------//
+				//================//
 				var _val_total_bonus =
-					_ref_existing_status._val_status_magnitude *
-					_ref_existing_status._ct_status_stacks;
+					_ref_existing_status
+						._val_status_magnitude *
+					_ref_existing_status
+						._ct_status_stacks;
 
-				_ref_existing_status._str_status_desc =
-					"+" + string(_val_total_bonus) + "% DAMAGE";
+				_ref_existing_status
+					._str_status_desc =
+						"+" +
+						string(_val_total_bonus) +
+						"% DAMAGE";
 
 				return _ref_existing_status;
 			}
@@ -96,31 +115,44 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//================//
 			//CREATE STATUS//
 			//================//
-			var _ref_new_status = instance_create_layer(
-				_ref_target.x,
-				_ref_target.y,
-				"ily_status",
-				obj_battle_status
-			);
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
 
 			//================//
 			//STATUS DATA//
 			//================//
-			_ref_new_status._scr_status = scr_status_buff_boost;
+			_ref_new_status._scr_status =
+				scr_status_buff_boost;
 
-			_ref_new_status._ref_host = _ref_target;
+			_ref_new_status._ref_host =
+				_ref_target;
 
-			_ref_new_status._str_status_type = "BUFF";
-			_ref_new_status._str_status_name = "BOOST";
+			_ref_new_status._str_status_type =
+				"BUFF";
+
+			_ref_new_status._str_status_name =
+				"BOOST";
+
 			_ref_new_status._str_status_desc =
-				"+" + string(_val_magnitude) + "% DAMAGE";
+				"+" +
+				string(_val_magnitude) +
+				"% DAMAGE";
 
-			_ref_new_status._spr_status = spr_status_buff_boost;
+			_ref_new_status._spr_status =
+				spr_status_buff_boost;
 
 			_ref_new_status._ct_status_stacks = 1;
-			_ref_new_status._val_status_magnitude = _val_magnitude;
 
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._val_status_magnitude =
+				_val_magnitude;
+
+			_ref_new_status._str_trigger_region =
+				"END";
 
 			//==========================//
 			//INITIALIZE STACKABLE TIMER//
@@ -135,7 +167,8 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//================//
 			//APPLY DAMAGE BONUS//
 			//================//
-			_ref_target._val_dmg_scalar_bonus += _val_magnitude;
+			_ref_target._val_dmg_scalar_bonus +=
+				_val_magnitude;
 
 			//================//
 			//REGISTER STATUS//
@@ -145,7 +178,9 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 				_ref_new_status
 			);
 
-			scr_status_reposition(_ref_target);
+			scr_status_reposition(
+				_ref_target
+			);
 
 			return _ref_new_status;
 
@@ -160,11 +195,14 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				scr_status_destroy(_ref_status);
+				scr_status_destroy(
+					_ref_status
+				);
 
 				return undefined;
 			}
@@ -172,9 +210,13 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//================//
 			//UPDATE LIFETIME//
 			//================//
-			scr_status_tick_lifetime(_ref_status);
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
-			scr_status_reposition(_ref_host);
+			scr_status_reposition(
+				_ref_host
+			);
 
 		break;
 
@@ -187,7 +229,8 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (instance_exists(_ref_host)){
 
@@ -209,7 +252,9 @@ function scr_status_buff_boost(_str_tag,_ref_status,_val_magnitude=undefined,_va
 			//================//
 			//DESTROY STATUS//
 			//================//
-			scr_status_destroy(_ref_status);
+			scr_status_destroy(
+				_ref_status
+			);
 
 		break;
 	}

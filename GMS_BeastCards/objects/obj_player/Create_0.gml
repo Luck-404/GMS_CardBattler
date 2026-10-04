@@ -69,10 +69,10 @@ scr_debug_log(
 	global.list_player_deck = ds_list_create();
 	global.list_player_library = ds_list_create();
 
-	global.list_pool_cards_rarity_I = ds_list_create();
-	global.list_pool_cards_rarity_II = ds_list_create();
-	global.list_pool_cards_rarity_III = ds_list_create();
-	global.list_pool_cards_rarity_IV = ds_list_create();
+	global.arr_pool_cards_rarity_I = [];
+	global.arr_pool_cards_rarity_II = [];
+	global.arr_pool_cards_rarity_III = [];
+	global.arr_pool_cards_rarity_IV = [];
 
 	#endregion
 
@@ -81,9 +81,9 @@ scr_debug_log(
 	//----------------//
 	#region MINION GLOBALS
 
-	global.list_pool_viridian_minions = ds_list_create();
-	global.list_pool_cerulean_minions = ds_list_create();
-	global.list_pool_vermilion_minions = ds_list_create();
+	global.arr_pool_viridian_minions = [];
+	global.arr_pool_cerulean_minions = [];
+	global.arr_pool_vermilion_minions = [];
 
 	#endregion
 
@@ -104,7 +104,7 @@ scr_debug_log(
 	global.uid_next_item = 0;
 
 	global.list_player_inventory = ds_list_create();
-	global.list_pool_items = ds_list_create();
+	global.arr_pool_items = [];
 
 	global.ct_inventory_revision = 0;
 
@@ -169,7 +169,9 @@ scr_debug_log(
 	global.str_last_player_banner = "";
 
 	global.arr_last_enemy_pool = [];
+	global.str_last_loot_zone_id = "UNASSIGNED";
 	global.stct_forced_enemy_unit = undefined;
+	global.stct_encounter_scaling = undefined;
 
 	#endregion
 
@@ -240,10 +242,10 @@ scr_debug_log(
 	"CARDS",
 	"INIT",
 	self,
-	"CARD POOLS INITIALIZED | I: " + string(ds_list_size(global.list_pool_cards_rarity_I)) +
-	" | II: " + string(ds_list_size(global.list_pool_cards_rarity_II)) +
-	" | III: " + string(ds_list_size(global.list_pool_cards_rarity_III)) +
-	" | IV: " + string(ds_list_size(global.list_pool_cards_rarity_IV)),
+	"CARD POOLS INITIALIZED | I: " + string(array_length(global.arr_pool_cards_rarity_I)) +
+	" | II: " + string(array_length(global.arr_pool_cards_rarity_II)) +
+	" | III: " + string(array_length(global.arr_pool_cards_rarity_III)) +
+	" | IV: " + string(array_length(global.arr_pool_cards_rarity_IV)),
 	"INIT",
 	"OBJ_PLAYER:CREATE"
 );
@@ -257,9 +259,9 @@ scr_debug_log(
 	"MINIONS",
 	"INIT",
 	self,
-	"MINION POOLS INITIALIZED | VIRIDIAN: " + string(ds_list_size(global.list_pool_viridian_minions)) +
-	" | CERULEAN: " + string(ds_list_size(global.list_pool_cerulean_minions)) +
-	" | VERMILION: " + string(ds_list_size(global.list_pool_vermilion_minions)),
+	"MINION POOLS INITIALIZED | VIRIDIAN: " + string(array_length(global.arr_pool_viridian_minions)) +
+	" | CERULEAN: " + string(array_length(global.arr_pool_cerulean_minions)) +
+	" | VERMILION: " + string(array_length(global.arr_pool_vermilion_minions)),
 	"INIT",
 	"OBJ_PLAYER:CREATE"
 );
@@ -273,7 +275,7 @@ scr_debug_log(
 	"INVENTORY",
 	"INIT",
 	self,
-	"ITEM POOL INITIALIZED | ITEMS: " + string(ds_list_size(global.list_pool_items)),
+	"ITEM POOL INITIALIZED | ITEMS: " + string(array_length(global.arr_pool_items)),
 	"INIT",
 	"OBJ_PLAYER:CREATE"
 );

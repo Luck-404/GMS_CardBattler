@@ -85,7 +85,9 @@ _arr_target_preview = [];
 //MINIONS//
 //---------//
 _flag_minions_init = false;
-_list_casting_minions = undefined;
+
+_arr_casting_minions = [];
+_it_casting_minion = 0;
 
 //----------//
 //STATUSES//
@@ -93,7 +95,9 @@ _list_casting_minions = undefined;
 global.list_statuses = ds_list_create();
 
 _flag_statuses_init = false;
-_list_statuses = undefined;
+
+_arr_statuses = [];
+_it_status_queue = 0;
 
 //--------//
 //BEASTS//
@@ -110,27 +114,14 @@ _list_battle_hand = ds_list_create();
 _list_battle_discard = ds_list_create();
 _list_battle_exhaust = ds_list_create();
 
-//-------------//
-//PRISM FLOW//
-//-------------//
-_stct_selected_prism = undefined;
-
-//--------------------//
-//PRISM BUTTON LAYOUT//
-//--------------------//
-_val_prism_button_x1 = 0;
-_val_prism_button_x2 = 100;
-
-_val_prism_button_y2 = 744;
-_val_prism_button_y1 = 793;
-
 //------------------//
 //TURN START ITEMS//
 //------------------//
 _flag_turn_start_items_init = false;
 _flag_turn_start_items_complete = false;
 
-_list_turn_start_items = undefined;
+_arr_turn_start_items = [];
+_it_turn_start_item = 0;
 
 //----------------//
 //TURN END ITEMS//
@@ -138,7 +129,8 @@ _list_turn_start_items = undefined;
 _flag_turn_end_items_init = false;
 _flag_turn_end_items_complete = false;
 
-_list_turn_end_items = undefined;
+_arr_turn_end_items = [];
+_it_turn_end_item = 0;
 
 //-----------------//
 //EXTRA TURN FLOW//
@@ -183,6 +175,18 @@ enum ENUM_PLAYER_STATE{
 }
 
 _state_player = ENUM_PLAYER_STATE.INIT_BEASTS;
+
+//================//
+//TEAM MANA RULES//
+//================//
+_val_max_mana =
+	scr_battle_get_player_max_mana();
+
+_val_cur_mana =
+	_val_max_mana;
+
+_val_saved_max_mana =
+	_val_max_mana;
 
 //-----------------//
 //POSITION MANA HUD//
@@ -235,7 +239,10 @@ hscr_battle_open_utility_tutor = function(){
 	//================//
 	//GET CANDIDATES//
 	//================//
-	var _arr_candidates = scr_battle_get_tutor_candidates(_str_tutor_card_type);
+	var _arr_candidates =
+		scr_battle_get_tutor_candidates(
+			_str_tutor_card_type
+		);
 
 	//----------------//
 	//NO CARDS FOUND//
@@ -283,12 +290,20 @@ hscr_battle_open_utility_tutor = function(){
 // FUNCTION: Queues Tutor selections for a specified primary Card Type.
 //           Defaults preserve Ancient Charts.
 //—------------------------------------------------------------------------------//
-hscr_battle_request_utility_tutor = function(_ct_amount,_str_primary_card_type="UTILITY",_str_title="ANCIENT CHARTS"){
+hscr_battle_request_utility_tutor = function(
+	_ct_amount,
+	_str_primary_card_type="UTILITY",
+	_str_title="ANCIENT CHARTS"
+){
 
 	//----------------//
 	//VALIDATE AMOUNT//
 	//----------------//
-	_ct_amount = max(0,floor(_ct_amount));
+	_ct_amount =
+		max(
+			0,
+			floor(_ct_amount)
+		);
 
 	if (_ct_amount <= 0){
 		return;
@@ -297,41 +312,17 @@ hscr_battle_request_utility_tutor = function(_ct_amount,_str_primary_card_type="
 	//================//
 	//SET TUTOR CONFIG//
 	//================//
-	_str_tutor_card_type = _str_primary_card_type;
-	_str_tutor_title = _str_title;
+	_str_tutor_card_type =
+		_str_primary_card_type;
+
+	_str_tutor_title =
+		_str_title;
 
 	//================//
 	//QUEUE SELECTIONS//
 	//================//
-	_ct_utility_tutors_pending += _ct_amount;
-};
-
-//—------------------------------------------------------------------------------//
-// hscr_battle_request_utility_tutor
-// FUNCTION: Queues Tutor selections for a specified primary Card Type.
-//           Defaults preserve Ancient Charts.
-//—------------------------------------------------------------------------------//
-hscr_battle_request_utility_tutor = function(_ct_amount,_str_primary_card_type="UTILITY",_str_title="ANCIENT CHARTS"){
-
-	//----------------//
-	//VALIDATE AMOUNT//
-	//----------------//
-	_ct_amount = max(0,floor(_ct_amount));
-
-	if (_ct_amount <= 0){
-		return;
-	}
-
-	//================//
-	//SET TUTOR CONFIG//
-	//================//
-	_str_tutor_card_type = _str_primary_card_type;
-	_str_tutor_title = _str_title;
-
-	//================//
-	//QUEUE SELECTIONS//
-	//================//
-	_ct_utility_tutors_pending += _ct_amount;
+	_ct_utility_tutors_pending +=
+		_ct_amount;
 };
 
 //—------------------------------------------------------------------------------//
@@ -344,7 +335,8 @@ hscr_battle_request_card_discard = function(_ct_amount){
 		return;
 	}
 
-	_ct_effect_discards_pending += floor(_ct_amount);
+	_ct_effect_discards_pending +=
+		floor(_ct_amount);
 };
 
 //—------------------------------------------------------------------------------//
@@ -359,7 +351,8 @@ hscr_battle_request_card_discard = function(_ct_amount){
 //—------------------------------------------------------------------------------//
 hscr_battle_finish_player_turn = function(){
 
-	_state_player = ENUM_PLAYER_STATE.WAIT;
+	_state_player =
+		ENUM_PLAYER_STATE.WAIT;
 
 	//----------------//
 	//EXTRA TURN//
@@ -379,7 +372,9 @@ hscr_battle_finish_player_turn = function(){
 			"OBJ_BATTLE_PLAYER_CONTROLLER:HSCR_BATTLE_FINISH_PLAYER_TURN"
 		);
 
-		scr_gui_spawn_popup_trigger_banner("CHRONO: EXTRA TURN");
+		scr_gui_spawn_popup_trigger_banner(
+			"CHRONO: EXTRA TURN"
+		);
 
 		return;
 	}
@@ -387,14 +382,23 @@ hscr_battle_finish_player_turn = function(){
 	//-----------------//
 	//NORMAL TURN PASS//
 	//-----------------//
-	obj_battle_turn_controller.hscr_battle_pass_turn();
+	obj_battle_turn_controller
+		.hscr_battle_pass_turn();
 };
 
 //—------------------------------------------------------------------------------//
 // hscr_battle_is_mouse_in_box
 // FUNCTION: Returns whether a GUI-space mouse position is inside a rectangle.
 //—------------------------------------------------------------------------------//
-hscr_battle_is_mouse_in_box = function(_val_mouse_x,_val_mouse_y,_val_x1,_val_y1,_val_x2,_val_y2){
+hscr_battle_is_mouse_in_box = function(
+	_val_mouse_x,
+	_val_mouse_y,
+	_val_x1,
+	_val_y1,
+	_val_x2,
+	_val_y2
+){
+
 	return (
 		_val_mouse_x >= _val_x1 &&
 		_val_mouse_x <= _val_x2 &&
@@ -411,11 +415,22 @@ hscr_battle_get_prism_stacks = function(){
 
 	var _arr_prisms = [];
 
-	var _ct_items = ds_list_size(global.list_player_inventory);
+	var _ct_items =
+		ds_list_size(
+			global.list_player_inventory
+		);
 
-	for (var _it_item = 0; _it_item < _ct_items; _it_item++){
+	for (
+		var _it_item = 0;
+		_it_item < _ct_items;
+		_it_item++
+	){
 
-		var _stct_item = ds_list_find_value(global.list_player_inventory,_it_item);
+		var _stct_item =
+			ds_list_find_value(
+				global.list_player_inventory,
+				_it_item
+			);
 
 		if (_stct_item == undefined){
 			continue;
@@ -429,7 +444,10 @@ hscr_battle_get_prism_stacks = function(){
 			continue;
 		}
 
-		array_push(_arr_prisms,_stct_item);
+		array_push(
+			_arr_prisms,
+			_stct_item
+		);
 	}
 
 	return _arr_prisms;
@@ -445,9 +463,17 @@ hscr_battle_check_prism_targets = function(){
 	//-----------------------//
 	//DISABLE PLAYER TARGETS//
 	//-----------------------//
-	for (var _it_player = 0; _it_player < ds_list_size(_list_beasts_alive); _it_player++){
+	for (
+		var _it_player = 0;
+		_it_player < ds_list_size(_list_beasts_alive);
+		_it_player++
+	){
 
-		var _ref_player_beast = ds_list_find_value(_list_beasts_alive,_it_player);
+		var _ref_player_beast =
+			ds_list_find_value(
+				_list_beasts_alive,
+				_it_player
+			);
 
 		if (instance_exists(_ref_player_beast)){
 			_ref_player_beast._flag_beast_range_check = false;
@@ -457,11 +483,21 @@ hscr_battle_check_prism_targets = function(){
 	//----------------------//
 	//ENABLE ENEMY TARGETS//
 	//----------------------//
-	var _list_enemies = obj_battle_enemy_controller._list_beasts_alive;
+	var _list_enemies =
+		obj_battle_enemy_controller
+			._list_beasts_alive;
 
-	for (var _it_enemy = 0; _it_enemy < ds_list_size(_list_enemies); _it_enemy++){
+	for (
+		var _it_enemy = 0;
+		_it_enemy < ds_list_size(_list_enemies);
+		_it_enemy++
+	){
 
-		var _ref_enemy_beast = ds_list_find_value(_list_enemies,_it_enemy);
+		var _ref_enemy_beast =
+			ds_list_find_value(
+				_list_enemies,
+				_it_enemy
+			);
 
 		if (instance_exists(_ref_enemy_beast)){
 			_ref_enemy_beast._flag_beast_range_check = true;
@@ -475,17 +511,21 @@ hscr_battle_check_prism_targets = function(){
 //—------------------------------------------------------------------------------//
 hscr_battle_draw_prism_button = function(){
 
-	var _val_mouse_x = device_mouse_x_to_gui(0);
-	var _val_mouse_y = device_mouse_y_to_gui(0);
+	var _val_mouse_x =
+		device_mouse_x_to_gui(0);
 
-	var _flag_hover = hscr_battle_is_mouse_in_box(
-		_val_mouse_x,
-		_val_mouse_y,
-		_val_prism_button_x1,
-		_val_prism_button_y1,
-		_val_prism_button_x2,
-		_val_prism_button_y2
-	);
+	var _val_mouse_y =
+		device_mouse_y_to_gui(0);
+
+	var _flag_hover =
+		hscr_battle_is_mouse_in_box(
+			_val_mouse_x,
+			_val_mouse_y,
+			_val_prism_button_x1,
+			_val_prism_button_y1,
+			_val_prism_button_x2,
+			_val_prism_button_y2
+		);
 
 	var _flag_active = (
 		_state_player == ENUM_PLAYER_STATE.SELECT_PRISM ||
@@ -496,7 +536,11 @@ hscr_battle_draw_prism_button = function(){
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
 
-	draw_set_colour((_flag_hover || _flag_active) ? c_white : global.c_dk_gray);
+	draw_set_colour(
+		(_flag_hover || _flag_active)
+			? c_white
+			: global.c_dk_gray
+	);
 
 	draw_rectangle(
 		_val_prism_button_x1,
@@ -529,29 +573,59 @@ hscr_battle_draw_prism_button = function(){
 //—------------------------------------------------------------------------------//
 // hscr_battle_draw_prism_menu
 // FUNCTION: Draws available Prism stacks while the Prism menu is open.
+//           Registers the hovered Prism item's name with the shared tooltip.
 //—------------------------------------------------------------------------------//
 hscr_battle_draw_prism_menu = function(){
 
-	if (_state_player != ENUM_PLAYER_STATE.SELECT_PRISM){
+	if (
+		_state_player !=
+		ENUM_PLAYER_STATE.SELECT_PRISM
+	){
 		return;
 	}
 
-	var _arr_prisms = hscr_battle_get_prism_stacks();
+	var _arr_prisms =
+		hscr_battle_get_prism_stacks();
 
-	draw_set_font(fnt_gui_small);
-	draw_set_halign(fa_center);
-	draw_set_valign(fa_top);
+	draw_set_font(
+		fnt_gui_small
+	);
+
+	draw_set_halign(
+		fa_center
+	);
+
+	draw_set_valign(
+		fa_top
+	);
 
 	//------------------//
 	//NO PRISMS FOUND//
 	//------------------//
-	if (array_length(_arr_prisms) <= 0){
+	if (
+		array_length(
+			_arr_prisms
+		) <=
+		0
+	){
 
-		draw_set_colour(c_black);
-		draw_text(room_width * 0.5,560,"NO PRISMS");
+		draw_set_colour(
+			c_black
+		);
 
-		draw_set_halign(fa_left);
-		draw_set_valign(fa_top);
+		draw_text(
+			room_width * 0.5,
+			560,
+			"NO PRISMS"
+		);
+
+		draw_set_halign(
+			fa_left
+		);
+
+		draw_set_valign(
+			fa_top
+		);
 
 		return;
 	}
@@ -559,50 +633,146 @@ hscr_battle_draw_prism_menu = function(){
 	//-----------------//
 	//LAYOUT SETTINGS//
 	//-----------------//
-	var _val_slot_w = 150;
-	var _val_slot_h = 85;
-	var _val_slot_gap = 10;
+	var _val_slot_w =
+		150;
 
-	var _ct_prisms = array_length(_arr_prisms);
+	var _val_slot_h =
+		85;
+
+	var _val_slot_gap =
+		10;
+
+	var _ct_prisms =
+		array_length(
+			_arr_prisms
+		);
 
 	var _val_total_w =
-		(_ct_prisms * _val_slot_w) +
-		((_ct_prisms - 1) * _val_slot_gap);
+		(
+			_ct_prisms *
+			_val_slot_w
+		) +
+		(
+			(
+				_ct_prisms -
+				1
+			) *
+			_val_slot_gap
+		);
 
-	var _val_start_x = room_width * 0.5 - (_val_total_w * 0.5);
-	var _val_start_y = 520;
+	var _val_start_x =
+		room_width *
+			0.5 -
+		(
+			_val_total_w *
+			0.5
+		);
 
-	var _val_mouse_x = device_mouse_x_to_gui(0);
-	var _val_mouse_y = device_mouse_y_to_gui(0);
+	var _val_start_y =
+		520;
+
+	var _val_mouse_x =
+		device_mouse_x_to_gui(0);
+
+	var _val_mouse_y =
+		device_mouse_y_to_gui(0);
 
 	//------------------//
 	//DRAW PRISM STACKS//
 	//------------------//
-	for (var _it_prism = 0; _it_prism < _ct_prisms; _it_prism++){
+	for (
+		var _it_prism = 0;
+		_it_prism < _ct_prisms;
+		_it_prism++
+	){
 
-		var _stct_item = _arr_prisms[_it_prism];
+		var _stct_item =
+			_arr_prisms[
+				_it_prism
+			];
 
-		var _val_x1 = _val_start_x + (_it_prism * (_val_slot_w + _val_slot_gap));
-		var _val_y1 = _val_start_y;
+		var _val_x1 =
+			_val_start_x +
+			(
+				_it_prism *
+				(
+					_val_slot_w +
+					_val_slot_gap
+				)
+			);
 
-		var _val_x2 = _val_x1 + _val_slot_w;
-		var _val_y2 = _val_y1 + _val_slot_h;
+		var _val_y1 =
+			_val_start_y;
 
-		var _flag_hover = hscr_battle_is_mouse_in_box(
-			_val_mouse_x,
-			_val_mouse_y,
+		var _val_x2 =
+			_val_x1 +
+			_val_slot_w;
+
+		var _val_y2 =
+			_val_y1 +
+			_val_slot_h;
+
+		var _flag_hover =
+			hscr_battle_is_mouse_in_box(
+				_val_mouse_x,
+				_val_mouse_y,
+				_val_x1,
+				_val_y1,
+				_val_x2,
+				_val_y2
+			);
+
+		//================//
+		//PRISM TOOLTIP//
+		//================//
+		if (
+			_flag_hover &&
+			!scr_gui_check_cheats_active()
+		){
+
+			scr_gui_set_hover_tooltip(
+				_stct_item
+					._str_item_name,
+				"",
+				60
+			);
+		}
+
+		//----------------//
+		//SLOT BACKGROUND//
+		//----------------//
+		draw_set_colour(
+			_flag_hover
+				? c_white
+				: global.c_dk_gray
+		);
+
+		draw_rectangle(
 			_val_x1,
 			_val_y1,
 			_val_x2,
-			_val_y2
+			_val_y2,
+			false
 		);
 
-		draw_set_colour(_flag_hover ? c_white : global.c_dk_gray);
-		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
+		//------------//
+		//SLOT BORDER//
+		//------------//
+		draw_set_colour(
+			c_black
+		);
 
-		draw_set_colour(c_black);
-		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,true);
+		draw_rectangle(
+			_val_x1,
+			_val_y1,
+			_val_x2,
+			_val_y2,
+			true
+		);
 
+		//-----------//
+		//PRISM ICON//
+		//-----------//
 		draw_sprite_ext(
 			_stct_item._spr_item,
 			0,
@@ -615,38 +785,86 @@ hscr_battle_draw_prism_menu = function(){
 			1
 		);
 
-		draw_set_colour(c_black);
+		//----------//
+		//ITEM NAME//
+		//----------//
+		draw_set_colour(
+			c_black
+		);
 
 		draw_text(
-			_val_x1 + (_val_slot_w * 0.5),
+			_val_x1 +
+				(
+					_val_slot_w *
+					0.5
+				),
 			_val_y1 + 12,
-			string(_stct_item._str_item_name)
+			string(
+				_stct_item
+					._str_item_name
+			)
 		);
 
+		//------//
+		//COUNT//
+		//------//
 		draw_text(
-			_val_x1 + (_val_slot_w * 0.5),
+			_val_x1 +
+				(
+					_val_slot_w *
+					0.5
+				),
 			_val_y1 + 34,
-			"x" + string(_stct_item._ct_item_amount)
+			"x" +
+			string(
+				_stct_item
+					._ct_item_amount
+			)
 		);
 
-		var _stct_prism_info = scr_inventory_get_prism_info(_stct_item._str_item_id);
+		//----------//
+		//PRISM INFO//
+		//----------//
+		var _stct_prism_info =
+			scr_inventory_get_prism_info(
+				_stct_item
+					._str_item_id
+			);
 
-		if (_stct_prism_info != undefined){
+		if (
+			_stct_prism_info !=
+			undefined
+		){
 
 			draw_text(
-				_val_x1 + (_val_slot_w * 0.5),
+				_val_x1 +
+					(
+						_val_slot_w *
+						0.5
+					),
 				_val_y1 + 54,
 				"+" +
-					string(_stct_prism_info._val_tame_bonus) +
-					"% | " +
-					string(_stct_prism_info._val_mana_cost) +
-					" MANA"
+				string(
+					_stct_prism_info
+						._val_tame_bonus
+				) +
+				"% | " +
+				string(
+					_stct_prism_info
+						._val_mana_cost
+				) +
+				" MANA"
 			);
 		}
 	}
 
-	draw_set_halign(fa_left);
-	draw_set_valign(fa_top);
+	draw_set_halign(
+		fa_left
+	);
+
+	draw_set_valign(
+		fa_top
+	);
 };
 
 //—------------------------------------------------------------------------------//
@@ -655,7 +873,8 @@ hscr_battle_draw_prism_menu = function(){
 //—------------------------------------------------------------------------------//
 hscr_battle_handle_prism_menu_input = function(){
 
-	var _arr_prisms = hscr_battle_get_prism_stacks();
+	var _arr_prisms =
+		hscr_battle_get_prism_stacks();
 
 	if (array_length(_arr_prisms) <= 0){
 		return;
@@ -665,25 +884,45 @@ hscr_battle_handle_prism_menu_input = function(){
 	var _val_slot_h = 85;
 	var _val_slot_gap = 10;
 
-	var _ct_prisms = array_length(_arr_prisms);
+	var _ct_prisms =
+		array_length(_arr_prisms);
 
 	var _val_total_w =
 		(_ct_prisms * _val_slot_w) +
 		((_ct_prisms - 1) * _val_slot_gap);
 
-	var _val_start_x = room_width * 0.5 - (_val_total_w * 0.5);
+	var _val_start_x =
+		room_width * 0.5 -
+		(_val_total_w * 0.5);
+
 	var _val_start_y = 520;
 
-	var _val_mouse_x = device_mouse_x_to_gui(0);
-	var _val_mouse_y = device_mouse_y_to_gui(0);
+	var _val_mouse_x =
+		device_mouse_x_to_gui(0);
 
-	for (var _it_prism = 0; _it_prism < _ct_prisms; _it_prism++){
+	var _val_mouse_y =
+		device_mouse_y_to_gui(0);
 
-		var _val_x1 = _val_start_x + (_it_prism * (_val_slot_w + _val_slot_gap));
+	for (
+		var _it_prism = 0;
+		_it_prism < _ct_prisms;
+		_it_prism++
+	){
+
+		var _val_x1 =
+			_val_start_x +
+			(
+				_it_prism *
+				(_val_slot_w + _val_slot_gap)
+			);
+
 		var _val_y1 = _val_start_y;
 
-		var _val_x2 = _val_x1 + _val_slot_w;
-		var _val_y2 = _val_y1 + _val_slot_h;
+		var _val_x2 =
+			_val_x1 + _val_slot_w;
+
+		var _val_y2 =
+			_val_y1 + _val_slot_h;
 
 		if (
 			!hscr_battle_is_mouse_in_box(
@@ -698,11 +937,15 @@ hscr_battle_handle_prism_menu_input = function(){
 			continue;
 		}
 
-		_stct_selected_prism = _arr_prisms[_it_prism];
+		_stct_selected_prism =
+			_arr_prisms[
+				_it_prism
+			];
 
 		hscr_battle_check_prism_targets();
 
-		_state_player = ENUM_PLAYER_STATE.SELECT_PRISM_TARGET;
+		_state_player =
+			ENUM_PLAYER_STATE.SELECT_PRISM_TARGET;
 
 		return;
 	}
@@ -714,11 +957,20 @@ hscr_battle_handle_prism_menu_input = function(){
 //—------------------------------------------------------------------------------//
 hscr_battle_check_card_oom = function(_list_cards){
 
-	var _ct_cards = ds_list_size(_list_cards);
+	var _ct_cards =
+		ds_list_size(_list_cards);
 
-	for (var _it_card = 0; _it_card < _ct_cards; _it_card++){
+	for (
+		var _it_card = 0;
+		_it_card < _ct_cards;
+		_it_card++
+	){
 
-		var _ref_card = ds_list_find_value(_list_cards,_it_card);
+		var _ref_card =
+			ds_list_find_value(
+				_list_cards,
+				_it_card
+			);
 
 		if (!instance_exists(_ref_card)){
 			continue;
@@ -728,7 +980,10 @@ hscr_battle_check_card_oom = function(_list_cards){
 			continue;
 		}
 
-		var _val_card_cost = _ref_card._ref_card._val_card_mana_cost;
+		var _val_card_cost =
+			_ref_card
+				._ref_card
+				._val_card_mana_cost;
 
 		_ref_card._flag_card_oom_check =
 			(_val_card_cost > _val_cur_mana);
@@ -742,16 +997,33 @@ hscr_battle_check_card_oom = function(_list_cards){
 //—------------------------------------------------------------------------------//
 hscr_battle_check_beast_color = function(_list_beasts_check){
 
-	var _arr_card_colors = global.ref_cast_card._ref_card._arr_card_colors;
+	var _arr_card_colors =
+		global.ref_cast_card
+			._ref_card
+			._arr_card_colors;
 
-	var _str_card_color_1 = _arr_card_colors[0];
-	var _str_card_color_2 = _arr_card_colors[1];
+	var _str_card_color_1 =
+		_arr_card_colors[0];
 
-	var _ct_beasts = ds_list_size(_list_beasts_check);
+	var _str_card_color_2 =
+		_arr_card_colors[1];
 
-	for (var _it_beast = 0; _it_beast < _ct_beasts; _it_beast++){
+	var _ct_beasts =
+		ds_list_size(
+			_list_beasts_check
+		);
 
-		var _ref_beast = ds_list_find_value(_list_beasts_check,_it_beast);
+	for (
+		var _it_beast = 0;
+		_it_beast < _ct_beasts;
+		_it_beast++
+	){
+
+		var _ref_beast =
+			ds_list_find_value(
+				_list_beasts_check,
+				_it_beast
+			);
 
 		if (!instance_exists(_ref_beast)){
 			continue;
@@ -767,10 +1039,16 @@ hscr_battle_check_beast_color = function(_list_beasts_check){
 			continue;
 		}
 
-		var _arr_beast_colors = _ref_beast._ref_unit._arr_beast_colors;
+		var _arr_beast_colors =
+			_ref_beast
+				._ref_unit
+				._arr_beast_colors;
 
-		var _str_beast_color_1 = _arr_beast_colors[0];
-		var _str_beast_color_2 = _arr_beast_colors[1];
+		var _str_beast_color_1 =
+			_arr_beast_colors[0];
+
+		var _str_beast_color_2 =
+			_arr_beast_colors[1];
 
 		var _flag_match = false;
 
@@ -804,7 +1082,8 @@ hscr_battle_check_beast_color = function(_list_beasts_check){
 			}
 		}
 
-		_ref_beast._flag_beast_color_check = _flag_match;
+		_ref_beast._flag_beast_color_check =
+			_flag_match;
 	}
 };
 
@@ -816,13 +1095,26 @@ hscr_battle_check_beast_color = function(_list_beasts_check){
 hscr_battle_check_beast_archetype = function(_list_beasts_check){
 
 	var _str_card_archetype =
-		global.ref_cast_card._ref_card._str_card_archetype_req;
+		global.ref_cast_card
+			._ref_card
+			._str_card_archetype_req;
 
-	var _ct_beasts = ds_list_size(_list_beasts_check);
+	var _ct_beasts =
+		ds_list_size(
+			_list_beasts_check
+		);
 
-	for (var _it_beast = 0; _it_beast < _ct_beasts; _it_beast++){
+	for (
+		var _it_beast = 0;
+		_it_beast < _ct_beasts;
+		_it_beast++
+	){
 
-		var _ref_beast = ds_list_find_value(_list_beasts_check,_it_beast);
+		var _ref_beast =
+			ds_list_find_value(
+				_list_beasts_check,
+				_it_beast
+			);
 
 		if (!instance_exists(_ref_beast)){
 			continue;
@@ -838,7 +1130,10 @@ hscr_battle_check_beast_archetype = function(_list_beasts_check){
 			continue;
 		}
 
-		var _str_beast_archetype = _ref_beast._ref_unit._str_beast_archetype;
+		var _str_beast_archetype =
+			_ref_beast
+				._ref_unit
+				._str_beast_archetype;
 
 		_ref_beast._flag_beast_archetype_check = (
 			_str_card_archetype == undefined ||
@@ -855,13 +1150,26 @@ hscr_battle_check_beast_archetype = function(_list_beasts_check){
 hscr_battle_check_beast_class = function(_list_beasts_check){
 
 	var _str_card_class =
-		global.ref_cast_card._ref_card._str_card_class_req;
+		global.ref_cast_card
+			._ref_card
+			._str_card_class_req;
 
-	var _ct_beasts = ds_list_size(_list_beasts_check);
+	var _ct_beasts =
+		ds_list_size(
+			_list_beasts_check
+		);
 
-	for (var _it_beast = 0; _it_beast < _ct_beasts; _it_beast++){
+	for (
+		var _it_beast = 0;
+		_it_beast < _ct_beasts;
+		_it_beast++
+	){
 
-		var _ref_beast = ds_list_find_value(_list_beasts_check,_it_beast);
+		var _ref_beast =
+			ds_list_find_value(
+				_list_beasts_check,
+				_it_beast
+			);
 
 		if (!instance_exists(_ref_beast)){
 			continue;
@@ -877,7 +1185,10 @@ hscr_battle_check_beast_class = function(_list_beasts_check){
 			continue;
 		}
 
-		var _str_beast_class = _ref_beast._ref_unit._str_beast_class;
+		var _str_beast_class =
+			_ref_beast
+				._ref_unit
+				._str_beast_class;
 
 		_ref_beast._flag_beast_class_check = (
 			_str_card_class == undefined ||
@@ -912,9 +1223,6 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
 	#region VALIDATION
 
-	//----------------//
-	//VALIDATE LISTS//
-	//----------------//
 	if (!ds_exists(_list_beasts_check,ds_type_list)){
 		return;
 	}
@@ -923,27 +1231,24 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 		return;
 	}
 
-	var _list_enemies = obj_battle_enemy_controller._list_beasts_alive;
+	var _list_enemies =
+		obj_battle_enemy_controller
+			._list_beasts_alive;
 
 	if (!ds_exists(_list_enemies,ds_type_list)){
 		return;
 	}
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
 	if (!instance_exists(global.ref_caster_beast)){
 		return;
 	}
 
-	//---------------//
-	//VALIDATE CARD//
-	//---------------//
 	if (!instance_exists(global.ref_cast_card)){
 		return;
 	}
 
-	var _stct_card = global.ref_cast_card._ref_card;
+	var _stct_card =
+		global.ref_cast_card._ref_card;
 
 	if (!is_struct(_stct_card)){
 		return;
@@ -953,17 +1258,25 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
 	#region FORMATION
 
-	//==========================//
-	//GET LIVING ENEMY FORMATION//
-	//==========================//
-	var _ct_enemies = ds_list_size(_list_enemies);
+	var _ct_enemies =
+		ds_list_size(
+			_list_enemies
+		);
 
 	var _ref_front_enemy = undefined;
 	var _ref_back_enemy = undefined;
 
-	for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+	for (
+		var _it_enemy = 0;
+		_it_enemy < _ct_enemies;
+		_it_enemy++
+	){
 
-		var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
+		var _ref_enemy =
+			ds_list_find_value(
+				_list_enemies,
+				_it_enemy
+			);
 
 		if (!instance_exists(_ref_enemy)){
 			continue;
@@ -976,16 +1289,10 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 			continue;
 		}
 
-		//----------------//
-		//FRONT ENEMY//
-		//----------------//
 		if (!instance_exists(_ref_front_enemy)){
 			_ref_front_enemy = _ref_enemy;
 		}
 
-		//--------------//
-		//REAR ENEMY//
-		//--------------//
 		_ref_back_enemy = _ref_enemy;
 	}
 
@@ -993,48 +1300,45 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
 	#region FRIENDLY TARGETING
 
-	//=========================//
-	//INITIAL PLAYER TEAM FLAGS//
-	//=========================//
-	for (var _it_beast = 0;_it_beast < ds_list_size(_list_beasts_check);_it_beast++){
+	for (
+		var _it_beast = 0;
+		_it_beast < ds_list_size(_list_beasts_check);
+		_it_beast++
+	){
 
-		var _ref_player_beast = ds_list_find_value(_list_beasts_check,_it_beast);
+		var _ref_player_beast =
+			ds_list_find_value(
+				_list_beasts_check,
+				_it_beast
+			);
 
 		if (!instance_exists(_ref_player_beast)){
 			continue;
 		}
 
-		//----------------//
-		//VALIDATE LIVING//
-		//----------------//
 		if (
 			_ref_player_beast._str_list != "ALIVE" ||
 			_ref_player_beast._val_cur_hp <= 0
 		){
 
-			_ref_player_beast._flag_beast_range_check = false;
+			_ref_player_beast._flag_beast_range_check =
+				false;
 
 			continue;
 		}
 
-		//================//
-		//CHECK CARD RANGE//
-		//================//
 		switch(_str_range){
 
-			//================//
-			//SELF EXCEPTION//
-			//================//
 			case "SELF":
 
 				_ref_player_beast._flag_beast_range_check =
-					(_ref_player_beast == global.ref_caster_beast);
+					(
+						_ref_player_beast ==
+						global.ref_caster_beast
+					);
 
 			break;
 
-			//========================//
-			//UNRESTRICTED FRIENDLIES//
-			//========================//
 			case "MELEE":
 			case "RANGED":
 			case "BACK":
@@ -1042,16 +1346,15 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 			case "TEAM":
 			case "ENEMY":
 
-				_ref_player_beast._flag_beast_range_check = true;
+				_ref_player_beast._flag_beast_range_check =
+					true;
 
 			break;
 
-			//===================//
-			//SPECIAL CARD RANGES//
-			//===================//
 			default:
 
-				_ref_player_beast._flag_beast_range_check = false;
+				_ref_player_beast._flag_beast_range_check =
+					false;
 
 			break;
 		}
@@ -1061,82 +1364,76 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
 	#region ENEMY TARGETING
 
-	//========================//
-	//INITIAL ENEMY TEAM FLAGS//
-	//========================//
-	for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+	for (
+		var _it_enemy = 0;
+		_it_enemy < _ct_enemies;
+		_it_enemy++
+	){
 
-		var _ref_enemy_beast = ds_list_find_value(_list_enemies,_it_enemy);
+		var _ref_enemy_beast =
+			ds_list_find_value(
+				_list_enemies,
+				_it_enemy
+			);
 
 		if (!instance_exists(_ref_enemy_beast)){
 			continue;
 		}
 
-		//----------------//
-		//VALIDATE LIVING//
-		//----------------//
 		if (
 			_ref_enemy_beast._str_list != "ALIVE" ||
 			_ref_enemy_beast._val_cur_hp <= 0
 		){
 
-			_ref_enemy_beast._flag_beast_range_check = false;
+			_ref_enemy_beast._flag_beast_range_check =
+				false;
 
 			continue;
 		}
 
-		//================//
-		//CHECK CARD RANGE//
-		//================//
 		switch(_str_range){
 
-			//================//
-			//FRIENDLY RANGES//
-			//================//
 			case "SELF":
 			case "TEAM":
 
-				_ref_enemy_beast._flag_beast_range_check = false;
+				_ref_enemy_beast._flag_beast_range_check =
+					false;
 
 			break;
 
-			//=======//
-			//MELEE//
-			//=======//
 			case "MELEE":
 
 				_ref_enemy_beast._flag_beast_range_check =
-					(_ref_enemy_beast == _ref_front_enemy);
+					(
+						_ref_enemy_beast ==
+						_ref_front_enemy
+					);
 
 			break;
 
-			//========//
-			//RANGED//
-			//========//
 			case "RANGED":
 			case "ENEMY":
 
-				_ref_enemy_beast._flag_beast_range_check = true;
+				_ref_enemy_beast._flag_beast_range_check =
+					true;
 
 			break;
 
-			//===========//
-			//BACK/FLANK//
-			//===========//
 			case "BACK":
 			case "FLANK":
 
 				_ref_enemy_beast._flag_beast_range_check =
-					(_ref_enemy_beast == _ref_back_enemy);
+					(
+						_ref_enemy_beast ==
+						_ref_back_enemy
+					);
 
 			break;
 
-			//===============//
-			//INVALID RANGE//
-			//===============//
 			default:
 
-				_ref_enemy_beast._flag_beast_range_check = false;
+				_ref_enemy_beast._flag_beast_range_check =
+					false;
 
 			break;
 		}
@@ -1146,57 +1443,62 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
 	#region HOSTILE OVERRIDES
 
-	//=======================//
-	//CHECK HOSTILE TARGETING//
-	//=======================//
 	if (!scr_battle_is_hostile_card_target(_stct_card)){
 		return;
 	}
 
-	//================//
-	//TAUNT OVERRIDE//
-	//================//
-	var _ref_taunt_target = scr_status_get_taunt_target(_list_enemies);
+	var _ref_taunt_target =
+		scr_status_get_taunt_target(
+			_list_enemies
+		);
 
 	if (instance_exists(_ref_taunt_target)){
 
-		//--------------------------//
-		//RESTRICT ENEMY TEAM ONLY//
-		//--------------------------//
-		for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+		for (
+			var _it_enemy = 0;
+			_it_enemy < _ct_enemies;
+			_it_enemy++
+		){
 
-			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
+			var _ref_enemy =
+				ds_list_find_value(
+					_list_enemies,
+					_it_enemy
+				);
 
 			if (!instance_exists(_ref_enemy)){
 				continue;
 			}
 
 			_ref_enemy._flag_beast_range_check =
-				(_ref_enemy == _ref_taunt_target);
+				(
+					_ref_enemy ==
+					_ref_taunt_target
+				);
 		}
 
 		return;
 	}
 
-	//================//
-	//BLIND OVERRIDE//
-	//================//
-	var _str_blind_mode = scr_cc_get_blind_attack_target_mode(
-		global.ref_caster_beast,
-		_stct_card
-	);
+	var _str_blind_mode =
+		scr_cc_get_blind_attack_target_mode(
+			global.ref_caster_beast,
+			_stct_card
+		);
 
-	//=============//
-	//BLIND BLOCK//
-	//=============//
 	if (_str_blind_mode == "BLOCK"){
 
-		//--------------------------//
-		//RESTRICT ENEMY TEAM ONLY//
-		//--------------------------//
-		for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+		for (
+			var _it_enemy = 0;
+			_it_enemy < _ct_enemies;
+			_it_enemy++
+		){
 
-			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
+			var _ref_enemy =
+				ds_list_find_value(
+					_list_enemies,
+					_it_enemy
+				);
 
 			if (instance_exists(_ref_enemy)){
 				_ref_enemy._flag_beast_range_check = false;
@@ -1206,36 +1508,35 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 		return;
 	}
 
-	//=============//
-	//BLIND FRONT//
-	//=============//
 	if (_str_blind_mode == "FRONT"){
 
-		//--------------------------//
-		//RESTRICT ENEMY TEAM ONLY//
-		//--------------------------//
-		for (var _it_enemy = 0;_it_enemy < _ct_enemies;_it_enemy++){
+		for (
+			var _it_enemy = 0;
+			_it_enemy < _ct_enemies;
+			_it_enemy++
+		){
 
-			var _ref_enemy = ds_list_find_value(_list_enemies,_it_enemy);
+			var _ref_enemy =
+				ds_list_find_value(
+					_list_enemies,
+					_it_enemy
+				);
 
 			if (!instance_exists(_ref_enemy)){
 				continue;
 			}
 
 			_ref_enemy._flag_beast_range_check =
-				(_ref_enemy == _ref_front_enemy);
+				(
+					_ref_enemy ==
+					_ref_front_enemy
+				);
 		}
 
 		return;
 	}
 
 	#endregion
-
-	//================//
-	//NORMAL TARGETING//
-	//================//
-	// No Taunt or Blind override.
-	// Retain both teams' previously assigned range flags.
 };
 
 //—------------------------------------------------------------------------------//
@@ -1245,18 +1546,31 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 //—------------------------------------------------------------------------------//
 hscr_battle_check_beast_able = function(_list_beasts_check){
 
-	var _ct_beasts = ds_list_size(_list_beasts_check);
+	var _ct_beasts =
+		ds_list_size(
+			_list_beasts_check
+		);
 
-	for (var _it_beast = 0; _it_beast < _ct_beasts; _it_beast++){
+	for (
+		var _it_beast = 0;
+		_it_beast < _ct_beasts;
+		_it_beast++
+	){
 
-		var _ref_beast = ds_list_find_value(_list_beasts_check,_it_beast);
+		var _ref_beast =
+			ds_list_find_value(
+				_list_beasts_check,
+				_it_beast
+			);
 
 		if (!instance_exists(_ref_beast)){
 			continue;
 		}
 
 		_ref_beast._flag_beast_able_check =
-			!scr_cc_is_action_locked(_ref_beast);
+			!scr_cc_is_action_locked(
+				_ref_beast
+			);
 	}
 };
 

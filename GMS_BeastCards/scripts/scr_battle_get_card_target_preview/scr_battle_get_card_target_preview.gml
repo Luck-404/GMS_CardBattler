@@ -1,13 +1,19 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_GET_CARD_TARGET_PREVIEW
-// FUNCTION: Returns the target's relevant defensive-stat preview for a Card.
-//           Direct PHY Cards inspect PDEF, Direct MAG Cards inspect MDEF,
-//           while DoTs, Debuffs, and Crowd Control inspect CON.
+// FUNCTION: Returns the selected Card's five-level target effectiveness preview.
 //
-// INPUTS:   _stct_card - Card struct being previewed.
-//           _ref_target - Battle Beast being evaluated as the Card target.
-// USES:     Target Beast stats and the shared stat-preview formatter.
+//           Direct PHY Cards evaluate target PHYDEF.
+//           Direct MAG Cards evaluate target MAGDEF.
+//           DoTs, Debuffs, and CC evaluate target CON.
+//           Defensive/resistance values are inverted because higher target
+//           resistance makes the Card less effective.
+//
+//           Direct NEU Attacks are always NEUTRAL.
+//
+// ARGUMENTS: _stct_card - Card being previewed.
+//            _ref_target - Battle Beast being evaluated as target.
+// RETURNS: VERY WEAK, WEAK, NEUTRAL, STRONG, VERY STRONG, or "".
 //
 //===============================================================================//
 
@@ -23,8 +29,8 @@ function scr_battle_get_card_target_preview(_stct_card,_ref_target){
 	}
 
 	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
+//VALIDATE TARGET//
+//----------------//
 	if (!instance_exists(_ref_target)){
 		return "";
 	}
@@ -37,18 +43,22 @@ function scr_battle_get_card_target_preview(_stct_card,_ref_target){
 
 	#region TARGET PREVIEW
 
-	//----------------//
-	//GET TARGET UNIT//
-	//----------------//
-	var _stct_target_unit = _ref_target._ref_unit;
-	var _str_effect_type = _stct_card._str_card_effect_type;
+	var _stct_target_unit =
+		_ref_target._ref_unit;
+
+	var _str_effect_type =
+		_stct_card._str_card_effect_type;
 
 	//------------------//
 	//CONSTITUTION CHECK//
 	//------------------//
-	if (_str_effect_type == "DOT" || _str_effect_type == "DEBUFF" || _str_effect_type == "CC"){
+	if (
+		_str_effect_type == "DOT" ||
+		_str_effect_type == "DEBUFF" ||
+		_str_effect_type == "CC"
+	){
 
-		return "CON " + scr_battle_get_stat_preview(
+		return scr_battle_get_stat_preview(
 			_stct_target_unit._val_beast_con_stat,
 			true
 		);
@@ -57,9 +67,12 @@ function scr_battle_get_card_target_preview(_stct_card,_ref_target){
 	//---------------//
 	//DIRECT PHYSICAL//
 	//---------------//
-	if (_str_effect_type == "DIRECT" && _stct_card._str_card_stat == "PHY"){
+	if (
+		_str_effect_type == "DIRECT" &&
+		_stct_card._str_card_stat == "PHY"
+	){
 
-		return "PDEF " + scr_battle_get_stat_preview(
+		return scr_battle_get_stat_preview(
 			_stct_target_unit._val_beast_pdef_stat,
 			true
 		);
@@ -68,12 +81,25 @@ function scr_battle_get_card_target_preview(_stct_card,_ref_target){
 	//--------------//
 	//DIRECT MAGICAL//
 	//--------------//
-	if (_str_effect_type == "DIRECT" && _stct_card._str_card_stat == "MAG"){
+	if (
+		_str_effect_type == "DIRECT" &&
+		_stct_card._str_card_stat == "MAG"
+	){
 
-		return "MDEF " + scr_battle_get_stat_preview(
+		return scr_battle_get_stat_preview(
 			_stct_target_unit._val_beast_mdef_stat,
 			true
 		);
+	}
+
+	//--------------//
+	//DIRECT NEUTRAL//
+	//--------------//
+	if (
+		_str_effect_type == "DIRECT" &&
+		_stct_card._str_card_stat == "NEU"
+	){
+		return "NEUTRAL";
 	}
 
 	#endregion

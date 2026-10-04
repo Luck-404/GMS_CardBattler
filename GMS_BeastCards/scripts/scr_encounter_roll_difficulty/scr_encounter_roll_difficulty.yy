@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_encounter_roll_difficulty",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_encounter_roll_difficulty",
+  "parent":{
+    "name":"TURN",
+    "path":"folders/BATTLE/CONTROLLERS/TURN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"POWERFUL STONE",
-    "path":"folders/INVENTORY/ITEMS/HELD/POWERFUL STONE.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/STAT BOOSTERS/POWERFUL STONE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -1,12 +1,13 @@
 //===============================================================================//
 //
 // GAME END: OBJ_PLAYER
-// FUNCTION: Logs the final player-session state and destroys all persistent
-//           data structures owned by OBJ_PLAYER.
-//           Cleans Beast, Card, Minion, Inventory, Treasure, Logbook, Market,
-//           and Camera runtime resources before application shutdown.
+// FUNCTION: Logs the final player-session state and delegates destruction of all
+//           persistent OBJ_PLAYER-owned runtime resources to
+//           SCR_PLAYER_TEARDOWN_SESSION.
 //
 //===============================================================================//
+
+#region SESSION SUMMARY
 
 //================//
 //SESSION SUMMARY//
@@ -28,56 +29,96 @@ var _ct_markets = 0;
 //----------------//
 //BEAST COUNTS//
 //----------------//
-if (ds_exists(global.list_player_party,ds_type_list)){
+if (
+	variable_global_exists("list_player_party") &&
+	global.list_player_party != undefined &&
+	ds_exists(global.list_player_party,ds_type_list)
+){
 	_ct_party = ds_list_size(global.list_player_party);
 }
 
-if (ds_exists(global.list_player_ranch,ds_type_list)){
+if (
+	variable_global_exists("list_player_ranch") &&
+	global.list_player_ranch != undefined &&
+	ds_exists(global.list_player_ranch,ds_type_list)
+){
 	_ct_ranch = ds_list_size(global.list_player_ranch);
 }
 
 //----------------//
 //CARD COUNTS//
 //----------------//
-if (ds_exists(global.list_player_deck,ds_type_list)){
+if (
+	variable_global_exists("list_player_deck") &&
+	global.list_player_deck != undefined &&
+	ds_exists(global.list_player_deck,ds_type_list)
+){
 	_ct_deck = ds_list_size(global.list_player_deck);
 }
 
-if (ds_exists(global.list_player_library,ds_type_list)){
+if (
+	variable_global_exists("list_player_library") &&
+	global.list_player_library != undefined &&
+	ds_exists(global.list_player_library,ds_type_list)
+){
 	_ct_library = ds_list_size(global.list_player_library);
 }
 
 //----------------//
 //INVENTORY COUNT//
 //----------------//
-if (ds_exists(global.list_player_inventory,ds_type_list)){
+if (
+	variable_global_exists("list_player_inventory") &&
+	global.list_player_inventory != undefined &&
+	ds_exists(global.list_player_inventory,ds_type_list)
+){
 	_ct_inventory = ds_list_size(global.list_player_inventory);
 }
 
 //----------------//
 //TREASURE COUNT//
 //----------------//
-if (ds_exists(global.map_player_chests_opened,ds_type_map)){
+if (
+	variable_global_exists("map_player_chests_opened") &&
+	global.map_player_chests_opened != undefined &&
+	ds_exists(global.map_player_chests_opened,ds_type_map)
+){
 	_ct_opened_chests = ds_map_size(global.map_player_chests_opened);
 }
 
 //----------------//
 //LOGBOOK COUNTS//
 //----------------//
-if (ds_exists(global.list_logbook_beasts,ds_type_list)){
+if (
+	variable_global_exists("list_logbook_beasts") &&
+	global.list_logbook_beasts != undefined &&
+	ds_exists(global.list_logbook_beasts,ds_type_list)
+){
 	_ct_logbook_beasts = ds_list_size(global.list_logbook_beasts);
 }
 
-if (ds_exists(global.list_logbook_cards,ds_type_list)){
+if (
+	variable_global_exists("list_logbook_cards") &&
+	global.list_logbook_cards != undefined &&
+	ds_exists(global.list_logbook_cards,ds_type_list)
+){
 	_ct_logbook_cards = ds_list_size(global.list_logbook_cards);
 }
 
 //----------------//
 //MARKET COUNT//
 //----------------//
-if (ds_exists(global.map_market_stock,ds_type_map)){
+if (
+	variable_global_exists("map_market_stock") &&
+	global.map_market_stock != undefined &&
+	ds_exists(global.map_market_stock,ds_type_map)
+){
 	_ct_markets = ds_map_size(global.map_market_stock);
 }
+
+#endregion
+
+#region DEBUG SESSION END
 
 //================//
 //DEBUG SESSION END//
@@ -115,169 +156,19 @@ scr_debug_log(
 	"OBJ_PLAYER:GAME_END"
 );
 
-//================//
-//CLEANUP TRACKING//
-//================//
-var _ct_ds_destroyed = 0;
-var _flag_camera_destroyed = false;
+#endregion
+
+#region SESSION TEARDOWN
 
 //================//
-//BEAST GLOBALS//
+//SESSION TEARDOWN//
 //================//
-if (ds_exists(global.list_player_party,ds_type_list)){
+var _stct_cleanup =
+	scr_player_teardown_session();
 
-	ds_list_destroy(global.list_player_party);
-	_ct_ds_destroyed++;
-}
+#endregion
 
-if (ds_exists(global.list_player_ranch,ds_type_list)){
-
-	ds_list_destroy(global.list_player_ranch);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//CARD GLOBALS//
-//================//
-if (ds_exists(global.list_player_deck,ds_type_list)){
-
-	ds_list_destroy(global.list_player_deck);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_player_library,ds_type_list)){
-
-	ds_list_destroy(global.list_player_library);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_cards_rarity_I,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_cards_rarity_I);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_cards_rarity_II,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_cards_rarity_II);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_cards_rarity_III,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_cards_rarity_III);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_cards_rarity_IV,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_cards_rarity_IV);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//MINION GLOBALS//
-//================//
-if (ds_exists(global.list_pool_viridian_minions,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_viridian_minions);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_cerulean_minions,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_cerulean_minions);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_vermilion_minions,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_vermilion_minions);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//ITEM GLOBALS//
-//================//
-if (ds_exists(global.list_player_inventory,ds_type_list)){
-
-	ds_list_destroy(global.list_player_inventory);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_pool_items,ds_type_list)){
-
-	ds_list_destroy(global.list_pool_items);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//PLAYER TRACKING//
-//================//
-if (ds_exists(global.map_player_chests_opened,ds_type_map)){
-
-	ds_map_destroy(global.map_player_chests_opened);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//LOGBOOK GLOBALS//
-//================//
-if (ds_exists(global.list_logbook_beasts,ds_type_list)){
-
-	ds_list_destroy(global.list_logbook_beasts);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.map_logbook_beasts,ds_type_map)){
-
-	ds_map_destroy(global.map_logbook_beasts);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.list_logbook_cards,ds_type_list)){
-
-	ds_list_destroy(global.list_logbook_cards);
-	_ct_ds_destroyed++;
-}
-
-if (ds_exists(global.map_logbook_cards,ds_type_map)){
-
-	ds_map_destroy(global.map_logbook_cards);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//MARKET GLOBALS//
-//================//
-if (ds_exists(global.map_market_stock,ds_type_map)){
-
-	ds_map_destroy(global.map_market_stock);
-	_ct_ds_destroyed++;
-}
-
-//================//
-//CAMERA//
-//================//
-if (global.ref_camera != undefined){
-
-	camera_destroy(global.ref_camera);
-
-	global.ref_camera = undefined;
-
-	_flag_camera_destroyed = true;
-}
-
-//================//
-//CLEAR REFERENCES//
-//================//
-global.ref_interacting_npc = undefined;
-global.stct_forced_enemy_unit = undefined;
-
-global.arr_last_enemy_pool = [];
-global.arr_market_egg_beast_pool = [];
-
-global.flag_companion_summoned = false;
+#region DEBUG COMPLETE
 
 //================//
 //DEBUG COMPLETE//
@@ -288,9 +179,19 @@ scr_debug_log(
 	self,
 	"PLAYER SESSION CLEANUP COMPLETE" +
 	" | DS RESOURCES DESTROYED: " +
-	string(_ct_ds_destroyed) +
+	string(
+		_stct_cleanup
+			._ct_ds_destroyed
+	) +
 	" | CAMERA DESTROYED: " +
-	(_flag_camera_destroyed ? "YES" : "NO"),
+	(
+		_stct_cleanup
+			._flag_camera_destroyed
+		? "YES"
+		: "NO"
+	),
 	"INFO",
 	"OBJ_PLAYER:GAME_END"
 );
+
+#endregion

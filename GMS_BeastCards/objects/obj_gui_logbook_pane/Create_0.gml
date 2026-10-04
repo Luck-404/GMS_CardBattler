@@ -629,7 +629,7 @@ hscr_gui_logbook_draw_beast_details = function(_stct_entry){
 		"HP: " +
 		string(_stct_beast._val_beast_hp_stat) +
 		" (" +
-		scr_beast_get_grade_letter(_stct_beast._val_beast_hp_stat) +
+		scr_beast_get_stat_grade(_stct_beast._val_beast_hp_stat) +
 		")"
 	);
 
@@ -641,7 +641,7 @@ hscr_gui_logbook_draw_beast_details = function(_stct_entry){
 		"PPOW: " +
 		string(_stct_beast._val_beast_ppow_stat) +
 		" (" +
-		scr_beast_get_grade_letter(_stct_beast._val_beast_ppow_stat) +
+		scr_beast_get_stat_grade(_stct_beast._val_beast_ppow_stat) +
 		")"
 	);
 
@@ -653,7 +653,7 @@ hscr_gui_logbook_draw_beast_details = function(_stct_entry){
 		"MPOW: " +
 		string(_stct_beast._val_beast_mpow_stat) +
 		" (" +
-		scr_beast_get_grade_letter(_stct_beast._val_beast_mpow_stat) +
+		scr_beast_get_stat_grade(_stct_beast._val_beast_mpow_stat) +
 		")"
 	);
 
@@ -665,7 +665,7 @@ hscr_gui_logbook_draw_beast_details = function(_stct_entry){
 		"PDEF: " +
 		string(_stct_beast._val_beast_pdef_stat) +
 		" (" +
-		scr_beast_get_grade_letter(_stct_beast._val_beast_pdef_stat) +
+		scr_beast_get_stat_grade(_stct_beast._val_beast_pdef_stat) +
 		")"
 	);
 
@@ -677,7 +677,7 @@ hscr_gui_logbook_draw_beast_details = function(_stct_entry){
 		"MDEF: " +
 		string(_stct_beast._val_beast_mdef_stat) +
 		" (" +
-		scr_beast_get_grade_letter(_stct_beast._val_beast_mdef_stat) +
+		scr_beast_get_stat_grade(_stct_beast._val_beast_mdef_stat) +
 		")"
 	);
 

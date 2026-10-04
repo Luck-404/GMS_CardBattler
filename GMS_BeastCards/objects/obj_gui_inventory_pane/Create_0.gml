@@ -178,6 +178,10 @@ function hscr_gui_inventory_open_item_prompt(_stct_item){
 			_scr_yes_callback = scr_inventory_use_consumable_item;
 		break;
 
+		case "MATERIAL":
+			_scr_yes_callback = scr_inventory_use_material_item;
+		break;
+
 		case "QUEST":
 			_scr_yes_callback = scr_inventory_use_quest_item;
 		break;
@@ -388,17 +392,20 @@ function hscr_gui_inventory_get_item_type_order(_str_item_type){
 		case "CONSUMABLE":
 			return 0;
 
-		case "EGG":
+		case "MATERIAL":
 			return 1;
 
-		case "HELD":
+		case "EGG":
 			return 2;
 
-		case "PRISM":
+		case "HELD":
 			return 3;
 
-		case "QUEST":
+		case "PRISM":
 			return 4;
+
+		case "QUEST":
+			return 5;
 	}
 
 	return 99;
@@ -467,6 +474,9 @@ function hscr_gui_inventory_get_item_type_color(_str_item_type){
 
 		case "CONSUMABLE":
 			return c_green;
+
+		case "MATERIAL":
+			return make_colour_rgb(184,156,110);
 
 		case "PRISM":
 			return c_aqua;
@@ -726,6 +736,10 @@ function hscr_gui_inventory_handle_sort_filter_input(){
 			break;
 
 			case "CONSUMABLE":
+				_str_filter_mode = "MATERIAL";
+			break;
+
+			case "MATERIAL":
 				_str_filter_mode = "EGG";
 			break;
 

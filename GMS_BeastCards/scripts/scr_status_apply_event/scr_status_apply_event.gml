@@ -1,150 +1,280 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_EVENT
-// FUNCTION: Applies a global Event Status.
-//           Reapplying the same Event delegates its refresh/overwrite behavior
-//           to that Event's Status script.
-//           Applying a different Event removes all current Events first.
-//           BLOODMIST stores the casting team's ownership for END timing.
-//           Does not affect active Weather.
+// FUNCTION: Applies or refreshes one global Event Status.
+//           Reapplying the same Event refreshes/overwrites through that Event's
+//           own APPLY behavior. Applying a different Event first removes every
+//           active Event through SCR_STATUS_CLEAR_EVENT.
 //
-//           ACTIVE EVENTS:
-//           - BLOODMIST
-//           - BLOOD_MOON
-//           - BLOOMTIDE
+//           BLOODMIST requires an owner team because its END trigger belongs to
+//           the team that created the Event. When the caller does not supply an
+//           owner, this script attempts to resolve it from GLOBAL.REF_CASTER_BEAST.
 //
-// ARGUMENTS: _str_event_name selects the Event.
-//            _val_lifetime optionally overrides its duration.
-//            _str_owner_team optionally identifies PLAYER or ENEMY ownership.
-// RETURNS: Active Event Status, or undefined if the request is invalid.
+// ACTIVE EVENTS:
+// - BLOOD_MOON
+// - BLOODMIST
+// - BLOOMTIDE
+//
+// ARGUMENTS: _str_event_name - Event ID to apply.
+//            _val_lifetime - Optional lifetime override.
+//            _str_owner_team - Optional PLAYER/ENEMY owner; required by BLOODMIST.
+// RETURNS: Applied Event Status, or undefined on failure.
 //
 //===============================================================================//
 
 function scr_status_apply_event(_str_event_name,_val_lifetime=undefined,_str_owner_team=undefined){
 
-	//----------------------//
-	//VALIDATE GLOBAL LIST//
-	//----------------------//
-	if (!ds_exists(global.list_statuses,ds_type_list)){
-		return undefined;
-	}
+    #region VALIDATION
 
-	//========================//
-	//VALIDATE REQUESTED EVENT//
-	//========================//
-	switch (_str_event_name){
+    //----------------------//
+    //VALIDATE GLOBAL LIST//
+    //----------------------//
+    if (!ds_exists(global.list_statuses,ds_type_list)){
+        return undefined;
+    }
 
-		case "BLOODMIST":
-		case "BLOOD_MOON":
-		case "BLOOMTIDE":
-		break;
+    //================//
+    //NORMALIZE NAME//
+    //================//
+    _str_event_name =
+        string_upper(
+            string(
+                _str_event_name
+            )
+        );
 
-		default:
-			return undefined;
-	}
+    if (string_pos("EVENT: ",_str_event_name) == 1){
+        _str_event_name =
+            string_delete(
+                _str_event_name,
+                1,
+                string_length("EVENT: ")
+            );
+    }
 
-	//===========================//
-	//VALIDATE BLOODMIST OWNERSHIP//
-	//===========================//
-	if (
-		_str_event_name == "BLOODMIST" &&
-		_str_owner_team != "PLAYER" &&
-		_str_owner_team != "ENEMY"
-	){
-		return undefined;
-	}
+    //========================//
+    //VALIDATE REQUESTED EVENT//
+    //========================//
+    switch (_str_event_name){
 
-	var _ref_status = undefined;
-	var _str_requested_event = "EVENT: " + _str_event_name;
+        case "BLOOD_MOON":
+        case "BLOODMIST":
+        case "BLOOMTIDE":
+        break;
 
-	//=====================//
-	//CHECK CURRENT EVENT//
-	//=====================//
-	var _flag_same_event_active = false;
+        default:
+            return undefined;
+    }
 
-	for (var _it_status = 0;_it_status < ds_list_size(global.list_statuses);_it_status++){
+    #endregion
 
-		var _ref_check_status = ds_list_find_value(global.list_statuses,_it_status);
+    #region OWNER
 
-		if (!instance_exists(_ref_check_status)){
-			continue;
-		}
+    if (_str_owner_team != undefined){
+        _str_owner_team =
+            string_upper(
+                string(
+                    _str_owner_team
+                )
+            );
+    }
 
-		if (_ref_check_status._str_status_type != "EVENT"){
-			continue;
-		}
+    //------------------------//
+    //INFER BLOODMIST OWNER//
+    //------------------------//
+    if (
+        _str_event_name == "BLOODMIST" &&
+        _str_owner_team != "PLAYER" &&
+        _str_owner_team != "ENEMY"
+    ){
 
-		if (_ref_check_status._str_status_name == _str_requested_event){
+        if (
+            variable_global_exists("ref_caster_beast") &&
+            instance_exists(global.ref_caster_beast) &&
+            variable_instance_exists(
+                global.ref_caster_beast,
+                "_str_team"
+            )
+        ){
 
-			_flag_same_event_active = true;
+            _str_owner_team =
+                string_upper(
+                    string(
+                        global.ref_caster_beast._str_team
+                    )
+                );
+        }
+    }
 
-			break;
-		}
-	}
+    if (
+        _str_event_name == "BLOODMIST" &&
+        _str_owner_team != "PLAYER" &&
+        _str_owner_team != "ENEMY"
+    ){
+        return undefined;
+    }
 
-	//=========================//
-	//REPLACE DIFFERENT EVENT//
-	//=========================//
-	if (!_flag_same_event_active){
-		scr_status_clear_event();
-	}
+    #endregion
 
-	//================//
-	//APPLY EVENT//
-	//================//
-	switch (_str_event_name){
+    #region CURRENT EVENT
 
-		//==========//
-		//BLOODMIST//
-		//==========//
-		case "BLOODMIST":
+    var _ref_status = undefined;
+    var _str_requested_event = "EVENT: " + _str_event_name;
+    var _flag_same_event_active = false;
 
-			_ref_status = scr_status_event_bloodmist("APPLY",undefined,_val_lifetime,_str_owner_team);
+    for (
+        var _it_status = 0;
+        _it_status < ds_list_size(global.list_statuses);
+        _it_status++
+    ){
 
-		break;
+        var _ref_check_status =
+            ds_list_find_value(
+                global.list_statuses,
+                _it_status
+            );
 
-		//============//
-		//BLOOD_MOON//
-		//============//
-		case "BLOOD_MOON":
+        if (!instance_exists(_ref_check_status)){
+            continue;
+        }
 
-			_ref_status = scr_status_event_blood_moon("APPLY",undefined,_val_lifetime);
+        if (_ref_check_status._str_status_type != "EVENT"){
+            continue;
+        }
 
-		break;
+        if (_ref_check_status._str_status_name == _str_requested_event){
+            _flag_same_event_active = true;
+            break;
+        }
+    }
 
-		//==========//
-		//BLOOMTIDE//
-		//==========//
-		case "BLOOMTIDE":
+    //=========================//
+    //REPLACE DIFFERENT EVENT//
+    //=========================//
+    if (!_flag_same_event_active){
+        scr_status_clear_event();
+    }
 
-			_ref_status = scr_status_event_bloomtide("APPLY",undefined,_val_lifetime);
+    #endregion
 
-		break;
-	}
+    #region APPLY EVENT
 
-	//================//
-	//EVENT FEEDBACK//
-	//================//
-	if (instance_exists(_ref_status)){
+    switch (_str_event_name){
 
-		var _c_event = c_green;
+        //============//
+        //BLOOD MOON//
+        //============//
+        case "BLOOD_MOON":
 
-		if (
-			_str_event_name == "BLOODMIST" ||
-			_str_event_name == "BLOOD_MOON"
-		){
-			_c_event = c_red;
-		}
+            _ref_status =
+                scr_status_event_blood_moon(
+                    "APPLY",
+                    undefined,
+                    _val_lifetime
+                );
 
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			_str_requested_event,
-			undefined,
-			_c_event,
-			room_width * 0.5,
-			room_height * 0.5
-		);
-	}
+        break;
 
-	return _ref_status;
+        //==========//
+        //BLOODMIST//
+        //==========//
+        case "BLOODMIST":
+
+            _ref_status =
+                scr_status_event_bloodmist(
+                    "APPLY",
+                    undefined,
+                    _val_lifetime,
+                    _str_owner_team
+                );
+
+        break;
+
+        //==========//
+        //BLOOMTIDE//
+        //==========//
+        case "BLOOMTIDE":
+
+            _ref_status =
+                scr_status_event_bloomtide(
+                    "APPLY",
+                    undefined,
+                    _val_lifetime
+                );
+
+        break;
+    }
+
+    #endregion
+
+    #region FEEDBACK
+
+    if (instance_exists(_ref_status)){
+
+        var _c_popup = c_red;
+
+        if (_str_event_name == "BLOOMTIDE"){
+            _c_popup = c_green;
+        }
+
+        scr_gui_spawn_popup_scrolling(
+            "TEXT",
+            _str_requested_event,
+            undefined,
+            _c_popup,
+            room_width * 0.5,
+            room_height * 0.5
+        );
+    }
+
+    #endregion
+
+    #region DEBUG
+
+    if (instance_exists(_ref_status)){
+
+        var _str_lifetime = "INFINITE";
+
+        if (!_ref_status._flag_status_infinite){
+            _str_lifetime =
+                string(
+                    _ref_status._val_status_lifetime
+                );
+        }
+
+        var _str_owner_text = "";
+
+        if (
+            variable_instance_exists(
+                _ref_status,
+                "_str_event_owner_team"
+            )
+        ){
+
+            _str_owner_text =
+                " | OWNER: " +
+                string_upper(
+                    string(
+                        _ref_status._str_event_owner_team
+                    )
+                );
+        }
+
+        scr_debug_log(
+            "BATTLE",
+            "EVENT",
+            _ref_status,
+            (_flag_same_event_active ? "EVENT REFRESHED: " : "EVENT STARTED: ") +
+            _str_event_name +
+            " | LIFETIME: " +
+            _str_lifetime +
+            _str_owner_text,
+            "BATTLE",
+            "SCR_STATUS_APPLY_EVENT"
+        );
+    }
+
+    #endregion
+
+    return _ref_status;
 }

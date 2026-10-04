@@ -98,127 +98,178 @@ function hscr_gui_party_has_held_item(_stct_unit){
 
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_PARTY_DRAW_SLOT_HELD_ITEM
-// FUNCTION: Draws the held-item badge displayed inside a Party slot.
+// FUNCTION: Draws the Beast's Held Item entirely inside the bottom-right corner
+//           of its Party portrait pane.
 //
-// ARGUMENTS: _stct_unit is the Beast being displayed, while _val_box_x and
-//            _val_box_y are the Party-slot coordinates.
+// ARGUMENTS: _stct_unit is the displayed Beast.
+//            _val_box_x/_val_box_y are the Party pane coordinates.
 // RETURNS: Nothing.
 //-------------------------------------------------------------------------------//
 function hscr_gui_party_draw_slot_held_item(_stct_unit,_val_box_x,_val_box_y){
 
+	//================//
+	//VALIDATE ITEM//
+	//================//
 	if (!hscr_gui_party_has_held_item(_stct_unit)){
 		return;
 	}
 
-	var _stct_held_item = _stct_unit._stct_beast_held_item;
-	var _val_badge_x = _val_box_x + _val_slot_size - 18;
-	var _val_badge_y = _val_box_y + _val_slot_size - 18;
+	var _stct_held_item =
+		_stct_unit._stct_beast_held_item;
 
-	draw_set_colour(c_black);
-	draw_circle(_val_badge_x,_val_badge_y,15,false);
-
-	draw_set_colour(c_white);
-	draw_circle(_val_badge_x,_val_badge_y,12,false);
-
-	draw_sprite_ext(
+	//================//
+	//DRAW ITEM//
+	//================//
+	scr_gui_draw_item_badge(
 		_stct_held_item._spr_item,
-		0,
-		_val_badge_x,
-		_val_badge_y,
-		1,
-		1,
-		0,
-		c_white,
-		1
+		_val_box_x +
+			_val_slot_size -
+			4,
+		_val_box_y +
+			_val_slot_size -
+			4,
+		26
 	);
 }
 
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_PARTY_DRAW_SELECTED_HELD_ITEM
-// FUNCTION: Draws held-item information for the selected Beast.
-//           Right-clicking the held-item box unequips the item.
+// FUNCTION: Draws held-item information directly on the Party pane.
+//           Does not create a secondary inset pane.
+//           Right-clicking the Item area unequips the Item.
 //
-// ARGUMENTS: _stct_unit is the selected Beast, while _val_x and _val_y define
-//            the starting GUI position.
-// RETURNS: The next vertical drawing position after the held-item section.
+// ARGUMENTS: _stct_unit is the selected Beast.
+//            _val_x/_val_y define the starting GUI position.
+// RETURNS: Next vertical drawing position.
 //-------------------------------------------------------------------------------//
 function hscr_gui_party_draw_selected_held_item(_stct_unit,_val_x,_val_y){
 
-	draw_text(_val_x,_val_y,"=== HELD ITEM ===");
+	//================//
+	//HEADER//
+	//================//
+	draw_set_colour(c_black);
+	draw_set_font(fnt_gui_small);
+
+	draw_text(
+		_val_x,
+		_val_y,
+		"=== HELD ITEM ==="
+	);
+
 	_val_y += 22;
 
+	//================//
+	//EMPTY//
+	//================//
 	if (!hscr_gui_party_has_held_item(_stct_unit)){
-		draw_text(_val_x,_val_y,"EMPTY");
+
+		draw_text(
+			_val_x,
+			_val_y,
+			"EMPTY"
+		);
+
 		return _val_y + 32;
 	}
 
-	var _stct_held_item = _stct_unit._stct_beast_held_item;
+	var _stct_held_item =
+		_stct_unit._stct_beast_held_item;
 
-	var _val_box_w = 430;
-	var _val_box_h = 74;
+	//================//
+	//INTERACTION AREA//
+	//================//
+	var _val_item_x1 =
+		_val_x;
 
-	var _val_box_x1 = _val_x;
-	var _val_box_y1 = _val_y;
-	var _val_box_x2 = _val_box_x1 + _val_box_w;
-	var _val_box_y2 = _val_box_y1 + _val_box_h;
+	var _val_item_y1 =
+		_val_y;
 
-	var _val_mouse_x = device_mouse_x_to_gui(0);
-	var _val_mouse_y = device_mouse_y_to_gui(0);
+	var _val_item_x2 =
+		_val_item_x1 +
+		300;
+
+	var _val_item_y2 =
+		_val_item_y1 +
+		42;
+
+	var _val_mouse_x =
+		device_mouse_x_to_gui(0);
+
+	var _val_mouse_y =
+		device_mouse_y_to_gui(0);
 
 	var _flag_hover =
-		_val_mouse_x > _val_box_x1 &&
-		_val_mouse_x < _val_box_x2 &&
-		_val_mouse_y > _val_box_y1 &&
-		_val_mouse_y < _val_box_y2;
+		_val_mouse_x >= _val_item_x1 &&
+		_val_mouse_x <= _val_item_x2 &&
+		_val_mouse_y >= _val_item_y1 &&
+		_val_mouse_y <= _val_item_y2;
 
-	//----------------//
-	//DRAW ITEM BOX//
-	//----------------//
-	draw_set_colour(_flag_hover ? c_white : global.c_dk_gray);
-	draw_rectangle(_val_box_x1,_val_box_y1,_val_box_x2,_val_box_y2,false);
-
-	draw_set_colour(c_black);
-	draw_rectangle(_val_box_x1 + 3,_val_box_y1 + 3,_val_box_x2 - 3,_val_box_y2 - 3,false);
-
-	//----------------//
-	//DRAW ITEM DATA//
-	//----------------//
-	draw_sprite_ext(
+	//================//
+	//ITEM BADGE//
+	//================//
+	scr_gui_draw_item_badge(
 		_stct_held_item._spr_item,
-		0,
-		_val_box_x1 + 34,
-		_val_box_y1 + 36,
-		1.5,
-		1.5,
-		0,
-		c_white,
-		1
+		_val_x + 36,
+		_val_y + 36,
+		36
 	);
 
-	draw_set_colour(c_white);
-	draw_text(_val_box_x1 + 70,_val_box_y1 + 10,_stct_held_item._str_item_name);
-
+	//================//
+	//ITEM NAME//
+	//================//
+	draw_set_colour(c_black);
 	draw_set_font(fnt_gui_small);
-	draw_set_colour(c_ltgray);
-	draw_text(_val_box_x1 + 70,_val_box_y1 + 36,"RIGHT CLICK: UNEQUIP");
 
-	//----------------//
+	draw_text(
+		_val_x + 48,
+		_val_y + 2,
+		_stct_held_item._str_item_name
+	);
+
+	//================//
+	//UNEQUIP HINT//
+	//================//
+	draw_set_colour(
+		_flag_hover
+		? c_black
+		: global.c_dk_gray
+	);
+
+	draw_set_font(fnt_gui_party_small);
+
+	draw_text(
+		_val_x + 48,
+		_val_y + 22,
+		"RIGHT CLICK: UNEQUIP"
+	);
+
+	//================//
 	//HANDLE UNEQUIP//
-	//----------------//
-	if (_flag_hover && mouse_check_button_pressed(mb_right) && !_flag_clicked){
+	//================//
+	if (
+		_flag_hover &&
+		mouse_check_button_pressed(mb_right) &&
+		!_flag_clicked
+	){
 
-		_flag_clicked = true;
-		_ct_cooldown = 10;
+		_flag_clicked =
+			true;
+
+		_ct_cooldown =
+			10;
 
 		scr_inventory_unequip_held_item(
 			_stct_unit,
-			_val_box_x1 + (_val_box_w * 0.5),
-			_val_box_y1
+			_val_x + 150,
+			_val_y
 		);
 	}
 
+	//================//
+	//RESET//
+	//================//
 	draw_set_font(fnt_gui_small);
 	draw_set_colour(c_black);
 
-	return _val_y + _val_box_h + 24;
+	return _val_y + 56;
 }

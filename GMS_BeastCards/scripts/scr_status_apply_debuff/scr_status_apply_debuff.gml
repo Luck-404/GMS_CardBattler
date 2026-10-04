@@ -2,21 +2,31 @@
 //
 // SCRIPT: SCR_STATUS_APPLY_DEBUFF
 // FUNCTION: Attempts to apply a Debuff Status to the supplied target.
+//
 //           Checks target CON resistance unless explicitly bypassed.
 //           Handles shared Debuff feedback, presentation, and debug logging.
 //
-// ARGUMENTS: _str_status_name is the Debuff ID; _ref_target is the affected Beast; _val_lifetime, _val_magnitude and _flag_ignore_resistance retain their original order.
+//           WITHER:
+//           _val_magnitude is interpreted as the requested initial bundled
+//           Wither stack count. Omitted magnitude preserves normal WITHER x1.
+//           Separate Wither applications remain non-stacking and refresh the
+//           existing duration.
 //
-// RETURNS: Applied Status instance, or undefined if the application fails.
+// ARGUMENTS: _str_status_name - Debuff ID.
+//            _ref_target - Affected battle Beast.
+//            _val_lifetime - Optional Status lifetime.
+//            _val_magnitude - Status-specific magnitude. For WITHER, initial
+//                             bundled stack count.
+//            _flag_ignore_resistance - Whether CON resistance is bypassed.
+// RETURNS: Applied Status instance, or undefined if application fails.
 //
 //===============================================================================//
 
 function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=undefined,_val_magnitude=undefined,_flag_ignore_resistance=false){
 
-	//----------------//
+	//================//
 	//VALIDATE TARGET//
-	//----------------//
-
+	//================//
 	if (!instance_exists(_ref_target)){
 		return undefined;
 	}
@@ -28,20 +38,37 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 	//========================//
 	//SNAPSHOT EXISTING STATUS//
 	//========================//
-	var _ref_existing_status = scr_status_check(_str_status_name,_ref_target);
+	var _ref_existing_status =
+		scr_status_check(
+			_str_status_name,
+			_ref_target
+		);
 
 	var _ct_previous_stacks = 0;
 	var _val_previous_lifetime = undefined;
 
-	if (_ref_existing_status != -1 && instance_exists(_ref_existing_status)){
-		_ct_previous_stacks = _ref_existing_status._ct_status_stacks;
-		_val_previous_lifetime = _ref_existing_status._val_status_lifetime;
+	if (
+		_ref_existing_status != -1 &&
+		instance_exists(_ref_existing_status)
+	){
+
+		_ct_previous_stacks =
+			_ref_existing_status._ct_status_stacks;
+
+		_val_previous_lifetime =
+			_ref_existing_status._val_status_lifetime;
 	}
 
 	//================//
 	//RESIST CHECK//
 	//================//
-	if (scr_status_check_con_resistance(_ref_target,_flag_ignore_resistance,_str_status_name)){
+	if (
+		scr_status_check_con_resistance(
+			_ref_target,
+			_flag_ignore_resistance,
+			_str_status_name
+		)
+	){
 		return undefined;
 	}
 
@@ -59,13 +86,14 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//============//
 		case "MOLTEN_BRAND":
 
-			_ref_status = scr_status_debuff_molten_brand(
-				"APPLY",
-				undefined,
-				_val_lifetime,
-				_val_magnitude,
-				_ref_target
-			);
+			_ref_status =
+				scr_status_debuff_molten_brand(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_val_magnitude,
+					_ref_target
+				);
 
 			_str_popup = "MOLTEN BRAND";
 			_c_popup = c_red;
@@ -77,13 +105,14 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//============//
 		case "HEMOPHILIA":
 
-			_ref_status = scr_status_debuff_hemophilia(
-				"APPLY",
-				undefined,
-				_val_lifetime,
-				_val_magnitude,
-				_ref_target
-			);
+			_ref_status =
+				scr_status_debuff_hemophilia(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_val_magnitude,
+					_ref_target
+				);
 
 			_str_popup = "HEMOPHILIA";
 			_c_popup = c_maroon;
@@ -95,7 +124,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//================//
 		case "UNSTABLE_COIL":
 
-			_ref_status = scr_status_debuff_unstable_coil("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_unstable_coil(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "UNSTABLE COIL";
 			_c_popup = c_aqua;
@@ -107,7 +142,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//======//
 		case "ANEMIA":
 
-			_ref_status = scr_status_debuff_anemia("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_anemia(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "ANEMIA";
 			_c_popup = c_maroon;
@@ -119,7 +160,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==========//
 		case "BLOODLET":
 
-			_ref_status = scr_status_debuff_bloodlet("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_bloodlet(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "+1 BLOODLET";
 			_c_popup = c_maroon;
@@ -131,7 +178,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//======//
 		case "CHAR":
 
-			_ref_status = scr_status_debuff_char("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_char(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "+1 CHAR";
 			_c_popup = c_red;
@@ -143,7 +196,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==========//
 		case "ANTIHEAL":
 
-			_ref_status = scr_status_debuff_antiheal("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_antiheal(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "ANTIHEAL";
 
@@ -154,7 +213,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==============//
 		case "FROZEN_CURSE":
 
-			_ref_status = scr_status_debuff_frozen_curse("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_frozen_curse(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "FROZEN CURSE";
 
@@ -165,13 +230,14 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==========//
 		case "WHITEOUT":
 
-			_ref_status = scr_status_debuff_whiteout(
-				"APPLY",
-				undefined,
-				_val_lifetime,
-				_val_magnitude,
-				_ref_target
-			);
+			_ref_status =
+				scr_status_debuff_whiteout(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_val_magnitude,
+					_ref_target
+				);
 
 			_str_popup = "WHITEOUT";
 
@@ -182,7 +248,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//======================//
 		case "BRITTLE_CONSTITUTION":
 
-			_ref_status = scr_status_debuff_brittle_constitution("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_brittle_constitution(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "BRITTLE CONSTITUTION";
 
@@ -193,7 +265,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==================//
 		case "STATIC_RESONANCE":
 
-			_ref_status = scr_status_debuff_static_resonance("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_static_resonance(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "STATIC RESONANCE";
 			_c_popup = c_aqua;
@@ -205,7 +283,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//=======//
 		case "FOCUS":
 
-			_ref_status = scr_status_debuff_focus("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_focus(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "FOCUS";
 
@@ -216,7 +300,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//=========//
 		case "DRAINED":
 
-			_ref_status = scr_status_debuff_drained("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_drained(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "DRAINED";
 
@@ -227,7 +317,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//============//
 		case "ARMORBREAK":
 
-			_ref_status = scr_status_debuff_armorbreak("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_armorbreak(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "ARMORBREAK";
 
@@ -238,7 +334,14 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==================//
 		case "CRIPPLING_VINES":
 
-			_ref_status = scr_status_debuff_crippling_vines("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_crippling_vines(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_val_magnitude,
+					_ref_target
+				);
 
 			_str_popup = "CRIPPLING VINES";
 
@@ -249,7 +352,13 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//==========//
 		case "WEAKNESS":
 
-			_ref_status = scr_status_debuff_weakness("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_weakness(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "WEAKNESS";
 			_c_popup = c_black;
@@ -261,9 +370,43 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//========//
 		case "WITHER":
 
-			_ref_status = scr_status_debuff_wither("APPLY", undefined, _val_lifetime, _ref_target);
+			var _ct_wither_stacks = 1;
 
-			_str_popup = "WITHER";
+			if (
+				_val_magnitude != undefined &&
+				is_real(_val_magnitude)
+			){
+
+				_ct_wither_stacks =
+					max(
+						1,
+						floor(
+							_val_magnitude
+						)
+					);
+			}
+
+			_ref_status =
+				scr_status_debuff_wither(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target,
+					_ct_wither_stacks
+				);
+
+			if (instance_exists(_ref_status)){
+
+				_str_popup =
+					"WITHER x" +
+					string(
+						_ref_status
+							._ct_status_stacks
+					);
+			}
+			else{
+				_str_popup = "WITHER";
+			}
 
 		break;
 
@@ -272,16 +415,22 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		//============//
 		case "VULNERABLE":
 
-			_ref_status = scr_status_debuff_vulnerable("APPLY", undefined, _val_lifetime, _ref_target);
+			_ref_status =
+				scr_status_debuff_vulnerable(
+					"APPLY",
+					undefined,
+					_val_lifetime,
+					_ref_target
+				);
 
 			_str_popup = "VULNERABLE";
 
 		break;
 	}
 
-	//-------------------------//
+	//=========================//
 	//VALIDATE APPLIED STATUS//
-	//-------------------------//
+	//=========================//
 	if (!instance_exists(_ref_status)){
 		return undefined;
 	}
@@ -304,11 +453,12 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 	//=====================//
 	//DEBUFF PRESENTATION//
 	//=====================//
-	var _snd_sfx = snd_battle_debuff;
+	var _snd_sfx =
+		snd_battle_debuff;
 
-	//------------------------//
+	//========================//
 	//ONLY PLAY ONCE PER CAST//
-	//------------------------//
+	//========================//
 	if (instance_exists(global.ref_cast_card)){
 
 		if (global.ref_cast_card._flag_debuff_sfx_played){
@@ -319,9 +469,9 @@ function scr_status_apply_debuff(_str_status_name,_ref_target,_val_lifetime=unde
 		}
 	}
 
-	//--------------------//
+	//====================//
 	//PLAY GENERIC DEBUFF//
-	//--------------------//
+	//====================//
 	scr_battle_vfx(
 		_ref_target,
 		spr_battle_vfx_debuff,

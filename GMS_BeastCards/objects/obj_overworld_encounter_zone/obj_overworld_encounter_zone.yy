@@ -146,6 +146,7 @@
         "\"HELD_BOLSTERING_SHELL\"",
         "\"HELD_GOLD_FANG\"",
       ],"multiselect":true,"name":"_arr_loot_table","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":6,},
+    {"$GMObjectProperty":"v2","%Name":"_str_loot_zone_id","filters":[],"listItems":[],"multiselect":false,"name":"_str_loot_zone_id","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"UNASSIGNED\"","varType":2,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

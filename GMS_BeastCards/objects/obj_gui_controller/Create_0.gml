@@ -34,6 +34,44 @@ persistent = true;
 global.flag_pause = false;
 global.ref_active_gui = undefined;
 
+//----------------//
+//HOVER TOOLTIPS//
+//----------------//
+global.flag_gui_hover_tooltip = false;
+
+global.str_gui_hover_tooltip_title = "";
+global.str_gui_hover_tooltip_body = "";
+
+global.val_gui_hover_tooltip_priority = -100000;
+
+//------------------//
+//BATTLE INSPECTION//
+//------------------//
+global.flag_battle_inspection = false;
+
+global.str_battle_inspection_title = "";
+global.str_battle_inspection_body = "";
+
+global.val_battle_inspection_priority = -100000;
+
+//==================//
+//PRINTOUT SETTINGS//
+//==================//
+if (!variable_global_exists("str_printout_mode")){
+	global.str_printout_mode = "CLEAN";
+}
+
+if (!variable_global_exists("val_printout_serial")){
+	global.val_printout_serial = 0;
+}
+
+//================//
+//CHEATS HOTKEY//
+//================//
+// One physical grave/tilde press may toggle Cheats only once.
+// Step re-arms this only after the key is fully released.
+_flag_cheats_hotkey_armed = !keyboard_check(192);
+
 //================//
 //MUSIC//
 //================//

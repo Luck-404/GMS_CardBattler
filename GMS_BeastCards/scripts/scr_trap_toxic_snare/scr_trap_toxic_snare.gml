@@ -100,9 +100,11 @@ function scr_trap_toxic_snare(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct
 			//================//
 			//REVEAL TRAP//
 			//================//
-			scr_gui_spawn_popup_trigger_banner(
-				"TRAP TRIGGERED: TOXIC SNARE"
-			);
+scr_gui_spawn_popup_trigger_banner(
+	"TRAP TRIGGERED: TOXIC SNARE",
+	_ref_trap._ref_owner,
+	_ref_target
+);
 
 			//======================//
 			//GET ADJACENT TARGETS//

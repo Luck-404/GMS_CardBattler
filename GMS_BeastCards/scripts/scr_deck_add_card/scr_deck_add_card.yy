@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_deck_add_card",
   "parent":{
-    "name":"DECK",
-    "path":"folders/CARDS/DECK.yy",
+    "name":"CORE",
+    "path":"folders/CARDS/DECK/CORE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

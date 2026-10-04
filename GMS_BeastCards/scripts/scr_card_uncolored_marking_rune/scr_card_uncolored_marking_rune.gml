@@ -37,9 +37,11 @@ function scr_card_uncolored_marking_rune(_stct_card,_ref_caster,_ref_target){
 	//=====================//
 	//SUMMON RANDOM MINION//
 	//=====================//
-	scr_card_summon_focus_minion(
-		_stct_card,
-		_ref_caster,
-		"UNCOLORED"
-	);
+	repeat (_stct_card._val_card_magnitude){
+		scr_card_summon_focus_minion(
+			_stct_card,
+			_ref_caster,
+			"UNCOLORED"
+		);
+	}
 }

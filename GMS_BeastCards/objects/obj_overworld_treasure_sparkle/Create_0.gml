@@ -4,6 +4,11 @@
 // FUNCTION: Initializes a roaming treasure sparkle.
 //           Rolls rarity, visibility, and starting position.
 //           Defines helpers for sparkle behavior, audio, and rewards.
+//
+//           All successfully awarded treasure uses the dedicated
+//           TREASURE_REWARD GUI system. Treasure rewards are independent
+//           of the normal RANDOM/CLEAN PRINTOUT modes.
+//
 //           Logs the exact Card/Item and Gold granted when collected.
 //
 //===============================================================================//
@@ -57,15 +62,15 @@ _val_nearby_sound_handle = -1;
 //-------------------------------------------------------------------------------//
 hscr_overworld_treasure_sparkle_stop_nearby_sound = function(){
 
-    if (_val_nearby_sound_handle == -1){
-        return;
-    }
+	if (_val_nearby_sound_handle == -1){
+		return;
+	}
 
-    if (audio_is_playing(_val_nearby_sound_handle)){
-        audio_stop_sound(_val_nearby_sound_handle);
-    }
+	if (audio_is_playing(_val_nearby_sound_handle)){
+		audio_stop_sound(_val_nearby_sound_handle);
+	}
 
-    _val_nearby_sound_handle = -1;
+	_val_nearby_sound_handle = -1;
 };
 
 //-------------------------------------------------------------------------------//
@@ -79,33 +84,39 @@ hscr_overworld_treasure_sparkle_stop_nearby_sound = function(){
 //-------------------------------------------------------------------------------//
 hscr_overworld_treasure_sparkle_roll_rarity = function(){
 
-    _str_rarity = choose(
-        "I",
-        "I",
-        "I",
-        "I",
-        "I",
-        "I",
-        "II",
-        "II",
-        "II",
-        "III"
-    );
+	_str_rarity = choose(
+		"I",
+		"I",
+		"I",
+		"I",
+		"I",
+		"I",
+		"II",
+		"II",
+		"II",
+		"III"
+	);
 
-    switch (_str_rarity){
+	switch (_str_rarity){
 
-        case "I":
-            _c_sparkle = c_white;
-        break;
+		case "I":
 
-        case "II":
-            _c_sparkle = c_lime;
-        break;
+			_c_sparkle = c_white;
 
-        case "III":
-            _c_sparkle = c_aqua;
-        break;
-    }
+		break;
+
+		case "II":
+
+			_c_sparkle = c_lime;
+
+		break;
+
+		case "III":
+
+			_c_sparkle = c_aqua;
+
+		break;
+	}
 };
 
 //-------------------------------------------------------------------------------//
@@ -118,15 +129,15 @@ hscr_overworld_treasure_sparkle_roll_rarity = function(){
 //-------------------------------------------------------------------------------//
 hscr_overworld_treasure_sparkle_roll_position = function(){
 
-    x = irandom_range(
-        32,
-        room_width - 32
-    );
+	x = irandom_range(
+		32,
+		room_width - 32
+	);
 
-    y = irandom_range(
-        32,
-        room_height - 32
-    );
+	y = irandom_range(
+		32,
+		room_height - 32
+	);
 };
 
 //-------------------------------------------------------------------------------//
@@ -140,24 +151,31 @@ hscr_overworld_treasure_sparkle_roll_position = function(){
 //-------------------------------------------------------------------------------//
 hscr_overworld_treasure_sparkle_roll_visibility = function(){
 
-    var _val_roll = irandom_range(
-        1,
-        100
-    );
+	var _val_roll = irandom_range(
+		1,
+		100
+	);
 
-    visible = (_val_roll <= 50);
+	visible = (_val_roll <= 50);
 
-    _ct_visibility_timer = 300;
+	_ct_visibility_timer = 300;
 
-    if (!visible){
-        hscr_overworld_treasure_sparkle_stop_nearby_sound();
-    }
+	if (!visible){
+		hscr_overworld_treasure_sparkle_stop_nearby_sound();
+	}
 };
 
 //-------------------------------------------------------------------------------//
 // HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD
 // FUNCTION: Awards a random Card or Item based on sparkle rarity.
 //           Also grants a rarity-scaled Gold reward.
+//
+//           Each successful primary reward and the Gold reward create their own
+//           dedicated bottom-right Treasure Reward notifications.
+//
+//           Inventory rewards beginning with EGG_ are automatically presented
+//           as Egg rewards by SCR_GUI_SPAWN_TREASURE_REWARD.
+//
 //           Logs the complete Sparkle reward in one line.
 //
 // ARGUMENTS: None.
@@ -166,208 +184,180 @@ hscr_overworld_treasure_sparkle_roll_visibility = function(){
 //-------------------------------------------------------------------------------//
 hscr_overworld_treasure_sparkle_award_reward = function(){
 
-    //================//
-    //SELECT REWARD//
-    //================//
-    var _str_reward_type = choose(
-        "ITEM",
-        "CARD"
-    );
+	//================//
+	//SELECT REWARD//
+	//================//
+	var _str_reward_type = choose(
+		"ITEM",
+		"CARD"
+	);
 
-    var _list_card_pool = global.list_pool_cards_rarity_I;
+	var _arr_card_pool =
+		global.arr_pool_cards_rarity_I;
 
-    var _str_primary_reward = "NONE";
+	var _str_primary_reward = "NONE";
 
-    switch (_str_rarity){
+	switch (_str_rarity){
 
-        case "II":
-            _list_card_pool = global.list_pool_cards_rarity_II;
-        break;
+		case "II":
 
-        case "III":
-            _list_card_pool = global.list_pool_cards_rarity_III;
-        break;
-    }
+			_arr_card_pool =
+				global.arr_pool_cards_rarity_II;
 
-    //================//
-    //CARD REWARD//
-    //================//
-    if (_str_reward_type == "CARD"){
+		break;
 
-        if (
-            ds_exists(_list_card_pool,ds_type_list) &&
-            ds_list_size(_list_card_pool) > 0
-        ){
+		case "III":
 
-            var _it_card_roll = irandom(
-                ds_list_size(_list_card_pool) - 1
-            );
+			_arr_card_pool =
+				global.arr_pool_cards_rarity_III;
 
-            var _str_card_id = ds_list_find_value(
-                _list_card_pool,
-                _it_card_roll
-            );
+		break;
+	}
 
-            var _stct_card = scr_card_get_info(
-                _str_card_id
-            );
+	//================//
+	//CARD REWARD//
+	//================//
+	if (_str_reward_type == "CARD"){
 
-            if (is_struct(_stct_card)){
+		if (
+			is_array(_arr_card_pool) &&
+			array_length(_arr_card_pool) > 0
+		){
 
-                scr_deck_add_card(_stct_card);
+			var _it_card_roll = irandom(
+				array_length(_arr_card_pool) - 1
+			);
 
-                _str_primary_reward =
-                    "CARD: " +
-                    string_upper(_str_card_id);
+			var _str_card_id =
+				_arr_card_pool[
+					_it_card_roll
+				];
 
-                if (instance_exists(obj_player)){
+			var _stct_card = scr_card_get_info(
+				_str_card_id
+			);
 
-                    var _val_popup_x =
-                        obj_player.x +
-                            irandom_range(-48,48);
+			if (is_struct(_stct_card)){
 
-                    var _val_popup_y =
-                        obj_player.y +
-                            irandom_range(-48,48);
+				scr_deck_add_card(_stct_card);
 
-                    scr_gui_spawn_popup(
-                        "TEXT",
-                        "+" + _str_card_id,
-                        undefined,
-                        c_white,
-                        _val_popup_x,
-                        _val_popup_y
-                    );
-                }
-            }
-        }
-        else{
+				_str_primary_reward =
+					"CARD: " +
+						string_upper(_str_card_id);
 
-            scr_debug_log(
-                "OVERWORLD",
-                "TREASURE_SPARKLE",
-                self,
-                "TREASURE SPARKLE CARD REWARD FAILED" +
-                " | RARITY: " +
-                string_upper(_str_rarity) +
-                " | REASON: EMPTY CARD POOL",
-                "WARNING",
-                "OBJ_OVERWORLD_TREASURE_SPARKLE:HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD"
-            );
-        }
-    }
+				//================//
+				//SHOW REWARD//
+				//================//
+				scr_gui_spawn_treasure_reward(
+					"CARD",
+					_str_card_id,
+					1
+				);
+			}
+		}
+		else{
 
-    //================//
-    //ITEM REWARD//
-    //================//
-    else{
+			scr_debug_log(
+				"OVERWORLD",
+				"TREASURE_SPARKLE",
+				self,
+				"TREASURE SPARKLE CARD REWARD FAILED" +
+				" | RARITY: " +
+				string_upper(_str_rarity) +
+				" | REASON: EMPTY CARD POOL",
+				"WARNING",
+				"OBJ_OVERWORLD_TREASURE_SPARKLE:HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD"
+			);
+		}
+	}
 
-        var _str_item_id = scr_inventory_get_random_item(
-            global.list_pool_items
-        );
+	//================//
+	//ITEM REWARD//
+	//================//
+	else{
 
-        if (_str_item_id != undefined){
+		var _str_item_id = scr_inventory_get_random_item(
+			global.arr_pool_items
+		);
 
-            scr_inventory_add_item(
-                _str_item_id,
-                1
-            );
+		if (_str_item_id != undefined){
 
-            _str_primary_reward =
-                "ITEM: " +
-                    string_upper(_str_item_id);
+			scr_inventory_add_item(
+				_str_item_id,
+				1
+			);
 
-            if (instance_exists(obj_player)){
+			_str_primary_reward =
+				"ITEM: " +
+					string_upper(_str_item_id);
 
-                var _val_popup_x =
-                    obj_player.x +
-                        irandom_range(-48,48);
+			//================//
+			//SHOW REWARD//
+			//================//
+			scr_gui_spawn_treasure_reward(
+				"ITEM",
+				_str_item_id,
+				1
+			);
+		}
+		else{
 
-                var _val_popup_y =
-                    obj_player.y +
-                        irandom_range(-48,48);
+			scr_debug_log(
+				"OVERWORLD",
+				"TREASURE_SPARKLE",
+				self,
+				"TREASURE SPARKLE ITEM REWARD FAILED" +
+				" | RARITY: " +
+				string_upper(_str_rarity) +
+				" | REASON: NO VALID ITEM",
+				"WARNING",
+				"OBJ_OVERWORLD_TREASURE_SPARKLE:HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD"
+			);
+		}
+	}
 
-                scr_gui_spawn_popup(
-                    "TEXT",
-                    "+" + string(_str_item_id),
-                    undefined,
-                    c_black,
-                    _val_popup_x,
-                    _val_popup_y
-                );
-            }
-        }
-        else{
+	//================//
+	//GOLD REWARD//
+	//================//
+	var _val_gold_reward = 10;
 
-            scr_debug_log(
-                "OVERWORLD",
-                "TREASURE_SPARKLE",
-                self,
-                "TREASURE SPARKLE ITEM REWARD FAILED" +
-                " | RARITY: " +
-                string_upper(_str_rarity) +
-                " | REASON: NO VALID ITEM",
-                "WARNING",
-                "OBJ_OVERWORLD_TREASURE_SPARKLE:HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD"
-            );
-        }
-    }
+	if (_str_rarity == "II"){
+		_val_gold_reward = 25;
+	}
+	else if (_str_rarity == "III"){
+		_val_gold_reward = 50;
+	}
 
-    //================//
-    //GOLD REWARD//
-    //================//
-    var _val_gold_reward = 10;
+	global.val_player_gold += _val_gold_reward;
 
-    if (_str_rarity == "II"){
-        _val_gold_reward = 25;
-    }
-    else if (_str_rarity == "III"){
-        _val_gold_reward = 50;
-    }
+	//================//
+	//SHOW GOLD//
+	//================//
+	scr_gui_spawn_treasure_reward(
+		"GOLD",
+		undefined,
+		_val_gold_reward
+	);
 
-    global.val_player_gold += _val_gold_reward;
-
-    if (instance_exists(obj_player)){
-
-        var _val_popup_x =
-            obj_player.x +
-                irandom_range(-48,48);
-
-        var _val_popup_y =
-            obj_player.y +
-                irandom_range(-48,48);
-
-        scr_gui_spawn_popup(
-            "TEXT",
-            "+" +
-                string(_val_gold_reward) +
-                "gp",
-            undefined,
-            c_yellow,
-            _val_popup_x,
-            _val_popup_y
-        );
-    }
-
-    //================//
-    //DEBUG REWARD//
-    //================//
-    scr_debug_log(
-        "OVERWORLD",
-        "TREASURE_SPARKLE",
-        self,
-        "TREASURE SPARKLE CLAIMED" +
-        " | RARITY: " +
-        string_upper(_str_rarity) +
-        " | " +
-        _str_primary_reward +
-        " | GOLD: +" +
-        string(_val_gold_reward) +
-        " | PLAYER GOLD: " +
-        string(global.val_player_gold),
-        "REWARD",
-        "OBJ_OVERWORLD_TREASURE_SPARKLE:HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD"
-    );
+	//================//
+	//DEBUG REWARD//
+	//================//
+	scr_debug_log(
+		"OVERWORLD",
+		"TREASURE_SPARKLE",
+		self,
+		"TREASURE SPARKLE CLAIMED" +
+		" | RARITY: " +
+		string_upper(_str_rarity) +
+		" | " +
+		_str_primary_reward +
+		" | GOLD: +" +
+		string(_val_gold_reward) +
+		" | PLAYER GOLD: " +
+		string(global.val_player_gold),
+		"REWARD",
+		"OBJ_OVERWORLD_TREASURE_SPARKLE:HSCR_OVERWORLD_TREASURE_SPARKLE_AWARD_REWARD"
+	);
 };
 
 #endregion

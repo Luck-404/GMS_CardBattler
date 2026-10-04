@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_encounter_get_zone_level_range",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_encounter_get_zone_level_range",
+  "parent":{
+    "name":"TURN",
+    "path":"folders/BATTLE/CONTROLLERS/TURN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -2,14 +2,20 @@
 //
 // SCRIPT: SCR_STATUS_GET_CON_RESIST_CHANCE
 // FUNCTION: Returns a Beast's chance to resist a DoT, Debuff, or CC application.
-//           Resistance scales from the target's CON grade modifier.
+//           Resistance is calculated directly from the target's effective CON.
 //
-// ARGUMENTS: _ref_target is the Beast whose CON resistance chance is calculated.
-// RETURNS: The final resistance chance as a percentage from 1 to 100.
+//           0 CON   = 0% resistance.
+//           300 CON = 50% resistance.
+//           CON above 300 receives diminishing returns toward 100%.
+//
+// ARGUMENTS: _ref_target - Beast whose CON resistance chance is calculated.
+// RETURNS: Final resistance chance as a percentage from 0 toward 100.
 //
 //===============================================================================//
 
 function scr_status_get_con_resist_chance(_ref_target){
+
+	#region VALIDATION
 
 	//----------------//
 	//VALIDATE TARGET//
@@ -22,12 +28,31 @@ function scr_status_get_con_resist_chance(_ref_target){
 		return 0;
 	}
 
+	#endregion
+
+	#region RESISTANCE
+
+	//================//
+	//GET CON STAT//
+	//================//
+	var _val_con_stat = max(
+		0,
+		_ref_target._ref_unit._val_beast_con_stat
+	);
+
 	//==========================//
 	//CALCULATE RESIST CHANCE//
 	//==========================//
-	var _val_con_stat = _ref_target._ref_unit._val_beast_con_stat;
-	var _val_con_modifier = scr_beast_get_grade_modifier(_val_con_stat);
-	var _val_resist_chance = round(10 * _val_con_modifier);
+	var _val_resist_chance =
+		scr_beast_get_con_resistance(
+			_val_con_stat
+		);
 
-	return clamp(_val_resist_chance,1,100);
+	return clamp(
+		_val_resist_chance,
+		0,
+		100
+	);
+
+	#endregion
 }

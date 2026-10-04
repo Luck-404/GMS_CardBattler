@@ -341,7 +341,8 @@ function scr_trap_init(_str_trap_id,_stct_card,_ref_caster,_ref_target){
 	//ANNOUNCE TRAP//
 	//================//
 	scr_gui_spawn_popup_trigger_banner(
-		_ref_caster._str_team + " HAS SET A TRAP"
+		"HAS SET A TRAP",
+		_ref_caster
 	);
 
 	return _ref_new_trap;

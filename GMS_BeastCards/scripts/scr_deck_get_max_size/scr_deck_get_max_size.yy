@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_deck_get_max_size",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_deck_get_max_size",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/CARDS/DECK/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

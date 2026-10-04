@@ -1,10 +1,9 @@
-
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DEBUFF_VULNERABLE
 // FUNCTION: Handles the Vulnerable Debuff.
 //           Stackable Timed Debuff.
-//           Each stack increases incoming damage by 25%.
+//           Each stack increases incoming damage by 10%.
 //           Reapplication adds 1 stack and refreshes duration without
 //           shortening the current effect.
 //           Removes the entire accumulated damage bonus on DEATH.
@@ -44,15 +43,20 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 				_val_lifetime = 3;
 			}
 
-			_val_lifetime = max(1,_val_lifetime);
+			_val_lifetime =
+				max(
+					1,
+					_val_lifetime
+				);
 
 			//================//
 			//CHECK EXISTING//
 			//================//
-			var _ref_existing_status = scr_status_check(
-				"VULNERABLE",
-				_ref_target
-			);
+			var _ref_existing_status =
+				scr_status_check(
+					"VULNERABLE",
+					_ref_target
+				);
 
 			//================//
 			//STACK EXISTING//
@@ -65,17 +69,20 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 				//================//
 				//ADD 1 STACK//
 				//================//
-				_ref_existing_status._ct_status_stacks++;
-				_ref_existing_status._flag_status_stackable = true;
+				_ref_existing_status
+					._ct_status_stacks++;
+
+				_ref_existing_status
+					._flag_status_stackable =
+						true;
 
 				//=========================//
 				//INCREASE DAMAGE TAKEN//
 				//=========================//
-				// Apply only the NEW stack's bonus.
-				// Previous stacks are already included in the host scalar.
-
-				_ref_target._val_dmg_taken_scalar_bonus +=
-					_ref_existing_status._val_status_magnitude;
+				_ref_target
+					._val_dmg_taken_scalar_bonus +=
+						_ref_existing_status
+							._val_status_magnitude;
 
 				//================//
 				//REFRESH LIFETIME//
@@ -89,15 +96,20 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 				//UPDATE DESCRIPTION//
 				//================//
 				var _val_total_bonus =
-					_ref_existing_status._val_status_magnitude *
-					_ref_existing_status._ct_status_stacks;
+					_ref_existing_status
+						._val_status_magnitude *
+					_ref_existing_status
+						._ct_status_stacks;
 
-				_ref_existing_status._str_status_desc =
-					"TAKES " +
-					string(_val_total_bonus) +
-					"% ADDITIONAL DAMAGE";
+				_ref_existing_status
+					._str_status_desc =
+						"TAKES " +
+						string(_val_total_bonus) +
+						"% ADDITIONAL DAMAGE";
 
-				scr_status_reposition(_ref_target);
+				scr_status_reposition(
+					_ref_target
+				);
 
 				return _ref_existing_status;
 			}
@@ -105,12 +117,13 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 			//===============//
 			//CREATE STATUS//
 			//===============//
-			var _ref_new_status = instance_create_layer(
-				_ref_target.x,
-				_ref_target.y,
-				"ily_status",
-				obj_battle_status
-			);
+			var _ref_new_status =
+				instance_create_layer(
+					_ref_target.x,
+					_ref_target.y,
+					"ily_status",
+					obj_battle_status
+				);
 
 			//================//
 			//INIT LIFETIME//
@@ -125,42 +138,57 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 			//=============//
 			//STATUS DATA//
 			//=============//
-			_ref_new_status._scr_status = scr_status_debuff_vulnerable;
+			_ref_new_status._scr_status =
+				scr_status_debuff_vulnerable;
 
-			_ref_new_status._ref_host = _ref_target;
+			_ref_new_status._ref_host =
+				_ref_target;
 
-			_ref_new_status._str_status_type = "DEBUFF";
-			_ref_new_status._str_status_name = "VULNERABLE";
+			_ref_new_status._str_status_type =
+				"DEBUFF";
 
-			_ref_new_status._spr_status = spr_status_debuff_vulnerable;
+			_ref_new_status._str_status_name =
+				"VULNERABLE";
+
+			_ref_new_status._spr_status =
+				spr_status_debuff_vulnerable;
 
 			//================//
 			//STACK DATA//
 			//================//
 			_ref_new_status._ct_status_stacks = 1;
-			_ref_new_status._flag_status_stackable = true;
 
-			// Magnitude is the damage bonus PER STACK.
-			_ref_new_status._val_status_magnitude = 25;
+			_ref_new_status._flag_status_stackable =
+				true;
+
+			// Magnitude is incoming damage bonus PER STACK.
+			_ref_new_status._val_status_magnitude =
+				10;
 
 			//================//
 			//DESCRIPTION//
 			//================//
 			_ref_new_status._str_status_desc =
 				"TAKES " +
-				string(_ref_new_status._val_status_magnitude) +
+				string(
+					_ref_new_status
+						._val_status_magnitude
+				) +
 				"% ADDITIONAL DAMAGE";
 
 			//================//
 			//TRIGGER TIMING//
 			//================//
-			_ref_new_status._str_trigger_region = "END";
+			_ref_new_status._str_trigger_region =
+				"END";
 
 			//=========================//
 			//INCREASE DAMAGE TAKEN//
 			//=========================//
-			_ref_target._val_dmg_taken_scalar_bonus +=
-				_ref_new_status._val_status_magnitude;
+			_ref_target
+				._val_dmg_taken_scalar_bonus +=
+					_ref_new_status
+						._val_status_magnitude;
 
 			//================//
 			//REGISTER STATUS//
@@ -170,7 +198,9 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 				_ref_new_status
 			);
 
-			scr_status_reposition(_ref_target);
+			scr_status_reposition(
+				_ref_target
+			);
 
 			return _ref_new_status;
 
@@ -185,11 +215,14 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			if (!instance_exists(_ref_host)){
 
-				scr_status_destroy(_ref_status);
+				scr_status_destroy(
+					_ref_status
+				);
 
 				return undefined;
 			}
@@ -197,9 +230,13 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 			//================//
 			//UPDATE LIFETIME//
 			//================//
-			scr_status_tick_lifetime(_ref_status);
+			scr_status_tick_lifetime(
+				_ref_status
+			);
 
-			scr_status_reposition(_ref_host);
+			scr_status_reposition(
+				_ref_host
+			);
 
 		break;
 
@@ -212,7 +249,8 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 				return undefined;
 			}
 
-			var _ref_host = _ref_status._ref_host;
+			var _ref_host =
+				_ref_status._ref_host;
 
 			//=======================//
 			//REMOVE DAMAGE PENALTY//
@@ -223,14 +261,22 @@ function scr_status_debuff_vulnerable(_str_tag,_ref_status,_val_lifetime=undefin
 					_ref_status._val_status_magnitude *
 					_ref_status._ct_status_stacks;
 
-				_ref_host._val_dmg_taken_scalar_bonus -=
-					_val_total_bonus;
+				_ref_host
+					._val_dmg_taken_scalar_bonus =
+						max(
+							0,
+							_ref_host
+								._val_dmg_taken_scalar_bonus -
+							_val_total_bonus
+						);
 			}
 
 			//================//
 			//DESTROY STATUS//
 			//================//
-			scr_status_destroy(_ref_status);
+			scr_status_destroy(
+				_ref_status
+			);
 
 		break;
 	}

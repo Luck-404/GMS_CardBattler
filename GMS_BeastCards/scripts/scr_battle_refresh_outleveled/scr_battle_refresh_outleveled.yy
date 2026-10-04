@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_refresh_outleveled",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_refresh_outleveled",
+  "parent":{
+    "name":"OUTLEVELED",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/OUTLEVELED.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -174,7 +174,7 @@ function scr_status_cc_sleep(_str_tag,_ref_status,_val_lifetime=undefined,_ref_t
 
 				var _val_con_stat = _ref_host._ref_unit._val_beast_con_stat;
 
-				_val_con_mod = scr_beast_get_grade_modifier(
+				_val_con_mod = scr_beast_get_con_resistance(
 					_val_con_stat
 				);
 			}

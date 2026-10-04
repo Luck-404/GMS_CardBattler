@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_draw_battle_inspection_pane",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_draw_battle_inspection_pane",
+  "parent":{
+    "name":"INSPECT",
+    "path":"folders/BATTLE/INSPECT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

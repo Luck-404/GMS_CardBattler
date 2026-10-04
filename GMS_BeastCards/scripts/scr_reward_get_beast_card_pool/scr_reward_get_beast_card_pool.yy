@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reward_get_beast_card_pool",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reward_get_beast_card_pool",
+  "parent":{
+    "name":"DATA",
+    "path":"folders/BEASTS/CORE/DATA.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

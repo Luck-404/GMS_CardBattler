@@ -1,70 +1,102 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_GET_STAT_PREVIEW
-// FUNCTION: Converts a Beast stat into a five-level battle preview rating.
-//           Returns --, -, o, +, or ++ and can invert that rating for
-//           defensive or resistance target previews.
+// FUNCTION: Converts a Beast primary Stat into a five-level battle preview.
 //
-// INPUTS:   _val_stat - Beast stat value being converted into a preview rating.
-//           _flag_invert - Whether the resulting rating should be reversed.
-// USES:     Shared Beast grade-modifier calculation.
+//           0-60    = VERY WEAK
+//           61-120  = WEAK
+//           121-180 = NEUTRAL
+//           181-240 = STRONG
+//           241+    = VERY STRONG
+//
+//           Defensive/resistance previews can invert the result so a high
+//           defensive Stat represents a weak matchup for the attacker.
+//
+// INPUTS:   _val_stat - Beast primary Stat being evaluated.
+//           _flag_invert - Whether the resulting preview should be reversed.
+// RETURNS:  VERY WEAK, WEAK, NEUTRAL, STRONG, or VERY STRONG.
 //
 //===============================================================================//
 
-function scr_battle_get_stat_preview(_val_stat,_flag_invert){
+function scr_battle_get_stat_preview(_val_stat,_flag_invert=false){
+
+	#region VALIDATION
+
+	//================//
+	//SANITIZE STAT//
+	//================//
+	if (!is_real(_val_stat)){
+		_val_stat = 0;
+	}
+
+	_val_stat = max(
+		0,
+		_val_stat
+	);
+
+	#endregion
 
 	#region STAT RATING
 
-	//-------------------//
-	//GET GRADE MODIFIER//
-	//-------------------//
-	var _val_grade_modifier = scr_beast_get_grade_modifier(_val_stat);
-	var _str_rating = "o";
+	//================//
+	//DEFAULT RATING//
+	//================//
+	var _str_rating = "NEUTRAL";
 
-	//----------------//
+	//================//
 	//CALCULATE RATING//
-	//----------------//
-	if (_val_grade_modifier <= 0.6){
-		_str_rating = "--";
+	//================//
+	if (_val_stat <= 60){
+
+		_str_rating =
+			"VERY WEAK";
 	}
-	else if (_val_grade_modifier <= 0.9){
-		_str_rating = "-";
+	else if (_val_stat <= 120){
+
+		_str_rating =
+			"WEAK";
 	}
-	else if (_val_grade_modifier <= 1.2){
-		_str_rating = "o";
+	else if (_val_stat <= 180){
+
+		_str_rating =
+			"NEUTRAL";
 	}
-	else if (_val_grade_modifier <= 1.6){
-		_str_rating = "+";
+	else if (_val_stat <= 240){
+
+		_str_rating =
+			"STRONG";
 	}
 	else{
-		_str_rating = "++";
+
+		_str_rating =
+			"VERY STRONG";
 	}
 
 	#endregion
 
 	#region INVERT RATING
 
-	//-------------------//
-	//INVERT TARGET VALUE//
-	//-------------------//
+	//================//
+	//INVERT RATING//
+	//================//
 	if (_flag_invert){
 
-		switch(_str_rating){
+		switch (_str_rating){
 
-			case "--":
-				return "++";
+			case "VERY WEAK":
+				return "VERY STRONG";
 
-			case "-":
-				return "+";
+			case "WEAK":
+				return "STRONG";
 
-			case "o":
-				return "o";
+			case "NEUTRAL":
+				return "NEUTRAL";
 
-			case "+":
-				return "-";
+			case "STRONG":
+				return "WEAK";
 
-			case "++":
-				return "--";
+			case "VERY STRONG":
+				return "VERY WEAK";
 		}
 	}
 

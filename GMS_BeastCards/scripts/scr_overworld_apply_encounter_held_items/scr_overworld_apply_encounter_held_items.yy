@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_overworld_apply_encounter_held_items",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_overworld_apply_encounter_held_items",
+  "parent":{
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/HELD/USAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

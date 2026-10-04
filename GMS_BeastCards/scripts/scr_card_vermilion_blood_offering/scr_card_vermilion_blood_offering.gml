@@ -35,19 +35,21 @@ function scr_card_vermilion_blood_offering(_stct_card,_ref_caster,_ref_target){
 	if (_ref_caster._val_cur_hp <= 0){
 		return;
 	}
-
+	
 	//=======================//
 	//VALIDATE MINION POOL//
 	//=======================//
-	if (!variable_global_exists("list_pool_vermilion_minions")){
+	if (
+		!variable_global_exists("arr_pool_vermilion_minions") ||
+		!is_array(global.arr_pool_vermilion_minions)
+	){
 		return;
 	}
 
-	if (!ds_exists(global.list_pool_vermilion_minions,ds_type_list)){
-		return;
-	}
-
-	var _ct_pool_size = ds_list_size(global.list_pool_vermilion_minions);
+	var _ct_pool_size =
+		array_length(
+			global.arr_pool_vermilion_minions
+		);
 
 	if (_ct_pool_size <= 0){
 		return;
@@ -56,12 +58,15 @@ function scr_card_vermilion_blood_offering(_stct_card,_ref_caster,_ref_target){
 	//=====================//
 	//SELECT RANDOM MINION//
 	//=====================//
-	var _it_minion = irandom(_ct_pool_size - 1);
+	var _it_minion =
+		irandom(
+			_ct_pool_size - 1
+		);
 
-	var _str_minion_id = ds_list_find_value(
-		global.list_pool_vermilion_minions,
-		_it_minion
-	);
+	var _str_minion_id =
+		global.arr_pool_vermilion_minions[
+			_it_minion
+		];
 
 	//================//
 	//SUMMON MINION//

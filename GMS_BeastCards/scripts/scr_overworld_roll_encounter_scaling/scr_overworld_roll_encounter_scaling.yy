@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_overworld_roll_encounter_scaling",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_overworld_roll_encounter_scaling",
+  "parent":{
+    "name":"TURN",
+    "path":"folders/BATTLE/CONTROLLERS/TURN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

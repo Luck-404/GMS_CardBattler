@@ -1,29 +1,30 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_GUI_SPAWN_POPUP
-// FUNCTION: Creates a standard GUI popup.
-//           Assigns popup type, text, icon, and color.
-//           Displays the popup at the specified GUI position.
+// FUNCTION: Routes a standard temporary popup through the active printout
+//           presentation mode.
 //
-// ARGUMENTS: _str_type is the popup display type. _str_text is popup text.
-//            _spr_icon is the icon sprite. _c_popup is the popup color.
-//            _val_x and _val_y are the GUI position.
-// RETURNS: Nothing.
+//           RANDOM preserves the original stationary popup behavior.
+//           CLEAN routes the entry into the organized scrolling printout list.
+//
+// ARGUMENTS: _str_type is the popup display type.
+//            _str_text is popup text.
+//            _spr_icon is the icon sprite.
+//            _c_popup is the popup color.
+//            _val_x and _val_y are the original popup coordinates.
+// RETURNS: Created or stacked popup instance.
 //
 //===============================================================================//
 
 function scr_gui_spawn_popup(_str_type,_str_text,_spr_icon,_c_popup,_val_x,_val_y){
 
-	//================//
-	//CREATE POPUP//
-	//================//
-	var _ref_popup = instance_create_layer(_val_x,_val_y,"ily_fx",obj_gui_popup);
-
-	//================//
-	//SET POPUP DATA//
-	//================//
-	_ref_popup._str_type = _str_type;
-	_ref_popup._str_text = _str_text;
-	_ref_popup._spr_icon = _spr_icon;
-	_ref_popup._c_popup = _c_popup;
+	return scr_gui_spawn_printout(
+		false,
+		_str_type,
+		_str_text,
+		_spr_icon,
+		_c_popup,
+		_val_x,
+		_val_y
+	);
 }

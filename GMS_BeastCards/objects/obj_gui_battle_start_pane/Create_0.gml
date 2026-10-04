@@ -2,8 +2,8 @@
 //
 // CREATE: OBJ_GUI_BATTLE_START_PANE
 // FUNCTION: Initializes the pre-battle confirmation pane.
-//           Displays both teams, Speed information, opening initiative,
-//           and the Start Battle confirmation button.
+//           Displays both teams, average Level, Speed information,
+//           OUTLEVELED disparity, opening initiative, and Start Battle.
 //
 //===============================================================================//
 
@@ -26,6 +26,13 @@ _val_player_avg_speed = 0;
 _val_enemy_avg_speed = 0;
 
 _str_first_team = "";
+
+#endregion
+
+#region LEVEL DISPARITY
+
+_val_player_avg_level = 0;
+_val_enemy_avg_level = 0;
 
 #endregion
 

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_held_bloomtide_chalice",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_held_bloomtide_chalice",
+  "parent":{
+    "name":"BLOOMTIDE",
+    "path":"folders/INVENTORY/ITEMS/HELD/ENTRY/BLOOMTIDE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

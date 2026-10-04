@@ -42,8 +42,11 @@ function scr_inventory_item_held_verdant_seed(_str_state,_stct_item,_ref_target)
 			//----------------//
 			scr_status_apply_weather("SEEDFALL");
 
-			scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name);
-
+			scr_gui_spawn_popup_trigger_banner(
+				_stct_item._str_item_name,
+				_ref_target
+			);
+			
 			return true;
 
 		case "UNEQUIP":

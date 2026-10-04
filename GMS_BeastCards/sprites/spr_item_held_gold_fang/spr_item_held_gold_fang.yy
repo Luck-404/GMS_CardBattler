@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"GOLD FANG",
-    "path":"folders/INVENTORY/ITEMS/HELD/GOLD FANG.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/RESOURCE MODIFIERS/GOLD FANG.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -169,6 +169,7 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 	//CHECK INSPECTION PANE//
 	//----------------------//
 	if (
+		!scr_gui_check_cheats_active() &&
 		keyboard_check(vk_lcontrol) &&
 		(
 			_state_player == ENUM_PLAYER_STATE.SELECT_CASTER ||

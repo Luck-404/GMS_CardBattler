@@ -6,6 +6,10 @@
 //           Defines helpers for rarity, loot awards, proximity audio,
 //           and structured reward logging.
 //
+//           All successfully awarded treasure uses the dedicated
+//           TREASURE_REWARD GUI system. Treasure rewards are independent
+//           of the normal RANDOM/CLEAN PRINTOUT modes.
+//
 //===============================================================================//
 
 //================//
@@ -127,6 +131,13 @@ hscr_overworld_treasure_roll_rarity = function(){
 // HSCR_OVERWORLD_TREASURE_AWARD_CUSTOM_LOOT
 // FUNCTION: Awards the configured loot assigned to this treasure chest.
 //           Supports Cards, Inventory Items, and Gold.
+//
+//           Each successfully awarded entry creates one dedicated bottom-right
+//           Treasure Reward notification.
+//
+//           Inventory rewards beginning with EGG_ are automatically presented
+//           as Egg rewards by SCR_GUI_SPAWN_TREASURE_REWARD.
+//
 //           Logs each reward actually granted.
 //
 // ARGUMENTS: None.
@@ -184,6 +195,18 @@ hscr_overworld_treasure_award_custom_loot = function(){
 
 				if (_ct_cards_awarded > 0){
 
+					//================//
+					//SHOW REWARD//
+					//================//
+					scr_gui_spawn_treasure_reward(
+						"CARD",
+						_str_reward_id,
+						_ct_cards_awarded
+					);
+
+					//================//
+					//DEBUG REWARD//
+					//================//
 					scr_debug_log(
 						"OVERWORLD",
 						"TREASURE",
@@ -209,6 +232,18 @@ hscr_overworld_treasure_award_custom_loot = function(){
 					_ct_reward_amount
 				);
 
+				//================//
+				//SHOW REWARD//
+				//================//
+				scr_gui_spawn_treasure_reward(
+					"ITEM",
+					_str_reward_id,
+					_ct_reward_amount
+				);
+
+				//================//
+				//DEBUG REWARD//
+				//================//
 				scr_debug_log(
 					"OVERWORLD",
 					"TREASURE",
@@ -230,6 +265,18 @@ hscr_overworld_treasure_award_custom_loot = function(){
 
 				global.val_player_gold += _ct_reward_amount;
 
+				//================//
+				//SHOW REWARD//
+				//================//
+				scr_gui_spawn_treasure_reward(
+					"GOLD",
+					undefined,
+					_ct_reward_amount
+				);
+
+				//================//
+				//DEBUG REWARD//
+				//================//
 				scr_debug_log(
 					"OVERWORLD",
 					"TREASURE",
@@ -244,32 +291,6 @@ hscr_overworld_treasure_award_custom_loot = function(){
 				);
 
 			break;
-		}
-
-		//================//
-		//SHOW REWARD//
-		//================//
-		if (instance_exists(obj_player)){
-
-			var _val_popup_x =
-				obj_player.x +
-				irandom_range(-128,128);
-
-			var _val_popup_y =
-				obj_player.y +
-				irandom_range(-128,128);
-
-			scr_gui_spawn_popup(
-				"TEXT",
-				"+" +
-				_str_reward_id +
-				"x" +
-				string(_ct_reward_amount),
-				undefined,
-				c_white,
-				_val_popup_x,
-				_val_popup_y
-			);
 		}
 	}
 
@@ -293,6 +314,13 @@ hscr_overworld_treasure_award_custom_loot = function(){
 // HSCR_OVERWORLD_TREASURE_AWARD_RANDOM_LOOT
 // FUNCTION: Rolls random Card or Item rewards based on chest rarity.
 //           Awards rarity-scaled Gold alongside each loot roll.
+//
+//           Each successful Card/Item reward and each Gold award creates its own
+//           dedicated bottom-right Treasure Reward notification.
+//
+//           Inventory rewards beginning with EGG_ are automatically presented
+//           as Egg rewards by SCR_GUI_SPAWN_TREASURE_REWARD.
+//
 //           Logs each completed random reward slot.
 //
 // ARGUMENTS: None.
@@ -308,7 +336,8 @@ hscr_overworld_treasure_award_random_loot = function(){
 			"CARD"
 		);
 
-		var _list_card_pool = global.list_pool_cards_rarity_I;
+		var _arr_card_pool =
+			global.arr_pool_cards_rarity_I;
 
 		var _str_primary_reward = "NONE";
 
@@ -318,11 +347,17 @@ hscr_overworld_treasure_award_random_loot = function(){
 		switch (_str_rarity){
 
 			case "II":
-				_list_card_pool = global.list_pool_cards_rarity_II;
+
+				_arr_card_pool =
+					global.arr_pool_cards_rarity_II;
+
 			break;
 
 			case "III":
-				_list_card_pool = global.list_pool_cards_rarity_III;
+
+				_arr_card_pool =
+					global.arr_pool_cards_rarity_III;
+
 			break;
 		}
 
@@ -332,18 +367,19 @@ hscr_overworld_treasure_award_random_loot = function(){
 		if (_str_reward_type == "CARD"){
 
 			if (
-				ds_exists(_list_card_pool,ds_type_list) &&
-				ds_list_size(_list_card_pool) > 0
+				is_array(_arr_card_pool) &&
+				array_length(_arr_card_pool) > 0
 			){
 
-				var _it_card_roll = irandom(
-					ds_list_size(_list_card_pool) - 1
-				);
+				var _it_card_roll =
+					irandom(
+						array_length(_arr_card_pool) - 1
+					);
 
-				var _str_card_id = ds_list_find_value(
-					_list_card_pool,
-					_it_card_roll
-				);
+				var _str_card_id =
+					_arr_card_pool[
+						_it_card_roll
+					];
 
 				var _stct_card = scr_card_get_info(
 					_str_card_id
@@ -357,25 +393,14 @@ hscr_overworld_treasure_award_random_loot = function(){
 						"CARD: " +
 						string_upper(_str_card_id);
 
-					if (instance_exists(obj_player)){
-
-						var _val_popup_x =
-							obj_player.x +
-								irandom_range(-48,48);
-
-						var _val_popup_y =
-							obj_player.y +
-								irandom_range(-48,48);
-
-						scr_gui_spawn_popup(
-							"TEXT",
-							"+" + _str_card_id,
-							undefined,
-							c_white,
-							_val_popup_x,
-							_val_popup_y
-						);
-					}
+					//================//
+					//SHOW REWARD//
+					//================//
+					scr_gui_spawn_treasure_reward(
+						"CARD",
+						_str_card_id,
+						1
+					);
 				}
 			}
 			else{
@@ -399,7 +424,7 @@ hscr_overworld_treasure_award_random_loot = function(){
 		else{
 
 			var _str_item_id = scr_inventory_get_random_item(
-				global.list_pool_items
+				global.arr_pool_items
 			);
 
 			if (_str_item_id != undefined){
@@ -411,27 +436,16 @@ hscr_overworld_treasure_award_random_loot = function(){
 
 				_str_primary_reward =
 					"ITEM: " +
-					string_upper(_str_item_id);
+						string_upper(_str_item_id);
 
-				if (instance_exists(obj_player)){
-
-					var _val_popup_x =
-						obj_player.x +
-							irandom_range(-48,48);
-
-					var _val_popup_y =
-						obj_player.y +
-							irandom_range(-48,48);
-
-					scr_gui_spawn_popup(
-						"TEXT",
-						"+" + string(_str_item_id),
-						undefined,
-						c_black,
-						_val_popup_x,
-						_val_popup_y
-					);
-				}
+				//================//
+				//SHOW REWARD//
+				//================//
+				scr_gui_spawn_treasure_reward(
+					"ITEM",
+					_str_item_id,
+					1
+				);
 			}
 			else{
 
@@ -462,27 +476,14 @@ hscr_overworld_treasure_award_random_loot = function(){
 
 		global.val_player_gold += _val_gold_reward;
 
-		if (instance_exists(obj_player)){
-
-			var _val_popup_x =
-				obj_player.x +
-					irandom_range(-48,48);
-
-			var _val_popup_y =
-				obj_player.y +
-					irandom_range(-48,48);
-
-			scr_gui_spawn_popup(
-				"TEXT",
-				"+" +
-				string(_val_gold_reward) +
-				"gp",
-				undefined,
-				c_yellow,
-				_val_popup_x,
-				_val_popup_y
-			);
-		}
+		//================//
+		//SHOW GOLD//
+		//================//
+		scr_gui_spawn_treasure_reward(
+			"GOLD",
+			undefined,
+			_val_gold_reward
+		);
 
 		//================//
 		//DEBUG REWARD//

@@ -16,9 +16,12 @@ function scr_card_uncolored_artifact_hourglass(_stct_card,_ref_caster,_ref_targe
 	//====================//
 	//SCHEDULE EXTRA TURN//
 	//====================//
+	//_stct_card._val_card_magnitude = 1
+	
 	if (instance_exists(obj_battle_player_controller)){
 		obj_battle_player_controller._flag_extra_turn_pending = true;
 	}
+
 
 	//================//
 	//SPAWN POPUP//

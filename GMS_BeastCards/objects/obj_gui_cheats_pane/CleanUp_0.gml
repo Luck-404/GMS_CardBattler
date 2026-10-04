@@ -21,6 +21,8 @@ _str_tool_target_type = "";
 
 _str_selected_id = "";
 
+_ref_swap_first = undefined;
+
 //================//
 //CLEAR MENU STATE//
 //================//

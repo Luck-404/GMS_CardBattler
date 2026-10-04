@@ -2,22 +2,32 @@
 //
 // DRAW: OBJ_BATTLE_MINION
 // FUNCTION: Draws the battle Minion.
-//           Displays its sprite, current HP, and inspection tooltip while
-//           hovered with Left Control held.
+//           Displays its sprite and current HP.
+//           Normal hover shows its name.
+//           Ctrl hover shows detailed Minion information using the shared
+//           Cheats-style hover tooltip.
 //
 //===============================================================================//
 
 //------------------//
 //END BATTLE GUARD//
 //------------------//
-if (instance_exists(obj_gui_end_battle_pane)){
+if (
+	instance_exists(
+		obj_gui_end_battle_pane
+	)
+){
 	exit;
 }
 
 //----------------//
 //VALIDATE HOST//
 //----------------//
-if (!instance_exists(_ref_host)){
+if (
+	!instance_exists(
+		_ref_host
+	)
+){
 	exit;
 }
 
@@ -26,19 +36,25 @@ if (!instance_exists(_ref_host)){
 //-----------//
 //DRAW SETUP//
 //-----------//
-draw_set_font(fnt_gui_party_small);
+draw_set_font(
+	fnt_gui_party_small
+);
 
 //------------------//
 //BASE MINION SCALE//
 //------------------//
-var _val_base_scale = 0.125;
+var _val_base_scale =
+	0.125;
 
 //------------------------//
 //MAGNITUDE SIZE INCREASE//
 //------------------------//
 var _ct_growth_tiers =
 	floor(
-		max(0,_val_magnitude) /
+		max(
+			0,
+			_val_magnitude
+		) /
 		5
 	);
 
@@ -74,7 +90,8 @@ draw_sprite_ext(
 	0,
 	x + _val_vfx_offset_x,
 	y + _val_vfx_offset_y,
-	_val_scale * _val_flip,
+	_val_scale *
+		_val_flip,
 	_val_scale,
 	0,
 	c_white,
@@ -88,140 +105,86 @@ draw_sprite_ext(
 //---------//
 //DRAW HP//
 //---------//
-draw_set_colour(c_white);
+draw_set_colour(
+	c_white
+);
 
 var _str_hp =
-	string(_val_cur_hp) +
+	string(
+		_val_cur_hp
+	) +
 	"/" +
-	string(_val_max_hp);
+	string(
+		_val_max_hp
+	);
 
 draw_text(
-	x - string_width(_str_hp) * 0.5,
+	x -
+		(
+			string_width(
+				_str_hp
+			) *
+			0.5
+		),
 	y + 20,
 	_str_hp
 );
 
 #endregion
 
-#region DRAW TOOLTIP
+#region HOVER TOOLTIP
 
-//----------------//
-//CHECK INSPECTION//
-//----------------//
-if (
-	keyboard_check(vk_lcontrol) &&
+//================//
+//CHECK HOVER//
+//================//
+var _flag_minion_hover =
 	position_meeting(
 		device_mouse_x(0),
 		device_mouse_y(0),
 		self
-	)
+	);
+
+if (
+	!scr_gui_check_cheats_active() &&
+	_flag_minion_hover
 ){
 
-	//-----------//
-	//HOST NAME//
-	//-----------//
-	var _str_host_name = "UNKNOWN";
-
+	//================//
+	//CTRL INSPECTION//
+	//================//
 	if (
-		instance_exists(_ref_host) &&
-		_ref_host._ref_unit != undefined
+		keyboard_check(
+			vk_lcontrol
+		)
 	){
-		_str_host_name = string(_ref_host._ref_unit._str_beast_name);
+
+		scr_gui_request_battle_inspection(
+			"MINION",
+			self,
+			40
+		);
 	}
 
-	//---------------//
-	//TOOLTIP TITLE//
-	//---------------//
-	var _str_title =
-		_str_name +
-		" | " +
-		_str_host_name;
+	//================//
+	//SIMPLE TOOLTIP//
+	//================//
+	else{
 
-	var _str_age = "";
-
-	//-----------------//
-	//DORMANT SEED AGE//
-	//-----------------//
-	if (_str_name == "DORMANT SEED"){
-		_str_age = "AGE: " + string(_ct_age) + " / 2";
-	}
-
-	//------------//
-	//PANEL SIZE//
-	//------------//
-	var _val_panel_w =
-		string_width(_str_title) +
-		40;
-
-	if (_str_age != ""){
-
-		_val_panel_w =
-			max(
-				_val_panel_w,
-				string_width(_str_age) + 40
-			);
-	}
-
-	var _val_panel_h =
-		(_str_age != "")
-			? 60
-			: 40;
-
-	var _val_panel_x =
-		room_width * 0.5 -
-		(_val_panel_w * 0.5);
-
-	var _val_panel_y = 20;
-
-	//-----------//
-	//DRAW PANEL//
-	//-----------//
-	draw_set_colour(c_dkgray);
-
-	draw_rectangle(
-		_val_panel_x,
-		_val_panel_y,
-		_val_panel_x + _val_panel_w,
-		_val_panel_y + _val_panel_h,
-		false
-	);
-
-	draw_set_colour(c_black);
-
-	draw_rectangle(
-		_val_panel_x,
-		_val_panel_y,
-		_val_panel_x + _val_panel_w,
-		_val_panel_y + _val_panel_h,
-		true
-	);
-
-	//-----------//
-	//DRAW TITLE//
-	//-----------//
-	draw_set_colour(c_white);
-
-	draw_text(
-		_val_panel_x +
-		(_val_panel_w * 0.5) -
-		(string_width(_str_title) * 0.5),
-		_val_panel_y + 12,
-		_str_title
-	);
-
-	//----------//
-	//DRAW AGE//
-	//----------//
-	if (_str_age != ""){
-
-		draw_text(
-			_val_panel_x +
-			(_val_panel_w * 0.5) -
-			(string_width(_str_age) * 0.5),
-			_val_panel_y + 32,
-			_str_age
+		scr_gui_set_hover_tooltip(
+			_str_name,
+			"",
+			40
 		);
 	}
 }
 
 #endregion
+
+//================//
+//RESET DRAW STATE//
+//================//
+draw_set_alpha(1);
+draw_set_colour(c_white);
+
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);

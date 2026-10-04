@@ -1,10 +1,8 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_MINION_INIT_POOLS
-// FUNCTION: Populates the global random Minion pools.
+// FUNCTION: Initializes the global random Minion pools as arrays.
 //           Called once during game initialization.
-//           Vermilion entries remain disabled until their Minions are
-//           implemented in the shared Minion system.
 //
 //===============================================================================//
 
@@ -15,12 +13,14 @@ function scr_minion_init_pools(){
 	//==========//
 	#region VIRIDIAN
 
-	ds_list_add(global.list_pool_viridian_minions,"THORNLING");
-	ds_list_add(global.list_pool_viridian_minions,"LIFE_SPIRIT");
-	ds_list_add(global.list_pool_viridian_minions,"BLOOMING_SPRITE");
-	ds_list_add(global.list_pool_viridian_minions,"SERPENT");
-	ds_list_add(global.list_pool_viridian_minions,"WASP_DRONE");
-	ds_list_add(global.list_pool_viridian_minions,"FUNGI");
+	global.arr_pool_viridian_minions = [
+		"THORNLING",
+		"LIFE_SPIRIT",
+		"BLOOMING_SPRITE",
+		"SERPENT",
+		"WASP_DRONE",
+		"FUNGI"
+	];
 
 	#endregion
 
@@ -29,13 +29,15 @@ function scr_minion_init_pools(){
 	//==========//
 	#region CERULEAN
 
-	ds_list_add(global.list_pool_cerulean_minions,"TENTACLE");
-	ds_list_add(global.list_pool_cerulean_minions,"ICE_WALL");
-	ds_list_add(global.list_pool_cerulean_minions,"RIMEFROST_ELEMENTAL");
-	ds_list_add(global.list_pool_cerulean_minions,"STORM_WISP");
-	ds_list_add(global.list_pool_cerulean_minions,"CORAL_GUARDIAN");
-	ds_list_add(global.list_pool_cerulean_minions,"ANCHOR_STONE");
-	ds_list_add(global.list_pool_cerulean_minions,"ABYSSAL_HARPOON");
+	global.arr_pool_cerulean_minions = [
+		"TENTACLE",
+		"ICE_WALL",
+		"RIMEFROST_ELEMENTAL",
+		"STORM_WISP",
+		"CORAL_GUARDIAN",
+		"ANCHOR_STONE",
+		"ABYSSAL_HARPOON"
+	];
 
 	#endregion
 
@@ -43,12 +45,15 @@ function scr_minion_init_pools(){
 	//VERMILION//
 	//===========//
 	#region VERMILION
-	ds_list_add(global.list_pool_vermilion_minions,"FLAMEGUARD");
-	ds_list_add(global.list_pool_vermilion_minions,"LIVING_FLAME");
-	ds_list_add(global.list_pool_vermilion_minions,"CINDERLING");
-	ds_list_add(global.list_pool_vermilion_minions,"MAGMA_CANNON");
-	ds_list_add(global.list_pool_vermilion_minions,"EMBER_TURRET");
-	ds_list_add(global.list_pool_vermilion_minions,"ASH_PHOENIX");
+
+	global.arr_pool_vermilion_minions = [
+		"FLAMEGUARD",
+		"LIVING_FLAME",
+		"CINDERLING",
+		"MAGMA_CANNON",
+		"EMBER_TURRET",
+		"ASH_PHOENIX"
+	];
 
 	#endregion
 }

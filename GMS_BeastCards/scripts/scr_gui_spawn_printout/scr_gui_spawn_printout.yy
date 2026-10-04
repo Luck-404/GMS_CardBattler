@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_gui_spawn_printout",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_gui_spawn_printout",
+  "parent":{
+    "name":"REWARDS",
+    "path":"folders/BATTLE/RESULTS/REWARDS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

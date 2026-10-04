@@ -1,5 +1,3 @@
-//===============================================================================//
-//
 // STEP: OBJ_OVERWORLD_ENCOUNTER_ZONE
 // FUNCTION: Rolls random encounters while the player moves through the zone.
 //           Stores battle-return state and logs successful grass encounters.
@@ -11,88 +9,145 @@
 //VALIDATE PLAYER//
 //================//
 if (!instance_exists(obj_player)){
-	exit;
+    exit;
 }
 
 if (!place_meeting(x,y,obj_player) || !obj_player._flag_player_moving){
-	exit;
+    exit;
 }
 
 //================//
 //ENCOUNTER ATTEMPT//
 //================//
 if (
-	_ct_encounter_attempt_cooldown <= 0 &&
-	!instance_exists(obj_battle_wait) &&
-	!instance_exists(obj_battle_wait)
+    _ct_encounter_attempt_cooldown <= 0 &&
+    !instance_exists(obj_transition) &&
+    !instance_exists(obj_transition_fader)
 ){
 
-	var _val_encounter_roll = irandom_range(1,100);
+    var _val_encounter_roll = irandom_range(1,100);
 
-	if (_val_encounter_roll <= _val_encounter_chance){
+    if (_val_encounter_roll <= _val_encounter_chance){
 
-		//----------------//
-		//SHOW FEEDBACK//
-		//----------------//
-		scr_gui_spawn_popup(
-			"TEXT",
-			"BATTLE TRIGGERED",
-			undefined,
-			c_black,
-			obj_player.x,
-			obj_player.y
-		);
+//================//
+//CLAIM TRANSITION//
+//================//
+        var _ref_transition =
+            scr_transition_trigger(
+                rm_battle
+            );
 
-		//--------------------//
-		//STORE SOURCE DETAILS//
-		//--------------------//
-		var _str_source_room = string_upper(room_get_name(room));
-		var _val_source_x = round(obj_player.x);
-		var _val_source_y = round(obj_player.y);
+        if (!instance_exists(_ref_transition)){
+            _ct_encounter_attempt_cooldown = 30;
+            exit;
+        }
 
-		//------------------//
-		//STORE RETURN STATE//
-		//------------------//
-		global.val_last_player_x = obj_player.x;
-		global.val_last_player_y = obj_player.y;
+//========================//
+//ROLL ENCOUNTER SCALING//
+//========================//
+        var _stct_encounter_scaling =
+            scr_overworld_roll_encounter_scaling(
+                room
+            );
 
-		global.rm_last_player = room;
-		global.arr_last_enemy_pool = _arr_encounter_beasts;
+//----------------//
+//SHOW FEEDBACK//
+//----------------//
+        scr_gui_spawn_popup(
+            "TEXT",
+            "BATTLE TRIGGERED",
+            undefined,
+            c_black,
+            obj_player.x,
+            obj_player.y
+        );
 
-		//----------------//
-		//DEBUG BATTLE ENTRY//
-		//----------------//
-		scr_debug_log(
-			"BATTLE",
-			"ENTRY",
-			obj_player,
-			"PLAYER ENTERED BATTLE FROM " + _str_source_room +
-			" (" + string(_val_source_x) + "," + string(_val_source_y) + ")" +
-			" | TRIGGER: GRASS" +
-			" | ENCOUNTER POOL: " + string(array_length(_arr_encounter_beasts)),
-			"TRANSITION",
-			"OBJ_OVERWORLD_ENCOUNTER_ZONE:STEP"
-		);
+//--------------------//
+//STORE SOURCE DETAILS//
+//--------------------//
+        var _str_source_room = string_upper(room_get_name(room));
+        var _val_source_x = round(obj_player.x);
+        var _val_source_y = round(obj_player.y);
 
-		//----------------//
-		//LOCK PLAYER//
-		//----------------//
-		scr_player_set_movement_state("STOP");
+        var _str_loot_zone_id = "UNASSIGNED";
 
-		obj_player.visible = false;
+        if (
+            variable_instance_exists(
+                id,
+                "_str_loot_zone_id"
+            ) &&
+            is_string(
+                self._str_loot_zone_id
+            ) &&
+            self._str_loot_zone_id != ""
+        ){
+            _str_loot_zone_id =
+                string_upper(
+                    self._str_loot_zone_id
+                );
+        }
 
-		//----------------//
-		//START BATTLE//
-		//----------------//
-		audio_play_sound(snd_overworld_encounter_trigger,0,false);
+//------------------//
+//STORE RETURN STATE//
+//------------------//
+        global.val_last_player_x = obj_player.x;
+        global.val_last_player_y = obj_player.y;
 
-		scr_transition_trigger(rm_battle);
-	}
+        global.rm_last_player = room;
+        global.arr_last_enemy_pool = _arr_encounter_beasts;
+        global.str_last_loot_zone_id = _str_loot_zone_id;
 
-	_ct_encounter_attempt_cooldown = 30;
+// Grass encounters never force a visible overworld Beast into slot 0.
+        global.stct_forced_enemy_unit = undefined;
+
+        global.stct_encounter_scaling =
+            _stct_encounter_scaling;
+
+//----------------//
+//DEBUG BATTLE ENTRY//
+//----------------//
+        scr_debug_log(
+            "BATTLE",
+            "ENTRY",
+            obj_player,
+            "PLAYER ENTERED BATTLE FROM " + _str_source_room +
+            " (" + string(_val_source_x) + "," + string(_val_source_y) + ")" +
+            " | TRIGGER: GRASS" +
+            " | ENCOUNTER POOL: " + string(array_length(_arr_encounter_beasts)) +
+            " | LOOT ZONE: " + _str_loot_zone_id +
+            " | DIFFICULTY: " + _stct_encounter_scaling._str_difficulty +
+            " | ENEMIES: " + string(_stct_encounter_scaling._ct_enemy_beasts) +
+            " | ZONE LEVELS: " +
+            string(_stct_encounter_scaling._val_zone_level_min) +
+            "-" +
+            string(_stct_encounter_scaling._val_zone_level_max) +
+            " | LEVEL TARGET: " +
+            string(_stct_encounter_scaling._val_enemy_level_target),
+            "TRANSITION",
+            "OBJ_OVERWORLD_ENCOUNTER_ZONE:STEP"
+        );
+
+//----------------//
+//LOCK PLAYER//
+//----------------//
+        scr_player_set_movement_state("STOP");
+
+        obj_player.visible = false;
+
+//----------------//
+//START BATTLE//
+//----------------//
+        audio_play_sound(
+            snd_overworld_encounter_trigger,
+            0,
+            false
+        );
+    }
+
+    _ct_encounter_attempt_cooldown = 30;
 }
 else if (_ct_encounter_attempt_cooldown > 0){
-	_ct_encounter_attempt_cooldown--;
+    _ct_encounter_attempt_cooldown--;
 }
 
 //================//
@@ -100,10 +155,10 @@ else if (_ct_encounter_attempt_cooldown > 0){
 //================//
 if (_ct_scene_fx_litter_timer <= 0){
 
-	_ct_scene_fx_litter_timer = 20;
+    _ct_scene_fx_litter_timer = 20;
 
-	scr_overworld_spawn_vfx_plant_litter();
+    scr_overworld_spawn_vfx_plant_litter();
 }
 else{
-	_ct_scene_fx_litter_timer--;
+    _ct_scene_fx_litter_timer--;
 }

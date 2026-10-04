@@ -62,13 +62,10 @@ function scr_trap_distracting_trap(_str_tag,_ref_trap,_ref_attacker,_ref_target,
 			//================//
 			//REVEAL TRAP//
 			//================//
-			scr_gui_spawn_popup(
-				"TEXT",
-				"DISTRACTING TRAP TRIGGERED",
-				undefined,
-				c_red,
-				room_width / 2,
-				room_height / 2 - 325
+			scr_gui_spawn_popup_trigger_banner(
+				"TRAP TRIGGERED: DISTRACTING TRAP",
+				_ref_trap._ref_owner,
+				_ref_attacker
 			);
 
 			//================//

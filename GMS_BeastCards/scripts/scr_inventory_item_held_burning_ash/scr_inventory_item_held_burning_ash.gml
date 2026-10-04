@@ -60,7 +60,10 @@ function scr_inventory_item_held_burning_ash(_str_state,_stct_item,_ref_caster,_
 
 			scr_status_apply_dot("BURN", _ref_target);
 
-			scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name);
+			scr_gui_spawn_popup_trigger_banner(
+				_stct_item._str_item_name,
+				_ref_caster
+			);
 
 			return true;
 

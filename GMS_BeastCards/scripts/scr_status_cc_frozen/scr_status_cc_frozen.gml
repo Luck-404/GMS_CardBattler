@@ -13,7 +13,7 @@
 //
 //===============================================================================//
 
-function scr_status_cc_frozen(_str_tag,_ref_status,_val_lifetime=undefined){
+function scr_status_cc_frozen(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
 
@@ -21,8 +21,6 @@ function scr_status_cc_frozen(_str_tag,_ref_status,_val_lifetime=undefined){
 		//APPLY//
 		//=======//
 		case "APPLY":
-
-			var _ref_target = global.ref_target_beast;
 
 			if (!instance_exists(_ref_target)){
 				return undefined;

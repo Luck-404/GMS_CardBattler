@@ -61,6 +61,20 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 					_val_lifetime
 				);
 
+				//=======================//
+				//ENSURE PERSISTENT VFX//
+				//=======================//
+				if (!instance_exists(_ref_existing_status._ref_persistent_vfx)){
+
+					_ref_existing_status._ref_persistent_vfx = scr_battle_vfx_persistent_loop(
+						spr_battle_vfx_weather_seedfall_persist,
+						room_width * 0.5,
+						room_height * 0.5,
+						1,
+						"ily_weather_fx"
+					);
+				}
+
 				return _ref_existing_status;
 			}
 

@@ -6,7 +6,7 @@
   "name":"scr_inventory_item_held_inspiring_chime",
   "parent":{
     "name":"INSPIRING CHIME",
-    "path":"folders/INVENTORY/ITEMS/HELD/INSPIRING CHIME.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/OVERWORLD/INSPIRING CHIME.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

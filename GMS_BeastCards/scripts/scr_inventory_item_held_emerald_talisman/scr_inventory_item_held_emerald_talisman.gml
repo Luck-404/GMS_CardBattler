@@ -2,8 +2,8 @@
 //
 // SCRIPT: SCR_INVENTORY_ITEM_HELD_EMERALD_TALISMAN
 // FUNCTION: Handles Emerald Talisman held item behavior.
-//           Triggers at turn start to summon a random Viridian minion.
-//           Returns whether the requested behavior successfully resolved.
+//           At turn start, summons a random Viridian Minion on the holder.
+//           Trigger feedback is handled by the battle turn-start item queue.
 //
 // ARGUMENTS: _str_state is the held-item behavior state.
 //            _stct_item is the item struct and _ref_target is the holder.
@@ -37,30 +37,48 @@ function scr_inventory_item_held_emerald_talisman(_str_state,_stct_item,_ref_tar
 				return false;
 			}
 
+			if (
+				_ref_target._str_list != "ALIVE" ||
+				_ref_target._val_cur_hp <= 0
+			){
+				return false;
+			}
+
 			//----------------//
 			//VALIDATE POOL//
 			//----------------//
-			if (ds_list_size(global.list_pool_viridian_minions) <= 0){
+			if (
+				!variable_global_exists("arr_pool_viridian_minions") ||
+				!is_array(global.arr_pool_viridian_minions) ||
+				array_length(global.arr_pool_viridian_minions) <= 0
+			){
 				return false;
 			}
 
 			//----------------//
 			//SELECT MINION//
 			//----------------//
-			var _it_minion = irandom(ds_list_size(global.list_pool_viridian_minions) - 1);
-			var _str_minion_id = ds_list_find_value(global.list_pool_viridian_minions,_it_minion);
+			var _it_minion =
+				irandom(
+					array_length(
+						global.arr_pool_viridian_minions
+					) - 1
+				);
 
-			//----------------//
+			var _str_minion_id =
+				global.arr_pool_viridian_minions[
+					_it_minion
+				];
+
+			//================//
 			//SUMMON MINION//
-			//----------------//
+			//================//
 			scr_minion_init(
 				_str_minion_id,
 				undefined,
 				_ref_target,
 				_ref_target
 			);
-
-			scr_gui_spawn_popup_trigger_banner(_stct_item._str_item_name);
 
 			return true;
 

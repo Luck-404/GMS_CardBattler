@@ -107,6 +107,88 @@ else{
 
 #endregion
 
+//======================//
+//PRINTOUT MODE TOGGLE//
+//======================//
+#region PRINTOUT MODE TOGGLE
+
+if (keyboard_check_pressed(ord("R"))){
+
+	if (!variable_global_exists("str_printout_mode")){
+		global.str_printout_mode = "CLEAN";
+	}
+
+	//================//
+	//NEXT MODE//
+	//================//
+	switch (global.str_printout_mode){
+
+		case "RANDOM":
+
+			global.str_printout_mode = "CLEAN";
+
+		break;
+
+		case "CLEAN":
+
+			global.str_printout_mode = "RANDOM STACKING";
+
+		break;
+
+		case "RANDOM STACKING":
+
+			global.str_printout_mode = "CLEAN STACKING";
+
+		break;
+
+		case "CLEAN STACKING":
+
+			global.str_printout_mode = "RANDOM";
+
+		break;
+
+		default:
+
+			global.str_printout_mode = "CLEAN";
+
+		break;
+	}
+
+	//================//
+	//SOUND//
+	//================//
+	audio_play_sound(
+		snd_gui_press,
+		0,
+		false
+	);
+
+	//================//
+	//MODE BANNER//
+	//================//
+	scr_gui_spawn_popup_banner(
+		"PRINTOUT MODE: " +
+		global.str_printout_mode
+	);
+
+	//================//
+	//DEBUG//
+	//================//
+	scr_debug_log(
+		"GUI",
+		"PRINTOUT",
+		self,
+		"PRINTOUT MODE CHANGED" +
+			" | MODE: " +
+			global.str_printout_mode +
+			" | SOURCE: HOTKEY R",
+		"INFO",
+		"OBJ_GUI_CONTROLLER:STEP"
+	);
+}
+
+#endregion
+
 //================//
 //AMBIANCE CONTROL//
 //================//
@@ -168,137 +250,239 @@ if (keyboard_check_pressed(ord("F"))){
 //================//
 #region CHEATS INPUT
 
-//----------------//
-//INPUT STATE//
-//----------------//
-var _flag_cheats_open = false;
+//===============================================================================//
+// HOTKEY LATCH
+//===============================================================================//
 
-if (
-    instance_exists(global.ref_active_gui) &&
-    variable_instance_exists(global.ref_active_gui,"_str_type")
-){
-    _flag_cheats_open =
-        global.ref_active_gui._str_type == "CHEATS";
+//----------------//
+//CURRENT KEY STATE//
+//----------------//
+var _flag_cheats_key_down =
+	keyboard_check(192);
+
+//----------------//
+//RE-ARM ON RELEASE//
+//----------------//
+// One physical grave/tilde depression may only toggle Cheats once.
+// Releasing Ctrl while tilde is still held cannot create a second toggle.
+if (!_flag_cheats_key_down){
+
+	_flag_cheats_hotkey_armed =
+		true;
 }
 
 //----------------//
-//HOTKEYS//
+//ONE-SHOT PRESS//
 //----------------//
 var _flag_cheats_tilde =
-    keyboard_check_pressed(192);
+	_flag_cheats_hotkey_armed &&
+	keyboard_check_pressed(192);
 
-var _flag_cheats_bypass =
-    keyboard_check(vk_control) &&
-    _flag_cheats_tilde;
+//----------------//
+//CONSUME PRESS//
+//----------------//
+if (_flag_cheats_tilde){
 
-var _flag_cheats_normal =
-    _flag_cheats_tilde &&
-    !keyboard_check(vk_control);
-
-//================//
-//CLOSE CHEATS//
-//================//
-if (
-    _flag_cheats_open &&
-    (_flag_cheats_tilde || _flag_cheats_bypass)
-){
-
-    audio_play_sound(
-        snd_gui_close,
-        0,
-        false
-    );
-
-    hscr_gui_destroy_active("CHEATS HOTKEY");
-    hscr_gui_set_pause(false,"CHEATS HOTKEY");
-
-    scr_debug_log(
-        "GUI",
-        "CHEATS",
-        self,
-        "CHEATS MENU CLOSED" +
-        " | SOURCE: " +
-        (_flag_cheats_bypass ? "CTRL+C" : "TILDE"),
-        "INFO",
-        "OBJ_GUI_CONTROLLER:STEP"
-    );
-
-    exit;
+	_flag_cheats_hotkey_armed =
+		false;
 }
 
-//================//
-//OPEN CHEATS//
-//================//
-if (
-    !_flag_cheats_open &&
-    (_flag_cheats_normal || _flag_cheats_bypass)
-){
+//===============================================================================//
+// TOGGLE CHEATS
+//===============================================================================//
+if (_flag_cheats_tilde){
 
-//----------------//
-//CLOSE OTHER GUI//
-//----------------//
-    if (instance_exists(global.ref_active_gui)){
+	//================//
+	//INPUT STATE//
+	//================//
+	var _flag_cheats_open =
+		false;
 
-        hscr_gui_destroy_active(
-            _flag_cheats_bypass
-                ? "CTRL+C"
-                : "TILDE"
-        );
-    }
+	if (
+		instance_exists(
+			global.ref_active_gui
+		) &&
+		variable_instance_exists(
+			global.ref_active_gui,
+			"_str_type"
+		)
+	){
 
-//----------------//
-//PAUSE GAME//
-//----------------//
-    hscr_gui_set_pause(
-        true,
-        _flag_cheats_bypass
-            ? "CTRL+C"
-            : "TILDE"
-    );
+		_flag_cheats_open =
+			global.ref_active_gui
+				._str_type ==
+			"CHEATS";
+	}
 
-//----------------//
-//CREATE CHEATS//
-//----------------//
-    global.ref_active_gui = instance_create_layer(
-        display_get_gui_width() * 0.5,
-        display_get_gui_height() * 0.5,
-        "ily_fx",
-        obj_gui_cheats_pane
-    );
+	//================//
+	//BYPASS STATE//
+	//================//
+	// Modifier state is sampled once when the accepted tilde press occurs.
+	var _flag_cheats_bypass =
+		keyboard_check(
+			vk_control
+		);
 
-//----------------//
-//BYPASS AUTH//
-//----------------//
-    if (
-        _flag_cheats_bypass &&
-        instance_exists(global.ref_active_gui)
-    ){
-        global.ref_active_gui._flag_authenticated = true;
-        global.ref_active_gui._flag_password_entry = false;
-        global.ref_active_gui._flag_open_authenticated = true;
+	var _str_cheats_source =
+		_flag_cheats_bypass
+		? "CTRL+TILDE"
+		: "TILDE";
 
-        keyboard_string = "";
-    }
+	//===============================================================================//
+	// CLOSE CHEATS
+	//===============================================================================//
+	if (_flag_cheats_open){
 
-//----------------//
-//DEBUG OPEN//
-//----------------//
-    scr_debug_log(
-        "GUI",
-        "CHEATS",
-        self,
-        "CHEATS MENU OPENED" +
-        " | MODE: " +
-        ((room == rm_battle) ? "BATTLE" : "OVERWORLD") +
-        " | SOURCE: " +
-        (_flag_cheats_bypass ? "CTRL+TILDE" : "TILDE") +
-        " | AUTHENTICATION: " +
-        (_flag_cheats_bypass ? "BYPASSED" : "REQUIRED"),
-        "INFO",
-        "OBJ_GUI_CONTROLLER:STEP"
-    );
+		audio_play_sound(
+			snd_gui_close,
+			0,
+			false
+		);
 
-    exit;
+		hscr_gui_destroy_active(
+			"CHEATS HOTKEY"
+		);
+
+		hscr_gui_set_pause(
+			false,
+			"CHEATS HOTKEY"
+		);
+
+		scr_debug_log(
+			"GUI",
+			"CHEATS",
+			self,
+			"CHEATS MENU CLOSED" +
+			" | SOURCE: " +
+			_str_cheats_source,
+			"INFO",
+			"OBJ_GUI_CONTROLLER:STEP"
+		);
+
+		exit;
+	}
+
+	//===============================================================================//
+	// OPEN CHEATS
+	//===============================================================================//
+
+	//----------------//
+	//CLOSE OTHER GUI//
+	//----------------//
+	if (
+		instance_exists(
+			global.ref_active_gui
+		)
+	){
+
+		hscr_gui_destroy_active(
+			_str_cheats_source
+		);
+	}
+
+	//----------------//
+	//PAUSE GAME//
+	//----------------//
+	hscr_gui_set_pause(
+		true,
+		_str_cheats_source
+	);
+
+	//----------------//
+	//CREATE CHEATS//
+	//----------------//
+	global.ref_active_gui =
+		instance_create_layer(
+			display_get_gui_width() * 0.5,
+			display_get_gui_height() * 0.5,
+			"ily_fx",
+			obj_gui_cheats_pane
+		);
+
+	//----------------//
+	//VALIDATE CREATION//
+	//----------------//
+	if (
+		!instance_exists(
+			global.ref_active_gui
+		)
+	){
+
+		global.ref_active_gui =
+			undefined;
+
+		hscr_gui_set_pause(
+			false,
+			"CHEATS CREATE FAILED"
+		);
+
+		audio_play_sound(
+			snd_gui_error,
+			0,
+			false
+		);
+
+		scr_debug_log(
+			"GUI",
+			"CHEATS",
+			self,
+			"CHEATS MENU OPEN FAILED" +
+			" | SOURCE: " +
+			_str_cheats_source,
+			"ERROR",
+			"OBJ_GUI_CONTROLLER:STEP"
+		);
+
+		exit;
+	}
+
+	//----------------//
+	//BYPASS AUTH//
+	//----------------//
+	if (_flag_cheats_bypass){
+
+		global.ref_active_gui
+			._flag_authenticated =
+			true;
+
+		global.ref_active_gui
+			._flag_password_entry =
+			false;
+
+		global.ref_active_gui
+			._flag_open_authenticated =
+			true;
+
+		keyboard_string = "";
+	}
+
+	//----------------//
+	//DEBUG OPEN//
+	//----------------//
+	scr_debug_log(
+		"GUI",
+		"CHEATS",
+		self,
+		"CHEATS MENU OPENED" +
+		" | MODE: " +
+		(
+			(room == rm_battle)
+			? "BATTLE"
+			: "OVERWORLD"
+		) +
+		" | SOURCE: " +
+		_str_cheats_source +
+		" | AUTHENTICATION: " +
+		(
+			_flag_cheats_bypass
+			? "BYPASSED"
+			: "REQUIRED"
+		),
+		"INFO",
+		"OBJ_GUI_CONTROLLER:STEP"
+	);
+
+	exit;
 }
 
 #endregion
@@ -815,172 +999,172 @@ if (room != rm_battle){
 		}
 	}
 
-//=====================//
-//RANCH CLICK TO SHAKE//
-//=====================//
-// Ranch Beasts must not accept world interaction while any GUI is active.
-// This specifically prevents click-through while using the Cheats menu.
-if (
-    room == rm_ow_ranch &&
-    !instance_exists(
-        global.ref_active_gui
-    )
-){
+	//=====================//
+	//RANCH CLICK TO SHAKE//
+	//=====================//
+	// Ranch Beasts must not accept world interaction while any GUI is active.
+	// This specifically prevents click-through while using the Cheats menu.
+	if (
+		room == rm_ow_ranch &&
+		!instance_exists(
+			global.ref_active_gui
+		)
+	){
 
-    if (
-        position_meeting(
-            device_mouse_x_to_gui(0),
-            device_mouse_y_to_gui(0),
-            obj_ranch_beast_dummy
-        ) &&
-        mouse_check_button_pressed(
-            mb_left
-        )
-    ){
+		if (
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_ranch_beast_dummy
+			) &&
+			mouse_check_button_pressed(
+				mb_left
+			)
+		){
 
-        var _ref_beast =
-            instance_nearest(
-                device_mouse_x_to_gui(0),
-                device_mouse_y_to_gui(0),
-                obj_ranch_beast_dummy
-            );
+			var _ref_beast =
+				instance_nearest(
+					device_mouse_x_to_gui(0),
+					device_mouse_y_to_gui(0),
+					obj_ranch_beast_dummy
+				);
 
-        if (
-            instance_exists(
-                _ref_beast
-            ) &&
-            _ref_beast._state_dummy !=
-                ENUM_RANCH_BEAST_DUMMY_STATE.REST
-        ){
+			if (
+				instance_exists(
+					_ref_beast
+				) &&
+				_ref_beast._state_dummy !=
+					ENUM_RANCH_BEAST_DUMMY_STATE.REST
+			){
 
-            audio_play_sound(
-                _ref_beast._snd_cry,
-                0,
-                false
-            );
+				audio_play_sound(
+					_ref_beast._snd_cry,
+					0,
+					false
+				);
 
-            _ref_beast._spr_emoji =
-                choose(
-                    spr_ranch_beast_happy,
-                    spr_ranch_beast_love,
-                    spr_ranch_beast_excited
-                );
+				_ref_beast._spr_emoji =
+					choose(
+						spr_ranch_beast_happy,
+						spr_ranch_beast_love,
+						spr_ranch_beast_excited
+					);
 
-            _ref_beast._ct_emoji_timer =
-                irandom_range(
-                    60,
-                    120
-                );
+				_ref_beast._ct_emoji_timer =
+					irandom_range(
+						60,
+						120
+					);
 
-            _ref_beast._state_dummy =
-                ENUM_RANCH_BEAST_DUMMY_STATE.SHAKE;
-        }
-    }
-}
+				_ref_beast._state_dummy =
+					ENUM_RANCH_BEAST_DUMMY_STATE.SHAKE;
+			}
+		}
+	}
 
-//==================//
-//CAMERA ZOOM TARGET//
-//==================//
-#region CAMERA ZOOM TARGET
+	//==================//
+	//CAMERA ZOOM TARGET//
+	//==================//
+	#region CAMERA ZOOM TARGET
 
-if (
-    global.ref_camera != undefined &&
-    room != rm_ow_ranch
-){
+	if (
+		global.ref_camera != undefined &&
+		room != rm_ow_ranch
+	){
 
-//================//
-//CHEATS CAMERA LOCK//
-//================//
-    var _flag_cheats_camera_lock =
-        false;
+		//================//
+		//CHEATS CAMERA LOCK//
+		//================//
+		var _flag_cheats_camera_lock =
+			false;
 
-    if (
-        instance_exists(
-            global.ref_active_gui
-        ) &&
-        variable_instance_exists(
-            global.ref_active_gui,
-            "_str_type"
-        ) &&
-        global.ref_active_gui._str_type
-            == "CHEATS"
-    ){
+		if (
+			instance_exists(
+				global.ref_active_gui
+			) &&
+			variable_instance_exists(
+				global.ref_active_gui,
+				"_str_type"
+			) &&
+			global.ref_active_gui._str_type
+				== "CHEATS"
+		){
 
-        _flag_cheats_camera_lock =
-            true;
+			_flag_cheats_camera_lock =
+				true;
 
-//----------------//
-//WORLD POSITION TOOL//
-//----------------//
-// World-position tools temporarily restore camera zoom so the tester can
-// position the camera before choosing the world location.
-        if (
-            variable_instance_exists(
-                global.ref_active_gui,
-                "_str_state"
-            ) &&
-            variable_instance_exists(
-                global.ref_active_gui,
-                "_str_tool_target_type"
-            ) &&
-            global.ref_active_gui._str_state
-                == "TOOL" &&
-            global.ref_active_gui
-                ._str_tool_target_type
-                == "WORLD_POSITION"
-        ){
-            _flag_cheats_camera_lock =
-                false;
-        }
-    }
+			//----------------//
+			//WORLD POSITION TOOL//
+			//----------------//
+			// World-position tools temporarily restore camera zoom so the tester can
+			// position the camera before choosing the world location.
+			if (
+				variable_instance_exists(
+					global.ref_active_gui,
+					"_str_state"
+				) &&
+				variable_instance_exists(
+					global.ref_active_gui,
+					"_str_tool_target_type"
+				) &&
+				global.ref_active_gui._str_state
+					== "TOOL" &&
+				global.ref_active_gui
+					._str_tool_target_type
+					== "WORLD_POSITION"
+			){
+				_flag_cheats_camera_lock =
+					false;
+			}
+		}
 
-//================//
-//CAMERA INPUT//
-//================//
-    if (!_flag_cheats_camera_lock){
+		//================//
+		//CAMERA INPUT//
+		//================//
+		if (!_flag_cheats_camera_lock){
 
-        var _val_zoom_step = 128;
+			var _val_zoom_step = 128;
 
-//----------------//
-//ZOOM IN//
-//----------------//
-        if (mouse_wheel_up()){
+			//----------------//
+			//ZOOM IN//
+			//----------------//
+			if (mouse_wheel_up()){
 
-            global.val_cam_target_width =
-                max(
-                    global.val_cam_min_size,
-                    global.val_cam_target_width -
-                    _val_zoom_step
-                );
+				global.val_cam_target_width =
+					max(
+						global.val_cam_min_size,
+						global.val_cam_target_width -
+						_val_zoom_step
+					);
 
-            global.val_cam_target_height =
-                max(
-                    global.val_cam_min_size,
-                    global.val_cam_target_height -
-                    _val_zoom_step
-                );
-        }
+				global.val_cam_target_height =
+					max(
+						global.val_cam_min_size,
+						global.val_cam_target_height -
+						_val_zoom_step
+					);
+			}
 
-	//----------------//
-	//ZOOM OUT//
-	//----------------//
-	        if (mouse_wheel_down()){
+			//----------------//
+			//ZOOM OUT//
+			//----------------//
+			if (mouse_wheel_down()){
 
-	            global.val_cam_target_width =
-	                min(
-	                    global.val_cam_max_size,
-	                    global.val_cam_target_width +
-	                    _val_zoom_step
-	                );
+				global.val_cam_target_width =
+					min(
+						global.val_cam_max_size,
+						global.val_cam_target_width +
+						_val_zoom_step
+					);
 
-	            global.val_cam_target_height =
-	                min(
-	                    global.val_cam_max_size,
-	                    global.val_cam_target_height +
-	                    _val_zoom_step
-	                );
-	        }
-	    }
+				global.val_cam_target_height =
+					min(
+						global.val_cam_max_size,
+						global.val_cam_target_height +
+						_val_zoom_step
+					);
+			}
+		}
 	}
 
 	#endregion

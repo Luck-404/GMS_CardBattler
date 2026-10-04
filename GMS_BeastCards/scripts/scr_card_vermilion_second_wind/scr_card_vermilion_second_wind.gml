@@ -46,6 +46,6 @@ function scr_card_vermilion_second_wind(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY SECOND WIND//
 	//================//
-	scr_status_apply_buff("SECOND_WIND", _ref_caster, 50);
+	scr_status_apply_buff("SECOND_WIND", _ref_caster, _stct_card._val_card_magnitude);
 
 }

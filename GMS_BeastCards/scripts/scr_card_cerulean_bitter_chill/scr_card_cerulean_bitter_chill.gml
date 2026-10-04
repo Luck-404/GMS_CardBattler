@@ -20,5 +20,10 @@ function scr_card_cerulean_bitter_chill(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY WEAKNESS//
 	//================//
-	scr_status_apply_debuff("WEAKNESS", _ref_target);
+	scr_status_apply_debuff(
+		"WEAKNESS",
+		_ref_target,
+		3,
+		_stct_card._val_card_magnitude
+	);
 }

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"INSPIRING CHIME",
-    "path":"folders/INVENTORY/ITEMS/HELD/INSPIRING CHIME.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/OVERWORLD/INSPIRING CHIME.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

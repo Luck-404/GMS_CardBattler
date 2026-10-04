@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_held_thornplate",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_held_thornplate",
+  "parent":{
+    "name":"THORNPLATE",
+    "path":"folders/INVENTORY/ITEMS/HELD/REACTIVE/THORNPLATE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

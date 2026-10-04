@@ -16,5 +16,5 @@ function scr_card_viridian_regenerate(_stct_card,_ref_caster,_ref_target){
 	//======================//
 	//APPLY ARMOR OVER TIME//
 	//======================//
-	scr_status_apply_buff("ARMOR_OVER_TIME", _ref_target, 8, 5);
+	scr_status_apply_buff("ARMOR_OVER_TIME", _ref_target, _stct_card._val_card_magnitude, 5);
 }

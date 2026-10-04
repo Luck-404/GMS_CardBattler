@@ -121,11 +121,10 @@ function hscr_gui_ranch_has_held_item(_stct_unit){
 
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_RANCH_DRAW_HELD_ITEM_BADGE
-// FUNCTION: Draws a held-item badge inside a Ranch Beast frame.
-//           Display-only; does not allow item changes.
+// FUNCTION: Draws a held-item badge at the bottom-right of a Ranch Beast portrait.
 //
-// ARGUMENTS: _stct_unit is the Beast being displayed, while _val_box_x and
-//            _val_box_y are the frame coordinates.
+// ARGUMENTS: _stct_unit is the Beast being displayed.
+//            _val_box_x/_val_box_y are the Ranch row coordinates.
 // RETURNS: Nothing.
 //-------------------------------------------------------------------------------//
 function hscr_gui_ranch_draw_held_item_badge(_stct_unit,_val_box_x,_val_box_y){
@@ -134,48 +133,16 @@ function hscr_gui_ranch_draw_held_item_badge(_stct_unit,_val_box_x,_val_box_y){
 		return;
 	}
 
-	var _stct_held_item = _stct_unit._stct_beast_held_item;
+	var _stct_held_item =
+		_stct_unit._stct_beast_held_item;
 
-	var _val_badge_x = _val_box_x + 96;
-	var _val_badge_y = _val_box_y + 96;
-	var _val_badge_size = 26;
-	var _val_badge_half = _val_badge_size * 0.5;
-
-	//----------------//
-	//DRAW BADGE BOX//
-	//----------------//
-	draw_set_colour(c_black);
-
-	draw_rectangle(
-		_val_badge_x - _val_badge_half,
-		_val_badge_y - _val_badge_half,
-		_val_badge_x + _val_badge_half,
-		_val_badge_y + _val_badge_half,
-		false
-	);
-
-	draw_set_colour(c_white);
-
-	draw_rectangle(
-		_val_badge_x - _val_badge_half,
-		_val_badge_y - _val_badge_half,
-		_val_badge_x + _val_badge_half,
-		_val_badge_y + _val_badge_half,
-		true
-	);
-
-	//----------------//
-	//DRAW ITEM ICON//
-	//----------------//
-	draw_sprite_ext(
+	// The Ranch portrait occupies:
+	// X: +10 -> +110
+	// Y: +10 -> +110
+	scr_gui_draw_item_badge(
 		_stct_held_item._spr_item,
-		0,
-		_val_badge_x,
-		_val_badge_y,
-		1,
-		1,
-		0,
-		c_white,
-		1
+		_val_box_x + 110,
+		_val_box_y + 110,
+		28
 	);
 }

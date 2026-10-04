@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_get_material_info",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_get_material_info",
+  "parent":{
+    "name":"MATERIALS",
+    "path":"folders/INVENTORY/ITEMS/MATERIALS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

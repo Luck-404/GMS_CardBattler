@@ -7,6 +7,21 @@
 //
 //===============================================================================//
 
+//==============================//
+//OUTLEVELED BATTLE-ONLY CLEANUP//
+//==============================//
+
+if (
+    _str_status_name == "OUTLEVELED" &&
+    _scr_status == scr_status_buff_outleveled
+){
+
+    scr_status_buff_outleveled(
+        "CLEANUP",
+        self
+    );
+}
+
 //================//
 //GET STATUS HOST//
 //================//

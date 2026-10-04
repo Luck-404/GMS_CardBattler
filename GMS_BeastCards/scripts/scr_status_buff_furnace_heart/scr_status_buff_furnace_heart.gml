@@ -4,7 +4,7 @@
 // FUNCTION: Handles Furnace Heart.
 //           Infinite unstackable Buff.
 //           Initially waits to absorb the next MAG Attack.
-//           After absorbing, stores 50% of the absorbed magnitude as stacks.
+//           After absorbing, stores 30% of the absorbed damage as stacks.
 //           The host's next Attack expends those stacks as fixed NEU damage.
 //
 // ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
@@ -90,7 +90,8 @@ function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage
 
 			_ref_new_status._flag_furnace_heart_charged = false;
 			_ref_new_status._val_furnace_heart_absorbed = 0;
-
+			// Whole-number percentage convention.
+			_ref_new_status._val_furnace_heart_store_percent = 30;
 			_ref_new_status._str_trigger_region = undefined;
 
 			//================//
@@ -131,9 +132,14 @@ function scr_status_buff_furnace_heart(_str_tag,_ref_status,_val_absorbed_damage
 			//=======================//
 			_ref_status._val_furnace_heart_absorbed = _val_absorbed_damage;
 
-			_ref_status._ct_status_stacks = ceil(
-				_val_absorbed_damage * 0.5
-			);
+			_ref_status._ct_status_stacks =
+			    ceil(
+			        _val_absorbed_damage *
+			        (
+			            _ref_status._val_furnace_heart_store_percent /
+			            100
+			        )
+			    );
 
 			_ref_status._flag_furnace_heart_charged = true;
 

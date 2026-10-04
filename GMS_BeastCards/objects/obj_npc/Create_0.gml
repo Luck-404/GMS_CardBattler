@@ -3,7 +3,7 @@
 // CREATE: OBJ_NPC
 // FUNCTION: Initializes an overworld NPC from its assigned NPC id.
 //           Loads NPC identity, visuals, interaction settings, and pathing data.
-//           Defines pathing and interaction helper methods.
+//           Tracks front/back facing separately from interaction highlighting.
 //
 //===============================================================================//
 
@@ -27,6 +27,11 @@ _flag_moving = false;
 _val_previous_x = x;
 _val_previous_y = y;
 
+// Base facing frame:
+// 0 = Forward
+// 1 = Backward
+_it_facing_frame = 0;
+
 //----------------//
 //INTERACTION//
 //----------------//
@@ -34,6 +39,9 @@ _flag_player_nearby = false;
 _flag_triggered = false;
 
 _ct_interaction_cooldown = 0;
+
+// NPC remains stationary briefly after interaction closes.
+_ct_post_interaction_pause = 0;
 
 _val_interaction_distance = 48;
 
@@ -84,7 +92,13 @@ if (_stct_npc == undefined){
 _spr_npc = _stct_npc._spr_npc;
 
 if (_spr_npc != undefined){
+
 	sprite_index = _spr_npc;
+
+	image_speed = 0;
+	image_index = 0;
+
+	_it_facing_frame = 0;
 }
 
 //----------------//
@@ -107,9 +121,6 @@ _val_path_speed_stored = _val_move_speed;
 // HSCR_NPC_START_PATH
 // FUNCTION: Starts the NPC's assigned GameMaker path.
 //           Uses relative positioning and reverses at each endpoint.
-//
-// ARGUMENTS: None.
-// RETURNS: True when path movement starts, otherwise false.
 //
 //-------------------------------------------------------------------------------//
 hscr_npc_start_path = function(){
@@ -180,9 +191,6 @@ hscr_npc_start_path = function(){
 // FUNCTION: Pauses active NPC path movement without ending the path.
 //           Preserves path position and movement speed for later resumption.
 //
-// ARGUMENTS: None.
-// RETURNS: True when the path is paused or already paused, otherwise false.
-//
 //-------------------------------------------------------------------------------//
 hscr_npc_pause_path = function(){
 
@@ -212,15 +220,20 @@ hscr_npc_pause_path = function(){
 
 //-------------------------------------------------------------------------------//
 // HSCR_NPC_RESUME_PATH
-// FUNCTION: Resumes the NPC's current path from its existing position.
-//           Restarts the path if its active assignment was unexpectedly lost.
+// FUNCTION: Resumes a paused NPC path from its existing position.
+//           Does not overwrite the signed path speed while already moving,
+//           allowing path_action_reverse to control endpoint reversals.
+//           Restarts the path only if its assignment was lost.
 //
 // ARGUMENTS: None.
-// RETURNS: True when path movement resumes, otherwise false.
+// RETURNS: True when the path is active or successfully resumed.
 //
 //-------------------------------------------------------------------------------//
 hscr_npc_resume_path = function(){
 
+	//----------------//
+	//VALIDATE PATH TYPE//
+	//----------------//
 	if (_str_path_type != "PATH"){
 		return false;
 	}
@@ -236,14 +249,34 @@ hscr_npc_resume_path = function(){
 		return hscr_npc_start_path();
 	}
 
-	//----------------//
-	//RESTORE SPEED//
-	//----------------//
-	if (_val_path_speed_stored == 0){
-		_val_path_speed_stored = _val_move_speed;
+	//=====================//
+	//ALREADY MOVING NORMALLY//
+	//=====================//
+	if (!_flag_path_paused){
+
+		_flag_path_started = true;
+
+		return true;
 	}
 
-	path_speed = _val_path_speed_stored;
+	//================//
+	//RESTORE SPEED//
+	//================//
+	if (_val_path_speed_stored == 0){
+
+		_val_path_speed_stored =
+			_val_move_speed;
+	}
+
+	/*
+		Preserve the SIGN of the stored path speed.
+
+		If path_action_reverse had the NPC moving backward along
+		the path before it was paused, this resumes that same
+		direction rather than forcing it forward.
+	*/
+	path_speed =
+		_val_path_speed_stored;
 
 	_flag_path_started = true;
 	_flag_path_paused = false;
@@ -253,8 +286,10 @@ hscr_npc_resume_path = function(){
 
 //-------------------------------------------------------------------------------//
 // HSCR_NPC_UPDATE_FACING
-// FUNCTION: Updates horizontal sprite facing from actual NPC movement.
-//           Preserves the current facing while stationary.
+// FUNCTION: Updates NPC facing from actual movement.
+//           Forward/down-facing is the default.
+//           Only active upward movement uses the backward-facing frame.
+//           Horizontal movement mirrors the sprite left/right.
 //
 // ARGUMENTS: None.
 // RETURNS: Nothing.
@@ -262,24 +297,104 @@ hscr_npc_resume_path = function(){
 //-------------------------------------------------------------------------------//
 hscr_npc_update_facing = function(){
 
-	var _val_move_x = x - _val_previous_x;
+	var _val_move_x =
+		x - _val_previous_x;
 
+	var _val_move_y =
+		y - _val_previous_y;
+
+	//================//
+//DEFAULT FORWARD//
+//================//
+	/*
+		Forward is the default presentation.
+
+		Only an NPC actively traveling upward should display
+		the backward-facing sprite.
+	*/
+	_it_facing_frame = 0;
+
+	//================//
+//MOVING UPWARD//
+//================//
+	if (_val_move_y < -0.01){
+
+		_it_facing_frame = 1;
+	}
+
+	//==================//
+//HORIZONTAL FACING//
+//==================//
 	if (_val_move_x > 0.01){
-		image_xscale = abs(image_xscale);
+
+		// Moving right.
+		image_xscale =
+			abs(image_xscale);
 	}
 	else if (_val_move_x < -0.01){
-		image_xscale = -abs(image_xscale);
+
+		// Moving left.
+		image_xscale =
+			-abs(image_xscale);
 	}
 };
 
 //-------------------------------------------------------------------------------//
-// HSCR_NPC_OPEN_INTERACTION
-// FUNCTION: Pauses NPC movement and opens the NPC interaction GUI.
-//           Stores this NPC as the active interacting NPC and logs the
-//           interaction state.
+// HSCR_NPC_FACE_PLAYER
+// FUNCTION: Turns the NPC toward the player while interaction is active.
+//           Vertical separation determines front/back facing.
+//           Horizontal separation determines sprite mirroring.
 //
-// ARGUMENTS: None.
-// RETURNS: True when interaction opens; otherwise false.
+//-------------------------------------------------------------------------------//
+hscr_npc_face_player = function(){
+
+	if (!instance_exists(obj_player)){
+		return false;
+	}
+
+	var _val_to_player_x =
+		obj_player.x - x;
+
+	var _val_to_player_y =
+		obj_player.y - y;
+
+	//================//
+//VERTICAL FACING//
+//================//
+	if (_val_to_player_y > 0.01){
+
+		// Player is below NPC.
+		_it_facing_frame = 0;
+	}
+	else if (_val_to_player_y < -0.01){
+
+		// Player is above NPC.
+		_it_facing_frame = 1;
+	}
+
+	//==================//
+	//HORIZONTAL FACING//
+	//==================//
+	if (_val_to_player_x > 0.01){
+
+		// Player is right of NPC.
+		image_xscale =
+			abs(image_xscale);
+	}
+	else if (_val_to_player_x < -0.01){
+
+		// Player is left of NPC.
+		image_xscale =
+			-abs(image_xscale);
+	}
+
+	return true;
+};
+
+//-------------------------------------------------------------------------------//
+// HSCR_NPC_OPEN_INTERACTION
+// FUNCTION: Pauses NPC movement, faces the NPC toward the player, and opens
+//           the NPC interaction GUI.
 //
 //-------------------------------------------------------------------------------//
 hscr_npc_open_interaction = function(){
@@ -309,6 +424,11 @@ hscr_npc_open_interaction = function(){
 	//PAUSE NPC//
 	//================//
 	hscr_npc_pause_path();
+
+	//================//
+	//FACE PLAYER//
+	//================//
+	hscr_npc_face_player();
 
 	//================//
 	//CLOSE ACTIVE GUI//
@@ -453,9 +573,6 @@ hscr_npc_open_interaction = function(){
 //           Restores player control, resumes NPC path movement, clears active
 //           references, and logs the completed interaction close.
 //
-// ARGUMENTS: None.
-// RETURNS: True when interaction state is released.
-//
 //-------------------------------------------------------------------------------//
 hscr_npc_close_interaction = function(){
 
@@ -507,9 +624,23 @@ hscr_npc_close_interaction = function(){
 	global.flag_pause = false;
 
 	//================//
-	//RESUME NPC PATH//
+	//SYNC POSITION//
 	//================//
-	var _flag_path_resumed = hscr_npc_resume_path();
+	/*
+		Prevents the paused interaction interval from being interpreted
+		as movement on the first resumed frame.
+	*/
+	_val_previous_x = x;
+	_val_previous_y = y;
+
+	//========================//
+	//POST-INTERACTION PAUSE//
+	//========================//
+	_ct_post_interaction_pause = 60;
+
+	// Keep the NPC's path paused.
+	// STEP will resume it once this timer reaches 0.
+	var _flag_path_resumed = false;
 
 	//================//
 	//DEBUG INTERACTION//
@@ -538,9 +669,6 @@ hscr_npc_close_interaction = function(){
 // HSCR_NPC_UPDATE_INTERACTION_COOLDOWN
 // FUNCTION: Updates the NPC interaction cooldown.
 //           Prevents the same input from immediately reopening interaction.
-//
-// ARGUMENTS: None.
-// RETURNS: Nothing.
 //
 //-------------------------------------------------------------------------------//
 hscr_npc_update_interaction_cooldown = function(){

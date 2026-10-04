@@ -1,11 +1,22 @@
 //===============================================================================//
 //
 // STEP: OBJ_BATTLE_VFX
-// FUNCTION: Handles delayed VFX startup, synchronized SFX playback,
+// FUNCTION: Handles battle VFX lifetime, delayed startup, synchronized SFX,
 //           and optional anchor following.
+//           Destroys all battle VFX once the end-battle pane is active.
 //           Animation completion is handled by the Animation End event.
 //
 //===============================================================================//
+
+//==================//
+//END BATTLE CLEANUP//
+//==================//
+if (instance_exists(obj_gui_end_battle_pane)){
+
+	instance_destroy();
+
+	exit;
+}
 
 #region START DELAY
 

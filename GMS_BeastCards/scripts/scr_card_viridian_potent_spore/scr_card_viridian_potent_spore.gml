@@ -15,7 +15,7 @@ function scr_card_viridian_potent_spore(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY 3 POISON//
 	//================//
-	repeat (3){
+	repeat (_stct_card._val_card_magnitude){
 		scr_status_apply_dot("POISON", _ref_target);
 	}
 }

@@ -64,6 +64,20 @@ function scr_status_transfer_oldest_buff(_ref_source,_ref_target){
 			continue;
 		}
 
+		//=========================//
+		//SKIP UNTRANSFERABLE BUFFS//
+		//=========================//
+
+		if (
+		    variable_instance_exists(
+		        _ref_status,
+		        "_flag_status_untransferable"
+		    ) &&
+		    _ref_status._flag_status_untransferable
+		){
+		    continue;
+		}
+
 		//==========================//
 		//SKIP LINKED REDIRECT BUFFS//
 		//==========================//

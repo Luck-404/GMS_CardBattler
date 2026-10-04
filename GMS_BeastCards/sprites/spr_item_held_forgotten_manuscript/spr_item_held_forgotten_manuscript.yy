@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"FORGOTTEN_MANUSCRIPT",
-    "path":"folders/INVENTORY/ITEMS/HELD/FORGOTTEN_MANUSCRIPT.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/DECK AND HAND ITEMS/FORGOTTEN_MANUSCRIPT.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"ARCHMAGES_FOCUS",
-    "path":"folders/INVENTORY/ITEMS/HELD/ARCHMAGES_FOCUS.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/DECK AND HAND ITEMS/ARCHMAGES_FOCUS.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -65,7 +65,9 @@ function scr_trap_thin_ice(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_ca
 			//REVEAL TRAP//
 			//================//
 			scr_gui_spawn_popup_trigger_banner(
-				"TRAP TRIGGERED: THIN ICE"
+				"TRAP TRIGGERED: THIN ICE",
+				_ref_trap._ref_owner,
+				_ref_attacker
 			);
 
 			//================//

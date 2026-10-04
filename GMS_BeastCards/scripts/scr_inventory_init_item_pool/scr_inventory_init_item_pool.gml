@@ -1,124 +1,161 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_INVENTORY_INIT_ITEM_POOL
-// FUNCTION: Initializes the global master item pool.
-//           Adds every obtainable item id to the pool.
-//           Rebuilds the pool cleanly to prevent duplicate entries.
+// FUNCTION: Initializes the global master Item pool.
+//
+//           This array is the authoritative list of Item IDs exposed to
+//           inventory, reward, debug, and Cheats systems that iterate the
+//           complete Item catalog.
 //
 // ARGUMENTS: None.
-// RETURNS: Nothing.
+// RETURNS: Nothing. Populates global.arr_pool_items.
 //
 //===============================================================================//
 
 function scr_inventory_init_item_pool(){
 
-	//================//
-	//RESET ITEM POOL//
-	//================//
-	ds_list_clear(global.list_pool_items);
+	global.arr_pool_items = [
 
-	#region QUEST
+		// QUEST
+		"QUEST_IMPORTANT_NOTEBOOK",
 
-	ds_list_add(global.list_pool_items,"QUEST_IMPORTANT_NOTEBOOK");
+		// HELD
+		"HELD_AMPLIFYING_BELL",
+		"HELD_ARCANE_CAPACITOR",
+		"HELD_ARCHMAGES_FOCUS",
+		"HELD_BATTLE_STANDARD",
+		"HELD_BLIGHT_VIAL",
+		"HELD_BLOOD_MOON_TALISMAN",
+		"HELD_BLOODSTAINED_IDOL",
+		"HELD_BLOOMTIDE_CHALICE",
+		"HELD_BOLSTERING_SHELL",
+		"HELD_BROOD_TOTEM",
+		"HELD_BURNING_ASH",
+		"HELD_CERULEAN_INCENSE",
+		"HELD_CINDER_CORE",
+		"HELD_CURSED_IDOL",
+		"HELD_DORMANT_POD",
+		"HELD_COLLECTORS_SEAL",
+		"HELD_EMBER_LENS",
+		"HELD_EMERALD_TALISMAN",
+		"HELD_EXPANDED_GRIMOIRE",
+		"HELD_FIRESTORM_LANTERN",
+		"HELD_FLEET_FEATHER",
+		"HELD_FORGOTTEN_MANUSCRIPT",
+		"HELD_GOLD_FANG",
+		"HELD_HAWKEYE_LENS",
+		"HELD_HEALING_FRUIT",
+		"HELD_INSPIRING_CHIME",
+		"HELD_IRON_SHELL",
+		"HELD_LUCKY_COIN",
+		"HELD_MENDING_MOSS",
+		"HELD_NEUTRAL_LENS",
+		"HELD_PHOENIX_EMBER",
+		"HELD_POCKET_HIVE",
+		"HELD_POWERFUL_STONE",
+		"HELD_PURIFYING_BELL",
+		"HELD_REGROWTH_CHARM",
+		"HELD_QUICKSILK_RIBBON",
+		"HELD_RAINCALLER_SHELL",
+		"HELD_RAZOR_FANG",
+		"HELD_RESOLUTE_CHARM",
+		"HELD_SALVAGERS_MAGNET",
+		"HELD_SCHOLARS_RIBBON",
+		"HELD_SCRIBES_QUILL",
+		"HELD_SEERS_LENS",
+		"HELD_SNOW_GLOBE",
+		"HELD_SORCEROUS_GEM",
+		"HELD_STORMGLASS",
+		"HELD_THORNPLATE",
+		"HELD_TIDAL_LENS",
+		"HELD_TRAVELERS_BUCKLER",
+		"HELD_VERDANT_LENS",
+		"HELD_VERDANT_SEED",
+		"HELD_VERMILION_INCENSE",
+		"HELD_VIRIDIAN_INCENSE",
+		"HELD_VITALITY_ROOT",
+		"HELD_WARDING_CRYSTAL",
+		// CONSUMABLE
+		"CONSUMABLE_HEALING_SALVE",
 
-	#endregion
+		// MATERIAL
+		"MATERIAL_BLADE_GRASS",
+		"MATERIAL_CRIMSITE",
+		"MATERIAL_DARKWOOD",
+		"MATERIAL_DAZZLING_HIDE",
+		"MATERIAL_HARDSTONE",
+		"MATERIAL_IRON",
+		"MATERIAL_LEAF_LITTER",
+		"MATERIAL_LIFEPETAL",
+		"MATERIAL_LIGHTWOOD",
+		"MATERIAL_LINEN",
+		"MATERIAL_ROUGH_BONE",
+		"MATERIAL_SILK",
+		"MATERIAL_SIMPLE_HIDE",
+		"MATERIAL_SOFTSTONE",
+		"MATERIAL_VINES",
 
-	#region HELD
+		// PRISM
+		"PRISM_COMMON",
+		"PRISM_UNCOMMON",
+		"PRISM_RARE",
+		"PRISM_EPIC",
+		"PRISM_LEGENDARY",
+		"PRISM_ARCWORK",
 
-	ds_list_add(global.list_pool_items,"HELD_POWERFUL_STONE");
-	ds_list_add(global.list_pool_items,"HELD_SORCEROUS_GEM");
-	ds_list_add(global.list_pool_items,"HELD_INSPIRING_CHIME");
-	ds_list_add(global.list_pool_items,"HELD_VERDANT_SEED");
-	ds_list_add(global.list_pool_items,"HELD_EMERALD_TALISMAN");
-	ds_list_add(global.list_pool_items,"HELD_BURNING_ASH");
-	ds_list_add(global.list_pool_items,"HELD_HEALING_FRUIT");
-	ds_list_add(global.list_pool_items,"HELD_BOLSTERING_SHELL");
-	ds_list_add(global.list_pool_items,"HELD_GOLD_FANG");
+		// VIRIDIAN EGGS
+		"EGG_ARBRAWN",
+		"EGG_ARGENTBUD",
+		"EGG_BEAVINE",
+		"EGG_BRYOBITE",
+		"EGG_CHITROOPER",
+		"EGG_CRUSABER",
+		"EGG_DRYADAE",
+		"EGG_FIGHTREE",
+		"EGG_FLITSAGE",
+		"EGG_FURN",
+		"EGG_LEPOROOT",
+		"EGG_LUMBUCK",
+		"EGG_MAMBARK",
+		"EGG_MORELUSH",
+		"EGG_SPOROSE",
+		"EGG_STRIGIBLOOM",
+		"EGG_TURFRANTULA",
 
-	#endregion
+		// CERULEAN EGGS
+		"EGG_AMMOMARSH",
+		"EGG_BLIZZDRIFT",
+		"EGG_CAUDAQUA",
+		"EGG_CEPHARIME",
+		"EGG_CHELONSEA",
+		"EGG_CORALLIARC",
+		"EGG_FROSTUSK",
+		"EGG_GALENATRIUM",
+		"EGG_GLACIMIGHT",
+		"EGG_GULFLOW",
+		"EGG_ISTIRAIN",
+		"EGG_KELPLATANI",
+		"EGG_LONTRIVER",
+		"EGG_MARITIMICE",
+		"EGG_SALTWAGG",
+		"EGG_SPHENISKIP",
 
-	#region CONSUMABLE
-
-	ds_list_add(global.list_pool_items,"CONSUMABLE_HEALING_SALVE");
-
-	#endregion
-
-	#region PRISM
-
-	ds_list_add(global.list_pool_items,"PRISM_COMMON");
-	ds_list_add(global.list_pool_items,"PRISM_UNCOMMON");
-	ds_list_add(global.list_pool_items,"PRISM_RARE");
-	ds_list_add(global.list_pool_items,"PRISM_EPIC");
-	ds_list_add(global.list_pool_items,"PRISM_LEGENDARY");
-	ds_list_add(global.list_pool_items,"PRISM_ARCWORK");
-
-	#endregion
-
-	#region EGG
-
-		#region VIRIDIAN
-
-		ds_list_add(global.list_pool_items,"EGG_ARBRAWN");
-		ds_list_add(global.list_pool_items,"EGG_ARGENTBUD");
-		ds_list_add(global.list_pool_items,"EGG_BEAVINE");
-		ds_list_add(global.list_pool_items,"EGG_BRYOBITE");
-		ds_list_add(global.list_pool_items,"EGG_CHITROOPER");
-		ds_list_add(global.list_pool_items,"EGG_CRUSABER");
-		ds_list_add(global.list_pool_items,"EGG_DRYADAE");
-		ds_list_add(global.list_pool_items,"EGG_FIGHTREE");
-		ds_list_add(global.list_pool_items,"EGG_FLITSAGE");
-		ds_list_add(global.list_pool_items,"EGG_FURN");
-		ds_list_add(global.list_pool_items,"EGG_LEPOROOT");
-		ds_list_add(global.list_pool_items,"EGG_LUMBUCK");
-		ds_list_add(global.list_pool_items,"EGG_MAMBARK");
-		ds_list_add(global.list_pool_items,"EGG_MORELUSH");
-		ds_list_add(global.list_pool_items,"EGG_SPOROSE");
-		ds_list_add(global.list_pool_items,"EGG_STRIGIBLOOM");
-		ds_list_add(global.list_pool_items,"EGG_TURFRANTULA");
-
-		#endregion
-
-		#region CERULEAN
-
-		ds_list_add(global.list_pool_items,"EGG_AMMOMARSH");
-		ds_list_add(global.list_pool_items,"EGG_BLIZZDRIFT");
-		ds_list_add(global.list_pool_items,"EGG_CAUDAQUA");
-		ds_list_add(global.list_pool_items,"EGG_CEPHARIME");
-		ds_list_add(global.list_pool_items,"EGG_CHELONSEA");
-		ds_list_add(global.list_pool_items,"EGG_CORALLIARC");
-		ds_list_add(global.list_pool_items,"EGG_FROSTUSK");
-		ds_list_add(global.list_pool_items,"EGG_GALENATRIUM");
-		ds_list_add(global.list_pool_items,"EGG_GLACIMIGHT");
-		ds_list_add(global.list_pool_items,"EGG_GULFLOW");
-		ds_list_add(global.list_pool_items,"EGG_ISTIRAIN");
-		ds_list_add(global.list_pool_items,"EGG_KELPLATANI");
-		ds_list_add(global.list_pool_items,"EGG_LONTRIVER");
-		ds_list_add(global.list_pool_items,"EGG_MARITIMICE");
-		ds_list_add(global.list_pool_items,"EGG_SALTWAGG");
-		ds_list_add(global.list_pool_items,"EGG_SPHENISKIP");
-
-		#endregion
-
-		#region VERMILION
-
-		ds_list_add(global.list_pool_items,"EGG_ASCHEMASS");
-		ds_list_add(global.list_pool_items,"EGG_CANIGNIS");
-		ds_list_add(global.list_pool_items,"EGG_DAIMONIS");
-		ds_list_add(global.list_pool_items,"EGG_DRAKOAL");
-		ds_list_add(global.list_pool_items,"EGG_EMBEROOST");
-		ds_list_add(global.list_pool_items,"EGG_HELLSHROOM");
-		ds_list_add(global.list_pool_items,"EGG_IMPARCH");
-		ds_list_add(global.list_pool_items,"EGG_INFERNUS");
-		ds_list_add(global.list_pool_items,"EGG_LAVAROWANA");
-		ds_list_add(global.list_pool_items,"EGG_PYREKNIGHT");
-		ds_list_add(global.list_pool_items,"EGG_PYROPLUME");
-		ds_list_add(global.list_pool_items,"EGG_SANGUINAUT");
-		ds_list_add(global.list_pool_items,"EGG_SLAGOLEM");
-		ds_list_add(global.list_pool_items,"EGG_SOLEMOLD");
-		ds_list_add(global.list_pool_items,"EGG_WRATHOOD");
-		ds_list_add(global.list_pool_items,"EGG_WYRMELTA");
-
-		#endregion
-
-	#endregion
+		// VERMILION EGGS
+		"EGG_ASCHEMASS",
+		"EGG_CANIGNIS",
+		"EGG_DAIMONIS",
+		"EGG_DRAKOAL",
+		"EGG_EMBEROOST",
+		"EGG_HELLSHROOM",
+		"EGG_IMPARCH",
+		"EGG_INFERNUS",
+		"EGG_LAVAROWANA",
+		"EGG_PYREKNIGHT",
+		"EGG_PYROPLUME",
+		"EGG_SANGUINAUT",
+		"EGG_SLAGOLEM",
+		"EGG_SOLEMOLD",
+		"EGG_WRATHOOD",
+		"EGG_WYRMELTA"
+	];
 }

@@ -6,6 +6,10 @@
 //           deducts player Mana AFTER resolution, then applies queued Mana.
 //           Invalid attempts release selection without spending resources.
 //
+//           Qualifying PASSIVE_MODIFIER Held Items may temporarily increase the
+//           resolving Attack Card's base magnitude for its effect callback. The
+//           original Card magnitude is restored immediately after each callback.
+//
 // ARGUMENTS: No arguments.
 // RETURNS: True for an admitted cast attempt (including Whiteout or Trap
 //          cancellation); false when initial validation rejects the action.
@@ -831,11 +835,54 @@ function scr_battle_cast_card(){
 					}
 				}
 
+				//===========================//
+				//HELD CARD MAGNITUDE BONUS//
+				//===========================//
+				var _val_original_card_magnitude = undefined;
+				var _flag_held_magnitude_applied = false;
+
+				if (
+					!_flag_skip_effect &&
+					variable_struct_exists(
+						_stct_card,
+						"_val_card_magnitude"
+					) &&
+					is_real(
+						_stct_card._val_card_magnitude
+					)
+				){
+
+					var _val_held_magnitude_bonus =
+						scr_battle_get_held_card_magnitude_bonus(
+							_ref_caster,
+							_stct_card
+						);
+
+					if (_val_held_magnitude_bonus > 0){
+
+						_val_original_card_magnitude =
+							_stct_card._val_card_magnitude;
+
+						_stct_card._val_card_magnitude +=
+							_val_held_magnitude_bonus;
+
+						_flag_held_magnitude_applied = true;
+					}
+				}
+
 				//-------------//
 				//RESOLVE CARD//
 				//-------------//
 				if (!_flag_skip_effect){
 					_scr_card_effect(_stct_card,_ref_caster,_ref_target);
+				}
+
+				//============================//
+				//RESTORE CARD BASE MAGNITUDE//
+				//============================//
+				if (_flag_held_magnitude_applied){
+					_stct_card._val_card_magnitude =
+						_val_original_card_magnitude;
 				}
 
 				//===========================//

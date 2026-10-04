@@ -72,6 +72,6 @@ function scr_card_viridian_hunters_instinct(_stct_card,_ref_caster,_ref_target){
 	//================//
 
 
-	scr_status_apply_buff("BOOST", _ref_caster, 25, 2);
+	scr_status_apply_buff("BOOST", _ref_caster, 10, 2);
 
 }

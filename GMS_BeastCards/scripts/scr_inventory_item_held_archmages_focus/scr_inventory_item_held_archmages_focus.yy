@@ -6,7 +6,7 @@
   "name":"scr_inventory_item_held_archmages_focus",
   "parent":{
     "name":"ARCHMAGES_FOCUS",
-    "path":"folders/INVENTORY/ITEMS/HELD/ARCHMAGES_FOCUS.yy",
+    "path":"folders/INVENTORY/ITEMS/HELD/DECK AND HAND ITEMS/ARCHMAGES_FOCUS.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

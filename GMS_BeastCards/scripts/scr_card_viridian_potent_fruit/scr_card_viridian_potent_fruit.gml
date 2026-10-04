@@ -16,5 +16,5 @@ function scr_card_viridian_potent_fruit(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY BOOST//
 	//================//
-	scr_status_apply_buff("BOOST", _ref_target, 25, 2);
+	scr_status_apply_buff("BOOST", _ref_target, 10, 2);
 }

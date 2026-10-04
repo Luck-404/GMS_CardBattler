@@ -109,6 +109,127 @@ if (_str_state == "TOOL"){
         exit;
     }
 
+//====================//
+//BATTLE BEAST PAIR//
+//====================//
+	if (_str_tool_target_type == "BATTLE_BEAST_PAIR"){
+
+		if (mouse_check_button_pressed(mb_left)){
+
+			var _val_swap_mouse_x = device_mouse_x_to_gui(0);
+			var _val_swap_mouse_y = device_mouse_y_to_gui(0);
+
+			var _ref_swap_target =
+				instance_position(
+					_val_swap_mouse_x,
+					_val_swap_mouse_y,
+					obj_battle_beast
+				);
+
+//================//
+//INVALID TARGET//
+//================//
+			if (
+				!instance_exists(_ref_swap_target) ||
+				_ref_swap_target.object_index != obj_battle_beast ||
+				_ref_swap_target._str_list != "ALIVE" ||
+				_ref_swap_target._val_cur_hp <= 0
+			){
+
+				hscr_cheats_error(
+					"BATTLE SWAP FAILED",
+					"SELECT A LIVING BATTLE BEAST"
+				);
+
+				exit;
+			}
+
+//================//
+//FIRST SELECTION//
+//================//
+			if (!instance_exists(_ref_swap_first)){
+
+				_ref_swap_first = _ref_swap_target;
+
+				var _str_swap_first_name = "BEAST";
+
+				if (is_struct(_ref_swap_first._ref_unit)){
+					_str_swap_first_name = string_upper(_ref_swap_first._ref_unit._str_beast_name);
+				}
+
+				_str_tool_label =
+					"SWAP: SELECT SECOND [" +
+					string_upper(_ref_swap_first._str_team) +
+					"]";
+
+				audio_play_sound(snd_gui_press,0,false);
+
+				hscr_cheats_log(
+					"BATTLE SWAP FIRST SELECTED",
+					"TEAM: " + string_upper(_ref_swap_first._str_team) +
+					" | BEAST: " + _str_swap_first_name
+				);
+
+				exit;
+			}
+
+//================//
+//SAME BEAST//
+//================//
+			if (_ref_swap_target == _ref_swap_first){
+
+				hscr_cheats_error(
+					"BATTLE SWAP FAILED",
+					"SAME BEAST SELECTED TWICE"
+				);
+
+				scr_gui_spawn_popup_banner("SELECT A DIFFERENT BEAST");
+				exit;
+			}
+
+//================//
+//OPPOSITE TEAMS//
+//================//
+			if (_ref_swap_target._str_team != _ref_swap_first._str_team){
+
+				hscr_cheats_error(
+					"BATTLE SWAP FAILED",
+					"OPPOSITE TEAMS" +
+					" | FIRST: " + string_upper(_ref_swap_first._str_team) +
+					" | SECOND: " + string_upper(_ref_swap_target._str_team)
+				);
+
+				scr_gui_spawn_popup_banner("SWAP REQUIRES SAME TEAM");
+				exit;
+			}
+
+//================//
+//SWAP BEASTS//
+//================//
+			if (
+				scr_battle_swap_beast_positions(
+					_ref_swap_first,
+					_ref_swap_target,
+					"OBJ_GUI_CHEATS_PANE:STEP"
+				)
+			){
+
+				audio_play_sound(snd_gui_press,0,false);
+
+				_ref_swap_first = undefined;
+				_str_tool_label = "SWAP: SELECT FIRST BEAST";
+			}
+			else{
+
+				hscr_cheats_error(
+					"BATTLE SWAP FAILED",
+					"FORMATION SWAP REJECTED"
+				);
+			}
+		}
+
+		exit;
+	}
 //================//
 //BATTLE UNIT//
 //================//
@@ -597,15 +718,13 @@ if (_str_mode == "OVERWORLD"){
         case 2:
 
             if (
-                ds_exists(
-                    global.list_pool_items,
-                    ds_type_list
-                )
+                variable_global_exists("arr_pool_items") &&
+                is_array(global.arr_pool_items)
             ){
 
                 _ct_page_entries =
-                    ds_list_size(
-                        global.list_pool_items
+                    array_length(
+                        global.arr_pool_items
                     );
             }
 
@@ -662,11 +781,16 @@ else{
                     ) +
                     array_length(
                         _arr_cheat_buffs
+                    ) +
+                    array_length(
+                        _arr_cheat_auras
+                    ) +
+                    array_length(
+                        _arr_cheat_globals
                     );
 
-                // Status buttons are normally drawn in a grid.
-                // Draw GUI should use this same count per page.
-                _ct_page_rows = 12;
+                // Six rows x four columns use the available first-tab space.
+                _ct_page_rows = 24;
             }
 
 // MINION SUBMENU
@@ -677,7 +801,7 @@ else{
                         _arr_cheat_minions
                     );
 
-                _ct_page_rows = 12;
+                _ct_page_rows = 24;
             }
 
 // MAIN INTERACT PAGE

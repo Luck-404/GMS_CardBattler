@@ -32,6 +32,11 @@ if (instance_number(obj_battle_turn_controller) > 1){
 #region VARIABLES
 _ct_turn_serial = 0;
 
+//----------------//
+//BATTLE TIMING//
+//----------------//
+_val_battle_start_time = -1;
+
 //------------//
 //TEAM TRAPS//
 //------------//
@@ -311,8 +316,9 @@ function hscr_battle_begin_initial_turn(){
 //—------------------------------------------------------------------------------//
 // hscr_battle_execute_entry_trigger
 // FUNCTION: Executes one queued battle-entry trigger.
-//           Resolves the source held item's TRIGGER behavior and consumes the
-//           held item after a successful trigger.
+//           ENTRY Held Items receive the live battle Beast instance.
+//           Successful Held Items are consumed only when their metadata sets
+//           _flag_consumed_on_trigger = true.
 //—------------------------------------------------------------------------------//
 function hscr_battle_execute_entry_trigger(_stct_trigger){
 
@@ -366,21 +372,33 @@ function hscr_battle_execute_entry_trigger(_stct_trigger){
 				" " +
 				_stct_item._str_trigger_text;
 
-			scr_gui_spawn_popup_trigger_banner(_str_popup);
+			scr_gui_spawn_popup_trigger_banner(
+				_str_popup,
+				_ref_beast
+			);
 
 			//----------------//
 			//EXECUTE ITEM//
 			//----------------//
-			var _flag_triggered = _stct_item._scr_item(
-				"TRIGGER",
-				_stct_item,
-				_ref_beast._ref_unit
-			);
+			var _flag_triggered =
+				script_execute(
+					_stct_item._scr_item,
+					"TRIGGER",
+					_stct_item,
+					_ref_beast
+				);
 
 			//----------------//
 			//CONSUME ITEM//
 			//----------------//
-			if (_flag_triggered){
+			if (
+				_flag_triggered &&
+				variable_struct_exists(
+					_stct_item,
+					"_flag_consumed_on_trigger"
+				) &&
+				_stct_item._flag_consumed_on_trigger
+			){
 				_ref_beast._stct_held_item = "EMPTY";
 			}
 

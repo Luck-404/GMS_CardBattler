@@ -62,9 +62,11 @@ function scr_trap_thorn_net(_str_tag,_ref_trap,_ref_attacker,_ref_target,_stct_c
 			//================//
 			//REVEAL TRAP//
 			//================//
-			scr_gui_spawn_popup_trigger_banner(
-				"TRAP TRIGGERED: THORN NET"
-			);
+scr_gui_spawn_popup_trigger_banner(
+	"TRAP TRIGGERED: THORN NET",
+	_ref_trap._ref_owner,
+	_ref_attacker
+);
 
 			//-----------------------//
 			//VALIDATE TRAP CONTEXT//

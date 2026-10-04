@@ -3,14 +3,23 @@
 // SCRIPT: SCR_BATTLE_DAMAGE_TARGET
 // FUNCTION: Resolves direct Card damage using LINEAR or target-Max-HP PERCENT
 //           bases, or card-independent FIXED damage.
-//           FIXED preserves the former dedicated fixed-damage pipeline.
-//           Armor piercing applies only to Card damage.
+//
+//           FIXED preserves the dedicated fixed-damage pipeline and does not
+//           resolve direct-Card reaction effects.
+//
+//           THORNPLATE:
+//           After direct Card damage reaches the defender's Armor, Overhealth,
+//           or HP, a held Thornplate retaliates for 3 FIXED Neutral damage.
+//
+//           CONSUMED ON_TARGET ITEMS:
+//           Successful consumed target items, including Healing Fruit, are
+//           cleared from both the battle Beast and persistent Beast struct.
 //
 // ARGUMENTS: _str_mode - LINEAR, PERCENT, or FIXED.
-//            _ref_caster - attacking Beast for LINEAR/PERCENT; optional source
-//            Minion for FIXED.
-//            _ref_target - selected battle Beast.
-//            _val_amount - base amount or PERCENT value.
+//            _ref_caster - Attacking Beast for LINEAR/PERCENT; optional source
+//                          Minion for FIXED.
+//            _ref_target - Selected battle Beast.
+//            _val_amount - Base amount or PERCENT value.
 //            _stct_options - Card/options struct for LINEAR/PERCENT.
 // RETURNS: True when the damage instance resolves; otherwise false.
 //
@@ -471,7 +480,16 @@ function scr_battle_damage_target(_str_mode,_ref_caster,_ref_target,_val_amount,
 	//--------------------------//
 	//CALL THE DEEP DAMAGE BONUS//
 	//--------------------------//
-	_val_damage_left += scr_status_consume_call_the_deep_damage(_ref_caster);
+	/*
+		CALL THE DEEP is consumed at the same pre-damage timing as before so
+		Dodge / Divine Protection behavior does not change. Its flat damage is
+		stored here and applied later with the other Linear modifiers, after
+		all percentage / scalar / Power calculations.
+	*/
+	var _val_call_the_deep_linear_bonus =
+		scr_status_consume_call_the_deep_damage(
+			_ref_caster
+		);
 
 	//-------------//
 	//TARGET DODGE//
@@ -637,26 +655,7 @@ function scr_battle_damage_target(_str_mode,_ref_caster,_ref_target,_val_amount,
 		return false;
 	}
 
-	#region DAMAGE MODIFIERS
-
-	//--------------------------//
-	//OUTGOING LINEAR MODIFIERS//
-	//--------------------------//
-	var _val_outgoing_linear_modifier =
-		_ref_caster._val_dmg_linear_bonus -
-		_ref_caster._val_dmg_linear_reduction;
-
-	_val_damage_left += _val_outgoing_linear_modifier;
-
-
-	//--------------------------//
-	//INCOMING LINEAR MODIFIERS//
-	//--------------------------//
-	var _val_incoming_linear_modifier =
-		_ref_damage_recipient._val_dmg_taken_linear_bonus -
-		_ref_damage_recipient._val_dmg_taken_linear_reduction;
-
-	_val_damage_left += _val_incoming_linear_modifier;
+	#region SCALAR MODIFIERS
 
 	//--------------------------//
 	//OUTGOING SCALAR MODIFIERS//
@@ -699,48 +698,33 @@ if (_val_second_wind_bonus > 0){
 
 	_val_damage_left *= _val_incoming_scalar_multiplier;
 
-	//------------------//
-	//CHECK DAMAGE FLOOR//
-	//------------------//
-	if (_val_damage_left <= 0){
-
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"TOO WEAK",
-			undefined,
-			c_white,
-			_ref_caster.x + irandom_range(-32,32),
-			_ref_caster.y - 24 + irandom_range(-32,32)
-		);
-
-		return false;
-	}
-
 	#endregion
 
 	#region POWER SCALING
 
-	//----------------------//
-	//ATTACKER POWER SCALING//
-	//----------------------//
-	if (_str_card_stat == "PHY"){
+		//----------------------//
+		//ATTACKER POWER SCALING//
+		//----------------------//
+		if (_str_card_stat == "PHY"){
 
-		var _val_ppow_modifier = max(
-			0.1,
-			scr_beast_get_grade_modifier(_stct_caster_unit._val_beast_ppow_stat)
-		);
+			var _val_ppow_modifier =
+				scr_beast_get_power_multiplier(
+					_stct_caster_unit._val_beast_ppow_stat
+				);
 
-		_val_damage_left *= _val_ppow_modifier;
-	}
-	else if (_str_card_stat == "MAG"){
+			_val_damage_left *=
+				_val_ppow_modifier;
+		}
+		else if (_str_card_stat == "MAG"){
 
-		var _val_mpow_modifier = max(
-			0.1,
-			scr_beast_get_grade_modifier(_stct_caster_unit._val_beast_mpow_stat)
-		);
+			var _val_mpow_modifier =
+				scr_beast_get_power_multiplier(
+					_stct_caster_unit._val_beast_mpow_stat
+				);
 
-		_val_damage_left *= _val_mpow_modifier;
-	}
+			_val_damage_left *=
+				_val_mpow_modifier;
+		}
 
 	#endregion
 
@@ -763,93 +747,156 @@ if (_val_second_wind_bonus > 0){
 
 	#endregion
 
-	#region DEFENSE MITIGATION
-
-	//--------------------//
-	//DEFENDER MITIGATION//
-	//--------------------//
-	if (_str_card_stat == "PHY"){
-
-		var _val_pdef_modifier = max(
-			0.1,
-			scr_beast_get_grade_modifier(_stct_target_unit._val_beast_pdef_stat)
-		);
-
-		_val_damage_left /= _val_pdef_modifier;
-	}
-	else if (_str_card_stat == "MAG"){
-
-		var _val_mdef_modifier = max(
-			0.1,
-			scr_beast_get_grade_modifier(_stct_target_unit._val_beast_mdef_stat)
-		);
-
-		_val_damage_left /= _val_mdef_modifier;
-	}
+	#region FINAL SCALAR MODIFIERS
 
 	//============================//
 	//MOLTEN BRAND DAMAGE BONUS//
 	//============================//
-	var _val_molten_brand_bonus = scr_status_get_molten_brand_damage_bonus(
-		_ref_target,
-		_stct_card
-	);
+	/*
+		MOLTEN BRAND is a percentage / scalar modifier, so it resolves before
+		Linear damage. This keeps flat bonuses immutable instead of multiplying
+		them by later percentage effects.
+	*/
+	var _val_molten_brand_bonus =
+		scr_status_get_molten_brand_damage_bonus(
+			_ref_target,
+			_stct_card
+		);
 
 	if (_val_molten_brand_bonus > 0){
 
-		_val_damage_left *= 1 + (_val_molten_brand_bonus / 100);
+		_val_damage_left *=
+			1 +
+			(_val_molten_brand_bonus / 100);
 	}
-
-	//----------------//
-	//FINALIZE DAMAGE//
-	//----------------//
-	_val_damage_left = max(0,ceil(_val_damage_left));
-
-	if (_val_damage_left <= 0){
-		return false;
-	}
-
-	//================//
-	//FURNACE HEART//
-	//================//
-	if (
-		scr_status_trigger_furnace_heart(
-			_ref_target,
-			_val_damage_left
-		)
-	){
-		return false;
-	}
-	//===================//
-	//TRIGGER BACKDRAFT//
-	//===================//
-	_val_damage_left = scr_status_trigger_backdraft(
-		_ref_target,
-		_ref_caster,
-		_val_damage_left
-	);
-
-	if (_val_damage_left <= 0){
-		return true;
-	}
-
-
-	//--------------------//
-	//STORE FINAL DAMAGE//
-	//--------------------//
-	var _val_final_damage = _val_damage_left;
-
-	//===========================//
-	//MELTING ARMAMENTS: PRE-HIT//
-	//===========================//
-	scr_status_trigger_melting_armaments(
-		_ref_caster,
-		_ref_target,
-		_stct_card
-	);
 
 	#endregion
 
+	#region LINEAR MODIFIERS
+
+	//--------------------------//
+	//OUTGOING LINEAR MODIFIERS//
+	//--------------------------//
+	var _val_outgoing_linear_modifier =
+		_ref_caster._val_dmg_linear_bonus -
+		_ref_caster._val_dmg_linear_reduction;
+
+	//--------------------------//
+	//INCOMING LINEAR MODIFIERS//
+	//--------------------------//
+	/*
+		Use the actual final damage recipient after Redirect resolves.
+	*/
+	var _val_incoming_linear_modifier =
+		_ref_target._val_dmg_taken_linear_bonus -
+		_ref_target._val_dmg_taken_linear_reduction;
+
+	//-----------------------//
+	//APPLY ALL FLAT DAMAGE//
+	//-----------------------//
+	_val_damage_left +=
+		_val_call_the_deep_linear_bonus +
+		_val_outgoing_linear_modifier +
+		_val_incoming_linear_modifier;
+
+	//------------------//
+	//CHECK DAMAGE FLOOR//
+	//------------------//
+	if (_val_damage_left <= 0){
+
+		scr_gui_spawn_popup_scrolling(
+			"TEXT",
+			"TOO WEAK",
+			undefined,
+			c_white,
+			_ref_caster.x + irandom_range(-32,32),
+			_ref_caster.y - 24 + irandom_range(-32,32)
+		);
+
+		return false;
+	}
+
+	#endregion
+
+	#region DEFENSE MITIGATION
+
+		//--------------------//
+		//DEFENDER MITIGATION//
+		//--------------------//
+		var _val_defense_mitigation = 0;
+
+		if (_str_card_stat == "PHY"){
+
+			_val_defense_mitigation =
+				scr_beast_get_defense_mitigation(
+					_stct_target_unit._val_beast_pdef_stat
+				);
+		}
+		else if (_str_card_stat == "MAG"){
+
+			_val_defense_mitigation =
+				scr_beast_get_defense_mitigation(
+					_stct_target_unit._val_beast_mdef_stat
+				);
+		}
+
+		//-----------------//
+		//REDUCE DAMAGE//
+		//-----------------//
+		_val_damage_left *=
+			1 -
+			_val_defense_mitigation;
+
+		//----------------//
+		//FINALIZE DAMAGE//
+		//----------------//
+		_val_damage_left = max(0,ceil(_val_damage_left));
+
+		if (_val_damage_left <= 0){
+			return false;
+		}
+
+		//================//
+		//FURNACE HEART//
+		//================//
+		if (
+			scr_status_trigger_furnace_heart(
+				_ref_target,
+				_val_damage_left
+			)
+		){
+			return false;
+		}
+
+		//===================//
+		//TRIGGER BACKDRAFT//
+		//===================//
+		_val_damage_left = scr_status_trigger_backdraft(
+			_ref_target,
+			_ref_caster,
+			_val_damage_left
+		);
+
+		if (_val_damage_left <= 0){
+			return true;
+		}
+
+		//--------------------//
+		//STORE FINAL DAMAGE//
+		//--------------------//
+		var _val_final_damage = _val_damage_left;
+
+		//===========================//
+		//MELTING ARMAMENTS: PRE-HIT//
+		//===========================//
+		scr_status_trigger_melting_armaments(
+			_ref_caster,
+			_ref_target,
+			_stct_card
+		);
+
+	#endregion
+	
 	#region HIT PRESENTATION
 
 	//------------//
@@ -1166,6 +1213,66 @@ if (_val_second_wind_bonus > 0){
 	}
 
 	//================//
+	//THORNPLATE//
+	//================//
+	/*
+		LINEAR / PERCENT are the direct Card-damage pathways. FIXED damage exits
+		earlier in this script and therefore cannot recursively trigger Thornplate.
+
+		Minion-only absorption does not count as the holder being struck. Damage
+		must reach the holder's Armor, Overhealth, or HP.
+	*/
+	if (
+		_val_armor_blocked +
+		_val_beast_damage >
+			0 &&
+		instance_exists(
+			_ref_target
+		) &&
+		instance_exists(
+			_ref_caster
+		) &&
+		variable_instance_exists(
+			_ref_target,
+			"_stct_held_item"
+		)
+	){
+
+		var _stct_direct_damage_item =
+			_ref_target
+				._stct_held_item;
+
+		if (
+			is_struct(
+				_stct_direct_damage_item
+			) &&
+			variable_struct_exists(
+				_stct_direct_damage_item,
+				"_str_item_trigger_type"
+			) &&
+			_stct_direct_damage_item
+				._str_item_trigger_type ==
+				"ON_DIRECT_DAMAGE" &&
+			variable_struct_exists(
+				_stct_direct_damage_item,
+				"_scr_item"
+			) &&
+			_stct_direct_damage_item._scr_item !=
+				undefined
+		){
+
+			script_execute(
+				_stct_direct_damage_item
+					._scr_item,
+				"TRIGGER",
+				_stct_direct_damage_item,
+				_ref_target,
+				_ref_caster
+			);
+		}
+	}
+
+	//================//
 	//PAIN RESPONSE//
 	//================//
 	if (_val_hp_damage > 0){
@@ -1212,7 +1319,31 @@ if (_val_second_wind_bonus > 0){
 			);
 
 			if (_flag_target_item_triggered){
-				_ref_target._stct_held_item = "EMPTY";
+
+				//=======================//
+				//CONSUME PERSISTENT ITEM//
+				//=======================//
+				if (
+					variable_instance_exists(
+						_ref_target,
+						"_ref_unit"
+					) &&
+					is_struct(
+						_ref_target._ref_unit
+					)
+				){
+
+					_ref_target
+						._ref_unit
+						._stct_beast_held_item =
+						"EMPTY";
+				}
+
+				//===================//
+				//CONSUME BATTLE ITEM//
+				//===================//
+				_ref_target._stct_held_item =
+					"EMPTY";
 			}
 		}
 	}

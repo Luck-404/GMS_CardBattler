@@ -15,5 +15,10 @@ function scr_card_viridian_disease(_stct_card,_ref_caster,_ref_target){
 	//====================//
 	//APPLY DEBUFF STATUS//
 	//====================//
-	scr_status_apply_debuff("WEAKNESS", _ref_target, 3);
+	scr_status_apply_debuff(
+		"WEAKNESS",
+		_ref_target,
+		3,
+		_stct_card._val_card_magnitude
+	);
 }

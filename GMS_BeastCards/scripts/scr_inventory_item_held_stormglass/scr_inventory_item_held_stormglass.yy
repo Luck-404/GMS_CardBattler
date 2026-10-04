@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_held_stormglass",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_held_stormglass",
+  "parent":{
+    "name":"STORMGLASS",
+    "path":"folders/INVENTORY/ITEMS/HELD/ENTRY/STORMGLASS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -15,5 +15,5 @@ function scr_card_viridian_wild_vigor(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY WILD VIGOR//
 	//================//
-	scr_status_apply_buff("WILD_VIGOR", _ref_target, 20, 3);
+	scr_status_apply_buff("WILD_VIGOR", _ref_target, _stct_card._val_card_magnitude, 3);
 }

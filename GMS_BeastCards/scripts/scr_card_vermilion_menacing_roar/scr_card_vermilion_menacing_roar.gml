@@ -69,7 +69,12 @@ function scr_card_vermilion_menacing_roar(_stct_card,_ref_caster,_ref_target){
 		//================//
 		//APPLY WEAKNESS//
 		//================//
-		scr_status_apply_debuff("WEAKNESS", _ref_affected_target, 2);
+		scr_status_apply_debuff(
+			"WEAKNESS",
+			_ref_target,
+			2,
+			_stct_card._val_card_magnitude
+		);
 
 		//================//
 		//CHECK RAGE BONUS//

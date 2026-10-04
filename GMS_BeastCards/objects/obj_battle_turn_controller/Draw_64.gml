@@ -23,13 +23,31 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		//================//
 		//BATTLE STARTUP//
 		//================//
-		if (!_flag_game_start){
+		if (!_flag_started_game){
 
-			if (
-				_flag_entry_triggers_init &&
+			if (!_flag_game_start){
+
+				_str_turn_text =
+					"BATTLE - INITIALIZING";
+			}
+			else if (
+				!_flag_start_confirmation_accepted
+			){
+
+				_str_turn_text =
+					"BATTLE - START CONFIRMATION";
+			}
+			else if (
 				!_flag_entry_triggers_complete
 			){
-				_str_turn_text = "BATTLE - ENTRY TRIGGERS";
+
+				_str_turn_text =
+					"BATTLE - ENTRY TRIGGERS";
+			}
+			else{
+
+				_str_turn_text =
+					"BATTLE - STARTING";
 			}
 		}
 
@@ -216,13 +234,21 @@ if (!instance_exists(obj_gui_end_battle_pane)){
 		//================//
 		if (instance_exists(obj_battle_wait)){
 
-			var _ref_wait = instance_find(obj_battle_wait,0);
+			var _ref_wait = instance_find(
+				obj_battle_wait,
+				0
+			);
 
 			if (instance_exists(_ref_wait)){
 
 				_str_turn_text +=
 					" | WAIT " +
-					string(max(0,_ref_wait._ct_life)) +
+					string(
+						max(
+							0,
+							_ref_wait._ct_life
+						)
+					) +
 					"F";
 			}
 		}

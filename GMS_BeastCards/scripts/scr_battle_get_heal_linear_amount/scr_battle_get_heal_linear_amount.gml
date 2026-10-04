@@ -56,7 +56,7 @@ function scr_battle_get_heal_linear_amount(_val_amount,_ref_caster,_stct_card){
 	//---------------//
 	if (_stct_card._str_card_stat == "PHY"){
 
-		var _val_ppow_modifier = scr_beast_get_grade_modifier(_stct_caster_unit._val_beast_ppow_stat);
+		var _val_ppow_modifier = scr_beast_get_power_multiplier(_stct_caster_unit._val_beast_ppow_stat);
 
 		_val_healing *= _val_ppow_modifier;
 	}
@@ -66,7 +66,7 @@ function scr_battle_get_heal_linear_amount(_val_amount,_ref_caster,_stct_card){
 	//---------------//
 	else if (_stct_card._str_card_stat == "MAG"){
 
-		var _val_mpow_modifier = scr_beast_get_grade_modifier(_stct_caster_unit._val_beast_mpow_stat);
+		var _val_mpow_modifier = scr_beast_get_power_multiplier(_stct_caster_unit._val_beast_mpow_stat);
 
 		_val_healing *= _val_mpow_modifier;
 	}

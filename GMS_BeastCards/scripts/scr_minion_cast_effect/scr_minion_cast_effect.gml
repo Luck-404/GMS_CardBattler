@@ -949,11 +949,12 @@ break;
 					//------------//
 					var _val_damage = _ref_minion._val_magnitude;
 
+					// GROVE SPIRIT
 					scr_battle_damage_target(
-						"FIXED",
-						_ref_minion,
-						_ref_target,
-						_val_damage
+					    "FIXED",
+					    _ref_minion,
+					    _ref_attack_target,
+					    _val_damage
 					);
 
 					//============================//
@@ -1009,7 +1010,7 @@ break;
 			scr_battle_damage_target(
 				"FIXED",
 				_ref_minion,
-				_ref_target,
+				_ref_damage_target,
 				_val_damage
 			);
 
