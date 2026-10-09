@@ -30,6 +30,22 @@ function scr_battle_has_reposition_lock(_ref_beast){
 
 	#endregion
 
+	#region ELITE LOCK
+
+	//----------------//
+	//HARDY ELITE//
+	//----------------//
+	if (
+		variable_instance_exists(_ref_beast,"_flag_elite") &&
+		_ref_beast._flag_elite &&
+		variable_instance_exists(_ref_beast,"_str_elite_modifier") &&
+		string_upper(string(_ref_beast._str_elite_modifier)) == "HARDY"
+	){
+		return true;
+	}
+
+	#endregion
+
 	#region REPOSITION LOCKS
 
 	//----------------//

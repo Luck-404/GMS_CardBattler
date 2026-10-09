@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_GODS_WRATH
@@ -15,9 +16,9 @@ function scr_card_cerulean_gods_wrath(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//CHECK WEATHER//
 	//================//
-	var _ref_rain = scr_status_check("WEATHER: RAIN",global.list_statuses);
-	var _ref_snow = scr_status_check("WEATHER: SNOW",global.list_statuses);
-	var _ref_storming = scr_status_check("WEATHER: STORMING",global.list_statuses);
+	var _ref_rain = scr_status_check("WEATHER: RAIN","WEATHER");
+	var _ref_snow = scr_status_check("WEATHER: SNOW","WEATHER");
+	var _ref_storming = scr_status_check("WEATHER: STORMING","WEATHER");
 
 	//================//
 	//GET TEAM LISTS//

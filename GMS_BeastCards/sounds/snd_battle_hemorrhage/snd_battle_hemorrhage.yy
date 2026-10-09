@@ -15,7 +15,7 @@
   "name":"snd_battle_hemorrhage",
   "parent":{
     "name":"HEMORRHAGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/HEMORRHAGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/HEMORRHAGE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

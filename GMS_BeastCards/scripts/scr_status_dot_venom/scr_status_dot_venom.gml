@@ -16,7 +16,6 @@
 // RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
-
 function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag_trigger_plague_garden=true,_ref_target=undefined){
 
 	switch (_str_tag){
@@ -320,60 +319,25 @@ function scr_status_dot_venom(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 				floor(_ct_venom_stacks / 4) * 4
 			);
 
-			//============//
-			//OVERHEALTH//
-			//============//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_overhealth > 0
-			){
+			/*
+				Venom's stat reductions, stack thresholds, and restoration remain
+				on the afflicted Beast. Only the raw Overhealth/HP tick damage
+				may redirect to Soulbound.
+			*/
+			scr_battle_elite_damage_raw_target(
+				_ref_host,
+				_val_damage,
+				{
+					_c_overhealth :
+						c_green,
 
-				var _val_blocked = min(
-					_ref_host._val_overhealth,
-					_val_damage
-				);
+					_c_hp :
+						c_purple,
 
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_blocked),
-					undefined,
-					c_green,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-
-				_ref_host._val_overhealth -= _val_blocked;
-				_val_damage -= _val_blocked;
-			}
-
-			//=========//
-			//HOST HP//
-			//=========//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_cur_hp > 0
-			){
-
-				var _val_actual_damage = min(
-					_val_damage,
-					_ref_host._val_cur_hp
-				);
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_actual_damage),
-					undefined,
-					c_purple,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-
-				_ref_host._val_cur_hp = max(
-					0,
-					_ref_host._val_cur_hp -
-					_val_actual_damage
-				);
-			}
+					_str_source :
+						"VENOM"
+				}
+			);
 
 			//==========//
 			//TICK VFX//

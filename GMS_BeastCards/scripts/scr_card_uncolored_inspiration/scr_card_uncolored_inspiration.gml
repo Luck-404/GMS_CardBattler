@@ -17,7 +17,7 @@ function scr_card_uncolored_inspiration(_stct_card,_ref_caster,_ref_target){
 	//===================//
 	scr_status_apply_buff(
 		"INSPIRATION",
-		_ref_target,
+		_ref_caster,
 		_stct_card._val_card_magnitude,
 		3
 	);

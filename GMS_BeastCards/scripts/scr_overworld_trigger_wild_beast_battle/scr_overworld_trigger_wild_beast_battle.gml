@@ -1,13 +1,4 @@
 //===============================================================================//
-//
-// SCRIPT: SCR_OVERWORLD_TRIGGER_WILD_BEAST_BATTLE
-// FUNCTION: Starts a battle from one visible wild Beast and stores the logical
-//           loot-zone ID alongside the existing encounter source state.
-//
-//           Encounter Held Items modify only the valid supplemental encounter
-//           pool. The visible overworld Beast remains forced into enemy slot 0.
-//
-//===============================================================================//
 
 function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 
@@ -225,6 +216,90 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 			room
 		);
 
+	if (!is_struct(_stct_encounter_scaling)){
+		with (_ref_transition){
+			instance_destroy();
+		}
+
+		return false;
+	}
+
+	//======================//
+	//COPY ELITE METADATA//
+	//======================//
+	var _stct_forced_unit =
+		_ref_world_beast._stct_unit;
+
+	var _flag_visible_elite =
+		variable_struct_exists(
+			_stct_forced_unit,
+			"_flag_elite"
+		) &&
+		_stct_forced_unit._flag_elite;
+
+	_stct_encounter_scaling._flag_elite_encounter =
+		_flag_visible_elite;
+
+	_stct_encounter_scaling._str_elite_modifier =
+		_flag_visible_elite &&
+		variable_struct_exists(
+			_stct_forced_unit,
+			"_str_elite_modifier"
+		)
+		? string_upper(
+			string(
+				_stct_forced_unit
+					._str_elite_modifier
+			)
+		)
+		: "";
+
+	_stct_encounter_scaling._val_elite_risk_tier =
+		_flag_visible_elite &&
+		variable_struct_exists(
+			_stct_forced_unit,
+			"_val_elite_risk_tier"
+		)
+		? max(
+			0,
+			round(
+				_stct_forced_unit
+					._val_elite_risk_tier
+			)
+		)
+		: 0;
+
+	_stct_encounter_scaling._val_elite_chance_percent =
+		variable_struct_exists(
+			_stct_forced_unit,
+			"_val_elite_chance_percent"
+		)
+		? _stct_forced_unit
+			._val_elite_chance_percent
+		: 4;
+
+	_stct_encounter_scaling._val_elite_roll =
+		variable_struct_exists(
+			_stct_forced_unit,
+			"_val_elite_roll"
+		)
+		? _stct_forced_unit
+			._val_elite_roll
+		: -1;
+
+	_stct_encounter_scaling._str_elite_source_item_id =
+		variable_struct_exists(
+			_stct_forced_unit,
+			"_str_elite_source_item_id"
+		)
+		? string_upper(
+			string(
+				_stct_forced_unit
+					._str_elite_source_item_id
+			)
+		)
+		: "BASE";
+
 	//================//
 	//STORE SOURCE DATA//
 	//================//
@@ -313,6 +388,36 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 		_str_loot_zone_id +
 		" | DIFFICULTY: " +
 		_stct_encounter_scaling._str_difficulty +
+		" | ELITE: " +
+		(
+			_stct_encounter_scaling
+				._flag_elite_encounter
+			? "YES (" +
+				_stct_encounter_scaling
+					._str_elite_modifier +
+				")"
+			: "NO"
+		) +
+		" | ELITE ROLL: " +
+		string(
+			_stct_encounter_scaling
+				._val_elite_roll
+		) +
+		"/100" +
+		" | ELITE CHANCE: " +
+		string(
+			_stct_encounter_scaling
+				._val_elite_chance_percent
+		) +
+		"%" +
+		" | ELITE SOURCE: " +
+		_stct_encounter_scaling
+			._str_elite_source_item_id +
+		" | RISK TIER: " +
+		string(
+			_stct_encounter_scaling
+				._val_elite_risk_tier
+		) +
 		" | ENEMIES: " +
 		string(_stct_encounter_scaling._ct_enemy_beasts) +
 		" | ZONE LEVELS: " +
@@ -335,6 +440,14 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 
 	obj_player.visible =
 		false;
+
+	//================//
+	//WILD BEAST CRY//
+	//================//
+	scr_beast_sound_play(
+		_ref_world_beast,
+		"CRY"
+	);
 
 	//================//
 	//START BATTLE//

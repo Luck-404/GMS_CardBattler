@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_overworld_beast_step.wav",
-  "volume":0.2,
+  "volume":1.0,
 }

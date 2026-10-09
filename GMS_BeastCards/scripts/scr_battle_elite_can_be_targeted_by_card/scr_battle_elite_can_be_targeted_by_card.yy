@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_elite_can_be_targeted_by_card",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_elite_can_be_targeted_by_card",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

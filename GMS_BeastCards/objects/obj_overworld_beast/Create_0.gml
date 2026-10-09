@@ -69,9 +69,10 @@ _ct_battle_cooldown = 30;
 _flag_battle_triggered = false;
 
 //----------------//
-//AUDIO//
+//AUDIO / STEP VFX//
 //----------------//
 _ct_step_sound_cooldown = 0;
+_ct_step_particle_timer = 0;
 
 //================//
 //INIT//

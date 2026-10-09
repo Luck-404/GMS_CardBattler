@@ -2,6 +2,10 @@
 //
 // SCRIPT: SCR_BATTLE_CAST_CARD
 // FUNCTION: Validates one normal player/enemy Card cast before any cast effects.
+//           Optional simulated mode bypasses live hand/turn/Mana/destination rules
+//           while retaining normal caster/target validation and resolution triggers.
+//           Hostile non-Minion-row casts trigger the staged Beast ATTACK animation
+//           for rollout-enabled casters in both normal and simulated cast modes.
 //           Resolves the existing Whiteout/Trap/Stormstruck/Echo sequence,
 //           deducts player Mana AFTER resolution, then applies queued Mana.
 //           Invalid attempts release selection without spending resources.
@@ -10,13 +14,16 @@
 //           resolving Attack Card's base magnitude for its effect callback. The
 //           original Card magnitude is restored immediately after each callback.
 //
-// ARGUMENTS: No arguments.
+// ARGUMENTS: _flag_simulated defaults false. True is reserved for the Cheats
+//            simulated-card wrapper and requires a valid compatibility Card instance.
 // RETURNS: True for an admitted cast attempt (including Whiteout or Trap
 //          cancellation); false when initial validation rejects the action.
 //
 //===============================================================================//
-function scr_battle_cast_card(){
+function scr_battle_cast_card(_flag_simulated=false){
 	#region PREFLIGHT
+
+	var _flag_simulated_cast = (_flag_simulated == true);
 
 	//==================//
 	//SNAPSHOT REQUEST//
@@ -97,26 +104,28 @@ function scr_battle_cast_card(){
 		else if (ds_list_find_index(_list_caster_team,_ref_caster) == -1){
 			_str_failure = "CASTER NOT IN LIVING TEAM";
 		}
-		else if (!variable_instance_exists(_ref_card,"_str_team") || !variable_instance_exists(_ref_card,"_str_location") || !variable_instance_exists(_ref_card,"_flag_card_disabled") || _ref_card._str_team != _ref_caster._str_team || _ref_card._str_location != "HAND" || _ref_card._flag_card_disabled){
-			_str_failure = "CARD NOT PLAYABLE";
-		}
-		else if (_flag_player_cast){
-			if (obj_battle_turn_controller._val_turn_tracker != 0 || obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.CARD_EXECUTE){
-				_str_failure = "NOT PLAYER CAST PHASE";
+		else if (!_flag_simulated_cast){
+			if (!variable_instance_exists(_ref_card,"_str_team") || !variable_instance_exists(_ref_card,"_str_location") || !variable_instance_exists(_ref_card,"_flag_card_disabled") || _ref_card._str_team != _ref_caster._str_team || _ref_card._str_location != "HAND" || _ref_card._flag_card_disabled){
+				_str_failure = "CARD NOT PLAYABLE";
 			}
-			else if (!ds_exists(obj_battle_player_controller._list_battle_hand,ds_type_list) || ds_list_find_index(obj_battle_player_controller._list_battle_hand,_ref_card) == -1){
-				_str_failure = "CARD NOT IN PLAYER HAND";
+			else if (_flag_player_cast){
+				if (obj_battle_turn_controller._val_turn_tracker != 0 || obj_battle_player_controller._state_player != ENUM_PLAYER_STATE.CARD_EXECUTE){
+					_str_failure = "NOT PLAYER CAST PHASE";
+				}
+				else if (!ds_exists(obj_battle_player_controller._list_battle_hand,ds_type_list) || ds_list_find_index(obj_battle_player_controller._list_battle_hand,_ref_card) == -1){
+					_str_failure = "CARD NOT IN PLAYER HAND";
+				}
+				else if (obj_battle_player_controller._val_cur_mana < _val_mana_cost){
+					_str_failure = "INSUFFICIENT MANA";
+				}
 			}
-			else if (obj_battle_player_controller._val_cur_mana < _val_mana_cost){
-				_str_failure = "INSUFFICIENT MANA";
-			}
-		}
-		else{
-			if (obj_battle_turn_controller._val_turn_tracker != 1 || obj_battle_enemy_controller._state_enemy != ENUM_ENEMY_STATE.CAST_CARDS){
-				_str_failure = "NOT ENEMY CAST PHASE";
-			}
-			else if (!ds_exists(_ref_caster._list_deck,ds_type_list) || _ref_caster._val_hand_pos < 0 || _ref_caster._val_hand_pos >= ds_list_size(_ref_caster._list_deck) || ds_list_find_value(_ref_caster._list_deck,_ref_caster._val_hand_pos) != _ref_card){
-				_str_failure = "CARD NOT ENEMY ACTIVE HAND";
+			else{
+				if (obj_battle_turn_controller._val_turn_tracker != 1 || obj_battle_enemy_controller._state_enemy != ENUM_ENEMY_STATE.CAST_CARDS){
+					_str_failure = "NOT ENEMY CAST PHASE";
+				}
+				else if (!ds_exists(_ref_caster._list_deck,ds_type_list) || _ref_caster._val_hand_pos < 0 || _ref_caster._val_hand_pos >= ds_list_size(_ref_caster._list_deck) || ds_list_find_value(_ref_caster._list_deck,_ref_caster._val_hand_pos) != _ref_card){
+					_str_failure = "CARD NOT ENEMY ACTIVE HAND";
+				}
 			}
 		}
 	}
@@ -167,7 +176,7 @@ function scr_battle_cast_card(){
 			if (!instance_exists(_ref_target) || !variable_instance_exists(_ref_target,"_ref_card") || !is_struct(_ref_target._ref_card)){
 				_str_failure = "INVALID ENEMY CARD TARGET";
 			}
-			else if (_ref_target._str_team != "ENEMY" || _ref_target._str_team == _ref_caster._str_team || _ref_target._str_location != "HAND" || _ref_target._flag_card_disabled){
+			else if (_ref_target._str_team == _ref_caster._str_team || _ref_target._str_location != "HAND" || _ref_target._flag_card_disabled){
 				_str_failure = "ENEMY CARD NOT TARGETABLE";
 			}
 		}
@@ -418,6 +427,7 @@ function scr_battle_cast_card(){
 		_str_caster_name +
 		" (LVL " + string(_val_caster_level) + ")" +
 		" CAST " + _str_card_name +
+		(_flag_simulated_cast ? " [SIMULATED]" : "") +
 		" | TARGET: " + _str_target,
 		"BATTLE",
 		"SCR_BATTLE_CAST_CARD"
@@ -561,15 +571,55 @@ function scr_battle_cast_card(){
 					scr_battle_vfx_cast(_ref_caster);
 				break;
 			}
+
+			//=======================//
+			//HOSTILE BEAST ANIMATION//
+			//=======================//
+			// Simulated casts use this same path through SCR_BATTLE_CAST_CARD(true).
+			// Friendly/self casts and Minion-row casts preserve Idle presentation.
+			if (_str_card_cast_motion != "MINION"){
+
+				var _flag_hostile_animation = scr_battle_is_hostile_card_target(_stct_card);
+
+				if (!_flag_hostile_animation){
+					var _str_animation_range = string_upper(string(_stct_card._str_card_range));
+					var _str_animation_count = string_upper(string(_stct_card._str_card_target_count));
+					var _str_animation_type = string_upper(string(_stct_card._str_card_type));
+					var _str_animation_effect = string_upper(string(_stct_card._str_card_effect_type));
+
+					var _flag_broad_hostile_target = (
+						_str_animation_range == "GLOBAL" ||
+						_str_animation_count == "TEAMWIDE" ||
+						_str_animation_count == "GLOBAL"
+					);
+
+					if (_flag_broad_hostile_target){
+						_flag_hostile_animation = (
+							_str_animation_type == "ATTACK" ||
+							_str_animation_effect == "DIRECT" ||
+							_str_animation_effect == "DOT" ||
+							_str_animation_effect == "DEBUFF" ||
+							_str_animation_effect == "CC"
+						);
+					}
+				}
+
+				if (_flag_hostile_animation){
+					scr_beast_animation_play(_ref_caster,"ATTACK");
+				}
+			}
 		}
 
 		//===============//
 		//CHECK FOR ECHO//
 		//===============//
-		var _ref_echo_status = scr_status_check("ECHO",global.list_statuses);
+		var _ref_echo_status =
+			scr_status_check(
+				"ECHO",
+				_ref_caster._str_team
+			);
 
 		var _flag_echo_active = (
-			_ref_caster._str_team == "PLAYER" &&
 			_ref_echo_status != -1 &&
 			instance_exists(_ref_echo_status) &&
 			_ref_echo_status._ct_status_stacks > 0 &&
@@ -1030,7 +1080,7 @@ function scr_battle_cast_card(){
 	//------------//
 	//SPEND MANA//
 	//------------//
-	if (_ref_caster._str_team == "PLAYER"){
+	if (!_flag_simulated_cast && _ref_caster._str_team == "PLAYER"){
 
 		var _val_mana_before_cost = obj_battle_player_controller._val_cur_mana;
 
@@ -1091,7 +1141,7 @@ function scr_battle_cast_card(){
 	//----------------//
 	//MOVE USED CARD//
 	//----------------//
-	if (_ref_caster._str_team == "PLAYER"){
+	if (!_flag_simulated_cast && _ref_caster._str_team == "PLAYER"){
 
 		//================//
 		//CHECK EXHAUST//

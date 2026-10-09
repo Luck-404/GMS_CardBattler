@@ -15,7 +15,7 @@
   "name":"snd_battle_shatter",
   "parent":{
     "name":"SHATTER",
-    "path":"folders/BATTLE/COLOR TRIGGERS/SHATTER.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/SHATTER.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

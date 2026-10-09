@@ -33,7 +33,7 @@
   "origin":4,
   "parent":{
     "name":"HEMORRHAGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/HEMORRHAGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/HEMORRHAGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

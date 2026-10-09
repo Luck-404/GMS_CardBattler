@@ -16,5 +16,5 @@ function scr_card_viridian_manavine(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY MANA BUFF//
 	//================//
-	scr_status_apply_buff("MANAVINE", _ref_target, 1, 3);
+	scr_status_apply_buff("MANAVINE", _ref_caster, 1, 3);
 }

@@ -25,6 +25,7 @@ function scr_inventory_get_item_info(_str_item_id){
 		_str_item_type : undefined,
 		_str_trigger_text : undefined,
 		_str_item_trigger_type : undefined,
+		_str_unique_team_group : "",
 		_scr_item : undefined,
 		_str_item_desc : "DEFAULT",
 		_flag_consumed_on_trigger : false,
@@ -469,6 +470,20 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._ct_item_max_amount = 1;
 		break;
 
+		case "HELD_HUNTERS_TROPHY":
+			_stct_item._str_item_name = "HUNTER'S TROPHY";
+			_stct_item._spr_item = spr_item_held_hunters_trophy;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ENCOUNTER";
+			_stct_item._str_unique_team_group = "ELITE_ENCOUNTER";
+			_stct_item._scr_item = scr_inventory_item_held_hunters_trophy;
+			_stct_item._str_item_desc = "Unique (1 Elite encounter Item per team). Raises natural Elite encounter chance from 4% to 20%. Successful Elites are Risk Tier 1: doubled universal Elite stat/HP bonuses, +5 Linear damage to Attack damage instances, and 25% improved reward quality. Cannot be equipped alongside Challenger's Bell.";
+			_stct_item._flag_unique_team = true;
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
 		case "HELD_BOLSTERING_SHELL":
 			_stct_item._str_item_name = "BOLSTERING SHELL";
 			_stct_item._spr_item = spr_item_held_bolstering_shell;
@@ -513,6 +528,20 @@ function scr_inventory_get_item_info(_str_item_id){
 			_stct_item._str_item_trigger_type = "ENCOUNTER";
 			_stct_item._scr_item = scr_inventory_item_held_cerulean_incense;
 			_stct_item._str_item_desc = "Doubles the encounter weight of Cerulean Beasts already present in local encounter pools. Does not stack.";
+			_stct_item._flag_stackable = false;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 1;
+		break;
+
+		case "HELD_CHALLENGERS_BELL":
+			_stct_item._str_item_name = "CHALLENGER'S BELL";
+			_stct_item._spr_item = spr_item_held_challengers_bell;
+			_stct_item._str_item_type = "HELD";
+			_stct_item._str_item_trigger_type = "ENCOUNTER";
+			_stct_item._str_unique_team_group = "ELITE_ENCOUNTER";
+			_stct_item._scr_item = scr_inventory_item_held_challengers_bell;
+			_stct_item._str_item_desc = "Unique (1 Elite encounter Item per team). Raises natural Elite encounter chance from 4% to 10%. Cannot be equipped alongside Hunter's Trophy.";
+			_stct_item._flag_unique_team = true;
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;

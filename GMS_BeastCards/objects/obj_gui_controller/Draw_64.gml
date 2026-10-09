@@ -5,6 +5,8 @@
 //           Displays pause text, Party strip, Gold counter, and Deck shortcut.
 //           Handles clickable Party/Deck HUD shortcuts.
 //           Registers shared hover tooltips for HUD Beasts/items/icons.
+//           Dead animation-valid Party Beasts use their DEATH frame 9.
+//           Party HUD Beast sprites and shadows are lifted 4 px for slot alignment.
 //
 //===============================================================================//
 
@@ -278,6 +280,11 @@ if (room != rm_battle){
 					0.5
 				);
 
+			// Keep the Beast and its shadow visually centered inside the compact
+			// Party HUD slot. Lift the complete Beast presentation together.
+			var _val_party_beast_visual_y =
+				_val_center_y - 8;
+
 			//----------------//
 			//DRAW SHADOW//
 			//----------------//
@@ -296,7 +303,7 @@ if (room != rm_battle){
 					_spr_shadow,
 					0,
 					_val_center_x,
-					_val_center_y + 24,
+					_val_party_beast_visual_y + 24,
 					1,
 					1,
 					0,
@@ -308,16 +315,50 @@ if (room != rm_battle){
 			//----------------//
 			//DRAW BEAST//
 			//----------------//
+			var _flag_unit_dead =
+				_stct_unit._val_beast_hp_cur <= 0;
+
+			var _flag_staged_animation =
+				scr_beast_animation_is_valid(
+					_stct_unit._str_beast_name
+				);
+
+			var _val_beast_subimage = 0;
+
+			if (
+				_flag_unit_dead &&
+				_flag_staged_animation &&
+				sprite_exists(
+					_stct_unit._spr_beast
+				)
+			){
+				_val_beast_subimage =
+					min(
+						9,
+						max(
+							0,
+							sprite_get_number(
+								_stct_unit._spr_beast
+							) - 1
+						)
+					);
+			}
+
+			var _c_beast =
+				_flag_unit_dead
+				? c_ltgray
+				: c_white;
+
 			draw_sprite_ext(
 				_stct_unit
 					._spr_beast,
-				0,
+				_val_beast_subimage,
 				_val_center_x,
-				_val_center_y,
+				_val_party_beast_visual_y,
 				0.10,
 				0.10,
 				0,
-				c_white,
+				_c_beast,
 				1
 			);
 

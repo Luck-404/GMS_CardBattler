@@ -6,7 +6,7 @@
   "name":"scr_battle_trigger_shatter",
   "parent":{
     "name":"SHATTER",
-    "path":"folders/BATTLE/COLOR TRIGGERS/SHATTER.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/SHATTER.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_WEATHER_HEATWAVE
@@ -27,11 +28,21 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 		//=======//
 		case "APPLY":
 
-			//----------------------//
-			//VALIDATE GLOBAL LIST//
-			//----------------------//
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
+			//=========================//
+			//ENSURE WEATHER REGISTRY//
+			//=========================//
+			if (!variable_global_exists("ref_status_weather")){
+				global.ref_status_weather = undefined;
+			}
+
+			//===========================//
+			//REPLACE DIFFERENT WEATHER//
+			//===========================//
+			if (
+				instance_exists(global.ref_status_weather) &&
+				global.ref_status_weather._str_status_name != "WEATHER: HEATWAVE"
+			){
+				scr_status_clear_weather();
 			}
 
 			//==========//
@@ -48,7 +59,7 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			var _ref_existing_status = scr_status_check(
 				"WEATHER: HEATWAVE",
-				global.list_statuses
+				"WEATHER"
 			);
 
 			//==================//
@@ -64,6 +75,8 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				global.ref_status_weather = _ref_existing_status;
 
 				return _ref_existing_status;
 			}
@@ -96,6 +109,7 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 			_ref_new_status._ref_host = undefined;
 
 			_ref_new_status._str_status_type = "WEATHER";
+			_ref_new_status._str_status_scope = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: HEATWAVE";
 
 			_ref_new_status._str_status_desc = "Weather. Vermilion damage is increased by 25%. Burn deals 1 additional damage per stack. Reduce the Char threshold by 1. Lifetime: 5 rounds.";
@@ -110,10 +124,7 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			//REGISTER STATUS//
 			//================//
-			ds_list_add(
-				global.list_statuses,
-				_ref_new_status
-			);
+			global.ref_status_weather = _ref_new_status;
 
 			//================//
 			//HEATWAVE START//
@@ -144,7 +155,7 @@ function scr_status_weather_heatwave(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			//REPOSITION STATUS//
 			//================//
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition("WEATHER");
 
 			return _ref_new_status;
 

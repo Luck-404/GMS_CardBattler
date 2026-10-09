@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"ARGENTBUD",
-    "path":"folders/BEASTS/VIRIDIAN/ARGENTBUD.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/ARGENTBUD/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

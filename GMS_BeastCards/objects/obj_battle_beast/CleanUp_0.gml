@@ -79,3 +79,57 @@ if (ds_exists(_list_deck,ds_type_list)){
 }
 
 #endregion
+
+#region CHEAT STAT ROLLBACK
+
+//====================================//
+//RESTORE TEMPORARY CHEAT STAT WRITES//
+//====================================//
+// Status/Minion cleanup runs first so their owned stat deltas can rollback
+// normally. Then restore only persistent fields touched by the Cheats stat editor.
+if (
+	is_struct(_ref_unit) &&
+	is_struct(_stct_cheat_stat_original) &&
+	is_array(_arr_cheat_stat_dirty_ids)
+){
+	var _arr_cheat_stat_fields = [
+		["HP","_val_beast_hp_stat"],
+		["CON","_val_beast_con_stat"],
+		["PPOW","_val_beast_ppow_stat"],
+		["MPOW","_val_beast_mpow_stat"],
+		["PDEF","_val_beast_pdef_stat"],
+		["MDEF","_val_beast_mdef_stat"],
+		["SPEED","_val_beast_speed_stat"],
+		["CRIT","_val_beast_crit_stat"],
+		["CRIT_DMG","_val_beast_crit_dmg_stat"],
+		["DODGE","_val_beast_dod_stat"],
+		["MIN","_val_beast_min_stat"]
+	];
+
+	for (var _it_cheat_stat = 0; _it_cheat_stat < array_length(_arr_cheat_stat_fields); _it_cheat_stat++){
+		var _str_cheat_stat_id = _arr_cheat_stat_fields[_it_cheat_stat][0];
+		var _str_cheat_stat_field = _arr_cheat_stat_fields[_it_cheat_stat][1];
+
+		if (!array_contains(_arr_cheat_stat_dirty_ids,_str_cheat_stat_id)){
+			continue;
+		}
+
+		if (!variable_struct_exists(_stct_cheat_stat_original,_str_cheat_stat_field)){
+			continue;
+		}
+
+		variable_struct_set(
+			_ref_unit,
+			_str_cheat_stat_field,
+			variable_struct_get(
+				_stct_cheat_stat_original,
+				_str_cheat_stat_field
+			)
+		);
+	}
+}
+
+_stct_cheat_stat_original = undefined;
+_arr_cheat_stat_dirty_ids = [];
+
+#endregion

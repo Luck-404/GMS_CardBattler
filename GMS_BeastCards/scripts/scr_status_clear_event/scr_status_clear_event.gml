@@ -1,80 +1,45 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_CLEAR_EVENT
-// FUNCTION: Removes every active global Event Status.
-//           Runs each Event's normal DEATH cleanup before removal so persistent
-//           VFX, audio, temporary overrides, and other Event-owned state clean up
-//           through the Event's authoritative path.
+// FUNCTION: Removes the single active Event Status through its normal DEATH
+//           cleanup path. Event is owned by GLOBAL.REF_STATUS_EVENT.
 //
 // ARGUMENTS: None.
-// RETURNS: Number of Event Statuses removed.
+// RETURNS: 1 when an Event Status was removed; otherwise 0.
 //
 //===============================================================================//
 
 function scr_status_clear_event(){
 
-    #region VALIDATION
+	if (
+		!variable_global_exists("ref_status_event") ||
+		!instance_exists(global.ref_status_event)
+	){
+		global.ref_status_event = undefined;
+		return 0;
+	}
 
-    //----------------------//
-    //VALIDATE GLOBAL LIST//
-    //----------------------//
-    if (!ds_exists(global.list_statuses,ds_type_list)){
-        return 0;
-    }
+	var _ref_status = global.ref_status_event;
 
-    #endregion
+	if (
+		variable_instance_exists(_ref_status,"_scr_status") &&
+		is_callable(_ref_status._scr_status)
+	){
+		script_execute(
+			_ref_status._scr_status,
+			"DEATH",
+			_ref_status
+		);
+	}
+	else{
+		scr_status_destroy(_ref_status);
+	}
 
-    #region REMOVE EVENTS
+	if (instance_exists(_ref_status)){
+		scr_status_destroy(_ref_status);
+	}
 
-    var _ct_removed = 0;
+	global.ref_status_event = undefined;
 
-    for (
-        var _it_status = ds_list_size(global.list_statuses) - 1;
-        _it_status >= 0;
-        _it_status--
-    ){
-
-        var _ref_status =
-            ds_list_find_value(
-                global.list_statuses,
-                _it_status
-            );
-
-        if (!instance_exists(_ref_status)){
-            continue;
-        }
-
-        if (_ref_status._str_status_type != "EVENT"){
-            continue;
-        }
-
-        //------------------//
-        //RUN EVENT CLEANUP//
-        //------------------//
-        if (
-            variable_instance_exists(
-                _ref_status,
-                "_scr_status"
-            ) &&
-            is_callable(
-                _ref_status._scr_status
-            )
-        ){
-
-            script_execute(
-                _ref_status._scr_status,
-                "DEATH",
-                _ref_status
-            );
-        }
-        else{
-            scr_status_destroy(_ref_status);
-        }
-
-        _ct_removed++;
-    }
-
-    #endregion
-
-    return _ct_removed;
+	return 1;
 }

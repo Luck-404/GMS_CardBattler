@@ -6,7 +6,7 @@
   "name":"scr_battle_resolve_discharge",
   "parent":{
     "name":"DISCHARGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

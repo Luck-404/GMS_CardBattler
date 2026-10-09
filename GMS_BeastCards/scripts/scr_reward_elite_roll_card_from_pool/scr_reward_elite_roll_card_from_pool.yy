@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reward_elite_roll_card_from_pool",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reward_elite_roll_card_from_pool",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,17 +1,15 @@
-
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_ENDLESS_BLOOM
-// FUNCTION: Handles Endless Bloom.
-//           Unstackable Timed Global Buff lasting 5 rounds by default.
-//           Records which team is protected by Endless Bloom.
-//           Lifetime decrements at the START of the protected team's turn.
-//           Allied Minion death handling queries this Status separately.
+// FUNCTION: Handles Endless Bloom as a timed Team Status.
+//           Registers in the owning PLAYER / ENEMY Team Status list.
+//           Reapplication by the same team refreshes duration.
 //
 // ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
 //            _ref_status is the existing Status for non-APPLY commands.
 //            _val_magnitude and _val_lifetime retain their original order.
-//            _ref_target is retained for APPLY caller compatibility.
+//            _ref_target may be a Beast on the owning team, PLAYER/ENEMY, or
+//            undefined when GLOBAL.REF_CASTER_BEAST supplies the team.
 // RETURNS: Command-specific Status reference or undefined.
 //
 //===============================================================================//
@@ -20,61 +18,69 @@ function scr_status_buff_endless_bloom(_str_tag,_ref_status,_val_magnitude=undef
 
 	switch (_str_tag){
 
-		//=======//
-		//APPLY//
-		//=======//
 		case "APPLY":
 
-			//======================//
-			//VALIDATE GLOBAL LIST//
-			//======================//
-			if (!variable_global_exists("list_statuses")){
-				return undefined;
-			}
-
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
-			}
-
-			//==========//
-			//DEFAULTS//
-			//==========//
 			if (_val_lifetime == undefined){
 				_val_lifetime = 5;
 			}
 
 			_val_lifetime = max(1,_val_lifetime);
 
-			//================//
-			//GET BUFF TEAM//
-			//================//
-			var _str_team = "PLAYER";
+			var _str_team = "";
+			var _ref_source = undefined;
 
-			if (instance_exists(global.ref_caster_beast)){
-				_str_team = global.ref_caster_beast._str_team;
+			if (instance_exists(_ref_target)){
+				_str_team = _ref_target._str_team;
+				_ref_source = _ref_target;
+			}
+			else if (is_string(_ref_target)){
+				var _str_target_team = string_upper(string(_ref_target));
+
+				if (
+					_str_target_team == "PLAYER" ||
+					_str_target_team == "ENEMY"
+				){
+					_str_team = _str_target_team;
+				}
 			}
 
-			//================//
-			//CHECK EXISTING//
-			//================//
-			var _ref_existing_status = scr_status_check(
-				"ENDLESS_BLOOM",
-				global.list_statuses
-			);
+			if (
+				_str_team == "" &&
+				instance_exists(global.ref_caster_beast)
+			){
+				_str_team = global.ref_caster_beast._str_team;
+				_ref_source = global.ref_caster_beast;
+			}
 
-			//==================//
-			//REFRESH EXISTING//
-			//==================//
-			if (_ref_existing_status != -1){
+			if (
+				_str_team != "PLAYER" &&
+				_str_team != "ENEMY"
+			){
+				return undefined;
+			}
 
-				if (!instance_exists(_ref_existing_status)){
-					return undefined;
-				}
+			var _list_team_statuses =
+				scr_status_get_team_status_list(
+					_str_team
+				);
 
-				if (_ref_existing_status._str_team != _str_team){
-					return undefined;
-				}
+			if (
+				_list_team_statuses == undefined ||
+				!ds_exists(_list_team_statuses,ds_type_list)
+			){
+				return undefined;
+			}
 
+			var _ref_existing_status =
+				scr_status_check(
+					"ENDLESS_BLOOM",
+					_str_team
+				);
+
+			if (
+				_ref_existing_status != -1 &&
+				instance_exists(_ref_existing_status)
+			){
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
@@ -83,9 +89,6 @@ function scr_status_buff_endless_bloom(_str_tag,_ref_status,_val_magnitude=undef
 				return _ref_existing_status;
 			}
 
-			//===============//
-			//CREATE STATUS//
-			//===============//
 			var _ref_new_status = instance_create_layer(
 				room_width * 0.5,
 				room_height * 0.5,
@@ -93,9 +96,6 @@ function scr_status_buff_endless_bloom(_str_tag,_ref_status,_val_magnitude=undef
 				obj_battle_status
 			);
 
-			//=====================//
-			//INITIALIZE LIFETIME//
-			//=====================//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
@@ -103,69 +103,62 @@ function scr_status_buff_endless_bloom(_str_tag,_ref_status,_val_magnitude=undef
 				false
 			);
 
-			//=============//
-			//STATUS DATA//
-			//=============//
 			_ref_new_status._scr_status = scr_status_buff_endless_bloom;
-
 			_ref_new_status._ref_host = undefined;
+			_ref_new_status._ref_status_source = _ref_source;
 			_ref_new_status._str_team = _str_team;
+			_ref_new_status._str_status_scope = "TEAM";
+			_ref_new_status._flag_status_source_bound = false;
 
+			// Retain GLOBAL as the gameplay category during staged migration so the
+			// existing shared Buff presentation/logging path remains compatible.
 			_ref_new_status._str_status_type = "GLOBAL";
 			_ref_new_status._str_status_name = "ENDLESS_BLOOM";
-			_ref_new_status._str_status_desc =
-				"ALLIED MINION DEATHS AND SACRIFICES CREATE INHERITED DORMANT SEEDS";
-
+			_ref_new_status._str_status_desc = "ALLIED MINION DEATHS AND SACRIFICES CREATE INHERITED DORMANT SEEDS";
 			_ref_new_status._spr_status = spr_status_buff_endless_bloom;
-
 			_ref_new_status._ct_status_stacks = 1;
-
+			_ref_new_status._flag_status_stackable = false;
 			_ref_new_status._str_trigger_region = "START";
 
-			//================//
-			//REGISTER STATUS//
-			//================//
 			ds_list_add(
-				global.list_statuses,
+				_list_team_statuses,
 				_ref_new_status
 			);
 
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition(_str_team);
 
 			return _ref_new_status;
 
 		break;
 
-		//========//
-		//REPEAT//
-		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
+			var _list_team_statuses =
+				scr_status_get_team_status_list(
+					_ref_status._str_team
+				);
+
 			if (
-				!variable_global_exists("list_statuses") ||
-				!ds_exists(global.list_statuses,ds_type_list)
+				_list_team_statuses == undefined ||
+				!ds_exists(_list_team_statuses,ds_type_list) ||
+				ds_list_find_index(_list_team_statuses,_ref_status) == -1
 			){
-
 				scr_status_destroy(_ref_status);
-
 				return undefined;
 			}
 
-			//================//
-			//UPDATE LIFETIME//
-			//================//
 			scr_status_tick_lifetime(_ref_status);
-			scr_status_reposition(global.list_statuses);
+
+			if (instance_exists(_ref_status)){
+				scr_status_reposition(_ref_status._str_team);
+			}
 
 		break;
 
-		//=======//
-		//DEATH//
-		//=======//
 		case "DEATH":
 
 			if (instance_exists(_ref_status)){

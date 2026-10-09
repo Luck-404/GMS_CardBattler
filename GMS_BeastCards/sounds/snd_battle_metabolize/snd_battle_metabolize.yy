@@ -15,7 +15,7 @@
   "name":"snd_battle_metabolize",
   "parent":{
     "name":"POISONFLOW",
-    "path":"folders/BATTLE/COLOR TRIGGERS/POISONFLOW.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/POISONFLOW.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

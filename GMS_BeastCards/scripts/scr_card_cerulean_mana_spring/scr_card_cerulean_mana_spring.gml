@@ -15,5 +15,5 @@ function scr_card_cerulean_mana_spring(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY MANA BUFF//
 	//================//
-	scr_status_apply_buff("MANA_SPRING", _ref_target, _stct_card._val_card_magnitude, 3);
+	scr_status_apply_buff("MANA_SPRING", _ref_caster, _stct_card._val_card_magnitude, 3);
 }

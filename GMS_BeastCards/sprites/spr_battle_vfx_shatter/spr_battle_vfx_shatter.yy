@@ -31,7 +31,7 @@
   "origin":4,
   "parent":{
     "name":"SHATTER",
-    "path":"folders/BATTLE/COLOR TRIGGERS/SHATTER.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/SHATTER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

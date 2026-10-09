@@ -1,9 +1,10 @@
+
 //===============================================================================//
 //
-// DRAW GUI: OBJ_BATTLE_PLAYER_CONTROLLER
+// DRAW GUI BEGIN: OBJ_BATTLE_PLAYER_CONTROLLER
 // FUNCTION: Draws the player battle HUD.
 //           Displays Mana, Card-pile counts, Card/caster targeting lines,
-//           Global Card feedback, and Ctrl-held casting requirements.
+//           shared Status HUD labels, Global Card feedback, and Ctrl-held casting requirements.
 //
 // USES:     Player battle Mana/Card state, active Card/caster context,
 //           Mana HUD positioning, and player targeting state.
@@ -11,6 +12,49 @@
 //===============================================================================//
 
 if (!instance_exists(obj_gui_end_battle_pane)){
+
+	#region SHARED STATUS HUD
+
+	//===================//
+	//STATUS HUD LABELS//
+	//===================//
+	draw_set_font(fnt_gui_party_small);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+	draw_set_colour(c_white);
+
+	var _val_status_hud_center_x = room_width * 0.5;
+
+	// Weather and Event occupy the two dedicated top-center slots.
+	draw_text(
+		_val_status_hud_center_x - 24,
+		18,
+		"WEATHER"
+	);
+
+	draw_text(
+		_val_status_hud_center_x + 24,
+		18,
+		"EVENT"
+	);
+
+	// Team Status registries flank the shared Weather / Event area.
+	draw_text(
+		_val_status_hud_center_x - 138,
+		82,
+		"PLAYER EFFECTS"
+	);
+
+	draw_text(
+		_val_status_hud_center_x + 138,
+		82,
+		"ENEMY EFFECTS"
+	);
+
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+
+	#endregion
 
 	#region MANA HUD
 

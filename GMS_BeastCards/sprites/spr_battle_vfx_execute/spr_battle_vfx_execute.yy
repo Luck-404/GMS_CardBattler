@@ -33,7 +33,7 @@
   "origin":4,
   "parent":{
     "name":"EXECUTE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/EXECUTE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/EXECUTE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

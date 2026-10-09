@@ -15,7 +15,7 @@
   "name":"snd_battle_eruption",
   "parent":{
     "name":"ERUPTION",
-    "path":"folders/BATTLE/COLOR TRIGGERS/ERUPTION.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/ERUPTION.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

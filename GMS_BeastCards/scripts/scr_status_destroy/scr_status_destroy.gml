@@ -1,10 +1,12 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DESTROY
-// FUNCTION: Removes an exact Status instance from its owning Status list.
-//           Supports Global Statuses and host-bound Statuses.
-//           Purges stale references, destroys the Status instance, and
-//           refreshes remaining Status icon positions.
+// FUNCTION: Removes an exact Status instance from every authoritative container
+//           that can own it, destroys the Status, and refreshes affected icon
+//           layouts.
+//
+//           Supports host-bound Beast Statuses, PLAYER / ENEMY Team Statuses,
+//           dedicated Weather / Event references.
 //
 // ARGUMENTS: _ref_status is the exact Status instance to remove and destroy.
 // RETURNS: Nothing.
@@ -22,88 +24,147 @@ function scr_status_destroy(_ref_status){
 
 	var _ref_host = _ref_status._ref_host;
 
-	//================//
-	//GLOBAL STATUS//
-	//================//
-	if (_ref_host == undefined){
-
-		if (ds_exists(global.list_statuses,ds_type_list)){
-
-			//------------------//
-			//REMOVE FROM LIST//
-			//------------------//
-			var _it_status = ds_list_find_index(
-				global.list_statuses,
-			_ref_status
-			);
-
-			if (_it_status != -1){
-				ds_list_delete(global.list_statuses,_it_status);
-			}
-
-			//--------------------//
-			//PURGE INVALID REFS//
-			//--------------------//
-			scr_status_prune_list(global.list_statuses);
-		}
-
-		//----------------//
-		//DESTROY STATUS//
-		//----------------//
-		instance_destroy(_ref_status);
-
-		//-------------------//
-		//REPOSITION ICONS//
-		//-------------------//
-		if (ds_exists(global.list_statuses,ds_type_list)){
-			scr_status_reposition(global.list_statuses);
-		}
-
-		return;
-	}
+	var _flag_host_removed = false;
+	var _flag_player_removed = false;
+	var _flag_enemy_removed = false;
+	var _flag_weather_removed = false;
+	var _flag_event_removed = false;
 
 	//====================//
-	//HOST-BOUND STATUS//
+	//HOST-BOUND REGISTRY//
 	//====================//
-	if (instance_exists(_ref_host)){
+	if (
+		instance_exists(_ref_host) &&
+		ds_exists(_ref_host._list_statuses,ds_type_list)
+	){
 
-		if (ds_exists(_ref_host._list_statuses,ds_type_list)){
-
-			//------------------//
-			//REMOVE FROM LIST//
-			//------------------//
-			var _it_status = ds_list_find_index(
+		var _it_host_status =
+			ds_list_find_index(
 				_ref_host._list_statuses,
-			_ref_status
+				_ref_status
 			);
 
-			if (_it_status != -1){
-				ds_list_delete(_ref_host._list_statuses,_it_status);
-			}
+		if (_it_host_status != -1){
+			ds_list_delete(
+				_ref_host._list_statuses,
+				_it_host_status
+			);
 
-			//--------------------//
-			//PURGE INVALID REFS//
-			//--------------------//
-			scr_status_prune_list(_ref_host._list_statuses);
+			_flag_host_removed = true;
 		}
 
-		//----------------//
-		//DESTROY STATUS//
-		//----------------//
-		instance_destroy(_ref_status);
-
-		//-------------------//
-		//REPOSITION ICONS//
-		//-------------------//
-		if (instance_exists(_ref_host)){
-			scr_status_reposition(_ref_host);
-		}
-
-		return;
+		scr_status_prune_list(
+			_ref_host._list_statuses
+		);
 	}
 
-	//===================//
-	//ORPHANED STATUS//
-	//===================//
+	//======================//
+	//PLAYER TEAM REGISTRY//
+	//======================//
+	var _list_player_statuses =
+		scr_status_get_team_status_list("PLAYER");
+
+	if (
+	_list_player_statuses != undefined &&
+	ds_exists(_list_player_statuses,ds_type_list)
+){
+
+		var _it_player =
+			ds_list_find_index(
+				_list_player_statuses,
+				_ref_status
+			);
+
+		if (_it_player != -1){
+			ds_list_delete(
+				_list_player_statuses,
+				_it_player
+			);
+
+			_flag_player_removed = true;
+		}
+
+		scr_status_prune_list(
+			_list_player_statuses
+		);
+	}
+
+	//=====================//
+	//ENEMY TEAM REGISTRY//
+	//=====================//
+	var _list_enemy_statuses =
+		scr_status_get_team_status_list("ENEMY");
+
+	if (
+	_list_enemy_statuses != undefined &&
+	ds_exists(_list_enemy_statuses,ds_type_list)
+){
+
+		var _it_enemy =
+			ds_list_find_index(
+				_list_enemy_statuses,
+				_ref_status
+			);
+
+		if (_it_enemy != -1){
+			ds_list_delete(
+				_list_enemy_statuses,
+				_it_enemy
+			);
+
+			_flag_enemy_removed = true;
+		}
+
+		scr_status_prune_list(
+			_list_enemy_statuses
+		);
+	}
+
+	//====================//
+	//WEATHER / EVENT REFS//
+	//====================//
+	if (
+		variable_global_exists("ref_status_weather") &&
+		global.ref_status_weather == _ref_status
+	){
+		global.ref_status_weather = undefined;
+		_flag_weather_removed = true;
+	}
+
+	if (
+		variable_global_exists("ref_status_event") &&
+		global.ref_status_event == _ref_status
+	){
+		global.ref_status_event = undefined;
+		_flag_event_removed = true;
+	}
+
+	//================//
+	//DESTROY STATUS//
+	//================//
 	instance_destroy(_ref_status);
+
+	//====================//
+	//REFRESH PRESENTATION//
+	//====================//
+	if (_flag_host_removed && instance_exists(_ref_host)){
+		scr_status_reposition(_ref_host);
+	}
+
+
+	if (_flag_player_removed){
+		scr_status_reposition("PLAYER");
+	}
+
+	if (_flag_enemy_removed){
+		scr_status_reposition("ENEMY");
+	}
+
+	if (_flag_weather_removed){
+		scr_status_reposition("WEATHER");
+	}
+
+	if (_flag_event_removed){
+		scr_status_reposition("EVENT");
+	}
 }

@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_HEAL_TARGET
@@ -170,7 +171,7 @@ function scr_battle_heal_target(_str_mode,_val_amount,_ref_target,_flag_trigger_
 	//==================//
 	var _ref_blood_moon = scr_status_check(
 		"EVENT: BLOOD_MOON",
-		global.list_statuses
+		"EVENT"
 	);
 
 	if (
@@ -206,7 +207,7 @@ function scr_battle_heal_target(_str_mode,_val_amount,_ref_target,_flag_trigger_
 	//================//
 	var _ref_bloomtide = scr_status_check(
 		"EVENT: BLOOMTIDE",
-		global.list_statuses
+		"EVENT"
 	);
 
 	var _flag_bloomtide =

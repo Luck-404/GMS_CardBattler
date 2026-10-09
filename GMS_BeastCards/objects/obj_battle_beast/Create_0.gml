@@ -20,6 +20,11 @@ _uid_beast = -1;
 
 _c_beast_draw_tint = c_white;
 _val_beast_draw_scale_multiplier = 1;
+_val_elite_draw_scale_multiplier = 1;
+
+_flag_elite = false;
+_str_elite_modifier = "";
+_val_elite_risk_tier = 0;
 
 _snd_cry = undefined;
 _snd_death = undefined;
@@ -135,6 +140,15 @@ _flag_beast_able_check = true;
 
 _flag_ignore_caster_requirements = false;
 
+//=============================//
+//TEMPORARY CHEAT STAT SNAPSHOT//
+//=============================//
+// Captured on the first Step after _ref_unit is assigned. Stat-editor writes to
+// the live struct for compatibility with existing combat formulas, then Cleanup
+// restores only fields touched by the Cheats stat tool.
+_stct_cheat_stat_original = undefined;
+_arr_cheat_stat_dirty_ids = [];
+
 #endregion
 
 //----//
@@ -148,30 +162,80 @@ _flag_ignore_caster_requirements = false;
 
 //—------------------------------------------------------------------------------//
 // hscr_battle_get_active_x
-// FUNCTION: Returns an active battlefield X position by team and formation slot.
+// FUNCTION: Returns the canonical normal battlefield X position for a team slot.
+//
+//           This helper intentionally contains NO Elite, bounds, graveyard, or
+//           cross-team shifting policy. SCR_BATTLE_REFRESH_FORMATION is the sole
+//           authority for those dynamic rules.
+//
+//           Base positions preserve the original formation and apply the approved
+//           permanent 25 px outward shift:
+//             PLAYER slot 0 = room center - 105.
+//             ENEMY  slot 0 = room center + 105.
+//             Additional slots = 100 px farther outward.
 //—------------------------------------------------------------------------------//
 hscr_battle_get_active_x = function(_str_team_check,_val_pos_check){
 
-	if (_str_team_check == "PLAYER"){
-		return room_width * 0.5 - 80 - (100 * _val_pos_check);
-	}
+	_str_team_check =
+		string_upper(
+			string(
+				_str_team_check
+			)
+		);
 
-	return room_width * 0.5 + 80 + (100 * _val_pos_check);
+	_val_pos_check =
+		max(
+			0,
+			floor(
+				_val_pos_check
+			)
+		);
+
+	var _val_direction =
+		(_str_team_check == "PLAYER")
+		? -1
+		: 1;
+
+	return
+		room_width *
+			0.5 +
+		(
+			_val_direction *
+			(
+				105 +
+				(100 * _val_pos_check)
+			)
+		);
 };
 
 //—------------------------------------------------------------------------------//
 // hscr_battle_get_graveyard_x
-// FUNCTION: Returns a graveyard X position using active and dead formation counts.
+// FUNCTION: Returns the canonical normal fallback X for a graveyard slot.
+//
+//           Graveyard slots are deliberately defined as a continuation of active
+//           slots, so the two helpers are mathematically symmetric. Runtime death,
+//           capture, resurrection, Banish, and Elite layouts are installed by
+//           SCR_BATTLE_REFRESH_FORMATION, which also accounts for Elite gaps and
+//           room bounds.
 //—------------------------------------------------------------------------------//
 hscr_battle_get_graveyard_x = function(_str_team_check,_ct_alive,_val_dead_pos){
 
-	var _val_position = _ct_alive + _val_dead_pos;
+	var _val_position =
+		max(
+			0,
+			floor(
+				_ct_alive
+			) +
+			floor(
+				_val_dead_pos
+			)
+		);
 
-	if (_str_team_check == "PLAYER"){
-		return room_width * 0.5 - 80 - (100 * _val_position);
-	}
-
-	return room_width * 0.5 + 80 + (100 * _val_position);
+	return
+		hscr_battle_get_active_x(
+			_str_team_check,
+			_val_position
+		);
 };
 
 //—------------------------------------------------------------------------------//
@@ -207,6 +271,9 @@ hscr_battle_handle_death = function(){
 	//STORE DEATH DATA//
 	//================//
 	var _val_death_position = _val_pos;
+
+	var _val_death_x = x;
+	var _val_death_y = y;
 
 	var _str_beast_name = "UNKNOWN";
 	var _val_beast_level = 0;
@@ -359,38 +426,28 @@ hscr_battle_handle_death = function(){
 		);
 	}
 
-	//========================//
-	//REFRESH ACTIVE FORMATION//
-	//========================//
-	scr_battle_refresh_formation(_str_team);
+	//=============================//
+	//REFRESH LIVING + GRAVEYARD//
+	//=============================//
+	/*
+		The shared formation refresh owns BOTH lists. Living Beasts collapse into
+		the front slots; corpses continue outward after them using the exact same
+		100/125 px gap math and room-bound correction.
+	*/
+	scr_battle_refresh_formation(
+		_str_team,
+		true
+	);
 
-	//=======================//
-	//REPOSITION DEAD BEASTS//
-	//=======================//
-	var _ct_alive = ds_list_size(_list_alive);
-	var _ct_dead = ds_list_size(_list_dead);
-
-	for (var _it_beast = 0;_it_beast < _ct_dead;_it_beast++){
-
-		var _ref_grave_beast = ds_list_find_value(
-			_list_dead,
-			_it_beast
+	var _ct_alive =
+		ds_list_size(
+			_list_alive
 		);
 
-		if (!instance_exists(_ref_grave_beast)){
-			continue;
-		}
-
-		_ref_grave_beast._val_pos =
-			_ct_alive +
-			_it_beast;
-
-		_ref_grave_beast.x = _ref_grave_beast.hscr_battle_get_graveyard_x(
-			_ref_grave_beast._str_team,
-			_ct_alive,
-			_it_beast
+	var _ct_dead =
+		ds_list_size(
+			_list_dead
 		);
-	}
 
 	//================//
 	//DEBUG DEATH//
@@ -411,6 +468,11 @@ hscr_battle_handle_death = function(){
 		"OBJ_BATTLE_BEAST:HSCR_BATTLE_HANDLE_DEATH"
 	);
 
+	//=================//
+	//DEATH ANIMATION//
+	//=================//
+	scr_beast_animation_play(_ref_dead_beast,"DEATH");
+
 	//===================//
 	//DEATH PRESENTATION//
 	//===================//
@@ -421,13 +483,16 @@ hscr_battle_handle_death = function(){
 		scr_battle_vfx(
 			undefined,
 			spr_battle_vfx_beast_death,
-			x,
-			y,
+			_val_death_x,
+			_val_death_y,
 			0,
 			0,
 			1,
 			0,
-			_snd_death
+			scr_beast_sound_get(
+				_ref_dead_beast,
+				"DEATH"
+			)
 		);
 	}
 

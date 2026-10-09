@@ -3,6 +3,7 @@
 // SCRIPT: SCR_GUI_DRAW_HOVER_TOOLTIP
 // FUNCTION: Draws the currently registered shared hover tooltip.
 //           Uses the same formatting as the Cheats Menu tooltip.
+//           Elite and Battle Log tooltips use increased multiline spacing.
 //
 //===============================================================================//
 
@@ -39,6 +40,30 @@ function scr_gui_draw_hover_tooltip(){
 
 	var _flag_has_body =
 		(_str_body != "");
+
+	//====================//
+	//BODY LINE SPACING//
+	//====================//
+	var _flag_elite_tooltip =
+		string_pos(
+			"ELITE",
+			string_upper(
+				_str_title
+			)
+		) == 1;
+
+	var _flag_battle_log_tooltip =
+		string_upper(
+			_str_title
+		) == "BATTLE LOG ENTRY";
+
+	var _val_body_line_sep =
+		(
+			_flag_elite_tooltip ||
+			_flag_battle_log_tooltip
+		)
+		? 10
+		: 4;
 
 	//================//
 	//MOUSE//
@@ -110,7 +135,7 @@ function scr_gui_draw_hover_tooltip(){
 		_val_body_h =
 			string_height_ext(
 				_str_body,
-				4,
+				_val_body_line_sep,
 				_val_body_w
 			);
 	}
@@ -240,7 +265,7 @@ function scr_gui_draw_hover_tooltip(){
 			_val_title_h +
 			7,
 			_str_body,
-			4,
+			_val_body_line_sep,
 			_val_body_w
 		);
 	}

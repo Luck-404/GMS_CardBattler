@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_elite_apply_primary_stat_percent_bonus",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_elite_apply_primary_stat_percent_bonus",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

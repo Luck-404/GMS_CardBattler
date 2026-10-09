@@ -91,6 +91,30 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		return false;
 	}
 
+	//===================//
+	//BLOCK ELITE CAPTURE//
+	//===================//
+	if (
+		variable_instance_exists(_ref_target_beast,"_flag_elite") &&
+		_ref_target_beast._flag_elite
+	){
+		scr_debug_log(
+			"BATTLE",
+			"CAPTURE",
+			_ref_target_beast,
+			"CAPTURE BLOCKED" +
+			" | TARGET: " + string_upper(_ref_target_beast._ref_unit._str_beast_name) +
+			" | REASON: ELITE BEASTS CANNOT BE CAPTURED",
+			"BATTLE",
+			"SCR_BATTLE_TRY_PRISM_CAPTURE"
+		);
+
+		audio_play_sound(snd_gui_error,0,false);
+		scr_gui_spawn_popup_error("ELITES CANNOT BE CAPTURED",60);
+
+		return false;
+	}
+
 	//================//
 	//VALIDATE MANA//
 	//================//
@@ -394,10 +418,9 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	//================//
 	//CAPTURE AUDIO//
 	//================//
-	audio_play_sound(
-		_ref_target_beast._ref_unit._snd_beast_cry,
-		0,
-		false
+	scr_beast_sound_play(
+		_stct_captured_beast,
+		"CRY"
 	);
 
 	audio_play_sound(

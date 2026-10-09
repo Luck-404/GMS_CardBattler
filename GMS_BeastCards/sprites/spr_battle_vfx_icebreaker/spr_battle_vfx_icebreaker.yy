@@ -31,7 +31,7 @@
   "origin":4,
   "parent":{
     "name":"ICEBREAKER",
-    "path":"folders/BATTLE/COLOR TRIGGERS/ICEBREAKER.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/ICEBREAKER.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

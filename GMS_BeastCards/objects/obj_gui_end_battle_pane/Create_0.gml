@@ -51,6 +51,7 @@ _val_slot_size = 100;
 _val_spacing = 15;
 _val_padding_y = 15;
 _flag_score_hovered = false;
+_flag_victory_interact_started = false;
 _ct_units = 0;
 
 if (
@@ -1596,6 +1597,64 @@ hscr_gui_end_battle_draw_rewards = function(){
 //—------------------------------------------------------------------------------//
 hscr_gui_end_battle_draw_party = function(_flag_draw_level=true){
 
+	//============================//
+	//START VICTORY INTERACT ONCE//
+	//============================//
+	/*
+		_flag_draw_level is true only for the WIN presentation in the current
+		result flow. On the first WIN draw, every living animation-valid Party
+		Beast plays its INTERACT animation once and its already-stored Cry once.
+		No separate interact SFX field is used.
+	*/
+	if (
+		_flag_draw_level &&
+		!_flag_victory_interact_started &&
+		instance_exists(obj_battle_player_controller) &&
+		ds_exists(
+			obj_battle_player_controller._list_beasts,
+			ds_type_list
+		)
+	){
+		_flag_victory_interact_started = true;
+
+		for (
+			var _it_victory_beast = 0;
+			_it_victory_beast <
+				ds_list_size(
+					obj_battle_player_controller._list_beasts
+				);
+			_it_victory_beast++
+		){
+			var _ref_victory_beast =
+				ds_list_find_value(
+					obj_battle_player_controller._list_beasts,
+					_it_victory_beast
+				);
+
+			if (
+				!instance_exists(_ref_victory_beast) ||
+				_ref_victory_beast._val_cur_hp <= 0 ||
+				!is_struct(_ref_victory_beast._ref_unit) ||
+				!scr_beast_animation_is_valid(
+					_ref_victory_beast._ref_unit._str_beast_name
+				)
+			){
+				continue;
+			}
+
+			scr_beast_animation_play(
+				_ref_victory_beast,
+				"INTERACT",
+				true
+			);
+
+			scr_beast_sound_play(
+				_ref_victory_beast,
+				"CRY"
+			);
+		}
+	}
+
 	var _val_display_index = 0;
 
 	for (
@@ -1658,7 +1717,16 @@ hscr_gui_end_battle_draw_party = function(_flag_draw_level=true){
 		}
 
 		var _flag_dead =
-			_ref_battle_beast._val_cur_hp <= 0;
+			_ref_battle_beast._val_cur_hp <= 0 ||
+			_stct_beast._val_beast_hp_cur <= 0;
+
+		var _flag_expended =
+			_flag_dead &&
+			variable_instance_exists(
+				_ref_battle_beast,
+				"_flag_corpse_consumed"
+			) &&
+			_ref_battle_beast._flag_corpse_consumed;
 
 		//---------------//
 		//SLOT POSITION//
@@ -1732,14 +1800,73 @@ hscr_gui_end_battle_draw_party = function(_flag_draw_level=true){
 			1
 		);
 
+		var _flag_staged_animation =
+			scr_beast_animation_is_valid(
+				_stct_beast._str_beast_name
+			);
+
+		// Once a victory INTERACT one-shot finishes, return that Beast to its
+		// normal looping IDLE rather than freezing on INTERACT frame 30.
+		if (
+			_flag_draw_level &&
+			!_flag_dead &&
+			_flag_staged_animation &&
+			variable_instance_exists(
+				_ref_battle_beast,
+				"_str_beast_animation_state"
+			) &&
+			_ref_battle_beast._str_beast_animation_state == "INTERACT" &&
+			variable_instance_exists(
+				_ref_battle_beast,
+				"_flag_beast_animation_finished"
+			) &&
+			_ref_battle_beast._flag_beast_animation_finished
+		){
+			scr_beast_animation_play(
+				_ref_battle_beast,
+				"IDLE",
+				true
+			);
+		}
+
+		var _val_beast_subimage = 0;
+
+		if (
+			_flag_staged_animation &&
+			sprite_exists(_stct_beast._spr_beast)
+		){
+			if (_flag_dead){
+				_val_beast_subimage =
+					min(
+						9,
+						max(
+							0,
+							sprite_get_number(
+								_stct_beast._spr_beast
+							) - 1
+						)
+					);
+			}
+			else{
+				_val_beast_subimage =
+					scr_beast_animation_get_frame(
+						_ref_battle_beast
+					);
+			}
+		}
+
 		var _c_beast =
-			_flag_dead ?
-				c_ltgray :
-				c_white;
+			_flag_dead
+			? (
+				_flag_expended
+				? global.c_dk_gray
+				: c_ltgray
+			)
+			: c_white;
 
 		draw_sprite_ext(
 			_stct_beast._spr_beast,
-			0,
+			_val_beast_subimage,
 			_val_beast_x,
 			_val_beast_y,
 			0.125,
@@ -2296,4 +2423,3 @@ hscr_gui_end_battle_draw_reward_tooltip = function(){
 };
 
 #endregion
-

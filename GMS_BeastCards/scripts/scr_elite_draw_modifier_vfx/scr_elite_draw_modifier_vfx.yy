@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_elite_draw_modifier_vfx",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_elite_draw_modifier_vfx",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

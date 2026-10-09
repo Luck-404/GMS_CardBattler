@@ -112,45 +112,37 @@ function scr_battle_resolve_discharge(_ref_host){
 	//================//
 	//DEAL 15 NEU//
 	//================//
-	var _val_damage_remaining = 15;
-	var _val_overhealth_damage = 0;
-	var _val_hp_damage = 0;
+	/*
+		DISCHARGE remains owned by the original Stormstruck host:
+		- threshold check stays on that Beast;
+		- consumed stacks stay on that Beast;
+		- spread originates from that Beast.
 
-	//----------------//
-	//OVERHEALTH//
-	//----------------//
-	if (_ref_host._val_overhealth > 0){
+		Only the raw 15 NEU Overhealth/HP damage may redirect to Soulbound.
+	*/
+	var _stct_discharge_damage =
+		scr_battle_elite_damage_raw_target(
+			_ref_host,
+			15,
+			{
+				_c_overhealth :
+					c_green,
 
-		_val_overhealth_damage = min(
-			_ref_host._val_overhealth,
-			_val_damage_remaining
+				_c_hp :
+					c_aqua,
+
+				_str_source :
+					"DISCHARGE"
+			}
 		);
 
-		_ref_host._val_overhealth -=
-			_val_overhealth_damage;
+	var _val_overhealth_damage =
+		_stct_discharge_damage
+			._val_overhealth_damage;
 
-		_val_damage_remaining -=
-			_val_overhealth_damage;
-	}
-
-	//----------------//
-	//HP//
-	//----------------//
-	if (
-		_val_damage_remaining > 0 &&
-		_ref_host._val_cur_hp > 0
-	){
-		_val_hp_damage = min(
-			_val_damage_remaining,
-			_ref_host._val_cur_hp
-		);
-
-		_ref_host._val_cur_hp = max(
-			0,
-			_ref_host._val_cur_hp -
-			_val_hp_damage
-		);
-	}
+	var _val_hp_damage =
+		_stct_discharge_damage
+			._val_hp_damage;
 
 	//================//
 	//GET SPREAD TARGETS//

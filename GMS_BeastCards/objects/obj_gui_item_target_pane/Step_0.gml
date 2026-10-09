@@ -82,6 +82,11 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 	_flag_clicked = true;
 	_ct_cooldown = 8;
 
+	scr_beast_sound_play(
+		_stct_unit,
+		"INTERACT"
+	);
+
 	//----------------//
 	//VALIDATE EFFECT//
 	//----------------//

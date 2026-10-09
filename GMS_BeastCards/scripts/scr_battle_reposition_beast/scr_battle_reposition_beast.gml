@@ -8,11 +8,10 @@
 //
 // INPUTS:   _ref_beast - Battle Beast being repositioned.
 //           _val_move_amount - Number of formation positions to move.
-// USES:     Team living-Beast lists, reposition eligibility, reposition VFX,
-//           Minion positioning, Status positioning, and GUI feedback.
+// USES:     Team living-Beast lists, reposition eligibility, shared formation
+//           refresh, reposition Status triggers, and GUI feedback.
 //
 //===============================================================================//
-
 function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 
 	#region VALIDATION
@@ -33,9 +32,14 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 	//-------------------//
 	if (!scr_battle_can_reposition(_ref_beast)){
 
+		var _str_reposition_block_popup =
+			(scr_battle_elite_get_modifier(_ref_beast) == "HARDY")
+			? "IMMUNE"
+			: "CANNOT REPOSITION";
+
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
-			"CANNOT REPOSITION",
+			_str_reposition_block_popup,
 			undefined,
 			c_maroon,
 			_ref_beast.x,
@@ -123,9 +127,14 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 	//-----------------------//
 	if (!scr_battle_can_reposition(_ref_swap_target)){
 
+		var _str_swap_reposition_block_popup =
+			(scr_battle_elite_get_modifier(_ref_swap_target) == "HARDY")
+			? "IMMUNE"
+			: "CANNOT REPOSITION";
+
 		scr_gui_spawn_popup_scrolling(
 			"TEXT",
-			"CANNOT REPOSITION",
+			_str_swap_reposition_block_popup,
 			undefined,
 			c_maroon,
 			_ref_swap_target.x,
@@ -156,35 +165,24 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 
 	#region POSITION SWAP
 
-	//--------------------//
-	//STORE OLD POSITIONS//
-	//--------------------//
-	var _val_beast_old_x = _ref_beast.x;
-	var _val_swap_old_x = _ref_swap_target.x;
-
-	//----------------//
-	//SWAP X POSITION//
-	//----------------//
-	_ref_beast.x = _val_swap_old_x;
-	_ref_swap_target.x = _val_beast_old_x;
-
-	//----------------------//
-	//ANIMATE REPOSITIONING//
-	//----------------------//
-	scr_battle_vfx_reposition(_ref_beast,_val_beast_old_x,8);
-	scr_battle_vfx_reposition(_ref_swap_target,_val_swap_old_x,8);
-
 	//----------------//
 	//SWAP TEAM ORDER//
 	//----------------//
+	/*
+		Only the living-list order is changed directly. Shared formation refresh then
+		rebuilds every X coordinate and attachment from the authoritative order. This
+		keeps Elite-adjacent 125 px gaps correct when an Elite moves between slots.
+	*/
 	ds_list_set(_list_team,_val_current_pos,_ref_swap_target);
 	ds_list_set(_list_team,_val_new_pos,_ref_beast);
 
-	//----------------//
-	//UPDATE POSITIONS//
-	//----------------//
-	_ref_beast._val_pos = _val_new_pos;
-	_ref_swap_target._val_pos = _val_current_pos;
+	//========================//
+	//REFRESH COMPLETE TEAM//
+	//========================//
+	scr_battle_refresh_formation(
+		_ref_beast._str_team,
+		true
+	);
 
 	#endregion
 
@@ -203,19 +201,6 @@ function scr_battle_reposition_beast(_ref_beast,_val_move_amount){
 	scr_status_trigger_reposition_effects(
 		_ref_swap_target
 	);
-
-	#endregion
-
-	#region ATTACHMENTS
-
-	//----------------------//
-	//REPOSITION ATTACHMENTS//
-	//----------------------//
-	scr_minion_reposition(_ref_beast);
-	scr_status_reposition(_ref_beast);
-
-	scr_minion_reposition(_ref_swap_target);
-	scr_status_reposition(_ref_swap_target);
 
 	#endregion
 

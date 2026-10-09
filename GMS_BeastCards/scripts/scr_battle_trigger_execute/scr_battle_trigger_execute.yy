@@ -6,7 +6,7 @@
   "name":"scr_battle_trigger_execute",
   "parent":{
     "name":"EXECUTE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/EXECUTE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/EXECUTE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

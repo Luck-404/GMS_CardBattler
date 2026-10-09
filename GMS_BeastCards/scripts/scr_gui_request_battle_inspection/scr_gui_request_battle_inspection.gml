@@ -1,16 +1,13 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_GUI_REQUEST_BATTLE_INSPECTION
-// FUNCTION: Builds and registers the fixed battle Ctrl-inspection pane content.
-//           Supports Beasts, Minions, Statuses, and Cards.
-//           Higher-priority inspection requests replace lower-priority ones.
+// FUNCTION: Registers the highest-priority Ctrl inspection request for a battle
+//           Beast, Minion, Status, or Card and builds its inspection text.
 //
-// ARGUMENTS:
-//     _str_type      - "BEAST", "MINION", "STATUS", or "CARD".
-//     _ref_source    - Battle instance being inspected.
-//     _val_priority  - Overlap priority.
-//
-// RETURNS: True when the inspection request becomes active.
+// ARGUMENTS: _str_type identifies the inspected source category.
+//            _ref_source is the inspected battle instance.
+//            _val_priority resolves overlapping inspection hitboxes.
+// RETURNS: True when inspection data is registered; otherwise false.
 //
 //===============================================================================//
 
@@ -130,6 +127,370 @@ function scr_gui_request_battle_inspection(
 					_stct_unit._val_beast_level
 				);
 
+			//================//
+			//ELITE DETAILS//
+			//================//
+			var _flag_inspect_elite =
+				variable_instance_exists(
+					_ref_source,
+					"_flag_elite"
+				) &&
+				_ref_source._flag_elite;
+
+			if (
+				!_flag_inspect_elite &&
+				variable_struct_exists(
+					_stct_unit,
+					"_flag_elite"
+				)
+			){
+				_flag_inspect_elite =
+					_stct_unit._flag_elite;
+			}
+
+			if (_flag_inspect_elite){
+				var _str_elite_modifier = "";
+
+				if (
+					variable_instance_exists(
+						_ref_source,
+						"_str_elite_modifier"
+					)
+				){
+					_str_elite_modifier =
+						string_upper(
+							string(
+								_ref_source._str_elite_modifier
+							)
+						);
+				}
+				else if (
+					variable_struct_exists(
+						_stct_unit,
+						"_str_elite_modifier"
+					)
+				){
+					_str_elite_modifier =
+						string_upper(
+							string(
+								_stct_unit._str_elite_modifier
+							)
+						);
+				}
+
+				var _stct_elite_info =
+					scr_battle_elite_get_info(
+						_str_elite_modifier
+					);
+
+				var _str_elite_display_name =
+					_str_elite_modifier;
+
+				var _str_elite_display_desc = "";
+
+				if (is_struct(_stct_elite_info)){
+					_str_elite_display_name =
+						_stct_elite_info
+							._str_elite_name;
+
+					_str_elite_display_desc =
+						_stct_elite_info
+							._str_elite_desc;
+				}
+
+				//========================//
+				//ACTIVE ELEMENTAL VARIANT//
+				//========================//
+				if (_str_elite_modifier == "ELEMENTAL"){
+					var _str_elemental_variant =
+						scr_battle_elite_get_elemental_variant(
+							_ref_source
+						);
+
+					switch (_str_elemental_variant){
+						case "STORM":
+							_str_elite_display_name =
+								"ELEMENTAL - STORM";
+							_str_elite_display_desc =
+								"Immune to Stormstruck. Begins Storming Weather.";
+						break;
+
+						case "FIRE":
+							_str_elite_display_name =
+								"ELEMENTAL - FIRE";
+							_str_elite_display_desc =
+								"Immune to Burn and Char. Begins Firestorm Weather.";
+						break;
+
+						case "FROST":
+							_str_elite_display_name =
+								"ELEMENTAL - FROST";
+							_str_elite_display_desc =
+								"Immune to Frostbite and Frostburn. Begins Snow Weather.";
+						break;
+
+						case "VERDANT":
+							_str_elite_display_name =
+								"ELEMENTAL - VERDANT";
+							_str_elite_display_desc =
+								"Immune to Poison. Begins Seedfall Weather.";
+						break;
+					}
+				}
+
+				_str_body +=
+					"\n\nELITE: " +
+					_str_elite_display_name;
+
+				if (_str_elite_display_desc != ""){
+					_str_body +=
+						"\n" +
+						_str_elite_display_desc;
+				}
+
+				//====================//
+				//VENGEFUL LIVE BONUS//
+				//====================//
+				if (_str_elite_modifier == "VENGEFUL"){
+					var _ct_vengeful_stacks = 0;
+
+					if (
+						variable_struct_exists(
+							_stct_unit,
+							"_arr_elite_vengeful_counted_death_uids"
+						) &&
+						is_array(
+							_stct_unit
+								._arr_elite_vengeful_counted_death_uids
+						)
+					){
+						_ct_vengeful_stacks =
+							array_length(
+								_stct_unit
+									._arr_elite_vengeful_counted_death_uids
+							);
+					}
+
+					_str_body +=
+						"\nVENGEFUL STACKS: " +
+						string(_ct_vengeful_stacks) +
+						"\nCURRENT BONUS: +" +
+						string(_ct_vengeful_stacks * 10) +
+						"% PRIMARY STATS";
+				}
+
+				//==================//
+				//PHASING COUNTDOWN//
+				//==================//
+				if (_str_elite_modifier == "PHASING"){
+					var _ct_phasing_turns_seen = 0;
+
+					if (
+						variable_instance_exists(
+							_ref_source,
+							"_ct_elite_phasing_turns_seen"
+						)
+					){
+						_ct_phasing_turns_seen =
+							max(
+								0,
+								_ref_source
+									._ct_elite_phasing_turns_seen
+							);
+					}
+
+					var _ct_phasing_turns_remaining =
+						3 -
+						(_ct_phasing_turns_seen mod 3);
+
+					_str_body +=
+						"\nPHASING IN: " +
+						string(_ct_phasing_turns_remaining) +
+						(
+							_ct_phasing_turns_remaining == 1
+							? " TURN"
+							: " TURNS"
+						);
+				}
+
+				if (
+					is_struct(_stct_elite_info) &&
+					!_stct_elite_info
+						._flag_elite_mechanic_active
+				){
+					_str_body +=
+						"\nMECHANIC: PENDING STEP 6";
+				}
+
+				if (
+					variable_instance_exists(
+						_ref_source,
+						"_val_elite_risk_tier"
+					)
+				){
+					_str_body +=
+						"\nRISK TIER: " +
+						string(
+							_ref_source._val_elite_risk_tier
+						);
+				}
+
+				if (
+					variable_struct_exists(
+						_stct_unit,
+						"_arr_elite_card_ids"
+					) &&
+					is_array(
+						_stct_unit._arr_elite_card_ids
+					) &&
+					array_length(
+						_stct_unit._arr_elite_card_ids
+					) > 0
+				){
+					var _str_elite_cards = "";
+
+					for (
+						var _it_elite_card = 0;
+						_it_elite_card <
+							array_length(
+								_stct_unit._arr_elite_card_ids
+							);
+						_it_elite_card++
+					){
+						if (_str_elite_cards != ""){
+							_str_elite_cards += ", ";
+						}
+
+						_str_elite_cards +=
+							string_upper(
+								string(
+									_stct_unit._arr_elite_card_ids[
+										_it_elite_card
+									]
+								)
+							);
+					}
+
+					_str_body +=
+						"\nELITE CARDS: " +
+						_str_elite_cards;
+				}
+
+
+				//=========================//
+				//SCHOLARLY CURRENT QUEUE//
+				//=========================//
+				if (
+					_str_elite_modifier == "SCHOLARLY" &&
+					variable_instance_exists(
+						_ref_source,
+						"_list_deck"
+					) &&
+					ds_exists(
+						_ref_source._list_deck,
+						ds_type_list
+					)
+				){
+
+					var _ct_queue_deck =
+						ds_list_size(
+							_ref_source._list_deck
+						);
+
+					if (_ct_queue_deck > 0){
+
+						var _it_left =
+							clamp(
+								_ref_source._val_hand_pos,
+								0,
+								_ct_queue_deck - 1
+							);
+
+						var _it_right =
+							(
+								_it_left + 1
+							)
+							mod
+							_ct_queue_deck;
+
+						var _str_left_card =
+							"NONE";
+
+						var _str_right_card =
+							"NONE";
+
+						var _ref_left_card =
+							ds_list_find_value(
+								_ref_source._list_deck,
+								_it_left
+							);
+
+						if (
+							instance_exists(_ref_left_card) &&
+							is_struct(_ref_left_card._ref_card)
+						){
+							_str_left_card =
+								string_upper(
+									string(
+										_ref_left_card
+											._ref_card
+											._str_card_name
+									)
+								);
+						}
+
+						if (_ct_queue_deck > 1){
+
+							var _ref_right_card =
+								ds_list_find_value(
+									_ref_source._list_deck,
+									_it_right
+								);
+
+							if (
+								instance_exists(_ref_right_card) &&
+								is_struct(_ref_right_card._ref_card)
+							){
+								_str_right_card =
+									string_upper(
+										string(
+											_ref_right_card
+												._ref_card
+												._str_card_name
+										)
+									);
+							}
+						}
+
+						_str_body +=
+							"\nSCHOLARLY QUEUE: LEFT/1ST - " +
+							_str_left_card +
+							" | RIGHT/2ND - " +
+							_str_right_card;
+					}
+				}
+
+				if (
+					variable_struct_exists(
+						_stct_unit,
+						"_str_elite_monarch_card_id"
+					) &&
+					string(
+						_stct_unit._str_elite_monarch_card_id
+					) !=
+					""
+				){
+					_str_body +=
+						"\nMONARCH CARD: " +
+						string_upper(
+							string(
+								_stct_unit
+									._str_elite_monarch_card_id
+							)
+						);
+				}
+			}
+
 			//==================//
 			//CLASS / ARCHETYPE//
 			//==================//
@@ -176,7 +537,7 @@ function scr_gui_request_battle_inspection(
 			}
 
 			_str_body +=
-				"\ARCHETYPE: " +
+				"\nARCHETYPE: " +
 				_str_beast_archetype + 
 				" | CLASS: " +
 				_str_beast_class;
@@ -212,6 +573,40 @@ function scr_gui_request_battle_inspection(
 						_ref_source._val_overhealth
 					);
 			}
+
+			//=====================//
+			//DEATH / EXPEND STATE//
+			//=====================//
+			var _flag_inspect_dead =
+				_ref_source._val_cur_hp <= 0 ||
+				(
+					variable_instance_exists(
+						_ref_source,
+						"_str_list"
+					) &&
+					_ref_source._str_list == "DEAD"
+				);
+
+			var _flag_inspect_expended =
+				variable_instance_exists(
+					_ref_source,
+					"_flag_corpse_consumed"
+				) &&
+				_ref_source._flag_corpse_consumed;
+
+			_str_body +=
+				"\nDEAD: " +
+				(
+					_flag_inspect_dead
+					? "TRUE"
+					: "FALSE"
+				) +
+				" | EXPENDED: " +
+				(
+					_flag_inspect_expended
+					? "TRUE"
+					: "FALSE"
+				);
 
 			//================//
 			//CORE STATS//
@@ -808,6 +1203,23 @@ function scr_gui_request_battle_inspection(
 					_stct_card._str_card_name
 				);
 
+			var _str_enemy_special_source = "";
+
+			if (
+				variable_struct_exists(
+					_stct_card,
+					"_str_enemy_special_card_source"
+				)
+			){
+				_str_enemy_special_source =
+					string_upper(
+						string(
+							_stct_card
+								._str_enemy_special_card_source
+						)
+					);
+			}
+
 			//================//
 			//COLORS//
 			//================//
@@ -1042,6 +1454,16 @@ function scr_gui_request_battle_inspection(
 				"\nREQUIREMENTS: " +
 				_str_requirements;
 
+			if (_str_enemy_special_source != ""){
+				_str_body +=
+					"\nENEMY SPECIAL: " +
+					string_replace_all(
+						_str_enemy_special_source,
+						"_",
+						" "
+					);
+			}
+
 			//================//
 			//EXHAUST//
 			//================//
@@ -1114,4 +1536,5 @@ function scr_gui_request_battle_inspection(
 		_val_priority;
 
 	return true;
+
 }

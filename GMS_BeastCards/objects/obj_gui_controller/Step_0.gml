@@ -4,7 +4,8 @@
 // FUNCTION: Manages background music, overworld ambiance, and global GUI input.
 //           Switches immediately between overworld and battle music.
 //           Opens and closes player GUI panes, controls pause/fullscreen,
-//           toggles the overworld companion, and handles Ranch/camera input.
+//           toggles the overworld companion, and handles Ranch/camera input,
+//           including exclusive one-shot Ranch Beast interaction animations.
 //
 //===============================================================================//
 
@@ -681,10 +682,9 @@ if (room != rm_battle){
 
 				if (is_struct(_stct_unit)){
 
-					audio_play_sound(
-						_stct_unit._snd_beast_cry,
-						0,
-						false
+					scr_beast_sound_play(
+						_stct_unit,
+						"CRY"
 					);
 
 					scr_debug_log(
@@ -1000,7 +1000,7 @@ if (room != rm_battle){
 	}
 
 	//=====================//
-	//RANCH CLICK TO SHAKE//
+	//RANCH CLICK INTERACTION//
 	//=====================//
 	// Ranch Beasts must not accept world interaction while any GUI is active.
 	// This specifically prevents click-through while using the Cheats menu.
@@ -1033,14 +1033,26 @@ if (room != rm_battle){
 				instance_exists(
 					_ref_beast
 				) &&
-				_ref_beast._state_dummy !=
-					ENUM_RANCH_BEAST_DUMMY_STATE.REST
+				(
+					_ref_beast._state_dummy ==
+						ENUM_RANCH_BEAST_DUMMY_STATE.FIND_LOCATION ||
+					_ref_beast._state_dummy ==
+						ENUM_RANCH_BEAST_DUMMY_STATE.IDLE ||
+					_ref_beast._state_dummy ==
+						ENUM_RANCH_BEAST_DUMMY_STATE.MOVE
+				)
 			){
 
-				audio_play_sound(
-					_ref_beast._snd_cry,
-					0,
-					false
+				// One Ranch interaction owns presentation until it completes.
+				// SHAKE and INTERACT states are deliberately excluded by the gate
+				// above, preventing click-spam from restarting or overlapping them.
+				_ref_beast._val_draw_rotation = 0;
+				_ref_beast._val_draw_y_offset = 0;
+				_ref_beast._ct_shake_timer = 0;
+
+				scr_beast_sound_play(
+					_ref_beast,
+					"CRY"
 				);
 
 				_ref_beast._spr_emoji =
@@ -1056,8 +1068,20 @@ if (room != rm_battle){
 						120
 					);
 
-				_ref_beast._state_dummy =
-					ENUM_RANCH_BEAST_DUMMY_STATE.SHAKE;
+				//==================================//
+				//ROLL BEAST-SPECIFIC INTERACT STATE//
+				//==================================//
+				var _flag_play_interact =
+					scr_beast_animation_ensure(_ref_beast) &&
+					irandom(3) == 0;
+
+				if (_flag_play_interact){
+					scr_beast_animation_play(_ref_beast,"INTERACT");
+					_ref_beast._state_dummy = ENUM_RANCH_BEAST_DUMMY_STATE.INTERACT;
+				}
+				else{
+					_ref_beast._state_dummy = ENUM_RANCH_BEAST_DUMMY_STATE.SHAKE;
+				}
 			}
 		}
 	}

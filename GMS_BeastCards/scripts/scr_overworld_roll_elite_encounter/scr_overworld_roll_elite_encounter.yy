@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_overworld_roll_elite_encounter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_overworld_roll_elite_encounter",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

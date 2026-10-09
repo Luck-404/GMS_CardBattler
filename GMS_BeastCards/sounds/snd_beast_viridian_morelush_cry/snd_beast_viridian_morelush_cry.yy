@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.47,
+  "duration":1.3547392,
   "exportDir":"",
   "name":"snd_beast_viridian_morelush_cry",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_beast_viridian_morelush_cry.wav",
-  "volume":0.1,
+  "volume":1.0,
 }

@@ -1,12 +1,40 @@
 //===============================================================================//
 //
 // STEP: OBJ_BATTLE_BEAST
-// FUNCTION: Resolves pending Beast death state and updates temporary visual
-//           motion effects used for normal casting, Minion-row casting,
-//           dodging, repositioning, and resist.
+// FUNCTION: Resolves pending Beast death state, staged Beast sprite animation,
+//           resurrection animation recovery, and temporary visual motion used for
+//           normal casting, Minion-row casting, dodging, repositioning, and resist.
 //           Visual motion does not alter the Beast's battlefield slot.
 //
 //===============================================================================//
+
+#region CHEAT STAT SNAPSHOT
+
+//==================================//
+//CAPTURE PRE-CHEAT PERSISTENT STATS//
+//==================================//
+// _ref_unit is assigned immediately after the battle Beast instance is created.
+// Capture on the first Step, before normal battle actions/statuses can mutate it.
+if (
+	_stct_cheat_stat_original == undefined &&
+	is_struct(_ref_unit)
+){
+	_stct_cheat_stat_original = {
+		_val_beast_hp_stat : _ref_unit._val_beast_hp_stat,
+		_val_beast_con_stat : _ref_unit._val_beast_con_stat,
+		_val_beast_ppow_stat : _ref_unit._val_beast_ppow_stat,
+		_val_beast_mpow_stat : _ref_unit._val_beast_mpow_stat,
+		_val_beast_pdef_stat : _ref_unit._val_beast_pdef_stat,
+		_val_beast_mdef_stat : _ref_unit._val_beast_mdef_stat,
+		_val_beast_speed_stat : _ref_unit._val_beast_speed_stat,
+		_val_beast_crit_stat : _ref_unit._val_beast_crit_stat,
+		_val_beast_crit_dmg_stat : _ref_unit._val_beast_crit_dmg_stat,
+		_val_beast_dod_stat : _ref_unit._val_beast_dod_stat,
+		_val_beast_min_stat : _ref_unit._val_beast_min_stat
+	};
+}
+
+#endregion
 
 #region DEATH
 
@@ -16,6 +44,29 @@
 if (_val_cur_hp <= 0 && !_flag_death_handled){
 	hscr_battle_handle_death();
 }
+
+#endregion
+
+#region BEAST SPRITE ANIMATION
+
+//=======================//
+//RESURRECTION RECOVERY//
+//=======================//
+// A resurrected animated Beast must immediately leave its permanent DEATH hold.
+// This lifecycle check keeps Cheats and future resurrection paths from needing
+// separate animation-specific reset code.
+if (
+	_val_cur_hp > 0 &&
+	scr_beast_animation_ensure(self) &&
+	_str_beast_animation_state == "DEATH"
+){
+	scr_beast_animation_play(self,"IDLE",true);
+}
+
+//========================//
+//UPDATE MULTI-FRAME STATE//
+//========================//
+scr_beast_animation_update(self);
 
 #endregion
 

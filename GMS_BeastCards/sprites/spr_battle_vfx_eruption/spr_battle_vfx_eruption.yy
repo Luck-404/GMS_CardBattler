@@ -34,7 +34,7 @@
   "origin":4,
   "parent":{
     "name":"ERUPTION",
-    "path":"folders/BATTLE/COLOR TRIGGERS/ERUPTION.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/ERUPTION.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

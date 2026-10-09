@@ -1,29 +1,26 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_INVENTORY_CAN_EQUIP_UNIQUE_HELD_ITEM
-// FUNCTION: Enforces the universal one-per-team rule for Unique Held Items.
+// FUNCTION: Enforces active-Party uniqueness for Held Items.
 //
-//           Every Item struct contains:
-//               _flag_unique_team
+//           _flag_unique_team = true blocks duplicate copies of the same Item ID.
 //
-//           When false, the item is unrestricted.
-//           When true, no OTHER Beast in the active player Party may already
-//           have the same Held Item ID equipped.
+//           _str_unique_team_group optionally creates a shared exclusivity group.
+//           Only one Item from the same non-empty group may be equipped across the
+//           active Party. Challenger's Bell and Hunter's Trophy both use:
+//               "ELITE_ENCOUNTER"
 //
-//           The target Beast is deliberately excluded from the duplicate scan,
-//           allowing a Unique item to replace the same Unique item on that same
-//           Beast without falsely detecting itself.
+//           The target Beast is excluded from the scan so replacing/swapping the
+//           Item on that same Beast remains legal.
 //
-//           This helper performs validation only. It does not remove inventory,
-//           unequip items, equip items, or display feedback.
+//           Legacy Bell/Trophy structs that predate _str_unique_team_group are
+//           treated as members of ELITE_ENCOUNTER by Item ID.
 //
 // ARGUMENTS: _stct_item - Held Item being equipped.
-//            _stct_target_unit - Persistent Party Beast receiving the item.
-// RETURNS: True when the equip is legal; false when the one-per-team rule would
-//          be violated.
+//            _stct_target_unit - persistent Party Beast receiving the Item.
+// RETURNS: True when legal; otherwise false.
 //
 //===============================================================================//
-
 function scr_inventory_can_equip_unique_held_item(_stct_item,_stct_target_unit){
 
 	#region VALIDATION
@@ -34,19 +31,6 @@ function scr_inventory_can_equip_unique_held_item(_stct_item,_stct_target_unit){
 
 	if (!is_struct(_stct_target_unit)){
 		return false;
-	}
-
-	//================//
-	//NOT UNIQUE//
-	//================//
-	if (
-		!variable_struct_exists(
-			_stct_item,
-			"_flag_unique_team"
-		) ||
-		!_stct_item._flag_unique_team
-	){
-		return true;
 	}
 
 	if (
@@ -67,6 +51,49 @@ function scr_inventory_can_equip_unique_held_item(_stct_item,_stct_target_unit){
 
 	if (_str_item_id == ""){
 		return false;
+	}
+
+	var _flag_unique_team =
+		variable_struct_exists(
+			_stct_item,
+			"_flag_unique_team"
+		) &&
+		_stct_item._flag_unique_team;
+
+	var _str_unique_team_group = "";
+
+	if (
+		variable_struct_exists(
+			_stct_item,
+			"_str_unique_team_group"
+		)
+	){
+		_str_unique_team_group =
+			string_upper(
+				string(
+					_stct_item
+						._str_unique_team_group
+				)
+			);
+	}
+
+	// Backward compatibility for Item structs created before the group field existed.
+	if (
+		_str_item_id == "HELD_CHALLENGERS_BELL" ||
+		_str_item_id == "HELD_HUNTERS_TROPHY"
+	){
+		_flag_unique_team = true;
+		_str_unique_team_group = "ELITE_ENCOUNTER";
+	}
+
+	//================//
+	//NOT RESTRICTED//
+	//================//
+	if (
+		!_flag_unique_team &&
+		_str_unique_team_group == ""
+	){
+		return true;
 	}
 
 	//================//
@@ -158,17 +185,59 @@ function scr_inventory_can_equip_unique_held_item(_stct_item,_stct_target_unit){
 			continue;
 		}
 
-		//================//
-		//DUPLICATE//
-		//================//
-		if (
+		var _str_party_item_id =
 			string_upper(
 				string(
 					_stct_party_item
 						._str_item_id
 				)
-			) ==
-			_str_item_id
+			);
+
+		//================//
+		//SAME ITEM ID//
+		//================//
+		if (
+			_flag_unique_team &&
+			_str_party_item_id ==
+				_str_item_id
+		){
+			return false;
+		}
+
+		//================//
+		//PARTY ITEM GROUP//
+		//================//
+		var _str_party_unique_group = "";
+
+		if (
+			variable_struct_exists(
+				_stct_party_item,
+				"_str_unique_team_group"
+			)
+		){
+			_str_party_unique_group =
+				string_upper(
+					string(
+						_stct_party_item
+							._str_unique_team_group
+					)
+				);
+		}
+
+		if (
+			_str_party_item_id == "HELD_CHALLENGERS_BELL" ||
+			_str_party_item_id == "HELD_HUNTERS_TROPHY"
+		){
+			_str_party_unique_group = "ELITE_ENCOUNTER";
+		}
+
+		//================//
+		//SAME GROUP//
+		//================//
+		if (
+			_str_unique_team_group != "" &&
+			_str_party_unique_group ==
+				_str_unique_team_group
 		){
 			return false;
 		}

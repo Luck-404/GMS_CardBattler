@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"ARBRAWN",
-    "path":"folders/BEASTS/VIRIDIAN/ARBRAWN.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/ARBRAWN/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

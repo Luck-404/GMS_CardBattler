@@ -15,5 +15,5 @@ function scr_card_uncolored_echo(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GAIN ECHO//
 	//================//
-	scr_status_gain_echo(_stct_card._val_card_magnitude);
+	scr_status_gain_echo(_stct_card._val_card_magnitude,_ref_caster);
 }

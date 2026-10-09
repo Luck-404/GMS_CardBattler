@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_buff_martyrs_gift",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_buff_martyrs_gift",
+  "parent":{
+    "name":"MARTYRS_GIFT",
+    "path":"folders/BATTLE/STATUSES/BUFFS/GENERIC/MARTYRS_GIFT.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

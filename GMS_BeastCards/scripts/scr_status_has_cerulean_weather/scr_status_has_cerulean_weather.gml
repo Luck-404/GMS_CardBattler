@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_HAS_CERULEAN_WEATHER
@@ -11,25 +12,18 @@
 
 function scr_status_has_cerulean_weather(){
 
-	//----------------------//
-	//VALIDATE GLOBAL LIST//
-	//----------------------//
-	if (!ds_exists(global.list_statuses,ds_type_list)){
-		return false;
-	}
-
 	//================//
 	//CHECK WEATHER//
 	//================//
-	if (scr_status_check("WEATHER: RAIN",global.list_statuses) != -1){
+	if (scr_status_check("WEATHER: RAIN","WEATHER") != -1){
 		return true;
 	}
 
-	if (scr_status_check("WEATHER: SNOW",global.list_statuses) != -1){
+	if (scr_status_check("WEATHER: SNOW","WEATHER") != -1){
 		return true;
 	}
 
-	if (scr_status_check("WEATHER: STORMING",global.list_statuses) != -1){
+	if (scr_status_check("WEATHER: STORMING","WEATHER") != -1){
 		return true;
 	}
 

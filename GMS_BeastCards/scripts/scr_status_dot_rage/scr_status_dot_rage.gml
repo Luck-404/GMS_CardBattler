@@ -16,7 +16,6 @@
 // RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
-
 function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
@@ -259,59 +258,25 @@ function scr_status_dot_rage(_str_tag,_ref_status,_val_lifetime=undefined,_ref_t
 				snd_battle_rage
 			);
 
-			//============//
-			//OVERHEALTH//
-			//============//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_overhealth > 0
-			){
+			/*
+				Rage remains on the original Beast and still provides its normal
+				Linear damage bonus, lifetime, and Endless Rage interaction.
+				Only Rage's actual self-damage may redirect to Soulbound.
+			*/
+			scr_battle_elite_damage_raw_target(
+				_ref_host,
+				_val_damage,
+				{
+					_c_overhealth :
+						c_green,
 
-				var _val_overhealth_damage = min(
-					_ref_host._val_overhealth,
-					_val_damage
-				);
+					_c_hp :
+						c_maroon,
 
-				_ref_host._val_overhealth -= _val_overhealth_damage;
-				_val_damage -= _val_overhealth_damage;
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_overhealth_damage),
-					undefined,
-					c_green,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-			}
-
-			//=========//
-			//HOST HP//
-			//=========//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_cur_hp > 0
-			){
-
-				var _val_hp_damage = min(
-					_val_damage,
-					_ref_host._val_cur_hp
-				);
-
-				_ref_host._val_cur_hp = max(
-					0,
-					_ref_host._val_cur_hp - _val_hp_damage
-				);
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_hp_damage),
-					undefined,
-					c_maroon,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-			}
+					_str_source :
+						"RAGE"
+				}
+			);
 
 			//================//
 			//UPDATE LIFETIME//

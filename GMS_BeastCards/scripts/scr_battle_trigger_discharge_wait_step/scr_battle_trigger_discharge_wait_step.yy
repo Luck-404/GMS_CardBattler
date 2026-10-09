@@ -6,7 +6,7 @@
   "name":"scr_battle_trigger_discharge_wait_step",
   "parent":{
     "name":"DISCHARGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

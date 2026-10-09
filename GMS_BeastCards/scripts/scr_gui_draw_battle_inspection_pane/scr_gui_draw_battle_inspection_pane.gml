@@ -1,14 +1,16 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_GUI_DRAW_BATTLE_INSPECTION_PANE
-// FUNCTION: Draws the active Ctrl-inspection pane in the upper-left battle HUD.
-//           Mirrors the current Battle Log dimensions.
-//           Uses spaced Cheats-style text formatting.
-//           Positions beneath the player's Mana rows.
-//           Truncates excess text rather than overflowing.
+// FUNCTION: Draws the active Ctrl-inspection pane.
+//
+//           Elite Beast inspections use a wider text region, but their height is
+//           calculated from the actual title/body text instead of forcing a large
+//           fixed panel. Text is only truncated when the required height exceeds
+//           the available GUI space.
+//
+//           Non-Elite inspections retain the normal Battle Log-sized pane.
 //
 //===============================================================================//
-
 function scr_gui_draw_battle_inspection_pane(){
 
 	//================//
@@ -36,6 +38,13 @@ function scr_gui_draw_battle_inspection_pane(){
 		return false;
 	}
 
+	var _flag_elite_inspection =
+		string_pos(
+			"\nELITE:",
+			global.str_battle_inspection_body
+		) >
+		0;
+
 	#region LAYOUT
 
 	//================//
@@ -49,13 +58,16 @@ function scr_gui_draw_battle_inspection_pane(){
 	var _ct_entries = 4;
 	var _val_entry_h = 48;
 
-	var _val_pane_h =
+	var _val_default_pane_h =
 		_val_header_h +
 		(
 			_ct_entries *
 			_val_entry_h
 		) +
 		_val_footer_h;
+
+	var _val_pane_h =
+		_val_default_pane_h;
 
 	//========================//
 	//MIRROR BATTLE LOG SIZE//
@@ -65,7 +77,6 @@ function scr_gui_draw_battle_inspection_pane(){
 			obj_gui_battle_log_pane
 		)
 	){
-
 		var _ref_log =
 			instance_find(
 				obj_gui_battle_log_pane,
@@ -77,12 +88,11 @@ function scr_gui_draw_battle_inspection_pane(){
 				_ref_log
 			)
 		){
-
 			_val_pane_w =
 				_ref_log
 					._val_pane_width;
 
-			_val_pane_h =
+			_val_default_pane_h =
 				_ref_log
 					._val_header_height +
 				(
@@ -93,7 +103,21 @@ function scr_gui_draw_battle_inspection_pane(){
 				) +
 				_ref_log
 					._val_footer_height;
+
+			_val_pane_h =
+				_val_default_pane_h;
 		}
+	}
+
+	//========================//
+	//ELITE INSPECTION WIDTH//
+	//========================//
+	if (_flag_elite_inspection){
+		_val_pane_w =
+			max(
+				_val_pane_w,
+				360
+			);
 	}
 
 	//================//
@@ -110,7 +134,6 @@ function scr_gui_draw_battle_inspection_pane(){
 			obj_battle_player_controller
 		)
 	){
-
 		var _ref_player =
 			instance_find(
 				obj_battle_player_controller,
@@ -122,7 +145,6 @@ function scr_gui_draw_battle_inspection_pane(){
 				_ref_player
 			)
 		){
-
 			var _ct_mana_rows =
 				max(
 					1,
@@ -170,14 +192,6 @@ function scr_gui_draw_battle_inspection_pane(){
 		}
 	}
 
-	var _val_pane_x2 =
-		_val_pane_x1 +
-		_val_pane_w;
-
-	var _val_pane_y2 =
-		_val_pane_y1 +
-		_val_pane_h;
-
 	#endregion
 
 	#region TEXT SETUP
@@ -188,11 +202,8 @@ function scr_gui_draw_battle_inspection_pane(){
 	var _val_pad_x = 9;
 	var _val_pad_y = 9;
 
-	/*
-		Extra vertical space between every rendered line.
-		The old tooltip format used 4.
-	*/
-	var _val_line_sep = 12;
+	// Increased from the original inspector without making every line oversized.
+	var _val_line_sep = 10;
 
 	var _val_title_body_gap = 12;
 
@@ -231,7 +242,6 @@ function scr_gui_draw_battle_inspection_pane(){
 		) >
 		_val_text_w
 	){
-
 		var _val_low_title = 0;
 
 		var _val_high_title =
@@ -243,7 +253,6 @@ function scr_gui_draw_battle_inspection_pane(){
 			_val_low_title <
 			_val_high_title
 		){
-
 			var _val_mid_title =
 				floor(
 					(
@@ -268,12 +277,10 @@ function scr_gui_draw_battle_inspection_pane(){
 				) <=
 				_val_text_w
 			){
-
 				_val_low_title =
 					_val_mid_title;
 			}
 			else{
-
 				_val_high_title =
 					_val_mid_title -
 					1;
@@ -291,16 +298,69 @@ function scr_gui_draw_battle_inspection_pane(){
 
 	#endregion
 
-	#region BODY LAYOUT
+	#region DYNAMIC HEIGHT
 
-	//================//
-	//BODY REGION//
-	//================//
+	//======================//
+	//MEASURE TEXT CONTENT//
+	//======================//
 	var _val_title_h =
 		string_height(
 			_str_title
 		);
 
+	var _val_body_h =
+		string_height_ext(
+			_str_body,
+			_val_line_sep,
+			_val_text_w
+		);
+
+	//========================//
+	//ELITE CONTENT-FIT HEIGHT//
+	//========================//
+	if (_flag_elite_inspection){
+		var _val_required_h =
+			_val_pad_y +
+			_val_title_h +
+			_val_title_body_gap +
+			_val_body_h +
+			_val_pad_y;
+
+		var _val_available_h =
+			max(
+				1,
+				display_get_gui_height() -
+				_val_pane_y1 -
+				12
+			);
+
+		_val_pane_h =
+			min(
+				max(
+					100,
+					ceil(
+						_val_required_h
+					)
+				),
+				_val_available_h
+			);
+	}
+
+	var _val_pane_x2 =
+		_val_pane_x1 +
+		_val_pane_w;
+
+	var _val_pane_y2 =
+		_val_pane_y1 +
+		_val_pane_h;
+
+	#endregion
+
+	#region BODY LAYOUT
+
+	//================//
+	//BODY REGION//
+	//================//
 	var _val_body_y =
 		_val_pane_y1 +
 		_val_pad_y +
@@ -329,7 +389,6 @@ function scr_gui_draw_battle_inspection_pane(){
 		) >
 		_val_max_body_h
 	){
-
 		var _val_low = 0;
 
 		var _val_high =
@@ -341,7 +400,6 @@ function scr_gui_draw_battle_inspection_pane(){
 			_val_low <
 			_val_high
 		){
-
 			var _val_mid =
 				floor(
 					(
@@ -368,12 +426,10 @@ function scr_gui_draw_battle_inspection_pane(){
 				) <=
 				_val_max_body_h
 			){
-
 				_val_low =
 					_val_mid;
 			}
 			else{
-
 				_val_high =
 					_val_mid -
 					1;

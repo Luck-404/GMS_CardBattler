@@ -2,7 +2,8 @@
 //
 // SCRIPT: SCR_BATTLE_DAMAGE_TARGET
 // FUNCTION: Resolves direct Card damage using LINEAR or target-Max-HP PERCENT
-//           bases, or card-independent FIXED damage.
+//           bases, or card-independent FIXED damage. Damage that reaches the
+//           host's Armor/Overhealth/HP triggers its staged HIT frame when enabled.
 //
 //           FIXED preserves the dedicated fixed-damage pipeline and does not
 //           resolve direct-Card reaction effects.
@@ -355,6 +356,13 @@ function scr_battle_damage_target(_str_mode,_ref_caster,_ref_target,_val_amount,
 			}
 		}
 
+		//===================//
+		//BEAST HIT ANIMATION//
+		//===================//
+		if (_val_fixed_armor_damage + _val_fixed_beast_damage > 0){
+			scr_beast_animation_play(_ref_target,"HIT");
+		}
+
 		//================//
 		//DEBUG DAMAGE//
 		//================//
@@ -581,7 +589,7 @@ function scr_battle_damage_target(_str_mode,_ref_caster,_ref_target,_val_amount,
 	//RAIN DAMAGE BONUS//
 	//================//
 	if (
-		scr_status_check("WEATHER: RAIN",global.list_statuses) != -1 &&
+		scr_status_check("WEATHER: RAIN","WEATHER") != -1 &&
 		array_contains(_stct_card._arr_card_colors,"CERULEAN")
 	){
 		_val_damage_left *= 1.25;
@@ -590,7 +598,7 @@ function scr_battle_damage_target(_str_mode,_ref_caster,_ref_target,_val_amount,
 	//----------------------//
 	//SEEDFALL COLOR BONUS//
 	//----------------------//
-	var _ref_seedfall = scr_status_check("WEATHER: SEEDFALL",global.list_statuses);
+	var _ref_seedfall = scr_status_check("WEATHER: SEEDFALL","WEATHER");
 
 	if (_ref_seedfall != -1){
 
@@ -1150,6 +1158,16 @@ if (_val_second_wind_bonus > 0){
 		}
 	}
 	
+	#endregion
+
+	#region BEAST HIT ANIMATION
+
+	// Minion-only absorption does not animate the host as struck. Armor,
+	// Overhealth, or HP contact does.
+	if (_val_armor_blocked + _val_beast_damage > 0){
+		scr_beast_animation_play(_ref_target,"HIT");
+	}
+
 	#endregion
 
 	#region DEBUG DAMAGE

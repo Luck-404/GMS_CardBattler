@@ -18,7 +18,6 @@
 // RETURNS: APPLY returns the applied status; otherwise undefined.
 //
 //===============================================================================//
-
 function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined,_ref_target=undefined){
 
 	switch (_str_tag){
@@ -218,59 +217,26 @@ function scr_status_dot_frostburn(_str_tag,_ref_status,_val_lifetime=undefined,_
 				_ref_status._ct_status_stacks *
 				_ref_status._val_status_magnitude;
 
-			//============//
-			//OVERHEALTH//
-			//============//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_overhealth > 0
-			){
+			/*
+				Frostburn's separate Armor destruction above remains on the
+				original afflicted Beast. Its positive-effect cleanse below also
+				remains on that Beast. Only the raw Overhealth/HP damage may be
+				redirected to Soulbound.
+			*/
+			scr_battle_elite_damage_raw_target(
+				_ref_host,
+				_val_damage,
+				{
+					_c_overhealth :
+						c_green,
 
-				var _val_blocked = min(
-					_ref_host._val_overhealth,
-					_val_damage
-				);
+					_c_hp :
+						c_aqua,
 
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_blocked),
-					undefined,
-					c_green,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-
-				_ref_host._val_overhealth -= _val_blocked;
-				_val_damage -= _val_blocked;
-			}
-
-			//=========//
-			//HOST HP//
-			//=========//
-			if (
-				_val_damage > 0 &&
-				_ref_host._val_cur_hp > 0
-			){
-
-				var _val_actual_damage = min(
-					_val_damage,
-					_ref_host._val_cur_hp
-				);
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_actual_damage),
-					undefined,
-					c_aqua,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-
-				_ref_host._val_cur_hp = max(
-					0,
-					_ref_host._val_cur_hp - _val_actual_damage
-				);
-			}
+					_str_source :
+						"FROSTBURN"
+				}
+			);
 
 			//================================//
 			//3. REMOVE OLDEST POSITIVE EFFECT//

@@ -8,7 +8,17 @@
 //           - EXP for surviving Party Beasts.
 //           - At least 1 Material when a valid Material source exists.
 //           - Each Salvager's Magnet adds +1 guaranteed Material.
+//           - Elite battles guarantee 2 normal Card rewards plus every exact
+//             special Elite Card persisted on the Elite enemy.
+////           RISK TIER 1 QUALITY:
+//           - Rare Card rarity weights (II/III/IV) are multiplied by 1.25 while
+//             preserving the total weight by removing the added weight from I.
+//           - Current base Card distribution changes 80/15/4/1 -> 75/18.75/5/1.25.
+//           - Egg, normal bonus-Item, and Secret Zone Item chances are multiplied
+//             by 1.25 after normal Battle Score / Held Item chance bonuses.
+//           - Gold, EXP, Materials, and reward-slot counts are otherwise unchanged.
 //
+
 //           OPTIONAL:
 //           - Second Material from Zone pool: 50% base.
 //           - Beast Card: 30% base.
@@ -51,11 +61,22 @@ function scr_reward_resolve_battle(
 	var _arr_beast_material_candidates = [];
 	var _arr_bonus_item_candidates = [];
 
+	var _arr_elite_units = [];
+	var _arr_elite_exact_card_candidates = [];
+
+	var _flag_elite_battle = false;
+
+	var _ct_elite_guaranteed_cards_awarded = 0;
+	var _ct_elite_exact_cards_awarded = 0;
+
 	var _str_loot_zone_id =
 		"UNASSIGNED";
 
 	var _stct_config =
 		scr_reward_get_battle_roll_config();
+
+	var _val_secret_item_chance =
+		_stct_config._val_secret_item_chance;
 
 	var _stct_grade =
 		scr_reward_calculate_battle_grade(
@@ -120,6 +141,9 @@ function scr_reward_resolve_battle(
 
 		return {
 			_flag_success : false,
+			_flag_elite_battle : false,
+			_ct_elite_guaranteed_cards_awarded : 0,
+			_ct_elite_exact_cards_awarded : 0,
 			_stct_grade : _stct_grade,
 			_arr_rewards : _arr_rewards,
 			_val_gold_base : 0,
@@ -148,6 +172,9 @@ function scr_reward_resolve_battle(
 
 		return {
 			_flag_success : false,
+			_flag_elite_battle : false,
+			_ct_elite_guaranteed_cards_awarded : 0,
+			_ct_elite_exact_cards_awarded : 0,
 			_stct_grade : _stct_grade,
 			_arr_rewards : _arr_rewards,
 			_val_gold_base : 0,
@@ -161,6 +188,95 @@ function scr_reward_resolve_battle(
 			_ct_rounds : _ct_rounds,
 			_str_loot_zone_id : _str_loot_zone_id
 		};
+	}
+
+	#endregion
+
+	#region ELITE RESOURCE MULTIPLIERS
+
+	var _stct_elite_resource_multipliers =
+		scr_reward_get_elite_resource_multipliers(
+			_ref_enemy_controller
+		);
+
+	var _val_elite_gold_multiplier =
+		_stct_elite_resource_multipliers
+			._val_gold_multiplier;
+
+	var _val_elite_exp_multiplier =
+		_stct_elite_resource_multipliers
+			._val_exp_multiplier;
+
+	var _val_elite_risk_tier =
+		_stct_elite_resource_multipliers
+			._val_elite_risk_tier;
+
+	var _val_elite_reward_quality_multiplier =
+		_stct_elite_resource_multipliers
+			._val_risk_reward_quality_multiplier;
+
+	//========================//
+	//CARD RARITY QUALITY//
+	//========================//
+	var _stct_reward_card_rarity_weights =
+		scr_reward_get_card_rarity_weights();
+
+	if (
+		_val_elite_risk_tier >= 1 &&
+		_val_elite_reward_quality_multiplier > 1
+	){
+		var _val_rarity_II_base =
+			_stct_reward_card_rarity_weights
+				._val_rarity_II;
+
+		var _val_rarity_III_base =
+			_stct_reward_card_rarity_weights
+				._val_rarity_III;
+
+		var _val_rarity_IV_base =
+			_stct_reward_card_rarity_weights
+				._val_rarity_IV;
+
+		_stct_reward_card_rarity_weights
+			._val_rarity_II =
+			_val_rarity_II_base *
+			_val_elite_reward_quality_multiplier;
+
+		_stct_reward_card_rarity_weights
+			._val_rarity_III =
+			_val_rarity_III_base *
+			_val_elite_reward_quality_multiplier;
+
+		_stct_reward_card_rarity_weights
+			._val_rarity_IV =
+			_val_rarity_IV_base *
+			_val_elite_reward_quality_multiplier;
+
+		var _val_rarity_added_weight =
+			(
+				_stct_reward_card_rarity_weights
+					._val_rarity_II -
+				_val_rarity_II_base
+			) +
+			(
+				_stct_reward_card_rarity_weights
+					._val_rarity_III -
+				_val_rarity_III_base
+			) +
+			(
+				_stct_reward_card_rarity_weights
+					._val_rarity_IV -
+				_val_rarity_IV_base
+			);
+
+		_stct_reward_card_rarity_weights
+			._val_rarity_I =
+			max(
+				0,
+				_stct_reward_card_rarity_weights
+					._val_rarity_I -
+				_val_rarity_added_weight
+			);
 	}
 
 	#endregion
@@ -494,6 +610,60 @@ function scr_reward_resolve_battle(
 
 	#endregion
 
+	#region RISK TIER REWARD QUALITY
+
+	if (
+		_val_elite_risk_tier >= 1 &&
+		_val_elite_reward_quality_multiplier > 1
+	){
+		_val_egg_chance =
+			min(
+				100,
+				_val_egg_chance *
+				_val_elite_reward_quality_multiplier
+			);
+
+		_val_bonus_item_chance =
+			min(
+				100,
+				_val_bonus_item_chance *
+				_val_elite_reward_quality_multiplier
+			);
+
+		_val_secret_item_chance =
+			min(
+				100,
+				_val_secret_item_chance *
+				_val_elite_reward_quality_multiplier
+			);
+
+		scr_debug_log(
+			"REWARD",
+			"ELITE",
+			undefined,
+			"RISK TIER REWARD QUALITY" +
+			" | TIER: " +
+			string(_val_elite_risk_tier) +
+			" | QUALITY: x" +
+			string_format(
+				_val_elite_reward_quality_multiplier,
+				0,
+				2
+			) +
+			" | EGG: " +
+			string_format(_val_egg_chance,0,2) +
+			"% | BONUS ITEM: " +
+			string_format(_val_bonus_item_chance,0,2) +
+			"% | SECRET ITEM: " +
+			string_format(_val_secret_item_chance,0,2) +
+			"%",
+			"REWARD",
+			"SCR_REWARD_RESOLVE_BATTLE"
+		);
+	}
+
+	#endregion
+
 	#region COLLECT ENEMY SOURCES
 
 	var _val_gold_base = 0;
@@ -523,6 +693,132 @@ function scr_reward_resolve_battle(
 
 		var _stct_enemy_unit =
 			_ref_enemy._ref_unit;
+
+		//===================//
+		//COLLECT ELITE SOURCE//
+		//===================//
+		var _flag_enemy_elite =
+			(
+				variable_struct_exists(
+					_stct_enemy_unit,
+					"_flag_elite"
+				) &&
+				_stct_enemy_unit._flag_elite
+			);
+
+		if (
+			!_flag_enemy_elite &&
+			variable_instance_exists(
+				_ref_enemy,
+				"_flag_elite"
+			)
+		){
+			_flag_enemy_elite =
+				_ref_enemy._flag_elite;
+		}
+
+		if (_flag_enemy_elite){
+
+			_flag_elite_battle = true;
+
+			array_push(
+				_arr_elite_units,
+				_stct_enemy_unit
+			);
+
+			var _flag_exact_card_found = false;
+
+			if (
+				variable_struct_exists(
+					_stct_enemy_unit,
+					"_arr_elite_card_ids"
+				) &&
+				is_array(
+					_stct_enemy_unit
+						._arr_elite_card_ids
+				)
+			){
+
+				for (
+					var _it_elite_reward_card = 0;
+					_it_elite_reward_card <
+						array_length(
+							_stct_enemy_unit
+								._arr_elite_card_ids
+						);
+					_it_elite_reward_card++
+				){
+
+					var _str_elite_reward_card_id =
+						string_upper(
+							string(
+								_stct_enemy_unit
+									._arr_elite_card_ids[
+										_it_elite_reward_card
+									]
+							)
+						);
+
+					if (_str_elite_reward_card_id == ""){
+						continue;
+					}
+
+					array_push(
+						_arr_elite_exact_card_candidates,
+						{
+							_str_card_id :
+								_str_elite_reward_card_id,
+
+							_str_source_detail :
+								string_upper(
+									string(
+										_stct_enemy_unit
+											._str_beast_name
+									)
+								)
+						}
+					);
+
+					_flag_exact_card_found = true;
+				}
+			}
+
+			if (
+				!_flag_exact_card_found &&
+				variable_struct_exists(
+					_stct_enemy_unit,
+					"_str_elite_primary_card_id"
+				)
+			){
+
+				var _str_elite_primary_card_id =
+					string_upper(
+						string(
+							_stct_enemy_unit
+								._str_elite_primary_card_id
+						)
+					);
+
+				if (_str_elite_primary_card_id != ""){
+
+					array_push(
+						_arr_elite_exact_card_candidates,
+						{
+							_str_card_id :
+								_str_elite_primary_card_id,
+
+							_str_source_detail :
+								string_upper(
+									string(
+										_stct_enemy_unit
+											._str_beast_name
+									)
+								)
+						}
+					);
+				}
+			}
+		}
 
 		array_push(
 			_arr_enemy_units,
@@ -977,6 +1273,24 @@ function scr_reward_resolve_battle(
 			);
 	}
 
+	//=====================//
+	//GOLDEN ELITE REWARD//
+	//=====================//
+	if (_val_elite_gold_multiplier > 1){
+
+		_val_gold_reward =
+			ceil(
+				_val_gold_reward *
+				_val_elite_gold_multiplier
+			);
+
+		scr_gui_spawn_popup_trigger_banner(
+			"GOLDEN: " +
+			string(_val_elite_gold_multiplier) +
+			"x GOLD"
+		);
+	}
+
 	global.val_player_gold +=
 		_val_gold_reward;
 
@@ -994,6 +1308,297 @@ function scr_reward_resolve_battle(
 			_spr_reward : undefined
 		}
 	);
+
+	#endregion
+
+	#region ELITE GUARANTEED CARDS
+
+	if (
+		_flag_elite_battle &&
+		array_length(
+			_arr_elite_units
+		) > 0
+	){
+
+		var _stct_elite_reward_unit =
+			_arr_elite_units[0];
+
+		var _str_elite_reward_beast_name =
+			string_upper(
+				string(
+					_stct_elite_reward_unit
+						._str_beast_name
+				)
+			);
+
+		var _arr_elite_beast_card_pool =
+			scr_reward_get_beast_card_pool(
+				_stct_elite_reward_unit
+			);
+
+		var _arr_elite_zone_card_pool = [];
+
+		if (is_struct(_stct_zone_loot)){
+			_arr_elite_zone_card_pool =
+				scr_reward_get_zone_card_pool(
+					_stct_zone_loot
+				);
+		}
+
+		var _arr_elite_guaranteed_ids = [];
+
+		//=========================//
+		//GUARANTEED CARD 1: BEAST//
+		//=========================//
+		var _stct_elite_guaranteed_roll =
+			scr_reward_elite_roll_card_from_pool(
+				_arr_elite_beast_card_pool,
+				_arr_elite_guaranteed_ids,
+				_stct_reward_card_rarity_weights
+			);
+
+		var _str_elite_guaranteed_source =
+			"BEAST_CARD";
+
+		var _str_elite_guaranteed_detail =
+			_str_elite_reward_beast_name;
+
+		// Fall back to the Zone pool when Beast Card data is unavailable.
+		if (!is_struct(_stct_elite_guaranteed_roll)){
+
+			_stct_elite_guaranteed_roll =
+				scr_reward_elite_roll_card_from_pool(
+					_arr_elite_zone_card_pool,
+					_arr_elite_guaranteed_ids,
+					_stct_reward_card_rarity_weights
+				);
+
+			_str_elite_guaranteed_source =
+				"ZONE_CARD";
+
+			_str_elite_guaranteed_detail =
+				_str_loot_zone_id;
+		}
+
+		// If exclusions exhausted the only valid pool, duplicates are preferable
+		// to failing an Elite's guaranteed Card floor.
+		if (!is_struct(_stct_elite_guaranteed_roll)){
+
+			_stct_elite_guaranteed_roll =
+				scr_reward_elite_roll_card_from_pool(
+					_arr_elite_beast_card_pool,
+					[],
+					_stct_reward_card_rarity_weights
+					);
+
+			_str_elite_guaranteed_source =
+				"BEAST_CARD";
+
+			_str_elite_guaranteed_detail =
+				_str_elite_reward_beast_name;
+		}
+
+		if (!is_struct(_stct_elite_guaranteed_roll)){
+
+			_stct_elite_guaranteed_roll =
+				scr_reward_elite_roll_card_from_pool(
+					_arr_elite_zone_card_pool,
+					[],
+					_stct_reward_card_rarity_weights
+					);
+
+			_str_elite_guaranteed_source =
+				"ZONE_CARD";
+
+			_str_elite_guaranteed_detail =
+				_str_loot_zone_id;
+		}
+
+		if (is_struct(_stct_elite_guaranteed_roll)){
+
+			var _stct_elite_guaranteed_award =
+				scr_reward_award_card(
+					_stct_elite_guaranteed_roll
+						._str_card_id,
+					_str_elite_guaranteed_source,
+					_str_elite_guaranteed_detail
+				);
+
+			if (is_struct(_stct_elite_guaranteed_award)){
+
+				array_push(
+					_arr_rewards,
+					_stct_elite_guaranteed_award
+						._stct_entry
+				);
+
+				array_push(
+					_arr_elite_guaranteed_ids,
+					_stct_elite_guaranteed_roll
+						._str_card_id
+				);
+
+				_ct_elite_guaranteed_cards_awarded++;
+			}
+		}
+
+		//=======================//
+		//GUARANTEED CARD 2: ZONE//
+		//=======================//
+		_stct_elite_guaranteed_roll =
+			scr_reward_elite_roll_card_from_pool(
+				_arr_elite_zone_card_pool,
+				_arr_elite_guaranteed_ids,
+				_stct_reward_card_rarity_weights
+			);
+
+		_str_elite_guaranteed_source =
+			"ZONE_CARD";
+
+		_str_elite_guaranteed_detail =
+			_str_loot_zone_id;
+
+		// Fall back to the Elite Beast's ordinary deck when the Zone has no Card.
+		if (!is_struct(_stct_elite_guaranteed_roll)){
+
+			_stct_elite_guaranteed_roll =
+				scr_reward_elite_roll_card_from_pool(
+					_arr_elite_beast_card_pool,
+					_arr_elite_guaranteed_ids,
+					_stct_reward_card_rarity_weights
+				);
+
+			_str_elite_guaranteed_source =
+				"BEAST_CARD";
+
+			_str_elite_guaranteed_detail =
+				_str_elite_reward_beast_name;
+		}
+
+		// Retry without exclusions if a duplicate is the only way to preserve
+		// the two-Card guaranteed reward floor.
+		if (!is_struct(_stct_elite_guaranteed_roll)){
+
+			_stct_elite_guaranteed_roll =
+				scr_reward_elite_roll_card_from_pool(
+					_arr_elite_zone_card_pool,
+					[],
+					_stct_reward_card_rarity_weights
+					);
+
+			_str_elite_guaranteed_source =
+				"ZONE_CARD";
+
+			_str_elite_guaranteed_detail =
+				_str_loot_zone_id;
+		}
+
+		if (!is_struct(_stct_elite_guaranteed_roll)){
+
+			_stct_elite_guaranteed_roll =
+				scr_reward_elite_roll_card_from_pool(
+					_arr_elite_beast_card_pool,
+					[],
+					_stct_reward_card_rarity_weights
+					);
+
+			_str_elite_guaranteed_source =
+				"BEAST_CARD";
+
+			_str_elite_guaranteed_detail =
+				_str_elite_reward_beast_name;
+		}
+
+		if (is_struct(_stct_elite_guaranteed_roll)){
+
+			var _stct_elite_guaranteed_award_2 =
+				scr_reward_award_card(
+					_stct_elite_guaranteed_roll
+						._str_card_id,
+					_str_elite_guaranteed_source,
+					_str_elite_guaranteed_detail
+				);
+
+			if (is_struct(_stct_elite_guaranteed_award_2)){
+
+				array_push(
+					_arr_rewards,
+					_stct_elite_guaranteed_award_2
+						._stct_entry
+				);
+
+				array_push(
+					_arr_elite_guaranteed_ids,
+					_stct_elite_guaranteed_roll
+						._str_card_id
+				);
+
+				_ct_elite_guaranteed_cards_awarded++;
+			}
+		}
+
+		//==================//
+		//EXACT ELITE CARD(S)//
+		//==================//
+		for (
+			var _it_exact_elite_card = 0;
+			_it_exact_elite_card <
+				array_length(
+					_arr_elite_exact_card_candidates
+				);
+			_it_exact_elite_card++
+		){
+
+			var _stct_exact_elite_candidate =
+				_arr_elite_exact_card_candidates[
+					_it_exact_elite_card
+				];
+
+			if (!is_struct(_stct_exact_elite_candidate)){
+				continue;
+			}
+
+			var _stct_exact_elite_award =
+				scr_reward_award_card(
+					_stct_exact_elite_candidate
+						._str_card_id,
+					"ELITE_CARD",
+					_stct_exact_elite_candidate
+						._str_source_detail
+				);
+
+			if (!is_struct(_stct_exact_elite_award)){
+				continue;
+			}
+
+			array_push(
+				_arr_rewards,
+				_stct_exact_elite_award
+					._stct_entry
+			);
+
+			_ct_elite_exact_cards_awarded++;
+		}
+
+		scr_debug_log(
+			"REWARD",
+			"ELITE",
+			undefined,
+			"ELITE GUARANTEED CARDS RESOLVED" +
+			" | ELITE: " +
+			_str_elite_reward_beast_name +
+			" | NORMAL GUARANTEED: " +
+			string(
+				_ct_elite_guaranteed_cards_awarded
+			) +
+			" | EXACT ELITE CARDS: " +
+			string(
+				_ct_elite_exact_cards_awarded
+			),
+			"REWARD",
+			"SCR_REWARD_RESOLVE_BATTLE"
+		);
+	}
 
 	#endregion
 
@@ -1250,7 +1855,7 @@ function scr_reward_resolve_battle(
 
 		var _str_requested_rarity =
 			scr_reward_roll_card_rarity(
-				scr_reward_get_card_rarity_weights()
+				_stct_reward_card_rarity_weights
 			);
 
 		var _arr_rarity_fallback =
@@ -1398,7 +2003,7 @@ function scr_reward_resolve_battle(
 
 		var _str_requested_rarity =
 			scr_reward_roll_card_rarity(
-				scr_reward_get_card_rarity_weights()
+				_stct_reward_card_rarity_weights
 			);
 
 		var _arr_rarity_fallback =
@@ -1546,8 +2151,7 @@ function scr_reward_resolve_battle(
 			_arr_secret_item_pool
 		) > 0 &&
 		random(100) <
-			_stct_config
-				._val_secret_item_chance
+			_val_secret_item_chance
 	){
 
 		var _str_secret_item_id =
@@ -1595,8 +2199,7 @@ function scr_reward_resolve_battle(
 
 		var _str_requested_rarity =
 			scr_reward_roll_card_rarity(
-				_stct_global_bonus
-					._stct_card_rarity_weights
+				_stct_reward_card_rarity_weights
 			);
 
 		var _arr_rarity_fallback =
@@ -1712,13 +2315,27 @@ function scr_reward_resolve_battle(
 			5
 		);
 
-	var _ct_exp_each =
+	var _ct_exp_each_base =
 		_stct_config._ct_exp_base +
 		(
 			_ct_exp_level_band *
 			_stct_config
 				._ct_exp_per_level_band
 		);
+
+	var _ct_exp_each =
+		floor(
+			_ct_exp_each_base *
+			_val_elite_exp_multiplier
+		);
+
+	if (_val_elite_exp_multiplier > 1){
+		scr_gui_spawn_popup_trigger_banner(
+			"ENLIGHTENED: " +
+			string(_val_elite_exp_multiplier) +
+			"x EXP"
+		);
+	}
 
 	if (
 		variable_global_exists(
@@ -1939,6 +2556,14 @@ scr_beast_add_exp(
 		string(
 			_val_gold_reward
 		) +
+		" | ELITE GOLD MULT: x" +
+		string(
+			_val_elite_gold_multiplier
+		) +
+		" | ELITE EXP MULT: x" +
+		string(
+			_val_elite_exp_multiplier
+		) +
 		" | EXP: +" +
 		string(
 			_ct_exp_each
@@ -1946,6 +2571,16 @@ scr_beast_add_exp(
 		" | EXP RECIPIENTS: " +
 		string(
 			_ct_exp_recipients
+		) +
+		" | ELITE: " +
+		(_flag_elite_battle ? "YES" : "NO") +
+		" | ELITE GUARANTEED CARDS: " +
+		string(
+			_ct_elite_guaranteed_cards_awarded
+		) +
+		" | ELITE EXACT CARDS: " +
+		string(
+			_ct_elite_exact_cards_awarded
 		) +
 		" | REWARD ENTRIES: " +
 		string(
@@ -1968,6 +2603,15 @@ scr_beast_add_exp(
 	return {
 		_flag_success : true,
 
+		_flag_elite_battle :
+			_flag_elite_battle,
+
+		_ct_elite_guaranteed_cards_awarded :
+			_ct_elite_guaranteed_cards_awarded,
+
+		_ct_elite_exact_cards_awarded :
+			_ct_elite_exact_cards_awarded,
+
 		_stct_grade :
 			_stct_grade,
 
@@ -1986,6 +2630,18 @@ scr_beast_add_exp(
 		_val_gold_level_bonus_per_level :
 			_stct_config
 				._val_gold_level_bonus_per_level,
+
+		_val_elite_gold_multiplier :
+			_val_elite_gold_multiplier,
+
+		_val_elite_exp_multiplier :
+			_val_elite_exp_multiplier,
+
+		_val_elite_risk_tier :
+			_val_elite_risk_tier,
+
+		_val_elite_reward_quality_multiplier :
+			_val_elite_reward_quality_multiplier,
 
 		_val_enemy_avg_level :
 			_val_enemy_avg_level,

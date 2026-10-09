@@ -1,4 +1,3 @@
-
 //===============================================================================//
 // STEP: OBJ_TRANSITION_FADER
 // FUNCTION: Runs the fade, spinner hold, battle reveal, and final fade.

@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_GET_CHAR_THRESHOLD
@@ -17,21 +18,17 @@ function scr_status_get_char_threshold(){
 	//================//
 	var _ct_threshold = 5;
 
-	//----------------------//
-	//VALIDATE GLOBAL LIST//
-	//----------------------//
-	if (!variable_global_exists("list_statuses")){
-		return _ct_threshold;
-	}
-
-	if (!ds_exists(global.list_statuses,ds_type_list)){
+	//-----------------------//
+	//VALIDATE WEATHER REF//
+	//-----------------------//
+	if (!variable_global_exists("ref_status_weather")){
 		return _ct_threshold;
 	}
 
 	//================//
 	//HEATWAVE//
 	//================//
-	var _ref_heatwave = scr_status_check("WEATHER: HEATWAVE",global.list_statuses);
+	var _ref_heatwave = scr_status_check("WEATHER: HEATWAVE","WEATHER");
 
 	if (_ref_heatwave != -1 && instance_exists(_ref_heatwave)){
 		_ct_threshold--;

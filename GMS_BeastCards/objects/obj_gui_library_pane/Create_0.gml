@@ -235,7 +235,9 @@ hscr_gui_library_draw_card_info = function(_stct_card,_val_box_x,_val_box_y){
 		1
 	);
 
-	draw_set_colour(c_black);
+	draw_set_colour(c_white);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
 
 	var _str_color_text =
 		hscr_gui_library_get_card_color_text(

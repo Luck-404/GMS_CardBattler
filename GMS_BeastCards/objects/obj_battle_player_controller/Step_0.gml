@@ -203,6 +203,25 @@ switch(_state_player){
 			_val_spawn_index++;
 		}
 
+		//=========================//
+		//INSTALL ENTRY FORMATION//
+		//=========================//
+		/*
+			The instance_create_layer positions above are only provisional spawn
+			coordinates.
+
+			The authoritative formation system must run after the complete player
+			team exists. Without this refresh, PLAYER can remain at the old
+			center +/- 80, 100 px spawn coordinates until the first death, swap,
+			reposition, Elite change, or other runtime formation refresh.
+
+			Entry setup is immediate, so animation is explicitly disabled.
+		*/
+		scr_battle_refresh_formation(
+			"PLAYER",
+			false
+		);
+
 		scr_debug_log(
 			"BATTLE",
 			"PLAYER",
@@ -210,7 +229,8 @@ switch(_state_player){
 			"PLAYER BEAST INITIALIZATION COMPLETE | ACTIVE: " +
 			string(ds_list_size(_list_beasts_alive)) +
 			" | PARTY: " +
-			string(_ct_party_beasts),
+			string(_ct_party_beasts) +
+			" | FORMATION INSTALLED: YES",
 			"INIT",
 			"OBJ_BATTLE_PLAYER_CONTROLLER:STEP"
 		);
@@ -627,58 +647,128 @@ switch(_state_player){
 					_it_status++
 				){
 
-					array_push(
-						_arr_statuses,
+					var _ref_host_status =
 						ds_list_find_value(
 							_ref_beast._list_statuses,
 							_it_status
-						)
-					);
-				}
-			}
-
-			//=======================//
-			//GLOBAL BEGIN STATUSES//
-			//=======================//
-			if (
-				ds_exists(
-					global.list_statuses,
-					ds_type_list
-				)
-			){
-
-				for (
-					var _it_global_status = 0;
-					_it_global_status <
-						ds_list_size(
-							global.list_statuses
-						);
-					_it_global_status++
-				){
-
-					var _ref_global_status =
-						ds_list_find_value(
-							global.list_statuses,
-							_it_global_status
 						);
 
-					if (!instance_exists(_ref_global_status)){
+					if (!instance_exists(_ref_host_status)){
 						continue;
 					}
 
+					// TEAM-scope entries may retain a source/death compatibility link
+					// on their source Beast. Their authoritative turn processing lives
+					// in the Team Status registry below, so do not queue them twice.
 					if (
-						_ref_global_status._str_trigger_region != "START" &&
-						_ref_global_status._str_trigger_region != "BEGIN"
+						variable_instance_exists(
+							_ref_host_status,
+							"_str_status_scope"
+						) &&
+						_ref_host_status._str_status_scope == "TEAM"
 					){
 						continue;
 					}
 
 					array_push(
 						_arr_statuses,
-						_ref_global_status
+						_ref_host_status
 					);
 				}
 			}
+
+			//=====================//
+			//PLAYER TEAM STATUSES//
+			//=====================//
+			scr_status_prune_team_status_sources(
+				"PLAYER"
+			);
+
+			var _list_player_team_start_statuses =
+				scr_status_get_team_status_list(
+					"PLAYER"
+				);
+
+			if (
+				_list_player_team_start_statuses != undefined &&
+				ds_exists(
+					_list_player_team_start_statuses,
+					ds_type_list
+				)
+			){
+
+				for (
+					var _it_team_status = 0;
+					_it_team_status <
+						ds_list_size(
+							_list_player_team_start_statuses
+						);
+					_it_team_status++
+				){
+
+					var _ref_team_status =
+						ds_list_find_value(
+							_list_player_team_start_statuses,
+							_it_team_status
+						);
+
+					if (!instance_exists(_ref_team_status)){
+						continue;
+					}
+
+					if (
+						_ref_team_status._str_trigger_region != "START" &&
+						_ref_team_status._str_trigger_region != "BEGIN"
+					){
+						continue;
+					}
+
+					array_push(
+						_arr_statuses,
+						_ref_team_status
+					);
+				}
+			}
+
+			//========================//
+			//WEATHER / EVENT START//
+			//========================//
+			if (
+				variable_global_exists("ref_status_weather") &&
+				instance_exists(global.ref_status_weather) &&
+				global.ref_status_weather._str_trigger_region == "START"
+			){
+				array_push(
+					_arr_statuses,
+					global.ref_status_weather
+				);
+			}
+
+			if (
+				variable_global_exists("ref_status_event") &&
+				instance_exists(global.ref_status_event) &&
+				global.ref_status_event._str_trigger_region == "START"
+			){
+				var _flag_player_start_event = true;
+
+				if (
+					variable_instance_exists(
+						global.ref_status_event,
+						"_str_event_owner_team"
+					)
+				){
+					_flag_player_start_event =
+						global.ref_status_event._str_event_owner_team == "PLAYER";
+				}
+
+				if (_flag_player_start_event){
+					array_push(
+						_arr_statuses,
+						global.ref_status_event
+					);
+				}
+			}
+
 		}
 
 		//--------------------//
@@ -739,7 +829,7 @@ switch(_state_player){
 			_flag_minions_init = true;
 
 			_arr_casting_minions =
-				scr_minion_build_speed_queue(
+				scr_minion_build_formation_queue(
 					_list_beasts_alive
 				);
 
@@ -912,6 +1002,39 @@ switch(_state_player){
 				hscr_battle_check_beast_color(_list_beasts_alive);
 				hscr_battle_check_beast_archetype(_list_beasts_alive);
 				hscr_battle_check_beast_class(_list_beasts_alive);
+			}
+		}
+
+		//----------------------//
+		//NEUTRAL BEAST INTERACT//
+		//----------------------//
+		if (
+			mouse_check_button_pressed(mb_left) &&
+			!_flag_clicked &&
+			position_meeting(
+				device_mouse_x_to_gui(0),
+				device_mouse_y_to_gui(0),
+				obj_battle_beast
+			)
+		){
+
+			var _ref_beast_clicked =
+				instance_nearest(
+					device_mouse_x_to_gui(0),
+					device_mouse_y_to_gui(0),
+					obj_battle_beast
+				);
+
+			if (
+				instance_exists(_ref_beast_clicked) &&
+				_ref_beast_clicked._str_list == "ALIVE" &&
+				_ref_beast_clicked._val_cur_hp > 0 &&
+				scr_beast_sound_play(
+					_ref_beast_clicked,
+					"INTERACT"
+				)
+			){
+				_flag_clicked = true;
 			}
 		}
 
@@ -1093,8 +1216,21 @@ switch(_state_player){
 			if (
 				instance_exists(_ref_beast_clicked) &&
 				_ref_beast_clicked._str_team == "ENEMY" &&
+				_ref_beast_clicked._flag_elite
+			){
+				audio_play_sound(snd_gui_error,0,false);
+				scr_gui_spawn_popup_error("ELITES CANNOT BE CAPTURED",60);
+
+				_flag_clicked = true;
+				break;
+			}
+
+			if (
+				instance_exists(_ref_beast_clicked) &&
+				_ref_beast_clicked._str_team == "ENEMY" &&
 				_ref_beast_clicked._str_list == "ALIVE" &&
-				_ref_beast_clicked._val_cur_hp > 0
+				_ref_beast_clicked._val_cur_hp > 0 &&
+				_ref_beast_clicked._flag_beast_range_check
 			){
 
 				audio_play_sound(snd_gui_close,0,false);
@@ -1194,7 +1330,14 @@ switch(_state_player){
 				_ref_beast_clicked._flag_beast_class_check
 			){
 
-				audio_play_sound(snd_gui_press,0,false);
+				if (
+					!scr_beast_sound_play(
+						_ref_beast_clicked,
+						"INTERACT"
+					)
+				){
+					audio_play_sound(snd_gui_press,0,false);
+				}
 
 				_flag_clicked = true;
 
@@ -2030,59 +2173,129 @@ switch(_state_player){
 					_it_status++
 				){
 
-					array_push(
-						_arr_statuses,
+					var _ref_host_status =
 						ds_list_find_value(
 							_ref_beast._list_statuses,
 							_it_status
-						)
-					);
-				}
-			}
-
-			if (
-				ds_exists(
-					global.list_statuses,
-					ds_type_list
-				)
-			){
-
-				for (
-					var _it_global_status = 0;
-					_it_global_status <
-						ds_list_size(
-							global.list_statuses
-						);
-					_it_global_status++
-				){
-
-					var _ref_status =
-						ds_list_find_value(
-							global.list_statuses,
-							_it_global_status
 						);
 
-					if (!instance_exists(_ref_status)){
+					if (!instance_exists(_ref_host_status)){
 						continue;
 					}
 
+					// TEAM-scope entries may retain a source/death compatibility link
+					// on their source Beast. Their authoritative turn processing lives
+					// in the Team Status registry below, so do not queue them twice.
 					if (
-						_ref_status._str_status_type == "EVENT" &&
 						variable_instance_exists(
-							_ref_status,
-							"_str_event_owner_team"
+							_ref_host_status,
+							"_str_status_scope"
 						) &&
-						_ref_status._str_event_owner_team != "PLAYER"
+						_ref_host_status._str_status_scope == "TEAM"
 					){
 						continue;
 					}
 
 					array_push(
 						_arr_statuses,
-						_ref_status
+						_ref_host_status
 					);
 				}
 			}
+
+			//=====================//
+			//PLAYER TEAM STATUSES//
+			//=====================//
+			scr_status_prune_team_status_sources(
+				"PLAYER"
+			);
+
+			var _list_player_team_end_statuses =
+				scr_status_get_team_status_list(
+					"PLAYER"
+				);
+
+			if (
+				_list_player_team_end_statuses != undefined &&
+				ds_exists(
+					_list_player_team_end_statuses,
+					ds_type_list
+				)
+			){
+
+				for (
+					var _it_team_status = 0;
+					_it_team_status <
+						ds_list_size(
+							_list_player_team_end_statuses
+						);
+					_it_team_status++
+				){
+
+					var _ref_team_status =
+						ds_list_find_value(
+							_list_player_team_end_statuses,
+							_it_team_status
+						);
+
+					if (!instance_exists(_ref_team_status)){
+						continue;
+					}
+
+					if (_ref_team_status._str_trigger_region != "END"){
+						continue;
+					}
+
+					array_push(
+						_arr_statuses,
+						_ref_team_status
+					);
+				}
+			}
+
+
+			//=====================//
+			//ROUND-END WEATHER//
+			//=====================//
+			if (
+				variable_global_exists("ref_status_weather") &&
+				instance_exists(global.ref_status_weather) &&
+				global.ref_status_weather._str_trigger_region == "END"
+			){
+				array_push(
+					_arr_statuses,
+					global.ref_status_weather
+				);
+			}
+
+			//===================//
+			//ROUND-END EVENT//
+			//===================//
+			if (
+				variable_global_exists("ref_status_event") &&
+				instance_exists(global.ref_status_event) &&
+				global.ref_status_event._str_trigger_region == "END"
+			){
+				var _flag_player_end_event = true;
+
+				if (
+					variable_instance_exists(
+						global.ref_status_event,
+						"_str_event_owner_team"
+					)
+				){
+					_flag_player_end_event =
+						global.ref_status_event._str_event_owner_team == "PLAYER";
+				}
+
+				if (_flag_player_end_event){
+					array_push(
+						_arr_statuses,
+						global.ref_status_event
+					);
+				}
+			}
+
 		}
 
 		if (

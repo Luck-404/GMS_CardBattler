@@ -15,7 +15,7 @@
   "name":"snd_battle_execute",
   "parent":{
     "name":"EXECUTE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/EXECUTE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/EXECUTE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

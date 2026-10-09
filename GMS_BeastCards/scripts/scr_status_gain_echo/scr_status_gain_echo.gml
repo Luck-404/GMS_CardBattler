@@ -1,47 +1,39 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_GAIN_ECHO
-// FUNCTION: Adds Echo stacks to the global Echo Buff.
-//           Creates the Echo Status when needed.
-//           Plays the shared Echo Set VFX and SFX when Echo is gained.
-//           Returns the active Echo Status reference.
+// FUNCTION: Adds Echo stacks to the source Beast's Team Echo resource.
+//           Creates the Team Status when needed and plays the shared Echo VFX/SFX.
+//
+// ARGUMENTS: _ct_amount defaults to 1.
+//            _ref_source may be a Beast or PLAYER/ENEMY Team string. When omitted,
+//            GLOBAL.REF_CASTER_BEAST supplies the active Team for legacy callers.
+// RETURNS: Active Echo Status reference, or undefined.
 //
 //===============================================================================//
 
-function scr_status_gain_echo(_ct_amount=undefined){
+function scr_status_gain_echo(_ct_amount=undefined,_ref_source=undefined){
 
-	//----------//
-	//DEFAULTS//
-	//----------//
 	if (_ct_amount == undefined){
 		_ct_amount = 1;
 	}
 
 	_ct_amount = floor(_ct_amount);
 
-	//----------------//
-	//VALIDATE AMOUNT//
-	//----------------//
 	if (_ct_amount <= 0){
 		return undefined;
 	}
 
-	//===========//
-	//GAIN ECHO//
-	//===========//
 	var _ref_echo = scr_status_buff_echo(
 		"APPLY",
 		undefined,
-		_ct_amount
+		_ct_amount,
+		_ref_source
 	);
 
 	if (!instance_exists(_ref_echo)){
 		return undefined;
 	}
 
-	//================//
-	//ECHO SET VFX/SFX//
-	//================//
 	scr_battle_vfx(
 		undefined,
 		spr_battle_vfx_echo_set,

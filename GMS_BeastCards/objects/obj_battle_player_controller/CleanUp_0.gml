@@ -2,41 +2,56 @@
 //
 // CLEANUP: OBJ_BATTLE_PLAYER_CONTROLLER
 // FUNCTION: Cleans up player battle-owned data structures.
-//           Destroys remaining global Status instances and releases global,
-//           Beast-tracking and Card-pile lists.
-//           Releases temporary processing arrays.
+//           Destroys Team Status registries and Weather/Event references, then releases
+//           Beast-tracking and Card-pile lists and temporary processing arrays.
 //
 //===============================================================================//
 
-#region GLOBAL STATUSES
+#region SHARED STATUS REGISTRIES
 
-//-------------------------//
-//CLEAN UP GLOBAL STATUSES//
-//-------------------------//
+//========================//
+//DESTROY STATUS INSTANCES//
+//========================//
+var _arr_shared_status_lists = [];
+
 if (
-	variable_global_exists("list_statuses") &&
-	global.list_statuses != undefined &&
-	ds_exists(
-		global.list_statuses,
-		ds_type_list
-	)
+	variable_global_exists("list_statuses_player") &&
+	ds_exists(global.list_statuses_player,ds_type_list)
+){
+	array_push(
+		_arr_shared_status_lists,
+		global.list_statuses_player
+	);
+}
+
+if (
+	variable_global_exists("list_statuses_enemy") &&
+	ds_exists(global.list_statuses_enemy,ds_type_list)
+){
+	array_push(
+		_arr_shared_status_lists,
+		global.list_statuses_enemy
+	);
+}
+
+for (
+	var _it_list = 0;
+	_it_list < array_length(_arr_shared_status_lists);
+	_it_list++
 ){
 
-	//------------------------//
-	//DESTROY STATUS INSTANCES//
-	//------------------------//
+	var _list_statuses =
+		_arr_shared_status_lists[_it_list];
+
 	for (
-		var _it_status =
-			ds_list_size(
-				global.list_statuses
-			) - 1;
+		var _it_status = ds_list_size(_list_statuses) - 1;
 		_it_status >= 0;
 		_it_status--
 	){
 
 		var _ref_status =
 			ds_list_find_value(
-				global.list_statuses,
+				_list_statuses,
 				_it_status
 			);
 
@@ -44,17 +59,50 @@ if (
 			instance_destroy(_ref_status);
 		}
 	}
-
-	//-------------------//
-	//DESTROY STATUS LIST//
-	//-------------------//
-	ds_list_destroy(
-		global.list_statuses
-	);
-
-	global.list_statuses =
-		undefined;
 }
+
+//==========================//
+//DESTROY WEATHER / EVENT//
+//==========================//
+if (
+	variable_global_exists("ref_status_weather") &&
+	instance_exists(global.ref_status_weather)
+){
+	instance_destroy(global.ref_status_weather);
+}
+
+if (
+	variable_global_exists("ref_status_event") &&
+	instance_exists(global.ref_status_event)
+){
+	instance_destroy(global.ref_status_event);
+}
+
+global.ref_status_weather = undefined;
+global.ref_status_event = undefined;
+
+//======================//
+//DESTROY STATUS LISTS//
+//======================//
+if (
+	variable_global_exists("list_statuses_player") &&
+	ds_exists(global.list_statuses_player,ds_type_list)
+){
+	ds_list_destroy(global.list_statuses_player);
+}
+
+global.list_statuses_player = undefined;
+
+if (
+	variable_global_exists("list_statuses_enemy") &&
+	ds_exists(global.list_statuses_enemy,ds_type_list)
+){
+	ds_list_destroy(global.list_statuses_enemy);
+}
+
+global.list_statuses_enemy = undefined;
+
+_arr_shared_status_lists = [];
 
 #endregion
 

@@ -25,5 +25,5 @@ function scr_card_cerulean_tideheart(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GAIN ECHO//
 	//================//
-	scr_status_gain_echo(1);
+	scr_status_gain_echo(1,_ref_caster);
 }

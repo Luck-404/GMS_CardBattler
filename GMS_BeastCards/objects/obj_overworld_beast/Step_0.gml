@@ -5,7 +5,9 @@
 //           Player Beasts follow the player.
 //           Wild Beasts wander, chase, flee, and trigger encounters.
 //           Prevents multiple wild Beasts from claiming the same battle entry.
-//           Plays nearby Beast footsteps while moving.
+//           Synchronizes staged Idle/Walk sprite animation, emits terrain-aware
+//           Beast step particles / occasional brush scene VFX, and plays nearby
+//           Beast footsteps while moving.
 //
 //===============================================================================//
 
@@ -310,6 +312,63 @@ var _flag_beast_moving = (
 	abs(y - yprevious) > 0.01
 );
 
+//======================//
+//BEAST SPRITE ANIMATION//
+//======================//
+scr_beast_animation_sync_locomotion(self,_flag_beast_moving);
+scr_beast_animation_update(self);
+
+//========================//
+//BEAST STEP PARTICLES/VFX//
+//========================//
+if (_flag_beast_moving){
+
+	if (_ct_step_particle_timer <= 0){
+
+		_ct_step_particle_timer = 15;
+
+		var _ct_step_particles = irandom_range(1,3);
+
+		for (
+			var _it_step_particle = 0;
+			_it_step_particle < _ct_step_particles;
+			_it_step_particle++
+		){
+
+			var _ref_step_particle =
+				instance_create_layer(
+					x,
+					y + 24,
+					"ily_fx",
+					obj_overworld_vfx_step_particle
+				);
+
+			if (instance_exists(_ref_step_particle)){
+				_ref_step_particle.depth = depth - 1;
+			}
+		}
+
+		// Occasional vegetation/brush traversal burst. The helper samples the
+		// Beast's own ground point and only emits this variant on brush terrain.
+		if (irandom_range(1,8) == 1){
+			scr_overworld_spawn_vfx_plant_litter(
+				x,
+				y + 24,
+				true
+			);
+		}
+	}
+	else{
+		_ct_step_particle_timer--;
+	}
+}
+else{
+	_ct_step_particle_timer = 0;
+}
+
+//================//
+//BEAST STEP SOUND//
+//================//
 if (
 	_flag_beast_moving &&
 	_val_dist_player <= 64 &&
@@ -336,3 +395,15 @@ if (abs(x - xprevious) > 0.01){
 		? -1
 		: 1;
 }
+//===============================================================================//
+//
+// END STEP: OBJ_OVERWORLD_BEAST
+// FUNCTION: Updates overworld Beast depth.
+//           Supports Y-sorted rendering with other world objects.
+//
+//===============================================================================//
+
+//================//
+//UPDATE DEPTH//
+//================//
+depth = -bbox_bottom;

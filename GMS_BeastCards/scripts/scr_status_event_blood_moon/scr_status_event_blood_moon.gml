@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_EVENT_BLOOD_MOON
@@ -22,11 +23,21 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 		//=======//
 		case "APPLY":
 
-			//----------------------//
-			//VALIDATE GLOBAL LIST//
-			//----------------------//
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
+			//=========================//
+			//ENSURE EVENT REGISTRY//
+			//=========================//
+			if (!variable_global_exists("ref_status_event")){
+				global.ref_status_event = undefined;
+			}
+
+			//===========================//
+			//REPLACE DIFFERENT EVENT//
+			//===========================//
+			if (
+				instance_exists(global.ref_status_event) &&
+				global.ref_status_event._str_status_name != "EVENT: BLOOD_MOON"
+			){
+				scr_status_clear_event();
 			}
 
 			//==========//
@@ -43,7 +54,7 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			var _ref_existing_status = scr_status_check(
 				"EVENT: BLOOD_MOON",
-				global.list_statuses
+				"EVENT"
 			);
 
 			//==================//
@@ -58,6 +69,8 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				global.ref_status_event = _ref_existing_status;
 
 				return _ref_existing_status;
 			}
@@ -90,6 +103,7 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 			_ref_new_status._ref_host = undefined;
 
 			_ref_new_status._str_status_type = "EVENT";
+			_ref_new_status._str_status_scope = "EVENT";
 			_ref_new_status._str_status_name = "EVENT: BLOOD_MOON";
 			_ref_new_status._str_status_desc = "Event. All healing is prevented. At the end of each round, each living Beast gains 1 Rage, and each Minion on that Beast gains (+1/+1). When Blood Moon expires, apply 1 Bloodlet to every living Beast. Lifetime: 4 rounds.";
 
@@ -103,7 +117,7 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			//REGISTER STATUS//
 			//================//
-			ds_list_add(global.list_statuses,_ref_new_status);
+			global.ref_status_event = _ref_new_status;
 
 			//======================//
 			//BLOOD MOON START VFX//
@@ -134,7 +148,7 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			//REPOSITION EVENT//
 			//================//
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition("EVENT");
 
 			return _ref_new_status;
 
@@ -354,12 +368,7 @@ function scr_status_event_blood_moon(_str_tag,_ref_status,_val_lifetime=undefine
 			//================//
 			//REPOSITION EVENT//
 			//================//
-			if (ds_exists(global.list_statuses,ds_type_list)){
-
-				scr_status_reposition(
-					global.list_statuses
-				);
-			}
+			scr_status_reposition("EVENT");
 
 		break;
 

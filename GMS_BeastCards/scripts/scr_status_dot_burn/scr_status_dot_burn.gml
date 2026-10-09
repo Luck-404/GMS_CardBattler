@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_DOT_BURN
@@ -172,8 +173,7 @@ function scr_status_dot_burn(_str_tag,_ref_status,_val_lifetime=undefined,_flag_
 			var _val_burn_hit = 1;
 
 			if (
-				ds_exists(global.list_statuses,ds_type_list) &&
-				scr_status_check("WEATHER: HEATWAVE",global.list_statuses) != -1
+				scr_status_check("WEATHER: HEATWAVE","WEATHER") != -1
 			){
 				_val_burn_hit++;
 			}

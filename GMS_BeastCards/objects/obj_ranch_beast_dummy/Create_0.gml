@@ -3,7 +3,7 @@
 // CREATE: OBJ_RANCH_BEAST_DUMMY
 // FUNCTION: Initializes a Ranch Beast dummy.
 //           Stores Beast presentation data, wandering behavior, emoji effects,
-//           movement state, and shake-animation state.
+//           movement state, shake state, and manual Beast interact animation.
 //
 //===============================================================================//
 
@@ -11,11 +11,14 @@
 //DRAW SETTINGS//
 //================//
 depth = 1;
+image_speed = 0;
+image_index = 0;
 
 //================//
 //IDENTIFIERS//
 //================//
 _uid_dummy = undefined;
+_str_beast_name = "";
 
 _spr_shadow = spr_player_shadow;
 
@@ -30,7 +33,8 @@ enum ENUM_RANCH_BEAST_DUMMY_STATE{
 	IDLE,
 	MOVE,
 	SHAKE,
-	REST
+	REST,
+	INTERACT
 }
 
 _state_dummy = choose(

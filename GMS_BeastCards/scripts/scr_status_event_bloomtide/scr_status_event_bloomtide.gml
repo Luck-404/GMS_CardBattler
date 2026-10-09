@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_EVENT_BLOOMTIDE
@@ -20,11 +21,21 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 		//=======//
 		case "APPLY":
 
-			//----------------------//
-			//VALIDATE GLOBAL LIST//
-			//----------------------//
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
+			//=========================//
+			//ENSURE EVENT REGISTRY//
+			//=========================//
+			if (!variable_global_exists("ref_status_event")){
+				global.ref_status_event = undefined;
+			}
+
+			//===========================//
+			//REPLACE DIFFERENT EVENT//
+			//===========================//
+			if (
+				instance_exists(global.ref_status_event) &&
+				global.ref_status_event._str_status_name != "EVENT: BLOOMTIDE"
+			){
+				scr_status_clear_event();
 			}
 
 			//==========//
@@ -41,7 +52,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			//================//
 			var _ref_existing_status = scr_status_check(
 				"EVENT: BLOOMTIDE",
-				global.list_statuses
+				"EVENT"
 			);
 
 			//==================//
@@ -57,6 +68,8 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				global.ref_status_event = _ref_existing_status;
 
 				return _ref_existing_status;
 			}
@@ -93,6 +106,9 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			_ref_new_status._str_status_type =
 				"EVENT";
 
+			_ref_new_status._str_status_scope =
+				"EVENT";
+
 			_ref_new_status._str_status_name =
 				"EVENT: BLOOMTIDE";
 
@@ -111,10 +127,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			//================//
 			//REGISTER STATUS//
 			//================//
-			ds_list_add(
-				global.list_statuses,
-				_ref_new_status
-			);
+			global.ref_status_event = _ref_new_status;
 
 			//=====================//
 			//BLOOMTIDE START VFX//
@@ -155,7 +168,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 			//REPOSITION STATUS//
 			//==================//
 			scr_status_reposition(
-				global.list_statuses
+				"EVENT"
 			);
 
 			return _ref_new_status;
@@ -315,12 +328,7 @@ function scr_status_event_bloomtide(_str_tag,_ref_status,_val_lifetime=undefined
 				_ref_status
 			);
 
-			if (ds_exists(global.list_statuses,ds_type_list)){
-
-				scr_status_reposition(
-					global.list_statuses
-				);
-			}
+			scr_status_reposition("EVENT");
 
 		break;
 

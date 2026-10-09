@@ -2,9 +2,9 @@
 //
 // STEP: OBJ_BATTLE_ENEMY_CONTROLLER
 // FUNCTION: Executes the enemy battle state machine.
-//           Initializes enemy Beasts/Cards, processes turn-start effects,
-//           resolves Minions and enemy Card casts, rotates Cards,
-//           resolves turn-end effects, and passes turn control.
+//           Initializes enemy Beasts/Cards, prepares visible queued Cards,
+//           processes turn-start effects, resolves Minions and enemy Card casts,
+//           rotates Card queues, resolves turn-end effects, and passes control.
 //
 //===============================================================================//
 
@@ -206,6 +206,57 @@ switch(_state_enemy){
 			_stct_enemy_unit._val_beast_hp_cur =
 				_val_expected_max_hp;
 
+			//================//
+			//APPLY ELITE//
+			//================//
+			var _flag_unit_elite =
+				variable_struct_exists(_stct_enemy_unit,"_flag_elite") &&
+				_stct_enemy_unit._flag_elite;
+
+			var _flag_encounter_elite =
+				_it_beast == 0 &&
+				_flag_elite_encounter;
+
+			if (_flag_unit_elite || _flag_encounter_elite){
+				var _str_apply_modifier = undefined;
+
+				if (
+					_flag_encounter_elite &&
+					_str_elite_modifier != ""
+				){
+					_str_apply_modifier = _str_elite_modifier;
+				}
+
+				if (_flag_encounter_elite){
+					_stct_enemy_unit._val_elite_risk_tier =
+						_val_elite_risk_tier;
+
+					_stct_enemy_unit._val_elite_chance_percent =
+						_val_elite_chance_percent;
+
+					_stct_enemy_unit._val_elite_roll =
+						_val_elite_roll;
+
+					_stct_enemy_unit._str_elite_source_item_id =
+						_str_elite_source_item_id;
+				}
+
+				if (!scr_battle_elite_apply(_stct_enemy_unit,_str_apply_modifier)){
+					scr_debug_log(
+						"BATTLE",
+						"ELITE",
+						_stct_enemy_unit,
+						"ELITE APPLICATION FAILED; ENEMY WILL CONTINUE AS NORMAL" +
+						" | ROLL: " + string(_it_beast),
+						"ERROR",
+						"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
+					);
+
+					_stct_enemy_unit._flag_elite = false;
+					_stct_enemy_unit._str_elite_modifier = "";
+				}
+			}
+
 			if (
 				variable_global_exists(
 					"map_logbook_beasts"
@@ -308,6 +359,25 @@ switch(_state_enemy){
 			_ref_enemy_beast._ref_unit =
 				_stct_enemy_unit;
 
+			_ref_enemy_beast._flag_elite =
+				variable_struct_exists(_stct_enemy_unit,"_flag_elite") &&
+				_stct_enemy_unit._flag_elite;
+
+			if (_ref_enemy_beast._flag_elite){
+				_ref_enemy_beast._str_elite_modifier =
+					string_upper(string(_stct_enemy_unit._str_elite_modifier));
+
+				_ref_enemy_beast._val_elite_draw_scale_multiplier =
+					scr_elite_get_draw_scale_multiplier(
+						_ref_enemy_beast._str_elite_modifier,
+						"BATTLE"
+					);
+
+				if (variable_struct_exists(_stct_enemy_unit,"_val_elite_risk_tier")){
+					_ref_enemy_beast._val_elite_risk_tier = _stct_enemy_unit._val_elite_risk_tier;
+				}
+			}
+
 			_ref_enemy_beast._stct_held_item =
 				_stct_enemy_unit._stct_beast_held_item;
 
@@ -377,12 +447,27 @@ switch(_state_enemy){
 				string(_stct_enemy_entry._it_roll) +
 				" | FORMATION PRIORITY: " +
 				string(_stct_enemy_entry._val_formation_priority) +
+				" | ELITE: " +
+				(_ref_enemy_beast._flag_elite ? "YES (" + _ref_enemy_beast._str_elite_modifier + ")" : "NO") +
 				" | POSITION: " +
 				string(_it_spawn),
 				"INIT",
 				"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
 			);
 		}
+
+		//=====================//
+		//INSTALL ENTRY FORMATION//
+		//=====================//
+		/*
+			FALSE prevents an artificial entry lerp. ENEMY refreshes also resolve
+			PLAYER, so whichever controller initializes second completes the final
+			two-team opening geometry in the same Step frame.
+		*/
+		scr_battle_refresh_formation(
+			"ENEMY",
+			false
+		);
 
 		scr_debug_log(
 			"BATTLE",
@@ -485,6 +570,130 @@ switch(_state_enemy){
 				continue;
 			}
 
+			//================//
+			//ELITE CARD DECK//
+			//================//
+			var _str_elite_deck_cards = "NONE";
+
+			if (_ref_beast._flag_elite){
+
+				var _ct_elite_cards_required =
+					(
+						_ref_beast._str_elite_modifier ==
+						"SCHOLARLY"
+					)
+					? 2
+					: 1;
+
+				var _arr_elite_card_ids =
+					scr_battle_elite_ensure_cards(
+						_stct_unit,
+						_arr_deck,
+						_ct_elite_cards_required
+					);
+
+				if (
+					is_array(_arr_elite_card_ids) &&
+					array_length(_arr_elite_card_ids) > 0
+				){
+
+					_str_elite_deck_cards = "";
+
+					for (
+						var _it_elite_card = 0;
+						_it_elite_card <
+							array_length(
+								_arr_elite_card_ids
+							);
+						_it_elite_card++
+					){
+
+						var _str_elite_card_id =
+							string_upper(
+								string(
+									_arr_elite_card_ids[
+										_it_elite_card
+									]
+								)
+							);
+
+						var _stct_elite_card =
+							scr_card_get_info(
+								_str_elite_card_id
+							);
+
+						if (!is_struct(_stct_elite_card)){
+
+							scr_debug_log(
+								"BATTLE",
+								"ELITE",
+								_ref_beast,
+								"ELITE CARD DECK INJECTION FAILED" +
+								" | CARD: " +
+								_str_elite_card_id +
+								" | REASON: INVALID CARD DATA",
+								"ERROR",
+								"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
+							);
+
+							continue;
+						}
+
+						_stct_elite_card._str_enemy_special_card_source =
+							"ELITE_POOL";
+
+						array_push(
+							_arr_deck,
+							_stct_elite_card
+						);
+
+						if (_str_elite_deck_cards != ""){
+							_str_elite_deck_cards += ", ";
+						}
+
+						_str_elite_deck_cards +=
+							_str_elite_card_id;
+					}
+				}
+			}
+
+			//=================//
+			//MONARCH ARCHETYPE//
+			//=================//
+			var _str_monarch_card = "NONE";
+
+			if (
+				_ref_beast._flag_elite &&
+				_ref_beast._str_elite_modifier ==
+					"MONARCH"
+			){
+				var _str_monarch_card_id =
+					scr_battle_elite_ensure_monarch_card(
+						_stct_unit,
+						_arr_deck
+					);
+
+				if (_str_monarch_card_id != ""){
+					var _stct_monarch_card =
+						scr_card_get_info(
+							_str_monarch_card_id
+						);
+
+					if (is_struct(_stct_monarch_card)){
+						_stct_monarch_card._str_enemy_special_card_source =
+							"MONARCH";
+
+						array_push(
+							_arr_deck,
+							_stct_monarch_card
+						);
+
+						_str_monarch_card =
+							_str_monarch_card_id;
+					}
+				}
+			}
+
 			var _ct_deck_cards =
 				array_length(_arr_deck);
 
@@ -543,6 +752,7 @@ switch(_state_enemy){
 				_ref_card._ref_card = _stct_card;
 				_ref_card._ref_unit = _ref_beast;
 				_ref_card._str_location = "DECK";
+				_ref_card._val_enemy_queue_slot = -1;
 
 				_ref_card.visible = true;
 
@@ -562,41 +772,53 @@ switch(_state_enemy){
 
 			_ref_beast._val_hand_pos = 0;
 
+			var _arr_queued_cards =
+				hscr_battle_enemy_refresh_queued_cards(
+					_ref_beast,
+					false
+				);
+
 			var _str_active_card =
 				"NONE";
 
-			if (
-				ds_list_size(
-					_ref_beast._list_deck
-				) > 0
-			){
+			if (array_length(_arr_queued_cards) > 0){
 
-				var _ref_first_card =
-					ds_list_find_value(
-						_ref_beast._list_deck,
-						_ref_beast._val_hand_pos
-					);
+				_str_active_card = "";
 
-				if (instance_exists(_ref_first_card)){
+				for (
+					var _it_queue = 0;
+					_it_queue < array_length(_arr_queued_cards);
+					_it_queue++
+				){
 
-					_ref_first_card._str_location =
-						"HAND";
+					var _ref_queued_card =
+						_arr_queued_cards[
+							_it_queue
+						];
 
 					if (
-						is_struct(
-							_ref_first_card._ref_card
-						)
+						!instance_exists(_ref_queued_card) ||
+						!is_struct(_ref_queued_card._ref_card)
 					){
-
-						_str_active_card =
-							string_upper(
-								string(
-									_ref_first_card
-										._ref_card
-										._str_card_name
-								)
-							);
+						continue;
 					}
+
+					if (_str_active_card != ""){
+						_str_active_card += ", ";
+					}
+
+					_str_active_card +=
+						string_upper(
+							string(
+								_ref_queued_card
+									._ref_card
+									._str_card_name
+							)
+						);
+				}
+
+				if (_str_active_card == ""){
+					_str_active_card = "NONE";
 				}
 			}
 
@@ -606,8 +828,12 @@ switch(_state_enemy){
 				_ref_beast,
 				"ENEMY DECK INITIALIZED | CARDS: " +
 				string(ds_list_size(_ref_beast._list_deck)) +
-				" | ACTIVE: " +
+				" | QUEUED: " +
 				_str_active_card +
+				" | ELITE CARDS: " +
+				_str_elite_deck_cards +
+				" | MONARCH CARD: " +
+				_str_monarch_card +
 				" | DECK: " +
 				_str_deck_cards,
 				"INIT",
@@ -625,6 +851,13 @@ switch(_state_enemy){
 			string(_ct_enemy_cards_total),
 			"INIT",
 			"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
+		);
+
+		//=====================//
+		//ELITE ENTRY EFFECTS//
+		//=====================//
+		scr_battle_elite_trigger_entry_effects(
+			_list_beasts_alive
 		);
 
 		_state_enemy =
@@ -826,6 +1059,18 @@ switch(_state_enemy){
 			!_flag_statuses_init
 		){
 
+			//==========================//
+			//ELITE TURN-START EFFECTS//
+			//==========================//
+			/*
+				PHASING resolves before the normal Status queue is built.
+				If it Banished the host, that Beast is no longer included in
+				this turn's Status queue, so its remaining Statuses do not tick.
+			*/
+			scr_battle_elite_trigger_turn_start(
+				_list_beasts_alive
+			);
+
 			_flag_statuses_init = true;
 
 			_arr_statuses = [];
@@ -856,16 +1101,90 @@ switch(_state_enemy){
 					_it_status++
 				){
 
-					array_push(
-						_arr_statuses,
+					var _ref_host_status =
 						ds_list_find_value(
 							_ref_beast._list_statuses,
 							_it_status
-						)
+						);
+
+					if (!instance_exists(_ref_host_status)){
+						continue;
+					}
+
+					// TEAM-scope entries may retain a source/death compatibility link
+					// on their source Beast. Their authoritative turn processing lives
+					// in the Team Status registry below, so do not queue them twice.
+					if (
+						variable_instance_exists(
+							_ref_host_status,
+							"_str_status_scope"
+						) &&
+						_ref_host_status._str_status_scope == "TEAM"
+					){
+						continue;
+					}
+
+					array_push(
+						_arr_statuses,
+						_ref_host_status
 					);
 				}
 			}
+			//====================//
+			//ENEMY TEAM STATUSES//
+			//====================//
+			scr_status_prune_team_status_sources(
+				"ENEMY"
+			);
+
+			var _list_enemy_team_start_statuses =
+				scr_status_get_team_status_list(
+					"ENEMY"
+				);
+
+			if (
+				_list_enemy_team_start_statuses != undefined &&
+				ds_exists(
+					_list_enemy_team_start_statuses,
+					ds_type_list
+				)
+			){
+
+				for (
+					var _it_team_status = 0;
+					_it_team_status <
+						ds_list_size(
+							_list_enemy_team_start_statuses
+						);
+					_it_team_status++
+				){
+
+					var _ref_team_status =
+						ds_list_find_value(
+							_list_enemy_team_start_statuses,
+							_it_team_status
+						);
+
+					if (!instance_exists(_ref_team_status)){
+						continue;
+					}
+
+					if (
+						_ref_team_status._str_trigger_region != "START" &&
+						_ref_team_status._str_trigger_region != "BEGIN"
+					){
+						continue;
+					}
+
+					array_push(
+						_arr_statuses,
+						_ref_team_status
+					);
+				}
+			}
+
 		}
+
 
 		if (
 			_flag_statuses_init &&
@@ -885,6 +1204,17 @@ switch(_state_enemy){
 				_it_status_queue++;
 
 				if (instance_exists(_ref_status)){
+
+					if (
+						_ref_status._str_trigger_region == "START" ||
+						_ref_status._str_trigger_region == "BEGIN"
+					){
+						// Host and Team START Statuses use the same command pathway.
+						// Restricting this to TEAM scope leaves enemy-hosted DOT/CC/
+						// Debuff lifetimes frozen, including Phasing's remaining negatives.
+						_ref_status._str_status_command = "REPEAT";
+					}
+
 					scr_battle_init_wait(15);
 				}
 			}
@@ -914,7 +1244,7 @@ switch(_state_enemy){
 			_flag_minions_init = true;
 
 			_arr_casting_minions =
-				scr_minion_build_speed_queue(
+				scr_minion_build_formation_queue(
 					_list_beasts_alive
 				);
 
@@ -987,16 +1317,46 @@ switch(_state_enemy){
 						_it_beast
 					);
 
-				if (instance_exists(_ref_beast)){
+				if (!instance_exists(_ref_beast)){
+					continue;
+				}
+
+				var _arr_queued_cards =
+					hscr_battle_enemy_refresh_queued_cards(
+						_ref_beast,
+						false
+					);
+
+				var _ct_actions =
+					array_length(
+						_arr_queued_cards
+					);
+
+				for (
+					var _it_action = 0;
+					_it_action < _ct_actions;
+					_it_action++
+				){
 
 					array_push(
 						_arr_casting_beasts,
-						_ref_beast
+						{
+							_ref_beast : _ref_beast,
+							_ref_card : _arr_queued_cards[_it_action],
+							_it_action : _it_action,
+							_ct_actions : _ct_actions
+						}
 					);
 				}
 			}
-		}
 
+			/*
+				Stop on the queue-build frame. This guarantees SCHOLARLY's two
+				real Card instances are both present for at least one Draw pass
+				before the left / queue-slot-0 Card resolves.
+			*/
+			break;
+		}
 		//--------------------//
 		//EXECUTE CAST QUEUE//
 		//--------------------//
@@ -1010,10 +1370,18 @@ switch(_state_enemy){
 				array_length(_arr_casting_beasts)
 			){
 
-				var _ref_beast =
+				var _stct_cast_entry =
 					_arr_casting_beasts[
 						_it_casting_beast
 					];
+
+				if (!is_struct(_stct_cast_entry)){
+					_it_casting_beast++;
+					break;
+				}
+
+				var _ref_beast =
+					_stct_cast_entry._ref_beast;
 
 				if (!instance_exists(_ref_beast)){
 
@@ -1021,6 +1389,7 @@ switch(_state_enemy){
 
 					break;
 				}
+
 
 				obj_battle_player_controller
 					.hscr_battle_check_beast_able(
@@ -1039,10 +1408,7 @@ switch(_state_enemy){
 				}
 
 				var _ref_card =
-					ds_list_find_value(
-						_ref_beast._list_deck,
-						_ref_beast._val_hand_pos
-					);
+					_stct_cast_entry._ref_card;
 
 				if (!instance_exists(_ref_card)){
 
@@ -1250,6 +1616,60 @@ switch(_state_enemy){
 								);
 
 						break;
+
+						case "ARCHETYPE":
+
+							// Archetype Cards still obey their normal range and
+							// effect semantics. Monarch only grants Cards the
+							// Beast can legally cast.
+
+							if (_stct_card._str_card_range == "GLOBAL"){
+								_ref_target = "GLOBAL";
+							}
+							else if (_stct_card._str_card_range == "SELF"){
+								_ref_target = _ref_beast;
+							}
+							else{
+								switch (_str_effect_type){
+									case "DIRECT":
+									case "DOT":
+									case "DEBUFF":
+									case "CC":
+										_ref_target =
+											hscr_battle_enemy_get_hostile_target(
+												_ref_beast,
+												_stct_card
+											);
+									break;
+
+									case "HEAL":
+										_ref_target =
+											hscr_battle_enemy_get_heal_target(
+												_ref_beast,
+												_stct_card
+											);
+									break;
+
+									case "WEATHER":
+									case "EVENT":
+										_ref_target =
+											hscr_battle_enemy_get_hostile_target(
+												_ref_beast,
+												_stct_card
+											);
+									break;
+
+									default:
+										_ref_target =
+											hscr_battle_enemy_get_friendly_target(
+												_ref_beast,
+												_stct_card
+											);
+									break;
+								}
+							}
+
+						break;
 					}
 
 					var _flag_valid_target =
@@ -1271,6 +1691,26 @@ switch(_state_enemy){
 					}
 
 					if (_flag_valid_target){
+
+						//============================//
+						//AUTHORITATIVE ACTIVE CARD//
+						//============================//
+						/*
+							scr_battle_cast_card intentionally validates enemy casts against
+							the caster's _val_hand_pos. SCHOLARLY keeps two Cards in HAND
+							simultaneously, so point that existing authoritative cursor at
+							the exact queued Card immediately before each cast.
+						*/
+						var _it_active_card =
+							ds_list_find_index(
+								_ref_beast._list_deck,
+								_ref_card
+							);
+
+						if (_it_active_card >= 0){
+							_ref_beast._val_hand_pos =
+								_it_active_card;
+						}
 
 						global.ref_cast_card =
 							_ref_card;
@@ -1351,49 +1791,10 @@ switch(_state_enemy){
 				continue;
 			}
 
-			var _ct_cards =
-				ds_list_size(
-					_ref_beast._list_deck
-				);
-
-			if (_ct_cards <= 0){
-				continue;
-			}
-
-			var _ref_old_card =
-				ds_list_find_value(
-					_ref_beast._list_deck,
-					_ref_beast._val_hand_pos
-				);
-
-			if (instance_exists(_ref_old_card)){
-
-				_ref_old_card._flag_card_disabled = false;
-				_ref_old_card.visible = false;
-				_ref_old_card._str_location = "DECK";
-			}
-
-			_ref_beast._val_hand_pos++;
-
-			if (
-				_ref_beast._val_hand_pos >=
-				_ct_cards
-			){
-				_ref_beast._val_hand_pos = 0;
-			}
-
-			var _ref_new_card =
-				ds_list_find_value(
-					_ref_beast._list_deck,
-					_ref_beast._val_hand_pos
-				);
-
-			if (instance_exists(_ref_new_card)){
-
-				_ref_new_card._flag_card_disabled = false;
-				_ref_new_card.visible = true;
-				_ref_new_card._str_location = "HAND";
-			}
+			hscr_battle_enemy_refresh_queued_cards(
+				_ref_beast,
+				true
+			);
 		}
 
 		_flag_statuses_init = false;
@@ -1571,78 +1972,106 @@ switch(_state_enemy){
 					_it_status++
 				){
 
-					array_push(
-						_arr_statuses,
+					var _ref_host_status =
 						ds_list_find_value(
 							_ref_beast._list_statuses,
 							_it_status
-						)
+						);
+
+					if (!instance_exists(_ref_host_status)){
+						continue;
+					}
+
+					// TEAM-scope entries may retain a source/death compatibility link
+					// on their source Beast. Their authoritative turn processing lives
+					// in the Team Status registry below, so do not queue them twice.
+					if (
+						variable_instance_exists(
+							_ref_host_status,
+							"_str_status_scope"
+						) &&
+						_ref_host_status._str_status_scope == "TEAM"
+					){
+						continue;
+					}
+
+					array_push(
+						_arr_statuses,
+						_ref_host_status
 					);
 				}
 			}
 
+
+			//====================//
+			//ENEMY TEAM STATUSES//
+			//====================//
+			scr_status_prune_team_status_sources(
+				"ENEMY"
+			);
+
+			var _list_enemy_team_end_statuses =
+				scr_status_get_team_status_list(
+					"ENEMY"
+				);
+
 			if (
+				_list_enemy_team_end_statuses != undefined &&
 				ds_exists(
-					global.list_statuses,
+					_list_enemy_team_end_statuses,
 					ds_type_list
 				)
 			){
 
 				for (
-					var _it_global_status = 0;
-					_it_global_status <
+					var _it_team_status = 0;
+					_it_team_status <
 						ds_list_size(
-							global.list_statuses
+							_list_enemy_team_end_statuses
 						);
-					_it_global_status++
+					_it_team_status++
 				){
 
-					var _ref_global_status =
+					var _ref_team_status =
 						ds_list_find_value(
-							global.list_statuses,
-							_it_global_status
+							_list_enemy_team_end_statuses,
+							_it_team_status
 						);
 
-					if (!instance_exists(_ref_global_status)){
+					if (!instance_exists(_ref_team_status)){
 						continue;
 					}
 
-					if (
-						_ref_global_status._str_status_type !=
-						"EVENT"
-					){
-						continue;
-					}
-
-					if (
-						_ref_global_status._str_trigger_region !=
-						"END"
-					){
-						continue;
-					}
-
-					if (
-						!variable_instance_exists(
-							_ref_global_status,
-							"_str_event_owner_team"
-						)
-					){
-						continue;
-					}
-
-					if (
-						_ref_global_status._str_event_owner_team !=
-						"ENEMY"
-					){
+					if (_ref_team_status._str_trigger_region != "END"){
 						continue;
 					}
 
 					array_push(
 						_arr_statuses,
-						_ref_global_status
+						_ref_team_status
 					);
 				}
 			}
+
+			//======================//
+			//ENEMY-OWNED EVENT END//
+			//======================//
+			if (
+				variable_global_exists("ref_status_event") &&
+				instance_exists(global.ref_status_event) &&
+				global.ref_status_event._str_trigger_region == "END" &&
+				variable_instance_exists(
+					global.ref_status_event,
+					"_str_event_owner_team"
+				) &&
+				global.ref_status_event._str_event_owner_team == "ENEMY"
+			){
+				array_push(
+					_arr_statuses,
+					global.ref_status_event
+				);
+			}
+
 		}
 
 		if (

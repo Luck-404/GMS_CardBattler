@@ -1,16 +1,11 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_MARK_ENEMY_CAPTURED_AS_DEAD
-// FUNCTION: Marks a captured enemy battle Beast as dead without destroying it.
-//           Removes it from the enemy alive list, moves it into the graveyard,
-//           cleans attached battle elements, and repositions enemy formations.
-//
-// INPUT:    _ref_enemy - Enemy battle Beast that was successfully captured.
-// USES:     Enemy controller alive/graveyard lists, attached Minions, Statuses,
-//           Cards, and battle-Beast positioning helpers.
+// FUNCTION: Removes a successfully captured enemy from active combat, cleans
+//           attached battle state, moves it into the graveyard presentation
+//           lane, and refreshes the complete enemy/player formation geometry.
 //
 //===============================================================================//
-
 function scr_battle_mark_enemy_captured_as_dead(_ref_enemy){
 
 	#region VALIDATION
@@ -91,50 +86,16 @@ function scr_battle_mark_enemy_captured_as_dead(_ref_enemy){
 
 	#endregion
 
-	#region REPOSITION
-
-	//--------------------------//
-	//REPOSITION LIVING ENEMIES//
-	//--------------------------//
-	for (var _it_beast = 0; _it_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_alive); _it_beast++){
-
-		var _ref_beast = ds_list_find_value(obj_battle_enemy_controller._list_beasts_alive,_it_beast);
-
-		if (!instance_exists(_ref_beast)){
-			continue;
-		}
-
-		_ref_beast._val_pos = _it_beast;
-		_ref_beast.x = _ref_beast.hscr_battle_get_active_x(_ref_beast._str_team,_it_beast);
-
-		scr_minion_reposition(_ref_beast);
-		scr_status_reposition(_ref_beast);
-	}
-
-	//-----------------------------//
-	//REPOSITION GRAVEYARD ENEMIES//
-	//-----------------------------//
-	var _ct_alive_beasts = ds_list_size(obj_battle_enemy_controller._list_beasts_alive);
-
-	for (var _it_dead_beast = 0; _it_dead_beast < ds_list_size(obj_battle_enemy_controller._list_beasts_graveyard); _it_dead_beast++){
-
-		var _ref_dead_beast = ds_list_find_value(obj_battle_enemy_controller._list_beasts_graveyard,_it_dead_beast);
-
-		if (!instance_exists(_ref_dead_beast)){
-			continue;
-		}
-
-		_ref_dead_beast._val_pos = _ct_alive_beasts + _it_dead_beast;
-		_ref_dead_beast.x = _ref_dead_beast.hscr_battle_get_graveyard_x(_ref_dead_beast._str_team,_ct_alive_beasts,_it_dead_beast);
-	}
-
-	#endregion
-
-	#region CAPTURE STATE
+	#region CAPTURE STATE / FORMATION
 
 	//-------------------//
 	//UPDATE BEAST STATE//
 	//-------------------//
+	/*
+		Set the captured/dead state BEFORE formation refresh so the shared layout
+		sees this instance as a graveyard presentation slot rather than a living
+		Elite/targetable unit.
+	*/
 	_ref_enemy._val_cur_hp = 0;
 	_ref_enemy._str_list = "DEAD";
 
@@ -147,7 +108,16 @@ function scr_battle_mark_enemy_captured_as_dead(_ref_enemy){
 	_ref_enemy.visible = true;
 	_ref_enemy.image_alpha = 1;
 
+	//=============================//
+	//REFRESH LIVING + GRAVEYARD//
+	//=============================//
+	scr_battle_refresh_formation(
+		"ENEMY",
+		true
+	);
+
 	#endregion
+
 
 	return true;
 }

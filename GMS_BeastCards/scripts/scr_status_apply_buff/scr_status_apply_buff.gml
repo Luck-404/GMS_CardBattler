@@ -29,27 +29,74 @@ function scr_status_apply_buff(_str_status_name,_ref_target,_val_magnitude=undef
 //========================//
     var _ref_existing_status = -1;
 
-//========================//
-//CHECK VALID BEAST TARGET//
-//========================//
-    if (is_real(_ref_target)){
+//=====================//
+//TEAM STATUS CONTEXT//
+//=====================//
+    var _flag_team_status = false;
 
-        if (instance_exists(_ref_target)){
+    switch(string_upper(string(_str_status_name))){
 
-            _ref_existing_status = scr_status_check(
-                _str_status_name,
-                _ref_target
+        case "DRAW_2":
+        case "ENDLESS_BLOOM":
+        case "HEART_OF_THE_FOREST":
+        case "INFERNO_ETERNAL":
+        case "INSPIRATION":
+        case "MANAVINE":
+        case "MANA_SPRING":
+        case "PLAGUE_GARDEN":
+            _flag_team_status = true;
+        break;
+    }
+
+    var _str_team_context = "";
+
+    if (instance_exists(_ref_target)){
+        _str_team_context = _ref_target._str_team;
+    }
+    else if (is_string(_ref_target)){
+
+        var _str_target_team =
+            string_upper(
+                string(_ref_target)
             );
+
+        if (
+            _str_target_team == "PLAYER" ||
+            _str_target_team == "ENEMY"
+        ){
+            _str_team_context = _str_target_team;
         }
     }
 
     if (
-        _ref_existing_status == -1 &&
-        variable_global_exists("list_statuses") &&
-        ds_exists(global.list_statuses,ds_type_list)
+        _str_team_context == "" &&
+        instance_exists(global.ref_caster_beast)
     ){
-        _ref_existing_status = scr_status_check(_str_status_name,global.list_statuses);
+        _str_team_context = global.ref_caster_beast._str_team;
     }
+
+//========================//
+//CHECK EXISTING STATUS//
+//========================//
+    if (
+        _flag_team_status &&
+        (
+            _str_team_context == "PLAYER" ||
+            _str_team_context == "ENEMY"
+        )
+    ){
+        _ref_existing_status = scr_status_check(
+            _str_status_name,
+            _str_team_context
+        );
+    }
+    else if (instance_exists(_ref_target)){
+        _ref_existing_status = scr_status_check(
+            _str_status_name,
+            _ref_target
+        );
+    }
+
 
     var _ct_previous_stacks = 0;
     var _val_previous_lifetime = undefined;

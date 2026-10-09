@@ -10,78 +10,167 @@
 // RETURNS: True when the incoming Status is resisted; otherwise false.
 //
 //===============================================================================//
-
 function scr_status_check_con_resistance(_ref_target,_flag_ignore_resistance=false,_str_status_name=""){
+    //================//
+    //VALIDATE TARGET//
+    //================//
+    if (!instance_exists(_ref_target)){
+        return false;
+    }
 
-	//===================//
-	//IGNORE RESISTANCE//
-	//===================//
-	if (_flag_ignore_resistance){
-		return false;
-	}
+    if (!is_struct(_ref_target._ref_unit)){
+        return false;
+    }
 
-	//----------------//
-	//VALIDATE TARGET//
-	//----------------//
-	if (!instance_exists(_ref_target)){
-		return false;
-	}
+    //=====================//
+    //ELEMENTAL IMMUNITY//
+    //=====================//
+    /*
+        Elemental immunity is absolute and therefore resolves before the
+        _flag_ignore_resistance CON bypass. Cards that ignore CON resistance
+        still cannot apply a Status the Elemental Elite is explicitly immune to.
+    */
+    if (
+        scr_battle_elite_is_status_immune(
+            _ref_target,
+            _str_status_name
+        )
+    ){
+        scr_battle_vfx_resist(
+            _ref_target
+        );
 
-	if (!is_struct(_ref_target._ref_unit)){
-		return false;
-	}
+        scr_gui_spawn_popup_scrolling(
+            "TEXT",
+            "IMMUNE",
+            undefined,
+            c_black,
+            _ref_target.x +
+                irandom_range(-32,32),
+            _ref_target.y -
+                24 +
+                irandom_range(-32,32)
+        );
 
-	//==========================//
-	//CALCULATE RESIST CHANCE//
-	//==========================//
-	var _val_resist_chance = scr_status_get_con_resist_chance(_ref_target);
+        scr_debug_log(
+            "BATTLE",
+            "ELITE",
+            _ref_target,
+            "ELEMENTAL IMMUNITY" +
+            " | VARIANT: " +
+            scr_battle_elite_get_elemental_variant(
+                _ref_target
+            ) +
+            " | STATUS: " +
+            string_upper(
+                string(
+                    _str_status_name
+                )
+            ),
+            "BATTLE",
+            "SCR_STATUS_CHECK_CON_RESISTANCE"
+        );
 
-	if (_val_resist_chance <= 0){
-		return false;
-	}
+        return true;
+    }
 
-	var _val_roll = irandom_range(1,100);
+    //===================//
+    //IGNORE RESISTANCE//
+    //===================//
+    if (_flag_ignore_resistance){
+        return false;
+    }
 
-	if (_val_roll > _val_resist_chance){
-		return false;
-	}
+    //==========================//
+    //CALCULATE RESIST CHANCE//
+    //==========================//
+    var _val_resist_chance =
+        scr_status_get_con_resist_chance(
+            _ref_target
+        );
 
-	//==================//
-	//RESIST FEEDBACK//
-	//==================//
-	scr_battle_vfx_resist(_ref_target);
+    if (_val_resist_chance <= 0){
+        return false;
+    }
 
-	scr_gui_spawn_popup_scrolling(
-		"TEXT",
-		"RESISTED",
-		undefined,
-		c_black,
-		_ref_target.x + irandom_range(-32,32),
-		_ref_target.y - 24 + irandom_range(-32,32)
-	);
+    var _val_roll =
+        irandom_range(
+            1,
+            100
+        );
 
-	//================//
-	//DEBUG RESIST//
-	//================//
-	var _str_status = string_upper(string(_str_status_name));
+    if (_val_roll > _val_resist_chance){
+        return false;
+    }
 
-	if (_str_status == ""){
-		_str_status = "STATUS";
-	}
+    //==================//
+    //RESIST FEEDBACK//
+    //==================//
+    scr_battle_vfx_resist(
+        _ref_target
+    );
 
-	scr_debug_log(
-		"BATTLE",
-		"RESIST",
-		_ref_target,
-		string_upper(_ref_target._str_team) + " " +
-		string_upper(_ref_target._ref_unit._str_beast_name) +
-		" (LVL " + string(_ref_target._ref_unit._val_beast_level) + ")" +
-		" RESISTED " + _str_status +
-		" | CON RESIST: " + string(_val_resist_chance) + "%" +
-		" | ROLL: " + string(_val_roll),
-		"BATTLE",
-		"SCR_STATUS_CHECK_CON_RESISTANCE"
-	);
+    scr_gui_spawn_popup_scrolling(
+        "TEXT",
+        "RESISTED",
+        undefined,
+        c_black,
+        _ref_target.x +
+            irandom_range(-32,32),
+        _ref_target.y -
+            24 +
+            irandom_range(-32,32)
+    );
 
-	return true;
+    //================//
+    //DEBUG RESIST//
+    //================//
+    var _str_status =
+        string_upper(
+            string(
+                _str_status_name
+            )
+        );
+
+    if (_str_status == ""){
+        _str_status =
+            "STATUS";
+    }
+
+    scr_debug_log(
+        "BATTLE",
+        "RESIST",
+        _ref_target,
+        string_upper(
+            _ref_target._str_team
+        ) +
+        " " +
+        string_upper(
+            _ref_target
+                ._ref_unit
+                ._str_beast_name
+        ) +
+        " (LVL " +
+        string(
+            _ref_target
+                ._ref_unit
+                ._val_beast_level
+        ) +
+        ")" +
+        " RESISTED " +
+        _str_status +
+        " | CON RESIST: " +
+        string(
+            _val_resist_chance
+        ) +
+        "%" +
+        " | ROLL: " +
+        string(
+            _val_roll
+        ),
+        "BATTLE",
+        "SCR_STATUS_CHECK_CON_RESISTANCE"
+    );
+
+    return true;
 }

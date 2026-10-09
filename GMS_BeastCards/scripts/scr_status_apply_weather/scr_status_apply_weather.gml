@@ -1,11 +1,10 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_WEATHER
-// FUNCTION: Applies or refreshes a global Weather Status.
-//           Reapplying the same Weather refreshes its lifetime.
-//           Applying a different Weather removes all current Weather first.
-//           Normalizes incoming Weather IDs before resolution.
-//           Logs successful Weather starts and refreshes.
+// FUNCTION: Applies or refreshes the single active Weather Status.
+//           Weather is owned by GLOBAL.REF_STATUS_WEATHER rather than the legacy
+//           Global Status list. Reapplying the same Weather refreshes lifetime;
+//           applying a different Weather clears the active Weather first.
 //
 // ACTIVE WEATHER:
 // - FIRESTORM
@@ -23,239 +22,182 @@
 
 function scr_status_apply_weather(_str_weather_name,_val_lifetime=undefined){
 
-    #region VALIDATION
+	#region VALIDATION
 
-    //----------------------//
-    //VALIDATE GLOBAL LIST//
-    //----------------------//
-    if (!ds_exists(global.list_statuses,ds_type_list)){
-        return undefined;
-    }
+	//================//
+	//NORMALIZE NAME//
+	//================//
+	_str_weather_name =
+		string_upper(
+			string(
+				_str_weather_name
+			)
+		);
 
-    //================//
-    //NORMALIZE NAME//
-    //================//
-    _str_weather_name =
-        string_upper(
-            string(
-                _str_weather_name
-            )
-        );
+	if (string_pos("WEATHER: ",_str_weather_name) == 1){
+		_str_weather_name =
+			string_delete(
+				_str_weather_name,
+				1,
+				string_length("WEATHER: ")
+			);
+	}
 
-    if (string_pos("WEATHER: ",_str_weather_name) == 1){
-        _str_weather_name =
-            string_delete(
-                _str_weather_name,
-                1,
-                string_length("WEATHER: ")
-            );
-    }
+	//==========================//
+	//VALIDATE REQUESTED WEATHER//
+	//==========================//
+	switch (_str_weather_name){
 
-    //==========================//
-    //VALIDATE REQUESTED WEATHER//
-    //==========================//
-    switch (_str_weather_name){
+		case "FIRESTORM":
+		case "HEATWAVE":
+		case "RAIN":
+		case "SEEDFALL":
+		case "SNOW":
+		case "STORMING":
+		break;
 
-        case "FIRESTORM":
-        case "HEATWAVE":
-        case "RAIN":
-        case "SEEDFALL":
-        case "SNOW":
-        case "STORMING":
-        break;
+		default:
+			return undefined;
+	}
 
-        default:
-            return undefined;
-    }
+	if (!variable_global_exists("ref_status_weather")){
+		global.ref_status_weather = undefined;
+	}
 
-    #endregion
+	#endregion
 
-    #region CURRENT WEATHER
+	#region CURRENT WEATHER
 
-    var _ref_status = undefined;
-    var _str_requested_weather = "WEATHER: " + _str_weather_name;
-    var _c_popup = c_aqua;
+	var _ref_status = undefined;
+	var _str_requested_weather = "WEATHER: " + _str_weather_name;
+	var _c_popup = c_aqua;
 
-    //=======================//
-    //CHECK CURRENT WEATHER//
-    //=======================//
-    var _flag_same_weather_active = false;
+	//=======================//
+	//CHECK CURRENT WEATHER//
+	//=======================//
+	var _flag_same_weather_active =
+		instance_exists(global.ref_status_weather) &&
+		global.ref_status_weather._str_status_name ==
+			_str_requested_weather;
 
-    for (
-        var _it_status = 0;
-        _it_status < ds_list_size(global.list_statuses);
-        _it_status++
-    ){
+	//===========================//
+	//REPLACE DIFFERENT WEATHER//
+	//===========================//
+	if (
+		instance_exists(global.ref_status_weather) &&
+		!_flag_same_weather_active
+	){
+		scr_status_clear_weather();
+	}
 
-        var _ref_check_status =
-            ds_list_find_value(
-                global.list_statuses,
-                _it_status
-            );
+	#endregion
 
-        if (!instance_exists(_ref_check_status)){
-            continue;
-        }
+	#region APPLY WEATHER
 
-        if (_ref_check_status._str_status_type != "WEATHER"){
-            continue;
-        }
+	switch (_str_weather_name){
 
-        if (_ref_check_status._str_status_name == _str_requested_weather){
-            _flag_same_weather_active = true;
-            break;
-        }
-    }
+		case "FIRESTORM":
+			_ref_status =
+				scr_status_weather_firestorm(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+			_c_popup = c_red;
+		break;
 
-    //===========================//
-    //REPLACE DIFFERENT WEATHER//
-    //===========================//
-    if (!_flag_same_weather_active){
-        scr_status_clear_weather();
-    }
+		case "HEATWAVE":
+			_ref_status =
+				scr_status_weather_heatwave(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+			_c_popup = c_red;
+		break;
 
-    #endregion
+		case "RAIN":
+			_ref_status =
+				scr_status_weather_rain(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+		break;
 
-    #region APPLY WEATHER
+		case "SEEDFALL":
+			_ref_status =
+				scr_status_weather_seedfall(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+			_c_popup = c_black;
+		break;
 
-    switch (_str_weather_name){
+		case "SNOW":
+			_ref_status =
+				scr_status_weather_snow(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+		break;
 
-        //==========//
-        //FIRESTORM//
-        //==========//
-        case "FIRESTORM":
+		case "STORMING":
+			_ref_status =
+				scr_status_weather_storming(
+					"APPLY",
+					undefined,
+					_val_lifetime
+				);
+		break;
+	}
 
-            _ref_status =
-                scr_status_weather_firestorm(
-                    "APPLY",
-                    undefined,
-                    _val_lifetime
-                );
+	#endregion
 
-            _c_popup = c_red;
+	#region FEEDBACK
 
-        break;
+	if (instance_exists(_ref_status)){
+		scr_gui_spawn_popup_scrolling(
+			"TEXT",
+			_str_requested_weather,
+			undefined,
+			_c_popup,
+			room_width * 0.5,
+			room_height * 0.5
+		);
+	}
 
-        //==========//
-        //HEATWAVE//
-        //==========//
-        case "HEATWAVE":
+	#endregion
 
-            _ref_status =
-                scr_status_weather_heatwave(
-                    "APPLY",
-                    undefined,
-                    _val_lifetime
-                );
+	#region DEBUG
 
-            _c_popup = c_red;
+	if (instance_exists(_ref_status)){
 
-        break;
+		var _str_lifetime = "INFINITE";
 
-        //======//
-        //RAIN//
-        //======//
-        case "RAIN":
+		if (!_ref_status._flag_status_infinite){
+			_str_lifetime =
+				string(
+					_ref_status._val_status_lifetime
+				);
+		}
 
-            _ref_status =
-                scr_status_weather_rain(
-                    "APPLY",
-                    undefined,
-                    _val_lifetime
-                );
+		scr_debug_log(
+			"BATTLE",
+			"WEATHER",
+			_ref_status,
+			(_flag_same_weather_active ? "WEATHER REFRESHED: " : "WEATHER STARTED: ") +
+			_str_weather_name +
+			" | LIFETIME: " +
+			_str_lifetime,
+			"BATTLE",
+			"SCR_STATUS_APPLY_WEATHER"
+		);
+	}
 
-        break;
+	#endregion
 
-        //==========//
-        //SEEDFALL//
-        //==========//
-        case "SEEDFALL":
-
-            _ref_status =
-                scr_status_weather_seedfall(
-                    "APPLY",
-                    undefined,
-                    _val_lifetime
-                );
-
-            _c_popup = c_black;
-
-        break;
-
-        //======//
-        //SNOW//
-        //======//
-        case "SNOW":
-
-            _ref_status =
-                scr_status_weather_snow(
-                    "APPLY",
-                    undefined,
-                    _val_lifetime
-                );
-
-        break;
-
-        //==========//
-        //STORMING//
-        //==========//
-        case "STORMING":
-
-            _ref_status =
-                scr_status_weather_storming(
-                    "APPLY",
-                    undefined,
-                    _val_lifetime
-                );
-
-        break;
-    }
-
-    #endregion
-
-    #region FEEDBACK
-
-    if (instance_exists(_ref_status)){
-
-        scr_gui_spawn_popup_scrolling(
-            "TEXT",
-            _str_requested_weather,
-            undefined,
-            _c_popup,
-            room_width * 0.5,
-            room_height * 0.5
-        );
-    }
-
-    #endregion
-
-    #region DEBUG
-
-    if (instance_exists(_ref_status)){
-
-        var _str_lifetime = "INFINITE";
-
-        if (!_ref_status._flag_status_infinite){
-            _str_lifetime =
-                string(
-                    _ref_status._val_status_lifetime
-                );
-        }
-
-        scr_debug_log(
-            "BATTLE",
-            "WEATHER",
-            _ref_status,
-            (_flag_same_weather_active ? "WEATHER REFRESHED: " : "WEATHER STARTED: ") +
-            _str_weather_name +
-            " | LIFETIME: " +
-            _str_lifetime,
-            "BATTLE",
-            "SCR_STATUS_APPLY_WEATHER"
-        );
-    }
-
-    #endregion
-
-    return _ref_status;
+	return _ref_status;
 }

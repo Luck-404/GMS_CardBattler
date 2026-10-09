@@ -6,7 +6,7 @@
   "name":"scr_status_get_discharge_threshold",
   "parent":{
     "name":"DISCHARGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

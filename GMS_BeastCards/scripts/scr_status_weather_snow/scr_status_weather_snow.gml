@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_WEATHER_SNOW
@@ -22,11 +23,21 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 		//=======//
 		case "APPLY":
 
-			//----------------------//
-			//VALIDATE GLOBAL LIST//
-			//----------------------//
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
+			//=========================//
+			//ENSURE WEATHER REGISTRY//
+			//=========================//
+			if (!variable_global_exists("ref_status_weather")){
+				global.ref_status_weather = undefined;
+			}
+
+			//===========================//
+			//REPLACE DIFFERENT WEATHER//
+			//===========================//
+			if (
+				instance_exists(global.ref_status_weather) &&
+				global.ref_status_weather._str_status_name != "WEATHER: SNOW"
+			){
+				scr_status_clear_weather();
 			}
 
 			//==========//
@@ -43,7 +54,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			var _ref_existing_status = scr_status_check(
 				"WEATHER: SNOW",
-				global.list_statuses
+				"WEATHER"
 			);
 
 			//------------------//
@@ -59,6 +70,8 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				global.ref_status_weather = _ref_existing_status;
 
 				return _ref_existing_status;
 			}
@@ -91,6 +104,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			_ref_new_status._ref_host = undefined;
 
 			_ref_new_status._str_status_type = "WEATHER";
+			_ref_new_status._str_status_scope = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: SNOW";
 			_ref_new_status._str_status_desc = "Weather. At the end of each round, apply 1 Frostbite to each Beast without Armor. Then, for each Beast with at least 3 Frostbite, consume 3 Frostbite and apply 1 Frostburn. Lifetime: 5 rounds.";
 
@@ -104,10 +118,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(
-				global.list_statuses,
-				_ref_new_status
-			);
+			global.ref_status_weather = _ref_new_status;
 
 			//=================//
 			//SNOW START VFX//
@@ -147,7 +158,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			//------------------//
 			//REPOSITION STATUS//
 			//------------------//
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition("WEATHER");
 
 			return _ref_new_status;
 
@@ -311,9 +322,7 @@ function scr_status_weather_snow(_str_tag,_ref_status,_val_lifetime=undefined){
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			if (ds_exists(global.list_statuses,ds_type_list)){
-				scr_status_reposition(global.list_statuses);
-			}
+			scr_status_reposition("WEATHER");
 
 		break;
 

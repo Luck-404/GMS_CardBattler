@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_GET_HEATWAVE_DAMAGE_MULTIPLIER
@@ -25,13 +26,13 @@ function scr_status_get_heatwave_damage_multiplier(_stct_card){
 	//================//
 	//CHECK WEATHER//
 	//================//
-	if (!ds_exists(global.list_statuses,ds_type_list)){
+	if (!variable_global_exists("ref_status_weather")){
 		return 1;
 	}
 
 	var _ref_heatwave = scr_status_check(
 		"WEATHER: HEATWAVE",
-		global.list_statuses
+		"WEATHER"
 	);
 
 	if (

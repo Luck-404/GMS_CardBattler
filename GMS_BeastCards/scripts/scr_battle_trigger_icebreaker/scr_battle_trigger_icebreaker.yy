@@ -6,7 +6,7 @@
   "name":"scr_battle_trigger_icebreaker",
   "parent":{
     "name":"ICEBREAKER",
-    "path":"folders/BATTLE/COLOR TRIGGERS/ICEBREAKER.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/ICEBREAKER.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -3,7 +3,8 @@
 // CREATE: OBJ_RANCH_INTERACTABLE
 // FUNCTION: Initializes the Ranch interactable.
 //           Stores Ranch Beast dummy references and interaction state.
-//           Defines helpers for spawning and destroying Ranch Beast dummies.
+//           Defines helpers for spawning and destroying Ranch Beast dummies,
+//           including staged animation identity/setup for spawned dummies.
 //
 //===============================================================================//
 
@@ -58,6 +59,9 @@ function hscr_ranch_spawn_beast_dummy(_stct_unit){
 	//SET BEAST DATA//
 	//----------------//
 	_ref_new_unit.sprite_index = _stct_unit._spr_beast;
+	_ref_new_unit.image_speed = 0;
+	_ref_new_unit.image_index = 0;
+	_ref_new_unit._str_beast_name = string_upper(string(_stct_unit._str_beast_name));
 	_ref_new_unit._spr_shadow = scr_beast_get_type_shadow(_stct_unit._str_beast_color_type);
 
 	_ref_new_unit._snd_death = _stct_unit._snd_beast_death;

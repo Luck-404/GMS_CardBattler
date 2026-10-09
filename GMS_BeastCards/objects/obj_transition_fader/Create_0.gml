@@ -1,4 +1,3 @@
-
 //===============================================================================//
 // CREATE: OBJ_TRANSITION_FADER
 // FUNCTION: Initializes persistent room and battle transitions.

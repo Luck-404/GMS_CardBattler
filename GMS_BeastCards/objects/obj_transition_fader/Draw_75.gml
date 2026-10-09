@@ -1,4 +1,3 @@
-
 //===============================================================================//
 // DRAW GUI END: OBJ_TRANSITION_FADER
 // FUNCTION: Draws the background fade and spinner.

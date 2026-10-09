@@ -1,14 +1,15 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_APPLY_AURA
-// FUNCTION: Applies an Aura Status to the supplied target Beast.
-//           Auras are host-bound persistent Statuses.
-//           Passes card-controlled Magnitude into the Aura callback.
-//           Handles shared Aura popup, VFX, SFX, and application logging.
+// FUNCTION: Applies an Aura Status to a Beast or to that Beast's Team registry.
+//		   SELF Auras remain host-bound. Team Auras register once in the
+//		   PLAYER / ENEMY Team Status list while retaining their source Beast
+//		   when their mechanics require one.
 //
-// ARGUMENTS: _str_status_name is the Aura ID; _ref_target is the host Beast; _val_magnitude is the optional strength.
-//
-// RETURNS: Applied Status instance, or undefined if the application fails.
+// ARGUMENTS: _str_status_name - Aura ID.
+//			_ref_target - Host/source/representative Beast used by the Aura.
+//			_val_magnitude - Optional Aura strength.
+// RETURNS: Applied Status instance, or undefined if application fails.
 //
 //===============================================================================//
 
@@ -17,52 +18,63 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 	//-----------------//
 	//VALIDATE TARGET//
 	//-----------------//
-
 	if (!instance_exists(_ref_target)){
 		return undefined;
+	}
+
+	var _str_status_upper =
+		string_upper(
+			string(_str_status_name)
+		);
+
+	var _flag_team_aura = false;
+
+	switch(_str_status_upper){
+		case "CALM_SEAS":
+		case "HONEYED_SCENT":
+		case "HUNGERING_FLAMES":
+		case "ROUGH_SEAS":
+			_flag_team_aura = true;
+		break;
 	}
 
 	//========================//
 	//SNAPSHOT EXISTING STATUS//
 	//========================//
 	var _ref_existing_status = -1;
-	var _list_team = undefined;
 
-	if (_ref_target._str_team == "PLAYER" && instance_exists(obj_battle_player_controller)){
-		_list_team = obj_battle_player_controller._list_beasts;
+	if (_flag_team_aura){
+
+		scr_status_prune_team_status_sources(
+			_ref_target._str_team
+		);
+
+		_ref_existing_status =
+			scr_status_check(
+				_str_status_upper,
+				_ref_target._str_team
+			);
 	}
-	else if (_ref_target._str_team == "ENEMY" && instance_exists(obj_battle_enemy_controller)){
-		_list_team = obj_battle_enemy_controller._list_beasts;
-	}
-
-	if (_list_team != undefined && ds_exists(_list_team,ds_type_list)){
-
-		for (var _it_beast = 0;_it_beast < ds_list_size(_list_team);_it_beast++){
-
-			var _ref_beast = ds_list_find_value(_list_team,_it_beast);
-
-			if (!instance_exists(_ref_beast)){
-				continue;
-			}
-
-			_ref_existing_status = scr_status_check(_str_status_name,_ref_beast);
-
-			if (_ref_existing_status != -1){
-				break;
-			}
-		}
-	}
-
-	if (_ref_existing_status == -1){
-		_ref_existing_status = scr_status_check(_str_status_name,_ref_target);
+	else{
+		_ref_existing_status =
+			scr_status_check(
+				_str_status_upper,
+				_ref_target
+			);
 	}
 
 	var _ct_previous_stacks = 0;
 	var _val_previous_lifetime = undefined;
 
-	if (_ref_existing_status != -1 && instance_exists(_ref_existing_status)){
-		_ct_previous_stacks = _ref_existing_status._ct_status_stacks;
-		_val_previous_lifetime = _ref_existing_status._val_status_lifetime;
+	if (
+		_ref_existing_status != -1 &&
+		instance_exists(_ref_existing_status)
+	){
+		_ct_previous_stacks =
+			_ref_existing_status._ct_status_stacks;
+
+		_val_previous_lifetime =
+			_ref_existing_status._val_status_lifetime;
 	}
 
 	var _ref_status = undefined;
@@ -70,43 +82,47 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 	//================//
 	//APPLY AURA//
 	//================//
-	switch (_str_status_name){
-			//==================//
-			//HUNGERING FLAMES//
-			//==================//
-			case "HUNGERING_FLAMES":
+	switch (_str_status_upper){
 
-				_ref_status = scr_status_aura_hungering_flames(
-					"APPLY",
+		//==================//
+		//HUNGERING FLAMES//
+		//==================//
+		case "HUNGERING_FLAMES":
+
+			_ref_status = scr_status_aura_hungering_flames(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				undefined,
+				_ref_target
+			);
+
+			if (instance_exists(_ref_status)){
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"HUNGERING FLAMES",
 					undefined,
-					_val_magnitude,
-					undefined,
-					_ref_target
+					c_red,
+					_ref_target.x + irandom_range(-32,32),
+					_ref_target.y - 24 + irandom_range(-32,32)
 				);
+			}
 
-				if (instance_exists(_ref_status)){
+		break;
 
-					scr_gui_spawn_popup_scrolling(
-						"TEXT",
-						"HUNGERING FLAMES",
-						undefined,
-						c_red,
-						_ref_target.x + irandom_range(-32,32),
-						_ref_target.y - 24 + irandom_range(-32,32)
-					);
-				}
-
-			break;		
-		
 		//==========//
 		//3RD DEGREE//
 		//==========//
 		case "3RD_DEGREE":
 
-			_ref_status = scr_status_aura_3rd_degree("APPLY", undefined, _val_magnitude, _ref_target);
+			_ref_status = scr_status_aura_3rd_degree(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_ref_target
+			);
 
 			if (instance_exists(_ref_status)){
-
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"3RD DEGREE",
@@ -118,6 +134,7 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 			}
 
 		break;
+
 		//----------//
 		//ROUGH SEAS//
 		//----------//
@@ -131,8 +148,7 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 				_ref_target
 			);
 
-			if (_ref_status != undefined){
-
+			if (instance_exists(_ref_status)){
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"ROUGH SEAS",
@@ -158,8 +174,7 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 				_ref_target
 			);
 
-			if (_ref_status != undefined){
-
+			if (instance_exists(_ref_status)){
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"KRAKENS CHOSEN",
@@ -185,8 +200,7 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 				_ref_target
 			);
 
-			if (_ref_status != undefined){
-
+			if (instance_exists(_ref_status)){
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"FROSTFORM",
@@ -204,10 +218,14 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 		//----------//
 		case "CALM_SEAS":
 
-			_ref_status = scr_status_aura_calm_seas("APPLY", undefined, _val_magnitude, _ref_target);
+			_ref_status = scr_status_aura_calm_seas(
+				"APPLY",
+				undefined,
+				_val_magnitude,
+				_ref_target
+			);
 
-			if (_ref_status != undefined){
-
+			if (instance_exists(_ref_status)){
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"CALM SEAS",
@@ -233,8 +251,7 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 				_ref_target
 			);
 
-			if (_ref_status != undefined){
-
+			if (instance_exists(_ref_status)){
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"HONEYED SCENT",
@@ -260,8 +277,7 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 				_ref_target
 			);
 
-			if (_ref_status != undefined){
-
+			if (instance_exists(_ref_status)){
 				scr_gui_spawn_popup_scrolling(
 					"TEXT",
 					"BURGEONING BLOOM",
@@ -278,36 +294,16 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 	//===================//
 	//AURA PRESENTATION//
 	//===================//
-	if (
-		_ref_status != undefined &&
-		instance_exists(_ref_status)
-	){
+	if (instance_exists(_ref_status)){
 
-		//-----------------//
-		//SELECT AURA VFX//
-		//-----------------//
 		var _spr_vfx = spr_battle_vfx_aura;
 
-		//------------------//
-		//SPECIAL AURA VFX//
-		//------------------//
-		switch (_str_status_name){
-
-			case "FROSTFORM":
-
-				_spr_vfx = spr_battle_vfx_frostform;
-
-			break;
+		if (_str_status_upper == "FROSTFORM"){
+			_spr_vfx = spr_battle_vfx_frostform;
 		}
 
-		//-----------------//
-		//SELECT AURA SFX//
-		//-----------------//
 		var _snd_sfx = snd_battle_aura;
 
-		//------------------------//
-		//ONLY PLAY ONCE PER CAST//
-		//------------------------//
 		if (instance_exists(global.ref_cast_card)){
 
 			if (global.ref_cast_card._flag_aura_sfx_played){
@@ -318,28 +314,36 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 			}
 		}
 
-		//---------------//
-		//PLAY AURA SFX//
-		//---------------//
 		if (_snd_sfx != undefined){
 			scr_battle_play_sfx(_snd_sfx);
 		}
 
-		//-----------------------//
-		//ENSURE PERSISTENT VFX//
-		//-----------------------//
+		var _ref_vfx_host = _ref_status._ref_host;
+
 		if (
-			instance_exists(_ref_status._ref_host) &&
+			!instance_exists(_ref_vfx_host) &&
+			variable_instance_exists(
+				_ref_status,
+				"_ref_status_source"
+			) &&
+			instance_exists(_ref_status._ref_status_source)
+		){
+			_ref_vfx_host =
+				_ref_status._ref_status_source;
+		}
+
+		if (
+			instance_exists(_ref_vfx_host) &&
 			!instance_exists(_ref_status._ref_persistent_vfx)
 		){
-
-			_ref_status._ref_persistent_vfx = scr_battle_vfx_persistent(
-				_ref_status._ref_host,
-				_spr_vfx,
-				0,
-				0,
-				1
-			);
+			_ref_status._ref_persistent_vfx =
+				scr_battle_vfx_persistent(
+					_ref_vfx_host,
+					_spr_vfx,
+					0,
+					0,
+					1
+				);
 		}
 	}
 
@@ -353,9 +357,18 @@ function scr_status_apply_aura(_str_status_name,_ref_target,_val_magnitude=0){
 		if (instance_exists(_ref_status._ref_host)){
 			_ref_log_target = _ref_status._ref_host;
 		}
+		else if (
+			variable_instance_exists(
+				_ref_status,
+				"_ref_status_source"
+			) &&
+			instance_exists(_ref_status._ref_status_source)
+		){
+			_ref_log_target =
+				_ref_status._ref_status_source;
+		}
 
 		if (instance_exists(_ref_log_target)){
-
 			scr_debug_log_status_application(
 				_ref_log_target,
 				_ref_status,

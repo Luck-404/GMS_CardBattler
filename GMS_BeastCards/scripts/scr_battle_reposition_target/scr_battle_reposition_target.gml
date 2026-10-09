@@ -3,18 +3,17 @@
 // SCRIPT: SCR_BATTLE_REPOSITION_TARGET
 // FUNCTION: Swaps the battlefield positions of two allied living Beasts.
 //           Prevents movement if either Beast has a reposition-locking effect.
-//           Updates team order, position indexes, Minions, and Statuses,
-//           then smoothly animates both Beasts between their positions.
+//           Updates team order, then delegates all living/graveyard X positions,
+//           attachments, and smooth movement to SCR_BATTLE_REFRESH_FORMATION.
 //
 // INPUTS:   _ref_beast_a - First allied battle Beast being repositioned.
 //           _ref_beast_b - Second allied battle Beast being repositioned.
 //           _flag_play_vfx - Whether reposition feedback VFX/SFX should play.
 //           _flag_play_popup - Whether reposition notification popups should play.
-// USES:     Team living-Beast lists, reposition eligibility, reposition VFX,
-//           Minion positioning, Status positioning, and GUI feedback.
+// USES:     Team living-Beast lists, reposition eligibility, shared formation
+//           refresh, reposition Status triggers, and GUI feedback.
 //
 //===============================================================================//
-
 function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=true,_flag_play_popup=true){
 
 	#region VALIDATION
@@ -48,9 +47,14 @@ function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=t
 
 		if (!_flag_beast_a_can_reposition){
 
+			var _str_reposition_block_popup_a =
+				(scr_battle_elite_get_modifier(_ref_beast_a) == "HARDY")
+				? "IMMUNE"
+				: "CANNOT REPOSITION";
+
 			scr_gui_spawn_popup_scrolling(
 				"TEXT",
-				"CANNOT REPOSITION",
+				_str_reposition_block_popup_a,
 				undefined,
 				c_maroon,
 				_ref_beast_a.x,
@@ -60,9 +64,14 @@ function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=t
 
 		if (!_flag_beast_b_can_reposition){
 
+			var _str_reposition_block_popup_b =
+				(scr_battle_elite_get_modifier(_ref_beast_b) == "HARDY")
+				? "IMMUNE"
+				: "CANNOT REPOSITION";
+
 			scr_gui_spawn_popup_scrolling(
 				"TEXT",
-				"CANNOT REPOSITION",
+				_str_reposition_block_popup_b,
 				undefined,
 				c_maroon,
 				_ref_beast_b.x,
@@ -142,48 +151,25 @@ function scr_battle_reposition_target(_ref_beast_a,_ref_beast_b,_flag_play_vfx=t
 
 	#region POSITION SWAP
 
-	//--------------------//
-	//STORE OLD POSITIONS//
-	//--------------------//
-	var _val_beast_a_old_x = _ref_beast_a.x;
-	var _val_beast_b_old_x = _ref_beast_b.x;
-
-	//----------------//
-	//SWAP X POSITION//
-	//----------------//
-	_ref_beast_a.x = _val_beast_b_old_x;
-	_ref_beast_b.x = _val_beast_a_old_x;
-
-	//----------------------//
-	//ANIMATE REPOSITIONING//
-	//----------------------//
-	scr_battle_vfx_reposition(_ref_beast_a,_val_beast_a_old_x,8);
-	scr_battle_vfx_reposition(_ref_beast_b,_val_beast_b_old_x,8);
-
 	//----------------//
 	//SWAP TEAM ORDER//
 	//----------------//
+	/*
+		Formation X is no longer swapped directly. The list order is the structural
+		authority; SCR_BATTLE_REFRESH_FORMATION then recalculates every living and
+		graveyard position from that order. This is required when an Elite changes
+		slots because the 125 px Elite-adjacent gap can move to different neighbors.
+	*/
 	ds_list_set(_list_team,_val_beast_a_pos,_ref_beast_b);
 	ds_list_set(_list_team,_val_beast_b_pos,_ref_beast_a);
 
-	//----------------//
-	//UPDATE POSITIONS//
-	//----------------//
-	_ref_beast_a._val_pos = _val_beast_b_pos;
-	_ref_beast_b._val_pos = _val_beast_a_pos;
-
-	#endregion
-
-	#region ATTACHMENTS
-
-	//----------------------//
-	//REPOSITION ATTACHMENTS//
-	//----------------------//
-	scr_minion_reposition(_ref_beast_a);
-	scr_status_reposition(_ref_beast_a);
-
-	scr_minion_reposition(_ref_beast_b);
-	scr_status_reposition(_ref_beast_b);
+	//========================//
+	//REFRESH COMPLETE TEAM//
+	//========================//
+	scr_battle_refresh_formation(
+		_ref_beast_a._str_team,
+		true
+	);
 
 	#endregion
 

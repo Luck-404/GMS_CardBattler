@@ -2,7 +2,8 @@
 //
 // DRAW GUI: OBJ_BATTLE_CARD
 // FUNCTION: Draws animated player/enemy Cards using the existing movement system.
-//           Uses native Card-object hitboxes for hover.
+//           Uses native Card-object hitboxes for hover. Enemy SCHOLARLY queues
+//           show two separate Cards, with the left Card resolving first.
 //
 //           NORMAL HOVER:
 //               - Slightly enlarges the Card.
@@ -24,6 +25,76 @@ if (
 	)
 ){
 	exit;
+}
+
+//===========================//
+//ELITE BADGE HOVER PRIORITY//
+//===========================//
+/*
+	Elite badges are presentation-only GUI elements. Native Card hitboxes can
+	overlap them, so Cards suppress their own hover/preview/inspection while the
+	pointer is on any Elite badge.
+*/
+var _val_card_mouse_x =
+	device_mouse_x_to_gui(0);
+
+var _val_card_mouse_y =
+	device_mouse_y_to_gui(0);
+
+var _flag_pointer_on_elite_badge =
+	false;
+
+for (
+	var _it_elite_badge = 0;
+	_it_elite_badge <
+		instance_number(
+			obj_battle_beast
+		);
+	_it_elite_badge++
+){
+	var _ref_elite_badge_beast =
+		instance_find(
+			obj_battle_beast,
+			_it_elite_badge
+		);
+
+	if (
+		!instance_exists(
+			_ref_elite_badge_beast
+		) ||
+		!variable_instance_exists(
+			_ref_elite_badge_beast,
+			"_flag_elite"
+		) ||
+		!_ref_elite_badge_beast._flag_elite ||
+		!variable_instance_exists(
+			_ref_elite_badge_beast,
+			"_val_elite_status_icon_x"
+		) ||
+		!variable_instance_exists(
+			_ref_elite_badge_beast,
+			"_val_elite_status_icon_y"
+		)
+	){
+		continue;
+	}
+
+	if (
+		point_distance(
+			_val_card_mouse_x,
+			_val_card_mouse_y,
+			_ref_elite_badge_beast
+				._val_elite_status_icon_x,
+			_ref_elite_badge_beast
+				._val_elite_status_icon_y
+		) <=
+		14
+	){
+		_flag_pointer_on_elite_badge =
+			true;
+
+		break;
+	}
 }
 
 //================//
@@ -185,9 +256,10 @@ if (_str_team == "PLAYER"){
 		x;
 
 	var _flag_card_hover =
+		!_flag_pointer_on_elite_badge &&
 		position_meeting(
-			device_mouse_x_to_gui(0),
-			device_mouse_y_to_gui(0),
+			_val_card_mouse_x,
+			_val_card_mouse_y,
 			self
 		);
 
@@ -335,8 +407,64 @@ if (_str_team != "PLAYER"){
 		exit;
 	}
 
-	x =
-		_ref_unit.x;
+	//======================//
+	//ENEMY QUEUE POSITION//
+	//======================//
+	var _val_enemy_card_y =
+		_ref_unit.y - 200;
+
+	if (
+		variable_instance_exists(_ref_unit,"_flag_elite") &&
+		_ref_unit._flag_elite
+	){
+		_val_enemy_card_y -= 25;
+	}
+
+	x = _ref_unit.x;
+	y = _val_enemy_card_y;
+
+	var _flag_scholarly_queue =
+		variable_instance_exists(_ref_unit,"_flag_elite") &&
+		_ref_unit._flag_elite &&
+		variable_instance_exists(_ref_unit,"_str_elite_modifier") &&
+		string_upper(string(_ref_unit._str_elite_modifier)) == "SCHOLARLY" &&
+		_str_location == "HAND";
+
+	if (_flag_scholarly_queue){
+
+		var _val_queue_slot = 0;
+
+		if (
+			variable_instance_exists(id,"_val_enemy_queue_slot")
+		){
+			_val_queue_slot =
+				max(
+					0,
+					round(
+						_val_enemy_queue_slot
+					)
+				);
+		}
+
+		// Keep the two displayed Card artworks centered as a pair with an
+		// 11 px edge-to-edge gap at their normal enemy draw scale.
+		var _val_queue_card_width =
+			sprite_get_width(
+				_spr_card
+			) *
+			0.15;
+
+		var _val_queue_spacing =
+			_val_queue_card_width +
+			11;
+
+		if (_val_queue_slot <= 0){
+			x -= _val_queue_spacing * 0.5;
+		}
+		else{
+			x += _val_queue_spacing * 0.5;
+		}
+	}
 
 	//-----------------//
 	//DEFEATED OWNER//
@@ -394,9 +522,10 @@ if (_str_team != "PLAYER"){
 			//HOVER//
 			//-----//
 			var _flag_enemy_card_hover =
+				!_flag_pointer_on_elite_badge &&
 				position_meeting(
-					device_mouse_x_to_gui(0),
-					device_mouse_y_to_gui(0),
+					_val_card_mouse_x,
+					_val_card_mouse_y,
 					self
 				);
 

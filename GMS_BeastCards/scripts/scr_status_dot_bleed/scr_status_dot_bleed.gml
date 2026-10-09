@@ -15,7 +15,6 @@
 // RETURNS: Command-specific Status reference, trigger result or undefined.
 //
 //===============================================================================//
-
 function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag_trigger_plague_garden=true,_ref_target=undefined){
 
 	switch (_str_tag){
@@ -173,46 +172,35 @@ function scr_status_dot_bleed(_str_tag,_ref_status,_val_lifetime=undefined,_flag
 			//=========================//
 			//DAMAGE = CURRENT STACKS//
 			//=========================//
-			var _val_damage = max(0,_ref_status._ct_status_stacks);
-
-			//============//
-			//OVERHEALTH//
-			//============//
-			if (_val_damage > 0 && _ref_host._val_overhealth > 0){
-
-				var _val_blocked = min(_ref_host._val_overhealth,_val_damage);
-
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_blocked),
-					undefined,
-					c_green,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
+			var _val_damage =
+				max(
+					0,
+					_ref_status
+						._ct_status_stacks
 				);
 
-				_ref_host._val_overhealth -= _val_blocked;
-				_val_damage -= _val_blocked;
-			}
+			/*
+				Bleed remains hosted by the original Beast and keeps its normal
+				lifetime/stack behavior. Only the damage recipient may change
+				when an active Soulbound Elite protects that host.
 
-			//=========//
-			//HOST HP//
-			//=========//
-			if (_val_damage > 0){
+				Legacy Bleed bypassed Armor and Minions, so the shared raw-damage
+				helper preserves that exact damage profile.
+			*/
+			scr_battle_elite_damage_raw_target(
+				_ref_host,
+				_val_damage,
+				{
+					_c_overhealth :
+						c_green,
 
-				var _val_actual_damage = min(_val_damage,_ref_host._val_cur_hp);
+					_c_hp :
+						c_maroon,
 
-				scr_gui_spawn_popup_scrolling(
-					"TEXT",
-					"-" + string(_val_actual_damage),
-					undefined,
-					c_maroon,
-					_ref_host.x + irandom_range(-32,32),
-					_ref_host.y - 24 + irandom_range(-32,32)
-				);
-
-				_ref_host._val_cur_hp = max(0,_ref_host._val_cur_hp - _val_actual_damage);
-			}
+					_str_source :
+						"BLEED"
+				}
+			);
 
 			//==========//
 			//TICK VFX//

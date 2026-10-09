@@ -1,22 +1,21 @@
-
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_BUFF_MANA_SPRING
-// FUNCTION: Handles the Mana Spring global Mana Buff.
-//           Unstackable Timed Global Buff.
-//           Grants temporary Maximum Mana on first application.
-//           Grants Current Mana on every application.
-//           Reapplication refreshes duration without stacking itself.
-//           Reapplication retains the original magnitude.
-//           Stacks independently with Inspiration and Manavine.
-//           Uses the shared Mana Gain and Maximum Mana systems.
+// FUNCTION: Handles Mana Spring as a PLAYER Team Status.
+//           This remains a player-resource Buff because the enemy battle system
+//           has no Mana pool. Enemy application is rejected rather than modifying
+//           the player's resources.
 //
-// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH or the status-specific tag.
-//            _ref_status is the existing Status instance for non-APPLY commands.
-//            Original optional args, unchanged:
+//           Unstackable Timed Buff. Grants temporary Maximum Mana on first
+//           application and Current Mana on every application. Reapplication
+//           refreshes duration and retains the original magnitude.
+//
+// ARGUMENTS: _str_tag selects APPLY/REPEAT/DEATH.
+//            _ref_status is the existing Status for non-APPLY commands.
 //            _val_magnitude=undefined, _val_lifetime=undefined.
-//            _ref_target is the explicit host ONLY for APPLY.
-// RETURNS: Command-specific Status reference, trigger result or undefined.
+//            _ref_target may be a PLAYER Beast, "PLAYER", or legacy GLOBAL
+//            context while GLOBAL.REF_CASTER_BEAST is a PLAYER Beast.
+// RETURNS: Command-specific Status reference or undefined.
 //
 //===============================================================================//
 
@@ -24,29 +23,12 @@ function scr_status_buff_mana_spring(_str_tag,_ref_status,_val_magnitude=undefin
 
 	switch (_str_tag){
 
-		//=======//
-		//APPLY//
-		//=======//
 		case "APPLY":
 
-			//-----------------//
-			//VALIDATE SYSTEM//
-			//-----------------//
 			if (!instance_exists(obj_battle_player_controller)){
 				return undefined;
 			}
 
-			if (!variable_global_exists("list_statuses")){
-				return undefined;
-			}
-
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
-			}
-
-			//----------//
-			//DEFAULTS//
-			//----------//
 			if (_val_magnitude == undefined){
 				_val_magnitude = 2;
 			}
@@ -58,42 +40,52 @@ function scr_status_buff_mana_spring(_str_tag,_ref_status,_val_magnitude=undefin
 			_val_magnitude = max(0,_val_magnitude);
 			_val_lifetime = max(1,_val_lifetime);
 
-			//----------------//
-			//CHECK EXISTING//
-			//----------------//
-			var _ref_existing_status = scr_status_check("MANA_SPRING",global.list_statuses);
+			var _str_team = "";
+			var _ref_source = undefined;
 
-			//------------------//
-			//REFRESH EXISTING//
-			//------------------//
-			if (_ref_existing_status != -1){
+			if (instance_exists(_ref_target)){
+				_str_team = _ref_target._str_team;
+				_ref_source = _ref_target;
+			}
+			else if (is_string(_ref_target)){
+				var _str_target_team = string_upper(string(_ref_target));
 
-				if (!instance_exists(_ref_existing_status)){
-					return undefined;
+				if (_str_target_team == "PLAYER" || _str_target_team == "ENEMY"){
+					_str_team = _str_target_team;
 				}
+			}
 
-				//------------------//
-				//REFRESH LIFETIME//
-				//------------------//
+			if (_str_team == "" && instance_exists(global.ref_caster_beast)){
+				_str_team = global.ref_caster_beast._str_team;
+				_ref_source = global.ref_caster_beast;
+			}
+
+			if (_str_team != "PLAYER"){
+				return undefined;
+			}
+
+			var _list_team_statuses = scr_status_get_team_status_list("PLAYER");
+
+			if (
+				_list_team_statuses == undefined ||
+				!ds_exists(_list_team_statuses,ds_type_list)
+			){
+				return undefined;
+			}
+
+			var _ref_existing_status = scr_status_check("MANA_SPRING","PLAYER");
+
+			if (_ref_existing_status != -1 && instance_exists(_ref_existing_status)){
+
 				scr_status_refresh_lifetime(
 					_ref_existing_status,
 					_val_lifetime
 				);
 
-				//-------------------//
-				//GAIN CURRENT MANA//
-				//-------------------//
-				// Regrant the original magnitude.
-				// Do not increase Maximum Mana again.
-				// The shared helper caps Current Mana at Maximum Mana.
-
 				scr_battle_gain_mana(
 					_ref_existing_status._val_status_magnitude
 				);
 
-				//--------------------//
-				//UPDATE DESCRIPTION//
-				//--------------------//
 				_ref_existing_status._str_status_desc =
 					"+" +
 					string(_ref_existing_status._val_status_magnitude) +
@@ -103,14 +95,11 @@ function scr_status_buff_mana_spring(_str_tag,_ref_status,_val_magnitude=undefin
 					string(_ref_existing_status._val_status_lifetime) +
 					" ROUNDS REMAINING.";
 
-				scr_status_reposition(global.list_statuses);
+				scr_status_reposition("PLAYER");
 
 				return _ref_existing_status;
 			}
 
-			//---------------//
-			//CREATE STATUS//
-			//---------------//
 			var _ref_new_status = instance_create_layer(
 				room_width * 0.5,
 				room_height * 0.5,
@@ -118,9 +107,6 @@ function scr_status_buff_mana_spring(_str_tag,_ref_status,_val_magnitude=undefin
 				obj_battle_status
 			);
 
-			//---------------------//
-			//INITIALIZE LIFETIME//
-			//---------------------//
 			scr_status_init_lifetime(
 				_ref_new_status,
 				_val_lifetime,
@@ -128,113 +114,155 @@ function scr_status_buff_mana_spring(_str_tag,_ref_status,_val_magnitude=undefin
 				false
 			);
 
-			//-------------//
-			//STATUS DATA//
-			//-------------//
 			_ref_new_status._scr_status = scr_status_buff_mana_spring;
-
 			_ref_new_status._ref_host = undefined;
+			_ref_new_status._ref_status_source = _ref_source;
+			_ref_new_status._str_team = "PLAYER";
+			_ref_new_status._str_status_scope = "TEAM";
+			_ref_new_status._flag_status_source_bound = false;
 
 			_ref_new_status._str_status_type = "GLOBAL";
 			_ref_new_status._str_status_name = "MANA_SPRING";
-
 			_ref_new_status._str_status_desc =
-				"+" +
-				string(_val_magnitude) +
-				" MAXIMUM MANA. GAIN " +
-				string(_val_magnitude) +
-				" CURRENT MANA ON APPLY. " +
-				string(_val_lifetime) +
+				"+" + string(_val_magnitude) +
+				" MAXIMUM MANA. GAIN " + string(_val_magnitude) +
+				" CURRENT MANA ON APPLY. " + string(_val_lifetime) +
 				" ROUNDS REMAINING.";
-
 			_ref_new_status._spr_status = spr_status_buff_mana_spring;
-
 			_ref_new_status._ct_status_stacks = 1;
 			_ref_new_status._val_status_magnitude = _val_magnitude;
-
 			_ref_new_status._flag_status_stackable = false;
-
 			_ref_new_status._str_trigger_region = "END";
 
-			//----------------------//
-			//INCREASE MAXIMUM MANA//
-			//----------------------//
-			// First application only.
+			_ref_new_status._val_team_max_mana_bonus_applied =
+				max(
+					0,
+					scr_battle_change_max_mana(
+						_ref_new_status._val_status_magnitude
+					)
+				);
 
-			scr_battle_change_max_mana(
-				_ref_new_status._val_status_magnitude
-			);
-
-			//-------------------//
-			//GAIN CURRENT MANA//
-			//-------------------//
 			scr_battle_gain_mana(
 				_ref_new_status._val_status_magnitude
 			);
 
-			//----------------//
-			//REGISTER STATUS//
-			//----------------//
 			ds_list_add(
-				global.list_statuses,
+				_list_team_statuses,
 				_ref_new_status
 			);
 
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition("PLAYER");
 
 			return _ref_new_status;
 
 		break;
 
-		//========//
-		//REPEAT//
-		//========//
 		case "REPEAT":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			if (
-				!variable_global_exists("list_statuses") ||
-				!ds_exists(global.list_statuses,ds_type_list)
-			){
+			var _list_team_statuses = scr_status_get_team_status_list("PLAYER");
 
-				scr_status_destroy(_ref_status);
+			//======================//
+			//VALIDATE TEAM REGISTRY//
+			//======================//
+			if (
+				_list_team_statuses == undefined ||
+				!ds_exists(_list_team_statuses,ds_type_list)
+			){
+				/*
+					Do not destroy this resource Status without its normal cleanup.
+					Running DEATH guarantees its temporary Maximum Mana contribution
+					is returned before the Status instance is removed.
+				*/
+				scr_status_buff_mana_spring(
+					"DEATH",
+					_ref_status
+				);
 
 				return undefined;
 			}
 
-			//----------------//
+			//========================//
+			//REPAIR LOST REGISTRATION//
+			//========================//
+			if (
+				ds_list_find_index(
+					_list_team_statuses,
+					_ref_status
+				) == -1
+			){
+				ds_list_add(
+					_list_team_statuses,
+					_ref_status
+				);
+
+				scr_debug_log(
+					"BATTLE",
+					"STATUS",
+					_ref_status,
+					"MANA_SPRING TEAM STATUS REGISTRATION REPAIRED",
+					"BATTLE",
+					"SCR_STATUS_BUFF_MANA_SPRING"
+				);
+			}
+
+			//================//
 			//UPDATE LIFETIME//
-			//----------------//
+			//================//
 			scr_status_tick_lifetime(_ref_status);
 
-			scr_status_reposition(global.list_statuses);
+			if (instance_exists(_ref_status)){
+				_ref_status._str_status_desc =
+					"+" + string(_ref_status._val_status_magnitude) +
+					" MAXIMUM MANA. GAIN " + string(_ref_status._val_status_magnitude) +
+					" CURRENT MANA ON APPLY. " + string(_ref_status._val_status_lifetime) +
+					" ROUNDS REMAINING.";
+
+				scr_status_reposition("PLAYER");
+			}
 
 		break;
 
-		//=======//
-		//DEATH//
-		//=======//
 		case "DEATH":
 
 			if (!instance_exists(_ref_status)){
 				return undefined;
 			}
 
-			var _val_mana_bonus = max(0,_ref_status._val_status_magnitude);
+			var _val_mana_bonus = 0;
 
-			//---------------------//
-			//REMOVE MAXIMUM MANA//
-			//---------------------//
-			scr_battle_change_max_mana(
-				-_val_mana_bonus
-			);
+			if (
+				variable_instance_exists(
+					_ref_status,
+					"_val_team_max_mana_bonus_applied"
+				)
+			){
+				_val_mana_bonus =
+					max(
+						0,
+						_ref_status._val_team_max_mana_bonus_applied
+					);
+			}
+			else{
+				// Compatibility fallback for a Status created before this hotfix.
+				_val_mana_bonus =
+					max(
+						0,
+						_ref_status._val_status_magnitude
+					);
+			}
 
-			//----------------//
-			//DESTROY STATUS//
-			//----------------//
+			if (_val_mana_bonus > 0){
+				scr_battle_change_max_mana(
+					-_val_mana_bonus
+				);
+			}
+
+			_ref_status._val_team_max_mana_bonus_applied = 0;
+
 			scr_status_destroy(_ref_status);
 
 		break;

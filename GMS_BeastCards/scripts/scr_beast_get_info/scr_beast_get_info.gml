@@ -1147,6 +1147,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_arbrawn,
 					_snd_beast_cry : snd_beast_viridian_arbrawn_cry,
 					_snd_beast_death : snd_beast_viridian_arbrawn_death,
+					_snd_beast_interact : snd_beast_viridian_arbrawn_interact,
 					_str_beast_name : "ARBRAWN",
 
 					_val_beast_hp_stat : 240,
@@ -1181,7 +1182,8 @@ function scr_beast_get_info(_str_beast_name){
 				_stct_return_beast = {
 					_spr_beast : spr_beast_viridian_argentbud,
 					_snd_beast_cry : snd_beast_viridian_argentbud_cry,
-					_snd_beast_death : snd_beast_viridian_argentbud_death,					
+					_snd_beast_death : snd_beast_viridian_argentbud_death,	
+					_snd_beast_interact : snd_beast_viridian_argentbud_interact,
 					_str_beast_name : "ARGENTBUD",
 
 					_val_beast_hp_stat : 54,
@@ -1216,7 +1218,8 @@ function scr_beast_get_info(_str_beast_name){
 				_stct_return_beast = {
 					_spr_beast : spr_beast_viridian_beavine,
 					_snd_beast_cry : snd_beast_viridian_beavine_cry,
-					_snd_beast_death : snd_beast_viridian_beavine_death,							
+					_snd_beast_death : snd_beast_viridian_beavine_death,	
+					_snd_beast_interact : snd_beast_viridian_beavine_interact,
 					_str_beast_name : "BEAVINE",
 
 					_val_beast_hp_stat : 88,
@@ -1252,6 +1255,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_bryobite,
 					_snd_beast_cry : snd_beast_viridian_bryobite_cry,
 					_snd_beast_death : snd_beast_viridian_bryobite_death,	
+					_snd_beast_interact : snd_beast_viridian_bryobite_interact,					
 					_str_beast_name : "BRYOBITE",
 
 					_val_beast_hp_stat : 280,
@@ -1286,7 +1290,8 @@ function scr_beast_get_info(_str_beast_name){
 				_stct_return_beast = {
 					_spr_beast : spr_beast_viridian_chitrooper,
 					_snd_beast_cry : snd_beast_viridian_chitrooper_cry,
-					_snd_beast_death : snd_beast_viridian_chitrooper_death,						
+					_snd_beast_death : snd_beast_viridian_chitrooper_death,	
+					_snd_beast_interact : snd_beast_viridian_chitrooper_interact,
 					_str_beast_name : "CHITROOPER",
 
 					_val_beast_hp_stat : 74,
@@ -1321,7 +1326,8 @@ function scr_beast_get_info(_str_beast_name){
 				_stct_return_beast = {
 					_spr_beast : spr_beast_viridian_crusaber,
 					_snd_beast_cry : snd_beast_viridian_crusaber_cry,
-					_snd_beast_death : snd_beast_viridian_crusaber_death,							
+					_snd_beast_death : snd_beast_viridian_crusaber_death,
+					_snd_beast_interact : snd_beast_viridian_crusaber_interact,
 					_str_beast_name : "CRUSABER",
 
 					_val_beast_hp_stat : 102,
@@ -1356,7 +1362,8 @@ function scr_beast_get_info(_str_beast_name){
 				_stct_return_beast = {
 					_spr_beast : spr_beast_viridian_dryadae,
 					_snd_beast_cry : snd_beast_viridian_dryadae_cry,
-					_snd_beast_death : snd_beast_viridian_dryadae_death,		
+					_snd_beast_death : snd_beast_viridian_dryadae_death,
+					_snd_beast_interact : snd_beast_viridian_dryadae_interact,
 					_str_beast_name : "DRYADAE",
 
 					_val_beast_hp_stat : 114,
@@ -1392,6 +1399,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_fightree,
 					_snd_beast_cry : snd_beast_viridian_fightree_cry,
 					_snd_beast_death : snd_beast_viridian_fightree_death,	
+					_snd_beast_interact : snd_beast_viridian_fightree_interact,
 					_str_beast_name : "FIGHTREE",
 
 					_val_beast_hp_stat : 255,
@@ -1427,6 +1435,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_flitsage,
 					_snd_beast_cry : snd_beast_viridian_flitsage_cry,
 					_snd_beast_death : snd_beast_viridian_flitsage_death,	
+					_snd_beast_interact : snd_beast_viridian_flitsage_interact,
 					_str_beast_name : "FLITSAGE",
 
 					_val_beast_hp_stat : 42,
@@ -1462,6 +1471,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_furn,
 					_snd_beast_cry : snd_beast_viridian_furn_cry,
 					_snd_beast_death : snd_beast_viridian_furn_death,	
+					_snd_beast_interact : snd_beast_viridian_furn_interact,
 					_str_beast_name : "FURN",
 
 					_val_beast_hp_stat : 82,
@@ -1497,6 +1507,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_leporoot,
 					_snd_beast_cry : snd_beast_viridian_leporoot_cry,
 					_snd_beast_death : snd_beast_viridian_leporoot_death,	
+					_snd_beast_interact : snd_beast_viridian_leporoot_interact,
 					_str_beast_name : "LEPOROOT",
 
 					_val_beast_hp_stat : 48,
@@ -1532,6 +1543,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_lumbuck,
 					_snd_beast_cry : snd_beast_viridian_lumbuck_cry,
 					_snd_beast_death : snd_beast_viridian_lumbuck_death,	
+					_snd_beast_interact : snd_beast_viridian_lumbuck_interact,
 					_str_beast_name : "LUMBUCK",
 
 					_val_beast_hp_stat : 108,
@@ -1567,6 +1579,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_mambark,
 					_snd_beast_cry : snd_beast_viridian_mambark_cry,
 					_snd_beast_death : snd_beast_viridian_mambark_death,	
+					_snd_beast_interact : snd_beast_viridian_mambark_interact,
 					_str_beast_name : "MAMBARK",
 
 					_val_beast_hp_stat : 52,
@@ -1602,6 +1615,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_morelush,
 					_snd_beast_cry : snd_beast_viridian_morelush_cry,
 					_snd_beast_death : snd_beast_viridian_morelush_death,	
+					_snd_beast_interact : snd_beast_viridian_morelush_interact,
 					_str_beast_name : "MORELUSH",
 
 					_val_beast_hp_stat : 72,
@@ -1637,6 +1651,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_sporose,
 					_snd_beast_cry : snd_beast_viridian_sporose_cry,
 					_snd_beast_death : snd_beast_viridian_sporose_death,	
+					_snd_beast_interact : snd_beast_viridian_sporose_interact,
 					_str_beast_name : "SPOROSE",
 
 					_val_beast_hp_stat : 84,
@@ -1672,6 +1687,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_strigibloom,
 					_snd_beast_cry : snd_beast_viridian_strigibloom_cry,
 					_snd_beast_death : snd_beast_viridian_strigibloom_death,	
+					_snd_beast_interact : snd_beast_viridian_strigibloom_interact,
 					_str_beast_name : "STRIGIBLOOM",
 
 					_val_beast_hp_stat : 126,
@@ -1707,6 +1723,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_viridian_turfrantula,
 					_snd_beast_cry : snd_beast_viridian_turfrantula_cry,
 					_snd_beast_death : snd_beast_viridian_turfrantula_death,	
+					_snd_beast_interact : snd_beast_viridian_turfrantula_interact,
 					_str_beast_name : "TURFRANTULA",
 
 					_val_beast_hp_stat : 88,

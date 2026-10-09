@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.49,
+  "duration":1.0649433,
   "exportDir":"",
   "name":"snd_beast_viridian_strigibloom_cry",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_beast_viridian_strigibloom_cry.wav",
-  "volume":0.1,
+  "volume":1.0,
 }

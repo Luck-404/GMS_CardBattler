@@ -432,23 +432,23 @@ function scr_gui_spawn_printout(_flag_scroll_random,_str_type,_str_text,_spr_ico
 			_ref_popup._ct_life;
 	}
 
-	//================//
-	//DEBUG CLEAN//
-	//================//
-	if (_flag_clean){
+	////================//
+	////DEBUG CLEAN//
+	////================//
+	//if (_flag_clean){
 
-		scr_debug_log(
-			"GUI",
-			"PRINTOUT",
-			_ref_anchor,
-			"CLEAN PRINTOUT QUEUED" +
-				" | TEXT: " + string_upper(string(_str_text)) +
-				" | FAMILY: " +
-				(_flag_scroll_random ? "SCROLLING" : "STANDARD"),
-			"INFO",
-			"SCR_GUI_SPAWN_PRINTOUT"
-		);
-	}
+	//	scr_debug_log(
+	//		"GUI",
+	//		"PRINTOUT",
+	//		_ref_anchor,
+	//		"CLEAN PRINTOUT QUEUED" +
+	//			" | TEXT: " + string_upper(string(_str_text)) +
+	//			" | FAMILY: " +
+	//			(_flag_scroll_random ? "SCROLLING" : "STANDARD"),
+	//		"INFO",
+	//		"SCR_GUI_SPAWN_PRINTOUT"
+	//	);
+	//}
 
 	return _ref_popup;
 

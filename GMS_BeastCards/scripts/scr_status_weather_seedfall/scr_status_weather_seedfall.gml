@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_WEATHER_SEEDFALL
@@ -23,11 +24,21 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 		//=======//
 		case "APPLY":
 
-			//----------------------//
-			//VALIDATE GLOBAL LIST//
-			//----------------------//
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
+			//=========================//
+			//ENSURE WEATHER REGISTRY//
+			//=========================//
+			if (!variable_global_exists("ref_status_weather")){
+				global.ref_status_weather = undefined;
+			}
+
+			//===========================//
+			//REPLACE DIFFERENT WEATHER//
+			//===========================//
+			if (
+				instance_exists(global.ref_status_weather) &&
+				global.ref_status_weather._str_status_name != "WEATHER: SEEDFALL"
+			){
+				scr_status_clear_weather();
 			}
 
 			//==========//
@@ -44,7 +55,7 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 			//----------------//
 			var _ref_existing_status = scr_status_check(
 				"WEATHER: SEEDFALL",
-				global.list_statuses
+				"WEATHER"
 			);
 
 			//------------------//
@@ -74,6 +85,8 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 						"ily_weather_fx"
 					);
 				}
+
+				global.ref_status_weather = _ref_existing_status;
 
 				return _ref_existing_status;
 			}
@@ -106,6 +119,7 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 			_ref_new_status._ref_host = undefined;
 
 			_ref_new_status._str_status_type = "WEATHER";
+			_ref_new_status._str_status_scope = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: SEEDFALL";
 			_ref_new_status._str_status_desc = "Weather. Viridian damage is increased by 25%. At the end of each round, summon up to 3 Dormant Seeds into random available Minion slots across the battlefield, then hatch 1 random Dormant Seed into a random Minion from the Viridian hatch pool. Lifetime: 5 rounds.";
 
@@ -119,10 +133,7 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(
-				global.list_statuses,
-				_ref_new_status
-			);
+			global.ref_status_weather = _ref_new_status;
 
 			//=====================//
 			//SEEDFALL START VFX//
@@ -162,7 +173,7 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 			//------------------//
 			//REPOSITION STATUS//
 			//------------------//
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition("WEATHER");
 
 			return _ref_new_status;
 
@@ -429,9 +440,7 @@ function scr_status_weather_seedfall(_str_tag,_ref_status,_val_lifetime=undefine
 			//----------------//
 			scr_status_tick_lifetime(_ref_status);
 
-			if (ds_exists(global.list_statuses,ds_type_list)){
-				scr_status_reposition(global.list_statuses);
-			}
+			scr_status_reposition("WEATHER");
 
 		break;
 

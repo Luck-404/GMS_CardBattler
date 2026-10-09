@@ -32,6 +32,22 @@ function scr_status_trigger_attack_statuses(_ref_attacker,_ref_primary_target,_s
 
 	var _flag_triggered = false;
 
+	//========================//
+	//ELITE ATTACK MODIFIERS//
+	//========================//
+	/*
+		Resolves inherent Elite Attack-level reactions once after the full
+		Attack Card has completed its damage-result ledger.
+	*/
+	if (
+		scr_battle_elite_trigger_attack_modifiers(
+			_ref_attacker,
+			_stct_card
+		)
+	){
+		_flag_triggered = true;
+	}
+
 	//================//
 	//FLAMING LASHES//
 	//================//

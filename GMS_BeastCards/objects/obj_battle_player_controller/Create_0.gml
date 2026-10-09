@@ -92,7 +92,13 @@ _it_casting_minion = 0;
 //----------//
 //STATUSES//
 //----------//
-global.list_statuses = ds_list_create();
+// Shared battle Status ownership is now explicit:
+// PLAYER / ENEMY Team registries plus one Weather and one Event reference.
+global.list_statuses_player = ds_list_create();
+global.list_statuses_enemy = ds_list_create();
+
+global.ref_status_weather = undefined;
+global.ref_status_event = undefined;
 
 _flag_statuses_init = false;
 
@@ -500,7 +506,7 @@ hscr_battle_check_prism_targets = function(){
 			);
 
 		if (instance_exists(_ref_enemy_beast)){
-			_ref_enemy_beast._flag_beast_range_check = true;
+			_ref_enemy_beast._flag_beast_range_check = !_ref_enemy_beast._flag_elite;
 		}
 	}
 };
@@ -1209,13 +1215,14 @@ hscr_battle_check_beast_class = function(_list_beasts_check){
 // ENEMY TARGETING:
 // - MELEE: Front living enemy.
 // - BACK/FLANK: Rear living enemy.
-// - RANGED/ENEMY: Any living enemy.
+// - RANGED/ENEMY: Any living enemy, subject to Elite targeting rules.
 // - SELF/TEAM: No enemy targets.
 //
 // HOSTILE TARGET PRIORITY:
 // 1. Taunt overrides enemy range and Blind.
 // 2. Blind restricts enemy targeting when no Taunt exists.
 // 3. Normal range applies otherwise.
+// 4. EVASIVE is a final direct-target eligibility gate for RANGED Attacks.
 //
 // Teamwide and Global effects are not redirected by Taunt.
 //—------------------------------------------------------------------------------//
@@ -1437,6 +1444,20 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 
 			break;
 		}
+
+		//========================//
+		//ELITE DIRECT TARGET RULE//
+		//========================//
+		if (
+			_ref_enemy_beast._flag_beast_range_check &&
+			!scr_battle_elite_can_be_targeted_by_card(
+				_ref_enemy_beast,
+				_stct_card
+			)
+		){
+			_ref_enemy_beast._flag_beast_range_check =
+				false;
+		}
 	}
 
 	#endregion
@@ -1473,7 +1494,11 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 			_ref_enemy._flag_beast_range_check =
 				(
 					_ref_enemy ==
-					_ref_taunt_target
+					_ref_taunt_target &&
+					scr_battle_elite_can_be_targeted_by_card(
+						_ref_enemy,
+						_stct_card
+					)
 				);
 		}
 
@@ -1529,7 +1554,11 @@ hscr_battle_check_beast_range = function(_list_beasts_check,_str_range){
 			_ref_enemy._flag_beast_range_check =
 				(
 					_ref_enemy ==
-					_ref_front_enemy
+					_ref_front_enemy &&
+					scr_battle_elite_can_be_targeted_by_card(
+						_ref_enemy,
+						_stct_card
+					)
 				);
 		}
 

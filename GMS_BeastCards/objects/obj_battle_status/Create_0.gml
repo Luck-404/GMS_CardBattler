@@ -23,9 +23,12 @@ _scr_status = undefined;
 _ref_host = undefined;
 _ref_status_target = undefined;
 _ref_source_minion = undefined;
+_ref_status_source = undefined;
 
 _str_team = undefined;
+_str_status_scope = "HOST"; // HOST, TEAM, WEATHER, EVENT, LEGACY_GLOBAL
 
+_flag_status_source_bound = false;
 _flag_status_requires_live_source_minion = false;
 
 //================//
@@ -68,7 +71,7 @@ _str_buff_trigger = undefined;
 //================//
 //AURA SETTINGS//
 //================//
-_str_aura_scope = undefined;   // SELF, TEAMWIDE, GLOBAL
+_str_aura_scope = undefined;   // SELF or TEAM; retained for Aura mechanics
 _str_aura_trigger = undefined; // HEALED, future trigger types
 
 //===================//
@@ -91,3 +94,4 @@ _flag_status_prevent_reposition = false;
 //=========================//
 _ref_persistent_vfx = undefined;
 _val_persistent_audio = -1;
+

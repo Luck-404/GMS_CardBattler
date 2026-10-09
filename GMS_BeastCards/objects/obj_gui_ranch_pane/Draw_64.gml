@@ -5,6 +5,7 @@
 //           Handles moving Beasts between Party and Ranch.
 //           Handles Party reordering, Ranch deletion, pagination, and cooldown.
 //           Logs all successful roster mutations.
+//           Dead animation-valid Beasts preview their DEATH frame 9.
 //
 //===============================================================================//
 
@@ -127,11 +128,43 @@ for (var _it_unit = 0;_it_unit < 5;_it_unit++){
 	//----------------//
 	//DRAW BEAST//
 	//----------------//
-	var _c_beast = _stct_unit._val_beast_hp_cur <= 0 ? c_ltgray : c_white;
+	var _flag_unit_dead =
+		_stct_unit._val_beast_hp_cur <= 0;
+
+	var _flag_staged_animation =
+		scr_beast_animation_is_valid(
+			_stct_unit._str_beast_name
+		);
+
+	var _val_beast_subimage = 0;
+
+	if (
+		_flag_unit_dead &&
+		_flag_staged_animation &&
+		sprite_exists(
+			_stct_unit._spr_beast
+		)
+	){
+		_val_beast_subimage =
+			min(
+				9,
+				max(
+					0,
+					sprite_get_number(
+						_stct_unit._spr_beast
+					) - 1
+				)
+			);
+	}
+
+	var _c_beast =
+		_flag_unit_dead
+		? c_ltgray
+		: c_white;
 
 	draw_sprite_ext(
 		_stct_unit._spr_beast,
-		0,
+		_val_beast_subimage,
 		_val_unit_x,
 		_val_unit_y,
 		0.125,
@@ -352,6 +385,11 @@ for (var _it_unit = 0;_it_unit < 5;_it_unit++){
 		!_flag_clicked
 	){
 
+		scr_beast_sound_play(
+			_stct_unit,
+			"INTERACT"
+		);
+
 		audio_play_sound(snd_beast_transfer,0,false);
 
 		_flag_clicked = true;
@@ -528,11 +566,43 @@ for (var _it_unit = 0;_it_unit < _ct_ranch_units_per_page;_it_unit++){
 	//----------------//
 	//DRAW BEAST//
 	//----------------//
-	var _c_beast = _stct_unit._val_beast_hp_cur <= 0 ? c_ltgray : c_white;
+	var _flag_unit_dead =
+		_stct_unit._val_beast_hp_cur <= 0;
+
+	var _flag_staged_animation =
+		scr_beast_animation_is_valid(
+			_stct_unit._str_beast_name
+		);
+
+	var _val_beast_subimage = 0;
+
+	if (
+		_flag_unit_dead &&
+		_flag_staged_animation &&
+		sprite_exists(
+			_stct_unit._spr_beast
+		)
+	){
+		_val_beast_subimage =
+			min(
+				9,
+				max(
+					0,
+					sprite_get_number(
+						_stct_unit._spr_beast
+					) - 1
+				)
+			);
+	}
+
+	var _c_beast =
+		_flag_unit_dead
+		? c_ltgray
+		: c_white;
 
 	draw_sprite_ext(
 		_stct_unit._spr_beast,
-		0,
+		_val_beast_subimage,
 		_val_unit_x,
 		_val_unit_y,
 		0.125,
@@ -599,6 +669,11 @@ for (var _it_unit = 0;_it_unit < _ct_ranch_units_per_page;_it_unit++){
 		mouse_check_button_pressed(mb_left) &&
 		!_flag_clicked
 	){
+
+		scr_beast_sound_play(
+			_stct_unit,
+			"INTERACT"
+		);
 
 		audio_play_sound(snd_beast_transfer,0,false);
 

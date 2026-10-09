@@ -242,6 +242,18 @@ function scr_cc_get_confused_target(_ref_caster,_ref_target,_stct_card){
 				continue;
 			}
 
+			//=========================//
+			//ELITE TARGETING EXCLUSION//
+			//=========================//
+			if (
+				!scr_battle_elite_can_be_targeted_by_card(
+					_ref_beast,
+					_stct_card
+				)
+			){
+				continue;
+			}
+
 			array_push(
 				_arr_targets,
 				_ref_beast

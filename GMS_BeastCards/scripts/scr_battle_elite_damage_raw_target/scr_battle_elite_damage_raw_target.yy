@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle_elite_damage_raw_target",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle_elite_damage_raw_target",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_GET_BLOODMIST
@@ -8,21 +9,17 @@
 
 function scr_status_get_bloodmist(){
 
-	//----------------------//
-	//VALIDATE GLOBAL LIST//
-	//----------------------//
-	if (!variable_global_exists("list_statuses")){
-		return -1;
-	}
-
-	if (!ds_exists(global.list_statuses,ds_type_list)){
+	//---------------------//
+	//VALIDATE EVENT REF//
+	//---------------------//
+	if (!variable_global_exists("ref_status_event")){
 		return -1;
 	}
 
 	//================//
 	//CHECK BLOODMIST//
 	//================//
-	var _ref_bloodmist = scr_status_check("EVENT: BLOODMIST",global.list_statuses);
+	var _ref_bloodmist = scr_status_check("EVENT: BLOODMIST","EVENT");
 
 	if (
 		_ref_bloodmist == -1 ||

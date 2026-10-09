@@ -95,11 +95,41 @@ for (var _it_unit = 0;_it_unit < _ct_units;_it_unit++){
 	//----------------//
 	//DRAW BEAST//
 	//----------------//
-	var _c_beast = _stct_unit._val_beast_hp_cur <= 0 ? c_ltgray : c_white;
+	var _flag_unit_dead =
+		_stct_unit._val_beast_hp_cur <= 0;
+
+	var _flag_staged_animation =
+		scr_beast_animation_is_valid(
+			_stct_unit._str_beast_name
+		);
+
+	var _val_beast_subimage = 0;
+
+	if (
+		_flag_unit_dead &&
+		_flag_staged_animation &&
+		sprite_exists(_stct_unit._spr_beast)
+	){
+		_val_beast_subimage =
+			min(
+				9,
+				max(
+					0,
+					sprite_get_number(
+						_stct_unit._spr_beast
+					) - 1
+				)
+			);
+	}
+
+	var _c_beast =
+		_flag_unit_dead
+		? c_ltgray
+		: c_white;
 
 	draw_sprite_ext(
 		_stct_unit._spr_beast,
-		0,
+		_val_beast_subimage,
 		_val_unit_x,
 		_val_unit_y,
 		0.125,
@@ -270,16 +300,23 @@ for (var _it_unit = 0;_it_unit < _ct_units;_it_unit++){
 		!_flag_clicked
 	){
 
-		audio_play_sound(snd_gui_press,0,false);
-
 		_flag_clicked = true;
 		_ct_cooldown = 10;
 
 		_val_pos = _it_unit;
 		_stct_unit_selected = ds_list_find_value(global.list_player_party,_val_pos);
 
+		var _flag_interact_sound = false;
+
 		if (is_struct(_stct_unit_selected)){
-			audio_play_sound(_stct_unit_selected._snd_beast_cry,0,false);
+			_flag_interact_sound = scr_beast_sound_play(
+				_stct_unit_selected,
+				"INTERACT"
+			);
+		}
+
+		if (!_flag_interact_sound){
+			audio_play_sound(snd_gui_press,0,false);
 		}
 	}
 

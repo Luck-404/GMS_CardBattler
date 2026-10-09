@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_beast_viridian_argentbud_interact",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.39015874,
+  "exportDir":"",
+  "name":"snd_beast_viridian_argentbud_interact",
+  "parent":{
+    "name":"ARGENTBUD",
+    "path":"folders/BEASTS/VIRIDIAN/ARGENTBUD.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_beast_viridian_argentbud_interact.wav",
+  "volume":0.5,
+}

@@ -14,7 +14,7 @@ function scr_card_vermilion_inferno_eternal(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//APPLY GLOBAL BUFF//
 	//================//
-	var _ref_inferno = scr_status_apply_buff("INFERNO_ETERNAL", _ref_target, _stct_card._val_card_magnitude, 5);
+	var _ref_inferno = scr_status_apply_buff("INFERNO_ETERNAL", _ref_caster, _stct_card._val_card_magnitude, 5);
 
 	if (!instance_exists(_ref_inferno)){
 		return;

@@ -10,7 +10,6 @@
 // RETURNS: True when Stormstruck successfully triggers; otherwise false.
 //
 //===============================================================================//
-
 function scr_status_trigger_stormstruck_action(_ref_beast){
 
 	//----------------//
@@ -53,64 +52,36 @@ function scr_status_trigger_stormstruck_action(_ref_beast){
 		_ct_stacks *
 		_ref_stormstruck._val_status_magnitude;
 
-	var _val_damage_remaining = _val_damage_total;
+	/*
+		Stormstruck remains hosted on the acting Beast. Its action reaction still
+		uses the pre-removal stack count, removes exactly one stack afterward,
+		and refreshes lifetime when stacks remain.
 
-	var _val_overhealth_damage = 0;
-	var _val_hp_damage = 0;
+		Only the raw Overhealth/HP damage recipient may redirect to Soulbound.
+	*/
+	var _stct_damage =
+		scr_battle_elite_damage_raw_target(
+			_ref_beast,
+			_val_damage_total,
+			{
+				_c_overhealth :
+					c_green,
 
-	//===================//
-	//DAMAGE OVERHEALTH//
-	//===================//
-	if (
-		_val_damage_remaining > 0 &&
-		_ref_beast._val_overhealth > 0
-	){
+				_c_hp :
+					c_maroon,
 
-		_val_overhealth_damage = min(
-			_ref_beast._val_overhealth,
-			_val_damage_remaining
+				_str_source :
+					"STORMSTRUCK ACTION"
+			}
 		);
 
-		_ref_beast._val_overhealth -= _val_overhealth_damage;
-		_val_damage_remaining -= _val_overhealth_damage;
+	var _val_overhealth_damage =
+		_stct_damage
+			._val_overhealth_damage;
 
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"-" + string(_val_overhealth_damage),
-			undefined,
-			c_green,
-			_ref_beast.x + irandom_range(-32,32),
-			_ref_beast.y - 24 + irandom_range(-32,32)
-		);
-	}
-
-	//=============//
-	//DAMAGE HP//
-	//=============//
-	if (
-		_val_damage_remaining > 0 &&
-		_ref_beast._val_cur_hp > 0
-	){
-
-		_val_hp_damage = min(
-			_val_damage_remaining,
-			_ref_beast._val_cur_hp
-		);
-
-		_ref_beast._val_cur_hp = max(
-			0,
-			_ref_beast._val_cur_hp - _val_hp_damage
-		);
-
-		scr_gui_spawn_popup_scrolling(
-			"TEXT",
-			"-" + string(_val_hp_damage),
-			undefined,
-			c_maroon,
-			_ref_beast.x + irandom_range(-32,32),
-			_ref_beast.y - 24 + irandom_range(-32,32)
-		);
-	}
+	var _val_hp_damage =
+		_stct_damage
+			._val_hp_damage;
 
 	//==========//
 	//TICK VFX//

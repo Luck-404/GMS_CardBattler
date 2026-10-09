@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_WEATHER_FIRESTORM
@@ -18,7 +19,6 @@
 // RETURNS: Applied or existing Weather Status on APPLY; undefined on other paths.
 //
 //===============================================================================//
-
 function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefined){
 
 	switch (_str_tag){
@@ -28,11 +28,21 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 		//=======//
 		case "APPLY":
 
-			//----------------------//
-			//VALIDATE GLOBAL LIST//
-			//----------------------//
-			if (!ds_exists(global.list_statuses,ds_type_list)){
-				return undefined;
+			//=========================//
+			//ENSURE WEATHER REGISTRY//
+			//=========================//
+			if (!variable_global_exists("ref_status_weather")){
+				global.ref_status_weather = undefined;
+			}
+
+			//===========================//
+			//REPLACE DIFFERENT WEATHER//
+			//===========================//
+			if (
+				instance_exists(global.ref_status_weather) &&
+				global.ref_status_weather._str_status_name != "WEATHER: FIRESTORM"
+			){
+				scr_status_clear_weather();
 			}
 
 			//==========//
@@ -49,7 +59,7 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 			//----------------//
 			var _ref_existing_status = scr_status_check(
 				"WEATHER: FIRESTORM",
-				global.list_statuses
+				"WEATHER"
 			);
 
 			//==================//
@@ -65,6 +75,8 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 					_ref_existing_status,
 					_val_lifetime
 				);
+
+				global.ref_status_weather = _ref_existing_status;
 
 				return _ref_existing_status;
 			}
@@ -97,6 +109,7 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 			_ref_new_status._ref_host = undefined;
 
 			_ref_new_status._str_status_type = "WEATHER";
+			_ref_new_status._str_status_scope = "WEATHER";
 			_ref_new_status._str_status_name = "WEATHER: FIRESTORM";
 
 			_ref_new_status._str_status_desc = "Weather. At the end of each round, apply 1 Burn to every living Beast. ERUPTION 10: Consume all Burn from that Beast, deal 20 NEU dmg to it, and apply 3 Char. Lifetime: 5 rounds.";
@@ -122,10 +135,7 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 			//----------------//
 			//REGISTER STATUS//
 			//----------------//
-			ds_list_add(
-				global.list_statuses,
-				_ref_new_status
-			);
+			global.ref_status_weather = _ref_new_status;
 
 			//================//
 			//START VFX//
@@ -148,7 +158,7 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 			//------------------//
 			//REPOSITION STATUS//
 			//------------------//
-			scr_status_reposition(global.list_statuses);
+			scr_status_reposition("WEATHER");
 
 			return _ref_new_status;
 
@@ -324,78 +334,56 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 				//======================//
 				//DEAL 20 NEU DAMAGE//
 				//======================//
-				// Fixed Weather damage bypasses Armor.
-				// Overhealth absorbs damage before HP.
+				/*
+					Firestorm ERUPTION remains attached to the original Beast:
+					- Burn is consumed from that Beast;
+					- Char is applied to that Beast afterward.
 
-				var _val_damage_remaining = 20;
-				var _val_beast_damage = 0;
+					Only the 20 raw NEU damage may redirect to Soulbound.
+					The raw helper preserves Firestorm's existing Armor bypass.
+				*/
+				var _stct_firestorm_damage =
+					scr_battle_elite_damage_raw_target(
+						_ref_beast,
+						20,
+						{
+							_c_overhealth :
+								c_green,
 
-				//================//
-				//OVERHEALTH//
-				//================//
-				if (_ref_beast._val_overhealth > 0){
+							_c_hp :
+								c_maroon,
 
-					var _val_overhealth_damage = min(
-						_ref_beast._val_overhealth,
-						_val_damage_remaining
+							_str_source :
+								"FIRESTORM ERUPTION"
+						}
 					);
 
-					_ref_beast._val_overhealth -= _val_overhealth_damage;
+				var _val_beast_damage =
+					_stct_firestorm_damage
+						._val_total_damage;
 
-					_val_damage_remaining -= _val_overhealth_damage;
-
-					_val_beast_damage += _val_overhealth_damage;
-
-					scr_gui_spawn_popup_scrolling(
-						"TEXT",
-						"-" + string(_val_overhealth_damage),
-						undefined,
-						c_green,
-						_ref_beast.x,
-						_ref_beast.y - 24
-					);
-				}
-
-				//================//
-				//HP DAMAGE//
-				//================//
-				if (
-					_val_damage_remaining > 0 &&
-					_ref_beast._val_cur_hp > 0
-				){
-
-					var _val_hp_damage = min(
-						_val_damage_remaining,
-						_ref_beast._val_cur_hp
-					);
-
-					_ref_beast._val_cur_hp = max(
-						0,
-						_ref_beast._val_cur_hp - _val_hp_damage
-					);
-
-					_val_beast_damage += _val_hp_damage;
-
-					scr_gui_spawn_popup_scrolling(
-						"TEXT",
-						"-" + string(_val_hp_damage),
-						undefined,
-						c_maroon,
-						_ref_beast.x,
-						_ref_beast.y - 48
-					);
-				}
+				var _ref_firestorm_damage_target =
+					_stct_firestorm_damage
+						._ref_target;
 
 				//================//
 				//WAKE SLEEP//
 				//================//
+				/*
+					Firestorm historically wakes the Beast that actually takes
+					damage. If Soulbound redirects the hit, wake the Soulbound
+					recipient rather than the protected Beast.
+				*/
 				if (
 					_val_beast_damage > 0 &&
-					_ref_beast._val_cur_hp > 0
+					instance_exists(
+						_ref_firestorm_damage_target
+					) &&
+					_ref_firestorm_damage_target
+						._val_cur_hp > 0
 				){
-
 					scr_status_wake_sleep_on_damage(
-						_ref_beast
+						_ref_firestorm_damage_target
 					);
 				}
 
@@ -458,12 +446,7 @@ function scr_status_weather_firestorm(_str_tag,_ref_status,_val_lifetime=undefin
 			//------------------//
 			//REPOSITION STATUS//
 			//------------------//
-			if (ds_exists(global.list_statuses,ds_type_list)){
-
-				scr_status_reposition(
-					global.list_statuses
-				);
-			}
+			scr_status_reposition("WEATHER");
 
 		break;
 

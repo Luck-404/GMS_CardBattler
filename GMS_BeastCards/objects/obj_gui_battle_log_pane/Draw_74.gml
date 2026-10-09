@@ -2,8 +2,10 @@
 //
 // DRAW GUI BEGIN: OBJ_GUI_BATTLE_LOG_PANE
 // FUNCTION: Draws the expandable battle-action log in the upper-right corner.
-//           Displays eight combat events per page and the page counter at the
+//           Displays four combat events per page and the page counter at the
 //           bottom-left of the pane.
+//           Hovering a visible entry registers its full untruncated message as
+//           the shared mouse-cursor tooltip.
 //
 //===============================================================================//
 
@@ -215,6 +217,15 @@ var _val_text_width =
 	(_val_padding * 2);
 
 //================//
+//MOUSE//
+//================//
+var _val_mouse_x =
+	device_mouse_x_to_gui(0);
+
+var _val_mouse_y =
+	device_mouse_y_to_gui(0);
+
+//================//
 //DRAW ENTRIES//
 //================//
 draw_set_font(fnt_gui_party_small);
@@ -237,6 +248,37 @@ for (
 		_val_header_height +
 		4 +
 		(_it_draw_entry * _val_entry_height);
+
+	//================//
+	//ENTRY HOVER//
+	//================//
+	var _val_entry_row_y1 =
+		_val_pane_y1 +
+		_val_header_height +
+		(_it_draw_entry * _val_entry_height);
+
+	var _val_entry_row_y2 =
+		_val_entry_row_y1 +
+		_val_entry_height;
+
+	if (
+		_flag_log_visible &&
+		point_in_rectangle(
+			_val_mouse_x,
+			_val_mouse_y,
+			_val_pane_x1,
+			_val_entry_row_y1,
+			_val_pane_x2,
+			_val_entry_row_y2
+		)
+	){
+
+		scr_gui_set_hover_tooltip(
+			"BATTLE LOG ENTRY",
+			_arr_log_entries[_it_entry],
+			100
+		);
+	}
 
 	//================//
 	//WRAP ENTRY//

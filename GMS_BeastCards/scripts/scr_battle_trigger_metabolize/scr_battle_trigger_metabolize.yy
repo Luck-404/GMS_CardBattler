@@ -6,7 +6,7 @@
   "name":"scr_battle_trigger_metabolize",
   "parent":{
     "name":"POISONFLOW",
-    "path":"folders/BATTLE/COLOR TRIGGERS/POISONFLOW.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/POISONFLOW.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

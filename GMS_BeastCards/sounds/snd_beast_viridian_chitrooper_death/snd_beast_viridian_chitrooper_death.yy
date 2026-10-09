@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.84,
+  "duration":0.9679365,
   "exportDir":"",
   "name":"snd_beast_viridian_chitrooper_death",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_beast_viridian_chitrooper_death.wav",
-  "volume":0.1,
+  "volume":1.0,
 }

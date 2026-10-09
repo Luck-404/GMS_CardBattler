@@ -1,29 +1,21 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_TRIGGER_CARD_CAST_AURAS
-// FUNCTION: Triggers Team Auras responding to a qualifying card cast.
-//           Searches living allied Beasts for Team-scoped Auras.
-//           Currently supports Auras triggered by Attack card casts.
-//           Logs every Aura that successfully triggers.
+// FUNCTION: Triggers Team Auras responding to an allied qualifying Card cast.
+//		   Reads the caster's Team Status registry directly.
 //
-// ARGUMENTS: _ref_caster is the Beast that cast the qualifying card.
-//            _stct_card is the Card struct that was cast.
-// RETURNS: True when at least one Aura successfully triggers; otherwise false.
+// ARGUMENTS: _ref_caster - Beast that cast the qualifying Card.
+//			_stct_card - Card struct that was cast.
+// RETURNS: True when at least one Aura successfully triggers.
 //
 //===============================================================================//
 
 function scr_status_trigger_card_cast_auras(_ref_caster,_stct_card){
 
-	//----------------//
-	//VALIDATE CASTER//
-	//----------------//
 	if (!instance_exists(_ref_caster)){
 		return false;
 	}
 
-	//--------------//
-	//VALIDATE CARD//
-	//--------------//
 	if (!is_struct(_stct_card)){
 		return false;
 	}
@@ -32,87 +24,92 @@ function scr_status_trigger_card_cast_auras(_ref_caster,_stct_card){
 		return false;
 	}
 
-	//---------------//
-	//GET TEAM LIST//
-	//---------------//
-	var _list_team = scr_battle_get_target_team_list(_ref_caster);
+	var _str_team = _ref_caster._str_team;
 
-	if (!ds_exists(_list_team,ds_type_list)){
+	scr_status_prune_team_status_sources(
+		_str_team
+	);
+
+	var _list_statuses =
+		scr_status_get_team_status_list(
+			_str_team
+		);
+
+	if (
+		_list_statuses == undefined ||
+		!ds_exists(_list_statuses,ds_type_list)
+	){
 		return false;
 	}
 
 	var _flag_triggered = false;
 
-	//================//
-	//CHECK TEAM AURAS//
-	//================//
-	for (var _it_beast = 0;_it_beast < ds_list_size(_list_team);_it_beast++){
+	for (
+		var _it_status = ds_list_size(_list_statuses) - 1;
+		_it_status >= 0;
+		_it_status--
+	){
 
-		var _ref_beast = ds_list_find_value(_list_team,_it_beast);
+		var _ref_status =
+			ds_list_find_value(
+				_list_statuses,
+				_it_status
+			);
 
-		if (!instance_exists(_ref_beast)){
+		if (!instance_exists(_ref_status)){
 			continue;
 		}
 
-		if (!ds_exists(_ref_beast._list_statuses,ds_type_list)){
+		if (_ref_status._str_status_type != "AURA"){
 			continue;
 		}
 
-		//----------------//
-		//CHECK STATUSES//
-		//----------------//
-		for (var _it_status = ds_list_size(_ref_beast._list_statuses) - 1;_it_status >= 0;_it_status--){
+		if (_ref_status._str_aura_scope != "TEAM"){
+			continue;
+		}
 
-			var _ref_status = ds_list_find_value(_ref_beast._list_statuses,_it_status);
+		if (_ref_status._str_aura_trigger != "ATTACK_CAST"){
+			continue;
+		}
 
-			if (!instance_exists(_ref_status)){
-				continue;
-			}
+		if (_ref_status._str_team != _str_team){
+			continue;
+		}
 
-			if (_ref_status._str_status_type != "AURA"){
-				continue;
-			}
+		if (_ref_status._scr_status == undefined){
+			continue;
+		}
 
-			if (_ref_status._str_aura_scope != "TEAM"){
-				continue;
-			}
+		var _str_status_name =
+			_ref_status._str_status_name;
 
-			if (_ref_status._str_aura_trigger != "ATTACK_CAST"){
-				continue;
-			}
+		var _ref_status_source =
+			_ref_status._ref_status_source;
 
-			if (_ref_status._scr_status == undefined){
-				continue;
-			}
+		if (!instance_exists(_ref_status_source)){
+			_ref_status_source =
+				_ref_status._ref_host;
+		}
 
-			//----------------//
-			//SNAPSHOT AURA//
-			//----------------//
-			var _str_status_name = _ref_status._str_status_name;
-			var _ref_status_host = _ref_status._ref_host;
-
-			//--------------//
-			//TRIGGER AURA//
-			//--------------//
-			var _flag_aura_triggered = _ref_status._scr_status(
+		var _flag_aura_triggered =
+			_ref_status._scr_status(
 				"TRIGGER",
 				_ref_status,
 				undefined,
 				_ref_caster
 			);
 
-			if (_flag_aura_triggered){
+		if (_flag_aura_triggered){
 
-				_flag_triggered = true;
+			_flag_triggered = true;
 
-				scr_debug_log_battle_trigger(
-					_str_status_name,
-					_ref_status_host,
-					_ref_caster,
-					"",
-					"SCR_STATUS_TRIGGER_CARD_CAST_AURAS"
-				);
-			}
+			scr_debug_log_battle_trigger(
+				_str_status_name,
+				_ref_status_source,
+				_ref_caster,
+				"",
+				"SCR_STATUS_TRIGGER_CARD_CAST_AURAS"
+			);
 		}
 	}
 

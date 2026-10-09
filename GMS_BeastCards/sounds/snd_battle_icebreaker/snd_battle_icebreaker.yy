@@ -15,7 +15,7 @@
   "name":"snd_battle_icebreaker",
   "parent":{
     "name":"ICEBREAKER",
-    "path":"folders/BATTLE/COLOR TRIGGERS/ICEBREAKER.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/ICEBREAKER.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

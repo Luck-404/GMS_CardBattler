@@ -1,3 +1,4 @@
+
 //===============================================================================//
 //
 // SCRIPT: SCR_CARD_CERULEAN_TIDAL_SLASH
@@ -17,7 +18,7 @@ function scr_card_cerulean_tidal_slash(_stct_card,_ref_caster,_ref_target){
 	//CALCULATE DAMAGE//
 	//================//
 	var _val_damage = _stct_card._val_card_magnitude;
-	var _ref_rain = scr_status_check("WEATHER: RAIN",global.list_statuses);
+	var _ref_rain = scr_status_check("WEATHER: RAIN","WEATHER");
 
 	if (_ref_rain != -1){
 		_val_damage += 5;

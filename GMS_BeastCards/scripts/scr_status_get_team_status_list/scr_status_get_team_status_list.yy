@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_status_get_team_status_list",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_status_get_team_status_list",
+  "parent":{
+    "name":"CORE",
+    "path":"folders/BATTLE/STATUSES/CORE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

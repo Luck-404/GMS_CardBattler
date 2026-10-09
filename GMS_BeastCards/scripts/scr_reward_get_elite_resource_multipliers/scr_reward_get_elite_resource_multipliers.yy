@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_reward_get_elite_resource_multipliers",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_reward_get_elite_resource_multipliers",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -33,7 +33,7 @@
   "origin":4,
   "parent":{
     "name":"DISCHARGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -15,7 +15,7 @@
   "name":"snd_battle_discharge",
   "parent":{
     "name":"DISCHARGE",
-    "path":"folders/BATTLE/COLOR TRIGGERS/DISCHARGE.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/DISCHARGE.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

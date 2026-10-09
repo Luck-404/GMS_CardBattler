@@ -1,1 +1,0 @@
-// All transition visuals are rendered in Draw GUI.

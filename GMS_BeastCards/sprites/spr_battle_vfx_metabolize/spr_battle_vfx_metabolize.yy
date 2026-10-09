@@ -33,7 +33,7 @@
   "origin":4,
   "parent":{
     "name":"POISONFLOW",
-    "path":"folders/BATTLE/COLOR TRIGGERS/POISONFLOW.yy",
+    "path":"folders/BATTLE/COMBAT/COLOR TRIGGERS/POISONFLOW.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

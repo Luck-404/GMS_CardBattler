@@ -1,52 +1,45 @@
 //===============================================================================//
 //
 // SCRIPT: SCR_STATUS_CLEAR_WEATHER
-// FUNCTION: Removes every active Weather Status.
-//           Runs each Weather's normal DEATH cleanup before removal.
+// FUNCTION: Removes the single active Weather Status through its normal DEATH
+//           cleanup path. Weather is owned by GLOBAL.REF_STATUS_WEATHER.
 //
 // ARGUMENTS: None.
-// RETURNS: The number of Weather Statuses removed.
+// RETURNS: 1 when a Weather Status was removed; otherwise 0.
 //
 //===============================================================================//
 
 function scr_status_clear_weather(){
 
-	//----------------------//
-	//VALIDATE GLOBAL LIST//
-	//----------------------//
-	if (!ds_exists(global.list_statuses,ds_type_list)){
+	if (
+		!variable_global_exists("ref_status_weather") ||
+		!instance_exists(global.ref_status_weather)
+	){
+		global.ref_status_weather = undefined;
 		return 0;
 	}
 
-	var _ct_removed = 0;
+	var _ref_status = global.ref_status_weather;
 
-	//===================//
-	//REMOVE ALL WEATHER//
-	//===================//
-	for (var _it_status = ds_list_size(global.list_statuses) - 1;_it_status >= 0;_it_status--){
-
-		var _ref_status = ds_list_find_value(global.list_statuses,_it_status);
-
-		if (!instance_exists(_ref_status)){
-			continue;
-		}
-
-		if (_ref_status._str_status_type != "WEATHER"){
-			continue;
-		}
-
-		//--------------------//
-		//RUN WEATHER CLEANUP//
-		//--------------------//
-		if (_ref_status._scr_status != undefined){
-			_ref_status._scr_status("DEATH",_ref_status);
-		}
-		else{
-			scr_status_destroy(_ref_status);
-		}
-
-		_ct_removed++;
+	if (
+		variable_instance_exists(_ref_status,"_scr_status") &&
+		is_callable(_ref_status._scr_status)
+	){
+		script_execute(
+			_ref_status._scr_status,
+			"DEATH",
+			_ref_status
+		);
+	}
+	else{
+		scr_status_destroy(_ref_status);
 	}
 
-	return _ct_removed;
+	if (instance_exists(_ref_status)){
+		scr_status_destroy(_ref_status);
+	}
+
+	global.ref_status_weather = undefined;
+
+	return 1;
 }

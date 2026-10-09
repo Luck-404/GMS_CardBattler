@@ -1,6 +1,9 @@
+//===============================================================================//
+//
 // STEP: OBJ_OVERWORLD_ENCOUNTER_ZONE
 // FUNCTION: Rolls random encounters while the player moves through the zone.
-//           Stores battle-return state and logs successful grass encounters.
+//           Rolls natural Elite metadata only after successfully claiming the
+//           battle transition, then stores battle-return and encounter state.
 //           Generates plant-litter traversal effects.
 //
 //===============================================================================//
@@ -49,6 +52,49 @@ if (
             scr_overworld_roll_encounter_scaling(
                 room
             );
+
+        if (!is_struct(_stct_encounter_scaling)){
+            with (_ref_transition){
+                instance_destroy();
+            }
+
+            _ct_encounter_attempt_cooldown = 30;
+            exit;
+        }
+
+//================//
+//ROLL ELITE//
+//================//
+        var _stct_elite_roll =
+            scr_overworld_roll_elite_encounter();
+
+        if (is_struct(_stct_elite_roll)){
+            _stct_encounter_scaling._flag_elite_encounter =
+                _stct_elite_roll._flag_elite;
+
+            _stct_encounter_scaling._str_elite_modifier =
+                _stct_elite_roll._str_elite_modifier;
+
+            _stct_encounter_scaling._val_elite_risk_tier =
+                _stct_elite_roll._val_elite_risk_tier;
+
+            _stct_encounter_scaling._val_elite_chance_percent =
+                _stct_elite_roll._val_elite_chance_percent;
+
+            _stct_encounter_scaling._val_elite_roll =
+                _stct_elite_roll._val_elite_roll;
+
+            _stct_encounter_scaling._str_elite_source_item_id =
+                _stct_elite_roll._str_elite_source_item_id;
+        }
+        else{
+            _stct_encounter_scaling._flag_elite_encounter = false;
+            _stct_encounter_scaling._str_elite_modifier = "";
+            _stct_encounter_scaling._val_elite_risk_tier = 0;
+            _stct_encounter_scaling._val_elite_chance_percent = 4;
+            _stct_encounter_scaling._val_elite_roll = -1;
+            _stct_encounter_scaling._str_elite_source_item_id = "BASE";
+        }
 
 //----------------//
 //SHOW FEEDBACK//
@@ -116,6 +162,33 @@ if (
             " | ENCOUNTER POOL: " + string(array_length(_arr_encounter_beasts)) +
             " | LOOT ZONE: " + _str_loot_zone_id +
             " | DIFFICULTY: " + _stct_encounter_scaling._str_difficulty +
+            " | ELITE: " +
+            (
+                _stct_encounter_scaling._flag_elite_encounter
+                ? "YES (" +
+                    _stct_encounter_scaling._str_elite_modifier +
+                    ")"
+                : "NO"
+            ) +
+            " | ELITE ROLL: " +
+            string(
+                _stct_encounter_scaling._val_elite_roll
+            ) +
+            "/100" +
+            " | ELITE CHANCE: " +
+            string(
+                _stct_encounter_scaling
+                    ._val_elite_chance_percent
+            ) +
+            "%" +
+            " | ELITE SOURCE: " +
+            _stct_encounter_scaling
+                ._str_elite_source_item_id +
+            " | RISK TIER: " +
+            string(
+                _stct_encounter_scaling
+                    ._val_elite_risk_tier
+            ) +
             " | ENEMIES: " + string(_stct_encounter_scaling._ct_enemy_beasts) +
             " | ZONE LEVELS: " +
             string(_stct_encounter_scaling._val_zone_level_min) +

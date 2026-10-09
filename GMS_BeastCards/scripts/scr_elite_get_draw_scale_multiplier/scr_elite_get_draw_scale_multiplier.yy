@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_elite_get_draw_scale_multiplier",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_elite_get_draw_scale_multiplier",
+  "parent":{
+    "name":"ELITES",
+    "path":"folders/BEASTS/ELITES.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

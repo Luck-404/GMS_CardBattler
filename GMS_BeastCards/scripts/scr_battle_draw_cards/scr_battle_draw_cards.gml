@@ -1,4 +1,3 @@
-
 //===============================================================================//
 //
 // SCRIPT: SCR_BATTLE_DRAW_CARDS
@@ -53,28 +52,22 @@ function scr_battle_draw_cards(_ct_amount){
 	var _ref_draw_2 = -1;
 	var _ct_draw_2_bonus = 0;
 
-	if (
-		variable_global_exists("list_statuses") &&
-		ds_exists(global.list_statuses,ds_type_list)
-	){
-
-		_ref_draw_2 = scr_status_check(
+	_ref_draw_2 =
+		scr_status_check(
 			"DRAW_2",
-			global.list_statuses
+			"PLAYER"
 		);
 
-		if (
-			_ref_draw_2 != -1 &&
-			instance_exists(_ref_draw_2)
-		){
+	if (
+		_ref_draw_2 != -1 &&
+		instance_exists(_ref_draw_2) &&
+		_ref_draw_2._ct_status_stacks > 0
+	){
+		_ct_draw_2_bonus =
+			_ref_draw_2._val_status_magnitude;
 
-			if (_ref_draw_2._ct_status_stacks > 0){
-
-				_ct_draw_2_bonus = _ref_draw_2._val_status_magnitude;
-
-				_ct_amount += _ct_draw_2_bonus;
-			}
-		}
+		_ct_amount +=
+			_ct_draw_2_bonus;
 	}
 
 	#endregion

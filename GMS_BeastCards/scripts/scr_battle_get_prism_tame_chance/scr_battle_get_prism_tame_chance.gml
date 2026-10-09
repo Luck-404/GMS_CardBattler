@@ -31,6 +31,16 @@ function scr_battle_get_prism_tame_chance(_str_prism_id,_ref_target_beast){
 		return 0;
 	}
 
+	//-----------------//
+	//BLOCK ELITE TARGET//
+	//-----------------//
+	if (
+		variable_instance_exists(_ref_target_beast,"_flag_elite") &&
+		_ref_target_beast._flag_elite
+	){
+		return 0;
+	}
+
 	//----------------//
 	//VALIDATE PRISM//
 	//----------------//
@@ -120,3 +130,5 @@ function scr_battle_get_prism_tame_chance(_str_prism_id,_ref_target_beast){
 
 	#endregion
 }
+
+

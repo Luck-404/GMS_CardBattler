@@ -29,5 +29,5 @@ function scr_card_vermilion_sanguine_song(_stct_card,_ref_caster,_ref_target){
 	//================//
 	//GAIN 1 ECHO//
 	//================//
-	scr_status_gain_echo(1);
+	scr_status_gain_echo(1,_ref_caster);
 }

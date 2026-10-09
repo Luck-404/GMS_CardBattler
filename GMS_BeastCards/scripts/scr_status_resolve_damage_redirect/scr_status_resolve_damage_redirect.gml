@@ -14,7 +14,6 @@
 // RETURNS: Final damage recipient, or the original target if none apply.
 //
 //===============================================================================//
-
 function scr_status_resolve_damage_redirect(_ref_target,_flag_consume=true){
 
 	//================//
@@ -35,6 +34,78 @@ function scr_status_resolve_damage_redirect(_ref_target,_flag_consume=true){
 	//FOLLOW THE CHAIN//
 	//================//
 	while (instance_exists(_ref_current)){
+
+		//=====================//
+		//SOULBOUND REDIRECT//
+		//=====================//
+		/*
+			Soulbound has precedence over temporary Redirect Buffs on the
+			protected Beast because the modifier protects that Beast from ALL
+			damage while the Elite remains active.
+
+			Once redirected to the Soulbound Elite, ordinary Redirect Buffs on
+			the Elite itself may still continue the redirect chain.
+		*/
+		var _ref_soulbound_guard =
+			scr_battle_elite_get_soulbound_guard(
+				_ref_current,
+				_arr_visited
+			);
+
+		if (
+			instance_exists(
+				_ref_soulbound_guard
+			)
+		){
+			if (_flag_consume){
+				scr_gui_spawn_popup_scrolling(
+					"TEXT",
+					"SOULBOUND",
+					undefined,
+					c_aqua,
+					_ref_current.x +
+						irandom_range(-32,32),
+					_ref_current.y -
+						24 +
+						irandom_range(-32,32)
+				);
+
+				scr_battle_vfx_blocked(
+					_ref_current
+				);
+
+				scr_debug_log(
+					"BATTLE",
+					"ELITE",
+					_ref_soulbound_guard,
+					"SOULBOUND DAMAGE REDIRECT" +
+					" | PROTECTED: " +
+					string_upper(
+						_ref_current
+							._ref_unit
+							._str_beast_name
+					) +
+					" | GUARD: " +
+					string_upper(
+						_ref_soulbound_guard
+							._ref_unit
+							._str_beast_name
+					),
+					"BATTLE",
+					"SCR_STATUS_RESOLVE_DAMAGE_REDIRECT"
+				);
+			}
+
+			_ref_current =
+				_ref_soulbound_guard;
+
+			array_push(
+				_arr_visited,
+				_ref_current
+			);
+
+			continue;
+		}
 
 		if (!ds_exists(_ref_current._list_statuses,ds_type_list)){
 			break;

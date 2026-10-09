@@ -2,8 +2,9 @@
 //
 // CREATE: OBJ_OVERWORLD_VFX_STEP_PARTICLE
 // FUNCTION: Initializes a short-lived footstep particle.
-//           Detects the terrain beneath the player.
-//           Assigns an appropriate terrain-based particle color.
+//           Detects terrain at the particle's OWN world position so particles
+//           spawned by the player, follower/wild Beasts, or Ranch Beasts inherit
+//           the tile beneath that mover rather than always sampling OBJ_PLAYER.
 //
 //===============================================================================//
 
@@ -28,10 +29,8 @@ _ct_lifetime = 5;
 _c_color = c_white;
 
 //----------------//
-//REFERENCES//
+//TERRAIN SAMPLE//
 //----------------//
-_ref_owner = undefined;
-
 _val_path_tilemap = -1;
 _val_tile_data = 0;
 _val_tile_index = 0;
@@ -41,29 +40,23 @@ _val_tile_index = 0;
 //================//
 
 //----------------//
-//GET OWNER//
-//----------------//
-if (instance_exists(obj_player)){
-	_ref_owner = instance_find(obj_player,0);
-}
-
-//----------------//
 //GET TERRAIN//
 //----------------//
-if (_ref_owner != undefined){
+_val_path_tilemap = layer_tilemap_get_id("tly_paths");
 
-	_val_path_tilemap = layer_tilemap_get_id("tly_paths");
+if (_val_path_tilemap != -1){
 
-	if (_val_path_tilemap != -1){
-
-		_val_tile_data = tilemap_get_at_pixel(
+	_val_tile_data =
+		tilemap_get_at_pixel(
 			_val_path_tilemap,
-			_ref_owner.x,
-			_ref_owner.y
+			x,
+			y
 		);
 
-		_val_tile_index = tile_get_index(_val_tile_data);
-	}
+	_val_tile_index =
+		tile_get_index(
+			_val_tile_data
+		);
 }
 
 //----------------//

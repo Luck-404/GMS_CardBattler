@@ -109,10 +109,9 @@ function scr_inventory_use_egg_item(_stct_item,_ref_inventory_pane){
 		false
 	);
 
-	audio_play_sound(
-		_stct_new_beast._snd_beast_cry,
-		0,
-		false
+	scr_beast_sound_play(
+		_stct_new_beast,
+		"CRY"
 	);
 
 	//================//
