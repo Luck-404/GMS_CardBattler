@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"BRYOBITE",
-    "path":"folders/BEASTS/VIRIDIAN/BRYOBITE.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/BRYOBITE/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

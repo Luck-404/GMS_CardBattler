@@ -16,7 +16,9 @@ function scr_beast_animation_is_valid(_str_beast_name){
 
 	static _arr_valid_beasts = [
 		"ARBRAWN",
-		"ARGENTBUD"
+		"ARGENTBUD",
+		"BEAVINE",
+		"BRYOBITE"
 	];
 
 	_str_beast_name =

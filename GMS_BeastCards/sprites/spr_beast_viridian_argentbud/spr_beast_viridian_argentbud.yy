@@ -49,8 +49,8 @@
   "height":512,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"f1d453df-c4f6-4d72-97f3-b62c27d65bdc","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"f1d453df-c4f6-4d72-97f3-b62c27d65bdc","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"b3c8d479-f9fe-4023-aadd-58430ee8eae8","blendMode":0,"displayName":"default","isLocked":false,"name":"b3c8d479-f9fe-4023-aadd-58430ee8eae8","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":false,},
+    {"$GMImageLayer":"","%Name":"f1d453df-c4f6-4d72-97f3-b62c27d65bdc","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"f1d453df-c4f6-4d72-97f3-b62c27d65bdc","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_beast_viridian_argentbud",
   "nineSlice":null,

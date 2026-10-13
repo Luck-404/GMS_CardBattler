@@ -22,8 +22,8 @@ function scr_beast_get_hp_level_growth(_val_hp_stat){
 	#region VALIDATION
 
 	//================//
-//SANITIZE HP STAT//
-//================//
+	//SANITIZE HP STAT//
+	//================//
 	if (!is_real(_val_hp_stat)){
 		_val_hp_stat = 0;
 	}

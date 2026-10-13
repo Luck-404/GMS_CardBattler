@@ -176,6 +176,15 @@ scr_debug_log(
 	#endregion
 
 	//----------------//
+	//WORLD EVENTS//
+	//----------------//
+	#region WORLD EVENTS
+
+	global.ref_world_event_controller = undefined;
+
+	#endregion
+
+	//----------------//
 	//CAMERA//
 	//----------------//
 	#region CAMERA
@@ -229,6 +238,37 @@ scr_debug_log(
 	"INIT",
 	self,
 	"RANDOM GENERATOR INITIALIZED",
+	"INIT",
+	"OBJ_PLAYER:CREATE"
+);
+
+//========================//
+//WORLD EVENT CONTROLLER//
+//========================//
+if (!instance_exists(obj_world_event_controller)){
+
+	global.ref_world_event_controller =
+		instance_create_depth(
+			0,
+			0,
+			0,
+			obj_world_event_controller
+		);
+}
+else{
+
+	global.ref_world_event_controller =
+		instance_find(
+			obj_world_event_controller,
+			0
+		);
+}
+
+scr_debug_log(
+	"WORLD_EVENT",
+	"INIT",
+	global.ref_world_event_controller,
+	"WORLD EVENT CONTROLLER READY",
 	"INIT",
 	"OBJ_PLAYER:CREATE"
 );

@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CHITROOPER",
-    "path":"folders/BEASTS/VIRIDIAN/CHITROOPER.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/CHITROOPER/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
