@@ -26,6 +26,9 @@ function scr_inventory_get_item_info(_str_item_id){
 		_str_trigger_text : undefined,
 		_str_item_trigger_type : undefined,
 		_str_unique_team_group : "",
+		_str_quest_behavior : "",
+		_str_quest_use_context : "",
+		_flag_quest_unique : false,
 		_scr_item : undefined,
 		_str_item_desc : "DEFAULT",
 		_flag_consumed_on_trigger : false,
@@ -43,27 +46,235 @@ function scr_inventory_get_item_info(_str_item_id){
 
 		#region QUEST
 
+		// All Quest Items directly reference their dedicated GameMaker sprites.
+		// These spr_item_quest_* resources must be imported before compiling.
+
+		case "QUEST_RANCH_KEY":
+			_stct_item._scr_item = scr_inventory_item_quest_ranch_key;
+			_stct_item._str_item_name = "RANCH KEY";
+			_stct_item._spr_item = spr_item_quest_ranch_key;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "USE";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._flag_quest_unique = true;
+			_stct_item._str_item_desc = "A key issued to the Ranch keeper. Fits the Ranch gate.";
+		break;
+
+		case "QUEST_GREENTOWN_PARCEL":
+			_stct_item._scr_item = scr_inventory_item_quest_greentown_parcel;
+			_stct_item._str_item_name = "GREENTOWN PARCEL";
+			_stct_item._spr_item = spr_item_quest_greentown_parcel;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "DELIVER";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._flag_quest_unique = true;
+			_stct_item._str_item_desc = "A sealed parcel addressed to someone in Greentown. Deliver it unopened.";
+		break;
+
 		case "QUEST_IMPORTANT_NOTEBOOK":
 			_stct_item._str_item_name = "IMPORTANT NOTEBOOK";
 			_stct_item._spr_item = spr_item_quest_important_notebook;
 			_stct_item._str_item_type = "QUEST";
 			_stct_item._scr_item = scr_inventory_item_quest_important_notebook;
+			_stct_item._str_quest_behavior = "USE";
+			_stct_item._str_quest_use_context = "INVENTORY";
+			_stct_item._flag_quest_unique = true;
 			_stct_item._str_item_desc = "An important notebook used for completing a quest.";
 			_stct_item._flag_stackable = false;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 1;
 		break;
 
+		case "QUEST_OLD_GROWTH_SAMPLE":
+			_stct_item._scr_item = scr_inventory_item_quest_old_growth_sample;
+			_stct_item._str_item_name = "OLD GROWTH SAMPLE";
+			_stct_item._spr_item = spr_item_quest_old_growth_sample;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "COLLECT";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._str_item_desc = "A preserved sample from an ancient Viridian tree, collected for research.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_max_amount = 100;
+		break;
+
+		case "QUEST_ROOTWATER_SAMPLE":
+			_stct_item._scr_item = scr_inventory_item_quest_rootwater_sample;
+			_stct_item._str_item_name = "ROOTWATER SAMPLE";
+			_stct_item._spr_item = spr_item_quest_rootwater_sample;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "COLLECT";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._str_item_desc = "A sealed sample of water gathered from the Viridian root system.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_max_amount = 100;
+		break;
+
+		case "QUEST_SLUICE_CRANK":
+			_stct_item._scr_item = scr_inventory_item_quest_sluice_crank;
+			_stct_item._str_item_name = "SLUICE CRANK";
+			_stct_item._spr_item = spr_item_quest_sluice_crank;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "USE";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._flag_quest_unique = true;
+			_stct_item._str_item_desc = "A heavy iron crank that fits an old sluice mechanism.";
+		break;
+
+		case "QUEST_COURIER_SATCHEL":
+			_stct_item._scr_item = scr_inventory_item_quest_courier_satchel;
+			_stct_item._str_item_name = "COURIER SATCHEL";
+			_stct_item._spr_item = spr_item_quest_courier_satchel;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "DELIVER";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._flag_quest_unique = true;
+			_stct_item._str_item_desc = "A courier's satchel awaiting its intended recipient near the Cerulean border.";
+		break;
+
+		case "QUEST_VIRIDIAN_RUNESTONE":
+			_stct_item._scr_item = scr_inventory_item_quest_viridian_runestone;
+			_stct_item._str_item_name = "VIRIDIAN RUNESTONE";
+			_stct_item._spr_item = spr_item_quest_viridian_runestone;
+			_stct_item._str_item_type = "QUEST";
+			_stct_item._str_quest_behavior = "USE";
+			_stct_item._str_quest_use_context = "WORLD";
+			_stct_item._flag_quest_unique = true;
+			_stct_item._str_item_desc = "An ancient Viridian runestone meant to be placed at its matching hub shrine.";
+		break;
+
 		#endregion
 
 		#region CONSUMABLE
+
+		case "CONSUMABLE_DEWDROP":
+			_stct_item._str_item_name = "DEWDROP";
+			_stct_item._spr_item = spr_item_consumable_dewdrop;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "HEAL_PERCENT";
+			_stct_item._val_consumable_amount = 0.1;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Restores 10% of a living Beast's Max HP.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		case "CONSUMABLE_GREATER_RESTORATIVE_SALVE":
+			_stct_item._str_item_name = "GREATER RESTORATIVE SALVE";
+			_stct_item._spr_item = spr_item_consumable_greater_restorative_salve;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "HEAL_FLAT";
+			_stct_item._val_consumable_amount = 75;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Restores 75 HP to a living Beast.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		case "CONSUMABLE_LIFEBLOOM_ELIXIR":
+			_stct_item._str_item_name = "LIFEBLOOM ELIXIR";
+			_stct_item._spr_item = spr_item_consumable_lifebloom_elixir;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "HEAL_FULL";
+			_stct_item._val_consumable_amount = 1;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Fully restores a living Beast's HP.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		case "CONSUMABLE_MENDING_DRAUGHT":
+			_stct_item._str_item_name = "MENDING DRAUGHT";
+			_stct_item._spr_item = spr_item_consumable_mending_draught;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "HEAL_PERCENT";
+			_stct_item._val_consumable_amount = 0.25;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Restores 25% of a living Beast's Max HP.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		case "CONSUMABLE_PHOENIX_SEED":
+			_stct_item._str_item_name = "PHOENIX SEED";
+			_stct_item._spr_item = spr_item_consumable_phoenix_seed;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "REVIVE";
+			_stct_item._val_consumable_amount = 0.25;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Revives a defeated Beast at 25% of Max HP.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		case "CONSUMABLE_RESTORATIVE_SALVE":
+			_stct_item._str_item_name = "RESTORATIVE SALVE";
+			_stct_item._spr_item = spr_item_consumable_restorative_salve;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "HEAL_FLAT";
+			_stct_item._val_consumable_amount = 30;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Restores 30 HP to a living Beast.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		case "CONSUMABLE_VITALITY_TONIC":
+			_stct_item._str_item_name = "VITALITY TONIC";
+			_stct_item._spr_item = spr_item_consumable_vitality_tonic;
+			_stct_item._str_item_type = "CONSUMABLE";
+			_stct_item._str_consumable_action = "HEAL_PERCENT";
+			_stct_item._val_consumable_amount = 0.5;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Restores 50% of a living Beast's Max HP.";
+			_stct_item._flag_stackable = true;
+			_stct_item._ct_item_amount = 1;
+			_stct_item._ct_item_max_amount = 10;
+		break;
+
+		// Food names, effects and descriptions come from SCR_INVENTORY_GET_FOOD_INFO.
+		case "CONSUMABLE_FOOD_DRAGONFRUIT":
+		case "CONSUMABLE_FOOD_HEARTPLUM":
+		case "CONSUMABLE_FOOD_HONEYCOMB":
+		case "CONSUMABLE_FOOD_IRONROOT":
+		case "CONSUMABLE_FOOD_KEENPEPPER":
+		case "CONSUMABLE_FOOD_MISTGRAPE":
+		case "CONSUMABLE_FOOD_MOONPEAR":
+		case "CONSUMABLE_FOOD_POPCORN":
+		case "CONSUMABLE_FOOD_STARFRUIT":
+		case "CONSUMABLE_FOOD_SWIFTBERRY":
+		case "CONSUMABLE_FOOD_TIGERFIG":
+		case "CONSUMABLE_FOOD_TITANBERRY":
+		case "CONSUMABLE_FOOD_WALNUT":
+		case "CONSUMABLE_FOOD_WATERMELON":
+			var _stct_food_info = scr_inventory_get_food_info(_str_item_id);
+			if (is_struct(_stct_food_info)){
+				_stct_item._str_item_name = string_upper(_stct_food_info._str_food_name);
+				_stct_item._spr_item = _stct_food_info._spr_food;
+				_stct_item._str_item_type = "CONSUMABLE";
+				_stct_item._str_consumable_action = "FOOD";
+				_stct_item._scr_item = scr_inventory_item_consumable_food;
+				_stct_item._str_item_desc = "Feed a Beast. " + _stct_food_info._str_bonus_text + ". Only the three most recent meals grant bonuses.";
+				_stct_item._flag_stackable = true;
+				_stct_item._ct_item_amount = 1;
+				_stct_item._ct_item_max_amount = 10;
+			}
+		break;
+
 
 		case "CONSUMABLE_HEALING_SALVE":
 			_stct_item._str_item_name = "HEALING SALVE";
 			_stct_item._spr_item = spr_item_consumable_healing_salve;
 			_stct_item._str_item_type = "CONSUMABLE";
-			_stct_item._scr_item = scr_inventory_item_consumable_healing_salve;
-			_stct_item._str_item_desc = "A healing balm that can be used to heal beasts.";
+			_stct_item._str_consumable_action = "HEAL_FLAT";
+			_stct_item._val_consumable_amount = 10;
+			_stct_item._scr_item = scr_inventory_item_consumable_restore;
+			_stct_item._str_item_desc = "Restores 10 HP to a living Beast.";
 			_stct_item._flag_stackable = true;
 			_stct_item._ct_item_amount = 1;
 			_stct_item._ct_item_max_amount = 10;
@@ -956,7 +1167,7 @@ function scr_inventory_get_item_info(_str_item_id){
 				#region CHITROOPER
 				case "EGG_CHITROOPER":
 					_stct_item._str_item_name = "CHITROOPER EGG";
-					_stct_item._spr_item = spr_item_egg_chitropper;
+					_stct_item._spr_item = spr_item_egg_chitrooper;
 					_stct_item._str_item_type = "EGG";
 					_stct_item._scr_item = undefined;
 					_stct_item._str_item_desc = "An egg of the beast Chitrooper.";

@@ -228,6 +228,26 @@ function hscr_gui_inventory_open_item_prompt(_stct_item){
 	_ref_item_prompt._str_yes_text = "YES";
 	_ref_item_prompt._str_no_text = "NO";
 
+	// World-use, collection and delivery items are inspected here. Their real
+	// quest/world interactions are deliberately not fired from Inventory.
+	if (_stct_item._str_item_type == "QUEST"){
+		var _str_quest_behavior = "USE";
+		var _str_quest_context = "INVENTORY";
+
+		if (variable_struct_exists(_stct_item,"_str_quest_behavior") && _stct_item._str_quest_behavior != ""){
+			_str_quest_behavior = _stct_item._str_quest_behavior;
+		}
+
+		if (variable_struct_exists(_stct_item,"_str_quest_use_context") && _stct_item._str_quest_use_context != ""){
+			_str_quest_context = _stct_item._str_quest_use_context;
+		}
+
+		if (_str_quest_behavior != "USE" || _str_quest_context != "INVENTORY"){
+			_ref_item_prompt._str_prompt_text = "INSPECT " + string(_stct_item._str_item_name) + "?";
+			_ref_item_prompt._str_yes_text = "VIEW";
+		}
+	}
+
 	_ref_item_prompt._scr_yes = _scr_yes_callback;
 	_ref_item_prompt._scr_no = scr_inventory_cancel_item_use;
 }

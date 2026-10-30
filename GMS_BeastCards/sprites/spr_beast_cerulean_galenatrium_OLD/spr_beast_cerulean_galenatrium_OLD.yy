@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"GALENATRIUM",
-    "path":"folders/BEASTS/CERULEAN/GALENATRIUM.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/GALENATRIUM/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -4,8 +4,8 @@
 // FUNCTION: Manages background music, overworld ambiance, and global GUI input.
 //           Switches immediately between overworld and battle music.
 //           Opens and closes player GUI panes, controls pause/fullscreen,
-//           toggles the overworld companion, and handles Ranch/camera input,
-//           including exclusive one-shot Ranch Beast interaction animations.
+//           toggles the overworld companion, and handles Ranch/camera input.
+//           Active Market panes reserve mouse-wheel input for pagination.
 //
 //===============================================================================//
 
@@ -1097,55 +1097,49 @@ if (room != rm_battle){
 	){
 
 		//================//
-		//CHEATS CAMERA LOCK//
+		//CAMERA INPUT LOCK//
 		//================//
-		var _flag_cheats_camera_lock =
-			false;
+		var _flag_camera_input_lock = false;
 
 		if (
-			instance_exists(
-				global.ref_active_gui
-			) &&
-			variable_instance_exists(
-				global.ref_active_gui,
-				"_str_type"
-			) &&
-			global.ref_active_gui._str_type
-				== "CHEATS"
+			instance_exists(global.ref_active_gui) &&
+			variable_instance_exists(global.ref_active_gui,"_str_type")
 		){
 
-			_flag_cheats_camera_lock =
-				true;
+			var _str_active_gui_type =
+				string_upper(string(global.ref_active_gui._str_type));
 
 			//----------------//
-			//WORLD POSITION TOOL//
+			//MARKET//
 			//----------------//
-			// World-position tools temporarily restore camera zoom so the tester can
-			// position the camera before choosing the world location.
-			if (
-				variable_instance_exists(
-					global.ref_active_gui,
-					"_str_state"
-				) &&
-				variable_instance_exists(
-					global.ref_active_gui,
-					"_str_tool_target_type"
-				) &&
-				global.ref_active_gui._str_state
-					== "TOOL" &&
-				global.ref_active_gui
-					._str_tool_target_type
-					== "WORLD_POSITION"
-			){
-				_flag_cheats_camera_lock =
-					false;
+			if (_str_active_gui_type == "MARKET"){
+				_flag_camera_input_lock = true;
+			}
+
+			//----------------//
+			//CHEATS//
+			//----------------//
+			else if (_str_active_gui_type == "CHEATS"){
+				_flag_camera_input_lock = true;
+
+				//----------------//
+				//WORLD POSITION TOOL//
+				//----------------//
+				if (
+					variable_instance_exists(global.ref_active_gui,"_str_state") &&
+					variable_instance_exists(global.ref_active_gui,"_str_tool_target_type") &&
+					global.ref_active_gui._str_state == "TOOL" &&
+					global.ref_active_gui._str_tool_target_type == "WORLD_POSITION"
+				){
+					_flag_camera_input_lock = false;
+				}
 			}
 		}
 
 		//================//
 		//CAMERA INPUT//
 		//================//
-		if (!_flag_cheats_camera_lock){
+		if (!_flag_camera_input_lock){
 
 			var _val_zoom_step = 128;
 

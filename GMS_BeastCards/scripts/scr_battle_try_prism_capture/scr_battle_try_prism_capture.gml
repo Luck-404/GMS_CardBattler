@@ -8,11 +8,12 @@
 //
 // ARGUMENTS: _stct_prism_item is the Inventory Prism struct being consumed.
 //            _ref_target_beast is the living enemy Beast targeted for capture.
+//            _flag_simulated bypasses Prism/Mana costs for developer Cheats only.
 // RETURNS: True when the Beast is successfully captured; otherwise false.
 //
 //===============================================================================//
 
-function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
+function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast,_flag_simulated=false){
 
 	#region VALIDATION
 
@@ -118,7 +119,7 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	//================//
 	//VALIDATE MANA//
 	//================//
-	if (obj_battle_player_controller._val_cur_mana < _stct_prism_info._val_mana_cost){
+	if (!_flag_simulated && obj_battle_player_controller._val_cur_mana < _stct_prism_info._val_mana_cost){
 
 		scr_debug_log(
 			"BATTLE",
@@ -180,7 +181,7 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	//================//
 	//CONSUME PRISM//
 	//================//
-	if (!scr_inventory_remove_item(_stct_prism_item,1)){
+	if (!_flag_simulated && !scr_inventory_remove_item(_stct_prism_item,1)){
 
 		scr_debug_log(
 			"BATTLE",
@@ -204,7 +205,9 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 	//================//
 	//SPEND MANA//
 	//================//
-	obj_battle_player_controller._val_cur_mana -= _stct_prism_info._val_mana_cost;
+	if (!_flag_simulated){
+		obj_battle_player_controller._val_cur_mana -= _stct_prism_info._val_mana_cost;
+	}
 
 	var _val_mana_after = obj_battle_player_controller._val_cur_mana;
 
@@ -220,6 +223,7 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		"CAPTURE",
 		_ref_target_beast,
 		"CAPTURE ATTEMPT" +
+		(_flag_simulated ? " | SIMULATED: YES | COST: FREE" : " | SIMULATED: NO") +
 		" | TARGET: " + _str_beast_name +
 		" | LEVEL: " + string(_val_beast_level) +
 		" | HP: " +
@@ -362,6 +366,14 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		_str_destination = "RANCH";
 	}
 
+	//==========================//
+	//WORLD EVENT CAPTURE RECORD//
+	//==========================//
+	// Record the original enemy UID, not the new captured Party/Ranch UID.
+	if (variable_struct_exists(_stct_target_unit,"_uid_beast")){
+		scr_world_event_record_battle_capture(_stct_target_unit._uid_beast);
+	}
+
 	//========================//
 	//REMOVE ENEMY FROM PLAY//
 	//========================//
@@ -379,6 +391,7 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		"CAPTURE",
 		_ref_target_beast,
 		"CAPTURE SUCCESS" +
+		(_flag_simulated ? " | SIMULATED: YES | COST: FREE" : " | SIMULATED: NO") +
 		" | TARGET: " + _str_beast_name +
 		" | LEVEL: " + string(_val_beast_level) +
 		" | PRISM: " +
@@ -390,9 +403,9 @@ function scr_battle_try_prism_capture(_stct_prism_item,_ref_target_beast){
 		" | UID: " +
 		string(_stct_captured_beast._uid_beast) +
 		" | HP: " +
-		string(_stct_captured_beast._val_cur_hp) +
+		string(_stct_captured_beast._val_beast_hp_cur) +
 		"/" +
-		string(_stct_captured_beast._val_max_hp) +
+		string(_stct_captured_beast._val_beast_hp_max) +
 		" | DESTINATION: " +
 		_str_destination,
 		"BATTLE",

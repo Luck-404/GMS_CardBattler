@@ -12,7 +12,8 @@
 //           bonus's derived-Max-HP delta is added.
 //
 //           Elite final-HP multipliers are preserved when the target itself is
-//           Elite (universal x1.25, plus Hardy/Bloodthirsty where applicable).
+//           Elite (Tier 0 x1.25, Tier 1 x1.50, Tier 2 x2.00, plus modifier
+//           Hardy/Bloodthirsty multipliers where applicable).
 //
 // ARGUMENTS: _ref_target - living battle Beast receiving the permanent bonus.
 //            _val_percent - positive percentage, e.g. 10 or 25.
@@ -181,7 +182,33 @@ function scr_battle_elite_apply_primary_stat_percent_bonus(
         ) &&
         _stct_unit._flag_elite
     ){
-        _val_final_hp_multiplier = 1.25;
+        var _val_elite_risk_tier = 0;
+
+        if (
+            variable_struct_exists(
+                _stct_unit,
+                "_val_elite_risk_tier"
+            )
+        ){
+            _val_elite_risk_tier =
+                max(
+                    0,
+                    round(
+                        _stct_unit
+                            ._val_elite_risk_tier
+                    )
+                );
+        }
+
+        if (_val_elite_risk_tier >= 2){
+            _val_final_hp_multiplier = 2.00;
+        }
+        else if (_val_elite_risk_tier >= 1){
+            _val_final_hp_multiplier = 1.50;
+        }
+        else{
+            _val_final_hp_multiplier = 1.25;
+        }
 
         var _str_modifier = "";
 

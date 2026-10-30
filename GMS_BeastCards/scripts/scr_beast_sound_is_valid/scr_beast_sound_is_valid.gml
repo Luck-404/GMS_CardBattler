@@ -31,7 +31,41 @@ function scr_beast_sound_is_valid(_str_beast_name){
 		"MORELUSH",
 		"SPOROSE",
 		"STRIGIBLOOM",
-		"TURFRANTULA"
+		"TURFRANTULA",
+		
+		"AMMOMARSH",
+		"BLIZZDRIFT",
+		"CAUDAQUA",
+		"CEPHARIME",
+		"CHELONSEA",
+		"CORALLIARC",
+		"FROSTUSK",
+		"GALENATRIUM",
+		"GLACIMIGHT",
+		"GULFLOW",
+		"ISTIRAIN",
+		"KELPLATANI",
+		"LONTRIVER",
+		"MARITIMICE",
+		"SALTWAGG",
+		"SPHENISKIP",
+		
+		"ASCHEMASS",
+		"CANIGNIS",
+		"DAIMONIS",
+		"DRAKOAL",
+		"EMBEROOST",
+		"HELLSHROOM",
+		"IMPARCH",
+		"INFERNUS",
+		"LAVAROWANA",
+		"PYREKNIGHT",
+		"PYROPLUME",
+		"SANGUINAUT",
+		"SLAGOLEM",
+		"SOLEMOLD",
+		"WRATHOOD",
+		"WYRMELTA"
 	];
 
 	_str_beast_name =

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_courier_satchel",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_courier_satchel",
+  "parent":{
+    "name":"QUEST_COURIER_SATCHEL",
+    "path":"folders/INVENTORY/ITEMS/QUEST/QUEST_COURIER_SATCHEL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

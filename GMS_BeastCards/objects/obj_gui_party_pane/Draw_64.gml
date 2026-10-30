@@ -396,6 +396,11 @@ if (is_struct(_stct_unit_selected)){
 	var _val_lh = 22;
 	var _val_sg = 32;
 
+    // Compact recent-meals panel at the upper-right of the selected Beast view.
+    // Matches supplied visual reference: gold names / white bonus descriptions.
+    scr_gui_draw_beast_recent_meals(_stct_unit,_val_pane_left+495,_val_y+10,275);
+
+
 	draw_set_colour(c_black);
 	draw_set_font(fnt_gui_small);
 	draw_set_valign(fa_top);

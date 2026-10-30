@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CORALLIARC",
-    "path":"folders/BEASTS/CERULEAN/CORALLIARC.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/CORALLIARC/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

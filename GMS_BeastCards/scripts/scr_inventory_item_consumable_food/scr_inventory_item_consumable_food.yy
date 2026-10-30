@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_consumable_food",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_consumable_food",
+  "parent":{
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/CONSUMABLES/USAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

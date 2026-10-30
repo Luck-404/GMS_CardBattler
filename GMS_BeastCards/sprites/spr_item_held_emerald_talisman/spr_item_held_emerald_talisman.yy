@@ -2,8 +2,8 @@
   "$GMSprite":"v2",
   "%Name":"spr_item_held_emerald_talisman",
   "bboxMode":0,
-  "bbox_bottom":28,
-  "bbox_left":4,
+  "bbox_bottom":30,
+  "bbox_left":3,
   "bbox_right":27,
   "bbox_top":1,
   "collisionKind":1,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"95277a17-fe25-43b9-a431-7c55ee573d70","name":"95277a17-fe25-43b9-a431-7c55ee573d70","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"1918825b-ffa5-482c-accb-0f948dc2355d","name":"1918825b-ffa5-482c-accb-0f948dc2355d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":32,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"f5c0cd40-b48a-4691-b379-665ca18a8983","blendMode":0,"displayName":"default","isLocked":false,"name":"f5c0cd40-b48a-4691-b379-665ca18a8983","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"38f49a05-b79d-47f0-a53b-06fb67acc31b","blendMode":0,"displayName":"default","isLocked":false,"name":"38f49a05-b79d-47f0-a53b-06fb67acc31b","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_item_held_emerald_talisman",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"95277a17-fe25-43b9-a431-7c55ee573d70","path":"sprites/spr_item_held_emerald_talisman/spr_item_held_emerald_talisman.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"21b723ff-034b-472a-8a2b-8b32b20ad891","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"1918825b-ffa5-482c-accb-0f948dc2355d","path":"sprites/spr_item_held_emerald_talisman/spr_item_held_emerald_talisman.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"a082c2db-cbcf-43bd-ad62-715f570cf993","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

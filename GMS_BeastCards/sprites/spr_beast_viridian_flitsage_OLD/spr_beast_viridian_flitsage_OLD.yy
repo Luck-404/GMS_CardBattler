@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FLITSAGE",
-    "path":"folders/BEASTS/VIRIDIAN/FLITSAGE.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/FLITSAGE/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

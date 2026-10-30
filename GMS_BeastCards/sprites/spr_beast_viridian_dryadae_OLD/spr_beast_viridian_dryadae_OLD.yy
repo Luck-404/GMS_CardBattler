@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"DRYADAE",
-    "path":"folders/BEASTS/VIRIDIAN/DRYADAE.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/DRYADAE/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

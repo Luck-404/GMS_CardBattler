@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CRUSABER",
-    "path":"folders/BEASTS/VIRIDIAN/CRUSABER.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/CRUSABER/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

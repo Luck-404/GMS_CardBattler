@@ -577,6 +577,30 @@ hscr_battle_draw_prism_button = function(){
 };
 
 //—------------------------------------------------------------------------------//
+// hscr_battle_get_prism_menu_layout
+// FUNCTION: Returns shared layout coordinates for Prism drawing and clicking.
+//           The selection menu ends 10 px above the Prism HUD button.
+//—------------------------------------------------------------------------------//
+hscr_battle_get_prism_menu_layout = function(_ct_prisms){
+
+	var _val_slot_w = 150;
+	var _val_slot_h = 90;
+	var _val_slot_gap = 10;
+
+	var _val_total_w =
+		(_ct_prisms * _val_slot_w) +
+		(max(0,_ct_prisms - 1) * _val_slot_gap);
+
+	return {
+		_val_slot_w : _val_slot_w,
+		_val_slot_h : _val_slot_h,
+		_val_slot_gap : _val_slot_gap,
+		_val_start_x : max(8,(display_get_gui_width() - _val_total_w) * 0.5),
+		_val_start_y : _val_prism_button_y1 - 10 - _val_slot_h
+	};
+};
+
+//—------------------------------------------------------------------------------//
 // hscr_battle_draw_prism_menu
 // FUNCTION: Draws available Prism stacks while the Prism menu is open.
 //           Registers the hovered Prism item's name with the shared tooltip.
@@ -636,46 +660,16 @@ hscr_battle_draw_prism_menu = function(){
 		return;
 	}
 
-	//-----------------//
-	//LAYOUT SETTINGS//
-	//-----------------//
-	var _val_slot_w =
-		150;
-
-	var _val_slot_h =
-		85;
-
-	var _val_slot_gap =
-		10;
-
-	var _ct_prisms =
-		array_length(
-			_arr_prisms
-		);
-
-	var _val_total_w =
-		(
-			_ct_prisms *
-			_val_slot_w
-		) +
-		(
-			(
-				_ct_prisms -
-				1
-			) *
-			_val_slot_gap
-		);
-
-	var _val_start_x =
-		room_width *
-			0.5 -
-		(
-			_val_total_w *
-			0.5
-		);
-
-	var _val_start_y =
-		520;
+	//======================//
+	//SHARED POPUP LAYOUT//
+	//======================//
+	var _ct_prisms = array_length(_arr_prisms);
+	var _stct_layout = hscr_battle_get_prism_menu_layout(_ct_prisms);
+	var _val_slot_w = _stct_layout._val_slot_w;
+	var _val_slot_h = _stct_layout._val_slot_h;
+	var _val_slot_gap = _stct_layout._val_slot_gap;
+	var _val_start_x = _stct_layout._val_start_x;
+	var _val_start_y = _stct_layout._val_start_y;
 
 	var _val_mouse_x =
 		device_mouse_x_to_gui(0);
@@ -744,124 +738,45 @@ hscr_battle_draw_prism_menu = function(){
 			);
 		}
 
+		//====================//
+		//DARK PRISM CARD UI//
+		//====================//
+		draw_set_colour(_flag_hover ? make_colour_rgb(58,72,95) : make_colour_rgb(30,35,46));
+		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
+
+		draw_set_colour(_flag_hover ? c_yellow : c_white);
+		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,true);
+
 		//----------------//
-		//SLOT BACKGROUND//
+		//PRISM NAME//
 		//----------------//
-		draw_set_colour(
-			_flag_hover
-				? c_white
-				: global.c_dk_gray
-		);
+		var _str_short_name = string_replace_all(string(_stct_item._str_item_name)," PRISM","");
+		draw_set_font(fnt_gui_party_small);
+		draw_set_halign(fa_center);
+		draw_set_valign(fa_top);
+		draw_set_colour(c_white);
+		draw_text(_val_x1 + (_val_slot_w * 0.5),_val_y1 + 9,_str_short_name);
 
-		draw_rectangle(
-			_val_x1,
-			_val_y1,
-			_val_x2,
-			_val_y2,
-			false
-		);
+		//----------------//
+		//ICON AND COUNT//
+		//----------------//
+		draw_sprite_ext(_stct_item._spr_item,0,_val_x1 + 34,_val_y1 + 45,1,1,0,c_white,1);
+		draw_text(_val_x1 + 100,_val_y1 + 35,"x" + string(_stct_item._ct_item_amount));
 
-		//------------//
-		//SLOT BORDER//
-		//------------//
-		draw_set_colour(
-			c_black
-		);
-
-		draw_rectangle(
-			_val_x1,
-			_val_y1,
-			_val_x2,
-			_val_y2,
-			true
-		);
-
-		//-----------//
-		//PRISM ICON//
-		//-----------//
-		draw_sprite_ext(
-			_stct_item._spr_item,
-			0,
-			_val_x1 + 25,
-			_val_y1 + 35,
-			1.5,
-			1.5,
-			0,
-			c_white,
-			1
-		);
-
-		//----------//
-		//ITEM NAME//
-		//----------//
-		draw_set_colour(
-			c_black
-		);
-
-		draw_text(
-			_val_x1 +
-				(
-					_val_slot_w *
-					0.5
-				),
-			_val_y1 + 12,
-			string(
-				_stct_item
-					._str_item_name
-			)
-		);
-
-		//------//
-		//COUNT//
-		//------//
-		draw_text(
-			_val_x1 +
-				(
-					_val_slot_w *
-					0.5
-				),
-			_val_y1 + 34,
-			"x" +
-			string(
-				_stct_item
-					._ct_item_amount
-			)
-		);
-
-		//----------//
-		//PRISM INFO//
-		//----------//
-		var _stct_prism_info =
-			scr_inventory_get_prism_info(
-				_stct_item
-					._str_item_id
-			);
-
-		if (
-			_stct_prism_info !=
-			undefined
-		){
-
+		//----------------------//
+		//CAPTURE BONUS AND COST//
+		//----------------------//
+		var _stct_prism_info = scr_inventory_get_prism_info(_stct_item._str_item_id);
+		if (is_struct(_stct_prism_info)){
+			draw_set_colour(c_aqua);
 			draw_text(
-				_val_x1 +
-					(
-						_val_slot_w *
-						0.5
-					),
-				_val_y1 + 54,
-				"+" +
-				string(
-					_stct_prism_info
-						._val_tame_bonus
-				) +
-				"% | " +
-				string(
-					_stct_prism_info
-						._val_mana_cost
-				) +
-				" MANA"
+				_val_x1 + (_val_slot_w * 0.5),
+				_val_y1 + 69,
+				(_stct_prism_info._flag_guaranteed ? "GUARANTEED" : "+" + string(_stct_prism_info._val_tame_bonus) + "%") +
+				" | " + string(_stct_prism_info._val_mana_cost) + " MANA"
 			);
 		}
+
 	}
 
 	draw_set_halign(
@@ -886,22 +801,13 @@ hscr_battle_handle_prism_menu_input = function(){
 		return;
 	}
 
-	var _val_slot_w = 150;
-	var _val_slot_h = 85;
-	var _val_slot_gap = 10;
-
-	var _ct_prisms =
-		array_length(_arr_prisms);
-
-	var _val_total_w =
-		(_ct_prisms * _val_slot_w) +
-		((_ct_prisms - 1) * _val_slot_gap);
-
-	var _val_start_x =
-		room_width * 0.5 -
-		(_val_total_w * 0.5);
-
-	var _val_start_y = 520;
+	var _ct_prisms = array_length(_arr_prisms);
+	var _stct_layout = hscr_battle_get_prism_menu_layout(_ct_prisms);
+	var _val_slot_w = _stct_layout._val_slot_w;
+	var _val_slot_h = _stct_layout._val_slot_h;
+	var _val_slot_gap = _stct_layout._val_slot_gap;
+	var _val_start_x = _stct_layout._val_start_x;
+	var _val_start_y = _stct_layout._val_start_y;
 
 	var _val_mouse_x =
 		device_mouse_x_to_gui(0);

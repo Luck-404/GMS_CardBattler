@@ -8,9 +8,13 @@
 //           - +10% to all seven primary stats.
 //           - +25% final Maximum HP after the boosted HP Stat is resolved.
 //
-//           RISK TIER 1+:
+//           RISK TIER 1:
 //           - +20% to all seven primary stats.
 //           - +50% final Maximum HP after the boosted HP Stat is resolved.
+//
+//           RISK TIER 2+:
+//           - +40% to all seven primary stats.
+//           - +100% final Maximum HP after the boosted HP Stat is resolved.
 //
 //           Implemented modifier initialization also includes:
 //           HARDY        - +50% CON; +10% final Max HP.
@@ -221,18 +225,25 @@ function scr_battle_elite_apply(_stct_unit,_str_modifier=undefined){
 
     #region PRIMARY STATS
 
-    var _flag_elite_risk_tier_1 =
-        _stct_unit._val_elite_risk_tier >= 1;
+    var _val_elite_risk_tier =
+        max(
+            0,
+            round(
+                _stct_unit._val_elite_risk_tier
+            )
+        );
 
-    var _val_universal_stat_bonus_percent =
-        _flag_elite_risk_tier_1
-        ? 20
-        : 10;
+    var _val_universal_stat_bonus_percent = 10;
+    var _val_universal_final_hp_bonus_percent = 25;
 
-    var _val_universal_final_hp_bonus_percent =
-        _flag_elite_risk_tier_1
-        ? 50
-        : 25;
+    if (_val_elite_risk_tier >= 2){
+        _val_universal_stat_bonus_percent = 40;
+        _val_universal_final_hp_bonus_percent = 100;
+    }
+    else if (_val_elite_risk_tier >= 1){
+        _val_universal_stat_bonus_percent = 20;
+        _val_universal_final_hp_bonus_percent = 50;
+    }
 
     if (!_stct_unit._flag_elite_stats_applied){
         var _val_stat_multiplier =

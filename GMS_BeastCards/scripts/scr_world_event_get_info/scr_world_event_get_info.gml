@@ -3,12 +3,6 @@
 // SCRIPT: SCR_WORLD_EVENT_GET_INFO
 // FUNCTION: Returns immutable V1 metadata for a World Event ID.
 //
-// ARGUMENTS: _str_event_id - World Event logical ID.
-// RETURNS: Event metadata struct or undefined.
-//
-// NOTE: Phase I defines identity and spawn-category requirements only. Event
-//       generation, activation, objectives, and rewards are implemented later.
-//
 //===============================================================================//
 
 function scr_world_event_get_info(_str_event_id){
@@ -30,9 +24,10 @@ function scr_world_event_get_info(_str_event_id){
 			};
 
 		case "CHOOSE_A_CHEST":
+		case "GILDED_GAMBIT":
 			return {
 				_str_event_id : "CHOOSE_A_CHEST",
-				_str_display_name : "CHOOSE A CHEST",
+				_str_display_name : "GILDED GAMBIT",
 				_str_spawn_category : "TREASURE"
 			};
 

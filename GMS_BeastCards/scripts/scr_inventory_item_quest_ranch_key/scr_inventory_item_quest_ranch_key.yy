@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_ranch_key",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_ranch_key",
+  "parent":{
+    "name":"QUEST_RANCH_KEY",
+    "path":"folders/INVENTORY/ITEMS/QUEST/QUEST_RANCH_KEY.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

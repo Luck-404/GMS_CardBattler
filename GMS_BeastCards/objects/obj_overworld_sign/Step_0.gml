@@ -27,7 +27,7 @@ if (instance_exists(obj_player) && distance_to_object(obj_player) < 48){
 
 			scr_overworld_spawn_text_bubble(
 				x,
-				y - 64,
+				y - 75,
 				_str_sign_text
 			);
 		}

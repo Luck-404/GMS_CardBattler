@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"LUMBUCK",
-    "path":"folders/BEASTS/VIRIDIAN/LUMBUCK.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/LUMBUCK/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,9 +6,12 @@
 //           Treasure rewards are completely independent of the normal PRINTOUT
 //           presentation modes.
 //
-//           Rewards appear in outlined boxes at the bottom-right of the GUI,
-//           stack vertically upward, remain fully visible for 120 frames,
-//           then fade over 60 frames.
+//           Rewards appear in outlined boxes at the bottom-right of the GUI.
+//           CARD reward text is coloured by Card rarity:
+//               I   = White
+//               II  = Lime
+//               III = Cyan
+//               IV  = Red
 //
 //           ITEM rewards whose ids begin with EGG_ are displayed as EGG rewards.
 //
@@ -100,6 +103,49 @@ function scr_gui_spawn_treasure_reward(_str_reward_type,_str_reward_id,_ct_amoun
 				_str_display_text +=
 					" x" +
 					string(_ct_amount);
+			}
+
+			//================//
+			//CARD RARITY COLOUR//
+			//================//
+			var _stct_card =
+				scr_card_get_info(
+					_str_reward_id_upper
+				);
+
+			if (
+				is_struct(_stct_card) &&
+				variable_struct_exists(
+					_stct_card,
+					"_str_card_rarity"
+				)
+			){
+
+				var _str_card_rarity =
+					string_upper(
+						string(
+							_stct_card._str_card_rarity
+						)
+					);
+
+				switch (_str_card_rarity){
+
+					case "I":
+						_c_text = c_white;
+					break;
+
+					case "II":
+						_c_text = c_lime;
+					break;
+
+					case "III":
+						_c_text = c_aqua;
+					break;
+
+					case "IV":
+						_c_text = c_red;
+					break;
+				}
 			}
 
 		break;

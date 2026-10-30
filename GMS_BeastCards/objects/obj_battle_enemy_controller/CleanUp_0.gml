@@ -79,4 +79,7 @@ _it_turn_start_item = 0;
 _arr_turn_end_items = [];
 _it_turn_end_item = 0;
 
+_arr_exact_enemy_roster = [];
+_flag_exact_enemy_roster = false;
+
 #endregion

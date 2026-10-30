@@ -4,6 +4,8 @@
 // FUNCTION: Initializes the generic market pane.
 //           Supports egg, prism, and NPC vendor stock and purchasing.
 //           Uses persistent market UID stock through global.map_market_stock.
+//           Presents all market offers as a shared paged list with four
+//           entries per page and registers shared item tooltips.
 //
 //===============================================================================//
 
@@ -26,31 +28,48 @@ _str_header_text = "BEAST EGG MARKET";
 _flag_return_to_npc = false;
 _flag_npc_interaction_released = false;
 
-_ct_cols = 3;
-_ct_offers = 3;
-
-_val_pane_w = 800;
-_val_pane_h = 500;
-
-_val_pane_left = x - (_val_pane_w * 0.5);
-_val_pane_top = y - (_val_pane_h * 0.5);
-
-_val_panel_w = 220;
-_val_panel_h = 350;
-_val_panel_gap = 30;
-_val_panel_row_gap = 20;
-
-_val_total_offer_w = (_ct_offers * _val_panel_w) + ((_ct_offers - 1) * _val_panel_gap);
-_val_panel_start_x = x - (_val_total_offer_w * 0.5);
-_val_panel_y = _val_pane_top + 95;
-
 _flag_clicked = false;
 _ct_cooldown = 0;
 
 //================//
+//PAGING//
+//================//
+_ct_entries_per_page = 4;
+_it_page = 0;
+_ct_pages = 1;
+
+//================//
+//PANE LAYOUT//
+//================//
+_val_pane_w = 800;
+_val_pane_h = 500;
+
+_val_pane_left = x - (_val_pane_w * 0.5);
+_val_pane_right = x + (_val_pane_w * 0.5);
+_val_pane_top = y - (_val_pane_h * 0.5);
+_val_pane_bottom = y + (_val_pane_h * 0.5);
+
+//================//
+//LIST LAYOUT//
+//================//
+_val_list_x1 = _val_pane_left + 45;
+_val_list_x2 = _val_pane_right - 45;
+
+_val_list_y = _val_pane_top + 105;
+
+_val_entry_h = 72;
+_val_entry_gap = 10;
+
+_val_icon_box_w = 72;
+_val_name_x_offset = 88;
+_val_price_x_offset = 24;
+
+//================//
 //INIT//
 //================//
-depth = -100;
+// Draw ahead of normal world/Y-sorted objects while remaining behind the
+// project's dedicated higher-priority GUI panes.
+depth = -9000;
 
 //================//
 //METHODS//
@@ -76,48 +95,35 @@ function hscr_gui_market_init(){
 
 		case "EGG":
 
-			_arr_stock = scr_market_get_egg_stock(
-				_str_market_uid
-			);
+			_arr_stock =
+				scr_market_get_egg_stock(
+					_str_market_uid
+				);
 
-			_str_header_text = "BEAST EGG MARKET";
-
-			_ct_offers = array_length(_arr_stock);
-			_ct_cols = 3;
-
-			_val_panel_w = 220;
-			_val_panel_h = 350;
-			_val_panel_gap = 30;
-			_val_panel_row_gap = 20;
-			_val_panel_y = _val_pane_top + 95;
+			_str_header_text =
+				"BEAST EGG MARKET";
 
 		break;
 
 		case "PRISM":
 
-			_arr_stock = scr_market_get_prism_stock(
-				_str_market_uid
-			);
+			_arr_stock =
+				scr_market_get_prism_stock(
+					_str_market_uid
+				);
 
-			_str_header_text = "PRISM VENDOR";
-
-			_ct_offers = array_length(_arr_stock);
-			_ct_cols = 3;
-
-			_val_panel_w = 170;
-			_val_panel_h = 165;
-			_val_panel_gap = 25;
-			_val_panel_row_gap = 20;
-			_val_panel_y = _val_pane_top + 95;
+			_str_header_text =
+				"PRISM VENDOR";
 
 		break;
 
 		case "NPC":
 
-			_arr_stock = scr_market_get_npc_stock(
-				_str_market_uid,
-				_arr_external_stock
-			);
+			_arr_stock =
+				scr_market_get_npc_stock(
+					_str_market_uid,
+					_arr_external_stock
+				);
 
 			if (
 				instance_exists(_ref_npc) &&
@@ -125,21 +131,14 @@ function hscr_gui_market_init(){
 			){
 
 				_str_header_text =
-					string(_ref_npc._stct_npc._str_npc_name) +
+					string(
+						_ref_npc._stct_npc._str_npc_name
+					) +
 					" | TRADE";
 			}
 			else{
 				_str_header_text = "VENDOR";
 			}
-
-			_ct_offers = array_length(_arr_stock);
-			_ct_cols = 3;
-
-			_val_panel_w = 170;
-			_val_panel_h = 210;
-			_val_panel_gap = 25;
-			_val_panel_row_gap = 20;
-			_val_panel_y = _val_pane_top + 95;
 
 			_flag_return_to_npc = true;
 
@@ -148,7 +147,6 @@ function hscr_gui_market_init(){
 		default:
 
 			_arr_stock = [];
-			_ct_offers = 0;
 
 			scr_debug_log(
 				"MARKET",
@@ -168,28 +166,28 @@ function hscr_gui_market_init(){
 	}
 
 	//================//
-	//UPDATE LAYOUT//
+	//UPDATE PAGING//
 	//================//
-	var _ct_layout_cols = min(
-		_ct_offers,
-		_ct_cols
-	);
+	var _ct_offers =
+		array_length(
+			_arr_stock
+		);
 
-	if (_ct_layout_cols > 0){
+	_ct_pages =
+		max(
+			1,
+			ceil(
+				_ct_offers /
+				_ct_entries_per_page
+			)
+		);
 
-		_val_total_offer_w =
-			(_ct_layout_cols * _val_panel_w) +
-			((_ct_layout_cols - 1) * _val_panel_gap);
-
-		_val_panel_start_x =
-			x -
-			(_val_total_offer_w * 0.5);
-	}
-	else{
-
-		_val_total_offer_w = 0;
-		_val_panel_start_x = x;
-	}
+	_it_page =
+		clamp(
+			_it_page,
+			0,
+			_ct_pages - 1
+		);
 
 	//================//
 	//DEBUG OPEN//
@@ -201,10 +199,12 @@ function hscr_gui_market_init(){
 		"MARKET OPENED" +
 		" | TYPE: " +
 		string_upper(_str_market_type) +
-		" | UID: " +
+		" | MARKET UID: " +
 		string_upper(_str_market_uid) +
 		" | OFFERS: " +
 		string(_ct_offers) +
+		" | PAGES: " +
+		string(_ct_pages) +
 		" | PLAYER GOLD: " +
 		string(global.val_player_gold) +
 		" | RESTOCK: " +
@@ -546,268 +546,312 @@ function hscr_gui_market_attempt_purchase(_it_offer){
 
 //-------------------------------------------------------------------------------//
 // HSCR_GUI_MARKET_DRAW_OFFER_PANEL
-// FUNCTION: Draws one market offer panel.
-//           Supports egg, prism, and NPC offers.
-//           Handles hover state and left-click purchasing.
+// FUNCTION: Draws one compact market offer panel.
+//           Displays the item sprite and current price.
+//           Hovering registers the shared item tooltip and displays BUY.
+//           Supports egg, prism, and NPC offers without changing purchase logic.
 //
 // ARGUMENTS: Offer index, panel x/y, and GUI mouse x/y.
 // RETURNS: Nothing.
 //
 //-------------------------------------------------------------------------------//
-function hscr_gui_market_draw_offer_panel(_it_offer,_val_panel_x,_val_panel_y,_val_mouse_x,_val_mouse_y){
+// HSCR_GUI_MARKET_DRAW_OFFER_ENTRY
+// FUNCTION: Draws one shared Market list entry.
+//           Displays item icon on the left, name in the middle, and price on the
+//           right. Hovering registers the shared item tooltip. Clicking the row
+//           purchases the offer when it is available.
+//
+// ARGUMENTS: Offer index, visible-page entry index, and GUI mouse x/y.
+// RETURNS: Nothing.
+//
+//-------------------------------------------------------------------------------//
+function hscr_gui_market_draw_offer_entry(_it_offer,_it_entry,_val_mouse_x,_val_mouse_y){
 
 	//================//
 	//VALIDATE OFFER//
 	//================//
-	if (_it_offer < 0 || _it_offer >= array_length(_arr_stock)){
+	if (
+		_it_offer < 0 ||
+		_it_offer >= array_length(_arr_stock)
+	){
 		return;
 	}
 
-	var _val_x1 = _val_panel_x;
-	var _val_y1 = _val_panel_y;
-	var _val_x2 = _val_panel_x + _val_panel_w;
-	var _val_y2 = _val_panel_y + _val_panel_h;
+	var _stct_offer =
+		_arr_stock[_it_offer];
 
-	var _flag_hover = hscr_gui_market_is_mouse_in_box(
-		_val_mouse_x,
-		_val_mouse_y,
+	if (!is_struct(_stct_offer)){
+		return;
+	}
+
+	if (
+		!variable_struct_exists(
+			_stct_offer,
+			"_stct_item"
+		) ||
+		!is_struct(
+			_stct_offer._stct_item
+		)
+	){
+		return;
+	}
+
+	var _stct_item =
+		_stct_offer._stct_item;
+
+	//================//
+	//ENTRY BOUNDS//
+	//================//
+	var _val_y1 =
+		_val_list_y +
+		(
+			_it_entry *
+			(_val_entry_h + _val_entry_gap)
+		);
+
+	var _val_y2 =
+		_val_y1 +
+		_val_entry_h;
+
+	var _val_x1 =
+		_val_list_x1;
+
+	var _val_x2 =
+		_val_list_x2;
+
+	var _val_center_y =
+		_val_y1 +
+		(_val_entry_h * 0.5);
+
+	var _flag_hover =
+		hscr_gui_market_is_mouse_in_box(
+			_val_mouse_x,
+			_val_mouse_y,
+			_val_x1,
+			_val_y1,
+			_val_x2,
+			_val_y2
+		);
+
+	//================//
+	//OFFER DATA//
+	//================//
+	var _str_item_name =
+		variable_struct_exists(
+			_stct_item,
+			"_str_item_name"
+		)
+		? string(
+			_stct_item._str_item_name
+		)
+		: string(
+			_stct_offer._str_item_id
+		);
+
+	var _flag_sold =
+		variable_struct_exists(
+			_stct_offer,
+			"_flag_sold"
+		) &&
+		_stct_offer._flag_sold;
+
+	//================//
+	//DRAW ENTRY//
+	//================//
+	draw_set_alpha(1);
+
+	draw_set_colour(c_black);
+
+	draw_rectangle(
 		_val_x1,
 		_val_y1,
 		_val_x2,
-		_val_y2
+		_val_y2,
+		false
 	);
 
-	//================//
-	//DRAW PANEL//
-	//================//
-	draw_set_colour(c_black);
-	draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
+	draw_set_colour(
+		_flag_hover
+			? c_ltgray
+			: global.c_dk_gray
+	);
 
-	draw_set_colour(_flag_hover ? c_ltgray : global.c_dk_gray);
-	draw_rectangle(_val_x1 + 4,_val_y1 + 4,_val_x2 - 4,_val_y2 - 4,false);
-
-	var _stct_offer = _arr_stock[_it_offer];
-
-	if (_stct_offer == undefined){
-		return;
-	}
-
-	var _stct_item = _stct_offer._stct_item;
-
-	if (_stct_item == undefined){
-		return;
-	}
-
-	var _val_center_x = _val_x1 + (_val_panel_w * 0.5);
+	draw_rectangle(
+		_val_x1 + 3,
+		_val_y1 + 3,
+		_val_x2 - 3,
+		_val_y2 - 3,
+		false
+	);
 
 	//================//
 	//DRAW ICON//
 	//================//
-	var _val_icon_scale = 3;
+	if (
+		variable_struct_exists(
+			_stct_item,
+			"_spr_item"
+		) &&
+		_stct_item._spr_item != undefined &&
+		_stct_item._spr_item != -1
+	){
 
-	if (_stct_offer._str_offer_type == "PRISM" || _stct_offer._str_offer_type == "NPC"){
-		_val_icon_scale = 2;
+		var _spr_item =
+			_stct_item._spr_item;
+
+		var _val_sprite_w =
+			max(
+				1,
+				sprite_get_width(
+					_spr_item
+				)
+			);
+
+		var _val_sprite_h =
+			max(
+				1,
+				sprite_get_height(
+					_spr_item
+				)
+			);
+
+		var _val_icon_scale =
+			min(
+				48 / _val_sprite_w,
+				48 / _val_sprite_h
+			);
+
+		draw_sprite_ext(
+			_spr_item,
+			0,
+			_val_x1 +
+				(_val_icon_box_w * 0.5),
+			_val_center_y,
+			_val_icon_scale,
+			_val_icon_scale,
+			0,
+			c_white,
+			1
+		);
 	}
 
-	draw_sprite_ext(
-		_stct_item._spr_item,
-		0,
-		_val_center_x,
-		_val_y1 + 75,
-		_val_icon_scale,
-		_val_icon_scale,
-		0,
-		c_white,
-		1
+	//================//
+	//DRAW NAME//
+	//================//
+	draw_set_font(
+		fnt_gui_small
+	);
+
+	draw_set_colour(
+		_flag_sold
+			? c_gray
+			: c_white
+	);
+
+	draw_set_halign(
+		fa_left
+	);
+
+	draw_set_valign(
+		fa_middle
+	);
+
+	draw_text(
+		_val_x1 +
+			_val_name_x_offset,
+		_val_center_y,
+		_str_item_name
 	);
 
 	//================//
-	//DRAW OFFER INFO//
+	//DRAW PRICE//
 	//================//
-	draw_set_font(fnt_gui_small);
-	draw_set_colour(c_black);
-	draw_set_halign(fa_center);
-	draw_set_valign(fa_top);
-
-	switch (_stct_offer._str_offer_type){
-
-		case "NPC":
-
-			draw_text(
-				_val_center_x,
-				_val_y1 + 118,
-				_stct_item._str_item_name
-			);
-
-			draw_set_colour(global.c_dk_gray);
-
-			draw_text_ext(
-				_val_center_x,
-				_val_y1 + 140,
-				_stct_item._str_item_desc,
-				14,
-				_val_panel_w - 32
-			);
-
-			draw_set_colour(c_black);
-
-			draw_text(
-				_val_center_x,
-				_val_y2 - 52,
-				"COST: " + string(_stct_offer._val_gold_cost) + " gp"
-			);
-
-			if (_stct_offer._ct_stock < 0){
-
-				draw_text(
-					_val_center_x,
-					_val_y2 - 34,
-					"STOCK: UNLIMITED"
-				);
-			}
-			else{
-
-				draw_text(
-					_val_center_x,
-					_val_y2 - 34,
-					"STOCK: " + string(_stct_offer._ct_stock)
-				);
-			}
-
-		break;
-
-		case "EGG":
-
-			var _stct_beast = undefined;
-
-			if (variable_struct_exists(_stct_offer,"_stct_beast_preview")){
-				_stct_beast = _stct_offer._stct_beast_preview;
-			}
-
-			draw_text(
-				_val_center_x,
-				_val_y1 + 160,
-				_stct_item._str_item_name
-			);
-
-			draw_set_colour(global.c_dk_gray);
-
-			draw_text_ext(
-				_val_center_x,
-				_val_y1 + 190,
-				_stct_item._str_item_desc,
-				14,
-				_val_panel_w - 36
-			);
-
-			draw_set_colour(c_black);
-
-			if (variable_struct_exists(_stct_offer,"_str_beast_name")){
-
-				draw_text(
-					_val_center_x,
-					_val_y2 - 82,
-					"BEAST: " + string(_stct_offer._str_beast_name)
-				);
-			}
-
-			draw_text(
-				_val_center_x,
-				_val_y2 - 60,
-				"COST: " + string(_stct_offer._val_gold_cost) + " gp"
-			);
-
-			if (_stct_beast != undefined){
-
-				draw_text(
-					_val_center_x,
-					_val_y2 - 38,
-					string(_stct_beast._str_beast_archetype) +
-					" | " +
-					string(_stct_beast._str_beast_class)
-				);
-			}
-
-		break;
-
-		case "PRISM":
-
-			draw_text(
-				_val_center_x,
-				_val_y1 + 118,
-				_stct_item._str_item_name
-			);
-
-			draw_set_colour(c_black);
-
-			if (variable_struct_exists(_stct_offer,"_val_tame_bonus")){
-
-				draw_text(
-					_val_center_x,
-					_val_y1 + 140,
-					"BONUS: +" + string(_stct_offer._val_tame_bonus) + "%"
-				);
-			}
-
-			draw_text(
-				_val_center_x,
-				_val_y1 + 158,
-				"COST: " + string(_stct_offer._val_gold_cost) + " gp"
-			);
-
-			if (variable_struct_exists(_stct_offer,"_ct_bought")){
-
-				draw_text(
-					_val_center_x,
-					_val_y1 + 176,
-					"BOUGHT: " + string(_stct_offer._ct_bought)
-				);
-			}
-
-		break;
-	}
-
-	//================//
-	//SOLD STATE//
-	//================//
-	var _flag_sold = false;
-
-	if (variable_struct_exists(_stct_offer,"_flag_sold")){
-		_flag_sold = _stct_offer._flag_sold;
-	}
+	draw_set_halign(
+		fa_right
+	);
 
 	if (_flag_sold){
 
-		draw_set_alpha(0.65);
-		draw_set_colour(c_black);
-		draw_rectangle(_val_x1,_val_y1,_val_x2,_val_y2,false);
+		draw_set_colour(
+			c_red
+		);
 
-		draw_set_alpha(1);
-
-		draw_set_colour(c_red);
-		draw_line(_val_x1 + 15,_val_y1 + 15,_val_x2 - 15,_val_y2 - 15);
-		draw_line(_val_x2 - 15,_val_y1 + 15,_val_x1 + 15,_val_y2 - 15);
-
-		draw_set_colour(c_white);
-		draw_text(_val_center_x,_val_y1 + 18,"SOLD");
+		draw_text(
+			_val_x2 -
+				_val_price_x_offset,
+			_val_center_y,
+			"SOLD"
+		);
 	}
-	else if (_flag_hover){
+	else{
 
-		draw_set_colour(c_white);
-		draw_text(_val_center_x,_val_y2 - 26,"BUY");
+		draw_set_colour(
+			c_yellow
+		);
 
-		if (mouse_check_button_pressed(mb_left) && !_flag_clicked){
+		draw_text(
+			_val_x2 -
+				_val_price_x_offset,
+			_val_center_y,
+			string(
+				_stct_offer._val_gold_cost
+			) +
+			" gp"
+		);
+	}
 
-			_flag_clicked = true;
-			_ct_cooldown = 10;
+	//================//
+	//REGISTER TOOLTIP//
+	//================//
+	if (_flag_hover){
 
-			hscr_gui_market_attempt_purchase(_it_offer);
+		var _str_tooltip_body = "";
+
+		if (
+			variable_struct_exists(
+				_stct_item,
+				"_str_item_desc"
+			)
+		){
+			_str_tooltip_body =
+				string(
+					_stct_item._str_item_desc
+				);
 		}
+
+		scr_gui_set_hover_tooltip(
+			_str_item_name,
+			_str_tooltip_body,
+			50
+		);
+	}
+
+	//================//
+	//PURCHASE//
+	//================//
+	if (
+		_flag_hover &&
+		!_flag_sold &&
+		mouse_check_button_pressed(
+			mb_left
+		) &&
+		!_flag_clicked
+	){
+
+		_flag_clicked = true;
+		_ct_cooldown = 10;
+
+		hscr_gui_market_attempt_purchase(
+			_it_offer
+		);
 	}
 
 	//================//
 	//RESET DRAW STATE//
 	//================//
+	draw_set_alpha(1);
+	draw_set_colour(c_white);
+
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
 }
@@ -899,3 +943,5 @@ function hscr_gui_market_release_npc_vendor(){
 
 	return false;
 }
+
+#endregion

@@ -110,7 +110,8 @@ if (_str_state == "TOOL"){
 	var _str_tool_input =
 		(
 			_str_tool == "SWAP_BEASTS" ||
-			_str_tool == "SIMULATED_CAST"
+			_str_tool == "SIMULATED_CAST" ||
+			_str_tool == "SIMULATED_PRISM"
 		)
 		? "LMB: SELECT   RMB: RETURN"
 		: "LMB: APPLY   RMB: RETURN";
@@ -121,6 +122,23 @@ if (_str_state == "TOOL"){
 		_str_tool_input
 	);
 	draw_set_colour(c_white);
+
+	// Show the true Prism chance under the mouse while the free tool is active.
+	if (_str_tool == "SIMULATED_PRISM"){
+		var _ref_prism_hover = instance_position(_mx,_my,obj_battle_beast);
+		var _str_prism_tip = "FREE SIMULATED CAPTURE";
+		if (
+			instance_exists(_ref_prism_hover) &&
+			_ref_prism_hover._str_team == "ENEMY" &&
+			_ref_prism_hover._str_list == "ALIVE" &&
+			_ref_prism_hover._val_cur_hp > 0
+		){
+			_str_prism_tip = _ref_prism_hover._flag_elite
+				? "ELITES CANNOT BE CAPTURED"
+				: "TAME: " + string(scr_battle_get_prism_tame_chance(_str_selected_id,_ref_prism_hover)) + "% | FREE";
+		}
+		draw_text(_mx + 20,_my + 67,_str_prism_tip);
+	}
 
 	exit;
 }
@@ -1848,6 +1866,240 @@ else if (_it_tab == 3){
 	);
 }
 
+//===============================================================================//
+// WORLD EVENTS
+//===============================================================================//
+else if (_it_tab == 4){
+
+	draw_set_font(fnt_gui_party_small);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_set_colour(c_white);
+
+	//================//
+	//ROOM SELECTOR//
+	//================//
+	draw_text(_val_left,_val_top,"WORLD EVENT TARGET ROOM");
+
+	var _val_room_y = _val_top + 24;
+	var _val_room_side_w = 100;
+	var _val_room_gap = 12;
+	var _val_room_right = _val_left + 212;
+	var _val_clear_w = 132;
+	var _val_current_x = _val_left + (_val_content_w * 0.52);
+
+	if (hscr_cheats_button(
+		"< ROOM",
+		_val_left,
+		_val_room_y,
+		_val_left + _val_room_side_w,
+		_val_room_y + 30
+	)){
+		hscr_cheats_world_event_cycle_room(-1);
+	}
+
+	if (hscr_cheats_button(
+		"ROOM >",
+		_val_left + _val_room_side_w + _val_room_gap,
+		_val_room_y,
+		_val_room_right,
+		_val_room_y + 30
+	)){
+		hscr_cheats_world_event_cycle_room(1);
+	}
+
+	if (
+		_it_world_event_room >= 0 &&
+		_it_world_event_room < array_length(_arr_world_event_debug_rooms)
+	){
+		var _str_room_name = _arr_world_event_debug_rooms[_it_world_event_room]._str_name;
+		draw_set_colour(c_yellow);
+		draw_set_halign(fa_left);
+		draw_set_valign(fa_middle);
+		draw_text(
+			_val_left + 264,
+			_val_room_y + 15,
+			"SELECTED: " + _str_room_name
+		);
+		draw_set_valign(fa_top);
+	}
+
+	if (hscr_cheats_button(
+		"SELECT CURRENT ROOM",
+		_val_current_x,
+		_val_room_y,
+		_val_current_x + 152,
+		_val_room_y + 30,
+		room != rm_ow_ranch && room != rm_ow_market
+	)){
+		hscr_cheats_world_event_use_current_room();
+	}
+
+	//================//
+	//ACTIVE EVENT / CLEAR//
+	//================//
+	var _ref_we_controller = scr_world_event_get_controller();
+	var _str_active_event = "NONE";
+
+	if (
+		instance_exists(_ref_we_controller) &&
+		is_struct(_ref_we_controller._stct_active_world_event) &&
+		_ref_we_controller._stct_active_world_event._state_world_event != ENUM_WORLD_EVENT_STATE.NONE
+	){
+		_str_active_event =
+			_ref_we_controller._stct_active_world_event._str_display_name +
+			" @ " +
+			_ref_we_controller._stct_active_world_event._str_target_room_name;
+	}
+
+	if (hscr_cheats_button(
+		"CLEAR EVENT",
+		_val_right - _val_clear_w,
+		_val_room_y,
+		_val_right,
+		_val_room_y + 30,
+		_str_active_event != "NONE"
+	)){
+		if (scr_world_event_debug_clear_active()){
+			audio_play_sound(snd_gui_press,0,false);
+			hscr_cheats_log("WORLD EVENT CLEARED","SOURCE: WORLD EVENTS TAB");
+		}
+	}
+
+	//================//
+	//EVENT SECTION//
+	//================//
+	var _val_event_header_y = _val_room_y + 50;
+	draw_set_colour(c_white);
+	draw_set_halign(fa_left);
+	draw_text(_val_left,_val_event_header_y,"WORLD EVENT: " + string_upper(_str_active_event));
+
+	var _val_event_y = _val_event_header_y + 21;
+	var _val_event_gap = 5;
+	var _val_event_w = 132;
+	var _val_event_total_w = (_val_event_w * 5) + (_val_event_gap * 4);
+	var _val_event_x = _val_left + ((_val_content_w - _val_event_total_w) * 0.5);
+
+	var _arr_world_event_buttons = [
+		["MIGRATION","MIGRATION"],
+		["GILDED GAMBIT","CHOOSE_A_CHEST"],
+		["RUNAWAY","RUNAWAY_TREASURE_BEAST"],
+		["MERCHANT","WANDERING_MERCHANT"],
+		["ELITE SIGHTING","ELITE_SIGHTING"]
+	];
+
+	for (var _it_event = 0; _it_event < array_length(_arr_world_event_buttons); _it_event++){
+		var _ex1 = _val_event_x + (_it_event * (_val_event_w + _val_event_gap));
+		if (hscr_cheats_button(
+			_arr_world_event_buttons[_it_event][0],
+			_ex1,
+			_val_event_y,
+			_ex1 + _val_event_w,
+			_val_event_y + 34
+		)){
+			hscr_cheats_world_event_force(_arr_world_event_buttons[_it_event][1]);
+		}
+	}
+
+	//================//
+	//MERCHANT REROLL//
+	//================//
+	var _flag_merchant_active = false;
+	if (
+		instance_exists(_ref_we_controller) &&
+		is_struct(_ref_we_controller._stct_active_world_event)
+	){
+		_flag_merchant_active =
+			_ref_we_controller._stct_active_world_event._str_event_id == "WANDERING_MERCHANT" &&
+			_ref_we_controller._stct_active_world_event._state_world_event == ENUM_WORLD_EVENT_STATE.ACTIVE;
+	}
+
+	var _val_merchant_x = _val_event_x + (3 * (_val_event_w + _val_event_gap));
+	if (hscr_cheats_button(
+		"REROLL",
+		_val_merchant_x,
+		_val_event_y + 39,
+		_val_merchant_x + _val_event_w,
+		_val_event_y + 60,
+		_flag_merchant_active
+	)){
+		if (scr_world_event_debug_reroll_merchant_stock()){
+			audio_play_sound(snd_gui_press,0,false);
+			scr_gui_spawn_popup_banner("MERCHANT STOCK REROLLED");
+		}
+	}
+
+	//================//
+	//BEAST OVERRIDE//
+	//================//
+	var _val_beast_header_y = _val_event_y + 63;
+	draw_set_colour(c_white);
+	draw_set_halign(fa_left);
+	draw_text(_val_left,_val_beast_header_y,"EVENT BEAST — MIGRATION / RUNAWAY / ELITE SIGHTING");
+
+	draw_set_colour(c_yellow);
+	draw_set_halign(fa_left);
+	draw_text(
+		_val_left + (_val_content_w * 0.46),
+		_val_beast_header_y + 14,
+		"SELECTED: " + string_upper(_str_world_event_selected_beast_name)
+	);
+
+	var _val_beast_list_y = _val_beast_header_y + 42;
+	var _ct_event_rows = max(
+		1,
+		floor(((_val_bottom - _val_beast_list_y) + _val_row_gap) / _val_row_step)
+	);
+
+	var _it_event_max_page = hscr_cheats_get_max_page(
+		array_length(_arr_world_event_beasts),
+		_ct_event_rows
+	);
+
+	_it_page = clamp(_it_page,0,_it_event_max_page);
+
+	for (var _r = 0; _r < _ct_event_rows; _r++){
+		var _index = (_it_page * _ct_event_rows) + _r;
+		if (_index >= array_length(_arr_world_event_beasts)){
+			break;
+		}
+
+		var _entry = _arr_world_event_beasts[_index];
+		if (!is_struct(_entry)){
+			continue;
+		}
+
+		var _y = _val_beast_list_y + (_r * _val_row_step);
+		var _str_beast_color = hscr_cheats_get_entry_color(_entry);
+		var _str_label =
+			(_str_world_event_selected_beast_id == string(_entry._str_beast_id) ? "> " : "") +
+			string(_entry._str_beast_name);
+
+		if (hscr_cheats_colored_button(
+			_str_label,
+			_val_left,
+			_y,
+			_val_right,
+			_y + _val_row_h,
+			_str_beast_color
+		)){
+			_str_world_event_selected_beast_id = string(_entry._str_beast_id);
+			_str_world_event_selected_beast_name = string(_entry._str_beast_name);
+			audio_play_sound(snd_gui_press,0,false);
+		}
+	}
+
+	draw_set_colour(c_ltgray);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_text(
+		_val_left,
+		_val_footer_y,
+		"BEAST PAGE " + string(_it_page + 1) + "/" + string(_it_event_max_page + 1) +
+		"   |   EVENT BUTTONS OVERWRITE THE CURRENT WORLD EVENT"
+	);
+}
+
 }
 
 //===============================================================================//
@@ -2318,14 +2570,24 @@ if (_it_tab == 0){
 	//ELITE RISK TIER BUTTONS//
 	//========================//
 	var _val_risk_button_y = _val_section_button_y + 36;
-	var _val_risk_button_gap = 5;
-	var _val_risk_button_w = (_val_section_w - _val_risk_button_gap) * 0.5;
+	var _val_risk_button_gap = 4;
+	var _val_risk_button_w = (_val_section_w - (_val_risk_button_gap * 2)) / 3;
 
 	if (hscr_cheats_button(
-		"TIER 1",
+		"TIER 2",
 		_val_elite_section_x,
 		_val_risk_button_y,
 		_val_elite_section_x + _val_risk_button_w,
+		_val_risk_button_y + 26
+	)){
+		hscr_cheats_start_tool("ELITE_RISK_SET","TIER 2: CLICK ENEMY ELITE","BATTLE_UNIT","2");
+	}
+
+	if (hscr_cheats_button(
+		"TIER 1",
+		_val_elite_section_x + _val_risk_button_w + _val_risk_button_gap,
+		_val_risk_button_y,
+		_val_elite_section_x + (_val_risk_button_w * 2) + _val_risk_button_gap,
 		_val_risk_button_y + 26
 	)){
 		hscr_cheats_start_tool("ELITE_RISK_SET","TIER 1: CLICK ENEMY ELITE","BATTLE_UNIT","1");
@@ -2333,7 +2595,7 @@ if (_it_tab == 0){
 
 	if (hscr_cheats_button(
 		"TIER 0",
-		_val_elite_section_x + _val_risk_button_w + _val_risk_button_gap,
+		_val_elite_section_x + (_val_risk_button_w * 2) + (_val_risk_button_gap * 2),
 		_val_risk_button_y,
 		_val_elite_section_x + _val_section_w,
 		_val_risk_button_y + 26
@@ -3467,14 +3729,66 @@ else if (_it_tab == 2){
 	draw_set_colour(c_white);
 	draw_set_halign(fa_left);
 
+	//================//
+	//MANA POOL CHEATS//
+	//================//
+	// Cheat changes affect BOTH Current and Maximum Mana immediately.
+	// The shared helper enforces the Minimum Maximum Mana of 1.
+	var _ref_mana_controller = obj_battle_player_controller;
+
 	draw_text(
 		_val_left,
 		_val_top,
-		"PLAYER HAND"
+		"MANA: " +
+		string(_ref_mana_controller._val_cur_mana) +
+		"/" +
+		string(_ref_mana_controller._val_max_mana)
 	);
 
-	var _val_y =
-		_val_top + 30;
+	var _val_mana_y = _val_top + 26;
+
+	if (hscr_cheats_button("MANA -1",_val_left,_val_mana_y,_val_left + 155,_val_mana_y + 34)){
+		var _val_changed = scr_battle_change_max_mana(-1,true);
+
+		if (_val_changed == 0){
+			hscr_cheats_error("MANA MINIMUM","MAX MANA CANNOT FALL BELOW 1");
+		}
+		else{
+			_ref_mana_controller.hscr_battle_check_card_oom(
+				_ref_mana_controller._list_battle_hand
+			);
+
+			hscr_cheats_log(
+				"MANA POOL CHEAT",
+				"CHANGE: " + string(_val_changed) +
+				" | CURRENT: " + string(_ref_mana_controller._val_cur_mana) +
+				" | MAX: " + string(_ref_mana_controller._val_max_mana)
+			);
+		}
+	}
+
+	if (hscr_cheats_button("MANA +1",_val_left + 165,_val_mana_y,_val_left + 320,_val_mana_y + 34)){
+		var _val_changed = scr_battle_change_max_mana(1,true);
+
+		if (_val_changed != 0){
+			_ref_mana_controller.hscr_battle_check_card_oom(
+				_ref_mana_controller._list_battle_hand
+			);
+
+			hscr_cheats_log(
+				"MANA POOL CHEAT",
+				"CHANGE: +" + string(_val_changed) +
+				" | CURRENT: " + string(_ref_mana_controller._val_cur_mana) +
+				" | MAX: " + string(_ref_mana_controller._val_max_mana)
+			);
+		}
+	}
+
+	draw_set_colour(c_white);
+	draw_set_halign(fa_left);
+	draw_text(_val_left,_val_top + 82,"PLAYER HAND");
+
+	var _val_y = _val_top + 110;
 
 	var _val_gap = 10;
 
@@ -3645,10 +3959,54 @@ else if (_it_tab == 3){
 		hscr_cheats_adjust_echo("ENEMY",1);
 	}
 
+	//===============================//
+	//PRISM CAPTURE SIMULATION (FREE)//
+	//===============================//
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_set_colour(c_white);
+	draw_text(_val_left,_val_top + 112,"PRISM CAPTURE SIMULATION - FREE");
+
+	var _arr_prism_ids = [
+		"PRISM_COMMON","PRISM_UNCOMMON","PRISM_RARE",
+		"PRISM_EPIC","PRISM_LEGENDARY","PRISM_ARCWORK"
+	];
+	var _val_prism_btn_gap = 8;
+	var _val_prism_btn_w = (_val_content_w - _val_prism_btn_gap * 2) / 3;
+	for (var _it_prism = 0; _it_prism < array_length(_arr_prism_ids); _it_prism++){
+		var _str_prism_id = _arr_prism_ids[_it_prism];
+		var _stct_prism_info = scr_inventory_get_prism_info(_str_prism_id);
+		if (!is_struct(_stct_prism_info)){
+			continue;
+		}
+		var _it_col = _it_prism mod 3;
+		var _it_row = floor(_it_prism / 3);
+		var _val_px1 = _val_left + _it_col * (_val_prism_btn_w + _val_prism_btn_gap);
+		var _val_py1 = _val_top + 138 + _it_row * 35;
+		var _str_prism_label = string_replace_all(_stct_prism_info._str_item_name," PRISM","");
+		_str_prism_label += _stct_prism_info._flag_guaranteed
+			? " (100%)"
+			: " (+" + string(_stct_prism_info._val_tame_bonus) + "%)";
+		if (hscr_cheats_button(_str_prism_label,_val_px1,_val_py1,_val_px1 + _val_prism_btn_w,_val_py1 + 31)){
+			hscr_cheats_start_tool(
+				"SIMULATED_PRISM",
+				"FREE " + _stct_prism_info._str_item_name + ": SELECT ENEMY",
+				"SIMULATED_PRISM_TARGET",
+				_str_prism_id
+			);
+		}
+		if (hscr_cheats_point_in_rect(_val_hover_mouse_x,_val_hover_mouse_y,_val_px1,_val_py1,_val_px1 + _val_prism_btn_w,_val_py1 + 31)){
+			hscr_cheats_set_hover_tooltip(
+				_stct_prism_info._str_item_name,
+				"NO MANA OR INVENTORY COST. " + _stct_prism_info._str_item_desc
+			);
+		}
+	}
+
 	//================//
 	//CASTING//
 	//================//
-	var _val_cast_header_y = _val_top + 110;
+	var _val_cast_header_y = _val_top + 224;
 	var _val_cast_list_y = _val_cast_header_y + 24;
 
 	draw_set_halign(fa_left);

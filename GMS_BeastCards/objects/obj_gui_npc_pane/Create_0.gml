@@ -349,6 +349,13 @@ hscr_gui_npc_build_options = function(){
 	if (_stct_npc._flag_can_fight){
 		array_push(_arr_options,"FIGHT");
 	}
+
+	if (
+		variable_struct_exists(_stct_npc,"_flag_can_send_away") &&
+		_stct_npc._flag_can_send_away
+	){
+		array_push(_arr_options,"SEND AWAY");
+	}
 };
 
 //-------------------------------------------------------------------------------//
@@ -479,6 +486,22 @@ hscr_gui_npc_start_dialogue = function(){
 
 	if (array_length(_arr_dialogue) <= 0){
 		_arr_dialogue = ["..."];
+	}
+
+	//========================//
+	//OPTIONAL RANDOM RUMOR//
+	//========================//
+	if (
+		variable_struct_exists(_stct_npc,"_flag_random_dialogue") &&
+		_stct_npc._flag_random_dialogue &&
+		array_length(_arr_dialogue) > 1
+	){
+		var _str_random_dialogue =
+			_arr_dialogue[
+				irandom(array_length(_arr_dialogue) - 1)
+			];
+
+		_arr_dialogue = [_str_random_dialogue];
 	}
 
 	//================//
@@ -856,6 +879,22 @@ hscr_gui_npc_activate_option = function(_str_option){
 				"WARNING",
 				"OBJ_GUI_NPC_PANE:HSCR_GUI_NPC_ACTIVATE_OPTION"
 			);
+
+			return false;
+
+
+		//===========//
+		//SEND AWAY//
+		//===========//
+		case "SEND AWAY":
+
+			if (scr_world_event_wandering_merchant_depart()){
+				hscr_gui_npc_close();
+				return true;
+			}
+
+			audio_play_sound(snd_gui_error,0,false);
+			scr_gui_spawn_popup_error("CANNOT SEND AWAY",60);
 
 			return false;
 	}

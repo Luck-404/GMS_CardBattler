@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"LEPOROOT",
-    "path":"folders/BEASTS/VIRIDIAN/LEPOROOT.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/LEPOROOT/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

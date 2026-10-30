@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"AMMOMARSH",
-    "path":"folders/BEASTS/CERULEAN/AMMOMARSH.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/AMMOMARSH/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

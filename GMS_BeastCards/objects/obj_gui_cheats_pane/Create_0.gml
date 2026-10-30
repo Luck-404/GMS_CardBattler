@@ -75,6 +75,27 @@ _it_submenu = 0;
 // MINION submenu action: SPAWN or REPLACE.
 _str_minion_submenu_action = "SPAWN";
 
+//=======================//
+//WORLD EVENT DEBUG STATE//
+//=======================//
+_arr_world_event_debug_rooms = [
+	{ _rm_room : rm_ow_center, _str_name : "CENTER" },
+	{ _rm_room : rm_ow_northwest, _str_name : "NORTHWEST" },
+	{ _rm_room : rm_ow_north, _str_name : "NORTH" },
+	{ _rm_room : rm_ow_northeast, _str_name : "NORTHEAST" },
+	{ _rm_room : rm_ow_west, _str_name : "WEST" },
+	{ _rm_room : rm_ow_east, _str_name : "EAST" },
+	{ _rm_room : rm_ow_southwest, _str_name : "SOUTHWEST" },
+	{ _rm_room : rm_ow_south, _str_name : "SOUTH" },
+	{ _rm_room : rm_ow_southeast, _str_name : "SOUTHEAST" },
+	{ _rm_room : rm_ow_lakeside, _str_name : "LAKESIDE" }
+];
+
+_it_world_event_room = 0;
+_arr_world_event_beasts = [];
+_str_world_event_selected_beast_id = "";
+_str_world_event_selected_beast_name = "";
+
 _flag_authenticated = false;
 _flag_password_entry = false;
 
@@ -193,7 +214,8 @@ else{
 		"BEASTS",
 		"CARDS",
 		"ITEMS",
-		"MISC"
+		"MISC",
+		"WORLD EVENTS"
 	];
 }
 
@@ -1043,6 +1065,9 @@ hscr_cheats_get_tab_tooltip = function(_str_tab){
 		case "MISC":
 			return "Gold controls, encounter-start controls, player movement/unstuck tools, and visible wild-Beast spawning tools.";
 
+		case "WORLD EVENTS":
+			return "Force, replace, clear, and inspect overworld World Events. Select a target room and Beast override for species-driven events.";
+
 		case "INTERACT":
 			return "Targeted battle cheats: HP, damage, level, cleanse, Status application, and Minion spawning.";
 
@@ -1059,7 +1084,7 @@ hscr_cheats_get_tab_tooltip = function(_str_tab){
 			return "Draw, discard, or Exhaust player hand Cards.";
 
 		case "CAST SIMULATED CARD":
-			return "Adjust Team Echo and cast any Card definition without spending Mana or moving a real battle Card.";
+			return "Adjust Team Echo, cast any Card, or use any simulated Prism to capture without spending Mana or consuming Inventory.";
 
 		case "END BATTLE":
 			return "Force a Win/Loss result or cancel the battle without applying battle rewards/results.";
@@ -8933,7 +8958,7 @@ hscr_cheats_set_elite_modifier = function(_ref_beast,_str_modifier,_str_elementa
 
 //-------------------------------------------------------------------------------//
 // HSCR_CHEATS_SET_ELITE_RISK_TIER
-// FUNCTION: Promotes/demotes an existing enemy Elite between Risk Tier 0 and 1.
+// FUNCTION: Promotes/demotes an existing enemy Elite between Risk Tier 0, 1, and 2.
 //           The Beast remains Elite and retains its current Elite modifier.
 //-------------------------------------------------------------------------------//
 hscr_cheats_set_elite_risk_tier = function(_ref_beast,_val_risk_tier){
@@ -8969,7 +8994,7 @@ hscr_cheats_set_elite_risk_tier = function(_ref_beast,_val_risk_tier){
 				_val_risk_tier
 			),
 			0,
-			1
+			2
 		);
 
 	if (
@@ -9125,8 +9150,202 @@ hscr_cheats_demote_elite = function(_ref_beast){
 
 #endregion
 
+//-------------------------------------------------------------------------------//
+// HSCR_CHEATS_REFRESH_WORLD_EVENT_BEASTS
+// FUNCTION: Builds an alphabetical snapshot of all Beast catalog entries used by
+//           the World Event debug tab.
+//-------------------------------------------------------------------------------//
+hscr_cheats_refresh_world_event_beasts = function(){
+
+	_arr_world_event_beasts = [];
+
+	if (ds_exists(global.list_logbook_beasts,ds_type_list)){
+		for (var _it = 0; _it < ds_list_size(global.list_logbook_beasts); _it++){
+			var _entry = ds_list_find_value(global.list_logbook_beasts,_it);
+			if (is_struct(_entry) && variable_struct_exists(_entry,"_str_beast_id")){
+				array_push(_arr_world_event_beasts,_entry);
+			}
+		}
+	}
+
+	// Stable insertion sort by display name. Catalog sizes are small and this only
+	// runs when the Cheats pane opens.
+	for (var _i = 1; _i < array_length(_arr_world_event_beasts); _i++){
+		var _key = _arr_world_event_beasts[_i];
+		var _key_name = string_upper(string(_key._str_beast_name));
+		var _j = _i - 1;
+
+		while (
+			_j >= 0 &&
+			string_upper(string(_arr_world_event_beasts[_j]._str_beast_name)) > _key_name
+		){
+			_arr_world_event_beasts[_j + 1] = _arr_world_event_beasts[_j];
+			_j--;
+		}
+
+		_arr_world_event_beasts[_j + 1] = _key;
+	}
+
+	if (array_length(_arr_world_event_beasts) > 0){
+		_str_world_event_selected_beast_id = string(_arr_world_event_beasts[0]._str_beast_id);
+		_str_world_event_selected_beast_name = string(_arr_world_event_beasts[0]._str_beast_name);
+	}
+
+	return array_length(_arr_world_event_beasts);
+};
+
+//-------------------------------------------------------------------------------//
+// HSCR_CHEATS_INIT_WORLD_EVENT_ROOMS
+// FUNCTION: Selects the player's current room when available and appends an
+//           otherwise-unregistered current overworld room for debug targeting.
+//-------------------------------------------------------------------------------//
+hscr_cheats_init_world_event_rooms = function(){
+
+	if (_str_mode != "OVERWORLD"){
+		return false;
+	}
+
+	var _flag_current_found = false;
+
+	for (var _it = 0; _it < array_length(_arr_world_event_debug_rooms); _it++){
+		if (_arr_world_event_debug_rooms[_it]._rm_room == room){
+			_it_world_event_room = _it;
+			_flag_current_found = true;
+			break;
+		}
+	}
+
+	// Ranch and Market are excluded even when Cheats opens in those rooms.
+	if (room == rm_ow_ranch || room == rm_ow_market){
+		_it_world_event_room = 0;
+		return true;
+	}
+
+	if (!_flag_current_found){
+		array_push(
+			_arr_world_event_debug_rooms,
+			{
+				_rm_room : room,
+				_str_name : string_upper(room_get_name(room)) + " [CURRENT]"
+			}
+		);
+		_it_world_event_room = array_length(_arr_world_event_debug_rooms) - 1;
+	}
+
+	return true;
+};
+
+//-------------------------------------------------------------------------------//
+// HSCR_CHEATS_WORLD_EVENT_CYCLE_ROOM
+//-------------------------------------------------------------------------------//
+hscr_cheats_world_event_cycle_room = function(_val_direction){
+
+	var _ct_rooms = array_length(_arr_world_event_debug_rooms);
+	if (_ct_rooms <= 0){
+		return false;
+	}
+
+	_it_world_event_room += sign(_val_direction);
+
+	if (_it_world_event_room < 0){
+		_it_world_event_room = _ct_rooms - 1;
+	}
+	else if (_it_world_event_room >= _ct_rooms){
+		_it_world_event_room = 0;
+	}
+
+	audio_play_sound(snd_gui_press,0,false);
+	return true;
+};
+
+//-------------------------------------------------------------------------------//
+// HSCR_CHEATS_WORLD_EVENT_USE_CURRENT_ROOM
+//-------------------------------------------------------------------------------//
+hscr_cheats_world_event_use_current_room = function(){
+
+	if (room == rm_ow_ranch || room == rm_ow_market){
+		return hscr_cheats_error("WORLD EVENT ROOM UNAVAILABLE","RANCH AND MARKET ARE EXCLUDED");
+	}
+
+	for (var _it = 0; _it < array_length(_arr_world_event_debug_rooms); _it++){
+		if (_arr_world_event_debug_rooms[_it]._rm_room == room){
+			_it_world_event_room = _it;
+			audio_play_sound(snd_gui_press,0,false);
+			return true;
+		}
+	}
+
+	array_push(
+		_arr_world_event_debug_rooms,
+		{
+			_rm_room : room,
+			_str_name : string_upper(room_get_name(room)) + " [CURRENT]"
+		}
+	);
+
+	_it_world_event_room = array_length(_arr_world_event_debug_rooms) - 1;
+	audio_play_sound(snd_gui_press,0,false);
+	return true;
+};
+
+//-------------------------------------------------------------------------------//
+// HSCR_CHEATS_WORLD_EVENT_FORCE
+//-------------------------------------------------------------------------------//
+hscr_cheats_world_event_force = function(_str_event_id){
+
+	if (
+		_it_world_event_room < 0 ||
+		_it_world_event_room >= array_length(_arr_world_event_debug_rooms)
+	){
+		return hscr_cheats_error("WORLD EVENT FAILED","INVALID ROOM SELECTION");
+	}
+
+	_str_event_id = string_upper(string(_str_event_id));
+
+	var _rm_target = _arr_world_event_debug_rooms[_it_world_event_room]._rm_room;
+	if (_rm_target == rm_ow_ranch || _rm_target == rm_ow_market){
+		return hscr_cheats_error("WORLD EVENT FAILED","RANCH AND MARKET ARE EXCLUDED");
+	}
+	var _str_beast_id = "";
+
+	if (
+		_str_event_id == "MIGRATION" ||
+		_str_event_id == "ELITE_SIGHTING" ||
+		_str_event_id == "RUNAWAY_TREASURE_BEAST"
+	){
+		_str_beast_id = _str_world_event_selected_beast_id;
+		if (_str_beast_id == ""){
+			return hscr_cheats_error("WORLD EVENT FAILED","SELECT A BEAST FIRST");
+		}
+	}
+
+	if (!scr_world_event_debug_force_event(_str_event_id,_rm_target,_str_beast_id)){
+		return hscr_cheats_error(
+			"WORLD EVENT FAILED",
+			"EVENT: " + _str_event_id +
+			" | ROOM: " + string_upper(room_get_name(_rm_target))
+		);
+	}
+
+	audio_play_sound(snd_gui_press,0,false);
+
+	hscr_cheats_log(
+		"WORLD EVENT FORCED",
+		"EVENT: " + _str_event_id +
+		" | ROOM: " + string_upper(room_get_name(_rm_target)) +
+		((_str_beast_id != "") ? " | BEAST: " + string_upper(_str_beast_id) : "")
+	);
+
+	return true;
+};
+
 //==========================//
 //BUILD CATALOG SNAPSHOTS//
 //==========================//
 // All helper methods are now installed. Build the expensive sorted catalogs once.
 hscr_cheats_refresh_catalog_snapshots();
+
+if (_str_mode == "OVERWORLD"){
+	hscr_cheats_refresh_world_event_beasts();
+	hscr_cheats_init_world_event_rooms();
+}

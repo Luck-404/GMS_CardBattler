@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"BLIZZDRIFT",
-    "path":"folders/BEASTS/CERULEAN/BLIZZDRIFT.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/BLIZZDRIFT/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

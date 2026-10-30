@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FIGHTREE",
-    "path":"folders/BEASTS/VIRIDIAN/FIGHTREE.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/FIGHTREE/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

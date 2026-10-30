@@ -57,5 +57,21 @@ function scr_inventory_use_consumable_item(_stct_item,_ref_inventory_pane){
 	_ref_target_pane._stct_item = _stct_item;
 	_ref_target_pane._str_target_mode = "PARTY";
 
+    // Food-only pane: remove 50px of unused space from the bottom.
+    // Keep the original top edge so the Beast slots and Recent Meals do not move.
+    if (variable_struct_exists(_stct_item,"_str_consumable_action") && _stct_item._str_consumable_action == "FOOD"){
+        var _val_food_original_h = 620;
+        var _val_food_bottom_trim = 50;
+
+        _ref_target_pane._val_pane_w = 930;
+        _ref_target_pane._val_pane_h = _val_food_original_h - _val_food_bottom_trim;
+        _ref_target_pane._val_pane_left = _ref_target_pane.x - (_ref_target_pane._val_pane_w*0.5);
+        _ref_target_pane._val_pane_top = _ref_target_pane.y - (_val_food_original_h*0.5);
+        _ref_target_pane._val_left_x = _ref_target_pane._val_pane_left + 24;
+        _ref_target_pane._val_right_x = _ref_target_pane._val_pane_left + 465;
+        _ref_target_pane._val_start_y = _ref_target_pane._val_pane_top + 70;
+    }
+
+
 	return true;
 }

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"SPOROSE",
-    "path":"folders/BEASTS/VIRIDIAN/SPOROSE.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/SPOROSE/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"MORELUSH",
-    "path":"folders/BEASTS/VIRIDIAN/MORELUSH.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/MORELUSH/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_beast_vermilion_slagolem_interact",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.54494333,
+  "exportDir":"",
+  "name":"snd_beast_vermilion_slagolem_interact",
+  "parent":{
+    "name":"SLAGOLEM",
+    "path":"folders/BEASTS/VERMILION/SLAGOLEM.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_beast_vermilion_slagolem_interact.wav",
+  "volume":0.5,
+}

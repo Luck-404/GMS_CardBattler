@@ -74,7 +74,54 @@ switch(_state_enemy){
 			var _flag_forced_enemy =
 				false;
 
-			if (
+			var _flag_exact_enemy =
+				false;
+
+			//================//
+			//EXACT ROSTER//
+			//================//
+			if (_flag_exact_enemy_roster){
+
+				if (
+					_it_beast >=
+					array_length(
+						_arr_exact_enemy_roster
+					)
+				){
+
+					scr_debug_log(
+						"BATTLE",
+						"ENEMY",
+						self,
+						"EXACT ENEMY ROSTER INDEX OUT OF RANGE" +
+						" | INDEX: " +
+						string(_it_beast) +
+						" | SIZE: " +
+						string(
+							array_length(
+								_arr_exact_enemy_roster
+							)
+						),
+						"ERROR",
+						"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
+					);
+
+					continue;
+				}
+
+				_stct_enemy_unit =
+					_arr_exact_enemy_roster[
+						_it_beast
+					];
+
+				_flag_exact_enemy =
+					true;
+			}
+
+			//================//
+			//NORMAL ROSTER//
+			//================//
+			else if (
 				_it_beast == 0 &&
 				variable_global_exists("stct_forced_enemy_unit") &&
 				is_struct(global.stct_forced_enemy_unit)
@@ -104,7 +151,17 @@ switch(_state_enemy){
 					"ENEMY",
 					undefined,
 					"ENEMY BATTLE INIT FAILED | INVALID BEAST STRUCT | ROLL: " +
-					string(_it_beast),
+					string(_it_beast) +
+					" | SOURCE: " +
+					(
+						_flag_exact_enemy
+						? "EXACT"
+						: (
+							_flag_forced_enemy
+							? "FORCED"
+							: "RANDOM"
+						)
+					),
 					"ERROR",
 					"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
 				);
@@ -112,99 +169,160 @@ switch(_state_enemy){
 				continue;
 			}
 
-			var _val_enemy_level =
-				undefined;
+			//======================//
+			//EXACT UNIT VALIDATION//
+			//======================//
+			if (_flag_exact_enemy){
 
-			if (is_struct(_stct_encounter_scaling)){
+				if (
+					!variable_struct_exists(
+						_stct_enemy_unit,
+						"_val_beast_level"
+					) ||
+					!variable_struct_exists(
+						_stct_enemy_unit,
+						"_val_beast_hp_max"
+					) ||
+					!variable_struct_exists(
+						_stct_enemy_unit,
+						"_val_beast_hp_cur"
+					) ||
+					!is_real(
+						_stct_enemy_unit
+							._val_beast_level
+					) ||
+					!is_real(
+						_stct_enemy_unit
+							._val_beast_hp_max
+					) ||
+					_stct_enemy_unit
+						._val_beast_level <= 0 ||
+					_stct_enemy_unit
+						._val_beast_hp_max <= 0 ||
+					_stct_enemy_unit
+						._val_beast_hp_cur <= 0
+				){
 
-				_val_enemy_level =
-					scr_encounter_roll_enemy_level(
-						_stct_encounter_scaling
+					scr_debug_log(
+						"BATTLE",
+						"ENEMY",
+						_stct_enemy_unit,
+						"EXACT ENEMY BATTLE INIT FAILED" +
+						" | REASON: INVALID PREINITIALIZED LEVEL/HP" +
+						" | ROLL: " +
+						string(_it_beast),
+						"ERROR",
+						"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
 					);
+
+					continue;
+				}
+
+				// Exact rosters preserve the supplied Beast's level, UID, subtype,
+				// breed, ability, held item, HP fields, and Elite metadata.
+				// Do not call SCR_BEAST_SET_LEVEL or replace it with a random unit.
 			}
 
-			if (
-				_val_enemy_level == undefined ||
-				!is_real(_val_enemy_level)
-			){
+			//=====================//
+			//NORMAL LEVEL ROLL//
+			//=====================//
+			else{
 
-				_val_enemy_level =
-					irandom_range(
-						_val_enemy_level_min,
-						_val_enemy_level_max
+				var _val_enemy_level =
+					undefined;
+
+				if (is_struct(_stct_encounter_scaling)){
+
+					_val_enemy_level =
+						scr_encounter_roll_enemy_level(
+							_stct_encounter_scaling
+						);
+				}
+
+				if (
+					_val_enemy_level == undefined ||
+					!is_real(_val_enemy_level)
+				){
+
+					_val_enemy_level =
+						irandom_range(
+							_val_enemy_level_min,
+							_val_enemy_level_max
+						);
+				}
+
+				if (
+					!scr_beast_set_level(
+						_stct_enemy_unit,
+						_val_enemy_level,
+						true
+					)
+				){
+
+					scr_debug_log(
+						"BATTLE",
+						"ENEMY",
+						_stct_enemy_unit,
+						"ENEMY BATTLE INIT FAILED | COULD NOT SET LEVEL: " +
+						string(_val_enemy_level),
+						"ERROR",
+						"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
 					);
+
+					continue;
+				}
+
+				var _val_expected_max_hp =
+					scr_beast_get_max_hp(
+						_stct_enemy_unit._val_beast_hp_stat,
+						_stct_enemy_unit._val_beast_level
+					);
+
+				if (_val_expected_max_hp <= 0){
+
+					scr_debug_log(
+						"BATTLE",
+						"ENEMY",
+						_stct_enemy_unit,
+						"ENEMY BATTLE INIT FAILED | INVALID EXPECTED MAX HP: " +
+						string(_val_expected_max_hp),
+						"ERROR",
+						"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
+					);
+
+					continue;
+				}
+
+				if (
+					_stct_enemy_unit._val_beast_hp_max !=
+					_val_expected_max_hp
+				){
+
+					scr_debug_log(
+						"BEAST",
+						"LEVEL",
+						_stct_enemy_unit,
+						"ENEMY HP MISMATCH CORRECTED" +
+						" | BEAST: " +
+						string_upper(_stct_enemy_unit._str_beast_name) +
+						" | LEVEL: " +
+						string(_stct_enemy_unit._val_beast_level) +
+						" | EXISTING MAX HP: " +
+						string(_stct_enemy_unit._val_beast_hp_max) +
+						" | EXPECTED MAX HP: " +
+						string(_val_expected_max_hp),
+						"WARNING",
+						"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
+					);
+				}
+
+				_stct_enemy_unit._val_beast_hp_max =
+					_val_expected_max_hp;
+
+				_stct_enemy_unit._val_beast_hp_cur =
+					_val_expected_max_hp;
 			}
 
-			if (
-				!scr_beast_set_level(
-					_stct_enemy_unit,
-					_val_enemy_level,
-					true
-				)
-			){
-
-				scr_debug_log(
-					"BATTLE",
-					"ENEMY",
-					_stct_enemy_unit,
-					"ENEMY BATTLE INIT FAILED | COULD NOT SET LEVEL: " +
-					string(_val_enemy_level),
-					"ERROR",
-					"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
-				);
-
-				continue;
-			}
-
-			var _val_expected_max_hp =
-				scr_beast_get_max_hp(
-					_stct_enemy_unit._val_beast_hp_stat,
-					_stct_enemy_unit._val_beast_level
-				);
-
-			if (_val_expected_max_hp <= 0){
-
-				scr_debug_log(
-					"BATTLE",
-					"ENEMY",
-					_stct_enemy_unit,
-					"ENEMY BATTLE INIT FAILED | INVALID EXPECTED MAX HP: " +
-					string(_val_expected_max_hp),
-					"ERROR",
-					"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
-				);
-
-				continue;
-			}
-
-			if (
-				_stct_enemy_unit._val_beast_hp_max !=
-				_val_expected_max_hp
-			){
-
-				scr_debug_log(
-					"BEAST",
-					"LEVEL",
-					_stct_enemy_unit,
-					"ENEMY HP MISMATCH CORRECTED" +
-					" | BEAST: " +
-					string_upper(_stct_enemy_unit._str_beast_name) +
-					" | LEVEL: " +
-					string(_stct_enemy_unit._val_beast_level) +
-					" | EXISTING MAX HP: " +
-					string(_stct_enemy_unit._val_beast_hp_max) +
-					" | EXPECTED MAX HP: " +
-					string(_val_expected_max_hp),
-					"WARNING",
-					"OBJ_BATTLE_ENEMY_CONTROLLER:STEP"
-				);
-			}
-
-			_stct_enemy_unit._val_beast_hp_max =
-				_val_expected_max_hp;
-
-			_stct_enemy_unit._val_beast_hp_cur =
-				_val_expected_max_hp;
 
 			//================//
 			//APPLY ELITE//
@@ -273,6 +391,7 @@ switch(_state_enemy){
 				{
 					_stct_unit : _stct_enemy_unit,
 					_flag_forced : _flag_forced_enemy,
+					_flag_exact : _flag_exact_enemy,
 					_val_formation_priority : scr_beast_get_formation_priority(
 						_stct_enemy_unit
 					),
@@ -428,7 +547,15 @@ switch(_state_enemy){
 				"ENEMY",
 				_ref_enemy_beast,
 				"ENEMY BEAST INITIALIZED | SOURCE: " +
-				(_stct_enemy_entry._flag_forced ? "FORCED" : "RANDOM") +
+				(
+					_stct_enemy_entry._flag_exact
+					? "EXACT"
+					: (
+						_stct_enemy_entry._flag_forced
+						? "FORCED"
+						: "RANDOM"
+					)
+				) +
 				" | LVL " +
 				string(_stct_enemy_unit._val_beast_level) +
 				" | HP: " +

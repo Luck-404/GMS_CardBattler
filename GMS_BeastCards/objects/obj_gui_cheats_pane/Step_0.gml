@@ -135,6 +135,62 @@ if (_str_state == "TOOL"){
 	}
 
 //========================//
+//FREE SIMULATED PRISM//
+//========================//
+	if (
+		_str_tool == "SIMULATED_PRISM" &&
+		_str_tool_target_type == "SIMULATED_PRISM_TARGET"
+	){
+
+		if (!hscr_cheats_take_left_click()){
+			exit;
+		}
+
+		var _ref_prism_target = instance_position(
+			device_mouse_x_to_gui(0),
+			device_mouse_y_to_gui(0),
+			obj_battle_beast
+		);
+
+		if (
+			!instance_exists(_ref_prism_target) ||
+			_ref_prism_target._str_team != "ENEMY" ||
+			_ref_prism_target._str_list != "ALIVE" ||
+			_ref_prism_target._val_cur_hp <= 0
+		){
+			hscr_cheats_error("SIMULATED PRISM REJECTED","SELECT A LIVING ENEMY BEAST");
+			exit;
+		}
+
+		if (_ref_prism_target._flag_elite){
+			hscr_cheats_error("SIMULATED PRISM REJECTED","ELITES CANNOT BE CAPTURED");
+			exit;
+		}
+
+		var _stct_prism_data = scr_inventory_get_prism_info(_str_selected_id);
+		if (!is_struct(_stct_prism_data)){
+			hscr_cheats_error("SIMULATED PRISM REJECTED","INVALID PRISM DEFINITION");
+			exit;
+		}
+
+		// No physical Prism is required. The capture helper validates the Prism
+		// definition and target, then bypasses only inventory/Mana consumption.
+		var _flag_simulated_success = scr_battle_try_prism_capture(
+			{ _str_item_id : _str_selected_id },
+			_ref_prism_target,
+			true
+		);
+
+		hscr_cheats_log(
+			"SIMULATED PRISM ATTEMPT",
+			"PRISM: " + string_upper(_str_selected_id) +
+			" | SUCCESS: " + (_flag_simulated_success ? "YES" : "NO") +
+			" | MANA/ITEM COST: ZERO"
+		);
+		exit;
+	}
+
+//========================//
 //SIMULATED CARD CASTING//
 //========================//
 	if (
@@ -1293,6 +1349,13 @@ if (_str_state == "TOOL"){
 								1;
 
 						break;
+
+						case "2":
+
+							_val_target_risk_tier =
+								2;
+
+						break;
 					}
 
 					if (
@@ -1964,6 +2027,33 @@ if (
 								195 +
 								24
 							) +
+							_val_row_gap
+						) /
+						_val_row_step
+					)
+				);
+
+		break;
+
+		//----------------//
+		//WORLD EVENTS//
+		//----------------//
+		case 4:
+
+			_ct_page_entries =
+				array_length(
+					_arr_world_event_beasts
+				);
+
+			var _val_world_event_beast_list_y =
+				_val_content_y1 + 200;
+
+			_ct_page_rows =
+				max(
+					1,
+					floor(
+						(
+							(_val_content_y2 - _val_world_event_beast_list_y) +
 							_val_row_gap
 						) /
 						_val_row_step

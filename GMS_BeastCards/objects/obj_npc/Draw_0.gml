@@ -2,6 +2,7 @@
 //
 // DRAW: OBJ_NPC
 // FUNCTION: Draws the NPC using directional and highlighted sprite frames.
+//           World Event overhead labels are drawn separately in Draw GUI.
 //
 // FRAME MAP:
 //     0 = Forward

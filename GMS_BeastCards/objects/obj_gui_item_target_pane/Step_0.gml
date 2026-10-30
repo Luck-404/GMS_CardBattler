@@ -28,15 +28,16 @@ if (_stct_item == undefined){
 var _stct_current_item = hscr_gui_item_target_get_item_struct();
 
 if (_stct_current_item == undefined){
-	hscr_gui_item_target_close();
-	exit;
+    hscr_gui_item_target_close();
+    exit;
+} else {
+    _stct_item = _stct_current_item;
 }
 
-_stct_item = _stct_current_item;
-
+// Close even after feeding: the depleted stack must return to Inventory.
 if (hscr_gui_item_target_get_item_amount() <= 0){
-	hscr_gui_item_target_close();
-	exit;
+    hscr_gui_item_target_close();
+    exit;
 }
 
 //================//
@@ -57,6 +58,8 @@ var _val_mouse_x = device_mouse_x_to_gui(0);
 var _val_mouse_y = device_mouse_y_to_gui(0);
 
 var _ct_party = ds_list_size(global.list_player_party);
+
+if (hscr_gui_item_target_get_item_amount() <= 0) exit;
 
 for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 
@@ -123,6 +126,9 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 			);
 
 			if (_flag_used){
+                if (variable_struct_exists(_stct_item,"_str_consumable_action") && _stct_item._str_consumable_action == "FOOD"){
+                    _stct_recent_feed_target = _stct_unit;
+                }
 
 				scr_inventory_remove_item(_stct_item,1);
 
@@ -134,12 +140,13 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 				_stct_current_item = hscr_gui_item_target_get_item_struct();
 
 				if (
-					_stct_current_item == undefined ||
-					hscr_gui_item_target_get_item_amount() <= 0
-				){
-					hscr_gui_item_target_close();
-					exit;
-				}
+                    _stct_current_item == undefined ||
+                    hscr_gui_item_target_get_item_amount() <= 0
+                ){
+                    // No more of the selected food/item: return to Inventory.
+                    hscr_gui_item_target_close();
+                    exit;
+                }
 
 				_stct_item = _stct_current_item;
 			}

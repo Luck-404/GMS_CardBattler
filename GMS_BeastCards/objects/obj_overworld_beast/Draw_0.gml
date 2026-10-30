@@ -170,6 +170,112 @@ var _val_beast_draw_y =
 	_val_elite_vertical_lift +
 	_val_companion_bounce_y;
 
+//========================//
+//MIGRATION LEADER MARKER//
+//========================//
+// Migration Leaders are NOT Elites. A simple gold ground ring identifies the
+// stronger member without touching Elite flags, modifiers, scaling, or VFX.
+if (
+	_flag_world_event_instance &&
+	_str_world_event_id == "MIGRATION" &&
+	_flag_migration_leader
+){
+
+	draw_set_alpha(0.85);
+	draw_set_colour(c_yellow);
+
+	draw_circle(
+		x,
+		y + 22,
+		20,
+		true
+	);
+
+	draw_circle(
+		x,
+		y + 22,
+		22,
+		true
+	);
+
+	draw_set_alpha(1);
+	draw_set_colour(c_white);
+}
+
+//========================//
+//RUNAWAY CATCH POOF//
+//========================//
+var _flag_runaway_catch_poof = false;
+var _val_runaway_catch_elapsed = 0;
+
+if (
+	_flag_world_event_instance &&
+	_str_world_event_id == "RUNAWAY_TREASURE_BEAST" &&
+	_flag_runaway_treasure_beast &&
+	_flag_runaway_treasure_catch_animation &&
+	_ct_runaway_treasure_catch_animation_total > 0
+){
+	_val_runaway_catch_elapsed =
+		_ct_runaway_treasure_catch_animation_total -
+		_ct_runaway_treasure_catch_animation;
+
+	_flag_runaway_catch_poof =
+		_val_runaway_catch_elapsed >=
+		_ct_runaway_treasure_drop_animation_frames;
+}
+
+if (_flag_runaway_catch_poof){
+	var _ct_poof_frames =
+		max(
+			1,
+			sprite_get_number(
+				spr_battle_vfx_reposition
+			)
+		);
+
+	var _ct_poof_duration =
+		max(
+			1,
+			_ct_runaway_treasure_catch_animation_total -
+			_ct_runaway_treasure_drop_animation_frames
+		);
+
+	var _val_poof_progress =
+		clamp(
+			(
+				_val_runaway_catch_elapsed -
+				_ct_runaway_treasure_drop_animation_frames
+			) /
+			_ct_poof_duration,
+			0,
+			0.999
+		);
+
+	var _it_poof_frame =
+		clamp(
+			floor(
+				_val_poof_progress *
+				_ct_poof_frames
+			),
+			0,
+			_ct_poof_frames - 1
+		);
+
+	draw_sprite_ext(
+		spr_battle_vfx_reposition,
+		_it_poof_frame,
+		x,
+		y,
+		0.65,
+		0.65,
+		0,
+		c_white,
+		1
+	);
+
+	exit;
+}
+
 //================//
 //DRAW SHADOW//
 //================//
@@ -268,3 +374,50 @@ draw_sprite_ext(
 	_c_beast_draw_tint,
 	1
 );
+
+//========================//
+//RUNAWAY TREASURE CHEST//
+//========================//
+if (
+	_flag_world_event_instance &&
+	_str_world_event_id == "RUNAWAY_TREASURE_BEAST" &&
+	_flag_runaway_treasure_beast
+){
+
+	var _val_chest_drop_progress = 0;
+
+	if (
+		_flag_runaway_treasure_catch_animation &&
+		_ct_runaway_treasure_drop_animation_frames > 0
+	){
+		_val_chest_drop_progress =
+			clamp(
+				_val_runaway_catch_elapsed /
+				_ct_runaway_treasure_drop_animation_frames,
+				0,
+				1
+			);
+	}
+
+	// Previous Phase VII position was x - (image_xscale * 8).
+	// Move 15 px inward from that placement: -8 -> +7 relative to facing.
+	var _val_chest_draw_x =
+		x + (image_xscale * 7);
+
+	var _val_chest_draw_y =
+		_val_beast_draw_y +
+		12 +
+		(30 * _val_chest_drop_progress);
+
+	draw_sprite_ext(
+		spr_overworld_treasure_chest,
+		0,
+		_val_chest_draw_x,
+		_val_chest_draw_y,
+		-image_xscale * 0.55,
+		0.55,
+		0,
+		c_yellow,
+		1
+	);
+}

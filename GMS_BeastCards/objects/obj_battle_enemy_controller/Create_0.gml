@@ -1,4 +1,3 @@
-
 //===============================================================================//
 //
 // CREATE: OBJ_BATTLE_ENEMY_CONTROLLER
@@ -18,6 +17,9 @@
 //BEASTS//
 //--------//
 _ct_beasts = 3;
+
+_flag_exact_enemy_roster = false;
+_arr_exact_enemy_roster = [];
 
 _list_beasts = ds_list_create();
 _list_beasts_alive = ds_list_create();
@@ -261,6 +263,40 @@ if (
 		undefined;
 }
 
+//=====================//
+//CONSUME EXACT ROSTER//
+//=====================//
+_arr_exact_enemy_roster =
+	scr_battle_consume_exact_enemy_roster();
+
+if (
+	is_array(
+		_arr_exact_enemy_roster
+	) &&
+	array_length(
+		_arr_exact_enemy_roster
+	) > 0
+){
+
+	_flag_exact_enemy_roster =
+		true;
+
+	_ct_beasts =
+		array_length(
+			_arr_exact_enemy_roster
+		);
+
+	// Exact composition supersedes the normal visible-wild forced-slot handoff.
+	if (
+		variable_global_exists(
+			"stct_forced_enemy_unit"
+		)
+	){
+		global.stct_forced_enemy_unit =
+			undefined;
+	}
+}
+
 var _ct_encounter_pool = 0;
 var _flag_forced_enemy = false;
 
@@ -296,6 +332,16 @@ scr_debug_log(
 	string(_val_enemy_level_max) +
 	" | ENCOUNTER POOL: " +
 	string(_ct_encounter_pool) +
+	" | EXACT ROSTER: " +
+	(_flag_exact_enemy_roster ? "YES" : "NO") +
+	" | EXACT ROSTER SIZE: " +
+	string(
+		_flag_exact_enemy_roster
+		? array_length(
+			_arr_exact_enemy_roster
+		)
+		: 0
+	) +
 	" | FORCED SLOT 0: " +
 	(_flag_forced_enemy ? "YES" : "NO") +
 	" | ELITE ENCOUNTER: " +

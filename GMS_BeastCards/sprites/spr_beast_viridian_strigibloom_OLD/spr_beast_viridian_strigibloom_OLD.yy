@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"STRIGIBLOOM",
-    "path":"folders/BEASTS/VIRIDIAN/STRIGIBLOOM.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/STRIGIBLOOM/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

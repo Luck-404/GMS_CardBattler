@@ -19,6 +19,12 @@ if (global.flag_pause){
 }
 
 //================//
+//MOVEMENT START POSITION//
+//================//
+var _val_step_start_x = x;
+var _val_step_start_y = y;
+
+//================//
 //UPDATE COOLDOWNS//
 //================//
 if (_ct_battle_cooldown > 0){
@@ -65,6 +71,11 @@ if (_str_team == "PLAYER"){
 			_val_follow_lerp
 		);
 	}
+
+	scr_overworld_beast_resolve_wall_collision(
+		_val_step_start_x,
+		_val_step_start_y
+	);
 }
 
 //================//
@@ -72,64 +83,98 @@ if (_str_team == "PLAYER"){
 //================//
 else if (_str_team == "WILD"){
 
-	var _val_dist_home =
-		point_distance(
-			x,
-			y,
-			_val_home_x,
-			_val_home_y
-		);
+	var _flag_runaway_treasure_mode =
+		_flag_world_event_instance &&
+		_str_world_event_id ==
+			"RUNAWAY_TREASURE_BEAST" &&
+		_flag_runaway_treasure_beast;
 
-	//----------------//
-	//ANGRY CHASE//
-	//----------------//
-	if (
-		_str_disposition == "ANGRY" &&
-		_val_dist_player <= _val_detect_radius &&
-		_val_dist_home <= _val_home_radius
-	){
+	if (_flag_runaway_treasure_mode){
 
-		var _val_direction =
-			point_direction(
-				x,
-				y,
-				obj_player.x,
-				obj_player.y
-			);
+		//========================//
+		//CATCH / DROP PRESENTATION//
+		//========================//
+		if (_flag_runaway_treasure_catch_animation){
 
-		x += lengthdir_x(
-			_val_move_speed + 0.5,
-			_val_direction
-		);
+			if (_ct_runaway_treasure_catch_animation > 0){
+				_ct_runaway_treasure_catch_animation--;
+			}
 
-		y += lengthdir_y(
-			_val_move_speed + 0.5,
-			_val_direction
-		);
-	}
+			if (_ct_runaway_treasure_catch_animation <= 0){
 
-	//----------------//
-	//SCARED FLEE//
-	//----------------//
-	else if (
-		_str_disposition == "SCARED" &&
-		_val_dist_player <= _val_detect_radius
-	){
+				if (
+					scr_world_event_runaway_treasure_finish_claim(
+						_uid_world_event_entity,
+						x,
+						y
+					)
+				){
+					exit;
+				}
+			}
+		}
+		else{
 
-		switch (_state_scared){
+			//================//
+			//COLLISION CATCH//
+			//================//
+			if (
+				place_meeting(
+					x,
+					y,
+					obj_player
+				) &&
+				!instance_exists(obj_transition) &&
+				!instance_exists(obj_transition_fader) &&
+				!instance_exists(obj_battle_wait)
+			){
 
-			case "READY":
+				if (
+					scr_world_event_runaway_treasure_claim(
+						_uid_world_event_entity,
+						x,
+						y
+					)
+				){
+					exit;
+				}
+			}
 
-				_state_scared =
-					"FLEE";
+			//================//
+			//RUNAWAY MOVEMENT//
+			//================//
+			var _val_runaway_dist_home =
+				point_distance(
+					x,
+					y,
+					_val_home_x,
+					_val_home_y
+				);
 
-				_ct_scared_timer =
-					irandom_range(
-						60,
-						120
+			// Stay inside the authored MOB anchor leash.
+			if (_val_runaway_dist_home > _val_home_radius){
+
+				var _val_runaway_home_direction =
+					point_direction(
+						x,
+						y,
+						_val_home_x,
+						_val_home_y
 					);
 
-				_val_scared_direction =
+				x += lengthdir_x(
+					_val_runaway_treasure_flee_speed,
+					_val_runaway_home_direction
+				);
+
+				y += lengthdir_y(
+					_val_runaway_treasure_flee_speed,
+					_val_runaway_home_direction
+				);
+			}
+			else if (_val_dist_player <= _val_detect_radius){
+
+				var _val_runaway_flee_direction =
 					point_direction(
 						obj_player.x,
 						obj_player.y,
@@ -137,171 +182,386 @@ else if (_str_team == "WILD"){
 						y
 					);
 
-			break;
-
-			case "FLEE":
-
 				x += lengthdir_x(
-					_val_move_speed + 0.35,
-					_val_scared_direction
+					_val_runaway_treasure_flee_speed,
+					_val_runaway_flee_direction
 				);
 
 				y += lengthdir_y(
-					_val_move_speed + 0.35,
-					_val_scared_direction
+					_val_runaway_treasure_flee_speed,
+					_val_runaway_flee_direction
 				);
+			}
+			else{
 
-				_ct_scared_timer--;
+				if (_ct_wander_timer <= 0){
 
-				if (_ct_scared_timer <= 0){
-					_state_scared = "FROZEN";
+					_ct_wander_timer =
+						irandom_range(
+							30,
+							75
+						);
+
+					var _val_runaway_wander_radius =
+						min(
+							96,
+							max(
+								24,
+								_val_home_radius * 0.6
+							)
+						);
+
+					_val_target_x =
+						_val_home_x +
+						irandom_range(
+							-_val_runaway_wander_radius,
+							_val_runaway_wander_radius
+						);
+
+					_val_target_y =
+						_val_home_y +
+						irandom_range(
+							-_val_runaway_wander_radius,
+							_val_runaway_wander_radius
+						);
+				}
+				else{
+					_ct_wander_timer--;
 				}
 
-			break;
+				var _val_runaway_target_distance =
+					point_distance(
+						x,
+						y,
+						_val_target_x,
+						_val_target_y
+					);
 
-			case "FROZEN":
+				if (_val_runaway_target_distance > 8){
 
-				// Remain stationary while the player stays nearby.
+					var _val_runaway_target_direction =
+						point_direction(
+							x,
+							y,
+							_val_target_x,
+							_val_target_y
+						);
 
-			break;
+					x += lengthdir_x(
+						_val_move_speed,
+						_val_runaway_target_direction
+					);
+
+					y += lengthdir_y(
+						_val_move_speed,
+						_val_runaway_target_direction
+					);
+				}
+			}
+
+			scr_overworld_beast_resolve_wall_collision(
+				_val_step_start_x,
+				_val_step_start_y
+			);
 		}
 	}
 
-	//----------------//
-	//WANDER//
-	//----------------//
 	else{
 
-		if (_ct_wander_timer <= 0){
-
-			_ct_wander_timer =
-				irandom_range(
-					45,
-					120
-				);
-
-			_val_target_x =
-				_val_home_x +
-				irandom_range(
-					-_val_home_radius,
-					_val_home_radius
-				);
-
-			_val_target_y =
-				_val_home_y +
-				irandom_range(
-					-_val_home_radius,
-					_val_home_radius
-				);
-		}
-		else{
-			_ct_wander_timer--;
-		}
-
-		var _val_target_distance =
+		var _val_dist_home =
 			point_distance(
-				x,
-				y,
-				_val_target_x,
-				_val_target_y
-			);
-
-		if (_val_target_distance > 8){
-
-			var _val_direction =
-				point_direction(
-					x,
-					y,
-					_val_target_x,
-					_val_target_y
-				);
-
-			x += lengthdir_x(
-				_val_move_speed,
-				_val_direction
-			);
-
-			y += lengthdir_y(
-				_val_move_speed,
-				_val_direction
-			);
-		}
-	}
-
-	//----------------//
-	//HOME LEASH//
-	//----------------//
-	_val_dist_home =
-		point_distance(
-			x,
-			y,
-			_val_home_x,
-			_val_home_y
-		);
-
-	if (_val_dist_home > _val_home_radius + 32){
-
-		var _val_home_direction =
-			point_direction(
 				x,
 				y,
 				_val_home_x,
 				_val_home_y
 			);
 
-		x += lengthdir_x(
-			_val_move_speed,
-			_val_home_direction
-		);
-
-		y += lengthdir_y(
-			_val_move_speed,
-			_val_home_direction
-		);
-	}
-
-	//----------------//
-	//RESET SCARED STATE//
-	//----------------//
-	if (
-		_str_disposition == "SCARED" &&
-		_val_dist_player > _val_detect_radius
-	){
-		_state_scared = "READY";
-		_ct_scared_timer = 0;
-	}
-
-	//----------------//
-	//BATTLE TRIGGER//
-	//----------------//
-	if (
-		!_flag_battle_triggered &&
-		_ct_battle_cooldown <= 0 &&
-		place_meeting(
-			x,
-			y,
-			obj_player
-		) &&
-		!instance_exists(obj_transition) &&
-		!instance_exists(obj_transition_fader) &&
-		!instance_exists(obj_battle_wait)
-	){
-
-		//------------------------//
-		//CLAIM THIS ENCOUNTER//
-		//------------------------//
-		// The Beast is only marked triggered if it successfully owns the
-		// shared battle-entry transition.
+		//----------------//
+		//ANGRY CHASE//
+		//----------------//
 		if (
-			scr_overworld_trigger_wild_beast_battle(
-				self
-			)
+			_str_disposition == "ANGRY" &&
+			_val_dist_player <= _val_detect_radius &&
+			_val_dist_home <= _val_home_radius
 		){
 
-			_flag_battle_triggered =
-				true;
+			var _val_direction =
+				point_direction(
+					x,
+					y,
+					obj_player.x,
+					obj_player.y
+				);
+
+			x += lengthdir_x(
+				_val_move_speed + 0.5,
+				_val_direction
+			);
+
+			y += lengthdir_y(
+				_val_move_speed + 0.5,
+				_val_direction
+			);
+		}
+
+		//----------------//
+		//SCARED FLEE//
+		//----------------//
+		else if (
+			_str_disposition == "SCARED" &&
+			_val_dist_player <= _val_detect_radius
+		){
+
+			switch (_state_scared){
+
+				case "READY":
+
+					_state_scared =
+						"FLEE";
+
+					_ct_scared_timer =
+						irandom_range(
+							60,
+							120
+						);
+
+					_val_scared_direction =
+						point_direction(
+							obj_player.x,
+							obj_player.y,
+							x,
+							y
+						);
+
+				break;
+
+				case "FLEE":
+
+					x += lengthdir_x(
+						_val_move_speed + 0.35,
+						_val_scared_direction
+					);
+
+					y += lengthdir_y(
+						_val_move_speed + 0.35,
+						_val_scared_direction
+					);
+
+					_ct_scared_timer--;
+
+					if (_ct_scared_timer <= 0){
+						_state_scared = "FROZEN";
+					}
+
+				break;
+
+				case "FROZEN":
+
+					// Remain stationary while the player stays nearby.
+
+				break;
+			}
+		}
+
+		//----------------//
+		//WANDER//
+		//----------------//
+		else{
+
+			if (_ct_wander_timer <= 0){
+
+				_ct_wander_timer =
+					irandom_range(
+						45,
+						120
+					);
+
+				_val_target_x =
+					_val_home_x +
+					irandom_range(
+						-_val_home_radius,
+						_val_home_radius
+					);
+
+				_val_target_y =
+					_val_home_y +
+					irandom_range(
+						-_val_home_radius,
+						_val_home_radius
+					);
+			}
+			else{
+				_ct_wander_timer--;
+			}
+
+			var _val_target_distance =
+				point_distance(
+					x,
+					y,
+					_val_target_x,
+					_val_target_y
+				);
+
+			if (_val_target_distance > 8){
+
+				var _val_direction =
+					point_direction(
+						x,
+						y,
+						_val_target_x,
+						_val_target_y
+					);
+
+				x += lengthdir_x(
+					_val_move_speed,
+					_val_direction
+				);
+
+				y += lengthdir_y(
+					_val_move_speed,
+					_val_direction
+				);
+			}
+		}
+
+		//----------------//
+		//HOME LEASH//
+		//----------------//
+		_val_dist_home =
+			point_distance(
+				x,
+				y,
+				_val_home_x,
+				_val_home_y
+			);
+
+		if (_val_dist_home > _val_home_radius + 32){
+
+			var _val_home_direction =
+				point_direction(
+					x,
+					y,
+					_val_home_x,
+					_val_home_y
+				);
+
+			x += lengthdir_x(
+				_val_move_speed,
+				_val_home_direction
+			);
+
+			y += lengthdir_y(
+				_val_move_speed,
+				_val_home_direction
+			);
+		}
+
+		scr_overworld_beast_resolve_wall_collision(
+			_val_step_start_x,
+			_val_step_start_y
+		);
+
+		//----------------//
+		//RESET SCARED STATE//
+		//----------------//
+		if (
+			_str_disposition == "SCARED" &&
+			_val_dist_player > _val_detect_radius
+		){
+			_state_scared = "READY";
+			_ct_scared_timer = 0;
+		}
+
+		//----------------//
+		//BATTLE TRIGGER//
+		//----------------//
+		if (
+			!_flag_battle_triggered &&
+			_ct_battle_cooldown <= 0 &&
+			place_meeting(
+				x,
+				y,
+				obj_player
+			) &&
+			!instance_exists(obj_transition) &&
+			!instance_exists(obj_transition_fader) &&
+			!instance_exists(obj_battle_wait)
+		){
+
+			//------------------------//
+			//CLAIM THIS ENCOUNTER//
+			//------------------------//
+			// The Beast is only marked triggered if it successfully owns the
+			// shared battle-entry transition.
+			if (
+				scr_overworld_trigger_wild_beast_battle(
+					self
+				)
+			){
+
+				_flag_battle_triggered =
+					true;
+
+				//========================//
+				//LOCK MIGRATION POD MEMBERS//
+				//========================//
+				// Once any member claims the transition, every visible member of the
+				// same persistent pod is locked so no sibling can attempt a second
+				// encounter while the room is fading into battle.
+				if (
+					_flag_world_event_instance &&
+					_str_world_event_id == "MIGRATION" &&
+					_uid_world_event >= 0 &&
+					_uid_world_event_pod >= 0
+				){
+
+					with (obj_overworld_beast){
+
+						if (
+							_flag_world_event_instance &&
+							_str_world_event_id == "MIGRATION" &&
+							_uid_world_event ==
+								other._uid_world_event &&
+							_uid_world_event_pod ==
+								other._uid_world_event_pod
+						){
+							_flag_battle_triggered = true;
+						}
+					}
+				}
+			}
 		}
 	}
+}
+
+//============================//
+//WORLD EVENT POSITION PERSISTENCE//
+//============================//
+if (
+	_flag_world_event_instance &&
+	_str_world_event_id == "MIGRATION"
+){
+	scr_world_event_migration_sync_member_position(
+		self
+	);
+}
+else if (
+	_flag_world_event_instance &&
+	_str_world_event_id == "RUNAWAY_TREASURE_BEAST" &&
+	_flag_runaway_treasure_beast
+){
+	scr_world_event_runaway_treasure_sync_position(
+		self
+	);
+}
+else if (
+	_flag_world_event_instance &&
+	_str_world_event_id == "ELITE_SIGHTING" &&
+	_flag_elite_sighting_target
+){
+	scr_world_event_elite_sighting_sync_position(
+		self
+	);
 }
 
 //================//
@@ -395,15 +655,3 @@ if (abs(x - xprevious) > 0.01){
 		? -1
 		: 1;
 }
-//===============================================================================//
-//
-// END STEP: OBJ_OVERWORLD_BEAST
-// FUNCTION: Updates overworld Beast depth.
-//           Supports Y-sorted rendering with other world objects.
-//
-//===============================================================================//
-
-//================//
-//UPDATE DEPTH//
-//================//
-depth = -bbox_bottom;

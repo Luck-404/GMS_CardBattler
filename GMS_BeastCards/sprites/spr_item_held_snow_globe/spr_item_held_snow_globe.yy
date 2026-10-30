@@ -2,9 +2,9 @@
   "$GMSprite":"v2",
   "%Name":"spr_item_held_snow_globe",
   "bboxMode":0,
-  "bbox_bottom":31,
-  "bbox_left":3,
-  "bbox_right":29,
+  "bbox_bottom":29,
+  "bbox_left":5,
+  "bbox_right":27,
   "bbox_top":2,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"95277a17-fe25-43b9-a431-7c55ee573d70","name":"95277a17-fe25-43b9-a431-7c55ee573d70","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"e96cef07-d731-4b0c-bb38-6527cf44ee39","name":"e96cef07-d731-4b0c-bb38-6527cf44ee39","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":32,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"f5c0cd40-b48a-4691-b379-665ca18a8983","blendMode":0,"displayName":"default","isLocked":false,"name":"f5c0cd40-b48a-4691-b379-665ca18a8983","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"d07fc4ec-f3ce-4626-b818-7d6429ad21aa","blendMode":0,"displayName":"default","isLocked":false,"name":"d07fc4ec-f3ce-4626-b818-7d6429ad21aa","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_item_held_snow_globe",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"95277a17-fe25-43b9-a431-7c55ee573d70","path":"sprites/spr_item_held_snow_globe/spr_item_held_snow_globe.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"21b723ff-034b-472a-8a2b-8b32b20ad891","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"e96cef07-d731-4b0c-bb38-6527cf44ee39","path":"sprites/spr_item_held_snow_globe/spr_item_held_snow_globe.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"715aebe4-0e5d-449a-a2d5-0563da68cef7","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

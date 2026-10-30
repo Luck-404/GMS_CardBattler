@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CAUDAQUA",
-    "path":"folders/BEASTS/CERULEAN/CAUDAQUA.yy",
+    "name":"ARHIVE",
+    "path":"folders/BEASTS/CERULEAN/CAUDAQUA/ARHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

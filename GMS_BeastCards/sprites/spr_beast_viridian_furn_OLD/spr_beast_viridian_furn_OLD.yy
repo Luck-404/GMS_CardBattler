@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FURN",
-    "path":"folders/BEASTS/VIRIDIAN/FURN.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/FURN/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

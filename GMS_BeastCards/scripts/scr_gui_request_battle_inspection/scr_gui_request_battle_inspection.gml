@@ -796,6 +796,21 @@ function scr_gui_request_battle_inspection(
 				}
 			}
 
+
+            // Persistent feeding bonuses: show newest meal first.
+            if (variable_instance_exists(_ref_source,"_str_team") && _ref_source._str_team == "PLAYER"){
+                var _arr_recent_meals = scr_beast_feed_get_recent(_stct_unit);
+                _str_body += "\n\nRECENT MEALS";
+                for (var _it_meal=0;_it_meal<3;_it_meal++){
+                    var _stct_meal = _arr_recent_meals[_it_meal];
+                    if (is_struct(_stct_meal)){
+                        _str_body += "\n" + _stct_meal._str_food_name + ": " + _stct_meal._str_bonus_text;
+                    } else {
+                        _str_body += "\n---";
+                    }
+                }
+            }
+
 		break;
 
 		//=======================================================================//

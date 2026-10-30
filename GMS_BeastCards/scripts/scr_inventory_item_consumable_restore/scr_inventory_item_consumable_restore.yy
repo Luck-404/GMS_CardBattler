@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_consumable_restore",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_consumable_restore",
+  "parent":{
+    "name":"USAGE",
+    "path":"folders/INVENTORY/ITEMS/CONSUMABLES/USAGE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

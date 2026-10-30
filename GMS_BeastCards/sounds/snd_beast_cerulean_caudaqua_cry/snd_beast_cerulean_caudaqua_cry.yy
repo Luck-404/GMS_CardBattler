@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.42,
+  "duration":1.3849887,
   "exportDir":"",
   "name":"snd_beast_cerulean_caudaqua_cry",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_beast_cerulean_caudaqua_cry.wav",
-  "volume":0.1,
+  "volume":1.0,
 }

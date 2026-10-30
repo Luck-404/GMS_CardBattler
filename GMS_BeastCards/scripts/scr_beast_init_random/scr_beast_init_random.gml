@@ -32,6 +32,12 @@ function scr_beast_init_random(_str_beast_name){
 		return undefined;
 	}
 
+	//=======================//
+	//INITIALIZE FEED RECORD//
+	//=======================//
+	_stct_new_beast._arr_beast_feed_list = [];
+	_stct_new_beast._stct_beast_feed_applied = {};
+
 	//======================//
 	//INITIALIZE HELD ITEM//
 	//======================//

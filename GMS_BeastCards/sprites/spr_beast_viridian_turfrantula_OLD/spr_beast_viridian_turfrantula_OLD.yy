@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"TURFRANTULA",
-    "path":"folders/BEASTS/VIRIDIAN/TURFRANTULA.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/TURFRANTULA/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

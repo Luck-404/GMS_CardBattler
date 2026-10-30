@@ -23,6 +23,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_ammomarsh,
 					_snd_beast_cry : snd_beast_cerulean_ammomarsh_cry,
 					_snd_beast_death : snd_beast_cerulean_ammomarsh_death,
+					_snd_beast_interact : snd_beast_cerulean_ammomarsh_interact,
 					_str_beast_name : "AMMOMARSH",
 
 					_val_beast_hp_stat : 96,
@@ -58,6 +59,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_blizzdrift,
 					_snd_beast_cry : snd_beast_cerulean_blizzdrift_cry,
 					_snd_beast_death : snd_beast_cerulean_blizzdrift_death,
+					_snd_beast_interact : snd_beast_cerulean_blizzdrift_interact,
 					_str_beast_name : "BLIZZDRIFT",
 
 					_val_beast_hp_stat : 68,
@@ -93,6 +95,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_caudaqua,
 					_snd_beast_cry : snd_beast_cerulean_caudaqua_cry,
 					_snd_beast_death : snd_beast_cerulean_caudaqua_death,
+					_snd_beast_interact : snd_beast_cerulean_caudaqua_interact,
 					_str_beast_name : "CAUDAQUA",
 
 					_val_beast_hp_stat : 102,
@@ -128,6 +131,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_cepharime,
 					_snd_beast_cry : snd_beast_cerulean_cepharime_cry,
 					_snd_beast_death : snd_beast_cerulean_cepharime_death,
+					_snd_beast_interact : snd_beast_cerulean_cepharime_interact,
 					_str_beast_name : "CEPHARIME",
 
 					_val_beast_hp_stat : 104,
@@ -163,6 +167,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_chelonsea,
 					_snd_beast_cry : snd_beast_cerulean_chelonsea_cry,
 					_snd_beast_death : snd_beast_cerulean_chelonsea_death,
+					_snd_beast_interact : snd_beast_cerulean_cepharime_interact,
 					_str_beast_name : "CHELONSEA",
 
 					_val_beast_hp_stat : 212,
@@ -198,6 +203,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_coralliarc,
 					_snd_beast_cry : snd_beast_cerulean_coralliarc_cry,
 					_snd_beast_death : snd_beast_cerulean_coralliarc_death,
+					_snd_beast_interact : snd_beast_cerulean_cepharime_interact,
 					_str_beast_name : "CORALLIARC",
 
 					_val_beast_hp_stat : 74,
@@ -233,6 +239,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_frostusk,
 					_snd_beast_cry : snd_beast_cerulean_frostusk_cry,
 					_snd_beast_death : snd_beast_cerulean_frostusk_death,
+					_snd_beast_interact : snd_beast_cerulean_frostusk_interact,
 					_str_beast_name : "FROSTUSK",
 
 					_val_beast_hp_stat : 156,
@@ -268,6 +275,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_galenatrium,
 					_snd_beast_cry : snd_beast_cerulean_galenatrium_cry,
 					_snd_beast_death : snd_beast_cerulean_galenatrium_death,
+					_snd_beast_interact : snd_beast_cerulean_galenatrium_interact,
 					_str_beast_name : "GALENATRIUM",
 
 					_val_beast_hp_stat : 62,
@@ -303,6 +311,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_glacimight,
 					_snd_beast_cry : snd_beast_cerulean_glacimight_cry,
 					_snd_beast_death : snd_beast_cerulean_glacimight_death,
+					_snd_beast_interact : snd_beast_cerulean_glacimight_interact,
 					_str_beast_name : "GLACIMIGHT",
 
 					_val_beast_hp_stat : 118,
@@ -338,6 +347,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_gulflow,
 					_snd_beast_cry : snd_beast_cerulean_gulflow_cry,
 					_snd_beast_death : snd_beast_cerulean_gulflow_death,
+					_snd_beast_interact : snd_beast_cerulean_gulflow_interact,
 					_str_beast_name : "GULFLOW",
 
 					_val_beast_hp_stat : 88,
@@ -373,6 +383,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_istirain,
 					_snd_beast_cry : snd_beast_cerulean_istirain_cry,
 					_snd_beast_death : snd_beast_cerulean_istirain_death,
+					_snd_beast_interact : snd_beast_cerulean_istirain_interact,
 					_str_beast_name : "ISTIRAIN",
 
 					_val_beast_hp_stat : 84,
@@ -408,6 +419,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_kelplatani,
 					_snd_beast_cry : snd_beast_cerulean_kelplatani_cry,
 					_snd_beast_death : snd_beast_cerulean_kelplatani_death,
+					_snd_beast_interact : snd_beast_cerulean_kelplatani_interact,
 					_str_beast_name : "KELPLATANI",
 
 					_val_beast_hp_stat : 182,
@@ -443,6 +455,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_lontriver,
 					_snd_beast_cry : snd_beast_cerulean_lontriver_cry,
 					_snd_beast_death : snd_beast_cerulean_lontriver_death,
+					_snd_beast_interact : snd_beast_cerulean_lontriver_interact,
 					_str_beast_name : "LONTRIVER",
 
 					_val_beast_hp_stat : 128,
@@ -478,6 +491,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_maritimice,
 					_snd_beast_cry : snd_beast_cerulean_maritimice_cry,
 					_snd_beast_death : snd_beast_cerulean_maritimice_death,
+					_snd_beast_interact : snd_beast_cerulean_maritimice_interact,
 					_str_beast_name : "MARITIMICE",
 
 					_val_beast_hp_stat : 162,
@@ -513,6 +527,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_saltwagg,
 					_snd_beast_cry : snd_beast_cerulean_saltwagg_cry,
 					_snd_beast_death : snd_beast_cerulean_saltwagg_death,
+					_snd_beast_interact : snd_beast_cerulean_saltwagg_interact,
 					_str_beast_name : "SALTWAGG",
 
 					_val_beast_hp_stat : 148,
@@ -548,6 +563,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_cerulean_spheniskip,
 					_snd_beast_cry : snd_beast_cerulean_spheniskip_cry,
 					_snd_beast_death : snd_beast_cerulean_spheniskip_death,
+					_snd_beast_interact : snd_beast_cerulean_spheniskip_interact,
 					_str_beast_name : "SPHENISKIP",
 
 					_val_beast_hp_stat : 134,
@@ -585,6 +601,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_aschemass,
 					_snd_beast_cry : snd_beast_vermilion_aschemass_cry,
 					_snd_beast_death : snd_beast_vermilion_aschemass_death,
+					_snd_beast_interact : snd_beast_vermilion_aschemass_interact,
 					_str_beast_name : "ASCHEMASS",
 
 					_val_beast_hp_stat : 188,
@@ -620,6 +637,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_canignis,
 					_snd_beast_cry : snd_beast_vermilion_canignis_cry,
 					_snd_beast_death : snd_beast_vermilion_canignis_death,
+					_snd_beast_interact : snd_beast_vermilion_canignis_interact,
 					_str_beast_name : "CANIGNIS",
 
 					_val_beast_hp_stat : 118,
@@ -655,6 +673,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_daimonis,
 					_snd_beast_cry : snd_beast_vermilion_daimonis_cry,
 					_snd_beast_death : snd_beast_vermilion_daimonis_death,
+					_snd_beast_interact : snd_beast_vermilion_daimonis_interact,
 					_str_beast_name : "DAIMONIS",
 
 					_val_beast_hp_stat : 74,
@@ -690,6 +709,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_drakoal,
 					_snd_beast_cry : snd_beast_vermilion_drakoal_cry,
 					_snd_beast_death : snd_beast_vermilion_drakoal_death,
+					_snd_beast_interact : snd_beast_vermilion_drakoal_interact,
 					_str_beast_name : "DRAKOAL",
 
 					_val_beast_hp_stat : 62,
@@ -725,6 +745,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_emberoost,
 					_snd_beast_cry : snd_beast_vermilion_emberoost_cry,
 					_snd_beast_death : snd_beast_vermilion_emberoost_death,
+					_snd_beast_interact : snd_beast_vermilion_emberoost_interact,
 					_str_beast_name : "EMBEROOST",
 
 					_val_beast_hp_stat : 128,
@@ -760,6 +781,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_hellshroom,
 					_snd_beast_cry : snd_beast_vermilion_hellshroom_cry,
 					_snd_beast_death : snd_beast_vermilion_hellshroom_death,
+					_snd_beast_interact : snd_beast_vermilion_hellshroom_interact,
 					_str_beast_name : "HELLSHROOM",
 
 					_val_beast_hp_stat : 116,
@@ -795,6 +817,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_imparch,
 					_snd_beast_cry : snd_beast_vermilion_imparch_cry,
 					_snd_beast_death : snd_beast_vermilion_imparch_death,
+					_snd_beast_interact : snd_beast_vermilion_imparch_interact,
 					_str_beast_name : "IMPARCH",
 
 					_val_beast_hp_stat : 58,
@@ -830,6 +853,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_infernus,
 					_snd_beast_cry : snd_beast_vermilion_infernus_cry,
 					_snd_beast_death : snd_beast_vermilion_infernus_death,
+					_snd_beast_interact : snd_beast_vermilion_infernus_interact,
 					_str_beast_name : "INFERNUS",
 
 					_val_beast_hp_stat : 164,
@@ -865,6 +889,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_lavarowana,
 					_snd_beast_cry : snd_beast_vermilion_lavarowana_cry,
 					_snd_beast_death : snd_beast_vermilion_lavarowana_death,
+					_snd_beast_interact : snd_beast_vermilion_lavarowana_interact,
 					_str_beast_name : "LAVAROWANA",
 
 					_val_beast_hp_stat : 142,
@@ -900,6 +925,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_pyreknight,
 					_snd_beast_cry : snd_beast_vermilion_pyreknight_cry,
 					_snd_beast_death : snd_beast_vermilion_pyreknight_death,
+					_snd_beast_interact : snd_beast_vermilion_pyreknight_interact,
 					_str_beast_name : "PYREKNIGHT",
 
 					_val_beast_hp_stat : 96,
@@ -935,6 +961,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_pyroplume,
 					_snd_beast_cry : snd_beast_vermilion_pyroplume_cry,
 					_snd_beast_death : snd_beast_vermilion_pyroplume_death,
+					_snd_beast_interact : snd_beast_vermilion_pyroplume_interact,
 					_str_beast_name : "PYROPLUME",
 
 					_val_beast_hp_stat : 64,
@@ -970,6 +997,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_sanguinaut,
 					_snd_beast_cry : snd_beast_vermilion_sanguinaut_cry,
 					_snd_beast_death : snd_beast_vermilion_sanguinaut_death,
+					_snd_beast_interact : snd_beast_vermilion_sanguinaut_interact,
 					_str_beast_name : "SANGUINAUT",
 
 					_val_beast_hp_stat : 82,
@@ -1005,6 +1033,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_slagolem,
 					_snd_beast_cry : snd_beast_vermilion_slagolem_cry,
 					_snd_beast_death : snd_beast_vermilion_slagolem_death,
+					_snd_beast_interact : snd_beast_vermilion_slagolem_interact,
 					_str_beast_name : "SLAGOLEM",
 
 					_val_beast_hp_stat : 272,
@@ -1040,6 +1069,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_solemold,
 					_snd_beast_cry : snd_beast_vermilion_solemold_cry,
 					_snd_beast_death : snd_beast_vermilion_solemold_death,
+					_snd_beast_interact : snd_beast_vermilion_solemold_interact,
 					_str_beast_name : "SOLEMOLD",
 
 					_val_beast_hp_stat : 86,
@@ -1075,6 +1105,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_wrathood,
 					_snd_beast_cry : snd_beast_vermilion_wrathood_cry,
 					_snd_beast_death : snd_beast_vermilion_wrathood_death,
+					_snd_beast_interact : snd_beast_vermilion_wrathood_interact,
 					_str_beast_name : "WRATHOOD",
 
 					_val_beast_hp_stat : 82,
@@ -1110,6 +1141,7 @@ function scr_beast_get_info(_str_beast_name){
 					_spr_beast : spr_beast_vermilion_wyrmelta,
 					_snd_beast_cry : snd_beast_vermilion_wyrmelta_cry,
 					_snd_beast_death : snd_beast_vermilion_wyrmelta_death,
+					_snd_beast_interact : snd_beast_vermilion_wyrmelta_interact,
 					_str_beast_name : "WYRMELTA",
 
 					_val_beast_hp_stat : 94,

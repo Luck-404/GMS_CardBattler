@@ -1,6 +1,6 @@
 //===============================================================================//
 //
-// DRAW GUI: OBJ_GUI_ITEM_TARGET_PANE
+// DRAW GUI END: OBJ_GUI_ITEM_TARGET_PANE
 // FUNCTION: Draws the Item target-selection pane.
 //           Shows Party members on the left.
 //           Shows selected Item sprite, name, amount, and close hint on the right.
@@ -91,6 +91,8 @@ for (var _it_unit = 0; _it_unit < _ct_party; _it_unit++){
 		_val_mouse_x < _val_box_x + _val_slot_w &&
 		_val_mouse_y > _val_box_y &&
 		_val_mouse_y < _val_box_y + _val_slot_h;
+
+    if (_flag_hover) _stct_preview_feed_target = _stct_unit;
 
 	//----------------//
 	//DRAW TARGET SLOT//
@@ -342,6 +344,28 @@ if (_stct_item != undefined){
 		_val_pane_bottom - 44,
 		"RIGHT CLICK: CLOSE"
 	);
+}
+
+//========================//
+//RECENT MEALS / FOOD PANE//
+//========================//
+if (is_struct(_stct_item) && variable_struct_exists(_stct_item,"_str_consumable_action") && _stct_item._str_consumable_action == "FOOD"){
+    var _stct_meal_target = _stct_recent_feed_target;
+    if (!is_struct(_stct_meal_target)) _stct_meal_target = _stct_preview_feed_target;
+    if (!is_struct(_stct_meal_target) && ds_list_size(global.list_player_party)>0)
+        _stct_meal_target = ds_list_find_value(global.list_player_party,0);
+    draw_set_colour(c_black);
+    draw_rectangle(_val_right_x-8,_val_pane_top+342,_val_pane_right-16,_val_pane_bottom-25,false);
+    if (is_struct(_stct_meal_target)){
+        draw_set_colour(c_white);
+        draw_set_font(fnt_gui_party_small);
+        draw_text(_val_right_x,_val_pane_top+349,string_upper(_stct_meal_target._str_beast_name));
+        scr_gui_draw_beast_recent_meals(_stct_meal_target,_val_right_x,_val_pane_top+370,_val_pane_right-_val_right_x-22);
+    }
+    if (hscr_gui_item_target_get_item_amount()<=0){
+        draw_set_colour(c_white);
+        draw_text(_val_right_x,_val_pane_bottom-20,"OUT OF FOOD - RIGHT CLICK TO CLOSE");
+    }
 }
 
 //================//

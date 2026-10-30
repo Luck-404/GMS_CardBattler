@@ -1,5 +1,34 @@
 //===============================================================================//
-
+//
+// SCRIPT: SCR_OVERWORLD_TRIGGER_WILD_BEAST_BATTLE
+// FUNCTION: Starts an overworld Beast encounter and transfers its encounter state
+//           into the battle room.
+//
+//           Normal visible-wild encounters preserve the existing encounter flow:
+//           the touched overworld Beast is carried into enemy slot 0, supplemental
+//           enemies are selected from its encounter pool, encounter scaling is
+//           rolled normally, and the source room / loot-zone state is stored.
+//
+//           Exact scripted and World Event encounters may instead provide a
+//           pre-initialized enemy roster. When an exact roster is present, that
+//           roster is validated and handed to the battle system unchanged; no
+//           supplemental random enemies are generated and the supplied Beast
+//           structs retain their existing identities, levels, breeds, abilities,
+//           Held Items, Elite data, and other persistent runtime fields.
+//
+//           World Event exact encounters also establish persistent battle context
+//           identifying the owning World Event, event entity / pod, source room,
+//           and post-battle World Event-roll suppression state.
+//
+// ARGUMENTS:
+//     _ref_world_beast
+//         Overworld Beast instance that owns / initiates the encounter.
+//
+// RETURNS:
+//     True when the battle transition was successfully claimed and encounter state
+//     was installed. False when validation fails or battle entry is already owned.
+//
+//===============================================================================//
 function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 
 	//================//
@@ -13,8 +42,111 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 		return false;
 	}
 
+	// Runaway Treasure Beasts are caught directly in the overworld and never
+	// enter the battle system.
+	if (
+		variable_instance_exists(
+			_ref_world_beast,
+			"_flag_world_event_instance"
+		) &&
+		_ref_world_beast._flag_world_event_instance &&
+		variable_instance_exists(
+			_ref_world_beast,
+			"_str_world_event_id"
+		) &&
+		_ref_world_beast._str_world_event_id ==
+			"RUNAWAY_TREASURE_BEAST"
+	){
+		return false;
+	}
+
 	if (!instance_exists(obj_player)){
 		return false;
+	}
+
+	//====================//
+	//EXACT ROSTER SOURCE//
+	//====================//
+	var _flag_exact_enemy_roster =
+		false;
+
+	var _arr_exact_enemy_roster =
+		[];
+
+	var _stct_world_event_battle_context =
+		undefined;
+
+	if (
+		variable_instance_exists(
+			_ref_world_beast,
+			"_arr_exact_enemy_roster"
+		) &&
+		is_array(
+			_ref_world_beast
+				._arr_exact_enemy_roster
+		) &&
+		array_length(
+			_ref_world_beast
+				._arr_exact_enemy_roster
+		) > 0
+	){
+
+		if (
+			!scr_battle_validate_exact_enemy_roster(
+				_ref_world_beast
+					._arr_exact_enemy_roster
+			)
+		){
+
+			scr_debug_log(
+				"BATTLE",
+				"ENTRY",
+				_ref_world_beast,
+				"EXACT ENEMY ROSTER REJECTED" +
+				" | REASON: INVALID ROSTER",
+				"ERROR",
+				"SCR_OVERWORLD_TRIGGER_WILD_BEAST_BATTLE"
+			);
+
+			return false;
+		}
+
+		_flag_exact_enemy_roster =
+			true;
+
+		for (
+			var _it_exact_unit = 0;
+			_it_exact_unit <
+				array_length(
+					_ref_world_beast
+						._arr_exact_enemy_roster
+				);
+			_it_exact_unit++
+		){
+
+			array_push(
+				_arr_exact_enemy_roster,
+				_ref_world_beast
+					._arr_exact_enemy_roster[
+						_it_exact_unit
+					]
+			);
+		}
+
+		if (
+			variable_instance_exists(
+				_ref_world_beast,
+				"_stct_world_event_battle_context"
+			) &&
+			is_struct(
+				_ref_world_beast
+					._stct_world_event_battle_context
+			)
+		){
+			_stct_world_event_battle_context =
+				_ref_world_beast
+					._stct_world_event_battle_context;
+		}
 	}
 
 	//======================//
@@ -36,11 +168,41 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 	var _str_pool_source = "SELF";
 
 	//----------------//
+	//EXACT ROSTER//
+	//----------------//
+	if (_flag_exact_enemy_roster){
+
+		for (
+			var _it_exact_pool = 0;
+			_it_exact_pool <
+				array_length(
+					_arr_exact_enemy_roster
+				);
+			_it_exact_pool++
+		){
+
+			var _stct_exact_pool_unit =
+				_arr_exact_enemy_roster[
+					_it_exact_pool
+				];
+
+			array_push(
+				_arr_pool,
+				_stct_exact_pool_unit
+					._str_beast_name
+			);
+		}
+
+		_str_pool_source =
+			"EXACT ROSTER";
+	}
+
+	//----------------//
 	//BEAST POOL OVERRIDE//
 	//----------------//
 	// Cheat-spawned visible wild Beasts can carry their own
 	// encounter pool without changing their home/leash object.
-	if (
+	else if (
 		variable_instance_exists(
 			_ref_world_beast,
 			"_arr_encounter_pool"
@@ -110,22 +272,34 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 	//========================//
 	//APPLY ENCOUNTER ITEMS//
 	//========================//
-	var _arr_weighted_pool =
-		scr_overworld_apply_encounter_held_items(
-			_arr_pool
-		);
+	var _arr_weighted_pool = [];
 
-	if (
-		!is_array(
-			_arr_weighted_pool
-		) ||
-		array_length(
-			_arr_weighted_pool
-		) <= 0
-	){
+	// Exact rosters are already fully initialized. Do not reroll encounter-held
+	// item weighting for a roster that is meant to preserve exact identities.
+	if (_flag_exact_enemy_roster){
 
 		_arr_weighted_pool =
 			_arr_pool;
+	}
+	else{
+
+		_arr_weighted_pool =
+			scr_overworld_apply_encounter_held_items(
+				_arr_pool
+			);
+
+		if (
+			!is_array(
+				_arr_weighted_pool
+			) ||
+			array_length(
+				_arr_weighted_pool
+			) <= 0
+		){
+
+			_arr_weighted_pool =
+				_arr_pool;
+		}
 	}
 
 	//================//
@@ -222,6 +396,19 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 		}
 
 		return false;
+	}
+
+	//====================//
+	//EXACT ROSTER SCALING//
+	//====================//
+	// Keep the room's normal scaling metadata for rewards/difficulty display, but
+	// exact battle composition owns team size and the units' preinitialized levels.
+	if (_flag_exact_enemy_roster){
+
+		_stct_encounter_scaling._ct_enemy_beasts =
+			array_length(
+				_arr_exact_enemy_roster
+			);
 	}
 
 	//======================//
@@ -344,11 +531,86 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 	global.str_last_loot_zone_id =
 		_str_loot_zone_id;
 
-	global.stct_forced_enemy_unit =
-		_ref_world_beast._stct_unit;
-
 	global.stct_encounter_scaling =
 		_stct_encounter_scaling;
+
+	//======================//
+	//ENEMY ROSTER HANDOFF//
+	//======================//
+	if (_flag_exact_enemy_roster){
+
+		if (
+			!scr_battle_set_exact_enemy_roster(
+				_arr_exact_enemy_roster
+			)
+		){
+
+			with (_ref_transition){
+				instance_destroy();
+			}
+
+			return false;
+		}
+
+		global.stct_forced_enemy_unit =
+			undefined;
+
+		//==========================//
+		//WORLD EVENT BATTLE CONTEXT//
+		//==========================//
+		if (
+			is_struct(
+				_stct_world_event_battle_context
+			)
+		){
+
+			if (
+				!scr_world_event_set_battle_context(
+					_stct_world_event_battle_context,
+					_arr_exact_enemy_roster
+				)
+			){
+
+				scr_battle_clear_exact_enemy_roster();
+
+				with (_ref_transition){
+					instance_destroy();
+				}
+
+				return false;
+			}
+		}
+		else{
+
+			// A generic scripted exact battle is legal without World Event context.
+			// Explicitly clear any stale context from a previously aborted battle.
+			scr_world_event_clear_battle_context(
+				false
+			);
+
+			scr_world_event_set_battle_roll_suppression(
+				false
+			);
+		}
+	}
+	else{
+
+		//======================//
+		//NORMAL WILD ENCOUNTER//
+		//======================//
+		scr_battle_clear_exact_enemy_roster();
+
+		scr_world_event_clear_battle_context(
+			false
+		);
+
+		scr_world_event_set_battle_roll_suppression(
+			false
+		);
+
+		global.stct_forced_enemy_unit =
+			_ref_world_beast._stct_unit;
+	}
 
 	//================//
 	//DEBUG BATTLE ENTRY//
@@ -364,14 +626,23 @@ function scr_overworld_trigger_wild_beast_battle(_ref_world_beast){
 		"," +
 		string(_val_source_y) +
 		")" +
-		" | TRIGGER: VISIBLE WILD" +
-		" | FORCED ENEMY: " +
+		" | TRIGGER: " +
+		(_flag_exact_enemy_roster ? "EXACT ROSTER" : "VISIBLE WILD") +
+		" | VISIBLE ENEMY: " +
 		_str_beast_name +
 		" (LVL " +
 		string(_val_beast_level) +
 		")" +
 		" | POOL SOURCE: " +
 		_str_pool_source +
+		" | EXACT ROSTER SIZE: " +
+		string(
+			_flag_exact_enemy_roster
+			? array_length(
+				_arr_exact_enemy_roster
+			)
+			: 0
+		) +
 		" | BASE POOL SIZE: " +
 		string(
 			array_length(

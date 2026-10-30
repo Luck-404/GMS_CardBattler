@@ -28,6 +28,18 @@ _c_sparkle = c_white;
 _flag_triggered = false;
 
 //----------------//
+//WORLD EVENT STATE//
+//----------------//
+_flag_world_event_instance = false;
+_flag_world_event_one_shot = false;
+
+_uid_world_event = -1;
+_uid_world_event_entity = -1;
+
+_str_world_event_id = "";
+_str_world_event_spawn_id = "";
+
+//----------------//
 //TIMERS//
 //----------------//
 _ct_visibility_timer = 300;
@@ -368,3 +380,6 @@ hscr_overworld_treasure_sparkle_award_reward = function(){
 hscr_overworld_treasure_sparkle_roll_rarity();
 hscr_overworld_treasure_sparkle_roll_position();
 hscr_overworld_treasure_sparkle_roll_visibility();
+
+//===============================================================================//
+//

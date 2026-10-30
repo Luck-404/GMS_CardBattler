@@ -68,6 +68,32 @@ _ct_battle_cooldown = 30;
 
 _flag_battle_triggered = false;
 
+//------------------------//
+//EXACT / WORLD EVENT BATTLE//
+//------------------------//
+// Phase III/IV handoff fields. Normal wild Beasts leave these empty.
+_arr_exact_enemy_roster = [];
+_stct_world_event_battle_context = undefined;
+
+_flag_world_event_instance = false;
+_uid_world_event = -1;
+_uid_world_event_entity = -1;
+_uid_world_event_pod = -1;
+
+_str_world_event_id = "";
+_str_world_event_spawn_id = "";
+
+_flag_migration_leader = false;
+
+_flag_runaway_treasure_beast = false;
+_flag_elite_sighting_target = false;
+_val_runaway_treasure_flee_speed = 2.25;
+
+_flag_runaway_treasure_catch_animation = false;
+_ct_runaway_treasure_catch_animation = 0;
+_ct_runaway_treasure_catch_animation_total = 30;
+_ct_runaway_treasure_drop_animation_frames = 18;
+
 //----------------//
 //AUDIO / STEP VFX//
 //----------------//

@@ -2,7 +2,8 @@
 //
 // STEP: OBJ_GUI_TREASURE_REWARD
 // FUNCTION: Updates treasure reward lifetime and fade.
-//           Holds fully visible for 120 frames, then fades for 60 frames.
+//           Holds fully visible for 420 frames, then fades for 60 frames.
+//           Total lifetime is approximately 8 seconds at 60 FPS.
 //
 //===============================================================================//
 

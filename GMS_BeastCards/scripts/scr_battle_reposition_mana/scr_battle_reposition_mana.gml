@@ -44,6 +44,12 @@ function scr_battle_reposition_mana(){
 		return;
 	}
 
+	//======================//
+	//ENFORCE FIVE PER ROW//
+	//======================//
+	var _ct_mana_per_row = 5;
+	_ref_player_controller._ct_mana_per_row = _ct_mana_per_row;
+
 	//------------------//
 	//CALCULATE SPACING//
 	//------------------//
@@ -63,8 +69,8 @@ function scr_battle_reposition_mana(){
 		//------------//
 		//GET ROW/COL//
 		//------------//
-		var _it_column = _it_mana mod _ref_player_controller._ct_mana_per_row;
-		var _it_row = floor(_it_mana / _ref_player_controller._ct_mana_per_row);
+		var _it_column = _it_mana mod _ct_mana_per_row;
+		var _it_row = floor(_it_mana / _ct_mana_per_row);
 
 		//-----------------//
 		//GET SLOT POSITION//

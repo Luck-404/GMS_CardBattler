@@ -2,15 +2,19 @@
 //
 // SCRIPT: SCR_BATTLE_CHANGE_MAX_MANA
 // FUNCTION: Changes the player's Maximum Mana.
-//           Prevents temporary reductions from dropping below saved base Mana,
-//           clamps Current Mana when Maximum Mana falls, and logs the change.
+//           Ordinary changes preserve the saved base Mana floor and clamp
+//           Current Mana to the resulting Maximum Mana.
+//           Cheat changes adjust Current and Maximum Mana together,
+//           allowing testing of Mana pool sizes down to Maximum Mana 1.
 //
 // ARGUMENTS: _val_amount is the signed Maximum Mana change.
+//            _flag_cheat_override changes both Current and Maximum Mana
+//            and permits Cheat changes down to 1 Maximum Mana.
 // RETURNS: The actual signed amount Maximum Mana changed.
 //
 //===============================================================================//
 
-function scr_battle_change_max_mana(_val_amount){
+function scr_battle_change_max_mana(_val_amount,_flag_cheat_override=false){
 
 	//================//
 	//VALIDATE SYSTEM//
@@ -34,9 +38,17 @@ function scr_battle_change_max_mana(_val_amount){
 	//===================//
 	//CHANGE MAXIMUM MANA//
 	//===================//
+	// The normal saved-base floor protects ordinary buffs. After the developer
+	// deliberately lowers Max Mana below base, retain that lower floor so later
+	// ordinary Mana changes cannot increase Max Mana during a negative change.
+	var _val_floor = _ref_player_controller._val_saved_max_mana;
+	if (_flag_cheat_override || _val_old_max_mana < _val_floor){
+		_val_floor = 1;
+	}
+
 	_ref_player_controller._val_max_mana =
 		max(
-			_ref_player_controller._val_saved_max_mana,
+			_val_floor,
 			_ref_player_controller._val_max_mana + _val_amount
 		);
 
@@ -48,12 +60,21 @@ function scr_battle_change_max_mana(_val_amount){
 		return 0;
 	}
 
-	//================//
-	//CLAMP CURRENT//
-	//================//
+	//==============================//
+	//UPDATE CURRENT MANA AMOUNT//
+	//==============================//
+	// A Cheat changes the entire usable Mana pool by the same signed amount.
+	// Normal Max Mana effects only clamp Current Mana when the cap shrinks.
+	var _val_new_cur_mana = _val_old_cur_mana;
+
+	if (_flag_cheat_override){
+		_val_new_cur_mana += _val_actual_change;
+	}
+
 	_ref_player_controller._val_cur_mana =
-		min(
-			_ref_player_controller._val_cur_mana,
+		clamp(
+			_val_new_cur_mana,
+			0,
 			_ref_player_controller._val_max_mana
 		);
 
@@ -76,6 +97,7 @@ function scr_battle_change_max_mana(_val_amount){
 		"MANA",
 		_ref_player_controller,
 		"PLAYER MAXIMUM MANA CHANGED " + _str_change +
+		(_flag_cheat_override ? " | CHEAT: YES" : "") +
 		" | MAX: " + string(_val_old_max_mana) +
 		" -> " + string(_ref_player_controller._val_max_mana) +
 		" | CURRENT: " + string(_val_old_cur_mana) +

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_greentown_parcel",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_greentown_parcel",
+  "parent":{
+    "name":"QUEST_GREENTOWN_PARCEL",
+    "path":"folders/INVENTORY/ITEMS/QUEST/QUEST_GREENTOWN_PARCEL.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

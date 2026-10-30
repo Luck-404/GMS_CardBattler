@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_viridian_runestone",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_viridian_runestone",
+  "parent":{
+    "name":"QUEST_VIRIDIAN_RUNESTONE",
+    "path":"folders/INVENTORY/ITEMS/QUEST/QUEST_VIRIDIAN_RUNESTONE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

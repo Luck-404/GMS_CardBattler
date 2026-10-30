@@ -12,6 +12,9 @@
 //
 //           RISK TIER 1:
 //           - Reward-quality multiplier 1.25x.
+//
+//           RISK TIER 2+:
+//           - Reward-quality multiplier 1.50x.
 //           - This multiplier is consumed by SCR_REWARD_RESOLVE_BATTLE to improve
 //             Card rarity distribution and rarer Item-channel chances.
 //
@@ -131,7 +134,10 @@ function scr_reward_get_elite_resource_multipliers(_ref_enemy_controller){
         }
     }
 
-    if (_stct_result._val_elite_risk_tier >= 1){
+    if (_stct_result._val_elite_risk_tier >= 2){
+        _stct_result._val_risk_reward_quality_multiplier = 1.50;
+    }
+    else if (_stct_result._val_elite_risk_tier >= 1){
         _stct_result._val_risk_reward_quality_multiplier = 1.25;
     }
 

@@ -93,6 +93,28 @@ function scr_inventory_add_item(_str_item_id,_ct_count){
 	}
 
 	//=====================//
+	//QUEST UNIQUENESS//
+	//=====================//
+	// Only explicit unique Quest Items are restricted. Stackable collection samples
+	// and all existing non-Quest Items keep their original stack/add semantics.
+	if (_stct_base_item._str_item_type == "QUEST" && _stct_base_item._flag_quest_unique){
+
+		if (_ct_owned_before > 0){
+			scr_debug_log(
+				"INVENTORY",
+				"ADD",
+				undefined,
+				"UNIQUE QUEST ITEM ALREADY OWNED | ID: " + string_upper(_str_item_id),
+				"INFO",
+				"SCR_INVENTORY_ADD_ITEM"
+			);
+			return;
+		}
+
+		_ct_count = 1;
+	}
+
+	//=====================//
 	//NON-STACKABLE ITEMS//
 	//=====================//
 	if (!_stct_base_item._flag_stackable){

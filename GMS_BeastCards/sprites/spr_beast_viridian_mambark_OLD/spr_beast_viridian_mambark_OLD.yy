@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"MAMBARK",
-    "path":"folders/BEASTS/VIRIDIAN/MAMBARK.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VIRIDIAN/MAMBARK/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

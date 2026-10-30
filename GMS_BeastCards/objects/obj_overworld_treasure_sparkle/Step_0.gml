@@ -9,6 +9,83 @@
 //
 //===============================================================================//
 
+//===========================//
+//RUNAWAY TREASURE EVENT DROP//
+//===========================//
+var _flag_runaway_treasure_drop =
+	_flag_world_event_instance &&
+	_flag_world_event_one_shot &&
+	_str_world_event_id ==
+		"RUNAWAY_TREASURE_BEAST";
+
+if (_flag_runaway_treasure_drop){
+
+	visible = true;
+
+	if (
+		!instance_exists(obj_player) ||
+		global.flag_pause
+	){
+		hscr_overworld_treasure_sparkle_stop_nearby_sound();
+		exit;
+	}
+
+	var _flag_runaway_near =
+		distance_to_object(obj_player) <
+		48;
+
+	if (_flag_runaway_near){
+
+		if (
+			_val_nearby_sound_handle == -1 ||
+			!audio_is_playing(_val_nearby_sound_handle)
+		){
+
+			_val_nearby_sound_handle =
+				audio_play_sound(
+					snd_overworld_treasure_nearby,
+					2,
+					true
+				);
+		}
+	}
+	else{
+		hscr_overworld_treasure_sparkle_stop_nearby_sound();
+	}
+
+	if (
+		_flag_runaway_near &&
+		!_flag_triggered &&
+		keyboard_check_pressed(ord("E"))
+	){
+
+		if (
+			scr_world_event_runaway_treasure_claim_sparkle(
+				_uid_world_event_entity
+			)
+		){
+
+			hscr_overworld_treasure_sparkle_stop_nearby_sound();
+
+			audio_play_sound(
+				snd_overworld_treasure_claim,
+				2,
+				false
+			);
+
+			_flag_triggered = true;
+
+			hscr_overworld_treasure_sparkle_award_reward();
+
+			instance_destroy();
+		}
+
+		exit;
+	}
+
+	exit;
+}
+
 //===============================================================================//
 // VISIBILITY TIMER
 //===============================================================================//
@@ -117,3 +194,6 @@ if (_ct_interaction_cooldown > 0){
         _flag_triggered = false;
     }
 }
+
+//===============================================================================//
+//

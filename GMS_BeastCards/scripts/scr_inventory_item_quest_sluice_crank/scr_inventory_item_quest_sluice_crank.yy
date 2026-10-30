@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_sluice_crank",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_sluice_crank",
+  "parent":{
+    "name":"QUEST_SLUICE_CRANK",
+    "path":"folders/INVENTORY/ITEMS/QUEST/QUEST_SLUICE_CRANK.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

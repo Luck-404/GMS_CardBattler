@@ -18,7 +18,28 @@ function scr_beast_animation_is_valid(_str_beast_name){
 		"ARBRAWN",
 		"ARGENTBUD",
 		"BEAVINE",
-		"BRYOBITE"
+		"BRYOBITE",
+		"CHITROOPER",
+		"CRUSABER",
+		"DRYADAE",
+		"FIGHTREE",
+		"FLITSAGE",
+		"FURN",
+		"LEPOROOT",
+		"LUMBUCK",
+		"MAMBARK",
+		"MORELUSH",
+		"SPOROSE",
+		"STRIGIBLOOM",
+		"TURFRANTULA",
+		
+		"AMMOMARSH",
+		"BLIZZDRIFT",
+		"CAUDAQUA",
+		"CEPHARIME",
+		"CHELONSEA",
+		"CORALLIARC",
+		"FROSTUSK"
 	];
 
 	_str_beast_name =

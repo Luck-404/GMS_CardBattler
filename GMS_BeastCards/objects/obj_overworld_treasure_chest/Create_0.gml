@@ -18,6 +18,33 @@
 #region VARIABLES
 
 //----------------//
+//WORLD EVENT STATE//
+//----------------//
+if (!variable_instance_exists(id,"_flag_world_event_instance")){
+	_flag_world_event_instance = false;
+}
+
+if (!variable_instance_exists(id,"_uid_world_event")){
+	_uid_world_event = -1;
+}
+
+if (!variable_instance_exists(id,"_uid_world_event_entity")){
+	_uid_world_event_entity = -1;
+}
+
+if (!variable_instance_exists(id,"_str_world_event_id")){
+	_str_world_event_id = "";
+}
+
+if (!variable_instance_exists(id,"_str_world_event_spawn_id")){
+	_str_world_event_spawn_id = "";
+}
+
+_val_world_event_chest_scale = 1;
+_flag_world_event_choice_banner_owner = false;
+
+
+//----------------//
 //TREASURE STATE//
 //----------------//
 _ct_loot_rewards = 1;

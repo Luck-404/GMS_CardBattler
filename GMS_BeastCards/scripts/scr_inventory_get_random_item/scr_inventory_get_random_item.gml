@@ -24,7 +24,6 @@ function scr_inventory_get_random_item(_arr_pool){
 //ITEM WEIGHTS//
 //================//
 	var _stct_weights = {
-		QUEST_IMPORTANT_NOTEBOOK : 5,
 		HELD_POWERFUL_STONE : 10,
 		CONSUMABLE_HEALING_SALVE : 50,
 		PRISM_COMMON : 50,
@@ -108,6 +107,11 @@ function scr_inventory_get_random_item(_arr_pool){
 		var _str_item_id =
 			_arr_pool[_it_item];
 
+		// Quest Items must come from explicit quest/world rewards, not random loot.
+		if (string_pos("QUEST_",string_upper(string(_str_item_id))) == 1){
+			continue;
+		}
+
 		if (
 			variable_struct_exists(
 				_stct_weights,
@@ -154,6 +158,11 @@ function scr_inventory_get_random_item(_arr_pool){
 
 		var _str_item_id =
 			_arr_pool[_it_item];
+
+		// Quest Items must come from explicit quest/world rewards, not random loot.
+		if (string_pos("QUEST_",string_upper(string(_str_item_id))) == 1){
+			continue;
+		}
 
 		if (
 			!variable_struct_exists(

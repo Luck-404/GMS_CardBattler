@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CEPHARIME",
-    "path":"folders/BEASTS/CERULEAN/CEPHARIME.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/CEPHARIME/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

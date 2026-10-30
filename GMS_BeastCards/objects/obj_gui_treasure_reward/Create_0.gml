@@ -2,6 +2,8 @@
 //
 // CREATE: OBJ_GUI_TREASURE_REWARD
 // FUNCTION: Initializes one bottom-right overworld treasure reward notification.
+//           Holds fully visible for 420 frames, then fades over 60 frames.
+//           Total lifetime is approximately 8 seconds at 60 FPS.
 //
 //===============================================================================//
 
@@ -22,7 +24,7 @@ _val_reward_serial = 0;
 //================//
 _ct_age = 0;
 
-_ct_hold_life = 120;
+_ct_hold_life = 420;
 _ct_fade_life = 60;
 
 _val_alpha = 1;

@@ -162,6 +162,20 @@ switch (_str_condition){
 
 			scr_market_register_battle_completion();
 
+			//==========================//
+			//RESOLVE WORLD EVENT BATTLE//
+			//==========================//
+			scr_world_event_resolve_battle_context(
+				_str_condition
+			);
+
+			//=======================//
+			//REGISTER WORLD EVENT ROLL//
+			//=======================//
+			scr_world_event_register_battle_completion(
+				_str_condition
+			);
+
 			//=================//
 			//DEBUG BATTLE EXIT//
 			//=================//
@@ -375,6 +389,20 @@ switch (_str_condition){
 			);
 
 			scr_market_register_battle_completion();
+
+			//==========================//
+			//RESOLVE WORLD EVENT BATTLE//
+			//==========================//
+			scr_world_event_resolve_battle_context(
+				_str_condition
+			);
+
+			//=======================//
+			//REGISTER WORLD EVENT ROLL//
+			//=======================//
+			scr_world_event_register_battle_completion(
+				_str_condition
+			);
 
 			//=================//
 			//DEBUG BATTLE EXIT//

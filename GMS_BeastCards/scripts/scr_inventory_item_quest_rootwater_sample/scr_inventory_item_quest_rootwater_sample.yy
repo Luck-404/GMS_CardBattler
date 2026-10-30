@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_inventory_item_quest_rootwater_sample",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_inventory_item_quest_rootwater_sample",
+  "parent":{
+    "name":"QUEST_ROOTWATER_SAMPLE",
+    "path":"folders/INVENTORY/ITEMS/QUEST/QUEST_ROOTWATER_SAMPLE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

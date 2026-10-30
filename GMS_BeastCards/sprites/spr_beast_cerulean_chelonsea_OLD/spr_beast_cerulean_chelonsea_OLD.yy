@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"CHELONSEA",
-    "path":"folders/BEASTS/CERULEAN/CHELONSEA.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/CHELONSEA/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

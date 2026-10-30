@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FROSTUSK",
-    "path":"folders/BEASTS/CERULEAN/FROSTUSK.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/FROSTUSK/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

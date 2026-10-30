@@ -20,6 +20,8 @@ _str_type = "ITEM_TARGET_PANE";
 
 _ref_parent_gui = undefined;
 _stct_item = undefined;
+_stct_recent_feed_target = undefined;
+_stct_preview_feed_target = undefined;
 
 _str_target_mode = "PARTY";
 
