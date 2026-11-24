@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"LONTRIVER",
-    "path":"folders/BEASTS/CERULEAN/LONTRIVER.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/LONTRIVER/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

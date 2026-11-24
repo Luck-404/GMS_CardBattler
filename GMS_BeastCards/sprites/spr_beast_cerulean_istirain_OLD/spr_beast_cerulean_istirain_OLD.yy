@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"ISTIRAIN",
-    "path":"folders/BEASTS/CERULEAN/ISTIRAIN.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/ISTIRAIN/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

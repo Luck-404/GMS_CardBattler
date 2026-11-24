@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"MARITIMICE",
-    "path":"folders/BEASTS/CERULEAN/MARITIMICE.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/MARITIMICE/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

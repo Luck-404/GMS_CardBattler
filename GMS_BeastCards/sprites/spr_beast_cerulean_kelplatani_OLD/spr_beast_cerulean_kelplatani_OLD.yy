@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"KELPLATANI",
-    "path":"folders/BEASTS/CERULEAN/KELPLATANI.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/KELPLATANI/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

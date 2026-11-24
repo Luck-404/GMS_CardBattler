@@ -39,7 +39,18 @@ function scr_beast_animation_is_valid(_str_beast_name){
 		"CEPHARIME",
 		"CHELONSEA",
 		"CORALLIARC",
-		"FROSTUSK"
+		"FROSTUSK",
+		"GALENATRIUM",
+		"GLACIMIGHT",
+		"GULFLOW",
+		"ISTIRAIN",
+		"KELPLATANI",
+		"LONTRIVER",
+		"MARITIMICE",
+		"SALTWAGG",
+		"SPHENISKIP",
+		
+		"ASCHEMASS"
 	];
 
 	_str_beast_name =

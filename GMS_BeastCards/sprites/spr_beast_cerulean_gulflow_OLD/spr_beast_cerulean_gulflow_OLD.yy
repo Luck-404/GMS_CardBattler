@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"GULFLOW",
-    "path":"folders/BEASTS/CERULEAN/GULFLOW.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/GULFLOW/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

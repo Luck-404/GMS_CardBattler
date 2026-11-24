@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"GLACIMIGHT",
-    "path":"folders/BEASTS/CERULEAN/GLACIMIGHT.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/GLACIMIGHT/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

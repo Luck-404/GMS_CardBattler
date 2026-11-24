@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"SALTWAGG",
-    "path":"folders/BEASTS/CERULEAN/SALTWAGG.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/SALTWAGG/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

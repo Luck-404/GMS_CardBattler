@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"ASCHEMASS",
-    "path":"folders/BEASTS/VERMILION/ASCHEMASS.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/VERMILION/ASCHEMASS/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

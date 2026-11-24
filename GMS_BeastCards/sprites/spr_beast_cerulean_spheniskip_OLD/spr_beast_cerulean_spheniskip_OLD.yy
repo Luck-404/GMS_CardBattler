@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"SPHENISKIP",
-    "path":"folders/BEASTS/CERULEAN/SPHENISKIP.yy",
+    "name":"ARCHIVE",
+    "path":"folders/BEASTS/CERULEAN/SPHENISKIP/ARCHIVE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
